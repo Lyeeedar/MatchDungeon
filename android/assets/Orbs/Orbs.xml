@@ -1,0 +1,63 @@
+<Orbs xmlns:meta="Editor">
+	<Template>
+		<Sprite meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_items/crystal_cloud</Name>
+			<DrawActualSize>true</DrawActualSize>
+		</Sprite>
+		<Death meta:RefKey="ParticleEffect">
+			<Name>Splatter</Name>
+			<TimeMultiplier>2</TimeMultiplier>
+		</Death>
+	</Template>
+	<Types>
+		<Orb>
+			<Name>Red</Name>
+			<Colour>209,27,27,255</Colour>
+		</Orb>
+		<Orb>
+			<Name>Green</Name>
+			<Colour>45,209,27,255</Colour>
+		</Orb>
+		<Orb>
+			<Name>Blue</Name>
+			<Colour>83,128,238,255</Colour>
+		</Orb>
+		<Orb>
+			<Name>Yellow</Name>
+			<Colour>253,253,41,255</Colour>
+		</Orb>
+		<Orb>
+			<Name>Purple</Name>
+			<Colour>165,35,212,255</Colour>
+		</Orb>
+		<Orb>
+			<Name>Grey</Name>
+			<Colour>205,205,205,255</Colour>
+		</Orb>
+		<Orb>
+			<Name>Orange</Name>
+			<Colour>255,159,0,255</Colour>
+		</Orb>
+		<Orb>
+			<Name>Pink</Name>
+			<Colour>255,0,196,255</Colour>
+		</Orb>
+		<Orb>
+			<Name>Black</Name>
+			<Colour>13,13,13,255</Colour>
+		</Orb>
+	</Types>
+	<NamedOrbs>
+		<Orb>
+			<Name>Seduce</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_items/heart_red_full</Name>
+				<DrawActualSize>true</DrawActualSize>
+				<Colour>255,0,196,255</Colour>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>HeartBurst</Name>
+			</Death>
+		</Orb>
+	</NamedOrbs>
+</Orbs>

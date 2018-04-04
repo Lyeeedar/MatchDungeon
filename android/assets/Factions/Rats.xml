@@ -1,0 +1,18 @@
+<Faction xmlns:meta="Editor">
+	<Monsters>
+		<Monster meta:RefKey="MonsterDesc">
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_heroes/rat</Name>
+				<DrawActualSize>true</DrawActualSize>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+			</Death>
+			<AttackNumPips>5</AttackNumPips>
+			<AttackCooldown>1,1</AttackCooldown>
+			<Size>1</Size>
+			<HP>10</HP>
+			<DamageResistance>0</DamageResistance>
+		</Monster>
+	</Monsters>
+</Faction>

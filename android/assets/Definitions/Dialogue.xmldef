@@ -1,0 +1,88 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="Dialogue" AllowCircularLinks="True" FlattenData="True" meta:RefKey="GraphStruct">
+		<Data Name="Branch" Keys="Branch" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+	</Definition>
+	<!--Node-->
+	<Definition Name="Node" meta:RefKey="GraphCollectionDef">
+		<Data Name="Node" Keys="Node" meta:RefKey="GraphReference" />
+		<Data Name="Action" Keys="Branch,Choice,Define,Line,Match3,MarkComplete,Image,Flash,FadeOut,ClearFadeOut,Comment,Thought,Expression,ChangeGirl,OverrideGirl,ClearOverrideGirl,ChangeLocation,SetBody,SetBlush,Reward" meta:RefKey="Reference" />
+	</Definition>
+	<!--Actions-->
+	<Definition Name="Line" TextColour="227,68,167" meta:RefKey="StructDef">
+		<Data Name="Text" meta:RefKey="MultilineString" />
+		<Data Name="Expression" Default="Default" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="Branch" TextColour="192,207,109" meta:RefKey="CollectionDef">
+		<Data Name="Branch" Description="{Condition}" meta:RefKey="Struct">
+			<Data Name="Condition" Default="1" meta:RefKey="String" />
+			<Data Name="Node" Keys="Node" UseParentDescription="True" meta:RefKey="GraphReference" />
+		</Data>
+	</Definition>
+	<Definition Name="Choice" TextColour="82,204,95" meta:RefKey="StructDef">
+		<Data Name="Choices" meta:RefKey="Collection">
+			<Data Name="Choice" Description="{Text}" meta:RefKey="Struct">
+				<Data Name="Text" meta:RefKey="String" />
+				<Data Name="Node" Keys="Node" UseParentDescription="True" meta:RefKey="GraphReference" />
+			</Data>
+		</Data>
+	</Definition>
+	<Definition Name="Define" TextColour="192,207,109" meta:RefKey="StructDef">
+		<Data Name="Key" meta:RefKey="String" />
+		<Data Name="Value" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="Match3" TextColour="82,204,95" meta:RefKey="StructDef">
+		<Data Name="LevelFile" StripExtension="True" AllowedFileTypes="xml" SkipIfDefault="False" meta:RefKey="File" />
+		<Data Name="Expression" Default="Default" SkipIfDefault="False" meta:RefKey="String" />
+		<Data Name="Success" Keys="Node" UseParentDescription="True" SkipIfDefault="False" meta:RefKey="GraphReference" />
+		<Data Name="Failure" Keys="Node" UseParentDescription="True" SkipIfDefault="False" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="MarkComplete" TextColour="242,183,30" meta:RefKey="StructDef" />
+	<Definition Name="Image" TextColour="192,207,109" meta:RefKey="StructDef">
+		<Data Name="Texture" Keys="Texture" Nullable="False" meta:RefKey="Reference" />
+		<Data Name="Text" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="Flash" TextColour="192,207,109" meta:RefKey="StructDef">
+		<Data Name="Colour" SkipIfDefault="False" meta:RefKey="Colour" />
+	</Definition>
+	<Definition Name="FadeOut" TextColour="192,207,109" meta:RefKey="StructDef">
+		<Data Name="Colour" SkipIfDefault="False" meta:RefKey="Colour" />
+		<Data Name="Duration" Min="0" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="ClearFadeOut" TextColour="192,207,109" meta:RefKey="StructDef">
+		<Data Name="Duration" Min="0" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="Comment" TextColour="82,204,95" meta:RefKey="StructDef">
+		<Data Name="Text" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="Thought" TextColour="227,68,167" meta:RefKey="StructDef">
+		<Data Name="Text" SkipIfDefault="False" meta:RefKey="String" />
+		<Data Name="Images" meta:RefKey="Collection">
+			<Data Name="Image" Keys="Texture" meta:RefKey="Reference" />
+		</Data>
+		<Data Name="Delay" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="Expression" TextColour="196,109,222" meta:RefKey="StructDef">
+		<Data Name="Expression" Default="Default" SkipIfDefault="False" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="OverrideGirl" TextColour="196,109,222" meta:RefKey="StructDef">
+		<Data Name="Image" Keys="Texture" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="ClearOverrideGirl" TextColour="196,109,222" meta:RefKey="StructDef" />
+	<Definition Name="ChangeGirl" TextColour="196,109,222" meta:RefKey="StructDef">
+		<Data Name="Girl" meta:RefKey="String" />
+		<Data Name="Body" Default="default" SkipIfDefault="False" meta:RefKey="String" />
+		<Data Name="Expression" Default="default" SkipIfDefault="False" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="ChangeLocation" TextColour="192,207,109" meta:RefKey="StructDef">
+		<Data Name="Location" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="SetBody" TextColour="196,109,222" meta:RefKey="StructDef">
+		<Data Name="Name" Default="Default" SkipIfDefault="False" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="SetBlush" TextColour="196,109,222" meta:RefKey="StructDef">
+		<Data Name="Blush" SkipIfDefault="False" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="Reward" TextColour="255,245,0" meta:RefKey="StructDef">
+		<Data Name="Amount" Default="1" SkipIfDefault="False" meta:RefKey="String" />
+	</Definition>
+</Definitions>

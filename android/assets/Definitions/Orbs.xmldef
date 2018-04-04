@@ -1,0 +1,21 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="Orbs" meta:RefKey="Struct">
+		<Data Name="Template" meta:RefKey="Struct">
+			<Data Name="Sprite" Keys="Sprite" meta:RefKey="Reference" />
+			<Data Name="Death" Keys="ParticleEffect" meta:RefKey="Reference" />
+		</Data>
+		<Data Name="Types" meta:RefKey="Collection">
+			<Data Name="Orb" meta:RefKey="Struct">
+				<Data Name="Name" meta:RefKey="String" />
+				<Data Name="Colour" meta:RefKey="Colour" />
+			</Data>
+		</Data>
+		<Data Name="NamedOrbs" meta:RefKey="Collection">
+			<Data Name="Orb" meta:RefKey="Struct">
+				<Data Name="Name" meta:RefKey="String" />
+				<Data Name="Sprite" Keys="Sprite" meta:RefKey="Reference" />
+				<Data Name="Death" Keys="ParticleEffect" meta:RefKey="Reference" />
+			</Data>
+		</Data>
+	</Definition>
+</Definitions>

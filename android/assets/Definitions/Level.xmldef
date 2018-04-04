@@ -1,0 +1,55 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="None" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />
+	<Definition Name="Plate" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />
+	<Definition Name="Kill" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />
+	<Definition Name="Die" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />
+	<Definition Name="Matches" MinCount="1" SkipIfDefault="False" meta:RefKey="CollectionDef">
+		<Data Name="Orbs" Type="Int" Min="1" Default="10" SkipIfDefault="False" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="Sink" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef">
+		<Data Name="Count" Type="Int" Min="1" Default="4" SkipIfDefault="False" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="CustomOrb" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef">
+		<Data Name="Count" Type="Int" Min="1" Default="20" SkipIfDefault="False" meta:RefKey="Number" />
+		<Data Name="OrbName" meta:RefKey="String" />
+		<Data Name="Chance" Min="0" Max="1" Default="0.2" SkipIfDefault="False" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="Time" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef">
+		<Data Name="Seconds" Min="1" Default="60" SkipIfDefault="False" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="Turns" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef">
+		<Data Name="Turns" Type="Int" Min="1" Default="30" SkipIfDefault="False" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="Level" meta:RefKey="Struct">
+		<Data Name="Grid" MinCount="1" meta:RefKey="Collection">
+			<Data Name="Rows" ElementPerLine="True" IsAsciiGrid="True" meta:RefKey="MultilineString" />
+		</Data>
+		<Data Name="Symbols" meta:RefKey="Collection">
+			<Data Name="Symbol" meta:RefKey="Struct">
+				<Data Name="Character" MaxLength="1" SkipIfDefault="False" meta:RefKey="String" />
+				<Data Name="Extends" MaxLength="1" SkipIfDefault="False" meta:RefKey="String" />
+				<Data Name="Sprite" Keys="SpriteWrapper" meta:RefKey="Reference" />
+				<Data Name="Block" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
+				<Data Name="Plate" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
+				<Data Name="Seal" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
+				<Data Name="Shield" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
+				<Data Name="Attack" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
+				<Data Name="IsMonster" SkipIfDefault="False" meta:RefKey="Boolean" />
+				<Data Name="MonsterDesc" Keys="MonsterDesc" meta:RefKey="Reference" />
+				<Data Name="SpecialOrb" EnumValues="None,3x3,H4,V4,5" SkipIfDefault="False" meta:RefKey="Enum" />
+				<Data Name="Sinkable" meta:RefKey="Struct">
+					<Data Name="Sprite" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+				</Data>
+			</Data>
+		</Data>
+		<Data Name="Faction" meta:RefKey="String" />
+		<Data Name="CustomMonster" Keys="MonsterDesc" meta:RefKey="Reference" />
+		<Data Name="OrbCount" Type="Int" Min="4" Default="6" meta:RefKey="Number" />
+		<Data Name="AllowedVictories" MinCount="1" meta:RefKey="Collection">
+			<Data Name="Condition" Keys="None,Kill,Matches,Sink,CustomOrb,Plate" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		</Data>
+		<Data Name="AllowedDefeats" MinCount="1" meta:RefKey="Collection">
+			<Data Name="Condition" Keys="None,Die,Kill,Matches,Sink,Plate,Time,Turns" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		</Data>
+	</Definition>
+</Definitions>

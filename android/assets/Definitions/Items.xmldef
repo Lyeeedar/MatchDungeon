@@ -1,0 +1,10 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="Items" meta:RefKey="Collection">
+		<Data Name="Item" meta:RefKey="Struct">
+			<Data Name="Name" meta:RefKey="String" />
+			<Data Name="Description" meta:RefKey="String" />
+			<Data Name="Icon" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+			<Data Name="Value" Type="Int" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+		</Data>
+	</Definition>
+</Definitions>

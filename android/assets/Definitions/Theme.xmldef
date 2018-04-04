@@ -1,0 +1,28 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="Theme" Nullable="False" meta:RefKey="Struct">
+		<Data Name="Floor" Keys="SpriteWrapper" Nullable="False" meta:RefKey="Reference" />
+		<Data Name="Wall" Keys="SpriteWrapper" Nullable="False" meta:RefKey="Reference" />
+		<Data Name="Pit" Keys="SpriteWrapper" Nullable="False" meta:RefKey="Reference" />
+		<Data Name="Chest" meta:RefKey="Struct">
+			<Data Name="Full" Keys="Sprite" Nullable="False" meta:RefKey="Reference" />
+			<Data Name="Empty" Keys="Sprite" Nullable="False" meta:RefKey="Reference" />
+		</Data>
+		<Data Name="Coin" Keys="Sprite" Nullable="False" meta:RefKey="Reference" />
+		<Data Name="Plate" Keys="Sprite" Nullable="False" meta:RefKey="Reference" />
+		<Data Name="Block" MinCount="1" meta:RefKey="Collection">
+			<Data Name="Sprite" Keys="Sprite" Nullable="False" meta:RefKey="Reference" />
+		</Data>
+		<Data Name="Seal" MinCount="1" meta:RefKey="Collection">
+			<Data Name="Sprite" Keys="Sprite" Nullable="False" meta:RefKey="Reference" />
+		</Data>
+		<Data Name="Shield" MinCount="1" meta:RefKey="Collection">
+			<Data Name="Sprite" Keys="Sprite" Nullable="False" meta:RefKey="Reference" />
+		</Data>
+		<Data Name="SpawnWeights" meta:RefKey="Collection">
+			<Data Name="Spawn" Nullable="False" Collapse="True" meta:RefKey="Struct">
+				<Data Name="Swappable" EnumValues="Orb,Shield,Changer,Attack" SkipIfDefault="False" meta:RefKey="Enum" />
+				<Data Name="Weight" Type="Int" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+			</Data>
+		</Data>
+	</Definition>
+</Definitions>

@@ -1,0 +1,100 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="Effect" meta:RefKey="Struct">
+		<Data Name="Warmup" Min="0" meta:RefKey="Number" />
+		<Data Name="Loop" Default="True" meta:RefKey="Boolean" />
+		<Data Name="Emitters" MinCount="1" meta:RefKey="Collection">
+			<Data Name="Emitter" meta:RefKey="Struct">
+				<Data Name="Name" meta:RefKey="String" />
+				<Data Name="Enabled" Default="True" meta:RefKey="Boolean" />
+				<Data Name="IsCollisionEmitter" meta:RefKey="Boolean" />
+				<Data Name="Type" EnumValues="Absolute,Accumulated" meta:RefKey="Enum" />
+				<Data Name="Space" EnumValues="World,Local" meta:RefKey="Enum" />
+				<Data Name="Shape" EnumValues="Box,Circle,Cone" meta:RefKey="Enum" />
+				<Data Name="Width" Min="0" Default="1" meta:RefKey="Number" />
+				<Data Name="Height" Min="0" Default="1" meta:RefKey="Number" />
+				<Data Name="Rotation" Min="0" Max="360" meta:RefKey="Number" />
+				<Data Name="Area" EnumValues="Interior,Border" meta:RefKey="Enum" />
+				<Data Name="Offset" meta:RefKey="Timeline">
+					<Keyframe Name="Keyframe" Collapse="True" Seperator="|" meta:RefKey="Keyframe">
+						<Time Name="Time" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
+						<Data Name="Position" SkipIfDefault="False" meta:RefKey="Vector" />
+					</Keyframe>
+				</Data>
+				<Data Name="Direction" EnumValues="Radial,Random,Up,Down,Left,Right" meta:RefKey="Enum" />
+				<Data Name="ParticleSpeed" Nullable="False" Collapse="True" meta:RefKey="Struct">
+					<Data Name="Min" SkipIfDefault="False" meta:RefKey="Number" />
+					<Data Name="Max" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+				</Data>
+				<Data Name="ParticleRotation" Nullable="False" Collapse="True" meta:RefKey="Struct">
+					<Data Name="Min" Min="0" Max="360" SkipIfDefault="False" meta:RefKey="Number" />
+					<Data Name="Max" Min="0" Max="360" Default="360" SkipIfDefault="False" meta:RefKey="Number" />
+				</Data>
+				<Data Name="Gravity" meta:RefKey="Number" />
+				<Data Name="RateKeyframes" MinCount="1" meta:RefKey="Timeline">
+					<Keyframe Name="Keyframe" Collapse="True" Seperator="|" meta:RefKey="Keyframe">
+						<Time Name="Time" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
+						<Data Name="Rate" Min="0" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+					</Keyframe>
+				</Data>
+				<Data Name="SingleBurst" meta:RefKey="Boolean" />
+				<Data Name="Particles" MinCount="1" meta:RefKey="Collection">
+					<Data Name="Particle" meta:RefKey="Struct">
+						<Data Name="Lifetime" Nullable="False" Collapse="True" SkipIfDefault="False" meta:RefKey="Struct">
+							<Data Name="Min" Min="0" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+							<Data Name="Max" Min="0" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+						</Data>
+						<Data Name="BlendMode" EnumValues="Additive,Multiplicative" SkipIfDefault="False" meta:RefKey="Enum" />
+						<Data Name="Collision" EnumValues="None,Slide,Bounce,Die" meta:RefKey="Enum" />
+						<Data Name="Drag" meta:RefKey="Number" />
+						<Data Name="Brownian" Min="0" meta:RefKey="Number" />
+						<Data Name="VelocityAligned" meta:RefKey="Boolean" />
+						<Data Name="AllowResize" Default="True" meta:RefKey="Boolean" />
+						<Data Name="BlendKeyframes" meta:RefKey="Boolean" />
+						<Data Name="TextureKeyframes" MinCount="1" meta:RefKey="Collection">
+							<Data Name="Stream" MinCount="1" meta:RefKey="Timeline">
+								<Keyframe Name="Keyframe" Collapse="True" Seperator="|" meta:RefKey="Keyframe">
+									<Time Name="Time" Min="0" Max="1" SkipIfDefault="False" meta:RefKey="Number" />
+									<Data Name="Path" BasePath="Sprites" StripExtension="True" AllowedFileTypes="png" Default="Particle/glow" SkipIfDefault="False" meta:RefKey="File" />
+								</Keyframe>
+							</Data>
+						</Data>
+						<Data Name="SizeKeyframes" MinCount="1" meta:RefKey="Collection">
+							<Data Name="Stream" MinCount="1" meta:RefKey="Timeline">
+								<Keyframe Name="Keyframe" Collapse="True" Seperator="|" meta:RefKey="Keyframe">
+									<Time Name="Time" Min="0" Max="1" SkipIfDefault="False" meta:RefKey="Number" />
+									<Data Name="Min" Min="0" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+									<Data Name="Max" Min="0" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+								</Keyframe>
+							</Data>
+						</Data>
+						<Data Name="RotationSpeedKeyframes" meta:RefKey="Collection">
+							<Data Name="Stream" MinCount="1" meta:RefKey="Timeline">
+								<Keyframe Name="Keyframe" Collapse="True" Seperator="|" meta:RefKey="Keyframe">
+									<Time Name="Time" Min="0" Max="1" SkipIfDefault="False" meta:RefKey="Number" />
+									<Data Name="Min" SkipIfDefault="False" meta:RefKey="Number" />
+									<Data Name="Max" SkipIfDefault="False" meta:RefKey="Number" />
+								</Keyframe>
+							</Data>
+						</Data>
+						<Data Name="ColourKeyframes" MinCount="1" meta:RefKey="Collection">
+							<Data Name="Stream" MinCount="1" meta:RefKey="Timeline">
+								<Keyframe Name="Keyframe" Collapse="True" Seperator="|" meta:RefKey="Keyframe">
+									<Time Name="Time" Min="0" Max="1" SkipIfDefault="False" meta:RefKey="Number" />
+									<Data Name="Colour" SkipIfDefault="False" meta:RefKey="Colour" />
+								</Keyframe>
+							</Data>
+						</Data>
+						<Data Name="AlphaKeyframes" MinCount="1" meta:RefKey="Collection">
+							<Data Name="Stream" MinCount="1" meta:RefKey="Timeline">
+								<Keyframe Name="Keyframe" Collapse="True" Seperator="|" meta:RefKey="Keyframe">
+									<Time Name="Time" Min="0" Max="1" SkipIfDefault="False" meta:RefKey="Number" />
+									<Data Name="Alpha" Min="0" Max="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+								</Keyframe>
+							</Data>
+						</Data>
+					</Data>
+				</Data>
+			</Data>
+		</Data>
+	</Definition>
+</Definitions>
