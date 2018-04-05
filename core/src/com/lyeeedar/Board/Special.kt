@@ -65,7 +65,7 @@ abstract class Special(val orb: Orb)
 					if (tile != null && cx == x && cy in min..max && !hitSet.contains(tile))
 					{
 						hitSet.add(tile)
-						grid.pop(cx, cy, 0f, special, grid.level.player.abilityDam)
+						grid.pop(cx, cy, 0f, special, grid.level.player.abilityDam + grid.level.player.attackDam)
 					}
 				}
 				grid.grid[x, y].effects.add(effect)
@@ -133,7 +133,7 @@ abstract class Special(val orb: Orb)
 					if (tile != null && cy == y && x in min..max && !hitSet.contains(tile))
 					{
 						hitSet.add(tile)
-						grid.pop(cx, cy, 0f, special, grid.level.player.abilityDam)
+						grid.pop(cx, cy, 0f, special, grid.level.player.abilityDam + grid.level.player.attackDam)
 					}
 
 				}
@@ -251,7 +251,7 @@ class DualMatch(orb: Orb) : Special(orb)
 						if (tile != null && !hitSet.contains(tile) && tile.dist(point) < 4)
 						{
 							hitSet.add(tile)
-							grid.pop(cx, cy, 0f, this@DualMatch, grid.level.player.abilityDam)
+							grid.pop(cx, cy, 0f, this@DualMatch, grid.level.player.abilityDam + grid.level.player.attackDam)
 						}
 					}
 					Future.call({
@@ -260,7 +260,7 @@ class DualMatch(orb: Orb) : Special(orb)
 							if (!hitSet.contains(tile) && tile.dist(point) < 4)
 							{
 								hitSet.add(tile)
-								grid.pop(tile.x, tile.y, 0f, this@DualMatch, grid.level.player.abilityDam)
+								grid.pop(tile.x, tile.y, 0f, this@DualMatch, grid.level.player.abilityDam + grid.level.player.attackDam)
 							}
 						}
 								}, 0.2f)
@@ -344,8 +344,36 @@ class Match5(orb: Orb) : Special(orb)
 					{
 						if (tile.canHaveOrb)
 						{
-							val delay = tile.dist(point) * 0.1f
-							grid.pop(tile, delay + 0.2f, special, grid.level.player.abilityDam + 2)
+							val dst = tile.dist(point)
+							val animDuration = 0.275f + dst * 0.05f
+
+							val diff = tile.getPosDiff(point)
+							diff[0].y *= -1
+
+							val s = AssetManager.loadSprite("Oryx/Custom/items/shard")
+							s.drawActualSize = false
+							s.faceInMoveDirection = true
+							s.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.5f)
+							s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.0f, false)
+							s.completionCallback = fun()
+							{
+								if (tile.orb == null)
+								{
+
+								}
+								else if (tile.orb!!.special == null)
+								{
+									tile.orb!!.special = special.copy(tile.orb!!)
+								}
+								else
+								{
+									val func = tile.orb!!.special!!.merge(other) ?: special.merge(tile.orb!!)
+									tile.orb!!.armed = func
+								}
+
+								grid.pop(tile, 0f, this, grid.level.player.abilityDam + grid.level.player.attackDam + 2)
+							}
+							tile.effects.add(s)
 						}
 					}
 				}
@@ -378,10 +406,13 @@ class Match5(orb: Orb) : Special(orb)
 							val dst = tile.dist(point)
 							val animDuration = 0.275f + dst * 0.05f
 
+							val diff = tile.getPosDiff(point)
+							diff[0].y *= -1
+
 							val s = origSprite.copy()
 							s.drawActualSize = false
 							s.faceInMoveDirection = true
-							s.animation = LeapAnimation.obtain().setRelative(animDuration, point, tile, 1f + dst * 0.5f)
+							s.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.5f)
 							s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.0f, false)
 							s.completionCallback = fun()
 							{
@@ -399,7 +430,7 @@ class Match5(orb: Orb) : Special(orb)
 									tile.orb!!.armed = func
 								}
 
-								grid.pop(tile, 0f, this, grid.level.player.abilityDam + 1)
+								grid.pop(tile, 0f, this, grid.level.player.abilityDam + grid.level.player.attackDam + 1)
 							}
 							tile.effects.add(s)
 						}
@@ -408,15 +439,18 @@ class Match5(orb: Orb) : Special(orb)
 							val dst = tile.dist(point)
 							val animDuration = 0.275f + dst * 0.05f
 
+							val diff = tile.getPosDiff(point)
+							diff[0].y *= -1
+
 							val s = AssetManager.loadSprite("Oryx/Custom/items/shard")
 							s.faceInMoveDirection = true
 							s.colour = Colour.random(s = 0.5f, l = 0.9f)
 							s.drawActualSize = true
-							s.animation = LeapAnimation.obtain().setRelative(animDuration, point, tile, 1f + dst * 0.5f)
+							s.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.5f)
 							s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.3f, false)
 							s.completionCallback = fun()
 							{
-								grid.pop(tile, 0f, this, grid.level.player.abilityDam + 1)
+								grid.pop(tile, 0f, this, grid.level.player.abilityDam + grid.level.player.attackDam + 1)
 							}
 							tile.effects.add(s)
 						}
@@ -450,15 +484,18 @@ class Match5(orb: Orb) : Special(orb)
 						val dst = tile.dist(point)
 						val animDuration = 0.275f + dst * 0.05f
 
+						val diff = tile.getPosDiff(point)
+						diff[0].y *= -1
+
 						val s = AssetManager.loadSprite("Oryx/Custom/items/shard")
 						s.faceInMoveDirection = true
 						s.colour = Colour.random(s = 0.5f, l = 0.9f)
 						s.drawActualSize = true
-						s.animation = LeapAnimation.obtain().set(animDuration, tile.getPosDiff(point), 1f + dst * 0.5f)
+						s.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.5f)
 						s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.3f, false)
 						s.completionCallback = fun()
 						{
-							grid.pop(tile, 0f, this, grid.level.player.abilityDam + 1)
+							grid.pop(tile, 0f, this, grid.level.player.abilityDam + grid.level.player.attackDam + 1)
 						}
 						tile.effects.add(s)
 					}
