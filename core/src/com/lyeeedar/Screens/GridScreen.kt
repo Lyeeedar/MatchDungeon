@@ -35,9 +35,11 @@ class GridScreen(): AbstractScreen()
 	val emptySlot = AssetManager.loadSprite("Icons/Empty")
 	var hpBar = Table()
 	var launchButton: TextButton? = null
+	var refreshButton: TextButton? = null
 	var grid: GridWidget? = null
 	//lateinit var player: Player
 	lateinit var level: Level
+	val defeatTable = Table()
 
 	// ----------------------------------------------------------------------
 	init
@@ -67,7 +69,6 @@ class GridScreen(): AbstractScreen()
 
 		val powerBar = PowerBar()
 
-		val defeatTable = Table()
 		val victoryTable = Table()
 
 		for (defeat in level.defeatConditions)
@@ -112,6 +113,16 @@ class GridScreen(): AbstractScreen()
 			row()
 			stack { cell -> cell.height(25f)
 				add(powerBar)
+				refreshButton = textButton("No Valid Moves. Refresh?", "default", Global.skin) {
+					isVisible = false
+					onClick { inputEvent: InputEvent, kTextButton: KTextButton ->
+						if (level.grid.activeAbility == null && level.grid.noValidMoves)
+						{
+							level.grid.refill()
+							powerBar.power = 0
+						}
+					}
+				}
 				launchButton = textButton("Launch", "default", Global.skin) {
 					isVisible = false
 					onClick { inputEvent: InputEvent, kTextButton: KTextButton ->
@@ -184,14 +195,22 @@ class GridScreen(): AbstractScreen()
 			}
 
 			PowerBar.instance.isVisible = false
+			refreshButton!!.isVisible = false
 			launchButton!!.isVisible = true
 			launchButton!!.color = if (ability.selectedTargets.size == 0) Color.DARK_GRAY else Color.WHITE
 			launchButton!!.touchable = if (ability.selectedTargets.size == 0) Touchable.disabled else Touchable.enabled
 			launchButton!!.setText("Activate (" + ability.selectedTargets.size + "/" + ability.targets + ")")
 		}
+		else if (level.grid.noValidMoves)
+		{
+			PowerBar.instance.isVisible = false
+			launchButton!!.isVisible = false
+			refreshButton!!.isVisible = true
+		}
 		else
 		{
 			PowerBar.instance.isVisible = true
+			refreshButton!!.isVisible = false
 			launchButton!!.isVisible = false
 			idleTimer = 0f
 			lastTargets = 0

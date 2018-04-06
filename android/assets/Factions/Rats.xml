@@ -9,10 +9,10 @@
 				<Name>Death</Name>
 			</Death>
 			<AttackNumPips>5</AttackNumPips>
-			<AttackCooldown>1,1</AttackCooldown>
+			<AttackCooldown>2,5</AttackCooldown>
 			<Size>1</Size>
 			<HP>10</HP>
-			<DamageResistance>0</DamageResistance>
+			<DamageReduction>2</DamageReduction>
 		</Monster>
 	</Monsters>
 </Faction>

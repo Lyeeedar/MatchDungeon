@@ -3,10 +3,12 @@ package com.lyeeedar.Board
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
+import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
 import com.lyeeedar.Game.Theme
 import com.lyeeedar.Renderables.Animation.BlinkAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Sprite.Sprite
+import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Point
 import com.lyeeedar.Util.getXml
@@ -23,12 +25,12 @@ class Orb(desc: OrbDesc, theme: Theme): Swappable(theme)
 		set(value)
 		{
 			field = value
+			sprite = desc.sprite.copy()
 			sprite.colour = desc.sprite.colour
 		}
 
 	init
 	{
-		sprite = desc.sprite.copy()
 		this.desc = desc
 	}
 
@@ -63,6 +65,17 @@ class Orb(desc: OrbDesc, theme: Theme): Swappable(theme)
 				val nsprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/skull_small", drawActualSize = true)
 				nsprite.colour = sprite.colour
 				sprite = nsprite
+
+				val grid = this.grid!!
+				if (grid.level.defeatConditions.filter { it is CompletionConditionDie }.isEmpty())
+				{
+					val die = CompletionConditionDie()
+					die.attachHandlers(grid)
+					GridScreen.instance.defeatTable.add(die.createTable(grid))
+					GridScreen.instance.defeatTable.row()
+
+					grid.level.defeatConditions.add(die)
+				}
 			}
 		}
 
@@ -128,7 +141,7 @@ class Orb(desc: OrbDesc, theme: Theme): Swappable(theme)
 		fun getValidOrbs(level: Level) : Array<OrbDesc>
 		{
 			val copy = Array<OrbDesc>(level.orbs)
-			for (i in 0..level.orbs-1) copy.add(validOrbs[i])
+			for (i in 0 until level.orbs) copy.add(validOrbs[i])
 			return copy
 		}
 
@@ -152,7 +165,7 @@ class Orb(desc: OrbDesc, theme: Theme): Swappable(theme)
 			val deathEffect = AssetManager.loadParticleEffect(template.getChildByName("Death")!!)
 
 			val types = xml.getChildByName("Types")!!
-			for (i in 0..types.childCount-1)
+			for (i in 0 until types.childCount)
 			{
 				val type = types.getChild(i)
 				val name = type.get("Name")
@@ -182,6 +195,7 @@ class Orb(desc: OrbDesc, theme: Theme): Swappable(theme)
 					orbDesc.name = name
 					orbDesc.sprite = sprite
 					orbDesc.death = death
+					orbDesc.isNamed = true
 
 					namedOrbs[name] = orbDesc
 				}
@@ -192,17 +206,19 @@ class Orb(desc: OrbDesc, theme: Theme): Swappable(theme)
 
 class OrbDesc()
 {
-	constructor(sprite: Sprite, death: ParticleEffect, key: Int, name: String) : this()
+	constructor(sprite: Sprite, death: ParticleEffect, key: Int, name: String, isNamed: Boolean) : this()
 	{
 		this.sprite = sprite
 		this.death = death
 		this.name = name
 		this.key = key
+		this.isNamed = isNamed
 	}
 
 	lateinit var sprite: Sprite
 	lateinit var death: ParticleEffect
 	var key: Int = -1
+	var isNamed: Boolean = false
 	var name: String = ""
 		set(value)
 		{

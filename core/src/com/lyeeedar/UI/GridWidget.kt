@@ -354,7 +354,7 @@ class GridWidget(val grid: Grid) : Widget()
 
 							val maxdots = 10
 							val degreesStep = 360f / maxdots
-							for (i in 0..maxdots - 1)
+							for (i in 0 until maxdots)
 							{
 								val sprite = if (i < orb.attackTimer) atk_full else atk_empty
 

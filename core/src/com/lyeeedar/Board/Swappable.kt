@@ -25,4 +25,6 @@ abstract class Swappable(val theme: Theme) : Point()
 		}
 	val sealed: Boolean
 		get() = sealCount > 0
+
+	var grid: Grid? = null
 }

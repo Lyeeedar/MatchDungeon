@@ -7,7 +7,7 @@
 		<Data Name="Types" meta:RefKey="Collection">
 			<Data Name="Orb" meta:RefKey="Struct">
 				<Data Name="Name" meta:RefKey="String" />
-				<Data Name="Colour" meta:RefKey="Colour" />
+				<Data Name="Colour" SkipIfDefault="False" meta:RefKey="Colour" />
 			</Data>
 		</Data>
 		<Data Name="NamedOrbs" meta:RefKey="Collection">

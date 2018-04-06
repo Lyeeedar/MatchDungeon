@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions.*
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectSet
+import com.lyeeedar.Board.CompletionCondition.CompletionConditionCustomOrb
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Global
@@ -88,6 +89,9 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	var inTurn = false
 	var gainedBonusPower = false
 	var matchCount = 0
+
+	// ----------------------------------------------------------------------
+	var noValidMoves = false
 
 	// ----------------------------------------------------------------------
 	init
@@ -344,6 +348,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 						orb = level.spawnOrb()
 						orb.movePoints.add(Point(x, -1))
 						orb.spawnCount = spawnCount[x, 0]
+						orb.grid = this
 
 						spawnCount[x, 0]++
 
@@ -355,6 +360,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 						if (o != null)
 						{
 							orb = o
+							orb.grid = this
 							orb.movePoints.add(Point(x, found.y))
 							orb.spawnCount = spawnCount[x, found.y + 1]
 
@@ -597,10 +603,12 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				if (activeAbility == null) matchHint = findValidMove()
 				if (activeAbility == null && matchHint == null)
 				{
-					FullscreenMessage("No valid moves. Randomising.", "", { refill() }).show()
+					noValidMoves = true
 				}
 				else
 				{
+					noValidMoves = false
+
 					if (activeAbility == null) noMatchTimer += delta
 
 					// handle input
@@ -1022,8 +1030,10 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	}
 
 	// ----------------------------------------------------------------------
-	private fun refill()
+	fun refill()
 	{
+		noValidMoves = false
+
 		val tempgrid: Array2D<Tile> = Array2D(width, height ){ x, y -> Tile(x, y) }
 		for (x in 0 until width)
 		{
@@ -1040,7 +1050,10 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			for (y in 0 until height)
 			{
 				val oldorb = tempgrid[x, y].swappable
-				if (oldorb == null || oldorb !is Orb) grid[x, y].contents = tempgrid[x, y].contents
+				if (oldorb == null || oldorb !is Orb || oldorb.desc.isNamed)
+				{
+					grid[x, y].contents = tempgrid[x, y].contents
+				}
 				else
 				{
 					val orb = grid[x, y].orb!!
@@ -1087,6 +1100,21 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					if (toSpawn is Orb)
 					{
 						val valid = Orb.getValidOrbs(level)
+
+						if (!orbOnly)
+						{
+							for (v in level.victoryConditions)
+							{
+								if (v is CompletionConditionCustomOrb)
+								{
+									if (Random.random.nextFloat() < v.orbChance)
+									{
+										valid.add(Orb.getNamedOrb(v.targetOrbName))
+									}
+								}
+							}
+						}
+
 						val l1 = tile(x - 1, y)
 						val l2 = tile(x - 2, y)
 						val u1 = tile(x, y - 1)
@@ -1105,6 +1133,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					}
 
 					grid[x, y].contents = toSpawn
+					grid[x, y].swappable?.grid = this
 				}
 			}
 		}

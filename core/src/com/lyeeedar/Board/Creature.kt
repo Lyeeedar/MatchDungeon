@@ -11,6 +11,11 @@ import com.lyeeedar.Util.Colour
 abstract class Creature(maxHp: Int, size: Int, sprite: Sprite, death: ParticleEffect)
 {
 	var damageReduction: Int = 0
+		set(value)
+		{
+			field = value
+			remainingReduction = value
+		}
 	var remainingReduction: Int = 0
 
 	var hp: Int = 1

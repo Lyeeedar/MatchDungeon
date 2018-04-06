@@ -12,7 +12,7 @@
 		<Data Name="AttackCooldown" Name1="Min" Name2="Max" Min="1" Default="6" Type="Int" SkipIfDefault="False" meta:RefKey="Vector" />
 		<Data Name="Size" Type="Int" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
 		<Data Name="HP" Type="Int" Min="1" Default="10" SkipIfDefault="False" meta:RefKey="Number" />
-		<Data Name="DamageResistance" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
+		<Data Name="DamageReduction" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
 		<Data Name="Abilities" meta:RefKey="Collection">
 			<Data Name="Ability" meta:RefKey="Struct">
 				<Data Name="Cooldown" Name1="Min" Name2="Max" Min="1" Type="Int" SkipIfDefault="False" meta:RefKey="Vector" />

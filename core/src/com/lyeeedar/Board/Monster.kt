@@ -55,7 +55,7 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 				sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
 
 				val dst = tile.euclideanDist(startTile)
-				val animDuration = 0.25f + tile.euclideanDist(startTile) * 0.05f
+				val animDuration = 0.4f + tile.euclideanDist(startTile) * 0.025f
 				val attackSprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/skull_small", drawActualSize = true)
 				attackSprite.colour = tile.orb!!.sprite.colour
 				attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
