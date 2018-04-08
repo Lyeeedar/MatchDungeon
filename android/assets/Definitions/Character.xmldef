@@ -1,0 +1,20 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="Character" meta:RefKey="Struct">
+		<Data Name="Name" SkipIfDefault="False" meta:RefKey="String" />
+		<Data Name="Description" SkipIfDefault="False" meta:RefKey="String" />
+		<Data Name="Sprite" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Statistics" Keys="Statistics" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="StartingEquipment" meta:RefKey="Struct">
+			<Data Name="Head" BasePath="Equipment" StripExtension="True" ResourceType="Head" meta:RefKey="File" />
+			<Data Name="Body" BasePath="Equipment" StripExtension="True" ResourceType="Body" meta:RefKey="File" />
+			<Data Name="MainHand" BasePath="Equipment" StripExtension="True" ResourceType="MainHand" meta:RefKey="File" />
+			<Data Name="OffHand" BasePath="Equipment" StripExtension="True" ResourceType="OffHand" meta:RefKey="File" />
+		</Data>
+	</Definition>
+	<Definition Name="Statistics" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="Health" Type="Int" Min="-999999" SkipIfDefault="False" meta:RefKey="Number" />
+		<Data Name="MatchDamage" Type="Int" SkipIfDefault="False" meta:RefKey="Number" />
+		<Data Name="AbilityDamage" Type="Int" SkipIfDefault="False" meta:RefKey="Number" />
+		<Data Name="PowerGain" Type="Int" SkipIfDefault="False" meta:RefKey="Number" />
+	</Definition>
+</Definitions>

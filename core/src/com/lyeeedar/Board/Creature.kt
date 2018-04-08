@@ -64,15 +64,15 @@ abstract class Creature(maxHp: Int, size: Int, sprite: Sprite, death: ParticleEf
 		this.death = death
 	}
 
-	fun setTile(target: Tile, grid: Grid)
+	fun setTile(target: Tile, grid: Grid, delay: Float = 0f)
 	{
 		for (tile in tiles)
 		{
 			tile.monster = null
 		}
-		for (x in 0..size-1)
+		for (x in 0 until size)
 		{
-			for (y in 0..size - 1)
+			for (y in 0 until size)
 			{
 				val tile = grid.tile(target.x + x, target.y + y)!!
 
@@ -81,6 +81,7 @@ abstract class Creature(maxHp: Int, size: Int, sprite: Sprite, death: ParticleEf
 					val orb = tile.orb!!
 
 					val sprite = orb.desc.death.copy()
+					sprite.renderDelay = delay
 					sprite.colour = orb.sprite.colour
 
 					tile.effects.add(sprite)
@@ -96,7 +97,7 @@ abstract class Creature(maxHp: Int, size: Int, sprite: Sprite, death: ParticleEf
 
 	fun getBorderTiles(grid: Grid, range: Int = 1): Sequence<Tile>
 	{
-		fun isBorder(tile: Tile) = tiles.map { it.dist(tile) }.min()!! <= range
+		fun isBorder(tile: Tile) = tiles.map { it.taxiDist(tile) }.min()!! <= range
 		return grid.grid.filter(::isBorder)
 	}
 }

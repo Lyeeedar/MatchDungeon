@@ -39,11 +39,9 @@ enum class Sin constructor(val colour: Colour)
 // ----------------------------------------------------------------------
 enum class Rarity
 {
-	COMMON,
-	UNCOMMON,
-	RARE,
-	MYSTICAL,
-	LEGENDARY;
+	BRONZE,
+	SILVER,
+	GOLD;
 
 
 	companion object

@@ -1,0 +1,33 @@
+<CardContent meta:X="0" meta:Y="0" GUID="d3338430-8d58-4616-8d1c-d4e248a43c6d" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">58eb3f6e-e78d-4b69-b306-b7d48f08c18d</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="58eb3f6e-e78d-4b69-b306-b7d48f08c18d">
+			<Line>
+				<MultilineString>You carefully push open the heavy door and step into the room.
+Greeting you with a rumbling growl a huge troll shambles from the shadows and attacks.</MultilineString>
+			</Line>
+			<Match3>
+				<Success meta:RefKey="Node">d646e20b-624a-4348-903d-c436bcebd8a8</Success>
+				<Failure meta:RefKey="Node">98c007a7-9354-4ebc-892b-c634437936f1</Failure>
+				<Level></Level>
+			</Match3>
+		</Node>
+		<Node meta:X="550" meta:Y="-8" GUID="d646e20b-624a-4348-903d-c436bcebd8a8">
+			<Line>
+				<MultilineString>You slay the foul creature and proceed to loot the room of all its valuables.</MultilineString>
+			</Line>
+			<Reward>
+				<Rewards meta:RefKey="Rewards">
+					<Card>
+						<File>FallenAdventurer</File>
+					</Card>
+				</Rewards>
+			</Reward>
+		</Node>
+		<Node meta:X="519" meta:Y="179" GUID="98c007a7-9354-4ebc-892b-c634437936f1">
+			<Line>
+				<MultilineString>The monster proves too much for you, and one final hit makes your whole world go black.</MultilineString>
+			</Line>
+		</Node>
+	</Nodes>
+</CardContent>

@@ -24,5 +24,8 @@
 				<Data Name="Weight" Type="Int" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
 			</Data>
 		</Data>
+		<Data Name="Factions" meta:RefKey="Collection">
+			<Data Name="Faction" meta:RefKey="String" />
+		</Data>
 	</Definition>
 </Definitions>

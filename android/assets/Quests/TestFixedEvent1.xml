@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="1ea7a5e9-2c68-4b6c-a7f2-020103ff5e40" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">6219df51-2f0d-4671-ba9c-15933fab9b84</Root>
+	<Nodes>
+		<CardNode meta:X="205" meta:Y="1" GUID="6219df51-2f0d-4671-ba9c-15933fab9b84">
+			<Name>Final Battle</Name>
+			<Description>You find yourself outside a large ornate door. Beyond this point lies the boss of the dungeon. Prepare yourself!</Description>
+			<Rarity>Gold</Rarity>
+			<Content>TestFixedEvent1Content1</Content>
+		</CardNode>
+	</Nodes>
+</Card>

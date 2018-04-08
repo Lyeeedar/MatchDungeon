@@ -87,11 +87,14 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 	lateinit var updateFuns: kotlin.Array<() -> Boolean>
 	var inTurn = false
+	var gridNeedsUpdate = false
 	var gainedBonusPower = false
 	var matchCount = 0
 
 	// ----------------------------------------------------------------------
 	var noValidMoves = false
+
+	val processedCreatures = ObjectSet<Creature>()
 
 	// ----------------------------------------------------------------------
 	init
@@ -107,29 +110,10 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 			for (tile in grid)
 			{
-				val orb = tile.orb
-				if (orb != null)
-				{
-					// Process attacks
-					if (orb.hasAttack)
-					{
-						orb.attackTimer--
-					}
-					if (orb.isChanger)
-					{
-						orb.desc = orb.nextDesc!!
-						orb.nextDesc = Orb.getRandomOrb(level, orb.desc)
-
-						val effect = AssetManager.loadSprite("EffectSprites/Heal/Heal", 0.05f, orb.desc.sprite.colour)
-						tile.effects.add(effect)
-					}
-				}
-
 				// process creatures
 				val creature = tile.creature
 				if (creature != null && tile == creature.tiles[0, 0])
 				{
-					creature.onTurn(this@Grid)
 					creature.damSources.clear()
 					creature.remainingReduction = creature.damageReduction
 				}
@@ -165,6 +149,44 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			}
 
 			return false
+		}
+	}
+
+	// ----------------------------------------------------------------------
+	fun updateGrid()
+	{
+		gridNeedsUpdate = false
+
+		processedCreatures.clear()
+
+		for (tile in grid)
+		{
+			val orb = tile.orb
+			if (orb != null)
+			{
+				// Process attacks
+				if (orb.hasAttack)
+				{
+					orb.attackTimer--
+				}
+				if (orb.isChanger)
+				{
+					orb.desc = orb.nextDesc!!
+					orb.nextDesc = Orb.getRandomOrb(level, orb.desc)
+
+					val effect = AssetManager.loadSprite("EffectSprites/Heal/Heal", 0.05f, orb.desc.sprite.colour)
+					tile.effects.add(effect)
+				}
+			}
+
+			// process creatures
+			val creature = tile.creature
+			if (creature != null && tile == creature.tiles[0, 0] && !processedCreatures.contains(creature))
+			{
+				processedCreatures.add(creature)
+
+				creature.onTurn(this@Grid)
+			}
 		}
 	}
 
@@ -591,9 +613,16 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 			if (inTurn)
 			{
-				onTurn()
-				inTurn = false
-				animSpeed = 0.15f
+				if (gridNeedsUpdate)
+				{
+					updateGrid()
+				}
+				else
+				{
+					onTurn()
+					inTurn = false
+					animSpeed = 0.15f
+				}
 			}
 
 			matchCount = 0
@@ -634,6 +663,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	private fun beginTurn()
 	{
 		inTurn = true
+		gridNeedsUpdate = true
 	}
 
 	// ----------------------------------------------------------------------

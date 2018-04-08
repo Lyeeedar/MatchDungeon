@@ -1,0 +1,10 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="Rewards" meta:RefKey="Collection">
+		<Data Name="Money" meta:RefKey="Struct">
+			<Data Name="Count" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
+		</Data>
+		<Data Name="Card" meta:RefKey="Struct">
+			<Data Name="File" BasePath="Cards" StripExtension="True" ResourceType="Card" SkipIfDefault="False" meta:RefKey="File" />
+		</Data>
+	</Definition>
+</Definitions>

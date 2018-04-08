@@ -1,0 +1,26 @@
+<Quest meta:X="0" meta:Y="0" GUID="754cabb8-fb1a-477c-9ea8-61509ebebb9d" xmlns:meta="Editor">
+	<Root meta:RefKey="QuestNode">e99c4c0a-4511-4290-9c13-7f426c1e7e31</Root>
+	<Nodes>
+		<QuestNode meta:X="252.53955343713002" meta:Y="-1.5395534371300259" GUID="e99c4c0a-4511-4290-9c13-7f426c1e7e31">
+			<Type>Deck</Type>
+			<AllowDeckCards>false</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<Next meta:RefKey="QuestNode">ef202c1c-a98d-4b2a-8ffb-4bd3749d8b4c</Next>
+		</QuestNode>
+		<QuestNode meta:X="488.66937782026946" meta:Y="-3.0791068742600518" GUID="ef202c1c-a98d-4b2a-8ffb-4bd3749d8b4c">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>false</AllowQuestCards>
+			<Next meta:RefKey="QuestNode">5fe952cb-7368-4432-81ad-ba18a2ab55a8</Next>
+		</QuestNode>
+		<QuestNode meta:X="792" meta:Y="1" GUID="5fe952cb-7368-4432-81ad-ba18a2ab55a8">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>false</AllowQuestCards>
+			<Next meta:RefKey="QuestNode">7aa1b7a6-4d86-4f2e-b0c4-c1273d5b5c87</Next>
+		</QuestNode>
+		<QuestNode meta:X="1061" meta:Y="0" GUID="7aa1b7a6-4d86-4f2e-b0c4-c1273d5b5c87">
+			<FixedEvent>TestFixedEvent1</FixedEvent>
+		</QuestNode>
+	</Nodes>
+</Quest>

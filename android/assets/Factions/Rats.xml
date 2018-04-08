@@ -13,6 +13,14 @@
 			<Size>1</Size>
 			<HP>10</HP>
 			<DamageReduction>2</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>1,2</Cooldown>
+					<Target>Random</Target>
+					<Effect>Move</Effect>
+					<Data />
+				</Ability>
+			</Abilities>
 		</Monster>
 	</Monsters>
 </Faction>

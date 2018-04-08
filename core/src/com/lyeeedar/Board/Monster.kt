@@ -66,19 +66,13 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 			}
 		}
 
-		var doneAbility = false
 		for (ability in abilities)
 		{
 			ability.cooldownTimer--
-			if (ability.cooldownTimer <= 0 && !doneAbility)
+			if (ability.cooldownTimer <= 0)
 			{
-				if (MathUtils.randomBoolean())
-				{
-					ability.cooldownTimer = ability.cooldownMin + MathUtils.random(ability.cooldownMax - ability.cooldownMin)
-					ability.activate(grid, this)
-
-					doneAbility = true // only use 1 a turn
-				}
+				ability.cooldownTimer = ability.cooldownMin + MathUtils.random(ability.cooldownMax - ability.cooldownMin)
+				ability.activate(grid, this)
 			}
 		}
 
@@ -172,11 +166,19 @@ class MonsterAbility
 
 		if (target == Target.NEIGHBOUR)
 		{
-			availableTargets.addAll(monster.getBorderTiles(grid, data["RANGE", "1"].toInt()))
+			if (effect == Effect.MOVE)
+			{
+				val range = data["RANGE", "1"].toInt()
+				availableTargets.addAll(grid.grid.filter { it != monster.tiles[0,0] && it.taxiDist(monster.tiles[0, 0]) <= range })
+			}
+			else
+			{
+				availableTargets.addAll(monster.getBorderTiles(grid, data["RANGE", "1"].toInt()))
+			}
 		}
 		else if (target == Target.RANDOM)
 		{
-			availableTargets.addAll(grid.grid)
+			availableTargets.addAll(grid.grid.filter { !monster.tiles.contains(it) })
 		}
 		else
 		{
@@ -209,30 +211,28 @@ class MonsterAbility
 		{
 			fun isValid(t: Tile): Boolean
 			{
-				for (x in 0..monster.size-1)
+				for (x in 0 until monster.size)
 				{
-					for (y in 0..monster.size-1)
+					for (y in 0 until monster.size)
 					{
 						val tile = grid.tile(t.x + x, t.y + y) ?: return false
 
-						if (tile.orb != tile.contents && tile.monster != monster)
+						if (tile.monster != monster)
 						{
-							return false
-						}
+							if (!tile.canHaveOrb)
+							{
+								return false
+							}
 
-						if (!tile.canHaveOrb)
-						{
-							return false
-						}
+							if (tile.contents != null && tile.contents !is Orb)
+							{
+								return false
+							}
 
-						if (tile.orb == null)
-						{
-							return false
-						}
-
-						if (tile.orb!!.special != null)
-						{
-							return false
+							if (tile.orb != null && tile.orb!!.special != null)
+							{
+								return false
+							}
 						}
 					}
 				}
@@ -240,25 +240,30 @@ class MonsterAbility
 				return true
 			}
 
-			val target = validTargets.filter(::isValid).asSequence().random()
+			val target = availableTargets.filter(::isValid).asSequence().random()
+
+			monster.sprite.animation = null
 
 			if (target != null)
 			{
+				val dst = monster.tiles[0,0].euclideanDist(target)
+				val animDuration = 0.25f + dst * 0.025f
+
 				val start = monster.tiles.first()
-				monster.setTile(target, grid)
+				monster.setTile(target, grid, animDuration - 0.1f)
 				val end = monster.tiles.first()
+
+				val diff = end.getPosDiff(start)
+				diff[0].y *= -1
 
 				if (this.target == Target.RANDOM)
 				{
-					val dst = target.euclideanDist(monster.tiles[0, 0])
-					val animDuration = 0.25f + dst * 0.025f
-
-					monster.sprite.animation = LeapAnimation.obtain().set(animDuration, target.getPosDiff(monster.tiles[0, 0]), 1f + dst * 0.25f)
-					monster.sprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
+					monster.sprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
+					monster.sprite.animation = ExpandAnimation.obtain().set(animDuration, 1f, 2f, false)
 				}
 				else
 				{
-					monster.sprite.animation = MoveAnimation.obtain().set(0.25f, UnsmoothedPath(end.getPosDiff(start)), Interpolation.linear)
+					monster.sprite.animation = MoveAnimation.obtain().set(animDuration, UnsmoothedPath(diff), Interpolation.linear)
 				}
 			}
 
@@ -285,10 +290,10 @@ class MonsterAbility
 				monster.sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
 
 				val dst = target.euclideanDist(monster.tiles[0, 0])
-				val animDuration = 0.25f + dst * 0.025f
+				val animDuration = 0.4f + dst * 0.025f
 				val attackSprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/skull_small", drawActualSize = true)
 				attackSprite.colour = target.orb!!.sprite.colour
-				attackSprite.animation = LeapAnimation.obtain().set(animDuration, target.getPosDiff(monster.tiles[0, 0]), 1f + dst * 0.25f)
+				attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
 				attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
 				target.effects.add(attackSprite)
 

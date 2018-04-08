@@ -1,0 +1,21 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="Quest" FlattenData="True" meta:RefKey="GraphStruct">
+		<Data Name="QuestCards" meta:RefKey="Collection">
+			<Data Name="Card" StripExtension="True" ResourceType="Card" RelativeToThis="True" meta:RefKey="File" />
+		</Data>
+		<Data Name="Rewards" meta:RefKey="Collection">
+			<Data Name="Quest" StripExtension="True" AllowedFileTypes="xml" SkipIfDefault="False" meta:RefKey="File" />
+			<Data Name="Card" StripExtension="True" AllowedFileTypes="xml" SkipIfDefault="False" meta:RefKey="File" />
+		</Data>
+		<Data Name="Root" Keys="QuestNode" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="QuestNode" meta:RefKey="GraphStructDef">
+		<Data Name="Type" EnumValues="Fixed,Deck" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="FixedEvent" StripExtension="True" ResourceType="Card" RelativeToThis="True" SkipIfDefault="False" VisibleIf="Type==Fixed" meta:RefKey="File" />
+		<Data Name="AllowDeckCards" SkipIfDefault="False" VisibleIf="Type==Deck" meta:RefKey="Boolean" />
+		<Data Name="AllowQuestCards" SkipIfDefault="False" VisibleIf="Type==Deck" meta:RefKey="Boolean" />
+		<Data Name="Next" Keys="QuestNode" VisibleIf="Type==Deck" meta:RefKey="GraphReference" />
+		<Data Name="Success" Keys="QuestNode" VisibleIf="Type==Fixed" meta:RefKey="GraphReference" />
+		<Data Name="Failure" Keys="QuestNode" VisibleIf="Type==Fixed" meta:RefKey="GraphReference" />
+	</Definition>
+</Definitions>
