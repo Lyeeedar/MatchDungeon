@@ -14,7 +14,7 @@ abstract class AbstractCardContentAction
 	{
 		fun load(xmlData: XmlData): AbstractCardContentAction
 		{
-			val refKey = xmlData.getAttribute("meta:RefKey").toUpperCase()
+			val refKey = xmlData.name.toUpperCase()
 			val action = when(refKey)
 			{
 				"LINE" -> CardContentActionLine()

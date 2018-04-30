@@ -6,7 +6,6 @@ import com.lyeeedar.Board.CompletionCondition.AbstractCompletionCondition
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionCustomOrb
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionSink
 import com.lyeeedar.Game.Player
-import com.lyeeedar.Game.Theme
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Renderables.Sprite.SpriteWrapper
 import com.lyeeedar.Util.*
@@ -210,6 +209,11 @@ class Level(val loadPath: String)
 			else
 			{
 				chosenFaction = Faction.load(chosenFactionName)
+			}
+
+			if (chosenFaction == null)
+			{
+				chosenFaction = Faction.load(theme.factions.random())
 			}
 
 			// iterate through and find groups

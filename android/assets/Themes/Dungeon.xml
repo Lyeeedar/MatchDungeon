@@ -72,4 +72,7 @@
 	<SpawnWeights>
 		<Spawn>Orb,1</Spawn>
 	</SpawnWeights>
+	<Factions>
+		<Faction>Rats</Faction>
+	</Factions>
 </Theme>

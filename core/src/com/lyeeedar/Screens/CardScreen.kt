@@ -31,6 +31,12 @@ class CardScreen : AbstractScreen()
 
 	fun setup(card: Card, quest: Quest)
 	{
+		if (!created)
+		{
+			baseCreate()
+			created = true
+		}
+
 		currentCard = card
 		currentContent = CardContent.load(currentCard.path.directory() + "/" + currentCard.current.content)
 		currentQuest = quest
@@ -41,6 +47,8 @@ class CardScreen : AbstractScreen()
 		mainTable.add(text).grow().pad(5f)
 		mainTable.row()
 		mainTable.add(buttonTable).pad(5f)
+
+		mainTable.debug()
 
 		success = false
 		currentContent.advance(this)

@@ -10,7 +10,7 @@ class CardContentActionLine : AbstractCardContentAction()
 
 	override fun parse(xmlData: XmlData)
 	{
-		text = xmlData.get("Text")
+		text = xmlData.get("MultilineString")
 	}
 
 	override fun advance(CardContent: CardContent, CardContentScreen: CardScreen): Boolean

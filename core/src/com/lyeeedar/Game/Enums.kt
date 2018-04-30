@@ -26,7 +26,6 @@ enum class Rarity
 
 	companion object
 	{
-
 		val Values = Rarity.values()
 	}
 }
@@ -269,7 +268,7 @@ enum class Statistic
 			for (stat in Values)
 			{
 				var value = statistics[stat] ?: 0
-				value = xmlData.getInt(stat.toString(), value)
+				value = xmlData.getInt(stat.toString().toLowerCase().capitalize(), value)
 				statistics[stat] = value
 			}
 		}

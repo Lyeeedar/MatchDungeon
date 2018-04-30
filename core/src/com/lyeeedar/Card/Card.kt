@@ -58,7 +58,7 @@ class CardNode
 
 		name = xmlData.get("Name")
 		description = xmlData.get("Description")
-		rarity = Rarity.valueOf(xmlData.get("Rarity"))
+		rarity = Rarity.valueOf(xmlData.get("Rarity").toUpperCase())
 		content = xmlData.get("Content")
 
 		val nextEl = xmlData.getChildByName("Next")

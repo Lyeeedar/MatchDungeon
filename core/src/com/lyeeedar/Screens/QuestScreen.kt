@@ -21,7 +21,14 @@ class QuestScreen : AbstractScreen()
 	lateinit var currentQuest: Quest
 	fun setup(quest: Quest)
 	{
+		if (!created)
+		{
+			baseCreate()
+			created = true
+		}
+
 		currentQuest = quest
+		updateButtons()
 	}
 
 	fun updateButtons()
@@ -36,6 +43,9 @@ class QuestScreen : AbstractScreen()
 				val cardScreen = CardScreen.instance
 				cardScreen.setup(card, currentQuest)
 				Global.game.switchScreen(MainGame.ScreenEnum.CARD)
+
+				Global.player.deck.encounters.removeValue(card, true)
+				currentQuest.questCards.removeValue(card, true)
 			}
 
 			mainTable.add(button)

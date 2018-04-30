@@ -8,10 +8,10 @@ import com.lyeeedar.Util.getXml
 import ktx.collections.isEmpty
 import ktx.collections.set
 
-class CardContent
+class CardContent(val path: String)
 {
 	val CardContentStack = Array<CardContentNodeState>()
-	lateinit var root: CardContentActionBranch
+	lateinit var root: CardContentActionNode
 	val nodes = ObjectMap<String, CardContentNode>()
 
 	fun advance(CardContentScreen: CardScreen): Boolean
@@ -53,8 +53,8 @@ class CardContent
 
 	fun parse(xml: XmlData)
 	{
-		val rootEl = xml.getChildByName("Branch")!!
-		val root = CardContentActionBranch()
+		val rootEl = xml.getChildByName("Root")!!
+		val root = CardContentActionNode()
 		root.parse(rootEl)
 		this.root = root
 
@@ -79,7 +79,7 @@ class CardContent
 	{
 		fun load(path: String): CardContent
 		{
-			val CardContent = CardContent()
+			val CardContent = CardContent(path)
 			CardContent.parse(getXml(path))
 			return CardContent
 		}

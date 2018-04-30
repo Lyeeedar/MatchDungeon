@@ -7,6 +7,7 @@ import com.lyeeedar.MainGame
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.directory
 
 class CardContentActionMatch3 : AbstractCardContentAction()
 {
@@ -21,40 +22,40 @@ class CardContentActionMatch3 : AbstractCardContentAction()
 
 	override fun parse(xmlData: XmlData)
 	{
-		levelFile = xmlData.get("LevelFile")
+		levelFile = xmlData.get("Level")
 		successNodeGuid = xmlData.get("Success", "")!!
 		failureNodeGuid = xmlData.get("Failure", "")!!
 	}
 
-	override fun advance(CardContent: CardContent, CardContentScreen: CardScreen): Boolean
+	override fun advance(cardContent: CardContent, CardContentScreen: CardScreen): Boolean
 	{
 		if (level == null)
 		{
-			level = Level.load(levelFile).random()
+			level = Level.load(cardContent.path.directory() + "/" + levelFile).random()
 			level!!.create(CardContentScreen.currentQuest.theme, Global.player,
 						   {
-							   CardContent.CardContentStack.last().index++
+							   cardContent.CardContentStack.last().index++
 							   level = null
 
 							   if (successNode != null)
 							   {
-								   CardContent.CardContentStack.add(CardContentNodeState(successNode!!))
+								   cardContent.CardContentStack.add(CardContentNodeState(successNode!!))
 							   }
 
 							   Global.game.switchScreen(MainGame.ScreenEnum.CARD)
-							   CardContent.advance(CardContentScreen)
+							   cardContent.advance(CardContentScreen)
 						   },
 						   {
-							   CardContent.CardContentStack.last().index++
+							   cardContent.CardContentStack.last().index++
 							   level = null
 
 							   if (failureNode != null)
 							   {
-								   CardContent.CardContentStack.add(CardContentNodeState(failureNode!!))
+								   cardContent.CardContentStack.add(CardContentNodeState(failureNode!!))
 							   }
 
 							   Global.game.switchScreen(MainGame.ScreenEnum.CARD)
-							   CardContent.advance(CardContentScreen)
+							   cardContent.advance(CardContentScreen)
 						   })
 			val screen = Global.game.getScreen(MainGame.ScreenEnum.GRID) as GridScreen
 			screen.updateLevel(level!!, Global.player)

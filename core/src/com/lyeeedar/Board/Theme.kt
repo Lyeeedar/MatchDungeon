@@ -1,45 +1,11 @@
-package com.lyeeedar.Game
+package com.lyeeedar.Board
 
-import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Renderables.Sprite.SpriteWrapper
 import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Point
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.getXml
-
-class Location
-{
-	lateinit var name: String
-	lateinit var exclusivityKey: String
-	lateinit var image: Texture
-	lateinit var position: Point
-	lateinit var theme: Theme
-
-	companion object
-	{
-		fun load(path: String): Location
-		{
-			val xml = getXml("Locations/$path")
-
-			val location = Location()
-
-			location.name = xml.get("Name")
-			location.exclusivityKey = xml.get("ExclusivityKey")
-			if (location.exclusivityKey.isBlank()) location.exclusivityKey = location.name
-
-			location.image = AssetManager.loadTexture("Sprites/" + xml.getChildByName("Background")!!.get("File"))!!
-
-			val posSplit = xml.get("Position").split(",")
-			location.position = Point(posSplit[0].toInt(), posSplit[1].toInt())
-
-			location.theme = Theme.load(xml.getChildByName("Theme")!!)
-
-			return location
-		}
-	}
-}
 
 class Theme
 {
@@ -56,6 +22,8 @@ class Theme
 	val shieldSprites = Array<Sprite>()
 
 	val spawnList = Array<String>()
+
+	val factions = Array<String>()
 
 	companion object
 	{
@@ -113,6 +81,15 @@ class Theme
 			else
 			{
 				theme.spawnList.add("Orb")
+			}
+
+			val factionsEl = xml.getChildByName("Factions")
+			if (factionsEl != null)
+			{
+				for (el in factionsEl.children)
+				{
+					theme.factions.add(el.text)
+				}
 			}
 
 			return theme

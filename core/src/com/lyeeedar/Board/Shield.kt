@@ -1,6 +1,5 @@
 package com.lyeeedar.Board
 
-import com.lyeeedar.Game.Theme
 import com.lyeeedar.Util.tryGet
 
 class Shield(theme: Theme) : Swappable(theme)

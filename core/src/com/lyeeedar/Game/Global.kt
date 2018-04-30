@@ -15,12 +15,11 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.esotericsoftware.kryo.Kryo
 import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
-import com.lyeeedar.Board.Level
 import com.lyeeedar.Game.Character
 import com.lyeeedar.Game.Player
-import com.lyeeedar.Game.Theme
+import com.lyeeedar.Game.Quest
 import com.lyeeedar.Screens.AbstractScreen
-import com.lyeeedar.Screens.GridScreen
+import com.lyeeedar.Screens.QuestScreen
 import com.lyeeedar.UI.*
 import com.lyeeedar.UI.Tooltip
 import com.lyeeedar.Util.*
@@ -78,12 +77,10 @@ class Global
 			player = Player(Character.load("Peasant"))
 			flags = GameStateFlags()
 
-			val theme = Theme.load("Themes/Dungeon")
-			val level = Level.load("Levels/Test").random()
-			level.create(theme, player, {}, {})
+			val quest = Quest.load("Test")
 
-			game.getTypedScreen<GridScreen>()?.updateLevel(level, player)
-			game.switchScreen(MainGame.ScreenEnum.GRID)
+			game.getTypedScreen<QuestScreen>()?.setup(quest)
+			game.switchScreen(MainGame.ScreenEnum.QUEST)
 		}
 
 		private fun loadSkin(): Skin

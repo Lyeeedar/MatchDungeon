@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="4c5b2219-4a2a-4cc8-b580-9727b281e06b" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">6ed1505b-834c-4017-8620-b5234d750206</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="6ed1505b-834c-4017-8620-b5234d750206">
+			<Name>Ambush!</Name>
+			<Description></Description>
+			<Rarity>Bronze</Rarity>
+			<Content>TestCard1Content1</Content>
+		</CardNode>
+	</Nodes>
+</Card>

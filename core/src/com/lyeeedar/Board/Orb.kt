@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
-import com.lyeeedar.Game.Theme
 import com.lyeeedar.Renderables.Animation.BlinkAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Sprite.Sprite

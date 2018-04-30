@@ -2,7 +2,9 @@ package com.lyeeedar.Game
 
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
+import com.lyeeedar.Board.Theme
 import com.lyeeedar.Card.Card
+import com.lyeeedar.Global
 import com.lyeeedar.Util.*
 import ktx.collections.set
 import ktx.collections.toGdxArray
@@ -14,22 +16,22 @@ class Quest(val path: String)
 	val questCards: Array<Card> = Array()
 
 	lateinit var current: QuestNode
-	lateinit var player: Player
 
 	val theme: Theme
 
 	init
 	{
-		val xml = getXml("Quests/$path")
+		val rawPath = "Quests/$path"
+		val xml = getXml(rawPath)
 
-		theme = Theme.Companion.load(xml.get("Theme"))
+		theme = Theme.Companion.load("Themes/" + xml.get("Theme"))
 
 		val questCardsEl = xml.getChildByName("QuestCards")
 		if (questCardsEl != null)
 		{
 			for (questCardEl in questCardsEl.children())
 			{
-				val card = Card.load(path.directory() + questCardEl.text)
+				val card = Card.load(rawPath.directory() + "/" + questCardEl.text)
 				questCards.add(card)
 			}
 		}
@@ -103,14 +105,14 @@ class QuestNode(val quest: Quest)
 
 		if (type == QuestNodeType.FIXED)
 		{
-			output.add(Card.load(quest.path.directory() + fixedEventString))
+			output.add(Card.load(("Quests/" + quest.path).directory() + "/" + fixedEventString))
 		}
 		else
 		{
 			val pool = Array<Card>()
 			if (allowDeckCards)
 			{
-				pool.addAll(quest.player.deck.encounters)
+				pool.addAll(Global.player.deck.encounters)
 			}
 			if (allowQuestCards)
 			{
@@ -130,7 +132,7 @@ class QuestNode(val quest: Quest)
 	{
 		guid = xmlData.getAttribute("GUID")
 
-		type = QuestNodeType.valueOf(xmlData.get("Type"))
+		type = QuestNodeType.valueOf(xmlData.get("Type").toUpperCase())
 
 		if (type == QuestNodeType.FIXED)
 		{
