@@ -52,8 +52,6 @@ class CardNode
 
 	var nextNode: CardNodeWrapper? = null
 
-	var completed = false
-
 	fun parse(xmlData: XmlData)
 	{
 		guid = xmlData.getAttribute("GUID")

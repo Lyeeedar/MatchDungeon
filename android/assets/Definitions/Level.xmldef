@@ -1,11 +1,20 @@
 <Definitions xmlns:meta="Editor">
+	<!--Completion Conditions-->
 	<Definition Name="None" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />
-	<Definition Name="Plate" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />
-	<Definition Name="Kill" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />
+	<!--Failure-->
 	<Definition Name="Die" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />
+	<Definition Name="Time" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef">
+		<Data Name="Seconds" Min="1" Default="60" SkipIfDefault="False" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="Turns" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef">
+		<Data Name="Turns" Type="Int" Min="1" Default="30" SkipIfDefault="False" meta:RefKey="Number" />
+	</Definition>
+	<!--Success-->
+	<Definition Name="Plate" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />
 	<Definition Name="Matches" MinCount="1" SkipIfDefault="False" meta:RefKey="CollectionDef">
 		<Data Name="Orbs" Type="Int" Min="1" Default="10" SkipIfDefault="False" meta:RefKey="Number" />
 	</Definition>
+	<Definition Name="Kill" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />
 	<Definition Name="Sink" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef">
 		<Data Name="Count" Type="Int" Min="1" Default="4" SkipIfDefault="False" meta:RefKey="Number" />
 	</Definition>
@@ -14,12 +23,7 @@
 		<Data Name="OrbName" meta:RefKey="String" />
 		<Data Name="Chance" Min="0" Max="1" Default="0.2" SkipIfDefault="False" meta:RefKey="Number" />
 	</Definition>
-	<Definition Name="Time" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef">
-		<Data Name="Seconds" Min="1" Default="60" SkipIfDefault="False" meta:RefKey="Number" />
-	</Definition>
-	<Definition Name="Turns" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef">
-		<Data Name="Turns" Type="Int" Min="1" Default="30" SkipIfDefault="False" meta:RefKey="Number" />
-	</Definition>
+	<!--Level-->
 	<Definition Name="Level" meta:RefKey="Struct">
 		<Data Name="Grid" MinCount="1" meta:RefKey="Collection">
 			<Data Name="Rows" ElementPerLine="True" IsAsciiGrid="True" meta:RefKey="MultilineString" />

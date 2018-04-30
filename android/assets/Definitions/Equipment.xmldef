@@ -1,5 +1,6 @@
 <Definitions xmlns:meta="Editor">
-	<Definition Name="Equipment" meta:RefKey="Struct">
+	<!--Base-->
+	<Definition Name="EquipmentBase" meta:RefKey="Struct">
 		<Data Name="Name" SkipIfDefault="False" meta:RefKey="String" />
 		<Data Name="Description" SkipIfDefault="False" meta:RefKey="String" />
 		<Data Name="Icon" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
@@ -28,8 +29,23 @@
 			</Data>
 		</Data>
 	</Definition>
-	<Definition Name="Head" Extends="Equipment" meta:RefKey="Struct" />
-	<Definition Name="Body" Extends="Equipment" meta:RefKey="Struct" />
-	<Definition Name="MainHand" Extends="Equipment" meta:RefKey="Struct" />
-	<Definition Name="OffHand" Extends="Equipment" meta:RefKey="Struct" />
+	<!--Actual Types-->
+	<Definition Name="Head" Extends="EquipmentBase" meta:RefKey="Struct" />
+	<Definition Name="Body" Extends="EquipmentBase" meta:RefKey="Struct" />
+	<Definition Name="MainHand" Extends="EquipmentBase" meta:RefKey="Struct" />
+	<Definition Name="OffHand" Extends="EquipmentBase" meta:RefKey="Struct" />
+	<!--File References-->
+	<Definition Name="HeadFile" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="File" BasePath="Equipment" StripExtension="True" ResourceType="Head" SkipIfDefault="False" meta:RefKey="File" />
+	</Definition>
+	<Definition Name="BodyFile" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="File" BasePath="Equipment" StripExtension="True" ResourceType="Body" SkipIfDefault="False" meta:RefKey="File" />
+	</Definition>
+	<Definition Name="MainHandFile" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="File" BasePath="Equipment" StripExtension="True" ResourceType="MainHand" SkipIfDefault="False" meta:RefKey="File" />
+	</Definition>
+	<Definition Name="OffHandFile" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="File" BasePath="Equipment" StripExtension="True" ResourceType="OffHand" SkipIfDefault="False" meta:RefKey="File" />
+	</Definition>
+	<Definition Name="Equipment" Keys="HeadFile,BodyFile,MainHandFile,OffHandFile" IsGlobal="True" meta:RefKey="ReferenceDef" />
 </Definitions>

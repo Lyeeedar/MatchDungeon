@@ -4,36 +4,16 @@ import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Array
-import com.lyeeedar.Util.*
+import com.lyeeedar.Util.FastEnumMap
+import com.lyeeedar.Util.Point
+import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.vectorToAngle
 
 // ----------------------------------------------------------------------
 enum class BlendMode constructor(val src: Int, val dst: Int)
 {
 	MULTIPLICATIVE(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA),
 	ADDITIVE(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
-}
-
-// ----------------------------------------------------------------------
-enum class Gender
-{
-	MALE,
-	FEMALE
-}
-
-// ----------------------------------------------------------------------
-enum class Sin constructor(val colour: Colour)
-{
-	ANGER(Colour(0.78f, 0.46f, 0.46f, 1f)),
-	SLOTH(Colour(0.8f, 0.69f, 0.52f, 1f)),
-	ENVY(Colour(0.1f, 0.93f, 1f, 1f)),
-	LUST(Colour(0.78f, 0.31f, 0.7f, 1f)),
-	GREED(Colour(0.25f, 0.61f, 0.29f, 1f)),
-	PRIDE(Colour(1f, 0.91f, 0f, 1f));
-
-	companion object
-	{
-		val Values = Sin.values()
-	}
 }
 
 // ----------------------------------------------------------------------
@@ -273,66 +253,25 @@ enum class Direction private constructor(val x: Int, val y: Int, val identifier:
 }
 
 // ----------------------------------------------------------------------
-enum class ElementType
+enum class Statistic
 {
-	PHYSICAL,
-
-	ELEMENTAL,
-	CORRUPTION,
-	PURIFICATION;
-
-	lateinit var weakTo: ElementType
-	lateinit var strongAgainst: ElementType
+	HEALTH,
+	MATCHDAMAGE,
+	ABILITYDAMAGE,
+	POWERGAIN;
 
 	companion object
 	{
-		init
+		val Values = Statistic.values()
+
+		fun parse(xmlData: XmlData, statistics: FastEnumMap<Statistic, Int>)
 		{
-			PHYSICAL.weakTo = ELEMENTAL
-			PHYSICAL.strongAgainst = PURIFICATION
-
-			ELEMENTAL.weakTo = CORRUPTION
-			ELEMENTAL.strongAgainst = PHYSICAL
-
-			CORRUPTION.weakTo = PURIFICATION
-			CORRUPTION.strongAgainst = ELEMENTAL
-
-			PURIFICATION.weakTo = PHYSICAL
-			PURIFICATION.strongAgainst = CORRUPTION
-		}
-
-		val Values = ElementType.values()
-
-		fun getElementMap(defaultValue: Float = 0f): FastEnumMap<ElementType, Float>
-		{
-			val map: FastEnumMap<ElementType, Float> = FastEnumMap(ElementType::class.java)
-
-			for (elem in Values)
+			for (stat in Values)
 			{
-				map[elem] = defaultValue
+				var value = statistics[stat] ?: 0
+				value = xmlData.getInt(stat.toString(), value)
+				statistics[stat] = value
 			}
-
-			return map
-		}
-
-		fun load(xml: XmlData, existing: FastEnumMap<ElementType, Float>? = null): FastEnumMap<ElementType, Float>
-		{
-			var map = existing
-
-			if (map == null)
-			{
-				map = getElementMap(0f)
-			}
-
-			for (i in 0 until xml.childCount)
-			{
-				val el = xml.getChild(i)
-				val elem = valueOf(el.name.toUpperCase())
-
-				map[elem] = el.text.toFloat()
-			}
-
-			return map
 		}
 	}
 }
@@ -340,37 +279,13 @@ enum class ElementType
 // ----------------------------------------------------------------------
 enum class EquipmentSlot
 {
-	WEAPON,
-	ARMOUR,
-
-	ACCESSORY1,
-	ACCESSORY2,
-	ACCESSORY3;
+	HEAD,
+	BODY,
+	MAINHAND,
+	OFFHAND;
 
 	companion object
 	{
 		val Values = EquipmentSlot.values()
-	}
-}
-
-// ----------------------------------------------------------------------
-enum class SpaceSlot
-{
-	FLOOR,
-	FLOORDETAIL,
-	WALL,
-	WALLDETAIL,
-	BELOWENTITY,
-	ENTITY,
-	ABOVEENTITY,
-	LIGHT;
-
-
-	companion object
-	{
-
-		val Values = SpaceSlot.values()
-		val BasicValues = arrayOf(FLOOR, FLOORDETAIL, WALL, WALLDETAIL)
-		val EntityValues = arrayOf(BELOWENTITY, ENTITY, ABOVEENTITY)
 	}
 }

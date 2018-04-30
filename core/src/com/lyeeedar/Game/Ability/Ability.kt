@@ -8,10 +8,10 @@ import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Tile
 import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
+import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.PowerBar
-import com.lyeeedar.UI.Unlockable
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.XmlData
@@ -22,8 +22,12 @@ import ktx.collections.set
  * Created by Philip on 20-Jul-16.
  */
 
-class Ability(): Unlockable()
+class Ability
 {
+	lateinit var name: String
+	lateinit var description: String
+	lateinit var icon: Sprite
+
 	var hitEffect: ParticleEffect? = null
 	var flightEffect: ParticleEffect? = null
 
@@ -140,14 +144,13 @@ class Ability(): Unlockable()
 		selectedTargets.clear()
 	}
 
-	override fun parse(xml: XmlData, resources: ObjectMap<String, XmlData>)
+	fun parse(xml: XmlData)
 	{
-		val dataEl = xml.getChildByName("EffectData")!!
+		name = xml.get("Name")
+		description = xml.get("Description")
+		icon = AssetManager.loadSprite(xml.getChildByName("Icon")!!)
 
-		val hitEffectData = dataEl.getChildByName("HitEffect")
-		if (hitEffectData != null) hitEffect = AssetManager.loadParticleEffect(hitEffectData)
-		val flightEffectData = dataEl.getChildByName("FlightEffect")
-		if (flightEffectData != null) flightEffect = AssetManager.loadParticleEffect(flightEffectData)
+		val dataEl = xml.getChildByName("EffectData")!!
 
 		cost = dataEl.getInt("Cost", 1)
 
@@ -166,6 +169,21 @@ class Ability(): Unlockable()
 			{
 				data[el.name.toUpperCase()] = el.text.toUpperCase()
 			}
+		}
+
+		val hitEffectData = dataEl.getChildByName("HitEffect")
+		if (hitEffectData != null) hitEffect = AssetManager.loadParticleEffect(hitEffectData)
+		val flightEffectData = dataEl.getChildByName("FlightEffect")
+		if (flightEffectData != null) flightEffect = AssetManager.loadParticleEffect(flightEffectData)
+	}
+
+	companion object
+	{
+		fun load(xml: XmlData): Ability
+		{
+			val ability = Ability()
+			ability.parse(xml)
+			return ability
 		}
 	}
 }

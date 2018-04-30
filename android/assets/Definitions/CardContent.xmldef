@@ -45,9 +45,7 @@
 			<Data Name="Key" meta:RefKey="String" />
 			<Data Name="Value" meta:RefKey="String" />
 		</Data>
-		<Data Name="MarkComplete" TextColour="242,183,30" meta:RefKey="Struct" />
-		<Data Name="Reward" TextColour="255,245,0" meta:RefKey="Struct">
-			<Data Name="Rewards" Keys="Rewards" meta:RefKey="Reference" />
-		</Data>
+		<Data Name="MarkComplete" SkipIfDefault="False" TextColour="242,183,30" meta:RefKey="Struct" />
+		<Data Name="Rewards" Keys="Rewards" Nullable="False" meta:RefKey="Reference" />
 	</Definition>
 </Definitions>

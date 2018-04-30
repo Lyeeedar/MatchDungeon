@@ -8,6 +8,7 @@ import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.Animation.LeapAnimation
 import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Sprite.Sprite
+import com.lyeeedar.Statistic
 import com.lyeeedar.Util.*
 
 /**
@@ -31,12 +32,6 @@ abstract class Special(val orb: Orb)
 			val col = colour * 0.8f
 			val lerped = col.lerp(Colour.WHITE, 0.6f)
 			return lerped
-		}
-
-		fun popTile(special: Special, tile: Tile, point: Point, grid: Grid, offset: Float = 0f)
-		{
-			val delay = tile.dist(point) * 0.1f + offset
-			grid.pop(tile, delay + 0.2f, special, grid.level.player.abilityDam)
 		}
 
 		fun popColumn(special: Special, colour: Colour, x: Int, sy: Int, grid: Grid)
@@ -65,7 +60,7 @@ abstract class Special(val orb: Orb)
 					if (tile != null && cx == x && cy in min..max && !hitSet.contains(tile))
 					{
 						hitSet.add(tile)
-						grid.pop(cx, cy, 0f, special, grid.level.player.abilityDam + grid.level.player.attackDam)
+						grid.pop(cx, cy, 0f, special, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE))
 					}
 				}
 				grid.grid[x, y].effects.add(effect)
@@ -133,7 +128,7 @@ abstract class Special(val orb: Orb)
 					if (tile != null && cy == y && x in min..max && !hitSet.contains(tile))
 					{
 						hitSet.add(tile)
-						grid.pop(cx, cy, 0f, special, grid.level.player.abilityDam + grid.level.player.attackDam)
+						grid.pop(cx, cy, 0f, special, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE))
 					}
 
 				}
@@ -251,7 +246,7 @@ class DualMatch(orb: Orb) : Special(orb)
 						if (tile != null && !hitSet.contains(tile) && tile.dist(point) < 4)
 						{
 							hitSet.add(tile)
-							grid.pop(cx, cy, 0f, this@DualMatch, grid.level.player.abilityDam + grid.level.player.attackDam)
+							grid.pop(cx, cy, 0f, this@DualMatch, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE))
 						}
 					}
 					Future.call({
@@ -260,7 +255,7 @@ class DualMatch(orb: Orb) : Special(orb)
 							if (!hitSet.contains(tile) && tile.dist(point) < 4)
 							{
 								hitSet.add(tile)
-								grid.pop(tile.x, tile.y, 0f, this@DualMatch, grid.level.player.abilityDam + grid.level.player.attackDam)
+								grid.pop(tile.x, tile.y, 0f, this@DualMatch, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE))
 							}
 						}
 								}, 0.2f)
@@ -310,7 +305,7 @@ class DualMatch(orb: Orb) : Special(orb)
 			if (tile != null && !hitSet.contains(tile) && tile.dist(point) < 3)
 			{
 				hitSet.add(tile)
-				grid.pop(cx, cy, 0f, this@DualMatch, grid.level.player.abilityDam)
+				grid.pop(cx, cy, 0f, this@DualMatch, grid.level.player.getStat(Statistic.ABILITYDAMAGE))
 			}
 		}
 
@@ -371,7 +366,7 @@ class Match5(orb: Orb) : Special(orb)
 									tile.orb!!.armed = func
 								}
 
-								grid.pop(tile, 0f, this, grid.level.player.abilityDam + grid.level.player.attackDam + 2)
+								grid.pop(tile, 0f, this, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 2)
 							}
 							tile.effects.add(s)
 						}
@@ -430,7 +425,7 @@ class Match5(orb: Orb) : Special(orb)
 									tile.orb!!.armed = func
 								}
 
-								grid.pop(tile, 0f, this, grid.level.player.abilityDam + grid.level.player.attackDam + 1)
+								grid.pop(tile, 0f, this, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
 							}
 							tile.effects.add(s)
 						}
@@ -450,7 +445,7 @@ class Match5(orb: Orb) : Special(orb)
 							s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.3f, false)
 							s.completionCallback = fun()
 							{
-								grid.pop(tile, 0f, this, grid.level.player.abilityDam + grid.level.player.attackDam + 1)
+								grid.pop(tile, 0f, this, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
 							}
 							tile.effects.add(s)
 						}
@@ -495,7 +490,7 @@ class Match5(orb: Orb) : Special(orb)
 						s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.3f, false)
 						s.completionCallback = fun()
 						{
-							grid.pop(tile, 0f, this, grid.level.player.abilityDam + grid.level.player.attackDam + 1)
+							grid.pop(tile, 0f, this, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
 						}
 						tile.effects.add(s)
 					}

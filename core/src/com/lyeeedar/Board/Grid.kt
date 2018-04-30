@@ -16,6 +16,7 @@ import com.lyeeedar.Renderables.Animation.BumpAnimation
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
+import com.lyeeedar.Statistic
 import com.lyeeedar.UI.FullscreenMessage
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.PowerBar
@@ -85,7 +86,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			}
 		}
 
-	lateinit var updateFuns: kotlin.Array<() -> Boolean>
+	val updateFuns: kotlin.Array<() -> Boolean>
 	var inTurn = false
 	var gridNeedsUpdate = false
 	var gainedBonusPower = false
@@ -140,7 +141,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					{
 						gainedBonusPower = true
 
-						for (i in 0 until level.player.powerGain)
+						for (i in 0 until level.player.getStat(Statistic.POWERGAIN))
 						{
 							Future.call({ Mote(pos, dst, sprite, 32f, { PowerBar.instance.power++ }) }, delay)
 						}
@@ -1378,7 +1379,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				if (t.creature != null)
 				{
 					val creature = t.creature!!
-					var targetDam = if (!creature.damSources.contains(this)) 1 + level.player.attackDam else 1
+					var targetDam = if (!creature.damSources.contains(this)) 1 + level.player.getStat(Statistic.MATCHDAMAGE) else 1
 					var damReduction = creature.remainingReduction
 					damReduction -= targetDam
 

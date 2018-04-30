@@ -16,6 +16,7 @@ import com.esotericsoftware.kryo.Kryo
 import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.Board.Level
+import com.lyeeedar.Game.Character
 import com.lyeeedar.Game.Player
 import com.lyeeedar.Game.Theme
 import com.lyeeedar.Screens.AbstractScreen
@@ -67,26 +68,21 @@ class Global
 		{
 			skin = loadSkin()
 			controls = Controls()
-			player = Player()
+			player = Player(Character.load("Peasant"))
 
 			Colors.put("IMPORTANT", Color(0.6f, 1f, 0.9f, 1f))
-
-			for (sin in Sin.Values)
-			{
-				Colors.put(sin.toString().toUpperCase(), sin.colour.color())
-			}
 		}
 
 		fun newGame()
 		{
-			player = Player()
+			player = Player(Character.load("Peasant"))
 			flags = GameStateFlags()
 
 			val theme = Theme.load("Themes/Dungeon")
 			val level = Level.load("Levels/Test").random()
 			level.create(theme, player, {}, {})
 
-			game.getTypedScreen<GridScreen>()?.updateLevel(level)
+			game.getTypedScreen<GridScreen>()?.updateLevel(level, player)
 			game.switchScreen(MainGame.ScreenEnum.GRID)
 		}
 

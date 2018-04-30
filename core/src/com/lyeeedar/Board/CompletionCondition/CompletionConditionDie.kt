@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Mote
 import com.lyeeedar.Global
+import com.lyeeedar.Statistic
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.Util.XmlData
 
@@ -17,7 +18,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 
 	override fun attachHandlers(grid: Grid)
 	{
-		maxHP = grid.level.player.maxhp
+		maxHP = grid.level.player.getStat(Statistic.HEALTH)
 		hp = maxHP
 
 		grid.onAttacked += fun(c): Boolean {

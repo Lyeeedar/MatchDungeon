@@ -1,11 +1,11 @@
 package com.lyeeedar.UI
 
-import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Widget
-import com.lyeeedar.Global
-import com.lyeeedar.Util.*
+import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Event0Arg
 
 /**
  * Created by Philip on 19-Jul-16.
@@ -22,6 +22,7 @@ class PowerBar() : Widget()
 
 	val empty = AssetManager.loadTextureRegion("GUI/power_empty")
 	val full = AssetManager.loadTextureRegion("GUI/power_full")
+	val drain = AssetManager.loadTextureRegion("GUI/power_drain")
 
 	val pipPadding = 0f
 
@@ -54,6 +55,17 @@ class PowerBar() : Widget()
 		{
 			tempPower--
 
+			if (value < field)
+			{
+				powerDrain += field - value
+			}
+			else
+			{
+				val diff = value - field
+				powerDrain -= diff
+				if (powerDrain < 0) powerDrain = 0
+			}
+
 			if (value < maxPower)
 			{
 				field = value
@@ -65,6 +77,8 @@ class PowerBar() : Widget()
 
 			powerChanged()
 		}
+	var powerDrain = 0
+	var drainAccumulator = 0f
 
 	fun getOrbDest(): Vector2?
 	{
@@ -97,7 +111,21 @@ class PowerBar() : Widget()
 
 		var powerCounter = 0
 
-		for (i in 0..numPips-1)
+		if (powerDrain > 0)
+		{
+			drainAccumulator += Gdx.app.graphics.deltaTime
+
+			while (drainAccumulator > 0.05f && powerDrain > 0)
+			{
+				drainAccumulator -= 0.05f
+
+				powerDrain--
+			}
+
+			drainAccumulator = 0f
+		}
+
+		for (i in 0 until numPips)
 		{
 			val powerDiff = power - powerCounter
 
@@ -106,9 +134,14 @@ class PowerBar() : Widget()
 			val xpos = x + pw * i + pipPadding * i
 			batch.draw(sprite, xpos, y + minipipHeight + 1, pw, height - minipipHeight)
 
-			for (pi in 0..powerPerPip-1)
+			for (pi in 0 until powerPerPip)
 			{
-				val ps = if(pi < powerDiff) full else empty
+				val ps = when {
+					pi < powerDiff -> full
+					pi < powerDiff + powerDrain -> drain
+					else -> empty
+				}
+
 				batch.draw(ps, xpos + pi * minipipWidth, y, minipipWidth, minipipHeight)
 			}
 

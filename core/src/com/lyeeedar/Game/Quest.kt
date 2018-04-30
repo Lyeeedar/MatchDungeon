@@ -2,45 +2,74 @@ package com.lyeeedar.Game
 
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
-import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.getXml
+import com.lyeeedar.Card.Card
+import com.lyeeedar.Util.*
 import ktx.collections.set
 import ktx.collections.toGdxArray
 
-class Quest(val path: String, val nodes: Array<QuestNode>, val root: QuestNode)
+class Quest(val path: String)
 {
-	var current: QuestNode = root
+	val nodes: Array<QuestNode>
+	val root: QuestNode
+	val questCards: Array<Card> = Array()
+
+	lateinit var current: QuestNode
+	lateinit var player: Player
+
+	val theme: Theme
+
+	init
+	{
+		val xml = getXml("Quests/$path")
+
+		theme = Theme.Companion.load(xml.get("Theme"))
+
+		val questCardsEl = xml.getChildByName("QuestCards")
+		if (questCardsEl != null)
+		{
+			for (questCardEl in questCardsEl.children())
+			{
+				val card = Card.load(path.directory() + questCardEl.text)
+				questCards.add(card)
+			}
+		}
+
+		val nodeMap = ObjectMap<String, QuestNode>()
+
+		val rootNode = xml.get("Root")
+		val nodesEl = xml.getChildByName("Nodes")!!
+		for (nodeEl in nodesEl.children())
+		{
+			val questNode = QuestNode(this)
+			questNode.parse(nodeEl)
+
+			nodeMap[questNode.guid] = questNode
+		}
+
+		for (node in nodeMap.values())
+		{
+			node.resolve(nodeMap)
+		}
+
+		nodes = nodeMap.values().toGdxArray()
+		root = nodeMap[rootNode]
+
+		current = root
+	}
 
 	companion object
 	{
 		fun load(path: String) : Quest
 		{
-			val xml = getXml("Quests/$path")
+			val quest = Quest(path)
 
-			val nodeMap = ObjectMap<String, QuestNode>()
 
-			val rootNode = xml.get("Root")
-			val nodesEl = xml.getChildByName("Nodes")!!
-			for (nodeEl in nodesEl.children())
-			{
-				val questNode = QuestNode()
-				questNode.parse(nodeEl)
-
-				nodeMap[questNode.guid] = questNode
-			}
-
-			for (node in nodeMap.values())
-			{
-				node.resolve(nodeMap)
-			}
-
-			val quest = Quest(path, nodeMap.values().toGdxArray(), nodeMap[rootNode])
 			return quest
 		}
 	}
 }
 
-class QuestNode
+class QuestNode(val quest: Quest)
 {
 	enum class QuestNodeType
 	{
@@ -67,6 +96,35 @@ class QuestNode
 	var failureNode: QuestNodeWrapper? = null
 
 	var state: CompletionState = CompletionState.NONE
+
+	fun getCards(): Array<Card>
+	{
+		val output = Array<Card>()
+
+		if (type == QuestNodeType.FIXED)
+		{
+			output.add(Card.load(quest.path.directory() + fixedEventString))
+		}
+		else
+		{
+			val pool = Array<Card>()
+			if (allowDeckCards)
+			{
+				pool.addAll(quest.player.deck.encounters)
+			}
+			if (allowQuestCards)
+			{
+				pool.addAll(quest.questCards)
+			}
+
+			for (i in 0 until 4)
+			{
+				output.add(pool.removeRandom(Random.random))
+			}
+		}
+
+		return output
+	}
 
 	fun parse(xmlData: XmlData)
 	{

@@ -12,11 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.lyeeedar.Board.Level
+import com.lyeeedar.EquipmentSlot
+import com.lyeeedar.Game.Player
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
-import com.lyeeedar.UI.GridWidget
-import com.lyeeedar.UI.PowerBar
-import com.lyeeedar.UI.TutorialPopup
+import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
 import ktx.actors.onClick
 import ktx.scene2d.KTextButton
@@ -53,7 +53,7 @@ class GridScreen(): AbstractScreen()
 	}
 
 	// ----------------------------------------------------------------------
-	fun updateLevel(level: Level)
+	fun updateLevel(level: Level, player: Player)
 	{
 		if (!created)
 		{
@@ -89,18 +89,19 @@ class GridScreen(): AbstractScreen()
 		victoryTable.background = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("Sprites/GUI/background.png"), 24, 24, 24, 24))
 
 		val abilityTable = Table()
-//		for (ability in player.abilities)
-//		{
-//			if (ability != null)
-//			{
-//				val widget = AbilityWidget(ability, 64f, 64f, level.grid)
-//				abilityTable.add(widget).expand()
-//			}
-//			else
-//			{
-//				abilityTable.add(SpriteWidget(emptySlot, 64f, 64f)).expand()
-//			}
-//		}
+		for (slot in EquipmentSlot.Values)
+		{
+			val equip = player.getEquipment(slot)
+			if (equip?.ability != null)
+			{
+				val widget = AbilityWidget(equip.ability!!, 64f, 64f, level.grid)
+				abilityTable.add(widget).expand()
+			}
+			else
+			{
+				abilityTable.add(SpriteWidget(emptySlot, 64f, 64f)).expand()
+			}
+		}
 
 		mainTable.clear()
 		//val table = mainTable

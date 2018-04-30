@@ -1,42 +1,45 @@
 package com.lyeeedar.Game
 
-import com.lyeeedar.Game.Ability.Ability
-import com.lyeeedar.UI.UnlockTree
+import com.badlogic.gdx.utils.Array
+import com.lyeeedar.Card.Card
+import com.lyeeedar.EquipmentSlot
+import com.lyeeedar.Statistic
+import com.lyeeedar.Util.FastEnumMap
 
-/**
- * Created by Philip on 15-Jul-16.
- */
-
-class Player()
+class Player(val baseCharacter: Character)
 {
-	val maxhp: Int
-		get() = 5 + (maxhpStat * 2.5f).toInt()
-	var maxhpStat: Int = 0
+	var gold: Int = 0
 
-	val powerGain: Int
-		get() = powerGainStat
-	var powerGainStat: Int = 0
+	val statistics = FastEnumMap<Statistic, Int>(Statistic::class.java)
+	val equipment = FastEnumMap<EquipmentSlot, Equipment>(EquipmentSlot::class.java)
 
-	val attackDam: Int
-		get() = 1 + attackDamStat
-	var attackDamStat: Int = 0
+	val deck = Deck()
 
-	val abilityDam: Int
-		get() = 3 + abilityDamStat
-	var abilityDamStat: Int = 0
-
-	var gold: Int = 500
-
-	// abilities and stuff
-	val abilities = Array<Ability?>(4){ e -> null}
-
-	val abilityTree: UnlockTree<Ability> = UnlockTree.load("UnlockTrees/Fire", {Ability()})
-
-	fun getAbility(name: String?): Ability?
+	fun getStat(statistic: Statistic): Int
 	{
-		if (name == null) return null
+		var stat = baseCharacter.baseStatistics[statistic] ?: 0
+		stat += statistics[statistic] ?: 0
 
-		val skill = abilityTree.boughtDescendants()[name]
-		return skill
+		for (slot in EquipmentSlot.Values)
+		{
+			val equip = getEquipment(slot)
+			if (equip != null)
+			{
+				stat += equip.statistics[statistic] ?: 0
+			}
+		}
+
+		return stat
 	}
+
+	fun getEquipment(equipmentSlot: EquipmentSlot): Equipment?
+	{
+		return equipment[equipmentSlot] ?: baseCharacter.equipment[equipmentSlot]
+	}
+}
+
+class Deck
+{
+	val encounters = Array<Card>()
+	val equipment = Array<Equipment>()
 }

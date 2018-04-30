@@ -3,9 +3,10 @@ package com.lyeeedar
 import com.badlogic.gdx.Game
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Screen
-import com.lyeeedar.Game.Save
 import com.lyeeedar.Screens.AbstractScreen
+import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Screens.GridScreen
+import com.lyeeedar.Screens.QuestScreen
 import com.lyeeedar.Util.Future
 import java.io.PrintWriter
 import java.io.StringWriter
@@ -18,7 +19,9 @@ class MainGame : Game()
 
 	enum class ScreenEnum
 	{
-		GRID
+		GRID,
+		QUEST,
+		CARD
 	}
 
 	private val screens = HashMap<ScreenEnum, AbstractScreen>()
@@ -59,15 +62,10 @@ class MainGame : Game()
 		}
 
 		screens.put(ScreenEnum.GRID, GridScreen())
+		screens.put(ScreenEnum.QUEST, QuestScreen())
+		screens.put(ScreenEnum.CARD, CardScreen())
 
-		val loaded = Save.load()
-		if (loaded)
-		{
-		}
-		else
-		{
-			Global.newGame()
-		}
+		Global.newGame()
 	}
 
 	fun switchScreen(screen: AbstractScreen)
