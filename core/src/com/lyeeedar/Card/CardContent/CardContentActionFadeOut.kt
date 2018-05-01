@@ -43,7 +43,7 @@ class CardContentActionFadeOut : AbstractCardContentAction()
 
 		val table = Table()
 		table.background = TextureDrawable(flashTexture).tint(colour.color())
-		val sequence = Actions.alpha(0f) then Actions.fadeIn(duration) then lambda { allowAdvance = true; CardContent.advance(CardContentScreen) }
+		val sequence = Actions.alpha(0f) then Actions.fadeIn(duration) then lambda { allowAdvance = true;  CardContentScreen.advanceContent() }
 		table.addAction(sequence)
 		table.setFillParent(true)
 

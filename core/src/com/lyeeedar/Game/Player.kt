@@ -3,6 +3,7 @@ package com.lyeeedar.Game
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Card.Card
 import com.lyeeedar.EquipmentSlot
+import com.lyeeedar.Global
 import com.lyeeedar.Statistic
 import com.lyeeedar.Util.FastEnumMap
 
@@ -13,7 +14,7 @@ class Player(val baseCharacter: Character)
 	val statistics = FastEnumMap<Statistic, Int>(Statistic::class.java)
 	val equipment = FastEnumMap<EquipmentSlot, Equipment>(EquipmentSlot::class.java)
 
-	val deck = Deck()
+	val deck = Global.deck.copy()
 
 	fun getStat(statistic: Statistic): Int
 	{
@@ -42,4 +43,13 @@ class Deck
 {
 	val encounters = Array<Card>()
 	val equipment = Array<Equipment>()
+
+	fun copy(): Deck
+	{
+		val deck = Deck()
+		deck.encounters.addAll(encounters)
+		deck.equipment.addAll(equipment)
+
+		return deck
+	}
 }

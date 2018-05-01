@@ -6,6 +6,7 @@ import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.Game.Quest
 import com.lyeeedar.Game.QuestNode
+import com.lyeeedar.GameStateFlags
 import com.lyeeedar.Global
 import com.lyeeedar.MainGame
 import com.lyeeedar.UI.ScrollingTextLabel
@@ -37,6 +38,8 @@ class CardScreen : AbstractScreen()
 			created = true
 		}
 
+		Global.levelflags = GameStateFlags()
+
 		currentCard = card
 		currentContent = CardContent.load(currentCard.path.directory() + "/" + currentCard.current.content)
 		currentQuest = quest
@@ -51,7 +54,7 @@ class CardScreen : AbstractScreen()
 		mainTable.debug()
 
 		success = false
-		currentContent.advance(this)
+		advanceContent()
 	}
 
 	override fun create()
@@ -62,7 +65,7 @@ class CardScreen : AbstractScreen()
 		buttonTable = Table()
 	}
 
-	override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean
+	fun advanceContent()
 	{
 		val completed = currentContent.advance(this)
 		if (completed)
@@ -93,6 +96,11 @@ class CardScreen : AbstractScreen()
 			QuestScreen.instance.updateButtons()
 			Global.game.switchScreen(MainGame.ScreenEnum.QUEST)
 		}
+	}
+
+	override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean
+	{
+		advanceContent()
 
 		return super.touchDown(screenX, screenY, pointer, button)
 	}

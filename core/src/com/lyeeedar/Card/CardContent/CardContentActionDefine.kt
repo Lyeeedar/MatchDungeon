@@ -10,16 +10,21 @@ class CardContentActionDefine : AbstractCardContentAction()
 {
 	lateinit var key: String
 	lateinit var value: String
+	var global = false
 
 	override fun parse(xmlData: XmlData)
 	{
 		key = xmlData.get("Key")
 		value = xmlData.get("Value")
+		global = xmlData.getBoolean("Global", false)
 	}
 
 	override fun advance(CardContent: CardContent, CardContentScreen: CardScreen): Boolean
 	{
-		Global.flags.flags.put(key, value.evaluate(Global.flags.flags))
+		val flags = if (global) Global.globalflags else Global.levelflags
+
+		flags.flags.put(key, value.evaluate(Global.globalflags.flags))
+
 		return true
 	}
 

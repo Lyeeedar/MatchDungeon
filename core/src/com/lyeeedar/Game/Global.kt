@@ -16,6 +16,7 @@ import com.esotericsoftware.kryo.Kryo
 import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.Game.Character
+import com.lyeeedar.Game.Deck
 import com.lyeeedar.Game.Player
 import com.lyeeedar.Game.Quest
 import com.lyeeedar.Screens.AbstractScreen
@@ -55,7 +56,17 @@ class Global
 		lateinit var controls: Controls
 
 		lateinit var player: Player
-		var flags = GameStateFlags()
+		var globalflags = GameStateFlags()
+		var levelflags = GameStateFlags()
+		val flags: ObjectFloatMap<String>
+			get() {
+				val output = ObjectFloatMap<String>()
+				output.putAll(globalflags.flags)
+				output.putAll(levelflags.flags)
+				return output
+			}
+
+		var deck = Deck()
 
 		val stage: Stage
 			get() = (game.screen as AbstractScreen).stage
@@ -75,7 +86,8 @@ class Global
 		fun newGame()
 		{
 			player = Player(Character.load("Peasant"))
-			flags = GameStateFlags()
+			globalflags = GameStateFlags()
+			levelflags = GameStateFlags()
 
 			val quest = Quest.load("Test")
 

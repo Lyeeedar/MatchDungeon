@@ -46,7 +46,7 @@ class CardContentActionChoice : AbstractCardContentAction()
 				{
 					CardContent.CardContentStack.add(CardContentNodeState(choice.node!!))
 				}
-				CardContent.advance(CardContentScreen)
+				CardContentScreen.advanceContent()
 			}
 		}
 

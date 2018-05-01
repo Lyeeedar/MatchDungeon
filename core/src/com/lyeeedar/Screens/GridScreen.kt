@@ -71,6 +71,7 @@ class GridScreen(): AbstractScreen()
 
 		val victoryTable = Table()
 
+		defeatTable.clear()
 		for (defeat in level.defeatConditions)
 		{
 			val table = defeat.createTable(level.grid)

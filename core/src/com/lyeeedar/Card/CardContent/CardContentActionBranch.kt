@@ -14,7 +14,7 @@ class CardContentActionBranch : AbstractCardContentAction()
 
 	override fun advance(CardContent: CardContent, CardContentScreen: CardScreen): Boolean
 	{
-		val variables = Global.flags.flags
+		val variables = Global.flags
 		for (branch in branches)
 		{
 			if (branch.condition.evaluate(variables).round() == 1)

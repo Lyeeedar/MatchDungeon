@@ -43,7 +43,7 @@ class CardContentActionMatch3 : AbstractCardContentAction()
 							   }
 
 							   Global.game.switchScreen(MainGame.ScreenEnum.CARD)
-							   cardContent.advance(CardContentScreen)
+							   CardContentScreen.advanceContent()
 						   },
 						   {
 							   cardContent.CardContentStack.last().index++
@@ -55,7 +55,7 @@ class CardContentActionMatch3 : AbstractCardContentAction()
 							   }
 
 							   Global.game.switchScreen(MainGame.ScreenEnum.CARD)
-							   cardContent.advance(CardContentScreen)
+							   CardContentScreen.advanceContent()
 						   })
 			val screen = Global.game.getScreen(MainGame.ScreenEnum.GRID) as GridScreen
 			screen.updateLevel(level!!, Global.player)

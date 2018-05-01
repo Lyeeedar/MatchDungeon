@@ -40,7 +40,7 @@ class CardContentActionFlash : AbstractCardContentAction()
 
 		val table = Table()
 		table.background = TextureDrawable(flashTexture).tint(colour.color())
-		val sequence = delay(0.1f) then fadeOut(0.05f) then lambda { allowAdvance = true; CardContent.advance(CardContentScreen) } then removeActor()
+		val sequence = delay(0.1f) then fadeOut(0.05f) then lambda { allowAdvance = true;  CardContentScreen.advanceContent() } then removeActor()
 		table.addAction(sequence)
 		table.setFillParent(true)
 

@@ -11,12 +11,11 @@
 			<AttackNumPips>5</AttackNumPips>
 			<AttackCooldown>2,5</AttackCooldown>
 			<Size>1</Size>
-			<HP>10</HP>
-			<DamageReduction>2</DamageReduction>
+			<HP>5</HP>
+			<DamageReduction>0</DamageReduction>
 			<Abilities>
 				<Ability>
-					<Cooldown>1,2</Cooldown>
-					<Target>Random</Target>
+					<Cooldown>2,4</Cooldown>
 					<Effect>Move</Effect>
 					<Data />
 				</Ability>

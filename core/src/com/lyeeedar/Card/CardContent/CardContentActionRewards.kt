@@ -17,7 +17,7 @@ class CardContentActionRewards : AbstractCardContentAction()
 
 	override fun advance(CardContent: CardContent, CardContentScreen: CardScreen): Boolean
 	{
-		val trueAmount = amount.evaluate(Global.flags.flags).toInt()
+		val trueAmount = amount.evaluate(Global.flags).toInt()
 		Global.player.gold += trueAmount
 
 		return true

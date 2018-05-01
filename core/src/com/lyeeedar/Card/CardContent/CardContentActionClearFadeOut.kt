@@ -35,7 +35,7 @@ class CardContentActionClearFadeOut : AbstractCardContentAction()
 
 		val table = CardContentScreen.fullScreenColour ?: return true
 
-		val sequence = Actions.fadeOut(duration) then lambda { allowAdvance = true; CardContent.advance(CardContentScreen) } then Actions.removeActor()
+		val sequence = Actions.fadeOut(duration) then lambda { allowAdvance = true; CardContentScreen.advanceContent() } then Actions.removeActor()
 		table.addAction(sequence)
 
 		CardContentScreen.fullScreenColour = null
