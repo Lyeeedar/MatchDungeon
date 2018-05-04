@@ -1,9 +1,19 @@
 package com.lyeeedar.Game
 
+import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.scenes.scene2d.ui.Button
+import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.Stack
+import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.Ability.Ability
+import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
+import com.lyeeedar.UI.FullscreenTable
+import com.lyeeedar.UI.Seperator
+import com.lyeeedar.UI.SpriteWidget
+import com.lyeeedar.UI.addClickListener
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.FastEnumMap
 import com.lyeeedar.Util.XmlData
@@ -18,6 +28,132 @@ class Equipment
 	var ability: Ability? = null
 
 	lateinit var slot: EquipmentSlot
+
+	fun createTable(other: Equipment?): Table
+	{
+		val table = Table()
+		table.defaults().growX()
+
+		val titleStack = Stack()
+		val iconTable = Table()
+		iconTable.add(SpriteWidget(icon, 64f, 64f)).left().pad(5f)
+		titleStack.add(iconTable)
+		titleStack.add(Label(name, Global.skin, "title"))
+
+		table.add(titleStack).growX()
+		table.row()
+		val descLabel = Label(description, Global.skin)
+		descLabel.setWrap(true)
+		table.add(descLabel)
+		table.row()
+		table.add(Seperator(Global.skin, false))
+		table.row()
+
+		table.add(Label("Statistics", Global.skin, "title"))
+		table.row()
+
+		for (stat in Statistic.Values)
+		{
+			val statVal = statistics[stat] ?: 0
+
+			val statTable = Table()
+			statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Global.skin))
+			statTable.add(Label(statVal.toString(), Global.skin))
+
+			var add = false
+
+			if (other != null)
+			{
+				val otherStatVal = other.statistics[stat] ?: 0
+
+				if (otherStatVal != 0 || statVal != 0)
+				{
+					add = true
+				}
+
+				if (otherStatVal == statVal)
+				{
+
+				}
+				else if (otherStatVal < statVal)
+				{
+					val diff = statVal - otherStatVal
+					val diffLabel = Label("+" + diff.toString(), Global.skin)
+					diffLabel.color = Color.GREEN
+					statTable.add(diffLabel)
+				}
+				else if (statVal < otherStatVal)
+				{
+					val diff = otherStatVal - statVal
+					val diffLabel = Label("-" + diff.toString(), Global.skin)
+					diffLabel.color = Color.RED
+					statTable.add(diffLabel)
+				}
+			}
+			else
+			{
+				if (statVal != 0)
+				{
+					add = true
+				}
+			}
+
+			if (add)
+			{
+				table.add(statTable)
+				table.row()
+			}
+		}
+
+		table.add(Seperator(Global.skin, false))
+		table.row()
+
+		table.add(Label("Ability", Global.skin, "title"))
+		table.row()
+
+		if (other?.ability != null)
+		{
+			val otherAbLabel = Label("-" + other.ability!!.name, Global.skin)
+			otherAbLabel.color = Color.RED
+
+			val abilityTable = Table()
+			abilityTable.add(otherAbLabel)
+
+			abilityTable.add(SpriteWidget(other.ability!!.icon, 32f, 32f))
+
+			val infoButton = Button(Global.skin, "info")
+			infoButton.addClickListener {
+				val t = other.ability!!.createTable()
+
+				FullscreenTable.createCloseable(t)
+			}
+			abilityTable.add(infoButton).expandX().right().pad(0f, 10f, 0f, 0f)
+
+			table.add(abilityTable)
+			table.row()
+		}
+
+		if (ability != null)
+		{
+			val abilityTable = Table()
+			abilityTable.add(Label(ability!!.name, Global.skin))
+			abilityTable.add(SpriteWidget(ability!!.icon, 32f, 32f))
+
+			val infoButton = Button(Global.skin, "info")
+			infoButton.setSize(24f, 24f)
+			infoButton.addClickListener {
+				val t = ability!!.createTable()
+
+				FullscreenTable.createCloseable(t)
+			}
+			abilityTable.add(infoButton).width(24f).height(24f).expandX().right().pad(0f, 10f, 0f, 0f)
+
+			table.add(abilityTable).growX()
+			table.row()
+		}
+
+		return table
+	}
 
 	fun parse(xml: XmlData)
 	{

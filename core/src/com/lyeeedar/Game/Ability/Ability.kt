@@ -2,16 +2,21 @@ package com.lyeeedar.Game.Ability
 
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.Stack
+import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Tile
+import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.PowerBar
+import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.XmlData
@@ -40,6 +45,31 @@ class Ability
 	val data = ObjectMap<String, String>()
 
 	val selectedTargets = Array<Tile>()
+
+	fun createTable(): Table
+	{
+		val table = Table()
+
+		val titleStack = Stack()
+		val iconTable = Table()
+		iconTable.add(SpriteWidget(icon, 64f, 64f)).left().pad(5f)
+		titleStack.add(iconTable)
+		titleStack.add(Label(name, Global.skin, "title"))
+
+		table.add(titleStack).growX()
+		table.row()
+
+		val descLabel = Label(description, Global.skin)
+		descLabel.setWrap(true)
+
+		table.add(descLabel).growX()
+		table.row()
+
+		table.add(Label("Cost: $cost", Global.skin)).growX()
+		table.row()
+
+		return table
+	}
 
 	fun activate(grid: Grid)
 	{

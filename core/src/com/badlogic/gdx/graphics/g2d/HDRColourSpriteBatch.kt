@@ -46,6 +46,21 @@ class HDRColourSpriteBatch
  */
 @JvmOverloads constructor(size: Int = 4000, defaultShader: ShaderProgram? = null) : Batch
 {
+	override fun getBlendDstFuncAlpha(): Int
+	{
+		TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+	}
+
+	override fun setBlendFunctionSeparate(srcFuncColor: Int, dstFuncColor: Int, srcFuncAlpha: Int, dstFuncAlpha: Int)
+	{
+		TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+	}
+
+	override fun getBlendSrcFuncAlpha(): Int
+	{
+		TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+	}
+
 	private val mesh: Mesh
 
 	internal val vertices: FloatArray

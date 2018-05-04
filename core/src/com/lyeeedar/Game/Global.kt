@@ -226,6 +226,15 @@ class Global
 					TextureRegionDrawable(AssetManager.loadTextureRegion("Sprites/Oryx/uf_split/uf_interface/uf_interface_681.png")).tint(Color(0.87f, 0.77f, 0.6f, 1f)))
 			skin.add("close", closeButton)
 
+			val infoButton = Button.ButtonStyle()
+			infoButton.up = LayeredDrawable(
+					buttonBackground,
+					TextureRegionDrawable(AssetManager.loadTextureRegion("Sprites/Oryx/uf_split/uf_interface/uf_interface_573.png")).tint(Color(0.97f, 0.87f, 0.7f, 1f)))
+			infoButton.over = LayeredDrawable(
+					buttonBackground.tint(Color.LIGHT_GRAY),
+					TextureRegionDrawable(AssetManager.loadTextureRegion("Sprites/Oryx/uf_split/uf_interface/uf_interface_573.png")).tint(Color(0.87f, 0.77f, 0.6f, 1f)))
+			skin.add("info", infoButton)
+
 			val horiSeperatorStyle = Seperator.SeperatorStyle()
 			horiSeperatorStyle.vertical = false
 			horiSeperatorStyle.thickness = 6

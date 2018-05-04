@@ -1,10 +1,15 @@
 package com.lyeeedar.Game
 
+import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.Stack
+import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Card.Card
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Global
 import com.lyeeedar.Statistic
+import com.lyeeedar.UI.Seperator
+import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.Util.FastEnumMap
 
 class Player(val baseCharacter: Character)
@@ -36,6 +41,60 @@ class Player(val baseCharacter: Character)
 	fun getEquipment(equipmentSlot: EquipmentSlot): Equipment?
 	{
 		return equipment[equipmentSlot] ?: baseCharacter.equipment[equipmentSlot]
+	}
+
+	fun createTable(): Table
+	{
+		val table = Table()
+		table.defaults().growX()
+
+		val titleStack = Stack()
+		val iconTable = Table()
+		iconTable.add(SpriteWidget(baseCharacter.sprite, 64f, 64f)).left().pad(5f)
+		titleStack.add(iconTable)
+		titleStack.add(Label(baseCharacter.name, Global.skin, "title"))
+
+		table.add(titleStack).growX()
+		table.row()
+
+		val descLabel = Label(baseCharacter.description, Global.skin)
+		descLabel.setWrap(true)
+
+		table.add(descLabel).growX()
+		table.row()
+
+		table.add(Seperator(Global.skin))
+		table.row()
+
+		table.add(Label("Statistics", Global.skin, "title"))
+		table.row()
+
+		for (stat in Statistic.Values)
+		{
+			val basestat = baseCharacter.baseStatistics[stat] ?: 0
+			val truestat = getStat(stat)
+
+			val diff = truestat - basestat
+			val diffStr: String
+			if (diff > 0)
+			{
+				diffStr = "[GREEN]+$diff[]"
+			}
+			else if (diff < 0)
+			{
+				diffStr = "[RED]-$diff[]"
+			}
+			else
+			{
+				diffStr = ""
+			}
+
+			val str = stat.toString().toLowerCase().capitalize() + ": " + truestat + " (" + basestat + diffStr + ")"
+			table.add(Label(str, Global.skin))
+			table.row()
+		}
+
+		return table
 	}
 }
 
