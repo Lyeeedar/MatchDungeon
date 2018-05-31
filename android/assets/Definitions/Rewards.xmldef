@@ -11,7 +11,12 @@
 		<Data Name="Statistics" Keys="Statistics" Nullable="False" meta:RefKey="Reference" />
 		<Data Name="Equipment" meta:RefKey="Struct">
 			<Data Name="FromDeck" VisibleIf="Equipment==null" meta:RefKey="Boolean" />
-			<Data Name="Equipment" DefKey="Equipment" VisibleIf="FromDeck==false" meta:RefKey="Reference" />
+			<Data Name="Type" EnumValues="Any,Weapon,Armour,MainHand,OffHand,Head,Body" VisibleIf="Equipment==null" meta:RefKey="Enum" />
+			<Data Name="Unlock" SkipIfDefault="False" VisibleIf="FromDeck==false" meta:RefKey="Boolean" />
+			<Data Name="Equipment" DefKey="Equipment" VisibleIf="FromDeck==false" meta:RefKey="File" />
+		</Data>
+		<Data Name="Item" meta:RefKey="Struct">
+			<Data Name="Item" Keys="Item" Nullable="False" meta:RefKey="Reference" />
 		</Data>
 	</Definition>
 </Definitions>

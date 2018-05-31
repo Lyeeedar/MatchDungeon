@@ -50,7 +50,7 @@ class Player(val baseCharacter: Character)
 
 		val titleStack = Stack()
 		val iconTable = Table()
-		iconTable.add(SpriteWidget(baseCharacter.sprite, 64f, 64f)).left().pad(5f)
+		iconTable.add(SpriteWidget(baseCharacter.sprite.copy(), 64f, 64f)).left().pad(5f)
 		titleStack.add(iconTable)
 		titleStack.add(Label(baseCharacter.name, Global.skin, "title"))
 
