@@ -1,10 +1,14 @@
 package com.lyeeedar.Screens
 
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
+import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.lyeeedar.Game.Quest
 import com.lyeeedar.Global
 import com.lyeeedar.MainGame
 import com.lyeeedar.UI.addClickListener
+import com.lyeeedar.Util.AssetManager
 
 class QuestScreen : AbstractScreen()
 {
@@ -28,6 +32,9 @@ class QuestScreen : AbstractScreen()
 		}
 
 		currentQuest = quest
+
+		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(quest.theme.backgroundTile))).tint(Color.DARK_GRAY)
+
 		updateButtons()
 	}
 

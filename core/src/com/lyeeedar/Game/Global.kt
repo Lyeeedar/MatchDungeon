@@ -50,7 +50,7 @@ class Global
 
 		var pause: Boolean = false
 
-		var resolution = Point(800, 600)
+		var resolution = Point(360, 640)
 		var screenSize = Point(resolution.x, resolution.y)
 
 		lateinit var controls: Controls

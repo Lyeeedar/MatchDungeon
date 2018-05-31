@@ -109,7 +109,7 @@ class GridScreen(): AbstractScreen()
 
 		val table = table {
 			defaults().pad(10f).growX()
-			background = TiledDrawable(TextureRegionDrawable(level.theme.floor.sprite!!.currentTexture)).tint(Color.DARK_GRAY)
+			background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(level.theme.backgroundTile))).tint(Color.DARK_GRAY)
 
 			add(abilityTable)
 			row()

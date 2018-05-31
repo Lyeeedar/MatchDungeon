@@ -75,4 +75,5 @@
 	<Factions>
 		<Faction>Rats</Faction>
 	</Factions>
+	<BackgroundTile>Oryx/uf_split/uf_terrain/floor_extra_8</BackgroundTile>
 </Theme>

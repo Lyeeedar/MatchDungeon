@@ -21,6 +21,8 @@ class Theme
 	val sealSprites = Array<Sprite>()
 	val shieldSprites = Array<Sprite>()
 
+	lateinit var backgroundTile: String
+
 	val spawnList = Array<String>()
 
 	val factions = Array<String>()
@@ -91,6 +93,8 @@ class Theme
 					theme.factions.add(el.text)
 				}
 			}
+
+			theme.backgroundTile = xml.get("BackgroundTile")
 
 			return theme
 		}

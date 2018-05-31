@@ -1,10 +1,14 @@
 package com.lyeeedar.Screens
 
+import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.g2d.NinePatch
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
+import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.EquipmentSlot
@@ -90,7 +94,10 @@ class CardScreen : AbstractScreen()
 		contentTable.row()
 		contentTable.add(buttonTable).pad(5f)
 
-		mainTable.add(contentTable).grow()
+		contentTable.background = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("Sprites/GUI/background.png"), 24, 24, 24, 24))
+
+		mainTable.add(contentTable).grow().pad(15f, 35f, 15f, 35f)
+		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(quest.theme.backgroundTile))).tint(Color.DARK_GRAY)
 
 		success = false
 
