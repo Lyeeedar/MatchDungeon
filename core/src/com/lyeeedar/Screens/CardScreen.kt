@@ -185,7 +185,7 @@ class CardScreen : AbstractScreen()
 				currentQuest.current = currentQuestNode.nextNode!!.node
 			}
 
-			QuestScreen.instance.updateButtons()
+			QuestScreen.instance.updateQuest()
 			Global.game.switchScreen(MainGame.ScreenEnum.QUEST)
 		}
 		updateEquipment()
