@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="673017bc-4cd6-4123-8d02-7630d1b2b36a" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">2f9baa21-9a6c-45ff-81f4-0714a4397be2</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="2f9baa21-9a6c-45ff-81f4-0714a4397be2">
+			<Name>Fallen Adventurer</Name>
+			<Description>You stumble across the body of another adventurer, brought down by a pack of creatures. If you can defeat them then you may find some further use for their equipment.</Description>
+			<Rarity>Bronze</Rarity>
+			<Content>FallenAdventurerContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

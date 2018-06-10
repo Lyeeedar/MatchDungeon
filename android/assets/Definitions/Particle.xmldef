@@ -1,4 +1,4 @@
-<Definitions xmlns:meta="Editor">
+<Definitions Colour="252,189,140" Icon="Sprites/Particle/star.png" xmlns:meta="Editor">
 	<Definition Name="Effect" meta:RefKey="Struct">
 		<Data Name="Warmup" Min="0" meta:RefKey="Number" />
 		<Data Name="Loop" Default="True" meta:RefKey="Boolean" />

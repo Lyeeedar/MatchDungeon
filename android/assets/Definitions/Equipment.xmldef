@@ -1,6 +1,6 @@
-<Definitions xmlns:meta="Editor">
+<Definitions Colour="255,238,64" Icon="Sprites/Oryx/uf_split/uf_items/armor_gold_chest.png" xmlns:meta="Editor">
 	<!--Base-->
-	<Definition Name="EquipmentBase" meta:RefKey="Struct">
+	<Definition Name="EquipmentBase" meta:RefKey="StructDef">
 		<Data Name="Name" SkipIfDefault="False" meta:RefKey="String" />
 		<Data Name="Description" SkipIfDefault="False" meta:RefKey="String" />
 		<Data Name="Icon" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />

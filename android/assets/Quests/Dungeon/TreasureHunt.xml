@@ -1,0 +1,82 @@
+<Quest meta:X="0" meta:Y="0" GUID="ded5d2d4-10d7-4388-ad06-72e15da3dd0b" xmlns:meta="Editor">
+	<Theme>Dungeon</Theme>
+	<QuestCards>
+		<Card>FallenAdventurer</Card>
+	</QuestCards>
+	<Root meta:RefKey="QuestNode">a1b7364f-c895-4428-8e0d-2bf52ea5cb1c</Root>
+	<Nodes>
+		<QuestNode meta:X="307" meta:Y="0" GUID="a1b7364f-c895-4428-8e0d-2bf52ea5cb1c">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<Success meta:RefKey="QuestNode">b137f243-471c-4286-b567-c5f5a0264133</Success>
+			<Failure meta:RefKey="QuestNode">b137f243-471c-4286-b567-c5f5a0264133</Failure>
+		</QuestNode>
+		<QuestNode meta:X="577" meta:Y="0" GUID="b137f243-471c-4286-b567-c5f5a0264133">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<Success meta:RefKey="QuestNode">6799c705-a3ff-402c-9697-925a2ef8a199</Success>
+			<Failure meta:RefKey="QuestNode">bc04c578-3d21-411c-ba93-288880e42577</Failure>
+		</QuestNode>
+		<QuestNode meta:X="847" meta:Y="0" GUID="6799c705-a3ff-402c-9697-925a2ef8a199">
+			<Type>Fixed</Type>
+			<FixedEvent></FixedEvent>
+		</QuestNode>
+		<QuestNode meta:X="847" meta:Y="0" GUID="bc04c578-3d21-411c-ba93-288880e42577">
+			<Type>Fixed</Type>
+			<FixedEvent>Ambush</FixedEvent>
+			<Success meta:RefKey="QuestNode">2a3417cc-d546-4dd1-ba3a-5fbe13432853</Success>
+		</QuestNode>
+		<QuestNode meta:X="1110" meta:Y="0" GUID="2a3417cc-d546-4dd1-ba3a-5fbe13432853">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<Success meta:RefKey="QuestNode">117abc6e-63d5-4129-a861-d1a17f9d7684</Success>
+			<Failure meta:RefKey="QuestNode">117abc6e-63d5-4129-a861-d1a17f9d7684</Failure>
+		</QuestNode>
+		<QuestNode meta:X="1380" meta:Y="0" GUID="117abc6e-63d5-4129-a861-d1a17f9d7684">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<Success meta:RefKey="QuestNode">d4cd457b-01d6-4bae-9c8c-e5b164a5e394</Success>
+			<Failure meta:RefKey="QuestNode">d4cd457b-01d6-4bae-9c8c-e5b164a5e394</Failure>
+		</QuestNode>
+		<QuestNode meta:X="1650" meta:Y="0" GUID="d4cd457b-01d6-4bae-9c8c-e5b164a5e394">
+			<Type>Fixed</Type>
+			<FixedEvent>Ambush</FixedEvent>
+			<Success meta:RefKey="QuestNode">bebbb939-9000-43f8-8c6a-e56b90349d12</Success>
+			<Failure meta:RefKey="CompleteQuest">bf754136-38f0-4f73-ba88-d35d3045a8d6</Failure>
+		</QuestNode>
+		<QuestNode meta:X="1913" meta:Y="0" GUID="bebbb939-9000-43f8-8c6a-e56b90349d12">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<Success meta:RefKey="QuestNode">0d5ac974-bbdf-42a2-923d-c159416bd352</Success>
+			<Failure meta:RefKey="QuestNode">0d5ac974-bbdf-42a2-923d-c159416bd352</Failure>
+		</QuestNode>
+		<QuestNode meta:X="2183" meta:Y="0" GUID="0d5ac974-bbdf-42a2-923d-c159416bd352">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<Success meta:RefKey="QuestNode">03320881-205b-4345-9a42-786b0af83253</Success>
+			<Failure meta:RefKey="CompleteQuest">bea8e3ba-0699-44b4-b0e0-4686439b89ad</Failure>
+		</QuestNode>
+		<QuestNode meta:X="2453" meta:Y="0" GUID="03320881-205b-4345-9a42-786b0af83253">
+			<Type>Fixed</Type>
+			<FixedEvent>TreasureRoom</FixedEvent>
+			<Success meta:RefKey="CompleteQuest">175f89dc-a031-47a1-8e48-e8483a992411</Success>
+			<Failure meta:RefKey="CompleteQuest">5dccc4d6-9a1a-4b1b-acc2-286e12626d1f</Failure>
+		</QuestNode>
+		<CompleteQuest meta:X="2741" meta:Y="0" GUID="175f89dc-a031-47a1-8e48-e8483a992411" />
+		<CompleteQuest meta:X="2741" meta:Y="116" GUID="5dccc4d6-9a1a-4b1b-acc2-286e12626d1f">
+			<State>Failure</State>
+		</CompleteQuest>
+		<CompleteQuest meta:X="1825" meta:Y="264.18736981151244" GUID="bf754136-38f0-4f73-ba88-d35d3045a8d6">
+			<State>Failure</State>
+		</CompleteQuest>
+		<CompleteQuest meta:X="2358" meta:Y="264.18736981151244" GUID="bea8e3ba-0699-44b4-b0e0-4686439b89ad">
+			<State>Failure</State>
+		</CompleteQuest>
+	</Nodes>
+</Quest>

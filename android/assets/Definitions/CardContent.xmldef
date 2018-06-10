@@ -1,4 +1,4 @@
-<Definitions xmlns:meta="Editor">
+<Definitions Colour="145,145,145" xmlns:meta="Editor">
 	<Definition Name="CardContent" AllowCircularLinks="True" FlattenData="True" meta:RefKey="GraphStruct">
 		<Data Name="Root" Keys="Node" meta:RefKey="GraphReference" />
 	</Definition>
@@ -25,9 +25,9 @@
 		</Data>
 		<Data Name="Node" Keys="Node" meta:RefKey="GraphReference" />
 		<Data Name="Match3" TextColour="82,204,95" meta:RefKey="Struct">
-			<Data Name="Success" Keys="Node" UseParentDescription="True" SkipIfDefault="False" meta:RefKey="GraphReference" />
-			<Data Name="Failure" Keys="Node" UseParentDescription="True" SkipIfDefault="False" meta:RefKey="GraphReference" />
 			<Data Name="Level" StripExtension="True" ResourceType="Level" RelativeToThis="True" SkipIfDefault="False" meta:RefKey="File" />
+			<Data Name="Success" Keys="Node" SkipIfDefault="False" meta:RefKey="GraphReference" />
+			<Data Name="Failure" Keys="Node" SkipIfDefault="False" meta:RefKey="GraphReference" />
 		</Data>
 		<!--Visual-->
 		<Data Name="Flash" TextColour="192,207,109" meta:RefKey="Struct">
@@ -46,7 +46,10 @@
 			<Data Name="Value" meta:RefKey="String" />
 			<Data Name="Global" SkipIfDefault="False" meta:RefKey="Boolean" />
 		</Data>
-		<Data Name="MarkComplete" SkipIfDefault="False" TextColour="242,183,30" meta:RefKey="Struct" />
+		<Data Name="MarkComplete" SkipIfDefault="False" TextColour="242,183,30" meta:RefKey="Struct">
+			<Data Name="State" EnumValues="Success,Failure,Custom" SkipIfDefault="False" meta:RefKey="Enum" />
+			<Data Name="StateString" VisibleIf="State==Custom" meta:RefKey="String" />
+		</Data>
 		<Data Name="Rewards" Keys="Rewards" Nullable="False" meta:RefKey="Reference" />
 	</Definition>
 </Definitions>

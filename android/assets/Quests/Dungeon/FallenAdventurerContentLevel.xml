@@ -1,0 +1,42 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>#.........#</Line>
+			<Line>#.........#</Line>
+			<Line>#.........#</Line>
+			<Line>#......!..#</Line>
+			<Line>#...!.....#</Line>
+			<Line>#....b....#</Line>
+			<Line>#.........#</Line>
+			<Line>#......!..#</Line>
+			<Line>#..!......#</Line>
+			<Line>#.........#</Line>
+			<Line>#.........#</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>b</Character>
+			<Extends>#</Extends>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<Sprite meta:RefKey="Sprite">
+					<Name>player_1</Name>
+				</Sprite>
+			</Sprite>
+			<Block>0</Block>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Shield>0</Shield>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+	</Symbols>
+	<Faction>Rats</Faction>
+	<AllowedVictories>
+		<Condition meta:RefKey="Kill" />
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Die" />
+	</AllowedDefeats>
+</Level>

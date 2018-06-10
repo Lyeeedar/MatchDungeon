@@ -1,7 +1,10 @@
 package com.lyeeedar.Card
 
+import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
+import com.lyeeedar.Global
 import com.lyeeedar.Rarity
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.getXml
@@ -51,6 +54,21 @@ class CardNode
 	lateinit var content: String
 
 	var nextNode: CardNodeWrapper? = null
+
+	fun createTable(): Table
+	{
+		val table = Table()
+
+		val title = Label(name, Global.skin, "title")
+		table.add(title).expandX().center()
+		table.row()
+
+		val descLabel = Label(description, Global.skin)
+		descLabel.setWrap(true)
+		table.add(descLabel).grow()
+
+		return table
+	}
 
 	fun parse(xmlData: XmlData)
 	{

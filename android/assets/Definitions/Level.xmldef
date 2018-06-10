@@ -1,4 +1,4 @@
-<Definitions xmlns:meta="Editor">
+<Definitions Colour="148,148,148" xmlns:meta="Editor">
 	<!--Completion Conditions-->
 	<Definition Name="None" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />
 	<!--Failure-->

@@ -10,21 +10,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.lyeeedar.Global
-import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.min
 import ktx.actors.alpha
 import ktx.actors.parallelTo
 import ktx.actors.then
 
-class CardWidget(val title: String, val description: String, val icon: Sprite, val pickString: String, val data: Any?, val pickFun: (card: CardWidget) -> Unit) : Widget()
+class CardWidget(val frontTable: Table, val pickString: String, val data: Any?, val pickFun: (card: CardWidget) -> Unit) : Widget()
 {
-	val referenceWidth = 180f
-	val referenceHeight = 320f
+	val referenceWidth = Global.resolution.x - 100f
+	val referenceHeight = Global.resolution.y - 200f
 
 	val contentTable = Table()
-
-	val frontTable: Table
 	val backTable: Table
 
 	private var faceup = false
@@ -38,25 +35,8 @@ class CardWidget(val title: String, val description: String, val icon: Sprite, v
 
 	init
 	{
-		val skin = Global.skin
+		contentTable.background = NinePatchDrawable(front)
 
-		// create foreground
-		frontTable = Table()
-		frontTable.background = NinePatchDrawable(front)
-
-		val title = Label(title, skin, "title")
-		title.setWrap(true)
-
-		val desc = Label(description, skin)
-		desc.setWrap(true)
-
-		frontTable.add(title)
-		frontTable.row()
-		frontTable.add(SpriteWidget(icon, 32f, 32f))
-		frontTable.row()
-		frontTable.add(desc)
-
-		// create background
 		backTable = Table()
 		backTable.background = NinePatchDrawable(back)
 

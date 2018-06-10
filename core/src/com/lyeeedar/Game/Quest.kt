@@ -122,6 +122,10 @@ class QuestNode(val quest: Quest)
 			for (i in 0 until 4)
 			{
 				output.add(pool.removeRandom(Random.random))
+				if (pool.size == 0)
+				{
+					break
+				}
 			}
 		}
 

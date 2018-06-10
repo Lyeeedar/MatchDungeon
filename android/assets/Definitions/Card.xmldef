@@ -1,4 +1,4 @@
-<Definitions xmlns:meta="Editor">
+<Definitions Colour="236,237,157" Icon="Sprites/Oryx/uf_split/uf_items/book_latch.png" xmlns:meta="Editor">
 	<Definition Name="Card" FlattenData="True" meta:RefKey="GraphStruct">
 		<Data Name="Root" Keys="CardNode" meta:RefKey="GraphReference" />
 	</Definition>

@@ -1,0 +1,19 @@
+<Faction xmlns:meta="Editor">
+	<Monsters>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>Instructor</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_heroes/monk</Name>
+				<DrawActualSize>true</DrawActualSize>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+			</Death>
+			<AttackNumPips>5</AttackNumPips>
+			<AttackCooldown>6,6</AttackCooldown>
+			<Size>1</Size>
+			<HP>3</HP>
+			<DamageReduction>0</DamageReduction>
+		</Monster>
+	</Monsters>
+</Faction>

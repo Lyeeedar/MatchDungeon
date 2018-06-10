@@ -1,5 +1,5 @@
 <Definitions xmlns:meta="Editor">
-	<Definition Name="Rewards" TextColour="253,255,0" meta:RefKey="Collection">
+	<Definition Name="Rewards" TextColour="253,255,0" IsGlobal="True" meta:RefKey="CollectionDef">
 		<!--Permanent-->
 		<Data Name="Card" meta:RefKey="Struct">
 			<Data Name="File" BasePath="Cards" StripExtension="True" ResourceType="Card" SkipIfDefault="False" meta:RefKey="File" />
@@ -13,7 +13,7 @@
 			<Data Name="FromDeck" VisibleIf="Equipment==null" meta:RefKey="Boolean" />
 			<Data Name="Type" EnumValues="Any,Weapon,Armour,MainHand,OffHand,Head,Body" VisibleIf="Equipment==null" meta:RefKey="Enum" />
 			<Data Name="Unlock" SkipIfDefault="False" VisibleIf="FromDeck==false" meta:RefKey="Boolean" />
-			<Data Name="Equipment" DefKey="Equipment" VisibleIf="FromDeck==false" meta:RefKey="File" />
+			<Data Name="Equipment" VisibleIf="FromDeck==false" meta:RefKey="File" />
 		</Data>
 		<Data Name="Item" meta:RefKey="Struct">
 			<Data Name="Item" Keys="Item" Nullable="False" meta:RefKey="Reference" />

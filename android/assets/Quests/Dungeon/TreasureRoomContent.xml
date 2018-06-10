@@ -1,0 +1,37 @@
+<CardContent meta:X="0" meta:Y="0" GUID="477a889e-daac-4f56-b442-e383edc28a9d" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">e1b33c9f-255d-4739-baa1-6ec4ef743494</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="e1b33c9f-255d-4739-baa1-6ec4ef743494">
+			<Line>
+				<MultilineString>You finally enter an unlooted treasure room. Rows and rows of chests are laid out, but around them swarm a multitude of rats.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>As you step forward the swarm spots you and lets out a chilling cry. In the distance you can hear the sound of many scampering feet.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Quick, grab what treasure you can before the rest of the horde arrives!</MultilineString>
+			</Line>
+			<Match3>
+				<Level>TreasureRoomContentLevel</Level>
+				<Success meta:RefKey="Node">23edc937-a196-4e14-9033-6d847b954efe</Success>
+				<Failure meta:RefKey="Node">62fb30f9-7e28-4330-912d-e6686428171d</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="500" meta:Y="0" GUID="23edc937-a196-4e14-9033-6d847b954efe">
+			<Line>
+				<MultilineString>Pack full of treasures you turn and sprint away, leaving the horrifying sounds of the rat swarm behind.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="501" meta:Y="166" GUID="62fb30f9-7e28-4330-912d-e6686428171d">
+			<Line>
+				<MultilineString>Suddenly the horde of rats bursts into the room, knocking chests everywhere. You turn to run but to no avail, the horde swarms over you and everything goes dark.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

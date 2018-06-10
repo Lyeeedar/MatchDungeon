@@ -1,0 +1,29 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>##.###.##.##</Line>
+			<Line>#...£.....£#</Line>
+			<Line>#.£........#</Line>
+			<Line>#.....!....#</Line>
+			<Line>#.!......!.#</Line>
+			<Line>#...!...£..#</Line>
+			<Line>#..........#</Line>
+			<Line>#£...£.!...#</Line>
+			<Line>#........£!#</Line>
+			<Line>#..!.......#</Line>
+			<Line>#..........#</Line>
+			<Line>#..........#</Line>
+		</Rows>
+	</Grid>
+	<OrbCount>5</OrbCount>
+	<AllowedVictories>
+		<Condition meta:RefKey="Sink">
+			<Count>7</Count>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Turns">
+			<Turns>30</Turns>
+		</Condition>
+	</AllowedDefeats>
+</Level>

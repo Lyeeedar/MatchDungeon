@@ -61,7 +61,7 @@ class QuestScreen : AbstractScreen()
 		cardWidgets.clear()
 		for (card in cards)
 		{
-			val widget = CardWidget(card.current.name, card.current.description, AssetManager.loadSprite("white"), "Choose", card, {
+			val widget = CardWidget(card.current.createTable(), "Choose", card, {
 				chosenQuestCard = it
 			})
 
