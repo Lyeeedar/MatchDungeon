@@ -48,6 +48,7 @@ fun Actor.addClickListener(func: () -> Unit)
 	this.addListener(object : ClickListener() {
 		override fun clicked(event: InputEvent?, x: Float, y: Float)
 		{
+			event?.handle()
 			super.clicked(event, x, y)
 			func()
 		}

@@ -17,7 +17,7 @@ import ktx.actors.alpha
 import ktx.actors.parallelTo
 import ktx.actors.then
 
-class CardWidget(val title: String, val description: String, val icon: Sprite, val pickString: String, val pickFun: () -> Unit) : Widget()
+class CardWidget(val title: String, val description: String, val icon: Sprite, val pickString: String, val data: Any?, val pickFun: (card: CardWidget) -> Unit) : Widget()
 {
 	val referenceWidth = 180f
 	val referenceHeight = 320f
@@ -30,6 +30,8 @@ class CardWidget(val title: String, val description: String, val icon: Sprite, v
 	private var faceup = false
 	private var flipping = false
 	private var fullscreen = false
+
+	var clickable = true
 
 	val back = NinePatch(AssetManager.loadTextureRegion("GUI/CardBackground"), 16, 16, 16, 16)
 	val front = NinePatch(AssetManager.loadTextureRegion("GUI/CardBackground"), 16, 16, 16, 16)
@@ -61,21 +63,52 @@ class CardWidget(val title: String, val description: String, val icon: Sprite, v
 		contentTable.add(backTable).grow()
 
 		contentTable.isTransform = true
+		contentTable.originX = referenceWidth / 2
+		//contentTable.originY = referenceHeight / 2
 
 		contentTable.setSize(referenceWidth, referenceHeight)
 
 		addClickListener {
-			if (!fullscreen && faceup)
+			if (clickable)
 			{
-				focus()
+				if (!fullscreen && faceup)
+				{
+					focus()
+				}
+				else if (!faceup)
+				{
+					flip(true)
+				}
 			}
 		}
 	}
 
+	data class Bounds(val x: Float, val y: Float, val width: Float, val height: Float)
+	fun getTableBounds(): Bounds
+	{
+		val tableWidth = ((referenceWidth-contentTable.originX) * contentTable.scaleX) + contentTable.originX
+		val tableHeight = ((referenceHeight-contentTable.originY) * contentTable.scaleY) + contentTable.originY
+
+		val tableX = (-contentTable.originX * contentTable.scaleX) + contentTable.originX
+		val tableY = (-contentTable.originY * contentTable.scaleY) + contentTable.originY
+
+		return Bounds(x + tableX, y + tableY, tableWidth, tableHeight)
+	}
+
 	override fun hit(x: Float, y: Float, touchable: Boolean): Actor?
 	{
+		val (tablex, tabley, width, height) = getTableBounds()
+		val minx = tablex - this.x
+		val miny = tabley - this.y
+
 		if (touchable && this.touchable != Touchable.enabled) return null
-		return if (x >= 0 && x < contentTable.width * contentTable.scaleX && y >= 0 && y < contentTable.height * contentTable.scaleY) this else null
+		return if (x >= minx && x < width && y >= miny && y < height) this else null
+	}
+
+	override fun act(delta: Float)
+	{
+		super.act(delta)
+		contentTable.act(delta)
 	}
 
 	override fun setBounds(x: Float, y: Float, width: Float, height: Float)
@@ -87,7 +120,21 @@ class CardWidget(val title: String, val description: String, val icon: Sprite, v
 		val min = min(scaleX, scaleY)
 
 		contentTable.setScale(min)
-		contentTable.setPosition(x, y)
+
+		val tableX = (width / 2f) - contentTable.originX
+		contentTable.setPosition(x + tableX, y)
+	}
+
+	override fun positionChanged()
+	{
+		super.positionChanged()
+		setBounds(x, y, width, height)
+	}
+
+	override fun sizeChanged()
+	{
+		super.sizeChanged()
+		setBounds(x, y, width, height)
 	}
 
 	override fun draw(batch: Batch?, parentAlpha: Float)
@@ -96,7 +143,7 @@ class CardWidget(val title: String, val description: String, val icon: Sprite, v
 
 		if (!fullscreen)
 		{
-			contentTable.draw(batch, parentAlpha)
+			contentTable.draw(batch, parentAlpha * alpha)
 		}
 	}
 
@@ -114,12 +161,13 @@ class CardWidget(val title: String, val description: String, val icon: Sprite, v
 		flipping = true
 
 		val nextTable = if (faceup) backTable else frontTable
-		val flipFun = fun () { contentTable.clear(); contentTable.add(nextTable).grow(); flipping = false }
+		val flipFun = fun () { contentTable.clearChildren(); contentTable.add(nextTable).grow(); flipping = false }
 
 		if (animate)
 		{
-			val speed = 0.5f
-			val sequence = scaleTo(0f, 1f, speed) then lambda { flipFun() } then scaleTo(1f, 1f, speed)
+			val scale = contentTable.scaleX
+			val speed = 0.1f
+			val sequence = scaleTo(0f, scale, speed) then lambda { flipFun() } then scaleTo(scale, scale, speed)
 			contentTable.addAction(sequence)
 		}
 		else
@@ -138,8 +186,9 @@ class CardWidget(val title: String, val description: String, val icon: Sprite, v
 		val table = Table()
 		val background = Table()
 
-		val currentX = x
-		val currentY = y
+		val (trueCurrentX, trueCurrentY, currentwidth, currentheight) = getTableBounds()
+		val currentX = contentTable.x
+		val currentY = contentTable.y
 		val currentScale = contentTable.scaleX
 
 		// Setup anim
@@ -150,7 +199,7 @@ class CardWidget(val title: String, val description: String, val icon: Sprite, v
 		val collapseSequence = lambda {
 			contentTable.clear()
 			contentTable.add(if (faceup) frontTable else backTable).grow()
-		} then parallel(scaleTo(currentScale, currentScale, speed), moveTo(currentX, currentY, speed)) then lambda {
+		} then parallel(scaleTo(currentScale, currentScale, speed), moveTo(trueCurrentX, trueCurrentY, speed)) then lambda {
 			fullscreen = false
 
 			background.remove()
@@ -182,7 +231,7 @@ class CardWidget(val title: String, val description: String, val icon: Sprite, v
 
 			val pickButton =  TextButton(pickString, Global.skin)
 			pickButton.addClickListener {
-				pickFun()
+				pickFun(this)
 				table.addAction(collapseSequence)
 				background.addAction(fadeOut(speed))
 			}
@@ -190,15 +239,19 @@ class CardWidget(val title: String, val description: String, val icon: Sprite, v
 		}
 
 		// Create holder
+		table.touchable = Touchable.enabled
 		table.isTransform = true
 
 		table.add(contentTable).grow()
 		contentTable.setScale(1f)
 
 		table.setSize(referenceWidth, referenceHeight)
-		table.setPosition(currentX, currentY)
+		table.setPosition(trueCurrentX, trueCurrentY)
 		table.setScale(currentScale)
 		table.addAction(expandSequence)
+		table.addClickListener {
+
+		}
 
 		// Background
 		background.touchable = Touchable.enabled
