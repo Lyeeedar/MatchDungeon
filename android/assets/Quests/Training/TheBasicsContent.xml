@@ -1,0 +1,35 @@
+<CardContent meta:X="0" meta:Y="0" GUID="350eb8ca-74fa-4b0b-bd79-2a32e228587a" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">14b6fed5-7326-4f12-b9fa-8a35f220df43</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="14b6fed5-7326-4f12-b9fa-8a35f220df43">
+			<Line>
+				<MultilineString>"So you want to learn how to be an adventurer? First thing you need to know is how to match orbs."</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Matching rows of 3 or more orbs of the same colour is the core of all adventuring skills."</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Just drag an orb in a direction to swap it with its neighbour. If the new orb position makes a line of 3 or more orbs of a colour it will swap. If it doesn't it will stay where it is."</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Now try it out for yourself."</MultilineString>
+			</Line>
+			<Match3>
+				<Level>TheBasicsContentLevel</Level>
+				<Success meta:RefKey="Node">c02d50fc-9762-4cab-b418-390a35f470e9</Success>
+				<Failure meta:RefKey="Node">c02d50fc-9762-4cab-b418-390a35f470e9</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="500" meta:Y="0" GUID="c02d50fc-9762-4cab-b418-390a35f470e9">
+			<Line>
+				<MultilineString>"Well done! You seem to have the hang of it now."</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Beware, often you will be restricted to a certain number of swaps before you fail. Make your moves count!"</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

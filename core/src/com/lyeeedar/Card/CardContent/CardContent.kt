@@ -10,6 +10,17 @@ import ktx.collections.set
 
 class CardContent(val path: String)
 {
+	enum class CardContentState
+	{
+		INPROGRESS,
+		SUCCESS,
+		FAILURE,
+		CUSTOM
+	}
+
+	var state = CardContentState.INPROGRESS
+	var customKey: String? = null
+
 	val CardContentStack = Array<CardContentNodeState>()
 	lateinit var root: CardContentActionNode
 	val nodes = ObjectMap<String, CardContentNode>()

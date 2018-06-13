@@ -89,7 +89,7 @@ class Global
 			globalflags = GameStateFlags()
 			levelflags = GameStateFlags()
 
-			val quest = Quest.load("Test")
+			val quest = Quest.load("Training/NewGame")
 
 			game.getTypedScreen<QuestScreen>()?.setup(quest)
 			game.switchScreen(MainGame.ScreenEnum.QUEST)

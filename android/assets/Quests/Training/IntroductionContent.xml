@@ -1,0 +1,28 @@
+<CardContent meta:X="0" meta:Y="0" GUID="c74bc8aa-ce57-4fc0-9732-eea96edb72d0" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">2339ab9a-29c1-4a3d-8b59-fc00b4a3389b</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="2339ab9a-29c1-4a3d-8b59-fc00b4a3389b">
+			<Line>
+				<MultilineString>You arrive at the academy, one amongst a throng of other bright faced, hopeful applicants. An excited buzz of voices fills the air as you all wait for the instructor to arrive.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Finally a grizzled man makes his way out onto the dais at the front of the crowd.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>He holds up his hand and bangs an ornate walking stick on the ground until the crowd becomes silent.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Welcome all to Rosentier Royal Academy! Here you will learn what you need to know to survive in a life of adventuring."</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Once you graduate I guarantee that you will be able to handle anything this dangerous world can throw at you."</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"So good luck, Train hard! And may the goddess look favourably upon you all!"</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

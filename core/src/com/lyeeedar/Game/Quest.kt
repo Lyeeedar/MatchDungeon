@@ -2,8 +2,10 @@ package com.lyeeedar.Game
 
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
+import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Board.Theme
 import com.lyeeedar.Card.Card
+import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.Global
 import com.lyeeedar.Util.*
 import ktx.collections.set
@@ -11,11 +13,20 @@ import ktx.collections.toGdxArray
 
 class Quest(val path: String)
 {
-	val nodes: Array<QuestNode>
-	val root: QuestNode
+	enum class QuestState
+	{
+		INPROGRESS,
+		SUCCESS,
+		FAILURE
+	}
+
+	var state = QuestState.INPROGRESS
+
+	val nodes: Array<AbstractQuestNode>
+	val root: AbstractQuestNode
 	val questCards: Array<Card> = Array()
 
-	lateinit var current: QuestNode
+	var current: AbstractQuestNode? = null
 
 	val theme: Theme
 
@@ -36,15 +47,13 @@ class Quest(val path: String)
 			}
 		}
 
-		val nodeMap = ObjectMap<String, QuestNode>()
+		val nodeMap = ObjectMap<String, AbstractQuestNode>()
 
 		val rootNode = xml.get("Root")
 		val nodesEl = xml.getChildByName("Nodes")!!
 		for (nodeEl in nodesEl.children())
 		{
-			val questNode = QuestNode(this)
-			questNode.parse(nodeEl)
-
+			val questNode = AbstractQuestNode.parse(nodeEl, this)
 			nodeMap[questNode.guid] = questNode
 		}
 
@@ -59,6 +68,15 @@ class Quest(val path: String)
 		current = root
 	}
 
+	fun run()
+	{
+		current = current?.run()
+		if (current == null && state == QuestState.INPROGRESS)
+		{
+			state = QuestState.FAILURE
+		}
+	}
+
 	companion object
 	{
 		fun load(path: String) : Quest
@@ -71,7 +89,34 @@ class Quest(val path: String)
 	}
 }
 
-class QuestNode(val quest: Quest)
+abstract class AbstractQuestNode(val quest: Quest, val guid: String)
+{
+	abstract fun parse(xmlData: XmlData)
+	abstract fun resolve(nodeMap: ObjectMap<String, AbstractQuestNode>)
+	abstract fun run(): QuestNode?
+
+	companion object
+	{
+		fun parse(xmlData: XmlData, quest: Quest): AbstractQuestNode
+		{
+			val guid = xmlData.getAttribute("GUID")
+
+			val node = when (xmlData.name.toUpperCase())
+			{
+				"QUESTNODE" -> QuestNode(quest, guid)
+				"BRANCH" -> Branch(quest, guid)
+				"COMPLETEQUEST" -> CompleteQuest(quest, guid)
+				else -> throw Exception("Unknown quest node type '" + xmlData.name + "'!")
+			}
+
+			node.parse(xmlData)
+
+			return node
+		}
+	}
+}
+
+class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 {
 	enum class QuestNodeType
 	{
@@ -79,25 +124,14 @@ class QuestNode(val quest: Quest)
 		DECK
 	}
 
-	enum class CompletionState
-	{
-		NONE,
-		SUCCESS,
-		FAILURE
-	}
-
-	lateinit var guid: String
-
 	var type: QuestNodeType = QuestNodeType.FIXED
 	lateinit var fixedEventString: String
 	var allowDeckCards = false
 	var allowQuestCards = false
 
-	var nextNode: QuestNodeWrapper? = null
 	var successNode: QuestNodeWrapper? = null
 	var failureNode: QuestNodeWrapper? = null
-
-	var state: CompletionState = CompletionState.NONE
+	val customNodes = Array<QuestNodeWrapper>()
 
 	fun getCards(): Array<Card>
 	{
@@ -132,46 +166,153 @@ class QuestNode(val quest: Quest)
 		return output
 	}
 
-	fun parse(xmlData: XmlData)
+	override fun parse(xmlData: XmlData)
 	{
-		guid = xmlData.getAttribute("GUID")
-
 		type = QuestNodeType.valueOf(xmlData.get("Type").toUpperCase())
 
 		if (type == QuestNodeType.FIXED)
 		{
 			fixedEventString = xmlData.get("FixedEvent")
-
-			val successEl = xmlData.getChildByName("Success")
-			if (successEl != null) successNode = QuestNodeWrapper(successEl.text)
-
-			val failureEl = xmlData.getChildByName("Failure")
-			if (failureEl != null) failureNode = QuestNodeWrapper(failureEl.text)
 		}
 		else
 		{
 			allowDeckCards = xmlData.getBoolean("AllowDeckCards", false)
 			allowQuestCards = xmlData.getBoolean("AllowQuestCards", false)
+		}
 
-			val nextEl = xmlData.getChildByName("Next")
-			if (nextEl != null) nextNode = QuestNodeWrapper(nextEl.text)
+		val successEl = xmlData.getChildByName("Success")
+		if (successEl != null) successNode = QuestNodeWrapper(successEl.text)
+
+		val failureEl = xmlData.getChildByName("Failure")
+		if (failureEl != null) failureNode = QuestNodeWrapper(failureEl.text)
+
+		val customEls = xmlData.getChildByName("Custom")
+		if (customEls != null)
+		{
+			for (el in customEls.children())
+			{
+				val key = el.get("Key")
+				val guid = el.get("Node")
+
+				customNodes.add(QuestNodeWrapper(guid, key))
+			}
 		}
 	}
 
-	fun resolve(nodeMap: ObjectMap<String, QuestNode>)
+	override fun resolve(nodeMap: ObjectMap<String, AbstractQuestNode>)
 	{
-		nextNode?.resolve(nodeMap)
 		successNode?.resolve(nodeMap)
 		failureNode?.resolve(nodeMap)
+		for (custom in customNodes)
+		{
+			custom.resolve(nodeMap)
+		}
 	}
 
-	data class QuestNodeWrapper(val guid: String)
+	override fun run(): QuestNode?
 	{
-		lateinit var node: QuestNode
+		return this
+	}
 
-		fun resolve(nodeMap: ObjectMap<String, QuestNode>)
+	fun getNext(state: CardContent.CardContentState, key: String?): AbstractQuestNode?
+	{
+		if (state == CardContent.CardContentState.SUCCESS)
+		{
+			return successNode?.node
+		}
+		else if (state == CardContent.CardContentState.FAILURE)
+		{
+			return failureNode?.node
+		}
+		else if (state == CardContent.CardContentState.CUSTOM && key != null)
+		{
+			for (custom in customNodes)
+			{
+				if (custom.key!!.toUpperCase() == key.toUpperCase())
+				{
+					return custom.node
+				}
+			}
+		}
+
+		return null
+	}
+
+	data class QuestNodeWrapper(val guid: String, val key: String? = null)
+	{
+		lateinit var node: AbstractQuestNode
+
+		fun resolve(nodeMap: ObjectMap<String, AbstractQuestNode>)
 		{
 			node = nodeMap[guid]
 		}
+	}
+}
+
+class Branch(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
+{
+	val branches = Array<BranchWrapper>()
+
+	override fun parse(xmlData: XmlData)
+	{
+		for (el in xmlData.children())
+		{
+			val cond = xmlData.get("Condition")
+			val guid = xmlData.get("Node")
+
+			branches.add(BranchWrapper(guid, cond))
+		}
+	}
+
+	override fun resolve(nodeMap: ObjectMap<String, AbstractQuestNode>)
+	{
+		for (branch in branches)
+		{
+			branch.resolve(nodeMap)
+		}
+	}
+
+	override fun run(): QuestNode?
+	{
+		for (branch in branches)
+		{
+			if (branch.condition.evaluate(Global.flags) != 0f)
+			{
+				return branch.node.run()
+			}
+		}
+
+		return null
+	}
+
+	data class BranchWrapper(val guid: String, val condition: String)
+	{
+		lateinit var node: AbstractQuestNode
+
+		fun resolve(nodeMap: ObjectMap<String, AbstractQuestNode>)
+		{
+			node = nodeMap[guid]
+		}
+	}
+}
+
+class CompleteQuest(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
+{
+	lateinit var state: Quest.QuestState
+
+	override fun parse(xmlData: XmlData)
+	{
+		state = Quest.QuestState.valueOf(xmlData.get("State", "Success")!!.toUpperCase())
+	}
+
+	override fun resolve(nodeMap: ObjectMap<String, AbstractQuestNode>)
+	{
+
+	}
+
+	override fun run(): QuestNode?
+	{
+		quest.state = state
+		return null
 	}
 }

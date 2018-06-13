@@ -46,8 +46,6 @@ class CardScreen : AbstractScreen()
 	val bodySlot = Table()
 	val playerSlot = Table()
 
-	var success = false
-
 	fun setup(card: Card, quest: Quest)
 	{
 		if (!created)
@@ -98,8 +96,6 @@ class CardScreen : AbstractScreen()
 
 		mainTable.add(contentTable).grow().pad(15f, 35f, 15f, 35f)
 		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(quest.theme.backgroundTile))).tint(Color.DARK_GRAY)
-
-		success = false
 
 		updateEquipment()
 		advanceContent()
@@ -162,28 +158,16 @@ class CardScreen : AbstractScreen()
 		val completed = currentContent.advance(this)
 		if (completed)
 		{
-			if (success)
+			val state = currentContent.state
+			val key = currentContent.customKey
+			if (state != CardContent.CardContentState.FAILURE)
 			{
 				val currentCardNode = currentCard.current
 				currentCard.current = currentCardNode.nextNode?.node ?: currentCardNode
 			}
 
-			val currentQuestNode = currentQuest.current
-			if (currentQuestNode.type == QuestNode.QuestNodeType.FIXED)
-			{
-				if (success)
-				{
-					currentQuest.current = currentQuestNode.successNode!!.node
-				}
-				else
-				{
-					currentQuest.current = currentQuestNode.failureNode!!.node
-				}
-			}
-			else
-			{
-				currentQuest.current = currentQuestNode.nextNode!!.node
-			}
+			val currentQuestNode = currentQuest.current as QuestNode
+			currentQuest.current = currentQuestNode.getNext(state, key)
 
 			QuestScreen.instance.updateQuest()
 			Global.game.switchScreen(MainGame.ScreenEnum.QUEST)

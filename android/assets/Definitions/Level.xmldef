@@ -15,6 +15,7 @@
 		<Data Name="Orbs" Type="Int" Min="1" Default="10" SkipIfDefault="False" meta:RefKey="Number" />
 	</Definition>
 	<Definition Name="Kill" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />
+	<Definition Name="Break" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />
 	<Definition Name="Sink" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef">
 		<Data Name="Count" Type="Int" Min="1" Default="4" SkipIfDefault="False" meta:RefKey="Number" />
 	</Definition>
@@ -51,10 +52,10 @@
 		<Data Name="CustomMonster" Keys="MonsterDesc" meta:RefKey="Reference" />
 		<Data Name="OrbCount" Type="Int" Min="4" Default="6" meta:RefKey="Number" />
 		<Data Name="AllowedVictories" MinCount="1" meta:RefKey="Collection">
-			<Data Name="Condition" Keys="None,Kill,Matches,Sink,CustomOrb,Plate,Turns" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+			<Data Name="Condition" Keys="None,Kill,Matches,Sink,CustomOrb,Plate,Turns,Break" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		</Data>
 		<Data Name="AllowedDefeats" MinCount="1" meta:RefKey="Collection">
-			<Data Name="Condition" Keys="None,Die,Kill,Matches,Sink,Plate,Time,Turns" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+			<Data Name="Condition" Keys="None,Die,Kill,Matches,Sink,Plate,Time,Turns,Break" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		</Data>
 	</Definition>
 </Definitions>

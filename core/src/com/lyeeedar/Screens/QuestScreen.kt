@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Game.Quest
+import com.lyeeedar.Game.QuestNode
 import com.lyeeedar.Global
 import com.lyeeedar.MainGame
 import com.lyeeedar.UI.CardWidget
@@ -46,11 +47,17 @@ class QuestScreen : AbstractScreen()
 	val cardWidgets = Array<CardWidget>()
 	fun updateQuest()
 	{
+		currentQuest.current!!.run()
+		if (currentQuest.current == null)
+		{
+			return
+		}
+
 		val padding = 20f
 		val cardWidth = (Global.resolution.x - 3f * padding) / 2f
 		val cardHeight = (Global.resolution.y - 3f * padding) / 2f
 
-		val cards = currentQuest.current.getCards()
+		val cards = (currentQuest.current as QuestNode).getCards()
 
 		// create widgets
 

@@ -48,7 +48,7 @@
 		</Data>
 		<Data Name="MarkComplete" SkipIfDefault="False" TextColour="242,183,30" meta:RefKey="Struct">
 			<Data Name="State" EnumValues="Success,Failure,Custom" SkipIfDefault="False" meta:RefKey="Enum" />
-			<Data Name="StateString" VisibleIf="State==Custom" meta:RefKey="String" />
+			<Data Name="Key" VisibleIf="State==Custom" meta:RefKey="String" />
 		</Data>
 		<Data Name="Rewards" Keys="Rewards" Nullable="False" meta:RefKey="Reference" />
 	</Definition>

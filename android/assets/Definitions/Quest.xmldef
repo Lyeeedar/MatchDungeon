@@ -1,13 +1,13 @@
 <Definitions Colour="187,126,235" Icon="Sprites/Oryx/uf_split/uf_items/chest_gold_open.png" xmlns:meta="Editor">
 	<Definition Name="QuestNodeDefs" Keys="QuestNode,Branch,Reward,CompleteQuest" meta:RefKey="ReferenceDef" />
-	<Definition Name="Quest" FlattenData="True" meta:RefKey="GraphStruct">
+	<Definition Name="Quest" AllowCircularLinks="True" FlattenData="True" meta:RefKey="GraphStruct">
 		<Data Name="Theme" BasePath="Themes" StripExtension="True" ResourceType="Theme" meta:RefKey="File" />
 		<Data Name="QuestCards" meta:RefKey="Collection">
 			<Data Name="Card" StripExtension="True" ResourceType="Card" RelativeToThis="True" meta:RefKey="File" />
 		</Data>
 		<Data Name="Rewards" meta:RefKey="Collection">
-			<Data Name="Quest" StripExtension="True" AllowedFileTypes="xml" SkipIfDefault="False" meta:RefKey="File" />
-			<Data Name="Card" StripExtension="True" AllowedFileTypes="xml" SkipIfDefault="False" meta:RefKey="File" />
+			<Data Name="Quest" BasePath="Quests" StripExtension="True" ResourceType="Quest" SkipIfDefault="False" meta:RefKey="File" />
+			<Data Name="Card" StripExtension="True" ResourceType="Card" SkipIfDefault="False" meta:RefKey="File" />
 		</Data>
 		<Data Name="Root" DefKey="QuestNodeDefs" meta:RefKey="GraphReference" />
 	</Definition>
@@ -21,9 +21,9 @@
 		<!--Chain nodes-->
 		<Data Name="Success" DefKey="QuestNodeDefs" meta:RefKey="GraphReference" />
 		<Data Name="Failure" DefKey="QuestNodeDefs" meta:RefKey="GraphReference" />
-		<Data Name="CustomStates" meta:RefKey="Collection">
+		<Data Name="Custom" meta:RefKey="Collection">
 			<Data Name="State" meta:RefKey="Struct">
-				<Data Name="Name" meta:RefKey="String" />
+				<Data Name="Key" meta:RefKey="String" />
 				<Data Name="Node" DefKey="QuestNodeDefs" UseParentDescription="True" meta:RefKey="GraphReference" />
 			</Data>
 		</Data>
