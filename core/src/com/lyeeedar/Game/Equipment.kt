@@ -176,7 +176,7 @@ class Equipment
 	{
 		fun load(path: String): Equipment
 		{
-			val xml = getXml("Equipment/$path")
+			val xml = getXml(path)
 			return load(xml)
 		}
 

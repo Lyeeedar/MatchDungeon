@@ -1,0 +1,37 @@
+<CardContent meta:X="0" meta:Y="0" GUID="fcba8748-8caa-4bf3-aa6a-50bad0930459" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">c9d5fcaa-3fc2-44ba-9f70-df0b7dee40c2</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="c9d5fcaa-3fc2-44ba-9f70-df0b7dee40c2">
+			<Line>
+				<MultilineString>"It's finally time. Time to put all you've learned to the test."</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"If you can beat all three of us instructors you can earn your adventurers license."</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Good luck!"</MultilineString>
+			</Line>
+			<Match3>
+				<Level>GraduationContentLevel</Level>
+				<Success meta:RefKey="Node">8dafe13a-1ee4-4581-a48b-c63b9375d656</Success>
+				<Failure meta:RefKey="Node">4e741f7c-b298-4156-b515-6236a7fd18c7</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="478" meta:Y="217" GUID="4e741f7c-b298-4156-b515-6236a7fd18c7">
+			<Line>
+				<MultilineString>"If you cannot defeat us, then you cannot survive out there as an adventurer. Better luck next time."</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="500" meta:Y="0" GUID="8dafe13a-1ee4-4581-a48b-c63b9375d656">
+			<Line>
+				<MultilineString>"Well done, you have proven yourself to be capable enough to become an adventurer. Good luck in your travels, and I wish you a long and successful career."</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

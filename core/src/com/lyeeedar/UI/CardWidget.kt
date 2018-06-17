@@ -9,6 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions.*
 import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
+import com.badlogic.gdx.utils.Array
+import com.lyeeedar.Direction
 import com.lyeeedar.Global
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.min
@@ -246,5 +248,92 @@ class CardWidget(val frontTable: Table, val pickString: String, val data: Any?, 
 
 		Global.stage.addActor(background)
 		Global.stage.addActor(table)
+	}
+
+	companion object
+	{
+		fun layoutCards(cardWidgets: Array<CardWidget>, enterFrom: Direction)
+		{
+			// Calculate card sizes
+			val padding = 20f
+			val cardWidth = (Global.resolution.x - 3f * padding) / 2f
+			val cardHeight = (Global.resolution.y - 3f * padding) / 2f
+
+			// Calculate final positions
+			if (cardWidgets.size == 1)
+			{
+				// center
+				cardWidgets[0].setPosition(Global.resolution.x / 2f - cardWidth / 2f, Global.resolution.y / 2f - cardHeight / 2f)
+			}
+			else if (cardWidgets.size == 2)
+			{
+				// vertical alignment
+				cardWidgets[0].setPosition(Global.resolution.x / 2f - cardWidth / 2f, padding * 2f + cardHeight)
+				cardWidgets[1].setPosition(Global.resolution.x / 2f - cardWidth / 2f, padding)
+			}
+			else if (cardWidgets.size == 3)
+			{
+				// triangle, single card at top, 2 below
+				cardWidgets[0].setPosition(Global.resolution.x / 2f - cardWidth / 2f, padding * 2f + cardHeight)
+				cardWidgets[1].setPosition(padding, padding)
+				cardWidgets[2].setPosition(padding * 2f + cardWidth, padding)
+			}
+			else if (cardWidgets.size == 4)
+			{
+				// even grid
+				cardWidgets[0].setPosition(padding, padding * 2f + cardHeight)
+				cardWidgets[1].setPosition(padding, padding)
+				cardWidgets[2].setPosition(padding * 2f + cardWidth, padding)
+				cardWidgets[3].setPosition(padding * 2f + cardWidth, padding * 2f + cardHeight)
+			}
+
+			// calculate start position
+			val startX: Float = when (enterFrom)
+			{
+				Direction.CENTER -> Global.resolution.x / 2f - cardWidth / 2f
+				Direction.NORTH -> Global.resolution.x / 2f - cardWidth / 2f
+				Direction.SOUTH -> Global.resolution.x / 2f - cardWidth / 2f
+
+				Direction.EAST -> Global.resolution.x.toFloat()
+				Direction.NORTHEAST -> Global.resolution.x.toFloat()
+				Direction.SOUTHEAST -> Global.resolution.x.toFloat()
+
+				Direction.WEST -> -cardWidth
+				Direction.NORTHWEST -> -cardWidth
+				Direction.SOUTHWEST -> -cardWidth
+			}
+
+			val startY: Float = when (enterFrom)
+			{
+				Direction.CENTER -> Global.resolution.y / 2f - cardHeight / 2f
+				Direction.EAST -> Global.resolution.y / 2f - cardHeight / 2f
+				Direction.WEST -> Global.resolution.y / 2f - cardHeight / 2f
+
+				Direction.NORTH -> Global.resolution.y.toFloat()
+				Direction.NORTHWEST -> Global.resolution.y.toFloat()
+				Direction.NORTHEAST -> Global.resolution.y.toFloat()
+
+				Direction.SOUTH -> -cardHeight
+				Direction.SOUTHWEST -> -cardHeight
+				Direction.SOUTHEAST -> -cardHeight
+			}
+
+			// do animation
+			var delay = 0.2f
+			for (widget in cardWidgets)
+			{
+				val x = widget.x
+				val y = widget.y
+
+				widget.setSize(cardWidth, cardHeight)
+				widget.setPosition(startX, startY)
+				widget.clickable = false
+
+				val delayVal = delay
+				delay += 0.04f
+				val sequence = delay(delayVal) then moveTo(x, y, 0.2f) then delay(0.1f) then lambda { widget.flip(true); widget.clickable = true }
+				widget.addAction(sequence)
+			}
+		}
 	}
 }

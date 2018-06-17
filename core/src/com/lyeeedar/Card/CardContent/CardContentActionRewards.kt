@@ -118,7 +118,7 @@ class EquipmentReward : AbstractReward()
 		rewardType = EquipmentRewardType.valueOf(xmlData.get("Type", "Any")!!.toUpperCase())
 
 		unlock = xmlData.getBoolean("Unlock", false)
-		equipmentPath = xmlData.getChildByName("Equipment")?.get("File") ?: ""
+		equipmentPath = xmlData.get("Equipment")
 	}
 
 	override fun reward()

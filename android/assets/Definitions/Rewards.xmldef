@@ -4,6 +4,12 @@
 		<Data Name="Card" meta:RefKey="Struct">
 			<Data Name="File" BasePath="Cards" StripExtension="True" ResourceType="Card" SkipIfDefault="False" meta:RefKey="File" />
 		</Data>
+		<Data Name="Quest" meta:RefKey="Struct">
+			<Data Name="File" BasePath="Quests" StripExtension="True" ResourceType="Quest" meta:RefKey="File" />
+		</Data>
+		<Data Name="Character" meta:RefKey="Struct">
+			<Data Name="File" BasePath="Characters" StripExtension="True" ResourceType="Character" meta:RefKey="File" />
+		</Data>
 		<!--Temporary-->
 		<Data Name="Money" meta:RefKey="Struct">
 			<Data Name="Count" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />

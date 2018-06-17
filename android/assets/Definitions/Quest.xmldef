@@ -1,14 +1,11 @@
-<Definitions Colour="187,126,235" Icon="Sprites/Oryx/uf_split/uf_items/chest_gold_open.png" xmlns:meta="Editor">
+<Definitions Colour="187,126,235" Icon="Sprites/Icons/QuestIcon.png" xmlns:meta="Editor">
 	<Definition Name="QuestNodeDefs" Keys="QuestNode,Branch,Reward,CompleteQuest" meta:RefKey="ReferenceDef" />
 	<Definition Name="Quest" AllowCircularLinks="True" FlattenData="True" meta:RefKey="GraphStruct">
 		<Data Name="Theme" BasePath="Themes" StripExtension="True" ResourceType="Theme" meta:RefKey="File" />
 		<Data Name="QuestCards" meta:RefKey="Collection">
 			<Data Name="Card" StripExtension="True" ResourceType="Card" RelativeToThis="True" meta:RefKey="File" />
 		</Data>
-		<Data Name="Rewards" meta:RefKey="Collection">
-			<Data Name="Quest" BasePath="Quests" StripExtension="True" ResourceType="Quest" SkipIfDefault="False" meta:RefKey="File" />
-			<Data Name="Card" StripExtension="True" ResourceType="Card" SkipIfDefault="False" meta:RefKey="File" />
-		</Data>
+		<Data Name="Rewards" Keys="Rewards" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="Root" DefKey="QuestNodeDefs" meta:RefKey="GraphReference" />
 	</Definition>
 	<Definition Name="QuestNode" TextColour="240,156,204" meta:RefKey="GraphStructDef">

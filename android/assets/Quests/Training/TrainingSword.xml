@@ -1,0 +1,31 @@
+<MainHand xmlns:meta="Editor">
+	<Name>Training Sword</Name>
+	<Description>A sword used for training. It's notched and unbalanced.</Description>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/weapon_sword</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>0</Health>
+		<MatchDamage>0</MatchDamage>
+		<AbilityDamage>1</AbilityDamage>
+		<PowerGain>1</PowerGain>
+	</Statistics>
+	<Ability>
+		<Name>Slash</Name>
+		<Description>Slash an enemy with the sword.</Description>
+		<Icon meta:RefKey="Sprite">
+			<Name>Icons/WarriorTree</Name>
+		</Icon>
+		<EffectData>
+			<Cost>3</Cost>
+			<Effect>0,Monster,Single,Pop</Effect>
+			<Data>
+				<Damage>2</Damage>
+			</Data>
+			<HitEffect meta:RefKey="ParticleEffect">
+				<Name>slash</Name>
+			</HitEffect>
+		</EffectData>
+	</Ability>
+</MainHand>

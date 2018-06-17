@@ -1,4 +1,4 @@
-<Definitions Colour="148,148,148" xmlns:meta="Editor">
+<Definitions Colour="125,156,127" Icon="Sprites/Icons/LevelIcon.png" xmlns:meta="Editor">
 	<!--Completion Conditions-->
 	<Definition Name="None" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />
 	<!--Failure-->
@@ -45,6 +45,7 @@
 				<Data Name="Sinkable" meta:RefKey="Struct">
 					<Data Name="Sprite" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 				</Data>
+				<Data Name="Type" EnumValues="Floor,Wall,Pit" meta:RefKey="Enum" />
 			</Data>
 		</Data>
 		<Data Name="Faction" meta:RefKey="String" />

@@ -1,9 +1,18 @@
 <Quest meta:X="94.664718627929688" meta:Y="-36.513534545898438" GUID="a8fd54e6-a78d-422d-b61e-64f948bc51d3" xmlns:meta="Editor">
 	<Theme>TrainingGround</Theme>
-	<Rewards>
-		<Quest>Dungeon/TreasureHunt</Quest>
+	<QuestCards>
+		<Card>TheBasics</Card>
+		<Card>Cleaning</Card>
+		<Card>Equipment</Card>
+		<Card>Combat</Card>
+		<Card>Graduation</Card>
+	</QuestCards>
+	<Rewards meta:RefKey="Rewards">
+		<Quest>
+			<File>Dungeon/TreasureHunt</File>
+		</Quest>
 	</Rewards>
-	<Root meta:RefKey="QuestNode">3c142db2-b2e7-476a-984c-20b57cfba344</Root>
+	<Root meta:RefKey="QuestNode">2c75e90c-5dce-429f-b8ee-5cac829573a1</Root>
 	<Nodes>
 		<QuestNode meta:X="370.66470336914062" meta:Y="-36.513534545898438" GUID="3c142db2-b2e7-476a-984c-20b57cfba344">
 			<Type>Fixed</Type>
@@ -11,39 +20,46 @@
 			<Success meta:RefKey="QuestNode">b4de7f84-a704-4cfb-a171-073497355cae</Success>
 			<Failure meta:RefKey="QuestNode">b4de7f84-a704-4cfb-a171-073497355cae</Failure>
 		</QuestNode>
-		<QuestNode meta:X="863.7988131383155" meta:Y="-36.312960898107626" GUID="5385c71d-14c3-4431-aad0-9ab865c32d01">
+		<QuestNode meta:X="863.798828125" meta:Y="-36.312961578369141" GUID="5385c71d-14c3-4431-aad0-9ab865c32d01">
 			<Type>Fixed</Type>
 			<FixedEvent>Cleaning</FixedEvent>
 			<Success meta:RefKey="QuestNode">c37471b4-0295-4ecf-86cd-722afc3a4110</Success>
 			<Failure meta:RefKey="QuestNode" meta:ControlPoints="1025.48996944109,146.145521758198,True|847.609842387442,148.426129289398,True">5385c71d-14c3-4431-aad0-9ab865c32d01</Failure>
 		</QuestNode>
-		<QuestNode meta:X="1122.7988741734719" meta:Y="-36.312960898107626" GUID="c37471b4-0295-4ecf-86cd-722afc3a4110">
+		<QuestNode meta:X="1122.798828125" meta:Y="-36.312961578369141" GUID="c37471b4-0295-4ecf-86cd-722afc3a4110">
 			<Type>Fixed</Type>
 			<FixedEvent>Combat</FixedEvent>
 			<Success meta:RefKey="QuestNode">d9048100-3b29-460b-9b0f-d1313540b675</Success>
 			<Failure meta:RefKey="QuestNode" meta:ControlPoints="1284.28015344552,148.961050107044,True|1105.42408674982,148.458374047845,True">c37471b4-0295-4ecf-86cd-722afc3a4110</Failure>
 		</QuestNode>
-		<QuestNode meta:X="1622.0857708945268" meta:Y="-37.460900167611051" GUID="52e6acbe-1365-4162-9a4b-7f86db428111">
+		<QuestNode meta:X="1622.0858154296875" meta:Y="-37.460899353027344" GUID="52e6acbe-1365-4162-9a4b-7f86db428111">
 			<Type>Fixed</Type>
 			<FixedEvent>Graduation</FixedEvent>
 			<Success meta:RefKey="CompleteQuest">564aca00-e89a-43ff-83da-216a3acaa66a</Success>
 			<Failure meta:RefKey="CompleteQuest">9ea86772-b56f-4d14-b8ff-aa6237afccbf</Failure>
 		</QuestNode>
-		<CompleteQuest meta:X="1862.9822552695268" meta:Y="80.947377343985636" GUID="9ea86772-b56f-4d14-b8ff-aa6237afccbf">
+		<CompleteQuest meta:X="1862.9822998046875" meta:Y="80.947380065917969" GUID="9ea86772-b56f-4d14-b8ff-aa6237afccbf">
 			<State>Failure</State>
 		</CompleteQuest>
-		<CompleteQuest meta:X="1862.9822552695268" meta:Y="-35.052626470711637" GUID="564aca00-e89a-43ff-83da-216a3acaa66a" />
+		<CompleteQuest meta:X="1862.9822998046875" meta:Y="-35.052627563476562" GUID="564aca00-e89a-43ff-83da-216a3acaa66a" />
 		<QuestNode meta:X="618.9129638671875" meta:Y="-37.865886688232422" GUID="b4de7f84-a704-4cfb-a171-073497355cae">
 			<Type>Fixed</Type>
 			<FixedEvent>TheBasics</FixedEvent>
 			<Success meta:RefKey="QuestNode">5385c71d-14c3-4431-aad0-9ab865c32d01</Success>
 			<Failure meta:RefKey="QuestNode" meta:ControlPoints="785.387760886077,148.438288610006,True|601.733031776803,147.304617442665,True">b4de7f84-a704-4cfb-a171-073497355cae</Failure>
 		</QuestNode>
-		<QuestNode meta:X="1377.7988741734719" meta:Y="-36.312960898107626" GUID="d9048100-3b29-460b-9b0f-d1313540b675">
+		<QuestNode meta:X="1377.798828125" meta:Y="-36.312961578369141" GUID="d9048100-3b29-460b-9b0f-d1313540b675">
 			<Type>Fixed</Type>
 			<FixedEvent>Equipment</FixedEvent>
 			<Success meta:RefKey="QuestNode">52e6acbe-1365-4162-9a4b-7f86db428111</Success>
 			<Failure meta:RefKey="QuestNode" meta:ControlPoints="1544.94448740719,145.540027802364,True|1362.44655377843,144.670990023179,True">d9048100-3b29-460b-9b0f-d1313540b675</Failure>
+		</QuestNode>
+		<QuestNode meta:X="254" meta:Y="174.33333333333331" GUID="2c75e90c-5dce-429f-b8ee-5cac829573a1">
+			<Type>Deck</Type>
+			<AllowDeckCards>false</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<Success meta:RefKey="QuestNode">3c142db2-b2e7-476a-984c-20b57cfba344</Success>
+			<Failure meta:RefKey="QuestNode">3c142db2-b2e7-476a-984c-20b57cfba344</Failure>
 		</QuestNode>
 	</Nodes>
 </Quest>

@@ -177,6 +177,22 @@ class Level(val loadPath: String)
 				{
 					hasMonster = true
 				}
+
+				if (symbol.type == SymbolType.PIT)
+				{
+					tile.canHaveOrb = false
+					tile.isPit = true
+				}
+				else if (symbol.type == SymbolType.WALL)
+				{
+					tile.canHaveOrb = false
+					tile.isPit = false
+				}
+				else
+				{
+					tile.canHaveOrb = true
+					tile.isPit = false
+				}
 			}
 			else
 			{
@@ -525,7 +541,9 @@ class Level(val loadPath: String)
 						sinkableDesc = SinkableDesc(sinkSprite)
 					}
 
-					symbolsMap[character.toInt()] = Symbol(character, extends, sprite, block, plate, seal, shield, attack, isMonster, monsterDesc, special, sinkableDesc)
+					val type = SymbolType.valueOf(symbolEl.get("Type", "Floor")!!.toUpperCase())
+
+					symbolsMap[character.toInt()] = Symbol(character, extends, sprite, block, plate, seal, shield, attack, isMonster, monsterDesc, special, sinkableDesc, type)
 				}
 			}
 
@@ -585,4 +603,11 @@ class Level(val loadPath: String)
 }
 
 data class SinkableDesc(val sprite: Sprite)
-data class Symbol(val char: Char, val extends: Char, val sprite: SpriteWrapper?, val block: Int, val plate: Int, val seal: Int, val shield: Int, val attack: Int, val isMonster: Boolean, val monsterDesc: MonsterDesc?, val special: String, val sinkableDesc: SinkableDesc?)
+
+enum class SymbolType
+{
+	FLOOR,
+	WALL,
+	PIT
+}
+data class Symbol(val char: Char, val extends: Char, val sprite: SpriteWrapper?, val block: Int, val plate: Int, val seal: Int, val shield: Int, val attack: Int, val isMonster: Boolean, val monsterDesc: MonsterDesc?, val special: String, val sinkableDesc: SinkableDesc?, val type: SymbolType)

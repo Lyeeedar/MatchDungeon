@@ -12,7 +12,6 @@
 			<Line>.........</Line>
 		</Rows>
 	</Grid>
-	<OrbCount>5</OrbCount>
 	<AllowedVictories>
 		<Condition meta:RefKey="Break" />
 	</AllowedVictories>

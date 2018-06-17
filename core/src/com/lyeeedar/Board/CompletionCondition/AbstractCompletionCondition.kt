@@ -40,6 +40,7 @@ abstract class AbstractCompletionCondition
 				"SINK" -> CompletionConditionSink()
 				"PLATE" -> CompletionConditionPlate()
 				"CUSTOMORB" -> CompletionConditionCustomOrb()
+				"BREAK" -> CompletionConditionBreak()
 
 			// ARGH everything broke
 				else -> throw RuntimeException("Invalid completion condition type: $name")

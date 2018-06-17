@@ -5,7 +5,7 @@
 			<Line>.........</Line>
 			<Line>.........</Line>
 			<Line>.........</Line>
-			<Line>.........</Line>
+			<Line>....!....</Line>
 			<Line>.........</Line>
 			<Line>.........</Line>
 			<Line>.........</Line>
@@ -13,12 +13,9 @@
 		</Rows>
 	</Grid>
 	<AllowedVictories>
-		<Condition meta:RefKey="Matches">
-			<Orbs>10</Orbs>
-			<Orbs>10</Orbs>
-		</Condition>
+		<Condition meta:RefKey="Kill" />
 	</AllowedVictories>
 	<AllowedDefeats>
-		<Condition meta:RefKey="None" />
+		<Condition meta:RefKey="Die" />
 	</AllowedDefeats>
 </Level>

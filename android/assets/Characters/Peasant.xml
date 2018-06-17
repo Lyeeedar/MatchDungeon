@@ -11,7 +11,4 @@
 		<AbilityDamage>0</AbilityDamage>
 		<PowerGain>0</PowerGain>
 	</Statistics>
-	<StartingEquipment>
-		<MainHand>Pitchfork</MainHand>
-	</StartingEquipment>
 </Character>

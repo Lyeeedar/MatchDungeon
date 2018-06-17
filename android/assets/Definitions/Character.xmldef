@@ -5,10 +5,10 @@
 		<Data Name="Sprite" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="Statistics" Keys="Statistics" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="StartingEquipment" meta:RefKey="Struct">
-			<Data Name="Head" BasePath="Equipment" StripExtension="True" ResourceType="Head" meta:RefKey="File" />
-			<Data Name="Body" BasePath="Equipment" StripExtension="True" ResourceType="Body" meta:RefKey="File" />
-			<Data Name="MainHand" BasePath="Equipment" StripExtension="True" ResourceType="MainHand" meta:RefKey="File" />
-			<Data Name="OffHand" BasePath="Equipment" StripExtension="True" ResourceType="OffHand" meta:RefKey="File" />
+			<Data Name="Head" StripExtension="True" ResourceType="Head" meta:RefKey="File" />
+			<Data Name="Body" StripExtension="True" ResourceType="Body" meta:RefKey="File" />
+			<Data Name="MainHand" StripExtension="True" ResourceType="MainHand" meta:RefKey="File" />
+			<Data Name="OffHand" StripExtension="True" ResourceType="OffHand" meta:RefKey="File" />
 		</Data>
 	</Definition>
 	<Definition Name="Statistics" IsGlobal="True" meta:RefKey="StructDef">
