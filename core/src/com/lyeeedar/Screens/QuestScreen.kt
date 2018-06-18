@@ -67,6 +67,11 @@ class QuestScreen : AbstractScreen()
 		{
 			val widget = CardWidget(card.current.createTable(), "Choose", card, {
 				chosenQuestCard = it
+
+				for (widget in cardWidgets)
+				{
+					widget.clickable = false
+				}
 			})
 
 			cardWidgets.add(widget)

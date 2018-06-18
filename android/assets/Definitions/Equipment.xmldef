@@ -12,7 +12,7 @@
 			<Data Name="EffectData" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
 				<Data Name="Cost" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
 				<Data Name="Effect" Nullable="False" Collapse="True" meta:RefKey="Struct">
-					<Data Name="Target Count" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
+					<Data Name="Target Count" Type="Int" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
 					<Data Name="Targetter" EnumValues="Orb,Special,Block,Empty,Sealed,Monster,Attack,Tile,Shield" meta:RefKey="Enum" />
 					<Data Name="Permuter" EnumValues="Single,AllOfType,NofType,Column,Row,Cross,Block,Diamond,Random" meta:RefKey="Enum" />
 					<Data Name="Effect" EnumValues="Pop,Convert,Summon" meta:RefKey="Enum" />

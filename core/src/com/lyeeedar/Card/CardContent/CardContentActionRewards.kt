@@ -1,15 +1,19 @@
 package com.lyeeedar.Card.CardContent
 
+import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Card.Card
+import com.lyeeedar.Direction
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.Equipment
 import com.lyeeedar.Global
 import com.lyeeedar.Screens.CardScreen
-import com.lyeeedar.UI.FullscreenTable
+import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.asGdxArray
+import ktx.collections.toGdxArray
 
 class CardContentActionRewards : AbstractCardContentAction()
 {
@@ -23,14 +27,60 @@ class CardContentActionRewards : AbstractCardContentAction()
 		}
 	}
 
+	var grouped: Array<Array<AbstractReward>> = Array()
+	var currentGroup = Array<CardWidget>()
+	var awaitingAdvance = false
+
 	override fun advance(CardContent: CardContent, CardContentScreen: CardScreen): Boolean
 	{
-		for (reward in rewards)
+		if (currentGroup.size > 0)
 		{
-			reward.reward()
+			// do nothing
+		}
+		else
+		{
+			// advance
+
+			if (!awaitingAdvance && grouped.size == 0)
+			{
+				grouped = rewards.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
+				awaitingAdvance = true
+			}
+
+			if (grouped.size > 0)
+			{
+				val chosen = grouped.removeIndex(0)
+				currentGroup = chosen.map { it.reward() }.filter { it != null }.map { it!! }.toGdxArray()
+
+				for (card in currentGroup)
+				{
+					val oldFun = card.pickFun
+					card.pickFun = {
+						oldFun(it)
+						currentGroup.removeValue(card, true)
+						if (currentGroup.size == 0)
+						{
+							CardContent.advance(CardContentScreen)
+						}
+
+						card.remove()
+					}
+
+					Global.stage.addActor(card)
+				}
+
+				if (currentGroup.size > 0)
+				{
+					CardWidget.layoutCards(currentGroup, Direction.CENTER)
+				}
+				else
+				{
+					CardContent.advance(CardContentScreen)
+				}
+			}
 		}
 
-		return true
+		return grouped.size == 0 && currentGroup.size == 0
 	}
 
 	override fun resolve(nodeMap: ObjectMap<String, CardContentNode>)
@@ -42,7 +92,7 @@ class CardContentActionRewards : AbstractCardContentAction()
 abstract class AbstractReward
 {
 	abstract fun parse(xmlData: XmlData)
-	abstract fun reward()
+	abstract fun reward(): CardWidget?
 
 	companion object
 	{
@@ -71,10 +121,18 @@ class CardReward : AbstractReward()
 		cardPath = xmlData.get("File")
 	}
 
-	override fun reward()
+	override fun reward(): CardWidget?
 	{
 		val card = Card.load(cardPath)
-		Global.deck.encounters.add(card)
+
+		val table = card.current.createTable()
+		val cardWidget = CardWidget(table, "", null, {
+			Global.deck.encounters.add(card)
+		})
+
+		cardWidget.canZoom = false
+
+		return cardWidget
 	}
 }
 
@@ -87,9 +145,24 @@ class MoneyReward : AbstractReward()
 		amount = xmlData.getInt("Count")
 	}
 
-	override fun reward()
+	override fun reward(): CardWidget?
 	{
-		Global.player.gold += amount
+		val table = Table()
+
+		val title = Label("Gold", Global.skin, "cardtitle")
+		table.add(title).expandX().center().padTop(10f)
+		table.row()
+
+		val amountLbl = Label(amount.toString(), Global.skin, "cardtitle")
+		table.add(amountLbl).expandX().center().padTop(10f)
+		table.row()
+
+		val card = CardWidget(table, "Take", null, {
+			Global.player.gold += amount
+		})
+		card.canZoom = false
+
+		return card
 	}
 }
 
@@ -121,7 +194,7 @@ class EquipmentReward : AbstractReward()
 		equipmentPath = xmlData.get("Equipment")
 	}
 
-	override fun reward()
+	override fun reward(): CardWidget?
 	{
 		val equipment: Equipment
 
@@ -156,7 +229,7 @@ class EquipmentReward : AbstractReward()
 			}
 			else
 			{
-				return
+				return null
 			}
 		}
 		else
@@ -170,6 +243,11 @@ class EquipmentReward : AbstractReward()
 
 		val equipped = Global.player.getEquipment(equipment.slot)
 		val table = equipment.createTable(equipped)
-		FullscreenTable.createCloseable(table)
+
+		val card = CardWidget(table, "Equip", null, {
+			Global.player.equipment[equipment.slot] = equipment
+		})
+
+		return card
 	}
 }

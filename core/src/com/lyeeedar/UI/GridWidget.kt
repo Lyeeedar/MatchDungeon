@@ -18,7 +18,6 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
 import com.lyeeedar.Util.Point
-import com.lyeeedar.Util.max
 
 /**
  * Created by Philip on 05-Jul-16.
@@ -145,18 +144,6 @@ class GridWidget(val grid: Grid) : Widget()
 		if (grid.activeAbility == null)
 		{
 			batch!!.color = Color.WHITE
-		}
-
-		if (!grid.inTurn)
-		{
-			hpLossTimer += Gdx.app.graphics.deltaTime
-		}
-
-		var reduceHpLossBy = 0
-		while (hpLossTimer > 0.07f)
-		{
-			reduceHpLossBy++
-			hpLossTimer -= 0.07f
 		}
 
 		for (x in 0 until grid.width)
@@ -380,8 +367,6 @@ class GridWidget(val grid: Grid) : Widget()
 					val spacing = spacePerPip * solidSpaceRatio
 					val solid = spacePerPip - spacing
 
-					monster.lostHP = max(0, monster.lostHP - reduceHpLossBy)
-
 					for (i in 0 until pips)
 					{
 						val sprite = when {
@@ -409,8 +394,6 @@ class GridWidget(val grid: Grid) : Widget()
 					val solid = spacePerPip - spacing
 
 					val fullHp = if (friendly.isSummon) hp_full_summon else hp_full_friendly
-
-					friendly.lostHP = max(0, friendly.lostHP - reduceHpLossBy)
 
 					for (i in 0 until pips)
 					{

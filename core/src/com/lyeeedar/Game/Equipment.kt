@@ -36,20 +36,20 @@ class Equipment
 
 		val titleStack = Stack()
 		val iconTable = Table()
-		iconTable.add(SpriteWidget(icon, 64f, 64f)).left().pad(5f)
+		iconTable.add(SpriteWidget(icon, 64f, 64f)).expandX().right().pad(5f)
 		titleStack.add(iconTable)
-		titleStack.add(Label(name, Global.skin, "title"))
+		titleStack.add(Label(name, Global.skin, "cardtitle"))
 
 		table.add(titleStack).growX()
 		table.row()
-		val descLabel = Label(description, Global.skin)
+		val descLabel = Label(description, Global.skin, "card")
 		descLabel.setWrap(true)
 		table.add(descLabel)
 		table.row()
 		table.add(Seperator(Global.skin, false))
 		table.row()
 
-		table.add(Label("Statistics", Global.skin, "title"))
+		table.add(Label("Statistics", Global.skin, "cardtitle"))
 		table.row()
 
 		for (stat in Statistic.Values)
@@ -57,8 +57,8 @@ class Equipment
 			val statVal = statistics[stat] ?: 0
 
 			val statTable = Table()
-			statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Global.skin))
-			statTable.add(Label(statVal.toString(), Global.skin))
+			statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Global.skin, "card"))
+			statTable.add(Label(statVal.toString(), Global.skin, "card"))
 
 			var add = false
 
@@ -78,14 +78,14 @@ class Equipment
 				else if (otherStatVal < statVal)
 				{
 					val diff = statVal - otherStatVal
-					val diffLabel = Label("+" + diff.toString(), Global.skin)
+					val diffLabel = Label("+" + diff.toString(), Global.skin, "cardgrey")
 					diffLabel.color = Color.GREEN
 					statTable.add(diffLabel)
 				}
 				else if (statVal < otherStatVal)
 				{
 					val diff = otherStatVal - statVal
-					val diffLabel = Label("-" + diff.toString(), Global.skin)
+					val diffLabel = Label("-" + diff.toString(), Global.skin, "cardgrey")
 					diffLabel.color = Color.RED
 					statTable.add(diffLabel)
 				}
@@ -108,12 +108,12 @@ class Equipment
 		table.add(Seperator(Global.skin, false))
 		table.row()
 
-		table.add(Label("Ability", Global.skin, "title"))
+		table.add(Label("Ability", Global.skin, "cardtitle"))
 		table.row()
 
 		if (other?.ability != null)
 		{
-			val otherAbLabel = Label("-" + other.ability!!.name, Global.skin)
+			val otherAbLabel = Label("-" + other.ability!!.name, Global.skin, "cardwhite")
 			otherAbLabel.color = Color.RED
 
 			val abilityTable = Table()
@@ -136,7 +136,7 @@ class Equipment
 		if (ability != null)
 		{
 			val abilityTable = Table()
-			abilityTable.add(Label(ability!!.name, Global.skin))
+			abilityTable.add(Label(ability!!.name, Global.skin, "card"))
 			abilityTable.add(SpriteWidget(ability!!.icon, 32f, 32f))
 
 			val infoButton = Button(Global.skin, "info")

@@ -18,8 +18,7 @@
 			<Name>Icons/WarriorTree</Name>
 		</Icon>
 		<EffectData>
-			<Cost>3</Cost>
-			<Effect>0,Monster,Single,Pop</Effect>
+			<Effect>1,Monster,Single,Pop</Effect>
 			<Data>
 				<Damage>2</Damage>
 			</Data>

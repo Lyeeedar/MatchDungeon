@@ -7,6 +7,7 @@ import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.Array2D
 import com.lyeeedar.Util.Colour
+import com.lyeeedar.Util.Future
 
 abstract class Creature(maxHp: Int, size: Int, sprite: Sprite, death: ParticleEffect)
 {
@@ -25,6 +26,13 @@ abstract class Creature(maxHp: Int, size: Int, sprite: Sprite, death: ParticleEf
 			{
 				val loss = field - value
 				lostHP += loss
+
+				var delay = 1f
+				for (i in 0 until loss)
+				{
+					Future.call({ lostHP-- }, delay)
+					delay += 0.2f
+				}
 
 				sprite.colourAnimation = BlinkAnimation.obtain().set(Colour(Color.RED), sprite.colour, 0.15f, true)
 			}

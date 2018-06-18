@@ -59,13 +59,13 @@ class CardNode
 	{
 		val table = Table()
 
-		val title = Label(name, Global.skin, "title")
-		table.add(title).expandX().center()
+		val title = Label(name, Global.skin, "cardtitle")
+		table.add(title).expandX().center().pad(10f, 0f, 0f, 0f)
 		table.row()
 
-		val descLabel = Label(description, Global.skin)
+		val descLabel = Label(description, Global.skin, "card")
 		descLabel.setWrap(true)
-		table.add(descLabel).grow()
+		table.add(descLabel).grow().pad(0f, 10f, 0f, 10f)
 
 		return table
 	}

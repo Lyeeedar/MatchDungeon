@@ -105,8 +105,17 @@ class Global
 			val font = AssetManager.loadFont("Sprites/Unpacked/font.ttf", 12, Color(0.97f, 0.87f, 0.7f, 1f), 1, Color.BLACK, false)
 			skin.add("default", font)
 
+			val cardfont = AssetManager.loadFont("Sprites/Unpacked/font.ttf", 12, Color(0.0f, 0.0f, 0.0f, 1f), 0, Color.BLACK, false)
+			skin.add("card", cardfont)
+
+			val cardwhitefont = AssetManager.loadFont("Sprites/Unpacked/font.ttf", 12, Color(1.0f, 1.0f, 1.0f, 1f), 0, Color.BLACK, false)
+			skin.add("cardwhite", cardwhitefont)
+
 			val titlefont = AssetManager.loadFont("Sprites/Unpacked/font.ttf", 20, Color(1f, 0.9f, 0.8f, 1f), 1, Color.BLACK, true)
 			skin.add("title", titlefont)
+
+			val cardTitlefont = AssetManager.loadFont("Sprites/Unpacked/font.ttf", 18, Color(0f, 0.0f, 0.0f, 1f), 0, Color.BLACK, false)
+			skin.add("cardtitle", cardTitlefont)
 
 			val popupfont = AssetManager.loadFont("Sprites/Unpacked/font.ttf", 20, Color(1f, 1f, 1f, 1f), 1, Color.DARK_GRAY, true)
 			skin.add("popup", popupfont)
@@ -158,6 +167,18 @@ class Global
 			val smallLabel = Label.LabelStyle()
 			smallLabel.font = skin.getFont("small")
 			skin.add("small", smallLabel)
+
+			val cardLabel = Label.LabelStyle()
+			cardLabel.font = skin.getFont("card")
+			skin.add("card", cardLabel)
+
+			val cardWhiteLabel = Label.LabelStyle()
+			cardWhiteLabel.font = skin.getFont("cardwhite")
+			skin.add("cardwhite", cardWhiteLabel)
+
+			val cardTitleLabel = Label.LabelStyle()
+			cardTitleLabel.font = skin.getFont("cardtitle")
+			skin.add("cardtitle", cardTitleLabel)
 
 			val checkButton = CheckBox.CheckBoxStyle()
 			checkButton.checkboxOff = TextureRegionDrawable(AssetManager.loadTextureRegion("Sprites/GUI/Unchecked.png"))

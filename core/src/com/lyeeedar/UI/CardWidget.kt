@@ -18,13 +18,16 @@ import ktx.actors.alpha
 import ktx.actors.parallelTo
 import ktx.actors.then
 
-class CardWidget(val frontTable: Table, val pickString: String, val data: Any?, val pickFun: (card: CardWidget) -> Unit) : Widget()
+class CardWidget(val frontTable: Table, val pickString: String, val data: Any?, var pickFun: (card: CardWidget) -> Unit) : Widget()
 {
 	val referenceWidth = Global.resolution.x - 100f
 	val referenceHeight = Global.resolution.y - 200f
 
 	val contentTable = Table()
 	val backTable: Table
+
+	var canZoom = true
+	var canPickFaceDown = false
 
 	private var faceup = false
 	private var flipping = false
@@ -53,13 +56,27 @@ class CardWidget(val frontTable: Table, val pickString: String, val data: Any?, 
 		addClickListener {
 			if (clickable)
 			{
-				if (!fullscreen && faceup)
+				if (canZoom)
 				{
-					focus()
+					if (!fullscreen && faceup)
+					{
+						focus()
+					}
+					else if (!faceup)
+					{
+						flip(true)
+					}
 				}
-				else if (!faceup)
+				else
 				{
-					flip(true)
+					if (canPickFaceDown || faceup)
+					{
+						pickFun(this)
+					}
+					else
+					{
+						flip(true)
+					}
 				}
 			}
 		}
