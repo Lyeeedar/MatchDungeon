@@ -69,7 +69,7 @@ class CompletionConditionCustomOrb : AbstractCompletionCondition()
 		}
 		else
 		{
-			table.add(Label("$matchCount", Global.skin))
+			table.add(Label(" x $matchCount", Global.skin))
 		}
 	}
 

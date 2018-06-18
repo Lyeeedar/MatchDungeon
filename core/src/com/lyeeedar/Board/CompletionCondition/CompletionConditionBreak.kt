@@ -42,7 +42,7 @@ class CompletionConditionBreak : AbstractCompletionCondition()
 		val table = Table()
 
 		val sprite = grid.level.theme.blockSprites[0].copy()
-		label = Label("$remaining", Global.skin)
+		label = Label(" x $remaining", Global.skin)
 
 		table.add(SpriteWidget(sprite, 24f, 24f))
 		table.add(label)

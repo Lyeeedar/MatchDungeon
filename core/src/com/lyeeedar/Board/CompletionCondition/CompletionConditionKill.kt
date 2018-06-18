@@ -94,6 +94,8 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 			{
 				table.add(Label(" x $count", Global.skin))
 			}
+
+			table.row()
 		}
 	}
 
