@@ -46,6 +46,17 @@ class CardScreen : AbstractScreen()
 	val bodySlot = Table()
 	val playerSlot = Table()
 
+	fun getSlot(slot: EquipmentSlot): Table
+	{
+		return when (slot)
+		{
+			EquipmentSlot.HEAD -> headSlot
+			EquipmentSlot.OFFHAND -> offhandSlot
+			EquipmentSlot.MAINHAND -> mainhandSlot
+			EquipmentSlot.BODY -> bodySlot
+		}
+	}
+
 	fun setup(card: Card, quest: Quest)
 	{
 		if (!created)

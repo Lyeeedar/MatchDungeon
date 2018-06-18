@@ -20,13 +20,13 @@ class CompletionConditionPlate : AbstractCompletionCondition()
 
 		grid.onTurn += {
 			remaining = grid.grid.count(Tile::hasPlate)
-			label.setText("$remaining")
+			label.setText(" x $remaining")
 			false
 		}
 
 		grid.onPop += fun (orb: Orb, delay: Float ) : Boolean {
 			remaining = grid.grid.count(Tile::hasPlate)
-			label.setText("$remaining")
+			label.setText(" x $remaining")
 
 			return false
 		}

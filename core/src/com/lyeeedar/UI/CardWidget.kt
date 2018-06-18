@@ -18,7 +18,9 @@ import ktx.actors.alpha
 import ktx.actors.parallelTo
 import ktx.actors.then
 
-class CardWidget(val frontTable: Table, val pickString: String, val data: Any?, var pickFun: (card: CardWidget) -> Unit) : Widget()
+data class Pick(val string: String, var pickFun: (card: CardWidget) -> Unit)
+
+class CardWidget(val frontTable: Table, val data: Any?) : Widget()
 {
 	val referenceWidth = Global.resolution.x - 100f
 	val referenceHeight = Global.resolution.y - 200f
@@ -28,6 +30,8 @@ class CardWidget(val frontTable: Table, val pickString: String, val data: Any?, 
 
 	var canZoom = true
 	var canPickFaceDown = false
+
+	val pickFuns = Array<Pick>()
 
 	private var faceup = false
 	private var flipping = false
@@ -71,7 +75,10 @@ class CardWidget(val frontTable: Table, val pickString: String, val data: Any?, 
 				{
 					if (canPickFaceDown || faceup)
 					{
-						pickFun(this)
+						if (pickFuns.size > 0)
+						{
+							pickFuns[0].pickFun(this)
+						}
 					}
 					else
 					{
@@ -80,6 +87,11 @@ class CardWidget(val frontTable: Table, val pickString: String, val data: Any?, 
 				}
 			}
 		}
+	}
+
+	fun addPick(string: String, pickFun: (card: CardWidget) -> Unit)
+	{
+		pickFuns.add(Pick(string, pickFun))
 	}
 
 	data class Bounds(val x: Float, val y: Float, val width: Float, val height: Float)
@@ -198,7 +210,7 @@ class CardWidget(val frontTable: Table, val pickString: String, val data: Any?, 
 		val collapseSequence = lambda {
 			contentTable.clear()
 			contentTable.add(if (faceup) frontTable else backTable).grow()
-		} then parallel(scaleTo(currentScale, currentScale, speed), moveTo(trueCurrentX, trueCurrentY, speed)) then lambda {
+		} then parallel(scaleTo(currentScale, currentScale, speed), moveTo(x, trueCurrentY, speed)) then lambda {
 			fullscreen = false
 
 			background.remove()
@@ -228,13 +240,21 @@ class CardWidget(val frontTable: Table, val pickString: String, val data: Any?, 
 			buttonTable.add(closeButton).expand().right().top().size(24f).pad(10f)
 			buttonTable.row()
 
-			val pickButton =  TextButton(pickString, Global.skin)
-			pickButton.addClickListener {
-				pickFun(this)
-				table.addAction(collapseSequence)
-				background.addAction(fadeOut(speed))
+			val pickButtonTable = Table()
+
+			for (pick in pickFuns)
+			{
+				val pickButton =  TextButton(pick.string, Global.skin)
+				pickButton.addClickListener {
+					pick.pickFun(this)
+					table.addAction(collapseSequence)
+					background.addAction(fadeOut(speed))
+				}
+
+				pickButtonTable.add(pickButton).uniform()
 			}
-			buttonTable.add(pickButton).expand().bottom().pad(10f)
+
+			buttonTable.add(pickButtonTable).expand().bottom().pad(10f)
 		}
 
 		// Create holder
@@ -245,7 +265,7 @@ class CardWidget(val frontTable: Table, val pickString: String, val data: Any?, 
 		contentTable.setScale(1f)
 
 		table.setSize(referenceWidth, referenceHeight)
-		table.setPosition(trueCurrentX, trueCurrentY)
+		table.setPosition(x, trueCurrentY)
 		table.setScale(currentScale)
 		table.addAction(expandSequence)
 		table.addClickListener {

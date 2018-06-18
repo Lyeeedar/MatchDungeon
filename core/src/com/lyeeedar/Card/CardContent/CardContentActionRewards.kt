@@ -1,9 +1,14 @@
 package com.lyeeedar.Card.CardContent
 
+import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
+import com.lyeeedar.Board.Mote
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Direction
 import com.lyeeedar.EquipmentSlot
@@ -11,6 +16,7 @@ import com.lyeeedar.Game.Equipment
 import com.lyeeedar.Global
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.UI.CardWidget
+import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.asGdxArray
 import ktx.collections.toGdxArray
@@ -29,7 +35,15 @@ class CardContentActionRewards : AbstractCardContentAction()
 
 	var grouped: Array<Array<AbstractReward>> = Array()
 	var currentGroup = Array<CardWidget>()
+	val greyOutTable = Table()
 	var awaitingAdvance = false
+
+	init
+	{
+		greyOutTable.background = TextureRegionDrawable(AssetManager.loadTextureRegion("white")).tint(Color(0f, 0f, 0f, 0.5f))
+		greyOutTable.touchable = Touchable.enabled
+		greyOutTable.setFillParent(true)
+	}
 
 	override fun advance(CardContent: CardContent, CardContentScreen: CardScreen): Boolean
 	{
@@ -44,6 +58,7 @@ class CardContentActionRewards : AbstractCardContentAction()
 			if (!awaitingAdvance && grouped.size == 0)
 			{
 				grouped = rewards.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
+				Global.stage.addActor(greyOutTable)
 				awaitingAdvance = true
 			}
 
@@ -54,16 +69,19 @@ class CardContentActionRewards : AbstractCardContentAction()
 
 				for (card in currentGroup)
 				{
-					val oldFun = card.pickFun
-					card.pickFun = {
-						oldFun(it)
-						currentGroup.removeValue(card, true)
-						if (currentGroup.size == 0)
-						{
-							CardContent.advance(CardContentScreen)
-						}
+					for (pick in card.pickFuns)
+					{
+						val oldFun = pick.pickFun
+						pick.pickFun = {
+							oldFun(it)
+							currentGroup.removeValue(card, true)
+							if (currentGroup.size == 0)
+							{
+								CardContent.advance(CardContentScreen)
+							}
 
-						card.remove()
+							card.remove()
+						}
 					}
 
 					Global.stage.addActor(card)
@@ -80,7 +98,13 @@ class CardContentActionRewards : AbstractCardContentAction()
 			}
 		}
 
-		return grouped.size == 0 && currentGroup.size == 0
+		val complete = grouped.size == 0 && currentGroup.size == 0
+		if (complete)
+		{
+			greyOutTable.remove()
+		}
+
+		return complete
 	}
 
 	override fun resolve(nodeMap: ObjectMap<String, CardContentNode>)
@@ -126,7 +150,8 @@ class CardReward : AbstractReward()
 		val card = Card.load(cardPath)
 
 		val table = card.current.createTable()
-		val cardWidget = CardWidget(table, "", null, {
+		val cardWidget = CardWidget(table, null)
+		cardWidget.addPick("", {
 			Global.deck.encounters.add(card)
 		})
 
@@ -157,7 +182,8 @@ class MoneyReward : AbstractReward()
 		table.add(amountLbl).expandX().center().padTop(10f)
 		table.row()
 
-		val card = CardWidget(table, "Take", null, {
+		val card = CardWidget(table, null)
+		card.addPick("Take", {
 			Global.player.gold += amount
 		})
 		card.canZoom = false
@@ -244,8 +270,22 @@ class EquipmentReward : AbstractReward()
 		val equipped = Global.player.getEquipment(equipment.slot)
 		val table = equipment.createTable(equipped)
 
-		val card = CardWidget(table, "Equip", null, {
-			Global.player.equipment[equipment.slot] = equipment
+		val card = CardWidget(table, null)
+		card.addPick("Equip", {
+			val sprite = equipment.icon.copy()
+
+			val src = card.localToStageCoordinates(Vector2(card.width / 2f, card.height / 2f))
+
+			val dstTable = CardScreen.instance.getSlot(equipment.slot)
+			val dst = dstTable.localToStageCoordinates(Vector2())
+
+			Mote(src, dst, sprite, 32f, {
+				Global.player.equipment[equipment.slot] = equipment
+				CardScreen.instance.updateEquipment()
+			}, 1f)
+		})
+		card.addPick("Discard", {
+
 		})
 
 		return card

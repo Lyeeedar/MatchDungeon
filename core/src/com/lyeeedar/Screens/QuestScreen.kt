@@ -48,7 +48,7 @@ class QuestScreen : AbstractScreen()
 	val cardWidgets = Array<CardWidget>()
 	fun updateQuest()
 	{
-		currentQuest.current!!.run()
+		currentQuest.run()
 		if (currentQuest.current == null)
 		{
 			return
@@ -65,12 +65,13 @@ class QuestScreen : AbstractScreen()
 		cardWidgets.clear()
 		for (card in cards)
 		{
-			val widget = CardWidget(card.current.createTable(), "Choose", card, {
+			val widget = CardWidget(card.current.createTable(), card)
+			widget.addPick("Choose", {
 				chosenQuestCard = it
 
-				for (widget in cardWidgets)
+				for (w in cardWidgets)
 				{
-					widget.clickable = false
+					w.clickable = false
 				}
 			})
 
