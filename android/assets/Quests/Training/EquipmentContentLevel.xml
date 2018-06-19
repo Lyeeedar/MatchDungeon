@@ -43,7 +43,7 @@
 				<Death meta:RefKey="ParticleEffect">
 					<Name>Death</Name>
 				</Death>
-				<AttackNumPips>10</AttackNumPips>
+				<AttackNumPips>0</AttackNumPips>
 				<AttackCooldown>50,50</AttackCooldown>
 				<Size>1</Size>
 				<HP>2</HP>

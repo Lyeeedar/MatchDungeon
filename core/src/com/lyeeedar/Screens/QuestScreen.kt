@@ -1,12 +1,15 @@
 package com.lyeeedar.Screens
 
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.*
+import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Direction
+import com.lyeeedar.Game.AbstractReward
 import com.lyeeedar.Game.Quest
 import com.lyeeedar.Game.QuestNode
 import com.lyeeedar.Global
@@ -15,6 +18,7 @@ import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.UI.lambda
 import com.lyeeedar.Util.AssetManager
 import ktx.actors.then
+import ktx.collections.toGdxArray
 
 class QuestScreen : AbstractScreen()
 {
@@ -25,7 +29,9 @@ class QuestScreen : AbstractScreen()
 
 	override fun create()
 	{
-
+		greyOutTable.background = TextureRegionDrawable(AssetManager.loadTextureRegion("white")).tint(Color(0f, 0f, 0f, 0.5f))
+		greyOutTable.touchable = Touchable.enabled
+		greyOutTable.setFillParent(true)
 	}
 
 	lateinit var currentQuest: Quest
@@ -48,21 +54,22 @@ class QuestScreen : AbstractScreen()
 	val cardWidgets = Array<CardWidget>()
 	fun updateQuest()
 	{
+		for (widget in cardWidgets)
+		{
+			widget.remove()
+		}
+		cardWidgets.clear()
+
 		currentQuest.run()
 		if (currentQuest.current == null)
 		{
+			completeQuest()
 			return
 		}
 
 		val cards = (currentQuest.current as QuestNode).getCards()
 
 		// create widgets
-
-		for (widget in cardWidgets)
-		{
-			widget.remove()
-		}
-		cardWidgets.clear()
 		for (card in cards)
 		{
 			val widget = CardWidget(card.current.createTable(), card)
@@ -80,6 +87,74 @@ class QuestScreen : AbstractScreen()
 		}
 
 		CardWidget.layoutCards(cardWidgets, Direction.CENTER)
+	}
+
+	fun completeQuest()
+	{
+		if (currentQuest.state == Quest.QuestState.SUCCESS)
+		{
+			if (currentQuest.rewards.size > 0)
+			{
+				grouped = currentQuest.rewards.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
+				Global.stage.addActor(greyOutTable)
+			}
+
+			updateRewards()
+		}
+		else
+		{
+			// change to quest selection screen here
+		}
+	}
+
+	var grouped: Array<Array<AbstractReward>> = Array()
+	var currentGroup = Array<CardWidget>()
+	val greyOutTable = Table()
+	fun updateRewards()
+	{
+		if (currentGroup.size == 0)
+		{
+			if (grouped.size > 0)
+			{
+				val chosen = grouped.removeIndex(0)
+				currentGroup = chosen.map { it.reward() }.filter { it != null }.map { it!! }.toGdxArray()
+
+				for (card in currentGroup)
+				{
+					for (pick in card.pickFuns)
+					{
+						val oldFun = pick.pickFun
+						pick.pickFun = {
+							oldFun(it)
+							currentGroup.removeValue(card, true)
+							if (currentGroup.size == 0)
+							{
+								updateRewards()
+							}
+
+							card.remove()
+						}
+					}
+
+					Global.stage.addActor(card)
+				}
+
+				if (currentGroup.size > 0)
+				{
+					CardWidget.layoutCards(currentGroup, Direction.CENTER)
+				}
+				else
+				{
+					updateRewards()
+				}
+			}
+			else
+			{
+				greyOutTable.remove()
+
+				// change to quest selection screen here
+			}
+		}
 	}
 
 	override fun doRender(delta: Float)

@@ -32,7 +32,14 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 		abilities.addAll(desc.abilities.map{ it.copy() }.toGdxArray())
 		damageReduction = desc.damageReduction
 
-		atkCooldown = (MathUtils.random() * desc.attackCooldown.max).toInt()
+		if (desc.attackNumPips > 0)
+		{
+			atkCooldown = (MathUtils.random() * desc.attackCooldown.max).toInt()
+		}
+		else
+		{
+			atkCooldown = Int.MAX_VALUE
+		}
 	}
 
 	override fun onTurn(grid: Grid)

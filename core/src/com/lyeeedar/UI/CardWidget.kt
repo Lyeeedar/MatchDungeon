@@ -142,6 +142,12 @@ class CardWidget(val frontTable: Table, val data: Any?) : Widget()
 		setBounds(x, y, width, height)
 	}
 
+	override fun rotationChanged()
+	{
+		super.rotationChanged()
+		contentTable.rotation = rotation
+	}
+
 	override fun sizeChanged()
 	{
 		super.sizeChanged()

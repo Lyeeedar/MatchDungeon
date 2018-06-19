@@ -1,5 +1,5 @@
 <Definitions Colour="187,126,235" Icon="Sprites/Icons/QuestIcon.png" xmlns:meta="Editor">
-	<Definition Name="QuestNodeDefs" Keys="QuestNode,Branch,Reward,CompleteQuest" meta:RefKey="ReferenceDef" />
+	<Definition Name="QuestNodeDefs" Keys="QuestNode,Branch,CompleteQuest" meta:RefKey="ReferenceDef" />
 	<Definition Name="Quest" AllowCircularLinks="True" FlattenData="True" meta:RefKey="GraphStruct">
 		<Data Name="Theme" BasePath="Themes" StripExtension="True" ResourceType="Theme" meta:RefKey="File" />
 		<Data Name="QuestCards" meta:RefKey="Collection">
@@ -30,10 +30,6 @@
 			<Data Name="Condition" meta:RefKey="String" />
 			<Data Name="Node" DefKey="QuestNodeDefs" meta:RefKey="GraphReference" />
 		</Data>
-	</Definition>
-	<Definition Name="Reward" TextColour="101,224,180" meta:RefKey="GraphStructDef">
-		<Data Name="Rewards" meta:RefKey="Reference" />
-		<Data Name="Next" DefKey="QuestNodeDefs" meta:RefKey="GraphReference" />
 	</Definition>
 	<Definition Name="CompleteQuest" TextColour="245,216,33" meta:RefKey="GraphStructDef">
 		<Data Name="State" EnumValues="Success,Failure" meta:RefKey="Enum" />

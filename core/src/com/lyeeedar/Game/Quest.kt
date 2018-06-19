@@ -30,6 +30,8 @@ class Quest(val path: String)
 
 	val theme: Theme
 
+	val rewards = Array<AbstractReward>()
+
 	init
 	{
 		val rawPath = "Quests/$path"
@@ -44,6 +46,15 @@ class Quest(val path: String)
 			{
 				val card = Card.load(rawPath.directory() + "/" + questCardEl.text)
 				questCards.add(card)
+			}
+		}
+
+		val rewardsEl = xml.getChildByName("Rewards")
+		if (rewardsEl != null)
+		{
+			for (el in rewardsEl.children)
+			{
+				rewards.add(AbstractReward.load(el))
 			}
 		}
 
