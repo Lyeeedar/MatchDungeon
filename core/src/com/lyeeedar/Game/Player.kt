@@ -12,7 +12,7 @@ import com.lyeeedar.UI.Seperator
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.Util.FastEnumMap
 
-class Player(val baseCharacter: Character)
+class Player(var baseCharacter: Character)
 {
 	var gold: Int = 0
 
@@ -102,12 +102,14 @@ class Deck
 {
 	val encounters = Array<Card>()
 	val equipment = Array<Equipment>()
+	val characters = Array<Character>()
 
 	fun copy(): Deck
 	{
 		val deck = Deck()
 		deck.encounters.addAll(encounters)
 		deck.equipment.addAll(equipment)
+		deck.characters.addAll(characters)
 
 		return deck
 	}

@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Global
 import com.lyeeedar.Rarity
+import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.getXml
 import ktx.collections.set
@@ -54,6 +55,11 @@ class CardNode
 	lateinit var content: String
 
 	var nextNode: CardNodeWrapper? = null
+
+	fun getCard(): CardWidget
+	{
+		return CardWidget(createTable(), this)
+	}
 
 	fun createTable(): Table
 	{

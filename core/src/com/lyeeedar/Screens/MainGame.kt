@@ -3,10 +3,7 @@ package com.lyeeedar
 import com.badlogic.gdx.Game
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Screen
-import com.lyeeedar.Screens.AbstractScreen
-import com.lyeeedar.Screens.CardScreen
-import com.lyeeedar.Screens.GridScreen
-import com.lyeeedar.Screens.QuestScreen
+import com.lyeeedar.Screens.*
 import com.lyeeedar.Util.Future
 import java.io.PrintWriter
 import java.io.StringWriter
@@ -21,7 +18,8 @@ class MainGame : Game()
 	{
 		GRID,
 		QUEST,
-		CARD
+		CARD,
+		DECK
 	}
 
 	private val screens = HashMap<ScreenEnum, AbstractScreen>()
@@ -64,6 +62,7 @@ class MainGame : Game()
 		screens.put(ScreenEnum.GRID, GridScreen())
 		screens.put(ScreenEnum.QUEST, QuestScreen())
 		screens.put(ScreenEnum.CARD, CardScreen())
+		screens.put(ScreenEnum.DECK, DeckScreen())
 
 		Global.newGame()
 	}

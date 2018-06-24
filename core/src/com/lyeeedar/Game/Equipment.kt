@@ -10,10 +10,7 @@ import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
-import com.lyeeedar.UI.FullscreenTable
-import com.lyeeedar.UI.Seperator
-import com.lyeeedar.UI.SpriteWidget
-import com.lyeeedar.UI.addClickListener
+import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.FastEnumMap
 import com.lyeeedar.Util.XmlData
@@ -28,6 +25,12 @@ class Equipment
 	var ability: Ability? = null
 
 	lateinit var slot: EquipmentSlot
+
+	fun getCard(other: Equipment?): CardWidget
+	{
+		val card = CardWidget(createTable(other), this)
+		return card
+	}
 
 	fun createTable(other: Equipment?): Table
 	{

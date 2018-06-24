@@ -1,5 +1,6 @@
 package com.lyeeedar.Game
 
+import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.exp4j.Helpers.evaluate
@@ -7,6 +8,7 @@ import com.lyeeedar.Board.Theme
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.Global
+import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.Util.*
 import ktx.collections.set
 import ktx.collections.toGdxArray
@@ -77,6 +79,11 @@ class Quest(val path: String)
 		root = nodeMap[rootNode]
 
 		current = root
+	}
+
+	fun getCard(): CardWidget
+	{
+		return CardWidget(Table(), this)
 	}
 
 	fun run()

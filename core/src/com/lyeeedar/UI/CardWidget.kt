@@ -3,6 +3,7 @@ package com.lyeeedar.UI
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.NinePatch
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.*
@@ -53,7 +54,7 @@ class CardWidget(val frontTable: Table, val data: Any?) : Widget()
 
 		contentTable.isTransform = true
 		contentTable.originX = referenceWidth / 2
-		//contentTable.originY = referenceHeight / 2
+		contentTable.originY = referenceHeight / 2
 
 		contentTable.setSize(referenceWidth, referenceHeight)
 
@@ -87,6 +88,8 @@ class CardWidget(val frontTable: Table, val data: Any?) : Widget()
 				}
 			}
 		}
+
+		//debug()
 	}
 
 	fun addPick(string: String, pickFun: (card: CardWidget) -> Unit)
@@ -97,13 +100,13 @@ class CardWidget(val frontTable: Table, val data: Any?) : Widget()
 	data class Bounds(val x: Float, val y: Float, val width: Float, val height: Float)
 	fun getTableBounds(): Bounds
 	{
-		val tableWidth = ((referenceWidth-contentTable.originX) * contentTable.scaleX) + contentTable.originX
-		val tableHeight = ((referenceHeight-contentTable.originY) * contentTable.scaleY) + contentTable.originY
+		val actualMidX = contentTable.x + contentTable.width / 2f
+		val drawX = actualMidX - (contentTable.width * contentTable.scaleX) / 2f
 
-		val tableX = (-contentTable.originX * contentTable.scaleX) + contentTable.originX
-		val tableY = (-contentTable.originY * contentTable.scaleY) + contentTable.originY
+		val actualMidY = contentTable.y + contentTable.height / 2f
+		val drawY = actualMidY - (contentTable.height * contentTable.scaleY) / 2f
 
-		return Bounds(x + tableX, y + tableY, tableWidth, tableHeight)
+		return Bounds(drawX, drawY, contentTable.width * contentTable.scaleX, contentTable.height * contentTable.scaleY)
 	}
 
 	override fun hit(x: Float, y: Float, touchable: Boolean): Actor?
@@ -113,13 +116,17 @@ class CardWidget(val frontTable: Table, val data: Any?) : Widget()
 		val miny = tabley - this.y
 
 		if (touchable && this.touchable != Touchable.enabled) return null
-		return if (x >= minx && x < width && y >= miny && y < height) this else null
+		return if (x >= minx && x < minx+width && y >= miny && y < miny+height) this else null
 	}
 
 	override fun act(delta: Float)
 	{
 		super.act(delta)
-		contentTable.act(delta)
+
+		if (!fullscreen)
+		{
+			contentTable.act(delta)
+		}
 	}
 
 	override fun setBounds(x: Float, y: Float, width: Float, height: Float)
@@ -132,8 +139,10 @@ class CardWidget(val frontTable: Table, val data: Any?) : Widget()
 
 		contentTable.setScale(min)
 
-		val tableX = (width / 2f) - contentTable.originX
-		contentTable.setPosition(x + tableX, y)
+		val middleX = x + width / 2f
+		val middleY = y + height / 2f
+
+		contentTable.setPosition(middleX - contentTable.width / 2f, middleY - contentTable.height / 2f)
 	}
 
 	override fun positionChanged()
@@ -152,6 +161,21 @@ class CardWidget(val frontTable: Table, val data: Any?) : Widget()
 	{
 		super.sizeChanged()
 		setBounds(x, y, width, height)
+	}
+
+	override fun drawDebug(shapes: ShapeRenderer)
+	{
+		super.drawDebug(shapes)
+
+		val bounds = getTableBounds()
+
+		shapes.color = Color.OLIVE
+		shapes.set(ShapeRenderer.ShapeType.Line)
+		shapes.rect(x, y, width, height)
+
+		shapes.set(ShapeRenderer.ShapeType.Line)
+		shapes.color = Color.MAGENTA
+		shapes.rect(bounds.x, bounds.y, bounds.width, bounds.height)
 	}
 
 	override fun draw(batch: Batch?, parentAlpha: Float)
@@ -216,7 +240,7 @@ class CardWidget(val frontTable: Table, val data: Any?) : Widget()
 		val collapseSequence = lambda {
 			contentTable.clear()
 			contentTable.add(if (faceup) frontTable else backTable).grow()
-		} then parallel(scaleTo(currentScale, currentScale, speed), moveTo(x, trueCurrentY, speed)) then lambda {
+		} then parallel(scaleTo(currentScale, currentScale, speed), moveTo(trueCurrentX, trueCurrentY, speed)) then lambda {
 			fullscreen = false
 
 			background.remove()
@@ -271,7 +295,7 @@ class CardWidget(val frontTable: Table, val data: Any?) : Widget()
 		contentTable.setScale(1f)
 
 		table.setSize(referenceWidth, referenceHeight)
-		table.setPosition(x, trueCurrentY)
+		table.setPosition(trueCurrentX, trueCurrentY)
 		table.setScale(currentScale)
 		table.addAction(expandSequence)
 		table.addClickListener {

@@ -22,11 +22,12 @@ abstract class AbstractReward
 	{
 		fun load(xmlData: XmlData): AbstractReward
 		{
-			val reward: AbstractReward = when (xmlData.name)
+			val reward: AbstractReward = when (xmlData.name.toUpperCase())
 			{
-				"Card" -> CardReward()
-				"Money" -> MoneyReward()
-				"Equipment" -> EquipmentReward()
+				"CARD" -> CardReward()
+				"MONEY" -> MoneyReward()
+				"EQUIPMENT" -> EquipmentReward()
+				"QUEST" -> QuestReward()
 				else -> throw RuntimeException("Invalid reward type: " + xmlData.name)
 			}
 
@@ -49,10 +50,33 @@ class CardReward : AbstractReward()
 	{
 		val card = Card.load(cardPath)
 
-		val table = card.current.createTable()
-		val cardWidget = CardWidget(table, null)
+		val cardWidget = card.current.getCard()
 		cardWidget.addPick("", {
 			Global.deck.encounters.add(card)
+		})
+
+		cardWidget.canZoom = false
+
+		return cardWidget
+	}
+}
+
+class QuestReward : AbstractReward()
+{
+	lateinit var questPath: String
+
+	override fun parse(xmlData: XmlData)
+	{
+		questPath = xmlData.get("File")
+	}
+
+	override fun reward(): CardWidget?
+	{
+		val quest = Quest.load(questPath)
+
+		val cardWidget = quest.getCard()
+		cardWidget.addPick("", {
+
 		})
 
 		cardWidget.canZoom = false
@@ -168,9 +192,8 @@ class EquipmentReward : AbstractReward()
 		}
 
 		val equipped = Global.player.getEquipment(equipment.slot)
-		val table = equipment.createTable(equipped)
 
-		val card = CardWidget(table, null)
+		val card = equipment.getCard(equipped)
 		card.addPick("Equip", {
 			val sprite = equipment.icon.copy()
 
