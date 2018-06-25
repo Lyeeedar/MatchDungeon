@@ -12,14 +12,12 @@ import com.lyeeedar.UI.Seperator
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.Util.FastEnumMap
 
-class Player(var baseCharacter: Character)
+class Player(val baseCharacter: Character, val deck: PlayerDeck)
 {
 	var gold: Int = 0
 
 	val statistics = FastEnumMap<Statistic, Int>(Statistic::class.java)
 	val equipment = FastEnumMap<EquipmentSlot, Equipment>(EquipmentSlot::class.java)
-
-	val deck = Global.deck.copy()
 
 	fun getStat(statistic: Statistic): Int
 	{
@@ -98,18 +96,16 @@ class Player(var baseCharacter: Character)
 	}
 }
 
-class Deck
+class PlayerDeck
 {
 	val encounters = Array<Card>()
 	val equipment = Array<Equipment>()
-	val characters = Array<Character>()
 
-	fun copy(): Deck
+	fun copy(): PlayerDeck
 	{
-		val deck = Deck()
+		val deck = PlayerDeck()
 		deck.encounters.addAll(encounters)
 		deck.equipment.addAll(equipment)
-		deck.characters.addAll(characters)
 
 		return deck
 	}

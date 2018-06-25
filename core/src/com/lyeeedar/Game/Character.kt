@@ -17,7 +17,7 @@ import com.lyeeedar.Util.FastEnumMap
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.getXml
 
-class Character
+class Character(val path: String)
 {
 	lateinit var name: String
 	lateinit var description: String
@@ -131,7 +131,7 @@ class Character
 		{
 			val xml = getXml("Characters/$path")
 
-			val character = Character()
+			val character = Character(path)
 			character.parse(xml)
 
 			return character

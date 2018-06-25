@@ -83,6 +83,15 @@ class DeckScreen : AbstractScreen()
 		equipCard.height = cardHeight
 		mainTable.add(equipCard).growX().center().height(cardHeight)
 		mainTable.row()
+
+		val returnButton = TextButton("Return", Global.skin)
+		returnButton.addClickListener {
+			val screen = Global.game.getTypedScreen<QuestSelectionScreen>()!!
+			screen.setup()
+			Global.game.switchScreen(screen)
+		}
+		mainTable.add(returnButton).expandX().right().pad(10f)
+		mainTable.row()
 	}
 
 	fun createCharacterScreen()
@@ -100,7 +109,7 @@ class DeckScreen : AbstractScreen()
 		mainTable.add(bodyTable).grow()
 		mainTable.row()
 
-		val leftCard = Global.player.baseCharacter.getCard()
+		val leftCard = Global.deck.chosenCharacter!!.getCard()
 		leftCard.setSize(cardWidth, cardHeight)
 		leftCard.setFacing(true, false)
 		bodyTable.add(leftCard).grow().center().height(cardHeight).pad(10f)
@@ -113,15 +122,18 @@ class DeckScreen : AbstractScreen()
 
 		for (char in Global.deck.characters)
 		{
-			val card = char.getCard()
-			card.setSize(cardWidth, cardHeight)
-			card.addPick("Select", {
-				Global.player.baseCharacter = char
-				createCharacterScreen()
-			})
-			card.setFacing(true, false)
-			scrollTable.add(card).height(cardHeight).expandX().center().pad(5f)
-			scrollTable.row()
+			if (char != Global.deck.chosenCharacter)
+			{
+				val card = char.getCard()
+				card.setSize(cardWidth, cardHeight)
+				card.addPick("Select", {
+					Global.deck.chosenCharacter = char
+					createCharacterScreen()
+				})
+				card.setFacing(true, false)
+				scrollTable.add(card).height(cardHeight).expandX().center().pad(5f)
+				scrollTable.row()
+			}
 		}
 
 		val returnButton = TextButton("Return", Global.skin)
@@ -153,12 +165,12 @@ class DeckScreen : AbstractScreen()
 		bodyTable.add(leftScrollPane).grow()
 
 		val used = ObjectSet<Card>()
-		for (enc in Global.player.deck.encounters)
+		for (enc in Global.deck.playerDeck.encounters)
 		{
 			val card = enc.current.getCard()
 			card.setSize(cardWidth, cardHeight)
 			card.addPick("Remove", {
-				Global.player.deck.encounters.removeValue(enc, true)
+				Global.deck.playerDeck.encounters.removeValue(enc, true)
 				createEncounterScreen()
 			})
 			card.setFacing(true, false)
@@ -182,7 +194,7 @@ class DeckScreen : AbstractScreen()
 				val card = enc.current.getCard()
 				card.setSize(cardWidth, cardHeight)
 				card.addPick("Add", {
-					Global.player.deck.encounters.add(enc)
+					Global.deck.playerDeck.encounters.add(enc)
 					createEncounterScreen()
 				})
 				card.setFacing(true, false)
@@ -220,12 +232,12 @@ class DeckScreen : AbstractScreen()
 		bodyTable.add(leftScrollPane).grow()
 
 		val used = ObjectSet<Equipment>()
-		for (equip in Global.player.deck.equipment)
+		for (equip in Global.deck.playerDeck.equipment)
 		{
 			val card = equip.getCard(null)
 			card.setSize(cardWidth, cardHeight)
 			card.addPick("Remove", {
-				Global.player.deck.equipment.removeValue(equip, true)
+				Global.deck.playerDeck.equipment.removeValue(equip, true)
 				createEquipmentScreen()
 			})
 			card.setFacing(true, false)
@@ -249,7 +261,7 @@ class DeckScreen : AbstractScreen()
 				val card = equip.getCard(null)
 				card.setSize(cardWidth, cardHeight)
 				card.addPick("Add", {
-					Global.player.deck.equipment.add(equip)
+					Global.deck.playerDeck.equipment.add(equip)
 					createEquipmentScreen()
 				})
 				card.setFacing(true, false)

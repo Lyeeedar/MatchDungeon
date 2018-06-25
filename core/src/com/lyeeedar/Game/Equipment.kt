@@ -16,7 +16,7 @@ import com.lyeeedar.Util.FastEnumMap
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.getXml
 
-class Equipment
+class Equipment(val path: String)
 {
 	lateinit var name: String
 	lateinit var description: String
@@ -180,12 +180,8 @@ class Equipment
 		fun load(path: String): Equipment
 		{
 			val xml = getXml(path)
-			return load(xml)
-		}
 
-		fun load(xml: XmlData): Equipment
-		{
-			val equipment = Equipment()
+			val equipment = Equipment(path)
 			equipment.parse(xml)
 			return equipment
 		}

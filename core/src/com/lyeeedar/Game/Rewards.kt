@@ -76,7 +76,7 @@ class QuestReward : AbstractReward()
 
 		val cardWidget = quest.getCard()
 		cardWidget.addPick("", {
-
+			Global.deck.quests.add(quest)
 		})
 
 		cardWidget.canZoom = false

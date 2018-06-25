@@ -19,7 +19,8 @@ class MainGame : Game()
 		GRID,
 		QUEST,
 		CARD,
-		DECK
+		DECK,
+		QUESTSELECTION
 	}
 
 	private val screens = HashMap<ScreenEnum, AbstractScreen>()
@@ -63,6 +64,7 @@ class MainGame : Game()
 		screens.put(ScreenEnum.QUEST, QuestScreen())
 		screens.put(ScreenEnum.CARD, CardScreen())
 		screens.put(ScreenEnum.DECK, DeckScreen())
+		screens.put(ScreenEnum.QUESTSELECTION, QuestSelectionScreen())
 
 		Global.newGame()
 	}

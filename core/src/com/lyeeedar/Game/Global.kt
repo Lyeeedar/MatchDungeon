@@ -15,10 +15,8 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.esotericsoftware.kryo.Kryo
 import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
-import com.lyeeedar.Game.Character
-import com.lyeeedar.Game.Deck
-import com.lyeeedar.Game.Player
-import com.lyeeedar.Game.Quest
+import com.lyeeedar.Card.Card
+import com.lyeeedar.Game.*
 import com.lyeeedar.Screens.AbstractScreen
 import com.lyeeedar.Screens.DeckScreen
 import com.lyeeedar.Screens.QuestScreen
@@ -67,7 +65,7 @@ class Global
 				return output
 			}
 
-		var deck = Deck()
+		var deck = GlobalDeck()
 
 		val stage: Stage
 			get() = (game.screen as AbstractScreen).stage
@@ -79,14 +77,16 @@ class Global
 		{
 			skin = loadSkin()
 			controls = Controls()
-			player = Player(Character.load("Peasant"))
+			player = deck.getPlayer()
 
 			Colors.put("IMPORTANT", Color(0.6f, 1f, 0.9f, 1f))
 		}
 
 		fun newGame()
 		{
-			player = Player(Character.load("Peasant"))
+			deck.clear()
+
+			player = deck.getPlayer()
 			globalflags = GameStateFlags()
 			levelflags = GameStateFlags()
 
@@ -311,6 +311,42 @@ class Global
 
 			return skin
 		}
+	}
+}
+
+class GlobalDeck
+{
+	val encounters = UniqueArray<Card>({it.path.hashCode()})
+	val equipment = UniqueArray<Equipment>({it.path.hashCode()})
+	val characters = UniqueArray<Character>({it.path.hashCode()})
+	val quests = UniqueArray<Quest>({it.path.hashCode()})
+
+	val playerDeck = PlayerDeck()
+	var chosenCharacter: Character
+
+	init
+	{
+		characters.add(Character.load("Peasant"))
+		chosenCharacter = characters.first()
+	}
+
+	fun getPlayer(): Player
+	{
+		return Player(chosenCharacter, playerDeck.copy())
+	}
+
+	fun clear()
+	{
+		encounters.clear()
+		equipment.clear()
+		characters.clear()
+		quests.clear()
+
+		playerDeck.encounters.clear()
+		playerDeck.equipment.clear()
+
+		characters.add(Character.load("Peasant"))
+		chosenCharacter = characters.first()
 	}
 }
 
