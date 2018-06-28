@@ -1,10 +1,6 @@
 package com.lyeeedar.UI
 
-import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
-import com.badlogic.gdx.graphics.g2d.HDRColourSpriteBatch
-import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Widget
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Scaling
@@ -12,7 +8,7 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 
 class SpriteWidget(private val drawable: Sprite, width: Float, height: Float, val fixHeight: Boolean = false) : Widget()
 {
-	private val scaling = Scaling.stretch
+	private val scaling = Scaling.fit
 	private val align = Align.center
 	private var imageX: Float = 0f
 	private var imageY: Float = 0f

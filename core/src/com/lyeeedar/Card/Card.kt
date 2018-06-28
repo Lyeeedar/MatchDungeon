@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Global
 import com.lyeeedar.Rarity
 import com.lyeeedar.UI.CardWidget
+import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.getXml
 import ktx.collections.set
@@ -58,7 +59,7 @@ class CardNode
 
 	fun getCard(): CardWidget
 	{
-		return CardWidget(createTable(), this)
+		return CardWidget(createTable(), createTable(), AssetManager.loadTextureRegion("white")!!, this)
 	}
 
 	fun createTable(): Table

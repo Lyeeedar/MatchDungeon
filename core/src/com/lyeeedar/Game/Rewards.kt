@@ -10,6 +10,7 @@ import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Global
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.UI.CardWidget
+import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.asGdxArray
 
@@ -106,7 +107,7 @@ class MoneyReward : AbstractReward()
 		table.add(amountLbl).expandX().center().padTop(10f)
 		table.row()
 
-		val card = CardWidget(table, null)
+		val card = CardWidget(table, table, AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/coin_gold")!!, null)
 		card.addPick("Take", {
 			Global.player.gold += amount
 		})

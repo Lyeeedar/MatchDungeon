@@ -16,6 +16,10 @@ import com.lyeeedar.Util.drawBlend
 
 class Sprite(val fileName: String, var animationDelay: Float, var textures: Array<TextureRegion>, colour: Colour, mode: Sprite.AnimationMode, var drawActualSize: Boolean) : Renderable()
 {
+	constructor(image: TextureRegion) : this("", 1f, Array<TextureRegion>(arrayOf(image)), Colour.WHITE, AnimationMode.NONE, false)
+	{
+	}
+
 	enum class AnimationStage
 	{
 		INVALID,

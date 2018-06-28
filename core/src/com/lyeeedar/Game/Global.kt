@@ -65,7 +65,7 @@ class Global
 				return output
 			}
 
-		var deck = GlobalDeck()
+		lateinit var deck: GlobalDeck
 
 		val stage: Stage
 			get() = (game.screen as AbstractScreen).stage
@@ -75,6 +75,8 @@ class Global
 
 		fun setup()
 		{
+			deck = GlobalDeck()
+
 			skin = loadSkin()
 			controls = Controls()
 			player = deck.getPlayer()
@@ -84,7 +86,7 @@ class Global
 
 		fun newGame()
 		{
-			deck.clear()
+			deck = GlobalDeck()
 
 			player = deck.getPlayer()
 			globalflags = GameStateFlags()

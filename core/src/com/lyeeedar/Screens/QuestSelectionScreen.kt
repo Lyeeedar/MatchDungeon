@@ -27,7 +27,7 @@ class QuestSelectionScreen : AbstractScreen()
 			card.addPick("Embark", {
 				val screen = Global.game.getTypedScreen<QuestScreen>()!!
 				screen.setup(quest)
-				Global.game.switchScreen(screen)
+				screen.swapTo()
 			})
 			card.setSize(cardWidth, cardHeight)
 
@@ -42,7 +42,7 @@ class QuestSelectionScreen : AbstractScreen()
 		editButton.addClickListener {
 			val screen = Global.game.getTypedScreen<DeckScreen>()!!
 			screen.setup()
-			Global.game.switchScreen(screen)
+			screen.swapTo()
 		}
 		mainTable.add(editButton).expandX().right().pad(10f)
 		mainTable.row()

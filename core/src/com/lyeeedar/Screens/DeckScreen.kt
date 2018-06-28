@@ -11,6 +11,7 @@ import com.lyeeedar.Global
 import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.UI.Seperator
 import com.lyeeedar.UI.addClickListener
+import com.lyeeedar.Util.AssetManager
 
 class DeckScreen : AbstractScreen()
 {
@@ -59,7 +60,7 @@ class DeckScreen : AbstractScreen()
 		mainTable.add(Seperator(Global.skin)).growX()
 		mainTable.row()
 
-		val deckCard = CardWidget(Table(), null)
+		val deckCard = CardWidget(Table(), Table(), AssetManager.loadTextureRegion("blank")!!, null)
 		deckCard.addPick("", {
 			createEncounterScreen()
 		})
@@ -74,7 +75,7 @@ class DeckScreen : AbstractScreen()
 		mainTable.add(Seperator(Global.skin)).growX()
 		mainTable.row()
 
-		val equipCard = CardWidget(Table(), null)
+		val equipCard = CardWidget(Table(), Table(), AssetManager.loadTextureRegion("white")!!, null)
 		equipCard.addPick("", {
 			createEquipmentScreen()
 		})
@@ -88,7 +89,7 @@ class DeckScreen : AbstractScreen()
 		returnButton.addClickListener {
 			val screen = Global.game.getTypedScreen<QuestSelectionScreen>()!!
 			screen.setup()
-			Global.game.switchScreen(screen)
+			screen.swapTo()
 		}
 		mainTable.add(returnButton).expandX().right().pad(10f)
 		mainTable.row()

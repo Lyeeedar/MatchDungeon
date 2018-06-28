@@ -28,7 +28,13 @@ class Equipment(val path: String)
 
 	fun getCard(other: Equipment?): CardWidget
 	{
-		val card = CardWidget(createTable(other), this)
+		val basicTable = Table()
+		basicTable.add(Label(name, Global.skin, "cardtitle")).expandX().center()
+		basicTable.row()
+		basicTable.add(SpriteWidget(icon.copy(), 64f, 64f)).grow()
+		basicTable.row()
+
+		val card = CardWidget(basicTable, createTable(other), AssetManager.loadTextureRegion("white")!!, this)
 		return card
 	}
 

@@ -34,7 +34,7 @@ class Character(val path: String)
 
 		val titleStack = Stack()
 		val iconTable = Table()
-		iconTable.add(SpriteWidget(sprite.copy(), 48f, 48f)).expandX().right().pad(5f)
+		iconTable.add(SpriteWidget(Sprite(sprite.textures[0]), 48f, 48f)).expandX().right().pad(5f).padRight(25f)
 		titleStack.add(iconTable)
 		titleStack.add(Label(name, Global.skin, "cardtitle"))
 
@@ -104,7 +104,13 @@ class Character(val path: String)
 			}
 		}
 
-		return CardWidget(table, this)
+		val basicTable = Table()
+		basicTable.add(Label(name, Global.skin, "cardtitle")).expandX().center()
+		basicTable.row()
+		basicTable.add(SpriteWidget(Sprite(sprite.textures[0]), 64f, 64f)).grow()
+		basicTable.row()
+
+		return CardWidget(basicTable, table, AssetManager.loadTextureRegion("white")!!, this)
 	}
 
 	fun parse(xmlData: XmlData)

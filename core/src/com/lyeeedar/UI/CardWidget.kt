@@ -3,6 +3,7 @@ package com.lyeeedar.UI
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.NinePatch
+import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.Touchable
@@ -13,15 +14,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Direction
 import com.lyeeedar.Global
+import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.min
 import ktx.actors.alpha
-import ktx.actors.parallelTo
 import ktx.actors.then
 
 data class Pick(val string: String, var pickFun: (card: CardWidget) -> Unit)
 
-class CardWidget(val frontTable: Table, val data: Any?) : Widget()
+class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backImage: TextureRegion, val data: Any?) : Widget()
 {
 	val referenceWidth = Global.resolution.x - 100f
 	val referenceHeight = Global.resolution.y - 200f
@@ -40,15 +41,20 @@ class CardWidget(val frontTable: Table, val data: Any?) : Widget()
 
 	var clickable = true
 
-	val back = NinePatch(AssetManager.loadTextureRegion("GUI/CardBackground"), 16, 16, 16, 16)
-	val front = NinePatch(AssetManager.loadTextureRegion("GUI/CardBackground"), 16, 16, 16, 16)
+	val back = NinePatch(AssetManager.loadTextureRegion("GUI/CardBackground"), 30, 30, 30, 30)
 
 	init
 	{
-		contentTable.background = NinePatchDrawable(front)
+		debug()
+
+		contentTable.background = NinePatchDrawable(back)
 
 		backTable = Table()
-		backTable.background = NinePatchDrawable(back)
+
+		val backStack = Stack()
+		backStack.add(SpriteWidget(Sprite(backImage), referenceWidth - 50f, referenceHeight - 50f))
+
+		backTable.add(backStack).expandX().center()
 
 		contentTable.add(backTable).grow()
 
@@ -239,7 +245,17 @@ class CardWidget(val frontTable: Table, val data: Any?) : Widget()
 
 		val collapseSequence = lambda {
 			contentTable.clear()
-			contentTable.add(if (faceup) frontTable else backTable).grow()
+
+			val stack = Stack()
+			stack.add(frontDetailTable)
+			stack.add(frontTable)
+			contentTable.add(stack).grow()
+
+			val hideSequence = alpha(1f) then fadeOut(speed)
+			val showSequence = alpha(0f) then fadeIn(speed)
+
+			frontDetailTable.addAction(hideSequence)
+			frontTable.addAction(showSequence)
 		} then parallel(scaleTo(currentScale, currentScale, speed), moveTo(trueCurrentX, trueCurrentY, speed)) then lambda {
 			fullscreen = false
 
@@ -247,15 +263,31 @@ class CardWidget(val frontTable: Table, val data: Any?) : Widget()
 			table.remove()
 			table.clear()
 
+			contentTable.clear()
+			contentTable.add(frontTable).grow()
+
 			contentTable.setScale(currentScale)
 			contentTable.setPosition(currentX, currentY)
 		}
 
-		val expandSequence = scaleTo(1f, 1f, speed) parallelTo moveTo(destX, destY, speed) then lambda {
+		val expandSequence = lambda {
 			contentTable.clear()
 
 			val stack = Stack()
+			stack.add(frontDetailTable)
 			stack.add(frontTable)
+			contentTable.add(stack).grow()
+
+			val hideSequence = alpha(1f) then fadeOut(speed)
+			val showSequence = alpha(0f) then fadeIn(speed)
+
+			frontTable.addAction(hideSequence)
+			frontDetailTable.addAction(showSequence)
+		} then parallel(scaleTo(1f, 1f, speed), moveTo(destX, destY, speed)) then lambda {
+			contentTable.clear()
+
+			val stack = Stack()
+			stack.add(frontDetailTable)
 
 			val buttonTable = Table()
 			stack.add(buttonTable)

@@ -72,7 +72,7 @@ class QuestScreen : AbstractScreen()
 		// create widgets
 		for (card in cards)
 		{
-			val widget = CardWidget(card.current.createTable(), card)
+			val widget = card.current.getCard()
 			widget.addPick("Choose", {
 				chosenQuestCard = it
 
@@ -103,8 +103,12 @@ class QuestScreen : AbstractScreen()
 		}
 		else
 		{
-			// change to quest selection screen here
+
 		}
+
+		val screen = Global.game.getTypedScreen<QuestSelectionScreen>()!!
+		screen.setup()
+		screen.swapTo()
 	}
 
 	var grouped: Array<Array<AbstractReward>> = Array()
