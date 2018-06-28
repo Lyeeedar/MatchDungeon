@@ -51,5 +51,9 @@
 			<Data Name="Key" VisibleIf="State==Custom" meta:RefKey="String" />
 		</Data>
 		<Data Name="Rewards" Keys="Rewards" Nullable="False" meta:RefKey="Reference" />
+		<Data Name="Spend" meta:RefKey="Struct">
+			<Data Name="Key" SkipIfDefault="False" meta:RefKey="String" />
+			<Data Name="Count" Type="Int" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+		</Data>
 	</Definition>
 </Definitions>

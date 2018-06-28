@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="f1254773-fe0b-4944-8ad4-8705f0ec82f1" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">9e7510bc-dbdd-41f5-8124-60e870b59b60</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="9e7510bc-dbdd-41f5-8124-60e870b59b60">
+			<Name>Buried Treasure</Name>
+			<Description>You never know what you may find if you have a dig around.</Description>
+			<Rarity>Bronze</Rarity>
+			<Content>BuriedTreasureContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

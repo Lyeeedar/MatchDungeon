@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="4d950aa9-c79c-478f-8b6f-b55391fdc0cc" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">933cebad-b0d6-4335-bc1b-1618488eb94e</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="933cebad-b0d6-4335-bc1b-1618488eb94e">
+			<Name>Blacksmiths Favour</Name>
+			<Description>Perfect Preperation is what preserves prosperity. Did you do yours before departing?</Description>
+			<Rarity>Bronze</Rarity>
+			<Content>BlacksmithsFavourContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

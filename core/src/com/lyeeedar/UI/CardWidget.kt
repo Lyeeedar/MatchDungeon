@@ -45,7 +45,7 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 
 	init
 	{
-		debug()
+		//debug()
 
 		contentTable.background = NinePatchDrawable(back)
 

@@ -1,0 +1,94 @@
+<CardContent meta:X="0" meta:Y="0" GUID="e05f5bf1-f56f-4355-9967-92ec41473779" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">373da4e9-1205-4dae-a360-8b02c4c145b8</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="373da4e9-1205-4dae-a360-8b02c4c145b8">
+			<Line>
+				<MultilineString>You approach the swarm of monsters, carefully drawing your weapon.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Suddenly a twig cracks beneath your foot. The monsters whip their heads around towards you. Time to fight!</MultilineString>
+			</Line>
+			<Match3>
+				<Level>HolyFountainContentLevel</Level>
+				<Success meta:RefKey="Node">8b318fe7-9eac-404c-b962-6e0f9c9a128d</Success>
+				<Failure meta:RefKey="Node">7fb39e26-b6e9-4d68-9163-58efce27c27b</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="454" meta:Y="394" GUID="7fb39e26-b6e9-4d68-9163-58efce27c27b">
+			<Line>
+				<MultilineString>The monsters are too strong. You beat a hasty retreat.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="503" meta:Y="-153" GUID="8b318fe7-9eac-404c-b962-6e0f9c9a128d">
+			<Line>
+				<MultilineString>The monsters lie slain at your feet. You stroll over to the water, its radiance filling you with energy and joy.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You take a deep swig from the pool, filling the holy blessings infuse you.</MultilineString>
+			</Line>
+			<Branch>
+				<Branch>
+					<Condition>chance(1,6)</Condition>
+					<Node meta:RefKey="Node">c6328817-81fe-4ae2-ade4-fe26ac9fbd38</Node>
+				</Branch>
+				<Branch>
+					<Condition>chance(1,3)</Condition>
+					<Node meta:RefKey="Node">d1d6aad1-acb4-488b-b7a6-6df87dde64b5</Node>
+				</Branch>
+				<Branch>
+					<Condition>chance(1,3)</Condition>
+					<Node meta:RefKey="Node">a1e38695-277c-4cc9-aa44-159fc6adbd04</Node>
+				</Branch>
+				<Branch>
+					<Node meta:RefKey="Node">69e3831c-3f5c-4e09-9657-4590ed9debc8</Node>
+				</Branch>
+			</Branch>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="764" meta:Y="94" GUID="69e3831c-3f5c-4e09-9657-4590ed9debc8">
+			<Rewards meta:RefKey="Rewards">
+				<Statistics meta:RefKey="Statistics">
+					<Health>2</Health>
+					<MatchDamage>0</MatchDamage>
+					<AbilityDamage>0</AbilityDamage>
+					<PowerGain>0</PowerGain>
+				</Statistics>
+			</Rewards>
+		</Node>
+		<Node meta:X="763" meta:Y="-43" GUID="d1d6aad1-acb4-488b-b7a6-6df87dde64b5">
+			<Rewards meta:RefKey="Rewards">
+				<Statistics meta:RefKey="Statistics">
+					<Health>0</Health>
+					<MatchDamage>0</MatchDamage>
+					<AbilityDamage>2</AbilityDamage>
+					<PowerGain>0</PowerGain>
+				</Statistics>
+			</Rewards>
+		</Node>
+		<Node meta:X="762" meta:Y="26" GUID="a1e38695-277c-4cc9-aa44-159fc6adbd04">
+			<Rewards meta:RefKey="Rewards">
+				<Statistics meta:RefKey="Statistics">
+					<Health>0</Health>
+					<MatchDamage>0</MatchDamage>
+					<AbilityDamage>0</AbilityDamage>
+					<PowerGain>5</PowerGain>
+				</Statistics>
+			</Rewards>
+		</Node>
+		<Node meta:X="765" meta:Y="-116" GUID="c6328817-81fe-4ae2-ade4-fe26ac9fbd38">
+			<Rewards meta:RefKey="Rewards">
+				<Statistics meta:RefKey="Statistics">
+					<Health>0</Health>
+					<MatchDamage>1</MatchDamage>
+					<AbilityDamage>0</AbilityDamage>
+					<PowerGain>0</PowerGain>
+				</Statistics>
+			</Rewards>
+		</Node>
+	</Nodes>
+</CardContent>

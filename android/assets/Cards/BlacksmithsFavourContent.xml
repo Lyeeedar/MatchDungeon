@@ -1,0 +1,86 @@
+<CardContent meta:X="0" meta:Y="0" GUID="f6873c35-3d21-411d-a2e6-019403e9d3e1" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">8203bacf-d41f-4274-8504-1cfce80c3d1d</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="8203bacf-d41f-4274-8504-1cfce80c3d1d">
+			<Line>
+				<MultilineString>You enter the blacksmiths shop, having dropped off your weapon to be repaired a few days ago. It should now be ready to collect.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>A gruff voice calls out towards you as you enter.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Hoy! Over here! It sure took you long enough to arrive." The blacksmith says, brandishing your weapon. "Here, all complete as you ordered." </MultilineString>
+			</Line>
+			<Match3>
+				<Level>BlacksmithsFavourContentLevel</Level>
+				<Success meta:RefKey="Node">a9aa1a0a-0ab9-4027-8593-d52146a28544</Success>
+				<Failure meta:RefKey="Node">4ad70355-b274-4df0-bf95-dc0a1f1890a0</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="456" meta:Y="236" GUID="4ad70355-b274-4df0-bf95-dc0a1f1890a0">
+			<Line>
+				<MultilineString>"Sadly the weapon is flawed, there's only so much I could do.", I'd advise you buy another.</MultilineString>
+			</Line>
+			<Branch>
+				<Branch>
+					<Condition>gold &gt;= 200</Condition>
+					<Node meta:RefKey="Node">a7699288-5921-4402-a3a5-224a55548d43</Node>
+				</Branch>
+				<Branch>
+					<Node meta:RefKey="Node">397764a2-de55-450c-bbc5-74e6d7888c1a</Node>
+				</Branch>
+			</Branch>
+		</Node>
+		<Node meta:X="734" meta:Y="236" GUID="a7699288-5921-4402-a3a5-224a55548d43">
+			<Line>
+				<MultilineString>"It'd be 200 gold for a brand spanking new replacement for what you have there. What do you say?"</MultilineString>
+			</Line>
+			<Choice>
+				<Choices>
+					<Choice>
+						<Text>Sure, here's the money.</Text>
+						<Node meta:RefKey="Node">a9aa1a0a-0ab9-4027-8593-d52146a28544</Node>
+					</Choice>
+					<Choice>
+						<Text>No thank you, I'll stick with what I've got.</Text>
+						<Node meta:RefKey="Node">4f64914a-873a-4e11-9e7c-fe7d04371366</Node>
+					</Choice>
+				</Choices>
+			</Choice>
+		</Node>
+		<Node meta:X="690" meta:Y="514" GUID="397764a2-de55-450c-bbc5-74e6d7888c1a">
+			<Line>
+				<MultilineString>Sadly you are too poor to afford a replacement. Hopefully your weapon lasts!</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="1114" meta:Y="443" GUID="4f64914a-873a-4e11-9e7c-fe7d04371366">
+			<Line>
+				<MultilineString>"Your funeral."</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="1140" meta:Y="184" GUID="a9aa1a0a-0ab9-4027-8593-d52146a28544">
+			<Line>
+				<MultilineString>"A pleasure doing business with yah."</MultilineString>
+			</Line>
+			<Spend>
+				<Key>Gold</Key>
+				<Count>200</Count>
+			</Spend>
+			<Rewards meta:RefKey="Rewards">
+				<Equipment>
+					<FromDeck>true</FromDeck>
+					<Type>Weapon</Type>
+				</Equipment>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

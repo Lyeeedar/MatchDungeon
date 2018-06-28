@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="fc2f4849-4a45-488a-9807-27ce1a589e69" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">f7d02d6a-62e7-45b2-aadb-c8d3ff9ff0f8</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="f7d02d6a-62e7-45b2-aadb-c8d3ff9ff0f8">
+			<Name>Holy Fountain</Name>
+			<Description>You stumble across a fountain, filled with water that glows with a holy light. The only issue is the swarm of monsters surrounding it.</Description>
+			<Rarity>Bronze</Rarity>
+			<Content>HolyFountainContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>
