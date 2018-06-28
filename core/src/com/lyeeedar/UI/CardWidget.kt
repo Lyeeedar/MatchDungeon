@@ -50,11 +50,7 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 		contentTable.background = NinePatchDrawable(back)
 
 		backTable = Table()
-
-		val backStack = Stack()
-		backStack.add(SpriteWidget(Sprite(backImage), referenceWidth - 50f, referenceHeight - 50f))
-
-		backTable.add(backStack).expandX().center()
+		backTable.add(SpriteWidget(Sprite(backImage), referenceWidth - 60, referenceWidth - 60)).expand().center()
 
 		contentTable.add(backTable).grow()
 

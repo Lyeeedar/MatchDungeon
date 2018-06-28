@@ -107,7 +107,7 @@ class MoneyReward : AbstractReward()
 		table.add(amountLbl).expandX().center().padTop(10f)
 		table.row()
 
-		val card = CardWidget(table, table, AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/coin_gold")!!, null)
+		val card = CardWidget(table, table, AssetManager.loadTextureRegion("GUI/MoneyCardback")!!, null)
 		card.addPick("Take", {
 			Global.player.gold += amount
 		})

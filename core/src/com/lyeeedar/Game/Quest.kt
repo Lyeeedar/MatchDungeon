@@ -83,7 +83,7 @@ class Quest(val path: String)
 
 	fun getCard(): CardWidget
 	{
-		return CardWidget(Table(), Table(), AssetManager.loadTextureRegion("white")!!, this)
+		return CardWidget(Table(), Table(), AssetManager.loadTextureRegion("GUI/QuestCardback")!!, this)
 	}
 
 	fun run()

@@ -110,7 +110,7 @@ class Character(val path: String)
 		basicTable.add(SpriteWidget(Sprite(sprite.textures[0]), 64f, 64f)).grow()
 		basicTable.row()
 
-		return CardWidget(basicTable, table, AssetManager.loadTextureRegion("white")!!, this)
+		return CardWidget(basicTable, table, AssetManager.loadTextureRegion("GUI/CharacterCardback")!!, this)
 	}
 
 	fun parse(xmlData: XmlData)

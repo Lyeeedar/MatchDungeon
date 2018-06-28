@@ -34,7 +34,7 @@ class Equipment(val path: String)
 		basicTable.add(SpriteWidget(icon.copy(), 64f, 64f)).grow()
 		basicTable.row()
 
-		val card = CardWidget(basicTable, createTable(other), AssetManager.loadTextureRegion("white")!!, this)
+		val card = CardWidget(basicTable, createTable(other), AssetManager.loadTextureRegion("GUI/EquipmentCardback")!!, this)
 		return card
 	}
 

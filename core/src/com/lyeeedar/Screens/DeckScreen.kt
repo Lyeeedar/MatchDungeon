@@ -60,7 +60,7 @@ class DeckScreen : AbstractScreen()
 		mainTable.add(Seperator(Global.skin)).growX()
 		mainTable.row()
 
-		val deckCard = CardWidget(Table(), Table(), AssetManager.loadTextureRegion("blank")!!, null)
+		val deckCard = CardWidget(Table(), Table(), AssetManager.loadTextureRegion("GUI/CardCardback")!!, null)
 		deckCard.addPick("", {
 			createEncounterScreen()
 		})
@@ -75,7 +75,7 @@ class DeckScreen : AbstractScreen()
 		mainTable.add(Seperator(Global.skin)).growX()
 		mainTable.row()
 
-		val equipCard = CardWidget(Table(), Table(), AssetManager.loadTextureRegion("white")!!, null)
+		val equipCard = CardWidget(Table(), Table(), AssetManager.loadTextureRegion("GUI/EquipmentCardback")!!, null)
 		equipCard.addPick("", {
 			createEquipmentScreen()
 		})
@@ -91,7 +91,7 @@ class DeckScreen : AbstractScreen()
 			screen.setup()
 			screen.swapTo()
 		}
-		mainTable.add(returnButton).expandX().right().pad(10f)
+		mainTable.add(returnButton).expandX().right().pad(10f).expandY().bottom()
 		mainTable.row()
 	}
 

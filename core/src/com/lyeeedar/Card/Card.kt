@@ -59,7 +59,7 @@ class CardNode
 
 	fun getCard(): CardWidget
 	{
-		return CardWidget(createTable(), createTable(), AssetManager.loadTextureRegion("white")!!, this)
+		return CardWidget(createTable(), createTable(), AssetManager.loadTextureRegion("GUI/CardCardback")!!, this)
 	}
 
 	fun createTable(): Table
