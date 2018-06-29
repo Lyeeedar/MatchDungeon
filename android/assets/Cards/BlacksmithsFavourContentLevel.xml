@@ -12,6 +12,17 @@
 			<Line>.........</Line>
 		</Rows>
 	</Grid>
-	<AllowedVictories />
-	<AllowedDefeats />
+	<Theme>City</Theme>
+	<AllowedVictories>
+		<Condition meta:RefKey="Matches">
+			<Orbs>15</Orbs>
+			<Orbs>15</Orbs>
+			<Orbs>15</Orbs>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Turns">
+			<Turns>30</Turns>
+		</Condition>
+	</AllowedDefeats>
 </Level>

@@ -1,0 +1,49 @@
+<CardContent meta:X="0" meta:Y="0" GUID="66bc9c75-3583-4f6e-9cc8-84403553470b" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">83173b27-e63d-47e2-be49-b37c0b406cf7</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="83173b27-e63d-47e2-be49-b37c0b406cf7">
+			<Line>
+				<MultilineString>As you explore a stash of treasure catches your eye. You head over to investigate it.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>ForgottenTreasureContentLevel</Level>
+				<Success meta:RefKey="Node">c4a3ac5b-a0e5-4151-a44a-06bbdf2b922d</Success>
+				<Failure meta:RefKey="Node">39ccf006-2d41-4eec-a635-f34bbbdbd409</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="457" meta:Y="180" GUID="39ccf006-2d41-4eec-a635-f34bbbdbd409">
+			<Line>
+				<MultilineString>It wasn't treasure at all! Just worthless junk.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="476" meta:Y="-29" GUID="c4a3ac5b-a0e5-4151-a44a-06bbdf2b922d">
+			<Line>
+				<MultilineString>You rummage through the stash, finally coming away with something valuable.</MultilineString>
+			</Line>
+			<Branch>
+				<Branch>
+					<Condition>chance(1,6)</Condition>
+					<Node meta:RefKey="Node">0e64d5d0-5f75-49cc-bb6b-08155a906124</Node>
+				</Branch>
+			</Branch>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>30</Count>
+				</Money>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="754" meta:Y="-30" GUID="0e64d5d0-5f75-49cc-bb6b-08155a906124">
+			<Rewards meta:RefKey="Rewards">
+				<Equipment>
+					<FromDeck>true</FromDeck>
+				</Equipment>
+			</Rewards>
+		</Node>
+	</Nodes>
+</CardContent>

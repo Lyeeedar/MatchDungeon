@@ -1,0 +1,91 @@
+<CardContent meta:X="0" meta:Y="0" GUID="fc987c6f-1d35-4464-8d90-1e016e6f0633" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">861e95be-cca7-433e-b9ab-ab59fc2fbad9</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="861e95be-cca7-433e-b9ab-ab59fc2fbad9">
+			<Line>
+				<MultilineString>As you are wandering through the city you suddenly find yourself surrounded by thieves.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Hand us yer money, or I'll stick a 'ole in ya."</MultilineString>
+			</Line>
+			<Choice>
+				<Choices>
+					<Choice>
+						<Text>Fight</Text>
+						<Node meta:RefKey="Node">5a201a33-165a-47a0-b483-8c85072c8168</Node>
+					</Choice>
+					<Choice>
+						<Text>Hand over money</Text>
+						<Node meta:RefKey="Node">fbe63c34-afe9-4016-9883-1fea1956f8e4</Node>
+					</Choice>
+				</Choices>
+			</Choice>
+		</Node>
+		<Node meta:X="919" meta:Y="337" GUID="04c442e9-e50c-4637-8165-e05021acb5af">
+			<Line>
+				<MultilineString>You hand over your money to the group.</MultilineString>
+			</Line>
+			<Spend>
+				<Key>Money</Key>
+				<Count>Loss</Count>
+			</Spend>
+			<Line>
+				<MultilineString>"Nice doin business with ya."</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="494" meta:Y="0" GUID="5a201a33-165a-47a0-b483-8c85072c8168">
+			<Match3>
+				<Level>MuggingContentLevel</Level>
+				<Success meta:RefKey="Node">1796a5a3-eea0-4138-9779-255bbd9300c6</Success>
+				<Failure meta:RefKey="Node">7e824be6-266b-469b-a3a6-a304af99893a</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="688" meta:Y="136" GUID="7e824be6-266b-469b-a3a6-a304af99893a">
+			<Line>
+				<MultilineString>"Now give us yer money!"</MultilineString>
+			</Line>
+			<Define>
+				<Key>Loss</Key>
+				<Value>Money</Value>
+				<Global>false</Global>
+			</Define>
+			<Node meta:RefKey="Node">04c442e9-e50c-4637-8165-e05021acb5af</Node>
+		</Node>
+		<Node meta:X="456" meta:Y="205.33333333333331" GUID="fbe63c34-afe9-4016-9883-1fea1956f8e4">
+			<Line>
+				<MultilineString>"Fer bein such a good sport I'll leave yer a bit."</MultilineString>
+			</Line>
+			<Define>
+				<Key>Loss</Key>
+				<Value>Money*0.75</Value>
+				<Global>false</Global>
+			</Define>
+			<Node meta:RefKey="Node">04c442e9-e50c-4637-8165-e05021acb5af</Node>
+		</Node>
+		<Node meta:X="818" meta:Y="-72" GUID="1796a5a3-eea0-4138-9779-255bbd9300c6">
+			<Line>
+				<MultilineString>The thieves lie dead at your feet. You take the opportunity to repossess their stolen goods.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>10</Count>
+				</Money>
+				<Money>
+					<Count>15</Count>
+				</Money>
+				<Money>
+					<Count>10</Count>
+				</Money>
+				<Money>
+					<Count>20</Count>
+				</Money>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

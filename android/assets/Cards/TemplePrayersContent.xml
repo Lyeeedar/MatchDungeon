@@ -1,0 +1,112 @@
+<CardContent meta:X="0" meta:Y="0" GUID="cf5e7aca-65b1-4127-8935-da6438aa8877" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">2b5a5cea-1af6-445e-a11b-b8fd7a8a54d7</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="2b5a5cea-1af6-445e-a11b-b8fd7a8a54d7">
+			<Line>
+				<MultilineString>Before embarking on the quest you knelt before the altar in the great cathedral and prayed. What did you pray for?</MultilineString>
+			</Line>
+			<Choice>
+				<Choices>
+					<Choice>
+						<Text>Strength</Text>
+						<Node meta:RefKey="Node">4410d017-678e-494c-af3f-ca308f96ac30</Node>
+					</Choice>
+					<Choice>
+						<Text>Protection</Text>
+						<Node meta:RefKey="Node">764e515a-9b4f-40fa-ae78-d79447dc7179</Node>
+					</Choice>
+					<Choice>
+						<Text>Power</Text>
+						<Node meta:RefKey="Node">21d0d3c3-907c-4cbb-9e49-45527fea452f</Node>
+					</Choice>
+				</Choices>
+			</Choice>
+			<Match3>
+				<Level>TemplePrayersContentLevel</Level>
+				<Success meta:RefKey="Node">d952e43f-aacc-40fd-9260-b56b29412468</Success>
+				<Failure meta:RefKey="Node">bd54cf2e-eb63-415a-ad93-37e7db3f2f41</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="514" meta:Y="-210" GUID="4410d017-678e-494c-af3f-ca308f96ac30">
+			<Define>
+				<Key>Strength</Key>
+				<Value>1</Value>
+				<Global>false</Global>
+			</Define>
+		</Node>
+		<Node meta:X="512" meta:Y="-133" GUID="764e515a-9b4f-40fa-ae78-d79447dc7179">
+			<Define>
+				<Key>Protection</Key>
+				<Value>1</Value>
+				<Global>false</Global>
+			</Define>
+		</Node>
+		<Node meta:X="511" meta:Y="-53" GUID="21d0d3c3-907c-4cbb-9e49-45527fea452f">
+			<Define>
+				<Key>Power</Key>
+				<Value>1</Value>
+				<Global>false</Global>
+			</Define>
+		</Node>
+		<Node meta:X="457" meta:Y="428" GUID="bd54cf2e-eb63-415a-ad93-37e7db3f2f41">
+			<Line>
+				<MultilineString>It doesn't seem the gods were listening.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="520" meta:Y="133" GUID="d952e43f-aacc-40fd-9260-b56b29412468">
+			<Line>
+				<MultilineString>The gods granted your prayer.</MultilineString>
+			</Line>
+			<Branch>
+				<Branch>
+					<Condition>Strength==1</Condition>
+					<Node meta:RefKey="Node">687aacfa-1e9c-4109-86e6-0e9e5cedddfa</Node>
+				</Branch>
+				<Branch>
+					<Condition>Protection==1</Condition>
+					<Node meta:RefKey="Node">f16d5e15-c788-4c19-a7ed-a15226cb091e</Node>
+				</Branch>
+				<Branch>
+					<Condition>Power==1</Condition>
+					<Node meta:RefKey="Node">c82992d0-ae64-4490-81ef-96d3412802bc</Node>
+				</Branch>
+			</Branch>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="813" meta:Y="133" GUID="687aacfa-1e9c-4109-86e6-0e9e5cedddfa">
+			<Rewards meta:RefKey="Rewards">
+				<Statistics meta:RefKey="Statistics">
+					<Health>0</Health>
+					<MatchDamage>1</MatchDamage>
+					<AbilityDamage>0</AbilityDamage>
+					<PowerGain>0</PowerGain>
+				</Statistics>
+			</Rewards>
+		</Node>
+		<Node meta:X="809" meta:Y="214" GUID="f16d5e15-c788-4c19-a7ed-a15226cb091e">
+			<Rewards meta:RefKey="Rewards">
+				<Statistics meta:RefKey="Statistics">
+					<Health>5</Health>
+					<MatchDamage>0</MatchDamage>
+					<AbilityDamage>0</AbilityDamage>
+					<PowerGain>0</PowerGain>
+				</Statistics>
+			</Rewards>
+		</Node>
+		<Node meta:X="812" meta:Y="302" GUID="c82992d0-ae64-4490-81ef-96d3412802bc">
+			<Rewards meta:RefKey="Rewards">
+				<Statistics meta:RefKey="Statistics">
+					<Health>0</Health>
+					<MatchDamage>0</MatchDamage>
+					<AbilityDamage>1</AbilityDamage>
+					<PowerGain>5</PowerGain>
+				</Statistics>
+			</Rewards>
+		</Node>
+	</Nodes>
+</CardContent>

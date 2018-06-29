@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="21a6e2a4-430b-4b28-8c16-0b1e56d3547c" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">39798a5e-3e3d-4463-bf1f-04b8d21189ce</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="39798a5e-3e3d-4463-bf1f-04b8d21189ce">
+			<Name>Choke Point</Name>
+			<Description>Monsters block the way forward. The only option is to smash through.</Description>
+			<Rarity>Bronze</Rarity>
+			<Content>ChokePointContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

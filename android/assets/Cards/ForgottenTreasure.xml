@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="3ea9bbca-6f1e-4388-99c6-f61c5056b8ca" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">722c2748-8c0c-41b0-96d2-795fe63e1e75</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="722c2748-8c0c-41b0-96d2-795fe63e1e75">
+			<Name>Forgotten Treasure</Name>
+			<Description>You stumble across a forgotten stash of treasure. It's yours for the taking!</Description>
+			<Rarity>Bronze</Rarity>
+			<Content>ForgottenTreasureContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

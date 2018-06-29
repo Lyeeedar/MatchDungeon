@@ -1,0 +1,70 @@
+<Faction xmlns:meta="Editor">
+	<Monsters>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>Thug 1</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_heroes/thief</Name>
+				<DrawActualSize>true</DrawActualSize>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+			</Death>
+			<AttackNumPips>6</AttackNumPips>
+			<AttackCooldown>3,6</AttackCooldown>
+			<Size>1</Size>
+			<HP>5</HP>
+			<DamageReduction>0</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>4,8</Cooldown>
+					<Effect>Move</Effect>
+				</Ability>
+			</Abilities>
+		</Monster>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>Thug 2</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_heroes/halfling_thief</Name>
+				<DrawActualSize>true</DrawActualSize>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+			</Death>
+			<AttackNumPips>8</AttackNumPips>
+			<AttackCooldown>2,4</AttackCooldown>
+			<Size>1</Size>
+			<HP>5</HP>
+			<DamageReduction>0</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>4,8</Cooldown>
+					<Effect>Move</Effect>
+				</Ability>
+			</Abilities>
+		</Monster>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>Thug Bruiser</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_heroes/barbarian_m</Name>
+				<DrawActualSize>true</DrawActualSize>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+			</Death>
+			<AttackNumPips>5</AttackNumPips>
+			<AttackCooldown>4,6</AttackCooldown>
+			<Size>2</Size>
+			<HP>8</HP>
+			<DamageReduction>0</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>3,6</Cooldown>
+					<Count>2</Count>
+					<Data>
+						<NumPips>6</NumPips>
+					</Data>
+				</Ability>
+			</Abilities>
+		</Monster>
+	</Monsters>
+</Faction>

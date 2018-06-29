@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="87795a04-4b63-4d3e-b6d5-a1cc0e541dce" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">20abb50d-11c4-4ba3-b742-69e347bab83c</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="20abb50d-11c4-4ba3-b742-69e347bab83c">
+			<Name>Discarded Equipment</Name>
+			<Description>You spot a pile of equipment discarded in a corner. Something may still be usable.</Description>
+			<Rarity>Bronze</Rarity>
+			<Content>DiscardedGearContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

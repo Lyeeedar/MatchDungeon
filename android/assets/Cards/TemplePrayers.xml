@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="ce8b1d1b-fb7a-421a-8b04-3974996ac2b2" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">3a94c1e7-874f-47d6-9a7e-ea78c90f0768</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="3a94c1e7-874f-47d6-9a7e-ea78c90f0768">
+			<Name>Temple Prayers</Name>
+			<Description>Sometimes the gods listen to the prayers of the faithful. Were the gods attentive to you?</Description>
+			<Rarity>Bronze</Rarity>
+			<Content>TemplePrayersContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

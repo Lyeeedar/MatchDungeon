@@ -53,7 +53,7 @@
 		<Data Name="Rewards" Keys="Rewards" Nullable="False" meta:RefKey="Reference" />
 		<Data Name="Spend" meta:RefKey="Struct">
 			<Data Name="Key" SkipIfDefault="False" meta:RefKey="String" />
-			<Data Name="Count" Type="Int" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+			<Data Name="Count" Default="1" SkipIfDefault="False" meta:RefKey="String" />
 		</Data>
 	</Definition>
 </Definitions>
