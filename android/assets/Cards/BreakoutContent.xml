@@ -1,0 +1,49 @@
+<CardContent meta:X="0" meta:Y="0" GUID="0df7fadf-1267-42df-8bed-425208d6fbcd" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">8fb76921-2ab6-44d7-9d50-1250dd03d566</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="8fb76921-2ab6-44d7-9d50-1250dd03d566">
+			<Line>
+				<MultilineString>A pile of treasure sits balanced just out of reach. A bit of smashing and it can be yours!</MultilineString>
+			</Line>
+			<Match3>
+				<Level>BreakoutContentLevel</Level>
+				<Success meta:RefKey="Node">36ea5625-4a87-4b6e-917f-d68a5e7b888b</Success>
+				<Failure meta:RefKey="Node">ae9ad688-87ef-4dd4-9cf8-9664cd746598</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="481" meta:Y="194" GUID="ae9ad688-87ef-4dd4-9cf8-9664cd746598">
+			<Line>
+				<MultilineString>You smash the treasure too. Oops.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="499" meta:Y="-38" GUID="36ea5625-4a87-4b6e-917f-d68a5e7b888b">
+			<Line>
+				<MultilineString>The treasure falls straight into your hands.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>30</Count>
+				</Money>
+			</Rewards>
+			<Branch>
+				<Branch>
+					<Condition>chance(1,7)</Condition>
+					<Node meta:RefKey="Node">153acbeb-2bbc-4c70-aa75-d27a865fac9c</Node>
+				</Branch>
+			</Branch>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="775" meta:Y="-38" GUID="153acbeb-2bbc-4c70-aa75-d27a865fac9c">
+			<Rewards meta:RefKey="Rewards">
+				<Equipment>
+					<FromDeck>true</FromDeck>
+				</Equipment>
+			</Rewards>
+		</Node>
+	</Nodes>
+</CardContent>

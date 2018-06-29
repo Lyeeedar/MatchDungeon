@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="d8a6a1db-3d19-44aa-a994-6d401ca50011" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">b3a89d2c-d95d-474b-b2c8-8ccede8e5581</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="b3a89d2c-d95d-474b-b2c8-8ccede8e5581">
+			<Name>Evil Altar</Name>
+			<Description>An evil altar sits up ahead. With vigorous prayer you can cleanse it of its corruption.</Description>
+			<Rarity>Bronze</Rarity>
+			<Content>EvilAltarContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

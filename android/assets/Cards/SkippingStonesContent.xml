@@ -1,0 +1,39 @@
+<CardContent meta:X="0" meta:Y="0" GUID="3d0a7048-5dc6-4171-b1dd-8163f37a73c6" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">df405f4c-c9b7-4614-9c79-4d2da2070e7e</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="df405f4c-c9b7-4614-9c79-4d2da2070e7e">
+			<Line>
+				<MultilineString>Between you and some sweet sweet treasure lies a pool of water. You are going to have to use finesse to extract the loot without losing it to the depths.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>SkippingStonesContentLevel</Level>
+				<Success meta:RefKey="Node">aa6fde79-90cc-4401-a44e-29a4a0223e0c</Success>
+				<Failure meta:RefKey="Node">9fe5effd-a6d8-4c14-83b7-6295ef9891d9</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="497" meta:Y="152" GUID="9fe5effd-a6d8-4c14-83b7-6295ef9891d9">
+			<Line>
+				<MultilineString>The treasure slips into the water and out of sight, never to be seen again.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="504" meta:Y="-81" GUID="aa6fde79-90cc-4401-a44e-29a4a0223e0c">
+			<Line>
+				<MultilineString>The treasure skips neatly into your hands.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>25</Count>
+				</Money>
+				<Money>
+					<Count>25</Count>
+				</Money>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

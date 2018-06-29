@@ -1,0 +1,31 @@
+<OffHand xmlns:meta="Editor">
+	<Name>Iron Buckler</Name>
+	<Description>A simple shield, excellent for blocking attacks.</Description>
+	<Cost>100</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/shield_iron_buckler</Name>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>3</Health>
+		<MatchDamage>0</MatchDamage>
+		<AbilityDamage>0</AbilityDamage>
+		<PowerGain>0</PowerGain>
+	</Statistics>
+	<Ability>
+		<Name>Block</Name>
+		<Description>Block an enemies attack.</Description>
+		<Icon meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_items/shield_iron_buckler</Name>
+		</Icon>
+		<EffectData>
+			<Cost>6</Cost>
+			<Effect>1,Attack,Single,Pop</Effect>
+			<Data>
+				<Damage>0</Damage>
+			</Data>
+			<HitEffect meta:RefKey="ParticleEffect">
+				<Name>Hit</Name>
+			</HitEffect>
+		</EffectData>
+	</Ability>
+</OffHand>

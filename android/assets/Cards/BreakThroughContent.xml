@@ -1,0 +1,39 @@
+<CardContent meta:X="0" meta:Y="0" GUID="51df3914-3e42-4aa9-a08c-706444ee4494" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">9be15f0d-d37d-4558-a981-644bb273c530</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="9be15f0d-d37d-4558-a981-644bb273c530">
+			<Line>
+				<MultilineString>The way ahead is entirely blocked up. Your only option is to smash on through.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>BreakThroughContentLevel</Level>
+				<Success meta:RefKey="Node">0699f025-6f3b-4570-8167-4412cc07b294</Success>
+				<Failure meta:RefKey="Node">d89a32f8-d9d8-427f-ad73-ad2b0353d11b</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="492" meta:Y="150" GUID="d89a32f8-d9d8-427f-ad73-ad2b0353d11b">
+			<Line>
+				<MultilineString>You are really bad at smashing aren't you. Better luck next time.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="498" meta:Y="-36" GUID="0699f025-6f3b-4570-8167-4412cc07b294">
+			<Line>
+				<MultilineString>You feel a bit stronger after that.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Statistics meta:RefKey="Statistics">
+					<Health>0</Health>
+					<MatchDamage>1</MatchDamage>
+					<AbilityDamage>0</AbilityDamage>
+					<PowerGain>0</PowerGain>
+				</Statistics>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

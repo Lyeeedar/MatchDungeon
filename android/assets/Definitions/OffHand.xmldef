@@ -1,0 +1,3 @@
+<Definitions Colour="255,238,64" Icon="Sprites/Icons/OffHandIcon.png" xmlns:meta="Editor">
+	<Definition Name="OffHand" Extends="EquipmentBase" meta:RefKey="Struct" />
+</Definitions>

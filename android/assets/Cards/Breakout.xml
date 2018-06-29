@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="23d71c4c-34fe-45fc-a488-c54ff00b5e5a" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">1dfc0c79-7789-4a5c-838c-01b04f50b09d</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="1dfc0c79-7789-4a5c-838c-01b04f50b09d">
+			<Name>Breakout</Name>
+			<Description>Some treasure sits balanced at the end of a precarious pile of things. It'll be all yours if you can break it out.</Description>
+			<Rarity>Bronze</Rarity>
+			<Content>BreakoutContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

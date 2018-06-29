@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="1e759814-281c-4dc5-9f76-7728a0ca21e1" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">801d9468-ed3f-4f37-97d4-d6af47e1efbe</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="801d9468-ed3f-4f37-97d4-d6af47e1efbe">
+			<Name>Skipping Stones</Name>
+			<Description>Some water lies between you and shiny loot. If you do this just right the treasure will skip straight into your hands.</Description>
+			<Rarity>Bronze</Rarity>
+			<Content>SkippingStonesContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

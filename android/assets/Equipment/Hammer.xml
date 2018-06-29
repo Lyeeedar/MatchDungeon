@@ -1,0 +1,30 @@
+<MainHand xmlns:meta="Editor">
+	<Name>Hammer</Name>
+	<Description>A hammer, great for smashing through anything blocking your way.</Description>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/weapon_hammer</Name>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>0</Health>
+		<MatchDamage>0</MatchDamage>
+		<AbilityDamage>0</AbilityDamage>
+		<PowerGain>2</PowerGain>
+	</Statistics>
+	<Ability>
+		<Name>Break</Name>
+		<Description>Break any one blocking object</Description>
+		<Icon meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_items/weapon_hammer</Name>
+		</Icon>
+		<EffectData>
+			<Cost>4</Cost>
+			<Effect>1,Block,Single,Pop</Effect>
+			<Data>
+				<Damage>0</Damage>
+			</Data>
+			<HitEffect meta:RefKey="ParticleEffect">
+				<Name>Stomp</Name>
+			</HitEffect>
+		</EffectData>
+	</Ability>
+</MainHand>

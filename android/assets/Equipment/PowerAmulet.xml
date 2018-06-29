@@ -1,0 +1,13 @@
+<Head xmlns:meta="Editor">
+	<Name>Power Amulet</Name>
+	<Description>An amulet thrumming with power. Enhances your abilities.</Description>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/necklace_amethyst</Name>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>0</Health>
+		<MatchDamage>0</MatchDamage>
+		<AbilityDamage>2</AbilityDamage>
+		<PowerGain>5</PowerGain>
+	</Statistics>
+</Head>

@@ -1,0 +1,31 @@
+<Body xmlns:meta="Editor">
+	<Name>Breastplate</Name>
+	<Description>A single breastplate, offering high protection from just a single direction. Requires skill to use.</Description>
+	<Cost>100</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/armor_plate_chest</Name>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>0</Health>
+		<MatchDamage>0</MatchDamage>
+		<AbilityDamage>0</AbilityDamage>
+		<PowerGain>0</PowerGain>
+	</Statistics>
+	<Ability>
+		<Name>Block</Name>
+		<Description>Turn to take an attack on your breastplate.</Description>
+		<Icon meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_items/armor_plate_chest</Name>
+		</Icon>
+		<EffectData>
+			<Cost>4</Cost>
+			<Effect>1,Attack,Single,Pop</Effect>
+			<Data>
+				<Damage>0</Damage>
+			</Data>
+			<HitEffect meta:RefKey="ParticleEffect">
+				<Name>Hit</Name>
+			</HitEffect>
+		</EffectData>
+	</Ability>
+</Body>

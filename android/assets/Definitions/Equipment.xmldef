@@ -1,8 +1,9 @@
 <Definitions Colour="255,238,64" Icon="Sprites/Oryx/uf_split/uf_items/armor_gold_chest.png" xmlns:meta="Editor">
 	<!--Base-->
-	<Definition Name="EquipmentBase" meta:RefKey="StructDef">
+	<Definition Name="EquipmentBase" IsGlobal="True" meta:RefKey="StructDef">
 		<Data Name="Name" SkipIfDefault="False" meta:RefKey="String" />
 		<Data Name="Description" SkipIfDefault="False" meta:RefKey="String" />
+		<Data Name="Cost" Type="Int" Min="1" Default="100" SkipIfDefault="False" meta:RefKey="Number" />
 		<Data Name="Icon" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="Statistics" Keys="Statistics" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="Ability" meta:RefKey="Struct">
@@ -29,11 +30,6 @@
 			</Data>
 		</Data>
 	</Definition>
-	<!--Actual Types-->
-	<Definition Name="Head" Extends="EquipmentBase" meta:RefKey="Struct" />
-	<Definition Name="Body" Extends="EquipmentBase" meta:RefKey="Struct" />
-	<Definition Name="MainHand" Extends="EquipmentBase" meta:RefKey="Struct" />
-	<Definition Name="OffHand" Extends="EquipmentBase" meta:RefKey="Struct" />
 	<!--File References-->
 	<Definition Name="HeadFile" IsGlobal="True" meta:RefKey="StructDef">
 		<Data Name="File" BasePath="Equipment" StripExtension="True" ResourceType="Head" SkipIfDefault="False" meta:RefKey="File" />

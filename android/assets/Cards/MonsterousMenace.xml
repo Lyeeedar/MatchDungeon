@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="92b6691f-f5b5-4ce7-b3c1-baae68f2ea2d" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">38074b4a-fd89-4c48-81b2-7a57b08ba89c</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="38074b4a-fd89-4c48-81b2-7a57b08ba89c">
+			<Name>Monsterous Menace</Name>
+			<Description>A group of giant creatures lurks beyond, the remains of dead adventurers littered around them.</Description>
+			<Rarity>Bronze</Rarity>
+			<Content>MonsterousMenaceContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

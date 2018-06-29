@@ -1,0 +1,33 @@
+<Head xmlns:meta="Editor">
+	<Name>Fireshot Necklace</Name>
+	<Description>A necklace enchanted with the power fireshot.</Description>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/necklace_ruby</Name>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>0</Health>
+		<MatchDamage>0</MatchDamage>
+		<AbilityDamage>0</AbilityDamage>
+		<PowerGain>0</PowerGain>
+	</Statistics>
+	<Ability>
+		<Name>Fireshot</Name>
+		<Description>Fire a bolt of flames at a foe.</Description>
+		<Icon meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_items/necklace_ruby</Name>
+		</Icon>
+		<EffectData>
+			<Cost>5</Cost>
+			<Effect>1,Monster,Single,Pop</Effect>
+			<Data>
+				<Damage>1</Damage>
+			</Data>
+			<FlightEffect meta:RefKey="ParticleEffect">
+				<Name>FireOrb</Name>
+			</FlightEffect>
+			<HitEffect meta:RefKey="ParticleEffect">
+				<Name>Fireburst</Name>
+			</HitEffect>
+		</EffectData>
+	</Ability>
+</Head>

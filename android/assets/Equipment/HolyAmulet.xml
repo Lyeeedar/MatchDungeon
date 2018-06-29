@@ -1,0 +1,30 @@
+<Head xmlns:meta="Editor">
+	<Name>Holy Amulet</Name>
+	<Description>An amulet infused with holy protection.</Description>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/necklace_cross</Name>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>3</Health>
+		<MatchDamage>0</MatchDamage>
+		<AbilityDamage>0</AbilityDamage>
+		<PowerGain>3</PowerGain>
+	</Statistics>
+	<Ability>
+		<Name>Divine Protection</Name>
+		<Description>Call on divine energies to block and attack.</Description>
+		<Icon meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_items/necklace_cross</Name>
+		</Icon>
+		<EffectData>
+			<Cost>8</Cost>
+			<Effect>1,Attack,Single,Pop</Effect>
+			<Data>
+				<Damage>0</Damage>
+			</Data>
+			<HitEffect meta:RefKey="ParticleEffect">
+				<Name>Block</Name>
+			</HitEffect>
+		</EffectData>
+	</Ability>
+</Head>

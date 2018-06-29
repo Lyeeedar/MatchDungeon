@@ -1,0 +1,14 @@
+<Head xmlns:meta="Editor">
+	<Name>Saucepan</Name>
+	<Description>A saucepan, in a pinch it can serve as a passable helmet. Well, it fits on your head anyway.</Description>
+	<Cost>40</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/armor_plate_helm</Name>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>1</Health>
+		<MatchDamage>0</MatchDamage>
+		<AbilityDamage>0</AbilityDamage>
+		<PowerGain>0</PowerGain>
+	</Statistics>
+</Head>

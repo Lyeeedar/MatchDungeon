@@ -1,0 +1,14 @@
+<Body xmlns:meta="Editor">
+	<Name>Leather Armour</Name>
+	<Description>Hardened leather armour, flexible yet still offering protection.</Description>
+	<Cost>80</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/armor_leather_chest</Name>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>5</Health>
+		<MatchDamage>0</MatchDamage>
+		<AbilityDamage>0</AbilityDamage>
+		<PowerGain>1</PowerGain>
+	</Statistics>
+</Body>

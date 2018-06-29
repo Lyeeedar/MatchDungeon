@@ -1,0 +1,36 @@
+<CardContent meta:X="0" meta:Y="0" GUID="22a34dcf-0ff7-432e-8476-a5e515c8aa66" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">873fd824-f256-4a68-a5f6-158a427fdd0b</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="873fd824-f256-4a68-a5f6-158a427fdd0b">
+			<Line>
+				<MultilineString>An evil altar stands up ahead. You approach and kneel before it, offering up a prayer to the gods. You feel the corruption in this place try to resist you.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>EvilAltarContentLevel</Level>
+				<Success meta:RefKey="Node">e61e4f4d-860b-438c-a210-03a3b8d9014d</Success>
+				<Failure meta:RefKey="Node">a5b784ce-184f-4e8e-9af0-4995dbf2d480</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="453" meta:Y="179" GUID="a5b784ce-184f-4e8e-9af0-4995dbf2d480">
+			<Line>
+				<MultilineString>Either your gods weren't listening, or your prayers were just too weak, but the evil emerged victorious. You slink away dejected.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="478" meta:Y="-1" GUID="e61e4f4d-860b-438c-a210-03a3b8d9014d">
+			<Line>
+				<MultilineString>The gods hear your prayers and the corruption is expelled from the altar. You feel a whisper in your mind, a sense of gratitude, and a surge of power.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Statistics meta:RefKey="Statistics">
+					<Health>2</Health>
+					<MatchDamage>0</MatchDamage>
+					<AbilityDamage>1</AbilityDamage>
+					<PowerGain>5</PowerGain>
+				</Statistics>
+			</Rewards>
+		</Node>
+	</Nodes>
+</CardContent>

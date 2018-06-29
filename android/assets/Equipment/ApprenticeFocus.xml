@@ -1,0 +1,14 @@
+<OffHand xmlns:meta="Editor">
+	<Name>Apprentice Focus</Name>
+	<Description>The focus handed out to apprentice mages. It helps you channel power faster.</Description>
+	<Cost>80</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/crystal_cloud</Name>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>0</Health>
+		<MatchDamage>0</MatchDamage>
+		<AbilityDamage>1</AbilityDamage>
+		<PowerGain>5</PowerGain>
+	</Statistics>
+</OffHand>

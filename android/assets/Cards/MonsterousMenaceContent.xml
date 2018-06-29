@@ -1,0 +1,48 @@
+<CardContent meta:X="0" meta:Y="0" GUID="d34ef7c9-c99d-4f11-bded-662b29ae06f6" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">b9761242-e33c-482a-bb42-33c3cc9f27e4</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="b9761242-e33c-482a-bb42-33c3cc9f27e4">
+			<Line>
+				<MultilineString>Just beyond you spot of group of giant monsters, the fallen bodies of unfortunate past adventurers littering the ground around them.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>If you can defeat the monsters, that treasure will be yours.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>MonsterousMenaceContentLevel</Level>
+				<Success meta:RefKey="Node">df78261e-de5b-48df-b652-ce6d52b03905</Success>
+				<Failure meta:RefKey="Node">5d4d1fec-f147-45ec-8de7-6152b332776f</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="453" meta:Y="179" GUID="5d4d1fec-f147-45ec-8de7-6152b332776f">
+			<Line>
+				<MultilineString>The monsters prove to much for you and you are forced to flee for your life.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="479" meta:Y="0" GUID="df78261e-de5b-48df-b652-ce6d52b03905">
+			<Line>
+				<MultilineString>You slay the beasts, and proceed to loot the bodies before you.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>20</Count>
+				</Money>
+				<Money>
+					<Count>15</Count>
+				</Money>
+				<Money>
+					<Count>15</Count>
+				</Money>
+				<Equipment>
+					<FromDeck>true</FromDeck>
+				</Equipment>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

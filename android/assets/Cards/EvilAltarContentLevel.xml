@@ -1,0 +1,48 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>....A....</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>A</Character>
+			<Extends>.</Extends>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/altar_blood</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+			</Sprite>
+			<Block>0</Block>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Shield>0</Shield>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<Type>Wall</Type>
+		</Symbol>
+	</Symbols>
+	<AllowedVictories>
+		<Condition meta:RefKey="Matches">
+			<Orbs>15</Orbs>
+			<Orbs>15</Orbs>
+			<Orbs>15</Orbs>
+			<Orbs>15</Orbs>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Turns">
+			<Turns>25</Turns>
+		</Condition>
+	</AllowedDefeats>
+</Level>

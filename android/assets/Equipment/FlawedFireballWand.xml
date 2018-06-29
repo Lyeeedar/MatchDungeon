@@ -1,0 +1,35 @@
+<MainHand xmlns:meta="Editor">
+	<Name>Flawed Fireball Wand</Name>
+	<Description>A wand of fireball with a flaw in it. It takes much more energy than usual to activate.</Description>
+	<Cost>120</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/weapon_staff_jeweled</Name>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>0</Health>
+		<MatchDamage>0</MatchDamage>
+		<AbilityDamage>0</AbilityDamage>
+		<PowerGain>0</PowerGain>
+	</Statistics>
+	<Ability>
+		<Name>Fireball</Name>
+		<Description>Fling a fireball at your target</Description>
+		<Icon meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_items/weapon_staff_jeweled</Name>
+		</Icon>
+		<EffectData>
+			<Cost>10</Cost>
+			<Effect>1,Orb,Block,Pop</Effect>
+			<Data>
+				<AOE>1</AOE>
+				<Damage>0</Damage>
+			</Data>
+			<FlightEffect meta:RefKey="ParticleEffect">
+				<Name>FireOrb</Name>
+			</FlightEffect>
+			<HitEffect meta:RefKey="ParticleEffect">
+				<Name>Fireburst</Name>
+			</HitEffect>
+		</EffectData>
+	</Ability>
+</MainHand>

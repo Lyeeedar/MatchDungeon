@@ -1,0 +1,49 @@
+<CardContent meta:X="0" meta:Y="0" GUID="c30e488e-e61e-43d0-9f50-3683811045cc" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">08d65bbf-c938-4e80-b4ce-94e6e7896bd3</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="08d65bbf-c938-4e80-b4ce-94e6e7896bd3">
+			<Line>
+				<MultilineString>You find a lovely pile of treasure, just waiting to be claimed. The only issue is the way out is blocked. Time to smash your way free.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>BlockedDropContentLevel</Level>
+				<Success meta:RefKey="Node">feb3bce5-4c6f-4b1c-9b17-8fe81de9638a</Success>
+				<Failure meta:RefKey="Node">d272c1e0-28ec-4e5f-9575-c5e96eec2687</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="449" meta:Y="216" GUID="d272c1e0-28ec-4e5f-9575-c5e96eec2687">
+			<Line>
+				<MultilineString>You entirely forgot to check the treasure. It's actually worthless junk! Disgusted you toss it away and leave.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="478" meta:Y="0" GUID="feb3bce5-4c6f-4b1c-9b17-8fe81de9638a">
+			<Line>
+				<MultilineString>You smash your way out and eagerly examine your loot.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>45</Count>
+				</Money>
+			</Rewards>
+			<Branch>
+				<Branch>
+					<Condition>chance(1,5)</Condition>
+					<Node meta:RefKey="Node">fbefdea5-731b-40c2-95d4-b64042807e80</Node>
+				</Branch>
+			</Branch>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="749" meta:Y="0" GUID="fbefdea5-731b-40c2-95d4-b64042807e80">
+			<Rewards meta:RefKey="Rewards">
+				<Equipment>
+					<FromDeck>true</FromDeck>
+				</Equipment>
+			</Rewards>
+		</Node>
+	</Nodes>
+</CardContent>
