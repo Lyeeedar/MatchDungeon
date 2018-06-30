@@ -13,6 +13,7 @@ import com.lyeeedar.Renderables.Sprite.DirectedSprite
 import com.lyeeedar.Renderables.Sprite.TilingSprite
 import com.lyeeedar.Util.EnumBitflag
 import com.lyeeedar.Util.ImageUtils
+import com.lyeeedar.Util.children
 import com.lyeeedar.Util.getChildrenByAttributeRecursively
 import ktx.collections.set
 import java.awt.image.BufferedImage
@@ -305,6 +306,7 @@ class AtlasCreator
 	private fun processTilingSprite(spriteElement: XmlReader.Element): Boolean
 	{
 		val topElement = spriteElement.getChildByName("Top")
+		val directions = spriteElement.getChildByName("Directions")
 		if (topElement != null)
 		{
 			// Predefined sprite
@@ -341,7 +343,21 @@ class AtlasCreator
 					return false
 				}
 			}
-		} else
+		}
+		else if (directions != null)
+		{
+			// Predefined sprite
+
+			for (el in directions.children())
+			{
+				val exists = tryPackSprite(el)
+				if (!exists)
+				{
+					return false
+				}
+			}
+		}
+		else
 		{
 			// Auto masking sprites
 			val spriteDataElement = spriteElement.getChildByName("Sprite")

@@ -1,5 +1,6 @@
 package com.lyeeedar.desktop
 
+import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.getRawXml
 import java.io.File
@@ -7,6 +8,8 @@ import java.io.File
 class XmlCompressor
 {
 	val rootPath: String
+
+	val processedPaths = Array<String>()
 
 	init
 	{
@@ -27,6 +30,20 @@ class XmlCompressor
 		}
 
 		findFilesRecursive(File("").absoluteFile, true)
+
+		var processedPathsFile = "<Paths>\n"
+
+		for (path in processedPaths)
+		{
+			processedPathsFile += "\t<Path>$path</Path>\n"
+		}
+
+		processedPathsFile += "</Paths>"
+
+		val tempFile = File("ProcessedPaths.xml")
+		tempFile.writeText(processedPathsFile)
+		processXml(tempFile.path)
+		tempFile.delete()
 	}
 
 	private fun findFilesRecursive(dir: File, isRoot: Boolean)
@@ -60,6 +77,7 @@ class XmlCompressor
 		// try to load it
 		XmlData().load(outputPath)
 
+		processedPaths.add(relativePath)
 		System.out.println("Compressed $relativePath")
 	}
 }

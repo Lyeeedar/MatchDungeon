@@ -328,6 +328,36 @@ class GlobalDeck
 
 	init
 	{
+		for (cardPath in XmlData.enumeratePaths("Cards/Default", "Card"))
+		{
+			val card = Card.load(cardPath)
+			encounters.add(card)
+		}
+
+		for (equipPath in XmlData.enumeratePaths("Equipment/Default", "MainHand"))
+		{
+			val equip = Equipment.load(equipPath)
+			equipment.add(equip)
+		}
+
+		for (equipPath in XmlData.enumeratePaths("Equipment/Default", "OffHand"))
+		{
+			val equip = Equipment.load(equipPath)
+			equipment.add(equip)
+		}
+
+		for (equipPath in XmlData.enumeratePaths("Equipment/Default", "Body"))
+		{
+			val equip = Equipment.load(equipPath)
+			equipment.add(equip)
+		}
+
+		for (equipPath in XmlData.enumeratePaths("Equipment/Default", "Head"))
+		{
+			val equip = Equipment.load(equipPath)
+			equipment.add(equip)
+		}
+
 		characters.add(Character.load("Peasant"))
 		chosenCharacter = characters.first()
 	}

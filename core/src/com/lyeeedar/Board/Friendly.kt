@@ -1,7 +1,5 @@
 package com.lyeeedar.Board
 
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
@@ -79,27 +77,9 @@ class FriendlyDesc
 
 	companion object
 	{
-		val files: ObjectMap<String, FileHandle> by lazy { loadFriendlies() }
-
-		private fun loadFriendlies(): ObjectMap<String, FileHandle>
-		{
-			val rootPath = "Friendlies"
-			var root = Gdx.files.internal(rootPath)
-			if (!root.exists()) root = Gdx.files.absolute(rootPath)
-
-			val out = ObjectMap<String, FileHandle>()
-
-			for (f in root.list())
-			{
-				out[f.nameWithoutExtension().toUpperCase()] = f
-			}
-
-			return out
-		}
-
 		fun load(path: String): FriendlyDesc
 		{
-			val xml = getXml(files[path.toUpperCase()])
+			val xml = getXml(path)
 
 			val desc = FriendlyDesc()
 

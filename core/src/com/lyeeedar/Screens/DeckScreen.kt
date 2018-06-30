@@ -150,7 +150,7 @@ class DeckScreen : AbstractScreen()
 		mainTable.clear()
 
 		val cardHeight = (Global.resolution.y.toFloat() * 0.7f) * 0.3f
-		val cardWidth = Global.resolution.x.toFloat() * 0.8f
+		val cardWidth = Global.resolution.x.toFloat() * 0.3f
 
 		val title = Label("Encounter Selection", Global.skin, "title")
 		mainTable.add(title).expandX().center().pad(20f)
@@ -163,6 +163,9 @@ class DeckScreen : AbstractScreen()
 		// Left stuff
 		val leftScrollTable = Table()
 		val leftScrollPane = ScrollPane(leftScrollTable, Global.skin)
+		leftScrollPane.setForceScroll(false, true)
+		leftScrollPane.setFadeScrollBars(false)
+		leftScrollPane.setScrollingDisabled(true, false)
 		bodyTable.add(leftScrollPane).grow()
 
 		val used = ObjectSet<Card>()
@@ -175,7 +178,7 @@ class DeckScreen : AbstractScreen()
 				createEncounterScreen()
 			})
 			card.setFacing(true, false)
-			leftScrollTable.add(card).height(cardHeight).expandX().center().pad(5f)
+			leftScrollTable.add(card).width(cardWidth).height(cardHeight).expandX().center().pad(5f)
 			leftScrollTable.row()
 
 			used.add(enc)
@@ -186,6 +189,9 @@ class DeckScreen : AbstractScreen()
 		// Right stuff
 		val rightScrollTable = Table()
 		val rightScrollPane = ScrollPane(rightScrollTable, Global.skin)
+		rightScrollPane.setForceScroll(false, true)
+		rightScrollPane.setFadeScrollBars(false)
+		rightScrollPane.setScrollingDisabled(true, false)
 		bodyTable.add(rightScrollPane).grow()
 
 		for (enc in Global.deck.encounters)
@@ -199,7 +205,7 @@ class DeckScreen : AbstractScreen()
 					createEncounterScreen()
 				})
 				card.setFacing(true, false)
-				rightScrollTable.add(card).height(cardHeight).expandX().center().pad(5f)
+				rightScrollTable.add(card).width(cardWidth).height(cardHeight).expandX().center().pad(5f)
 				rightScrollTable.row()
 			}
 		}
@@ -217,7 +223,7 @@ class DeckScreen : AbstractScreen()
 		mainTable.clear()
 
 		val cardHeight = (Global.resolution.y.toFloat() * 0.7f) * 0.3f
-		val cardWidth = Global.resolution.x.toFloat() * 0.8f
+		val cardWidth = Global.resolution.x.toFloat() * 0.3f
 
 		val title = Label("Equipment Selection", Global.skin, "title")
 		mainTable.add(title).expandX().center().pad(20f)
@@ -230,6 +236,9 @@ class DeckScreen : AbstractScreen()
 		// Left stuff
 		val leftScrollTable = Table()
 		val leftScrollPane = ScrollPane(leftScrollTable, Global.skin)
+		leftScrollPane.setForceScroll(false, true)
+		leftScrollPane.setFadeScrollBars(false)
+		leftScrollPane.setScrollingDisabled(true, false)
 		bodyTable.add(leftScrollPane).grow()
 
 		val used = ObjectSet<Equipment>()
@@ -242,7 +251,7 @@ class DeckScreen : AbstractScreen()
 				createEquipmentScreen()
 			})
 			card.setFacing(true, false)
-			leftScrollTable.add(card).height(cardHeight).expandX().center().pad(5f)
+			leftScrollTable.add(card).width(cardWidth).height(cardHeight).expandX().center().pad(5f)
 			leftScrollTable.row()
 
 			used.add(equip)
@@ -253,6 +262,9 @@ class DeckScreen : AbstractScreen()
 		// Right stuff
 		val rightScrollTable = Table()
 		val rightScrollPane = ScrollPane(rightScrollTable, Global.skin)
+		rightScrollPane.setForceScroll(false, true)
+		rightScrollPane.setFadeScrollBars(false)
+		rightScrollPane.setScrollingDisabled(true, false)
 		bodyTable.add(rightScrollPane).grow()
 
 		for (equip in Global.deck.equipment)
@@ -266,7 +278,7 @@ class DeckScreen : AbstractScreen()
 					createEquipmentScreen()
 				})
 				card.setFacing(true, false)
-				rightScrollTable.add(card).height(cardHeight).expandX().center().pad(5f)
+				rightScrollTable.add(card).width(cardWidth).height(cardHeight).expandX().center().pad(5f)
 				rightScrollTable.row()
 			}
 		}

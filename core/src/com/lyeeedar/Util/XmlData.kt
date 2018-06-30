@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.utils.GdxRuntimeException
 import com.badlogic.gdx.utils.IntMap
+import com.badlogic.gdx.utils.ObjectMap
 import com.badlogic.gdx.utils.XmlReader
 import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
@@ -29,9 +30,9 @@ class XmlData
 	constructor()
 	{}
 
-	constructor(s: String)
+	constructor(handle: FileHandle)
 	{
-		load(s)
+		load(handle)
 	}
 
 	constructor(name: String, data: String)
@@ -274,6 +275,30 @@ class XmlData
 
 	companion object
 	{
+		val cachedXml = ObjectMap<String, XmlData>()
+		var existingPaths: com.badlogic.gdx.utils.Array<String>? = null
+
+		fun getXml(path: String): XmlData
+		{
+			val existing = cachedXml.get(path, null)
+			if (existing != null) { return existing }
+
+			var filepath = path
+
+			filepath = filepath.replace("\\", "/")
+
+			filepath = "CompressedData/" + filepath.hashCode() + ".xmldata"
+
+			var handle = Gdx.files.internal(filepath)
+			if (!handle.exists()) handle = Gdx.files.absolute(filepath)
+
+			val loaded = XmlData(handle)
+
+			cachedXml[path] = loaded
+
+			return loaded
+		}
+
 		fun loadFromElement(el: XmlReader.Element): XmlData
 		{
 			val data = XmlData()
@@ -341,6 +366,34 @@ class XmlData
 			}
 
 			return data
+		}
+
+		fun enumeratePaths(base: String, type: String): Sequence<String>
+		{
+			if (existingPaths == null)
+			{
+				existingPaths = com.badlogic.gdx.utils.Array()
+
+				val xml = getXml("ProcessedPaths.xml")
+				for (el in xml.children)
+				{
+					existingPaths?.add(el.text)
+				}
+			}
+
+			return buildSequence {
+				for (path in existingPaths!!)
+				{
+					if (path.startsWith(base, true))
+					{
+						val xml = getXml(path)
+						if (xml.name == type)
+						{
+							yield(path)
+						}
+					}
+				}
+			}
 		}
 
 		fun performanceTest()

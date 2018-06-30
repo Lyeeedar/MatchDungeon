@@ -15,7 +15,7 @@ class TilingSprite() : Renderable()
 {
 	constructor(name: String, texture: String, mask: String) : this()
 	{
-		val spriteBase = XmlData("Sprite")
+		val spriteBase = XmlData("Sprite", "")
 
 		load(name, name, texture, mask, spriteBase)
 	}

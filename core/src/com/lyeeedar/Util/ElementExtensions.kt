@@ -12,36 +12,16 @@ fun getXml(path: String, extension: String = "xml"): XmlData
 	try
 	{
 		var filepath = path
-		if (!filepath.endsWith("." + extension))
+		if (!filepath.endsWith(".$extension"))
 		{
-			filepath += "." + extension
+			filepath += ".$extension"
 		}
-		filepath = filepath.replace("\\", "/")
 
-		filepath = "CompressedData/" + filepath.hashCode() + ".xmldata"
-
-		var handle = Gdx.files.internal(filepath)
-		if (!handle.exists()) handle = Gdx.files.absolute(filepath)
-		return getXml(handle)
+		return XmlData.getXml(filepath)
 	}
 	catch (ex: Exception)
 	{
 		System.err.println("Failed to load '$path'!")
-		System.err.println(ex.message)
-		throw ex
-	}
-}
-
-fun getXml(filehandle: FileHandle): XmlData
-{
-	try
-	{
-		val data = XmlData()
-		data.load(filehandle)
-		return data
-	}
-	catch (ex: Exception)
-	{
 		System.err.println(ex.message)
 		throw ex
 	}
