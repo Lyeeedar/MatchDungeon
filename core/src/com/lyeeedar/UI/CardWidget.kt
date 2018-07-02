@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.NinePatch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.*
@@ -22,7 +23,7 @@ import ktx.actors.then
 
 data class Pick(val string: String, var pickFun: (card: CardWidget) -> Unit)
 
-class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backImage: TextureRegion, val data: Any?) : Widget()
+class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backImage: TextureRegion, val data: Any?) : WidgetGroup()
 {
 	val referenceWidth = Global.resolution.x - 100f
 	val referenceHeight = Global.resolution.y - 200f
@@ -47,6 +48,7 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 	{
 		debug()
 
+		addActor(contentTable)
 		contentTable.background = NinePatchDrawable(back)
 
 		backTable = Table()
@@ -108,7 +110,7 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 		val actualMidY = contentTable.y + contentTable.height / 2f
 		val drawY = actualMidY - (contentTable.height * contentTable.scaleY) / 2f
 
-		return Bounds(drawX, drawY, contentTable.width * contentTable.scaleX, contentTable.height * contentTable.scaleY)
+		return Bounds(x + drawX, y + drawY, contentTable.width * contentTable.scaleX, contentTable.height * contentTable.scaleY)
 	}
 
 	override fun hit(x: Float, y: Float, touchable: Boolean): Actor?
@@ -141,8 +143,8 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 
 		contentTable.setScale(min)
 
-		val middleX = x + width / 2f
-		val middleY = y + height / 2f
+		val middleX = width / 2f
+		val middleY = height / 2f
 
 		contentTable.setPosition(middleX - contentTable.width / 2f, middleY - contentTable.height / 2f)
 	}
@@ -162,6 +164,13 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 	override fun sizeChanged()
 	{
 		super.sizeChanged()
+		setBounds(x, y, width, height)
+	}
+
+	override fun setPosition(x: Float, y: Float)
+	{
+		super.setPosition(x, y)
+
 		setBounds(x, y, width, height)
 	}
 
@@ -186,8 +195,14 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 
 		if (!fullscreen)
 		{
+			setBounds(x, y, width, height)
 			contentTable.draw(batch, parentAlpha * alpha)
 		}
+	}
+
+	override fun drawChildren(batch: Batch?, parentAlpha: Float)
+	{
+
 	}
 
 	fun setFacing(faceup: Boolean, animate: Boolean = true)
@@ -229,10 +244,17 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 		val table = Table()
 		val background = Table()
 
-		val (trueCurrentX, trueCurrentY, currentwidth, currentheight) = getTableBounds()
-		val currentX = contentTable.x
-		val currentY = contentTable.y
 		val currentScale = contentTable.scaleX
+		val point = contentTable.localToStageCoordinates(Vector2(0f, 0f))
+
+		val zoomTable = Table()
+		zoomTable.isTransform = true
+		zoomTable.originX = referenceWidth / 2
+		zoomTable.originY = referenceHeight / 2
+		zoomTable.background = NinePatchDrawable(back)
+		zoomTable.setPosition(contentTable.x, contentTable.y)
+		zoomTable.setSize(referenceWidth, referenceHeight)
+		zoomTable.setScale(contentTable.scaleX, contentTable.scaleY)
 
 		// Setup anim
 		val speed = 0.1f
@@ -240,30 +262,31 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 		val destY = (stage.height - referenceHeight) / 2f
 
 		val collapseSequence = lambda {
-			contentTable.clear()
+			zoomTable.clear()
 
 			val stack = Stack()
 			stack.add(frontDetailTable)
 			stack.add(frontTable)
-			contentTable.add(stack).grow()
+			zoomTable.add(stack).grow()
 
 			val hideSequence = alpha(1f) then fadeOut(speed)
 			val showSequence = alpha(0f) then fadeIn(speed)
 
 			frontDetailTable.addAction(hideSequence)
 			frontTable.addAction(showSequence)
-		} then parallel(scaleTo(currentScale, currentScale, speed), moveTo(trueCurrentX, trueCurrentY, speed)) then lambda {
+		} then parallel(scaleTo(currentScale, currentScale, speed), moveTo(point.x, point.y, speed)) then lambda {
 			fullscreen = false
 
 			background.remove()
 			table.remove()
 			table.clear()
 
+			zoomTable.clear()
 			contentTable.clear()
 			contentTable.add(frontTable).grow()
 
-			contentTable.setScale(currentScale)
-			contentTable.setPosition(currentX, currentY)
+			//contentTable.setScale(currentScale)
+			//contentTable.setPosition(currentX, currentY)
 		}
 
 		val expandSequence = lambda {
@@ -272,7 +295,7 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 			val stack = Stack()
 			stack.add(frontDetailTable)
 			stack.add(frontTable)
-			contentTable.add(stack).grow()
+			zoomTable.add(stack).grow()
 
 			val hideSequence = alpha(1f) then fadeOut(speed)
 			val showSequence = alpha(0f) then fadeIn(speed)
@@ -280,7 +303,7 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 			frontTable.addAction(hideSequence)
 			frontDetailTable.addAction(showSequence)
 		} then parallel(scaleTo(1f, 1f, speed), moveTo(destX, destY, speed)) then lambda {
-			contentTable.clear()
+			zoomTable.clear()
 
 			val stack = Stack()
 			stack.add(frontDetailTable)
@@ -288,7 +311,7 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 			val buttonTable = Table()
 			stack.add(buttonTable)
 
-			contentTable.add(stack).grow()
+			zoomTable.add(stack).grow()
 
 			val closeButton = Button(Global.skin, "close")
 			closeButton.addClickListener {
@@ -319,11 +342,11 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 		table.touchable = Touchable.enabled
 		table.isTransform = true
 
-		table.add(contentTable).grow()
-		contentTable.setScale(1f)
+		table.add(zoomTable).grow()
+		zoomTable.setScale(1f)
 
 		table.setSize(referenceWidth, referenceHeight)
-		table.setPosition(trueCurrentX, trueCurrentY)
+		table.setPosition(point.x, point.y)
 		table.setScale(currentScale)
 		table.addAction(expandSequence)
 		table.addClickListener {
