@@ -5,7 +5,9 @@
 		<Data Name="QuestCards" meta:RefKey="Collection">
 			<Data Name="Card" StripExtension="True" ResourceType="Card" RelativeToThis="True" meta:RefKey="File" />
 		</Data>
-		<Data Name="Rewards" Keys="Rewards" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="BronzeRewards" Keys="Rewards" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="SilverRewards" Keys="Rewards" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="GoldRewards" Keys="Rewards" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="Root" DefKey="QuestNodeDefs" meta:RefKey="GraphReference" />
 	</Definition>
 	<Definition Name="QuestNode" TextColour="240,156,204" meta:RefKey="GraphStructDef">
@@ -32,6 +34,6 @@
 		</Data>
 	</Definition>
 	<Definition Name="CompleteQuest" TextColour="245,216,33" meta:RefKey="GraphStructDef">
-		<Data Name="State" EnumValues="Success,Failure" meta:RefKey="Enum" />
+		<Data Name="State" EnumValues="Gold,Silver,Bronze,Failure" meta:RefKey="Enum" />
 	</Definition>
 </Definitions>

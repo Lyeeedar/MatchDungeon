@@ -4,7 +4,7 @@
 		<CardNode meta:X="204" meta:Y="0" GUID="9836fbbf-68c0-47da-a706-8cb0da7b1d2b">
 			<Name>Gauntlet</Name>
 			<Description>Some treasure lies at the end of the room. The only issue is the monsters lining each side of it. Time to run the gauntlet!</Description>
-			<Rarity>Bronze</Rarity>
+			<SpawnWeighting>End</SpawnWeighting>
 			<Content>GauntletContent</Content>
 		</CardNode>
 	</Nodes>

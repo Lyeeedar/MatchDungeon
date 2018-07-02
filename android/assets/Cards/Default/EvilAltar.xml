@@ -4,7 +4,7 @@
 		<CardNode meta:X="204" meta:Y="0" GUID="b3a89d2c-d95d-474b-b2c8-8ccede8e5581">
 			<Name>Evil Altar</Name>
 			<Description>An evil altar sits up ahead. With vigorous prayer you can cleanse it of its corruption.</Description>
-			<Rarity>Bronze</Rarity>
+			<SpawnWeighting>Middle</SpawnWeighting>
 			<Content>EvilAltarContent</Content>
 		</CardNode>
 	</Nodes>

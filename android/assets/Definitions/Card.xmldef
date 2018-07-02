@@ -5,7 +5,7 @@
 	<Definition Name="CardNode" meta:RefKey="GraphStructDef">
 		<Data Name="Name" SkipIfDefault="False" meta:RefKey="String" />
 		<Data Name="Description" MaxLength="250" SkipIfDefault="False" meta:RefKey="String" />
-		<Data Name="Rarity" EnumValues="Bronze,Silver,Gold" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="SpawnWeighting" EnumValues="Any,Start,StartMiddle,Middle,MiddleEnd,End" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="Content" StripExtension="True" ResourceType="CardContent" RelativeToThis="True" SkipIfDefault="False" meta:RefKey="File" />
 		<Data Name="Next" Keys="CardNode" meta:RefKey="GraphReference" />
 	</Definition>

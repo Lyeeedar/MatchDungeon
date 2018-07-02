@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Global
-import com.lyeeedar.Rarity
+import com.lyeeedar.SpawnWeight
 import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.XmlData
@@ -52,7 +52,7 @@ class CardNode
 
 	lateinit var name: String
 	lateinit var description: String
-	lateinit var rarity: Rarity
+	lateinit var spawnWeight: SpawnWeight
 	lateinit var content: String
 
 	var nextNode: CardNodeWrapper? = null
@@ -83,7 +83,7 @@ class CardNode
 
 		name = xmlData.get("Name")
 		description = xmlData.get("Description")
-		rarity = Rarity.valueOf(xmlData.get("Rarity").toUpperCase())
+		spawnWeight = SpawnWeight.valueOf(xmlData.get("SpawnWeighting", "Any")!!.toUpperCase())
 		content = xmlData.get("Content")
 
 		val nextEl = xmlData.getChildByName("Next")

@@ -23,7 +23,7 @@ import ktx.actors.then
 
 data class Pick(val string: String, var pickFun: (card: CardWidget) -> Unit)
 
-class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backImage: TextureRegion, val data: Any?) : WidgetGroup()
+class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backImage: TextureRegion, var data: Any?) : WidgetGroup()
 {
 	val referenceWidth = Global.resolution.x - 100f
 	val referenceHeight = Global.resolution.y - 200f
@@ -46,8 +46,6 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 
 	init
 	{
-		debug()
-
 		addActor(contentTable)
 		contentTable.background = NinePatchDrawable(back)
 

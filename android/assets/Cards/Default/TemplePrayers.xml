@@ -4,7 +4,7 @@
 		<CardNode meta:X="204" meta:Y="0" GUID="3a94c1e7-874f-47d6-9a7e-ea78c90f0768">
 			<Name>Temple Prayers</Name>
 			<Description>Sometimes the gods listen to the prayers of the faithful. Were the gods attentive to you?</Description>
-			<Rarity>Bronze</Rarity>
+			<SpawnWeighting>Start</SpawnWeighting>
 			<Content>TemplePrayersContent</Content>
 		</CardNode>
 	</Nodes>

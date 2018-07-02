@@ -7,11 +7,13 @@
 		<Card>Combat</Card>
 		<Card>Graduation</Card>
 	</QuestCards>
-	<Rewards meta:RefKey="Rewards">
+	<BronzeRewards meta:RefKey="Rewards">
 		<Quest>
 			<File>Dungeon/TreasureHunt</File>
 		</Quest>
-	</Rewards>
+	</BronzeRewards>
+	<SilverRewards meta:RefKey="Rewards" />
+	<GoldRewards meta:RefKey="Rewards" />
 	<Root meta:RefKey="QuestNode">2c75e90c-5dce-429f-b8ee-5cac829573a1</Root>
 	<Nodes>
 		<QuestNode meta:X="370.66470336914062" meta:Y="-36.513534545898438" GUID="3c142db2-b2e7-476a-984c-20b57cfba344">
@@ -54,7 +56,7 @@
 			<Success meta:RefKey="QuestNode">52e6acbe-1365-4162-9a4b-7f86db428111</Success>
 			<Failure meta:RefKey="QuestNode" meta:ControlPoints="1544.94448740719,145.540027802364,True|1362.44655377843,144.670990023179,True">d9048100-3b29-460b-9b0f-d1313540b675</Failure>
 		</QuestNode>
-		<QuestNode meta:X="254" meta:Y="174.33333333333331" GUID="2c75e90c-5dce-429f-b8ee-5cac829573a1">
+		<QuestNode meta:X="254" meta:Y="174.33332824707031" GUID="2c75e90c-5dce-429f-b8ee-5cac829573a1">
 			<Type>Deck</Type>
 			<AllowDeckCards>false</AllowDeckCards>
 			<AllowQuestCards>true</AllowQuestCards>

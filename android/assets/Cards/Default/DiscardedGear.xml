@@ -4,7 +4,7 @@
 		<CardNode meta:X="204" meta:Y="0" GUID="20abb50d-11c4-4ba3-b742-69e347bab83c">
 			<Name>Discarded Equipment</Name>
 			<Description>You spot a pile of equipment discarded in a corner. Something may still be usable.</Description>
-			<Rarity>Bronze</Rarity>
+			<SpawnWeighting>Middle</SpawnWeighting>
 			<Content>DiscardedGearContent</Content>
 		</CardNode>
 	</Nodes>

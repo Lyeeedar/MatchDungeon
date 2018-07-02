@@ -73,6 +73,8 @@ class QuestScreen : AbstractScreen()
 		for (card in cards)
 		{
 			val widget = card.current.getCard()
+			widget.data = card
+
 			widget.addPick("Choose", {
 				chosenQuestCard = it
 
@@ -91,19 +93,29 @@ class QuestScreen : AbstractScreen()
 
 	fun completeQuest()
 	{
-		if (currentQuest.state == Quest.QuestState.SUCCESS)
+		if (currentQuest.state == Quest.QuestState.GOLD || currentQuest.state == Quest.QuestState.SILVER || currentQuest.state == Quest.QuestState.BRONZE)
 		{
-			if (currentQuest.rewards.size > 0)
+			val allRewards = Array<AbstractReward>()
+			if (currentQuest.state == Quest.QuestState.GOLD)
 			{
-				grouped = currentQuest.rewards.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
+				allRewards.addAll(currentQuest.goldRewards)
+			}
+			if (currentQuest.state == Quest.QuestState.GOLD || currentQuest.state == Quest.QuestState.SILVER)
+			{
+				allRewards.addAll(currentQuest.silverRewards)
+			}
+			if (currentQuest.state == Quest.QuestState.GOLD || currentQuest.state == Quest.QuestState.SILVER || currentQuest.state == Quest.QuestState.BRONZE)
+			{
+				allRewards.addAll(currentQuest.bronzeRewards)
+			}
+
+			if (allRewards.size > 0)
+			{
+				grouped = allRewards.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
 				Global.stage.addActor(greyOutTable)
 			}
 
 			updateRewards()
-		}
-		else
-		{
-
 		}
 
 		val screen = Global.game.getTypedScreen<QuestSelectionScreen>()!!
@@ -121,7 +133,7 @@ class QuestScreen : AbstractScreen()
 			if (grouped.size > 0)
 			{
 				val chosen = grouped.removeIndex(0)
-				currentGroup = chosen.map { it.reward() }.filter { it != null }.map { it!! }.toGdxArray()
+				currentGroup = chosen.flatMap { it.reward() }.filter { it != null }.map { it!! }.toGdxArray()
 
 				for (card in currentGroup)
 				{

@@ -31,6 +31,39 @@ enum class Rarity
 }
 
 // ----------------------------------------------------------------------
+enum class SpawnWeight
+{
+	ANY,
+	START,
+	STARTMIDDLE,
+	MIDDLE,
+	MIDDLEEND,
+	END;
+
+	val subWeights = Array<SpawnWeight>()
+
+	companion object
+	{
+		val Values = SpawnWeight.values()
+
+		init
+		{
+			ANY.subWeights.add(START, MIDDLE, END)
+
+			START.subWeights.add(START)
+
+			STARTMIDDLE.subWeights.add(START, MIDDLE)
+
+			MIDDLE.subWeights.add(MIDDLE)
+
+			MIDDLEEND.subWeights.add(MIDDLE, END)
+
+			END.subWeights.add(END)
+		}
+	}
+}
+
+// ----------------------------------------------------------------------
 enum class Direction private constructor(val x: Int, val y: Int, val identifier: String)
 {
 	CENTER(0, 0, "C"),

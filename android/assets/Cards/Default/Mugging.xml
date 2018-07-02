@@ -4,7 +4,7 @@
 		<CardNode meta:X="204" meta:Y="0" GUID="7dab10a5-6329-4c16-94f4-ae70f18048cc">
 			<Name>Mugging</Name>
 			<Description>A group of thieves accosted you in the street before you embarked.</Description>
-			<Rarity>Bronze</Rarity>
+			<SpawnWeighting>StartMiddle</SpawnWeighting>
 			<Content>MuggingContent</Content>
 		</CardNode>
 	</Nodes>

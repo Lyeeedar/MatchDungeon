@@ -59,7 +59,7 @@ class CardContentActionRewards : AbstractCardContentAction()
 			if (grouped.size > 0)
 			{
 				val chosen = grouped.removeIndex(0)
-				currentGroup = chosen.map { it.reward() }.filter { it != null }.map { it!! }.toGdxArray()
+				currentGroup = chosen.flatMap { it.reward() }.filter { it != null }.map { it!! }.toGdxArray()
 
 				for (card in currentGroup)
 				{

@@ -3,11 +3,13 @@ package com.lyeeedar.Game
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
+import com.badlogic.gdx.utils.ObjectSet
 import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Board.Theme
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.Global
+import com.lyeeedar.SpawnWeight
 import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.Util.*
 import ktx.collections.set
@@ -18,7 +20,9 @@ class Quest(val path: String)
 	enum class QuestState
 	{
 		INPROGRESS,
-		SUCCESS,
+		GOLD,
+		SILVER,
+		BRONZE,
 		FAILURE
 	}
 
@@ -32,7 +36,9 @@ class Quest(val path: String)
 
 	val theme: Theme
 
-	val rewards = Array<AbstractReward>()
+	val bronzeRewards = Array<AbstractReward>()
+	val silverRewards = Array<AbstractReward>()
+	val goldRewards = Array<AbstractReward>()
 
 	init
 	{
@@ -51,12 +57,30 @@ class Quest(val path: String)
 			}
 		}
 
-		val rewardsEl = xml.getChildByName("Rewards")
-		if (rewardsEl != null)
+		val bronzeRewardsEl = xml.getChildByName("BronzeRewards")
+		if (bronzeRewardsEl != null)
 		{
-			for (el in rewardsEl.children)
+			for (el in bronzeRewardsEl.children)
 			{
-				rewards.add(AbstractReward.load(el))
+				bronzeRewards.add(AbstractReward.load(el))
+			}
+		}
+
+		val silverRewardsEl = xml.getChildByName("SilverRewards")
+		if (silverRewardsEl != null)
+		{
+			for (el in silverRewardsEl.children)
+			{
+				silverRewards.add(AbstractReward.load(el))
+			}
+		}
+
+		val goldRewardsEl = xml.getChildByName("GoldRewards")
+		if (goldRewardsEl != null)
+		{
+			for (el in goldRewardsEl.children)
+			{
+				goldRewards.add(AbstractReward.load(el))
 			}
 		}
 
@@ -93,6 +117,85 @@ class Quest(val path: String)
 		{
 			state = QuestState.FAILURE
 		}
+	}
+
+	fun getQuestPosition(): SpawnWeight
+	{
+		var averageCurrentPoint: Int? = null
+		var averageRun: Int? = null
+
+		val visited = ObjectSet<AbstractQuestNode>()
+
+		fun recursiveWalk(currentNode: AbstractQuestNode, currentRun: Int)
+		{
+			if (visited.contains(currentNode))
+			{
+				return
+			}
+			visited.add(currentNode)
+
+			if (currentNode == current)
+			{
+				if (averageCurrentPoint == null)
+				{
+					averageCurrentPoint = currentRun
+				}
+				else
+				{
+					var nextVal = averageCurrentPoint!!
+
+					nextVal += currentRun
+					nextVal /= 2
+
+					averageCurrentPoint = nextVal
+				}
+			}
+
+			if (currentNode is CompleteQuest)
+			{
+				if (averageRun == null)
+				{
+					averageRun = currentRun
+				}
+				else
+				{
+					var nextVal = averageRun!!
+
+					nextVal += currentRun
+					nextVal /= 2
+
+					averageRun = nextVal
+				}
+			}
+			else
+			{
+				if (currentNode is Branch)
+				{
+					for (branch in currentNode.branches)
+					{
+						recursiveWalk(branch.node, currentRun+1)
+					}
+				}
+				else if (currentNode is QuestNode)
+				{
+					if (currentNode.successNode != null) recursiveWalk(currentNode.successNode!!.node, currentRun+1)
+					if (currentNode.failureNode != null) recursiveWalk(currentNode.failureNode!!.node, currentRun+1)
+
+					for (custom in currentNode.customNodes)
+					{
+						recursiveWalk(custom.node, currentRun+1)
+					}
+				}
+			}
+		}
+
+		recursiveWalk(root, 0)
+
+		val third = averageCurrentPoint!! / 3
+
+		if (averageCurrentPoint!! <= third) return SpawnWeight.START
+		else if (averageCurrentPoint!! <= 2*third) return SpawnWeight.MIDDLE
+		else return SpawnWeight.END
 	}
 
 	companion object
@@ -161,22 +264,55 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 		}
 		else
 		{
+			val spawnWeight = quest.getQuestPosition()
+
 			val pool = Array<Card>()
 			if (allowDeckCards)
 			{
-				pool.addAll(Global.player.deck.encounters)
+				for (card in Global.player.deck.encounters)
+				{
+					if (card.current.spawnWeight.subWeights.contains(spawnWeight))
+					{
+						// make it 3x more likely
+						for (i in 0 until 3)
+						{
+							pool.add(card)
+						}
+					}
+					else
+					{
+						pool.add(card)
+					}
+				}
 			}
 			if (allowQuestCards)
 			{
-				pool.addAll(quest.questCards)
+				for (card in quest.questCards)
+				{
+					if (card.current.spawnWeight.subWeights.contains(spawnWeight))
+					{
+						// make it 3x more likely
+						for (i in 0 until 3)
+						{
+							pool.add(card)
+						}
+					}
+					else
+					{
+						pool.add(card)
+					}
+				}
 			}
 
-			for (i in 0 until 4)
+			if (pool.size > 0)
 			{
-				output.add(pool.removeRandom(Random.random))
-				if (pool.size == 0)
+				for (i in 0 until 4)
 				{
-					break
+					output.add(pool.removeRandom(Random.random))
+					if (pool.size == 0)
+					{
+						break
+					}
 				}
 			}
 		}
@@ -294,7 +430,7 @@ class Branch(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 	{
 		for (branch in branches)
 		{
-			if (branch.condition.evaluate(Global.flags) != 0f)
+			if (branch.condition.evaluate(Global.getVariableMap()) != 0f)
 			{
 				return branch.node.run()
 			}
@@ -320,7 +456,7 @@ class CompleteQuest(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 
 	override fun parse(xmlData: XmlData)
 	{
-		state = Quest.QuestState.valueOf(xmlData.get("State", "Success")!!.toUpperCase())
+		state = Quest.QuestState.valueOf(xmlData.get("State", "Bronze")!!.toUpperCase())
 	}
 
 	override fun resolve(nodeMap: ObjectMap<String, AbstractQuestNode>)

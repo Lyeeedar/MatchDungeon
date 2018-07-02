@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Scaling
 import com.lyeeedar.Renderables.Sprite.Sprite
 
-class SpriteWidget(private val drawable: Sprite, width: Float, height: Float, val fixHeight: Boolean = false) : Widget()
+class SpriteWidget(private val drawable: Sprite, val originalWidth: Float, val originalHeight: Float, val fixHeight: Boolean = false) : Widget()
 {
 	private val scaling = Scaling.fit
 	private val align = Align.center
@@ -17,14 +17,14 @@ class SpriteWidget(private val drawable: Sprite, width: Float, height: Float, va
 
 	init
 	{
-		this.width = width
-		this.height = height
+		this.width = originalWidth
+		this.height = originalHeight
 	}
 
 	override fun layout()
 	{
-		val regionWidth = width
-		val regionHeight = height
+		val regionWidth = originalWidth
+		val regionHeight = originalHeight
 
 		val size = scaling.apply(regionWidth, regionHeight, width, height)
 		imageWidth = size.x

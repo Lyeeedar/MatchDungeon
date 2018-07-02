@@ -38,7 +38,7 @@ class XmlData
 	constructor(name: String, data: String)
 	{
 		this.name = name
-		this.nameId = name.hashCode()
+		this.nameId = name.toUpperCase().hashCode()
 		this.value = data
 	}
 
@@ -48,12 +48,12 @@ class XmlData
 
 	fun getChildByName(name: String): XmlData?
 	{
-		return getChildById(name.hashCode())
+		return getChildById(name.toUpperCase().hashCode())
 	}
 
 	fun getChildrenByName(name: String): Sequence<XmlData>
 	{
-		val id = name.hashCode()
+		val id = name.toUpperCase().hashCode()
 		return buildSequence {
 			for (child in children)
 			{
@@ -122,42 +122,42 @@ class XmlData
 
 	fun getAttribute(name: String): String
 	{
-		return attributeMap[name.hashCode()]?.text() ?: throw GdxRuntimeException("Element ${this.name} has no attribute called $name!")
+		return attributeMap[name.toUpperCase().hashCode()]?.text() ?: throw GdxRuntimeException("Element ${this.name} has no attribute called $name!")
 	}
 
 	fun getAttribute(name: String, fallback: String?): String?
 	{
-		return attributeMap[name.hashCode()]?.text() ?: fallback
+		return attributeMap[name.toUpperCase().hashCode()]?.text() ?: fallback
 	}
 
 	fun getIntAttribute(name: String): Int
 	{
-		return attributeMap[name.hashCode()]?.int() ?: throw GdxRuntimeException("Element ${this.name} has no attribute called $name!")
+		return attributeMap[name.toUpperCase().hashCode()]?.int() ?: throw GdxRuntimeException("Element ${this.name} has no attribute called $name!")
 	}
 
 	fun getIntAttribute(name: String, fallback: Int): Int
 	{
-		return attributeMap[name.hashCode()]?.int() ?: fallback
+		return attributeMap[name.toUpperCase().hashCode()]?.int() ?: fallback
 	}
 
 	fun getFloatAttribute(name: String): Float
 	{
-		return attributeMap[name.hashCode()]?.float() ?: throw GdxRuntimeException("Element ${this.name} has no attribute called $name!")
+		return attributeMap[name.toUpperCase().hashCode()]?.float() ?: throw GdxRuntimeException("Element ${this.name} has no attribute called $name!")
 	}
 
 	fun getFloatAttribute(name: String, fallback: Float): Float
 	{
-		return attributeMap[name.hashCode()]?.float() ?: fallback
+		return attributeMap[name.toUpperCase().hashCode()]?.float() ?: fallback
 	}
 
 	fun getBooleanAttribute(name: String): Boolean
 	{
-		return attributeMap[name.hashCode()]?.boolean() ?: throw GdxRuntimeException("Element ${this.name} has no attribute called $name!")
+		return attributeMap[name.toUpperCase().hashCode()]?.boolean() ?: throw GdxRuntimeException("Element ${this.name} has no attribute called $name!")
 	}
 
 	fun getBooleanAttribute(name: String, fallback: Boolean): Boolean
 	{
-		return attributeMap[name.hashCode()]?.boolean() ?: fallback
+		return attributeMap[name.toUpperCase().hashCode()]?.boolean() ?: fallback
 	}
 
 	val text: String
@@ -235,7 +235,7 @@ class XmlData
 	fun load(input: Input)
 	{
 		name = input.readString()
-		nameId = name.hashCode()
+		nameId = name.toUpperCase().hashCode()
 
 		val childCount = input.readInt(true)
 		children = Array(childCount){ e -> XmlData() }
@@ -303,7 +303,7 @@ class XmlData
 		{
 			val data = XmlData()
 			data.name = el.name
-			data.nameId = data.name.hashCode()
+			data.nameId = data.name.toUpperCase().hashCode()
 
 			if (el.childCount == 0 && el.text == null)
 			{
@@ -488,7 +488,7 @@ class XmlAttributeData
 	fun load(input: Input)
 	{
 		name = input.readString()
-		nameId = name.hashCode()
+		nameId = name.toUpperCase().hashCode()
 
 		val valueType = input.readShort().toInt()
 		value = when(valueType)
@@ -507,7 +507,7 @@ class XmlAttributeData
 		{
 			val data = XmlAttributeData()
 			data.name = name
-			data.nameId = name.hashCode()
+			data.nameId = name.toUpperCase().hashCode()
 
 			val floatVal = rawvalue.toFloatOrNull()
 			if (floatVal != null)

@@ -18,6 +18,14 @@ class UniqueArray<T>(val uniqueFun: (T) -> Int) : Iterable<T>
 		}
 	}
 
+	fun addAll(items: Iterable<T>)
+	{
+		for (item in items)
+		{
+			add(item)
+		}
+	}
+
 	fun remove(item: T)
 	{
 		val key = uniqueFun(item)

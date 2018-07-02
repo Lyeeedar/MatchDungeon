@@ -15,6 +15,12 @@ class QuestSelectionScreen : AbstractScreen()
 
 	fun setup()
 	{
+		if (!created)
+		{
+			baseCreate()
+			created = true
+		}
+
 		val scrollTable = Table()
 		val scrollPane = ScrollPane(scrollTable, Global.skin)
 

@@ -113,13 +113,13 @@ class DeckScreen : AbstractScreen()
 		val leftCard = Global.deck.chosenCharacter!!.getCard()
 		leftCard.setSize(cardWidth, cardHeight)
 		leftCard.setFacing(true, false)
-		bodyTable.add(leftCard).grow().center().height(cardHeight).pad(10f)
+		bodyTable.add(leftCard).grow().center().height(cardHeight).pad(10f).uniform()
 
 		bodyTable.add(Seperator(Global.skin, true)).growY()
 
 		val scrollTable = Table()
 		val scrollPane = ScrollPane(scrollTable, Global.skin)
-		bodyTable.add(scrollPane).grow()
+		bodyTable.add(scrollPane).grow().uniform()
 
 		for (char in Global.deck.characters)
 		{
@@ -166,7 +166,7 @@ class DeckScreen : AbstractScreen()
 		leftScrollPane.setForceScroll(false, true)
 		leftScrollPane.setFadeScrollBars(false)
 		leftScrollPane.setScrollingDisabled(true, false)
-		bodyTable.add(leftScrollPane).grow()
+		bodyTable.add(leftScrollPane).grow().uniform()
 
 		val used = ObjectSet<Card>()
 		for (enc in Global.deck.playerDeck.encounters)
@@ -192,7 +192,7 @@ class DeckScreen : AbstractScreen()
 		rightScrollPane.setForceScroll(false, true)
 		rightScrollPane.setFadeScrollBars(false)
 		rightScrollPane.setScrollingDisabled(true, false)
-		bodyTable.add(rightScrollPane).grow()
+		bodyTable.add(rightScrollPane).grow().uniform()
 
 		for (enc in Global.deck.encounters)
 		{
@@ -230,6 +230,7 @@ class DeckScreen : AbstractScreen()
 		mainTable.row()
 
 		val bodyTable = Table()
+
 		mainTable.add(bodyTable).grow()
 		mainTable.row()
 
@@ -239,7 +240,7 @@ class DeckScreen : AbstractScreen()
 		leftScrollPane.setForceScroll(false, true)
 		leftScrollPane.setFadeScrollBars(false)
 		leftScrollPane.setScrollingDisabled(true, false)
-		bodyTable.add(leftScrollPane).grow()
+		bodyTable.add(leftScrollPane).grow().uniform()
 
 		val used = ObjectSet<Equipment>()
 		for (equip in Global.deck.playerDeck.equipment)
@@ -265,7 +266,7 @@ class DeckScreen : AbstractScreen()
 		rightScrollPane.setForceScroll(false, true)
 		rightScrollPane.setFadeScrollBars(false)
 		rightScrollPane.setScrollingDisabled(true, false)
-		bodyTable.add(rightScrollPane).grow()
+		bodyTable.add(rightScrollPane).grow().uniform()
 
 		for (equip in Global.deck.equipment)
 		{

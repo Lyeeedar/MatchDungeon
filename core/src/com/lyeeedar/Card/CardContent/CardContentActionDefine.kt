@@ -23,7 +23,7 @@ class CardContentActionDefine : AbstractCardContentAction()
 	{
 		val flags = if (global) Global.globalflags else Global.levelflags
 
-		flags.flags.put(key, value.evaluate(Global.globalflags.flags))
+		flags.flags.put(key, value.evaluate(Global.getVariableMap()))
 
 		return true
 	}

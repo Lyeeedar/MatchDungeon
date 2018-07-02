@@ -9,15 +9,17 @@ import com.lyeeedar.Card.Card
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Global
 import com.lyeeedar.Screens.CardScreen
+import com.lyeeedar.Statistic
 import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.FastEnumMap
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.asGdxArray
 
 abstract class AbstractReward
 {
 	abstract fun parse(xmlData: XmlData)
-	abstract fun reward(): CardWidget?
+	abstract fun reward(): Array<CardWidget>
 
 	companion object
 	{
@@ -29,12 +31,51 @@ abstract class AbstractReward
 				"MONEY" -> MoneyReward()
 				"EQUIPMENT" -> EquipmentReward()
 				"QUEST" -> QuestReward()
+				"STATISTICS" -> StatisticsReward()
 				else -> throw RuntimeException("Invalid reward type: " + xmlData.name)
 			}
 
 			reward.parse(xmlData)
 			return reward
 		}
+	}
+}
+
+class StatisticsReward : AbstractReward()
+{
+	val statsTable = FastEnumMap<Statistic, Int>(Statistic::class.java)
+
+	override fun parse(xmlData: XmlData)
+	{
+		Statistic.parse(xmlData, statsTable)
+	}
+
+	override fun reward(): Array<CardWidget>
+	{
+		val output = Array<CardWidget>()
+
+		for (stat in Statistic.Values)
+		{
+			val statVal = statsTable[stat]
+			if (statVal != 0)
+			{
+				val table = Table()
+				table.add(Label(stat.toString().capitalize(), Global.skin, "cardtitle"))
+				table.row()
+				table.add(Label(statVal.toString(), Global.skin, "cardtitle"))
+				table.row()
+
+				val card = CardWidget(table, table, AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, null)
+				card.canZoom = false
+				card.addPick("Take", {
+					Global.player.statistics[stat] = (Global.player.statistics[stat] ?: 0) + statVal
+				})
+
+				output.add(card)
+			}
+		}
+
+		return output
 	}
 }
 
@@ -47,8 +88,10 @@ class CardReward : AbstractReward()
 		cardPath = xmlData.get("File")
 	}
 
-	override fun reward(): CardWidget?
+	override fun reward(): Array<CardWidget>
 	{
+		val output = Array<CardWidget>()
+
 		val card = Card.load(cardPath)
 
 		val cardWidget = card.current.getCard()
@@ -58,7 +101,9 @@ class CardReward : AbstractReward()
 
 		cardWidget.canZoom = false
 
-		return cardWidget
+		output.add(cardWidget)
+
+		return output
 	}
 }
 
@@ -71,8 +116,10 @@ class QuestReward : AbstractReward()
 		questPath = xmlData.get("File")
 	}
 
-	override fun reward(): CardWidget?
+	override fun reward(): Array<CardWidget>
 	{
+		val output = Array<CardWidget>()
+
 		val quest = Quest.load(questPath)
 
 		val cardWidget = quest.getCard()
@@ -82,7 +129,9 @@ class QuestReward : AbstractReward()
 
 		cardWidget.canZoom = false
 
-		return cardWidget
+		output.add(cardWidget)
+
+		return output
 	}
 }
 
@@ -95,8 +144,10 @@ class MoneyReward : AbstractReward()
 		amount = xmlData.getInt("Count")
 	}
 
-	override fun reward(): CardWidget?
+	override fun reward(): Array<CardWidget>
 	{
+		val output = Array<CardWidget>()
+
 		val table = Table()
 
 		val title = Label("Gold", Global.skin, "cardtitle")
@@ -113,7 +164,9 @@ class MoneyReward : AbstractReward()
 		})
 		card.canZoom = false
 
-		return card
+		output.add(card)
+
+		return output
 	}
 }
 
@@ -142,11 +195,13 @@ class EquipmentReward : AbstractReward()
 		rewardType = EquipmentRewardType.valueOf(xmlData.get("Type", "Any")!!.toUpperCase())
 
 		unlock = xmlData.getBoolean("Unlock", false)
-		equipmentPath = xmlData.get("Equipment")
+		equipmentPath = xmlData.get("Equipment", "")!!
 	}
 
-	override fun reward(): CardWidget?
+	override fun reward(): Array<CardWidget>
 	{
+		val output = Array<CardWidget>()
+
 		val equipment: Equipment
 
 		if (fromDeck)
@@ -180,7 +235,7 @@ class EquipmentReward : AbstractReward()
 			}
 			else
 			{
-				return null
+				return output
 			}
 		}
 		else
@@ -212,6 +267,8 @@ class EquipmentReward : AbstractReward()
 
 		})
 
-		return card
+		output.add(card)
+
+		return output
 	}
 }

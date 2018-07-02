@@ -24,6 +24,7 @@ import com.lyeeedar.UI.*
 import com.lyeeedar.UI.Tooltip
 import com.lyeeedar.Util.*
 import com.sun.xml.internal.ws.api.pipe.Engine
+import ktx.collections.addAll
 import ktx.collections.set
 import java.util.zip.GZIPInputStream
 import java.util.zip.GZIPOutputStream
@@ -57,13 +58,6 @@ class Global
 		lateinit var player: Player
 		var globalflags = GameStateFlags()
 		var levelflags = GameStateFlags()
-		val flags: ObjectFloatMap<String>
-			get() {
-				val output = ObjectFloatMap<String>()
-				output.putAll(globalflags.flags)
-				output.putAll(levelflags.flags)
-				return output
-			}
 
 		lateinit var deck: GlobalDeck
 
@@ -313,6 +307,29 @@ class Global
 
 			return skin
 		}
+
+		fun getVariableMap(): ObjectFloatMap<String>
+		{
+			val output = ObjectFloatMap<String>()
+			output.putAll(globalflags.flags)
+			output.putAll(levelflags.flags)
+
+			output.put("Money", player.gold.toFloat())
+
+			for (stat in Statistic.Values)
+			{
+				output.put(stat.toString(), player.getStat(stat).toFloat())
+			}
+
+			for (slot in EquipmentSlot.Values)
+			{
+				output.put(slot.toString(), if(player.getEquipment(slot) != null) 1f else 0f)
+			}
+
+			output.put(player.baseCharacter.name, 1f)
+
+			return output
+		}
 	}
 }
 
@@ -360,6 +377,10 @@ class GlobalDeck
 
 		characters.add(Character.load("Peasant"))
 		chosenCharacter = characters.first()
+		playerDeck.equipment.addAll(equipment)
+		playerDeck.encounters.addAll(encounters)
+
+		quests.add(Quest.load("Dungeon/TreasureHunt"))
 	}
 
 	fun getPlayer(): Player
