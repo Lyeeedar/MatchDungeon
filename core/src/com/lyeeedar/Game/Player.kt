@@ -1,5 +1,6 @@
 package com.lyeeedar.Game
 
+import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
@@ -10,6 +11,8 @@ import com.lyeeedar.Global
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.Seperator
 import com.lyeeedar.UI.SpriteWidget
+import com.lyeeedar.UI.addClickListener
+import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.FastEnumMap
 
 class Player(val baseCharacter: Character, val deck: PlayerDeck)
@@ -90,6 +93,49 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 			val str = stat.toString().toLowerCase().capitalize() + ": " + truestat + " (" + basestat + diffStr + ")"
 			table.add(Label(str, Global.skin))
 			table.row()
+		}
+
+		table.add(Seperator(Global.skin, false))
+		table.row()
+
+		table.add(Label("Equipment", Global.skin, "title"))
+		table.row()
+
+		val emptySlot = AssetManager.loadSprite("Icons/Empty")
+
+		for (slot in EquipmentSlot.Values)
+		{
+			val equipment = equipment[slot]
+
+			if (equipment == null)
+			{
+				val equipTable = Table()
+				table.add(equipTable).growX().padBottom(2f)
+				table.row()
+
+				equipTable.add(Label("None", Global.skin))
+				equipTable.add(SpriteWidget(emptySlot, 32f, 32f)).size(32f).expandX().right()
+			}
+			else
+			{
+				val equipTable = Table()
+				table.add(equipTable).growX().padBottom(2f)
+				table.row()
+
+				equipTable.add(Label(equipment.name, Global.skin))
+
+				val iconStack = Stack()
+				iconStack.add(SpriteWidget(emptySlot, 32f, 32f))
+				iconStack.add(SpriteWidget(equipment.icon, 32f, 32f))
+				equipTable.add(iconStack).size(32f).expandX().right()
+
+				val infoButton = Button(Global.skin, "info")
+				infoButton.setSize(24f, 24f)
+				infoButton.addClickListener {
+
+				}
+				equipTable.add(infoButton).pad(0f, 12f, 0f, 12f)
+			}
 		}
 
 		return table

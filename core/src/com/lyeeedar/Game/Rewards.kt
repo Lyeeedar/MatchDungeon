@@ -102,26 +102,29 @@ class CardReward : AbstractReward()
 	{
 		val output = Array<CardWidget>()
 
-		val card = Card.load(cardPath)
+		if (Global.deck.encounters.firstOrNull { it.path == cardPath } == null)
+		{
+			val card = Card.load(cardPath)
 
-		val cardWidget = card.current.getCard()
-		cardWidget.addPick("", {
-			Global.deck.encounters.add(card)
+			val cardWidget = card.current.getCard()
+			cardWidget.addPick("", {
+				Global.deck.encounters.add(card)
 
-			val sprite = AssetManager.loadSprite("Oryx/Custom/items/card")
+				val sprite = AssetManager.loadSprite("Oryx/Custom/items/card")
 
-			val src = cardWidget.localToStageCoordinates(Vector2(cardWidget.width / 2f, cardWidget.height / 2f))
+				val src = cardWidget.localToStageCoordinates(Vector2(cardWidget.width / 2f, cardWidget.height / 2f))
 
-			val dstTable = CardScreen.instance.playerSlot
-			val dst = dstTable.localToStageCoordinates(Vector2())
+				val dstTable = CardScreen.instance.playerSlot
+				val dst = dstTable.localToStageCoordinates(Vector2())
 
-			Mote(src, dst, sprite, 32f, {
-			}, 0.75f)
-		})
+				Mote(src, dst, sprite, 32f, {
+				}, 0.75f)
+			})
 
-		cardWidget.canZoom = false
+			cardWidget.canZoom = false
 
-		output.add(cardWidget)
+			output.add(cardWidget)
+		}
 
 		return output
 	}
@@ -140,26 +143,29 @@ class QuestReward : AbstractReward()
 	{
 		val output = Array<CardWidget>()
 
-		val quest = Quest.load(questPath)
+		if (Global.deck.quests.firstOrNull { it.path == questPath } == null)
+		{
+			val quest = Quest.load(questPath)
 
-		val cardWidget = quest.getCard()
-		cardWidget.addPick("", {
-			Global.deck.quests.add(quest)
+			val cardWidget = quest.getCard()
+			cardWidget.addPick("", {
+				Global.deck.quests.add(quest)
 
-			val sprite = AssetManager.loadSprite("Oryx/Custom/items/card")
+				val sprite = AssetManager.loadSprite("Oryx/Custom/items/card")
 
-			val src = cardWidget.localToStageCoordinates(Vector2(cardWidget.width / 2f, cardWidget.height / 2f))
+				val src = cardWidget.localToStageCoordinates(Vector2(cardWidget.width / 2f, cardWidget.height / 2f))
 
-			val dstTable = CardScreen.instance.playerSlot
-			val dst = dstTable.localToStageCoordinates(Vector2())
+				val dstTable = CardScreen.instance.playerSlot
+				val dst = dstTable.localToStageCoordinates(Vector2())
 
-			Mote(src, dst, sprite, 32f, {
-			}, 0.75f)
-		})
+				Mote(src, dst, sprite, 32f, {
+				}, 0.75f)
+			})
 
-		cardWidget.canZoom = false
+			cardWidget.canZoom = false
 
-		output.add(cardWidget)
+			output.add(cardWidget)
+		}
 
 		return output
 	}
@@ -281,7 +287,7 @@ class EquipmentReward : AbstractReward()
 		else
 		{
 			equipment = Equipment.Companion.load(equipmentPath)
-			if (unlock)
+			if (unlock && Global.deck.equipment.firstOrNull { it.path == equipmentPath } == null)
 			{
 				Global.deck.equipment.add(equipment)
 			}
