@@ -17,18 +17,14 @@
 			<Success meta:RefKey="QuestNode">b137f243-471c-4286-b567-c5f5a0264133</Success>
 			<Failure meta:RefKey="QuestNode">b137f243-471c-4286-b567-c5f5a0264133</Failure>
 		</QuestNode>
-		<QuestNode meta:X="577" meta:Y="0" GUID="b137f243-471c-4286-b567-c5f5a0264133">
+		<QuestNode meta:X="604.13221777506055" meta:Y="-7.1400573092264512" GUID="b137f243-471c-4286-b567-c5f5a0264133">
 			<Type>Deck</Type>
 			<AllowDeckCards>true</AllowDeckCards>
 			<AllowQuestCards>true</AllowQuestCards>
-			<Success meta:RefKey="QuestNode">6799c705-a3ff-402c-9697-925a2ef8a199</Success>
+			<Success meta:RefKey="QuestNode">bc04c578-3d21-411c-ba93-288880e42577</Success>
 			<Failure meta:RefKey="QuestNode">bc04c578-3d21-411c-ba93-288880e42577</Failure>
 		</QuestNode>
-		<QuestNode meta:X="847" meta:Y="0" GUID="6799c705-a3ff-402c-9697-925a2ef8a199">
-			<Type>Fixed</Type>
-			<FixedEvent></FixedEvent>
-		</QuestNode>
-		<QuestNode meta:X="847" meta:Y="0" GUID="bc04c578-3d21-411c-ba93-288880e42577">
+		<QuestNode meta:X="844.1439770763094" meta:Y="-4.2840343855358469" GUID="bc04c578-3d21-411c-ba93-288880e42577">
 			<Type>Fixed</Type>
 			<FixedEvent>Ambush</FixedEvent>
 			<Success meta:RefKey="QuestNode">2a3417cc-d546-4dd1-ba3a-5fbe13432853</Success>
@@ -41,7 +37,7 @@
 			<Success meta:RefKey="QuestNode">117abc6e-63d5-4129-a861-d1a17f9d7684</Success>
 			<Failure meta:RefKey="QuestNode">117abc6e-63d5-4129-a861-d1a17f9d7684</Failure>
 		</QuestNode>
-		<QuestNode meta:X="1380" meta:Y="0" GUID="117abc6e-63d5-4129-a861-d1a17f9d7684">
+		<QuestNode meta:X="1378.5719885381548" meta:Y="-12.852103156607612" GUID="117abc6e-63d5-4129-a861-d1a17f9d7684">
 			<Type>Deck</Type>
 			<AllowDeckCards>true</AllowDeckCards>
 			<AllowQuestCards>true</AllowQuestCards>
@@ -84,7 +80,7 @@
 		<CompleteQuest meta:X="2358" meta:Y="264.1873779296875" GUID="bea8e3ba-0699-44b4-b0e0-4686439b89ad">
 			<State>Failure</State>
 		</CompleteQuest>
-		<CompleteQuest meta:X="1068.4202103337907" meta:Y="274.34842249657061" GUID="03cb0031-35ab-439d-833b-fd8a9448c7cb">
+		<CompleteQuest meta:X="1068.420166015625" meta:Y="274.34841918945312" GUID="03cb0031-35ab-439d-833b-fd8a9448c7cb">
 			<State>Failure</State>
 		</CompleteQuest>
 	</Nodes>

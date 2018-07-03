@@ -17,7 +17,7 @@
 	<Symbols>
 		<Symbol>
 			<Character>b</Character>
-			<Extends>#</Extends>
+			<Extends>.</Extends>
 			<Sprite meta:RefKey="SpriteWrapper">
 				<Sprite meta:RefKey="Sprite">
 					<Name>player_1</Name>

@@ -473,7 +473,7 @@ class Level(val loadPath: String)
 		}
 	}
 
-	private fun complete()
+	fun complete()
 	{
 		completeFun = null
 		if (victoryConditions.all { it.isCompleted() })

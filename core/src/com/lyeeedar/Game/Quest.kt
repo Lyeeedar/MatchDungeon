@@ -328,12 +328,12 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 
 			if (pool.size > 0)
 			{
-				for (i in 0 until 4)
+				while (output.size < 4 && pool.size > 0)
 				{
-					output.add(pool.removeRandom(Random.random))
-					if (pool.size == 0)
+					val picked = pool.removeRandom(Random.random)
+					if (!output.contains(picked))
 					{
-						break
+						output.add(picked)
 					}
 				}
 			}

@@ -177,6 +177,11 @@ class CardScreen : AbstractScreen()
 				currentCard.current = currentCardNode.nextNode?.node ?: currentCardNode
 			}
 
+			if (state == CardContent.CardContentState.INPROGRESS)
+			{
+				throw Exception("Failed to mark the content as complete! Offending content: " + currentCard.current.name)
+			}
+
 			val currentQuestNode = currentQuest.current as QuestNode
 			currentQuest.current = currentQuestNode.getNext(state, key)
 

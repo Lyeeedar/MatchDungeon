@@ -143,7 +143,8 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 						for (i in 0 until level.player.getStat(Statistic.POWERGAIN))
 						{
-							Future.call({ Mote(pos, dst, sprite, 32f, { PowerBar.instance.power++ }) }, delay)
+							val dst = PowerBar.instance.getOrbDest() ?: break
+							Future.call({ Mote(pos, dst, sprite.copy(), 32f, { PowerBar.instance.power++ }) }, delay)
 						}
 					}
 				}

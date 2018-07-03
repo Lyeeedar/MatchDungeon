@@ -40,8 +40,4 @@ public abstract class AbstractApplicationChanger
 	public abstract Application createApplication( MainGame game, Preferences pref );
 
 	public abstract void updateApplication( Preferences pref );
-
-	public abstract String[] getSupportedDisplayModes();
-
-	public abstract void setToNativeResolution( Preferences prefs );
 }

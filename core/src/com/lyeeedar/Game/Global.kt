@@ -20,6 +20,7 @@ import com.lyeeedar.Game.*
 import com.lyeeedar.Screens.AbstractScreen
 import com.lyeeedar.Screens.DeckScreen
 import com.lyeeedar.Screens.QuestScreen
+import com.lyeeedar.Screens.QuestSelectionScreen
 import com.lyeeedar.UI.*
 import com.lyeeedar.UI.Tooltip
 import com.lyeeedar.Util.*
@@ -90,7 +91,8 @@ class Global
 
 			game.getTypedScreen<QuestScreen>()?.setup(quest)
 			game.getTypedScreen<DeckScreen>()?.setup()
-			game.switchScreen(MainGame.ScreenEnum.DECK)
+			game.getTypedScreen<QuestSelectionScreen>()?.setup()
+			game.switchScreen(MainGame.ScreenEnum.QUESTSELECTION)
 		}
 
 		private fun loadSkin(): Skin

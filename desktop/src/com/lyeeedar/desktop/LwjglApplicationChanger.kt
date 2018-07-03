@@ -10,7 +10,6 @@ import com.badlogic.gdx.backends.lwjgl.LwjglPreferences
 import com.lyeeedar.Global
 import com.lyeeedar.MainGame
 import com.lyeeedar.Util.AbstractApplicationChanger
-import java.util.*
 
 class LwjglApplicationChanger : AbstractApplicationChanger(LwjglPreferences("game-settings", "settings"))
 {
@@ -22,7 +21,7 @@ class LwjglApplicationChanger : AbstractApplicationChanger(LwjglPreferences("gam
 
 		val cfg = LwjglApplicationConfiguration()
 
-		cfg.title = "A Skin of Others"
+		cfg.title = "Match Dungeon"
 		cfg.width = 800
 		cfg.height = 600
 		cfg.fullscreen = pref.getBoolean("fullscreen")
@@ -69,49 +68,6 @@ class LwjglApplicationChanger : AbstractApplicationChanger(LwjglPreferences("gam
 		}
 	}
 
-	override fun getSupportedDisplayModes(): Array<String>
-	{
-		val displayModes = Gdx.graphics.displayModes
-
-		val modes = ArrayList<String>()
-
-		for (i in displayModes.indices)
-		{
-			val mode = displayModes[i].width.toString() + "x" + displayModes[i].height.toString()
-
-			var contained = false
-			for (m in modes)
-			{
-				if (m == mode)
-				{
-					contained = true
-					break
-				}
-			}
-			if (!contained)
-			{
-				modes.add(mode)
-			}
-		}
-
-		Collections.sort(modes, Comparator<kotlin.String> { s1, s2 ->
-			var split = s1.indexOf("x")
-			val rX1 = Integer.parseInt(s1.substring(0, split))
-
-			split = s2.indexOf("x")
-			val rX2 = Integer.parseInt(s2.substring(0, split))
-
-			if (rX1 < rX2)
-				return@Comparator -1
-			else if (rX1 > rX2) return@Comparator 1
-			0
-		})
-
-		val m = arrayOfNulls<String>(modes.size)
-
-		return modes.toTypedArray()
-	}
-
 	override fun setDefaultPrefs(prefs: Preferences)
 	{
 		prefs.putBoolean("pathfindMovement", false)
@@ -128,16 +84,6 @@ class LwjglApplicationChanger : AbstractApplicationChanger(LwjglPreferences("gam
 		prefs.putInteger("fps", 0)
 		prefs.putFloat("animspeed", 1f)
 		prefs.putInteger("msaa", 16)
-	}
-
-	override fun setToNativeResolution(prefs: Preferences)
-	{
-		val dm = Gdx.graphics.displayMode
-
-		prefs.putInteger("resolutionX", dm.width)
-		prefs.putInteger("resolutionY", dm.height)
-
-		updateApplication(prefs)
 	}
 
 }

@@ -19,7 +19,7 @@ allprojects {
 
     version = '1.0'
     ext {
-        appName = 'MatchHunie'
+        appName = 'Match Dungeon'
         gdxVersion = '1.9.8'
         roboVMVersion = '1.3.0'
         aiVersion = '1.8.0'

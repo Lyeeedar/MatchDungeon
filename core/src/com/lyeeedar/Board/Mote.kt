@@ -20,6 +20,7 @@ class Mote(src: Vector2, dst: Vector2, sprite: Sprite, spriteSize: Float, comple
 
 		val path = Bezier(p0, p1, p2, p3)
 		sprite.animation = MoveAnimation.obtain().set(animSpeed, path, Interpolation.exp5)
+		sprite.faceInMoveDirection = true
 
 		moteCount++
 	}

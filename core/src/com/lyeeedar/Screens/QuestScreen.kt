@@ -32,6 +32,30 @@ class QuestScreen : AbstractScreen()
 		greyOutTable.background = TextureRegionDrawable(AssetManager.loadTextureRegion("white")).tint(Color(0f, 0f, 0f, 0.5f))
 		greyOutTable.touchable = Touchable.enabled
 		greyOutTable.setFillParent(true)
+
+		debugConsole.register("LoadCard", "LoadCard cardName", fun (args, console): Boolean {
+			if (args.size != 1)
+			{
+				console.error("Invalid number of arguments!")
+				return false
+			}
+
+			val card = Global.deck.encounters.backingArray.firstOrNull { it.current.name.toLowerCase() == args[0].toLowerCase() }
+			if (card == null)
+			{
+				console.error("Invalid card name!")
+				return false
+			}
+
+			val cardScreen = CardScreen.instance
+			cardScreen.setup(card, currentQuest)
+			Global.game.switchScreen(MainGame.ScreenEnum.CARD)
+
+			Global.player.deck.encounters.removeValue(card, true)
+			currentQuest.questCards.removeValue(card, true)
+
+			return true
+		})
 	}
 
 	lateinit var currentQuest: Quest

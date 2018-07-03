@@ -87,14 +87,14 @@ class Equipment(val path: String)
 				else if (otherStatVal < statVal)
 				{
 					val diff = statVal - otherStatVal
-					val diffLabel = Label("+" + diff.toString(), Global.skin, "cardgrey")
+					val diffLabel = Label("+" + diff.toString(), Global.skin, "cardwhite")
 					diffLabel.color = Color.GREEN
 					statTable.add(diffLabel)
 				}
 				else if (statVal < otherStatVal)
 				{
 					val diff = otherStatVal - statVal
-					val diffLabel = Label("-" + diff.toString(), Global.skin, "cardgrey")
+					val diffLabel = Label("-" + diff.toString(), Global.skin, "cardwhite")
 					diffLabel.color = Color.RED
 					statTable.add(diffLabel)
 				}

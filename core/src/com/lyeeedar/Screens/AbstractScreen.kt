@@ -144,6 +144,8 @@ abstract class AbstractScreen() : Screen, InputProcessor
 			debugConsole.isVisible = !debugConsole.isVisible
 			debugConsole.text.setKeyboardFocus(true)
 
+			debugConsoleTable.toFront()
+
 			return true
 		}
 		else
@@ -195,12 +197,17 @@ abstract class AbstractScreen() : Screen, InputProcessor
 
 		if (!Global.release)
 		{
-			val debugConsoleTable = Table()
 			debugConsoleTable.setFillParent(true)
 			stage.addActor(debugConsoleTable)
 
 			debugConsole = DebugConsole(this.javaClass.simpleName)
 			debugConsoleTable.add(debugConsole).width(300f).expand().left().top().pad(5f)
+
+			debugConsole.register("CurrentScreen", "", { args, console ->
+				console.write(this.javaClass.simpleName)
+
+				true
+			})
 
 			debugConsole.isVisible = false
 		}
@@ -266,6 +273,7 @@ abstract class AbstractScreen() : Screen, InputProcessor
 	private var fadeType: FadeType = FadeType.IN
 	private val fadeRenderer: ShapeRenderer = ShapeRenderer(8)
 
+	val debugConsoleTable = Table()
 	lateinit var debugConsole: DebugConsole
 
     //endregion

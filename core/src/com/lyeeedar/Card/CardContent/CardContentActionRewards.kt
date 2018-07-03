@@ -71,6 +71,11 @@ class CardContentActionRewards : AbstractCardContentAction()
 							currentGroup.removeValue(card, true)
 							if (currentGroup.size == 0)
 							{
+								if (grouped.size == 0)
+								{
+									CardContent.CardContentStack.last().index++
+									greyOutTable.remove()
+								}
 								CardContentScreen.advanceContent()
 							}
 
@@ -87,6 +92,11 @@ class CardContentActionRewards : AbstractCardContentAction()
 				}
 				else
 				{
+					if (grouped.size == 0)
+					{
+						CardContent.CardContentStack.last().index++
+						greyOutTable.remove()
+					}
 					CardContentScreen.advanceContent()
 				}
 			}

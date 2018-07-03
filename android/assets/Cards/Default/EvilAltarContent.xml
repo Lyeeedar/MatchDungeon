@@ -31,6 +31,9 @@
 					<PowerGain>5</PowerGain>
 				</Statistics>
 			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
 		</Node>
 	</Nodes>
 </CardContent>

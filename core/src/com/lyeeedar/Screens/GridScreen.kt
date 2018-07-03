@@ -50,6 +50,17 @@ class GridScreen(): AbstractScreen()
 	// ----------------------------------------------------------------------
 	override fun create()
 	{
+		debugConsole.register("complete", "", { args, console ->
+			level.victoryAction.invoke()
+
+			true
+		})
+
+		debugConsole.register("fail", "", { args, console ->
+			level.defeatAction.invoke()
+
+			true
+		})
 	}
 
 	// ----------------------------------------------------------------------
@@ -151,6 +162,8 @@ class GridScreen(): AbstractScreen()
 
 	override fun keyDown(keycode: Int): Boolean
 	{
+		super.keyDown(keycode)
+
 		if (keycode == Input.Keys.D)
 		{
 			grid!!.ground.debugDraw = !grid!!.ground.debugDraw
