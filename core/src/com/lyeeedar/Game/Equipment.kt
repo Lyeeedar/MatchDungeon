@@ -21,7 +21,7 @@ class Equipment(val path: String)
 	lateinit var name: String
 	lateinit var description: String
 	lateinit var icon: Sprite
-	val statistics = FastEnumMap<Statistic, Int>(Statistic::class.java)
+	val statistics = FastEnumMap<Statistic, Float>(Statistic::class.java)
 	var ability: Ability? = null
 
 	lateinit var slot: EquipmentSlot
@@ -63,7 +63,7 @@ class Equipment(val path: String)
 
 		for (stat in Statistic.Values)
 		{
-			val statVal = statistics[stat] ?: 0
+			val statVal = statistics[stat] ?: 0f
 
 			val statTable = Table()
 			statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Global.skin, "card"))
@@ -73,9 +73,9 @@ class Equipment(val path: String)
 
 			if (other != null)
 			{
-				val otherStatVal = other.statistics[stat] ?: 0
+				val otherStatVal = other.statistics[stat] ?: 0f
 
-				if (otherStatVal != 0 || statVal != 0)
+				if (otherStatVal != 0f || statVal != 0f)
 				{
 					add = true
 				}
@@ -101,7 +101,7 @@ class Equipment(val path: String)
 			}
 			else
 			{
-				if (statVal != 0)
+				if (statVal != 0f)
 				{
 					add = true
 				}

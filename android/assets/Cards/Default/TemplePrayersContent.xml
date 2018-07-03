@@ -82,7 +82,7 @@
 			<Rewards meta:RefKey="Rewards">
 				<Statistics meta:RefKey="Statistics">
 					<Health>0</Health>
-					<MatchDamage>1</MatchDamage>
+					<MatchDamage>0.3</MatchDamage>
 					<AbilityDamage>0</AbilityDamage>
 					<PowerGain>0</PowerGain>
 				</Statistics>

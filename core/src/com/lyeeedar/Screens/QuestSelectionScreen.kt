@@ -21,6 +21,8 @@ class QuestSelectionScreen : AbstractScreen()
 			created = true
 		}
 
+		mainTable.clear()
+
 		val scrollTable = Table()
 		val scrollPane = ScrollPane(scrollTable, Global.skin)
 

@@ -22,7 +22,7 @@ class Character(val path: String)
 	lateinit var name: String
 	lateinit var description: String
 	lateinit var sprite: Sprite
-	val baseStatistics = FastEnumMap<Statistic, Int>(Statistic::class.java)
+	val baseStatistics = FastEnumMap<Statistic, Float>(Statistic::class.java)
 	val equipment = FastEnumMap<EquipmentSlot, Equipment>(EquipmentSlot::class.java)
 
 	val emptySlot = AssetManager.loadSprite("Icons/Empty")

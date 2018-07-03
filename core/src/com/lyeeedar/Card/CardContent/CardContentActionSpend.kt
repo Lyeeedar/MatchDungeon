@@ -22,11 +22,11 @@ class CardContentActionSpend : AbstractCardContentAction()
 
 	override fun advance(CardContent: CardContent, CardContentScreen: CardScreen): Boolean
 	{
-		val count = countEqn.evaluate(Global.getVariableMap()).toInt()
+		val count = countEqn.evaluate(Global.getVariableMap())
 
 		if (key == "Money")
 		{
-			Global.player.gold = max(0, Global.player.gold - count)
+			Global.player.gold = max(0, Global.player.gold - count.toInt())
 		}
 
 		if (EquipmentSlot.Values.map { it.toString() }.contains(key.toUpperCase()))
@@ -38,7 +38,7 @@ class CardContentActionSpend : AbstractCardContentAction()
 		if (Statistic.Values.map { it.toString() }.contains(key.toUpperCase()))
 		{
 			val slot = Statistic.valueOf(key.toUpperCase())
-			Global.player.statistics[slot] = max(0, (Global.player.statistics[slot] ?: 0) - count)
+			Global.player.statistics[slot] = max(0f, (Global.player.statistics[slot] ?: 0f) - count)
 		}
 
 		return true

@@ -1,8 +1,13 @@
 <Quest meta:X="0" meta:Y="0" GUID="ded5d2d4-10d7-4388-ad06-72e15da3dd0b" xmlns:meta="Editor">
+	<Title>Treasure Hunt</Title>
+	<Description>Tales of forgotten treasures left deep within an ancient ruin have drawn you to this place. Explore and take everything you can find!</Description>
 	<Theme>Dungeon</Theme>
 	<QuestCards>
 		<Card>FallenAdventurer</Card>
 	</QuestCards>
+	<BronzeRewards meta:RefKey="Rewards" />
+	<SilverRewards meta:RefKey="Rewards" />
+	<GoldRewards meta:RefKey="Rewards" />
 	<Root meta:RefKey="QuestNode">a1b7364f-c895-4428-8e0d-2bf52ea5cb1c</Root>
 	<Nodes>
 		<QuestNode meta:X="307" meta:Y="0" GUID="a1b7364f-c895-4428-8e0d-2bf52ea5cb1c">
@@ -27,6 +32,7 @@
 			<Type>Fixed</Type>
 			<FixedEvent>Ambush</FixedEvent>
 			<Success meta:RefKey="QuestNode">2a3417cc-d546-4dd1-ba3a-5fbe13432853</Success>
+			<Failure meta:RefKey="CompleteQuest">03cb0031-35ab-439d-833b-fd8a9448c7cb</Failure>
 		</QuestNode>
 		<QuestNode meta:X="1110" meta:Y="0" GUID="2a3417cc-d546-4dd1-ba3a-5fbe13432853">
 			<Type>Deck</Type>
@@ -72,10 +78,13 @@
 		<CompleteQuest meta:X="2741" meta:Y="116" GUID="5dccc4d6-9a1a-4b1b-acc2-286e12626d1f">
 			<State>Failure</State>
 		</CompleteQuest>
-		<CompleteQuest meta:X="1825" meta:Y="264.18736981151244" GUID="bf754136-38f0-4f73-ba88-d35d3045a8d6">
+		<CompleteQuest meta:X="1825" meta:Y="264.1873779296875" GUID="bf754136-38f0-4f73-ba88-d35d3045a8d6">
 			<State>Failure</State>
 		</CompleteQuest>
-		<CompleteQuest meta:X="2358" meta:Y="264.18736981151244" GUID="bea8e3ba-0699-44b4-b0e0-4686439b89ad">
+		<CompleteQuest meta:X="2358" meta:Y="264.1873779296875" GUID="bea8e3ba-0699-44b4-b0e0-4686439b89ad">
+			<State>Failure</State>
+		</CompleteQuest>
+		<CompleteQuest meta:X="1068.4202103337907" meta:Y="274.34842249657061" GUID="03cb0031-35ab-439d-833b-fd8a9448c7cb">
 			<State>Failure</State>
 		</CompleteQuest>
 	</Nodes>

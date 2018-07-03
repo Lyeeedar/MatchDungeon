@@ -71,7 +71,7 @@ class CardContentActionRewards : AbstractCardContentAction()
 							currentGroup.removeValue(card, true)
 							if (currentGroup.size == 0)
 							{
-								CardContent.advance(CardContentScreen)
+								CardContentScreen.advanceContent()
 							}
 
 							card.remove()
@@ -87,7 +87,7 @@ class CardContentActionRewards : AbstractCardContentAction()
 				}
 				else
 				{
-					CardContent.advance(CardContentScreen)
+					CardContentScreen.advanceContent()
 				}
 			}
 		}

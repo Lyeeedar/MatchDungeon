@@ -27,7 +27,7 @@
 				<MultilineString>The monsters lie slain at your feet. You stroll over to the water, its radiance filling you with energy and joy.</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You take a deep swig from the pool, filling the holy blessings infuse you.</MultilineString>
+				<MultilineString>You take a deep swig from the pool, feeling the holy blessings infuse you.</MultilineString>
 			</Line>
 			<Branch>
 				<Branch>
@@ -84,7 +84,7 @@
 			<Rewards meta:RefKey="Rewards">
 				<Statistics meta:RefKey="Statistics">
 					<Health>0</Health>
-					<MatchDamage>1</MatchDamage>
+					<MatchDamage>0.3</MatchDamage>
 					<AbilityDamage>0</AbilityDamage>
 					<PowerGain>0</PowerGain>
 				</Statistics>

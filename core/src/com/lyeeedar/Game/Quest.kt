@@ -1,5 +1,6 @@
 package com.lyeeedar.Game
 
+import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
@@ -40,10 +41,16 @@ class Quest(val path: String)
 	val silverRewards = Array<AbstractReward>()
 	val goldRewards = Array<AbstractReward>()
 
+	val title: String
+	val description: String
+
 	init
 	{
 		val rawPath = "Quests/$path"
 		val xml = getXml(rawPath)
+
+		title = xml.get("Title", "")!!
+		description = xml.get("Description", "")!!
 
 		theme = Theme.Companion.load("Themes/" + xml.get("Theme"))
 
@@ -105,9 +112,24 @@ class Quest(val path: String)
 		current = root
 	}
 
+	fun createTable(): Table
+	{
+		val table = Table()
+
+		val title = Label(title, Global.skin, "cardtitle")
+		table.add(title).expandX().center().pad(10f, 0f, 0f, 0f)
+		table.row()
+
+		val descLabel = Label(description, Global.skin, "card")
+		descLabel.setWrap(true)
+		table.add(descLabel).grow().pad(0f, 10f, 0f, 10f)
+
+		return table
+	}
+
 	fun getCard(): CardWidget
 	{
-		return CardWidget(Table(), Table(), AssetManager.loadTextureRegion("GUI/QuestCardback")!!, this)
+		return CardWidget(createTable(), createTable(), AssetManager.loadTextureRegion("GUI/QuestCardback")!!, this)
 	}
 
 	fun run()

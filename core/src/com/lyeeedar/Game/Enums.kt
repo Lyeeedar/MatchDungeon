@@ -296,12 +296,12 @@ enum class Statistic
 	{
 		val Values = Statistic.values()
 
-		fun parse(xmlData: XmlData, statistics: FastEnumMap<Statistic, Int>)
+		fun parse(xmlData: XmlData, statistics: FastEnumMap<Statistic, Float>)
 		{
 			for (stat in Values)
 			{
-				var value = statistics[stat] ?: 0
-				value = xmlData.getInt(stat.toString().toLowerCase().capitalize(), value)
+				var value = statistics[stat] ?: 0f
+				value = xmlData.getFloat(stat.toString().toLowerCase().capitalize(), value)
 				statistics[stat] = value
 			}
 		}

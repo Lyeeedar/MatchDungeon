@@ -99,9 +99,9 @@ class CardScreen : AbstractScreen()
 			advanceContent()
 		}
 
-		contentTable.add(text).grow().pad(5f)
+		contentTable.add(text).grow().pad(5f).growX()
 		contentTable.row()
-		contentTable.add(buttonTable).pad(5f)
+		contentTable.add(buttonTable).pad(5f).growX()
 
 		contentTable.background = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("Sprites/GUI/background.png"), 24, 24, 24, 24))
 

@@ -60,7 +60,7 @@ abstract class Special(val orb: Orb)
 					if (tile != null && cx == x && cy in min..max && !hitSet.contains(tile))
 					{
 						hitSet.add(tile)
-						grid.pop(cx, cy, 0f, special, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE))
+						grid.pop(cx, cy, 0f, special, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
 					}
 				}
 				grid.grid[x, y].effects.add(effect)
@@ -128,7 +128,7 @@ abstract class Special(val orb: Orb)
 					if (tile != null && cy == y && x in min..max && !hitSet.contains(tile))
 					{
 						hitSet.add(tile)
-						grid.pop(cx, cy, 0f, special, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE))
+						grid.pop(cx, cy, 0f, special, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
 					}
 
 				}
@@ -246,7 +246,7 @@ class DualMatch(orb: Orb) : Special(orb)
 						if (tile != null && !hitSet.contains(tile) && tile.dist(point) < 4)
 						{
 							hitSet.add(tile)
-							grid.pop(cx, cy, 0f, this@DualMatch, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE))
+							grid.pop(cx, cy, 0f, this@DualMatch, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
 						}
 					}
 					Future.call({
@@ -255,7 +255,7 @@ class DualMatch(orb: Orb) : Special(orb)
 							if (!hitSet.contains(tile) && tile.dist(point) < 4)
 							{
 								hitSet.add(tile)
-								grid.pop(tile.x, tile.y, 0f, this@DualMatch, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE))
+								grid.pop(tile.x, tile.y, 0f, this@DualMatch, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
 							}
 						}
 								}, 0.2f)
@@ -305,7 +305,7 @@ class DualMatch(orb: Orb) : Special(orb)
 			if (tile != null && !hitSet.contains(tile) && tile.dist(point) < 3)
 			{
 				hitSet.add(tile)
-				grid.pop(cx, cy, 0f, this@DualMatch, grid.level.player.getStat(Statistic.ABILITYDAMAGE))
+				grid.pop(cx, cy, 0f, this@DualMatch, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
 			}
 		}
 

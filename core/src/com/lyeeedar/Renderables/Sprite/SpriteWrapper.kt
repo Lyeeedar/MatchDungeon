@@ -27,8 +27,11 @@ class SpriteWrapper
 			var spriteEl = xml.getChildByName("Sprite")
 			var tilingEl = xml.getChildByName("TilingSprite")
 
-			if (spriteEl == null && xml.name == "Sprite") spriteEl = xml
-			if (tilingEl == null && xml.name == "TilingSprite") tilingEl = xml
+			if (spriteEl == null && tilingEl == null)
+			{
+				if (xml.name == "Sprite") spriteEl = xml
+				if (xml.name == "TilingSprite") tilingEl = xml
+			}
 
 			val wrapper = SpriteWrapper()
 			if (spriteEl != null) wrapper.sprite = AssetManager.loadSprite(spriteEl)

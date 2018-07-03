@@ -13,8 +13,8 @@
 	</Definition>
 	<Definition Name="Statistics" IsGlobal="True" meta:RefKey="StructDef">
 		<Data Name="Health" Type="Int" Min="-999999" SkipIfDefault="False" meta:RefKey="Number" />
-		<Data Name="MatchDamage" Type="Int" SkipIfDefault="False" meta:RefKey="Number" />
-		<Data Name="AbilityDamage" Type="Int" SkipIfDefault="False" meta:RefKey="Number" />
-		<Data Name="PowerGain" Type="Int" SkipIfDefault="False" meta:RefKey="Number" />
+		<Data Name="MatchDamage" SkipIfDefault="False" meta:RefKey="Number" />
+		<Data Name="AbilityDamage" SkipIfDefault="False" meta:RefKey="Number" />
+		<Data Name="PowerGain" SkipIfDefault="False" meta:RefKey="Number" />
 	</Definition>
 </Definitions>

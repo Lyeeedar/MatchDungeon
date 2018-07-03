@@ -16,24 +16,24 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 {
 	var gold: Int = 0
 
-	val statistics = FastEnumMap<Statistic, Int>(Statistic::class.java)
+	val statistics = FastEnumMap<Statistic, Float>(Statistic::class.java)
 	val equipment = FastEnumMap<EquipmentSlot, Equipment>(EquipmentSlot::class.java)
 
 	fun getStat(statistic: Statistic): Int
 	{
-		var stat = baseCharacter.baseStatistics[statistic] ?: 0
-		stat += statistics[statistic] ?: 0
+		var stat = baseCharacter.baseStatistics[statistic] ?: 0f
+		stat += statistics[statistic] ?: 0f
 
 		for (slot in EquipmentSlot.Values)
 		{
 			val equip = getEquipment(slot)
 			if (equip != null)
 			{
-				stat += equip.statistics[statistic] ?: 0
+				stat += equip.statistics[statistic] ?: 0f
 			}
 		}
 
-		return stat
+		return stat.toInt()
 	}
 
 	fun getEquipment(equipmentSlot: EquipmentSlot): Equipment?
@@ -69,7 +69,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 
 		for (stat in Statistic.Values)
 		{
-			val basestat = baseCharacter.baseStatistics[stat] ?: 0
+			val basestat = baseCharacter.baseStatistics[stat] ?: 0f
 			val truestat = getStat(stat)
 
 			val diff = truestat - basestat

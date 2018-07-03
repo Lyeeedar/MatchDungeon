@@ -43,7 +43,7 @@ abstract class AbstractReward
 
 class StatisticsReward : AbstractReward()
 {
-	val statsTable = FastEnumMap<Statistic, Int>(Statistic::class.java)
+	val statsTable = FastEnumMap<Statistic, Float>(Statistic::class.java)
 
 	override fun parse(xmlData: XmlData)
 	{
@@ -57,7 +57,7 @@ class StatisticsReward : AbstractReward()
 		for (stat in Statistic.Values)
 		{
 			val statVal = statsTable[stat]
-			if (statVal != 0)
+			if (statVal != 0f)
 			{
 				val table = Table()
 				table.add(Label(stat.toString().capitalize(), Global.skin, "cardtitle"))
@@ -68,7 +68,7 @@ class StatisticsReward : AbstractReward()
 				val card = CardWidget(table, table, AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, null)
 				card.canZoom = false
 				card.addPick("Take", {
-					Global.player.statistics[stat] = (Global.player.statistics[stat] ?: 0) + statVal
+					Global.player.statistics[stat] = (Global.player.statistics[stat] ?: 0f) + statVal
 				})
 
 				output.add(card)
