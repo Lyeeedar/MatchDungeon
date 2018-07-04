@@ -454,7 +454,7 @@ class Level(val loadPath: String)
 
 		if (!completed && done)
 		{
-			if (victoryConditions.all { it.isCompleted() } || defeatConditions.all { it.isCompleted() })
+			if (victoryConditions.all { it.isCompleted() } || defeatConditions.any { it.isCompleted() })
 			{
 				completeFun = {complete()}
 				completed = true
@@ -480,7 +480,7 @@ class Level(val loadPath: String)
 		{
 			victoryAction.invoke()
 		}
-		else if (defeatConditions.all { it.isCompleted() })
+		else if (defeatConditions.any { it.isCompleted() })
 		{
 			defeatAction.invoke()
 		}

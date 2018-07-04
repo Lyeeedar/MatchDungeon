@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
+import com.lyeeedar.Board.Mote
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.EquipmentSlot
@@ -59,6 +60,8 @@ class CardScreen : AbstractScreen()
 
 	fun setup(card: Card, quest: Quest)
 	{
+		readyToSwitch = false
+
 		if (!created)
 		{
 			baseCreate()
@@ -164,6 +167,7 @@ class CardScreen : AbstractScreen()
 		createFun(EquipmentSlot.OFFHAND, offhandSlot)
 	}
 
+	var readyToSwitch = false
 	fun advanceContent()
 	{
 		val completed = currentContent.advance(this)
@@ -185,6 +189,8 @@ class CardScreen : AbstractScreen()
 			val currentQuestNode = currentQuest.current as QuestNode
 			currentQuest.current = currentQuestNode.getNext(state, key)
 
+			readyToSwitch = true
+
 			QuestScreen.instance.updateQuest()
 			Global.game.switchScreen(MainGame.ScreenEnum.QUEST)
 		}
@@ -193,7 +199,13 @@ class CardScreen : AbstractScreen()
 
 	override fun doRender(delta: Float)
 	{
-
+		if (readyToSwitch && stage.actors.filter { it is Mote }.count() == 0)
+		{
+			readyToSwitch = false
+			
+			QuestScreen.instance.updateQuest()
+			Global.game.switchScreen(MainGame.ScreenEnum.QUEST)
+		}
 	}
 
 	companion object

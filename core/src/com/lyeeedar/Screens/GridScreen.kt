@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
+import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
 import com.lyeeedar.Board.Level
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.Player
@@ -60,6 +61,20 @@ class GridScreen(): AbstractScreen()
 			level.defeatAction.invoke()
 
 			true
+		})
+
+		debugConsole.register("suicide", "", fun (args, console): Boolean {
+			val die = level.defeatConditions.filter { it is CompletionConditionDie }.firstOrNull()
+
+			if (die == null || die !is CompletionConditionDie)
+			{
+				console.error("Do die defeat condition!")
+				return false
+			}
+
+			die.hp = 0
+
+			return true
 		})
 	}
 

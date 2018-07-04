@@ -25,6 +25,9 @@ class QuestSelectionScreen : AbstractScreen()
 
 		val scrollTable = Table()
 		val scrollPane = ScrollPane(scrollTable, Global.skin)
+		scrollPane.setFadeScrollBars(false)
+		scrollPane.setScrollingDisabled(false, true)
+		scrollPane.setForceScroll(true, false)
 
 		val cardHeight = (Global.resolution.y.toFloat() * 0.7f) * 0.3f
 		val cardWidth = Global.resolution.x.toFloat() * 0.8f
@@ -43,7 +46,7 @@ class QuestSelectionScreen : AbstractScreen()
 			scrollTable.row()
 		}
 
-		mainTable.add(scrollPane).grow()
+		mainTable.add(scrollPane).growX().expandY().bottom()
 		mainTable.row()
 
 		val editButton = TextButton("Edit Deck", Global.skin)
@@ -52,7 +55,7 @@ class QuestSelectionScreen : AbstractScreen()
 			screen.setup()
 			screen.swapTo()
 		}
-		mainTable.add(editButton).expandX().right().pad(10f)
+		mainTable.add(editButton).expand().right().bottom().pad(10f)
 		mainTable.row()
 	}
 

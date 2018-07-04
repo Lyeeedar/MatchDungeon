@@ -119,6 +119,9 @@ class DeckScreen : AbstractScreen()
 
 		val scrollTable = Table()
 		val scrollPane = ScrollPane(scrollTable, Global.skin)
+		scrollPane.setForceScroll(false, true)
+		scrollPane.setFadeScrollBars(false)
+		scrollPane.setScrollingDisabled(true, false)
 		bodyTable.add(scrollPane).grow().uniform()
 
 		for (char in Global.deck.characters)

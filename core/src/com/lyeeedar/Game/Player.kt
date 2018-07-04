@@ -24,6 +24,11 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 
 	fun getStat(statistic: Statistic): Int
 	{
+		return getStatRaw(statistic).toInt()
+	}
+
+	fun getStatRaw(statistic: Statistic): Float
+	{
 		var stat = baseCharacter.baseStatistics[statistic] ?: 0f
 		stat += statistics[statistic] ?: 0f
 
@@ -36,7 +41,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 			}
 		}
 
-		return stat.toInt()
+		return stat
 	}
 
 	fun getEquipment(equipmentSlot: EquipmentSlot): Equipment?
@@ -72,8 +77,8 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 
 		for (stat in Statistic.Values)
 		{
-			val basestat = baseCharacter.baseStatistics[stat] ?: 0f
-			val truestat = getStat(stat)
+			val basestat = (baseCharacter.baseStatistics[stat] ?: 0f) + (statistics[stat] ?: 0f)
+			val truestat = getStatRaw(stat)
 
 			val diff = truestat - basestat
 			val diffStr: String
@@ -90,7 +95,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 				diffStr = ""
 			}
 
-			val str = stat.toString().toLowerCase().capitalize() + ": " + truestat + " (" + basestat + diffStr + ")"
+			val str = stat.toString().toLowerCase().capitalize() + ": " + truestat.toInt() + " (" + basestat + diffStr + ")"
 			table.add(Label(str, Global.skin))
 			table.row()
 		}
