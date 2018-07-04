@@ -10,8 +10,11 @@ import com.lyeeedar.Board.Theme
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.Global
+import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.SpawnWeight
 import com.lyeeedar.UI.CardWidget
+import com.lyeeedar.UI.SpriteWidget
+import com.lyeeedar.UI.addTapToolTip
 import com.lyeeedar.Util.*
 import ktx.collections.set
 import ktx.collections.toGdxArray
@@ -40,6 +43,10 @@ class Quest(val path: String)
 	val bronzeRewards = Array<AbstractReward>()
 	val silverRewards = Array<AbstractReward>()
 	val goldRewards = Array<AbstractReward>()
+
+	var gotBronze = false
+	var gotSilver = false
+	var gotGold = false
 
 	val title: String
 	val description: String
@@ -112,7 +119,7 @@ class Quest(val path: String)
 		current = root
 	}
 
-	fun createTable(): Table
+	fun createTable(detail: Boolean): Table
 	{
 		val table = Table()
 
@@ -120,16 +127,47 @@ class Quest(val path: String)
 		table.add(title).expandX().center().pad(10f, 0f, 0f, 0f)
 		table.row()
 
-		val descLabel = Label(description, Global.skin, "card")
-		descLabel.setWrap(true)
-		table.add(descLabel).grow().pad(0f, 10f, 0f, 10f)
+		val rewardsTable = Table()
+		table.add(rewardsTable).growX().center()
+		table.row()
+
+		if (!gotBronze && bronzeRewards.size > 0)
+		{
+			val icon = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/coin_copper")!!
+			val widget = SpriteWidget(Sprite(icon), 64f, 64f)
+			widget.addTapToolTip("Can gain a bronze level reward.")
+			rewardsTable.add(widget).expandX().center().pad(10f)
+		}
+
+		if (!gotSilver && silverRewards.size > 0)
+		{
+			val icon = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/coin_silver")!!
+			val widget = SpriteWidget(Sprite(icon), 64f, 64f)
+			widget.addTapToolTip("Can gain a silver level reward.")
+			rewardsTable.add(widget).expandX().center().pad(10f)
+		}
+
+		if (!gotGold && goldRewards.size > 0)
+		{
+			val icon = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/coin_gold")!!
+			val widget = SpriteWidget(Sprite(icon), 64f, 64f)
+			widget.addTapToolTip("Can gain a gold level reward.")
+			rewardsTable.add(widget).expandX().center().pad(10f)
+		}
+
+		if (detail)
+		{
+			val descLabel = Label(description, Global.skin, "card")
+			descLabel.setWrap(true)
+			table.add(descLabel).grow().pad(0f, 10f, 0f, 10f)
+		}
 
 		return table
 	}
 
 	fun getCard(): CardWidget
 	{
-		return CardWidget(createTable(), createTable(), AssetManager.loadTextureRegion("GUI/QuestCardback")!!, this)
+		return CardWidget(createTable(false), createTable(true), AssetManager.loadTextureRegion("GUI/QuestCardback")!!, this)
 	}
 
 	fun run()

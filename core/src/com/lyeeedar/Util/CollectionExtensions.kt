@@ -59,7 +59,7 @@ fun <T> Sequence<T>.random(): T?
 	val count = sequence.size
 	if (count > 0)
 	{
-		return sequence[Random.random(count-1)]
+		return sequence[Random.random(count)]
 	}
 	else
 	{
@@ -73,7 +73,7 @@ inline fun <reified T> Sequence<T>.random(num: Int): Sequence<T>
 	for (item in this) array.add(item)
 
 	val outArray = Array<T>()
-	for (i in 0..num-1)
+	for (i in 0 until num)
 	{
 		if (array.size == 0) break
 		outArray.add(array.removeRandom(Random.random))
@@ -87,7 +87,7 @@ inline fun <reified T> Sequence<T>.random(num: Int, ran: LightRNG): Sequence<T>
 	for (item in this) array.add(item)
 
 	val outArray = Array<T>()
-	for (i in 0..num-1)
+	for (i in 0 until num)
 	{
 		if (array.size == 0) break
 		outArray.add(array.removeRandom(ran))
