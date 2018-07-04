@@ -4,11 +4,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
+import com.badlogic.gdx.utils.ObjectSet
+import com.lyeeedar.Card.CardContent.CardContent
+import com.lyeeedar.Card.CardContent.CardContentActionRewards
+import com.lyeeedar.Game.AbstractReward
 import com.lyeeedar.Global
+import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.SpawnWeight
 import com.lyeeedar.UI.CardWidget
+import com.lyeeedar.UI.SpriteWidget
+import com.lyeeedar.UI.addTapToolTip
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.directory
 import com.lyeeedar.Util.getXml
 import ktx.collections.set
 import ktx.collections.toGdxArray
@@ -16,6 +24,14 @@ import ktx.collections.toGdxArray
 class Card(val path: String, val nodes: Array<CardNode>, val root: CardNode)
 {
 	var current: CardNode = root
+
+	init
+	{
+		for (node in nodes)
+		{
+			node.parent = this
+		}
+	}
 
 	companion object
 	{
@@ -48,6 +64,8 @@ class Card(val path: String, val nodes: Array<CardNode>, val root: CardNode)
 
 class CardNode
 {
+	lateinit var parent: Card
+
 	lateinit var guid: String
 
 	lateinit var name: String
@@ -59,10 +77,10 @@ class CardNode
 
 	fun getCard(): CardWidget
 	{
-		return CardWidget(createTable(), createTable(), AssetManager.loadTextureRegion("GUI/CardCardback")!!, this)
+		return CardWidget(createTable(false), createTable(true), AssetManager.loadTextureRegion("GUI/CardCardback")!!, this)
 	}
 
-	fun createTable(): Table
+	fun createTable(detail: Boolean): Table
 	{
 		val table = Table()
 
@@ -70,9 +88,44 @@ class CardNode
 		table.add(title).expandX().center().pad(10f, 0f, 0f, 0f)
 		table.row()
 
-		val descLabel = Label(description, Global.skin, "card")
-		descLabel.setWrap(true)
-		table.add(descLabel).grow().pad(0f, 10f, 0f, 10f)
+		val rewardsTable = Table()
+		table.add(rewardsTable).growX()
+		table.row()
+
+		val rewards = getPossibleRewards()
+
+		var needsrow = false
+		val addedMap = ObjectSet<Class<AbstractReward>>()
+		for (reward in rewards)
+		{
+			if (!addedMap.contains(reward.javaClass))
+			{
+				addedMap.add(reward.javaClass)
+
+				val icon = reward.cardIcon()
+				val widget = SpriteWidget(Sprite(icon), 64f, 64f)
+				val name = reward.javaClass.simpleName.toString().replace("Reward", "").capitalize()
+				widget.addTapToolTip("Have a chance to gain $name rewards.")
+				rewardsTable.add(widget).expandX().center().pad(10f)
+
+				if (needsrow)
+				{
+					rewardsTable.row()
+					needsrow = false
+				}
+				else
+				{
+					needsrow = true
+				}
+			}
+		}
+
+		if (detail)
+		{
+			val descLabel = Label(description, Global.skin, "card")
+			descLabel.setWrap(true)
+			table.add(descLabel).grow().pad(0f, 10f, 0f, 10f)
+		}
 
 		return table
 	}
@@ -88,6 +141,23 @@ class CardNode
 
 		val nextEl = xmlData.getChildByName("Next")
 		if (nextEl != null) nextNode = CardNodeWrapper(nextEl.text)
+	}
+
+	fun getPossibleRewards(): Array<AbstractReward>
+	{
+		val content = getContent()
+		val actions = content.nodes.values().flatMap { it.actions }
+		val rewardNodes = actions.filter { it is CardContentActionRewards }.map { it as CardContentActionRewards }
+
+		val rawRewards = rewardNodes.flatMap { it.rewards }
+		val validRewards = rawRewards.filter { it.isValid() }
+
+		return validRewards.toGdxArray()
+	}
+
+	fun getContent(): CardContent
+	{
+		return CardContent.load(parent.path.directory() + "/" + content)
 	}
 
 	fun resolve(nodeMap: ObjectMap<String, CardNode>)

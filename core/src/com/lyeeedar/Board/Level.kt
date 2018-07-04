@@ -69,7 +69,6 @@ class Level(val loadPath: String)
 		{
 			val orb = Orb(Orb.getRandomOrb(this), theme)
 			orb.isChanger = true
-			orb.nextDesc = Orb.getRandomOrb(this, orb.desc)
 			return orb
 		}
 		else if (toSpawn == "Attack")

@@ -23,7 +23,6 @@ import com.lyeeedar.UI.ScrollingTextLabel
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.addClickListener
 import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.directory
 
 class CardScreen : AbstractScreen()
 {
@@ -79,7 +78,7 @@ class CardScreen : AbstractScreen()
 		Global.levelflags = GameStateFlags()
 
 		currentCard = card
-		currentContent = CardContent.load(currentCard.path.directory() + "/" + currentCard.current.content)
+		currentContent = currentCard.current.getContent()
 		currentQuest = quest
 
 		mainTable.clear()
@@ -190,9 +189,6 @@ class CardScreen : AbstractScreen()
 			currentQuest.current = currentQuestNode.getNext(state, key)
 
 			readyToSwitch = true
-
-			QuestScreen.instance.updateQuest()
-			Global.game.switchScreen(MainGame.ScreenEnum.QUEST)
 		}
 		updateEquipment()
 	}
@@ -202,7 +198,7 @@ class CardScreen : AbstractScreen()
 		if (readyToSwitch && stage.actors.filter { it is Mote }.count() == 0)
 		{
 			readyToSwitch = false
-			
+
 			QuestScreen.instance.updateQuest()
 			Global.game.switchScreen(MainGame.ScreenEnum.QUEST)
 		}

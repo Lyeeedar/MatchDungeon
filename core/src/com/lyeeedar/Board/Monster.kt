@@ -138,9 +138,9 @@ class MonsterAbility
 	fun copy(): MonsterAbility
 	{
 		val ability = MonsterAbility()
-		ability.cooldownTimer = cooldownTimer
 		ability.cooldownMin = cooldownMin
 		ability.cooldownMax = cooldownMax
+		ability.cooldownTimer = ability.cooldownMin + MathUtils.random(ability.cooldownMax - ability.cooldownMin)
 		ability.target = target
 		ability.targetRestriction = targetRestriction
 		ability.targetCount = targetCount

@@ -1,5 +1,6 @@
 package com.lyeeedar.Game
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
@@ -20,6 +21,8 @@ abstract class AbstractReward
 {
 	abstract fun parse(xmlData: XmlData)
 	abstract fun reward(): Array<CardWidget>
+	abstract fun isValid(): Boolean
+	abstract fun cardIcon(): TextureRegion
 
 	companion object
 	{
@@ -31,6 +34,7 @@ abstract class AbstractReward
 				"MONEY" -> MoneyReward()
 				"EQUIPMENT" -> EquipmentReward()
 				"QUEST" -> QuestReward()
+				"CHARACTER" -> CharacterReward()
 				"STATISTICS" -> StatisticsReward()
 				else -> throw RuntimeException("Invalid reward type: " + xmlData.name)
 			}
@@ -44,6 +48,10 @@ abstract class AbstractReward
 class StatisticsReward : AbstractReward()
 {
 	val statsTable = FastEnumMap<Statistic, Float>(Statistic::class.java)
+
+	override fun isValid(): Boolean = true
+
+	override fun cardIcon(): TextureRegion = AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!
 
 	override fun parse(xmlData: XmlData)
 	{
@@ -69,6 +77,8 @@ class StatisticsReward : AbstractReward()
 				card.canZoom = false
 				card.addPick("Take", {
 
+					Global.player.statistics[stat] = (Global.player.statistics[stat] ?: 0f) + statVal
+
 					val sprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/key_ornate")
 
 					val src = card.localToStageCoordinates(Vector2(card.width / 2f, card.height / 2f))
@@ -77,7 +87,7 @@ class StatisticsReward : AbstractReward()
 					val dst = dstTable.localToStageCoordinates(Vector2())
 
 					Mote(src, dst, sprite, 32f, {
-						Global.player.statistics[stat] = (Global.player.statistics[stat] ?: 0f) + statVal
+
 					}, 0.75f)
 				})
 
@@ -98,11 +108,18 @@ class CardReward : AbstractReward()
 		cardPath = xmlData.get("File")
 	}
 
+	override fun isValid(): Boolean
+	{
+		return Global.deck.encounters.firstOrNull { it.path == cardPath } == null
+	}
+
+	override fun cardIcon(): TextureRegion = AssetManager.loadTextureRegion("GUI/CardCardback")!!
+
 	override fun reward(): Array<CardWidget>
 	{
 		val output = Array<CardWidget>()
 
-		if (Global.deck.encounters.firstOrNull { it.path == cardPath } == null)
+		if (isValid())
 		{
 			val card = Card.load(cardPath)
 
@@ -139,11 +156,18 @@ class QuestReward : AbstractReward()
 		questPath = xmlData.get("File")
 	}
 
+	override fun isValid(): Boolean
+	{
+		return Global.deck.quests.firstOrNull { it.path == questPath } == null
+	}
+
+	override fun cardIcon(): TextureRegion = AssetManager.loadTextureRegion("GUI/QuestCardback")!!
+
 	override fun reward(): Array<CardWidget>
 	{
 		val output = Array<CardWidget>()
 
-		if (Global.deck.quests.firstOrNull { it.path == questPath } == null)
+		if (isValid())
 		{
 			val quest = Quest.load(questPath)
 
@@ -171,14 +195,66 @@ class QuestReward : AbstractReward()
 	}
 }
 
+class CharacterReward : AbstractReward()
+{
+	lateinit var path: String
+
+	override fun parse(xmlData: XmlData)
+	{
+		path = xmlData.get("File")
+	}
+
+	override fun isValid(): Boolean
+	{
+		return Global.deck.characters.firstOrNull { it.path == path } == null
+	}
+
+	override fun cardIcon(): TextureRegion = AssetManager.loadTextureRegion("GUI/CharacterCardback")!!
+
+	override fun reward(): Array<CardWidget>
+	{
+		val output = Array<CardWidget>()
+
+		if (isValid())
+		{
+			val c = Character.load(path)
+
+			val cardWidget = c.getCard()
+			cardWidget.addPick("", {
+				Global.deck.characters.add(c)
+
+				val sprite = AssetManager.loadSprite("Oryx/Custom/items/card")
+
+				val src = cardWidget.localToStageCoordinates(Vector2(cardWidget.width / 2f, cardWidget.height / 2f))
+
+				val dstTable = CardScreen.instance.playerSlot
+				val dst = dstTable.localToStageCoordinates(Vector2())
+
+				Mote(src, dst, sprite, 32f, {
+				}, 0.75f)
+			})
+
+			cardWidget.canZoom = false
+
+			output.add(cardWidget)
+		}
+
+		return output
+	}
+}
+
 class MoneyReward : AbstractReward()
 {
 	var amount: Int = 0
+
+	override fun isValid(): Boolean = true
 
 	override fun parse(xmlData: XmlData)
 	{
 		amount = xmlData.getInt("Count")
 	}
+
+	override fun cardIcon(): TextureRegion = AssetManager.loadTextureRegion("GUI/MoneyCardback")!!
 
 	override fun reward(): Array<CardWidget>
 	{
@@ -197,6 +273,8 @@ class MoneyReward : AbstractReward()
 		val card = CardWidget(table, table, AssetManager.loadTextureRegion("GUI/MoneyCardback")!!, null)
 		card.addPick("Take", {
 
+			Global.player.gold += amount
+
 			val sprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_gold")
 
 			val src = card.localToStageCoordinates(Vector2(card.width / 2f, card.height / 2f))
@@ -205,7 +283,6 @@ class MoneyReward : AbstractReward()
 			val dst = dstTable.localToStageCoordinates(Vector2())
 
 			Mote(src, dst, sprite, 32f, {
-				Global.player.gold += amount
 			}, 0.75f)
 		})
 		card.canZoom = false
@@ -234,6 +311,10 @@ class EquipmentReward : AbstractReward()
 
 	var unlock: Boolean = false
 	lateinit var equipmentPath: String
+
+	override fun isValid(): Boolean = true
+
+	override fun cardIcon(): TextureRegion = AssetManager.loadTextureRegion("GUI/EquipmentCardback")!!
 
 	override fun parse(xmlData: XmlData)
 	{
@@ -297,6 +378,8 @@ class EquipmentReward : AbstractReward()
 
 		val card = equipment.getCard(equipped)
 		card.addPick("Equip", {
+			Global.player.equipment[equipment.slot] = equipment
+
 			val sprite = equipment.icon.copy()
 
 			val src = card.localToStageCoordinates(Vector2(card.width / 2f, card.height / 2f))
@@ -305,7 +388,6 @@ class EquipmentReward : AbstractReward()
 			val dst = dstTable.localToStageCoordinates(Vector2())
 
 			Mote(src, dst, sprite, 32f, {
-				Global.player.equipment[equipment.slot] = equipment
 				CardScreen.instance.updateEquipment()
 			}, 0.75f)
 		})

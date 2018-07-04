@@ -55,6 +55,44 @@ fun Actor.addClickListener(func: () -> Unit)
 	})
 }
 
+fun Actor.addClickListenerFull(func: (InputEvent?, Float, Float) -> Unit)
+{
+	this.addListener(object : ClickListener() {
+		override fun clicked(event: InputEvent?, x: Float, y: Float)
+		{
+			event?.handle()
+			super.clicked(event, x, y)
+			func(event, x, y)
+		}
+	})
+}
+
+fun Actor.addTapToolTip(content: String)
+{
+	this.addClickListenerFull { event, x, y ->
+
+		val table = Table()
+		val label = Label(content, Global.skin)
+		label.setWrap(true)
+		table.add(label).grow().pad(10f).prefWidth(200f).center()
+
+		val tooltip = Tooltip(table, Global.skin, Global.stage)
+
+		val fullscreenTable = Table()
+		fullscreenTable.touchable = com.badlogic.gdx.scenes.scene2d.Touchable.enabled
+		fullscreenTable.setFillParent(true)
+		fullscreenTable.addClickListener {
+			tooltip.remove()
+			Tooltip.openTooltip = null
+			fullscreenTable.remove()
+		}
+		Global.stage.addActor(fullscreenTable)
+
+		tooltip.toFront()
+		tooltip.show(event, x, y)
+	}
+}
+
 fun Actor.addToolTip(title: String, body: String, stage: Stage)
 {
 	val titleLabel = Label(title, Global.skin, "title")

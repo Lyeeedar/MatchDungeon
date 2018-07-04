@@ -1162,6 +1162,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 						}
 
 						toSpawn.desc = valid.random()
+						if (toSpawn.isChanger) toSpawn.nextDesc = Orb.getRandomOrb(level, toSpawn.desc)
 					}
 
 					grid[x, y].contents = toSpawn
