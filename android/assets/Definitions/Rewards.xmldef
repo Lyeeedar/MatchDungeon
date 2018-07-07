@@ -2,35 +2,35 @@
 	<Definition Name="Rewards" TextColour="253,255,0" IsGlobal="True" meta:RefKey="CollectionDef">
 		<!--Permanent-->
 		<Data Name="Card" meta:RefKey="Struct">
-			<Data Name="Enum" Key="Chance" Default="Always" meta:RefKey="Enum" />
+			<Data Name="Chance" Key="Chance" Default="Always" meta:RefKey="Enum" />
 			<Data Name="File" BasePath="Cards" StripExtension="True" ResourceType="Card" SkipIfDefault="False" meta:RefKey="File" />
 		</Data>
 		<Data Name="Quest" meta:RefKey="Struct">
-			<Data Name="Enum" Key="Chance" Default="Always" meta:RefKey="Enum" />
+			<Data Name="Chance" Key="Chance" Default="Always" meta:RefKey="Enum" />
 			<Data Name="File" BasePath="Quests" StripExtension="True" ResourceType="Quest" meta:RefKey="File" />
 		</Data>
 		<Data Name="Character" meta:RefKey="Struct">
-			<Data Name="Enum" Key="Chance" Default="Always" meta:RefKey="Enum" />
+			<Data Name="Chance" Key="Chance" Default="Always" meta:RefKey="Enum" />
 			<Data Name="File" BasePath="Characters" StripExtension="True" ResourceType="Character" meta:RefKey="File" />
 		</Data>
 		<!--Temporary-->
 		<Data Name="Money" meta:RefKey="Struct">
-			<Data Name="Enum" Key="Chance" Default="Always" meta:RefKey="Enum" />
+			<Data Name="Chance" Key="Chance" Default="Always" meta:RefKey="Enum" />
 			<Data Name="Count" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
 		</Data>
 		<Data Name="Equipment" meta:RefKey="Struct">
-			<Data Name="Enum" Key="Chance" Default="Always" meta:RefKey="Enum" />
+			<Data Name="Chance" Key="Chance" Default="Always" meta:RefKey="Enum" />
 			<Data Name="FromDeck" VisibleIf="Equipment==null" meta:RefKey="Boolean" />
 			<Data Name="Type" EnumValues="Any,Weapon,Armour,MainHand,OffHand,Head,Body" VisibleIf="Equipment==null" meta:RefKey="Enum" />
 			<Data Name="Unlock" SkipIfDefault="False" VisibleIf="FromDeck==false" meta:RefKey="Boolean" />
 			<Data Name="Equipment" VisibleIf="FromDeck==false" meta:RefKey="File" />
 		</Data>
 		<Data Name="Item" meta:RefKey="Struct">
-			<Data Name="Enum" Key="Chance" Default="Always" meta:RefKey="Enum" />
+			<Data Name="Chance" Key="Chance" Default="Always" meta:RefKey="Enum" />
 			<Data Name="Item" Keys="Item" Nullable="False" meta:RefKey="Reference" />
 		</Data>
 		<Data Name="Statistics" meta:RefKey="Struct">
-			<Data Name="Enum" Key="Chance" Default="Always" meta:RefKey="Enum" />
+			<Data Name="Chance" Key="Chance" Default="Always" meta:RefKey="Enum" />
 			<Data Name="Health" Type="Int" Min="-999999" SkipIfDefault="False" meta:RefKey="Number" />
 			<Data Name="MatchDamage" SkipIfDefault="False" meta:RefKey="Number" />
 			<Data Name="AbilityDamage" SkipIfDefault="False" meta:RefKey="Number" />

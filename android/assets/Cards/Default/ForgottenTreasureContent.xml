@@ -19,7 +19,7 @@
 				<State>Failure</State>
 			</MarkComplete>
 		</Node>
-		<Node meta:X="476" meta:Y="-29" GUID="c4a3ac5b-a0e5-4151-a44a-06bbdf2b922d">
+		<Node meta:X="477" meta:Y="-29" GUID="c4a3ac5b-a0e5-4151-a44a-06bbdf2b922d">
 			<Line>
 				<MultilineString>You rummage through the stash, finally coming away with something valuable.</MultilineString>
 			</Line>
@@ -28,7 +28,7 @@
 					<Count>30</Count>
 				</Money>
 				<Equipment>
-					<Enum>Low</Enum>
+					<Chance>Low</Chance>
 					<FromDeck>true</FromDeck>
 				</Equipment>
 			</Rewards>

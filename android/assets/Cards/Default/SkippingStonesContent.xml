@@ -28,6 +28,7 @@
 					<Count>25</Count>
 				</Money>
 				<Money>
+					<Chance>High</Chance>
 					<Count>25</Count>
 				</Money>
 			</Rewards>

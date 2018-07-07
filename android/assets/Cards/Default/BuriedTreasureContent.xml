@@ -19,7 +19,7 @@
 				<State>Failure</State>
 			</MarkComplete>
 		</Node>
-		<Node meta:X="508" meta:Y="-27" GUID="874210b3-bb84-4b2e-bac9-0774c15e1d22">
+		<Node meta:X="507" meta:Y="-27" GUID="874210b3-bb84-4b2e-bac9-0774c15e1d22">
 			<Line>
 				<MultilineString>Your persistence is rewarded as you pull the item from the mess, polishing it off.</MultilineString>
 			</Line>
@@ -28,7 +28,7 @@
 					<Count>50</Count>
 				</Money>
 				<Equipment>
-					<Enum>Medium</Enum>
+					<Chance>Low</Chance>
 					<FromDeck>true</FromDeck>
 				</Equipment>
 			</Rewards>

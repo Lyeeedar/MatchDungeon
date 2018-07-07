@@ -35,6 +35,11 @@ class Colour()
 		set(r, g, b, a)
 	}
 
+	constructor(r: Int, g:Int, b:Int, a:Int) : this()
+	{
+		set(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f)
+	}
+
 	fun copy(): Colour = Colour(this)
 
 	fun r(r: Float): Colour

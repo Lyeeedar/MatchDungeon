@@ -28,7 +28,7 @@
 					<Count>45</Count>
 				</Money>
 				<Equipment>
-					<Enum>Low</Enum>
+					<Chance>Low</Chance>
 					<FromDeck>true</FromDeck>
 				</Equipment>
 			</Rewards>

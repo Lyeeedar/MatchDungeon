@@ -9,9 +9,9 @@
 				<MultilineString>As you ready your weapon one of the pack stops you and chitters to the others. Suddenly the pack rush towards you.</MultilineString>
 			</Line>
 			<Match3>
+				<Level>FallenAdventurerContentLevel</Level>
 				<Success meta:RefKey="Node">322bebf1-4cf9-4ae1-93cd-ce73c04c610f</Success>
 				<Failure meta:RefKey="Node">36ca9f05-d47e-4fd7-8251-c96e55a6acf3</Failure>
-				<Level>FallenAdventurerContentLevel</Level>
 			</Match3>
 		</Node>
 		<Node meta:X="482" meta:Y="0" GUID="322bebf1-4cf9-4ae1-93cd-ce73c04c610f">
@@ -20,6 +20,7 @@
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Equipment>
+					<Chance>Low</Chance>
 					<FromDeck>true</FromDeck>
 				</Equipment>
 				<Money>

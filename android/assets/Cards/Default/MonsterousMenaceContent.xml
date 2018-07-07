@@ -31,12 +31,15 @@
 					<Count>20</Count>
 				</Money>
 				<Money>
+					<Chance>High</Chance>
 					<Count>15</Count>
 				</Money>
 				<Money>
+					<Chance>High</Chance>
 					<Count>15</Count>
 				</Money>
 				<Equipment>
+					<Chance>Low</Chance>
 					<FromDeck>true</FromDeck>
 				</Equipment>
 			</Rewards>

@@ -1,7 +1,9 @@
 package com.lyeeedar.Card
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion
+import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
@@ -93,35 +95,44 @@ class CardNode
 		table.add(rewardsTable).growX()
 		table.row()
 
-		val rewards = getPossibleRewards()
+		val rawRewards = getPossibleRewards()
 
-		var needsrow = false
-		val iconMap = ObjectMap<Class<AbstractReward>, TextureRegion>()
-		val rewardMap = ObjectMap<Class<AbstractReward>, Chance>()
-		for (reward in rewards)
+		data class RewardData(val rewardClass: Class<AbstractReward>, val icon: TextureRegion, var chance: Chance)
+
+		val rewardData = Array<RewardData>()
+		for (reward in rawRewards)
 		{
-			if (rewardMap.containsKey(reward.javaClass))
+			val existing = rewardData.firstOrNull { it.rewardClass == reward.javaClass }
+			if (existing != null)
 			{
-				if (reward.chance.ordinal > rewardMap[reward.javaClass].ordinal)
+				if (reward.chance.ordinal > existing.chance.ordinal)
 				{
-					rewardMap[reward.javaClass] = reward.chance
+					existing.chance = reward.chance
 				}
 			}
 			else
 			{
-				iconMap[reward.javaClass] = reward.cardIcon()
-				rewardMap[reward.javaClass] = reward.chance
+				rewardData.add(RewardData(reward.javaClass, reward.cardIcon(), reward.chance))
 			}
 		}
 
-		for (reward in rewardMap.sortedBy { it.key.toString() })
+		var needsrow = false
+		val sorted = rewardData.sortedBy { it.rewardClass.toString() }
+		for (reward in sorted)
 		{
-			val icon = iconMap[reward.key]
+			val icon = reward.icon
 			val widget = SpriteWidget(Sprite(icon), 64f, 64f)
-			val name = reward.key.simpleName.toString().replace("Reward", "").capitalize()
-			val chance = reward.value.uiString
-			widget.addTapToolTip("Have a $chance chance to gain $name rewards.")
-			rewardsTable.add(widget).expandX().center().pad(10f)
+			val name = reward.rewardClass.simpleName.toString().replace("Reward", "").capitalize()
+			val chance = reward.chance.uiString
+
+			val stack = Stack()
+			stack.touchable = Touchable.enabled
+
+			stack.add(SpriteWidget(AssetManager.loadSprite("GUI/RewardChanceBorder", colour = reward.chance.colour), 64f, 64f))
+			stack.add(widget)
+
+			stack.addTapToolTip("Have a $chance chance to gain $name rewards.")
+			rewardsTable.add(stack).expandX().center().pad(10f)
 
 			if (needsrow)
 			{

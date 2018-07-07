@@ -54,7 +54,7 @@
 			</Define>
 			<Node meta:RefKey="Node">04c442e9-e50c-4637-8165-e05021acb5af</Node>
 		</Node>
-		<Node meta:X="456" meta:Y="205.33333333333331" GUID="fbe63c34-afe9-4016-9883-1fea1956f8e4">
+		<Node meta:X="456" meta:Y="205.33332824707031" GUID="fbe63c34-afe9-4016-9883-1fea1956f8e4">
 			<Line>
 				<MultilineString>"Fer bein such a good sport I'll leave yer a bit."</MultilineString>
 			</Line>
@@ -65,7 +65,7 @@
 			</Define>
 			<Node meta:RefKey="Node">04c442e9-e50c-4637-8165-e05021acb5af</Node>
 		</Node>
-		<Node meta:X="818" meta:Y="-72" GUID="1796a5a3-eea0-4138-9779-255bbd9300c6">
+		<Node meta:X="814" meta:Y="-73" GUID="1796a5a3-eea0-4138-9779-255bbd9300c6">
 			<Line>
 				<MultilineString>The thieves lie dead at your feet. You take the opportunity to repossess their stolen goods.</MultilineString>
 			</Line>
@@ -74,12 +74,14 @@
 					<Count>10</Count>
 				</Money>
 				<Money>
+					<Chance>High</Chance>
 					<Count>15</Count>
 				</Money>
 				<Money>
 					<Count>10</Count>
 				</Money>
 				<Money>
+					<Chance>High</Chance>
 					<Count>20</Count>
 				</Money>
 			</Rewards>

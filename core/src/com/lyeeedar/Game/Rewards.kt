@@ -13,18 +13,15 @@ import com.lyeeedar.Global
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.CardWidget
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.FastEnumMap
-import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.asGdxArray
+import com.lyeeedar.Util.*
 
-enum class Chance private constructor(val eqn: String, val uiString: String)
+enum class Chance private constructor(val eqn: String, val uiString: String, val colour: Colour)
 {
-	VERYLOW("chance(1,5)", "very low"),
-	LOW("chance(1,4)", "low"),
-	MEDIUM("chance(1,3)", "medium"),
-	HIGH("chance(1,2)", "high"),
-	ALWAYS("1", "certain");
+	VERYLOW("chance(1,5)", "very low", Colour(124, 115, 98, 255)),
+	LOW("chance(1,4)", "low", Colour(237, 154, 21, 255)),
+	MEDIUM("chance(1,3)", "medium", Colour(200, 200, 200, 255)),
+	HIGH("chance(1,2)", "high", Colour(255, 238, 163, 255)),
+	ALWAYS("1", "certain", Colour(249, 209, 27, 255));
 
 	fun evaluate(): Boolean = eqn.evaluate() != 0f
 }
