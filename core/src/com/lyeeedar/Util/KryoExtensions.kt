@@ -26,12 +26,10 @@ fun Kryo.registerLyeeedarSerialisers()
 			val animDelay = input.readFloat()
 			val repeatDelay = input.readFloat()
 			val colour = kryo.readObject(input, Colour::class.java)
-			val modeVal = input.readInt()
-			val mode = Sprite.AnimationMode.values()[modeVal]
 			val scale = input.readFloats(2)
 			val drawActualSize = input.readBoolean()
 
-			val sprite = AssetManager.loadSprite(fileName, animDelay, colour, mode, drawActualSize)
+			val sprite = AssetManager.loadSprite(fileName, animDelay, colour, drawActualSize)
 			sprite.baseScale = scale
 			sprite.repeatDelay = repeatDelay
 			return sprite
@@ -43,7 +41,6 @@ fun Kryo.registerLyeeedarSerialisers()
 			output.writeFloat(sprite.animationDelay)
 			output.writeFloat(sprite.repeatDelay)
 			kryo.writeObject(output, sprite.colour)
-			output.writeInt(sprite.animationState.mode.ordinal)
 			output.writeFloats(sprite.baseScale)
 			output.writeBoolean(sprite.drawActualSize)
 		}

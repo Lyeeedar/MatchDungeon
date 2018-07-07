@@ -30,6 +30,7 @@
 			<Attack>0</Attack>
 			<IsMonster>false</IsMonster>
 			<SpecialOrb>None</SpecialOrb>
+			<Type>Pit</Type>
 		</Symbol>
 	</Symbols>
 	<Faction>Rats</Faction>

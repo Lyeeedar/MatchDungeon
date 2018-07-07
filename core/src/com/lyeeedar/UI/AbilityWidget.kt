@@ -29,24 +29,23 @@ class AbilityWidget(val ability: Ability, val w: Float, val h: Float, val grid: 
 		add(widget).expand().fill()
 
 		PowerBar.instance.powerChanged += {
-			if (PowerBar.instance.pips >= ability.cost)
-			{
-				widget.color = Color.WHITE
-			}
-			else
-			{
-				widget.color = Color.DARK_GRAY
-			}
+			updateEnabled()
 
 			false
 		}
-		PowerBar.instance.powerChanged()
+		grid.onTurn += {
+			updateEnabled()
+
+			false
+		}
+
+		updateEnabled()
 
 		addListener(object: ClickListener()
 		{
 			override fun clicked(event: InputEvent?, x: Float, y: Float)
 			{
-				if (PowerBar.instance.pips >= ability.cost)
+				if (PowerBar.instance.pips >= ability.cost && ability.getValidTargets(grid).size > 0)
 				{
 					if (grid.activeAbility == ability)
 					{
@@ -64,6 +63,19 @@ class AbilityWidget(val ability: Ability, val w: Float, val h: Float, val grid: 
 		touchable = Touchable.enabled
 	}
 
+	var colour: Color = Color.DARK_GRAY
+	fun updateEnabled()
+	{
+		if (PowerBar.instance.pips >= ability.cost && ability.getValidTargets(grid).size > 0)
+		{
+			colour = Color.WHITE
+		}
+		else
+		{
+			colour = Color.DARK_GRAY
+		}
+	}
+
 	override fun draw(batch: Batch?, parentAlpha: Float)
 	{
 		if (grid.activeAbility == ability)
@@ -72,14 +84,7 @@ class AbilityWidget(val ability: Ability, val w: Float, val h: Float, val grid: 
 		}
 		else
 		{
-			if (PowerBar.instance.pips >= ability.cost)
-			{
-				widget.color = Color.WHITE
-			}
-			else
-			{
-				widget.color = Color.DARK_GRAY
-			}
+			widget.color = colour
 		}
 
 		super.draw(batch, parentAlpha)

@@ -23,27 +23,18 @@
 			<Line>
 				<MultilineString>You rummage through the stash, finally coming away with something valuable.</MultilineString>
 			</Line>
-			<Branch>
-				<Branch>
-					<Condition>chance(1,6)</Condition>
-					<Node meta:RefKey="Node">0e64d5d0-5f75-49cc-bb6b-08155a906124</Node>
-				</Branch>
-			</Branch>
 			<Rewards meta:RefKey="Rewards">
 				<Money>
 					<Count>30</Count>
 				</Money>
+				<Equipment>
+					<Enum>Low</Enum>
+					<FromDeck>true</FromDeck>
+				</Equipment>
 			</Rewards>
 			<MarkComplete>
 				<State>Success</State>
 			</MarkComplete>
-		</Node>
-		<Node meta:X="754" meta:Y="-30" GUID="0e64d5d0-5f75-49cc-bb6b-08155a906124">
-			<Rewards meta:RefKey="Rewards">
-				<Equipment>
-					<FromDeck>true</FromDeck>
-				</Equipment>
-			</Rewards>
 		</Node>
 	</Nodes>
 </CardContent>

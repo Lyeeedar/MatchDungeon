@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
+import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Board.Mote
 import com.lyeeedar.Card.Card
 import com.lyeeedar.EquipmentSlot
@@ -17,8 +18,21 @@ import com.lyeeedar.Util.FastEnumMap
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.asGdxArray
 
+enum class Chance private constructor(val eqn: String, val uiString: String)
+{
+	VERYLOW("chance(1,5)", "very low"),
+	LOW("chance(1,4)", "low"),
+	MEDIUM("chance(1,3)", "medium"),
+	HIGH("chance(1,2)", "high"),
+	ALWAYS("1", "certain");
+
+	fun evaluate(): Boolean = eqn.evaluate() != 0f
+}
+
 abstract class AbstractReward
 {
+	lateinit var chance: Chance
+
 	abstract fun parse(xmlData: XmlData)
 	abstract fun reward(): Array<CardWidget>
 	abstract fun isValid(): Boolean
@@ -38,6 +52,8 @@ abstract class AbstractReward
 				"STATISTICS" -> StatisticsReward()
 				else -> throw RuntimeException("Invalid reward type: " + xmlData.name)
 			}
+
+			reward.chance = Chance.valueOf(xmlData.get("Chance", "Always")!!.toUpperCase())
 
 			reward.parse(xmlData)
 			return reward

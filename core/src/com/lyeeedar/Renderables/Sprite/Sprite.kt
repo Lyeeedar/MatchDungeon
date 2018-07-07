@@ -14,9 +14,9 @@ import com.lyeeedar.Util.Colour
 import com.lyeeedar.Util.draw
 import com.lyeeedar.Util.drawBlend
 
-class Sprite(val fileName: String, var animationDelay: Float, var textures: Array<TextureRegion>, colour: Colour, mode: Sprite.AnimationMode, var drawActualSize: Boolean) : Renderable()
+class Sprite(val fileName: String, var animationDelay: Float, var textures: Array<TextureRegion>, colour: Colour, var drawActualSize: Boolean) : Renderable()
 {
-	constructor(image: TextureRegion) : this("", 1f, Array<TextureRegion>(arrayOf(image)), Colour.WHITE, AnimationMode.NONE, false)
+	constructor(image: TextureRegion) : this("", 1f, Array<TextureRegion>(arrayOf(image)), Colour.WHITE, false)
 	{
 	}
 
@@ -31,11 +31,6 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 		{
 			val Values = values()
 		}
-	}
-
-	enum class AnimationMode
-	{
-		NONE, TEXTURE, SHRINK, SINE
 	}
 
 	var referenceSize: Float? = null
@@ -59,7 +54,6 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 	var completed = false
 
 	var animationStage = AnimationStage.INVALID
-	var animationState: AnimationState
 
 	var baseScale = floatArrayOf(1f, 1f)
 
@@ -69,11 +63,10 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 
 	var frameBlend = false
 
+	var texIndex: Int = 0
+
 	init
 	{
-		animationState = AnimationState()
-		animationState.mode = mode
-
 		this.colour = colour
 	}
 
@@ -81,7 +74,7 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 		get() = if (animation != null) animation!!.duration() else animationDelay * textures.size
 
 	val remainingLifetime: Float
-		get() = if (animation != null) animation!!.duration() - animation!!.time() else animationDelay * (textures.size - animationState.texIndex)
+		get() = if (animation != null) animation!!.duration() - animation!!.time() else animationDelay * (textures.size - texIndex)
 
 	override fun doUpdate(delta: Float): Boolean
 	{
@@ -100,36 +93,19 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 			{
 				animationAccumulator -= animationDelay
 
-				if (animationState.mode == AnimationMode.TEXTURE)
+				if (animation == null && texIndex == textures.size / 2)
 				{
-					if (animation == null && animationState.texIndex == textures.size / 2)
-					{
-						animationStage = AnimationStage.MIDDLE
-					}
+					animationStage = AnimationStage.MIDDLE
+				}
 
-					animationState.texIndex++
-					if (animationState.texIndex >= textures.size)
-					{
-						animationState.texIndex = 0
-						looped = true
-						repeatAccumulator = repeatDelay
-					}
-				}
-				else if (animationState.mode == AnimationMode.SHRINK)
+				texIndex++
+				if (texIndex >= textures.size)
 				{
-					animationState.isShrunk = !animationState.isShrunk
-					looped = animationState.isShrunk
-				}
-				else if (animationState.mode == AnimationMode.SINE)
-				{
+					texIndex = 0
 					looped = true
+					repeatAccumulator = repeatDelay
 				}
 			}
-		}
-
-		if (animationState.mode == AnimationMode.SINE)
-		{
-			animationState.sinOffset = Math.sin(animationAccumulator / (animationDelay / (2 * Math.PI))).toFloat()
 		}
 
 		if (animation != null)
@@ -139,7 +115,7 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 
 			if (animation!!.time() >= animation!!.duration() / 2f)
 			{
-				if (animation == null && animationState.texIndex == textures.size / 2)
+				if (animation == null && texIndex == textures.size / 2)
 				{
 					animationStage = AnimationStage.MIDDLE
 				}
@@ -189,7 +165,7 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 			}
 		}
 
-		render(batch, x, y, size, size, scaleX, scaleY, animationState, rotation)
+		render(batch, x, y, size, size, scaleX, scaleY, rotation)
 	}
 
 	fun render(batch: Batch, x: Float, y: Float, width: Float, height: Float, scaleX: Float = 1f, scaleY: Float = 1f, rotation: Float = 0f)
@@ -207,10 +183,10 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 			}
 		}
 
-		render(batch, x, y, width, height, scaleX, scaleY, animationState, rotation + this.rotation)
+		render(batch, x, y, width, height, scaleX, scaleY, texIndex, rotation + this.rotation)
 	}
 
-	private fun render(batch: Batch, x: Float, y: Float, width: Float, height: Float, scaleX: Float, scaleY: Float, animationState: AnimationState, rotation: Float)
+	private fun render(batch: Batch, x: Float, y: Float, width: Float, height: Float, scaleX: Float, scaleY: Float, texIndex: Int, rotation: Float)
 	{
 		val colour = if (colourAnimation != null) colourAnimation!!.renderColour()!! else if (animation?.renderColour() != null) animation!!.renderColour()!! else this.colour
 
@@ -221,7 +197,7 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 
 		if (colour == Colour.WHITE && !disableHDR)
 		{
-			drawTexture(batch, animationState.texIndex, x, y, width, height, scaleX, scaleY, rotation)
+			drawTexture(batch, texIndex, x, y, width, height, scaleX, scaleY, rotation)
 		}
 		else
 		{
@@ -238,7 +214,7 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 
 			(batch as? HDRColourSpriteBatch)?.setColor(col) ?: batch.setColor(col.toFloatBits())
 
-			drawTexture(batch, animationState.texIndex, x, y, width, height, scaleX, scaleY, rotation)
+			drawTexture(batch, texIndex, x, y, width, height, scaleX, scaleY, rotation)
 
 			(batch as? HDRColourSpriteBatch)?.setColor(oldCol) ?: batch.setColor(oldCol.toFloatBits())
 		}
@@ -295,55 +271,24 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 	}
 
 	val currentTexture: TextureRegion
-		get() = textures.get(animationState.texIndex)
+		get() = textures.get(texIndex)
 
 	fun resetAnimation()
 	{
 		animationAccumulator = 0f
 		repeatAccumulator = 0f
-		animationState.texIndex = 0
-		animationState.isShrunk = false
-		animationState.sinOffset = 0f
+		texIndex = 0
 	}
 
 	override fun copy(): Sprite
 	{
-		val sprite = Sprite(fileName, animationDelay, textures, colour, animationState.mode, drawActualSize)
+		val sprite = Sprite(fileName, animationDelay, textures, colour, drawActualSize)
 		sprite.referenceSize = referenceSize
 		sprite.animation = animation?.copy()
 		sprite.colourAnimation = colourAnimation?.copy() as? AbstractColourAnimation
 		sprite.disableHDR = disableHDR
 
 		return sprite
-	}
-
-	class AnimationState
-	{
-		lateinit var mode: AnimationMode
-
-		var texIndex: Int = 0
-		var isShrunk: Boolean = false
-		var sinOffset: Float = 0.toFloat()
-
-		fun copy(): AnimationState
-		{
-			val `as` = AnimationState()
-
-			`as`.mode = mode
-			`as`.texIndex = texIndex
-			`as`.isShrunk = isShrunk
-			`as`.sinOffset = sinOffset
-
-			return `as`
-		}
-
-		fun set(other: AnimationState)
-		{
-			mode = other.mode
-			texIndex = other.texIndex
-			isShrunk = other.isShrunk
-			sinOffset = other.sinOffset
-		}
 	}
 
 	companion object

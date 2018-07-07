@@ -38,7 +38,7 @@ class ParticleEditorScreen : AbstractScreen()
 	lateinit var background: Array2D<Symbol>
 	lateinit var collision: Array2D<Boolean>
 	val tileSize = 32f
-	val spriteRender = SortedRenderer(tileSize, 100f, 100f, 2)
+	val spriteRender = SortedRenderer(tileSize, 100f, 100f, 2, true)
 	val shape = ShapeRenderer()
 	var colour: java.awt.Color = java.awt.Color.WHITE
 	val crossedTiles = ObjectSet<Point>()

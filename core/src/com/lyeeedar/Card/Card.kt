@@ -1,13 +1,14 @@
 package com.lyeeedar.Card
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
-import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.Card.CardContent.CardContentActionRewards
 import com.lyeeedar.Game.AbstractReward
+import com.lyeeedar.Game.Chance
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.SpawnWeight
@@ -95,28 +96,41 @@ class CardNode
 		val rewards = getPossibleRewards()
 
 		var needsrow = false
-		val addedMap = ObjectSet<Class<AbstractReward>>()
+		val iconMap = ObjectMap<Class<AbstractReward>, TextureRegion>()
+		val rewardMap = ObjectMap<Class<AbstractReward>, Chance>()
 		for (reward in rewards)
 		{
-			if (!addedMap.contains(reward.javaClass))
+			if (rewardMap.containsKey(reward.javaClass))
 			{
-				addedMap.add(reward.javaClass)
-
-				val icon = reward.cardIcon()
-				val widget = SpriteWidget(Sprite(icon), 64f, 64f)
-				val name = reward.javaClass.simpleName.toString().replace("Reward", "").capitalize()
-				widget.addTapToolTip("Have a chance to gain $name rewards.")
-				rewardsTable.add(widget).expandX().center().pad(10f)
-
-				if (needsrow)
+				if (reward.chance.ordinal > rewardMap[reward.javaClass].ordinal)
 				{
-					rewardsTable.row()
-					needsrow = false
+					rewardMap[reward.javaClass] = reward.chance
 				}
-				else
-				{
-					needsrow = true
-				}
+			}
+			else
+			{
+				iconMap[reward.javaClass] = reward.cardIcon()
+				rewardMap[reward.javaClass] = reward.chance
+			}
+		}
+
+		for (reward in rewardMap.sortedBy { it.key.toString() })
+		{
+			val icon = iconMap[reward.key]
+			val widget = SpriteWidget(Sprite(icon), 64f, 64f)
+			val name = reward.key.simpleName.toString().replace("Reward", "").capitalize()
+			val chance = reward.value.uiString
+			widget.addTapToolTip("Have a $chance chance to gain $name rewards.")
+			rewardsTable.add(widget).expandX().center().pad(10f)
+
+			if (needsrow)
+			{
+				rewardsTable.row()
+				needsrow = false
+			}
+			else
+			{
+				needsrow = true
 			}
 		}
 

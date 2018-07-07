@@ -50,8 +50,8 @@ class GridWidget(val grid: Grid) : Widget()
 	val ORB = 1
 	val EFFECT = 2
 
-	val ground = SortedRenderer(tileSize, grid.width.toFloat(), grid.height.toFloat(), 3)
-	val floating = SortedRenderer(tileSize, grid.width.toFloat(), grid.height.toFloat(), 3)
+	val ground = SortedRenderer(tileSize, grid.width.toFloat(), grid.height.toFloat(), 3, true)
+	val floating = SortedRenderer(tileSize, grid.width.toFloat(), grid.height.toFloat(), 3, true)
 
 	val tempCol = Colour()
 

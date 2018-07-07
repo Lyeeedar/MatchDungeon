@@ -8,10 +8,7 @@ import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
-import com.lyeeedar.UI.CardWidget
-import com.lyeeedar.UI.Seperator
-import com.lyeeedar.UI.SpriteWidget
-import com.lyeeedar.UI.addClickListener
+import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.FastEnumMap
 import com.lyeeedar.Util.XmlData
@@ -90,17 +87,19 @@ class Character(val path: String)
 
 				equipTable.add(Label(equipment.name, Global.skin, "card"))
 
+				val infoButton = Button(Global.skin, "info")
+				infoButton.setSize(24f, 24f)
+				infoButton.addClickListener {
+					val t = equipment.createTable(null)
+
+					FullscreenTable.createCloseable(t)
+				}
+				equipTable.add(infoButton).size(24f).pad(0f, 12f, 0f, 12f)
+
 				val iconStack = Stack()
 				iconStack.add(SpriteWidget(emptySlot, 32f, 32f))
 				iconStack.add(SpriteWidget(equipment.icon, 32f, 32f))
 				equipTable.add(iconStack).size(32f).expandX().right()
-
-				val infoButton = Button(Global.skin, "info")
-				infoButton.setSize(24f, 24f)
-				infoButton.addClickListener {
-
-				}
-				equipTable.add(infoButton).pad(0f, 12f, 0f, 12f)
 			}
 		}
 

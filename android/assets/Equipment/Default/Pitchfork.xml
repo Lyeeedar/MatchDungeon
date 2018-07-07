@@ -1,7 +1,7 @@
 <MainHand xmlns:meta="Editor">
 	<Name>Pitchfork</Name>
 	<Description>A pitchfork, normally used for moving hay. Serves as a useful weapon for any angry peasant.</Description>
-	<Cost>40</Cost>
+	<Cost>30</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/weapon_trident</Name>
 	</Icon>

@@ -13,7 +13,7 @@ class UnsmoothedPath(val path: Array<Vector2>): Path<Vector2>
 
 	init
 	{
-		for (i in 1..path.size-1)
+		for (i in 1 until path.size)
 		{
 			distPoints[i] = distPoints[i-1] + path[i-1].dst(path[i])
 		}
@@ -34,17 +34,17 @@ class UnsmoothedPath(val path: Array<Vector2>): Path<Vector2>
 	{
 		if (t >= 1f)
 		{
-			out.set(path.last())
+			out.set(path[path.size-1])
 			return out
 		}
 
 		if (t <= 0f)
 		{
-			out.set(path.first())
+			out.set(path[0])
 			return out
 		}
 
-		val targetDst = distPoints.last() * t
+		val targetDst = distPoints[distPoints.size-1] * t
 		var i = 0
 		while (distPoints[i] < targetDst) i++
 

@@ -27,23 +27,14 @@
 				<Money>
 					<Count>50</Count>
 				</Money>
-			</Rewards>
-			<Branch>
-				<Branch>
-					<Condition>chance(1,3)</Condition>
-					<Node meta:RefKey="Node">877368de-fe91-4c92-a0c0-259496867d05</Node>
-				</Branch>
-			</Branch>
-			<MarkComplete>
-				<State>Success</State>
-			</MarkComplete>
-		</Node>
-		<Node meta:X="761" meta:Y="-29" GUID="877368de-fe91-4c92-a0c0-259496867d05">
-			<Rewards meta:RefKey="Rewards">
 				<Equipment>
+					<Enum>Medium</Enum>
 					<FromDeck>true</FromDeck>
 				</Equipment>
 			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
 		</Node>
 	</Nodes>
 </CardContent>

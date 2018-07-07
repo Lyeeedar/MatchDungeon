@@ -26,7 +26,7 @@ import squidpony.squidmath.LightRNG
  * Created by Philip on 04-Jul-16.
  */
 
-class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, val layers: Int)
+class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, val layers: Int, val alwaysOnscreen: Boolean)
 {
 	var batchID: Int = 0
 
@@ -459,7 +459,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 		addToMap(tilingSprite, ix, iy)
 
 		// check if onscreen
-		if (!isSpriteOnscreen(tilingSprite, x, y, width, height)) return
+		if (!alwaysOnscreen && !isSpriteOnscreen(tilingSprite, x, y, width, height)) return
 
 		val comparisonVal = getComparisonVal(lx.toInt(), ly.toInt(), layer, index, BlendMode.MULTIPLICATIVE)
 
@@ -538,7 +538,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 		}
 
 		// check if onscreen
-		if (!isSpriteOnscreen(sprite, x, y, width, height, scaleX, scaleY)) return
+		if (!alwaysOnscreen && !isSpriteOnscreen(sprite, x, y, width, height, scaleX, scaleY)) return
 
 		val comparisonVal = getComparisonVal(lx.toInt(), ly.toInt(), layer, index, BlendMode.MULTIPLICATIVE)
 
@@ -629,7 +629,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 
 		if (sprite.drawActualSize)
 		{
-			val texture = sprite.textures.items[sprite.animationState.texIndex]
+			val texture = sprite.textures.items[sprite.texIndex]
 
 			val widthRatio = localw / 32f
 			val heightRatio = localh / 32f

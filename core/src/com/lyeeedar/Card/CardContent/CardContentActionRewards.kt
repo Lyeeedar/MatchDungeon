@@ -51,7 +51,7 @@ class CardContentActionRewards : AbstractCardContentAction()
 
 			if (!awaitingAdvance && grouped.size == 0)
 			{
-				grouped = rewards.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
+				grouped = rewards.filter { it.chance.evaluate() }.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
 				Global.stage.addActor(greyOutTable)
 				awaitingAdvance = true
 			}

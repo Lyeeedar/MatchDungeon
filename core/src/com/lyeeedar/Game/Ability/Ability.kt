@@ -17,10 +17,7 @@ import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.PowerBar
 import com.lyeeedar.UI.SpriteWidget
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Future
-import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.getRotation
+import com.lyeeedar.Util.*
 import ktx.collections.set
 
 /**
@@ -172,6 +169,21 @@ class Ability
 		}
 
 		selectedTargets.clear()
+	}
+
+	fun getValidTargets(grid: Grid): Array<Point>
+	{
+		val output = Array<Point>()
+
+		for (tile in grid.grid)
+		{
+			if (targetter.isValid(tile, data))
+			{
+				output.add(tile)
+			}
+		}
+
+		return output
 	}
 
 	fun parse(xml: XmlData)

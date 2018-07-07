@@ -9,6 +9,7 @@ import com.lyeeedar.Card.Card
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Global
 import com.lyeeedar.Statistic
+import com.lyeeedar.UI.FullscreenTable
 import com.lyeeedar.UI.Seperator
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.addClickListener
@@ -129,17 +130,19 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 
 				equipTable.add(Label(equipment.name, Global.skin))
 
-				val iconStack = Stack()
-				iconStack.add(SpriteWidget(emptySlot, 32f, 32f))
-				iconStack.add(SpriteWidget(equipment.icon, 32f, 32f))
-				equipTable.add(iconStack).size(32f).expandX().right()
-
 				val infoButton = Button(Global.skin, "info")
 				infoButton.setSize(24f, 24f)
 				infoButton.addClickListener {
+					val t = equipment.createTable(null)
 
+					FullscreenTable.createCloseable(t)
 				}
-				equipTable.add(infoButton).pad(0f, 12f, 0f, 12f)
+				equipTable.add(infoButton).size(24f).pad(0f, 12f, 0f, 12f).expandX().right()
+
+				val iconStack = Stack()
+				iconStack.add(SpriteWidget(emptySlot, 32f, 32f))
+				iconStack.add(SpriteWidget(equipment.icon, 32f, 32f))
+				equipTable.add(iconStack).size(32f)
 			}
 		}
 

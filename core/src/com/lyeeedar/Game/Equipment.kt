@@ -131,12 +131,13 @@ class Equipment(val path: String)
 			abilityTable.add(SpriteWidget(other.ability!!.icon, 32f, 32f))
 
 			val infoButton = Button(Global.skin, "info")
+			infoButton.setSize(24f, 24f)
 			infoButton.addClickListener {
 				val t = other.ability!!.createTable()
 
 				FullscreenTable.createCloseable(t)
 			}
-			abilityTable.add(infoButton).expandX().right().pad(0f, 10f, 0f, 0f)
+			abilityTable.add(infoButton).size(24f).expandX().right().pad(0f, 10f, 0f, 0f)
 
 			table.add(abilityTable)
 			table.row()
@@ -155,7 +156,7 @@ class Equipment(val path: String)
 
 				FullscreenTable.createCloseable(t)
 			}
-			abilityTable.add(infoButton).width(24f).height(24f).expandX().right().pad(0f, 10f, 0f, 0f)
+			abilityTable.add(infoButton).size(24f).expandX().right().pad(0f, 10f, 0f, 0f)
 
 			table.add(abilityTable).growX()
 			table.row()

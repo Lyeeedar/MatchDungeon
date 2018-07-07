@@ -174,15 +174,15 @@ class AssetManager
 
 		fun loadSprite(name: String, drawActualSize: Boolean): Sprite
 		{
-			return loadSprite(name, 0.5f, Colour(1f, 1f, 1f, 1f), Sprite.AnimationMode.TEXTURE, drawActualSize)
+			return loadSprite(name, 0.5f, Colour(1f, 1f, 1f, 1f), drawActualSize)
 		}
 
 		fun loadSprite(name: String, updateTime: Float, reverse: Boolean): Sprite
 		{
-			return loadSprite(name, updateTime, Colour(1f, 1f, 1f, 1f), Sprite.AnimationMode.TEXTURE, false, reverse)
+			return loadSprite(name, updateTime, Colour(1f, 1f, 1f, 1f), false, reverse)
 		}
 
-		@JvmOverloads fun loadSprite(name: String, updateTime: Float = 0.5f, colour: Colour = Colour(1f, 1f, 1f, 1f), mode: Sprite.AnimationMode = Sprite.AnimationMode.TEXTURE, drawActualSize: Boolean = false, reverse: Boolean = false): Sprite
+		@JvmOverloads fun loadSprite(name: String, updateTime: Float = 0.5f, colour: Colour = Colour(1f, 1f, 1f, 1f), drawActualSize: Boolean = false, reverse: Boolean = false): Sprite
 		{
 			var updateTime = updateTime
 			val textures = Array<TextureRegion>(false, 1, TextureRegion::class.java)
@@ -247,16 +247,10 @@ class AssetManager
 
 			if (updateTime <= 0)
 			{
-				if (mode === Sprite.AnimationMode.SINE)
-				{
-					updateTime = 4f
-				} else
-				{
-					updateTime = 0.5f
-				}
+				updateTime = 0.5f
 			}
 
-			val sprite = Sprite(name, updateTime, textures, colour, mode, drawActualSize)
+			val sprite = Sprite(name, updateTime, textures, colour, drawActualSize)
 
 			return sprite
 		}
@@ -287,7 +281,6 @@ class AssetManager
 					xml.get("Name"),
 					xml.getFloat("UpdateRate", 0f),
 					colour,
-					Sprite.AnimationMode.valueOf(xml.get("AnimationMode", "Texture")!!.toUpperCase()),
 					xml.getBoolean("DrawActualSize", false))
 
 			sprite.repeatDelay = xml.getFloat("RepeatDelay", 0f)
@@ -297,7 +290,7 @@ class AssetManager
 
 			if (xml.getBoolean("RandomStart", false))
 			{
-				sprite.animationState.texIndex = Random.random(sprite.textures.size)
+				sprite.texIndex = Random.random(sprite.textures.size)
 				sprite.animationAccumulator = Random.random(sprite.animationDelay)
 			}
 
@@ -323,24 +316,16 @@ class AssetManager
 			textures.add(texture)
 
 			var updateTime = xml.getFloat("UpdateRate", 0f)
-			val mode = Sprite.AnimationMode.valueOf(xml.get("AnimationMode", "Texture")!!.toUpperCase())
 
 			if (updateTime <= 0)
 			{
-				if (mode === Sprite.AnimationMode.SINE)
-				{
-					updateTime = 4f
-				} else
-				{
-					updateTime = 0.5f
-				}
+				updateTime = 0.5f
 			}
 
 			val sprite = Sprite(xml.get("Name", "")!!,
 					updateTime,
 					textures,
 					colour,
-					mode,
 					xml.getBoolean("DrawActualSize", false))
 
 			sprite.repeatDelay = xml.getFloat("RepeatDelay", 0f)
