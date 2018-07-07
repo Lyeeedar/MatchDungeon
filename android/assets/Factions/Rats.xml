@@ -1,6 +1,29 @@
 <Faction xmlns:meta="Editor">
 	<Monsters>
 		<Monster meta:RefKey="MonsterDesc">
+			<Name>Small Rat</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_heroes/rat</Name>
+				<DrawActualSize>true</DrawActualSize>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+			</Death>
+			<AttackNumPips>7</AttackNumPips>
+			<AttackCooldown>2,4</AttackCooldown>
+			<Size>1</Size>
+			<HP>7</HP>
+			<DamageReduction>0</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>2,4</Cooldown>
+					<Effect>Move</Effect>
+					<Data />
+				</Ability>
+			</Abilities>
+		</Monster>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>Big Rat</Name>
 			<Sprite meta:RefKey="Sprite">
 				<Name>Oryx/uf_split/uf_heroes/rat</Name>
 				<DrawActualSize>true</DrawActualSize>
@@ -9,13 +32,13 @@
 				<Name>Death</Name>
 			</Death>
 			<AttackNumPips>5</AttackNumPips>
-			<AttackCooldown>2,5</AttackCooldown>
-			<Size>1</Size>
-			<HP>5</HP>
+			<AttackCooldown>3,6</AttackCooldown>
+			<Size>2</Size>
+			<HP>13</HP>
 			<DamageReduction>0</DamageReduction>
 			<Abilities>
 				<Ability>
-					<Cooldown>2,4</Cooldown>
+					<Cooldown>4,8</Cooldown>
 					<Effect>Move</Effect>
 					<Data />
 				</Ability>

@@ -15,7 +15,7 @@
 	<Theme>City</Theme>
 	<AllowedVictories>
 		<Condition meta:RefKey="Matches">
-			<Orbs>15</Orbs>
+			<Orbs>25</Orbs>
 			<Orbs>15</Orbs>
 			<Orbs>15</Orbs>
 		</Condition>

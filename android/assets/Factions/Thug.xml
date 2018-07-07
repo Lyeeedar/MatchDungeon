@@ -12,7 +12,7 @@
 			<AttackNumPips>6</AttackNumPips>
 			<AttackCooldown>3,6</AttackCooldown>
 			<Size>1</Size>
-			<HP>5</HP>
+			<HP>8</HP>
 			<DamageReduction>0</DamageReduction>
 			<Abilities>
 				<Ability>
@@ -33,7 +33,7 @@
 			<AttackNumPips>8</AttackNumPips>
 			<AttackCooldown>2,4</AttackCooldown>
 			<Size>1</Size>
-			<HP>5</HP>
+			<HP>8</HP>
 			<DamageReduction>0</DamageReduction>
 			<Abilities>
 				<Ability>
@@ -52,9 +52,9 @@
 				<Name>Death</Name>
 			</Death>
 			<AttackNumPips>5</AttackNumPips>
-			<AttackCooldown>4,6</AttackCooldown>
+			<AttackCooldown>3,6</AttackCooldown>
 			<Size>2</Size>
-			<HP>8</HP>
+			<HP>12</HP>
 			<DamageReduction>0</DamageReduction>
 			<Abilities>
 				<Ability>

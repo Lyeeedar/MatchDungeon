@@ -41,7 +41,9 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	var toSwap: Pair<Point, Point>? = null
 	var lastSwapped: Point = Point.MINUS_ONE
 
-	var animSpeed = 0.15f
+	val defaultAnimSpeed = 0.15f
+	val animSpeedUpMultiplier = 0.95f
+	var animSpeed = defaultAnimSpeed
 
 	// ----------------------------------------------------------------------
 	val onTurn = Event0Arg()
@@ -623,7 +625,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				{
 					onTurn()
 					inTurn = false
-					animSpeed = 0.15f
+					animSpeed = defaultAnimSpeed
 				}
 			}
 
@@ -832,7 +834,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		if (matches.size > 0)
 		{
 			matchCount++
-			animSpeed *= 0.995f
+			animSpeed *= animSpeedUpMultiplier
 
 			val chosen = matches.random()
 			val point = chosen.points().asSequence().random()
@@ -1028,7 +1030,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		if (!complete)
 		{
 			matchCount++
-			animSpeed *= 0.995f
+			animSpeed *= animSpeedUpMultiplier
 
 			val point = tilesToDetonate.random()
 			displayMatchMessage(point!!)

@@ -20,6 +20,9 @@
 			</MarkComplete>
 		</Node>
 		<Node meta:X="481" meta:Y="0" GUID="fb68d943-b8ec-4fd8-a10f-57638e7d828b">
+			<Line>
+				<MultilineString>You manage to salvage something usable from the pile.</MultilineString>
+			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Equipment>
 					<FromDeck>true</FromDeck>

@@ -21,7 +21,7 @@
 					<BlendMode>Additive</BlendMode>
 					<TextureKeyframes>
 						<Stream>
-							<Keyframe>0|Particle/boot-stomp</Keyframe>
+							<Keyframe>0|Particle/blurrylines</Keyframe>
 						</Stream>
 					</TextureKeyframes>
 					<SizeKeyframes>
@@ -100,7 +100,7 @@
 			<SingleBurst>true</SingleBurst>
 			<Particles>
 				<Particle>
-					<Lifetime>1,2</Lifetime>
+					<Lifetime>0.6,1.2</Lifetime>
 					<BlendMode>Additive</BlendMode>
 					<Brownian>5</Brownian>
 					<AllowResize>false</AllowResize>

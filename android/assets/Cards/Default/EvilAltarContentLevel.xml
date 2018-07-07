@@ -34,10 +34,10 @@
 	</Symbols>
 	<AllowedVictories>
 		<Condition meta:RefKey="Matches">
-			<Orbs>15</Orbs>
-			<Orbs>15</Orbs>
-			<Orbs>15</Orbs>
-			<Orbs>15</Orbs>
+			<Orbs>20</Orbs>
+			<Orbs>20</Orbs>
+			<Orbs>20</Orbs>
+			<Orbs>20</Orbs>
 		</Condition>
 	</AllowedVictories>
 	<AllowedDefeats>

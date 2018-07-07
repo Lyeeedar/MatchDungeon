@@ -82,7 +82,7 @@
 	<AllowedVictories>
 		<Condition meta:RefKey="Matches">
 			<Orbs>20</Orbs>
-			<Orbs>10</Orbs>
+			<Orbs>20</Orbs>
 			<Orbs>10</Orbs>
 		</Condition>
 	</AllowedVictories>
