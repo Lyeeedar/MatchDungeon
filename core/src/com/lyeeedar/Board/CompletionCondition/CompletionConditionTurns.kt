@@ -14,7 +14,8 @@ import com.lyeeedar.Util.XmlData
 
 class CompletionConditionTurns(): AbstractCompletionCondition()
 {
-	var turnCount: Int = 30
+	var maxTurnCount = 30
+	var turnCount: Int = maxTurnCount
 
 	lateinit var label: Label
 
@@ -32,7 +33,8 @@ class CompletionConditionTurns(): AbstractCompletionCondition()
 
 	override fun parse(xml: XmlData)
 	{
-		turnCount = xml.getInt("Turns")
+		maxTurnCount = xml.getInt("Turns")
+		turnCount = maxTurnCount
 	}
 
 	override fun attachHandlers(grid: Grid)

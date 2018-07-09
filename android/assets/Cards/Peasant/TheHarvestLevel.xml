@@ -1,0 +1,48 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>...........</Line>
+			<Line>...........</Line>
+			<Line>...........</Line>
+			<Line>..c..c..c..</Line>
+			<Line>...........</Line>
+			<Line>...........</Line>
+			<Line>..c..c..c..</Line>
+			<Line>...........</Line>
+			<Line>...........</Line>
+			<Line>...........</Line>
+			<Line>...........</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>c</Character>
+			<Extends>.</Extends>
+			<Block>0</Block>
+			<Plate>0</Plate>
+			<Seal>1</Seal>
+			<Shield>0</Shield>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<Sinkable>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_items/satchel</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+			</Sinkable>
+		</Symbol>
+	</Symbols>
+	<Theme>Farm</Theme>
+	<OrbCount>5</OrbCount>
+	<AllowedVictories>
+		<Condition meta:RefKey="Sink">
+			<Count>6</Count>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Turns">
+			<Turns>30</Turns>
+		</Condition>
+	</AllowedDefeats>
+</Level>

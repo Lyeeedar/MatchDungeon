@@ -24,10 +24,10 @@ class Quest(val path: String)
 	enum class QuestState
 	{
 		INPROGRESS,
-		GOLD,
-		SILVER,
+		FAILURE,
 		BRONZE,
-		FAILURE
+		SILVER,
+		GOLD
 	}
 
 	var state = QuestState.INPROGRESS

@@ -117,34 +117,8 @@ class QuestScreen : AbstractScreen()
 
 	fun completeQuest()
 	{
-		if (currentQuest.state == Quest.QuestState.GOLD || currentQuest.state == Quest.QuestState.SILVER || currentQuest.state == Quest.QuestState.BRONZE)
-		{
-			val allRewards = Array<AbstractReward>()
-			if (currentQuest.state == Quest.QuestState.GOLD)
-			{
-				allRewards.addAll(currentQuest.goldRewards)
-			}
-			if (currentQuest.state == Quest.QuestState.GOLD || currentQuest.state == Quest.QuestState.SILVER)
-			{
-				allRewards.addAll(currentQuest.silverRewards)
-			}
-			if (currentQuest.state == Quest.QuestState.GOLD || currentQuest.state == Quest.QuestState.SILVER || currentQuest.state == Quest.QuestState.BRONZE)
-			{
-				allRewards.addAll(currentQuest.bronzeRewards)
-			}
-
-			if (allRewards.size > 0)
-			{
-				grouped = allRewards.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
-				Global.stage.addActor(greyOutTable)
-			}
-
-			updateRewards()
-		}
-
-		val screen = Global.game.getTypedScreen<QuestSelectionScreen>()!!
-		screen.setup()
-		screen.swapTo()
+		Global.stage.addActor(greyOutTable)
+		updateRewards()
 	}
 
 	var grouped: Array<Array<AbstractReward>> = Array()
@@ -154,6 +128,32 @@ class QuestScreen : AbstractScreen()
 	{
 		if (currentGroup.size == 0)
 		{
+			if (grouped.size == 0)
+			{
+				val bronze = currentQuest.bronzeRewards.filter { it.isValid() }.toGdxArray()
+				val silver = currentQuest.silverRewards.filter { it.isValid() }.toGdxArray()
+				val gold = currentQuest.goldRewards.filter { it.isValid() }.toGdxArray()
+
+				if (currentQuest.state.ordinal >= Quest.QuestState.BRONZE.ordinal && !currentQuest.gotBronze && bronze.size > 0)
+				{
+					grouped = bronze.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
+				}
+				else if (currentQuest.state.ordinal >= Quest.QuestState.SILVER.ordinal && !currentQuest.gotSilver && silver.size > 0)
+				{
+					grouped = silver.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
+				}
+				else if (currentQuest.state.ordinal >= Quest.QuestState.GOLD.ordinal && !currentQuest.gotGold && gold.size > 0)
+				{
+					grouped = gold.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
+				}
+				else
+				{
+					greyOutTable.remove()
+					QuestSelectionScreen.instance.setup()
+					QuestSelectionScreen.instance.swapTo()
+				}
+			}
+
 			if (grouped.size > 0)
 			{
 				val chosen = grouped.removeIndex(0)
@@ -187,12 +187,6 @@ class QuestScreen : AbstractScreen()
 				{
 					updateRewards()
 				}
-			}
-			else
-			{
-				greyOutTable.remove()
-
-				// change to quest selection screen here
 			}
 		}
 	}

@@ -1,0 +1,34 @@
+<CardContent meta:X="0" meta:Y="0" GUID="1a8dbaa4-0c77-43b0-b2ea-cf4b62581c30" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">52ff64a3-258f-425b-bd77-a697b6410b5c</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="52ff64a3-258f-425b-bd77-a697b6410b5c">
+			<Line>
+				<MultilineString>Fields of crops lie waiting for you to harvest and store them, ready for sale during the next market fair.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You must be quick however, as every day that passes allows wildlife more time to ravage the ripe vegetables.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>TheHarvestLevel</Level>
+				<Success meta:RefKey="Node">0f3bed00-6168-44ff-9ccd-dbc8d063460a</Success>
+				<Failure meta:RefKey="Node">c8dcf4fb-2551-4447-848b-74e5e68606ff</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="458" meta:Y="216" GUID="c8dcf4fb-2551-4447-848b-74e5e68606ff">
+			<Line>
+				<MultilineString>More crops remain to be gathered. Your work is not yet done.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="482" meta:Y="0" GUID="0f3bed00-6168-44ff-9ccd-dbc8d063460a">
+			<Line>
+				<MultilineString>The harvest is complete, and your barn is full to bursting with newly gathered crops. Just some picking, brining and preserving and you will be ready for the fair.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

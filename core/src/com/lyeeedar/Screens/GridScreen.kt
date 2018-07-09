@@ -37,6 +37,7 @@ class GridScreen(): AbstractScreen()
 	var hpBar = Table()
 	var launchButton: TextButton? = null
 	var refreshButton: TextButton? = null
+	var ultimateButton: TextButton? = null
 	var grid: GridWidget? = null
 	//lateinit var player: Player
 	lateinit var level: Level
@@ -75,6 +76,12 @@ class GridScreen(): AbstractScreen()
 			die.hp = 0
 
 			return true
+		})
+
+		debugConsole.register("maxpower", "", { args, console ->
+			PowerBar.instance.power = PowerBar.instance.maxPower
+
+			true
 		})
 	}
 
@@ -141,7 +148,8 @@ class GridScreen(): AbstractScreen()
 			row()
 			stack { cell -> cell.height(25f)
 				add(powerBar)
-				refreshButton = textButton("No Valid Moves. Refresh?", "default", Global.skin) {
+
+				refreshButton = textButton("No Valid Moves. Shuffle Grid?", "default", Global.skin) {
 					isVisible = false
 					onClick { inputEvent: InputEvent, kTextButton: KTextButton ->
 						if (level.grid.activeAbility == null && level.grid.noValidMoves)
@@ -151,6 +159,18 @@ class GridScreen(): AbstractScreen()
 						}
 					}
 				}
+
+				ultimateButton = textButton("Full Power! Shuffle Grid?", "default", Global.skin) {
+					isVisible = false
+					onClick { inputEvent: InputEvent, kTextButton: KTextButton ->
+						if (powerBar.power == powerBar.maxPower)
+						{
+							level.grid.refill()
+							powerBar.power = 0
+						}
+					}
+				}
+
 				launchButton = textButton("Launch", "default", Global.skin) {
 					isVisible = false
 					onClick { inputEvent: InputEvent, kTextButton: KTextButton ->
@@ -226,6 +246,7 @@ class GridScreen(): AbstractScreen()
 
 			PowerBar.instance.isVisible = false
 			refreshButton!!.isVisible = false
+			ultimateButton!!.isVisible = false
 			launchButton!!.isVisible = true
 			launchButton!!.color = if (ability.selectedTargets.size == 0) Color.DARK_GRAY else Color.WHITE
 			launchButton!!.touchable = if (ability.selectedTargets.size == 0) Touchable.disabled else Touchable.enabled
@@ -235,13 +256,22 @@ class GridScreen(): AbstractScreen()
 		{
 			PowerBar.instance.isVisible = false
 			launchButton!!.isVisible = false
+			ultimateButton!!.isVisible = false
 			refreshButton!!.isVisible = true
+		}
+		else if (PowerBar.instance.power == PowerBar.instance.maxPower)
+		{
+			PowerBar.instance.isVisible = false
+			launchButton!!.isVisible = false
+			refreshButton!!.isVisible = false
+			ultimateButton!!.isVisible = true
 		}
 		else
 		{
 			PowerBar.instance.isVisible = true
 			refreshButton!!.isVisible = false
 			launchButton!!.isVisible = false
+			ultimateButton!!.isVisible = false
 			idleTimer = 0f
 			lastTargets = 0
 		}

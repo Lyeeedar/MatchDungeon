@@ -80,7 +80,7 @@
 		</Node>
 		<Node meta:X="813" meta:Y="133" GUID="687aacfa-1e9c-4109-86e6-0e9e5cedddfa">
 			<Rewards meta:RefKey="Rewards">
-				<Statistics meta:RefKey="Statistics">
+				<Statistics>
 					<Health>0</Health>
 					<MatchDamage>0.3</MatchDamage>
 					<AbilityDamage>0</AbilityDamage>
@@ -90,8 +90,8 @@
 		</Node>
 		<Node meta:X="809" meta:Y="214" GUID="f16d5e15-c788-4c19-a7ed-a15226cb091e">
 			<Rewards meta:RefKey="Rewards">
-				<Statistics meta:RefKey="Statistics">
-					<Health>5</Health>
+				<Statistics>
+					<Health>2</Health>
 					<MatchDamage>0</MatchDamage>
 					<AbilityDamage>0</AbilityDamage>
 					<PowerGain>0</PowerGain>
@@ -100,7 +100,7 @@
 		</Node>
 		<Node meta:X="812" meta:Y="302" GUID="c82992d0-ae64-4490-81ef-96d3412802bc">
 			<Rewards meta:RefKey="Rewards">
-				<Statistics meta:RefKey="Statistics">
+				<Statistics>
 					<Health>0</Health>
 					<MatchDamage>0</MatchDamage>
 					<AbilityDamage>1</AbilityDamage>

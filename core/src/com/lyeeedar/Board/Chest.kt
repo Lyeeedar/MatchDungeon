@@ -1,5 +1,6 @@
 package com.lyeeedar.Board
 
+import com.lyeeedar.Board.CompletionCondition.CompletionConditionTurns
 import com.lyeeedar.Renderables.Sprite.Sprite
 
 /**
@@ -9,7 +10,6 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 class Chest(val spawnOrbs: Boolean = true, val theme: Theme)
 {
 	var numToSpawn = 0
-	var spacing = 3
 	var spacingCounter = 0
 
 	val sprite: Sprite
@@ -33,7 +33,29 @@ class Chest(val spawnOrbs: Boolean = true, val theme: Theme)
 			val coinsOnBoard = grid.grid.filter { it.sinkable != null }.count() + 1
 			if (coinsOnBoard >= 7) return grid.level.spawnOrb()
 
-			if (spacingCounter < spacing)
+			var chosenSpacing = 3
+			val turnsCondition = grid.level.defeatConditions.firstOrNull { it is CompletionConditionTurns }
+			if (turnsCondition != null && turnsCondition is CompletionConditionTurns)
+			{
+				if (turnsCondition.turnCount < turnsCondition.maxTurnCount / 4)
+				{
+					chosenSpacing = 0
+				}
+				else if (turnsCondition.turnCount < (turnsCondition.maxTurnCount / 4) * 2)
+				{
+					chosenSpacing = 1
+				}
+				else if (turnsCondition.turnCount < (turnsCondition.maxTurnCount / 4) * 3)
+				{
+					chosenSpacing = 2
+				}
+				else
+				{
+					chosenSpacing = 3
+				}
+			}
+
+			if (spacingCounter < chosenSpacing)
 			{
 				spacingCounter++
 				return grid.level.spawnOrb()

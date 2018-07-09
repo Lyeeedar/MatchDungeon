@@ -6,7 +6,7 @@
 		<Name>Oryx/uf_split/uf_items/armor_leather_chest</Name>
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
-		<Health>5</Health>
+		<Health>3</Health>
 		<MatchDamage>0</MatchDamage>
 		<AbilityDamage>0</AbilityDamage>
 		<PowerGain>1</PowerGain>

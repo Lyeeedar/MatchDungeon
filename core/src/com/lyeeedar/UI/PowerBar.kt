@@ -27,7 +27,7 @@ class PowerBar() : Widget()
 	val pipPadding = 0f
 
 	val powerPerPip = 10
-	var maxPower = 100
+	var maxPower = 150
 
 	val pipWidth: Float
 		get()

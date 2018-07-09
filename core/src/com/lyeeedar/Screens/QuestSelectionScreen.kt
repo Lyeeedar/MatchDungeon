@@ -8,6 +8,11 @@ import com.lyeeedar.UI.addClickListener
 
 class QuestSelectionScreen : AbstractScreen()
 {
+	init
+	{
+		instance = this
+	}
+
 	override fun create()
 	{
 
@@ -62,5 +67,10 @@ class QuestSelectionScreen : AbstractScreen()
 	override fun doRender(delta: Float)
 	{
 
+	}
+
+	companion object
+	{
+		lateinit var instance: QuestSelectionScreen
 	}
 }
