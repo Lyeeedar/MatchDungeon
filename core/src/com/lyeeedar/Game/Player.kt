@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
+import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Card.Card
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Global
@@ -48,6 +49,19 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 	fun getEquipment(equipmentSlot: EquipmentSlot): Equipment?
 	{
 		return equipment[equipmentSlot] ?: baseCharacter.equipment[equipmentSlot]
+	}
+
+	fun getEquippedSet(): ObjectSet<String>
+	{
+		val output = ObjectSet<String>()
+
+		for (slot in EquipmentSlot.Values)
+		{
+			val equip = getEquipment(slot) ?: continue
+			output.add(equip.path)
+		}
+
+		return output
 	}
 
 	fun createTable(): Table
@@ -111,7 +125,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 
 		for (slot in EquipmentSlot.Values)
 		{
-			val equipment = equipment[slot]
+			val equipment = getEquipment(slot)
 
 			if (equipment == null)
 			{

@@ -137,14 +137,17 @@ class QuestScreen : AbstractScreen()
 				if (currentQuest.state.ordinal >= Quest.QuestState.BRONZE.ordinal && !currentQuest.gotBronze && bronze.size > 0)
 				{
 					grouped = bronze.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
+					currentQuest.gotBronze = true
 				}
 				else if (currentQuest.state.ordinal >= Quest.QuestState.SILVER.ordinal && !currentQuest.gotSilver && silver.size > 0)
 				{
 					grouped = silver.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
+					currentQuest.gotSilver = true
 				}
 				else if (currentQuest.state.ordinal >= Quest.QuestState.GOLD.ordinal && !currentQuest.gotGold && gold.size > 0)
 				{
 					grouped = gold.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
+					currentQuest.gotGold = true
 				}
 				else
 				{

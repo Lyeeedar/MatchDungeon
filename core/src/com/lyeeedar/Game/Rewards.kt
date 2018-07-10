@@ -13,7 +13,10 @@ import com.lyeeedar.Global
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.CardWidget
-import com.lyeeedar.Util.*
+import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Colour
+import com.lyeeedar.Util.FastEnumMap
+import com.lyeeedar.Util.XmlData
 
 enum class Chance private constructor(val eqn: String, val uiString: String, val colour: Colour)
 {
@@ -368,10 +371,25 @@ class EquipmentReward : AbstractReward()
 				types.add(EquipmentSlot.OFFHAND)
 			}
 
-			val validEquipment = Global.player.deck.equipment.filter { types.contains(it.slot) }
+			val equipped = Global.player.getEquippedSet()
+			val validEquipment = Global.player.deck.equipment.filter { types.contains(it.slot) && !equipped.contains(it.path) }
 			if (!validEquipment.isEmpty())
 			{
-				equipment = validEquipment.asGdxArray().random()
+				val biasedArray = Array<Equipment>()
+				for (equip in validEquipment)
+				{
+					if (Global.player.getEquipment(equip.slot) == null)
+					{
+						biasedArray.add(equip)
+						biasedArray.add(equip)
+					}
+					else
+					{
+						biasedArray.add(equip)
+					}
+				}
+
+				equipment = biasedArray.random()
 			}
 			else
 			{

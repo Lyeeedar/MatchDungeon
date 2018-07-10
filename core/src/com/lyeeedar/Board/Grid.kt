@@ -42,7 +42,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	var lastSwapped: Point = Point.MINUS_ONE
 
 	val defaultAnimSpeed = 0.15f
-	val animSpeedUpMultiplier = 0.95f
+	val animSpeedUpMultiplier = 0.975f
 	var animSpeed = defaultAnimSpeed
 
 	// ----------------------------------------------------------------------
@@ -123,6 +123,8 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			}
 
 			gainedBonusPower = false
+
+			animSpeed = defaultAnimSpeed
 
 			false
 		}

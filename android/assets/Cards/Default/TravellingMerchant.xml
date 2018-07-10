@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="59e4a3e9-6ff8-450f-a6f6-cba284aef654" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">50d5f400-24df-4190-a333-6fe004ca8a5d</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="50d5f400-24df-4190-a333-6fe004ca8a5d">
+			<Name>Travelling Merchant</Name>
+			<Description>You stumble across a travelling merchant, burdened by a multitude of goods.</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>TravellingMerchantContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

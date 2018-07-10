@@ -1,0 +1,72 @@
+<Theme xmlns:meta="Editor">
+	<Floor meta:RefKey="SpriteWrapper">
+		<Sprite meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_terrain/ground_grass_1</Name>
+			<Colour>217,217,217,255</Colour>
+		</Sprite>
+	</Floor>
+	<Wall meta:RefKey="SpriteWrapper">
+		<TilingSprite meta:RefKey="TilingSprite">
+			<Name>Wall</Name>
+			<Mode>Premade</Mode>
+			<Front meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_terrain/wall_stone_14</Name>
+			</Front>
+			<Top meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_terrain/wall_stone_7</Name>
+			</Top>
+			<Overhang meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_terrain/wall_stone_1</Name>
+			</Overhang>
+		</TilingSprite>
+	</Wall>
+	<Pit meta:RefKey="SpriteWrapper">
+		<Sprite meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_terrain/water_blue</Name>
+		</Sprite>
+	</Pit>
+	<Chest>
+		<Full meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_items/chest_silver_open</Name>
+			<DrawActualSize>true</DrawActualSize>
+		</Full>
+		<Empty meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_items/chest_silver_empty</Name>
+			<DrawActualSize>true</DrawActualSize>
+		</Empty>
+	</Chest>
+	<Coin meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/coin_gold</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Coin>
+	<Plate meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_terrain/rune_2</Name>
+		<Colour>228,0,255,255</Colour>
+	</Plate>
+	<Block>
+		<Sprite meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_terrain/crate</Name>
+			<DrawActualSize>true</DrawActualSize>
+		</Sprite>
+	</Block>
+	<Seal>
+		<Sprite meta:RefKey="Sprite">
+			<Name>Oryx/Custom/terrain/Rubbish_1</Name>
+			<DrawActualSize>true</DrawActualSize>
+			<Colour>255,255,255,54</Colour>
+		</Sprite>
+	</Seal>
+	<Shield>
+		<Sprite meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_items/shield_iron_heater</Name>
+			<DrawActualSize>true</DrawActualSize>
+		</Sprite>
+	</Shield>
+	<SpawnWeights>
+		<Spawn>Orb,1</Spawn>
+	</SpawnWeights>
+	<Factions>
+		<Faction>Rats</Faction>
+	</Factions>
+	<BackgroundTile>Oryx/uf_split/uf_terrain/ground_grass_1</BackgroundTile>
+</Theme>

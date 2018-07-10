@@ -29,6 +29,46 @@
 			<Data Name="Success" Keys="Node" SkipIfDefault="False" meta:RefKey="GraphReference" />
 			<Data Name="Failure" Keys="Node" SkipIfDefault="False" meta:RefKey="GraphReference" />
 		</Data>
+		<Data Name="Shop" TextColour="188,102,255" meta:RefKey="Struct">
+			<Data Name="CostMultiplier" Default="1" meta:RefKey="String" />
+			<Data Name="Items" meta:RefKey="Collection">
+				<!--Quest-->
+				<Data Name="Equipment" meta:RefKey="Struct">
+					<Data Name="FromDeck" Default="True" VisibleIf="Equipment==null" meta:RefKey="Boolean" />
+					<Data Name="Type" EnumValues="Any,Weapon,Armour,MainHand,OffHand,Head,Body" VisibleIf="Equipment==null" meta:RefKey="Enum" />
+					<Data Name="Cost" Type="Int" Min="1" Default="1" VisibleIf="FromDeck==false" meta:RefKey="Number" />
+					<Data Name="Equipment" VisibleIf="FromDeck==false" meta:RefKey="File" />
+					<Data Name="OnPurchaseDefine" Keys="OnPurchaseDefine" VisibleIf="FromDeck==false" meta:RefKey="Reference" />
+				</Data>
+				<Data Name="Statistics" meta:RefKey="Struct">
+					<Data Name="Cost" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
+					<Data Name="Type" EnumValues="Health,MatchDamage,AbilityDamage,PowerGain" Default="Always" meta:RefKey="Enum" />
+					<Data Name="Amount" Min="-999999" SkipIfDefault="False" meta:RefKey="Number" />
+					<Data Name="OnPurchaseDefine" Keys="OnPurchaseDefine" meta:RefKey="Reference" />
+				</Data>
+				<Data Name="Item" meta:RefKey="Struct">
+					<Data Name="Cost" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
+					<Data Name="Item" Keys="Item" Nullable="False" meta:RefKey="Reference" />
+					<Data Name="OnPurchaseDefine" Keys="OnPurchaseDefine" meta:RefKey="Reference" />
+				</Data>
+				<!--Progression-->
+				<Data Name="Card" meta:RefKey="Struct">
+					<Data Name="Cost" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
+					<Data Name="File" BasePath="Cards" StripExtension="True" ResourceType="Card" SkipIfDefault="False" meta:RefKey="File" />
+					<Data Name="OnPurchaseDefine" Keys="OnPurchaseDefine" meta:RefKey="Reference" />
+				</Data>
+				<Data Name="Quest" meta:RefKey="Struct">
+					<Data Name="Cost" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
+					<Data Name="File" BasePath="Quests" StripExtension="True" ResourceType="Quest" meta:RefKey="File" />
+					<Data Name="OnPurchaseDefine" Keys="OnPurchaseDefine" meta:RefKey="Reference" />
+				</Data>
+				<Data Name="Character" meta:RefKey="Struct">
+					<Data Name="Cost" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
+					<Data Name="File" BasePath="Characters" StripExtension="True" ResourceType="Character" meta:RefKey="File" />
+					<Data Name="OnPurchaseDefine" Keys="OnPurchaseDefine" meta:RefKey="Reference" />
+				</Data>
+			</Data>
+		</Data>
 		<!--Visual-->
 		<Data Name="Flash" TextColour="192,207,109" meta:RefKey="Struct">
 			<Data Name="Colour" SkipIfDefault="False" meta:RefKey="Colour" />
@@ -51,9 +91,14 @@
 			<Data Name="Key" VisibleIf="State==Custom" meta:RefKey="String" />
 		</Data>
 		<Data Name="Rewards" Keys="Rewards" Nullable="False" meta:RefKey="Reference" />
-		<Data Name="Spend" meta:RefKey="Struct">
+		<Data Name="Spend" TextColour="204,173,160" meta:RefKey="Struct">
 			<Data Name="Key" SkipIfDefault="False" meta:RefKey="String" />
 			<Data Name="Count" Default="1" SkipIfDefault="False" meta:RefKey="String" />
 		</Data>
+	</Definition>
+	<Definition Name="OnPurchaseDefine" meta:RefKey="StructDef">
+		<Data Name="Key" meta:RefKey="String" />
+		<Data Name="Value" meta:RefKey="String" />
+		<Data Name="Global" SkipIfDefault="False" meta:RefKey="Boolean" />
 	</Definition>
 </Definitions>

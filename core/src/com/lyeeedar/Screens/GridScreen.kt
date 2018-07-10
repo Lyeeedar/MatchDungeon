@@ -252,14 +252,14 @@ class GridScreen(): AbstractScreen()
 			launchButton!!.touchable = if (ability.selectedTargets.size == 0) Touchable.disabled else Touchable.enabled
 			launchButton!!.setText("Activate (" + ability.selectedTargets.size + "/" + ability.targets + ")")
 		}
-		else if (level.grid.noValidMoves)
+		else if (level.grid.noValidMoves && !level.grid.inTurn)
 		{
 			PowerBar.instance.isVisible = false
 			launchButton!!.isVisible = false
 			ultimateButton!!.isVisible = false
 			refreshButton!!.isVisible = true
 		}
-		else if (PowerBar.instance.power == PowerBar.instance.maxPower)
+		else if (PowerBar.instance.power == PowerBar.instance.maxPower && !level.grid.inTurn)
 		{
 			PowerBar.instance.isVisible = false
 			launchButton!!.isVisible = false
