@@ -39,6 +39,7 @@ class GridWidget(val grid: Grid) : Widget()
 	val hp_full: Sprite = AssetManager.loadSprite("GUI/health_full")
 	val hp_dr: Sprite = AssetManager.loadSprite("GUI/health_DR")
 	val hp_damaged: Sprite = AssetManager.loadSprite("GUI/health_damaged")
+	val hp_neutral: Sprite = AssetManager.loadSprite("GUI/health_neutral")
 	val hp_full_friendly: Sprite = AssetManager.loadSprite("GUI/health_full_green")
 	val hp_full_summon: Sprite = AssetManager.loadSprite("GUI/health_full_blue")
 	val hp_empty: Sprite = AssetManager.loadSprite("GUI/health_empty")
@@ -153,6 +154,7 @@ class GridWidget(val grid: Grid) : Widget()
 				val tile = grid.grid[x, y]
 				val orb = tile.swappable
 				val block = tile.block
+				val container = tile.container
 				val chest = tile.chest
 				val monster = tile.monster
 				val friendly = tile.friendly
@@ -410,6 +412,57 @@ class GridWidget(val grid: Grid) : Widget()
 				if (block != null)
 				{
 					ground.queueSprite(block.sprite, xi, yi, ORB, 1, blockColour)
+
+					// do hp bar
+					if (block.hp < block.maxhp)
+					{
+						val solidSpaceRatio = 0.12f // 20% free space
+						val space = 1f
+						val pips = block.maxhp + block.damageReduction
+						val spacePerPip = space / pips.toFloat()
+						val spacing = spacePerPip * solidSpaceRatio
+						val solid = spacePerPip - spacing
+
+						for (i in 0 until pips)
+						{
+							val sprite = when
+							{
+								i < block.hp -> hp_neutral
+								i < block.hp + block.remainingReduction -> hp_dr
+								i < block.hp + block.lostHP -> hp_damaged
+								else -> hp_empty
+							}
+							floating.queueSprite(sprite, xi + i * spacePerPip, yi + 0.1f, ORB, 2, width = solid, height = 0.15f)
+						}
+					}
+				}
+
+				if (container != null)
+				{
+					ground.queueSprite(container.sprite, xi, yi, ORB, 1, blockColour)
+
+					// do hp bar
+					if (container.hp < container.maxhp)
+					{
+						val solidSpaceRatio = 0.12f // 20% free space
+						val space = 1f
+						val pips = container.maxhp + container.damageReduction
+						val spacePerPip = space / pips.toFloat()
+						val spacing = spacePerPip * solidSpaceRatio
+						val solid = spacePerPip - spacing
+
+						for (i in 0 until pips)
+						{
+							val sprite = when
+							{
+								i < container.hp -> hp_neutral
+								i < container.hp + container.remainingReduction -> hp_dr
+								i < container.hp + container.lostHP -> hp_damaged
+								else -> hp_empty
+							}
+							floating.queueSprite(sprite, xi + i * spacePerPip, yi + 0.1f, ORB, 2, width = solid, height = 0.15f)
+						}
+					}
 				}
 
 				if (tile.isSelected)

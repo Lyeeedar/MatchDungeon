@@ -50,7 +50,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	val onTime = Event1Arg<Float>()
 	val onPop = Event2Arg<Orb, Float>()
 	val onSunk = Event1Arg<Sinkable>()
-	val onDamaged = Event1Arg<Creature>()
+	val onDamaged = Event1Arg<Damageable>()
 	val onSpawn = Event1Arg<Swappable>()
 	val onAttacked = Event1Arg<Orb>()
 
@@ -114,11 +114,14 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			for (tile in grid)
 			{
 				// process creatures
-				val creature = tile.creature
-				if (creature != null && tile == creature.tiles[0, 0])
+				val damageable = tile.damageable
+				if (damageable != null)
 				{
-					creature.damSources.clear()
-					creature.remainingReduction = creature.damageReduction
+					if (damageable !is Creature || damageable.tiles[0, 0] == tile)
+					{
+						damageable.damSources.clear()
+						damageable.remainingReduction = damageable.damageReduction
+					}
 				}
 			}
 
@@ -789,18 +792,19 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				else if (tile.block != null)
 				{
 					val block = tile.block!!
-					if (block.count <= 0)
+					if (block.hp <= 0)
 					{
 						tile.block = null
 						tile.effects.add(block.death.copy())
 					}
 				}
-				else if (tile.shield != null)
+				else if (tile.container != null)
 				{
-					val shield = tile.shield!!
-					if (shield.count <= 0)
+					val container = tile.container!!
+					if (container.hp <= 0)
 					{
-						tile.shield = null
+						tile.contents = container.contents
+						tile.effects.add(container.death.copy())
 					}
 				}
 				else if (tile.creature != null)
@@ -1376,40 +1380,28 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			// pop all borders
 			for (t in borderTiles)
 			{
-				if (t.block != null)
+				if (t.damageable != null)
 				{
-					t.block!!.count--
+					val damageable = t.damageable!!
 
-					t.effects.add(hitEffect.copy())
-				}
-				if (t.creature != null)
-				{
-					val creature = t.creature!!
-					var targetDam = if (!creature.damSources.contains(this)) 1 + level.player.getStat(Statistic.MATCHDAMAGE) else 1
-					var damReduction = creature.remainingReduction
+					var targetDam = if (!damageable.damSources.contains(this)) 1 + level.player.getStat(Statistic.MATCHDAMAGE) else 1
+					var damReduction = damageable.remainingReduction
 					damReduction -= targetDam
 
 					if (damReduction < 0)
 					{
 						targetDam = -damReduction
-						creature.remainingReduction = 0
+						damageable.remainingReduction = 0
 					}
 					else
 					{
 						targetDam = 0
-						creature.remainingReduction = damReduction
+						damageable.remainingReduction = damReduction
 					}
 
-					creature.hp -= targetDam
+					damageable.hp -= targetDam
 
-					creature.damSources.add(this)
-					onDamaged(creature)
-
-					t.effects.add(hitEffect.copy())
-				}
-				if (t.shield != null)
-				{
-					t.shield!!.count--
+					damageable.damSources.add(this)
 
 					t.effects.add(hitEffect.copy())
 				}
@@ -1520,49 +1512,31 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			tile.effects.add(hit)
 		}
 
-		if (tile.block != null)
+		if (tile.damageable != null)
 		{
-			tile.block!!.count--
-			val hit = hitEffect.copy()
-			hit.renderDelay = delay
-			tile.effects.add(hit)
-			return
-		}
+			val damageable = tile.damageable!!
 
-		if (tile.shield != null)
-		{
-			tile.shield!!.count--
-			val hit = hitEffect.copy()
-			hit.renderDelay = delay
-			tile.effects.add(hit)
-			return
-		}
-
-		if (tile.creature != null)
-		{
-			val creature = tile.creature!!
-
-			var targetDam = if (!creature.damSources.contains(damSource)) 1 + bonusDam else 1
-			var damReduction = creature.remainingReduction
+			var targetDam = if (!damageable.damSources.contains(damSource)) 1 + bonusDam else 1
+			var damReduction = damageable.remainingReduction
 			damReduction -= targetDam
 
 			if (damReduction < 0)
 			{
 				targetDam = -damReduction
-				creature.remainingReduction = 0
+				damageable.remainingReduction = 0
 			}
 			else
 			{
 				targetDam = 0
-				creature.remainingReduction = damReduction
+				damageable.remainingReduction = damReduction
 			}
 
-			creature.hp -= targetDam
-			if (damSource != null) creature.damSources.add(damSource)
+			damageable.hp -= targetDam
+			if (damSource != null) damageable.damSources.add(damSource)
 			val hit = hitEffect.copy()
 			hit.renderDelay = delay
 			tile.effects.add(hit)
-			onDamaged(creature)
+			onDamaged(damageable)
 			return
 		}
 

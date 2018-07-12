@@ -61,11 +61,7 @@ class Level(val loadPath: String)
 
 		val toSpawn = theme.spawnList.random()
 
-		if (toSpawn == "Shield")
-		{
-			return Shield(theme)
-		}
-		else if (toSpawn == "Changer")
+		if (toSpawn == "Changer")
 		{
 			val orb = Orb(Orb.getRandomOrb(this), theme)
 			orb.isChanger = true
@@ -118,7 +114,7 @@ class Level(val loadPath: String)
 				tile.canHaveOrb = true
 				tile.spriteSetter = theme.floor.copy()
 				tile.block = Block(theme)
-				tile.block!!.count = blockStrength
+				tile.block!!.maxhp = blockStrength
 			}
 			else if (char == '$')
 			{
@@ -161,20 +157,21 @@ class Level(val loadPath: String)
 				if (symbol.block > 0)
 				{
 					tile.block = Block(theme)
-					tile.block!!.count = symbol.block
+					tile.block!!.maxhp = symbol.block
 				}
 
 				tile.plateStrength = symbol.plate
 
-				if (symbol.shield > 0)
-				{
-					tile.shield = Shield(theme)
-					tile.shield!!.count = symbol.shield
-				}
-
 				if (symbol.isMonster)
 				{
 					hasMonster = true
+				}
+				else if (symbol.isChest)
+				{
+					tile.chest = Chest(true, theme)
+					tile.canHaveOrb = false
+					tile.spriteSetter = theme.floor.copy()
+					tile.chest!!.attachHandlers(grid)
 				}
 
 				if (symbol.type == SymbolType.PIT)
@@ -408,6 +405,11 @@ class Level(val loadPath: String)
 					orb.special = special
 					tile.orb = orb
 				}
+
+				if (symbol.container != null && tile.contents != null)
+				{
+					tile.container = Container(symbol.container.sprite.copy(), symbol.container.hp, tile.contents!!)
+				}
 			}
 		}
 
@@ -428,9 +430,9 @@ class Level(val loadPath: String)
 			{
 				val numToSink = (victory as? CompletionConditionSink)!!.count
 
-				val existingCount = grid.grid.filter { it.sinkable != null }.count()
+				val existingCount = grid.grid.filter { it.sinkable != null || it.container?.contents is Sinkable }.count()
 
-				val chests = grid.grid.filter { it.chest != null }.map { it.chest!! }
+				val chests = grid.grid.filter { it.chest != null || it.container?.contents is Chest }.map { it.chest ?: it.container!!.contents as Chest }
 
 				val totalToSpawn = numToSink - existingCount
 				if (totalToSpawn > 0)
@@ -519,7 +521,6 @@ class Level(val loadPath: String)
 					val block = symbolEl.getInt("Block", 0)
 					val plate = symbolEl.getInt("Plate", 0)
 					val seal = symbolEl.getInt("Seal", 0)
-					val shield = symbolEl.getInt("Shield", 0)
 					val attack = symbolEl.getInt("Attack", 0)
 
 					val isMonster = symbolEl.getBoolean("IsMonster", false)
@@ -540,9 +541,19 @@ class Level(val loadPath: String)
 						sinkableDesc = SinkableDesc(sinkSprite)
 					}
 
+					val isChest = symbolEl.getBoolean("IsChest", false)
+
+					var containerDesc: ContainerDesc? = null
+					val containerDescEl = symbolEl.getChildByName("Container")
+					if (containerDescEl != null)
+					{
+						val containerSprite = AssetManager.loadSprite(containerDescEl.getChildByName("Sprite")!!)
+						containerDesc = ContainerDesc(containerSprite, containerDescEl.getInt("Health", 1))
+					}
+
 					val type = SymbolType.valueOf(symbolEl.get("Type", "Floor")!!.toUpperCase())
 
-					symbolsMap[character.toInt()] = Symbol(character, extends, sprite, block, plate, seal, shield, attack, isMonster, monsterDesc, special, sinkableDesc, type)
+					symbolsMap[character.toInt()] = Symbol(character, extends, sprite, block, plate, seal, attack, isMonster, monsterDesc, special, sinkableDesc, isChest, containerDesc, type)
 				}
 			}
 
@@ -603,10 +614,21 @@ class Level(val loadPath: String)
 
 data class SinkableDesc(val sprite: Sprite)
 
+data class ContainerDesc(val sprite: Sprite, val hp: Int)
+
 enum class SymbolType
 {
 	FLOOR,
 	WALL,
 	PIT
 }
-data class Symbol(val char: Char, val extends: Char, val sprite: SpriteWrapper?, val block: Int, val plate: Int, val seal: Int, val shield: Int, val attack: Int, val isMonster: Boolean, val monsterDesc: MonsterDesc?, val special: String, val sinkableDesc: SinkableDesc?, val type: SymbolType)
+data class Symbol(
+		val char: Char, val extends: Char,
+		val sprite: SpriteWrapper?,
+		val block: Int, val plate: Int, val seal: Int, val attack: Int,
+		val isMonster: Boolean, val monsterDesc: MonsterDesc?,
+		val special: String,
+		val sinkableDesc: SinkableDesc?,
+		val isChest: Boolean,
+		val container: ContainerDesc?,
+		val type: SymbolType)

@@ -5,10 +5,7 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.ObjectMap
-import com.lyeeedar.Board.Grid
-import com.lyeeedar.Board.Mote
-import com.lyeeedar.Board.Sinkable
-import com.lyeeedar.Board.Tile
+import com.lyeeedar.Board.*
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.GridWidget
@@ -63,7 +60,7 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 
 		for (tile in grid.grid)
 		{
-			val sinkable = tile.sinkable ?: continue
+			val sinkable = tile.sinkable ?: tile.container?.contents as? Sinkable ?: continue
 
 			val data: SinkableData
 			if (sinkableMap.containsKey(sinkable.sprite.fileName))
@@ -85,7 +82,7 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 			// Check if level has chests and make up the rest with coins
 			val coins = count - total
 
-			if (grid.grid.any { it.chest != null })
+			if (grid.grid.any { it.chest != null || it.container?.contents is Chest })
 			{
 				// no need to do anything fancy, the chests will spawn them
 			}
@@ -156,9 +153,9 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 		// check if any sinkables exist in the level already, use their sprite instead if they do
 		for (tile in grid.grid)
 		{
-			if (tile.sinkable != null)
+			if (tile.sinkable != null || tile.container?.contents is Sinkable)
 			{
-				val sinkable = tile.sinkable!!
+				val sinkable = tile.sinkable ?: tile.container!!.contents as Sinkable
 				sprite = sinkable.sprite.copy()
 			}
 		}

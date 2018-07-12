@@ -37,13 +37,17 @@
 				<Data Name="Block" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
 				<Data Name="Plate" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
 				<Data Name="Seal" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
-				<Data Name="Shield" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
 				<Data Name="Attack" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
 				<Data Name="IsMonster" SkipIfDefault="False" meta:RefKey="Boolean" />
 				<Data Name="MonsterDesc" Keys="MonsterDesc" meta:RefKey="Reference" />
 				<Data Name="SpecialOrb" EnumValues="None,3x3,H4,V4,5" SkipIfDefault="False" meta:RefKey="Enum" />
 				<Data Name="Sinkable" meta:RefKey="Struct">
 					<Data Name="Sprite" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+				</Data>
+				<Data Name="IsChest" meta:RefKey="Boolean" />
+				<Data Name="Container" meta:RefKey="Struct">
+					<Data Name="Sprite" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+					<Data Name="Health" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
 				</Data>
 				<Data Name="Type" EnumValues="Floor,Wall,Pit" meta:RefKey="Enum" />
 			</Data>

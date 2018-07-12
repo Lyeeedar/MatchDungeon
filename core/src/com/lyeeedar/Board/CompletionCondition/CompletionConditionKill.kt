@@ -29,9 +29,9 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 	{
 		for (tile in grid.grid)
 		{
-			if (tile.monster != null)
+			if (tile.monster != null || tile.container?.contents is Monster)
 			{
-				val monster = tile.monster!!
+				val monster = tile.monster ?: tile.container!!.contents as Monster
 				if (!monsters.contains(monster, true))
 				{
 					monsters.add(monster)

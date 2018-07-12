@@ -117,7 +117,7 @@ class MonsterAbility
 	{
 		ATTACK,
 		SEALEDATTACK,
-		SHIELD,
+		CUSTOMORB,
 		SEAL,
 		BLOCK,
 		MOVE,
@@ -306,10 +306,9 @@ class MonsterAbility
 
 				target.orb!!.delayDisplayAttack = animDuration
 			}
-			if (effect == Effect.SHIELD)
+			if (effect == Effect.CUSTOMORB)
 			{
-				target.shield = Shield(grid.level.theme)
-				target.shield!!.count = strength
+				target.orb = Orb(Orb.getNamedOrb(data.get("NAME")), grid.level.theme)
 			}
 			if (effect == Effect.SEAL || effect == Effect.SEALEDATTACK)
 			{
@@ -322,7 +321,7 @@ class MonsterAbility
 			if (effect == Effect.BLOCK)
 			{
 				target.block = Block(grid.level.theme)
-				target.block!!.count = strength
+				target.block!!.maxhp = strength
 			}
 			if (effect == Effect.SUMMON)
 			{
@@ -359,7 +358,7 @@ class MonsterAbility
 			val dEl = xml.getChildByName("Data")
 			if (dEl != null)
 			{
-				for (i in 0..dEl.childCount-1)
+				for (i in 0 until dEl.childCount)
 				{
 					val el = dEl.getChild(i)
 					ability.data[el.name.toUpperCase()] = el.text.toUpperCase()

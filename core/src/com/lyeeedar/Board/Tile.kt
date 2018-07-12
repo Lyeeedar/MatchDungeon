@@ -27,10 +27,6 @@ class Tile(x: Int, y: Int) : Point(x, y)
 		get() = contents as? Sinkable
 		set(value) { contents = value }
 
-	var shield: Shield?
-		get() = contents as? Shield
-		set(value) { contents = value }
-
 	var swappable: Swappable?
 		get() = contents as? Swappable
 		set(value) { contents = value }
@@ -47,6 +43,9 @@ class Tile(x: Int, y: Int) : Point(x, y)
 		get() = contents as? Creature
 		set(value) { contents = value }
 
+	var damageable: Damageable?
+		get() = contents as? Damageable
+		set(value) { contents = value }
 
 	var monster: Monster?
 		get() = contents as? Monster
@@ -54,6 +53,10 @@ class Tile(x: Int, y: Int) : Point(x, y)
 
 	var friendly: Friendly?
 		get() = contents as? Friendly
+		set(value) { contents = value }
+
+	var container: Container?
+		get() = contents as? Container
 		set(value) { contents = value }
 
 	var contents: Any? = null
@@ -87,7 +90,6 @@ class Tile(x: Int, y: Int) : Point(x, y)
 		if (block != null) return "="
 		if (monster != null) return "!"
 		if (friendly != null) return "?"
-		if (shield != null) return "s"
 		if (chest != null) return "£"
 		if (isPit) return "~"
 		if (!canHaveOrb) return "#"

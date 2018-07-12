@@ -2,6 +2,7 @@ package com.lyeeedar.Board.CompletionCondition
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.lyeeedar.Board.Block
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Orb
 import com.lyeeedar.Global
@@ -15,7 +16,7 @@ class CompletionConditionBreak : AbstractCompletionCondition()
 
 	override fun attachHandlers(grid: Grid)
 	{
-		remaining = grid.grid.count{ it.block != null }
+		remaining = grid.grid.count{ it.block != null || it.container?.contents is Block }
 
 		grid.onTurn += {
 			remaining = grid.grid.count{ it.block != null }
