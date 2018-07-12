@@ -21,6 +21,7 @@ class Equipment(val path: String)
 	lateinit var name: String
 	lateinit var description: String
 	lateinit var icon: Sprite
+	var cost: Int = 0
 	val statistics = FastEnumMap<Statistic, Float>(Statistic::class.java)
 	var ability: Ability? = null
 
@@ -169,6 +170,7 @@ class Equipment(val path: String)
 	{
 		name = xml.get("Name")
 		description = xml.get("Description")
+		cost = xml.getInt("Cost", 0)
 		icon = AssetManager.loadSprite(xml.getChildByName("Icon")!!)
 
 		Statistic.parse(xml.getChildByName("Statistics")!!, statistics)

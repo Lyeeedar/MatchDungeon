@@ -147,6 +147,12 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 		contentTable.setPosition(middleX - contentTable.width / 2f, middleY - contentTable.height / 2f)
 	}
 
+	fun getWidthFromHeight(height: Float): Float
+	{
+		val scaleY = height / referenceHeight
+		return referenceWidth * scaleY
+	}
+
 	override fun positionChanged()
 	{
 		super.positionChanged()

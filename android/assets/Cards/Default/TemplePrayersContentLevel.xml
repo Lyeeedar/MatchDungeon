@@ -81,9 +81,8 @@
 	<Theme>City</Theme>
 	<AllowedVictories>
 		<Condition meta:RefKey="Matches">
-			<Orbs>20</Orbs>
-			<Orbs>20</Orbs>
-			<Orbs>10</Orbs>
+			<Orbs>25</Orbs>
+			<Orbs>25</Orbs>
 		</Condition>
 	</AllowedVictories>
 	<AllowedDefeats>

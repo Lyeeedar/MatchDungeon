@@ -29,6 +29,7 @@ abstract class AbstractCardContentAction
 				"FADEOUT" -> CardContentActionFadeOut()
 				"CLEARFADEOUT" -> CardContentActionClearFadeOut()
 				"SPEND" -> CardContentActionSpend()
+				"SHOP" -> CardContentActionShop()
 				else -> throw RuntimeException("Unknown CardContent action type '$refKey'!")
 			}
 

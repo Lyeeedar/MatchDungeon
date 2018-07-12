@@ -352,20 +352,6 @@ class Match5(orb: Orb) : Special(orb)
 							s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.0f, false)
 							s.completionCallback = fun()
 							{
-								if (tile.orb == null)
-								{
-
-								}
-								else if (tile.orb!!.special == null)
-								{
-									tile.orb!!.special = special.copy(tile.orb!!)
-								}
-								else
-								{
-									val func = tile.orb!!.special!!.merge(other) ?: special.merge(tile.orb!!)
-									tile.orb!!.armed = func
-								}
-
 								grid.pop(tile, 0f, this, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 2)
 							}
 							tile.effects.add(s)

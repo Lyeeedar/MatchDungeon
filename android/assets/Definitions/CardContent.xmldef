@@ -29,6 +29,32 @@
 			<Data Name="Success" Keys="Node" SkipIfDefault="False" meta:RefKey="GraphReference" />
 			<Data Name="Failure" Keys="Node" SkipIfDefault="False" meta:RefKey="GraphReference" />
 		</Data>
+		<!--Visual-->
+		<Data Name="Flash" TextColour="192,207,109" meta:RefKey="Struct">
+			<Data Name="Colour" SkipIfDefault="False" meta:RefKey="Colour" />
+		</Data>
+		<Data Name="FadeOut" TextColour="192,207,109" meta:RefKey="Struct">
+			<Data Name="Colour" SkipIfDefault="False" meta:RefKey="Colour" />
+			<Data Name="Duration" Min="0" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+		</Data>
+		<Data Name="ClearFadeOut" TextColour="192,207,109" meta:RefKey="Struct">
+			<Data Name="Duration" Min="0" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+		</Data>
+		<!--Other-->
+		<Data Name="Define" TextColour="192,207,109" meta:RefKey="Struct">
+			<Data Name="Key" meta:RefKey="String" />
+			<Data Name="Value" meta:RefKey="String" />
+			<Data Name="Global" SkipIfDefault="False" meta:RefKey="Boolean" />
+		</Data>
+		<Data Name="MarkComplete" SkipIfDefault="False" TextColour="242,183,30" meta:RefKey="Struct">
+			<Data Name="State" EnumValues="Success,Failure,Custom" SkipIfDefault="False" meta:RefKey="Enum" />
+			<Data Name="Key" VisibleIf="State==Custom" meta:RefKey="String" />
+		</Data>
+		<Data Name="Rewards" Keys="Rewards" Nullable="False" meta:RefKey="Reference" />
+		<Data Name="Spend" TextColour="204,173,160" meta:RefKey="Struct">
+			<Data Name="Key" SkipIfDefault="False" meta:RefKey="String" />
+			<Data Name="Count" Default="1" SkipIfDefault="False" meta:RefKey="String" />
+		</Data>
 		<Data Name="Shop" TextColour="188,102,255" meta:RefKey="Struct">
 			<Data Name="CostMultiplier" Default="1" meta:RefKey="String" />
 			<Data Name="Items" meta:RefKey="Collection">
@@ -36,7 +62,6 @@
 				<Data Name="Equipment" meta:RefKey="Struct">
 					<Data Name="FromDeck" Default="True" VisibleIf="Equipment==null" meta:RefKey="Boolean" />
 					<Data Name="Type" EnumValues="Any,Weapon,Armour,MainHand,OffHand,Head,Body" VisibleIf="Equipment==null" meta:RefKey="Enum" />
-					<Data Name="Cost" Type="Int" Min="1" Default="1" VisibleIf="FromDeck==false" meta:RefKey="Number" />
 					<Data Name="Equipment" VisibleIf="FromDeck==false" meta:RefKey="File" />
 					<Data Name="OnPurchaseDefine" Keys="OnPurchaseDefine" VisibleIf="FromDeck==false" meta:RefKey="Reference" />
 				</Data>
@@ -68,32 +93,6 @@
 					<Data Name="OnPurchaseDefine" Keys="OnPurchaseDefine" meta:RefKey="Reference" />
 				</Data>
 			</Data>
-		</Data>
-		<!--Visual-->
-		<Data Name="Flash" TextColour="192,207,109" meta:RefKey="Struct">
-			<Data Name="Colour" SkipIfDefault="False" meta:RefKey="Colour" />
-		</Data>
-		<Data Name="FadeOut" TextColour="192,207,109" meta:RefKey="Struct">
-			<Data Name="Colour" SkipIfDefault="False" meta:RefKey="Colour" />
-			<Data Name="Duration" Min="0" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
-		</Data>
-		<Data Name="ClearFadeOut" TextColour="192,207,109" meta:RefKey="Struct">
-			<Data Name="Duration" Min="0" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
-		</Data>
-		<!--Other-->
-		<Data Name="Define" TextColour="192,207,109" meta:RefKey="Struct">
-			<Data Name="Key" meta:RefKey="String" />
-			<Data Name="Value" meta:RefKey="String" />
-			<Data Name="Global" SkipIfDefault="False" meta:RefKey="Boolean" />
-		</Data>
-		<Data Name="MarkComplete" SkipIfDefault="False" TextColour="242,183,30" meta:RefKey="Struct">
-			<Data Name="State" EnumValues="Success,Failure,Custom" SkipIfDefault="False" meta:RefKey="Enum" />
-			<Data Name="Key" VisibleIf="State==Custom" meta:RefKey="String" />
-		</Data>
-		<Data Name="Rewards" Keys="Rewards" Nullable="False" meta:RefKey="Reference" />
-		<Data Name="Spend" TextColour="204,173,160" meta:RefKey="Struct">
-			<Data Name="Key" SkipIfDefault="False" meta:RefKey="String" />
-			<Data Name="Count" Default="1" SkipIfDefault="False" meta:RefKey="String" />
 		</Data>
 	</Definition>
 	<Definition Name="OnPurchaseDefine" meta:RefKey="StructDef">
