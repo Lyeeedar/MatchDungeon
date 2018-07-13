@@ -27,7 +27,7 @@ class Equipment(val path: String)
 
 	lateinit var slot: EquipmentSlot
 
-	fun getCard(other: Equipment?): CardWidget
+	fun getCard(other: Equipment?, showAsPlus: Boolean): CardWidget
 	{
 		val basicTable = Table()
 		basicTable.add(Label(name, Global.skin, "cardtitle")).expandX().center()
@@ -35,11 +35,11 @@ class Equipment(val path: String)
 		basicTable.add(SpriteWidget(icon.copy(), 64f, 64f)).grow()
 		basicTable.row()
 
-		val card = CardWidget(basicTable, createTable(other), AssetManager.loadTextureRegion("GUI/EquipmentCardback")!!, this)
+		val card = CardWidget(basicTable, createTable(other, showAsPlus), AssetManager.loadTextureRegion("GUI/EquipmentCardback")!!, this)
 		return card
 	}
 
-	fun createTable(other: Equipment?): Table
+	fun createTable(other: Equipment?, showAsPlus: Boolean): Table
 	{
 		val table = Table()
 		table.defaults().growX()
@@ -106,6 +106,14 @@ class Equipment(val path: String)
 				{
 					add = true
 				}
+
+				if (showAsPlus)
+				{
+					val diff = statVal
+					val diffLabel = Label("+" + diff.toString(), Global.skin, "cardwhite")
+					diffLabel.color = Color.GREEN
+					statTable.add(diffLabel)
+				}
 			}
 
 			if (add)
@@ -170,7 +178,7 @@ class Equipment(val path: String)
 	{
 		name = xml.get("Name")
 		description = xml.get("Description")
-		cost = xml.getInt("Cost", 0)
+		cost = xml.getInt("Cost", 100)
 		icon = AssetManager.loadSprite(xml.getChildByName("Icon")!!)
 
 		Statistic.parse(xml.getChildByName("Statistics")!!, statistics)

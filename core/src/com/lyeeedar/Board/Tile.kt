@@ -62,7 +62,7 @@ class Tile(x: Int, y: Int) : Point(x, y)
 	var contents: Any? = null
 		set(value)
 		{
-			if (value != null && !canHaveOrb)
+			if (value != null && !canHaveOrb && (value is Swappable || value is Creature))
 			{
 				System.err.print("Tried to put something in tile that should be empty. IsPit: $isPit, Existing: $field, object: $value")
 				return

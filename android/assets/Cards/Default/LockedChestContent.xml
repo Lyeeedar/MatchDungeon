@@ -1,0 +1,48 @@
+<CardContent meta:X="0" meta:Y="0" GUID="656b7c96-b9e2-4bf2-b0d5-fbb5aec53b25" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">e8470777-c365-4a2a-9333-a325e627ad49</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="e8470777-c365-4a2a-9333-a325e627ad49">
+			<Line>
+				<MultilineString>You stumble across a chest. It still seems to be locked down tight. With a bit of effort you should be able to break it open.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>LockedChestContentLevel</Level>
+				<Success meta:RefKey="Node">f14c5551-ecec-4122-bf8a-3ddc58d57d15</Success>
+				<Failure meta:RefKey="Node">8f3392ef-4bda-4d98-bd63-a2e89577a0aa</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="421" meta:Y="153" GUID="8f3392ef-4bda-4d98-bd63-a2e89577a0aa">
+			<Line>
+				<MultilineString>With a final smash you destory the chest. Unfortunately you also destroy all its contents.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="476" meta:Y="0" GUID="f14c5551-ecec-4122-bf8a-3ddc58d57d15">
+			<Line>
+				<MultilineString>I finally smash to lid apart and reach inside.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>50</Count>
+				</Money>
+				<Money>
+					<Chance>High</Chance>
+					<Count>10</Count>
+				</Money>
+				<Money>
+					<Chance>Medium</Chance>
+					<Count>20</Count>
+				</Money>
+				<Money>
+					<Chance>Low</Chance>
+					<Count>30</Count>
+				</Money>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

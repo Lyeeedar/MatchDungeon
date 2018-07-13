@@ -272,7 +272,7 @@ class EquipmentWare : ShopWares()
 
 	override fun getCard(): CardWidget
 	{
-		return equipment!!.getCard(Global.player.getEquipment(equipment!!.slot))
+		return equipment!!.getCard(Global.player.getEquipment(equipment!!.slot), true)
 	}
 
 	override fun reward()

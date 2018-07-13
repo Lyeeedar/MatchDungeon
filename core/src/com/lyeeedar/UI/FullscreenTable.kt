@@ -2,6 +2,7 @@ package com.lyeeedar.UI
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.NinePatch
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.Table
@@ -62,6 +63,21 @@ open class FullscreenTable() : Table()
 			Global.stage.addActor(closeButton)
 
 			openCount++
+		}
+
+		fun createCard(content: Table, point: Vector2)
+		{
+			val cardWidget = CardWidget(content, content, AssetManager.loadTextureRegion("white")!!, null)
+			cardWidget.setSize(24f, 24f)
+			cardWidget.setPosition(point.x, point.y)
+
+			Global.stage.addActor(cardWidget)
+
+			cardWidget.focus()
+
+			cardWidget.collapseFun = {
+				cardWidget.remove()
+			}
 		}
 	}
 }

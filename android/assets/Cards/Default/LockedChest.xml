@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="022da11d-d70c-4045-b782-c0aeaef591cd" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">f8e114aa-2944-411f-b177-ab538fbb3fe9</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="f8e114aa-2944-411f-b177-ab538fbb3fe9">
+			<Name>Locked Chest</Name>
+			<Description>You stumble across a chest, still locked. If you can break it open you may be able to grab some loot.</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>LockedChestContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

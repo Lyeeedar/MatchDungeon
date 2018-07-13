@@ -248,7 +248,7 @@ class DeckScreen : AbstractScreen()
 		val used = ObjectSet<Equipment>()
 		for (equip in Global.deck.playerDeck.equipment)
 		{
-			val card = equip.getCard(null)
+			val card = equip.getCard(null, false)
 			card.setSize(cardWidth, cardHeight)
 			card.addPick("Remove", {
 				Global.deck.playerDeck.equipment.removeValue(equip, true)
@@ -275,7 +275,7 @@ class DeckScreen : AbstractScreen()
 		{
 			if (!used.contains(equip))
 			{
-				val card = equip.getCard(null)
+				val card = equip.getCard(null, false)
 				card.setSize(cardWidth, cardHeight)
 				card.addPick("Add", {
 					Global.deck.playerDeck.equipment.add(equip)

@@ -1133,7 +1133,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		{
 			for (y in 0 until height)
 			{
-				if (grid[x, y].canHaveOrb && grid[x, y].block == null && grid[x, y].creature == null)
+				if (grid[x, y].canHaveOrb && grid[x, y].block == null && grid[x, y].container == null && grid[x, y].creature == null)
 				{
 					val toSpawn = if (orbOnly) Orb(Orb.getRandomOrb(level), level.theme) else level.spawnOrb()
 

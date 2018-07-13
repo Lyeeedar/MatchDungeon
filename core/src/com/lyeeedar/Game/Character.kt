@@ -1,5 +1,6 @@
 package com.lyeeedar.Game
 
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
@@ -90,9 +91,9 @@ class Character(val path: String)
 				val infoButton = Button(Global.skin, "info")
 				infoButton.setSize(24f, 24f)
 				infoButton.addClickListener {
-					val t = equipment.createTable(null)
+					val t = equipment.createTable(null, false)
 
-					FullscreenTable.createCloseable(t)
+					FullscreenTable.createCard(t, infoButton.localToStageCoordinates(Vector2(12f, 12f)))
 				}
 				equipTable.add(infoButton).size(24f).pad(0f, 12f, 0f, 12f)
 

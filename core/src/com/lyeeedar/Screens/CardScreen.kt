@@ -152,11 +152,12 @@ class CardScreen : AbstractScreen()
 			{
 				val widget = SpriteWidget(equip.icon, 32f, 32f)
 				tableSlot.add(widget).grow()
-				tableSlot.addClickListener {
-					val table = equip.createTable(null)
+			}
 
-					FullscreenTable.createCloseable(table)
-				}
+			tableSlot.addClickListener {
+				val table = Global.player.createTable()
+
+				FullscreenTable.createCloseable(table)
 			}
 		}
 

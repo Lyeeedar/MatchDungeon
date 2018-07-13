@@ -415,7 +415,7 @@ class Match5(orb: Orb) : Special(orb)
 							}
 							tile.effects.add(s)
 						}
-						else if (tile.monster != null)
+						else if (tile.damageable != null)
 						{
 							val dst = tile.dist(point)
 							val animDuration = 0.275f + dst * 0.05f

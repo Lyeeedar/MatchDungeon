@@ -10,6 +10,7 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Renderables.Sprite.SpriteWrapper
 import com.lyeeedar.Util.*
 import ktx.collections.set
+import ktx.collections.toGdxArray
 
 /**
  * Created by Philip on 13-Jul-16.
@@ -166,13 +167,6 @@ class Level(val loadPath: String)
 				{
 					hasMonster = true
 				}
-				else if (symbol.isChest)
-				{
-					tile.chest = Chest(true, theme)
-					tile.canHaveOrb = false
-					tile.spriteSetter = theme.floor.copy()
-					tile.chest!!.attachHandlers(grid)
-				}
 
 				if (symbol.type == SymbolType.PIT)
 				{
@@ -187,6 +181,16 @@ class Level(val loadPath: String)
 				else
 				{
 					tile.canHaveOrb = true
+					tile.isPit = false
+				}
+
+				if (symbol.isChest)
+				{
+					tile.chest = Chest(true, theme)
+					tile.spriteSetter = theme.floor.copy()
+					tile.chest!!.attachHandlers(grid)
+
+					tile.canHaveOrb = false
 					tile.isPit = false
 				}
 			}
@@ -432,7 +436,7 @@ class Level(val loadPath: String)
 
 				val existingCount = grid.grid.filter { it.sinkable != null || it.container?.contents is Sinkable }.count()
 
-				val chests = grid.grid.filter { it.chest != null || it.container?.contents is Chest }.map { it.chest ?: it.container!!.contents as Chest }
+				val chests = grid.grid.filter { it.chest != null || it.container?.contents is Chest }.map { it.chest ?: it.container!!.contents as Chest }.toList().toGdxArray()
 
 				val totalToSpawn = numToSink - existingCount
 				if (totalToSpawn > 0)

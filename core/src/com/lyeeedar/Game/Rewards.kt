@@ -407,7 +407,7 @@ class EquipmentReward : AbstractReward()
 
 		val equipped = Global.player.getEquipment(equipment.slot)
 
-		val card = equipment.getCard(equipped)
+		val card = equipment.getCard(equipped, true)
 		card.addPick("Equip", {
 			Global.player.equipment[equipment.slot] = equipment
 

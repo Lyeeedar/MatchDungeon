@@ -35,6 +35,7 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 	var canPickFaceDown = false
 
 	val pickFuns = Array<Pick>()
+	var collapseFun: (() -> Unit)? = null
 
 	private var faceup = false
 	private var flipping = false
@@ -291,6 +292,8 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 
 			//contentTable.setScale(currentScale)
 			//contentTable.setPosition(currentX, currentY)
+
+			collapseFun?.invoke()
 		}
 
 		val expandSequence = lambda {
