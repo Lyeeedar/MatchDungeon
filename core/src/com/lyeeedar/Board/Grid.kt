@@ -142,7 +142,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 				if (dst != null)
 				{
-					Future.call({ Mote(pos, dst, sprite, 32f, { PowerBar.instance.power++ }) }, delay)
+					Future.call({ Mote(pos, dst, sprite.copy(), 32f, { PowerBar.instance.power++ }) }, delay)
 
 					if (!gainedBonusPower)
 					{
@@ -554,7 +554,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	}
 
 	// ----------------------------------------------------------------------
-	private fun hasAnim(): Boolean
+	fun hasAnim(): Boolean
 	{
 		var hasAnim = false
 		for (x in 0 until width)
@@ -1097,6 +1097,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				else
 				{
 					val orb = grid[x, y].orb!!
+					grid[x, y].orb = tempgrid[x, y].orb
 
 					if (oldorb.special != null) orb.special = oldorb.special!!.copy(orb)
 					orb.sealCount = oldorb.sealCount
@@ -1111,16 +1112,19 @@ class Grid(val width: Int, val height: Int, val level: Level)
 						orb.nextDesc = oldorb.nextDesc
 					}
 
+
 					val delay = grid[x, y].taxiDist(Point.ZERO).toFloat() * 0.1f
-					orb.sprite.renderDelay = delay + 0.2f
-					orb.sprite.showBeforeRender = false
 
-					val sprite = refillSprite.copy()
-					sprite.colour = orb.sprite.colour
-					sprite.renderDelay = delay
-					sprite.showBeforeRender = false
+					Future.call(
+							{
+								grid[x, y].orb = orb
 
-					grid[x, y].effects.add(sprite)
+								val sprite = refillSprite.copy()
+								sprite.colour = orb.sprite.colour
+
+								grid[x, y].effects.add(sprite)
+							}, delay + 0.2f)
+
 				}
 			}
 		}

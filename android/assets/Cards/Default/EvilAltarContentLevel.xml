@@ -25,7 +25,6 @@
 			<Block>0</Block>
 			<Plate>0</Plate>
 			<Seal>0</Seal>
-			<Shield>0</Shield>
 			<Attack>0</Attack>
 			<IsMonster>false</IsMonster>
 			<SpecialOrb>None</SpecialOrb>
@@ -34,10 +33,10 @@
 	</Symbols>
 	<AllowedVictories>
 		<Condition meta:RefKey="Matches">
-			<Orbs>17</Orbs>
-			<Orbs>17</Orbs>
-			<Orbs>17</Orbs>
-			<Orbs>17</Orbs>
+			<Orbs>20</Orbs>
+			<Orbs>20</Orbs>
+			<Orbs>20</Orbs>
+			<Orbs>20</Orbs>
 		</Condition>
 	</AllowedVictories>
 	<AllowedDefeats>

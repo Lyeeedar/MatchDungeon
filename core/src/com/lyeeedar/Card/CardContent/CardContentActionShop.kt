@@ -41,11 +41,13 @@ class CardContentActionShop : AbstractCardContentAction()
 
 	var shopActive = false
 	var doAdvance = false
+	var resolved = false
 	override fun advance(CardContent: CardContent, CardContentScreen: CardScreen): Boolean
 	{
 		if (doAdvance)
 		{
 			doAdvance = false
+			resolved = false
 			return true
 		}
 
@@ -61,7 +63,12 @@ class CardContentActionShop : AbstractCardContentAction()
 			for (i in 0 until wares.size)
 			{
 				val currentWare = wares[i]
-				currentWare.resolve(this)
+
+				if (!resolved)
+				{
+					currentWare.resolve(this)
+					resolved = true
+				}
 
 				if (currentWare.isValid())
 				{
@@ -205,7 +212,7 @@ class EquipmentWare : ShopWares()
 
 	var equipment: Equipment? = null
 
-	override fun isValid(): Boolean = equipment != null
+	override fun isValid(): Boolean = equipment != null && Global.player.getEquipment(equipment!!.slot)?.path != equipment!!.path
 
 	override fun resolve(shop: CardContentActionShop)
 	{

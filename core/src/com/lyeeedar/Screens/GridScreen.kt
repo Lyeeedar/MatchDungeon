@@ -228,6 +228,8 @@ class GridScreen(): AbstractScreen()
 
 		val ability = level.grid.activeAbility
 
+		val canShowButtons = if (ability == null && !level.grid.inTurn && (level.grid.noValidMoves || PowerBar.instance.power == PowerBar.instance.maxPower)) !level.grid.hasAnim() else false
+
 		if (ability != null)
 		{
 			if (ability.selectedTargets.size != lastTargets)
@@ -252,14 +254,14 @@ class GridScreen(): AbstractScreen()
 			launchButton!!.touchable = if (ability.selectedTargets.size == 0) Touchable.disabled else Touchable.enabled
 			launchButton!!.setText("Activate (" + ability.selectedTargets.size + "/" + ability.targets + ")")
 		}
-		else if (level.grid.noValidMoves && !level.grid.inTurn)
+		else if (level.grid.noValidMoves && canShowButtons)
 		{
 			PowerBar.instance.isVisible = false
 			launchButton!!.isVisible = false
 			ultimateButton!!.isVisible = false
 			refreshButton!!.isVisible = true
 		}
-		else if (PowerBar.instance.power == PowerBar.instance.maxPower && !level.grid.inTurn)
+		else if (PowerBar.instance.power == PowerBar.instance.maxPower && canShowButtons)
 		{
 			PowerBar.instance.isVisible = false
 			launchButton!!.isVisible = false
