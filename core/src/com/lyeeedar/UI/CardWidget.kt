@@ -377,51 +377,55 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 
 	companion object
 	{
-		fun layoutCards(cardWidgets: Array<CardWidget>, enterFrom: Direction)
+		fun layoutCards(cardWidgets: Array<CardWidget>, enterFrom: Direction, dstWidget: Table? = null)
 		{
+			val areapos = dstWidget?.localToStageCoordinates(Vector2()) ?: Vector2()
+			val areaWidth = dstWidget?.width ?: Global.resolution.x.toFloat()
+			val areaHeight = dstWidget?.height ?: Global.resolution.y.toFloat()
+
 			// Calculate card sizes
 			val padding = 20f
-			val cardWidth = (Global.resolution.x - 3f * padding) / 2f
-			val cardHeight = (Global.resolution.y - 3f * padding) / 2f
+			val cardWidth = (areaWidth - 3f * padding) / 2f
+			val cardHeight = (areaHeight - 3f * padding) / 2f
 
 			// Calculate final positions
 			if (cardWidgets.size == 1)
 			{
 				// center
-				cardWidgets[0].setPosition(Global.resolution.x / 2f - cardWidth / 2f, Global.resolution.y / 2f - cardHeight / 2f)
+				cardWidgets[0].setPosition(areaWidth / 2f - cardWidth / 2f + areapos.x, areaHeight / 2f - cardHeight / 2f + areapos.y)
 			}
 			else if (cardWidgets.size == 2)
 			{
 				// vertical alignment
-				cardWidgets[0].setPosition(Global.resolution.x / 2f - cardWidth / 2f, padding * 2f + cardHeight)
-				cardWidgets[1].setPosition(Global.resolution.x / 2f - cardWidth / 2f, padding)
+				cardWidgets[0].setPosition(areaWidth / 2f - cardWidth / 2f + areapos.x, padding * 2f + cardHeight + areapos.y)
+				cardWidgets[1].setPosition(areaWidth / 2f - cardWidth / 2f + areapos.x, padding + areapos.y)
 			}
 			else if (cardWidgets.size == 3)
 			{
 				// triangle, single card at top, 2 below
-				cardWidgets[0].setPosition(Global.resolution.x / 2f - cardWidth / 2f, padding * 2f + cardHeight)
-				cardWidgets[1].setPosition(padding, padding)
-				cardWidgets[2].setPosition(padding * 2f + cardWidth, padding)
+				cardWidgets[0].setPosition(areaWidth / 2f - cardWidth / 2f + areapos.x, padding * 2f + cardHeight + areapos.y)
+				cardWidgets[1].setPosition(padding + areapos.x, padding + areapos.y)
+				cardWidgets[2].setPosition(padding * 2f + cardWidth + areapos.x, padding + areapos.y)
 			}
 			else if (cardWidgets.size == 4)
 			{
 				// even grid
-				cardWidgets[0].setPosition(padding, padding * 2f + cardHeight)
-				cardWidgets[1].setPosition(padding, padding)
-				cardWidgets[2].setPosition(padding * 2f + cardWidth, padding)
-				cardWidgets[3].setPosition(padding * 2f + cardWidth, padding * 2f + cardHeight)
+				cardWidgets[0].setPosition(padding + areapos.x, padding * 2f + cardHeight + areapos.y)
+				cardWidgets[1].setPosition(padding + areapos.x, padding + areapos.y)
+				cardWidgets[2].setPosition(padding * 2f + cardWidth + areapos.x, padding + areapos.y)
+				cardWidgets[3].setPosition(padding * 2f + cardWidth + areapos.x, padding * 2f + cardHeight + areapos.y)
 			}
 
 			// calculate start position
 			val startX: Float = when (enterFrom)
 			{
-				Direction.CENTER -> Global.resolution.x / 2f - cardWidth / 2f
-				Direction.NORTH -> Global.resolution.x / 2f - cardWidth / 2f
-				Direction.SOUTH -> Global.resolution.x / 2f - cardWidth / 2f
+				Direction.CENTER -> areaWidth / 2f - cardWidth / 2f
+				Direction.NORTH -> areaWidth / 2f - cardWidth / 2f
+				Direction.SOUTH -> areaWidth / 2f - cardWidth / 2f
 
-				Direction.EAST -> Global.resolution.x.toFloat()
-				Direction.NORTHEAST -> Global.resolution.x.toFloat()
-				Direction.SOUTHEAST -> Global.resolution.x.toFloat()
+				Direction.EAST -> areaWidth
+				Direction.NORTHEAST -> areaWidth
+				Direction.SOUTHEAST -> areaWidth
 
 				Direction.WEST -> -cardWidth
 				Direction.NORTHWEST -> -cardWidth
@@ -430,13 +434,13 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 
 			val startY: Float = when (enterFrom)
 			{
-				Direction.CENTER -> Global.resolution.y / 2f - cardHeight / 2f
-				Direction.EAST -> Global.resolution.y / 2f - cardHeight / 2f
-				Direction.WEST -> Global.resolution.y / 2f - cardHeight / 2f
+				Direction.CENTER -> areaHeight / 2f - cardHeight / 2f
+				Direction.EAST -> areaHeight / 2f - cardHeight / 2f
+				Direction.WEST -> areaHeight / 2f - cardHeight / 2f
 
-				Direction.NORTH -> Global.resolution.y.toFloat()
-				Direction.NORTHWEST -> Global.resolution.y.toFloat()
-				Direction.NORTHEAST -> Global.resolution.y.toFloat()
+				Direction.NORTH -> areaHeight
+				Direction.NORTHWEST -> areaHeight
+				Direction.NORTHEAST -> areaHeight
 
 				Direction.SOUTH -> -cardHeight
 				Direction.SOUTHWEST -> -cardHeight
@@ -451,7 +455,7 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 				val y = widget.y
 
 				widget.setSize(cardWidth, cardHeight)
-				widget.setPosition(startX, startY)
+				widget.setPosition(startX + areapos.x, startY + areapos.y)
 				widget.clickable = false
 
 				val delayVal = delay

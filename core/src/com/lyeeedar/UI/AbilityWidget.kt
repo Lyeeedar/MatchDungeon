@@ -3,12 +3,16 @@ package com.lyeeedar.UI
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.Touchable
+import com.badlogic.gdx.scenes.scene2d.ui.Button
+import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Game.Ability.Ability
+import com.lyeeedar.Global
 import com.lyeeedar.Util.AssetManager
 
 /**
@@ -26,7 +30,22 @@ class AbilityWidget(val ability: Ability, val w: Float, val h: Float, val grid: 
 
 	init
 	{
-		add(widget).expand().fill()
+		val stack = Stack()
+		stack.add(widget)
+
+		val infoButton = Button(Global.skin, "info")
+		infoButton.setSize(16f, 16f)
+		infoButton.addClickListener {
+			val t = ability.createTable()
+
+			FullscreenTable.createCard(t, infoButton.localToStageCoordinates(Vector2()))
+		}
+		val infoButtonTable = Table()
+		infoButtonTable.add(infoButton).size(16f).expand().top().right().pad(5f)
+
+		stack.add(infoButtonTable)
+
+		add(stack).grow()
 
 		PowerBar.instance.powerChanged += {
 			updateEnabled()

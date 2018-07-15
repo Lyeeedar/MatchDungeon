@@ -2,9 +2,8 @@ package com.lyeeedar.Screens
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.NinePatch
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Touchable
-import com.badlogic.gdx.scenes.scene2d.ui.Label
-import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
@@ -18,10 +17,7 @@ import com.lyeeedar.Game.QuestNode
 import com.lyeeedar.GameStateFlags
 import com.lyeeedar.Global
 import com.lyeeedar.MainGame
-import com.lyeeedar.UI.FullscreenTable
-import com.lyeeedar.UI.ScrollingTextLabel
-import com.lyeeedar.UI.SpriteWidget
-import com.lyeeedar.UI.addClickListener
+import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
 
 class CardScreen : AbstractScreen()
@@ -39,12 +35,13 @@ class CardScreen : AbstractScreen()
 
 	lateinit var text: ScrollingTextLabel
 	val buttonTable = Table()
-	val equipmentTable = Table()
+	val statsTable = Table()
 	val headSlot = Table()
 	val mainhandSlot = Table()
 	val offhandSlot = Table()
 	val bodySlot = Table()
 	val playerSlot = Table()
+	lateinit var goldLabel: NumberChangeLabel
 
 	fun getSlot(slot: EquipmentSlot): Table
 	{
@@ -69,11 +66,6 @@ class CardScreen : AbstractScreen()
 
 		playerSlot.clear()
 		playerSlot.add(SpriteWidget(Global.player.baseCharacter.sprite, 32f, 32f)).grow()
-		playerSlot.addClickListener {
-			val table = Global.player.createTable()
-
-			FullscreenTable.createCloseable(table)
-		}
 
 		Global.levelflags = GameStateFlags()
 
@@ -83,16 +75,10 @@ class CardScreen : AbstractScreen()
 
 		mainTable.clear()
 
-		val titleStack = Stack()
-		val equipTable = Table()
-		equipTable.add(equipmentTable).expandX().right()
-		titleStack.add(equipTable)
+		mainTable.add(statsTable).expandX().left().pad(20f)
+		mainTable.row()
 
-		val titleTable = Table()
-		titleTable.add(Label(currentCard.current.name, Global.skin, "title")).expandX().center()
-		titleStack.add(titleTable)
-
-		mainTable.add(titleStack).growX().pad(10f)
+		mainTable.add(Seperator(Global.skin)).growX().pad(0f, 10f, 0f, 10f)
 		mainTable.row()
 
 		val contentTable = Table()
@@ -119,25 +105,53 @@ class CardScreen : AbstractScreen()
 		val skin = Global.skin
 
 		text = ScrollingTextLabel("", skin)
+		goldLabel = NumberChangeLabel("Gold: ", Global.skin)
 
 		headSlot.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/TileBackground"))
 		mainhandSlot.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/TileBackground"))
 		offhandSlot.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/TileBackground"))
 		bodySlot.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/TileBackground"))
 
-		equipmentTable.defaults().width(32f).height(32f)
-		equipmentTable.add(Table())
+		// build equipment
+		val equipmentTable = Table()
+		equipmentTable.defaults().size(32f).uniform()
 		equipmentTable.add(headSlot)
-		equipmentTable.add(Table())
-		equipmentTable.row()
 		equipmentTable.add(mainhandSlot)
-		equipmentTable.add(playerSlot)
 		equipmentTable.add(offhandSlot)
-		equipmentTable.row()
-		equipmentTable.add(Table())
 		equipmentTable.add(bodySlot)
-		equipmentTable.add(Table())
 
+		// body, gold
+		val topTable = Table()
+
+		topTable.add(playerSlot).size(32f)
+		topTable.add(goldLabel).expandX().left()
+
+		// build stats
+		statsTable.add(topTable).growX()
+		statsTable.row()
+		statsTable.add(equipmentTable).growX()
+
+		statsTable.addClickListener {
+			val table = Global.player.createTable()
+
+			FullscreenTable.createCard(table, statsTable.localToStageCoordinates(Vector2()))
+		}
+
+		debugConsole.register("AddGold", "", fun (args, console): Boolean {
+
+			if (args.size != 1)
+			{
+				console.error("Invalid number of arguments! Expected 1!")
+				return false
+			}
+
+			val value = args[0].toInt()
+
+			Global.player.gold += value
+			updateEquipment()
+
+			return true
+		})
 	}
 
 	fun updateEquipment()
@@ -153,18 +167,14 @@ class CardScreen : AbstractScreen()
 				val widget = SpriteWidget(equip.icon, 32f, 32f)
 				tableSlot.add(widget).grow()
 			}
-
-			tableSlot.addClickListener {
-				val table = Global.player.createTable()
-
-				FullscreenTable.createCloseable(table)
-			}
 		}
 
 		createFun(EquipmentSlot.HEAD, headSlot)
 		createFun(EquipmentSlot.BODY, bodySlot)
 		createFun(EquipmentSlot.MAINHAND, mainhandSlot)
 		createFun(EquipmentSlot.OFFHAND, offhandSlot)
+
+		goldLabel.value = Global.player.gold
 	}
 
 	var readyToSwitch = false

@@ -67,7 +67,6 @@ class CardContentActionShop : AbstractCardContentAction()
 				if (!resolved)
 				{
 					currentWare.resolve(this)
-					resolved = true
 				}
 
 				if (currentWare.isValid())
@@ -114,6 +113,8 @@ class CardContentActionShop : AbstractCardContentAction()
 					waresTable.add(table).pad(5f)
 				}
 			}
+
+			resolved = true
 
 			val scrollPane = ScrollPane(waresTable, Global.skin)
 			scrollPane.setFadeScrollBars(false)

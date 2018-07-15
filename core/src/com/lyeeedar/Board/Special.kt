@@ -55,8 +55,8 @@ abstract class Special(val orb: Orb)
 				{
 					val cy = (grid.height-1) - pcy
 					val tile = grid.tile(cx, cy)
-					val min = min(y, cy)
-					val max = max(y, cy)
+					val min = min(y, sy)
+					val max = max(y, sy)
 					if (tile != null && cx == x && cy in min..max && !hitSet.contains(tile))
 					{
 						hitSet.add(tile)
@@ -123,9 +123,9 @@ abstract class Special(val orb: Orb)
 				{
 					val cy = (grid.height-1) - pcy
 					val tile = grid.tile(cx, cy)
-					val min = min(x, cx)
-					val max = max(x, cx)
-					if (tile != null && cy == y && x in min..max && !hitSet.contains(tile))
+					val min = min(x, sx)
+					val max = max(x, sx)
+					if (tile != null && cy == y && cx in min..max && !hitSet.contains(tile))
 					{
 						hitSet.add(tile)
 						grid.pop(cx, cy, 0f, special, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
@@ -460,7 +460,7 @@ class Match5(orb: Orb) : Special(orb)
 
 				for (tile in grid.grid)
 				{
-					if (tile.orb?.key == key || tile.monster != null)
+					if (tile.orb?.key == key || tile.damageable != null)
 					{
 						val dst = tile.dist(point)
 						val animDuration = 0.275f + dst * 0.05f

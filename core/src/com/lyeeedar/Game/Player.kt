@@ -74,12 +74,12 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 		val iconTable = Table()
 		iconTable.add(SpriteWidget(baseCharacter.sprite.copy(), 64f, 64f)).left().pad(5f)
 		titleStack.add(iconTable)
-		titleStack.add(Label(baseCharacter.name, Global.skin, "title"))
+		titleStack.add(Label(baseCharacter.name, Global.skin, "cardtitle"))
 
 		table.add(titleStack).growX()
 		table.row()
 
-		val descLabel = Label(baseCharacter.description, Global.skin)
+		val descLabel = Label(baseCharacter.description, Global.skin, "card")
 		descLabel.setWrap(true)
 
 		table.add(descLabel).growX()
@@ -88,7 +88,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 		table.add(Seperator(Global.skin))
 		table.row()
 
-		table.add(Label("Statistics", Global.skin, "title"))
+		table.add(Label("Statistics", Global.skin, "cardtitle"))
 		table.row()
 
 		for (stat in Statistic.Values)
@@ -104,22 +104,25 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 			}
 			else if (diff < 0)
 			{
-				diffStr = "[RED]-$diff[]"
+				diffStr = "[RED]$diff[]"
 			}
 			else
 			{
 				diffStr = ""
 			}
 
-			val str = stat.toString().toLowerCase().capitalize() + ": " + truestat.toInt() + " (" + basestat + diffStr + ")"
-			table.add(Label(str, Global.skin))
+			val statTable = Table()
+			statTable.add(Label(stat.toString().toLowerCase().capitalize() + ":", Global.skin, "card")).expandX().left()
+			statTable.add(Label(truestat.toInt().toString() + " (" + basestat + diffStr + ")", Global.skin, "card"))
+
+			table.add(statTable).growX()
 			table.row()
 		}
 
 		table.add(Seperator(Global.skin, false))
 		table.row()
 
-		table.add(Label("Equipment", Global.skin, "title"))
+		table.add(Label("Equipment", Global.skin, "cardtitle"))
 		table.row()
 
 		val emptySlot = AssetManager.loadSprite("Icons/Empty")
@@ -134,7 +137,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 				table.add(equipTable).growX().padBottom(2f)
 				table.row()
 
-				equipTable.add(Label("None", Global.skin))
+				equipTable.add(Label("None", Global.skin,"card"))
 				equipTable.add(SpriteWidget(emptySlot, 32f, 32f)).size(32f).expandX().right()
 			}
 			else
@@ -143,7 +146,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 				table.add(equipTable).growX().padBottom(2f)
 				table.row()
 
-				equipTable.add(Label(equipment.name, Global.skin))
+				equipTable.add(Label(equipment.name, Global.skin, "card"))
 
 				val infoButton = Button(Global.skin, "info")
 				infoButton.setSize(24f, 24f)

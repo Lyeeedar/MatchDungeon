@@ -5,6 +5,7 @@
 			<Name>Travelling Merchant</Name>
 			<Description>You stumble across a travelling merchant, burdened by a multitude of goods.</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
+			<IsShop>true</IsShop>
 			<Content>TravellingMerchantContent</Content>
 		</CardNode>
 	</Nodes>

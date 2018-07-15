@@ -16,6 +16,7 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.PowerBar
+import com.lyeeedar.UI.Seperator
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.Util.*
 import ktx.collections.set
@@ -46,23 +47,43 @@ class Ability
 	fun createTable(): Table
 	{
 		val table = Table()
+		table.defaults().pad(5f)
 
 		val titleStack = Stack()
 		val iconTable = Table()
 		iconTable.add(SpriteWidget(icon, 64f, 64f)).left().pad(5f)
 		titleStack.add(iconTable)
-		titleStack.add(Label(name, Global.skin, "title"))
+		titleStack.add(Label(name, Global.skin, "cardtitle"))
 
 		table.add(titleStack).growX()
 		table.row()
 
-		val descLabel = Label(description, Global.skin)
+		val descLabel = Label(description, Global.skin, "card")
 		descLabel.setWrap(true)
 
 		table.add(descLabel).growX()
 		table.row()
 
-		table.add(Label("Cost: $cost", Global.skin)).growX()
+		table.add(Seperator(Global.skin)).growX().pad(10f)
+		table.row()
+
+		var effectDesc = "Target $targets " + targetter.type.toString().toLowerCase().capitalize().pluralize(targets)
+
+		if (permuter.type != Permuter.Type.SINGLE)
+		{
+			effectDesc += " then " + permuter.toString(data)
+		}
+
+		val them = if (targets > 1 || permuter.type != Permuter.Type.SINGLE) "them" else "it"
+		effectDesc += " and " + effect.toString(data, them, targetter.popAction())
+
+		val effectLabel = Label(effectDesc, Global.skin, "card")
+		effectLabel.setWrap(true)
+
+		table.add(effectLabel).growX()
+		table.row()
+
+		table.add(Label("Cost: $cost", Global.skin, "card")).growX()
 		table.row()
 
 		return table

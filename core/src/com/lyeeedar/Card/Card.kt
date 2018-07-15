@@ -74,6 +74,7 @@ class CardNode
 	lateinit var name: String
 	lateinit var description: String
 	lateinit var spawnWeight: SpawnWeight
+	var isShop = false
 	lateinit var content: String
 
 	var nextNode: CardNodeWrapper? = null
@@ -162,6 +163,7 @@ class CardNode
 		name = xmlData.get("Name")
 		description = xmlData.get("Description")
 		spawnWeight = SpawnWeight.valueOf(xmlData.get("SpawnWeighting", "Any")!!.toUpperCase())
+		isShop = xmlData.getBoolean("IsShop", false)
 		content = xmlData.get("Content")
 
 		val nextEl = xmlData.getChildByName("Next")

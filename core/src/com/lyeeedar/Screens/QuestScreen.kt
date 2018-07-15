@@ -1,21 +1,23 @@
 package com.lyeeedar.Screens
 
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.*
+import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Direction
+import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.AbstractReward
 import com.lyeeedar.Game.Quest
 import com.lyeeedar.Game.QuestNode
 import com.lyeeedar.Global
 import com.lyeeedar.MainGame
-import com.lyeeedar.UI.CardWidget
-import com.lyeeedar.UI.lambda
+import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
 import ktx.actors.then
 import ktx.collections.toGdxArray
@@ -27,11 +29,61 @@ class QuestScreen : AbstractScreen()
 		instance = this
 	}
 
+	val statsTable = Table()
+	val headSlot = Table()
+	val mainhandSlot = Table()
+	val offhandSlot = Table()
+	val bodySlot = Table()
+	val playerSlot = Table()
+	lateinit var goldLabel: Label
+
+	val cardsTable = Table()
+
 	override fun create()
 	{
 		greyOutTable.background = TextureRegionDrawable(AssetManager.loadTextureRegion("white")).tint(Color(0f, 0f, 0f, 0.5f))
 		greyOutTable.touchable = Touchable.enabled
 		greyOutTable.setFillParent(true)
+
+		goldLabel = Label("Gold: 0", Global.skin)
+
+		headSlot.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/TileBackground"))
+		mainhandSlot.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/TileBackground"))
+		offhandSlot.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/TileBackground"))
+		bodySlot.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/TileBackground"))
+
+		// build equipment
+		val equipmentTable = Table()
+		equipmentTable.defaults().size(32f).uniform()
+		equipmentTable.add(headSlot)
+		equipmentTable.add(mainhandSlot)
+		equipmentTable.add(offhandSlot)
+		equipmentTable.add(bodySlot)
+
+		// body, gold
+		val topTable = Table()
+
+		topTable.add(playerSlot).size(32f)
+		topTable.add(goldLabel).expandX().left()
+
+		// build stats
+		statsTable.add(topTable).growX()
+		statsTable.row()
+		statsTable.add(equipmentTable).growX()
+
+		statsTable.addClickListener {
+			val table = Global.player.createTable()
+
+			FullscreenTable.createCard(table, statsTable.localToStageCoordinates(Vector2()))
+		}
+
+		mainTable.add(statsTable).expandX().left().pad(20f)
+		mainTable.row()
+
+		mainTable.add(Seperator(Global.skin)).growX().pad(0f, 10f, 0f, 10f)
+		mainTable.row()
+
+		mainTable.add(cardsTable).grow()
 
 		debugConsole.register("LoadCard", "LoadCard cardName", fun (args, console): Boolean {
 			if (args.size != 1)
@@ -71,11 +123,13 @@ class QuestScreen : AbstractScreen()
 
 		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(quest.theme.backgroundTile))).tint(Color.DARK_GRAY)
 
+		updateEquipment()
 		updateQuest()
 	}
 
 	var chosenQuestCard: CardWidget? = null
 	val cardWidgets = Array<CardWidget>()
+	var needsLayout = false
 	fun updateQuest()
 	{
 		for (widget in cardWidgets)
@@ -112,7 +166,33 @@ class QuestScreen : AbstractScreen()
 			stage.addActor(widget)
 		}
 
-		CardWidget.layoutCards(cardWidgets, Direction.CENTER)
+		needsLayout = true
+	}
+
+	fun updateEquipment()
+	{
+		playerSlot.clear()
+		playerSlot.add(SpriteWidget(Global.player.baseCharacter.sprite, 32f, 32f)).grow()
+
+		val createFun = fun(slot: EquipmentSlot, tableSlot: Table)
+		{
+			tableSlot.clearChildren()
+			tableSlot.clearListeners()
+
+			val equip = Global.player.getEquipment(slot)
+			if (equip != null)
+			{
+				val widget = SpriteWidget(equip.icon, 32f, 32f)
+				tableSlot.add(widget).grow()
+			}
+		}
+
+		createFun(EquipmentSlot.HEAD, headSlot)
+		createFun(EquipmentSlot.BODY, bodySlot)
+		createFun(EquipmentSlot.MAINHAND, mainhandSlot)
+		createFun(EquipmentSlot.OFFHAND, offhandSlot)
+
+		goldLabel.setText("Gold: " + Global.player.gold)
 	}
 
 	fun completeQuest()
@@ -196,6 +276,12 @@ class QuestScreen : AbstractScreen()
 
 	override fun doRender(delta: Float)
 	{
+		if (needsLayout && cardsTable.width != 0f)
+		{
+			CardWidget.layoutCards(cardWidgets, Direction.CENTER, cardsTable)
+			needsLayout = false
+		}
+
 		if (chosenQuestCard != null && chosenQuestCard!!.actions.size == 0)
 		{
 			for (widget in cardWidgets)

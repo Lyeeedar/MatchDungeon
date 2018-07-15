@@ -42,4 +42,20 @@ class Permuter(val type: Type)
 			else -> throw Exception("Invalid permuter type $type")
 		}
 	}
+
+	fun toString(data: ObjectMap<String, String>): String
+	{
+		return when (type)
+		{
+			Type.SINGLE -> "single"
+			Type.ALLOFTYPE -> if (data["TYPE"] != null) "select all orbs of type " + data["TYPE"] else "select all orbs of chosen type"
+			Type.NOFTYPE -> { val count = data["COUNT"].toInt(); if (data["TYPE"] != null) "select $count orbs of type " + data["TYPE"] else "select $count orbs of chosen type" }
+			Type.COLUMN -> "select entire column"
+			Type.ROW -> "select entire row"
+			Type.CROSS -> "select entire row and column"
+			Type.BLOCK -> { val dst = data["AOE"].toInt(); "select block of size $dst" }
+			Type.DIAMOND ->  { val dst = data["AOE"].toInt(); "select diamond of size $dst" }
+			Type.RANDOM -> { val count = data["COUNT"].toInt(); "select $count randomly" }
+		}
+	}
 }

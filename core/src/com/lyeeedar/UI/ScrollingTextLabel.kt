@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 
-class ScrollingTextLabel(text: String, val skin: Skin) : Label(text, skin)
+class ScrollingTextLabel(text: String, val skin: Skin, style: String = "default") : Label(text, skin, style)
 {
 	init
 	{

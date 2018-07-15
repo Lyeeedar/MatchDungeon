@@ -54,7 +54,7 @@ class Character(val path: String)
 			val statVal = baseStatistics[stat] ?: 0
 
 			val statTable = Table()
-			statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Global.skin, "card"))
+			statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Global.skin, "card")).expandX().left()
 			statTable.add(Label(statVal.toString(), Global.skin, "card"))
 
 			table.add(statTable)

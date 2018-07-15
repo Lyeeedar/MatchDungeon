@@ -1,6 +1,7 @@
 package com.lyeeedar.Game
 
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
@@ -67,7 +68,7 @@ class Equipment(val path: String)
 			val statVal = statistics[stat] ?: 0f
 
 			val statTable = Table()
-			statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Global.skin, "card"))
+			statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Global.skin, "card")).expandX().left()
 			statTable.add(Label(statVal.toString(), Global.skin, "card"))
 
 			var add = false
@@ -144,7 +145,7 @@ class Equipment(val path: String)
 			infoButton.addClickListener {
 				val t = other.ability!!.createTable()
 
-				FullscreenTable.createCloseable(t)
+				FullscreenTable.createCard(t, infoButton.localToStageCoordinates(Vector2()))
 			}
 			abilityTable.add(infoButton).size(24f).expandX().right().pad(0f, 10f, 0f, 0f)
 
@@ -163,7 +164,7 @@ class Equipment(val path: String)
 			infoButton.addClickListener {
 				val t = ability!!.createTable()
 
-				FullscreenTable.createCloseable(t)
+				FullscreenTable.createCard(t, infoButton.localToStageCoordinates(Vector2()))
 			}
 			abilityTable.add(infoButton).size(24f).expandX().right().pad(0f, 10f, 0f, 0f)
 

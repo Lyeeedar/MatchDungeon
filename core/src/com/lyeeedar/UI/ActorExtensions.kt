@@ -3,6 +3,7 @@ package com.lyeeedar.UI
 import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
@@ -45,6 +46,7 @@ fun Actor.ensureOnScreen(pad: Float = 0f)
 
 fun Actor.addClickListener(func: () -> Unit)
 {
+	this.touchable = Touchable.enabled
 	this.addListener(object : ClickListener() {
 		override fun clicked(event: InputEvent?, x: Float, y: Float)
 		{
@@ -57,6 +59,7 @@ fun Actor.addClickListener(func: () -> Unit)
 
 fun Actor.addClickListenerFull(func: (InputEvent?, Float, Float) -> Unit)
 {
+	this.touchable = Touchable.enabled
 	this.addListener(object : ClickListener() {
 		override fun clicked(event: InputEvent?, x: Float, y: Float)
 		{

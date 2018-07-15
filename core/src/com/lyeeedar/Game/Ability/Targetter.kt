@@ -41,4 +41,20 @@ class Targetter(val type: Type)
 			else -> throw Exception("Invalid targetter type $type")
 		}
 	}
+
+	fun popAction(): String
+	{
+		return when (type)
+		{
+			Type.BASICORB -> "pop"
+			Type.ORB -> "pop"
+			Type.SPECIAL -> "pop"
+			Type.BLOCK -> "break"
+			Type.EMPTY -> "pop"
+			Type.SEALED -> "break"
+			Type.MONSTER -> "strike"
+			Type.ATTACK -> "block"
+			Type.TILE -> "pop"
+		}
+	}
 }

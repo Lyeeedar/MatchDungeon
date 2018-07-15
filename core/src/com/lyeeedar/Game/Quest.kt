@@ -51,6 +51,8 @@ class Quest(val path: String)
 	val title: String
 	val description: String
 
+	var shopCounter = 2
+
 	init
 	{
 		val rawPath = "Quests/$path"
@@ -374,6 +376,23 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 						output.add(picked)
 					}
 				}
+			}
+
+			if (quest.shopCounter <= 0 && !output.any { it.current.isShop } && output.size == 4)
+			{
+				// forcibly add a shop
+				val shops = pool.filter { it.current.isShop }.toGdxArray()
+				if (shops.size > 0)
+				{
+					output.removeRandom(Random.random)
+					output.add(shops.random())
+				}
+
+				quest.shopCounter = Random.random(2) + 1
+			}
+			else
+			{
+				quest.shopCounter--
 			}
 		}
 

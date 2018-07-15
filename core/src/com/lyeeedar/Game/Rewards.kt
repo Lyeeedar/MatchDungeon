@@ -299,6 +299,7 @@ class MoneyReward : AbstractReward()
 			val dst = dstTable.localToStageCoordinates(Vector2())
 
 			Mote(src, dst, sprite, 32f, {
+				CardScreen.instance.updateEquipment()
 			}, 0.75f)
 		})
 		card.canZoom = false
