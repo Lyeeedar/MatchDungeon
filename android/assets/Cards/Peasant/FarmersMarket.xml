@@ -1,0 +1,48 @@
+<CardContent meta:X="0" meta:Y="0" GUID="d5ec9616-538e-43f6-a52c-7c3d0fbf890b" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">140acba3-75ab-4bdb-b407-4bff57971497</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="140acba3-75ab-4bdb-b407-4bff57971497">
+			<Line>
+				<MultilineString>You trundle your cart of produce over to the large market and set up your stall.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You soon get some attention, people wandering over to inspect your goods. Can you make some sales?</MultilineString>
+			</Line>
+			<Match3>
+				<Level>FarmersMarketLevel</Level>
+				<Success meta:RefKey="Node">4c292775-c571-499d-934e-0a7c36fee381</Success>
+				<Failure meta:RefKey="Node">ffaad5e3-c6df-43ca-8639-dee8f75af92c</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="437" meta:Y="196" GUID="ffaad5e3-c6df-43ca-8639-dee8f75af92c">
+			<Line>
+				<MultilineString>Today just wasn't all that successful. Maybe tomorrow will bring better profits.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="479" meta:Y="0" GUID="4c292775-c571-499d-934e-0a7c36fee381">
+			<Line>
+				<MultilineString>You completely sell out! With pockets full of gold and an empty cart you happily return home.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>5</Count>
+				</Money>
+				<Money>
+					<Count>5</Count>
+				</Money>
+				<Money>
+					<Count>5</Count>
+				</Money>
+				<Money>
+					<Count>5</Count>
+				</Money>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

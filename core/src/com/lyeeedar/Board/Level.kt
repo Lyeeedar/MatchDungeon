@@ -233,7 +233,7 @@ class Level(val loadPath: String)
 			}
 
 			// iterate through and find groups
-			data class Block(val monsterDesc: MonsterDesc?, val tiles: Array<Tile>)
+			data class Block(val monsterDesc: MonsterDesc?, val char: Char, val tiles: Array<Tile>)
 			val blocks = Array<Block>()
 
 			fun loadMonster(tile: Tile, char: Char)
@@ -242,6 +242,10 @@ class Level(val loadPath: String)
 				var monsterDesc: MonsterDesc? = null
 
 				if (char == '!')
+				{
+					isMonster = true
+				}
+				else if (char == '?')
 				{
 					isMonster = true
 				}
@@ -281,7 +285,7 @@ class Level(val loadPath: String)
 
 					if (!found)
 					{
-						val newBlock = Block(monsterDesc, Array())
+						val newBlock = Block(monsterDesc, char, Array())
 
 						newBlock.tiles.add(tile)
 						blocks.add(newBlock)
@@ -320,7 +324,7 @@ class Level(val loadPath: String)
 				if (w != h) throw Exception("Non-square monster!")
 
 				val size = w
-				val monsterDesc = block.monsterDesc ?: chosenFaction!!.get(size)
+				val monsterDesc = block.monsterDesc ?: if (block.char == '?') chosenFaction.getBoss(size) else chosenFaction.get(size)
 				val monster = Monster(monsterDesc)
 				monster.size = size
 

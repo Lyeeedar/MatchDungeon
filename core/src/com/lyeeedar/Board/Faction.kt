@@ -20,6 +20,7 @@ import ktx.collections.set
 class Faction
 {
 	val sizeMap = IntMap<Array<MonsterDesc>>()
+	val bossSizeMap = IntMap<Array<MonsterDesc>>()
 
 	fun get(size: Int) : MonsterDesc
 	{
@@ -36,6 +37,31 @@ class Faction
 	fun get(name: String): MonsterDesc?
 	{
 		for (size in sizeMap)
+		{
+			for (monster in size.value)
+			{
+				if (monster.name == name) return monster
+			}
+		}
+
+		return null
+	}
+
+	fun getBoss(size: Int) : MonsterDesc
+	{
+		var s = size
+		while (s > 0)
+		{
+			if (bossSizeMap.containsKey(s)) return bossSizeMap[s].random()
+			s--
+		}
+
+		return bossSizeMap.values().first().random()
+	}
+
+	fun getBoss(name: String): MonsterDesc?
+	{
+		for (size in bossSizeMap)
 		{
 			for (monster in size.value)
 			{
@@ -84,6 +110,20 @@ class Faction
 				}
 
 				faction.sizeMap[desc.size].add(desc)
+			}
+
+			val bossEl = xml.getChildByName("Bosses")!!
+			for (i in 0 until bossEl.childCount)
+			{
+				val el = bossEl.getChild(i)
+				val desc = MonsterDesc.load(el)
+
+				if (!faction.bossSizeMap.containsKey(desc.size))
+				{
+					faction.bossSizeMap[desc.size] = Array()
+				}
+
+				faction.bossSizeMap[desc.size].add(desc)
 			}
 
 			return faction

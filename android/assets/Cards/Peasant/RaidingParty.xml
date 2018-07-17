@@ -1,0 +1,54 @@
+<CardContent meta:X="0" meta:Y="0" GUID="99b028ae-4ad1-41cf-880b-4a3980679b77" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">588fc20b-8b70-493d-9943-ba5694862074</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="588fc20b-8b70-493d-9943-ba5694862074">
+			<Line>
+				<MultilineString>You awaken to the chittering cries of goblins, followed by a splintering crack as the break their way into your home.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You charge downstairs, snatching some household items along the way to help defend yourself.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Equipment>
+					<Unlock>false</Unlock>
+					<Equipment>Equipment/Default/Pitchfork.xml</Equipment>
+				</Equipment>
+				<Equipment>
+					<Unlock>false</Unlock>
+					<Equipment>Equipment/Default/Saucepan.xml</Equipment>
+				</Equipment>
+				<Equipment>
+					<Unlock>false</Unlock>
+					<Equipment>Equipment/Default/SaucepanLid.xml</Equipment>
+				</Equipment>
+			</Rewards>
+			<Line>
+				<MultilineString>You face down a small group of the greenskins as they brandish weapons and leer at you. Fight for your life!</MultilineString>
+			</Line>
+			<Match3>
+				<Level>RaidingPartyLevel</Level>
+				<Success meta:RefKey="Node">c3c6e4b7-81d3-41b9-869a-50f1b8ad1dce</Success>
+				<Failure meta:RefKey="Node">85257c02-5740-411f-8eca-de3d0c019b40</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="496" meta:Y="230" GUID="85257c02-5740-411f-8eca-de3d0c019b40">
+			<Line>
+				<MultilineString>You fall under the onslaught, a multitude of wounds bringing you to the ground.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="502" meta:Y="0" GUID="c3c6e4b7-81d3-41b9-869a-50f1b8ad1dce">
+			<Line>
+				<MultilineString>The last goblin falls dead at your feet and you breath a sigh of relief, your muscles burning from exhaustion.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You look out the window and see a firey red glow in the distance. The village is burning!</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

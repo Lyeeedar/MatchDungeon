@@ -13,6 +13,20 @@
 			<Description>Harvest time is always the most exhausting time of the year, and the culmination of all the efforts you have put in to this point. Don't mess it up!</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>TheHarvest</Content>
+			<Next meta:RefKey="CardNode">2abf5a6e-a060-4bf7-967e-5dd689bd59d9</Next>
+		</CardNode>
+		<CardNode meta:X="835" meta:Y="0" GUID="2abf5a6e-a060-4bf7-967e-5dd689bd59d9">
+			<Name>Farmers Market</Name>
+			<Description>The farmers market is an opportunity to finally make some money by selling the produce you have grown.</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>FarmersMarket</Content>
+			<Next meta:RefKey="CardNode">b5b4cf07-d46e-4574-95e2-58cf7c7a0b9e</Next>
+		</CardNode>
+		<CardNode meta:X="1147" meta:Y="0" GUID="b5b4cf07-d46e-4574-95e2-58cf7c7a0b9e">
+			<Name>Raiding Party</Name>
+			<Description>Your peaceful farm life is shattered by the chittering cries of goblins smashing their way into your house.</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>RaidingParty</Content>
 		</CardNode>
 	</Nodes>
 </Card>

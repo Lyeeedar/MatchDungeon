@@ -1,0 +1,117 @@
+<Faction xmlns:meta="Editor">
+	<Monsters>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>Goblin</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_heroes/goblin</Name>
+				<DrawActualSize>true</DrawActualSize>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+			</Death>
+			<AttackNumPips>5</AttackNumPips>
+			<AttackCooldown>2,5</AttackCooldown>
+			<Size>1</Size>
+			<HP>7</HP>
+			<DamageReduction>0</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>2,5</Cooldown>
+					<Effect>Move</Effect>
+				</Ability>
+			</Abilities>
+		</Monster>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>GoblinShield</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_heroes/goblin_warrior</Name>
+				<DrawActualSize>true</DrawActualSize>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+			</Death>
+			<AttackNumPips>7</AttackNumPips>
+			<AttackCooldown>3,6</AttackCooldown>
+			<Size>1</Size>
+			<HP>11</HP>
+			<DamageReduction>0</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>2,5</Cooldown>
+					<Effect>Move</Effect>
+				</Ability>
+			</Abilities>
+		</Monster>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>Troll</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_heroes/troll</Name>
+				<DrawActualSize>true</DrawActualSize>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+			</Death>
+			<AttackNumPips>4</AttackNumPips>
+			<AttackCooldown>4,7</AttackCooldown>
+			<Size>2</Size>
+			<HP>15</HP>
+			<DamageReduction>0</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>3,6</Cooldown>
+					<Effect>Move</Effect>
+				</Ability>
+				<Ability>
+					<Cooldown>2,6</Cooldown>
+					<Target>Random</Target>
+					<Count>3</Count>
+					<Data />
+				</Ability>
+			</Abilities>
+		</Monster>
+	</Monsters>
+	<Bosses>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>Shaman</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_heroes/goblin_shaman</Name>
+				<DrawActualSize>true</DrawActualSize>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+			</Death>
+			<AttackNumPips>5</AttackNumPips>
+			<AttackCooldown>4,6</AttackCooldown>
+			<Size>1</Size>
+			<HP>20</HP>
+			<DamageReduction>0</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>3,6</Cooldown>
+					<Effect>Move</Effect>
+				</Ability>
+				<Ability>
+					<Cooldown>4,9</Cooldown>
+					<Target>Random</Target>
+					<TargetRestriction>Monster</TargetRestriction>
+					<Effect>Heal</Effect>
+					<Data>
+						<Amount>4</Amount>
+					</Data>
+				</Ability>
+				<Ability>
+					<Cooldown>3,6</Cooldown>
+					<Target>Random</Target>
+					<Count>2</Count>
+					<Data />
+				</Ability>
+				<Ability>
+					<Cooldown>3,6</Cooldown>
+					<Count>2</Count>
+					<Effect>Seal</Effect>
+					<Data />
+				</Ability>
+			</Abilities>
+		</Monster>
+	</Bosses>
+</Faction>

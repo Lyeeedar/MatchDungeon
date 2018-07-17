@@ -1,7 +1,10 @@
 <Definitions Colour="250,136,136" Icon="Sprites/Oryx/uf_split/uf_heroes/rat_giant_1.png" xmlns:meta="Editor">
 	<Definition Name="Faction" meta:RefKey="Struct">
 		<Data Name="Monsters" MinCount="1" meta:RefKey="Collection">
-			<Data Name="Monster" Keys="MonsterDesc" meta:RefKey="Reference" />
+			<Data Name="Monster" Keys="MonsterDesc" Nullable="False" meta:RefKey="Reference" />
+		</Data>
+		<Data Name="Bosses" MinCount="1" meta:RefKey="Collection">
+			<Data Name="Monster" Keys="MonsterDesc" Nullable="False" meta:RefKey="Reference" />
 		</Data>
 	</Definition>
 	<Definition Name="MonsterDesc" IsGlobal="True" meta:RefKey="StructDef">
