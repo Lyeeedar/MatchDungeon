@@ -1,76 +1,76 @@
 <Level xmlns:meta="Editor">
 	<Grid>
 		<Rows>
-			<Line>##.££.##</Line>
+			<Line>##..£.##</Line>
 			<Line>#......#</Line>
 			<Line>#!....!#</Line>
-			<Line>#=....=#</Line>
+			<Line>##....##</Line>
 			<Line>#......#</Line>
 			<Line>#!....!#</Line>
-			<Line>#=....=#</Line>
+			<Line>##....##</Line>
 			<Line>#......#</Line>
 			<Line>#!....!#</Line>
-			<Line>#=....=#</Line>
+			<Line>##....##</Line>
 			<Line>#......#</Line>
 			<Line>#!....!#</Line>
 			<Line>##....##</Line>
 		</Rows>
 		<Rows>
-			<Line>##.££.##</Line>
+			<Line>##.£..##</Line>
 			<Line>#......#</Line>
 			<Line>#.....!#</Line>
-			<Line>#=.....#</Line>
+			<Line>##....##</Line>
 			<Line>#......#</Line>
 			<Line>#!...=!#</Line>
-			<Line>#....=.#</Line>
-			<Line>#=.=...#</Line>
+			<Line>##...=##</Line>
+			<Line>#..=...#</Line>
 			<Line>#!.....#</Line>
+			<Line>##....##</Line>
 			<Line>#......#</Line>
-			<Line>#..==..#</Line>
 			<Line>#!....!#</Line>
 			<Line>##.=..##</Line>
 		</Rows>
 		<Rows>
-			<Line>##.££.##</Line>
+			<Line>##..£.##</Line>
 			<Line>#......#</Line>
 			<Line>#!....!#</Line>
-			<Line>#=....=#</Line>
+			<Line>##....##</Line>
 			<Line>#......#</Line>
 			<Line>#!.....#</Line>
-			<Line>#=....=#</Line>
+			<Line>##....##</Line>
 			<Line>#...!..#</Line>
 			<Line>#.....!#</Line>
-			<Line>#=....=#</Line>
+			<Line>##....##</Line>
 			<Line>#......#</Line>
 			<Line>#!....!#</Line>
 			<Line>##....##</Line>
 		</Rows>
 		<Rows>
-			<Line>##.££.##</Line>
+			<Line>##.£..##</Line>
 			<Line>#......#</Line>
 			<Line>#.....!#</Line>
-			<Line>#......#</Line>
+			<Line>##....##</Line>
 			<Line>#......#</Line>
 			<Line>#.....!#</Line>
-			<Line>#......#</Line>
+			<Line>##....##</Line>
 			<Line>#!!....#</Line>
 			<Line>#!!...!#</Line>
-			<Line>#......#</Line>
+			<Line>##....##</Line>
 			<Line>#....!!#</Line>
 			<Line>#....!!#</Line>
 			<Line>##....##</Line>
 		</Rows>
 		<Rows>
-			<Line>##.££.##</Line>
+			<Line>##.£..##</Line>
 			<Line>#......#</Line>
 			<Line>#!....!#</Line>
-			<Line>#......#</Line>
+			<Line>##....##</Line>
 			<Line>#......#</Line>
 			<Line>#!....!#</Line>
-			<Line>#......#</Line>
+			<Line>##....##</Line>
 			<Line>#!!....#</Line>
 			<Line>#!!....#</Line>
-			<Line>#======#</Line>
+			<Line>##....##</Line>
 			<Line>#......#</Line>
 			<Line>#!....!#</Line>
 			<Line>##....##</Line>

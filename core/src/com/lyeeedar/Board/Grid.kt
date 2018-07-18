@@ -455,8 +455,20 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					val diagR = tile(x + 1, currentY - 1)
 					val diagRBelow = tile(x + 1, currentY)
 
-					val diagLValid = diagL != null && diagL.swappable != null && diagL.swappable!!.canMove && (diagLBelow == null || !diagLBelow.canHaveOrb || diagLBelow.contents != null)
-					val diagRValid = diagR != null && diagR.swappable != null && diagR.swappable!!.canMove && (diagRBelow == null || !diagRBelow.canHaveOrb || diagRBelow.contents != null)
+					// check if column block connects to the bottom of the grid
+					var connectsToBottom = true
+					for (y in currentY until height)
+					{
+						val tile = tile(x, y) ?: continue
+						if (!tile.canHaveOrb && !tile.isPit)
+						{
+							connectsToBottom = false
+							break
+						}
+					}
+
+					val diagLValid = diagL?.swappable != null && (diagL.sinkable == null || connectsToBottom) && diagL.swappable!!.canMove && (diagLBelow == null || !diagLBelow.canHaveOrb || diagLBelow.contents != null)
+					val diagRValid = diagR?.swappable != null && (diagR.sinkable == null || connectsToBottom) && diagR.swappable!!.canMove && (diagRBelow == null || !diagRBelow.canHaveOrb || diagRBelow.contents != null)
 
 					if (diagLValid || diagRValid)
 					{

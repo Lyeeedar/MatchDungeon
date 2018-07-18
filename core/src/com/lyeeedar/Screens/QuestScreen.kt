@@ -279,7 +279,7 @@ class QuestScreen : AbstractScreen()
 		if (needsLayout && cardsTable.width != 0f)
 		{
 			CardWidget.layoutCards(cardWidgets, Direction.CENTER, cardsTable)
-			goldLabel.setText("Gold: " + Global.player.gold)
+			updateEquipment()
 			needsLayout = false
 		}
 
