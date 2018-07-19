@@ -31,13 +31,13 @@ class AtlasCreator
 	init
 	{
 		buildTilingMasksArray()
-		findFilesRecursive(File("").absoluteFile)
+		findFilesRecursive(File("../assetsraw").absoluteFile)
 		parseCodeFilesRecursive(File("../../core/src").absoluteFile)
 
 		var doPack = true
 		val thisHash = packedPaths.sorted().joinToString().hashCode()
 
-		val cacheFile = File("atlasPackCache")
+		val cacheFile = File("../assetsraw/atlasPackCache")
 		if (cacheFile.exists())
 		{
 			val cacheHash = cacheFile.readText().toInt()
@@ -51,7 +51,7 @@ class AtlasCreator
 
 		if (doPack)
 		{
-			val outDir = File("Atlases")
+			val outDir = File("../assetsraw/Atlases")
 			val contents = outDir.listFiles()
 			if (contents != null)
 				for (file in contents)
@@ -77,14 +77,14 @@ class AtlasCreator
 			settings.filterMin = Texture.TextureFilter.MipMapLinearLinear
 			settings.filterMag = Texture.TextureFilter.MipMapLinearLinear
 
-			val packer = TexturePacker(File("Sprites"), settings)
+			val packer = TexturePacker(File("../assetsraw/Sprites"), settings)
 
 			for (path in packedPaths)
 			{
-				val file = File(path)
+				val file = File("../assetsraw/$path")
 				if (file.exists())
 				{
-					packer.addImage(File(path))
+					packer.addImage(File("../assetsraw/$path"))
 				}
 				else
 				{
@@ -402,14 +402,14 @@ class AtlasCreator
 			return true
 		}
 
-		val topHandle = Gdx.files.internal("Sprites/$topName.png")
+		val topHandle = Gdx.files.internal("../assetsraw/Sprites/$topName.png")
 		if (!topHandle.exists())
 		{
 			System.err.println("Failed to find sprite for: " + topName)
 			return false
 		}
 
-		val overhangHandle = Gdx.files.internal("Sprites/$overhangName.png")
+		val overhangHandle = Gdx.files.internal("../assetsraw/Sprites/$overhangName.png")
 		if (!overhangHandle.exists())
 		{
 			System.err.println("Failed to find sprite for: " + overhangName)
@@ -460,15 +460,15 @@ class AtlasCreator
 		var merged = if (additive) Pixmap(base.width, base.height, Pixmap.Format.RGBA8888) else base
 		for (maskSuffix in masks)
 		{
-			var maskHandle = Gdx.files.internal("Sprites/" + maskBaseName + "_" + maskSuffix + ".png")
+			var maskHandle = Gdx.files.internal("../assetsraw/Sprites/" + maskBaseName + "_" + maskSuffix + ".png")
 			if (!maskHandle.exists())
 			{
-				maskHandle = Gdx.files.internal("Sprites/" + maskBaseName + "_C.png")
+				maskHandle = Gdx.files.internal("../assetsraw/Sprites/" + maskBaseName + "_C.png")
 			}
 
 			if (!maskHandle.exists())
 			{
-				maskHandle = Gdx.files.internal("Sprites/$maskBaseName.png")
+				maskHandle = Gdx.files.internal("../assetsraw/Sprites/$maskBaseName.png")
 			}
 
 			if (!maskHandle.exists())
@@ -536,7 +536,7 @@ class AtlasCreator
 			return true
 		}
 
-		val handle = Gdx.files.internal(path)
+		val handle = Gdx.files.internal("../assetsraw/$path")
 
 		if (handle.exists())
 		{

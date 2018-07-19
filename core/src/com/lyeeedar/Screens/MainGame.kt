@@ -66,16 +66,9 @@ class MainGame : Game()
 		screens.put(ScreenEnum.CARD, CardScreen())
 		screens.put(ScreenEnum.DECK, DeckScreen())
 		screens.put(ScreenEnum.QUESTSELECTION, QuestSelectionScreen())
-		screens.put(ScreenEnum.PARTICLEEDITOR, ParticleEditorScreen())
+		//screens.put(ScreenEnum.PARTICLEEDITOR, ParticleEditorScreen())
 
-		if (Global.PARTICLE_EDITOR)
-		{
-			switchScreen(ScreenEnum.PARTICLEEDITOR)
-		}
-		else
-		{
-			Global.newGame()
-		}
+		Global.newGame()
 	}
 
 	fun switchScreen(screen: AbstractScreen)

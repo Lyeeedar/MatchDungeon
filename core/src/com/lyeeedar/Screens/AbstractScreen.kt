@@ -195,8 +195,8 @@ abstract class AbstractScreen() : Screen, InputProcessor
         mainTable.setFillParent(true)
         stage.addActor(mainTable)
 
-		if (!Global.release)
-		{
+		//if (!Global.release)
+		//{
 			debugConsoleTable.setFillParent(true)
 			stage.addActor(debugConsoleTable)
 
@@ -210,7 +210,7 @@ abstract class AbstractScreen() : Screen, InputProcessor
 			})
 
 			debugConsole.isVisible = false
-		}
+		//}
 
         inputMultiplexer = InputMultiplexer()
 

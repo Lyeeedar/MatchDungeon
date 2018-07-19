@@ -44,7 +44,6 @@ class LwjglApplicationChanger : AbstractApplicationChanger(LwjglPreferences("gam
 			AtlasCreator()
 			TextureCompressor()
 			XmlCompressor()
-			XmlCompressor()
 		}
 	}
 

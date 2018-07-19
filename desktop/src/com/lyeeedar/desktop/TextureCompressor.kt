@@ -21,7 +21,7 @@ class TextureCompressor
 
 	init
 	{
-		val cacheFilePath = File("textureCompressionCache")
+		val cacheFilePath = File("../assetsraw/textureCompressionCache")
 		if (cacheFilePath.exists())
 		{
 			val lines = cacheFilePath.readLines()
@@ -37,7 +37,7 @@ class TextureCompressor
 			}
 		}
 
-		findFilesRecursive(File("").absoluteFile)
+		findFilesRecursive(File("../assetsraw").absoluteFile)
 		parseCodeFilesRecursive(File("../../core/src").absoluteFile)
 		processAtlas()
 
@@ -51,13 +51,13 @@ class TextureCompressor
 
 	private fun processAtlas()
 	{
-		val atlas = File("Atlases/SpriteAtlas.atlas")
+		val atlas = File("../assetsraw/Atlases/SpriteAtlas.atlas")
 		val lines = atlas.readLines().toGdxArray()
 		for (i in 0 until lines.size-1)
 		{
 			if (lines[i].endsWith(".png") && lines[i+1].startsWith("size: "))
 			{
-				val outpath = compressTexture("Atlases/" + lines[i]) ?: error("Failed to compress atlas texture {$lines[i]}")
+				val outpath = compressTexture("../assetsraw/Atlases/" + lines[i]) ?: error("Failed to compress atlas texture {$lines[i]}")
 				val relPath = outpath.replace("CompressedData/", "")
 				lines[i] = relPath
 			}

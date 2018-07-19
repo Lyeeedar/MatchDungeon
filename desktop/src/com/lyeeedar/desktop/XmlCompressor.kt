@@ -13,7 +13,7 @@ class XmlCompressor
 
 	init
 	{
-		rootPath = File("").absolutePath
+		rootPath = File("../assetsraw").absolutePath
 
 		// clear out existing data
 		val outputFolder = File("CompressedData")
@@ -29,7 +29,7 @@ class XmlCompressor
 			}
 		}
 
-		findFilesRecursive(File("").absoluteFile, true)
+		findFilesRecursive(File("../assetsraw").absoluteFile, true)
 
 		var processedPathsFile = "<Paths>\n"
 
@@ -40,10 +40,9 @@ class XmlCompressor
 
 		processedPathsFile += "</Paths>"
 
-		val tempFile = File("ProcessedPaths.xml")
+		val tempFile = File("../assetsraw/ProcessedPaths.xml")
 		tempFile.writeText(processedPathsFile)
-		processXml(tempFile.path)
-		tempFile.delete()
+		processXml(tempFile.absolutePath)
 	}
 
 	private fun findFilesRecursive(dir: File, isRoot: Boolean)
@@ -67,7 +66,7 @@ class XmlCompressor
 	{
 		val relativePath = path.replace(rootPath + "\\", "").replace("\\", "/")
 
-		val rawxml = getRawXml(relativePath)
+		val rawxml = getRawXml("../assetsraw/$relativePath")
 		val data = XmlData.loadFromElement(rawxml)
 
 		val outputPath = "CompressedData/" + relativePath.hashCode() + ".xmldata"
