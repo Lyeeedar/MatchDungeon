@@ -112,18 +112,21 @@ class Faction
 				faction.sizeMap[desc.size].add(desc)
 			}
 
-			val bossEl = xml.getChildByName("Bosses")!!
-			for (i in 0 until bossEl.childCount)
+			val bossEl = xml.getChildByName("Bosses")
+			if (bossEl != null)
 			{
-				val el = bossEl.getChild(i)
-				val desc = MonsterDesc.load(el)
-
-				if (!faction.bossSizeMap.containsKey(desc.size))
+				for (i in 0 until bossEl.childCount)
 				{
-					faction.bossSizeMap[desc.size] = Array()
-				}
+					val el = bossEl.getChild(i)
+					val desc = MonsterDesc.load(el)
 
-				faction.bossSizeMap[desc.size].add(desc)
+					if (!faction.bossSizeMap.containsKey(desc.size))
+					{
+						faction.bossSizeMap[desc.size] = Array()
+					}
+
+					faction.bossSizeMap[desc.size].add(desc)
+				}
 			}
 
 			return faction

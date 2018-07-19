@@ -25,7 +25,7 @@ class ParticleEffect : Renderable()
 
 	var loop = true
 	var completed = false
-	var killOnAnimComplete = true
+	var killOnAnimComplete = false
 	private var warmupTime = 0f
 	private var doneWarmup = false
 	val emitters = Array<Emitter>()

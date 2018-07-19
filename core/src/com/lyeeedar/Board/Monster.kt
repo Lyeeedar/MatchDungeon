@@ -95,6 +95,7 @@ fun validAttack(grid: Grid, tile: Tile): Boolean
 	if (tile.orb == null) return false
 	if (tile.orb!!.special != null) return false
 	if (tile.orb!!.hasAttack) return false
+	if (tile.spreader != null) return false
 
 	for (dir in Direction.CardinalValues)
 	{

@@ -1,0 +1,54 @@
+<CardContent meta:X="0" meta:Y="0" GUID="d436ecb5-9899-4429-8b9e-5c979966f277" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">1a52e197-cc5e-4613-b080-8c15a2a6252b</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="1a52e197-cc5e-4613-b080-8c15a2a6252b">
+			<Line>
+				<MultilineString>You stumble across and old room, filled with locked chests.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>The approaching sound of a dangerous horde of monsters forces you into frantic action.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Grab what you can and get out of here!</MultilineString>
+			</Line>
+			<Match3>
+				<Level>FranticSearchContentLevel</Level>
+				<Success meta:RefKey="Node">12306581-fe20-4ce4-8fcf-5275f48f1b2e</Success>
+				<Failure meta:RefKey="Node">3fd17398-fae6-408c-a2a0-633f90cafea1</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="509" meta:Y="302" GUID="3fd17398-fae6-408c-a2a0-633f90cafea1">
+			<Line>
+				<MultilineString>The sound of the horde gets too close and you are forced to flee.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="481" meta:Y="0" GUID="12306581-fe20-4ce4-8fcf-5275f48f1b2e">
+			<Line>
+				<MultilineString>You escape just in time, treasures in hand.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>50</Count>
+				</Money>
+				<Money>
+					<Chance>High</Chance>
+					<Count>20</Count>
+				</Money>
+				<Money>
+					<Chance>Low</Chance>
+					<Count>40</Count>
+				</Money>
+				<Equipment>
+					<Chance>Low</Chance>
+					<FromDeck>true</FromDeck>
+				</Equipment>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

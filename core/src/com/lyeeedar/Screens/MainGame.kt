@@ -20,7 +20,8 @@ class MainGame : Game()
 		QUEST,
 		CARD,
 		DECK,
-		QUESTSELECTION
+		QUESTSELECTION,
+		PARTICLEEDITOR
 	}
 
 	private val screens = HashMap<ScreenEnum, AbstractScreen>()
@@ -65,8 +66,16 @@ class MainGame : Game()
 		screens.put(ScreenEnum.CARD, CardScreen())
 		screens.put(ScreenEnum.DECK, DeckScreen())
 		screens.put(ScreenEnum.QUESTSELECTION, QuestSelectionScreen())
+		screens.put(ScreenEnum.PARTICLEEDITOR, ParticleEditorScreen())
 
-		Global.newGame()
+		if (Global.PARTICLE_EDITOR)
+		{
+			switchScreen(ScreenEnum.PARTICLEEDITOR)
+		}
+		else
+		{
+			Global.newGame()
+		}
 	}
 
 	fun switchScreen(screen: AbstractScreen)

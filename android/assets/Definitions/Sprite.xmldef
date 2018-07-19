@@ -38,6 +38,7 @@
 		<Data Name="FlipX" meta:RefKey="Boolean" />
 		<Data Name="FlipY" meta:RefKey="Boolean" />
 		<Data Name="TimeMultiplier" Min="0" Default="1" meta:RefKey="Number" />
+		<Data Name="KillOnAnimComplete" meta:RefKey="Boolean" />
 	</Definition>
 	<Definition Name="DirectionalSprite" IsGlobal="True" meta:RefKey="StructDef">
 		<Data Name="Animations" meta:RefKey="Collection">

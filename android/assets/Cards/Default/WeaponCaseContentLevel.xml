@@ -1,0 +1,51 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>....C....</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>C</Character>
+			<Extends></Extends>
+			<Block>0</Block>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<Sinkable>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_items/weapon_broadsword</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+			</Sinkable>
+			<Container>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_items/chest_silver</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Health>8</Health>
+			</Container>
+		</Symbol>
+	</Symbols>
+	<OrbCount>5</OrbCount>
+	<AllowedVictories>
+		<Condition meta:RefKey="Sink">
+			<Count>1</Count>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Turns">
+			<Turns>30</Turns>
+		</Condition>
+	</AllowedDefeats>
+</Level>

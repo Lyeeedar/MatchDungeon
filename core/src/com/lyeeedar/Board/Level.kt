@@ -193,6 +193,11 @@ class Level(val loadPath: String)
 					tile.canHaveOrb = false
 					tile.isPit = false
 				}
+
+				if (symbol.spreader != null)
+				{
+					tile.spreader = symbol.spreader.copy()
+				}
 			}
 			else
 			{
@@ -559,9 +564,16 @@ class Level(val loadPath: String)
 						containerDesc = ContainerDesc(containerSprite, containerDescEl.getInt("Health", 1))
 					}
 
+					var spreader: Spreader? = null
+					val spreaderEl = symbolEl.getChildByName("Spreader")
+					if (spreaderEl != null)
+					{
+						spreader = Spreader.load(spreaderEl)
+					}
+
 					val type = SymbolType.valueOf(symbolEl.get("Type", "Floor")!!.toUpperCase())
 
-					symbolsMap[character.toInt()] = Symbol(character, extends, sprite, block, plate, seal, attack, isMonster, monsterDesc, special, sinkableDesc, isChest, containerDesc, type)
+					symbolsMap[character.toInt()] = Symbol(character, extends, sprite, block, plate, seal, attack, isMonster, monsterDesc, special, sinkableDesc, isChest, containerDesc, spreader, type)
 				}
 			}
 
@@ -639,4 +651,5 @@ data class Symbol(
 		val sinkableDesc: SinkableDesc?,
 		val isChest: Boolean,
 		val container: ContainerDesc?,
+		val spreader: Spreader?,
 		val type: SymbolType)

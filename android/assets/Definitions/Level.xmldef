@@ -49,6 +49,12 @@
 					<Data Name="Sprite" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 					<Data Name="Health" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
 				</Data>
+				<Data Name="Spreader" meta:RefKey="Struct">
+					<Data Name="Name" meta:RefKey="String" />
+					<Data Name="Sprite" Keys="SpriteWrapper" meta:RefKey="Reference" />
+					<Data Name="ParticleEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
+					<Data Name="Effect" EnumValues="Seal,Pop" meta:RefKey="Enum" />
+				</Data>
 				<Data Name="Type" EnumValues="Floor,Wall,Pit" meta:RefKey="Enum" />
 			</Data>
 		</Data>

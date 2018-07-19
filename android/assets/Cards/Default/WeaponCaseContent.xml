@@ -1,0 +1,37 @@
+<CardContent meta:X="0" meta:Y="0" GUID="758ff987-df0b-4494-8c46-4e1db5da10d4" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">23aba7cf-51ab-45cc-b91e-cfc85321b66f</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="23aba7cf-51ab-45cc-b91e-cfc85321b66f">
+			<Line>
+				<MultilineString>You come across a large case on the ground, the exact shape of a weapon. The only issue is it is locked down tight. If you can break it open, you can claim the weapon inside.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>WeaponCaseContentLevel</Level>
+				<Success meta:RefKey="Node">f2207443-a76f-4c75-b09d-96ad6efca6df</Success>
+				<Failure meta:RefKey="Node">6639ec93-1811-46b4-a0f8-da1d4846e3aa</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="447" meta:Y="227" GUID="6639ec93-1811-46b4-a0f8-da1d4846e3aa">
+			<Line>
+				<MultilineString>Your final blow breaks the case and the weapon together. It's useless to you now.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="480" meta:Y="0" GUID="f2207443-a76f-4c75-b09d-96ad6efca6df">
+			<Line>
+				<MultilineString>The case springs open and you take your prize.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Equipment>
+					<FromDeck>true</FromDeck>
+					<Type>Weapon</Type>
+				</Equipment>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

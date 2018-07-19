@@ -93,11 +93,13 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	var gridNeedsUpdate = false
 	var gainedBonusPower = false
 	var matchCount = 0
+	val poppedSpreaders = ObjectSet<String>()
 
 	// ----------------------------------------------------------------------
 	var noValidMoves = false
 
 	val processedCreatures = ObjectSet<Creature>()
+	val processedSpreaders = ObjectSet<String>()
 
 	// ----------------------------------------------------------------------
 	init
@@ -128,6 +130,8 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			gainedBonusPower = false
 
 			animSpeed = defaultAnimSpeed
+
+			poppedSpreaders.clear()
 
 			false
 		}
@@ -167,11 +171,78 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		gridNeedsUpdate = false
 
 		processedCreatures.clear()
+		processedSpreaders.clear()
 
+		var newspreader: Spreader? = null
 		for (tile in grid)
 		{
 			val orb = tile.orb
-			if (orb != null)
+			val spreader = tile.spreader
+
+			if (spreader != null)
+			{
+				if (!processedSpreaders.contains(spreader.nameKey))
+				{
+					processedSpreaders.add(spreader.nameKey)
+
+					if (!poppedSpreaders.contains(spreader.nameKey))
+					{
+						// spread
+
+						// get borders tiles
+						val border = ObjectSet<Tile>()
+						for (t in grid)
+						{
+							if (t.spreader != null && t.spreader!!.nameKey == spreader.nameKey)
+							{
+								for (dir in Direction.CardinalValues)
+								{
+									val nt = tile(t + dir) ?: continue
+
+									if (nt.spreader == null && nt.canHaveOrb)
+									{
+										border.add(nt)
+									}
+								}
+							}
+						}
+
+						// select random
+						if (border.size > 0)
+						{
+							val chosenTile = border.asSequence().random()!!
+
+							newspreader = spreader.copy()
+
+							if (newspreader.particleEffect != null)
+							{
+								newspreader.particleEffect!!.animation = ExpandAnimation.obtain().set(animSpeed)
+							}
+
+							if (newspreader.spriteWrapper != null)
+							{
+								if (newspreader.spriteWrapper!!.sprite != null)
+								{
+									newspreader.spriteWrapper!!.sprite!!.animation = ExpandAnimation.obtain().set(animSpeed)
+								}
+
+								if (newspreader.spriteWrapper!!.tilingSprite != null)
+								{
+									newspreader.spriteWrapper!!.tilingSprite!!.animation = ExpandAnimation.obtain().set(animSpeed)
+								}
+							}
+
+							chosenTile.spreader = newspreader
+						}
+					}
+				}
+
+				if (spreader.effect == Spreader.SpreaderEffect.POP && spreader != newspreader)
+				{
+					pop(tile, 0f, spreader, 0, true)
+				}
+			}
+			else if (orb != null)
 			{
 				// Process attacks
 				if (orb.hasAttack)
@@ -330,7 +401,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			val tile = grid[x, currentY]
 
 			// read up column, find first gap
-			if (tile.canHaveOrb && tile.swappable == null && tile.creature == null)
+			if (tile.canHaveOrb && tile.swappable == null && tile.creature == null && tile.block == null && tile.container == null)
 			{
 				// if gap found read up until solid / spawner
 				var found: Tile? = null
@@ -341,6 +412,10 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					if (stile == null)
 					{
 						found = tile
+						break
+					}
+					else if (stile.spreader?.effect == Spreader.SpreaderEffect.SEAL)
+					{
 						break
 					}
 					else if (stile.swappable != null)
@@ -360,6 +435,10 @@ class Grid(val width: Int, val height: Int, val level: Level)
 						break
 					}
 					else if (stile.block != null)
+					{
+						break
+					}
+					else if (stile.container != null)
 					{
 						break
 					}
@@ -431,14 +510,14 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			while (currentY < height)
 			{
 				val tile = grid[x, currentY]
-				if (tile.canHaveOrb && tile.swappable == null && tile.block == null && tile.creature == null)
+				if (tile.canHaveOrb && tile.swappable == null && tile.block == null && tile.creature == null && tile.container == null)
 				{
 					if (lookingForOrb == 0)
 					{
 						lookingForOrb = 1
 					}
 				}
-				else if (!tile.canHaveOrb || lookingForOrb == 2 || tile.block != null || tile.creature != null)
+				else if (!tile.canHaveOrb || lookingForOrb == 2 || tile.block != null || tile.creature != null || tile.container != null)
 				{
 					lookingForOrb = 0
 				}
@@ -467,8 +546,19 @@ class Grid(val width: Int, val height: Int, val level: Level)
 						}
 					}
 
-					val diagLValid = diagL?.swappable != null && (diagL.sinkable == null || connectsToBottom) && diagL.swappable!!.canMove && (diagLBelow == null || !diagLBelow.canHaveOrb || diagLBelow.contents != null)
-					val diagRValid = diagR?.swappable != null && (diagR.sinkable == null || connectsToBottom) && diagR.swappable!!.canMove && (diagRBelow == null || !diagRBelow.canHaveOrb || diagRBelow.contents != null)
+					val diagLValid =
+							diagL?.swappable != null &&
+							(diagL.sinkable == null || connectsToBottom) &&
+							diagL.swappable!!.canMove &&
+							(diagL.spreader == null || diagL.spreader!!.effect != Spreader.SpreaderEffect.SEAL) &&
+							(diagLBelow == null || !diagLBelow.canHaveOrb || diagLBelow.contents != null)
+
+					val diagRValid =
+							diagR?.swappable != null &&
+							(diagR.sinkable == null || connectsToBottom) &&
+							diagR.swappable!!.canMove &&
+							(diagR.spreader == null || diagR.spreader!!.effect != Spreader.SpreaderEffect.SEAL) &&
+							(diagRBelow == null || !diagRBelow.canHaveOrb || diagRBelow.contents != null)
 
 					if (diagLValid || diagRValid)
 					{
@@ -1264,7 +1354,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				val tile = grid[x, y]
 				val orb = tile.orb
 
-				if (orb == null)
+				if (orb == null || tile.spreader != null)
 				{
 					if (key != -1)
 					{
@@ -1306,7 +1396,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				val tile = grid[x, y]
 				val orb = tile.orb
 
-				if (orb == null)
+				if (orb == null || tile.spreader != null)
 				{
 					if (key != -1)
 					{
@@ -1421,6 +1511,17 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 					t.effects.add(hitEffect.copy())
 				}
+
+				if (t.spreader != null)
+				{
+					val spreader = t.spreader!!
+
+					t.spreader = null
+
+					poppedSpreaders.add(spreader.nameKey)
+
+					t.effects.add(hitEffect.copy())
+				}
 			}
 		}
 
@@ -1523,6 +1624,19 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		if (tile.hasPlate)
 		{
 			tile.plateStrength--
+			val hit = hitEffect.copy()
+			hit.renderDelay = delay
+			tile.effects.add(hit)
+		}
+
+		if (tile.spreader != null && damSource !is Spreader)
+		{
+			val spreader = tile.spreader!!
+
+			poppedSpreaders.add(spreader.nameKey)
+
+			tile.spreader = null
+
 			val hit = hitEffect.copy()
 			hit.renderDelay = delay
 			tile.effects.add(hit)

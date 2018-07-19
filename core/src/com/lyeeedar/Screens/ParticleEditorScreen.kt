@@ -77,9 +77,12 @@ class ParticleEditorScreen : AbstractScreen()
 			{
 				val file = fc.selectedFile
 
-				currentPath = file.name
+				currentPath = file.path
 
-				val nparticle = ParticleEffect.Companion.load(currentPath!!)
+				val rawxml = getRawXml(currentPath!!)
+				val xmlData = XmlData.loadFromElement(rawxml)
+
+				val nparticle = ParticleEffect.Companion.load(xmlData)
 				nparticle.killOnAnimComplete = false
 				nparticle.setPosition(particle.position.x, particle.position.y)
 				nparticle.rotation = particle.rotation
@@ -91,7 +94,11 @@ class ParticleEditorScreen : AbstractScreen()
 
 		updateButton.addClickListener {
 
-			val nparticle = ParticleEffect.Companion.load(currentPath!!)
+			val rawxml = getRawXml(currentPath!!)
+			val xmlData = XmlData.loadFromElement(rawxml)
+
+			val nparticle = ParticleEffect.Companion.load(xmlData)
+
 			nparticle.killOnAnimComplete = false
 			nparticle.setPosition(particle.position.x, particle.position.y)
 			nparticle.rotation = particle.rotation

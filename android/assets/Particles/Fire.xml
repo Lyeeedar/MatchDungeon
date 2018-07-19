@@ -1,97 +1,45 @@
 <Effect xmlns:meta="Editor">
 	<Warmup>5</Warmup>
-	<MoveSpeed>0.1</MoveSpeed>
 	<Emitters>
 		<Emitter>
-			<Name>Trail</Name>
-			<Shape>Circle</Shape>
-			<Width>0.4</Width>
-			<Height>0.4</Height>
-			<Direction>Random</Direction>
-			<ParticleSpeed>0.2,0.6</ParticleSpeed>
+			<Name>Core</Name>
+			<Type>Accumulated</Type>
+			<Space>Local</Space>
+			<Width>0.8</Width>
+			<Height>0.1</Height>
+			<Direction>Up</Direction>
+			<ParticleSpeed>1,1.2</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
-				<Keyframe>0|50</Keyframe>
-			</RateKeyframes>
-			<Particles>
-				<Particle>
-					<Lifetime>1,1</Lifetime>
-					<BlendMode>Multiplicative</BlendMode>
-					<Collision>Slide</Collision>
-					<Drag>0.2</Drag>
-					<TextureKeyframes>
-						<Stream>
-							<Keyframe>0|Particle/ember_2</Keyframe>
-						</Stream>
-						<Stream>
-							<Keyframe>0|Particle/plasma_2</Keyframe>
-						</Stream>
-						<Stream>
-							<Keyframe>0|Particle/plasma_1</Keyframe>
-						</Stream>
-					</TextureKeyframes>
-					<SizeKeyframes>
-						<Stream>
-							<Keyframe>0|0|0</Keyframe>
-							<Keyframe>0.3|0.4|0.6</Keyframe>
-							<Keyframe>1|0.8|1</Keyframe>
-						</Stream>
-					</SizeKeyframes>
-					<RotationSpeedKeyframes>
-						<Stream>
-							<Keyframe>0|-100|100</Keyframe>
-						</Stream>
-					</RotationSpeedKeyframes>
-					<ColourKeyframes>
-						<Stream>
-							<Keyframe>0|255,250,133,255</Keyframe>
-							<Keyframe>0.2|240,255,0,255</Keyframe>
-							<Keyframe>0.3943284|255,208,0,255</Keyframe>
-							<Keyframe>0.6015667|255,89,5,255</Keyframe>
-							<Keyframe>0.6783215|28,28,28,255</Keyframe>
-							<Keyframe>1|0,0,0,255</Keyframe>
-						</Stream>
-					</ColourKeyframes>
-					<AlphaKeyframes>
-						<Stream>
-							<Keyframe>0|0.1</Keyframe>
-							<Keyframe>0.3|0.8</Keyframe>
-							<Keyframe>0.6019004|0.6</Keyframe>
-							<Keyframe>1|0</Keyframe>
-						</Stream>
-					</AlphaKeyframes>
-				</Particle>
-			</Particles>
-		</Emitter>
-		<Emitter>
-			<Name>Core</Name>
-			<Space>Local</Space>
-			<Shape>Circle</Shape>
-			<Width>0</Width>
-			<Height>0</Height>
-			<Direction>Random</Direction>
-			<ParticleSpeed>0,0.3</ParticleSpeed>
-			<ParticleRotation>0,1</ParticleRotation>
-			<RateKeyframes>
-				<Keyframe>0|5</Keyframe>
+				<Keyframe>0|10</Keyframe>
 			</RateKeyframes>
 			<Particles>
 				<Particle>
 					<Lifetime>1,1</Lifetime>
 					<BlendMode>Additive</BlendMode>
+					<Brownian>10</Brownian>
 					<TextureKeyframes>
 						<Stream>
-							<Keyframe>0|Particle/glow</Keyframe>
+							<Keyframe>0|Particle/plasma_3</Keyframe>
 						</Stream>
 						<Stream>
 							<Keyframe>0|Particle/plasma_1</Keyframe>
 						</Stream>
+						<Stream>
+							<Keyframe>0|Particle/plasma_2</Keyframe>
+						</Stream>
 					</TextureKeyframes>
 					<SizeKeyframes>
 						<Stream>
-							<Keyframe>0|0.5|0.7</Keyframe>
+							<Keyframe>0|0.4|0.6</Keyframe>
+							<Keyframe>0.4864353|0.6|0.8</Keyframe>
 						</Stream>
 					</SizeKeyframes>
+					<RotationSpeedKeyframes>
+						<Stream>
+							<Keyframe>0|-10|10</Keyframe>
+						</Stream>
+					</RotationSpeedKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|255,250,194,255</Keyframe>
@@ -102,8 +50,54 @@
 					<AlphaKeyframes>
 						<Stream>
 							<Keyframe>0|0.2</Keyframe>
-							<Keyframe>0.1|0.9</Keyframe>
+							<Keyframe>0.05315458|0.9</Keyframe>
 							<Keyframe>0.7|0.7</Keyframe>
+							<Keyframe>1|0</Keyframe>
+						</Stream>
+					</AlphaKeyframes>
+				</Particle>
+			</Particles>
+		</Emitter>
+		<Emitter>
+			<Name>Sparks</Name>
+			<Type>Accumulated</Type>
+			<Shape>Cone</Shape>
+			<Width>90</Width>
+			<Height>0.1</Height>
+			<ParticleSpeed>1,3</ParticleSpeed>
+			<ParticleRotation>0,360</ParticleRotation>
+			<RateKeyframes>
+				<Keyframe>0|5</Keyframe>
+			</RateKeyframes>
+			<Particles>
+				<Particle>
+					<Lifetime>0.4,0.8</Lifetime>
+					<BlendMode>Additive</BlendMode>
+					<Brownian>5</Brownian>
+					<VelocityAligned>true</VelocityAligned>
+					<TextureKeyframes>
+						<Stream>
+							<Keyframe>0|Particle/ember_1</Keyframe>
+						</Stream>
+						<Stream>
+							<Keyframe>0|Particle/ember_2</Keyframe>
+						</Stream>
+					</TextureKeyframes>
+					<SizeKeyframes>
+						<Stream>
+							<Keyframe>0|0.1|0.3</Keyframe>
+						</Stream>
+					</SizeKeyframes>
+					<ColourKeyframes>
+						<Stream>
+							<Keyframe>0|220,224,148,255</Keyframe>
+							<Keyframe>1|143,96,1,255</Keyframe>
+						</Stream>
+					</ColourKeyframes>
+					<AlphaKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+							<Keyframe>0.229802|1</Keyframe>
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>

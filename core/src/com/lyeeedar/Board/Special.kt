@@ -49,6 +49,7 @@ abstract class Special(val orb: Orb)
 
 				val effect = AssetManager.loadParticleEffect("SpecialBeam")
 				effect.colour = modifyColour(colour)
+				effect.killOnAnimComplete = true
 				effect.animation = MoveAnimation.obtain().set(dist * beamMoveSpeed, arrayOf(p1, p2), Interpolation.linear)
 				effect.rotation = getRotation(p1, p2)
 				effect.collisionFun = fun(cx: Int, pcy: Int)
@@ -117,6 +118,7 @@ abstract class Special(val orb: Orb)
 
 				val effect = AssetManager.loadParticleEffect("SpecialBeam")
 				effect.colour = modifyColour(colour)
+				effect.killOnAnimComplete = true
 				effect.animation = MoveAnimation.obtain().set(dist * beamMoveSpeed, arrayOf(p1, p2), Interpolation.linear)
 				effect.rotation = getRotation(p1, p2)
 				effect.collisionFun = fun(cx: Int, pcy: Int)
@@ -415,7 +417,7 @@ class Match5(orb: Orb) : Special(orb)
 							}
 							tile.effects.add(s)
 						}
-						else if (tile.damageable != null)
+						else if (tile.creature != null || (tile.damageable?.maxhp ?: 0) > 1)
 						{
 							val dst = tile.dist(point)
 							val animDuration = 0.275f + dst * 0.05f
@@ -460,7 +462,7 @@ class Match5(orb: Orb) : Special(orb)
 
 				for (tile in grid.grid)
 				{
-					if (tile.orb?.key == key || tile.damageable != null)
+					if (tile.orb?.key == key || tile.creature != null || (tile.damageable?.maxhp ?: 0) > 1)
 					{
 						val dst = tile.dist(point)
 						val animDuration = 0.275f + dst * 0.05f

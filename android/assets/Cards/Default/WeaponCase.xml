@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="3d0336e8-3b72-41e6-8539-0eec789a8c11" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">6dfafff5-df2e-45f1-aeb4-5d9c30f0110d</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="6dfafff5-df2e-45f1-aeb4-5d9c30f0110d">
+			<Name>Weapon Case</Name>
+			<Description>You find a locked case, the exact shape of a weapon. If you can break it open you can claim a nice reward.</Description>
+			<SpawnWeighting>StartMiddle</SpawnWeighting>
+			<Content>WeaponCaseContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

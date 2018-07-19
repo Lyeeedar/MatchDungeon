@@ -52,17 +52,7 @@ class ExpandAnimation() : AbstractScaleAnimation()
 
 	fun set(duration: Float): ExpandAnimation
 	{
-		startScale[0] = 0f
-		startScale[1] = 0f
-
-		endScale[0] = 1f
-		endScale[1] = 1f
-
-		oneway = true
-
-		this.duration = duration
-		this.time = 0f
-		return this
+		return set(duration, 0f, 1f, true)
 	}
 
 	fun set(duration: Float, start: Float, end: Float, oneway: Boolean = true): ExpandAnimation

@@ -423,8 +423,21 @@ class EquipmentReward : AbstractReward()
 				CardScreen.instance.updateEquipment()
 			}, 0.75f)
 		})
-		card.addPick("Discard", {
 
+		val sellAmount = equipment.cost / 10
+		card.addPick("Sell ($sellAmount)", {
+			Global.player.gold += sellAmount
+
+			val sprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_gold")
+
+			val src = card.localToStageCoordinates(Vector2(card.width / 2f, card.height / 2f))
+
+			val dstTable = CardScreen.instance.playerSlot
+			val dst = dstTable.localToStageCoordinates(Vector2())
+
+			Mote(src, dst, sprite, 32f, {
+				CardScreen.instance.updateEquipment()
+			}, 0.75f)
 		})
 
 		output.add(card)

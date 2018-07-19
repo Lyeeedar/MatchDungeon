@@ -168,6 +168,7 @@ class AssetManager
 			effect.flipY = xml.getBoolean("FlipY", false)
 			effect.useFacing = xml.getBoolean("UseFacing", true)
 			effect.timeMultiplier = xml.getFloat("TimeMultiplier", 1f)
+			effect.killOnAnimComplete = xml.getBoolean("KillOnAnimComplete", false)
 
 			return effect
 		}

@@ -1,0 +1,39 @@
+<CardContent meta:X="0" meta:Y="0" GUID="4dca1aba-2ab8-43b3-acab-c0bd72cd0942" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">020d5fcf-2aef-4bd9-8825-a30f6dba1d4f</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="020d5fcf-2aef-4bd9-8825-a30f6dba1d4f">
+			<Line>
+				<MultilineString>You catch a gleam of something out of the corner of your eye. On further investigation it's coming from beneath a mound of debris.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>If you can dig it out it may be worth something, so get digging!</MultilineString>
+			</Line>
+			<Match3>
+				<Level>DiamondInTheRoughContentLevel</Level>
+				<Success meta:RefKey="Node">81246f23-5b2a-4af2-a789-ed8ebfa6399d</Success>
+				<Failure meta:RefKey="Node">186b87f8-b4d3-4b76-83cf-bed434bc5d79</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="469" meta:Y="222" GUID="186b87f8-b4d3-4b76-83cf-bed434bc5d79">
+			<Line>
+				<MultilineString>What a shame, it was some worthless junk all along.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="478" meta:Y="-1" GUID="81246f23-5b2a-4af2-a789-ed8ebfa6399d">
+			<Line>
+				<MultilineString>What a fancy gemstone you've found! That will sell very nicely.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>100</Count>
+				</Money>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>
