@@ -377,6 +377,13 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 
 	companion object
 	{
+		fun layoutCards(cardWidget: CardWidget, enterFrom: Direction, dstWidget: Table? = null)
+		{
+			val temp = Array<CardWidget>()
+			temp.add(cardWidget)
+			layoutCards(temp, enterFrom, dstWidget)
+		}
+
 		fun layoutCards(cardWidgets: Array<CardWidget>, enterFrom: Direction, dstWidget: Table? = null)
 		{
 			val areapos = dstWidget?.localToStageCoordinates(Vector2()) ?: Vector2()

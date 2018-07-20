@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.NinePatch
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Touchable
+import com.badlogic.gdx.scenes.scene2d.actions.Actions.*
+import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
@@ -19,6 +21,7 @@ import com.lyeeedar.Global
 import com.lyeeedar.MainGame
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
+import ktx.actors.then
 
 class CardScreen : AbstractScreen()
 {
@@ -185,10 +188,48 @@ class CardScreen : AbstractScreen()
 		{
 			val state = currentContent.state
 			val key = currentContent.customKey
+
+			var advancedCard = false
 			if (state != CardContent.CardContentState.FAILURE)
 			{
 				val currentCardNode = currentCard.current
-				currentCard.current = currentCardNode.nextNode?.node ?: currentCardNode
+				val nextCardNode = currentCardNode.nextNode?.node
+
+				if (nextCardNode != null)
+				{
+					currentCard.current = nextCardNode
+
+					val prevCard = currentCardNode.getCard()
+					val nextCard = nextCardNode.getCard()
+
+					val transitionTable = Table()
+					val transitionStack = Stack()
+					transitionTable.add(transitionStack).grow()
+
+					val prevDetailTable = prevCard.frontDetailTable
+					val nextDetailTable = nextCard.frontDetailTable
+
+					val prevSequence = alpha(1f) then delay(1f) then fadeOut(0.5f)
+					val nextSequence = alpha(0f) then delay(1f) then fadeIn(0.5f)
+
+					prevDetailTable.addAction(prevSequence)
+					nextDetailTable.addAction(nextSequence)
+
+					transitionStack.add(prevDetailTable)
+					transitionStack.add(nextDetailTable)
+
+					prevCard.frontTable.remove()
+					val newCard = CardWidget(prevCard.frontTable, transitionTable, prevCard.backImage, null)
+					newCard.setPosition(Global.resolution.x / 2f, Global.resolution.y / 2f)
+					Global.stage.addActor(newCard)
+					newCard.focus()
+					newCard.collapseFun = {
+						readyToSwitch = true
+						newCard.remove()
+					}
+
+					advancedCard = true
+				}
 			}
 
 			if (state == CardContent.CardContentState.INPROGRESS)
@@ -199,7 +240,10 @@ class CardScreen : AbstractScreen()
 			val currentQuestNode = currentQuest.current as QuestNode
 			currentQuest.current = currentQuestNode.getNext(state, key)
 
-			readyToSwitch = true
+			if (!advancedCard)
+			{
+				readyToSwitch = true
+			}
 		}
 		updateEquipment()
 	}

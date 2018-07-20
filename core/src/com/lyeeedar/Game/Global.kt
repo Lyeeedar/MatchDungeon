@@ -342,12 +342,23 @@ class GlobalDeck
 	val characters = UniqueArray<Character>({it.path.hashCode()})
 	val quests = UniqueArray<Quest>({it.path.hashCode()})
 
+	val newencounters = UniqueArray<Card>({it.path.hashCode()})
+	val newequipment = UniqueArray<Equipment>({it.path.hashCode()})
+	val newcharacters = UniqueArray<Character>({it.path.hashCode()})
+	val newquests = UniqueArray<Quest>({it.path.hashCode()})
+
 	val playerDeck = PlayerDeck()
 	var chosenCharacter: Character
 
 	init
 	{
 		for (cardPath in XmlData.enumeratePaths("Cards/Default", "Card"))
+		{
+			val card = Card.load(cardPath)
+			encounters.add(card)
+		}
+
+		for (cardPath in XmlData.enumeratePaths("Cards/Peasant", "Card"))
 		{
 			val card = Card.load(cardPath)
 			encounters.add(card)

@@ -318,6 +318,7 @@ class QuestWare : ShopWares()
 	override fun reward()
 	{
 		Global.deck.quests.add(quest)
+		Global.deck.newquests.add(quest)
 	}
 }
 
@@ -349,6 +350,7 @@ class CardWare : ShopWares()
 	override fun reward()
 	{
 		Global.deck.encounters.add(card)
+		Global.deck.newencounters.add(card)
 	}
 }
 
@@ -380,5 +382,6 @@ class CharacterWare : ShopWares()
 	override fun reward()
 	{
 		Global.deck.characters.add(character)
+		Global.deck.newcharacters.add(character)
 	}
 }

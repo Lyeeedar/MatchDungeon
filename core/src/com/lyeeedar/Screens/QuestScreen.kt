@@ -203,31 +203,159 @@ class QuestScreen : AbstractScreen()
 
 	var grouped: Array<Array<AbstractReward>> = Array()
 	var currentGroup = Array<CardWidget>()
+	var shownIntro = false
 	val greyOutTable = Table()
+	val questunlocks = Array<CardWidget>()
 	fun updateRewards()
 	{
 		if (currentGroup.size == 0)
 		{
-			if (grouped.size == 0)
+			if (questunlocks.size > 0)
+			{
+				while (questunlocks.size > 0)
+				{
+					val card = questunlocks.removeIndex(questunlocks.size-1)
+					card.canZoom = false
+					card.setFacing(true, false)
+					card.pickFuns.clear()
+					card.addPick("", {
+						currentGroup.removeValue(card, true)
+						if (currentGroup.size == 0)
+						{
+							updateRewards()
+						}
+
+						card.remove()
+					})
+
+					currentGroup.add(card)
+					Global.stage.addActor(card)
+				}
+
+				CardWidget.layoutCards(cardWidgets, Direction.CENTER)
+			}
+			else if (grouped.size == 0)
 			{
 				val bronze = currentQuest.bronzeRewards.filter { it.isValid() }.toGdxArray()
 				val silver = currentQuest.silverRewards.filter { it.isValid() }.toGdxArray()
 				val gold = currentQuest.goldRewards.filter { it.isValid() }.toGdxArray()
 
-				if (currentQuest.state.ordinal >= Quest.QuestState.BRONZE.ordinal && !currentQuest.gotBronze && bronze.size > 0)
+				if (Global.deck.newcharacters.size > 0 || Global.deck.newencounters.size > 0 || Global.deck.newequipment.size > 0 || Global.deck.newquests.size > 0)
 				{
-					grouped = bronze.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
-					currentQuest.gotBronze = true
+					if (!shownIntro)
+					{
+						shownIntro = true
+
+						val table = Table()
+						table.add(Label("Quest Unlocks", Global.skin, "card"))
+						table.row()
+						//table.add(SpriteWidget(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_bronze", drawActualSize =  true), 32f, 32f)).expandX().center()
+
+						val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("white")!!, null)
+						card.canZoom = false
+						card.setFacing(true, false)
+						card.addPick("", { updateRewards() })
+					}
+					else
+					{
+						shownIntro = false
+
+						for (reward in Global.deck.newcharacters)
+						{
+							questunlocks.add(reward.getCard())
+						}
+						Global.deck.newcharacters.clear()
+
+						for (reward in Global.deck.newencounters)
+						{
+							questunlocks.add(reward.current.getCard())
+						}
+						Global.deck.newencounters.clear()
+
+						for (reward in Global.deck.newequipment)
+						{
+							questunlocks.add(reward.getCard(null, false))
+						}
+						Global.deck.newequipment.clear()
+
+						for (reward in Global.deck.newquests)
+						{
+							questunlocks.add(reward.getCard())
+						}
+						Global.deck.newquests.clear()
+
+						updateRewards()
+						return
+					}
+				}
+				else if (currentQuest.state.ordinal >= Quest.QuestState.BRONZE.ordinal && !currentQuest.gotBronze && bronze.size > 0)
+				{
+					if (!shownIntro)
+					{
+						shownIntro = true
+
+						val table = Table()
+						table.add(Label("Bronze Reward", Global.skin, "card"))
+						table.row()
+						table.add(SpriteWidget(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_bronze", drawActualSize =  true), 32f, 32f)).expandX().center()
+
+						val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("white")!!, null)
+						card.canZoom = false
+						card.setFacing(true, false)
+						card.addPick("", { updateRewards() })
+					}
+					else
+					{
+						shownIntro = false
+						grouped = bronze.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
+						currentQuest.gotBronze = true
+					}
 				}
 				else if (currentQuest.state.ordinal >= Quest.QuestState.SILVER.ordinal && !currentQuest.gotSilver && silver.size > 0)
 				{
-					grouped = silver.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
-					currentQuest.gotSilver = true
+					if (!shownIntro)
+					{
+						shownIntro = true
+
+						val table = Table()
+						table.add(Label("Silver Reward", Global.skin, "card"))
+						table.row()
+						table.add(SpriteWidget(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_silver", drawActualSize =  true), 32f, 32f)).expandX().center()
+
+						val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("white")!!, null)
+						card.canZoom = false
+						card.setFacing(true, false)
+						card.addPick("", { updateRewards() })
+					}
+					else
+					{
+						shownIntro = false
+						grouped = silver.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
+						currentQuest.gotSilver = true
+					}
 				}
 				else if (currentQuest.state.ordinal >= Quest.QuestState.GOLD.ordinal && !currentQuest.gotGold && gold.size > 0)
 				{
-					grouped = gold.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
-					currentQuest.gotGold = true
+					if (!shownIntro)
+					{
+						shownIntro = true
+
+						val table = Table()
+						table.add(Label("Gold Reward", Global.skin, "card"))
+						table.row()
+						table.add(SpriteWidget(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_gold", drawActualSize =  true), 32f, 32f)).expandX().center()
+
+						val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("white")!!, null)
+						card.canZoom = false
+						card.setFacing(true, false)
+						card.addPick("", { updateRewards() })
+					}
+					else
+					{
+						shownIntro = false
+						grouped = gold.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
+						currentQuest.gotGold = true
+					}
 				}
 				else
 				{
@@ -252,6 +380,10 @@ class QuestScreen : AbstractScreen()
 							currentGroup.removeValue(card, true)
 							if (currentGroup.size == 0)
 							{
+								Global.deck.newcharacters.clear()
+								Global.deck.newencounters.clear()
+								Global.deck.newequipment.clear()
+								Global.deck.newquests.clear()
 								updateRewards()
 							}
 

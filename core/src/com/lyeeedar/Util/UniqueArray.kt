@@ -8,6 +8,9 @@ class UniqueArray<T>(val uniqueFun: (T) -> Int) : Iterable<T>
 	val backingArray = Array<T>()
 	val uniqueSet = IntSet()
 
+	val size: Int
+		get() = backingArray.size
+
 	fun add(item: T)
 	{
 		val key = uniqueFun(item)

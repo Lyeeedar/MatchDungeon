@@ -403,6 +403,7 @@ class EquipmentReward : AbstractReward()
 			if (unlock && Global.deck.equipment.firstOrNull { it.path == equipmentPath } == null)
 			{
 				Global.deck.equipment.add(equipment)
+				Global.deck.newequipment.add(equipment)
 			}
 		}
 

@@ -260,7 +260,7 @@ class DualMatch(orb: Orb) : Special(orb)
 								grid.pop(tile.x, tile.y, 0f, this@DualMatch, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
 							}
 						}
-								}, 0.2f)
+								}, 0.1f)
 
 					coreTile?.effects?.add(effect)
 				}
@@ -311,6 +311,16 @@ class DualMatch(orb: Orb) : Special(orb)
 			}
 		}
 
+		Future.call({
+						for (tile in grid.grid)
+						{
+							if (!hitSet.contains(tile) && tile.dist(point) < 3)
+							{
+								hitSet.add(tile)
+								grid.pop(tile.x, tile.y, 0f, this@DualMatch, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
+							}
+						}
+					}, 0.1f)
 
 		coreTile?.effects?.add(effect)
 	}

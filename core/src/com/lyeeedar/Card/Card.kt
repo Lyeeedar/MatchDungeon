@@ -96,53 +96,70 @@ class CardNode
 		table.add(rewardsTable).growX()
 		table.row()
 
-		val rawRewards = getPossibleRewards()
-
-		data class RewardData(val rewardClass: Class<AbstractReward>, val icon: TextureRegion, var chance: Chance)
-
-		val rewardData = Array<RewardData>()
-		for (reward in rawRewards)
+		if (isShop)
 		{
-			val existing = rewardData.firstOrNull { it.rewardClass == reward.javaClass }
-			if (existing != null)
-			{
-				if (reward.chance.ordinal > existing.chance.ordinal)
-				{
-					existing.chance = reward.chance
-				}
-			}
-			else
-			{
-				rewardData.add(RewardData(reward.javaClass, reward.cardIcon(), reward.chance))
-			}
-		}
-
-		var needsrow = false
-		val sorted = rewardData.sortedBy { it.rewardClass.toString() }
-		for (reward in sorted)
-		{
-			val icon = reward.icon
+			val icon = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/satchel")!!
 			val widget = SpriteWidget(Sprite(icon), 64f, 64f)
-			val name = reward.rewardClass.simpleName.toString().replace("Reward", "").capitalize()
-			val chance = reward.chance.uiString
 
 			val stack = Stack()
 			stack.touchable = Touchable.enabled
 
-			stack.add(SpriteWidget(AssetManager.loadSprite("GUI/RewardChanceBorder", colour = reward.chance.colour), 64f, 64f))
+			stack.add(SpriteWidget(AssetManager.loadSprite("GUI/RewardChanceBorder", colour = Chance.ALWAYS.colour), 64f, 64f))
 			stack.add(widget)
 
-			stack.addTapToolTip("Have a $chance chance to gain $name rewards.")
+			stack.addTapToolTip("This encounter contains a shop.")
 			rewardsTable.add(stack).expandX().center().pad(10f)
+		}
+		else
+		{
+			val rawRewards = getPossibleRewards()
 
-			if (needsrow)
+			data class RewardData(val rewardClass: Class<AbstractReward>, val icon: TextureRegion, var chance: Chance)
+
+			val rewardData = Array<RewardData>()
+			for (reward in rawRewards)
 			{
-				rewardsTable.row()
-				needsrow = false
+				val existing = rewardData.firstOrNull { it.rewardClass == reward.javaClass }
+				if (existing != null)
+				{
+					if (reward.chance.ordinal > existing.chance.ordinal)
+					{
+						existing.chance = reward.chance
+					}
+				}
+				else
+				{
+					rewardData.add(RewardData(reward.javaClass, reward.cardIcon(), reward.chance))
+				}
 			}
-			else
+
+			var needsrow = false
+			val sorted = rewardData.sortedBy { it.rewardClass.toString() }
+			for (reward in sorted)
 			{
-				needsrow = true
+				val icon = reward.icon
+				val widget = SpriteWidget(Sprite(icon), 64f, 64f)
+				val name = reward.rewardClass.simpleName.toString().replace("Reward", "").capitalize()
+				val chance = reward.chance.uiString
+
+				val stack = Stack()
+				stack.touchable = Touchable.enabled
+
+				stack.add(SpriteWidget(AssetManager.loadSprite("GUI/RewardChanceBorder", colour = reward.chance.colour), 64f, 64f))
+				stack.add(widget)
+
+				stack.addTapToolTip("Have a $chance chance to gain $name rewards.")
+				rewardsTable.add(stack).expandX().center().pad(10f)
+
+				if (needsrow)
+				{
+					rewardsTable.row()
+					needsrow = false
+				}
+				else
+				{
+					needsrow = true
+				}
 			}
 		}
 
@@ -151,6 +168,22 @@ class CardNode
 			val descLabel = Label(description, Global.skin, "card")
 			descLabel.setWrap(true)
 			table.add(descLabel).grow().pad(0f, 10f, 0f, 10f)
+			table.row()
+		}
+
+		if (nextNode != null)
+		{
+			val icon = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/book_latch")!!
+			val widget = SpriteWidget(Sprite(icon), 64f, 64f)
+
+			val stack = Stack()
+			stack.touchable = Touchable.enabled
+
+			//stack.add(SpriteWidget(AssetManager.loadSprite("GUI/RewardChanceBorder", colour = Chance.ALWAYS.colour), 64f, 64f))
+			stack.add(widget)
+
+			stack.addTapToolTip("Completing this encounter will cause it to advance.")
+			table.add(stack).expandX().center().pad(5f).padBottom(32f)
 		}
 
 		return table
