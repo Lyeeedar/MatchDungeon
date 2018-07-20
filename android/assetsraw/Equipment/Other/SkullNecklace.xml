@@ -1,0 +1,36 @@
+<Head xmlns:meta="Editor">
+	<Name>Skull Necklace</Name>
+	<Description>A necklace of finely carved skulls. Balefire glows from within their empty eye sockets.</Description>
+	<Cost>210</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/necklace_dark</Name>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>0</Health>
+		<MatchDamage>0</MatchDamage>
+		<AbilityDamage>1</AbilityDamage>
+		<PowerGain>0</PowerGain>
+	</Statistics>
+	<Ability>
+		<Name>Balefire</Name>
+		<Description>Fling balefire out at your enemies.</Description>
+		<Icon meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_items/necklace_dark</Name>
+		</Icon>
+		<EffectData>
+			<Cost>5</Cost>
+			<Effect>3,Orb,Single,Pop</Effect>
+			<Data>
+				<Damage>1</Damage>
+			</Data>
+			<FlightEffect meta:RefKey="ParticleEffect">
+				<Name>FireOrb</Name>
+				<Colour>53,29,71,255</Colour>
+			</FlightEffect>
+			<HitEffect meta:RefKey="ParticleEffect">
+				<Name>Fireburst</Name>
+				<Colour>151,82,168,255</Colour>
+			</HitEffect>
+		</EffectData>
+	</Ability>
+</Head>

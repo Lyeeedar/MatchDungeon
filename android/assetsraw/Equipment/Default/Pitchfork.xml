@@ -18,7 +18,7 @@
 			<Name>Oryx/uf_split/uf_items/weapon_trident</Name>
 		</Icon>
 		<EffectData>
-			<Cost>8</Cost>
+			<Cost>7</Cost>
 			<Effect>1,Monster,Single,Pop</Effect>
 			<Data>
 				<Damage>1</Damage>

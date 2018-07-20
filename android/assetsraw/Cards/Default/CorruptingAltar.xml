@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="247b144c-ed6e-4874-82ba-ad96f4e6f9ec" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">0cd60451-682a-4c5a-9d2c-2a6d9ef23eca</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="0cd60451-682a-4c5a-9d2c-2a6d9ef23eca">
+			<Name>Corrupting Altar</Name>
+			<Description>An altar stands a short distance ahead of you, surrounded by a cloying, corrupting energy. Monsters crowd around it, distorted and empowered. Destroy the altar before its corruption can spread further!</Description>
+			<SpawnWeighting>End</SpawnWeighting>
+			<Content>CorruptingAltarContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

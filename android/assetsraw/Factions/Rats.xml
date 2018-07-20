@@ -45,4 +45,35 @@
 			</Abilities>
 		</Monster>
 	</Monsters>
+	<Bosses>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>Red Rat</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_heroes/rat_giant</Name>
+				<DrawActualSize>true</DrawActualSize>
+				<Colour>173,83,83,255</Colour>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+			</Death>
+			<AttackNumPips>4</AttackNumPips>
+			<AttackCooldown>2,5</AttackCooldown>
+			<Size>1</Size>
+			<HP>13</HP>
+			<DamageReduction>0</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>1,3</Cooldown>
+					<Effect>Move</Effect>
+				</Ability>
+				<Ability>
+					<Cooldown>4,6</Cooldown>
+					<Count>2</Count>
+					<Data>
+						<NumPips>4</NumPips>
+					</Data>
+				</Ability>
+			</Abilities>
+		</Monster>
+	</Bosses>
 </Faction>

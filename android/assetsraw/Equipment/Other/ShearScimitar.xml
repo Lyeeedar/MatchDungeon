@@ -1,0 +1,35 @@
+<MainHand xmlns:meta="Editor">
+	<Name>Shear Scimitar</Name>
+	<Description>A scimitar, faintly glowing with a purple sheen. Its edge is unnaturally sharp.</Description>
+	<Cost>220</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/weapon_falchion</Name>
+		<DrawActualSize>true</DrawActualSize>
+		<Colour>249,187,252,255</Colour>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>0</Health>
+		<MatchDamage>2</MatchDamage>
+		<AbilityDamage>2</AbilityDamage>
+		<PowerGain>0</PowerGain>
+	</Statistics>
+	<Ability>
+		<Name>Thousand Cuts</Name>
+		<Description>Slash the target with your blade, slicing it to ribbons.</Description>
+		<Icon meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_items/weapon_falchion</Name>
+			<DrawActualSize>true</DrawActualSize>
+			<Colour>249,187,252,255</Colour>
+		</Icon>
+		<EffectData>
+			<Cost>5</Cost>
+			<Effect>1,Orb,Single,Pop</Effect>
+			<Data>
+				<Damage>3</Damage>
+			</Data>
+			<HitEffect meta:RefKey="ParticleEffect">
+				<Name>slash</Name>
+			</HitEffect>
+		</EffectData>
+	</Ability>
+</MainHand>

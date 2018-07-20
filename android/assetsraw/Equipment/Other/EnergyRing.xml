@@ -1,0 +1,30 @@
+<OffHand xmlns:meta="Editor">
+	<Name>Energy Ring</Name>
+	<Description>A small ring, covered in sigils. Wearing it makes you feel unnatural energy run through you.</Description>
+	<Cost>200</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/ring_copper</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>0</Health>
+		<MatchDamage>0</MatchDamage>
+		<AbilityDamage>0</AbilityDamage>
+		<PowerGain>5</PowerGain>
+	</Statistics>
+	<Ability>
+		<Name>Energise</Name>
+		<Description>Channel the rings energies to manipulate events in your favour.</Description>
+		<Icon meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_items/ring_copper</Name>
+			<DrawActualSize>true</DrawActualSize>
+		</Icon>
+		<EffectData>
+			<Cost>5</Cost>
+			<Effect>1,Orb,Random,Convert</Effect>
+			<Data>
+				<Count>6</Count>
+			</Data>
+		</EffectData>
+	</Ability>
+</OffHand>

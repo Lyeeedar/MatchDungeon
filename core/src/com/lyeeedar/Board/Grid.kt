@@ -1122,7 +1122,14 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 				if (orb.armed != null)
 				{
-					tilesToDetonate.add(tile)
+					if (tile.spreader != null)
+					{
+						orb.armed = null
+					}
+					else
+					{
+						tilesToDetonate.add(tile)
+					}
 				}
 			}
 		}

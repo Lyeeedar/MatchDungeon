@@ -1,0 +1,191 @@
+<CardContent meta:X="0" meta:Y="0" GUID="5584a3aa-378a-40cc-aade-1884c7b632a8" xmlns:meta="Editor" meta:GraphCommentData="be518c98-9fd7-4172-aae2-7ee269b24884$Scimitar$$181,107,230,255%7bb6f46a-50cd-41e0-9218-6e4cf646189a$Ring$$146,163,92,255%bf6e7606-169e-4689-b8c2-2cd8e4c69ef5$Necklace$$148,148,148,255">
+	<Root meta:RefKey="Node">b31dc256-ddfb-414c-9de3-951da3fee93f</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="b31dc256-ddfb-414c-9de3-951da3fee93f">
+			<Line>
+				<MultilineString>You wander through the market, the crowds jolting you this way and that.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Suddenly a voice calls out to you. "Adventurer! Come here, my goods will surely interest you!"</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You wander over to find a stall covered in all manner of equipment. The vendor sat behind the table smiles at you and gestures around him.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"I have equipment for all occasions. Would you like something basic, or are you looking to spend some more for something rare?"</MultilineString>
+			</Line>
+			<Choice>
+				<Choices>
+					<Choice>
+						<Text>Show me your normal items</Text>
+						<Node meta:RefKey="Node">7ee922ab-95dc-4754-b675-37570481c89d</Node>
+					</Choice>
+					<Choice>
+						<Text>Show me your expensive items</Text>
+						<Node meta:RefKey="Node">d98c4c47-8fc6-40b5-8b61-7e1d324244f9</Node>
+					</Choice>
+				</Choices>
+			</Choice>
+		</Node>
+		<Node meta:X="512" meta:Y="0" GUID="7ee922ab-95dc-4754-b675-37570481c89d">
+			<Line>
+				<MultilineString>"My goods won't disappoint."</MultilineString>
+			</Line>
+			<Shop>
+				<CostMultiplier>1.2</CostMultiplier>
+				<Items>
+					<Equipment />
+					<Equipment />
+					<Equipment />
+					<Equipment />
+					<Equipment />
+				</Items>
+			</Shop>
+			<Line>
+				<MultilineString>"Thank you for your patronage!"</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="502" meta:Y="247" GUID="d98c4c47-8fc6-40b5-8b61-7e1d324244f9">
+			<Line>
+				<MultilineString>"Now these items are something special." The vendor disappears behind a curtain, then comes back with a sealed case. You can see three items though the glass, each labelled with a price.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>There is a scimitar, it's blade glowing faintly purple. A ring, engraved with runes. Finally a necklace, ringed with skulls.</MultilineString>
+			</Line>
+			<Choice>
+				<Choices>
+					<Choice>
+						<Text>Buy the scimitar (500)</Text>
+						<Node meta:RefKey="Node">cebcf632-c451-4675-b649-47aeb0a24b3d</Node>
+					</Choice>
+					<Choice>
+						<Text>Buy the ring (360)</Text>
+						<Node meta:RefKey="Node">23558adc-d5af-4270-bb16-f7ce380afbaf</Node>
+					</Choice>
+					<Choice>
+						<Text>Buy the necklace (420)</Text>
+						<Node meta:RefKey="Node">73da98ff-8432-4018-8463-f43673f471ce</Node>
+					</Choice>
+					<Choice>
+						<Text>Actually, show me your regular items.</Text>
+						<Node meta:RefKey="Node" meta:ControlPoints="786.44813573177,496.696576421051,True|465.334860442368,493.004836619101,True">7ee922ab-95dc-4754-b675-37570481c89d</Node>
+					</Choice>
+				</Choices>
+			</Choice>
+		</Node>
+		<Node meta:X="875.38515470202708" meta:Y="257.79088553574155" meta:Comment="be518c98-9fd7-4172-aae2-7ee269b24884" GUID="cebcf632-c451-4675-b649-47aeb0a24b3d">
+			<Branch>
+				<Branch>
+					<Condition>Money &lt; 500</Condition>
+					<Node meta:RefKey="Node">372aa1ae-a3a6-4fc5-8d39-8f29a61dc969</Node>
+				</Branch>
+				<Branch>
+					<Condition>else</Condition>
+					<Node meta:RefKey="Node">2b74326c-8a65-4dd1-8693-e612b2b342ad</Node>
+				</Branch>
+			</Branch>
+		</Node>
+		<Node meta:X="1155.3851547020272" meta:Y="257.79088553574155" meta:Comment="be518c98-9fd7-4172-aae2-7ee269b24884" GUID="372aa1ae-a3a6-4fc5-8d39-8f29a61dc969">
+			<Line>
+				<MultilineString>"I'm sorry, you don't have enough for that, maybe you'd like to look at something else?"</MultilineString>
+			</Line>
+			<Node meta:RefKey="Node">d5e32565-03fe-4d85-b7bf-3849875b21b1</Node>
+		</Node>
+		<Node meta:X="1157.8542905044963" meta:Y="375.0748361530255" meta:Comment="be518c98-9fd7-4172-aae2-7ee269b24884" GUID="2b74326c-8a65-4dd1-8693-e612b2b342ad">
+			<Line>
+				<MultilineString>"You won't regret your purchase."</MultilineString>
+			</Line>
+			<Spend>
+				<Key>Money</Key>
+				<Count>500</Count>
+			</Spend>
+			<Rewards meta:RefKey="Rewards">
+				<Equipment>
+					<Unlock>true</Unlock>
+					<Equipment>Equipment/Other/ShearScimitar.xml</Equipment>
+				</Equipment>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="875.25925925925947" meta:Y="596.66666666666663" meta:Comment="7bb6f46a-50cd-41e0-9218-6e4cf646189a" GUID="23558adc-d5af-4270-bb16-f7ce380afbaf">
+			<Branch>
+				<Branch>
+					<Condition>Money &lt; 360</Condition>
+					<Node meta:RefKey="Node">28549610-23fe-44ff-9103-179ee67d2b94</Node>
+				</Branch>
+				<Branch>
+					<Condition>else</Condition>
+					<Node meta:RefKey="Node">860535cf-ee3e-431e-9684-f4a88e7eb4b3</Node>
+				</Branch>
+			</Branch>
+		</Node>
+		<Node meta:X="1166.3703703703704" meta:Y="597.90123456790116" meta:Comment="7bb6f46a-50cd-41e0-9218-6e4cf646189a" GUID="28549610-23fe-44ff-9103-179ee67d2b94">
+			<Line>
+				<MultilineString>"I'm sorry, you don't have enough for that, maybe you'd like to look at something else?"</MultilineString>
+			</Line>
+			<Node meta:RefKey="Node">d5e32565-03fe-4d85-b7bf-3849875b21b1</Node>
+		</Node>
+		<Node meta:X="1168.8394865813079" meta:Y="715.18517011477616" meta:Comment="7bb6f46a-50cd-41e0-9218-6e4cf646189a" GUID="860535cf-ee3e-431e-9684-f4a88e7eb4b3">
+			<Line>
+				<MultilineString>"You won't regret your purchase."</MultilineString>
+			</Line>
+			<Spend>
+				<Key>Money</Key>
+				<Count>360</Count>
+			</Spend>
+			<Rewards meta:RefKey="Rewards">
+				<Equipment>
+					<Unlock>true</Unlock>
+					<Equipment>Equipment/Other/EnergyRing.xml</Equipment>
+				</Equipment>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="1490.0740740740741" meta:Y="185.55555555555554" GUID="d5e32565-03fe-4d85-b7bf-3849875b21b1">
+			<Node meta:RefKey="Node" meta:ControlPoints="1620.35909160189,149.341563786008,True|498.578875171468,213.356195701875,True">d98c4c47-8fc6-40b5-8b61-7e1d324244f9</Node>
+		</Node>
+		<Node meta:X="883.989972770442" meta:Y="937.35077352453436" meta:Comment="bf6e7606-169e-4689-b8c2-2cd8e4c69ef5" GUID="73da98ff-8432-4018-8463-f43673f471ce">
+			<Branch>
+				<Branch>
+					<Condition>Money &lt; 420</Condition>
+					<Node meta:RefKey="Node">5ae5efa8-1099-4f21-9d4c-d1fb904351f7</Node>
+				</Branch>
+				<Branch>
+					<Condition>else</Condition>
+					<Node meta:RefKey="Node">07bff6a5-c348-4516-88cd-22db5800c8f8</Node>
+				</Branch>
+			</Branch>
+		</Node>
+		<Node meta:X="1175.1010567548169" meta:Y="938.58533163000311" meta:Comment="bf6e7606-169e-4689-b8c2-2cd8e4c69ef5" GUID="5ae5efa8-1099-4f21-9d4c-d1fb904351f7">
+			<Line>
+				<MultilineString>"I'm sorry, you don't have enough for that, maybe you'd like to look at something else?"</MultilineString>
+			</Line>
+			<Node meta:RefKey="Node">d5e32565-03fe-4d85-b7bf-3849875b21b1</Node>
+		</Node>
+		<Node meta:X="1177.5701729657544" meta:Y="1055.8692671768779" meta:Comment="bf6e7606-169e-4689-b8c2-2cd8e4c69ef5" GUID="07bff6a5-c348-4516-88cd-22db5800c8f8">
+			<Line>
+				<MultilineString>"You won't regret your purchase."</MultilineString>
+			</Line>
+			<Spend>
+				<Key>Money</Key>
+				<Count>420</Count>
+			</Spend>
+			<Rewards meta:RefKey="Rewards">
+				<Equipment>
+					<Unlock>true</Unlock>
+					<Equipment>Equipment/Other/SkullNecklace.xml</Equipment>
+				</Equipment>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

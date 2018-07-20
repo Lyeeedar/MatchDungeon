@@ -1,16 +1,11 @@
 package com.lyeeedar.Board
 
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.IntMap
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Sprite.Sprite
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Point
-import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.getXml
+import com.lyeeedar.Util.*
 import ktx.collections.set
 
 /**
@@ -74,19 +69,15 @@ class Faction
 
 	companion object
 	{
-		val files: ObjectMap<String, FileHandle> by lazy { loadAll() }
+		val files: ObjectMap<String, String> by lazy { loadAll() }
 
-		private fun loadAll(): ObjectMap<String, FileHandle>
+		private fun loadAll(): ObjectMap<String, String>
 		{
-			val rootPath = "Factions"
-			var root = Gdx.files.internal(rootPath)
-			if (!root.exists()) root = Gdx.files.absolute(rootPath)
+			val out = ObjectMap<String, String>()
 
-			val out = ObjectMap<String, FileHandle>()
-
-			for (f in root.list())
+			for (f in XmlData.enumeratePaths("Factions", "Faction"))
 			{
-				out[f.nameWithoutExtension().toUpperCase()] = f
+				out[f.filename(false).toUpperCase()] = f
 			}
 
 			return out
@@ -94,7 +85,7 @@ class Faction
 
 		fun load(path: String): Faction
 		{
-			val xml = getXml(files[path.toUpperCase()].path())
+			val xml = getXml(files[path.toUpperCase()])
 
 			val faction = Faction()
 

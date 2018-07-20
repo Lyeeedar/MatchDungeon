@@ -155,10 +155,16 @@ class Level(val loadPath: String)
 					tile.spriteSetter = symbol.sprite
 				}
 
-				if (symbol.block > 0)
+				if (symbol.block != null)
 				{
 					tile.block = Block(theme)
-					tile.block!!.maxhp = symbol.block
+
+					if (symbol.block.sprite != null)
+					{
+						tile.block!!.sprite = symbol.block.sprite.copy()
+					}
+
+					tile.block!!.maxhp = symbol.block.hp
 				}
 
 				tile.plateStrength = symbol.plate
@@ -531,7 +537,17 @@ class Level(val loadPath: String)
 						sprite = SpriteWrapper.load(symbolSpriteEl)
 					}
 
-					val block = symbolEl.getInt("Block", 0)
+					val blockEl = symbolEl.getChildByName("Block")
+					var blockDesc: BlockDesc? = null
+					if (blockEl != null && blockEl.childCount > 0)
+					{
+						val blockSpriteEl = blockEl.getChildByName("Sprite")
+						val blockSprite = if(blockSpriteEl != null) AssetManager.loadSprite(blockSpriteEl) else null
+						val blockHP = blockEl.getInt("Health", 1)
+
+						blockDesc = BlockDesc(blockSprite, blockHP)
+					}
+
 					val plate = symbolEl.getInt("Plate", 0)
 					val seal = symbolEl.getInt("Seal", 0)
 					val attack = symbolEl.getInt("Attack", 0)
@@ -573,7 +589,7 @@ class Level(val loadPath: String)
 
 					val type = SymbolType.valueOf(symbolEl.get("Type", "Floor")!!.toUpperCase())
 
-					symbolsMap[character.toInt()] = Symbol(character, extends, sprite, block, plate, seal, attack, isMonster, monsterDesc, special, sinkableDesc, isChest, containerDesc, spreader, type)
+					symbolsMap[character.toInt()] = Symbol(character, extends, sprite, blockDesc, plate, seal, attack, isMonster, monsterDesc, special, sinkableDesc, isChest, containerDesc, spreader, type)
 				}
 			}
 
@@ -636,6 +652,8 @@ data class SinkableDesc(val sprite: Sprite)
 
 data class ContainerDesc(val sprite: Sprite, val hp: Int)
 
+data class BlockDesc(val sprite: Sprite?, val hp: Int)
+
 enum class SymbolType
 {
 	FLOOR,
@@ -645,7 +663,7 @@ enum class SymbolType
 data class Symbol(
 		val char: Char, val extends: Char,
 		val sprite: SpriteWrapper?,
-		val block: Int, val plate: Int, val seal: Int, val attack: Int,
+		val block: BlockDesc?, val plate: Int, val seal: Int, val attack: Int,
 		val isMonster: Boolean, val monsterDesc: MonsterDesc?,
 		val special: String,
 		val sinkableDesc: SinkableDesc?,

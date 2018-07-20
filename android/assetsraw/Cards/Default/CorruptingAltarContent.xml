@@ -1,0 +1,45 @@
+<CardContent meta:X="0" meta:Y="0" GUID="5fae0eae-e1d8-4b3e-a0d6-cf0e718d6daa" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">7ac6ae82-63ca-4605-83bb-000b0c835a8f</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="7ac6ae82-63ca-4605-83bb-000b0c835a8f">
+			<Line>
+				<MultilineString>Just ahead of you stands a lone altar. It's surface is marked by bloodstain, and dark sigils are further into its sides.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Around it an evil mist lurks, and within the mist move monsters, distorted and empowered by the evil energy.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Destroy the altar to stop its corruption spreading!</MultilineString>
+			</Line>
+			<Match3>
+				<Level>CorruptingAltarContentLevel</Level>
+				<Success meta:RefKey="Node">1e11b9e0-0d0c-4d86-b91e-91904677e634</Success>
+				<Failure meta:RefKey="Node">479bcb1e-ffc3-4e67-85ed-440cdafc93ec</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="426" meta:Y="216" GUID="479bcb1e-ffc3-4e67-85ed-440cdafc93ec">
+			<Line>
+				<MultilineString>The monsters are too much and you are forced to flee.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="478" meta:Y="0" GUID="1e11b9e0-0d0c-4d86-b91e-91904677e634">
+			<Line>
+				<MultilineString>The moment the altar is destroyed the mist vanishes. The monsters around you collapse still to the ground, drained husks of their former selves.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Statistics>
+					<Health>2</Health>
+					<MatchDamage>1</MatchDamage>
+					<AbilityDamage>2</AbilityDamage>
+					<PowerGain>3</PowerGain>
+				</Statistics>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>
