@@ -18,7 +18,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 
 	override fun attachHandlers(grid: Grid)
 	{
-		maxHP = grid.level.player.getStat(Statistic.HEALTH)
+		maxHP = grid.level.player.getStat(Statistic.HEALTH).toInt()
 		hp = maxHP
 
 		grid.onAttacked += fun(c): Boolean {

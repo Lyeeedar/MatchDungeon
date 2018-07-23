@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="65528e83-f206-4ea2-bcd0-18b9ad52f20b" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">7c13a121-473f-433f-9120-689d975a19b9</Root>
+	<Nodes>
+		<CardNode meta:X="197.66666666666669" meta:Y="-24.666666666666686" GUID="7c13a121-473f-433f-9120-689d975a19b9">
+			<Name>Farmers Market</Name>
+			<Description>The farmers market is an opportunity to finally make some money by selling the produce you have grown.</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>FarmersMarketContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

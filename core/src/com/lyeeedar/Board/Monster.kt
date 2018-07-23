@@ -159,7 +159,7 @@ class MonsterAbility
 		if (effect == Effect.HEAL)
 		{
 			monster.hp += data["AMOUNT"].toInt()
-			if (monster.hp > monster.maxhp) monster.hp = monster.maxhp
+			if (monster.hp > monster.maxhp) monster.hp = monster.maxhp.toFloat()
 
 			val sprite = AssetManager.loadSprite("EffectSprites/Heal/Heal", 0.1f, Colour(0f,1f,0f,1f))
 			sprite.size[0] = monster.size

@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="0cd4a36c-aab1-4267-9d60-141b4c343e6c" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">c75314ce-d1f0-44fa-be54-bd8ee754ca7f</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="c75314ce-d1f0-44fa-be54-bd8ee754ca7f">
+			<Name>The Festival</Name>
+			<Description>Having sold out of produce you decide to enjoy the rest of the festival.</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>TheFestivalContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

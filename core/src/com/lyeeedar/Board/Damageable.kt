@@ -6,6 +6,7 @@ import com.lyeeedar.Renderables.Animation.BlinkAnimation
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.Colour
 import com.lyeeedar.Util.Future
+import com.lyeeedar.Util.ciel
 
 abstract class Damageable
 {
@@ -17,12 +18,12 @@ abstract class Damageable
 		}
 	var remainingReduction: Int = 0
 
-	var hp: Int = 1
+	var hp: Float = 1f
 		set(value)
 		{
 			if (value < field)
 			{
-				val loss = field - value
+				val loss = field.ciel() - value.ciel()
 				lostHP += loss
 
 				var delay = 1f
@@ -36,7 +37,7 @@ abstract class Damageable
 			}
 
 			field = value
-			if (field < 0) field = 0
+			if (field < 0f) field = 0f
 		}
 
 	var lostHP: Int = 0
@@ -45,7 +46,7 @@ abstract class Damageable
 		set(value)
 		{
 			field = value
-			hp = value
+			hp = value.toFloat()
 		}
 
 	val damSources = ObjectSet<Any>()

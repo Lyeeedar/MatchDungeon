@@ -64,7 +64,7 @@ class Ability
 		table.add(descLabel).growX()
 		table.row()
 
-		table.add(Seperator(Global.skin)).growX().pad(10f)
+		table.add(Seperator(Global.skin, "horizontalcard")).growX().pad(10f)
 		table.row()
 
 		var effectDesc = "Target $targets " + targetter.type.toString().toLowerCase().capitalize().pluralize(targets)

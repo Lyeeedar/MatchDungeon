@@ -57,119 +57,126 @@ class Equipment(val path: String)
 		descLabel.setWrap(true)
 		table.add(descLabel)
 		table.row()
-		table.add(Seperator(Global.skin, false))
-		table.row()
 
-		table.add(Label("Statistics", Global.skin, "cardtitle"))
-		table.row()
-
-		for (stat in Statistic.Values)
+		if (statistics.any { it != 0f } || (other != null && other.statistics.any{ it != 0f }))
 		{
-			val statVal = statistics[stat] ?: 0f
+			table.add(Seperator(Global.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f)
+			table.row()
 
-			val statTable = Table()
-			statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Global.skin, "card")).expandX().left()
-			statTable.add(Label(statVal.toString(), Global.skin, "card"))
+			table.add(Label("Statistics", Global.skin, "cardtitle"))
+			table.row()
 
-			var add = false
-
-			if (other != null)
+			for (stat in Statistic.Values)
 			{
-				val otherStatVal = other.statistics[stat] ?: 0f
+				val statVal = statistics[stat] ?: 0f
 
-				if (otherStatVal != 0f || statVal != 0f)
+				val statTable = Table()
+				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Global.skin, "card")).expandX().left()
+				statTable.add(Label(statVal.toString(), Global.skin, "card"))
+
+				var add = false
+
+				if (other != null)
 				{
-					add = true
+					val otherStatVal = other.statistics[stat] ?: 0f
+
+					if (otherStatVal != 0f || statVal != 0f)
+					{
+						add = true
+					}
+
+					if (otherStatVal == statVal)
+					{
+
+					}
+					else if (otherStatVal < statVal)
+					{
+						val diff = statVal - otherStatVal
+						val diffLabel = Label("+" + diff.toString(), Global.skin, "cardwhite")
+						diffLabel.color = Color.GREEN
+						statTable.add(diffLabel)
+					}
+					else if (statVal < otherStatVal)
+					{
+						val diff = otherStatVal - statVal
+						val diffLabel = Label("-" + diff.toString(), Global.skin, "cardwhite")
+						diffLabel.color = Color.RED
+						statTable.add(diffLabel)
+					}
+				}
+				else
+				{
+					if (statVal != 0f)
+					{
+						add = true
+					}
+
+					if (showAsPlus)
+					{
+						val diff = statVal
+						val diffLabel = Label("+" + diff.toString(), Global.skin, "cardwhite")
+						diffLabel.color = Color.GREEN
+						statTable.add(diffLabel)
+					}
 				}
 
-				if (otherStatVal == statVal)
+				if (add)
 				{
-
-				}
-				else if (otherStatVal < statVal)
-				{
-					val diff = statVal - otherStatVal
-					val diffLabel = Label("+" + diff.toString(), Global.skin, "cardwhite")
-					diffLabel.color = Color.GREEN
-					statTable.add(diffLabel)
-				}
-				else if (statVal < otherStatVal)
-				{
-					val diff = otherStatVal - statVal
-					val diffLabel = Label("-" + diff.toString(), Global.skin, "cardwhite")
-					diffLabel.color = Color.RED
-					statTable.add(diffLabel)
+					table.add(statTable)
+					table.row()
 				}
 			}
-			else
-			{
-				if (statVal != 0f)
-				{
-					add = true
-				}
+		}
 
-				if (showAsPlus)
-				{
-					val diff = statVal
-					val diffLabel = Label("+" + diff.toString(), Global.skin, "cardwhite")
-					diffLabel.color = Color.GREEN
-					statTable.add(diffLabel)
-				}
-			}
+		if (ability != null || (other?.ability != null))
+		{
+			table.add(Seperator(Global.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f)
+			table.row()
 
-			if (add)
+			table.add(Label("Ability", Global.skin, "cardtitle"))
+			table.row()
+
+			if (other?.ability != null)
 			{
-				table.add(statTable)
+				val otherAbLabel = Label("-" + other.ability!!.name, Global.skin, "cardwhite")
+				otherAbLabel.color = Color.RED
+
+				val abilityTable = Table()
+				abilityTable.add(otherAbLabel)
+
+				abilityTable.add(SpriteWidget(other.ability!!.icon, 32f, 32f))
+
+				val infoButton = Button(Global.skin, "infocard")
+				infoButton.setSize(24f, 24f)
+				infoButton.addClickListener {
+					val t = other.ability!!.createTable()
+
+					FullscreenTable.createCard(t, infoButton.localToStageCoordinates(Vector2()))
+				}
+				abilityTable.add(infoButton).size(24f).expandX().right().pad(0f, 10f, 0f, 0f)
+
+				table.add(abilityTable)
 				table.row()
 			}
-		}
 
-		table.add(Seperator(Global.skin, false))
-		table.row()
+			if (ability != null)
+			{
+				val abilityTable = Table()
+				abilityTable.add(Label(ability!!.name, Global.skin, "card"))
+				abilityTable.add(SpriteWidget(ability!!.icon, 32f, 32f))
 
-		table.add(Label("Ability", Global.skin, "cardtitle"))
-		table.row()
+				val infoButton = Button(Global.skin, "infocard")
+				infoButton.setSize(24f, 24f)
+				infoButton.addClickListener {
+					val t = ability!!.createTable()
 
-		if (other?.ability != null)
-		{
-			val otherAbLabel = Label("-" + other.ability!!.name, Global.skin, "cardwhite")
-			otherAbLabel.color = Color.RED
+					FullscreenTable.createCard(t, infoButton.localToStageCoordinates(Vector2()))
+				}
+				abilityTable.add(infoButton).size(24f).expandX().right().pad(0f, 10f, 0f, 0f)
 
-			val abilityTable = Table()
-			abilityTable.add(otherAbLabel)
-
-			abilityTable.add(SpriteWidget(other.ability!!.icon, 32f, 32f))
-
-			val infoButton = Button(Global.skin, "info")
-			infoButton.setSize(24f, 24f)
-			infoButton.addClickListener {
-				val t = other.ability!!.createTable()
-
-				FullscreenTable.createCard(t, infoButton.localToStageCoordinates(Vector2()))
+				table.add(abilityTable).growX()
+				table.row()
 			}
-			abilityTable.add(infoButton).size(24f).expandX().right().pad(0f, 10f, 0f, 0f)
-
-			table.add(abilityTable)
-			table.row()
-		}
-
-		if (ability != null)
-		{
-			val abilityTable = Table()
-			abilityTable.add(Label(ability!!.name, Global.skin, "card"))
-			abilityTable.add(SpriteWidget(ability!!.icon, 32f, 32f))
-
-			val infoButton = Button(Global.skin, "info")
-			infoButton.setSize(24f, 24f)
-			infoButton.addClickListener {
-				val t = ability!!.createTable()
-
-				FullscreenTable.createCard(t, infoButton.localToStageCoordinates(Vector2()))
-			}
-			abilityTable.add(infoButton).size(24f).expandX().right().pad(0f, 10f, 0f, 0f)
-
-			table.add(abilityTable).growX()
-			table.row()
 		}
 
 		return table

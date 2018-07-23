@@ -140,21 +140,25 @@ class CardScreen : AbstractScreen()
 			FullscreenTable.createCard(table, statsTable.localToStageCoordinates(Vector2()))
 		}
 
-		debugConsole.register("AddGold", "", fun (args, console): Boolean {
-
-			if (args.size != 1)
+		if (!Global.release)
+		{
+			debugConsole.register("AddGold", "", fun(args, console): Boolean
 			{
-				console.error("Invalid number of arguments! Expected 1!")
-				return false
-			}
 
-			val value = args[0].toInt()
+				if (args.size != 1)
+				{
+					console.error("Invalid number of arguments! Expected 1!")
+					return false
+				}
 
-			Global.player.gold += value
-			updateEquipment()
+				val value = args[0].toInt()
 
-			return true
-		})
+				Global.player.gold += value
+				updateEquipment()
+
+				return true
+			})
+		}
 	}
 
 	fun updateEquipment()

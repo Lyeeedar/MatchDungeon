@@ -1,0 +1,50 @@
+<CardContent meta:X="0" meta:Y="0" GUID="cc409e16-71e7-4efc-b409-b584dba9adbe" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">40ec3958-ecdd-4479-b2cb-00216fd909c0</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="40ec3958-ecdd-4479-b2cb-00216fd909c0">
+			<Line>
+				<MultilineString>You stumble across an unlooted treasure room. Amidst piles of creates the inviting tops of chests peak out at you, beckoning you in.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>As you enter the room however the floor creaks and groans, and a part of the far corner collapses, taking a chest with it.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You'll have to move fast if you want to salvage anything before room comes down.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>TreasureRoom1ContentLevel</Level>
+				<Success meta:RefKey="Node">760f7d9b-36cb-451d-a768-da9355b999c2</Success>
+				<Failure meta:RefKey="Node">2ad24a71-57dd-4089-acef-ab4056c21c7e</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="495.18181818181819" meta:Y="212.1212121212121" GUID="2ad24a71-57dd-4089-acef-ab4056c21c7e">
+			<Line>
+				<MultilineString>The ground gives way before you can grab much and you have to jump back out of the room. The treasures drop down into the blackness below.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="477" meta:Y="0" GUID="760f7d9b-36cb-451d-a768-da9355b999c2">
+			<Line>
+				<MultilineString>You manage to escape with armfuls of treasure, just in before the ground collapses, taking the empty chests down into the dark.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>70</Count>
+				</Money>
+				<Money>
+					<Chance>High</Chance>
+					<Count>20</Count>
+				</Money>
+				<Money>
+					<Chance>Low</Chance>
+					<Count>40</Count>
+				</Money>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

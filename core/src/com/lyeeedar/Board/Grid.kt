@@ -152,7 +152,8 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					{
 						gainedBonusPower = true
 
-						for (i in 0 until level.player.getStat(Statistic.POWERGAIN))
+						val gain = level.player.getStat(Statistic.POWERGAIN).toInt()
+						for (i in 0 until gain)
 						{
 							val dst = PowerBar.instance.getOrbDest() ?: break
 							Future.call({ Mote(pos, dst, sprite.copy(), 32f, { PowerBar.instance.power++ }) }, delay)
@@ -239,7 +240,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 				if (spreader.effect == Spreader.SpreaderEffect.POP && spreader != newspreader)
 				{
-					pop(tile, 0f, spreader, 0, true)
+					pop(tile, 0f, spreader, 0f, true)
 				}
 			}
 			else if (orb != null)
@@ -1497,8 +1498,8 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				{
 					val damageable = t.damageable!!
 
-					var targetDam = if (!damageable.damSources.contains(this)) 1 + level.player.getStat(Statistic.MATCHDAMAGE) else 1
-					var damReduction = damageable.remainingReduction
+					var targetDam = if (!damageable.damSources.contains(this)) 1f + level.player.getStat(Statistic.MATCHDAMAGE) else 1f
+					var damReduction = damageable.remainingReduction.toFloat()
 					damReduction -= targetDam
 
 					if (damReduction < 0)
@@ -1508,8 +1509,8 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					}
 					else
 					{
-						targetDam = 0
-						damageable.remainingReduction = damReduction
+						targetDam = 0f
+						damageable.remainingReduction = damReduction.ciel()
 					}
 
 					damageable.hp -= targetDam
@@ -1618,13 +1619,13 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	}
 
 	// ----------------------------------------------------------------------
-	fun pop(point: Point, delay: Float, damSource: Any? = null, bonusDam: Int = 0, skipPowerOrb: Boolean = false)
+	fun pop(point: Point, delay: Float, damSource: Any? = null, bonusDam: Float = 0f, skipPowerOrb: Boolean = false)
 	{
 		pop(point.x, point.y , delay, damSource, bonusDam, skipPowerOrb)
 	}
 
 	// ----------------------------------------------------------------------
-	fun pop(x: Int, y: Int, delay: Float, damSource: Any? = null, bonusDam: Int = 0, skipPowerOrb: Boolean = false)
+	fun pop(x: Int, y: Int, delay: Float, damSource: Any? = null, bonusDam: Float = 0f, skipPowerOrb: Boolean = false)
 	{
 		val tile = tile(x, y) ?: return
 
@@ -1653,8 +1654,8 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		{
 			val damageable = tile.damageable!!
 
-			var targetDam = if (!damageable.damSources.contains(damSource)) 1 + bonusDam else 1
-			var damReduction = damageable.remainingReduction
+			var targetDam = if (!damageable.damSources.contains(damSource)) 1f + bonusDam else 1f
+			var damReduction = damageable.remainingReduction.toFloat()
 			damReduction -= targetDam
 
 			if (damReduction < 0)
@@ -1664,8 +1665,8 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			}
 			else
 			{
-				targetDam = 0
-				damageable.remainingReduction = damReduction
+				targetDam = 0f
+				damageable.remainingReduction = damReduction.ciel()
 			}
 
 			damageable.hp -= targetDam

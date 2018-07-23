@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="f4f26aa0-d74b-4bc2-8246-2bf7470bc579" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">a6391445-b7a9-4d69-8d99-2aef54c81e24</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="a6391445-b7a9-4d69-8d99-2aef54c81e24">
+			<Name>Cleanup</Name>
+			<Description>Your barn is filled with old, rotting, leftover crates. Smash them up to clean some space.</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>CleanupContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

@@ -1,0 +1,31 @@
+<CardContent meta:X="0" meta:Y="0" GUID="a92807be-ad6e-48a7-b7c8-b0ae9e95639e" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">3b065e88-cd39-43a8-8e25-16d5d23b7893</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="3b065e88-cd39-43a8-8e25-16d5d23b7893">
+			<Line>
+				<MultilineString>Your barn is filled with old, rotting crates. They are useless for anything, but maybe you can burn them. Smash them all to pieces.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>CleanupContentLevel</Level>
+				<Success meta:RefKey="Node">9b1b0a17-44ec-49f6-a009-b33046eac007</Success>
+				<Failure meta:RefKey="Node">40026140-a9f7-4cc6-9d71-0cc44087c3a6</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="430" meta:Y="146" GUID="40026140-a9f7-4cc6-9d71-0cc44087c3a6">
+			<Line>
+				<MultilineString>The day turns into evening which turns in to night, but there are still crates left. You'll finish the work tomorrow.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="482" meta:Y="0" GUID="9b1b0a17-44ec-49f6-a009-b33046eac007">
+			<Line>
+				<MultilineString>Your barn is finally clear, the old crates now firewood and stacked neatly in a corner. You go to bed pleased.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

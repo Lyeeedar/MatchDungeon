@@ -44,6 +44,8 @@ class Quest(val path: String)
 	val silverRewards = Array<AbstractReward>()
 	val goldRewards = Array<AbstractReward>()
 
+	val themeCards = Array<Card>()
+
 	var gotBronze = false
 	var gotSilver = false
 	var gotGold = false
@@ -61,7 +63,14 @@ class Quest(val path: String)
 		title = xml.get("Title", "")!!
 		description = xml.get("Description", "")!!
 
-		theme = Theme.Companion.load("Themes/" + xml.get("Theme"))
+		val themeName = xml.get("Theme")
+		theme = Theme.Companion.load("Themes/$themeName")
+
+		for (themeCardPath in XmlData.enumeratePaths("Cards/$themeName", "Card"))
+		{
+			val card = Card.load(themeCardPath)
+			themeCards.add(card)
+		}
 
 		val questCardsEl = xml.getChildByName("QuestCards")
 		if (questCardsEl != null)
@@ -311,6 +320,7 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 	lateinit var fixedEventString: String
 	var allowDeckCards = false
 	var allowQuestCards = false
+	var allowThemeCards = false
 
 	var successNode: QuestNodeWrapper? = null
 	var failureNode: QuestNodeWrapper? = null
@@ -350,6 +360,24 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 			if (allowQuestCards)
 			{
 				for (card in quest.questCards)
+				{
+					if (card.current.spawnWeight.subWeights.contains(spawnWeight))
+					{
+						// make it 3x more likely
+						for (i in 0 until 3)
+						{
+							pool.add(card)
+						}
+					}
+					else
+					{
+						pool.add(card)
+					}
+				}
+			}
+			if (allowThemeCards)
+			{
+				for (card in quest.themeCards)
 				{
 					if (card.current.spawnWeight.subWeights.contains(spawnWeight))
 					{
@@ -411,6 +439,7 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 		{
 			allowDeckCards = xmlData.getBoolean("AllowDeckCards", false)
 			allowQuestCards = xmlData.getBoolean("AllowQuestCards", false)
+			allowThemeCards = xmlData.getBoolean("AllowThemeCards", false)
 		}
 
 		val successEl = xmlData.getChildByName("Success")

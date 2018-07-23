@@ -85,29 +85,33 @@ class QuestScreen : AbstractScreen()
 
 		mainTable.add(cardsTable).grow()
 
-		debugConsole.register("LoadCard", "LoadCard cardName", fun (args, console): Boolean {
-			if (args.size != 1)
+		if (!Global.release)
+		{
+			debugConsole.register("LoadCard", "LoadCard cardName", fun(args, console): Boolean
 			{
-				console.error("Invalid number of arguments!")
-				return false
-			}
+				if (args.size != 1)
+				{
+					console.error("Invalid number of arguments!")
+					return false
+				}
 
-			val card = Global.deck.encounters.backingArray.firstOrNull { it.current.name.toLowerCase() == args[0].toLowerCase() }
-			if (card == null)
-			{
-				console.error("Invalid card name!")
-				return false
-			}
+				val card = Global.deck.encounters.backingArray.firstOrNull { it.current.name.toLowerCase() == args[0].toLowerCase() }
+				if (card == null)
+				{
+					console.error("Invalid card name!")
+					return false
+				}
 
-			val cardScreen = CardScreen.instance
-			cardScreen.setup(card, currentQuest)
-			Global.game.switchScreen(MainGame.ScreenEnum.CARD)
+				val cardScreen = CardScreen.instance
+				cardScreen.setup(card, currentQuest)
+				Global.game.switchScreen(MainGame.ScreenEnum.CARD)
 
-			Global.player.deck.encounters.removeValue(card, true)
-			currentQuest.questCards.removeValue(card, true)
+				Global.player.deck.encounters.removeValue(card, true)
+				currentQuest.questCards.removeValue(card, true)
 
-			return true
-		})
+				return true
+			})
+		}
 	}
 
 	lateinit var currentQuest: Quest
@@ -435,6 +439,7 @@ class QuestScreen : AbstractScreen()
 
 				Global.player.deck.encounters.removeValue(card, true)
 				currentQuest.questCards.removeValue(card, true)
+				currentQuest.themeCards.removeValue(card, true)
 
 				chosenQuestCard = null
 			} then removeActor()

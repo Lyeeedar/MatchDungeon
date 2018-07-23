@@ -1,5 +1,6 @@
 package com.lyeeedar.Card.CardContent
 
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
@@ -108,7 +109,13 @@ class CardContentActionShop : AbstractCardContentAction()
 					table.add(card).size(cardWidth, cardHeight).expand()
 					table.row()
 
-					table.add(Label("$cost", Global.skin)).expandX().center()
+					val costLabel = Label("$cost", Global.skin)
+					if (cost > Global.player.gold)
+					{
+						costLabel.color = Color.DARK_GRAY
+					}
+
+					table.add(costLabel).expandX().center()
 
 					waresTable.add(table).pad(5f)
 				}

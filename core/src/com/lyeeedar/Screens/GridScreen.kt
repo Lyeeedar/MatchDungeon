@@ -11,14 +11,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
+import com.lyeeedar.Board.*
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
-import com.lyeeedar.Board.Level
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.Player
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.random
 import ktx.actors.onClick
 import ktx.scene2d.KTextButton
 import ktx.scene2d.stack
@@ -52,37 +53,77 @@ class GridScreen(): AbstractScreen()
 	// ----------------------------------------------------------------------
 	override fun create()
 	{
-		debugConsole.register("complete", "", { args, console ->
-			level.victoryAction.invoke()
+		if (!Global.release)
+		{
+			debugConsole.register("complete", "", { args, console ->
+				level.victoryAction.invoke()
 
-			true
-		})
+				true
+			})
 
-		debugConsole.register("fail", "", { args, console ->
-			level.defeatAction.invoke()
+			debugConsole.register("fail", "", { args, console ->
+				level.defeatAction.invoke()
 
-			true
-		})
+				true
+			})
 
-		debugConsole.register("suicide", "", fun (args, console): Boolean {
-			val die = level.defeatConditions.filter { it is CompletionConditionDie }.firstOrNull()
-
-			if (die == null || die !is CompletionConditionDie)
+			debugConsole.register("suicide", "", fun(args, console): Boolean
 			{
-				console.error("Do die defeat condition!")
-				return false
-			}
+				val die = level.defeatConditions.filter { it is CompletionConditionDie }.firstOrNull()
 
-			die.hp = 0
+				if (die == null || die !is CompletionConditionDie)
+				{
+					console.error("Do die defeat condition!")
+					return false
+				}
 
-			return true
-		})
+				die.hp = 0
 
-		debugConsole.register("maxpower", "", { args, console ->
-			PowerBar.instance.power = PowerBar.instance.maxPower
+				return true
+			})
 
-			true
-		})
+			debugConsole.register("maxpower", "", { args, console ->
+				PowerBar.instance.power = PowerBar.instance.maxPower
+
+				true
+			})
+
+			debugConsole.register("spawn", "", fun(args, console): Boolean {
+				if (args[0] == "match5")
+				{
+					val tile = level.grid.grid.filter { it.orb != null }.random()!!
+					tile.orb!!.special = Match5(tile.orb!!)
+				}
+				else if (args[0] == "match4")
+				{
+					if (args[1] == "hori")
+					{
+						val tile = level.grid.grid.filter { it.orb != null }.random()!!
+						tile.orb!!.special = Horizontal4(tile.orb!!)
+					}
+					else if (args[1] == "vert")
+					{
+						val tile = level.grid.grid.filter { it.orb != null }.random()!!
+						tile.orb!!.special = Vertical4(tile.orb!!)
+					}
+					else
+					{
+						return false
+					}
+				}
+				else if (args[0] == "dualmatch")
+				{
+					val tile = level.grid.grid.filter { it.orb != null }.random()!!
+					tile.orb!!.special = DualMatch(tile.orb!!)
+				}
+				else
+				{
+					return false
+				}
+
+				return true
+			})
+		}
 	}
 
 	// ----------------------------------------------------------------------

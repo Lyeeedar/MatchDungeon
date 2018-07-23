@@ -320,7 +320,7 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 
 			zoomTable.add(stack).grow()
 
-			val closeButton = Button(Global.skin, "close")
+			val closeButton = Button(Global.skin, "closecard")
 			closeButton.addClickListener {
 				table.addAction(collapseSequence)
 				background.addAction(fadeOut(speed))
@@ -332,7 +332,7 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 
 			for (pick in pickFuns)
 			{
-				val pickButton =  TextButton(pick.string, Global.skin)
+				val pickButton =  TextButton(pick.string, Global.skin, "defaultcard")
 				pickButton.addClickListener {
 					pick.pickFun(this)
 					table.addAction(collapseSequence)

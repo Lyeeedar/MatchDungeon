@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="476" meta:Y="0" GUID="f14c5551-ecec-4122-bf8a-3ddc58d57d15">
 			<Line>
-				<MultilineString>I finally smash to lid apart and reach inside.</MultilineString>
+				<MultilineString>You finally smash to lid apart and reach inside.</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

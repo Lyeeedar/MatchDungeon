@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="ee2f08d7-45ce-4739-aee0-55ca58aa65ac" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">e43e3cfc-798f-41dd-844a-95337dd69ef4</Root>
+	<Nodes>
+		<CardNode meta:X="228.66666666666669" meta:Y="-4.6666666666666856" GUID="e43e3cfc-798f-41dd-844a-95337dd69ef4">
+			<Name>Treasure Room</Name>
+			<Description>You find an unlooted treasure room.</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>TreasureRoom2Content</Content>
+		</CardNode>
+	</Nodes>
+</Card>

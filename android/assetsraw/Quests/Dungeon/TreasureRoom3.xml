@@ -4,8 +4,8 @@
 		<CardNode meta:X="204" meta:Y="0" GUID="bf64ce44-9049-4f20-820c-2a6f7fee0495">
 			<Name>Treasure Room</Name>
 			<Description>You find an unlooted treasure room.</Description>
-			<Rarity>Bronze</Rarity>
-			<Content>TreasureRoomContent</Content>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>TreasureRoom3Content</Content>
 		</CardNode>
 	</Nodes>
 </Card>

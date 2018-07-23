@@ -1,0 +1,54 @@
+<CardContent meta:X="0" meta:Y="0" GUID="e13234f8-23aa-4cce-8bfd-46adea29dec0" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">4e738aa2-b95d-4969-9e2c-ac63dc9ec039</Root>
+	<Nodes>
+		<Node meta:X="203" meta:Y="2" GUID="4e738aa2-b95d-4969-9e2c-ac63dc9ec039">
+			<Line>
+				<MultilineString>You wander through the brighly coloured stalls, pockets weighed down with money. On all sides people call out to you, looking to sell all sorts of wares.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You finally arrive in the town square. All sorts of games are being run here, but the one that grabs your attention the most is the bare handed fighting tournament in the middle.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Any challengers!" The announcer calls out as the lastest contender gets carried out of the ring. "Anyone think they have what it takes to defeat Rodney the Red, current champion of the fair!"</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>To one side a group of men are taking bets on the outcome of the matches. You decide you could make some good money if you win.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You put down a sum of coins and step up to the ring.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Oh a new contender steps forth! Lets see if he can fare any better!"</MultilineString>
+			</Line>
+			<Match3>
+				<Level>TheFestivalContentLevel</Level>
+				<Success meta:RefKey="Node">496eb4f7-0da2-4f27-b9de-16ac31b37bd5</Success>
+				<Failure meta:RefKey="Node">49d3281f-4d92-479a-9022-b805afefe5d5</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="463" meta:Y="299" GUID="49d3281f-4d92-479a-9022-b805afefe5d5">
+			<Line>
+				<MultilineString>"Another win for Rodney!"</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="482" meta:Y="0" GUID="496eb4f7-0da2-4f27-b9de-16ac31b37bd5">
+			<Line>
+				<MultilineString>"We have a new champion! Leave the arena now and rest, you've earned it."</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You take your winnings and head home, humming happily to yourself.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>50</Count>
+				</Money>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

@@ -43,7 +43,7 @@ class Character(val path: String)
 		table.add(descLabel)
 		table.row()
 
-		table.add(Seperator(Global.skin, false))
+		table.add(Seperator(Global.skin, "horizontalcard"))
 		table.row()
 
 		table.add(Label("Statistics", Global.skin, "cardtitle"))
@@ -61,7 +61,7 @@ class Character(val path: String)
 			table.row()
 		}
 
-		table.add(Seperator(Global.skin, false))
+		table.add(Seperator(Global.skin, "horizontalcard"))
 		table.row()
 
 		table.add(Label("Equipment", Global.skin, "cardtitle"))
@@ -88,19 +88,19 @@ class Character(val path: String)
 
 				equipTable.add(Label(equipment.name, Global.skin, "card"))
 
-				val infoButton = Button(Global.skin, "info")
+				val infoButton = Button(Global.skin, "infocard")
 				infoButton.setSize(24f, 24f)
 				infoButton.addClickListener {
 					val t = equipment.createTable(null, false)
 
 					FullscreenTable.createCard(t, infoButton.localToStageCoordinates(Vector2(12f, 12f)))
 				}
-				equipTable.add(infoButton).size(24f).pad(0f, 12f, 0f, 12f)
+				equipTable.add(infoButton).size(24f).pad(0f, 12f, 0f, 12f).expandX().right()
 
 				val iconStack = Stack()
 				iconStack.add(SpriteWidget(emptySlot, 32f, 32f))
 				iconStack.add(SpriteWidget(equipment.icon, 32f, 32f))
-				equipTable.add(iconStack).size(32f).expandX().right()
+				equipTable.add(iconStack).size(32f)
 			}
 		}
 

@@ -29,7 +29,7 @@ class CardContentActionChoice : AbstractCardContentAction()
 		{
 			val response = TextButton(choice.text, skin, "responseButton")
 			response.label.setWrap(true)
-			responsesTable.add(response).growX().pad(10f).height(100f)
+			responsesTable.add(response).growX().pad(5f, 0f, 5f, 0f).height(75f)
 			responsesTable.row()
 
 			val seq = Actions.alpha(0f) then Actions.delay(delay) then Actions.fadeIn(0.3f)

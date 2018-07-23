@@ -19,6 +19,7 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
 import com.lyeeedar.Util.Point
+import com.lyeeedar.Util.ciel
 
 /**
  * Created by Philip on 05-Jul-16.
@@ -374,12 +375,13 @@ class GridWidget(val grid: Grid) : Widget()
 					val spacing = spacePerPip * solidSpaceRatio
 					val solid = spacePerPip - spacing
 
+					val hp = monster.hp.ciel()
 					for (i in 0 until pips)
 					{
 						val sprite = when {
-							i < monster.hp -> hp_full
-							i < monster.hp + monster.remainingReduction -> hp_dr
-							i < monster.hp + monster.lostHP -> hp_damaged
+							i < hp -> hp_full
+							i < hp + monster.remainingReduction -> hp_dr
+							i < hp + monster.lostHP -> hp_damaged
 							else -> hp_empty
 						}
 						floating.queueSprite(sprite, xi+i*spacePerPip, yi+0.1f, ORB, 2, width = solid, height = 0.15f)
@@ -402,12 +404,13 @@ class GridWidget(val grid: Grid) : Widget()
 
 					val fullHp = if (friendly.isSummon) hp_full_summon else hp_full_friendly
 
+					val hp = friendly.hp.ciel()
 					for (i in 0 until pips)
 					{
 						val sprite = when {
-							i < friendly.hp -> fullHp
-							i < friendly.hp + friendly.remainingReduction -> hp_dr
-							i < friendly.hp + friendly.lostHP -> hp_damaged
+							i < hp -> fullHp
+							i < hp + friendly.remainingReduction -> hp_dr
+							i < hp + friendly.lostHP -> hp_damaged
 							else -> hp_empty
 						}
 						floating.queueSprite(sprite, xi+i*spacePerPip, yi+0.1f, ORB, 2, width = solid, height = 0.15f)
@@ -428,13 +431,14 @@ class GridWidget(val grid: Grid) : Widget()
 						val spacing = spacePerPip * solidSpaceRatio
 						val solid = spacePerPip - spacing
 
+						val hp = block.hp.ciel()
 						for (i in 0 until pips)
 						{
 							val sprite = when
 							{
-								i < block.hp -> hp_neutral
-								i < block.hp + block.remainingReduction -> hp_dr
-								i < block.hp + block.lostHP -> hp_damaged
+								i < hp -> hp_neutral
+								i < hp + block.remainingReduction -> hp_dr
+								i < hp + block.lostHP -> hp_damaged
 								else -> hp_empty
 							}
 							floating.queueSprite(sprite, xi + i * spacePerPip, yi + 0.1f, ORB, 2, width = solid, height = 0.15f)
@@ -456,13 +460,14 @@ class GridWidget(val grid: Grid) : Widget()
 						val spacing = spacePerPip * solidSpaceRatio
 						val solid = spacePerPip - spacing
 
+						val hp = container.hp.ciel()
 						for (i in 0 until pips)
 						{
 							val sprite = when
 							{
-								i < container.hp -> hp_neutral
-								i < container.hp + container.remainingReduction -> hp_dr
-								i < container.hp + container.lostHP -> hp_damaged
+								i < hp -> hp_neutral
+								i < hp + container.remainingReduction -> hp_dr
+								i < hp + container.lostHP -> hp_damaged
 								else -> hp_empty
 							}
 							floating.queueSprite(sprite, xi + i * spacePerPip, yi + 0.1f, ORB, 2, width = solid, height = 0.15f)

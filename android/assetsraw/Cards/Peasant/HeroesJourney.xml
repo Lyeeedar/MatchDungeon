@@ -1,28 +1,7 @@
 <Card meta:X="0" meta:Y="0" GUID="a2361de1-fa39-4522-baa1-07b6765f22b4" xmlns:meta="Editor">
-	<Root meta:RefKey="CardNode">b8e47f83-4cba-41d0-8870-3148351ba468</Root>
+	<Root meta:RefKey="CardNode">b5b4cf07-d46e-4574-95e2-58cf7c7a0b9e</Root>
 	<Nodes>
-		<CardNode meta:X="204" meta:Y="0" GUID="b8e47f83-4cba-41d0-8870-3148351ba468">
-			<Name>Farm Life</Name>
-			<Description>Life on a farm is tough. Waking at the crack of dawn and working until sun sets. It breeds hard people, strong willed and strong armed.</Description>
-			<SpawnWeighting>Any</SpawnWeighting>
-			<Content>FarmLife</Content>
-			<Next meta:RefKey="CardNode">8dac19df-8634-42c6-b302-a4e1ff16d4f0</Next>
-		</CardNode>
-		<CardNode meta:X="520" meta:Y="0" GUID="8dac19df-8634-42c6-b302-a4e1ff16d4f0">
-			<Name>The Harvest</Name>
-			<Description>Harvest time is always the most exhausting time of the year, and the culmination of all the efforts you have put in to this point. Don't mess it up!</Description>
-			<SpawnWeighting>Any</SpawnWeighting>
-			<Content>TheHarvest</Content>
-			<Next meta:RefKey="CardNode">2abf5a6e-a060-4bf7-967e-5dd689bd59d9</Next>
-		</CardNode>
-		<CardNode meta:X="835" meta:Y="0" GUID="2abf5a6e-a060-4bf7-967e-5dd689bd59d9">
-			<Name>Farmers Market</Name>
-			<Description>The farmers market is an opportunity to finally make some money by selling the produce you have grown.</Description>
-			<SpawnWeighting>Any</SpawnWeighting>
-			<Content>FarmersMarket</Content>
-			<Next meta:RefKey="CardNode">b5b4cf07-d46e-4574-95e2-58cf7c7a0b9e</Next>
-		</CardNode>
-		<CardNode meta:X="1147" meta:Y="0" GUID="b5b4cf07-d46e-4574-95e2-58cf7c7a0b9e">
+		<CardNode meta:X="178.31297735778776" meta:Y="-5.080526342529085" GUID="b5b4cf07-d46e-4574-95e2-58cf7c7a0b9e">
 			<Name>Raiding Party</Name>
 			<Description>Your peaceful farm life is shattered by the chittering cries of goblins smashing their way into your house.</Description>
 			<SpawnWeighting>Any</SpawnWeighting>

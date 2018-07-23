@@ -1,5 +1,5 @@
 <Definitions Colour="187,126,235" Icon="Sprites/Icons/QuestIcon.png" xmlns:meta="Editor">
-	<Definition Name="QuestNodeDefs" Keys="QuestNode,Branch,CompleteQuest" meta:RefKey="ReferenceDef" />
+	<Definition Name="QuestNodeDefs" Keys="QuestNode,Branch,CompleteQuest,Define" meta:RefKey="ReferenceDef" />
 	<Definition Name="Quest" AllowCircularLinks="True" FlattenData="True" meta:RefKey="GraphStruct">
 		<Data Name="Title" meta:RefKey="String" />
 		<Data Name="Description" meta:RefKey="String" />
@@ -15,8 +15,9 @@
 	<Definition Name="QuestNode" TextColour="240,156,204" meta:RefKey="GraphStructDef">
 		<Data Name="Type" EnumValues="Fixed,Deck" SkipIfDefault="False" meta:RefKey="Enum" />
 		<!--Deck-->
-		<Data Name="AllowDeckCards" SkipIfDefault="False" VisibleIf="Type==Deck" meta:RefKey="Boolean" />
-		<Data Name="AllowQuestCards" SkipIfDefault="False" VisibleIf="Type==Deck" meta:RefKey="Boolean" />
+		<Data Name="AllowDeckCards" Default="True" SkipIfDefault="False" VisibleIf="Type==Deck" meta:RefKey="Boolean" />
+		<Data Name="AllowQuestCards" Default="True" SkipIfDefault="False" VisibleIf="Type==Deck" meta:RefKey="Boolean" />
+		<Data Name="AllowThemeCards" Default="True" SkipIfDefault="False" VisibleIf="Type==Deck" meta:RefKey="Boolean" />
 		<!--Fixed-->
 		<Data Name="FixedEvent" StripExtension="True" ResourceType="Card" RelativeToThis="True" SkipIfDefault="False" VisibleIf="Type==Fixed" meta:RefKey="File" />
 		<!--Chain nodes-->
@@ -37,5 +38,11 @@
 	</Definition>
 	<Definition Name="CompleteQuest" TextColour="245,216,33" meta:RefKey="GraphStructDef">
 		<Data Name="State" EnumValues="Gold,Silver,Bronze,Failure" meta:RefKey="Enum" />
+	</Definition>
+	<Definition Name="Define" TextColour="131,187,174" meta:RefKey="GraphStruct">
+		<Data Name="Key" meta:RefKey="String" />
+		<Data Name="Value" meta:RefKey="String" />
+		<Data Name="IsGlobal" meta:RefKey="Boolean" />
+		<Data Name="Next" DefKey="QuestNodeDefs" meta:RefKey="GraphReference" />
 	</Definition>
 </Definitions>

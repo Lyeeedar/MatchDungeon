@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="659f41b9-bc2e-42ca-b99f-d04ca84d3f39" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">30eabe57-9ffe-4b49-9a11-4e2e2b185ae2</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="30eabe57-9ffe-4b49-9a11-4e2e2b185ae2">
+			<Name>Devastation</Name>
+			<Description>You wake up and everything changes...</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>DevastationContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

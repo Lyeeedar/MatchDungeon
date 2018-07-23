@@ -111,6 +111,9 @@ class Global
 			val cardwhitefont = AssetManager.loadFont("Sprites/Unpacked/font.ttf", 12, Color(1.0f, 1.0f, 1.0f, 1f), 0, Color.BLACK, false)
 			skin.add("cardwhite", cardwhitefont)
 
+			val textButtonCardfont = AssetManager.loadFont("Sprites/Unpacked/font.ttf", 12, Color(0.97f, 0.87f, 0.7f, 1f), 0, Color.BLACK, false)
+			skin.add("textButtonCard", textButtonCardfont)
+
 			val titlefont = AssetManager.loadFont("Sprites/Unpacked/font.ttf", 20, Color(1f, 0.9f, 0.8f, 1f), 1, Color.BLACK, true)
 			skin.add("title", titlefont)
 
@@ -129,6 +132,7 @@ class Global
 			skin.add("white", Texture(pixmap))
 
 			val buttonBackground = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("Sprites/GUI/Button.png"), 6, 6, 6, 6))
+			val buttonCardBackground = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("Sprites/GUI/ButtonCard.png"), 6, 6, 6, 6))
 
 			val textField = TextField.TextFieldStyle()
 			textField.fontColor = Color.WHITE
@@ -197,6 +201,15 @@ class Global
 			textButton.over = (textButton.up as NinePatchDrawable).tint(Color(0.9f, 0.9f, 0.9f, 1.0f))
 			skin.add("default", textButton)
 
+			val textCardButton = TextButton.TextButtonStyle()
+			textCardButton.up = buttonCardBackground
+			textCardButton.font = skin.getFont("textButtonCard")
+			textCardButton.fontColor = Color.LIGHT_GRAY
+			textCardButton.overFontColor = Color.WHITE
+			//textCardButton.checked = new NinePatchDrawable( new NinePatch( AssetManager.loadTextureRegion( "Sprites/GUI/ButtonDown.png" ), 12, 12, 12, 12 ) );
+			textCardButton.over = (textCardButton.up as NinePatchDrawable).tint(Color(0.9f, 0.9f, 0.9f, 1.0f))
+			skin.add("defaultcard", textCardButton)
+
 			val bigTextButton = TextButton.TextButtonStyle()
 			bigTextButton.up = buttonBackground
 			bigTextButton.font = skin.getFont("title")
@@ -238,6 +251,11 @@ class Global
 			buttonStyle.over = (buttonStyle.up as NinePatchDrawable).tint(Color(0.9f, 0.9f, 0.9f, 1.0f))
 			skin.add("default", buttonStyle)
 
+			val buttonCardStyle = Button.ButtonStyle()
+			buttonCardStyle.up = buttonCardBackground
+			buttonCardStyle.over = (buttonStyle.up as NinePatchDrawable).tint(Color(0.9f, 0.9f, 0.9f, 1.0f))
+			skin.add("defaultcard", buttonCardStyle)
+
 			val closeButton = Button.ButtonStyle()
 			closeButton.up = LayeredDrawable(
 					buttonBackground,
@@ -247,6 +265,15 @@ class Global
 					TextureRegionDrawable(AssetManager.loadTextureRegion("Sprites/Oryx/uf_split/uf_interface/uf_interface_681.png")).tint(Color(0.87f, 0.77f, 0.6f, 1f)))
 			skin.add("close", closeButton)
 
+			val closeCardButton = Button.ButtonStyle()
+			closeCardButton.up = LayeredDrawable(
+					buttonCardBackground,
+					TextureRegionDrawable(AssetManager.loadTextureRegion("Sprites/Oryx/uf_split/uf_interface/uf_interface_681.png")).tint(Color(0.97f, 0.87f, 0.7f, 1f)))
+			closeCardButton.over = LayeredDrawable(
+					buttonCardBackground.tint(Color.LIGHT_GRAY),
+					TextureRegionDrawable(AssetManager.loadTextureRegion("Sprites/Oryx/uf_split/uf_interface/uf_interface_681.png")).tint(Color(0.87f, 0.77f, 0.6f, 1f)))
+			skin.add("closecard", closeCardButton)
+
 			val infoButton = Button.ButtonStyle()
 			infoButton.up = LayeredDrawable(
 					buttonBackground,
@@ -255,6 +282,22 @@ class Global
 					buttonBackground.tint(Color.LIGHT_GRAY),
 					TextureRegionDrawable(AssetManager.loadTextureRegion("Sprites/Oryx/uf_split/uf_interface/uf_interface_573.png")).tint(Color(0.87f, 0.77f, 0.6f, 1f)))
 			skin.add("info", infoButton)
+
+
+			val infoCardButton = Button.ButtonStyle()
+			infoCardButton.up = LayeredDrawable(
+					buttonCardBackground,
+					TextureRegionDrawable(AssetManager.loadTextureRegion("Sprites/Oryx/uf_split/uf_interface/uf_interface_573.png")).tint(Color(0.97f, 0.87f, 0.7f, 1f)))
+			infoCardButton.over = LayeredDrawable(
+					buttonCardBackground.tint(Color.LIGHT_GRAY),
+					TextureRegionDrawable(AssetManager.loadTextureRegion("Sprites/Oryx/uf_split/uf_interface/uf_interface_573.png")).tint(Color(0.87f, 0.77f, 0.6f, 1f)))
+			skin.add("infocard", infoCardButton)
+
+			val horiCardSeperatorStyle = Seperator.SeperatorStyle()
+			horiCardSeperatorStyle.vertical = false
+			horiCardSeperatorStyle.thickness = 6
+			horiCardSeperatorStyle.background = TextureRegionDrawable(AssetManager.loadTextureRegion("Sprites/GUI/SeperatorHorizontalCard.png"))
+			skin.add("horizontalcard", horiCardSeperatorStyle)
 
 			val horiSeperatorStyle = Seperator.SeperatorStyle()
 			horiSeperatorStyle.vertical = false
@@ -320,7 +363,7 @@ class Global
 
 			for (stat in Statistic.Values)
 			{
-				output.put(stat.toString(), player.getStat(stat).toFloat())
+				output.put(stat.toString(), player.getStat(stat))
 			}
 
 			for (slot in EquipmentSlot.Values)

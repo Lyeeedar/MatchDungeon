@@ -1,0 +1,47 @@
+<CardContent meta:X="0" meta:Y="0" GUID="dda757dd-f22d-4cd1-8b09-f747615cd96b" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">e585b7db-8fd6-40a2-9670-8c600ab2cfed</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="e585b7db-8fd6-40a2-9670-8c600ab2cfed">
+			<Line>
+				<MultilineString>You stumble across another unlooted treasure room. The room is partially flooded from some deep source below, but the chests are still visible on the other side.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>It is going to take some finesse to extract them without falling into the water.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>TreasureRoom2ContentLevel</Level>
+				<Success meta:RefKey="Node">02acd133-1f12-442c-bcaf-19464cb1d7d4</Success>
+				<Failure meta:RefKey="Node">5448f946-ebbc-4f55-98bb-8bfab3d9ba67</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="429" meta:Y="196" GUID="5448f946-ebbc-4f55-98bb-8bfab3d9ba67">
+			<Line>
+				<MultilineString>You slip and drop all the treasure into the water, nearly going under yourself. The sparkly goods disappear down into the depths. You don't risk going in after them.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="482" meta:Y="0" GUID="02acd133-1f12-442c-bcaf-19464cb1d7d4">
+			<Line>
+				<MultilineString>You manage to return safely with your loot.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>70</Count>
+				</Money>
+				<Money>
+					<Chance>High</Chance>
+					<Count>20</Count>
+				</Money>
+				<Money>
+					<Chance>Low</Chance>
+					<Count>40</Count>
+				</Money>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

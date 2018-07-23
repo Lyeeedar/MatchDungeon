@@ -12,7 +12,7 @@
 				<MultilineString>Quick, grab what treasure you can before the rest of the horde arrives!</MultilineString>
 			</Line>
 			<Match3>
-				<Level>TreasureRoomContentLevel</Level>
+				<Level>TreasureRoom3ContentLevel</Level>
 				<Success meta:RefKey="Node">23edc937-a196-4e14-9033-6d847b954efe</Success>
 				<Failure meta:RefKey="Node">62fb30f9-7e28-4330-912d-e6686428171d</Failure>
 			</Match3>

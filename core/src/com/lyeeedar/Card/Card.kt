@@ -1,5 +1,6 @@
 package com.lyeeedar.Card
 
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Label
@@ -17,10 +18,7 @@ import com.lyeeedar.SpawnWeight
 import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.addTapToolTip
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.directory
-import com.lyeeedar.Util.getXml
+import com.lyeeedar.Util.*
 import ktx.collections.set
 import ktx.collections.toGdxArray
 
@@ -104,7 +102,7 @@ class CardNode
 			val stack = Stack()
 			stack.touchable = Touchable.enabled
 
-			stack.add(SpriteWidget(AssetManager.loadSprite("GUI/RewardChanceBorder", colour = Chance.ALWAYS.colour), 64f, 64f))
+			stack.add(SpriteWidget(AssetManager.loadSprite("GUI/RewardChanceBorder", colour = Colour(Color.OLIVE)), 64f, 64f))
 			stack.add(widget)
 
 			stack.addTapToolTip("This encounter contains a shop.")
