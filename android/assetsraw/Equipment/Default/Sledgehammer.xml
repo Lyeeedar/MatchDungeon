@@ -1,6 +1,7 @@
 <MainHand xmlns:meta="Editor">
 	<Name>Sledgehammer</Name>
 	<Description>A heavy sledgehammer. Slow and heavy but allows you to smash almost anything.</Description>
+	<Cost>100</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/weapon_hammer_exotic1</Name>
 	</Icon>
@@ -17,7 +18,7 @@
 			<Name>Oryx/uf_split/uf_items/weapon_hammer_exotic1</Name>
 		</Icon>
 		<EffectData>
-			<Cost>8</Cost>
+			<Cost>6</Cost>
 			<Effect>1,Orb,Single,Pop</Effect>
 			<Data>
 				<Damage>0</Damage>

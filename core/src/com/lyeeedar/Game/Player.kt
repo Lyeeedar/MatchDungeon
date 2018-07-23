@@ -91,27 +91,30 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 			val basestat = (baseCharacter.baseStatistics[stat] ?: 0f) + (statistics[stat] ?: 0f)
 			val truestat = getStat(stat)
 
-			val diff = truestat - basestat
-			val diffStr: String
-			if (diff > 0)
+			if (truestat != 0f || basestat != 0f)
 			{
-				diffStr = "[GREEN]+$diff[]"
-			}
-			else if (diff < 0)
-			{
-				diffStr = "[RED]$diff[]"
-			}
-			else
-			{
-				diffStr = ""
-			}
+				val diff = truestat - basestat
+				val diffStr: String
+				if (diff > 0)
+				{
+					diffStr = "[GREEN]+$diff[]"
+				}
+				else if (diff < 0)
+				{
+					diffStr = "[RED]$diff[]"
+				}
+				else
+				{
+					diffStr = ""
+				}
 
-			val statTable = Table()
-			statTable.add(Label(stat.toString().toLowerCase().capitalize() + ":", Global.skin, "card")).expandX().left()
-			statTable.add(Label(truestat.toInt().toString() + " (" + basestat + diffStr + ")", Global.skin, "card"))
+				val statTable = Table()
+				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ":", Global.skin, "card")).expandX().left()
+				statTable.add(Label(truestat.toString() + " (" + basestat + diffStr + ")", Global.skin, "card"))
 
-			table.add(statTable).growX()
-			table.row()
+				table.add(statTable).growX()
+				table.row()
+			}
 		}
 
 		table.add(Seperator(Global.skin, "horizontalcard"))

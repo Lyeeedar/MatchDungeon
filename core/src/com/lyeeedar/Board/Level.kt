@@ -531,6 +531,8 @@ class Level(val loadPath: String)
 					val extends = symbolEl.get("Extends", " ")!!.firstOrNull() ?: ' '
 					var sprite: SpriteWrapper? = null
 
+					val nameKey = symbolEl.get("NameKey", null)
+
 					val symbolSpriteEl = symbolEl.getChildByName("Sprite")
 					if (symbolSpriteEl != null)
 					{
@@ -589,7 +591,7 @@ class Level(val loadPath: String)
 
 					val type = SymbolType.valueOf(symbolEl.get("Type", "Floor")!!.toUpperCase())
 
-					symbolsMap[character.toInt()] = Symbol(character, extends, sprite, blockDesc, plate, seal, attack, isMonster, monsterDesc, special, sinkableDesc, isChest, containerDesc, spreader, type)
+					symbolsMap[character.toInt()] = Symbol(character, extends, nameKey, sprite, blockDesc, plate, seal, attack, isMonster, monsterDesc, special, sinkableDesc, isChest, containerDesc, spreader, type)
 				}
 			}
 
@@ -662,6 +664,7 @@ enum class SymbolType
 }
 data class Symbol(
 		val char: Char, val extends: Char,
+		val nameKey: String?,
 		val sprite: SpriteWrapper?,
 		val block: BlockDesc?, val plate: Int, val seal: Int, val attack: Int,
 		val isMonster: Boolean, val monsterDesc: MonsterDesc?,

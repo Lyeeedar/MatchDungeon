@@ -298,6 +298,7 @@ abstract class AbstractQuestNode(val quest: Quest, val guid: String)
 				"QUESTNODE" -> QuestNode(quest, guid)
 				"BRANCH" -> Branch(quest, guid)
 				"COMPLETEQUEST" -> CompleteQuest(quest, guid)
+				"DEFINE" -> Define(quest, guid)
 				else -> throw Exception("Unknown quest node type '" + xmlData.name + "'!")
 			}
 
@@ -576,5 +577,45 @@ class CompleteQuest(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 	{
 		quest.state = state
 		return null
+	}
+}
+
+class Define(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
+{
+	lateinit var next: QuestNode.QuestNodeWrapper
+
+	lateinit var key: String
+	lateinit var value: String
+	var isGlobal: Boolean = false
+
+	override fun resolve(nodeMap: ObjectMap<String, AbstractQuestNode>)
+	{
+		next.resolve(nodeMap)
+	}
+
+	override fun run(): QuestNode?
+	{
+		val newVal = value.evaluate(Global.getVariableMap())
+
+		if (isGlobal)
+		{
+			Global.globalflags.flags.put(key, newVal)
+		}
+		else
+		{
+			Global.levelflags.flags.put(key, newVal)
+		}
+
+		return next.node.run()
+	}
+
+	override fun parse(xmlData: XmlData)
+	{
+		key = xmlData.get("Key")
+		value = xmlData.get("Value")
+		isGlobal = xmlData.getBoolean("IsGlobal")
+
+		val nextID = xmlData.get("Next")
+		next = QuestNode.QuestNodeWrapper(nextID)
 	}
 }

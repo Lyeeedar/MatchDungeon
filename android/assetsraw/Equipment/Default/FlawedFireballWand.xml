@@ -18,7 +18,7 @@
 			<Name>Oryx/uf_split/uf_items/weapon_staff_jeweled</Name>
 		</Icon>
 		<EffectData>
-			<Cost>10</Cost>
+			<Cost>7</Cost>
 			<Effect>1,Orb,Block,Pop</Effect>
 			<Data>
 				<AOE>1</AOE>

@@ -20,7 +20,8 @@ class Targetter(val type: Type)
 		SEALED,
 		MONSTER,
 		ATTACK,
-		TILE
+		TILE,
+		NAMEDTILE
 	}
 
 	lateinit var isValid: (tile: Tile, data: ObjectMap<String, String>) -> Boolean
@@ -38,6 +39,7 @@ class Targetter(val type: Type)
 			Type.MONSTER ->  fun(tile: Tile, data: ObjectMap<String, String>) = tile.monster != null && tile.spreader == null
 			Type.ATTACK ->  fun(tile: Tile, data: ObjectMap<String, String>) = tile.orb?.hasAttack ?: false && tile.spreader == null
 			Type.TILE -> fun(tile: Tile, data: ObjectMap<String, String>) = tile.canHaveOrb
+			Type.NAMEDTILE -> fun(tile: Tile, data: ObjectMap<String, String>) = tile.nameKey == data["TILENAME"]
 			else -> throw Exception("Invalid targetter type $type")
 		}
 	}
@@ -55,6 +57,7 @@ class Targetter(val type: Type)
 			Type.MONSTER -> "strike"
 			Type.ATTACK -> "block"
 			Type.TILE -> "pop"
+			Type.NAMEDTILE -> "pop"
 		}
 	}
 }

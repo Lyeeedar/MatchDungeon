@@ -18,7 +18,7 @@
 			<Name>Oryx/uf_split/uf_items/armor_plate_chest</Name>
 		</Icon>
 		<EffectData>
-			<Cost>4</Cost>
+			<Cost>3</Cost>
 			<Effect>1,Attack,Single,Pop</Effect>
 			<Data>
 				<Damage>0</Damage>

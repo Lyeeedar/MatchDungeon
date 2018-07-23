@@ -290,7 +290,9 @@ enum class Statistic
 	HEALTH,
 	MATCHDAMAGE,
 	ABILITYDAMAGE,
-	POWERGAIN;
+	POWERGAIN,
+	BONUSGOLD,
+	BONUSTIME;
 
 	companion object
 	{
@@ -301,7 +303,7 @@ enum class Statistic
 			for (stat in Values)
 			{
 				var value = statistics[stat] ?: 0f
-				value = xmlData.getFloat(stat.toString().toLowerCase().capitalize(), value)
+				value = xmlData.getFloat(stat.toString(), value)
 				statistics[stat] = value
 			}
 		}

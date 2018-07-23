@@ -51,14 +51,17 @@ class Character(val path: String)
 
 		for (stat in Statistic.Values)
 		{
-			val statVal = baseStatistics[stat] ?: 0
+			val statVal = baseStatistics[stat] ?: 0f
 
-			val statTable = Table()
-			statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Global.skin, "card")).expandX().left()
-			statTable.add(Label(statVal.toString(), Global.skin, "card"))
+			if (statVal != 0f)
+			{
+				val statTable = Table()
+				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Global.skin, "card")).expandX().left()
+				statTable.add(Label(statVal.toString(), Global.skin, "card"))
 
-			table.add(statTable)
-			table.row()
+				table.add(statTable)
+				table.row()
+			}
 		}
 
 		table.add(Seperator(Global.skin, "horizontalcard"))

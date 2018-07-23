@@ -16,5 +16,7 @@
 		<Data Name="MatchDamage" SkipIfDefault="False" meta:RefKey="Number" />
 		<Data Name="AbilityDamage" SkipIfDefault="False" meta:RefKey="Number" />
 		<Data Name="PowerGain" SkipIfDefault="False" meta:RefKey="Number" />
+		<Data Name="BonusGold" SkipIfDefault="False" meta:RefKey="Number" />
+		<Data Name="BonusTime" SkipIfDefault="False" meta:RefKey="Number" />
 	</Definition>
 </Definitions>

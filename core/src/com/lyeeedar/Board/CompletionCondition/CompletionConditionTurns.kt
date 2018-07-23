@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Align
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Global
 import com.lyeeedar.Global.Companion.skin
+import com.lyeeedar.Statistic
 import com.lyeeedar.Util.XmlData
 
 /**
@@ -39,6 +40,9 @@ class CompletionConditionTurns(): AbstractCompletionCondition()
 
 	override fun attachHandlers(grid: Grid)
 	{
+		maxTurnCount += ((Global.player.getStat(Statistic.BONUSTIME) / 100f) * maxTurnCount).toInt()
+		turnCount = maxTurnCount
+
 		grid.onTurn +=
 				{
 					turnCount--

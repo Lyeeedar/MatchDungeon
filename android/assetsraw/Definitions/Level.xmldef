@@ -33,6 +33,7 @@
 			<Data Name="Symbol" meta:RefKey="Struct">
 				<Data Name="Character" MaxLength="1" SkipIfDefault="False" meta:RefKey="String" />
 				<Data Name="Extends" MaxLength="1" SkipIfDefault="False" meta:RefKey="String" />
+				<Data Name="NameKey" meta:RefKey="String" />
 				<Data Name="Sprite" Keys="SpriteWrapper" meta:RefKey="Reference" />
 				<Data Name="Block" meta:RefKey="Struct">
 					<Data Name="Sprite" Keys="Sprite" meta:RefKey="Reference" />

@@ -129,6 +129,7 @@ class Ability
 			if (flightEffect != null)
 			{
 				val fs = flightEffect!!.copy()
+				fs.killOnAnimComplete = true
 
 				val p1 = Vector2()
 				val p2 = GridWidget.instance.pointToScreenspace(target)

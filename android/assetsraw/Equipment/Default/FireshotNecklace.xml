@@ -1,6 +1,7 @@
 <Head xmlns:meta="Editor">
 	<Name>Fireshot Necklace</Name>
 	<Description>A necklace enchanted with the power fireshot.</Description>
+	<Cost>100</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/necklace_ruby</Name>
 	</Icon>
@@ -17,7 +18,7 @@
 			<Name>Oryx/uf_split/uf_items/necklace_ruby</Name>
 		</Icon>
 		<EffectData>
-			<Cost>5</Cost>
+			<Cost>4</Cost>
 			<Effect>1,Monster,Single,Pop</Effect>
 			<Data>
 				<Damage>1</Damage>

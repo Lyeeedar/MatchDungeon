@@ -71,10 +71,6 @@ class Tile(x: Int, y: Int) : Point(x, y)
 		}
 
 	var spreader: Spreader? = null
-		set(value)
-		{
-			field = value
-		}
 
 	var plateStrength: Int = 0
 	val hasPlate: Boolean
@@ -84,6 +80,8 @@ class Tile(x: Int, y: Int) : Point(x, y)
 	var isPit: Boolean = false
 
 	var isSelected: Boolean = false
+
+	var nameKey: String? = null
 
 	val effects: Array<Renderable> = Array()
 

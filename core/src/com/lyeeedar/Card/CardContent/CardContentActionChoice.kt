@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Global.Companion.skin
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.UI.addClickListener
+import com.lyeeedar.UI.lambda
 import com.lyeeedar.Util.XmlData
 import ktx.actors.then
 
@@ -32,22 +33,22 @@ class CardContentActionChoice : AbstractCardContentAction()
 			responsesTable.add(response).growX().pad(5f, 0f, 5f, 0f).height(75f)
 			responsesTable.row()
 
-			val seq = Actions.alpha(0f) then Actions.delay(delay) then Actions.fadeIn(0.3f)
+			val seq = Actions.alpha(0f) then Actions.delay(delay) then Actions.fadeIn(0.3f) then lambda {
+				response.addClickListener {
+					responsesTable.clear()
+					CardContent.CardContentStack.last().index++
+					built = false
+
+					if (!choice.key.isBlank())
+					{
+						CardContent.CardContentStack.add(CardContentNodeState(choice.node!!))
+					}
+					CardContentScreen.advanceContent()
+				}
+			}
 			response.addAction(seq)
 
 			delay += 0.1f
-
-			response.addClickListener {
-				responsesTable.clear()
-				CardContent.CardContentStack.last().index++
-				built = false
-
-				if (!choice.key.isBlank())
-				{
-					CardContent.CardContentStack.add(CardContentNodeState(choice.node!!))
-				}
-				CardContentScreen.advanceContent()
-			}
 		}
 
 		built = true

@@ -282,6 +282,8 @@ class MoneyReward : AbstractReward()
 		table.add(title).expandX().center().padTop(10f)
 		table.row()
 
+		val amount = amount + ((Global.player.getStat(Statistic.BONUSGOLD) / 100) * amount).toInt()
+
 		val amountLbl = Label(amount.toString(), Global.skin, "cardtitle")
 		table.add(amountLbl).expandX().center().padTop(10f)
 		table.row()

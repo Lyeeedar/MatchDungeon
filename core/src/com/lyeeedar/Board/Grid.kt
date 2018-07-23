@@ -1518,6 +1518,8 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					damageable.damSources.add(this)
 
 					t.effects.add(hitEffect.copy())
+
+					onDamaged(damageable)
 				}
 
 				if (t.spreader != null)

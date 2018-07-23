@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Align
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Global
 import com.lyeeedar.Global.Companion.skin
+import com.lyeeedar.Statistic
 import com.lyeeedar.Util.XmlData
 
 /**
@@ -38,6 +39,8 @@ class CompletionConditionTime(): AbstractCompletionCondition()
 
 	override fun attachHandlers(grid: Grid)
 	{
+		time += ((Global.player.getStat(Statistic.BONUSTIME) / 100f) * time).toInt()
+
 		grid.onTime +=
 				{
 					time -= it

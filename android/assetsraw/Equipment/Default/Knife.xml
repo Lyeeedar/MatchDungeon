@@ -18,7 +18,7 @@
 			<Name>Oryx/uf_split/uf_items/weapon_sword</Name>
 		</Icon>
 		<EffectData>
-			<Cost>6</Cost>
+			<Cost>5</Cost>
 			<Effect>1,Monster,Single,Pop</Effect>
 			<Data>
 				<Damage>1</Damage>
