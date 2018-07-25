@@ -7,10 +7,12 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.Permuter
 import com.lyeeedar.Game.Ability.Targetter
+import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Animation.BumpAnimation
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.Animation.LeapAnimation
 import com.lyeeedar.Renderables.Animation.MoveAnimation
+import com.lyeeedar.Statistic
 import com.lyeeedar.Util.*
 import ktx.collections.set
 import ktx.collections.toGdxArray
@@ -34,7 +36,10 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 
 		if (desc.attackNumPips > 0)
 		{
-			atkCooldown = (MathUtils.random() * desc.attackCooldown.max).toInt()
+			var max = desc.attackCooldown.max
+			max += ((Global.player.getStat(Statistic.BONUSTIME) / 100f) * max).toInt()
+
+			atkCooldown = (MathUtils.random() * max).toInt()
 		}
 		else
 		{
@@ -47,7 +52,13 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 		atkCooldown--
 		if (atkCooldown <= 0)
 		{
-			atkCooldown = desc.attackCooldown.lerp()
+			var min = desc.attackCooldown.min
+			min += ((Global.player.getStat(Statistic.BONUSTIME) / 100f) * min).toInt()
+
+			var max = desc.attackCooldown.max
+			max += ((Global.player.getStat(Statistic.BONUSTIME) / 100f) * max).toInt()
+
+			atkCooldown = min + MathUtils.random(max - min)
 
 			// do attack
 			val tile = grid.grid.filter { validAttack(grid, it) }.random()
@@ -78,7 +89,13 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 			ability.cooldownTimer--
 			if (ability.cooldownTimer <= 0)
 			{
-				ability.cooldownTimer = ability.cooldownMin + MathUtils.random(ability.cooldownMax - ability.cooldownMin)
+				var min = ability.cooldownMin
+				min += ((Global.player.getStat(Statistic.BONUSTIME) / 100f) * min).toInt()
+
+				var max = ability.cooldownMax
+				max += ((Global.player.getStat(Statistic.BONUSTIME) / 100f) * max).toInt()
+
+				ability.cooldownTimer = min + MathUtils.random(max - min)
 				ability.activate(grid, this)
 			}
 		}

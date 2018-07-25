@@ -39,6 +39,7 @@ class GridScreen(): AbstractScreen()
 	var launchButton: TextButton? = null
 	var refreshButton: TextButton? = null
 	var ultimateButton: TextButton? = null
+	var completeButton: TextButton? = null
 	var grid: GridWidget? = null
 	//lateinit var player: Player
 	lateinit var level: Level
@@ -169,8 +170,14 @@ class GridScreen(): AbstractScreen()
 			val equip = player.getEquipment(slot)
 			if (equip?.ability != null)
 			{
-				val widget = AbilityWidget(equip.ability!!, 64f, 64f, level.grid)
+				val widget = AbilityWidget(equip, 64f, 64f, level.grid)
 				abilityTable.add(widget).expand()
+			}
+			else if (equip != null)
+			{
+				val sprite = SpriteWidget(equip.icon.copy(), 64f, 64f)
+				sprite.color = Color.DARK_GRAY
+				abilityTable.add(sprite).expand()
 			}
 			else
 			{
@@ -221,6 +228,17 @@ class GridScreen(): AbstractScreen()
 						}
 					}
 				}
+
+				completeButton = textButton("Level complete! Skip animations?", "default", Global.skin) {
+					isVisible = false
+					onClick { inputEvent: InputEvent, kTextButton: KTextButton ->
+						if (level.victoryConditions.all { it.isCompleted() })
+						{
+							level.completed = true
+							level.complete()
+						}
+					}
+				}
 			}
 			row()
 			add(gridWidget).grow()
@@ -236,6 +254,7 @@ class GridScreen(): AbstractScreen()
 		mainTable.add(table).grow()
 	}
 
+	// ----------------------------------------------------------------------
 	override fun keyDown(keycode: Int): Boolean
 	{
 		super.keyDown(keycode)
@@ -271,7 +290,15 @@ class GridScreen(): AbstractScreen()
 
 		val canShowButtons = if (ability == null && !level.grid.inTurn && (level.grid.noValidMoves || PowerBar.instance.power == PowerBar.instance.maxPower)) !level.grid.hasAnim() else false
 
-		if (ability != null)
+		if (level.victoryConditions.all { it.isCompleted() })
+		{
+			PowerBar.instance.isVisible = false
+			launchButton!!.isVisible = false
+			refreshButton!!.isVisible = false
+			completeButton!!.isVisible = true
+			ultimateButton!!.isVisible = false
+		}
+		else if (ability != null)
 		{
 			if (ability.selectedTargets.size != lastTargets)
 			{
@@ -290,6 +317,7 @@ class GridScreen(): AbstractScreen()
 			PowerBar.instance.isVisible = false
 			refreshButton!!.isVisible = false
 			ultimateButton!!.isVisible = false
+			completeButton!!.isVisible = false
 			launchButton!!.isVisible = true
 			launchButton!!.color = if (ability.selectedTargets.size == 0) Color.DARK_GRAY else Color.WHITE
 			launchButton!!.touchable = if (ability.selectedTargets.size == 0) Touchable.disabled else Touchable.enabled
@@ -300,6 +328,7 @@ class GridScreen(): AbstractScreen()
 			PowerBar.instance.isVisible = false
 			launchButton!!.isVisible = false
 			ultimateButton!!.isVisible = false
+			completeButton!!.isVisible = false
 			refreshButton!!.isVisible = true
 		}
 		else if (PowerBar.instance.power == PowerBar.instance.maxPower && canShowButtons)
@@ -307,6 +336,7 @@ class GridScreen(): AbstractScreen()
 			PowerBar.instance.isVisible = false
 			launchButton!!.isVisible = false
 			refreshButton!!.isVisible = false
+			completeButton!!.isVisible = false
 			ultimateButton!!.isVisible = true
 		}
 		else
@@ -315,6 +345,7 @@ class GridScreen(): AbstractScreen()
 			refreshButton!!.isVisible = false
 			launchButton!!.isVisible = false
 			ultimateButton!!.isVisible = false
+			completeButton!!.isVisible = false
 			idleTimer = 0f
 			lastTargets = 0
 		}

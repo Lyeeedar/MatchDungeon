@@ -144,7 +144,7 @@ class Equipment(val path: String)
 				val abilityTable = Table()
 				abilityTable.add(otherAbLabel)
 
-				abilityTable.add(SpriteWidget(other.ability!!.icon, 32f, 32f))
+				abilityTable.add(SpriteWidget(other.icon, 32f, 32f))
 
 				val infoButton = Button(Global.skin, "infocard")
 				infoButton.setSize(24f, 24f)
@@ -163,7 +163,7 @@ class Equipment(val path: String)
 			{
 				val abilityTable = Table()
 				abilityTable.add(Label(ability!!.name, Global.skin, "card"))
-				abilityTable.add(SpriteWidget(ability!!.icon, 32f, 32f))
+				abilityTable.add(SpriteWidget(icon, 32f, 32f))
 
 				val infoButton = Button(Global.skin, "infocard")
 				infoButton.setSize(24f, 24f)

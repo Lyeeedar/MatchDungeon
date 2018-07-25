@@ -9,7 +9,6 @@
 		<Data Name="Ability" meta:RefKey="Struct">
 			<Data Name="Name" meta:RefKey="String" />
 			<Data Name="Description" meta:RefKey="String" />
-			<Data Name="Icon" Keys="Sprite" Nullable="False" meta:RefKey="Reference" />
 			<Data Name="EffectData" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
 				<Data Name="Cost" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
 				<Data Name="Effect" Nullable="False" Collapse="True" meta:RefKey="Struct">

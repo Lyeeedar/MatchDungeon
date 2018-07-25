@@ -344,6 +344,8 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 			{
 				for (card in Global.player.deck.encounters)
 				{
+					if (card.current.isShop) continue
+
 					if (card.current.spawnWeight.subWeights.contains(spawnWeight))
 					{
 						// make it 3x more likely
@@ -362,6 +364,8 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 			{
 				for (card in quest.questCards)
 				{
+					if (card.current.isShop) continue
+
 					if (card.current.spawnWeight.subWeights.contains(spawnWeight))
 					{
 						// make it 3x more likely
@@ -380,6 +384,8 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 			{
 				for (card in quest.themeCards)
 				{
+					if (card.current.isShop) continue
+
 					if (card.current.spawnWeight.subWeights.contains(spawnWeight))
 					{
 						// make it 3x more likely
@@ -407,9 +413,9 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 				}
 			}
 
-			if (quest.shopCounter <= 0 && !output.any { it.current.isShop } && output.size == 4)
+			if (quest.shopCounter <= 0 && !output.any { it.current.isShop } && output.size == 4 && Global.player.gold > 25)
 			{
-				// forcibly add a shop
+				// add a shop
 				val shops = pool.filter { it.current.isShop }.toGdxArray()
 				if (shops.size > 0)
 				{
@@ -520,8 +526,8 @@ class Branch(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 	{
 		for (el in xmlData.children())
 		{
-			val cond = xmlData.get("Condition")
-			val guid = xmlData.get("Node")
+			val cond = el.get("Condition")
+			val guid = el.get("Node")
 
 			branches.add(BranchWrapper(guid, cond))
 		}
@@ -613,7 +619,7 @@ class Define(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 	{
 		key = xmlData.get("Key")
 		value = xmlData.get("Value")
-		isGlobal = xmlData.getBoolean("IsGlobal")
+		isGlobal = xmlData.getBoolean("IsGlobal", false)
 
 		val nextID = xmlData.get("Next")
 		next = QuestNode.QuestNodeWrapper(nextID)

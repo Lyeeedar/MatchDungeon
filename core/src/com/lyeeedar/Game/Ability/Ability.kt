@@ -12,12 +12,10 @@ import com.lyeeedar.Board.Tile
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
-import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.PowerBar
 import com.lyeeedar.UI.Seperator
-import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.Util.*
 import ktx.collections.set
 
@@ -29,7 +27,6 @@ class Ability
 {
 	lateinit var name: String
 	lateinit var description: String
-	lateinit var icon: Sprite
 
 	var hitEffect: ParticleEffect? = null
 	var flightEffect: ParticleEffect? = null
@@ -51,7 +48,6 @@ class Ability
 
 		val titleStack = Stack()
 		val iconTable = Table()
-		iconTable.add(SpriteWidget(icon, 64f, 64f)).left().pad(5f)
 		titleStack.add(iconTable)
 		titleStack.add(Label(name, Global.skin, "cardtitle"))
 
@@ -212,7 +208,6 @@ class Ability
 	{
 		name = xml.get("Name")
 		description = xml.get("Description")
-		icon = AssetManager.loadSprite(xml.getChildByName("Icon")!!)
 
 		val dataEl = xml.getChildByName("EffectData")!!
 

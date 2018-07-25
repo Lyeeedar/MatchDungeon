@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.lyeeedar.Board.Grid
-import com.lyeeedar.Game.Ability.Ability
+import com.lyeeedar.Game.Equipment
 import com.lyeeedar.Global
 import com.lyeeedar.Util.AssetManager
 
@@ -19,14 +19,16 @@ import com.lyeeedar.Util.AssetManager
  * Created by Philip on 20-Jul-16.
  */
 
-class AbilityWidget(val ability: Ability, val w: Float, val h: Float, val grid: Grid) : Table()
+class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val grid: Grid) : Table()
 {
 	val empty = AssetManager.loadSprite("GUI/power_empty")
 	val full = AssetManager.loadSprite("GUI/power_full")
 
 	val padding = 3
 
-	val widget = SpriteWidget(ability.icon, w, h)
+	val widget = SpriteWidget(equipment.icon.copy(), w, h)
+
+	val ability = equipment.ability!!
 
 	init
 	{
