@@ -10,34 +10,64 @@ import com.badlogic.gdx.utils.Pool
 
 class Colour()
 {
-	@JvmField var r: Float = 0f
-	@JvmField var g: Float = 0f
-	@JvmField var b: Float = 0f
-	@JvmField var a: Float = 0f
+	var fixed: Boolean = false
 
-	constructor(col: Float) : this()
+	var r: Float = 0f
+		set(value)
+		{
+			if (fixed) throw Exception("Tried to modify fixed colour!")
+			field = value
+		}
+
+	var g: Float = 0f
+		set(value)
+		{
+			if (fixed) throw Exception("Tried to modify fixed colour!")
+			field = value
+		}
+
+	var b: Float = 0f
+		set(value)
+		{
+			if (fixed) throw Exception("Tried to modify fixed colour!")
+			field = value
+		}
+
+	var a: Float = 0f
+		set(value)
+		{
+			if (fixed) throw Exception("Tried to modify fixed colour!")
+			field = value
+		}
+
+	constructor(col: Float, fixed: Boolean = false) : this()
 	{
 		set(col)
+		this.fixed = fixed
 	}
 
-	constructor(col: Color) : this()
+	constructor(col: Color, fixed: Boolean = false) : this()
 	{
 		set(col.r, col.g, col.b, col.a)
+		this.fixed = fixed
 	}
 
-	constructor(col: Colour) : this()
+	constructor(col: Colour, fixed: Boolean = false) : this()
 	{
 		set(col.r, col.g, col.b, col.a)
+		this.fixed = fixed
 	}
 
-	constructor(r: Float, g:Float, b:Float, a:Float) : this()
+	constructor(r: Float, g:Float, b:Float, a:Float, fixed: Boolean = false) : this()
 	{
 		set(r, g, b, a)
+		this.fixed = fixed
 	}
 
-	constructor(r: Int, g:Int, b:Int, a:Int) : this()
+	constructor(r: Int, g:Int, b:Int, a:Int, fixed: Boolean = false) : this()
 	{
 		set(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f)
+		this.fixed = fixed
 	}
 
 	fun copy(): Colour = Colour(this)
@@ -260,15 +290,15 @@ class Colour()
 
 	companion object
 	{
-		val BLACK = Colour(Color.BLACK)
-		val WHITE = Colour(Color.WHITE)
-		val LIGHT_GRAY = Colour(Color.LIGHT_GRAY)
-		val DARK_GRAY = Colour(Color.DARK_GRAY)
-		val GOLD = Colour(Color.GOLD)
-		val GREEN = Colour(Color.GREEN)
-		val RED = Colour(Color.RED)
-		val ORANGE = Colour(Color.ORANGE)
-		val YELLOW = Colour(Color.YELLOW)
+		val BLACK = Colour(Color.BLACK, true)
+		val WHITE = Colour(Color.WHITE, true)
+		val LIGHT_GRAY = Colour(Color.LIGHT_GRAY, true)
+		val DARK_GRAY = Colour(Color.DARK_GRAY, true)
+		val GOLD = Colour(Color.GOLD, true)
+		val GREEN = Colour(Color.GREEN, true)
+		val RED = Colour(Color.RED, true)
+		val ORANGE = Colour(Color.ORANGE, true)
+		val YELLOW = Colour(Color.YELLOW, true)
 
 		fun random(s: Float = 0.9f, l: Float = 0.7f): Colour
 		{

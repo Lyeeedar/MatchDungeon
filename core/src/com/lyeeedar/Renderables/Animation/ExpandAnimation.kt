@@ -10,6 +10,8 @@ import com.lyeeedar.Util.XmlData
 
 class ExpandAnimation() : AbstractScaleAnimation()
 {
+	public var loop: Boolean = false
+
 	private var duration: Float = 0f
 	private var time: Float = 0f
 
@@ -40,7 +42,15 @@ class ExpandAnimation() : AbstractScaleAnimation()
 
 		if (time >= duration)
 		{
-			return true
+			if (loop)
+			{
+				time -= duration
+				update(0f)
+			}
+			else
+			{
+				return true
+			}
 		}
 
 		return false
@@ -55,7 +65,7 @@ class ExpandAnimation() : AbstractScaleAnimation()
 		return set(duration, 0f, 1f, true)
 	}
 
-	fun set(duration: Float, start: Float, end: Float, oneway: Boolean = true): ExpandAnimation
+	fun set(duration: Float, start: Float, end: Float, oneway: Boolean = true, loop: Boolean = false): ExpandAnimation
 	{
 		startScale[0] = start
 		startScale[1] = start
@@ -64,6 +74,7 @@ class ExpandAnimation() : AbstractScaleAnimation()
 		endScale[1] = end
 
 		this.oneway = oneway
+		this.loop = loop
 
 		this.duration = duration
 		this.time = 0f

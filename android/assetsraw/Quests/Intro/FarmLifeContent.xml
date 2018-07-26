@@ -1,5 +1,5 @@
-<CardContent meta:X="0" meta:Y="0" GUID="2e75113f-f7ab-4674-a8cd-1bbbc79542a5" xmlns:meta="Editor">
-	<Root meta:RefKey="Node">557a5d42-729b-4f65-aec0-e353174bd6f2</Root>
+<CardContent meta:X="-222.77835611663636" meta:Y="2.0820407113704333" GUID="2e75113f-f7ab-4674-a8cd-1bbbc79542a5" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">19fe8d84-b639-475e-9e4f-c9146798af72</Root>
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="557a5d42-729b-4f65-aec0-e353174bd6f2">
 			<Line>
@@ -28,6 +28,29 @@
 			</Line>
 			<MarkComplete>
 				<State>Success</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="-58.309425686662976" meta:Y="15.436197801589593" GUID="19fe8d84-b639-475e-9e4f-c9146798af72">
+			<Line>
+				<MultilineString>Play introduction?</MultilineString>
+			</Line>
+			<Choice>
+				<Choices>
+					<Choice>
+						<Text>Yes</Text>
+						<Node meta:RefKey="Node">557a5d42-729b-4f65-aec0-e353174bd6f2</Node>
+					</Choice>
+					<Choice>
+						<Text>No</Text>
+						<Node meta:RefKey="Node">6898caba-4ea8-4c83-af87-36f8ed81e209</Node>
+					</Choice>
+				</Choices>
+			</Choice>
+		</Node>
+		<Node meta:X="170.57969223364432" meta:Y="261.81101531375748" GUID="6898caba-4ea8-4c83-af87-36f8ed81e209">
+			<MarkComplete>
+				<State>Custom</State>
+				<Key>Skip</Key>
 			</MarkComplete>
 		</Node>
 	</Nodes>

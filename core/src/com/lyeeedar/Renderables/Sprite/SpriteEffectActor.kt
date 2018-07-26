@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Actor
 import com.lyeeedar.Global
 
-open class SpriteEffectActor(val sprite: Sprite, val w: Float, val h: Float, val pos: Vector2, val completionFunc: (() -> Unit)? = null): Actor()
+open class SpriteEffectActor(val sprite: Sprite, val w: Float, val h: Float, val pos: Vector2, var completionFunc: (() -> Unit)? = null): Actor()
 {
 	init
 	{

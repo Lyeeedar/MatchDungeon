@@ -2,12 +2,17 @@ package com.lyeeedar.Board.CompletionCondition
 
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Mote
 import com.lyeeedar.Global
+import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.GridWidget
+import com.lyeeedar.UI.SpriteWidget
+import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Colour
 import com.lyeeedar.Util.XmlData
 
 class CompletionConditionDie : AbstractCompletionCondition()
@@ -15,6 +20,8 @@ class CompletionConditionDie : AbstractCompletionCondition()
 	lateinit var hpLabel: Label
 	var maxHP: Int = 1
 	var hp = 1
+
+	val blinkTable = Table()
 
 	override fun attachHandlers(grid: Grid)
 	{
@@ -27,9 +34,28 @@ class CompletionConditionDie : AbstractCompletionCondition()
 			val dst = hpLabel.localToStageCoordinates(Vector2())
 			val src = GridWidget.instance.pointToScreenspace(c)
 
-			Mote(src, dst, sprite, GridWidget.instance.tileSize, { if (hp > 0) hp--; hpLabel.setText("$hp/$maxHP") })
+			Mote(src, dst, sprite, GridWidget.instance.tileSize,
+				 {
+					 if (hp > 0) hp--
+					 hpLabel.setText("$hp/$maxHP")
+					 updateBlink()
+				 })
+
+
 
 			return false
+		}
+	}
+
+	fun updateBlink()
+	{
+		if (hp <= maxHP * 0.25f && blinkTable.children.size == 0)
+		{
+			val blinkSprite = AssetManager.loadSprite("Particle/glow")
+			blinkSprite.colour = Colour.RED.copy().a(0.5f)
+			blinkSprite.animation = ExpandAnimation.obtain().set(1f, 0.5f, 2f, false, true)
+			val actor = SpriteWidget(blinkSprite, 32f, 32f)
+			blinkTable.add(actor).grow()
 		}
 	}
 
@@ -42,9 +68,15 @@ class CompletionConditionDie : AbstractCompletionCondition()
 
 	override fun createTable(grid: Grid): Table
 	{
-		val table = Table()
 		hpLabel = Label("$hp/$maxHP", Global.skin)
-		table.add(hpLabel)
+
+		val stack = Stack()
+		stack.add(blinkTable)
+		stack.add(hpLabel)
+
+		val table = Table()
+		table.defaults().pad(10f)
+		table.add(stack).grow()
 
 		return table
 	}

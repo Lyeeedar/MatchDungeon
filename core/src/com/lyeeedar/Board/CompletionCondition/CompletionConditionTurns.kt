@@ -1,12 +1,17 @@
 package com.lyeeedar.Board.CompletionCondition
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Align
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Global
 import com.lyeeedar.Global.Companion.skin
+import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Statistic
+import com.lyeeedar.UI.SpriteWidget
+import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Colour
 import com.lyeeedar.Util.XmlData
 
 /**
@@ -17,6 +22,7 @@ class CompletionConditionTurns(): AbstractCompletionCondition()
 {
 	var maxTurnCount = 30
 	var turnCount: Int = maxTurnCount
+	val blinkTable = Table()
 
 	lateinit var label: Label
 
@@ -25,9 +31,13 @@ class CompletionConditionTurns(): AbstractCompletionCondition()
 		label = Label("$turnCount\nTurns", skin)
 		label.setAlignment(Align.center)
 
+		val stack = Stack()
+		stack.add(blinkTable)
+		stack.add(label)
+
 		val table = Table()
 		table.defaults().pad(10f)
-		table.add(label)
+		table.add(stack)
 
 		return table
 	}
@@ -47,6 +57,16 @@ class CompletionConditionTurns(): AbstractCompletionCondition()
 				{
 					turnCount--
 					label.setText("$turnCount\nTurns")
+
+					if (turnCount <= maxTurnCount * 0.25f && blinkTable.children.size == 0)
+					{
+						val blinkSprite = AssetManager.loadSprite("Particle/glow")
+						blinkSprite.colour = Colour.RED.copy().a(0.5f)
+						blinkSprite.animation = ExpandAnimation.obtain().set(1f, 0.5f, 2f, false, true)
+						val actor = SpriteWidget(blinkSprite, 32f, 32f)
+						blinkTable.add(actor).grow()
+					}
+
 					false
 				}
 	}

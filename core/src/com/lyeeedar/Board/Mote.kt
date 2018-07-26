@@ -8,7 +8,7 @@ import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Renderables.Sprite.SpriteEffectActor
 
-class Mote(src: Vector2, dst: Vector2, sprite: Sprite, spriteSize: Float, completionFunc: (() -> Unit)? = null, animSpeed: Float = 1.5f) : SpriteEffectActor(sprite, spriteSize, spriteSize, Vector2(), { completionFunc?.invoke(); moteCount-- })
+class Mote(src: Vector2, dst: Vector2, sprite: Sprite, spriteSize: Float, completionFun: (() -> Unit)? = null, animSpeed: Float = 1.5f) : SpriteEffectActor(sprite, spriteSize, spriteSize, Vector2())
 {
 	init
 	{
@@ -22,12 +22,22 @@ class Mote(src: Vector2, dst: Vector2, sprite: Sprite, spriteSize: Float, comple
 		sprite.animation = MoveAnimation.obtain().set(animSpeed, path, Interpolation.exp5)
 		sprite.faceInMoveDirection = true
 
-		moteCount++
+		motes.add(this)
+		completionFunc = { completionFun?.invoke(); motes.removeValue(this, true) }
 	}
 
 
 	companion object
 	{
-		var moteCount = 0
+		val motes = com.badlogic.gdx.utils.Array<Mote>(false, 16)
+
+		fun clear()
+		{
+			for (mote in motes)
+			{
+				mote.remove()
+			}
+			motes.clear()
+		}
 	}
 }

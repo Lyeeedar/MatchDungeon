@@ -171,7 +171,10 @@ class MonsterAbility
 
 	fun activate(grid: Grid, monster: Monster)
 	{
-		println("Monster trying to use ability '$effect'")
+		if (!Global.release)
+		{
+			println("Monster trying to use ability '$effect'")
+		}
 
 		if (effect == Effect.HEAL)
 		{

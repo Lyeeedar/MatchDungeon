@@ -31,7 +31,7 @@
 	</AllowedVictories>
 	<AllowedDefeats>
 		<Condition meta:RefKey="Turns">
-			<Turns>30</Turns>
+			<Turns>40</Turns>
 		</Condition>
 	</AllowedDefeats>
 </Level>

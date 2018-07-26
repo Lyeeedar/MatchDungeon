@@ -487,7 +487,7 @@ class Level(val loadPath: String)
 			}
 		}
 
-		if (completed && completeFun != null && (!done || Mote.moteCount > 0))
+		if (completed && completeFun != null && (!done || Mote.motes.size > 0))
 		{
 			Future.call(completeFun!!, 0.5f, this)
 		}

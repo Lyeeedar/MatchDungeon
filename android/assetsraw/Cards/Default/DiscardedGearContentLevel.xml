@@ -65,10 +65,11 @@
 		<Symbol>
 			<Character>w</Character>
 			<Extends>.</Extends>
-			<Block>0</Block>
+			<Block>
+				<Health>1</Health>
+			</Block>
 			<Plate>0</Plate>
 			<Seal>0</Seal>
-			<Shield>0</Shield>
 			<Attack>0</Attack>
 			<IsMonster>false</IsMonster>
 			<SpecialOrb>None</SpecialOrb>
@@ -82,10 +83,11 @@
 		<Symbol>
 			<Character>s</Character>
 			<Extends>.</Extends>
-			<Block>0</Block>
+			<Block>
+				<Health>1</Health>
+			</Block>
 			<Plate>0</Plate>
 			<Seal>0</Seal>
-			<Shield>0</Shield>
 			<Attack>0</Attack>
 			<IsMonster>false</IsMonster>
 			<SpecialOrb>None</SpecialOrb>
@@ -99,10 +101,11 @@
 		<Symbol>
 			<Character>h</Character>
 			<Extends>.</Extends>
-			<Block>0</Block>
+			<Block>
+				<Health>1</Health>
+			</Block>
 			<Plate>0</Plate>
 			<Seal>0</Seal>
-			<Shield>0</Shield>
 			<Attack>0</Attack>
 			<IsMonster>false</IsMonster>
 			<SpecialOrb>None</SpecialOrb>
@@ -116,10 +119,11 @@
 		<Symbol>
 			<Character>b</Character>
 			<Extends>.</Extends>
-			<Block>0</Block>
+			<Block>
+				<Health>1</Health>
+			</Block>
 			<Plate>0</Plate>
 			<Seal>0</Seal>
-			<Shield>0</Shield>
 			<Attack>0</Attack>
 			<IsMonster>false</IsMonster>
 			<SpecialOrb>None</SpecialOrb>
@@ -139,7 +143,7 @@
 	</AllowedVictories>
 	<AllowedDefeats>
 		<Condition meta:RefKey="Turns">
-			<Turns>30</Turns>
+			<Turns>40</Turns>
 		</Condition>
 	</AllowedDefeats>
 </Level>

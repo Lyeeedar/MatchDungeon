@@ -31,7 +31,7 @@
 				<Name>Death</Name>
 			</Death>
 			<AttackNumPips>8</AttackNumPips>
-			<AttackCooldown>2,4</AttackCooldown>
+			<AttackCooldown>3,5</AttackCooldown>
 			<Size>1</Size>
 			<HP>8</HP>
 			<DamageReduction>0</DamageReduction>
@@ -51,7 +51,7 @@
 			<Death meta:RefKey="ParticleEffect">
 				<Name>Death</Name>
 			</Death>
-			<AttackNumPips>5</AttackNumPips>
+			<AttackNumPips>8</AttackNumPips>
 			<AttackCooldown>3,6</AttackCooldown>
 			<Size>2</Size>
 			<HP>12</HP>
@@ -67,4 +67,32 @@
 			</Abilities>
 		</Monster>
 	</Monsters>
+	<Bosses>
+		<Monster meta:RefKey="MonsterDesc">
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_heroes/barbarian_f</Name>
+				<DrawActualSize>true</DrawActualSize>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+			</Death>
+			<AttackNumPips>4</AttackNumPips>
+			<AttackCooldown>2,6</AttackCooldown>
+			<Size>1</Size>
+			<HP>15</HP>
+			<DamageReduction>0</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>2,6</Cooldown>
+					<Effect>Move</Effect>
+				</Ability>
+				<Ability>
+					<Cooldown>1,5</Cooldown>
+					<Target>Random</Target>
+					<Count>2</Count>
+					<Data />
+				</Ability>
+			</Abilities>
+		</Monster>
+	</Bosses>
 </Faction>

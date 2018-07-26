@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.lyeeedar.Board.*
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
+import com.lyeeedar.Board.CompletionCondition.CompletionConditionTurns
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.Player
 import com.lyeeedar.Global
@@ -68,13 +69,30 @@ class GridScreen(): AbstractScreen()
 				true
 			})
 
+			debugConsole.register("setturns", "", fun(args, console): Boolean
+			{
+				val condition = level.defeatConditions.filter { it is CompletionConditionTurns }.firstOrNull()
+
+				if (condition == null || condition !is CompletionConditionTurns)
+				{
+					console.error("No turns defeat condition!")
+					return false
+				}
+
+				val count = args[0].toInt()
+
+				condition.turnCount = count
+
+				return true
+			})
+
 			debugConsole.register("suicide", "", fun(args, console): Boolean
 			{
 				val die = level.defeatConditions.filter { it is CompletionConditionDie }.firstOrNull()
 
 				if (die == null || die !is CompletionConditionDie)
 				{
-					console.error("Do die defeat condition!")
+					console.error("No die defeat condition!")
 					return false
 				}
 
@@ -234,6 +252,8 @@ class GridScreen(): AbstractScreen()
 					onClick { inputEvent: InputEvent, kTextButton: KTextButton ->
 						if (level.victoryConditions.all { it.isCompleted() })
 						{
+							Mote.clear()
+
 							level.completed = true
 							level.complete()
 						}

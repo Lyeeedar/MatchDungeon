@@ -340,11 +340,12 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 			val spawnWeight = quest.getQuestPosition()
 
 			val pool = Array<Card>()
+			val shops = Array<Card>()
 			if (allowDeckCards)
 			{
 				for (card in Global.player.deck.encounters)
 				{
-					if (card.current.isShop) continue
+					val pool = if (card.current.isShop) shops else pool
 
 					if (card.current.spawnWeight.subWeights.contains(spawnWeight))
 					{
@@ -364,7 +365,7 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 			{
 				for (card in quest.questCards)
 				{
-					if (card.current.isShop) continue
+					val pool = if (card.current.isShop) shops else pool
 
 					if (card.current.spawnWeight.subWeights.contains(spawnWeight))
 					{
@@ -384,7 +385,7 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 			{
 				for (card in quest.themeCards)
 				{
-					if (card.current.isShop) continue
+					val pool = if (card.current.isShop) shops else pool
 
 					if (card.current.spawnWeight.subWeights.contains(spawnWeight))
 					{
@@ -413,15 +414,15 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 				}
 			}
 
-			if (quest.shopCounter <= 0 && !output.any { it.current.isShop } && output.size == 4 && Global.player.gold > 25)
+			if (quest.shopCounter <= 0 && !output.any { it.current.isShop } && shops.size > 0 && Global.player.gold > 25)
 			{
 				// add a shop
-				val shops = pool.filter { it.current.isShop }.toGdxArray()
-				if (shops.size > 0)
+				if (output.size == 4)
 				{
 					output.removeRandom(Random.random)
-					output.add(shops.random())
 				}
+
+				output.add(shops.random())
 
 				quest.shopCounter = Random.random(2) + 1
 			}

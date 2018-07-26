@@ -22,7 +22,9 @@
 					<DrawActualSize>true</DrawActualSize>
 				</Sprite>
 			</Sprite>
-			<Block>0</Block>
+			<Block>
+				<Health>1</Health>
+			</Block>
 			<Plate>0</Plate>
 			<Seal>0</Seal>
 			<Attack>0</Attack>
@@ -41,7 +43,7 @@
 	</AllowedVictories>
 	<AllowedDefeats>
 		<Condition meta:RefKey="Turns">
-			<Turns>25</Turns>
+			<Turns>40</Turns>
 		</Condition>
 	</AllowedDefeats>
 </Level>
