@@ -9,7 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.badlogic.gdx.utils.Array
+import com.lyeeedar.Board.Mote
 import com.lyeeedar.Card.Card
+import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.Direction
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.AbstractReward
@@ -17,6 +19,7 @@ import com.lyeeedar.Game.Quest
 import com.lyeeedar.Game.QuestNode
 import com.lyeeedar.Global
 import com.lyeeedar.MainGame
+import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
 import ktx.actors.then
@@ -111,6 +114,32 @@ class QuestScreen : AbstractScreen()
 
 				return true
 			})
+
+			debugConsole.register("CompleteQuest", "", fun(args, console): Boolean
+			{
+				if (args[0].toLowerCase() == "gold")
+				{
+					currentQuest.state = Quest.QuestState.GOLD
+					completeQuest()
+				}
+				else if (args[0].toLowerCase() == "silver")
+				{
+					currentQuest.state = Quest.QuestState.SILVER
+					completeQuest()
+				}
+				else if (args[0].toLowerCase() == "bronze")
+				{
+					currentQuest.state = Quest.QuestState.BRONZE
+					completeQuest()
+				}
+				else if (args[0].toLowerCase() == "fail")
+				{
+					currentQuest.state = Quest.QuestState.FAILURE
+					completeQuest()
+				}
+
+				return true
+			})
 		}
 	}
 
@@ -150,6 +179,14 @@ class QuestScreen : AbstractScreen()
 		}
 
 		val cards = (currentQuest.current as QuestNode).getCards()
+		if (cards.size == 0)
+		{
+			val currentQuestNode = currentQuest.current as QuestNode
+			currentQuest.current = currentQuestNode.getNext(CardContent.CardContentState.SUCCESS, null)
+
+			updateQuest()
+			return
+		}
 
 		// create widgets
 		for (card in cards)
@@ -202,7 +239,28 @@ class QuestScreen : AbstractScreen()
 	fun completeQuest()
 	{
 		Global.stage.addActor(greyOutTable)
-		updateRewards()
+
+		val table = Table()
+
+		val text = if (currentQuest.state == Quest.QuestState.FAILURE) "Quest Failed!" else "Quest Completed!"
+		table.add(Label(text, Global.skin, "cardtitle"))
+
+		val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("blank")!!, null)
+		card.canZoom = false
+		card.setFacing(true, false)
+		card.addPick("", {
+			card.remove()
+			currentGroup.clear()
+			updateRewards()
+		})
+
+		currentGroup.add(card)
+
+		val cards = Array<CardWidget>()
+		cards.add(card)
+
+		Global.stage.addActor(card)
+		CardWidget.layoutCards(cards, Direction.CENTER, cardsTable, animate = false)
 	}
 
 	var grouped: Array<Array<AbstractReward>> = Array()
@@ -236,13 +294,34 @@ class QuestScreen : AbstractScreen()
 					Global.stage.addActor(card)
 				}
 
-				CardWidget.layoutCards(cardWidgets, Direction.CENTER)
+				CardWidget.layoutCards(cardWidgets, Direction.CENTER, animate = false)
 			}
 			else if (grouped.size == 0)
 			{
 				val bronze = currentQuest.bronzeRewards.filter { it.isValid() }.toGdxArray()
 				val silver = currentQuest.silverRewards.filter { it.isValid() }.toGdxArray()
 				val gold = currentQuest.goldRewards.filter { it.isValid() }.toGdxArray()
+
+				val spawnIntroCard = fun(name:String, icon:Sprite) {
+					val table = Table()
+					table.add(Label(name, Global.skin, "cardtitle"))
+					table.row()
+					table.add(SpriteWidget(icon, 64f, 64f)).expandX().center()
+
+					val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("white")!!, null)
+					card.canZoom = false
+					card.setFacing(true, false)
+					card.addPick("", {
+						card.remove()
+						updateRewards()
+					})
+
+					val cards = Array<CardWidget>()
+					cards.add(card)
+
+					Global.stage.addActor(card)
+					CardWidget.layoutCards(cards, Direction.CENTER, cardsTable, animate = false)
+				}
 
 				if (Global.deck.newcharacters.size > 0 || Global.deck.newencounters.size > 0 || Global.deck.newequipment.size > 0 || Global.deck.newquests.size > 0)
 				{
@@ -298,15 +377,7 @@ class QuestScreen : AbstractScreen()
 					{
 						shownIntro = true
 
-						val table = Table()
-						table.add(Label("Bronze Reward", Global.skin, "card"))
-						table.row()
-						table.add(SpriteWidget(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_bronze", drawActualSize =  true), 32f, 32f)).expandX().center()
-
-						val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("white")!!, null)
-						card.canZoom = false
-						card.setFacing(true, false)
-						card.addPick("", { updateRewards() })
+						spawnIntroCard("Bronze Reward", AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_copper", drawActualSize =  true))
 					}
 					else
 					{
@@ -321,15 +392,7 @@ class QuestScreen : AbstractScreen()
 					{
 						shownIntro = true
 
-						val table = Table()
-						table.add(Label("Silver Reward", Global.skin, "card"))
-						table.row()
-						table.add(SpriteWidget(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_silver", drawActualSize =  true), 32f, 32f)).expandX().center()
-
-						val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("white")!!, null)
-						card.canZoom = false
-						card.setFacing(true, false)
-						card.addPick("", { updateRewards() })
+						spawnIntroCard("Silver Reward", AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_silver", drawActualSize =  true))
 					}
 					else
 					{
@@ -344,15 +407,7 @@ class QuestScreen : AbstractScreen()
 					{
 						shownIntro = true
 
-						val table = Table()
-						table.add(Label("Gold Reward", Global.skin, "card"))
-						table.row()
-						table.add(SpriteWidget(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_gold", drawActualSize =  true), 32f, 32f)).expandX().center()
-
-						val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("white")!!, null)
-						card.canZoom = false
-						card.setFacing(true, false)
-						card.addPick("", { updateRewards() })
+						spawnIntroCard("Gold Reward", AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_gold", drawActualSize =  true))
 					}
 					else
 					{
@@ -363,9 +418,7 @@ class QuestScreen : AbstractScreen()
 				}
 				else
 				{
-					greyOutTable.remove()
-					QuestSelectionScreen.instance.setup()
-					QuestSelectionScreen.instance.swapTo()
+					needsAdvance = true
 				}
 			}
 
@@ -410,8 +463,16 @@ class QuestScreen : AbstractScreen()
 		}
 	}
 
+	var needsAdvance = false
 	override fun doRender(delta: Float)
 	{
+		if (needsAdvance && Mote.motes.size == 0)
+		{
+			QuestSelectionScreen.instance.setup()
+			QuestSelectionScreen.instance.swapTo()
+			greyOutTable.remove()
+		}
+
 		if (needsLayout && cardsTable.width != 0f)
 		{
 			CardWidget.layoutCards(cardWidgets, Direction.CENTER, cardsTable)

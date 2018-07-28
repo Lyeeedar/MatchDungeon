@@ -15,6 +15,7 @@
 	<Definition Name="QuestNode" TextColour="240,156,204" meta:RefKey="GraphStructDef">
 		<Data Name="Type" EnumValues="Fixed,Deck" SkipIfDefault="False" meta:RefKey="Enum" />
 		<!--Deck-->
+		<Data Name="IsShop" meta:RefKey="Boolean" />
 		<Data Name="AllowDeckCards" Default="True" SkipIfDefault="False" VisibleIf="Type==Deck" meta:RefKey="Boolean" />
 		<Data Name="AllowQuestCards" Default="True" SkipIfDefault="False" VisibleIf="Type==Deck" meta:RefKey="Boolean" />
 		<Data Name="AllowThemeCards" Default="True" SkipIfDefault="False" VisibleIf="Type==Deck" meta:RefKey="Boolean" />

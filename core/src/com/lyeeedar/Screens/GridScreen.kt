@@ -3,7 +3,7 @@ package com.lyeeedar.Screens
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.NinePatch
-import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Table
@@ -20,6 +20,7 @@ import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.random
 import ktx.actors.onClick
 import ktx.scene2d.KTextButton
@@ -272,6 +273,22 @@ class GridScreen(): AbstractScreen()
 		}
 
 		mainTable.add(table).grow()
+
+		launchTutorial = Tutorial("AbilityButton")
+		launchTutorial.addPopup("Click activate to use your ability on the selected tiles.", launchButton!!)
+
+		Future.call(
+		{
+			val tutorial = Tutorial("GridScreen")
+			tutorial.addPopup("This is the match 3 board.", Rectangle(Global.stage.width / 2f, Global.stage.height / 2f, 0f, 0f))
+			tutorial.addPopup("These are your victory conditions", victoryTable)
+			tutorial.addPopup("These are your failure conditions", defeatTable)
+			tutorial.addPopup("These are your abilities, provided by your equipment.", abilityTable)
+			tutorial.addPopup("This is the power bar. You use the power collected here to use abilities, or when it is full you can discharge it all to shuffle the board.", powerBar)
+			tutorial.addPopup("This area contains the orbs you match. Make rows of 3 orbs of the same colour to match them.", gridWidget)
+			tutorial.addPopup("Make rows of 4 or 5 to spawn a special orb, which when matched has a special effect.", gridWidget)
+			tutorial.show()
+		}, 1f)
 	}
 
 	// ----------------------------------------------------------------------
@@ -325,13 +342,13 @@ class GridScreen(): AbstractScreen()
 				idleTimer = 0f
 				lastTargets = ability.selectedTargets.size
 			}
-			else if (idleTimer <= 2f && popup == null)
+			else if (idleTimer <= 2f)
 			{
 				idleTimer += delta
 			}
-			else if (idleTimer > 2f && popup == null && !squashed)
+			else if (idleTimer > 2f)
 			{
-				popup = TutorialPopup("Click activate to use your ability on the selected tiles.", launchButton!!.localToStageCoordinates(Vector2()), "AbilityButton")
+				launchTutorial.show()
 			}
 
 			PowerBar.instance.isVisible = false
@@ -370,10 +387,9 @@ class GridScreen(): AbstractScreen()
 			lastTargets = 0
 		}
 	}
-	var squashed = false
 	var idleTimer = 0f
 	var lastTargets = 0
-	var popup: TutorialPopup? = null
+	lateinit var launchTutorial: Tutorial
 
 	// ----------------------------------------------------------------------
 	companion object

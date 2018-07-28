@@ -112,6 +112,7 @@ fun validAttack(grid: Grid, tile: Tile): Boolean
 	if (tile.orb == null) return false
 	if (tile.orb!!.special != null) return false
 	if (tile.orb!!.hasAttack) return false
+	if (tile.orb!!.delayDisplayAttack > 0f) return false
 	if (tile.spreader != null) return false
 
 	for (dir in Direction.CardinalValues)
@@ -257,7 +258,8 @@ class MonsterAbility
 								return false
 							}
 
-							if (tile.orb != null && tile.orb!!.special != null)
+							val orb = tile.orb
+							if (orb != null && (orb.special != null || orb.hasAttack || orb.delayDisplayAttack > 0f))
 							{
 								return false
 							}

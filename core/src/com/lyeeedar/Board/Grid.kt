@@ -17,10 +17,7 @@ import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Statistic
-import com.lyeeedar.UI.FullscreenMessage
-import com.lyeeedar.UI.GridWidget
-import com.lyeeedar.UI.PowerBar
-import com.lyeeedar.UI.shake
+import com.lyeeedar.UI.*
 import com.lyeeedar.Util.*
 import ktx.actors.plus
 import ktx.actors.then
@@ -759,7 +756,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 						if (swapSuccess) beginTurn()
 					}
 
-					onTime(delta)
+					if (Tutorial.current == null) onTime(delta)
 				}
 			}
 		}
@@ -1162,7 +1159,13 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 		for (x in 0 until width)
 		{
-			val tile = grid[x, height-1]
+			var y = height-1
+			while (grid[x, y].isPit && y >= 0)
+			{
+				y--
+			}
+
+			val tile = grid[x, y]
 			val sink = tile.sinkable
 			if (sink != null)
 			{

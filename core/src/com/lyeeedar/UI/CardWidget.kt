@@ -200,7 +200,7 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 
 		if (!fullscreen)
 		{
-			setBounds(x, y, width, height)
+			if (!animating) setBounds(x, y, width, height)
 			contentTable.draw(batch, parentAlpha * alpha)
 		}
 	}
@@ -218,6 +218,7 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 		}
 	}
 
+	var animating = false
 	fun flip(animate: Boolean = true)
 	{
 		if (flipping) return
@@ -229,8 +230,9 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 		if (animate)
 		{
 			val scale = contentTable.scaleX
-			val speed = 0.1f
-			val sequence = scaleTo(0f, scale, speed) then lambda { flipFun() } then scaleTo(scale, scale, speed)
+			val speed = 0.2f
+			animating = true
+			val sequence = scaleTo(0f, scale, speed) then lambda { flipFun() } then scaleTo(scale, scale, speed) then lambda{ animating = false }
 			contentTable.addAction(sequence)
 		}
 		else
@@ -377,14 +379,7 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 
 	companion object
 	{
-		fun layoutCards(cardWidget: CardWidget, enterFrom: Direction, dstWidget: Table? = null)
-		{
-			val temp = Array<CardWidget>()
-			temp.add(cardWidget)
-			layoutCards(temp, enterFrom, dstWidget)
-		}
-
-		fun layoutCards(cardWidgets: Array<CardWidget>, enterFrom: Direction, dstWidget: Table? = null)
+		fun layoutCards(cardWidgets: Array<CardWidget>, enterFrom: Direction, dstWidget: Table? = null, animate: Boolean = true)
 		{
 			val areapos = dstWidget?.localToStageCoordinates(Vector2()) ?: Vector2()
 			val areaWidth = dstWidget?.width ?: Global.resolution.x.toFloat()
@@ -463,12 +458,16 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 
 				widget.setSize(cardWidth, cardHeight)
 				widget.setPosition(startX + areapos.x, startY + areapos.y)
-				widget.clickable = false
 
-				val delayVal = delay
-				delay += 0.04f
-				val sequence = delay(delayVal) then moveTo(x, y, 0.2f) then delay(0.1f) then lambda { widget.flip(true); widget.clickable = true }
-				widget.addAction(sequence)
+				if (animate)
+				{
+					widget.clickable = false
+
+					val delayVal = delay
+					delay += 0.04f
+					val sequence = delay(delayVal) then moveTo(x, y, 0.2f) then delay(0.1f) then lambda { widget.flip(true); widget.clickable = true }
+					widget.addAction(sequence)
+				}
 			}
 		}
 	}

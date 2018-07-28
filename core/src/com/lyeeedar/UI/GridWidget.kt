@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
@@ -118,6 +119,37 @@ class GridWidget(val grid: Grid) : Widget()
 
 		atk_empty.baseScale = floatArrayOf(0.14f, 0.14f)
 		atk_full.baseScale = floatArrayOf(0.14f, 0.14f)
+	}
+
+	fun getRect(points: Array<Point>): Rectangle
+	{
+		var minx = Float.MAX_VALUE
+		var miny = Float.MAX_VALUE
+		var maxx = -Float.MAX_VALUE
+		var maxy = -Float.MAX_VALUE
+
+		for (point in points)
+		{
+			val screenSpace = pointToScreenspace(point)
+			if (screenSpace.x < minx)
+			{
+				minx = screenSpace.x
+			}
+			if (screenSpace.y < miny)
+			{
+				miny = screenSpace.y
+			}
+			if (screenSpace.x + tileSize > maxx)
+			{
+				maxx = screenSpace.x + tileSize
+			}
+			if (screenSpace.y + tileSize > maxy)
+			{
+				maxy = screenSpace.y + tileSize
+			}
+		}
+
+		return Rectangle(minx, miny, maxx - minx, maxy - miny)
 	}
 
 	fun pointToScreenspace(point: Point): Vector2

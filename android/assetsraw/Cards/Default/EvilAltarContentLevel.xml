@@ -22,9 +22,6 @@
 					<DrawActualSize>true</DrawActualSize>
 				</Sprite>
 			</Sprite>
-			<Block>
-				<Health>1</Health>
-			</Block>
 			<Plate>0</Plate>
 			<Seal>0</Seal>
 			<Attack>0</Attack>

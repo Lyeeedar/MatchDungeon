@@ -1,5 +1,7 @@
 package com.lyeeedar.UI
 
+import com.badlogic.gdx.math.Rectangle
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.Stage
@@ -8,6 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.lyeeedar.Global
+
+fun Actor.getBounds(): Rectangle
+{
+	val pos = localToStageCoordinates(Vector2())
+	return Rectangle(pos.x, pos.y, this.width, this.height)
+}
 
 fun Actor.ensureOnScreen(pad: Float = 0f)
 {

@@ -53,8 +53,6 @@ class Quest(val path: String)
 	val title: String
 	val description: String
 
-	var shopCounter = 2
-
 	init
 	{
 		val rawPath = "Quests/$path"
@@ -323,6 +321,8 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 	var allowQuestCards = false
 	var allowThemeCards = false
 
+	var isShop = false
+
 	var successNode: QuestNodeWrapper? = null
 	var failureNode: QuestNodeWrapper? = null
 	val customNodes = Array<QuestNodeWrapper>()
@@ -402,33 +402,17 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 				}
 			}
 
-			if (pool.size > 0)
+			val chosenPool = if (isShop) shops else pool
+			if (chosenPool.size > 0)
 			{
-				while (output.size < 4 && pool.size > 0)
+				while (output.size < 4 && chosenPool.size > 0)
 				{
-					val picked = pool.removeRandom(Random.random)
+					val picked = chosenPool.removeRandom(Random.random)
 					if (!output.contains(picked))
 					{
 						output.add(picked)
 					}
 				}
-			}
-
-			if (quest.shopCounter <= 0 && !output.any { it.current.isShop } && shops.size > 0 && Global.player.gold > 25)
-			{
-				// add a shop
-				if (output.size == 4)
-				{
-					output.removeRandom(Random.random)
-				}
-
-				output.add(shops.random())
-
-				quest.shopCounter = Random.random(2) + 1
-			}
-			else
-			{
-				quest.shopCounter--
 			}
 		}
 
@@ -438,6 +422,7 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 	override fun parse(xmlData: XmlData)
 	{
 		type = QuestNodeType.valueOf(xmlData.get("Type").toUpperCase())
+		isShop = xmlData.getBoolean("IsShop", false)
 
 		if (type == QuestNodeType.FIXED)
 		{

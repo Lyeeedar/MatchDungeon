@@ -82,10 +82,8 @@
 					<Name>Oryx/uf_split/uf_terrain/fountain_pool</Name>
 				</Sprite>
 			</Sprite>
-			<Block>0</Block>
 			<Plate>0</Plate>
 			<Seal>0</Seal>
-			<Shield>0</Shield>
 			<Attack>0</Attack>
 			<IsMonster>false</IsMonster>
 			<SpecialOrb>None</SpecialOrb>
