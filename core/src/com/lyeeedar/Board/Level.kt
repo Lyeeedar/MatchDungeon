@@ -546,8 +546,9 @@ class Level(val loadPath: String)
 						val blockSpriteEl = blockEl.getChildByName("Sprite")
 						val blockSprite = if(blockSpriteEl != null) AssetManager.loadSprite(blockSpriteEl) else null
 						val blockHP = blockEl.getInt("Health", 1)
+						val showHP = blockEl.getBoolean("AlwaysShowHP", false)
 
-						blockDesc = BlockDesc(blockSprite, blockHP)
+						blockDesc = BlockDesc(blockSprite, blockHP, showHP)
 					}
 
 					val plate = symbolEl.getInt("Plate", 0)
@@ -579,7 +580,7 @@ class Level(val loadPath: String)
 					if (containerDescEl != null)
 					{
 						val containerSprite = AssetManager.loadSprite(containerDescEl.getChildByName("Sprite")!!)
-						containerDesc = ContainerDesc(containerSprite, containerDescEl.getInt("Health", 1))
+						containerDesc = ContainerDesc(containerSprite, containerDescEl.getInt("Health", 1), containerDescEl.getBoolean("AlwaysShowHP", false))
 					}
 
 					var spreader: Spreader? = null
@@ -652,9 +653,9 @@ class Level(val loadPath: String)
 
 data class SinkableDesc(val sprite: Sprite)
 
-data class ContainerDesc(val sprite: Sprite, val hp: Int)
+data class ContainerDesc(val sprite: Sprite, val hp: Int, val alwaysShowHP: Boolean)
 
-data class BlockDesc(val sprite: Sprite?, val hp: Int)
+data class BlockDesc(val sprite: Sprite?, val hp: Int, val alwaysShowHP: Boolean)
 
 enum class SymbolType
 {

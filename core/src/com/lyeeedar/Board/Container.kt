@@ -7,6 +7,8 @@ class Container(override var sprite: Sprite, hp: Int, val contents: Any) : Damag
 {
 	val death = AssetManager.loadParticleEffect("Hit")
 
+	var alwaysShowHP: Boolean = false
+
 	init
 	{
 		this.maxhp = hp

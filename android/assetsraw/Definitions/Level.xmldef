@@ -38,6 +38,7 @@
 				<Data Name="Block" meta:RefKey="Struct">
 					<Data Name="Sprite" Keys="Sprite" meta:RefKey="Reference" />
 					<Data Name="Health" Type="Int" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+					<Data Name="AlwaysShowHP" meta:RefKey="Boolean" />
 				</Data>
 				<Data Name="Plate" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
 				<Data Name="Seal" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
@@ -52,6 +53,7 @@
 				<Data Name="Container" meta:RefKey="Struct">
 					<Data Name="Sprite" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 					<Data Name="Health" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
+					<Data Name="AlwaysShowHP" meta:RefKey="Boolean" />
 				</Data>
 				<Data Name="Spreader" meta:RefKey="Struct">
 					<Data Name="Name" meta:RefKey="String" />

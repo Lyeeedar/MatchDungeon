@@ -3,6 +3,7 @@ package com.lyeeedar.UI
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.Touchable
@@ -120,6 +121,16 @@ class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val gr
 			val sprite = if (i <= filledPips) full else empty
 
 			sprite.render(batch as SpriteBatch, x + padding * i + (i-1) * pipSize, y, pipSize, 10f)
+		}
+
+		if (!Global.settings.get("Ability", false))
+		{
+			val tutorial = Tutorial("Ability")
+			tutorial.addDelay(1f)
+			tutorial.addPopup("This is a usable ability, granted by your current equipment.", this)
+			tutorial.addPopup("These pips show how much power you need to activate it.", Rectangle(x, y, width, 10f))
+			tutorial.addPopup("When you have enough power you can tap this ability to begin to select targets for it. Note you won't be able to select it if there are no valid targets.", this)
+			tutorial.show()
 		}
 	}
 }

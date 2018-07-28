@@ -14,6 +14,7 @@ import com.lyeeedar.Board.CompletionCondition.CompletionConditionTime
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Orb
 import com.lyeeedar.Game.Ability.Targetter
+import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.SortedRenderer
 import com.lyeeedar.Renderables.Sprite.Sprite
@@ -309,7 +310,7 @@ class GridWidget(val grid: Grid) : Widget()
 				{
 					ground.queueSprite(chest.sprite, xi, yi, TILE, tileHeight, tileColour)
 
-					if (chest.numToSpawn > 0)
+					if (chest.numToSpawn > 0 && !Global.settings.get("Chest", false))
 					{
 						val tutorial = Tutorial("Chest")
 						tutorial.addPopup("This is a chest. Match in the tiles beneath this to spawn coins. When there are no more coins to spawn, it will appear empty.", getRect(tile))
@@ -350,6 +351,13 @@ class GridWidget(val grid: Grid) : Widget()
 					if (orb.sealed)
 					{
 						ground.queueSprite(orb.sealSprite, xi, yi, ORB, 2, orbColour)
+
+						if (!Global.settings.get("Seal", false))
+						{
+							val tutorial = Tutorial("Seal")
+							tutorial.addPopup("This orb has been sealed. It won't move until the seal is broken. To break the seal use the orb in a match.", getRect(orb))
+							tutorial.show()
+						}
 					}
 
 					if (orb is Orb && orb.isChanger)
@@ -409,10 +417,13 @@ class GridWidget(val grid: Grid) : Widget()
 								currentPoint.rotate(degreesStep)
 							}
 
-							val tutorial = Tutorial("Attack")
-							tutorial.addPopup("This is an attack. The pips surrounding the skull indicate the turns remaining until it activates.", getRect(orb))
-							tutorial.addPopup("Match it like a normal orb to remove it from the board. If you fail to remove it then you will lose 1 hp", getRect(orb))
-							tutorial.show()
+							if (!Global.settings.get("Attack", false))
+							{
+								val tutorial = Tutorial("Attack")
+								tutorial.addPopup("This is an attack. The pips surrounding the skull indicate the turns remaining until it activates.", getRect(orb))
+								tutorial.addPopup("Match it like a normal orb to remove it from the board. If you fail to remove it then you will lose 1 hp", getRect(orb))
+								tutorial.show()
+							}
 						}
 					}
 				}
@@ -443,10 +454,21 @@ class GridWidget(val grid: Grid) : Widget()
 						floating.queueSprite(sprite, xi+i*spacePerPip, yi+0.1f, ORB, 2, width = solid, height = 0.15f)
 					}
 
-					val tutorial = Tutorial("Monster")
-					val tiles: com.badlogic.gdx.utils.Array<Point> = monster.tiles.toList().toGdxArray()
-					tutorial.addPopup("This is a monster. Match in the tiles surrounding it to damage it.", getRect(tiles))
-					tutorial.show()
+					if (!Global.settings.get("Monster", false))
+					{
+						val tutorial = Tutorial("Monster")
+						val tiles: com.badlogic.gdx.utils.Array<Point> = monster.tiles.toList().toGdxArray()
+						tutorial.addPopup("This is an enemy. The red bar beneath it is its remaining health. Match in the tiles surrounding it to damage it.", getRect(tiles))
+						tutorial.show()
+					}
+
+					if (!Global.settings.get("DR", false))
+					{
+						val tutorial = Tutorial("DR")
+						val tiles: com.badlogic.gdx.utils.Array<Point> = monster.tiles.toList().toGdxArray()
+						tutorial.addPopup("This enemy has damage resistance, represented by the grey pips on its health bar. At the end of each turn it will replenish those pips, so focus on those big hits!", getRect(tiles))
+						tutorial.show()
+					}
 				}
 
 				if (friendly != null && tile == friendly.tiles[0, friendly.size-1])
@@ -476,6 +498,14 @@ class GridWidget(val grid: Grid) : Widget()
 						}
 						floating.queueSprite(sprite, xi+i*spacePerPip, yi+0.1f, ORB, 2, width = solid, height = 0.15f)
 					}
+
+					if (!Global.settings.get("Friendly", false))
+					{
+						val tutorial = Tutorial("Friendly")
+						val tiles: com.badlogic.gdx.utils.Array<Point> = friendly.tiles.toList().toGdxArray()
+						tutorial.addPopup("This is a friendly ally. Match in the surrounding tiles to replenish its health.", getRect(tiles))
+						tutorial.show()
+					}
 				}
 
 				if (block != null)
@@ -483,7 +513,7 @@ class GridWidget(val grid: Grid) : Widget()
 					ground.queueSprite(block.sprite, xi, yi, ORB, 1, blockColour)
 
 					// do hp bar
-					if (block.hp < block.maxhp)
+					if (block.hp < block.maxhp || block.alwaysShowHP)
 					{
 						val solidSpaceRatio = 0.12f // 20% free space
 						val space = 1f
@@ -506,9 +536,12 @@ class GridWidget(val grid: Grid) : Widget()
 						}
 					}
 
-					val tutorial = Tutorial("Block")
-					tutorial.addPopup("This is a block. Match in the tiles surrounding it to break it.", getRect(tile))
-					tutorial.show()
+					if (!Global.settings.get("Block", false))
+					{
+						val tutorial = Tutorial("Block")
+						tutorial.addPopup("This is a block. Match in the tiles surrounding it to break it.", getRect(tile))
+						tutorial.show()
+					}
 				}
 
 				if (container != null)
@@ -516,7 +549,7 @@ class GridWidget(val grid: Grid) : Widget()
 					ground.queueSprite(container.sprite, xi, yi, ORB, 1, blockColour)
 
 					// do hp bar
-					if (container.hp < container.maxhp)
+					if (container.hp < container.maxhp || container.alwaysShowHP)
 					{
 						val solidSpaceRatio = 0.12f // 20% free space
 						val space = 1f
@@ -559,9 +592,12 @@ class GridWidget(val grid: Grid) : Widget()
 						floating.queueParticle(spreader.particleEffect!!, xi, yi, SPREADER, 1, orbColour)
 					}
 
-					val tutorial = Tutorial("Spreader")
-					tutorial.addPopup("This is a spreading field. Match in the tiles surrounding it to remove it and stop it spreading this turn.", getRect(tile))
-					tutorial.show()
+					if (!Global.settings.get("Spreader", false))
+					{
+						val tutorial = Tutorial("Spreader")
+						tutorial.addPopup("This is a spreading field. Match in the tiles surrounding it to remove it and stop it spreading this turn.", getRect(tile))
+						tutorial.show()
+					}
 				}
 
 				if (tile.isSelected)

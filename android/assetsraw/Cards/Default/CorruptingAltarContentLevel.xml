@@ -102,6 +102,7 @@
 					<DrawActualSize>true</DrawActualSize>
 				</Sprite>
 				<Health>15</Health>
+				<AlwaysShowHP>true</AlwaysShowHP>
 			</Block>
 			<Plate>0</Plate>
 			<Seal>0</Seal>

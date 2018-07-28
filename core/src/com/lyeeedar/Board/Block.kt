@@ -10,6 +10,7 @@ import com.lyeeedar.Util.tryGet
 class Block(val theme: Theme) : Damageable()
 {
 	override var sprite = theme.blockSprites.tryGet(0).copy()
+	var alwaysShowHP: Boolean = false
 
 	val death = AssetManager.loadParticleEffect("Hit")
 }

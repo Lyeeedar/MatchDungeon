@@ -72,6 +72,7 @@
 					<DrawActualSize>true</DrawActualSize>
 				</Sprite>
 				<Health>4</Health>
+				<AlwaysShowHP>true</AlwaysShowHP>
 			</Container>
 		</Symbol>
 	</Symbols>
