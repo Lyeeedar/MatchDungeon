@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.lyeeedar.Global
+import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.UI.addClickListener
 
 class QuestSelectionScreen : AbstractScreen()
@@ -18,6 +19,9 @@ class QuestSelectionScreen : AbstractScreen()
 
 	}
 
+	val scrollTable = Table()
+	val editButton = TextButton("Edit Deck", Global.skin)
+
 	fun setup()
 	{
 		if (!created)
@@ -28,7 +32,6 @@ class QuestSelectionScreen : AbstractScreen()
 
 		mainTable.clear()
 
-		val scrollTable = Table()
 		val scrollPane = ScrollPane(scrollTable, Global.skin)
 		scrollPane.setFadeScrollBars(false)
 		scrollPane.setScrollingDisabled(false, true)
@@ -54,7 +57,6 @@ class QuestSelectionScreen : AbstractScreen()
 		mainTable.add(scrollPane).growX().expandY().bottom()
 		mainTable.row()
 
-		val editButton = TextButton("Edit Deck", Global.skin)
 		editButton.addClickListener {
 			val screen = Global.game.getTypedScreen<DeckScreen>()!!
 			screen.setup()
@@ -62,6 +64,18 @@ class QuestSelectionScreen : AbstractScreen()
 		}
 		mainTable.add(editButton).expand().right().bottom().pad(10f)
 		mainTable.row()
+	}
+
+	override fun show()
+	{
+		super.show()
+
+		val tutorial = Tutorial("QuestSelection")
+		tutorial.addDelay(1f)
+		tutorial.addPopup("This is the quest selection screen.", Any())
+		tutorial.addPopup("You can pick a quest from those you have unlocked here. Just tap the card you want, then tap 'embark'.", scrollTable)
+		tutorial.addPopup("You can edit your deck of cards here. This will allow you to customise your quest experience.", editButton)
+		tutorial.show()
 	}
 
 	override fun doRender(delta: Float)

@@ -1,45 +1,72 @@
 package com.lyeeedar.UI
 
-import com.badlogic.gdx.math.Rectangle
-import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Global
 
 class Tutorial(val key: String)
 {
-	val popups = Array<TutorialPopup>()
+	val actions = Array<Any>()
 	var index: Int = -1
+	var currentAction: ((Float) -> Boolean)? = null
 
-	fun addPopup(text: String, emphasis: Actor) { addPopup(text, emphasis.getBounds()) }
-	fun addPopup(text: String, emphasis: Rectangle)
+	fun addPopup(text: String, emphasis: Any)
 	{
-		popups.add(TutorialPopup(text, emphasis, {
+		actions.add(TutorialPopup(text, emphasis, {
 			advance()
 		}))
+	}
+	fun addDelay(duration: Float)
+	{
+		var counter = 0f
+		val action = fun (delta:Float): Boolean {
+			counter += delta
+			if (counter >= duration)
+			{
+				return true
+			}
+			return false
+		}
+		actions.add(action)
+	}
+	fun addAction(action: (Float) -> Boolean)
+	{
+		actions.add(action)
+	}
+
+	fun act(delta: Float)
+	{
+		val complete = currentAction?.invoke(delta) ?: false
+		if (complete)
+		{
+			currentAction = null
+			advance()
+		}
 	}
 
 	fun show()
 	{
-		if (current != null)
+		if (Global.settings.get(key, false))
 		{
-			queue.add(this)
 			return
 		}
 
-		if (true)//(!Global.settings.get(key, false))
+		if (current != null)
 		{
-			Global.settings.set(key, true)
-
-			current = this
-
-			advance()
+			if (!queue.any{ it.key == key }) queue.add(this)
+			return
 		}
+
+		Global.settings.set(key, true)
+
+		current = this
+
+		advance()
 	}
 
 	private fun advance()
 	{
 		index++
-		if (index >= popups.size)
+		if (index >= actions.size)
 		{
 			current = null
 			if (queue.size > 0)
@@ -50,8 +77,15 @@ class Tutorial(val key: String)
 		}
 		else
 		{
-			val popup = popups[index]
-			popup.show()
+			val action = actions[index]
+			if (action is TutorialPopup)
+			{
+				action.show()
+			}
+			else
+			{
+				currentAction = action as ((Float) -> Boolean)?
+			}
 		}
 	}
 

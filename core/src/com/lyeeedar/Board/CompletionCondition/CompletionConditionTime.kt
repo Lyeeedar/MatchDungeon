@@ -10,8 +10,10 @@ import com.lyeeedar.Global.Companion.skin
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.SpriteWidget
+import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
+import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.XmlData
 
 /**
@@ -71,6 +73,13 @@ class CompletionConditionTime(): AbstractCompletionCondition()
 
 					false
 				}
+
+		Future.call(
+				{
+					val tutorial = Tutorial("Time")
+					tutorial.addPopup("This is your remaining time. When it reaches 0 you will fail the level. It will only decrease between animating a turn, so act fast!", label)
+					tutorial.show()
+				}, 0.5f)
 	}
 
 	override fun isCompleted(): Boolean = time <= 0

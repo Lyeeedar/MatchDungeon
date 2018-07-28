@@ -10,8 +10,10 @@ import com.lyeeedar.Board.Monster
 import com.lyeeedar.Board.MonsterDesc
 import com.lyeeedar.Global
 import com.lyeeedar.UI.SpriteWidget
+import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
+import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.XmlData
 import ktx.collections.set
 
@@ -43,6 +45,13 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 			rebuildWidget()
 			return false
 		}
+
+		Future.call(
+				{
+					val tutorial = Tutorial("KillComplete")
+					tutorial.addPopup("This is the count of enemies you need to kill to win.", table)
+					tutorial.show()
+				}, 0.5f)
 	}
 
 	override fun isCompleted(): Boolean = monsters.filter { it.hp > 0 }.count() == 0

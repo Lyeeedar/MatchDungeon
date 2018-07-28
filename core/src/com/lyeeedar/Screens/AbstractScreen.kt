@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Scaling
 import com.badlogic.gdx.utils.viewport.ScalingViewport
 import com.lyeeedar.Global
 import com.lyeeedar.UI.DebugConsole
+import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.KeyMapping
 import com.lyeeedar.Util.KeySource
@@ -79,6 +80,7 @@ abstract class AbstractScreen() : Screen, InputProcessor
 
         stage.act()
 		Future.update(delta)
+		Tutorial.current?.act(delta)
 
         Gdx.gl.glClearColor(0f, 0f, 0f, 0f)
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)

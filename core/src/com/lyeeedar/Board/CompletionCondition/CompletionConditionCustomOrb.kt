@@ -7,8 +7,10 @@ import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Orb
 import com.lyeeedar.Global
 import com.lyeeedar.UI.SpriteWidget
+import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
+import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.XmlData
 
 class CompletionConditionCustomOrb : AbstractCompletionCondition()
@@ -33,6 +35,13 @@ class CompletionConditionCustomOrb : AbstractCompletionCondition()
 
 			return false
 		}
+
+		Future.call(
+				{
+					val tutorial = Tutorial("CustomOrbComplete")
+					tutorial.addPopup("This is the count you need to match to win.", table)
+					tutorial.show()
+				}, 0.5f)
 	}
 
 	override fun isCompleted(): Boolean

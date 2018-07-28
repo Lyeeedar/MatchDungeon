@@ -263,6 +263,19 @@ class QuestScreen : AbstractScreen()
 		CardWidget.layoutCards(cards, Direction.CENTER, cardsTable, animate = false)
 	}
 
+	override fun show()
+	{
+		super.show()
+
+		val tutorial = Tutorial("QuestScreen")
+		tutorial.addDelay(1f)
+		tutorial.addPopup("This is the quest screen.", Any())
+		tutorial.addPopup("Here you can choose what you want to encounter next. Tap a card to view more details about it, and to select it.", cardsTable)
+		tutorial.addPopup("Tap here to see your current character information, including statistics and equipment.", statsTable)
+		tutorial.addPopup("Here you can see your current gold. You can use this to buy equipment in shops, or during encounters.", goldLabel)
+		tutorial.show()
+	}
+
 	var grouped: Array<Array<AbstractReward>> = Array()
 	var currentGroup = Array<CardWidget>()
 	var shownIntro = false

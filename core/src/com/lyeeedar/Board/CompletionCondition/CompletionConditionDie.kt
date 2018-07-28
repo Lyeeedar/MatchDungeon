@@ -11,8 +11,10 @@ import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.SpriteWidget
+import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
+import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.XmlData
 
 class CompletionConditionDie : AbstractCompletionCondition()
@@ -45,6 +47,13 @@ class CompletionConditionDie : AbstractCompletionCondition()
 
 			return false
 		}
+
+		Future.call(
+				{
+					val tutorial = Tutorial("Die")
+					tutorial.addPopup("This is your remaining health. Attacks ill reduce it, and when it reaches 0 you will fail the level.", hpLabel)
+					tutorial.show()
+				}, 0.5f)
 	}
 
 	fun updateBlink()

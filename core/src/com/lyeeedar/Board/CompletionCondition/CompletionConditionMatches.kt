@@ -11,8 +11,10 @@ import com.lyeeedar.Board.Orb
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.SpriteWidget
+import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
+import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.XmlData
 import ktx.collections.get
 import ktx.collections.set
@@ -104,6 +106,13 @@ class CompletionConditionMatches(): AbstractCompletionCondition()
 		{
 			sprites.put(entry.key, Orb.getOrb(entry.key).sprite)
 		}
+
+		Future.call(
+				{
+					val tutorial = Tutorial("MatchComplete")
+					tutorial.addPopup("This is the count of orbs of each colour you need to match to win.", table)
+					tutorial.show()
+				}, 0.5f)
 	}
 
 	override fun isCompleted(): Boolean

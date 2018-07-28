@@ -10,6 +10,7 @@ import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.SpriteWidget
+import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
 import ktx.collections.set
 import ktx.collections.toGdxArray
@@ -45,6 +46,13 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 
 			false
 		}
+
+		Future.call(
+				{
+					val tutorial = Tutorial("Sink")
+					tutorial.addPopup("This is the count of items you need to get to the bottom of the board to win. If you can't see them on the board then they'll be in chests, inside blocks or in enemies.", table)
+					tutorial.show()
+				}, 0.5f)
 	}
 
 	override fun isCompleted(): Boolean = sinkableMap.all { it.value.count == 0 }

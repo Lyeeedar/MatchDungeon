@@ -7,7 +7,10 @@ import com.lyeeedar.Board.Orb
 import com.lyeeedar.Board.Tile
 import com.lyeeedar.Global
 import com.lyeeedar.UI.SpriteWidget
+import com.lyeeedar.UI.Tutorial
+import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.XmlData
+import com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table
 
 class CompletionConditionPlate : AbstractCompletionCondition()
 {
@@ -30,6 +33,13 @@ class CompletionConditionPlate : AbstractCompletionCondition()
 
 			return false
 		}
+
+		Future.call(
+				{
+					val tutorial = Tutorial("PlateComplete")
+					tutorial.addPopup("This is the count of plates you need to get to break to win.", table)
+					tutorial.show()
+				}, 0.5f)
 	}
 
 	override fun isCompleted(): Boolean = remaining == 0

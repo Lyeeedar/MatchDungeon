@@ -9,8 +9,10 @@ import com.lyeeedar.Board.Block
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Global
 import com.lyeeedar.UI.SpriteWidget
+import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
+import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.XmlData
 import ktx.collections.set
 
@@ -41,6 +43,13 @@ class CompletionConditionBreak : AbstractCompletionCondition()
 			rebuildWidget()
 			return false
 		}
+
+		Future.call(
+				{
+					val tutorial = Tutorial("BlockComplete")
+					tutorial.addPopup("This is the count of blocks you need to get to break to win.", table)
+					tutorial.show()
+				}, 0.5f)
 	}
 
 	override fun isCompleted(): Boolean = blocks.filter { it.hp > 0 }.count() == 0

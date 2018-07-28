@@ -10,16 +10,34 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
+import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Global
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Point
 import ktx.actors.alpha
-import ktx.actors.onClick
 import ktx.actors.then
 
-class TutorialPopup(val text: String, val emphasis: Rectangle, val advance: () -> Unit) : Table()
+class TutorialPopup(val text: String, val emphasisSource: Any, val advance: () -> Unit) : Table()
 {
 	fun show()
 	{
+		val emphasis = when (emphasisSource)
+		{
+			is Rectangle -> emphasisSource
+			is Actor -> emphasisSource.getBounds()
+			is Array<*> -> GridWidget.instance.getRect(emphasisSource as Array<Point>)
+			else -> Rectangle(Global.stage.width / 2f, Global.stage.height / 2f, 0f, 0f)
+		}
+
+		if (emphasis.width > 0f && emphasis.height > 0f)
+		{
+			val pad = 5f
+			emphasis.x -= pad
+			emphasis.y -= pad
+			emphasis.width += pad * 2f
+			emphasis.height += pad * 2f
+		}
+
 		val animSpeed = 0.3f
 
 		val greyoutalpha = 0.9f
@@ -77,7 +95,7 @@ class TutorialPopup(val text: String, val emphasis: Rectangle, val advance: () -
 
 		addAction(alpha(0f) then fadeIn(animSpeed))
 
-		onClick { inputEvent, tutorialPopup ->
+		val click = {
 			advance.invoke()
 			addAction(fadeOut(0.1f) then removeActor())
 			topGreyout.addAction(fadeOut(0.1f) then removeActor())
@@ -86,6 +104,12 @@ class TutorialPopup(val text: String, val emphasis: Rectangle, val advance: () -
 			rightGreyout.addAction(fadeOut(0.1f) then removeActor())
 			centerBlock.addAction(fadeOut(0.1f) then removeActor())
 		}
+		addClickListener(click)
+		topGreyout.addClickListener(click)
+		bottomGreyout.addClickListener(click)
+		leftGreyout.addClickListener(click)
+		rightGreyout.addClickListener(click)
+		centerBlock.addClickListener(click)
 
 		pack()
 
@@ -103,9 +127,7 @@ class TutorialPopup(val text: String, val emphasis: Rectangle, val advance: () -
 		}
 
 		setPosition(px, py)
-		ensureOnScreen(5f)
 		Global.stage.addActor(this)
+		ensureOnScreen(5f)
 	}
-
-	constructor(text: String, emphasis: Actor, advance: () -> Unit): this(text, emphasis.getBounds(), advance)
 }

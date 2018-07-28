@@ -21,6 +21,7 @@ import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
 import com.lyeeedar.Util.Point
 import com.lyeeedar.Util.ciel
+import ktx.collections.toGdxArray
 
 /**
  * Created by Philip on 05-Jul-16.
@@ -121,7 +122,14 @@ class GridWidget(val grid: Grid) : Widget()
 		atk_full.baseScale = floatArrayOf(0.14f, 0.14f)
 	}
 
-	fun getRect(points: Array<Point>): Rectangle
+	fun getRect(point: Point): Rectangle
+	{
+		val array = com.badlogic.gdx.utils.Array<Point>()
+		array.add(point)
+		return getRect(array)
+	}
+
+	fun getRect(points: com.badlogic.gdx.utils.Array<Point>): Rectangle
 	{
 		var minx = Float.MAX_VALUE
 		var miny = Float.MAX_VALUE
@@ -290,12 +298,23 @@ class GridWidget(val grid: Grid) : Widget()
 				{
 					ground.queueSprite(grid.level.theme.plate, xi, yi, TILE, tileHeight, tileColour)
 
+					val tutorial = Tutorial("Plate")
+					tutorial.addPopup("This is a plate. Match on top of this to break it.", getRect(tile))
+					tutorial.show()
+
 					tileHeight++
 				}
 
 				if (chest != null)
 				{
 					ground.queueSprite(chest.sprite, xi, yi, TILE, tileHeight, tileColour)
+
+					if (chest.numToSpawn > 0)
+					{
+						val tutorial = Tutorial("Chest")
+						tutorial.addPopup("This is a chest. Match in the tiles beneath this to spawn coins. When there are no more coins to spawn, it will appear empty.", getRect(tile))
+						tutorial.show()
+					}
 				}
 
 				for (effect in tile.effects)
@@ -389,6 +408,11 @@ class GridWidget(val grid: Grid) : Widget()
 
 								currentPoint.rotate(degreesStep)
 							}
+
+							val tutorial = Tutorial("Attack")
+							tutorial.addPopup("This is an attack. The pips surrounding the skull indicate the turns remaining until it activates.", getRect(orb))
+							tutorial.addPopup("Match it like a normal orb to remove it from the board. If you fail to remove it then you will lose 1 hp", getRect(orb))
+							tutorial.show()
 						}
 					}
 				}
@@ -418,6 +442,11 @@ class GridWidget(val grid: Grid) : Widget()
 						}
 						floating.queueSprite(sprite, xi+i*spacePerPip, yi+0.1f, ORB, 2, width = solid, height = 0.15f)
 					}
+
+					val tutorial = Tutorial("Monster")
+					val tiles: com.badlogic.gdx.utils.Array<Point> = monster.tiles.toList().toGdxArray()
+					tutorial.addPopup("This is a monster. Match in the tiles surrounding it to damage it.", getRect(tiles))
+					tutorial.show()
 				}
 
 				if (friendly != null && tile == friendly.tiles[0, friendly.size-1])
@@ -476,6 +505,10 @@ class GridWidget(val grid: Grid) : Widget()
 							floating.queueSprite(sprite, xi + i * spacePerPip, yi + 0.1f, ORB, 2, width = solid, height = 0.15f)
 						}
 					}
+
+					val tutorial = Tutorial("Block")
+					tutorial.addPopup("This is a block. Match in the tiles surrounding it to break it.", getRect(tile))
+					tutorial.show()
 				}
 
 				if (container != null)
@@ -525,6 +558,10 @@ class GridWidget(val grid: Grid) : Widget()
 					{
 						floating.queueParticle(spreader.particleEffect!!, xi, yi, SPREADER, 1, orbColour)
 					}
+
+					val tutorial = Tutorial("Spreader")
+					tutorial.addPopup("This is a spreading field. Match in the tiles surrounding it to remove it and stop it spreading this turn.", getRect(tile))
+					tutorial.show()
 				}
 
 				if (tile.isSelected)
