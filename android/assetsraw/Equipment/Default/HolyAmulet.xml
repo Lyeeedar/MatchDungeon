@@ -9,14 +9,13 @@
 		<Health>2</Health>
 		<MatchDamage>0</MatchDamage>
 		<AbilityDamage>0</AbilityDamage>
-		<PowerGain>3</PowerGain>
+		<PowerGain>2</PowerGain>
+		<BonusGold>0</BonusGold>
+		<BonusTime>0</BonusTime>
 	</Statistics>
 	<Ability>
 		<Name>Divine Protection</Name>
 		<Description>Call on divine energies to block and attack.</Description>
-		<Icon meta:RefKey="Sprite">
-			<Name>Oryx/uf_split/uf_items/necklace_cross</Name>
-		</Icon>
 		<EffectData>
 			<Cost>5</Cost>
 			<Effect>1,Attack,Single,Pop</Effect>

@@ -17,30 +17,48 @@ class Effect(val type: Type)
 		POP,
 		CONVERT,
 		SUMMON,
+		SPREADER,
 		TEST
 	}
 
-	lateinit var apply: (tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, String>) -> Unit
+	lateinit var apply: (tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>) -> Unit
 
 	init
 	{
 		apply = when(type)
 		{
-			Type.POP -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, String>) { grid.pop(tile, delay, damSource = this, bonusDam = data["DAMAGE", "0"].toInt() + grid.level.player.getStat(Statistic.ABILITYDAMAGE), skipPowerOrb = true) }
-			Type.CONVERT -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, String>) { val orb = tile.orb ?: return; tile.orb = if(data["CONVERTTO"] == "RANDOM") Orb(Orb.getRandomOrb(grid.level), grid.level.theme) else Orb(Orb.getOrb(data["CONVERTTO"]), grid.level.theme); tile.orb!!.setAttributes(orb) }
-			Type.SUMMON ->  fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, String>) { Friendly.load(data["SUMMON"], true).setTile(tile, grid) }
-			Type.TEST ->  fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, String>) { val orb = tile.orb ?: return; orb.special = Match5(orb) }
-			else -> throw Exception("Invalid effect type $type")
+			Type.POP -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>) { grid.pop(tile, delay, damSource = this, bonusDam = data["DAMAGE", "0"].toString().toInt() + grid.level.player.getStat(Statistic.ABILITYDAMAGE), skipPowerOrb = true) }
+
+			Type.CONVERT -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>) { val orb = tile.orb ?: return; tile.orb = if(data["CONVERTTO"] == "RANDOM") Orb(Orb.getRandomOrb(grid.level), grid.level.theme) else Orb(Orb.getOrb(data["CONVERTTO"].toString()), grid.level.theme); tile.orb!!.setAttributes(orb) }
+
+			Type.SUMMON ->  fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>) { Friendly.load(data["SUMMON"].toString(), true).setTile(tile, grid) }
+
+			Type.SPREADER -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>)
+			{
+				val spreader = data["SPREADER"] as Spreader
+				spreader.damage += Global.player.getStat(Statistic.ABILITYDAMAGE) / 2f
+				tile.spreader = spreader.copy()
+			}
+
+			Type.TEST ->  fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>) { val orb = tile.orb ?: return; orb.special = Match5(orb) }
 		}
 	}
 
-	fun toString(data: ObjectMap<String, String>, them: String, popAction: String): String
+	fun toString(data: ObjectMap<String, Any>, them: String, popAction: String): String
 	{
 		return when(type)
 		{
-			Type.POP -> { val dam = data["DAMAGE", "0"].toInt() + Global.player.getStat(Statistic.ABILITYDAMAGE) + 1; "$popAction $them, dealing $dam damage." }
+			Type.POP -> { val dam = data["DAMAGE", "0"].toString().toInt() + Global.player.getStat(Statistic.ABILITYDAMAGE) + 1; "$popAction $them, dealing $dam damage." }
+
 			Type.CONVERT -> { val t = data["CONVERTTO"]; "convert $them to $t." }
-			Type.SUMMON -> { val f = data["SUMMON"]; "summon " + f.filename(false) + "." }
+
+			Type.SUMMON -> { val f = data["SUMMON"].toString(); "summon " + f.filename(false) + "." }
+
+			Type.SPREADER -> {
+				val spreader = data["SPREADER"] as Spreader
+				"create " + spreader.nameKey
+			}
+
 			Type.TEST -> "TEST"
 		}
 	}

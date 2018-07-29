@@ -9,6 +9,8 @@
 		<Health>0</Health>
 		<MatchDamage>0</MatchDamage>
 		<AbilityDamage>1</AbilityDamage>
-		<PowerGain>5</PowerGain>
+		<PowerGain>3</PowerGain>
+		<BonusGold>0</BonusGold>
+		<BonusTime>0</BonusTime>
 	</Statistics>
 </OffHand>

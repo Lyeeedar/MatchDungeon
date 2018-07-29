@@ -235,9 +235,19 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					}
 				}
 
-				if (spreader.effect == Spreader.SpreaderEffect.POP && spreader != newspreader)
+				if (spreader != newspreader)
 				{
-					pop(tile, 0f, spreader, 0f, true)
+					if (spreader.effect == Spreader.SpreaderEffect.POP)
+					{
+						pop(tile, 0f, spreader, spreader.damage, true)
+					}
+					else if (spreader.effect == Spreader.SpreaderEffect.DAMAGE)
+					{
+						if (tile.damageable != null)
+						{
+							damage(tile, tile.damageable!!, 0f, spreader.nameKey, spreader.damage)
+						}
+					}
 				}
 			}
 			else if (orb != null)
@@ -1499,30 +1509,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			{
 				if (t.damageable != null)
 				{
-					val damageable = t.damageable!!
-
-					var targetDam = if (!damageable.damSources.contains(this)) 1f + level.player.getStat(Statistic.MATCHDAMAGE) else 1f
-					var damReduction = damageable.remainingReduction.toFloat()
-					damReduction -= targetDam
-
-					if (damReduction < 0)
-					{
-						targetDam = -damReduction
-						damageable.remainingReduction = 0
-					}
-					else
-					{
-						targetDam = 0f
-						damageable.remainingReduction = damReduction.ciel()
-					}
-
-					damageable.hp -= targetDam
-
-					damageable.damSources.add(this)
-
-					t.effects.add(hitEffect.copy())
-
-					onDamaged(damageable)
+					damage(t, t.damageable!!, 0f, this, level.player.getStat(Statistic.MATCHDAMAGE))
 				}
 
 				if (t.spreader != null)
@@ -1624,6 +1611,32 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	}
 
 	// ----------------------------------------------------------------------
+	fun damage(tile: Tile, damageable: Damageable, delay: Float, damSource: Any? = null, bonusDam: Float = 0f)
+	{
+		var targetDam = if (!damageable.damSources.contains(damSource)) 1f + bonusDam else 1f
+		var damReduction = damageable.remainingReduction.toFloat()
+		damReduction -= targetDam
+
+		if (damReduction < 0)
+		{
+			targetDam = -damReduction
+			damageable.remainingReduction = 0
+		}
+		else
+		{
+			targetDam = 0f
+			damageable.remainingReduction = damReduction.ciel()
+		}
+
+		damageable.hp -= targetDam
+		if (damSource != null) damageable.damSources.add(damSource)
+		val hit = hitEffect.copy()
+		hit.renderDelay = delay
+		tile.effects.add(hit)
+		onDamaged(damageable)
+	}
+
+	// ----------------------------------------------------------------------
 	fun pop(point: Point, delay: Float, damSource: Any? = null, bonusDam: Float = 0f, skipPowerOrb: Boolean = false)
 	{
 		pop(point.x, point.y , delay, damSource, bonusDam, skipPowerOrb)
@@ -1657,29 +1670,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 		if (tile.damageable != null)
 		{
-			val damageable = tile.damageable!!
-
-			var targetDam = if (!damageable.damSources.contains(damSource)) 1f + bonusDam else 1f
-			var damReduction = damageable.remainingReduction.toFloat()
-			damReduction -= targetDam
-
-			if (damReduction < 0)
-			{
-				targetDam = -damReduction
-				damageable.remainingReduction = 0
-			}
-			else
-			{
-				targetDam = 0f
-				damageable.remainingReduction = damReduction.ciel()
-			}
-
-			damageable.hp -= targetDam
-			if (damSource != null) damageable.damSources.add(damSource)
-			val hit = hitEffect.copy()
-			hit.renderDelay = delay
-			tile.effects.add(hit)
-			onDamaged(damageable)
+			damage(tile, tile.damageable!!, delay, damSource, bonusDam)
 			return
 		}
 

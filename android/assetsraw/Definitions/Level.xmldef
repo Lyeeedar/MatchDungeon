@@ -24,6 +24,14 @@
 		<Data Name="OrbName" meta:RefKey="String" />
 		<Data Name="Chance" Min="0" Max="1" Default="0.2" SkipIfDefault="False" meta:RefKey="Number" />
 	</Definition>
+	<!--Level Content-->
+	<Definition Name="SpreaderDef" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="Name" meta:RefKey="String" />
+		<Data Name="Sprite" Keys="SpriteWrapper" meta:RefKey="Reference" />
+		<Data Name="ParticleEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
+		<Data Name="Effect" EnumValues="Seal,Pop,Damage" meta:RefKey="Enum" />
+		<Data Name="Damage" Min="0" VisibleIf="Effect == Pop || Effect == Damage" meta:RefKey="Number" />
+	</Definition>
 	<!--Level-->
 	<Definition Name="Level" meta:RefKey="Struct">
 		<Data Name="Grid" MinCount="1" meta:RefKey="Collection">
@@ -55,12 +63,7 @@
 					<Data Name="Health" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
 					<Data Name="AlwaysShowHP" meta:RefKey="Boolean" />
 				</Data>
-				<Data Name="Spreader" meta:RefKey="Struct">
-					<Data Name="Name" meta:RefKey="String" />
-					<Data Name="Sprite" Keys="SpriteWrapper" meta:RefKey="Reference" />
-					<Data Name="ParticleEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
-					<Data Name="Effect" EnumValues="Seal,Pop" meta:RefKey="Enum" />
-				</Data>
+				<Data Name="Spreader" Keys="SpreaderDef" meta:RefKey="Reference" />
 				<Data Name="Type" EnumValues="Floor,Wall,Pit" meta:RefKey="Enum" />
 			</Data>
 		</Data>

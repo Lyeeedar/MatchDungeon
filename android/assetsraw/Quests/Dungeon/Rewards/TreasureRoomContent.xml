@@ -1,0 +1,44 @@
+<CardContent meta:X="0" meta:Y="0" GUID="cc409e16-71e7-4efc-b409-b584dba9adbe" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">40ec3958-ecdd-4479-b2cb-00216fd909c0</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="40ec3958-ecdd-4479-b2cb-00216fd909c0">
+			<Line>
+				<MultilineString>You stumble across an unlooted treasure room.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>TreasureRoomContentLevel</Level>
+				<Success meta:RefKey="Node">760f7d9b-36cb-451d-a768-da9355b999c2</Success>
+				<Failure meta:RefKey="Node">2ad24a71-57dd-4089-acef-ab4056c21c7e</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="495.18182373046875" meta:Y="212.1212158203125" GUID="2ad24a71-57dd-4089-acef-ab4056c21c7e">
+			<Line>
+				<MultilineString>You find nothing but worthless junk.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="477" meta:Y="0" GUID="760f7d9b-36cb-451d-a768-da9355b999c2">
+			<Line>
+				<MultilineString>You manage to escape with armfuls of treasure.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>90</Count>
+				</Money>
+				<Money>
+					<Chance>High</Chance>
+					<Count>40</Count>
+				</Money>
+				<Money>
+					<Chance>Low</Chance>
+					<Count>40</Count>
+				</Money>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

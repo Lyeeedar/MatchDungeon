@@ -10,7 +10,8 @@ class Spreader
 	enum class SpreaderEffect
 	{
 		POP,
-		SEAL
+		SEAL,
+		DAMAGE
 	}
 
 	lateinit var nameKey: String
@@ -20,12 +21,16 @@ class Spreader
 
 	lateinit var effect: SpreaderEffect
 
+	var damage: Float = 0f
+
 	fun copy(): Spreader
 	{
 		val out = Spreader()
 		out.nameKey = nameKey
 		out.spriteWrapper = spriteWrapper?.copy()
 		out.particleEffect = particleEffect?.copy()
+
+		out.damage = damage
 
 		out.effect = effect
 
@@ -53,6 +58,8 @@ class Spreader
 			}
 
 			spreader.effect = SpreaderEffect.valueOf(xmlData.get("Effect", "seal")!!.toUpperCase())
+
+			spreader.damage = xmlData.getFloat("Damage", 0f)
 
 			return spreader
 		}

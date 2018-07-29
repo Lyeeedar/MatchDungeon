@@ -2,19 +2,15 @@
 	<Title>Treasure Hunt</Title>
 	<Description>Tales of forgotten treasures left deep within an ancient ruin have drawn you to this place. Explore and take everything you can find!</Description>
 	<Theme>Dungeon</Theme>
-	<BronzeRewards meta:RefKey="Rewards">
-		<Card>
-			<File>Quests/Dungeon/TreasureRoom1</File>
-		</Card>
-	</BronzeRewards>
+	<BronzeRewards meta:RefKey="Rewards" />
 	<SilverRewards meta:RefKey="Rewards">
 		<Card>
-			<File>Quests/Dungeon/TreasureRoom2</File>
+			<File>Quests/Dungeon/Rewards/TreasureRoom</File>
 		</Card>
 	</SilverRewards>
 	<GoldRewards meta:RefKey="Rewards">
 		<Card>
-			<File>Quests/Dungeon/TreasureRoom3</File>
+			<File>Quests/Dungeon/Rewards/GemHoard</File>
 		</Card>
 	</GoldRewards>
 	<Root meta:RefKey="QuestNode">02534db6-2870-4f0c-ba4c-282369221cc0</Root>

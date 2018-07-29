@@ -1,0 +1,37 @@
+<MainHand xmlns:meta="Editor">
+	<Name>Shamans Staff</Name>
+	<Description>The staff of a goblin shaman.</Description>
+	<Cost>170</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/weapon_staff_branch</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>0</Health>
+		<MatchDamage>0</MatchDamage>
+		<AbilityDamage>1</AbilityDamage>
+		<PowerGain>3</PowerGain>
+		<BonusGold>0</BonusGold>
+		<BonusTime>0</BonusTime>
+	</Statistics>
+	<Ability>
+		<Name>Summon Poison Cloud</Name>
+		<Description>Summon a poison cloud at the target location. This does damage every turn, but is dispersed if you match next to it.</Description>
+		<EffectData>
+			<Cost>6</Cost>
+			<Effect>1,Orb,Single,Spreader</Effect>
+			<Data>
+				<Spreader meta:RefKey="SpreaderDef">
+					<Name>Poison Cloud</Name>
+					<Sprite meta:RefKey="SpriteWrapper">
+						<Sprite meta:RefKey="Sprite">
+							<Name>Oryx/Custom/terrain/cloud</Name>
+							<Colour>16,143,5,159</Colour>
+						</Sprite>
+					</Sprite>
+					<Effect>Damage</Effect>
+				</Spreader>
+			</Data>
+		</EffectData>
+	</Ability>
+</MainHand>

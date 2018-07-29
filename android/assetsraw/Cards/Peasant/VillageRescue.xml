@@ -1,0 +1,45 @@
+<CardContent meta:X="0" meta:Y="0" GUID="644f6cba-99f0-41ad-90b5-213b0b65b426" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">3d7d5554-2d5e-4faa-ac1b-0e101708d04e</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="3d7d5554-2d5e-4faa-ac1b-0e101708d04e">
+			<Line>
+				<MultilineString>You quickly rush over to the village, only to find it in flames. Thick clouds of smoke boil away from the sheets of fire engulfing each house.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You hear a faint cry over the crackling of the blaze. "Please help! Anybody!"</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>There's some people still alive in there! If you want to save them, you'll have to break them out fast.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>VillageRescueLevel</Level>
+				<Success meta:RefKey="Node">fe145018-63a1-4aa0-8976-4c48e6ead32e</Success>
+				<Failure meta:RefKey="Node">97aeea80-7a64-4b78-b132-d1a51f4bbecc</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="426" meta:Y="237" GUID="97aeea80-7a64-4b78-b132-d1a51f4bbecc">
+			<Line>
+				<MultilineString>Suddenly the house groans and begins to collapse. You just barely manage to escape with your life.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="482" meta:Y="0" GUID="fe145018-63a1-4aa0-8976-4c48e6ead32e">
+			<Line>
+				<MultilineString>You manage to pull the small family out from the house, moments before it collapses.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Thank you, thank you so much. Here, take this, as thanks for saving our lives." The woman presses a small gem into your hands, then stumbles away.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>50</Count>
+				</Money>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

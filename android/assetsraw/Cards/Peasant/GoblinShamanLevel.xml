@@ -1,0 +1,54 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>...........</Line>
+			<Line>.FWFF......</Line>
+			<Line>..WFF......</Line>
+			<Line>.!WF.!..!..</Line>
+			<Line>F..........</Line>
+			<Line>WWW........</Line>
+			<Line>.....?....F</Line>
+			<Line>.........FF</Line>
+			<Line>........!FF</Line>
+			<Line>.!........F</Line>
+			<Line>........WWW</Line>
+			<Line>.......W...</Line>
+			<Line>.......W...</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>W</Character>
+			<Extends>.</Extends>
+			<Block>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/crate</Name>
+				</Sprite>
+				<Health>3</Health>
+				<AlwaysShowHP>true</AlwaysShowHP>
+			</Block>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>F</Character>
+			<Extends>.</Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+	</Symbols>
+	<Faction>Goblin</Faction>
+	<Theme>City</Theme>
+	<AllowedVictories>
+		<Condition meta:RefKey="Kill" />
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Die" />
+	</AllowedDefeats>
+</Level>

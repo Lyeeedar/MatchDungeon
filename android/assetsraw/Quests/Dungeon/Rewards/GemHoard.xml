@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="4722de38-94b7-4ec7-a2fd-2aaf706e516f" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">035d5354-7f5c-4b77-95f3-6cdb70950acb</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="035d5354-7f5c-4b77-95f3-6cdb70950acb">
+			<Name>Gem Hoard</Name>
+			<Description>You come across a vault of gems, glittering in the torchlight. The only problem are the hulking golems stalking around.</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>GemHoardContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

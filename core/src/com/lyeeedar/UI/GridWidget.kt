@@ -462,7 +462,7 @@ class GridWidget(val grid: Grid) : Widget()
 						tutorial.show()
 					}
 
-					if (!Global.settings.get("DR", false))
+					if (monster.damageReduction > 0 && !Global.settings.get("DR", false))
 					{
 						val tutorial = Tutorial("DR")
 						val tiles: com.badlogic.gdx.utils.Array<Point> = monster.tiles.toList().toGdxArray()

@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Board.Grid
+import com.lyeeedar.Board.Spreader
 import com.lyeeedar.Board.Tile
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Animation.MoveAnimation
@@ -37,7 +38,7 @@ class Ability
 	var targetter: Targetter = Targetter(Targetter.Type.ORB)
 	var permuter: Permuter = Permuter(Permuter.Type.SINGLE)
 	var effect: Effect = Effect(Effect.Type.TEST)
-	val data = ObjectMap<String, String>()
+	val data = ObjectMap<String, Any>()
 
 	val selectedTargets = Array<Tile>()
 
@@ -226,7 +227,16 @@ class Ability
 		{
 			for (el in dEl.children)
 			{
-				data[el.name.toUpperCase()] = el.text.toUpperCase()
+				if (el.name == "Spreader")
+				{
+					val spreader = Spreader.load(el)
+					data[el.name.toUpperCase()] = spreader
+
+				}
+				else
+				{
+					data[el.name.toUpperCase()] = el.text.toUpperCase()
+				}
 			}
 		}
 

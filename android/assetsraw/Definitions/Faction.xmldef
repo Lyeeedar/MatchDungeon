@@ -21,9 +21,9 @@
 				<Data Name="Cooldown" Name1="Min" Name2="Max" Min="1" Type="Int" SkipIfDefault="False" meta:RefKey="Vector" />
 				<Data Name="Target" EnumValues="Neighbour,Random" meta:RefKey="Enum" />
 				<Data Name="Count" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
-				<Data Name="TargetRestriction" EnumValues="Orb,Special,Block,Empty,Sealed,Monster,Attack,Tile,NamedTile" meta:RefKey="Enum" />
+				<Data Name="TargetRestriction" EnumValues="Orb,Special,Block,Empty,Sealed,Monster,Attack,Tile,NamedTile,Spreader" meta:RefKey="Enum" />
 				<Data Name="Permuter" EnumValues="Single,AllOfType,NofType,Column,Row,Cross,Block,Diamond,Random" meta:RefKey="Enum" />
-				<Data Name="Effect" EnumValues="Attack,Seal,CustomOrb,Block,Move,Heal,SealedAttack,Summon" meta:RefKey="Enum" />
+				<Data Name="Effect" EnumValues="Attack,Seal,CustomOrb,Block,Move,Heal,SealedAttack,Summon,Spreader" meta:RefKey="Enum" />
 				<Data Name="Data" meta:RefKey="Struct">
 					<Data Name="NumPips" Type="Int" Min="1" Default="7" VisibleIf="Parent.Effect==Attack || Parent.Effect==SealedAttack" meta:RefKey="Number" />
 					<Data Name="Amount" Type="Int" Min="1" Default="10" VisibleIf="Parent.Effect==Heal" meta:RefKey="Number" />
@@ -35,6 +35,8 @@
 					<Data Name="Faction" VisibleIf="Parent.Effect==Summon" meta:RefKey="String" />
 					<Data Name="Name" VisibleIf="Parent.Effect==Summon || Parent.Effect==CustomOrb" meta:RefKey="String" />
 					<Data Name="TileName" VisibleIf="Parent.TargetRestriction==NamedTile" meta:RefKey="String" />
+					<Data Name="SpreaderName" VisibleIf="Parent.TargetRestriction == Spreader" meta:RefKey="String" />
+					<Data Name="Spreader" Keys="SpreaderDef" VisibleIf="Parent.Effect == Spreader" meta:RefKey="Reference" />
 				</Data>
 			</Data>
 		</Data>

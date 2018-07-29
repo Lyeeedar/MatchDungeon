@@ -7,8 +7,10 @@
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
 		<Health>0</Health>
-		<MatchDamage>0.6</MatchDamage>
-		<AbilityDamage>2</AbilityDamage>
+		<MatchDamage>0.5</MatchDamage>
+		<AbilityDamage>1</AbilityDamage>
 		<PowerGain>0</PowerGain>
+		<BonusGold>0</BonusGold>
+		<BonusTime>0</BonusTime>
 	</Statistics>
 </Body>

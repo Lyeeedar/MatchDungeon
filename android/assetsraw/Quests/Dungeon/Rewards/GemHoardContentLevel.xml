@@ -1,0 +1,99 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>...W...W...</Line>
+			<Line>...WjjjW...</Line>
+			<Line>...WWWWW...</Line>
+			<Line>...........</Line>
+			<Line>...........</Line>
+			<Line>....G......</Line>
+			<Line>......G....</Line>
+			<Line>...........</Line>
+			<Line>...G.......</Line>
+			<Line>...........</Line>
+			<Line>...........</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>W</Character>
+			<Extends>.</Extends>
+			<Block>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/crate</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Health>3</Health>
+			</Block>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>j</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<Sinkable>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_items/gem_amethyst</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+			</Sinkable>
+		</Symbol>
+		<Symbol>
+			<Character>G</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<MonsterDesc meta:RefKey="MonsterDesc">
+				<Name>Golem</Name>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_heroes/golem_stone</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Death meta:RefKey="ParticleEffect">
+					<Name>Death</Name>
+				</Death>
+				<AttackNumPips>8</AttackNumPips>
+				<AttackCooldown>2,6</AttackCooldown>
+				<Size>1</Size>
+				<HP>7</HP>
+				<DamageReduction>1</DamageReduction>
+				<Abilities>
+					<Ability>
+						<Cooldown>4,8</Cooldown>
+						<Effect>Move</Effect>
+					</Ability>
+					<Ability>
+						<Cooldown>2,7</Cooldown>
+						<Count>2</Count>
+						<Effect>Block</Effect>
+						<Data />
+					</Ability>
+				</Abilities>
+			</MonsterDesc>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+	</Symbols>
+	<Theme>Dungeon</Theme>
+	<OrbCount>5</OrbCount>
+	<AllowedVictories>
+		<Condition meta:RefKey="Sink">
+			<Count>3</Count>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Die" />
+		<Condition meta:RefKey="Turns">
+			<Turns>30</Turns>
+		</Condition>
+	</AllowedDefeats>
+</Level>

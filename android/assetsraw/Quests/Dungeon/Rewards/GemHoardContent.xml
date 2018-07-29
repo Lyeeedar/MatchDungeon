@@ -1,0 +1,51 @@
+<CardContent meta:X="0" meta:Y="0" GUID="f4ca8d49-2ca0-4e00-a4d4-772848d9656f" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">e06a48d6-8e2d-419e-b92b-ba69a0abafb9</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="e06a48d6-8e2d-419e-b92b-ba69a0abafb9">
+			<Line>
+				<MultilineString>You come across a vault, filled with glimmering gemstones.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Around the vault stalk several hulking golems, their stone feet crunching through the remains of adventurers who failed to loot this place in the past.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>GemHoardContentLevel</Level>
+				<Success meta:RefKey="Node">55b738a5-27c4-4054-953e-57cbcee17763</Success>
+				<Failure meta:RefKey="Node">392b6d4a-6196-43d2-bb20-b61c713f94c9</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="441" meta:Y="230" GUID="392b6d4a-6196-43d2-bb20-b61c713f94c9">
+			<Line>
+				<MultilineString>You flee, barely escaping with your life.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="480" meta:Y="0" GUID="55b738a5-27c4-4054-953e-57cbcee17763">
+			<Line>
+				<MultilineString>You escape with armfuls of gemstones.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>100</Count>
+				</Money>
+				<Money>
+					<Chance>Medium</Chance>
+					<Count>100</Count>
+				</Money>
+				<Money>
+					<Chance>Low</Chance>
+					<Count>100</Count>
+				</Money>
+				<Money>
+					<Chance>VeryLow</Chance>
+					<Count>100</Count>
+				</Money>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

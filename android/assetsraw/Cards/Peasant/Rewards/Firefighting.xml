@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="73607864-df72-4866-9bc5-88d3ef3af7c5" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">13893db2-1b88-4a90-9a20-7d387df2af6a</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="13893db2-1b88-4a90-9a20-7d387df2af6a">
+			<Name>Firefighting</Name>
+			<Description>As you walk through the city you come across a blazing building. Some shouts indicate there are still people trapped inside.</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>FirefightingContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

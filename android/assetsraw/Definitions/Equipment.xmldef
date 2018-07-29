@@ -13,9 +13,9 @@
 				<Data Name="Cost" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
 				<Data Name="Effect" Nullable="False" Collapse="True" meta:RefKey="Struct">
 					<Data Name="Target Count" Type="Int" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
-					<Data Name="Targetter" EnumValues="Orb,Special,Block,Empty,Sealed,Monster,Attack,Tile" meta:RefKey="Enum" />
+					<Data Name="Targetter" EnumValues="Orb,Special,Block,Empty,Sealed,Monster,Attack,Tile,Spreader" meta:RefKey="Enum" />
 					<Data Name="Permuter" EnumValues="Single,AllOfType,NofType,Column,Row,Cross,Block,Diamond,Random" meta:RefKey="Enum" />
-					<Data Name="Effect" EnumValues="Pop,Convert,Summon" meta:RefKey="Enum" />
+					<Data Name="Effect" EnumValues="Pop,Convert,Summon,Spreader" meta:RefKey="Enum" />
 				</Data>
 				<Data Name="Data" Nullable="False" meta:RefKey="Struct">
 					<Data Name="AOE" Type="Int" Min="1" Default="1" SkipIfDefault="False" VisibleIf="Parent.Effect.Permuter==Block || Parent.Effect.Permuter==Diamond" meta:RefKey="Number" />
@@ -23,6 +23,8 @@
 					<Data Name="Type" SkipIfDefault="False" VisibleIf="Parent.Effect.Permuter==NofType || Parent.Effect.Permuter==AllOfType" meta:RefKey="String" />
 					<Data Name="Damage" Type="Int" Min="0" SkipIfDefault="False" VisibleIf="Parent.Effect.Effect == Pop" meta:RefKey="Number" />
 					<Data Name="Summon" SkipIfDefault="False" VisibleIf="Parent.Effect.Effect == Summon" meta:RefKey="String" />
+					<Data Name="SpreaderName" VisibleIf="Parent.Effect.Targetter == Spreader" meta:RefKey="String" />
+					<Data Name="Spreader" Keys="SpreaderDef" VisibleIf="Parent.Effect.Effect == Spreader" meta:RefKey="Reference" />
 				</Data>
 				<Data Name="FlightEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
 				<Data Name="HitEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
