@@ -49,6 +49,7 @@ class QuestSelectionScreen : AbstractScreen()
 				screen.swapTo()
 			})
 			card.setSize(cardWidth, cardHeight)
+			card.setFacing(true, false)
 
 			scrollTable.add(card).width(cardWidth).height(cardHeight).expandX().center()
 			scrollTable.row()

@@ -5,10 +5,10 @@
 			<Name>Core</Name>
 			<Type>Accumulated</Type>
 			<Space>Local</Space>
-			<Width>0.8</Width>
+			<Width>0.4</Width>
 			<Height>0.1</Height>
 			<Direction>Up</Direction>
-			<ParticleSpeed>1,1.2</ParticleSpeed>
+			<ParticleSpeed>0.5,1</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
 				<Keyframe>0|10</Keyframe>
@@ -17,7 +17,7 @@
 				<Particle>
 					<Lifetime>1,1</Lifetime>
 					<BlendMode>Additive</BlendMode>
-					<Brownian>10</Brownian>
+					<Brownian>3</Brownian>
 					<TextureKeyframes>
 						<Stream>
 							<Keyframe>0|Particle/plasma_3</Keyframe>
@@ -31,8 +31,8 @@
 					</TextureKeyframes>
 					<SizeKeyframes>
 						<Stream>
-							<Keyframe>0|0.4|0.6</Keyframe>
-							<Keyframe>0.4864353|0.6|0.8</Keyframe>
+							<Keyframe>0|0.2|0.4</Keyframe>
+							<Keyframe>0.4864353|0.5|0.7</Keyframe>
 						</Stream>
 					</SizeKeyframes>
 					<RotationSpeedKeyframes>
@@ -60,18 +60,19 @@
 		</Emitter>
 		<Emitter>
 			<Name>Sparks</Name>
+			<IsBlockingEmitter>false</IsBlockingEmitter>
 			<Type>Accumulated</Type>
 			<Shape>Cone</Shape>
 			<Width>90</Width>
 			<Height>0.1</Height>
-			<ParticleSpeed>1,3</ParticleSpeed>
+			<ParticleSpeed>1,4</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
-				<Keyframe>0|5</Keyframe>
+				<Keyframe>0|10</Keyframe>
 			</RateKeyframes>
 			<Particles>
 				<Particle>
-					<Lifetime>0.4,0.8</Lifetime>
+					<Lifetime>0.4,1.2</Lifetime>
 					<BlendMode>Additive</BlendMode>
 					<Brownian>5</Brownian>
 					<VelocityAligned>true</VelocityAligned>

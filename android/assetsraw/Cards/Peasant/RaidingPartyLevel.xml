@@ -1,17 +1,35 @@
 <Level xmlns:meta="Editor">
 	<Grid>
 		<Rows>
-			<Line>=......=</Line>
-			<Line>=......=</Line>
-			<Line>=......=</Line>
-			<Line>=......=</Line>
-			<Line>=......=</Line>
-			<Line>=......=</Line>
-			<Line>=..!.!.=</Line>
-			<Line>=!.....=</Line>
-			<Line>====!===</Line>
+			<Line>w......w</Line>
+			<Line>w......w</Line>
+			<Line>w......w</Line>
+			<Line>w......w</Line>
+			<Line>w......w</Line>
+			<Line>w......w</Line>
+			<Line>w..!.!.w</Line>
+			<Line>w!.....w</Line>
+			<Line>wwww!www</Line>
 		</Rows>
 	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>W</Character>
+			<Extends></Extends>
+			<Block>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/crate</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Health>3</Health>
+			</Block>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+	</Symbols>
 	<Faction>Goblin</Faction>
 	<Theme>Farm</Theme>
 	<AllowedVictories>

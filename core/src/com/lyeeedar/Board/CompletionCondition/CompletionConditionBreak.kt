@@ -47,7 +47,7 @@ class CompletionConditionBreak : AbstractCompletionCondition()
 		Future.call(
 				{
 					val tutorial = Tutorial("BlockComplete")
-					tutorial.addPopup("This is the count of blocks you need to get to break to win.", table)
+					tutorial.addPopup("This is the count of blocks you need to break to win.", table)
 					tutorial.show()
 				}, 0.5f)
 	}

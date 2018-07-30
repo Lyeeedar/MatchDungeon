@@ -1,4 +1,4 @@
-<Effect>
+<Effect xmlns:meta="Editor">
 	<Emitters>
 		<Emitter>
 			<Name>Fire</Name>
@@ -106,6 +106,7 @@
 		</Emitter>
 		<Emitter>
 			<Name>Sparks</Name>
+			<IsBlockingEmitter>false</IsBlockingEmitter>
 			<Shape>Circle</Shape>
 			<Width>0</Width>
 			<Height>0</Height>

@@ -24,7 +24,6 @@
 					<Name>Oryx/uf_split/uf_terrain/crate</Name>
 				</Sprite>
 				<Health>3</Health>
-				<AlwaysShowHP>true</AlwaysShowHP>
 			</Block>
 			<Plate>0</Plate>
 			<Seal>0</Seal>
@@ -40,6 +39,13 @@
 			<Attack>0</Attack>
 			<IsMonster>false</IsMonster>
 			<SpecialOrb>None</SpecialOrb>
+			<Spreader meta:RefKey="SpreaderDef">
+				<Name>Fire</Name>
+				<ParticleEffect meta:RefKey="ParticleEffect">
+					<Name>Fire</Name>
+				</ParticleEffect>
+				<Effect>Pop</Effect>
+			</Spreader>
 		</Symbol>
 		<Symbol>
 			<Character>V</Character>

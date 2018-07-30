@@ -684,7 +684,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 								break
 							}
 						}
-						else
+						else if (effect.blocked())
 						{
 							hasAnim = true
 							break
@@ -767,6 +767,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					}
 
 					if (Tutorial.current == null) onTime(delta)
+					animSpeed = defaultAnimSpeed
 				}
 			}
 		}

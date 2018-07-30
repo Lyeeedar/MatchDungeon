@@ -51,7 +51,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 		Future.call(
 				{
 					val tutorial = Tutorial("Die")
-					tutorial.addPopup("This is your remaining health. Attacks ill reduce it, and when it reaches 0 you will fail the level.", hpLabel)
+					tutorial.addPopup("This is your remaining health. Attacks will reduce it, and when it reaches 0 you will fail the level.", hpLabel)
 					tutorial.show()
 				}, 0.5f)
 	}

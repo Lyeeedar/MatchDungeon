@@ -10,16 +10,15 @@
 		<MatchDamage>0</MatchDamage>
 		<AbilityDamage>1</AbilityDamage>
 		<PowerGain>0</PowerGain>
+		<BonusGold>0</BonusGold>
+		<BonusTime>0</BonusTime>
 	</Statistics>
 	<Ability>
 		<Name>Balefire</Name>
 		<Description>Fling balefire out at your enemies.</Description>
-		<Icon meta:RefKey="Sprite">
-			<Name>Oryx/uf_split/uf_items/necklace_dark</Name>
-		</Icon>
 		<EffectData>
 			<Cost>5</Cost>
-			<Effect>3,Orb,Single,Pop</Effect>
+			<Effect>3,Monster,Single,Pop</Effect>
 			<Data>
 				<Damage>1</Damage>
 			</Data>

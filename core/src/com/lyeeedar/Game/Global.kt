@@ -401,12 +401,6 @@ class GlobalDeck
 			encounters.add(card)
 		}
 
-		for (cardPath in XmlData.enumeratePaths("Cards/Peasant", "Card"))
-		{
-			val card = Card.load(cardPath)
-			encounters.add(card)
-		}
-
 		for (equipPath in XmlData.enumeratePaths("Equipment/Default", "MainHand"))
 		{
 			val equip = Equipment.load(equipPath)

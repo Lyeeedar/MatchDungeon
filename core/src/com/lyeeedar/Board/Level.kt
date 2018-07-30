@@ -152,7 +152,7 @@ class Level(val loadPath: String)
 
 				if (symbol.sprite != null)
 				{
-					tile.spriteSetter = symbol.sprite
+					tile.spriteSetter = symbol.sprite.copy()
 				}
 
 				if (symbol.block != null)
@@ -165,6 +165,7 @@ class Level(val loadPath: String)
 					}
 
 					tile.block!!.maxhp = symbol.block.hp
+					tile.block!!.alwaysShowHP = symbol.block.alwaysShowHP
 				}
 
 				tile.plateStrength = symbol.plate
@@ -384,7 +385,7 @@ class Level(val loadPath: String)
 				val symbol = symbolMap[char.toInt()]
 				if (symbol.sinkableDesc != null)
 				{
-					val sinkable = Sinkable(symbol.sinkableDesc.sprite, theme)
+					val sinkable = Sinkable(symbol.sinkableDesc.sprite.copy(), theme)
 					tile.sinkable = sinkable
 				}
 
@@ -428,6 +429,7 @@ class Level(val loadPath: String)
 				if (symbol.container != null && tile.contents != null)
 				{
 					tile.container = Container(symbol.container.sprite.copy(), symbol.container.hp, tile.contents!!)
+					tile.container!!.alwaysShowHP = symbol.container.alwaysShowHP
 				}
 			}
 		}

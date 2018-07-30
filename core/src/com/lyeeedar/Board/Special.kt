@@ -30,7 +30,8 @@ abstract class Special(val orb: Orb)
 		fun modifyColour(colour: Colour): Colour
 		{
 			val col = colour * 0.8f
-			val lerped = col.lerp(Colour.WHITE, 0.6f)
+			col.a = 1f
+			val lerped = col.lerp(Colour.WHITE, 0.3f)
 			return lerped
 		}
 

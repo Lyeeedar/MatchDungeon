@@ -1,10 +1,9 @@
 <Effect xmlns:meta="Editor">
-	<MoveSpeed>1.5</MoveSpeed>
-	<MoveType>Leap</MoveType>
 	<Emitters>
 		<Emitter>
 			<Name>Glow</Name>
 			<IsCollisionEmitter>true</IsCollisionEmitter>
+			<IsBlockingEmitter>false</IsBlockingEmitter>
 			<Space>Local</Space>
 			<Width>0</Width>
 			<Height>0</Height>
@@ -106,6 +105,7 @@
 		</Emitter>
 		<Emitter>
 			<Name>Sparks</Name>
+			<IsBlockingEmitter>false</IsBlockingEmitter>
 			<Type>Accumulated</Type>
 			<Shape>Cone</Shape>
 			<Width>180</Width>

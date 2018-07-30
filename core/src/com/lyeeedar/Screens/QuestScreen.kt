@@ -22,6 +22,7 @@ import com.lyeeedar.MainGame
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.XmlData
 import ktx.actors.then
 import ktx.collections.toGdxArray
 
@@ -92,17 +93,23 @@ class QuestScreen : AbstractScreen()
 		{
 			debugConsole.register("LoadCard", "LoadCard cardName", fun(args, console): Boolean
 			{
-				if (args.size != 1)
+				if (args.isEmpty())
 				{
 					console.error("Invalid number of arguments!")
 					return false
 				}
 
-				val card = Global.deck.encounters.backingArray.firstOrNull { it.current.name.toLowerCase() == args[0].toLowerCase() }
+				var card = Global.deck.encounters.backingArray.firstOrNull { it.current.name.toLowerCase() == args[0].toLowerCase() }
 				if (card == null)
 				{
-					console.error("Invalid card name!")
-					return false
+					val cardPath = XmlData.existingPaths!!.firstOrNull { it.toLowerCase().endsWith(args[0].toLowerCase() + ".xml") }
+					if (cardPath == null)
+					{
+						console.error("Invalid card name!")
+						return false
+					}
+
+					card = Card.load(cardPath)
 				}
 
 				val cardScreen = CardScreen.instance
@@ -511,9 +518,12 @@ class QuestScreen : AbstractScreen()
 				cardScreen.setup(card, currentQuest)
 				Global.game.switchScreen(MainGame.ScreenEnum.CARD)
 
-				Global.player.deck.encounters.removeValue(card, true)
-				currentQuest.questCards.removeValue(card, true)
-				currentQuest.themeCards.removeValue(card, true)
+				if (!card.current.isShop)
+				{
+					Global.player.deck.encounters.removeValue(card, true)
+					currentQuest.questCards.removeValue(card, true)
+					currentQuest.themeCards.removeValue(card, true)
+				}
 
 				chosenQuestCard = null
 			} then removeActor()

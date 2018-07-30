@@ -19,6 +19,7 @@ import com.lyeeedar.UI.PowerBar
 import com.lyeeedar.UI.Seperator
 import com.lyeeedar.Util.*
 import ktx.collections.set
+import ktx.collections.toGdxArray
 
 /**
  * Created by Philip on 20-Jul-16.
@@ -92,7 +93,7 @@ class Ability
 
 		val finalTargets = Array<Tile>()
 
-		if (permuter.type == Permuter.Type.RANDOM)
+		if (permuter.type == Permuter.Type.RANDOM && targets == 0)
 		{
 			for (t in permuter.permute(grid.tile(grid.width/2, grid.height/2)!!, grid, data))
 			{
@@ -107,7 +108,7 @@ class Ability
 
 		for (target in selectedTargets)
 		{
-			if (permuter.type == Permuter.Type.RANDOM)
+			if (permuter.type == Permuter.Type.RANDOM && targets == 0)
 			{
 				finalTargets.add(target)
 			}
@@ -165,10 +166,11 @@ class Ability
 			selectedDelays[target] = delay
 		}
 
+		val originalTargets = selectedTargets.toGdxArray()
 		for (target in finalTargets)
 		{
 			val closest = selectedTargets.minBy { it.dist(target) }!!
-			val dst = closest.dist(target)
+			val dst = if (permuter.type == Permuter.Type.RANDOM) 0 else closest.dist(target)
 
 			Future.call(
 					{
@@ -182,7 +184,7 @@ class Ability
 							target.effects.add(hs)
 						}
 
-						effect.apply(target, grid, delay, data)
+						effect.apply(target, grid, delay, data, originalTargets)
 					}, selectedDelays[closest] - 0.05f)
 
 		}

@@ -73,6 +73,7 @@ class Emitter(val particleEffect: ParticleEffect)
 	lateinit var dir: EmissionDirection
 	var gravity: Float = 0f
 	var isCollisionEmitter: Boolean = false
+	var isBlockingEmitter: Boolean = true
 
 	var time: Float = 0f
 		set(value)
@@ -379,6 +380,7 @@ class Emitter(val particleEffect: ParticleEffect)
 			emitter.particleRotation = Range(xml.get("ParticleRotation"))
 			emitter.gravity = xml.getFloat("Gravity", 0f)
 			emitter.isCollisionEmitter = xml.getBoolean("IsCollisionEmitter", false)
+			emitter.isBlockingEmitter = xml.getBoolean("IsBlockingEmitter", true)
 
 			val offset = xml.getChildByName("Offset")
 			if (offset != null)

@@ -11,20 +11,22 @@
 		<MatchDamage>0</MatchDamage>
 		<AbilityDamage>0</AbilityDamage>
 		<PowerGain>5</PowerGain>
+		<BonusGold>0</BonusGold>
+		<BonusTime>0</BonusTime>
 	</Statistics>
 	<Ability>
 		<Name>Energise</Name>
 		<Description>Channel the rings energies to manipulate events in your favour.</Description>
-		<Icon meta:RefKey="Sprite">
-			<Name>Oryx/uf_split/uf_items/ring_copper</Name>
-			<DrawActualSize>true</DrawActualSize>
-		</Icon>
 		<EffectData>
 			<Cost>5</Cost>
 			<Effect>1,Orb,Random,Convert</Effect>
 			<Data>
 				<Count>6</Count>
+				<ConvertTo>Same</ConvertTo>
 			</Data>
+			<HitEffect meta:RefKey="ParticleEffect">
+				<Name>Heal</Name>
+			</HitEffect>
 		</EffectData>
 	</Ability>
 </OffHand>

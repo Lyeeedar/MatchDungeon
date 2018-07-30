@@ -132,6 +132,7 @@ class ParticleEffect : Renderable()
 	}
 
 	fun complete() = emitters.all{ it.complete() }
+	fun blocked() = emitters.any { it.isBlockingEmitter && !it.complete() }
 
 	fun setPosition(x: Float, y: Float)
 	{

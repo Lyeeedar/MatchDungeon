@@ -1,13 +1,12 @@
-<Effect>
-	<MoveSpeed>0.1</MoveSpeed>
+<Effect xmlns:meta="Editor">
 	<Emitters>
 		<Emitter>
 			<Name>HeadGlow</Name>
+			<IsBlockingEmitter>false</IsBlockingEmitter>
 			<Space>Local</Space>
 			<Shape>Circle</Shape>
 			<Width>0.2</Width>
 			<Height>0.2</Height>
-			<Offset>0,0.2</Offset>
 			<Direction>Random</Direction>
 			<ParticleSpeed>0,0</ParticleSpeed>
 			<ParticleRotation>0,1</ParticleRotation>

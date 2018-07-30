@@ -17,7 +17,7 @@ class CardContentActionBranch : AbstractCardContentAction()
 		val variables = Global.getVariableMap()
 		for (branch in branches)
 		{
-			if (branch.condition.evaluate(variables).round() == 1)
+			if (branch.condition == "else" || branch.condition.evaluate(variables).round() == 1)
 			{
 				if (branch.hasNode)
 				{
