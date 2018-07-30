@@ -144,7 +144,7 @@ class AttackAbility : FriendlyAbility()
 	var targets: Int = 1
 	lateinit var targetter: Targetter
 	lateinit var permuter: Permuter
-	val data: ObjectMap<String, String> = ObjectMap()
+	val data: ObjectMap<String, Any> = ObjectMap()
 
 	override fun activate(friendly: Friendly, grid: Grid)
 	{
@@ -184,7 +184,15 @@ class AttackAbility : FriendlyAbility()
 		{
 			for (el in dEl.children())
 			{
-				data[el.name.toUpperCase()] = el.text.toUpperCase()
+				if (el.name == "Spreader")
+				{
+					val spreader = Spreader.load(el)
+					data[el.name.toUpperCase()] = spreader
+				}
+				else
+				{
+					data[el.name.toUpperCase()] = el.text.toUpperCase()
+				}
 			}
 		}
 	}

@@ -9,6 +9,10 @@
 		</Card>
 	</SilverRewards>
 	<GoldRewards meta:RefKey="Rewards">
+		<Equipment>
+			<Unlock>true</Unlock>
+			<Equipment>Quests/Dungeon/Rewards/MidasGlove.xml</Equipment>
+		</Equipment>
 		<Card>
 			<File>Quests/Dungeon/Rewards/GemHoard</File>
 		</Card>

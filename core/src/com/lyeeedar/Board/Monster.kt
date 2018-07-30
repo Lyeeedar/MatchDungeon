@@ -152,7 +152,7 @@ class MonsterAbility
 	var targetCount: Int = 1
 	lateinit var permuter: Permuter
 	lateinit var effect: Effect
-	val data = ObjectMap<String, String>()
+	val data = ObjectMap<String, Any>()
 
 	fun copy(): MonsterAbility
 	{
@@ -179,7 +179,7 @@ class MonsterAbility
 
 		if (effect == Effect.HEAL)
 		{
-			monster.hp += data["AMOUNT"].toInt()
+			monster.hp += data["AMOUNT"].toString().toInt()
 			if (monster.hp > monster.maxhp) monster.hp = monster.maxhp.toFloat()
 
 			val sprite = AssetManager.loadSprite("EffectSprites/Heal/Heal", 0.1f, Colour(0f,1f,0f,1f))
@@ -197,12 +197,12 @@ class MonsterAbility
 		{
 			if (effect == Effect.MOVE)
 			{
-				val range = data["RANGE", "1"].toInt()
+				val range = data["RANGE", "1"].toString().toInt()
 				availableTargets.addAll(grid.grid.filter { it != monster.tiles[0,0] && it.taxiDist(monster.tiles[0, 0]) <= range })
 			}
 			else
 			{
-				availableTargets.addAll(monster.getBorderTiles(grid, data["RANGE", "1"].toInt()))
+				availableTargets.addAll(monster.getBorderTiles(grid, data["RANGE", "1"].toString().toInt()))
 			}
 		}
 		else if (target == Target.RANDOM)
@@ -302,11 +302,11 @@ class MonsterAbility
 
 		for (target in finalTargets)
 		{
-			val strength = data.get("STRENGTH", "1").toInt()
+			val strength = data.get("STRENGTH", "1").toString().toInt()
 
 			if (effect == Effect.ATTACK || effect == Effect.SEALEDATTACK)
 			{
-				val speed = data.get("SPEED", monster.desc.attackNumPips.toString()).toInt()
+				val speed = data.get("SPEED", monster.desc.attackNumPips.toString()).toString().toInt()
 
 				if (target.orb == null)
 				{
@@ -331,7 +331,7 @@ class MonsterAbility
 			}
 			if (effect == Effect.CUSTOMORB)
 			{
-				target.orb = Orb(Orb.getNamedOrb(data.get("NAME")), grid.level.theme)
+				target.orb = Orb(Orb.getNamedOrb(data.get("NAME").toString()), grid.level.theme)
 			}
 			if (effect == Effect.SEAL || effect == Effect.SEALEDATTACK)
 			{
@@ -348,8 +348,8 @@ class MonsterAbility
 			}
 			if (effect == Effect.SUMMON)
 			{
-				val factionName = data["FACTION"]
-				val name = data["NAME"]
+				val factionName = data["FACTION"].toString()
+				val name = data["NAME"].toString()
 
 				val faction = Faction.load(factionName)
 				val summoned = Monster(faction.get(name)!!)
@@ -384,7 +384,16 @@ class MonsterAbility
 				for (i in 0 until dEl.childCount)
 				{
 					val el = dEl.getChild(i)
-					ability.data[el.name.toUpperCase()] = el.text.toUpperCase()
+
+					if (el.name == "Spreader")
+					{
+						val spreader = Spreader.load(el)
+						ability.data[el.name.toUpperCase()] = spreader
+					}
+					else
+					{
+						ability.data[el.name.toUpperCase()] = el.text.toUpperCase()
+					}
 				}
 			}
 

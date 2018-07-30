@@ -1,0 +1,17 @@
+<OffHand xmlns:meta="Editor">
+	<Name>Midas Glove</Name>
+	<Description>A glove imbued with an enchantment that turns normal items into gold.</Description>
+	<Cost>250</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/armor_gold_glove</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>0</Health>
+		<MatchDamage>0</MatchDamage>
+		<AbilityDamage>0</AbilityDamage>
+		<PowerGain>0</PowerGain>
+		<BonusGold>0.5</BonusGold>
+		<BonusTime>0</BonusTime>
+	</Statistics>
+</OffHand>
