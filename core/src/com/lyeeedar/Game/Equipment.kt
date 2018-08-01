@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.esotericsoftware.kryo.io.Input
+import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Global
@@ -200,6 +202,11 @@ class Equipment(val path: String)
 		slot = EquipmentSlot.valueOf(xml.name.toUpperCase())
 	}
 
+	fun save(output: Output)
+	{
+		output.writeString(path)
+	}
+
 	companion object
 	{
 		fun load(path: String): Equipment
@@ -209,6 +216,12 @@ class Equipment(val path: String)
 			val equipment = Equipment(path)
 			equipment.parse(xml)
 			return equipment
+		}
+
+		fun load(input: Input): Equipment
+		{
+			val path = input.readString()
+			return load(path)
 		}
 	}
 }

@@ -8,6 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
+import com.esotericsoftware.kryo.io.Input
+import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.Card.CardContent.CardContentActionRewards
 import com.lyeeedar.Game.AbstractReward
@@ -34,9 +36,15 @@ class Card(val path: String, val nodes: Array<CardNode>, val root: CardNode)
 		}
 	}
 
+	fun save(output: Output)
+	{
+		output.writeString(path)
+		output.writeString(current.guid)
+	}
+
 	companion object
 	{
-		fun load(path: String) : Card
+		fun load(path: String): Card
 		{
 			val xml = getXml(path)
 
@@ -58,6 +66,17 @@ class Card(val path: String, val nodes: Array<CardNode>, val root: CardNode)
 			}
 
 			val card = Card(path, nodeMap.values().toGdxArray(), nodeMap[rootNode])
+			return card
+		}
+
+		fun load(input: Input): Card
+		{
+			val path = input.readString()
+			val currentGuid = input.readString()
+
+			val card = load(path)
+			card.current = card.nodes.first { it.guid == currentGuid }
+
 			return card
 		}
 	}

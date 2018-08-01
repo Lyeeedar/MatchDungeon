@@ -16,6 +16,7 @@ import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.Quest
 import com.lyeeedar.Game.QuestNode
+import com.lyeeedar.Game.Save
 import com.lyeeedar.GameStateFlags
 import com.lyeeedar.Global
 import com.lyeeedar.MainGame
@@ -57,7 +58,7 @@ class CardScreen : AbstractScreen()
 		}
 	}
 
-	fun setup(card: Card, quest: Quest)
+	fun setup(card: Card, quest: Quest, resetLevelFlags: Boolean = true)
 	{
 		readyToSwitch = false
 
@@ -70,7 +71,10 @@ class CardScreen : AbstractScreen()
 		playerSlot.clear()
 		playerSlot.add(SpriteWidget(Global.player.baseCharacter.sprite, 32f, 32f)).grow()
 
-		Global.levelflags = GameStateFlags()
+		if (resetLevelFlags)
+		{
+			Global.levelflags = GameStateFlags()
+		}
 
 		currentCard = card
 		currentContent = currentCard.current.getContent()
@@ -250,6 +254,8 @@ class CardScreen : AbstractScreen()
 			}
 		}
 		updateEquipment()
+
+		Save.save()
 	}
 
 	override fun doRender(delta: Float)

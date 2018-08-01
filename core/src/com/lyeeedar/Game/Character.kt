@@ -5,6 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.esotericsoftware.kryo.io.Input
+import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
@@ -134,6 +136,11 @@ class Character(val path: String)
 		}
 	}
 
+	fun save(output: Output)
+	{
+		output.writeString(path)
+	}
+
 	companion object
 	{
 		fun load(path: String): Character
@@ -144,6 +151,12 @@ class Character(val path: String)
 			character.parse(xml)
 
 			return character
+		}
+
+		fun load(input: Input): Character
+		{
+			val path = input.readString()
+			return load(path)
 		}
 	}
 }

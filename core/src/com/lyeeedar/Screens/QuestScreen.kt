@@ -17,6 +17,7 @@ import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.AbstractReward
 import com.lyeeedar.Game.Quest
 import com.lyeeedar.Game.QuestNode
+import com.lyeeedar.Game.Save
 import com.lyeeedar.Global
 import com.lyeeedar.MainGame
 import com.lyeeedar.Renderables.Sprite.Sprite
@@ -182,6 +183,7 @@ class QuestScreen : AbstractScreen()
 		if (currentQuest.current == null)
 		{
 			completeQuest()
+			Save.save()
 			return
 		}
 
@@ -192,6 +194,7 @@ class QuestScreen : AbstractScreen()
 			currentQuest.current = currentQuestNode.getNext(CardContent.CardContentState.SUCCESS, null)
 
 			updateQuest()
+			Save.save()
 			return
 		}
 
@@ -449,22 +452,28 @@ class QuestScreen : AbstractScreen()
 
 				for (card in currentGroup)
 				{
+					card.canZoom = false
+					card.pickFuns.clear()
+					card.addPick("", {
+						currentGroup.removeValue(card, true)
+						if (currentGroup.size == 0)
+						{
+							Global.deck.newcharacters.clear()
+							Global.deck.newencounters.clear()
+							Global.deck.newequipment.clear()
+							Global.deck.newquests.clear()
+							updateRewards()
+						}
+
+						card.remove()
+					})
+
 					for (pick in card.pickFuns)
 					{
 						val oldFun = pick.pickFun
 						pick.pickFun = {
 							oldFun(it)
-							currentGroup.removeValue(card, true)
-							if (currentGroup.size == 0)
-							{
-								Global.deck.newcharacters.clear()
-								Global.deck.newencounters.clear()
-								Global.deck.newequipment.clear()
-								Global.deck.newquests.clear()
-								updateRewards()
-							}
 
-							card.remove()
 						}
 					}
 

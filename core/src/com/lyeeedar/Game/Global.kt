@@ -1,6 +1,5 @@
 package com.lyeeedar
 
-import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Colors
 import com.badlogic.gdx.graphics.Pixmap
@@ -27,8 +26,6 @@ import com.lyeeedar.Util.*
 import com.sun.xml.internal.ws.api.pipe.Engine
 import ktx.collections.addAll
 import ktx.collections.set
-import java.util.zip.GZIPInputStream
-import java.util.zip.GZIPOutputStream
 
 /**
  * Created by Philip on 04-Jul-16.
@@ -41,12 +38,12 @@ class Global
 		val PARTICLE_EDITOR = false
 
 		lateinit var skin: Skin
-		var fps = 60
+		var fps = 30
 		val android = false
 		val release = false
 		lateinit var game: MainGame
 		lateinit var applicationChanger: AbstractApplicationChanger
-		val settings: Settings by lazy { Settings() }
+		var settings = Settings()
 		lateinit var engine: Engine
 
 		var pause: Boolean = false
@@ -74,7 +71,6 @@ class Global
 
 			skin = loadSkin()
 			controls = Controls()
-			player = deck.getPlayer()
 
 			Colors.put("IMPORTANT", Color(0.6f, 1f, 0.9f, 1f))
 		}
@@ -82,12 +78,15 @@ class Global
 		fun newGame()
 		{
 			deck = GlobalDeck()
+			deck.newGame()
 
 			player = deck.getPlayer()
 			globalflags = GameStateFlags()
 			levelflags = GameStateFlags()
 
-			val quest = Quest.load("Training/NewGame")
+			settings = Settings()
+
+			val quest = Quest.load("Intro/Intro")
 
 			game.getTypedScreen<QuestScreen>()?.setup(quest)
 			game.getTypedScreen<DeckScreen>()?.setup()
@@ -391,9 +390,9 @@ class GlobalDeck
 	val newquests = UniqueArray<Quest>({it.path.hashCode()})
 
 	val playerDeck = PlayerDeck()
-	var chosenCharacter: Character
+	lateinit var chosenCharacter: Character
 
-	init
+	fun newGame()
 	{
 		for (cardPath in XmlData.enumeratePaths("Cards/Default", "Card"))
 		{
@@ -451,32 +450,190 @@ class GlobalDeck
 		characters.add(Character.load("Peasant"))
 		chosenCharacter = characters.first()
 	}
+
+	fun save(output: Output)
+	{
+		output.writeInt(encounters.size)
+		for (encounter in encounters)
+		{
+			encounter.save(output)
+		}
+
+		output.writeInt(equipment.size)
+		for (equip in equipment)
+		{
+			equip.save(output)
+		}
+
+		output.writeInt(characters.size)
+		for (character in characters)
+		{
+			character.save(output)
+		}
+
+		output.writeInt(quests.size)
+		for (quest in quests)
+		{
+			quest.save(output)
+		}
+
+		output.writeInt(newencounters.size)
+		for (encounter in newencounters)
+		{
+			output.writeInt(encounter.path.hashCode())
+		}
+
+		output.writeInt(newequipment.size)
+		for (equip in newequipment)
+		{
+			output.writeInt(equip.path.hashCode())
+		}
+
+		output.writeInt(newcharacters.size)
+		for (character in newcharacters)
+		{
+			output.writeInt(character.path.hashCode())
+		}
+
+		output.writeInt(newquests.size)
+		for (quest in newquests)
+		{
+			output.writeInt(quest.path.hashCode())
+		}
+
+		output.writeInt(playerDeck.encounters.size)
+		for (encounter in playerDeck.encounters)
+		{
+			output.writeInt(encounter.path.hashCode())
+		}
+
+		output.writeInt(playerDeck.equipment.size)
+		for (equip in playerDeck.equipment)
+		{
+			output.writeInt(equip.path.hashCode())
+		}
+
+		output.writeInt(chosenCharacter.path.hashCode())
+	}
+
+	companion object
+	{
+		fun load(input: Input): GlobalDeck
+		{
+			val deck = GlobalDeck()
+
+			val numEncounters = input.readInt()
+			for (i in 0 until numEncounters)
+			{
+				val card = Card.load(input)
+				deck.encounters.add(card)
+			}
+
+			val numEquipment = input.readInt()
+			for (i in 0 until numEquipment)
+			{
+				val equip = Equipment.load(input)
+				deck.equipment.add(equip)
+			}
+
+			val numCharacters = input.readInt()
+			for (i in 0 until numCharacters)
+			{
+				val character = Character.load(input)
+				deck.characters.add(character)
+			}
+
+			val numQuests = input.readInt()
+			for (i in 0 until numQuests)
+			{
+				val quest = Quest.load(input)
+				deck.quests.add(quest)
+			}
+
+			val numNewEncounters = input.readInt()
+			for (i in 0 until numNewEncounters)
+			{
+				val hash = input.readInt()
+				deck.newencounters.add(deck.encounters.uniqueMap[hash])
+			}
+
+			val numNewEquipment = input.readInt()
+			for (i in 0 until numNewEquipment)
+			{
+				val hash = input.readInt()
+				deck.newequipment.add(deck.equipment.uniqueMap[hash])
+			}
+
+			val numNewCharacters = input.readInt()
+			for (i in 0 until numNewCharacters)
+			{
+				val hash = input.readInt()
+				deck.newcharacters.add(deck.characters.uniqueMap[hash])
+			}
+
+			val numNewQuests = input.readInt()
+			for (i in 0 until numNewQuests)
+			{
+				val hash = input.readInt()
+				deck.newquests.add(deck.quests.uniqueMap[hash])
+			}
+
+			val numPlayerEncounters = input.readInt()
+			for (i in 0 until numPlayerEncounters)
+			{
+				val hash = input.readInt()
+				deck.playerDeck.encounters.add(deck.encounters.uniqueMap[hash])
+			}
+
+			val numPlayerEquipment = input.readInt()
+			for (i in 0 until numPlayerEquipment)
+			{
+				val hash = input.readInt()
+				deck.playerDeck.equipment.add(deck.equipment.uniqueMap[hash])
+			}
+
+			val chosenCharacterHash = input.readInt()
+			deck.chosenCharacter = deck.characters.uniqueMap[chosenCharacterHash]
+
+			return deck
+		}
+	}
 }
 
 class GameStateFlags
 {
 	val flags = ObjectFloatMap<String>()
+
+	fun save(kryo: Kryo, output: Output)
+	{
+		kryo.writeObject(output, flags)
+	}
+
+	companion object
+	{
+		fun load(kryo: Kryo, input: Input): GameStateFlags
+		{
+			val gsf = GameStateFlags()
+
+			val newflags = kryo.readObject(input, ObjectFloatMap::class.java)
+
+			for (pair in newflags)
+			{
+				gsf.flags.put(pair.key as String, pair.value)
+			}
+
+			return gsf
+		}
+	}
 }
 
 class Settings
 {
-	val kryo: Kryo by lazy { initKryo() }
-	fun initKryo(): Kryo
-	{
-		val kryo = Kryo()
-		kryo.isRegistrationRequired = false
-
-		kryo.registerGdxSerialisers()
-		kryo.registerLyeeedarSerialisers()
-
-		return kryo
-	}
-
 	val data = ObjectMap<String, Any>()
 
 	fun hasKey(key: String) = data.containsKey(key)
 	fun <T> get(key: String, default: T) = if (data.containsKey(key)) data[key] as T else default
-	fun set(key: String, value: Any) { data[key] = value; save() }
+	fun set(key: String, value: Any) { data[key] = value }
 
 	fun set(other: Settings)
 	{
@@ -486,52 +643,25 @@ class Settings
 		}
 	}
 
-	init
+	fun save(kryo: Kryo, output: Output)
 	{
-		load()
-	}
-
-	fun save()
-	{
-		val outputFile = Gdx.files.local("settings.dat")
-
-		var output: Output? = null
-		try
-		{
-			output = Output(GZIPOutputStream(outputFile.write(false)))
-		}
-		catch (e: Exception)
-		{
-			e.printStackTrace()
-			return
-		}
-
 		kryo.writeObject(output, data)
-
-		output.close()
 	}
 
-	fun load()
+	companion object
 	{
-		var input: Input? = null
-
-		try
+		fun load(kryo: Kryo, input: Input): Settings
 		{
-			input = Input(GZIPInputStream(Gdx.files.local("settings.dat").read()))
+			val settings = Settings()
+
 			val newData = kryo.readObject(input, ObjectMap::class.java)
 
 			for (pair in newData)
 			{
-				data[pair.key as String] = pair.value
+				settings.data[pair.key as String] = pair.value
 			}
-		}
-		catch (e: Exception)
-		{
-			//e.printStackTrace()
-		}
-		finally
-		{
-			input?.close()
+
+			return settings
 		}
 	}
 }

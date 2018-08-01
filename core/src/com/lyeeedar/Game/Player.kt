@@ -7,9 +7,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectSet
+import com.esotericsoftware.kryo.Kryo
+import com.esotericsoftware.kryo.io.Input
+import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.Card.Card
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Global
+import com.lyeeedar.GlobalDeck
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.FullscreenTable
 import com.lyeeedar.UI.Seperator
@@ -22,8 +26,8 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 {
 	var gold: Int = 0
 
-	val statistics = FastEnumMap<Statistic, Float>(Statistic::class.java)
-	val equipment = FastEnumMap<EquipmentSlot, Equipment>(EquipmentSlot::class.java)
+	var statistics = FastEnumMap<Statistic, Float>(Statistic::class.java)
+	var equipment = FastEnumMap<EquipmentSlot, Equipment>(EquipmentSlot::class.java)
 
 	fun getStat(statistic: Statistic): Float
 	{
@@ -163,6 +167,53 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 		}
 
 		return table
+	}
+
+	fun save(kryo: Kryo, output: Output)
+	{
+		output.writeInt(gold)
+		kryo.writeObject(output, statistics)
+
+		for (slot in EquipmentSlot.Values)
+		{
+			val equip = equipment[slot]
+			if (equip == null)
+			{
+				output.writeBoolean(false)
+			}
+			else
+			{
+				output.writeBoolean(true)
+				equip.save(output)
+			}
+		}
+	}
+
+	companion object
+	{
+		fun load(kryo: Kryo, input: Input, deck: GlobalDeck): Player
+		{
+			val gold = input.readInt()
+			val stats = kryo.readObject(input, FastEnumMap::class.java) as FastEnumMap<Statistic, Float>
+
+			val equipment = FastEnumMap<EquipmentSlot, Equipment>(EquipmentSlot::class.java)
+			for (slot in EquipmentSlot.Values)
+			{
+				val exists = input.readBoolean()
+				if (exists)
+				{
+					val equip = Equipment.load(input)
+					equipment[slot] = equip
+				}
+			}
+
+			val player = Player(deck.chosenCharacter, deck.playerDeck)
+			player.gold = gold
+			player.statistics = stats
+			player.equipment = equipment
+
+			return player
+		}
 	}
 }
 

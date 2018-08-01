@@ -19,15 +19,20 @@ import ktx.actors.then
 
 class TutorialPopup(val text: String, val emphasisSource: Any, val advance: () -> Unit) : Table()
 {
-	fun show()
+	fun evaluateBounds(): Rectangle
 	{
-		val emphasis = when (emphasisSource)
+		return when (emphasisSource)
 		{
 			is Rectangle -> emphasisSource
 			is Actor -> emphasisSource.getBounds()
 			is Array<*> -> GridWidget.instance.getRect(emphasisSource as Array<Point>)
 			else -> Rectangle(Global.stage.width / 2f, Global.stage.height / 2f, 0f, 0f)
 		}
+	}
+
+	fun show(greyoutOnEnter: Boolean, clearOnExit: Boolean)
+	{
+		val emphasis = evaluateBounds()
 
 		if (emphasis.width > 0f && emphasis.height > 0f)
 		{
@@ -43,45 +48,49 @@ class TutorialPopup(val text: String, val emphasisSource: Any, val advance: () -
 		val greyoutalpha = 0.9f
 
 		// add greyout
-		val topGreyout = Table()
-		topGreyout.alpha = 0f
-		topGreyout.touchable = Touchable.enabled
-		topGreyout.background = TextureRegionDrawable(AssetManager.loadTextureRegion ("white")).tint(Color(0f, 0f, 0f, greyoutalpha))
-		topGreyout.setBounds(0f, 0f, Global.stage.width, emphasis.y)
-		topGreyout.addAction(alpha(0f) then fadeIn(animSpeed))
-		Global.stage.addActor(topGreyout)
 
-		val bottomGreyout = Table()
-		bottomGreyout.alpha = 0f
-		bottomGreyout.touchable = Touchable.enabled
-		bottomGreyout.background = TextureRegionDrawable(AssetManager.loadTextureRegion ("white")).tint(Color(0f, 0f, 0f, greyoutalpha))
-		bottomGreyout.setBounds(0f, emphasis.y + emphasis.height, Global.stage.width, Global.stage.height - (emphasis.y + emphasis.height))
-		bottomGreyout.addAction(alpha(0f) then fadeIn(animSpeed))
-		Global.stage.addActor(bottomGreyout)
+		if (greyoutOnEnter)
+		{
+			topGreyout = Table()
+			topGreyout.alpha = 0f
+			topGreyout.touchable = Touchable.enabled
+			topGreyout.background = TextureRegionDrawable(AssetManager.loadTextureRegion("white")).tint(Color(0f, 0f, 0f, greyoutalpha))
+			topGreyout.setBounds(0f, 0f, Global.stage.width, emphasis.y)
+			topGreyout.addAction(alpha(0f) then fadeIn(animSpeed))
+			Global.stage.addActor(topGreyout)
 
-		val leftGreyout = Table()
-		leftGreyout.alpha = 0f
-		leftGreyout.touchable = Touchable.enabled
-		leftGreyout.background = TextureRegionDrawable(AssetManager.loadTextureRegion ("white")).tint(Color(0f, 0f, 0f, greyoutalpha))
-		leftGreyout.setBounds(0f, emphasis.y, emphasis.x, emphasis.height)
-		leftGreyout.addAction(alpha(0f) then fadeIn(animSpeed))
-		Global.stage.addActor(leftGreyout)
+			bottomGreyout = Table()
+			bottomGreyout.alpha = 0f
+			bottomGreyout.touchable = Touchable.enabled
+			bottomGreyout.background = TextureRegionDrawable(AssetManager.loadTextureRegion("white")).tint(Color(0f, 0f, 0f, greyoutalpha))
+			bottomGreyout.setBounds(0f, emphasis.y + emphasis.height, Global.stage.width, Global.stage.height - (emphasis.y + emphasis.height))
+			bottomGreyout.addAction(alpha(0f) then fadeIn(animSpeed))
+			Global.stage.addActor(bottomGreyout)
 
-		val rightGreyout = Table()
-		rightGreyout.alpha = 0f
-		rightGreyout.touchable = Touchable.enabled
-		rightGreyout.background = TextureRegionDrawable(AssetManager.loadTextureRegion ("white")).tint(Color(0f, 0f, 0f, greyoutalpha))
-		rightGreyout.setBounds(emphasis.x + emphasis.width, emphasis.y, Global.stage.width - (emphasis.x + emphasis.width), emphasis.height)
-		rightGreyout.addAction(alpha(0f) then fadeIn(animSpeed))
-		Global.stage.addActor(rightGreyout)
+			leftGreyout = Table()
+			leftGreyout.alpha = 0f
+			leftGreyout.touchable = Touchable.enabled
+			leftGreyout.background = TextureRegionDrawable(AssetManager.loadTextureRegion("white")).tint(Color(0f, 0f, 0f, greyoutalpha))
+			leftGreyout.setBounds(0f, emphasis.y, emphasis.x, emphasis.height)
+			leftGreyout.addAction(alpha(0f) then fadeIn(animSpeed))
+			Global.stage.addActor(leftGreyout)
 
-		val centerBlock = Table()
-		centerBlock.alpha = 0f
-		centerBlock.touchable = Touchable.enabled
-		centerBlock.background = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("GUI/border"), 8, 8, 8, 8)).tint(Color.GOLD)
-		centerBlock.setBounds(emphasis.x, emphasis.y, emphasis.width, emphasis.height)
-		if (emphasis.width != 0f && emphasis.height != 0f) centerBlock.addAction(alpha(0f) then fadeIn(animSpeed))
-		Global.stage.addActor(centerBlock)
+			rightGreyout = Table()
+			rightGreyout.alpha = 0f
+			rightGreyout.touchable = Touchable.enabled
+			rightGreyout.background = TextureRegionDrawable(AssetManager.loadTextureRegion("white")).tint(Color(0f, 0f, 0f, greyoutalpha))
+			rightGreyout.setBounds(emphasis.x + emphasis.width, emphasis.y, Global.stage.width - (emphasis.x + emphasis.width), emphasis.height)
+			rightGreyout.addAction(alpha(0f) then fadeIn(animSpeed))
+			Global.stage.addActor(rightGreyout)
+
+			centerBlock = Table()
+			centerBlock.alpha = 0f
+			centerBlock.touchable = Touchable.enabled
+			centerBlock.background = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("GUI/border"), 8, 8, 8, 8)).tint(Color.GOLD)
+			centerBlock.setBounds(emphasis.x, emphasis.y, emphasis.width, emphasis.height)
+			if (emphasis.width != 0f && emphasis.height != 0f) centerBlock.addAction(alpha(0f) then fadeIn(animSpeed))
+			Global.stage.addActor(centerBlock)
+		}
 
 		// add popup
 		background = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("Sprites/GUI/background.png"), 24, 24, 24, 24)).tint(Color(1f, 1f, 1f, 0.7f))
@@ -96,15 +105,28 @@ class TutorialPopup(val text: String, val emphasisSource: Any, val advance: () -
 		addAction(alpha(0f) then fadeIn(animSpeed))
 
 		val click = {
-			advance.invoke()
 			addAction(fadeOut(0.1f) then removeActor())
-			topGreyout.addAction(fadeOut(0.1f) then removeActor())
-			bottomGreyout.addAction(fadeOut(0.1f) then removeActor())
-			leftGreyout.addAction(fadeOut(0.1f) then removeActor())
-			rightGreyout.addAction(fadeOut(0.1f) then removeActor())
-			centerBlock.addAction(fadeOut(0.1f) then removeActor())
+
+			if (clearOnExit)
+			{
+				topGreyout.addAction(alpha(1f) then fadeOut(animSpeed) then removeActor())
+				bottomGreyout.addAction(alpha(1f) then fadeOut(animSpeed) then removeActor())
+				leftGreyout.addAction(alpha(1f) then fadeOut(animSpeed) then removeActor())
+				rightGreyout.addAction(alpha(1f) then fadeOut(animSpeed) then removeActor())
+
+				centerBlock.addAction(fadeOut(0.1f) then removeActor())
+			}
+
+			advance.invoke()
 		}
 		addClickListener(click)
+
+		topGreyout.clearListeners()
+		bottomGreyout.clearListeners()
+		leftGreyout.clearListeners()
+		rightGreyout.clearListeners()
+		centerBlock.clearListeners()
+
 		topGreyout.addClickListener(click)
 		bottomGreyout.addClickListener(click)
 		leftGreyout.addClickListener(click)
@@ -129,5 +151,14 @@ class TutorialPopup(val text: String, val emphasisSource: Any, val advance: () -
 		setPosition(px, py)
 		Global.stage.addActor(this)
 		ensureOnScreen(5f)
+	}
+
+	companion object
+	{
+		var topGreyout = Table()
+		var bottomGreyout = Table()
+		var leftGreyout = Table()
+		var rightGreyout = Table()
+		var centerBlock = Table()
 	}
 }

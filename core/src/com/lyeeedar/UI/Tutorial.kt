@@ -1,5 +1,6 @@
 package com.lyeeedar.UI
 
+import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Global
 
@@ -63,6 +64,7 @@ class Tutorial(val key: String)
 		advance()
 	}
 
+	var prevBounds: Rectangle? = null
 	private fun advance()
 	{
 		index++
@@ -80,11 +82,25 @@ class Tutorial(val key: String)
 			val action = actions[index]
 			if (action is TutorialPopup)
 			{
-				action.show()
+				val actionBounds = action.evaluateBounds()
+
+				var removeOnExit = true
+
+				val next = if (actions.size > index+1) actions[index+1] else null
+				if (next != null && next is TutorialPopup)
+				{
+					val nextBounds = next.evaluateBounds()
+					removeOnExit = nextBounds != actionBounds
+				}
+
+				action.show(actionBounds != prevBounds, removeOnExit)
+
+				prevBounds = actionBounds
 			}
 			else
 			{
 				currentAction = action as ((Float) -> Boolean)?
+				prevBounds = null
 			}
 		}
 	}

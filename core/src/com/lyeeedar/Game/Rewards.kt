@@ -94,6 +94,7 @@ class StatisticsReward : AbstractReward()
 				card.addPick("Take", {
 
 					Global.player.statistics[stat] = (Global.player.statistics[stat] ?: 0f) + statVal
+					Save.save()
 
 					val sprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/key_ornate")
 
@@ -140,9 +141,12 @@ class CardReward : AbstractReward()
 			val card = Card.load(cardPath)
 
 			val cardWidget = card.current.getCard()
-			cardWidget.addPick("", {
-				Global.deck.encounters.add(card)
 
+			Global.deck.encounters.add(card)
+			Global.deck.newencounters.add(card)
+			Save.save()
+
+			cardWidget.addPick("", {
 				val sprite = AssetManager.loadSprite("Oryx/Custom/items/card")
 
 				val src = cardWidget.localToStageCoordinates(Vector2(cardWidget.width / 2f, cardWidget.height / 2f))
@@ -188,8 +192,12 @@ class QuestReward : AbstractReward()
 			val quest = Quest.load(questPath)
 
 			val cardWidget = quest.getCard()
+
+			Global.deck.quests.add(quest)
+			Global.deck.newquests.add(quest)
+			Save.save()
+
 			cardWidget.addPick("", {
-				Global.deck.quests.add(quest)
 
 				val sprite = AssetManager.loadSprite("Oryx/Custom/items/card")
 
@@ -236,8 +244,12 @@ class CharacterReward : AbstractReward()
 			val c = Character.load(path)
 
 			val cardWidget = c.getCard()
+
+			Global.deck.characters.add(c)
+			Global.deck.newcharacters.add(c)
+			Save.save()
+
 			cardWidget.addPick("", {
-				Global.deck.characters.add(c)
 
 				val sprite = AssetManager.loadSprite("Oryx/Custom/items/card")
 
@@ -292,6 +304,7 @@ class MoneyReward : AbstractReward()
 		card.addPick("Take", {
 
 			Global.player.gold += amount
+			Save.save()
 
 			val sprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_gold")
 
@@ -396,6 +409,7 @@ class EquipmentReward : AbstractReward()
 			}
 			else
 			{
+				Save.save()
 				return output
 			}
 		}
@@ -444,6 +458,8 @@ class EquipmentReward : AbstractReward()
 		})
 
 		output.add(card)
+
+		Save.save()
 
 		return output
 	}

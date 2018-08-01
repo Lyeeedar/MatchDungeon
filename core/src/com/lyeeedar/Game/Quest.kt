@@ -5,6 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.badlogic.gdx.utils.ObjectSet
+import com.esotericsoftware.kryo.io.Input
+import com.esotericsoftware.kryo.io.Output
 import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Board.Theme
 import com.lyeeedar.Card.Card
@@ -267,12 +269,75 @@ class Quest(val path: String)
 		else return SpawnWeight.END
 	}
 
+	fun save(output: Output)
+	{
+		output.writeString(path)
+		output.writeInt(state.ordinal)
+
+		output.writeInt(questCards.size)
+		for (card in questCards)
+		{
+			card.save(output)
+		}
+
+		output.writeInt(themeCards.size)
+		for (card in themeCards)
+		{
+			card.save(output)
+		}
+
+		output.writeString(current?.guid ?: "null")
+
+		output.writeBoolean(gotBronze)
+		output.writeBoolean(gotSilver)
+		output.writeBoolean(gotGold)
+	}
+
 	companion object
 	{
 		fun load(path: String) : Quest
 		{
 			val quest = Quest(path)
+			return quest
+		}
 
+		fun load(input: Input): Quest
+		{
+			val path = input.readString()
+			val quest = load(path)
+
+			val state = input.readInt()
+			quest.state = QuestState.values()[state]
+
+			quest.questCards.clear()
+			val numQuestCards = input.readInt()
+			for (i in 0 until numQuestCards)
+			{
+				val card = Card.load(input)
+				quest.questCards.add(card)
+			}
+
+			quest.themeCards.clear()
+			val numThemeCards = input.readInt()
+			for (i in 0 until numThemeCards)
+			{
+				val card = Card.load(input)
+				quest.themeCards.add(card)
+			}
+
+			val currentGuid = input.readString()
+			if (currentGuid != null)
+			{
+				quest.current = quest.nodes.first { it.guid == currentGuid }
+			}
+			else
+			{
+				quest.current = null
+			}
+
+			quest.gotBronze = input.readBoolean()
+			quest.gotSilver = input.readBoolean()
+			quest.gotGold = input.readBoolean()
 
 			return quest
 		}

@@ -1,12 +1,12 @@
 package com.lyeeedar.Util
 
 import com.badlogic.gdx.utils.Array
-import com.badlogic.gdx.utils.IntSet
+import com.badlogic.gdx.utils.IntMap
 
 class UniqueArray<T>(val uniqueFun: (T) -> Int) : Iterable<T>
 {
 	val backingArray = Array<T>()
-	val uniqueSet = IntSet()
+	val uniqueMap = IntMap<T>()
 
 	val size: Int
 		get() = backingArray.size
@@ -14,10 +14,10 @@ class UniqueArray<T>(val uniqueFun: (T) -> Int) : Iterable<T>
 	fun add(item: T)
 	{
 		val key = uniqueFun(item)
-		if (!uniqueSet.contains(key))
+		if (!uniqueMap.containsKey(key))
 		{
 			backingArray.add(item)
-			uniqueSet.add(key)
+			uniqueMap.put(key, item)
 		}
 	}
 
@@ -32,7 +32,7 @@ class UniqueArray<T>(val uniqueFun: (T) -> Int) : Iterable<T>
 	fun remove(item: T)
 	{
 		val key = uniqueFun(item)
-		uniqueSet.remove(key)
+		uniqueMap.remove(key)
 
 		backingArray.removeValue(item, true)
 	}
@@ -40,7 +40,7 @@ class UniqueArray<T>(val uniqueFun: (T) -> Int) : Iterable<T>
 	fun clear()
 	{
 		backingArray.clear()
-		uniqueSet.clear()
+		uniqueMap.clear()
 	}
 
 	override fun iterator(): Iterator<T>

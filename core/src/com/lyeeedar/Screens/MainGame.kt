@@ -3,6 +3,7 @@ package com.lyeeedar
 import com.badlogic.gdx.Game
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Screen
+import com.lyeeedar.Game.Save
 import com.lyeeedar.Screens.*
 import com.lyeeedar.Util.Future
 import java.io.PrintWriter
@@ -21,10 +22,24 @@ class MainGame : Game()
 		CARD,
 		DECK,
 		QUESTSELECTION,
-		PARTICLEEDITOR
+		PARTICLEEDITOR,
+		INVALID
 	}
 
 	private val screens = HashMap<ScreenEnum, AbstractScreen>()
+	var currentScreen: AbstractScreen? = null
+	val currentScreenEnum: ScreenEnum
+		get()
+		{
+			for (se in ScreenEnum.values())
+			{
+				if (screens[se] == currentScreen)
+				{
+					return se
+				}
+			}
+			return ScreenEnum.INVALID
+		}
 
 	override fun create()
 	{
@@ -68,7 +83,12 @@ class MainGame : Game()
 		screens.put(ScreenEnum.QUESTSELECTION, QuestSelectionScreen())
 		//screens.put(ScreenEnum.PARTICLEEDITOR, ParticleEditorScreen())
 
-		Global.newGame()
+		val success = Save.load()
+
+		if (!success)
+		{
+			Global.newGame()
+		}
 	}
 
 	fun switchScreen(screen: AbstractScreen)
@@ -98,21 +118,21 @@ class MainGame : Game()
 
 	override fun setScreen(screen: Screen?)
 	{
-		val currentScreen = getScreen() as? AbstractScreen
-
 		if (currentScreen != null)
 		{
-			currentScreen.fadeOutTransition(0.2f)
+			currentScreen!!.fadeOutTransition(0.2f)
 
 			Future.call(
 					{
-						super.setScreen(screen)
 						val ascreen = screen as AbstractScreen
+						currentScreen = ascreen
+						super.setScreen(screen)
 						ascreen.fadeInTransition(0.2f)
 					}, 0.2f)
 		}
 		else
 		{
+			currentScreen = screen as? AbstractScreen
 			super.setScreen(screen)
 		}
 	}

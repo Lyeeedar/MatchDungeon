@@ -90,9 +90,9 @@ fun Kryo.registerLyeeedarSerialisers()
 		{
 			output.writeInt(`object`.width)
 			output.writeInt(`object`.height)
-			for (x in 0..`object`.width-1)
+			for (x in 0 until `object`.width)
 			{
-				for (y in 0..`object`.height-1)
+				for (y in 0 until `object`.height)
 				{
 					kryo.writeClassAndObject(output, `object`[x, y])
 				}
@@ -107,9 +107,9 @@ fun Kryo.registerLyeeedarSerialisers()
 			val grid = Array2D<Any>(width, height)
 			kryo.reference(grid)
 
-			for (x in 0..width-1)
+			for (x in 0 until width)
 			{
-				for (y in 0..height-1)
+				for (y in 0 until height)
 				{
 					val obj = kryo.readClassAndObject(input)
 					grid[x, y] = obj
@@ -119,6 +119,22 @@ fun Kryo.registerLyeeedarSerialisers()
 			return grid
 		}
 
+	})
+
+	kryo.register(XmlData::class.java, object : Serializer<XmlData>()
+	{
+		override fun read(kryo: Kryo, input: Input, type: Class<XmlData>): XmlData
+		{
+			val xmlData = XmlData()
+			xmlData.load(input)
+
+			return xmlData
+		}
+
+		override fun write(kryo: Kryo, output: Output, xmlData: XmlData)
+		{
+			xmlData.save(output)
+		}
 	})
 }
 
@@ -136,7 +152,7 @@ fun Kryo.registerGdxSerialisers()
 			val length = input.readInt(true)
 			array.ensureCapacity(length)
 
-			for (i in 0..length-1)
+			for (i in 0 until length)
 			{
 				val obj = kryo.readClassAndObject(input)
 				array.add(obj)
@@ -150,7 +166,7 @@ fun Kryo.registerGdxSerialisers()
 			val length = array.size
 			output.writeInt(length, true)
 
-			for (i in 0..length-1)
+			for (i in 0 until length)
 			{
 				kryo.writeClassAndObject(output, array[i])
 			}
@@ -167,7 +183,7 @@ fun Kryo.registerGdxSerialisers()
 			val length = input.readInt(true)
 			map.ensureCapacity(length)
 
-			for (i in 0..length-1)
+			for (i in 0 until length)
 			{
 				val key = kryo.readClassAndObject(input)
 				val value = kryo.readClassAndObject(input)
@@ -201,7 +217,7 @@ fun Kryo.registerGdxSerialisers()
 			val length = input.readInt(true)
 			map.ensureCapacity(length)
 
-			for (i in 0..length-1)
+			for (i in 0 until length)
 			{
 				val key = kryo.readClassAndObject(input)
 				val value = input.readFloat()

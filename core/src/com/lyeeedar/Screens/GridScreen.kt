@@ -42,7 +42,6 @@ class GridScreen(): AbstractScreen()
 	var ultimateButton: TextButton? = null
 	var completeButton: TextButton? = null
 	var grid: GridWidget? = null
-	//lateinit var player: Player
 	lateinit var level: Level
 	val defeatTable = Table()
 
