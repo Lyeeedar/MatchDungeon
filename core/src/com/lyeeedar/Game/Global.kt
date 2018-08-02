@@ -38,7 +38,7 @@ class Global
 		val PARTICLE_EDITOR = false
 
 		lateinit var skin: Skin
-		var fps = 30
+		var fps = 60
 		val android = false
 		val release = false
 		lateinit var game: MainGame

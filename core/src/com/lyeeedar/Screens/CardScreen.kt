@@ -58,7 +58,7 @@ class CardScreen : AbstractScreen()
 		}
 	}
 
-	fun setup(card: Card, quest: Quest, resetLevelFlags: Boolean = true)
+	fun setup(card: Card, quest: Quest, resetLevelFlags: Boolean = true, content: CardContent? = null)
 	{
 		readyToSwitch = false
 
@@ -77,7 +77,7 @@ class CardScreen : AbstractScreen()
 		}
 
 		currentCard = card
-		currentContent = currentCard.current.getContent()
+		currentContent = content?: currentCard.current.getContent()
 		currentQuest = quest
 
 		mainTable.clear()

@@ -2,6 +2,9 @@ package com.lyeeedar.Card.CardContent
 
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
+import com.esotericsoftware.kryo.Kryo
+import com.esotericsoftware.kryo.io.Input
+import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.getXml
@@ -86,6 +89,24 @@ class CardContent(val path: String)
 		}
 	}
 
+	fun save(kryo: Kryo, output: Output)
+	{
+		output.writeString(path)
+		output.writeInt(state.ordinal)
+
+		if (state == CardContentState.CUSTOM)
+		{
+			output.writeString(customKey)
+		}
+
+		output.writeInt(CardContentStack.size)
+		for (item in CardContentStack)
+		{
+			output.writeString(item.node.guid)
+			output.writeInt(item.index)
+		}
+	}
+
 	companion object
 	{
 		fun load(path: String): CardContent
@@ -93,6 +114,34 @@ class CardContent(val path: String)
 			val CardContent = CardContent(path)
 			CardContent.parse(getXml(path))
 			return CardContent
+		}
+
+		fun load(kryo: Kryo, input: Input): CardContent
+		{
+			val path = input.readString()
+
+			val content = load(path)
+			content.state = CardContentState.values()[input.readInt()]
+
+			if (content.state == CardContentState.CUSTOM)
+			{
+				content.customKey = input.readString()
+			}
+
+			val stackSize = input.readInt()
+			for (i in 0 until stackSize)
+			{
+				val guid = input.readString()
+				val index = input.readInt()
+
+				val node = content.nodes[guid]
+
+				val item = CardContentNodeState(node)
+				item.index = index
+				content.CardContentStack.add(item)
+			}
+
+			return content
 		}
 	}
 }

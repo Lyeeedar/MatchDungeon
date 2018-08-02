@@ -441,7 +441,7 @@ class EquipmentReward : AbstractReward()
 			}, 0.75f)
 		})
 
-		val sellAmount = equipment.cost / 10
+		val sellAmount = equipment.cost / 4
 		card.addPick("Sell ($sellAmount)", {
 			Global.player.gold += sellAmount
 

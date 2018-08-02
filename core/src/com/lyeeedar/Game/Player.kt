@@ -187,6 +187,18 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 				equip.save(output)
 			}
 		}
+
+		output.writeInt(deck.encounters.size)
+		for (encounter in deck.encounters)
+		{
+			output.writeInt(encounter.path.hashCode())
+		}
+
+		output.writeInt(deck.equipment.size)
+		for (equip in deck.equipment)
+		{
+			output.writeInt(equip.path.hashCode())
+		}
 	}
 
 	companion object
@@ -207,7 +219,22 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 				}
 			}
 
-			val player = Player(deck.chosenCharacter, deck.playerDeck)
+			val playerDeck = PlayerDeck()
+			val numPlayerEncounters = input.readInt()
+			for (i in 0 until numPlayerEncounters)
+			{
+				val hash = input.readInt()
+				playerDeck.encounters.add(deck.encounters.uniqueMap[hash])
+			}
+
+			val numPlayerEquipment = input.readInt()
+			for (i in 0 until numPlayerEquipment)
+			{
+				val hash = input.readInt()
+				playerDeck.equipment.add(deck.equipment.uniqueMap[hash])
+			}
+
+			val player = Player(deck.chosenCharacter, playerDeck)
 			player.gold = gold
 			player.statistics = stats
 			player.equipment = equipment

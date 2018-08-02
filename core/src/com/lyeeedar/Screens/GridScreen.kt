@@ -277,7 +277,7 @@ class GridScreen(): AbstractScreen()
 
 		val tutorial = Tutorial("GridScreen")
 		tutorial.addDelay(1f)
-		tutorial.addPopup("This is the match 3 board.", Rectangle(Global.stage.width / 2f, Global.stage.height / 2f, 0f, 0f))
+		tutorial.addPopup("This is the match 3 board.", Rectangle(stage.width / 2f, stage.height / 2f, 0f, 0f))
 		tutorial.addPopup("These are your victory conditions", victoryTable)
 		tutorial.addPopup("These are your failure conditions", defeatTable)
 		tutorial.addPopup("These are your abilities, provided by your equipment.", abilityTable)

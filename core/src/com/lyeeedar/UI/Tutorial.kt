@@ -1,7 +1,7 @@
 package com.lyeeedar.UI
 
-import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.utils.Array
+import com.lyeeedar.Game.Save
 import com.lyeeedar.Global
 
 class Tutorial(val key: String)
@@ -64,13 +64,16 @@ class Tutorial(val key: String)
 		advance()
 	}
 
-	var prevBounds: Rectangle? = null
+	var wasntRemoved = false
 	private fun advance()
 	{
 		index++
 		if (index >= actions.size)
 		{
 			current = null
+
+			Save.save()
+
 			if (queue.size > 0)
 			{
 				val first = queue.removeIndex(0)
@@ -93,14 +96,14 @@ class Tutorial(val key: String)
 					removeOnExit = nextBounds != actionBounds
 				}
 
-				action.show(actionBounds != prevBounds, removeOnExit)
+				action.show(!wasntRemoved, removeOnExit)
 
-				prevBounds = actionBounds
+				wasntRemoved = !removeOnExit
 			}
 			else
 			{
 				currentAction = action as ((Float) -> Boolean)?
-				prevBounds = null
+				wasntRemoved = false
 			}
 		}
 	}

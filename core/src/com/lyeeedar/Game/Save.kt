@@ -5,10 +5,8 @@ import com.esotericsoftware.kryo.Kryo
 import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.*
-import com.lyeeedar.Screens.CardScreen
-import com.lyeeedar.Screens.DeckScreen
-import com.lyeeedar.Screens.QuestScreen
-import com.lyeeedar.Screens.QuestSelectionScreen
+import com.lyeeedar.Card.CardContent.CardContent
+import com.lyeeedar.Screens.*
 import com.lyeeedar.Util.registerGdxSerialisers
 import com.lyeeedar.Util.registerLyeeedarSerialisers
 import java.util.zip.GZIPInputStream
@@ -32,6 +30,8 @@ class Save
 
 		fun save()
 		{
+			if (doingLoad) return
+
 			val outputFile = Gdx.files.local("save.dat")
 
 			val output: Output
@@ -78,14 +78,18 @@ class Save
 				{
 					val cardScreen = Global.game.getTypedScreen<CardScreen>()!!
 					output.writeInt(cardScreen.currentCard.path.hashCode())
+
+					cardScreen.currentContent.save(kryo, output)
 				}
 			}
 
 			output.close()
 		}
 
+		var doingLoad = false
 		fun load(): Boolean
 		{
+			doingLoad = true
 			var input: Input? = null
 
 			try
@@ -137,15 +141,27 @@ class Save
 						val currentCardHash = input.readInt()
 						val currentCard = deck.encounters.uniqueMap.get(currentCardHash)
 
-						val cardScreen = Global.game.getTypedScreen<CardScreen>()!!
-						cardScreen.setup(currentCard, currentQuest, false)
+						val content = CardContent.load(kryo, input)
 
-						cardScreen.swapTo()
+						val cardScreen = Global.game.getTypedScreen<CardScreen>()!!
+						cardScreen.setup(currentCard, currentQuest, false, content)
+
+						if (currentScreen == MainGame.ScreenEnum.CARD)
+						{
+							cardScreen.swapTo()
+						}
+						else
+						{
+							val gridScreen = Global.game.getTypedScreen<GridScreen>()!!
+
+							gridScreen.swapTo()
+						}
 					}
 				}
 			}
 			catch (e: Exception)
 			{
+				doingLoad = false
 				return false
 				//e.printStackTrace()
 			}
@@ -154,6 +170,7 @@ class Save
 				input?.close()
 			}
 
+			doingLoad = false
 			return true
 		}
 	}
