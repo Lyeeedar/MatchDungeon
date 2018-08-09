@@ -21,7 +21,7 @@
 		<Data Name="Equipment" meta:RefKey="Struct">
 			<Data Name="Chance" Key="Chance" Default="Always" meta:RefKey="Enum" />
 			<Data Name="FromDeck" VisibleIf="Equipment==null" meta:RefKey="Boolean" />
-			<Data Name="Type" EnumValues="Any,Weapon,Armour,MainHand,OffHand,Head,Body" VisibleIf="Equipment==null" meta:RefKey="Enum" />
+			<Data Name="Type" EnumValues="Any,Hands,Armour,MainHand,OffHand,Head,Body" VisibleIf="Equipment==null" meta:RefKey="Enum" />
 			<Data Name="Unlock" SkipIfDefault="False" VisibleIf="FromDeck==false" meta:RefKey="Boolean" />
 			<Data Name="Equipment" VisibleIf="FromDeck==false" meta:RefKey="File" />
 		</Data>

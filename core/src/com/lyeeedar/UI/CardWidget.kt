@@ -224,6 +224,8 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 		if (flipping) return
 		flipping = true
 
+		if (animating) return
+
 		val nextTable = if (faceup) backTable else frontTable
 		val flipFun = fun () { contentTable.clearChildren(); contentTable.add(nextTable).grow(); flipping = false }
 

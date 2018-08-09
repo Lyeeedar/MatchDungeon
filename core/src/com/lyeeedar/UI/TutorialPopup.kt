@@ -105,6 +105,13 @@ class TutorialPopup(val text: String, val emphasisSource: Any, val advance: () -
 		addAction(alpha(0f) then fadeIn(animSpeed))
 
 		val click = {
+			clearListeners()
+			topGreyout.clearListeners()
+			bottomGreyout.clearListeners()
+			leftGreyout.clearListeners()
+			rightGreyout.clearListeners()
+			centerBlock.clearListeners()
+
 			addAction(fadeOut(0.1f) then removeActor())
 
 			if (clearOnExit)

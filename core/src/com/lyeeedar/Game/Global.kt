@@ -430,6 +430,7 @@ class GlobalDeck
 		playerDeck.encounters.addAll(encounters)
 
 		quests.add(Quest.load("Dungeon/TreasureHunt"))
+		quests.add(Quest.load("Training/NewGame"))
 	}
 
 	fun getPlayer(): Player

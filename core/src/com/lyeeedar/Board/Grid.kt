@@ -689,6 +689,11 @@ class Grid(val width: Int, val height: Int, val level: Level)
 							hasAnim = true
 							break
 						}
+						else if (effect.animation != null)
+						{
+							hasAnim = true
+							break
+						}
 					}
 					else
 					{
@@ -1181,7 +1186,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			if (sink != null)
 			{
 				sink.x = x
-				sink.y = height-1
+				sink.y = y
 
 				tile.sinkable = null
 				onSunk(sink)

@@ -14,6 +14,7 @@ import com.lyeeedar.Board.Mote
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.EquipmentSlot
+import com.lyeeedar.Game.Equipment
 import com.lyeeedar.Game.Quest
 import com.lyeeedar.Game.QuestNode
 import com.lyeeedar.Game.Save
@@ -22,6 +23,7 @@ import com.lyeeedar.Global
 import com.lyeeedar.MainGame
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.XmlData
 import ktx.actors.then
 
 class CardScreen : AbstractScreen()
@@ -158,6 +160,31 @@ class CardScreen : AbstractScreen()
 				val value = args[0].toInt()
 
 				Global.player.gold += value
+				updateEquipment()
+
+				return true
+			})
+
+			debugConsole.register("Equip", "", fun(args, console): Boolean
+			{
+				val equipmentName = args[0]
+				var equipment = Global.deck.equipment.firstOrNull { it.path.toLowerCase().endsWith(equipmentName.toLowerCase()) || it.name.toLowerCase() == equipmentName.toLowerCase() }
+				if (equipment == null)
+				{
+					val equipmentPath = XmlData.existingPaths!!.firstOrNull { it.toLowerCase().endsWith(equipmentName.toLowerCase() + ".xml") }
+					if (equipmentPath != null)
+					{
+						equipment = Equipment.Companion.load(equipmentPath)
+					}
+				}
+
+				if (equipment == null)
+				{
+					console.error("Invalid equipment name!")
+					return false
+				}
+
+				Global.player.equipment[equipment.slot] = equipment
 				updateEquipment()
 
 				return true

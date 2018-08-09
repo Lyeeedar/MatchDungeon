@@ -12,18 +12,15 @@
 		<MatchDamage>2</MatchDamage>
 		<AbilityDamage>2</AbilityDamage>
 		<PowerGain>0</PowerGain>
+		<BonusGold>0</BonusGold>
+		<BonusTime>0</BonusTime>
 	</Statistics>
 	<Ability>
 		<Name>Thousand Cuts</Name>
 		<Description>Slash the target with your blade, slicing it to ribbons.</Description>
-		<Icon meta:RefKey="Sprite">
-			<Name>Oryx/uf_split/uf_items/weapon_falchion</Name>
-			<DrawActualSize>true</DrawActualSize>
-			<Colour>249,187,252,255</Colour>
-		</Icon>
 		<EffectData>
 			<Cost>5</Cost>
-			<Effect>1,Orb,Single,Pop</Effect>
+			<Effect>1,Monster,Single,Pop</Effect>
 			<Data>
 				<Damage>3</Damage>
 			</Data>

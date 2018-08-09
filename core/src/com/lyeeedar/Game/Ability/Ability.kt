@@ -181,7 +181,21 @@ class Ability
 							hs.renderDelay = delay + 0.1f * dst
 							delay += hs.lifetime * 0.6f
 
-							target.effects.add(hs)
+							if (permuter.type == Permuter.Type.BLOCK || permuter.type == Permuter.Type.DIAMOND)
+							{
+								// single sprite
+								if (originalTargets.contains(target, true))
+								{
+									hs.size[0] = data["AOE"].toString().toInt() * 2 + 1
+									hs.size[1] = hs.size[0]
+									hs.isCentered = true
+									target.effects.add(hs)
+								}
+							}
+							else
+							{
+								target.effects.add(hs)
+							}
 						}
 
 						effect.apply(target, grid, delay, data, originalTargets)

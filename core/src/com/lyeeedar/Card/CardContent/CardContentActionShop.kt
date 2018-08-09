@@ -238,12 +238,12 @@ class EquipmentWare : ShopWares()
 				types.add(EquipmentSlot.HEAD)
 			}
 
-			if (type == EquipmentReward.EquipmentRewardType.ANY || type == EquipmentReward.EquipmentRewardType.WEAPON || type == EquipmentReward.EquipmentRewardType.MAINHAND)
+			if (type == EquipmentReward.EquipmentRewardType.ANY || type == EquipmentReward.EquipmentRewardType.HANDS || type == EquipmentReward.EquipmentRewardType.MAINHAND)
 			{
 				types.add(EquipmentSlot.MAINHAND)
 			}
 
-			if (type == EquipmentReward.EquipmentRewardType.ANY || type == EquipmentReward.EquipmentRewardType.WEAPON || type == EquipmentReward.EquipmentRewardType.OFFHAND)
+			if (type == EquipmentReward.EquipmentRewardType.ANY || type == EquipmentReward.EquipmentRewardType.HANDS || type == EquipmentReward.EquipmentRewardType.OFFHAND)
 			{
 				types.add(EquipmentSlot.OFFHAND)
 			}

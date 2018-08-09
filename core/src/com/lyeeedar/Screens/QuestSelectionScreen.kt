@@ -31,11 +31,12 @@ class QuestSelectionScreen : AbstractScreen()
 		}
 
 		mainTable.clear()
+		scrollTable.clear()
 
 		val scrollPane = ScrollPane(scrollTable, Global.skin)
 		scrollPane.setFadeScrollBars(false)
-		scrollPane.setScrollingDisabled(false, true)
-		scrollPane.setForceScroll(true, false)
+		scrollPane.setScrollingDisabled(true, false)
+		scrollPane.setForceScroll(false, true)
 
 		val cardHeight = (Global.resolution.y.toFloat() * 0.7f) * 0.3f
 		val cardWidth = Global.resolution.x.toFloat() * 0.8f

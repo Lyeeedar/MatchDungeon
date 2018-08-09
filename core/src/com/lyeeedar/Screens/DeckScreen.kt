@@ -88,7 +88,6 @@ class DeckScreen : AbstractScreen()
 		val returnButton = TextButton("Return", Global.skin)
 		returnButton.addClickListener {
 			val screen = Global.game.getTypedScreen<QuestSelectionScreen>()!!
-			screen.setup()
 			screen.swapTo()
 		}
 		mainTable.add(returnButton).expandX().right().pad(10f).expandY().bottom()

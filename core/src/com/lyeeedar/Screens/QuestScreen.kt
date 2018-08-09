@@ -14,10 +14,7 @@ import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.Direction
 import com.lyeeedar.EquipmentSlot
-import com.lyeeedar.Game.AbstractReward
-import com.lyeeedar.Game.Quest
-import com.lyeeedar.Game.QuestNode
-import com.lyeeedar.Game.Save
+import com.lyeeedar.Game.*
 import com.lyeeedar.Global
 import com.lyeeedar.MainGame
 import com.lyeeedar.Renderables.Sprite.Sprite
@@ -148,6 +145,31 @@ class QuestScreen : AbstractScreen()
 
 				return true
 			})
+
+			debugConsole.register("Equip", "", fun(args, console): Boolean
+			{
+				val equipmentName = args[0]
+				var equipment = Global.deck.equipment.firstOrNull { it.path.toLowerCase().endsWith(equipmentName.toLowerCase()) || it.name.toLowerCase() == equipmentName.toLowerCase() }
+				if (equipment == null)
+				{
+					val equipmentPath = XmlData.existingPaths!!.firstOrNull { it.toLowerCase().endsWith(equipmentName.toLowerCase() + ".xml") }
+					if (equipmentPath != null)
+					{
+						equipment = Equipment.Companion.load(equipmentPath)
+					}
+				}
+
+				if (equipment == null)
+				{
+					console.error("Invalid equipment name!")
+					return false
+				}
+
+				Global.player.equipment[equipment.slot] = equipment
+				updateEquipment()
+
+				return true
+			})
 		}
 	}
 
@@ -248,7 +270,9 @@ class QuestScreen : AbstractScreen()
 
 	fun completeQuest()
 	{
-		Global.stage.addActor(greyOutTable)
+		chosenQuestCard = null
+
+		stage.addActor(greyOutTable)
 
 		val table = Table()
 
@@ -269,7 +293,7 @@ class QuestScreen : AbstractScreen()
 		val cards = Array<CardWidget>()
 		cards.add(card)
 
-		Global.stage.addActor(card)
+		stage.addActor(card)
 		CardWidget.layoutCards(cards, Direction.CENTER, cardsTable, animate = false)
 	}
 

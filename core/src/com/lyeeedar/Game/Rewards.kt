@@ -330,7 +330,7 @@ class EquipmentReward : AbstractReward()
 	enum class EquipmentRewardType
 	{
 		ANY,
-		WEAPON,
+		HANDS,
 		ARMOUR,
 		MAINHAND,
 		OFFHAND,
@@ -377,12 +377,12 @@ class EquipmentReward : AbstractReward()
 				types.add(EquipmentSlot.HEAD)
 			}
 
-			if (rewardType == EquipmentRewardType.ANY || rewardType == EquipmentRewardType.WEAPON || rewardType == EquipmentRewardType.MAINHAND)
+			if (rewardType == EquipmentRewardType.ANY || rewardType == EquipmentRewardType.HANDS || rewardType == EquipmentRewardType.MAINHAND)
 			{
 				types.add(EquipmentSlot.MAINHAND)
 			}
 
-			if (rewardType == EquipmentRewardType.ANY || rewardType == EquipmentRewardType.WEAPON || rewardType == EquipmentRewardType.OFFHAND)
+			if (rewardType == EquipmentRewardType.ANY || rewardType == EquipmentRewardType.HANDS || rewardType == EquipmentRewardType.OFFHAND)
 			{
 				types.add(EquipmentSlot.OFFHAND)
 			}

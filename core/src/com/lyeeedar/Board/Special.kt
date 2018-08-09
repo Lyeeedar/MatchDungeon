@@ -183,8 +183,8 @@ abstract class Match4(orb: Orb) : Special(orb)
 		{
 			return fun (point: Point, grid: Grid, orb: Orb)
 			{
-				popColumn(this, orb.sprite.colour * other.sprite.colour, point.x, point.y, grid)
-				popRow(this, orb.sprite.colour * other.sprite.colour, point.x, point.y, grid)
+				popColumn(this, orb.sprite.colour.lerp(other.sprite.colour, 0.5f), point.x, point.y, grid)
+				popRow(this, orb.sprite.colour.lerp(other.sprite.colour, 0.5f), point.x, point.y, grid)
 			}
 		}
 
@@ -238,7 +238,7 @@ class DualMatch(orb: Orb) : Special(orb)
 					val hitSet = ObjectSet<Tile>()
 
 					val effect = AssetManager.loadParticleEffect("SpecialExplosion")
-					effect.colour = modifyColour(orb.sprite.colour)
+					effect.colour = orb.sprite.colour.lerp(other.sprite.colour, 0.5f)
 					effect.size[0] = 4
 					effect.size[1] = 4
 					effect.isCentered = true
@@ -270,18 +270,18 @@ class DualMatch(orb: Orb) : Special(orb)
 			{
 				return fun (point: Point, grid: Grid, orb: Orb)
 				{
-					popColumn(this, orb.sprite.colour, point.x-1, point.y, grid)
-					popColumn(this, orb.sprite.colour, point.x, point.y, grid)
-					popColumn(this, orb.sprite.colour, point.x+1, point.y, grid)
+					popColumn(this, orb.sprite.colour.lerp(other.sprite.colour, 0.5f), point.x-1, point.y, grid)
+					popColumn(this, orb.sprite.colour.lerp(other.sprite.colour, 0.5f), point.x, point.y, grid)
+					popColumn(this, orb.sprite.colour.lerp(other.sprite.colour, 0.5f), point.x+1, point.y, grid)
 				}
 			}
 			else if (special is Vertical4)
 			{
 				return fun (point: Point, grid: Grid, orb: Orb)
 				{
-					popRow(this, orb.sprite.colour, point.x, point.y-1, grid)
-					popRow(this, orb.sprite.colour, point.x, point.y, grid)
-					popRow(this, orb.sprite.colour, point.x, point.y+1, grid)
+					popRow(this, orb.sprite.colour.lerp(other.sprite.colour, 0.5f), point.x, point.y-1, grid)
+					popRow(this, orb.sprite.colour.lerp(other.sprite.colour, 0.5f), point.x, point.y, grid)
+					popRow(this, orb.sprite.colour.lerp(other.sprite.colour, 0.5f), point.x, point.y+1, grid)
 				}
 			}
 		}
