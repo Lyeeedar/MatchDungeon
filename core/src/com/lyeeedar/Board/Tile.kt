@@ -31,6 +31,14 @@ class Tile(x: Int, y: Int) : Point(x, y)
 		get() = contents as? Swappable
 		set(value) { contents = value }
 
+	var matchable: Matchable?
+		get() = contents as? Matchable
+		set(value) { contents = value }
+
+	var special: Special?
+		get() = contents as? Special
+		set(value) { contents = value }
+
 	var block: Block?
 		get() = contents as? Block
 		set(value) { contents = value }

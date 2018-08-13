@@ -126,7 +126,6 @@ class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val gr
 		if (!Global.settings.get("Ability", false))
 		{
 			val tutorial = Tutorial("Ability")
-			tutorial.addDelay(1f)
 			tutorial.addPopup("This is a usable ability, granted by your current equipment.", this)
 			tutorial.addPopup("These pips show how much power you need to activate it.", Rectangle(x, y, width, 10f))
 			tutorial.addPopup("When you have enough power you can tap this ability to begin to select targets for it. Note you won't be able to select it if there are no valid targets.", this)

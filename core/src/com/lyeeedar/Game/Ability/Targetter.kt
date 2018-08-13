@@ -1,7 +1,6 @@
 package com.lyeeedar.Game.Ability
 
 import com.badlogic.gdx.utils.ObjectMap
-import com.lyeeedar.Board.Match5
 import com.lyeeedar.Board.Tile
 
 /**
@@ -31,9 +30,9 @@ class Targetter(val type: Type)
 	{
 		isValid = when(type)
 		{
-			Type.BASICORB -> fun(tile: Tile, data: ObjectMap<String, Any>) = tile.orb != null && !tile.orb!!.hasAttack && tile.orb!!.special == null && !tile.orb!!.sealed && tile.spreader == null
-			Type.ORB -> fun(tile: Tile, data: ObjectMap<String, Any>) = tile.orb != null && !tile.orb!!.hasAttack && tile.orb?.special !is Match5 && tile.spreader == null
-			Type.SPECIAL -> fun(tile: Tile, data: ObjectMap<String, Any>) = tile.orb?.special != null && tile.spreader == null
+			Type.BASICORB -> fun(tile: Tile, data: ObjectMap<String, Any>) = tile.orb != null && !tile.orb!!.hasAttack && !tile.orb!!.sealed && tile.spreader == null
+			Type.ORB -> fun(tile: Tile, data: ObjectMap<String, Any>) = ((tile.orb != null && !tile.orb!!.hasAttack) || tile.special != null) && tile.spreader == null
+			Type.SPECIAL -> fun(tile: Tile, data: ObjectMap<String, Any>) = tile.special != null && tile.spreader == null
 			Type.BLOCK -> fun(tile: Tile, data: ObjectMap<String, Any>) = tile.block != null && tile.spreader == null
 			Type.EMPTY -> fun(tile: Tile, data: ObjectMap<String, Any>) = tile.contents == null && tile.canHaveOrb && tile.spreader == null
 			Type.SEALED -> fun(tile: Tile, data: ObjectMap<String, Any>) = tile.swappable?.sealed ?: false && tile.spreader == null

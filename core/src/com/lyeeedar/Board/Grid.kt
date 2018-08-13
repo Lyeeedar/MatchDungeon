@@ -39,8 +39,10 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	var lastSwapped: Point = Point.MINUS_ONE
 
 	val defaultAnimSpeed = 0.15f
-	val animSpeedUpMultiplier = 0.975f
-	var animSpeed = defaultAnimSpeed
+	private val animSpeedUpMultiplier = 0.975f
+	var animSpeedMultiplier = 1f
+	val animSpeed: Float
+		get() = defaultAnimSpeed * animSpeedMultiplier
 
 	// ----------------------------------------------------------------------
 	val onTurn = Event0Arg()
@@ -126,7 +128,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 			gainedBonusPower = false
 
-			animSpeed = defaultAnimSpeed
+			animSpeedMultiplier = 1f
 
 			poppedSpreaders.clear()
 
@@ -288,23 +290,23 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	}
 
 	// ----------------------------------------------------------------------
-	private fun getSpecial(count1: Int, count2: Int, dir: Direction, orb: Orb): Special?
+	private fun getSpecial(count1: Int, count2: Int, dir: Direction, desc: OrbDesc): Special?
 	{
 		if (count1 >= 5 || count2 >= 5)
 		{
-			return Match5(orb)
+			return Match5(desc, level.theme)
 		}
 		else if (count1 > 0 && count2 > 0)
 		{
-			return DualMatch(orb)
+			return DualMatch(desc, level.theme)
 		}
 		else if (dir.y != 0 && count1 == 4)
 		{
-			return Vertical4(orb)
+			return Vertical4(desc, level.theme)
 		}
 		else if (dir.x != 0 && count1 == 4)
 		{
-			return Horizontal4(orb)
+			return Horizontal4(desc, level.theme)
 		}
 
 		return null
@@ -429,8 +431,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					else if (stile.swappable != null)
 					{
 						val swappable = stile.swappable!!
-						val orb = swappable as? Orb
-						if (orb == null || (orb.armed == null && !orb.sealed)) found = stile
+						if (swappable.canMove) found = stile
 						break
 					}
 					else if (stile.chest != null)
@@ -745,7 +746,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				{
 					onTurn()
 					inTurn = false
-					animSpeed = defaultAnimSpeed
+					animSpeedMultiplier = 1f
 				}
 			}
 
@@ -772,7 +773,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					}
 
 					if (Tutorial.current == null) onTime(delta)
-					animSpeed = defaultAnimSpeed
+					animSpeedMultiplier = 1f
 				}
 			}
 		}
@@ -807,31 +808,31 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		val oldOrb = oldSwap as? Orb
 		val newOrb = newSwap as? Orb
 
-		if (oldSwap.sealed || newSwap.sealed) return false
+		val oldSpecial = oldSwap as? Special
+		val newSpecial = newSwap as? Special
+
+		if (!oldSwap.canMove || !newSwap.canMove) return false
 
 		oldSwap.cascadeCount = -1
 		newSwap.cascadeCount = -1
 
-		if (oldOrb != null && newOrb != null)
+		if (oldSpecial != null || newSpecial != null)
 		{
-			// check for merges
-			if (newOrb.special != null || oldOrb.special != null)
+			val merged = newSpecial?.merge(oldSwap) ?: oldSpecial?.merge(newSwap)
+			if (merged != null)
 			{
-				val armfun = newOrb.special?.merge(oldOrb) ?: oldOrb.special?.merge(newOrb)
-				if (armfun != null)
-				{
-					val sprite = oldOrb.sprite.copy()
-					sprite.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile, true)), Interpolation.linear)
-					newTile.effects.add(sprite)
+				newTile.special = merged
 
-					onPop(oldOrb, 0f)
-					oldTile.orb = null
+				val sprite = oldSwap.sprite.copy()
+				sprite.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile, true)), Interpolation.linear)
+				newTile.effects.add(sprite)
 
-					newOrb.armed = armfun
-					newOrb.markedForDeletion = true
+				oldTile.swappable = null
 
-					return false
-				}
+				merged.armed = true
+				merged.markedForDeletion = true
+
+				return false
 			}
 		}
 
@@ -875,12 +876,12 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					orb.x = x
 					orb.y = y
 
-					if (orb.markedForDeletion && orb.sprite.animation == null && orb.armed == null)
+					if (orb.markedForDeletion && orb.sprite.animation == null)
 					{
 						tile.orb = null
 						onPop(orb, orb.deletionEffectDelay)
 
-						if (orb.deletionEffectDelay >= 0.2f && orb.special == null)
+						if (orb.deletionEffectDelay >= 0.2f)
 						{
 							val sprite = orb.sprite.copy()
 							sprite.renderDelay = orb.deletionEffectDelay - 0.2f
@@ -903,6 +904,14 @@ class Grid(val width: Int, val height: Int, val level: Level)
 						{
 							orb.hasAttack = true
 						}
+					}
+				}
+				else if (tile.special != null)
+				{
+					val special = tile.special!!
+					if (special.markedForDeletion && !special.armed)
+					{
+						tile.special = null
 					}
 				}
 				else if (tile.block != null)
@@ -956,7 +965,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		if (matches.size > 0)
 		{
 			matchCount++
-			animSpeed *= animSpeedUpMultiplier
+			animSpeedMultiplier *= animSpeedUpMultiplier
 
 			val chosen = matches.random()
 			val point = chosen.points().asSequence().random()
@@ -988,13 +997,20 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		{
 			val pos = GridWidget.instance.pointToScreenspace(point)
 
-			val sequence = alpha(0f) then fadeIn(0.1f) then parallel(moveBy(MathUtils.random(-2f, 2f), MathUtils.random(0f, 2f), 1f), shake(matchCount.toFloat() / maxVal, 0.03f, 1f)) then fadeOut(0.1f) then removeActor()
-
 			val label = Label(message.text, Global.skin, "popup")
 			label.color = message.colour.color()
 			label.setFontScale(message.size)
 			label.rotation = -60f
 			label.setPosition(pos.x, pos.y)
+
+			val sequence =
+					alpha(0f) then
+					fadeIn(0.1f) then
+					parallel(moveBy(MathUtils.random(-2f, 2f), MathUtils.random(0f, 2f), 1f), shake(matchCount.toFloat() / maxVal, 0.03f, 1f)) then
+							fadeOut(0.1f) then
+							lambda { messageList.removeValue(label, true) } then
+							removeActor()
+
 			label + sequence
 
 			val width = label.prefWidth
@@ -1003,9 +1019,11 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				label.setPosition(Global.stage.width - width - 20, pos.y)
 			}
 
+			messageList.add(label)
 			Global.stage.addActor(label)
 		}
 	}
+	val messageList = Array<Label>()
 
 	// ----------------------------------------------------------------------
 	private fun findValidMove() : Pair<Point, Point>?
@@ -1017,7 +1035,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		{
 			// check the 3 tiles around each end to see if it contains one of the correct colours
 			val dir = match.direction()
-			val key = grid[match.p1].orb!!.key
+			val key = grid[match.p1].matchable!!.desc.key
 
 			fun checkSurrounding(point: Point, dir: Direction, key: Int): Pair<Point, Point>?
 			{
@@ -1027,9 +1045,9 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				fun canMatch(point: Point): Boolean
 				{
 					val tile = tile(point) ?: return false
-					val orb = tile.orb ?: return false
-					if (!orb.canMove || orb.markedForDeletion) return false
-					return orb.key == key
+					val matchable = tile.matchable ?: return false
+					if (!matchable.canMove) return false
+					return matchable.desc.key == key
 				}
 
 				// check + dir
@@ -1063,10 +1081,10 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		fun getTileKey(x: Int, y: Int, dir: Direction): Int
 		{
 			val tile = tile(x + dir.x, y + dir.y) ?: return -1
-			val orb = tile.orb ?: return -1
-			if (!orb.canMove || orb.markedForDeletion) return -1
+			val matchable = tile.matchable ?: return -1
+			if (!matchable.canMove) return -1
 
-			return orb.key
+			return matchable.desc.key
 		}
 
 		// check diamond pattern
@@ -1100,16 +1118,14 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		{
 			for (y in 0 until height)
 			{
-				val orb = grid[x, y].orb ?: continue
-				if (orb.special != null)
+				val special = grid[x, y].special ?: continue
+
+				for (dir in Direction.CardinalValues)
 				{
-					for (dir in Direction.CardinalValues)
+					val tile = tile(x + dir.x, y + dir.y) ?: continue
+					if (tile.special != null)
 					{
-						val tile = tile(x + dir.x, y + dir.y) ?: continue
-						if (tile.orb?.special != null)
-						{
-							return Pair(Point(x, y), Point(x + dir.x, y + dir.y))
-						}
+						return Pair(Point(x, y), Point(x + dir.x, y + dir.y))
 					}
 				}
 			}
@@ -1132,13 +1148,13 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			for (y in 0 until height)
 			{
 				val tile = grid[x, y]
-				val orb = tile.orb ?: continue
+				val special = tile.special ?: continue
 
-				if (orb.armed != null)
+				if (special.armed)
 				{
 					if (tile.spreader != null)
 					{
-						orb.armed = null
+						special.armed = false
 					}
 					else
 					{
@@ -1150,16 +1166,16 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 		for (tile in tilesToDetonate)
 		{
-			tile.orb!!.armed!!.invoke(tile, this, tile.orb!!)
+			tile.special!!.apply(tile, this)
 
-			tile.orb!!.armed = null
+			tile.special = null
 			complete = false
 		}
 
 		if (!complete)
 		{
 			matchCount++
-			animSpeed *= animSpeedUpMultiplier
+			animSpeedMultiplier *= animSpeedUpMultiplier
 
 			val point = tilesToDetonate.random()
 			displayMatchMessage(point!!)
@@ -1228,7 +1244,6 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					val orb = grid[x, y].orb!!
 					grid[x, y].orb = tempgrid[x, y].orb
 
-					if (oldorb.special != null) orb.special = oldorb.special!!.copy(orb)
 					orb.sealCount = oldorb.sealCount
 					if (oldorb.hasAttack)
 					{
@@ -1379,9 +1394,9 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			for (x in 0 until width)
 			{
 				val tile = grid[x, y]
-				val orb = tile.orb
+				val matchable = tile.matchable
 
-				if (orb == null || tile.spreader != null)
+				if (matchable == null || tile.spreader != null)
 				{
 					if (key != -1)
 					{
@@ -1392,7 +1407,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				}
 				else
 				{
-					if (orb.key != key || orb.armed != null)
+					if (matchable.desc.key != key || !matchable.canMatch)
 					{
 						// if we were matching, close matching
 						if (key != -1)
@@ -1401,7 +1416,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 						}
 
 						sx = x
-						key = orb.key
+						key = matchable.desc.key
 					}
 				}
 			}
@@ -1421,9 +1436,9 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			for (y in 0 until height)
 			{
 				val tile = grid[x, y]
-				val orb = tile.orb
+				val matchable = tile.matchable
 
-				if (orb == null || tile.spreader != null)
+				if (matchable == null || tile.spreader != null)
 				{
 					if (key != -1)
 					{
@@ -1434,7 +1449,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				}
 				else
 				{
-					if (orb.key != key || orb.armed != null)
+					if (matchable.desc.key != key || !matchable.canMatch)
 					{
 						// if we were matching, close matching
 						if (key != -1)
@@ -1443,7 +1458,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 						}
 
 						sy = y
-						key = orb.key
+						key = matchable.desc.key
 					}
 				}
 			}
@@ -1536,31 +1551,26 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		{
 			if (tile.associatedMatches[0] != null && tile.associatedMatches[1] != null)
 			{
-				val orb = Orb(tile.orb!!.desc, level.theme)
-				val special = getSpecial(tile.associatedMatches[0]!!.length(), tile.associatedMatches[1]!!.length(), Direction.CENTER, orb) ?: continue
-				orb.special = special
+				val sprite = tile.matchable!!.sprite
 
-				if (tile.orb != null)
+				val special = getSpecial(tile.associatedMatches[0]!!.length(), tile.associatedMatches[1]!!.length(), Direction.CENTER, tile.matchable!!.desc) ?: continue
+				if (tile.special != null)
 				{
-					if (tile.orb!!.special != null)
-					{
-						orb.armed = orb.special!!.merge(tile.orb!!) ?: tile.orb!!.special!!.merge(orb)
-						orb.markedForDeletion = true
-					}
-
-					tile.orb!!.x = tile.x
-					tile.orb!!.y = tile.y
-					onPop(tile.orb!!, 0f)
+					tile.special = tile.special!!.merge(special) ?: special.merge(tile.special!!) ?: special
+					tile.special!!.armed = true
+					tile.special!!.markedForDeletion = true
 				}
-
-				tile.orb = orb
+				else
+				{
+					tile.special = special
+				}
 
 				tile.associatedMatches[0]!!.used = true
 				tile.associatedMatches[1]!!.used = true
 
 				for (point in tile.associatedMatches[0]!!.points())
 				{
-					val sprite = orb.sprite.copy()
+					val sprite = sprite.copy()
 					sprite.drawActualSize = false
 					sprite.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(tile.getPosDiff(point)).invertY(), Interpolation.linear)
 
@@ -1569,7 +1579,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 				for (point in tile.associatedMatches[1]!!.points())
 				{
-					val sprite = orb.sprite.copy()
+					val sprite = sprite.copy()
 					sprite.drawActualSize = false
 					sprite.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(tile.getPosDiff(point)).invertY(), Interpolation.linear)
 
@@ -1585,28 +1595,23 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			{
 				val tile = grid[match.points().maxBy { grid[it].orb?.cascadeCount ?: 0 }!!]
 
-				val orb = Orb(tile.orb!!.desc, level.theme)
-				val special = getSpecial(match.length(), 0, match.direction(), orb) ?: continue
-				orb.special = special
+				val sprite = tile.matchable!!.sprite
 
-				if (tile.orb != null)
+				val special = getSpecial(match.length(), 0, match.direction(), tile.matchable!!.desc) ?: continue
+				if (tile.special != null)
 				{
-					if (tile.orb!!.special != null)
-					{
-						orb.armed = orb.special!!.merge(tile.orb!!) ?: tile.orb!!.special!!.merge(orb)
-						orb.markedForDeletion = true
-					}
-
-					tile.orb!!.x = tile.x
-					tile.orb!!.y = tile.y
-					onPop(tile.orb!!, 0f)
+					tile.special = tile.special!!.merge(special) ?: special.merge(tile.special!!) ?: special
+					tile.special!!.armed = true
+					tile.special!!.markedForDeletion = true
 				}
-
-				tile.orb = orb
+				else
+				{
+					tile.special = special
+				}
 
 				for (point in match.points())
 				{
-					val sprite = orb.sprite.copy()
+					val sprite = sprite.copy()
 					sprite.drawActualSize = false
 					sprite.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(tile.getPosDiff(point)).invertY(), Interpolation.linear)
 
@@ -1680,6 +1685,16 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			return
 		}
 
+		if (tile.special != null)
+		{
+			if (tile.special!!.canMatch)
+			{
+				tile.special!!.armed = true
+				tile.special!!.markedForDeletion = true
+				return
+			}
+		}
+
 		val orb = tile.orb ?: return
 		if (orb.markedForDeletion) return // already completed, dont do it again
 
@@ -1696,29 +1711,14 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		orb.deletionEffectDelay = delay
 		orb.skipPowerOrb = skipPowerOrb
 
-		if (orb.armed != null)
-		{
-			// dont need to do anything more
-		}
-		else if (orb.special == null)
-		{
-			orb.sprite.visible = false
+		orb.sprite.visible = false
 
-			val sprite = orb.desc.death.copy()
-			sprite.colour = orb.sprite.colour
-			sprite.renderDelay = delay
-			sprite.isShortened = true
+		val sprite = orb.desc.death.copy()
+		sprite.colour = orb.sprite.colour
+		sprite.renderDelay = delay
+		sprite.isShortened = true
 
-			tile.effects.add(sprite)
-		}
-		else if (orb.special is Match5)
-		{
-			orb.markedForDeletion = false
-		}
-		else
-		{
-			orb.armed = orb.special!!.apply()
-		}
+		tile.effects.add(sprite)
 	}
 
 	// ----------------------------------------------------------------------

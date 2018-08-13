@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Widget
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionTime
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Orb
+import com.lyeeedar.Board.Sinkable
+import com.lyeeedar.Board.Special
 import com.lyeeedar.Game.Ability.Targetter
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Particle.ParticleEffect
@@ -123,11 +125,18 @@ class GridWidget(val grid: Grid) : Widget()
 		atk_full.baseScale = floatArrayOf(0.14f, 0.14f)
 	}
 
-	fun getRect(point: Point): Rectangle
+	fun getRect(point: Point, actualSize: Boolean = false): Rectangle
 	{
 		val array = com.badlogic.gdx.utils.Array<Point>()
 		array.add(point)
-		return getRect(array)
+		val rect = getRect(array)
+
+		if (actualSize)
+		{
+			rect.height *= 1.5f
+		}
+
+		return rect
 	}
 
 	fun getRect(points: com.badlogic.gdx.utils.Array<Point>): Rectangle
@@ -198,7 +207,7 @@ class GridWidget(val grid: Grid) : Widget()
 			for (y in 0 until grid.height)
 			{
 				val tile = grid.grid[x, y]
-				val orb = tile.swappable
+				val swappable = tile.swappable
 				val block = tile.block
 				val container = tile.container
 				val chest = tile.chest
@@ -262,7 +271,7 @@ class GridWidget(val grid: Grid) : Widget()
 						else if (grid.activeAbility!!.targetter.type == Targetter.Type.SEALED)
 						{
 							tileColour = Colour.DARK_GRAY
-							orbColour = if (orb != null && orb.sealed) Colour.WHITE else Colour.DARK_GRAY
+							orbColour = if (swappable != null && swappable.sealed) Colour.WHITE else Colour.DARK_GRAY
 							blockColour = Colour.DARK_GRAY
 							monsterColour = Colour.DARK_GRAY
 						}
@@ -344,27 +353,27 @@ class GridWidget(val grid: Grid) : Widget()
 					}
 				}
 
-				if (orb != null)
+				if (swappable != null)
 				{
-					ground.queueSprite(orb.sprite, xi, yi, ORB, 1, orbColour)
+					ground.queueSprite(swappable.sprite, xi, yi, ORB, 1, orbColour)
 
-					if (orb.sealed)
+					if (swappable.sealed)
 					{
-						ground.queueSprite(orb.sealSprite, xi, yi, ORB, 2, orbColour)
+						ground.queueSprite(swappable.sealSprite, xi, yi, ORB, 2, orbColour)
 
 						if (!Global.settings.get("Seal", false))
 						{
 							val tutorial = Tutorial("Seal")
-							tutorial.addPopup("This orb has been sealed. It won't move until the seal is broken. To break the seal use the orb in a match.", getRect(orb))
+							tutorial.addPopup("This orb has been sealed. It won't move until the seal is broken. To break the seal use the orb in a match.", getRect(swappable))
 							tutorial.show()
 						}
 					}
 
-					if (orb is Orb && orb.isChanger)
+					if (swappable is Orb && swappable.isChanger)
 					{
-						if (orb.sprite.visible && (orb.sprite.showBeforeRender || orb.sprite.renderDelay <= 0))
+						if (swappable.sprite.visible && (swappable.sprite.showBeforeRender || swappable.sprite.renderDelay <= 0))
 						{
-							val offset = orb.sprite.animation?.renderOffset(false)
+							val offset = swappable.sprite.animation?.renderOffset(false)
 
 							var xii = xi
 							var yii = yi
@@ -375,12 +384,12 @@ class GridWidget(val grid: Grid) : Widget()
 								yii += offset[1]
 							}
 
-							tempCol.set(orbColour).mul(orb.nextDesc!!.sprite.colour)
+							tempCol.set(orbColour).mul(swappable.nextDesc!!.sprite.colour)
 
-							var scaleX = orb.sprite.baseScale[0]
-							var scaleY = orb.sprite.baseScale[1]
+							var scaleX = swappable.sprite.baseScale[0]
+							var scaleY = swappable.sprite.baseScale[1]
 
-							val scale = orb.sprite.animation?.renderScale()
+							val scale = swappable.sprite.animation?.renderScale()
 
 							if (scale != null)
 							{
@@ -392,17 +401,20 @@ class GridWidget(val grid: Grid) : Widget()
 						}
 					}
 
-					if (orb is Orb && orb.sprite.renderDelay <= 0)
+					if (swappable is Special && swappable.sprite.renderDelay <= 0)
 					{
-						if (orb.armed != null)
+						if (swappable.armed)
 						{
 							ground.queueSprite(glow, xi, yi, ORB, 0)
 						}
+					}
 
-						if (orb.hasAttack)
+					if (swappable is Orb && swappable.sprite.renderDelay <= 0)
+					{
+						if (swappable.hasAttack)
 						{
-							val cx = xi + (orb.sprite.animation?.renderOffset(false)?.get(0) ?: 0f)
-							val cy = yi + 0.15f + (orb.sprite.animation?.renderOffset(false)?.get(1) ?: 0f)
+							val cx = xi + (swappable.sprite.animation?.renderOffset(false)?.get(0) ?: 0f)
+							val cy = yi + 0.15f + (swappable.sprite.animation?.renderOffset(false)?.get(1) ?: 0f)
 
 							val currentPoint = Vector2(0f, 0.4f)
 
@@ -410,7 +422,7 @@ class GridWidget(val grid: Grid) : Widget()
 							val degreesStep = 360f / maxdots
 							for (i in 0 until maxdots)
 							{
-								val sprite = if (i < orb.attackTimer) atk_full else atk_empty
+								val sprite = if (i < swappable.attackTimer) atk_full else atk_empty
 
 								floating.queueSprite(sprite, cx + currentPoint.x, cy + currentPoint.y, ORB, 2, orbColour)
 
@@ -420,10 +432,20 @@ class GridWidget(val grid: Grid) : Widget()
 							if (!Global.settings.get("Attack", false))
 							{
 								val tutorial = Tutorial("Attack")
-								tutorial.addPopup("This is an attack. The pips surrounding the skull indicate the turns remaining until it activates.", getRect(orb))
-								tutorial.addPopup("Match it like a normal orb to remove it from the board. If you fail to remove it then you will lose 1 hp", getRect(orb))
+								tutorial.addPopup("This is an attack. The pips surrounding the skull indicate the turns remaining until it activates.", getRect(swappable))
+								tutorial.addPopup("Match it like a normal orb to remove it from the board. If you fail to remove it then you will lose 1 hp", getRect(swappable))
 								tutorial.show()
 							}
+						}
+					}
+
+					if (swappable is Sinkable)
+					{
+						if (!Global.settings.get("Sinkable", false))
+						{
+							val tutorial = Tutorial("Sinkable")
+							tutorial.addPopup("This is a sinkable item. If you move it to the bottom of the board you will successfully sink it.", getRect(tile, true))
+							tutorial.show()
 						}
 					}
 				}
@@ -539,7 +561,7 @@ class GridWidget(val grid: Grid) : Widget()
 					if (!Global.settings.get("Block", false))
 					{
 						val tutorial = Tutorial("Block")
-						tutorial.addPopup("This is a block. Match in the tiles surrounding it to break it.", getRect(tile))
+						tutorial.addPopup("This is a block. Match in the tiles surrounding it to break it.", getRect(tile, true))
 						tutorial.show()
 					}
 				}

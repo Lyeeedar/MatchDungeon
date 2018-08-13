@@ -366,15 +366,13 @@ class Level(val loadPath: String)
 			{
 				var orb = swappable as? Orb
 				if (orb == null) orb = Orb(Orb.getRandomOrb(this), theme)
-				orb.special = Horizontal4(orb)
-				tile.orb = orb
+				tile.special = Horizontal4(orb.desc, theme)
 			}
 			else if (char == '-')
 			{
 				var orb = swappable as? Orb
 				if (orb == null) orb = Orb(Orb.getRandomOrb(this), theme)
-				orb.special = Vertical4(orb)
-				tile.orb = orb
+				tile.special = Vertical4(orb.desc, theme)
 			}
 			else if (char == '@')
 			{
@@ -413,17 +411,20 @@ class Level(val loadPath: String)
 
 				val special = when (symbol.special)
 				{
-					"3x3" -> DualMatch(orb)
-					"V4" -> Vertical4(orb)
-					"H4" -> Horizontal4(orb)
-					"5" -> Match5(orb)
+					"3x3" -> DualMatch(orb.desc, theme)
+					"4x4" -> DoubleDualMatch(orb.desc, theme)
+					"V4" -> Vertical4(orb.desc, theme)
+					"3V4" -> DualVert(orb.desc, theme)
+					"H4" -> Horizontal4(orb.desc, theme)
+					"3H4" -> DualHori(orb.desc, theme)
+					"5" -> Match5(orb.desc, theme)
+					"All" -> Match5Dual(orb.desc, theme)
 					else -> null
 				}
 
 				if (special != null)
 				{
-					orb.special = special
-					tile.orb = orb
+					tile.special = special
 				}
 
 				if (symbol.container != null && tile.contents != null)

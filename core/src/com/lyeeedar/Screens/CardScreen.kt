@@ -106,7 +106,7 @@ class CardScreen : AbstractScreen()
 		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(quest.theme.backgroundTile))).tint(Color.DARK_GRAY)
 
 		updateEquipment()
-		advanceContent()
+		advanceContent(true)
 	}
 
 	override fun create()
@@ -216,9 +216,9 @@ class CardScreen : AbstractScreen()
 	}
 
 	var readyToSwitch = false
-	fun advanceContent()
+	fun advanceContent(canStart: Boolean = false)
 	{
-		val completed = currentContent.advance(this)
+		val completed = currentContent.advance(this, canStart)
 		if (completed)
 		{
 			val state = currentContent.state

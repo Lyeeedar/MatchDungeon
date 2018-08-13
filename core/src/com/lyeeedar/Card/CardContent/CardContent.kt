@@ -28,9 +28,9 @@ class CardContent(val path: String)
 	lateinit var root: CardContentActionNode
 	val nodes = ObjectMap<String, CardContentNode>()
 
-	fun advance(CardContentScreen: CardScreen): Boolean
+	fun advance(CardContentScreen: CardScreen, canStart: Boolean): Boolean
 	{
-		if (CardContentStack.size == 0)
+		if (CardContentStack.size == 0 && canStart)
 		{
 			root.advance(this, CardContentScreen)
 		}

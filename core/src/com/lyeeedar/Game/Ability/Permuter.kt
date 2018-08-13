@@ -1,5 +1,6 @@
 package com.lyeeedar.Game.Ability
 
+import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Tile
@@ -24,21 +25,33 @@ class Permuter(val type: Type)
 		RANDOM
 	}
 
-	lateinit var permute: (tile: Tile, grid: Grid, data: ObjectMap<String, Any>) -> Sequence<Tile>
+	lateinit var permute: (tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?) -> Sequence<Tile>
 
 	init
 	{
 		permute = when(type)
 		{
-			Type.SINGLE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>) = sequenceOf(tile)
-			Type.ALLOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>) = grid.grid.filter{ val key = data["TYPE"]?.hashCode() ?: tile.orb!!.key; it.orb?.key == key }
-			Type.NOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>): Sequence<Tile> { val type = data["TYPE"].hashCode(); val count = data["COUNT"].toString().toInt(); return grid.grid.filter{ it.orb?.key == type }.random(count) }
-			Type.COLUMN ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>) = grid.grid.filter{ it.x == tile.x }
-			Type.ROW ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>) = grid.grid.filter{ it.y == tile.y }
-			Type.CROSS ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>) = grid.grid.filter{ it.y == tile.y || it.x == tile.x }
-			Type.BLOCK ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>): Sequence<Tile> { val dst = data["AOE"].toString().toInt(); return grid.grid.filter{ it.taxiDist(tile) <= dst } }
-			Type.DIAMOND ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>): Sequence<Tile> { val dst = data["AOE"].toString().toInt(); return grid.grid.filter{ it.dist(tile) <= dst } }
-			Type.RANDOM ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>): Sequence<Tile> { val count = data["COUNT"].toString().toInt(); return grid.grid.filter{ it.canHaveOrb }.random(count) }
+			Type.SINGLE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?) = sequenceOf(tile)
+			Type.ALLOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?) = grid.grid.filter{ val key = data["TYPE"]?.hashCode() ?: tile.orb!!.key; it.orb?.key == key }
+			Type.NOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?): Sequence<Tile> { val type = data["TYPE"].hashCode(); val count = data["COUNT"].toString().toInt(); return grid.grid.filter{ it.orb?.key == type }.random(count) }
+			Type.COLUMN ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?) = grid.grid.filter{ it.x == tile.x }
+			Type.ROW ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?) = grid.grid.filter{ it.y == tile.y }
+			Type.CROSS ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?) = grid.grid.filter{ it.y == tile.y || it.x == tile.x }
+			Type.BLOCK ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?): Sequence<Tile> { val dst = data["AOE"].toString().toInt(); return grid.grid.filter{ it.taxiDist(tile) <= dst } }
+			Type.DIAMOND ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?): Sequence<Tile> { val dst = data["AOE"].toString().toInt(); return grid.grid.filter{ it.dist(tile) <= dst } }
+
+			Type.RANDOM ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?): Sequence<Tile> {
+				val count = data["COUNT"].toString().toInt()
+
+				if (ability != null && selectedTargets.size > 0 && ability.effect.type == Effect.Type.CONVERT)
+				{
+					val selectedType = selectedTargets[0].orb!!.desc
+					return grid.grid.filter{ it.orb != null && it.orb!!.desc != selectedType }.random(count)
+				}
+
+				return grid.grid.filter{ it.canHaveOrb }.random(count)
+			}
+
 			else -> throw Exception("Invalid permuter type $type")
 		}
 	}

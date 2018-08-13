@@ -27,3 +27,9 @@ abstract class Swappable(val theme: Theme) : Point()
 
 	var grid: Grid? = null
 }
+
+abstract class Matchable(theme: Theme) : Swappable(theme)
+{
+	abstract var desc: OrbDesc
+	abstract val canMatch: Boolean
+}

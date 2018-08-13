@@ -151,12 +151,12 @@ class AttackAbility : FriendlyAbility()
 		val availableTargets = friendly.getBorderTiles(grid, range)
 		val validTargets = availableTargets.filter { targetter.isValid(it, data) }
 
-		val chosen = validTargets.random(targets)
+		val chosen = validTargets.random(targets).toList().toGdxArray()
 		val final = Array<Tile>()
 
 		for (c in chosen)
 		{
-			for (t in permuter.permute(c, grid, data))
+			for (t in permuter.permute(c, grid, data, chosen, null))
 			{
 				if (!final.contains(t))
 				{

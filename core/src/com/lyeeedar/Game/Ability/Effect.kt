@@ -55,7 +55,7 @@ class Effect(val type: Type)
 				tile.spreader = spreader.copy()
 			}
 
-			Type.TEST ->  fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>) { val orb = tile.orb ?: return; orb.special = Match5(orb) }
+			Type.TEST ->  fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>) { val orb = tile.orb ?: return; tile.special = Match5(orb.desc, grid.level.theme) }
 		}
 	}
 

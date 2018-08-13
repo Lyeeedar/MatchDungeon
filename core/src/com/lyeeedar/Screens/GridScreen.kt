@@ -110,19 +110,19 @@ class GridScreen(): AbstractScreen()
 				if (args[0] == "match5")
 				{
 					val tile = level.grid.grid.filter { it.orb != null }.random()!!
-					tile.orb!!.special = Match5(tile.orb!!)
+					tile.special = Match5(tile.orb!!.desc, level.theme)
 				}
 				else if (args[0] == "match4")
 				{
 					if (args[1] == "hori")
 					{
 						val tile = level.grid.grid.filter { it.orb != null }.random()!!
-						tile.orb!!.special = Horizontal4(tile.orb!!)
+						tile.special = Horizontal4(tile.orb!!.desc, level.theme)
 					}
 					else if (args[1] == "vert")
 					{
 						val tile = level.grid.grid.filter { it.orb != null }.random()!!
-						tile.orb!!.special = Vertical4(tile.orb!!)
+						tile.special = Vertical4(tile.orb!!.desc, level.theme)
 					}
 					else
 					{
@@ -132,7 +132,7 @@ class GridScreen(): AbstractScreen()
 				else if (args[0] == "dualmatch")
 				{
 					val tile = level.grid.grid.filter { it.orb != null }.random()!!
-					tile.orb!!.special = DualMatch(tile.orb!!)
+					tile.special = DualMatch(tile.orb!!.desc, level.theme)
 				}
 				else
 				{
@@ -252,6 +252,11 @@ class GridScreen(): AbstractScreen()
 						if (level.victoryConditions.all { it.isCompleted() })
 						{
 							Mote.clear()
+
+							for (label in level.grid.messageList)
+							{
+								label.remove()
+							}
 
 							level.completed = true
 							level.complete()

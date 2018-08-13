@@ -110,7 +110,6 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 fun validAttack(grid: Grid, tile: Tile): Boolean
 {
 	if (tile.orb == null) return false
-	if (tile.orb!!.special != null) return false
 	if (tile.orb!!.hasAttack) return false
 	if (tile.orb!!.delayDisplayAttack > 0f) return false
 	if (tile.spreader != null) return false
@@ -221,13 +220,13 @@ class MonsterAbility
 			validTargets = validTargets.filter { validAttack(grid, it) }
 		}
 
-		val chosen = validTargets.asSequence().random(targetCount)
+		val chosen = validTargets.asSequence().random(targetCount).toList().toGdxArray()
 
 		val finalTargets = Array<Tile>()
 
 		for (target in chosen)
 		{
-			for (t in permuter.permute(target, grid, data))
+			for (t in permuter.permute(target, grid, data, chosen, null))
 			{
 				if (!finalTargets.contains(t, true))
 				{
@@ -259,7 +258,7 @@ class MonsterAbility
 							}
 
 							val orb = tile.orb
-							if (orb != null && (orb.special != null || orb.hasAttack || orb.delayDisplayAttack > 0f))
+							if (orb != null && (orb.hasAttack || orb.delayDisplayAttack > 0f))
 							{
 								return false
 							}

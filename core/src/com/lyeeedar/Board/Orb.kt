@@ -4,12 +4,10 @@ import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
-import com.lyeeedar.Renderables.Animation.BlinkAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Point
 import com.lyeeedar.Util.getXml
 import ktx.collections.set
 
@@ -17,9 +15,9 @@ import ktx.collections.set
  * Created by Philip on 04-Jul-16.
  */
 
-class Orb(desc: OrbDesc, theme: Theme): Swappable(theme)
+class Orb(desc: OrbDesc, theme: Theme): Matchable(theme)
 {
-	var desc: OrbDesc = OrbDesc()
+	override var desc: OrbDesc = OrbDesc()
 		get() = field
 		set(value)
 		{
@@ -33,22 +31,8 @@ class Orb(desc: OrbDesc, theme: Theme): Swappable(theme)
 		this.desc = desc
 	}
 
-	var armed: ((point: Point, grid: Grid, orb: Orb) -> Unit)? = null
-
-	var special: Special? = null
-		set(value)
-		{
-			field = value
-
-			if (value != null)
-			{
-				val nsprite = value.sprite.copy()
-				nsprite.colour = sprite.colour
-				if (nsprite.colourAnimation == null) nsprite.colourAnimation = BlinkAnimation.obtain().set(nsprite.colour, 0.1f, 2.5f, false)
-
-				sprite = nsprite
-			}
-		}
+	override val canMatch: Boolean
+		get() = true
 
 	var markedForDeletion: Boolean = false
 	var deletionEffectDelay: Float = 0f
@@ -93,10 +77,10 @@ class Orb(desc: OrbDesc, theme: Theme): Swappable(theme)
 	var nextSprite: Sprite? = null
 
 	val key: Int
-		get() = if (special is Match5) -1 else desc.key
+		get() = desc.key
 
 	override val canMove: Boolean
-		get() = !sealed && armed == null
+		get() = !sealed
 
 	override fun toString(): String
 	{
@@ -108,7 +92,6 @@ class Orb(desc: OrbDesc, theme: Theme): Swappable(theme)
 		sealCount = orb.sealCount
 		hasAttack = orb.hasAttack
 		attackTimer = orb.attackTimer
-		special = orb.special
 	}
 
 	companion object
