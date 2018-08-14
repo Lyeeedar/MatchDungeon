@@ -8,7 +8,6 @@ import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.AbstractReward
-import com.lyeeedar.Global
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.Util.AssetManager
@@ -52,7 +51,7 @@ class CardContentActionRewards : AbstractCardContentAction()
 			if (!awaitingAdvance && grouped.size == 0)
 			{
 				grouped = rewards.filter { it.chance.evaluate() }.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
-				Global.stage.addActor(greyOutTable)
+				CardContentScreen.stage.addActor(greyOutTable)
 				awaitingAdvance = true
 			}
 
@@ -83,7 +82,7 @@ class CardContentActionRewards : AbstractCardContentAction()
 						}
 					}
 
-					Global.stage.addActor(card)
+					CardContentScreen.stage.addActor(card)
 				}
 
 				if (currentGroup.size > 0)

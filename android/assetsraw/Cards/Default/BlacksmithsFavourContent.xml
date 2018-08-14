@@ -75,7 +75,7 @@
 			<Rewards meta:RefKey="Rewards">
 				<Equipment>
 					<FromDeck>true</FromDeck>
-					<Type>Weapon</Type>
+					<Type>Hands</Type>
 				</Equipment>
 			</Rewards>
 			<MarkComplete>

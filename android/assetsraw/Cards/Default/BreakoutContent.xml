@@ -25,7 +25,7 @@
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>
-					<Count>30</Count>
+					<Count>50</Count>
 				</Money>
 				<Equipment>
 					<Chance>Low</Chance>

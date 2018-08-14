@@ -340,7 +340,7 @@ class DualHori(orbDesc: OrbDesc, theme: Theme) : HorizontalBeamSpecial(orbDesc, 
 {
 	init
 	{
-		sprite = AssetManager.loadSprite("Oryx/Custom/items/orb_dual_hori", drawActualSize = true)
+		sprite = AssetManager.loadSprite("Oryx/Custom/items/orb_dual_vert", drawActualSize = true)
 		sprite.colour = orbDesc.sprite.colour
 		sprite.colourAnimation = BlinkAnimation.obtain().set(sprite.colour, 0.1f, 2.5f, false)
 	}
@@ -367,7 +367,7 @@ class DualVert(orbDesc: OrbDesc, theme: Theme) : VerticalBeamSpecial(orbDesc, th
 {
 	init
 	{
-		sprite = AssetManager.loadSprite("Oryx/Custom/items/orb_dual_vert", drawActualSize = true)
+		sprite = AssetManager.loadSprite("Oryx/Custom/items/orb_dual_hori", drawActualSize = true)
 		sprite.colour = orbDesc.sprite.colour
 		sprite.colourAnimation = BlinkAnimation.obtain().set(sprite.colour, 0.1f, 2.5f, false)
 	}
@@ -559,12 +559,12 @@ class Match5Spread(orbDesc: OrbDesc, theme: Theme, val special: Special) : GemSp
 	{
 		if (special is HorizontalBeamSpecial)
 		{
-			sprite = AssetManager.loadSprite("Oryx/Custom/items/gem_hori", drawActualSize = true)
+			sprite = AssetManager.loadSprite("Oryx/Custom/items/gem_vert", drawActualSize = true)
 			sprite.colourAnimation = ChromaticAnimation.obtain().set(15f)
 		}
 		else if (special is VerticalBeamSpecial)
 		{
-			sprite = AssetManager.loadSprite("Oryx/Custom/items/gem_vert", drawActualSize = true)
+			sprite = AssetManager.loadSprite("Oryx/Custom/items/gem_hori", drawActualSize = true)
 			sprite.colourAnimation = ChromaticAnimation.obtain().set(15f)
 		}
 		else if (special is BombSpecial)

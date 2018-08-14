@@ -3,6 +3,7 @@ package com.lyeeedar.UI
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Util.Future
 
 class NumberChangeLabel(caption: String, skin: Skin, style: String = "default") : Table(skin)
@@ -12,10 +13,14 @@ class NumberChangeLabel(caption: String, skin: Skin, style: String = "default") 
 		{
 			val diff = value - field
 			currentChange += diff
-			Future.call({ currentChange -= diff }, 1f)
+
+			val changeToken = Any()
+			Future.call({ currentChange -= diff; changeTokens.removeValue(changeToken, true) }, 1f, changeToken)
+			changeTokens.add(changeToken)
 
 			field = value
 		}
+	val changeTokens = Array<Any>()
 
 	private var currentValue = 0
 	private var currentChange = 0
@@ -33,6 +38,21 @@ class NumberChangeLabel(caption: String, skin: Skin, style: String = "default") 
 		add(captionLabel)
 		add(numberLabel)
 		add(changeLabel)
+	}
+
+	fun complete()
+	{
+		currentValue = value
+		numberLabel.setText(currentValue.toString())
+		currentChange = 0
+		lastChange = 0
+		changeLabel.setText("")
+
+		for (token in changeTokens)
+		{
+			Future.cancel(token)
+		}
+		changeTokens.clear()
 	}
 
 	override fun act(delta: Float)

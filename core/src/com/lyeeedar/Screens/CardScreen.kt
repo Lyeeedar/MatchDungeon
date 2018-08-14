@@ -291,9 +291,17 @@ class CardScreen : AbstractScreen()
 		{
 			readyToSwitch = false
 
+			goldLabel.complete()
+
 			QuestScreen.instance.updateQuest()
 			Global.game.switchScreen(MainGame.ScreenEnum.QUEST)
 		}
+	}
+
+	override fun show()
+	{
+		super.show()
+		goldLabel.complete()
 	}
 
 	companion object

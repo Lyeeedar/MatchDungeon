@@ -308,9 +308,12 @@ class GridWidget(val grid: Grid) : Widget()
 				{
 					ground.queueSprite(grid.level.theme.plate, xi, yi, TILE, tileHeight, tileColour)
 
-					val tutorial = Tutorial("Plate")
-					tutorial.addPopup("This is a plate. Match on top of this to break it.", getRect(tile))
-					tutorial.show()
+					if ( !grid.inTurn )
+					{
+						val tutorial = Tutorial("Plate")
+						tutorial.addPopup("This is a plate. Match on top of this to break it.", getRect(tile))
+						tutorial.show()
+					}
 
 					tileHeight++
 				}
@@ -319,7 +322,7 @@ class GridWidget(val grid: Grid) : Widget()
 				{
 					ground.queueSprite(chest.sprite, xi, yi, TILE, tileHeight, tileColour)
 
-					if (chest.numToSpawn > 0 && !Global.settings.get("Chest", false))
+					if (chest.numToSpawn > 0 && !grid.inTurn && !Global.settings.get("Chest", false))
 					{
 						val tutorial = Tutorial("Chest")
 						tutorial.addPopup("This is a chest. Match in the tiles beneath this to spawn coins. When there are no more coins to spawn, it will appear empty.", getRect(tile))
@@ -361,7 +364,7 @@ class GridWidget(val grid: Grid) : Widget()
 					{
 						ground.queueSprite(swappable.sealSprite, xi, yi, ORB, 2, orbColour)
 
-						if (!Global.settings.get("Seal", false))
+						if (!Global.settings.get("Seal", false) && !grid.inTurn )
 						{
 							val tutorial = Tutorial("Seal")
 							tutorial.addPopup("This orb has been sealed. It won't move until the seal is broken. To break the seal use the orb in a match.", getRect(swappable))
@@ -429,7 +432,7 @@ class GridWidget(val grid: Grid) : Widget()
 								currentPoint.rotate(degreesStep)
 							}
 
-							if (!Global.settings.get("Attack", false))
+							if (!Global.settings.get("Attack", false) && !grid.inTurn )
 							{
 								val tutorial = Tutorial("Attack")
 								tutorial.addPopup("This is an attack. The pips surrounding the skull indicate the turns remaining until it activates.", getRect(swappable))
@@ -441,7 +444,7 @@ class GridWidget(val grid: Grid) : Widget()
 
 					if (swappable is Sinkable)
 					{
-						if (!Global.settings.get("Sinkable", false))
+						if (!Global.settings.get("Sinkable", false) && !grid.inTurn )
 						{
 							val tutorial = Tutorial("Sinkable")
 							tutorial.addPopup("This is a sinkable item. If you move it to the bottom of the board you will successfully sink it.", getRect(tile, true))
@@ -476,7 +479,7 @@ class GridWidget(val grid: Grid) : Widget()
 						floating.queueSprite(sprite, xi+i*spacePerPip, yi+0.1f, ORB, 2, width = solid, height = 0.15f)
 					}
 
-					if (!Global.settings.get("Monster", false))
+					if (!Global.settings.get("Monster", false) && !grid.inTurn )
 					{
 						val tutorial = Tutorial("Monster")
 						val tiles: com.badlogic.gdx.utils.Array<Point> = monster.tiles.toList().toGdxArray()
@@ -484,7 +487,7 @@ class GridWidget(val grid: Grid) : Widget()
 						tutorial.show()
 					}
 
-					if (monster.damageReduction > 0 && !Global.settings.get("DR", false))
+					if (monster.damageReduction > 0 && !grid.inTurn  && !Global.settings.get("DR", false))
 					{
 						val tutorial = Tutorial("DR")
 						val tiles: com.badlogic.gdx.utils.Array<Point> = monster.tiles.toList().toGdxArray()
@@ -521,7 +524,7 @@ class GridWidget(val grid: Grid) : Widget()
 						floating.queueSprite(sprite, xi+i*spacePerPip, yi+0.1f, ORB, 2, width = solid, height = 0.15f)
 					}
 
-					if (!Global.settings.get("Friendly", false))
+					if (!Global.settings.get("Friendly", false) && !grid.inTurn )
 					{
 						val tutorial = Tutorial("Friendly")
 						val tiles: com.badlogic.gdx.utils.Array<Point> = friendly.tiles.toList().toGdxArray()
@@ -558,7 +561,7 @@ class GridWidget(val grid: Grid) : Widget()
 						}
 					}
 
-					if (!Global.settings.get("Block", false))
+					if (!Global.settings.get("Block", false) && !grid.inTurn )
 					{
 						val tutorial = Tutorial("Block")
 						tutorial.addPopup("This is a block. Match in the tiles surrounding it to break it.", getRect(tile, true))
@@ -614,7 +617,7 @@ class GridWidget(val grid: Grid) : Widget()
 						floating.queueParticle(spreader.particleEffect!!, xi, yi, SPREADER, 1, orbColour)
 					}
 
-					if (!Global.settings.get("Spreader", false))
+					if (!Global.settings.get("Spreader", false) && !grid.inTurn )
 					{
 						val tutorial = Tutorial("Spreader")
 						tutorial.addPopup("This is a spreading field. Match in the tiles surrounding it to remove it and stop it spreading this turn.", getRect(tile))
