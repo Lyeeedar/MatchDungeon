@@ -289,14 +289,21 @@ class XmlData
 
 			filepath = "CompressedData/" + filepath.hashCode() + ".xmldata"
 
-			var handle = Gdx.files.internal(filepath)
-			if (!handle.exists()) handle = Gdx.files.absolute(filepath)
+			try
+			{
+				var handle = Gdx.files.internal(filepath)
+				if (!handle.exists()) handle = Gdx.files.absolute(filepath)
 
-			val loaded = XmlData(handle)
+				val loaded = XmlData(handle)
 
-			cachedXml[path] = loaded
+				cachedXml[path] = loaded
 
-			return loaded
+				return loaded
+			}
+			catch (ex: Exception)
+			{
+				throw Exception("Failed to load file: '$path'. Reason: ${ex.message}")
+			}
 		}
 
 		fun loadFromElement(el: XmlReader.Element): XmlData

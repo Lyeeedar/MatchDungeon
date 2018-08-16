@@ -290,11 +290,11 @@ class QuestScreen : AbstractScreen()
 
 		currentGroup.add(card)
 
-		val cards = Array<CardWidget>()
-		cards.add(card)
+		cardWidgets.add(card)
 
 		stage.addActor(card)
-		CardWidget.layoutCards(cards, Direction.CENTER, cardsTable, animate = false)
+
+		needsLayout = true
 	}
 
 	override fun show()

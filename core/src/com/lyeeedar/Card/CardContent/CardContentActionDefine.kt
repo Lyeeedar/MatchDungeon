@@ -14,8 +14,8 @@ class CardContentActionDefine : AbstractCardContentAction()
 
 	override fun parse(xmlData: XmlData)
 	{
-		key = xmlData.get("Key")
-		value = xmlData.get("Value")
+		key = xmlData.get("Key").toLowerCase()
+		value = xmlData.get("Value").toLowerCase()
 		global = xmlData.getBoolean("Global", false)
 	}
 

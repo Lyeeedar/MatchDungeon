@@ -358,19 +358,19 @@ class Global
 			output.putAll(globalflags.flags)
 			output.putAll(levelflags.flags)
 
-			output.put("Money", player.gold.toFloat())
+			output.put("money", player.gold.toFloat())
 
 			for (stat in Statistic.Values)
 			{
-				output.put(stat.toString(), player.getStat(stat))
+				output.put(stat.toString().toLowerCase(), player.getStat(stat))
 			}
 
 			for (slot in EquipmentSlot.Values)
 			{
-				output.put(slot.toString(), if(player.getEquipment(slot) != null) 1f else 0f)
+				output.put(slot.toString().toLowerCase(), if(player.getEquipment(slot) != null) 1f else 0f)
 			}
 
-			output.put(player.baseCharacter.name, 1f)
+			output.put(player.baseCharacter.name.toLowerCase(), 1f)
 
 			return output
 		}

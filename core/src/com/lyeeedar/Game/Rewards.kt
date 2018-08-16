@@ -94,7 +94,6 @@ class StatisticsReward : AbstractReward()
 				card.addPick("Take", {
 
 					Global.player.statistics[stat] = (Global.player.statistics[stat] ?: 0f) + statVal
-					Save.save()
 
 					val sprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/key_ornate")
 
@@ -144,7 +143,6 @@ class CardReward : AbstractReward()
 
 			Global.deck.encounters.add(card)
 			Global.deck.newencounters.add(card)
-			Save.save()
 
 			cardWidget.addPick("", {
 				val sprite = AssetManager.loadSprite("Oryx/Custom/items/card")
@@ -195,7 +193,6 @@ class QuestReward : AbstractReward()
 
 			Global.deck.quests.add(quest)
 			Global.deck.newquests.add(quest)
-			Save.save()
 
 			cardWidget.addPick("", {
 
@@ -247,7 +244,6 @@ class CharacterReward : AbstractReward()
 
 			Global.deck.characters.add(c)
 			Global.deck.newcharacters.add(c)
-			Save.save()
 
 			cardWidget.addPick("", {
 
@@ -304,7 +300,6 @@ class MoneyReward : AbstractReward()
 		card.addPick("Take", {
 
 			Global.player.gold += amount
-			Save.save()
 
 			val sprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_gold")
 
@@ -409,7 +404,6 @@ class EquipmentReward : AbstractReward()
 			}
 			else
 			{
-				Save.save()
 				return output
 			}
 		}
@@ -458,8 +452,6 @@ class EquipmentReward : AbstractReward()
 		})
 
 		output.add(card)
-
-		Save.save()
 
 		return output
 	}

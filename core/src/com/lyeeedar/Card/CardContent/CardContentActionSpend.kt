@@ -17,7 +17,7 @@ class CardContentActionSpend : AbstractCardContentAction()
 	override fun parse(xmlData: XmlData)
 	{
 		key = xmlData.get("Key")
-		countEqn = xmlData.get("Count")
+		countEqn = xmlData.get("Count").toLowerCase()
 	}
 
 	override fun advance(CardContent: CardContent, CardContentScreen: CardScreen): Boolean

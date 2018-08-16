@@ -467,7 +467,7 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 
 					val delayVal = delay
 					delay += 0.04f
-					val sequence = delay(delayVal) then moveTo(x, y, 0.2f) then delay(0.1f) then lambda { widget.flip(true); widget.clickable = true }
+					val sequence = delay(delayVal) then moveTo(x, y, 0.2f) then delay(0.1f) then lambda { widget.setFacing(true, true); widget.clickable = true }
 					widget.addAction(sequence)
 				}
 			}

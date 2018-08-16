@@ -35,7 +35,7 @@ class CardContentActionBranch : AbstractCardContentAction()
 	{
 		for (el in xml.children())
 		{
-			val condition = el.get("Condition", "1")!!
+			val condition = el.get("Condition", "1")!!.toLowerCase()
 			var key = el.get("Node", null)
 			var hasNode = true
 

@@ -326,7 +326,7 @@ class Quest(val path: String)
 			}
 
 			val currentGuid = input.readString()
-			if (currentGuid != null)
+			if (currentGuid != "null")
 			{
 				quest.current = quest.nodes.first { it.guid == currentGuid }
 			}
@@ -577,7 +577,7 @@ class Branch(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 	{
 		for (el in xmlData.children())
 		{
-			val cond = el.get("Condition")
+			val cond = el.get("Condition").toLowerCase()
 			val guid = el.get("Node")
 
 			branches.add(BranchWrapper(guid, cond))
@@ -668,8 +668,8 @@ class Define(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 
 	override fun parse(xmlData: XmlData)
 	{
-		key = xmlData.get("Key")
-		value = xmlData.get("Value")
+		key = xmlData.get("Key").toLowerCase()
+		value = xmlData.get("Value").toLowerCase()
 		isGlobal = xmlData.getBoolean("IsGlobal", false)
 
 		val nextID = xmlData.get("Next")

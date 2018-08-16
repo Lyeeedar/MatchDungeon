@@ -46,6 +46,7 @@ class QuestSelectionScreen : AbstractScreen()
 			val card = quest.getCard()
 			card.addPick("Embark", {
 				val screen = Global.game.getTypedScreen<QuestScreen>()!!
+				quest.current = quest.root
 				screen.setup(quest)
 				screen.swapTo()
 			})

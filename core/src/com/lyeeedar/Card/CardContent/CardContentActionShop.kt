@@ -31,7 +31,7 @@ class CardContentActionShop : AbstractCardContentAction()
 
 	override fun parse(xmlData: XmlData)
 	{
-		costMultiplier = xmlData.get("CostMultiplier", "1")!!
+		costMultiplier = xmlData.get("CostMultiplier", "1")!!.toLowerCase()
 
 		val itemsEl = xmlData.getChildByName("Items")!!
 		for (itemEl in itemsEl.children)
