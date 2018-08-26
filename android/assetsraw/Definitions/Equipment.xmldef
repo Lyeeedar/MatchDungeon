@@ -15,7 +15,7 @@
 					<Data Name="Target Count" Type="Int" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
 					<Data Name="Targetter" EnumValues="Orb,Special,Block,Empty,Sealed,Monster,Attack,Tile,Spreader" meta:RefKey="Enum" />
 					<Data Name="Permuter" EnumValues="Single,AllOfType,NofType,Column,Row,Cross,Block,Diamond,Random" meta:RefKey="Enum" />
-					<Data Name="Effect" EnumValues="Pop,Convert,Summon,Spreader" meta:RefKey="Enum" />
+					<Data Name="Effect" EnumValues="Pop,Convert,Summon,Spreader,Supercharge" meta:RefKey="Enum" />
 				</Data>
 				<Data Name="Data" Nullable="False" meta:RefKey="Struct">
 					<Data Name="AOE" Type="Int" Min="1" Default="1" SkipIfDefault="False" VisibleIf="Parent.Effect.Permuter==Block || Parent.Effect.Permuter==Diamond" meta:RefKey="Number" />

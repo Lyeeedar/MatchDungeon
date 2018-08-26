@@ -34,8 +34,8 @@ class Orb(desc: OrbDesc, theme: Theme): Matchable(theme)
 	override val canMatch: Boolean
 		get() = true
 
-	var markedForDeletion: Boolean = false
-	var deletionEffectDelay: Float = 0f
+	override var markedForDeletion: Boolean = false
+	override var deletionEffectDelay: Float = 0f
 	var skipPowerOrb = false
 
 	var delayDisplayAttack: Float = 0f
@@ -75,9 +75,6 @@ class Orb(desc: OrbDesc, theme: Theme): Matchable(theme)
 			nextSprite!!.baseScale[1] = 1.25f
 		}
 	var nextSprite: Sprite? = null
-
-	val key: Int
-		get() = desc.key
 
 	override val canMove: Boolean
 		get() = !sealed

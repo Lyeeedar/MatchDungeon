@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.lyeeedar.Board.Grid
+import com.lyeeedar.Board.Matchable
 import com.lyeeedar.Board.Orb
 import com.lyeeedar.Global
 import com.lyeeedar.UI.SpriteWidget
@@ -25,7 +26,7 @@ class CompletionConditionCustomOrb : AbstractCompletionCondition()
 
 	override fun attachHandlers(grid: Grid)
 	{
-		grid.onPop += fun(orb: Orb, delay: Float) : Boolean {
+		grid.onPop += fun(orb: Matchable, delay: Float) : Boolean {
 
 			if (orb.desc.name == targetOrbName)
 			{

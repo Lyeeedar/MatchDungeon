@@ -600,9 +600,9 @@ class Level(val loadPath: String)
 			}
 
 			val grid = xml.getChildByName("Grid")!!
-			for (ci in 0 until grid.childCount)
+			for (ci in 0 until grid.childCount * 2)
 			{
-				val cel = grid.getChild(ci)
+				val cel = grid.getChild(ci / 2)
 
 				val level = Level(path)
 				level.symbolMap.putAll(symbolsMap)
@@ -617,9 +617,11 @@ class Level(val loadPath: String)
 					rows = gridxml.getChildByName("Rows")!!
 				}
 
+				val flip = (ci % 2) == 0
+
 				val width = rows.getChild(0).text.length
 				val height = rows.childCount
-				level.charGrid = Array2D<Char>(width, height) { x, y -> rows.getChild(y).text[x] }
+				level.charGrid = Array2D<Char>(width, height) { x, y -> rows.getChild(y).text[if (flip) width - x - 1 else x] }
 
 				val defeatsEl = xml.getChildByName("AllowedDefeats")!!
 				for (defeatEl in defeatsEl.children)

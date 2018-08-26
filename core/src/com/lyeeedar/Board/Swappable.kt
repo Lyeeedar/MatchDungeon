@@ -32,4 +32,6 @@ abstract class Matchable(theme: Theme) : Swappable(theme)
 {
 	abstract var desc: OrbDesc
 	abstract val canMatch: Boolean
+	abstract var markedForDeletion: Boolean
+	abstract var deletionEffectDelay: Float
 }

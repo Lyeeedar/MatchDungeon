@@ -339,9 +339,21 @@ class QuestScreen : AbstractScreen()
 
 					currentGroup.add(card)
 					Global.stage.addActor(card)
+
+					if (currentGroup.size == 4)
+					{
+						break
+					}
 				}
 
-				CardWidget.layoutCards(cardWidgets, Direction.CENTER, animate = false)
+				if (currentGroup.size > 0)
+				{
+					CardWidget.layoutCards(currentGroup, Direction.CENTER)
+				}
+				else
+				{
+					updateRewards()
+				}
 			}
 			else if (grouped.size == 0)
 			{
@@ -376,15 +388,7 @@ class QuestScreen : AbstractScreen()
 					{
 						shownIntro = true
 
-						val table = Table()
-						table.add(Label("Quest Unlocks", Global.skin, "card"))
-						table.row()
-						//table.add(SpriteWidget(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_bronze", drawActualSize =  true), 32f, 32f)).expandX().center()
-
-						val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("white")!!, null)
-						card.canZoom = false
-						card.setFacing(true, false)
-						card.addPick("", { updateRewards() })
+						spawnIntroCard("Quest Unlocks", AssetManager.loadSprite("blank", drawActualSize =  true))
 					}
 					else
 					{
@@ -521,6 +525,8 @@ class QuestScreen : AbstractScreen()
 	{
 		if (needsAdvance && Mote.motes.size == 0)
 		{
+			needsAdvance = false
+
 			QuestSelectionScreen.instance.setup()
 			QuestSelectionScreen.instance.swapTo()
 			greyOutTable.remove()

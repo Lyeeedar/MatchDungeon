@@ -47,7 +47,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	// ----------------------------------------------------------------------
 	val onTurn = Event0Arg()
 	val onTime = Event1Arg<Float>()
-	val onPop = Event2Arg<Orb, Float>()
+	val onPop = Event2Arg<Matchable, Float>()
 	val onSunk = Event1Arg<Sinkable>()
 	val onDamaged = Event1Arg<Damageable>()
 	val onSpawn = Event1Arg<Swappable>()
@@ -135,9 +135,9 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			false
 		}
 
-		onPop += fun (orb: Orb, delay: Float) : Boolean {
+		onPop += fun (orb: Matchable, delay: Float) : Boolean {
 
-			if (!orb.skipPowerOrb)
+			if (orb is Orb && !orb.skipPowerOrb)
 			{
 				val pos = GridWidget.instance.pointToScreenspace(orb)
 				val dst = PowerBar.instance.getOrbDest()
@@ -805,9 +805,6 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		val oldSwap = oldTile.swappable ?: return false
 		val newSwap = newTile.swappable ?: return false
 
-		val oldOrb = oldSwap as? Orb
-		val newOrb = newSwap as? Orb
-
 		val oldSpecial = oldSwap as? Special
 		val newSpecial = newSwap as? Special
 
@@ -870,48 +867,52 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			{
 				val tile = grid[x, y]
 
-				if (tile.orb != null)
-				{
-					val orb = tile.orb!!
-					orb.x = x
-					orb.y = y
-
-					if (orb.markedForDeletion && orb.sprite.animation == null)
-					{
-						tile.orb = null
-						onPop(orb, orb.deletionEffectDelay)
-
-						if (orb.deletionEffectDelay >= 0.2f)
-						{
-							val sprite = orb.sprite.copy()
-							sprite.renderDelay = orb.deletionEffectDelay - 0.2f
-							sprite.showBeforeRender = true
-							sprite.animation = AlphaAnimation.obtain().set(0.2f, 1f, 0f, sprite.colour)
-							tile.effects.add(sprite)
-						}
-					}
-					else if (orb.hasAttack && orb.attackTimer == 0 && orb.sprite.animation == null)
-					{
-						if (!level.completed) onAttacked(orb)
-						tile.orb = null
-						onPop(orb, orb.deletionEffectDelay)
-					}
-					else if (orb.delayDisplayAttack > 0)
-					{
-						orb.delayDisplayAttack -= delta
-
-						if (orb.delayDisplayAttack <= 0)
-						{
-							orb.hasAttack = true
-						}
-					}
-				}
-				else if (tile.special != null)
+				if (tile.special != null)
 				{
 					val special = tile.special!!
 					if (special.markedForDeletion && !special.armed)
 					{
 						tile.special = null
+						onPop(special, special.deletionEffectDelay)
+					}
+				}
+				else if (tile.matchable != null)
+				{
+					val matchable = tile.matchable!!
+					matchable.x = x
+					matchable.y = y
+
+					if (matchable.markedForDeletion && matchable.sprite.animation == null)
+					{
+						tile.orb = null
+						onPop(matchable, matchable.deletionEffectDelay)
+
+						if (matchable.deletionEffectDelay >= 0.2f)
+						{
+							val sprite = matchable.sprite.copy()
+							sprite.renderDelay = matchable.deletionEffectDelay - 0.2f
+							sprite.showBeforeRender = true
+							sprite.animation = AlphaAnimation.obtain().set(0.2f, 1f, 0f, sprite.colour)
+							tile.effects.add(sprite)
+						}
+					}
+					else if (matchable is Orb)
+					{
+						if (matchable.hasAttack && matchable.attackTimer == 0 && matchable.sprite.animation == null)
+						{
+							if (!level.completed) onAttacked(matchable)
+							tile.orb = null
+							onPop(matchable, matchable.deletionEffectDelay)
+						}
+						else if (matchable.delayDisplayAttack > 0)
+						{
+							matchable.delayDisplayAttack -= delta
+
+							if (matchable.delayDisplayAttack <= 0)
+							{
+								matchable.hasAttack = true
+							}
+						}
 					}
 				}
 				else if (tile.block != null)
@@ -1308,11 +1309,11 @@ class Grid(val width: Int, val height: Int, val level: Level)
 						val u1 = tile(x, y - 1)
 						val u2 = tile(x, y - 2)
 
-						if (l1?.orb != null && l2?.orb != null && l1.orb?.key == l2.orb?.key)
+						if (l1?.orb != null && l2?.orb != null && l1.orb?.desc?.key == l2.orb?.desc?.key)
 						{
 							valid.removeValue(l1.orb!!.desc, true)
 						}
-						if (u1?.orb != null && u2?.orb != null && u1.orb?.key == u2.orb?.key)
+						if (u1?.orb != null && u2?.orb != null && u1.orb?.desc?.key == u2.orb?.desc?.key)
 						{
 							valid.removeValue(u1.orb!!.desc, true)
 						}
@@ -1695,26 +1696,35 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			}
 		}
 
-		val orb = tile.orb ?: return
-		if (orb.markedForDeletion) return // already completed, dont do it again
+		val matchable = tile.matchable ?: return
+		if (matchable.markedForDeletion) return // already completed, dont do it again
 
-		if (orb.sealed)
+		if (matchable.sealed)
 		{
-			orb.sealCount--
+			matchable.sealCount--
 			val hit = hitEffect.copy()
 			hit.renderDelay = delay
 			tile.effects.add(hit)
 			return
 		}
 
-		orb.markedForDeletion = true
-		orb.deletionEffectDelay = delay
-		orb.skipPowerOrb = skipPowerOrb
+		matchable.markedForDeletion = true
+		matchable.deletionEffectDelay = delay
 
-		orb.sprite.visible = false
+		if (matchable is Orb)
+		{
+			matchable.skipPowerOrb = skipPowerOrb
+		}
 
-		val sprite = orb.desc.death.copy()
-		sprite.colour = orb.sprite.colour
+		if (matchable is Special)
+		{
+			matchable.armed = true
+		}
+
+		matchable.sprite.visible = false
+
+		val sprite = matchable.desc.death.copy()
+		sprite.colour = matchable.sprite.colour
 		sprite.renderDelay = delay
 		sprite.isShortened = true
 

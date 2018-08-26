@@ -3,6 +3,7 @@ package com.lyeeedar.Screens
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
+import com.lyeeedar.Game.Quest
 import com.lyeeedar.Global
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.UI.addClickListener
@@ -47,6 +48,7 @@ class QuestSelectionScreen : AbstractScreen()
 			card.addPick("Embark", {
 				val screen = Global.game.getTypedScreen<QuestScreen>()!!
 				quest.current = quest.root
+				quest.state = Quest.QuestState.INPROGRESS
 				screen.setup(quest)
 				screen.swapTo()
 			})

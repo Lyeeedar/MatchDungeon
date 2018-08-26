@@ -23,7 +23,9 @@ abstract class Special(val orbDesc: OrbDesc, theme: Theme) : Matchable(theme)
 	override val canMatch: Boolean
 		get() = !armed
 
-	var markedForDeletion: Boolean = false
+	override var deletionEffectDelay: Float = 0f
+
+	override var markedForDeletion: Boolean = false
 
 	override var desc: OrbDesc = orbDesc
 
@@ -524,7 +526,7 @@ class Match5(orbDesc: OrbDesc, theme: Theme) : GemSpecial(orbDesc, theme)
 
 		for (tile in grid.grid)
 		{
-			if (tile.orb?.desc == targetDesc || tile.creature != null || (tile.damageable?.maxhp ?: 0) > 1)
+			if (tile.matchable?.desc == targetDesc || tile.creature != null || (tile.damageable?.maxhp ?: 0) > 1)
 			{
 				val dst = tile.dist(point)
 				val animDuration = 0.275f + dst * 0.05f
@@ -614,7 +616,7 @@ class Match5Spread(orbDesc: OrbDesc, theme: Theme, val special: Special) : GemSp
 
 		for (tile in grid.grid)
 		{
-			if (tile.orb?.desc == targetDesc)
+			if (tile.matchable?.desc == targetDesc)
 			{
 				val dst = tile.dist(point)
 				val animDuration = 0.275f + dst * 0.05f
@@ -629,7 +631,7 @@ class Match5Spread(orbDesc: OrbDesc, theme: Theme, val special: Special) : GemSp
 				s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.0f, false)
 				s.completionCallback = fun()
 				{
-					if (tile.orb == null)
+					if (tile.matchable == null)
 					{
 
 					}

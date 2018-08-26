@@ -19,6 +19,7 @@ class Effect(val type: Type)
 		CONVERT,
 		SUMMON,
 		SPREADER,
+		SUPERCHARGE,
 		TEST
 	}
 
@@ -55,6 +56,17 @@ class Effect(val type: Type)
 				tile.spreader = spreader.copy()
 			}
 
+			Type.SUPERCHARGE -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>)
+			{
+				val special = tile.special ?: return
+
+				val mergeSpecial = DualMatch(special.orbDesc, grid.level.theme)
+
+				tile.special = special.merge(mergeSpecial) ?: mergeSpecial.merge(special) ?: special
+				tile.special!!.armed = true
+				tile.special!!.markedForDeletion = true
+			}
+
 			Type.TEST ->  fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>) { val orb = tile.orb ?: return; tile.special = Match5(orb.desc, grid.level.theme) }
 		}
 	}
@@ -73,6 +85,8 @@ class Effect(val type: Type)
 				val spreader = data["SPREADER"] as Spreader
 				"create " + spreader.nameKey
 			}
+
+			Type.SUPERCHARGE -> "Supercharge"
 
 			Type.TEST -> "TEST"
 		}

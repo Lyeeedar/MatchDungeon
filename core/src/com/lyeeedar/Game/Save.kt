@@ -94,7 +94,14 @@ class Save
 
 			try
 			{
-				input = Input(GZIPInputStream(Gdx.files.local("save.dat").read()))
+				val saveFileHandle = Gdx.files.local("save.dat")
+				if (!saveFileHandle.exists())
+				{
+					doingLoad = false
+					return false
+				}
+
+				input = Input(GZIPInputStream(saveFileHandle.read()))
 
 				// Load all data
 				val deck = GlobalDeck.load(input)
@@ -161,6 +168,7 @@ class Save
 			}
 			catch (e: Exception)
 			{
+				throw e
 				doingLoad = false
 				return false
 				//e.printStackTrace()

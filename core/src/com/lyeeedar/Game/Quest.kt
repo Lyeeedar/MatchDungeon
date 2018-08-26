@@ -622,7 +622,7 @@ class CompleteQuest(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 
 	override fun parse(xmlData: XmlData)
 	{
-		state = Quest.QuestState.valueOf(xmlData.get("State", "Bronze")!!.toUpperCase())
+		state = Quest.QuestState.valueOf(xmlData.get("State", "Gold")!!.toUpperCase())
 	}
 
 	override fun resolve(nodeMap: ObjectMap<String, AbstractQuestNode>)

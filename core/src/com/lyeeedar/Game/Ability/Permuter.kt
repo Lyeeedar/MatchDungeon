@@ -32,8 +32,8 @@ class Permuter(val type: Type)
 		permute = when(type)
 		{
 			Type.SINGLE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?) = sequenceOf(tile)
-			Type.ALLOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?) = grid.grid.filter{ val key = data["TYPE"]?.hashCode() ?: tile.orb!!.key; it.orb?.key == key }
-			Type.NOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?): Sequence<Tile> { val type = data["TYPE"].hashCode(); val count = data["COUNT"].toString().toInt(); return grid.grid.filter{ it.orb?.key == type }.random(count) }
+			Type.ALLOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?) = grid.grid.filter{ val key = data["TYPE"]?.hashCode() ?: tile.orb!!.desc.key; it.orb?.desc?.key == key }
+			Type.NOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?): Sequence<Tile> { val type = data["TYPE"].hashCode(); val count = data["COUNT"].toString().toInt(); return grid.grid.filter{ it.orb?.desc?.key == type }.random(count) }
 			Type.COLUMN ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?) = grid.grid.filter{ it.x == tile.x }
 			Type.ROW ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?) = grid.grid.filter{ it.y == tile.y }
 			Type.CROSS ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?) = grid.grid.filter{ it.y == tile.y || it.x == tile.x }
