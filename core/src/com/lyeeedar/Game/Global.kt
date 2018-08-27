@@ -39,7 +39,7 @@ class Global
 
 		lateinit var skin: Skin
 		var fps = 60
-		val android = false
+		var android = false
 		val release = false
 		lateinit var game: MainGame
 		lateinit var applicationChanger: AbstractApplicationChanger

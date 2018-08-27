@@ -16,7 +16,7 @@ android {
     }
     defaultConfig {
         applicationId "com.lyeeedar"
-        minSdkVersion 8
+        minSdkVersion 9
         targetSdkVersion 24
     }
 

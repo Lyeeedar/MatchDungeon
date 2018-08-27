@@ -1594,7 +1594,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		{
 			if (!match.used && match.length() > 3)
 			{
-				val tile = grid[match.points().maxBy { grid[it].orb?.cascadeCount ?: 0 }!!]
+				val tile = grid[match.points().maxBy { grid[it].matchable?.cascadeCount ?: 0 }!!]
 
 				val sprite = tile.matchable!!.sprite
 

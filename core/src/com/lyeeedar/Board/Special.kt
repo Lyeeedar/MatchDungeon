@@ -233,9 +233,13 @@ class Horizontal4(orbDesc: OrbDesc, theme: Theme) : HorizontalBeamSpecial(orbDes
 	{
 		if (other is Horizontal4 || other is Vertical4)
 		{
-			val out = HoriVert4(orbDesc, theme)
-			out.sprite.colour = sprite.colour.copy().lerp(other.sprite.colour, 0.5f)
-			return out
+			val desc = OrbDesc()
+			desc.death = orbDesc.death.copy()
+			desc.sprite = orbDesc.sprite.copy()
+			desc.sprite.colour = sprite.colour.copy().lerp(other.sprite.colour, 0.5f)
+			desc.name = "Merged"
+
+			return HoriVert4(desc, theme)
 		}
 
 		return null
@@ -265,9 +269,13 @@ class Vertical4(orbDesc: OrbDesc, theme: Theme) : VerticalBeamSpecial(orbDesc, t
 	{
 		if (other is Horizontal4 || other is Vertical4)
 		{
-			val out = HoriVert4(orbDesc, theme)
-			out.sprite.colour = sprite.colour.copy().lerp(other.sprite.colour, 0.5f)
-			return out
+			val desc = OrbDesc()
+			desc.death = orbDesc.death.copy()
+			desc.sprite = orbDesc.sprite.copy()
+			desc.sprite.colour = sprite.colour.copy().lerp(other.sprite.colour, 0.5f)
+			desc.name = "Merged"
+
+			return HoriVert4(desc, theme)
 		}
 
 		return null
@@ -440,23 +448,23 @@ class DualMatch(orbDesc: OrbDesc, theme: Theme) : BombSpecial(orbDesc, theme)
 
 	override fun merge(other: Swappable): Special?
 	{
+		val desc = OrbDesc()
+		desc.death = orbDesc.death.copy()
+		desc.sprite = orbDesc.sprite.copy()
+		desc.sprite.colour = sprite.colour.copy().lerp(other.sprite.colour, 0.5f)
+		desc.name = "Merged"
+
 		if (other is DualMatch)
 		{
-			val out = DoubleDualMatch(orbDesc, theme)
-			out.sprite.colour = sprite.colour.copy().lerp(other.sprite.colour, 0.5f)
-			return out
+			return DoubleDualMatch(desc, theme)
 		}
 		else if (other is Horizontal4)
 		{
-			val out = DualHori(orbDesc, theme)
-			out.sprite.colour = sprite.colour.copy().lerp(other.sprite.colour, 0.5f)
-			return out
+			return DualHori(desc, theme)
 		}
 		else if (other is Vertical4)
 		{
-			val out = DualVert(orbDesc, theme)
-			out.sprite.colour = sprite.colour.copy().lerp(other.sprite.colour, 0.5f)
-			return out
+			return DualVert(desc, theme)
 		}
 
 		return null
