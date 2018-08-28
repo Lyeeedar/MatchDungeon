@@ -1,7 +1,7 @@
 <CardContent meta:X="0" meta:Y="0" GUID="99b028ae-4ad1-41cf-880b-4a3980679b77" xmlns:meta="Editor">
 	<Root meta:RefKey="Node">588fc20b-8b70-493d-9943-ba5694862074</Root>
 	<Nodes>
-		<Node meta:X="204" meta:Y="0" GUID="588fc20b-8b70-493d-9943-ba5694862074">
+		<Node meta:X="201" meta:Y="-1" GUID="588fc20b-8b70-493d-9943-ba5694862074">
 			<Line>
 				<MultilineString>You awaken to the chittering cries of goblins, followed by a splintering crack as the break their way into your home.</MultilineString>
 			</Line>
@@ -11,15 +11,15 @@
 			<Rewards meta:RefKey="Rewards">
 				<Equipment>
 					<Unlock>false</Unlock>
-					<Equipment>Equipment/Default/Pitchfork.xml</Equipment>
+					<Equipment>Equipment/Peasant/Pitchfork.xml</Equipment>
 				</Equipment>
 				<Equipment>
 					<Unlock>false</Unlock>
-					<Equipment>Equipment/Default/Saucepan.xml</Equipment>
+					<Equipment>Equipment/Peasant/Saucepan.xml</Equipment>
 				</Equipment>
 				<Equipment>
 					<Unlock>false</Unlock>
-					<Equipment>Equipment/Default/SaucepanLid.xml</Equipment>
+					<Equipment>Equipment/Peasant/SaucepanLid.xml</Equipment>
 				</Equipment>
 			</Rewards>
 			<Line>

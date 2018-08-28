@@ -24,6 +24,7 @@ class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val gr
 {
 	val empty = AssetManager.loadSprite("GUI/power_empty")
 	val full = AssetManager.loadSprite("GUI/power_full")
+	val border = AssetManager.loadTextureRegion("GUI/border")
 
 	val padding = 3
 
@@ -103,6 +104,9 @@ class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val gr
 		if (grid.activeAbility == ability)
 		{
 			widget.color = Color.GOLD
+
+			batch?.color = Color.GOLD
+			batch?.draw(border, x, y, width, height)
 		}
 		else
 		{

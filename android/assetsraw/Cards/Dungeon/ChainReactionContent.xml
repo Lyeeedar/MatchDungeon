@@ -1,0 +1,43 @@
+<CardContent meta:X="0" meta:Y="0" GUID="d602ae26-37f9-4d48-9cab-51601324af27" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">dc013345-62f5-4e94-bbb4-a383ec7e93ef</Root>
+	<Nodes>
+		<Node meta:X="205" meta:Y="1" GUID="dc013345-62f5-4e94-bbb4-a383ec7e93ef">
+			<Line>
+				<MultilineString>You come across an ancient room filled with crumbling pillars. In the far corner a pile of treasure sits balanced atop a ledge.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>The pillars are too damaged to climb safely, but if they are knocked down in the right way you can topple them all to get the treasure.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>ChainReactionContentLevel</Level>
+				<Success meta:RefKey="Node">c4296296-7e44-42f5-bdba-889810b43451</Success>
+				<Failure meta:RefKey="Node">0543eaf1-42d2-420e-bc44-b4bd649f50b4</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="471" meta:Y="186" GUID="0543eaf1-42d2-420e-bc44-b4bd649f50b4">
+			<Line>
+				<MultilineString>The pillars collapse on top of the treasure, burying it in a huge heap of rubble.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="481" meta:Y="1" GUID="c4296296-7e44-42f5-bdba-889810b43451">
+			<Line>
+				<MultilineString>Each pillar falls to knock the next pillar down, all across the room. Finally the treasure falls at your feet.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>70</Count>
+				</Money>
+				<Money>
+					<Chance>Low</Chance>
+					<Count>20</Count>
+				</Money>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

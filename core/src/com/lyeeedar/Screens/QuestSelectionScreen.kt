@@ -49,6 +49,7 @@ class QuestSelectionScreen : AbstractScreen()
 				val screen = Global.game.getTypedScreen<QuestScreen>()!!
 				quest.current = quest.root
 				quest.state = Quest.QuestState.INPROGRESS
+				Global.player = Global.deck.getPlayer()
 				screen.setup(quest)
 				screen.swapTo()
 			})

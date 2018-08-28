@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="bc18859d-94c7-403a-9932-f8b3b2dafc11" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">c576db26-37c0-4430-a533-ef8814de370f</Root>
+	<Nodes>
+		<CardNode meta:X="205" meta:Y="4" GUID="c576db26-37c0-4430-a533-ef8814de370f">
+			<Name>Chain Reaction</Name>
+			<Description>You come across a room filled with crumbling pillars. In the distance you can see some treasure.</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>ChainReactionContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

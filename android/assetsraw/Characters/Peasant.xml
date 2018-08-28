@@ -10,8 +10,10 @@
 		<MatchDamage>0</MatchDamage>
 		<AbilityDamage>0</AbilityDamage>
 		<PowerGain>0</PowerGain>
+		<BonusGold>0</BonusGold>
+		<BonusTime>0</BonusTime>
 	</Statistics>
 	<StartingEquipment>
-		<MainHand>Equipment/Default/Pitchfork</MainHand>
+		<MainHand>Equipment/Peasant/Pitchfork</MainHand>
 	</StartingEquipment>
 </Character>
