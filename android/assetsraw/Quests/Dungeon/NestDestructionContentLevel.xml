@@ -1,0 +1,44 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>l=l=l=....</Line>
+			<Line>=b=b==....</Line>
+			<Line>l=l=l=....</Line>
+			<Line>======....</Line>
+			<Line>..........</Line>
+			<Line>..........</Line>
+			<Line>..........</Line>
+			<Line>!!.!.#....</Line>
+			<Line>!!!.!#....</Line>
+			<Line>.!.!!#....</Line>
+			<Line>!.!###....</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>l</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>3V4</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>b</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>4x4</SpecialOrb>
+		</Symbol>
+	</Symbols>
+	<Faction>Rats</Faction>
+	<AllowedVictories>
+		<Condition meta:RefKey="Kill" />
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Die" />
+	</AllowedDefeats>
+</Level>

@@ -2,7 +2,11 @@
 	<Title>Treasure Hunt</Title>
 	<Description>Tales of forgotten treasures left deep within an ancient ruin have drawn you to this place. Explore and take everything you can find!</Description>
 	<Theme>Dungeon</Theme>
-	<BronzeRewards meta:RefKey="Rewards" />
+	<BronzeRewards meta:RefKey="Rewards">
+		<Quest>
+			<File>Quests/Dungeon/RatKing</File>
+		</Quest>
+	</BronzeRewards>
 	<SilverRewards meta:RefKey="Rewards">
 		<Card>
 			<File>Quests/Dungeon/Rewards/TreasureRoom</File>

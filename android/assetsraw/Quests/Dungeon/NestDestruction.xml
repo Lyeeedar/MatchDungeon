@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="e9b75c69-4718-40ae-a686-1b7f6761a657" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">d9a5d800-4c48-416c-97cf-9d97de33dc6b</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="1" GUID="d9a5d800-4c48-416c-97cf-9d97de33dc6b">
+			<Name>Writhing Nest</Name>
+			<Description>You come across a nest writhing with rat bodies. This is a perfect chance to thin the hordes numbers.</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>NestDestructionContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

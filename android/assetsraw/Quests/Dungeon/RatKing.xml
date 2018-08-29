@@ -1,0 +1,147 @@
+<Quest meta:X="0" meta:Y="0" GUID="7eb4f439-70ed-41ce-afab-f7ce2202a22f" xmlns:meta="Editor">
+	<Title>The Rat King</Title>
+	<Description>You have been given a bounty to slay an especially large rat that has been terrorising the area.</Description>
+	<Theme>Dungeon</Theme>
+	<BronzeRewards meta:RefKey="Rewards" />
+	<SilverRewards meta:RefKey="Rewards" />
+	<GoldRewards meta:RefKey="Rewards" />
+	<Root meta:RefKey="QuestNode">58016e14-26df-44bf-81c1-f7b6a39439df</Root>
+	<Nodes>
+		<QuestNode meta:X="325" meta:Y="0" GUID="58016e14-26df-44bf-81c1-f7b6a39439df">
+			<Type>Fixed</Type>
+			<FixedEvent>Encounter</FixedEvent>
+			<Success meta:RefKey="QuestNode">44e97d0d-73d5-46b9-a96c-0e3e8dfbbdab</Success>
+			<Failure meta:RefKey="CompleteQuest">25667b33-db79-4ff6-a0d9-2e1aabd76e22</Failure>
+		</QuestNode>
+		<QuestNode meta:X="557" meta:Y="0" GUID="44e97d0d-73d5-46b9-a96c-0e3e8dfbbdab">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">249029e9-e6b4-403b-b7fa-fadc1af09c30</Success>
+			<Failure meta:RefKey="QuestNode">249029e9-e6b4-403b-b7fa-fadc1af09c30</Failure>
+		</QuestNode>
+		<QuestNode meta:X="833" meta:Y="0" GUID="249029e9-e6b4-403b-b7fa-fadc1af09c30">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">d11d30c3-6c8e-4662-aff5-6d737db91dfd</Success>
+			<Failure meta:RefKey="QuestNode">d11d30c3-6c8e-4662-aff5-6d737db91dfd</Failure>
+		</QuestNode>
+		<QuestNode meta:X="1109" meta:Y="0" GUID="d11d30c3-6c8e-4662-aff5-6d737db91dfd">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">8fdc2c12-1de2-4627-a056-e2aca5a454cc</Success>
+			<Failure meta:RefKey="QuestNode">8fdc2c12-1de2-4627-a056-e2aca5a454cc</Failure>
+		</QuestNode>
+		<QuestNode meta:X="1385" meta:Y="0" GUID="8fdc2c12-1de2-4627-a056-e2aca5a454cc">
+			<Type>Deck</Type>
+			<IsShop>true</IsShop>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">1f298433-d959-4ba1-b42c-e428eb916893</Success>
+			<Failure meta:RefKey="QuestNode">1f298433-d959-4ba1-b42c-e428eb916893</Failure>
+		</QuestNode>
+		<QuestNode meta:X="1661" meta:Y="1" GUID="1f298433-d959-4ba1-b42c-e428eb916893">
+			<Type>Fixed</Type>
+			<FixedEvent>AngrySwarm</FixedEvent>
+			<Success meta:RefKey="QuestNode">39a143ce-f799-4e6e-888c-21be367e8521</Success>
+			<Failure meta:RefKey="CompleteQuest">6e6d250e-7715-42ac-9cc3-8ca3e00bc5dd</Failure>
+		</QuestNode>
+		<QuestNode meta:X="1944" meta:Y="-13" GUID="39a143ce-f799-4e6e-888c-21be367e8521">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">30499942-86a6-4e91-8a27-3a355c0a5c96</Success>
+			<Failure meta:RefKey="QuestNode">30499942-86a6-4e91-8a27-3a355c0a5c96</Failure>
+		</QuestNode>
+		<CompleteQuest meta:X="1949" meta:Y="277" GUID="6e6d250e-7715-42ac-9cc3-8ca3e00bc5dd">
+			<State>Failure</State>
+		</CompleteQuest>
+		<QuestNode meta:X="2221" meta:Y="-13" GUID="30499942-86a6-4e91-8a27-3a355c0a5c96">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">ca312475-4b55-48f7-904e-e3ec4fce898f</Success>
+			<Failure meta:RefKey="QuestNode">ca312475-4b55-48f7-904e-e3ec4fce898f</Failure>
+		</QuestNode>
+		<QuestNode meta:X="2497" meta:Y="-13" GUID="ca312475-4b55-48f7-904e-e3ec4fce898f">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">e885a8d6-924b-4083-b856-5eee0b4a252d</Success>
+			<Failure meta:RefKey="QuestNode">e885a8d6-924b-4083-b856-5eee0b4a252d</Failure>
+		</QuestNode>
+		<QuestNode meta:X="2773" meta:Y="-13" GUID="e885a8d6-924b-4083-b856-5eee0b4a252d">
+			<Type>Deck</Type>
+			<IsShop>true</IsShop>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">a784fc5f-d1dc-453e-b8f7-0c2faade61b9</Success>
+			<Failure meta:RefKey="QuestNode">a784fc5f-d1dc-453e-b8f7-0c2faade61b9</Failure>
+		</QuestNode>
+		<QuestNode meta:X="3049" meta:Y="-13" GUID="a784fc5f-d1dc-453e-b8f7-0c2faade61b9">
+			<Type>Fixed</Type>
+			<FixedEvent>NestDestruction</FixedEvent>
+			<Success meta:RefKey="QuestNode">bbedeb43-178a-44c7-833c-5470599941b6</Success>
+			<Failure meta:RefKey="CompleteQuest">715ae751-ee88-43a9-b362-9b0c7e42f78e</Failure>
+		</QuestNode>
+		<CompleteQuest meta:X="557.74747474747471" meta:Y="308.080808080808" GUID="25667b33-db79-4ff6-a0d9-2e1aabd76e22">
+			<State>Failure</State>
+		</CompleteQuest>
+		<QuestNode meta:X="3346" meta:Y="-13" GUID="bbedeb43-178a-44c7-833c-5470599941b6">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">4e4834a4-253a-4078-b073-b02a79dd4afa</Success>
+			<Failure meta:RefKey="QuestNode">4e4834a4-253a-4078-b073-b02a79dd4afa</Failure>
+		</QuestNode>
+		<QuestNode meta:X="3622" meta:Y="-13" GUID="4e4834a4-253a-4078-b073-b02a79dd4afa">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">fb634379-0bda-4cd4-adb1-c1cc7559aef5</Success>
+			<Failure meta:RefKey="QuestNode">fb634379-0bda-4cd4-adb1-c1cc7559aef5</Failure>
+		</QuestNode>
+		<QuestNode meta:X="3898" meta:Y="-13" GUID="fb634379-0bda-4cd4-adb1-c1cc7559aef5">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">e58249df-6149-4f24-9b8b-bc1cbd76c276</Success>
+			<Failure meta:RefKey="QuestNode">e58249df-6149-4f24-9b8b-bc1cbd76c276</Failure>
+		</QuestNode>
+		<QuestNode meta:X="4174" meta:Y="-13" GUID="e58249df-6149-4f24-9b8b-bc1cbd76c276">
+			<Type>Deck</Type>
+			<IsShop>true</IsShop>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">cfd62c8c-b729-4a6f-9ee9-195be84d2d0a</Success>
+			<Failure meta:RefKey="QuestNode">cfd62c8c-b729-4a6f-9ee9-195be84d2d0a</Failure>
+		</QuestNode>
+		<QuestNode meta:X="4450" meta:Y="-13" GUID="cfd62c8c-b729-4a6f-9ee9-195be84d2d0a">
+			<Type>Fixed</Type>
+			<FixedEvent>RatKingBattle</FixedEvent>
+			<Success meta:RefKey="CompleteQuest">8694bbeb-a0e9-4b7f-9ca5-eeed15e19fbc</Success>
+			<Failure meta:RefKey="CompleteQuest">334a5e92-1d41-46f2-a51f-80775f2b3805</Failure>
+		</QuestNode>
+		<CompleteQuest meta:X="4733" meta:Y="-13" GUID="8694bbeb-a0e9-4b7f-9ca5-eeed15e19fbc" />
+		<CompleteQuest meta:X="4729.845748645952" meta:Y="154.175321764539" GUID="334a5e92-1d41-46f2-a51f-80775f2b3805">
+			<State>Silver</State>
+		</CompleteQuest>
+		<CompleteQuest meta:X="3344.9054533778294" meta:Y="275.96030825301443" GUID="715ae751-ee88-43a9-b362-9b0c7e42f78e">
+			<State>Bronze</State>
+		</CompleteQuest>
+	</Nodes>
+</Quest>

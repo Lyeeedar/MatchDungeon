@@ -1,0 +1,37 @@
+<CardContent meta:X="0" meta:Y="0" GUID="ac1aaa41-5844-45b9-9e3d-33ea18f4d229" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">146b7263-ab25-4958-a73a-80649bd9bfc8</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="146b7263-ab25-4958-a73a-80649bd9bfc8">
+			<Line>
+				<MultilineString>As you enter the room the vile sounds of tiny nails on stone and matted fur rubbing on fur asails your ears.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>In the corner, surrounded by pillars, sits a writhing nest of rats. A multitude of the foul creatures clambering over one another.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>If you can destroy this nest, it will surely deal a blow to the swarm.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>NestDestructionContentLevel</Level>
+				<Success meta:RefKey="Node">6dd82a76-0d6a-4e88-91a8-27284518787c</Success>
+				<Failure meta:RefKey="Node">92604f41-5827-4bdc-b489-58293ba4cdba</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="457" meta:Y="64" GUID="6dd82a76-0d6a-4e88-91a8-27284518787c">
+			<Line>
+				<MultilineString>Finally the nest is still, rat corpses littering the room. A job well done.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="446" meta:Y="196" GUID="92604f41-5827-4bdc-b489-58293ba4cdba">
+			<Line>
+				<MultilineString>The rats overwealm you and you have to flee for your life.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>
