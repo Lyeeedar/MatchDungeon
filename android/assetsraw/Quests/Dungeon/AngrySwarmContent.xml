@@ -1,0 +1,57 @@
+<CardContent meta:X="0" meta:Y="0" GUID="990c20fa-d68a-4639-bc9d-4edc8cb57644" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">a00375d2-271e-4d14-9755-980bf37583bd</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="a00375d2-271e-4d14-9755-980bf37583bd">
+			<Line>
+				<MultilineString>As you are walking down a corridor a quick skittering sound alerts you to something coming your way.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Suddenly a pack of large, vicious rats springs out at you.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>AngrySwarmContentLevel</Level>
+				<Success meta:RefKey="Node">abc741de-6c49-4129-ab5e-6dc19568f80d</Success>
+				<Failure meta:RefKey="Node">f13f7a12-49df-4d42-8cd2-ae495fc4535e</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="439" meta:Y="199" GUID="f13f7a12-49df-4d42-8cd2-ae495fc4535e">
+			<Line>
+				<MultilineString>The rats bring you down, their teeth ripping your life away.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="477" meta:Y="0" GUID="abc741de-6c49-4129-ab5e-6dc19568f80d">
+			<Line>
+				<MultilineString>You manage to bring them all down.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Statistics>
+					<Chance>Medium</Chance>
+					<Health>2</Health>
+					<MatchDamage>0</MatchDamage>
+					<AbilityDamage>0</AbilityDamage>
+					<PowerGain>0</PowerGain>
+				</Statistics>
+				<Statistics>
+					<Chance>Medium</Chance>
+					<Health>0</Health>
+					<MatchDamage>0</MatchDamage>
+					<AbilityDamage>1</AbilityDamage>
+					<PowerGain>0</PowerGain>
+				</Statistics>
+				<Statistics>
+					<Chance>Medium</Chance>
+					<Health>0</Health>
+					<MatchDamage>0</MatchDamage>
+					<AbilityDamage>0</AbilityDamage>
+					<PowerGain>2</PowerGain>
+				</Statistics>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

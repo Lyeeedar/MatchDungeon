@@ -20,6 +20,9 @@ import ktx.collections.set
 
 class CompletionConditionKill() : AbstractCompletionCondition()
 {
+	var all = true
+	var named: String? = null
+
 	val tick = AssetManager.loadSprite("Oryx/uf_split/uf_interface/uf_interface_680", colour = Colour(Color.FOREST))
 
 	var monsters = Array<Monster>()
@@ -31,12 +34,15 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 	{
 		for (tile in grid.grid)
 		{
-			if (tile.monster != null || tile.container?.contents is Monster)
+			val monster = tile.monster ?: tile.container!!.contents as? Monster
+			if (monster != null)
 			{
-				val monster = tile.monster ?: tile.container!!.contents as Monster
-				if (!monsters.contains(monster, true))
+				if (all || monster.desc.name == named)
 				{
-					monsters.add(monster)
+					if (!monsters.contains(monster, true))
+					{
+						monsters.add(monster)
+					}
 				}
 			}
 		}
@@ -58,6 +64,11 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 
 	override fun parse(xml: XmlData)
 	{
+		all = xml.getBoolean("All", true)
+		if (!all)
+		{
+			named = xml.get("Named")
+		}
 	}
 
 	override fun createTable(grid: Grid): Table

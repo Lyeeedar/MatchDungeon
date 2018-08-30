@@ -33,7 +33,7 @@
 				<Statistics>
 					<Health>2</Health>
 					<MatchDamage>1</MatchDamage>
-					<AbilityDamage>2</AbilityDamage>
+					<AbilityDamage>1</AbilityDamage>
 					<PowerGain>3</PowerGain>
 				</Statistics>
 			</Rewards>

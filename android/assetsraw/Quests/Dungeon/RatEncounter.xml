@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="9d01503e-7cc6-4cda-ac38-8674fa84de23" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">20b79d8d-77b1-48b4-ac21-16b3a4fc3c45</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="20b79d8d-77b1-48b4-ac21-16b3a4fc3c45">
+			<Name>Rat Encounter</Name>
+			<Description>As you approach the ruin you find a multitude of rats milling around the entrance.</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>RatEncounterContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

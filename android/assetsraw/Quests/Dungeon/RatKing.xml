@@ -9,7 +9,7 @@
 	<Nodes>
 		<QuestNode meta:X="325" meta:Y="0" GUID="58016e14-26df-44bf-81c1-f7b6a39439df">
 			<Type>Fixed</Type>
-			<FixedEvent>Encounter</FixedEvent>
+			<FixedEvent>RatEncounter</FixedEvent>
 			<Success meta:RefKey="QuestNode">44e97d0d-73d5-46b9-a96c-0e3e8dfbbdab</Success>
 			<Failure meta:RefKey="CompleteQuest">25667b33-db79-4ff6-a0d9-2e1aabd76e22</Failure>
 		</QuestNode>
@@ -94,7 +94,7 @@
 			<Success meta:RefKey="QuestNode">bbedeb43-178a-44c7-833c-5470599941b6</Success>
 			<Failure meta:RefKey="CompleteQuest">715ae751-ee88-43a9-b362-9b0c7e42f78e</Failure>
 		</QuestNode>
-		<CompleteQuest meta:X="557.74747474747471" meta:Y="308.080808080808" GUID="25667b33-db79-4ff6-a0d9-2e1aabd76e22">
+		<CompleteQuest meta:X="557.74749755859375" meta:Y="308.080810546875" GUID="25667b33-db79-4ff6-a0d9-2e1aabd76e22">
 			<State>Failure</State>
 		</CompleteQuest>
 		<QuestNode meta:X="3346" meta:Y="-13" GUID="bbedeb43-178a-44c7-833c-5470599941b6">
@@ -137,10 +137,10 @@
 			<Failure meta:RefKey="CompleteQuest">334a5e92-1d41-46f2-a51f-80775f2b3805</Failure>
 		</QuestNode>
 		<CompleteQuest meta:X="4733" meta:Y="-13" GUID="8694bbeb-a0e9-4b7f-9ca5-eeed15e19fbc" />
-		<CompleteQuest meta:X="4729.845748645952" meta:Y="154.175321764539" GUID="334a5e92-1d41-46f2-a51f-80775f2b3805">
+		<CompleteQuest meta:X="4729.845703125" meta:Y="154.17532348632813" GUID="334a5e92-1d41-46f2-a51f-80775f2b3805">
 			<State>Silver</State>
 		</CompleteQuest>
-		<CompleteQuest meta:X="3344.9054533778294" meta:Y="275.96030825301443" GUID="715ae751-ee88-43a9-b362-9b0c7e42f78e">
+		<CompleteQuest meta:X="3344.905517578125" meta:Y="275.96029663085938" GUID="715ae751-ee88-43a9-b362-9b0c7e42f78e">
 			<State>Bronze</State>
 		</CompleteQuest>
 	</Nodes>

@@ -1,0 +1,43 @@
+<CardContent meta:X="0" meta:Y="0" GUID="d63c01a7-f8ce-4a08-a72e-b3c1f6264582" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">926dfa1f-edac-4a1c-bc5b-82303ba5ed4e</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="926dfa1f-edac-4a1c-bc5b-82303ba5ed4e">
+			<Line>
+				<MultilineString>As you approach the ruin you find it to be surrounded by large rats.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>They are just milling around, some of them chewing on what looks to be the remains of a previous adventurer.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>If you want to get inside, you are going to need to kill them.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>RatEncounterContentLevel</Level>
+				<Success meta:RefKey="Node">c4d07bb4-aef4-4260-9091-7232f6c3b9f5</Success>
+				<Failure meta:RefKey="Node">f2eafcf5-2f5b-4ad2-898c-419392133252</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="447" meta:Y="259" GUID="f2eafcf5-2f5b-4ad2-898c-419392133252">
+			<Line>
+				<MultilineString>The rat swarm overpowers you and you fall, becoming the creatures next meal.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="481" meta:Y="0" GUID="c4d07bb4-aef4-4260-9091-7232f6c3b9f5">
+			<Line>
+				<MultilineString>The last rat lies broken at your feet. You take a second to check the adventurer, a gimmer from his equipment catching your eye.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Equipment>
+					<FromDeck>true</FromDeck>
+					<Type>OffHand</Type>
+				</Equipment>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

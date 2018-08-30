@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="aff4d7e1-9063-4c38-9e2c-b6b8b6af01cc" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">03434317-a52d-4998-8d62-8dad6a902c78</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="03434317-a52d-4998-8d62-8dad6a902c78">
+			<Name>Angry Swarm</Name>
+			<Description>A group of larger rats springs out of a side corridor onto you</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>AngrySwarmContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

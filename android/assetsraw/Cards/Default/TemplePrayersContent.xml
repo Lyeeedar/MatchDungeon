@@ -82,7 +82,7 @@
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Health>0</Health>
-					<MatchDamage>0.3</MatchDamage>
+					<MatchDamage>0.5</MatchDamage>
 					<AbilityDamage>0</AbilityDamage>
 					<PowerGain>0</PowerGain>
 				</Statistics>
@@ -103,8 +103,8 @@
 				<Statistics>
 					<Health>0</Health>
 					<MatchDamage>0</MatchDamage>
-					<AbilityDamage>1</AbilityDamage>
-					<PowerGain>5</PowerGain>
+					<AbilityDamage>0</AbilityDamage>
+					<PowerGain>3</PowerGain>
 				</Statistics>
 			</Rewards>
 		</Node>

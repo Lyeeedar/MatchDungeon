@@ -194,8 +194,8 @@ class OrbDesc()
 		this.isNamed = isNamed
 	}
 
-	lateinit var sprite: Sprite
-	lateinit var death: ParticleEffect
+	var sprite: Sprite = AssetManager.loadSprite("white")
+	var death: ParticleEffect = AssetManager.loadParticleEffect("Death")
 	var key: Int = -1
 	var isNamed: Boolean = false
 	var name: String = ""

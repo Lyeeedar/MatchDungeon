@@ -1,0 +1,80 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>......~....</Line>
+			<Line>......~....</Line>
+			<Line>.G....~~...</Line>
+			<Line>.......~~~~</Line>
+			<Line>...RRR.....</Line>
+			<Line>...RRR.G...</Line>
+			<Line>...RRR...G.</Line>
+			<Line>...........</Line>
+			<Line>...........</Line>
+			<Line>..G........</Line>
+			<Line>...........</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>R</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>true</IsMonster>
+			<MonsterDesc meta:RefKey="MonsterDesc">
+				<Name>Rat King</Name>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/heroes/rat_king</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Death meta:RefKey="ParticleEffect">
+					<Name>Death</Name>
+				</Death>
+				<AttackNumPips>5</AttackNumPips>
+				<AttackCooldown>2,4</AttackCooldown>
+				<Size>3</Size>
+				<HP>25</HP>
+				<DamageReduction>1</DamageReduction>
+				<Abilities>
+					<Ability>
+						<Cooldown>6,10</Cooldown>
+						<Target>Random</Target>
+						<TargetRestriction>NamedTile</TargetRestriction>
+						<Effect>Summon</Effect>
+						<Data>
+							<Faction>Rats</Faction>
+							<Name>Small Rat</Name>
+							<TileName>Grate</TileName>
+						</Data>
+					</Ability>
+				</Abilities>
+			</MonsterDesc>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>G</Character>
+			<Extends>.</Extends>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/floor_set_blue_7</Name>
+				</Sprite>
+			</Sprite>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+	</Symbols>
+	<Faction>Rats</Faction>
+	<AllowedVictories>
+		<Condition meta:RefKey="Kill">
+			<All>false</All>
+			<Named>Rat King</Named>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Die" />
+	</AllowedDefeats>
+</Level>

@@ -24,11 +24,11 @@
 				<MultilineString>The gods hear your prayers and the corruption is expelled from the altar. You feel a whisper in your mind, a sense of gratitude, and a surge of power.</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
-				<Statistics meta:RefKey="Statistics">
+				<Statistics>
 					<Health>2</Health>
 					<MatchDamage>0</MatchDamage>
 					<AbilityDamage>1</AbilityDamage>
-					<PowerGain>5</PowerGain>
+					<PowerGain>2</PowerGain>
 				</Statistics>
 			</Rewards>
 			<MarkComplete>

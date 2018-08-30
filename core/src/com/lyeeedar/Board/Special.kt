@@ -656,12 +656,9 @@ class Match5Spread(orbDesc: OrbDesc, theme: Theme, val special: Special) : GemSp
 					}
 					else
 					{
-						val newspecial = tile.special!!.merge(special)
-						if (newspecial != null)
-						{
-							tile.swappable = newspecial
-							newspecial.armed = true
-						}
+						val newspecial = tile.special!!.merge(special) ?: special.merge(tile.special!!) ?: special
+						tile.special = newspecial
+						newspecial.armed = true
 					}
 
 					grid.pop(tile, 0f, this, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)

@@ -14,7 +14,10 @@
 	<Definition Name="Matches" MinCount="1" SkipIfDefault="False" meta:RefKey="CollectionDef">
 		<Data Name="Orbs" Type="Int" Min="1" Default="10" SkipIfDefault="False" meta:RefKey="Number" />
 	</Definition>
-	<Definition Name="Kill" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />
+	<Definition Name="Kill" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef">
+		<Data Name="All" Default="True" meta:RefKey="Boolean" />
+		<Data Name="Named" VisibleIf="All == false" meta:RefKey="String" />
+	</Definition>
 	<Definition Name="Break" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />
 	<Definition Name="Sink" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef">
 		<Data Name="Count" Type="Int" Min="1" Default="4" SkipIfDefault="False" meta:RefKey="Number" />
