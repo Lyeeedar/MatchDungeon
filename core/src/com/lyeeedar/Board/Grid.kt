@@ -241,7 +241,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				{
 					if (spreader.effect == Spreader.SpreaderEffect.POP)
 					{
-						pop(tile, 0f, spreader, spreader.damage, true)
+						pop(tile, 0f, spreader, spreader.damage, 0f, true)
 					}
 					else if (spreader.effect == Spreader.SpreaderEffect.DAMAGE)
 					{
@@ -1531,7 +1531,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			{
 				if (t.damageable != null)
 				{
-					damage(t, t.damageable!!, 0f, this, level.player.getStat(Statistic.MATCHDAMAGE))
+					damage(t, t.damageable!!, 0f, this, level.player.getStat(Statistic.MATCHDAMAGE), level.player.getStat(Statistic.PIERCE))
 				}
 
 				if (t.spreader != null)
@@ -1623,10 +1623,17 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	}
 
 	// ----------------------------------------------------------------------
-	fun damage(tile: Tile, damageable: Damageable, delay: Float, damSource: Any? = null, bonusDam: Float = 0f)
+	fun damage(tile: Tile, damageable: Damageable, delay: Float, damSource: Any? = null, bonusDam: Float = 0f, pierce: Float = 0f)
 	{
 		var targetDam = if (!damageable.damSources.contains(damSource)) 1f + bonusDam else 1f
 		var damReduction = damageable.remainingReduction.toFloat()
+
+		damReduction -= pierce
+		if (damReduction < 0f)
+		{
+			damReduction = 0f
+		}
+
 		damReduction -= targetDam
 
 		if (damReduction < 0)
@@ -1649,13 +1656,13 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	}
 
 	// ----------------------------------------------------------------------
-	fun pop(point: Point, delay: Float, damSource: Any? = null, bonusDam: Float = 0f, skipPowerOrb: Boolean = false)
+	fun pop(point: Point, delay: Float, damSource: Any? = null, bonusDam: Float = 0f, pierce: Float = 0f, skipPowerOrb: Boolean = false)
 	{
-		pop(point.x, point.y , delay, damSource, bonusDam, skipPowerOrb)
+		pop(point.x, point.y , delay, damSource, bonusDam, pierce, skipPowerOrb)
 	}
 
 	// ----------------------------------------------------------------------
-	fun pop(x: Int, y: Int, delay: Float, damSource: Any? = null, bonusDam: Float = 0f, skipPowerOrb: Boolean = false)
+	fun pop(x: Int, y: Int, delay: Float, damSource: Any? = null, bonusDam: Float = 0f, pierce: Float = 0f, skipPowerOrb: Boolean = false)
 	{
 		val tile = tile(x, y) ?: return
 
@@ -1682,7 +1689,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 		if (tile.damageable != null)
 		{
-			damage(tile, tile.damageable!!, delay, damSource, bonusDam)
+			damage(tile, tile.damageable!!, delay, damSource, bonusDam, pierce)
 			return
 		}
 

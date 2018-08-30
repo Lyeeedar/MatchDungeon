@@ -29,7 +29,7 @@ class Effect(val type: Type)
 	{
 		apply = when(type)
 		{
-			Type.POP -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>) { grid.pop(tile, delay, damSource = this, bonusDam = data["DAMAGE", "0"].toString().toInt() + grid.level.player.getStat(Statistic.ABILITYDAMAGE), skipPowerOrb = true) }
+			Type.POP -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>) { grid.pop(tile, delay, damSource = this, bonusDam = data["DAMAGE", "0"].toString().toInt() + grid.level.player.getStat(Statistic.ABILITYDAMAGE), pierce = grid.level.player.getStat(Statistic.PIERCE), skipPowerOrb = true) }
 
 			Type.CONVERT -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>)
 			{

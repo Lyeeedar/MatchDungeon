@@ -18,5 +18,8 @@
 		<Data Name="PowerGain" SkipIfDefault="False" meta:RefKey="Number" />
 		<Data Name="BonusGold" SkipIfDefault="False" meta:RefKey="Number" />
 		<Data Name="BonusTime" SkipIfDefault="False" meta:RefKey="Number" />
+		<Data Name="Regeneration" Min="0" meta:RefKey="Number" />
+		<Data Name="Pierce" Min="0" meta:RefKey="Number" />
+		<Data Name="Berserk" Min="0" meta:RefKey="Number" />
 	</Definition>
 </Definitions>

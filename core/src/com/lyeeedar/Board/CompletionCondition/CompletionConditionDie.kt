@@ -19,6 +19,8 @@ import com.lyeeedar.Util.XmlData
 
 class CompletionConditionDie : AbstractCompletionCondition()
 {
+	var regenAccumulator = 0f
+
 	lateinit var hpLabel: Label
 	var maxHP: Int = 1
 	var hp = 1
@@ -46,6 +48,28 @@ class CompletionConditionDie : AbstractCompletionCondition()
 
 
 			return false
+		}
+
+		grid.onTurn += {
+
+			grid.level.player.isInBerserkRange = hp <= maxHP / 2
+
+			regenAccumulator += grid.level.player.getStat(Statistic.REGENERATION)
+			while (regenAccumulator > 1f)
+			{
+				regenAccumulator -= 1f
+				hp += 1
+
+				if (hp > maxHP)
+				{
+					hp = maxHP
+				}
+
+				hpLabel.setText("$hp/$maxHP")
+				updateBlink()
+			}
+
+			false
 		}
 
 		Future.call(

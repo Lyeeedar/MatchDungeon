@@ -285,14 +285,17 @@ enum class Direction private constructor(val x: Int, val y: Int, val identifier:
 }
 
 // ----------------------------------------------------------------------
-enum class Statistic
+enum class Statistic private constructor(val min: Float, val max: Float, val tooltip: String)
 {
-	HEALTH,
-	MATCHDAMAGE,
-	ABILITYDAMAGE,
-	POWERGAIN,
-	BONUSGOLD,
-	BONUSTIME;
+	HEALTH(1f, Float.MAX_VALUE, "The number of attacks you can take before dieing"),
+	MATCHDAMAGE(0f, Float.MAX_VALUE, "The bonus damage you do the first time you match next to a damageable object each turn"),
+	ABILITYDAMAGE(0f, Float.MAX_VALUE, "The bonus damage you do with specials and abilities"),
+	PIERCE(0f, Float.MAX_VALUE, "The amount of damage resistance you remove each time you hit something with damage resistance"),
+	POWERGAIN(0f, Float.MAX_VALUE, "The bonus power you gain the first time you gain power each turn"),
+	BONUSGOLD(-Float.MAX_VALUE, Float.MAX_VALUE, "The bonus multiplier you gain each time you gain gold"),
+	BONUSTIME(-Float.MAX_VALUE, Float.MAX_VALUE, "The bonus multiplier to turn count"),
+	REGENERATION(0f, Float.MAX_VALUE, "The amount of health you regenerate each turn"),
+	BERSERK(0f, Float.MAX_VALUE, "When below half health this is the amount MatchDamage, AbilityDamage and PowerGain is increased");
 
 	companion object
 	{

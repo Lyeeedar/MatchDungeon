@@ -1,5 +1,6 @@
 package com.lyeeedar.Game
 
+import com.badlogic.gdx.math.MathUtils.clamp
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.Label
@@ -25,6 +26,7 @@ import com.lyeeedar.Util.FastEnumMap
 class Player(val baseCharacter: Character, val deck: PlayerDeck)
 {
 	var gold: Int = 0
+	var isInBerserkRange = false
 
 	var statistics = FastEnumMap<Statistic, Float>(Statistic::class.java)
 	var equipment = FastEnumMap<EquipmentSlot, Equipment>(EquipmentSlot::class.java)
@@ -43,7 +45,15 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 			}
 		}
 
-		return stat
+		if (statistic == Statistic.MATCHDAMAGE || statistic == Statistic.ABILITYDAMAGE || statistic == Statistic.POWERGAIN)
+		{
+			if (isInBerserkRange)
+			{
+				stat += getStat(Statistic.BERSERK)
+			}
+		}
+
+		return clamp(stat, statistic.min, statistic.max)
 	}
 
 	fun getEquipment(equipmentSlot: EquipmentSlot): Equipment?

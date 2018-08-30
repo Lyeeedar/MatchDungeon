@@ -557,7 +557,7 @@ class Match5(orbDesc: OrbDesc, theme: Theme) : GemSpecial(orbDesc, theme)
 				s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.3f, false)
 				s.completionCallback = fun()
 				{
-					grid.pop(tile, 0f, this, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
+					grid.pop(tile, 0f, this, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
 				}
 				tile.effects.add(s)
 			}
@@ -661,7 +661,7 @@ class Match5Spread(orbDesc: OrbDesc, theme: Theme, val special: Special) : GemSp
 						newspecial.armed = true
 					}
 
-					grid.pop(tile, 0f, this, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
+					grid.pop(tile, 0f, this, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
 				}
 				tile.effects.add(s)
 			}
@@ -681,7 +681,7 @@ class Match5Spread(orbDesc: OrbDesc, theme: Theme, val special: Special) : GemSp
 				s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.3f, false)
 				s.completionCallback = fun()
 				{
-					grid.pop(tile, 0f, this, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
+					grid.pop(tile, 0f, this, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
 				}
 				tile.effects.add(s)
 			}
@@ -745,7 +745,7 @@ class Match5Dual(orbDesc: OrbDesc, theme: Theme) : GemSpecial(orbDesc, theme)
 			s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.3f, false)
 			s.completionCallback = fun()
 			{
-				grid.pop(tile, 0f, this, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
+				grid.pop(tile, 0f, this, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
 			}
 			tile.effects.add(s)
 		}
