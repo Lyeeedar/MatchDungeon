@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="52555b22-06e3-4c91-ac04-868511925cf2" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">793539a0-4db2-4722-8d73-3a54846da3a7</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="793539a0-4db2-4722-8d73-3a54846da3a7">
+			<Name>Hearty Meal</Name>
+			<Description>It's never worthwhile to adventure on an empty stomach.</Description>
+			<SpawnWeighting>Start</SpawnWeighting>
+			<Content>HeartyMealContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

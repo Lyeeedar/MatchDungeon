@@ -24,11 +24,19 @@
 				<MultilineString>You feel a bit stronger after that.</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
-				<Statistics meta:RefKey="Statistics">
+				<Statistics>
 					<Health>0</Health>
 					<MatchDamage>0.5</MatchDamage>
 					<AbilityDamage>0</AbilityDamage>
 					<PowerGain>0</PowerGain>
+					<Statistics meta:RefKey="Statistics">
+						<Health>0</Health>
+						<MatchDamage>0.5</MatchDamage>
+						<AbilityDamage>0</AbilityDamage>
+						<PowerGain>0</PowerGain>
+						<BonusGold>0</BonusGold>
+						<BonusTime>0</BonusTime>
+					</Statistics>
 				</Statistics>
 			</Rewards>
 			<MarkComplete>

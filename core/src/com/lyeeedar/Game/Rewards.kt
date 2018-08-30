@@ -50,6 +50,7 @@ abstract class AbstractReward
 				"QUEST" -> QuestReward()
 				"CHARACTER" -> CharacterReward()
 				"STATISTICS" -> StatisticsReward()
+				"BUFF" -> BuffReward()
 				else -> throw RuntimeException("Invalid reward type: " + xmlData.name)
 			}
 
@@ -71,7 +72,9 @@ class StatisticsReward : AbstractReward()
 
 	override fun parse(xmlData: XmlData)
 	{
-		Statistic.parse(xmlData, statsTable)
+		val statsEl = xmlData.getChildByName("Statistics")!!
+
+		Statistic.parse(statsEl, statsTable)
 	}
 
 	override fun reward(): Array<CardWidget>
@@ -310,6 +313,56 @@ class MoneyReward : AbstractReward()
 
 			Mote(src, dst, sprite, 32f, {
 				CardScreen.instance.updateEquipment()
+			}, 0.75f)
+		})
+		card.canZoom = false
+
+		output.add(card)
+
+		return output
+	}
+}
+
+class BuffReward : AbstractReward()
+{
+	lateinit var buffXml: XmlData
+
+	override fun isValid(): Boolean = true
+
+	override fun parse(xmlData: XmlData)
+	{
+		buffXml = xmlData.getChildByName("Buff")!!
+	}
+
+	override fun cardIcon(): TextureRegion = AssetManager.loadTextureRegion("GUI/BuffCardback")!!
+
+	override fun reward(): Array<CardWidget>
+	{
+		val output = Array<CardWidget>()
+
+		val buff = Buff.load(buffXml)
+
+		val card = buff.getCard()
+		card.addPick("", {
+
+			val existing = Global.player.buffs.firstOrNull{ it.name != buff.name }
+			if (existing != null)
+			{
+				existing.remainingDuration = buff.remainingDuration
+			}
+			else
+			{
+				Global.player.buffs.add(buff)
+			}
+
+			val sprite = buff.icon.copy()
+
+			val src = card.localToStageCoordinates(Vector2(card.width / 2f, card.height / 2f))
+
+			val dstTable = CardScreen.instance.playerSlot
+			val dst = dstTable.localToStageCoordinates(Vector2())
+
+			Mote(src, dst, sprite, 32f, {
 			}, 0.75f)
 		})
 		card.canZoom = false

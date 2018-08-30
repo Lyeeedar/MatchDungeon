@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="ad597713-9241-4b53-872b-fd8f2ec20438" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">e812d10c-8572-469b-846b-261c2a928ce4</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="e812d10c-8572-469b-846b-261c2a928ce4">
+			<Name>Endurance Training</Name>
+			<Description>To improve your endurance you've been eating well and exercising vigorously. Did it pay off?</Description>
+			<SpawnWeighting>Start</SpawnWeighting>
+			<Content>EnduranceTrainingContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

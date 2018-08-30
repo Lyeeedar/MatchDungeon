@@ -289,6 +289,15 @@ class CardScreen : AbstractScreen()
 	{
 		if (readyToSwitch && stage.actors.filter { it is Mote }.count() == 0)
 		{
+			for (buff in Global.player.buffs.toArray())
+			{
+				buff.remainingDuration--
+				if (buff.remainingDuration <= 0)
+				{
+					Global.player.buffs.removeValue(buff, true)
+				}
+			}
+
 			readyToSwitch = false
 
 			goldLabel.complete()

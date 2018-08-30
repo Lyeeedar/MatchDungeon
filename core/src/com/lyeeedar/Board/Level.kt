@@ -245,64 +245,36 @@ class Level(val loadPath: String)
 			}
 
 			// iterate through and find groups
-			data class Block(val monsterDesc: MonsterDesc?, val char: Char, val tiles: Array<Tile>)
-			val blocks = Array<Block>()
+			data class MonsterMarker(val monsterDesc: MonsterDesc?, val isBoss: Boolean, var used: Boolean = false)
+			val monsterGrid = Array2D<MonsterMarker?>(charGrid.xSize, charGrid.ySize)
 
-			fun loadMonster(tile: Tile, char: Char)
+			fun loadMonster(tile: Tile, char: Char): MonsterMarker?
 			{
-				var isMonster = false
-				var monsterDesc: MonsterDesc? = null
+				var monster: MonsterMarker? = null
 
 				if (char == '!')
 				{
-					isMonster = true
+					monster = MonsterMarker(null, false)
 				}
 				else if (char == '?')
 				{
-					isMonster = true
+					monster = MonsterMarker(null, true)
 				}
 				else if (symbolMap.containsKey(char.toInt()))
 				{
 					val symbol = symbolMap[char.toInt()]
 					if (symbol.extends != ' ')
 					{
-						loadMonster(tile, symbol.extends)
+						monster = loadMonster(tile, symbol.extends)
 					}
 
 					if (symbol.isMonster)
 					{
-						isMonster = true
-						monsterDesc = symbol.monsterDesc
+						monster = MonsterMarker(symbol.monsterDesc, false)
 					}
 				}
 
-				if (isMonster)
-				{
-					var found = false
-					for (block in blocks)
-					{
-						if (block.monsterDesc == monsterDesc)
-						{
-							for (testtile in block.tiles)
-							{
-								if (testtile.dist(tile) == 1)
-								{
-									block.tiles.add(tile)
-									found = true
-									break
-								}
-							}
-						}
-					}
-
-					if (!found)
-					{
-						val newBlock = Block(monsterDesc, char, Array())
-
-						newBlock.tiles.add(tile)
-						blocks.add(newBlock)
-					}
-				}
+				return monster
 			}
 
 			for (x in 0 until charGrid.xSize)
@@ -310,47 +282,59 @@ class Level(val loadPath: String)
 				for (y in 0 until charGrid.ySize)
 				{
 					val tile = grid.grid[x, y]
-					loadMonster(tile, charGrid[x, y])
+					monsterGrid[x, y] = loadMonster(tile, charGrid[x, y])
 				}
 			}
 
-			// convert groups into x by x arrays
-			for (block in blocks)
+			for (x in 0 until charGrid.xSize)
 			{
-				var minx = block.tiles[0].x
-				var miny = block.tiles[0].y
-				var maxx = block.tiles[0].x
-				var maxy = block.tiles[0].y
-
-				for (tile in block.tiles)
+				for (y in 0 until charGrid.ySize)
 				{
-					if (tile.x < minx) minx = tile.x
-					if (tile.y < miny) miny = tile.y
-					if (tile.x > maxx) maxx = tile.x
-					if (tile.y > maxy) maxy = tile.y
-				}
-
-				val w = (maxx - minx) + 1
-				val h = (maxy - miny) + 1
-
-				if (w != h) throw Exception("Non-square monster!")
-
-				val size = w
-				val monsterDesc = block.monsterDesc ?: if (block.char == '?') chosenFaction.getBoss(size) else chosenFaction.get(size)
-				val monster = Monster(monsterDesc)
-				monster.size = size
-
-				for (x in 0 until size)
-				{
-					for (y in 0 until size)
+					val monsterMarker = monsterGrid[x, y]
+					if (monsterMarker != null && !monsterMarker.used)
 					{
-						val gx = minx + x
-						val gy = miny + y
+						// Try sizes until we fail
+						var size = 1
+						outer@ while (true)
+						{
+							for (ix in 0 until size+1)
+							{
+								for (iy in 0 until size+1)
+								{
+									if (!monsterGrid.inBounds(x+ix, y+iy))
+									{
+										break@outer
+									}
 
-						val tile = grid.grid[gx, gy]
+									val otherMonster = monsterGrid[x+ix, y+iy]
+									if (otherMonster == null || otherMonster.used || otherMonster.monsterDesc != monsterMarker.monsterDesc || otherMonster.isBoss != monsterMarker.isBoss)
+									{
+										break@outer
+									}
+								}
+							}
 
-						tile.monster = monster
-						monster.tiles[x, y] = tile
+							size++
+						}
+
+						// Spawn monster for found size
+						val monsterDesc = monsterMarker.monsterDesc ?: if (monsterMarker.isBoss) chosenFaction.getBoss(size) else chosenFaction.get(size)
+						val monster = Monster(monsterDesc)
+						monster.size = size
+
+						for (ix in 0 until size)
+						{
+							for (iy in 0 until size)
+							{
+								val gx = x + ix
+								val gy = y + iy
+
+								val tile = grid.grid[gx, gy]
+
+								tile.monster = monster
+								monster.tiles[ix, iy] = tile
+							}
+						}
 					}
 				}
 			}

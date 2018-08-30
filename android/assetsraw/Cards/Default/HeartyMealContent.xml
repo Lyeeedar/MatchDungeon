@@ -1,0 +1,49 @@
+<CardContent meta:X="0" meta:Y="0" GUID="3f94cbdb-33e2-41d9-a77d-10118577e1bd" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">cf5ee94d-e0ab-4bcb-b269-bd06b0d9141b</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="cf5ee94d-e0ab-4bcb-b269-bd06b0d9141b">
+			<Line>
+				<MultilineString>You sit down to eat a hearty meal. Good food leads to good energy. And with good energy you can get a good adventure.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>HeartyMealContentLevel</Level>
+				<Success meta:RefKey="Node">39134cff-be50-4f84-a1b2-e9833e1bd85d</Success>
+				<Failure meta:RefKey="Node">c54a0cb8-634f-40fe-89b7-85a2b1b3a5d6</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="433" meta:Y="156" GUID="c54a0cb8-634f-40fe-89b7-85a2b1b3a5d6">
+			<Line>
+				<MultilineString>The food was not filling enough. You still feel hungry.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="482" meta:Y="0" GUID="39134cff-be50-4f84-a1b2-e9833e1bd85d">
+			<Line>
+				<MultilineString>The food was delicious. You feel new energy infusing through your body.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Buff>
+					<Buff meta:RefKey="Buff">
+						<Name>Hearty Meal</Name>
+						<Icon meta:RefKey="Sprite">
+							<Name>Oryx/Custom/items/steak</Name>
+							<DrawActualSize>true</DrawActualSize>
+						</Icon>
+						<Statistics meta:RefKey="Statistics">
+							<Health>5</Health>
+							<MatchDamage>0</MatchDamage>
+							<AbilityDamage>0</AbilityDamage>
+							<PowerGain>0</PowerGain>
+							<BonusGold>0</BonusGold>
+							<BonusTime>0</BonusTime>
+							<Regeneration>0.1</Regeneration>
+						</Statistics>
+						<Duration>4</Duration>
+					</Buff>
+				</Buff>
+			</Rewards>
+		</Node>
+	</Nodes>
+</CardContent>

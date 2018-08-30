@@ -1,0 +1,46 @@
+<CardContent meta:X="0" meta:Y="0" GUID="c2e2a06b-206b-4797-9a0c-4a56b40bb7fc" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">c3fd15f8-7834-47b6-acbf-298d9b4b2cbc</Root>
+	<Nodes>
+		<Node meta:X="207" meta:Y="-2" GUID="c3fd15f8-7834-47b6-acbf-298d9b4b2cbc">
+			<Line>
+				<MultilineString>To improve your endurance during battles on your quests you've been diligently training your body.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Regular runs, sessions with weights and healthy eating have been your life for a while now. Did it pay off?</MultilineString>
+			</Line>
+			<Match3>
+				<Level>EnduranceTrainingContentLevel</Level>
+				<Success meta:RefKey="Node">64cf7148-e1de-4829-a09b-aa83056eb000</Success>
+				<Failure meta:RefKey="Node">a9549421-01bf-4b9f-a9db-21a3e64bb972</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="442" meta:Y="151" GUID="a9549421-01bf-4b9f-a9db-21a3e64bb972">
+			<Line>
+				<MultilineString>Oh no, you overdid it and injured yourself. Sadly you achieved no gains from your training.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="482" meta:Y="-2" GUID="64cf7148-e1de-4829-a09b-aa83056eb000">
+			<Line>
+				<MultilineString>Your training has left you strong and fit.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Statistics>
+					<Statistics meta:RefKey="Statistics">
+						<Health>2</Health>
+						<MatchDamage>0</MatchDamage>
+						<AbilityDamage>0</AbilityDamage>
+						<PowerGain>0</PowerGain>
+						<BonusGold>0</BonusGold>
+						<BonusTime>0</BonusTime>
+					</Statistics>
+				</Statistics>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

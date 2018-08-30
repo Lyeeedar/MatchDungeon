@@ -1,0 +1,8 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="Buff" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="Name" SkipIfDefault="False" meta:RefKey="String" />
+		<Data Name="Icon" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Statistics" Keys="Statistics" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Duration" Type="Int" Min="1" Default="4" SkipIfDefault="False" meta:RefKey="Number" />
+	</Definition>
+</Definitions>

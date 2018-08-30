@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="9a422a67-cb45-4e9d-8ff8-71b627fbe0c8" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">5a32b3d4-23bc-4971-b586-ca2813693e5c</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="5a32b3d4-23bc-4971-b586-ca2813693e5c">
+			<Name>Combat Training</Name>
+			<Description>To survive as an adventurer you must be proficient at combat. Have you trained enough?</Description>
+			<SpawnWeighting>Start</SpawnWeighting>
+			<Content>CombatTrainingContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

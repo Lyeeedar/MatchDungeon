@@ -1,0 +1,43 @@
+<CardContent meta:X="0" meta:Y="0" GUID="1c848a58-a01d-4900-b4e2-0e913ee8ff38" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">d63fca9c-3fe5-404b-aaef-6f6037456b64</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="d63fca9c-3fe5-404b-aaef-6f6037456b64">
+			<Line>
+				<MultilineString>Within your body is a seething mass of energy. With sufficient training you can channel this power to utalise powerful abilities.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>CultivationTrainingContentLevel</Level>
+				<Success meta:RefKey="Node">a8a145c8-b0be-4a4f-9078-df9523d04ede</Success>
+				<Failure meta:RefKey="Node">44248bde-962a-4bae-aa01-2b255ad15199</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="442" meta:Y="160" GUID="44248bde-962a-4bae-aa01-2b255ad15199">
+			<Line>
+				<MultilineString>You see no results for your efforts.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="477" meta:Y="0" GUID="a8a145c8-b0be-4a4f-9078-df9523d04ede">
+			<Line>
+				<MultilineString>Your training pays off. You can channel your inner forces with much greater ease.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Statistics>
+					<Statistics meta:RefKey="Statistics">
+						<Health>0</Health>
+						<MatchDamage>0</MatchDamage>
+						<AbilityDamage>0</AbilityDamage>
+						<PowerGain>5</PowerGain>
+						<BonusGold>0</BonusGold>
+						<BonusTime>0</BonusTime>
+					</Statistics>
+				</Statistics>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

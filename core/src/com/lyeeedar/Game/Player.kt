@@ -31,6 +31,8 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 	var statistics = FastEnumMap<Statistic, Float>(Statistic::class.java)
 	var equipment = FastEnumMap<EquipmentSlot, Equipment>(EquipmentSlot::class.java)
 
+	var buffs = Array<Buff>()
+
 	fun getStat(statistic: Statistic): Float
 	{
 		var stat = baseCharacter.baseStatistics[statistic] ?: 0f
@@ -43,6 +45,11 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 			{
 				stat += equip.statistics[statistic] ?: 0f
 			}
+		}
+
+		for (buff in buffs)
+		{
+			stat += buff.statistics[statistic] ?: 0f
 		}
 
 		if (statistic == Statistic.MATCHDAMAGE || statistic == Statistic.ABILITYDAMAGE || statistic == Statistic.POWERGAIN)
@@ -134,6 +141,27 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 		table.add(Seperator(Global.skin, "horizontalcard"))
 		table.row()
 
+		if (buffs.size > 0)
+		{
+			table.add(Label("Buffs", Global.skin, "cardtitle"))
+			table.row()
+
+			val bufftable = Table()
+			table.add(bufftable).growX()
+			table.row()
+
+			for (buff in buffs)
+			{
+				val card = buff.getCard()
+				card.setFacing(true, false)
+
+				bufftable.add(card).pad(0f, 5f, 0f, 5f)
+			}
+
+			table.add(Seperator(Global.skin, "horizontalcard"))
+			table.row()
+		}
+
 		table.add(Label("Equipment", Global.skin, "cardtitle"))
 		table.row()
 
@@ -198,6 +226,12 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 			}
 		}
 
+		output.writeInt(buffs.size)
+		for (buff in buffs)
+		{
+			buff.save(kryo, output)
+		}
+
 		output.writeInt(deck.encounters.size)
 		for (encounter in deck.encounters)
 		{
@@ -229,6 +263,14 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 				}
 			}
 
+			val buffs = Array<Buff>()
+			val numBuffs = input.readInt()
+			for (i in 0 until numBuffs)
+			{
+				val buff = Buff.load(kryo, input)
+				buffs.add(buff)
+			}
+
 			val playerDeck = PlayerDeck()
 			val numPlayerEncounters = input.readInt()
 			for (i in 0 until numPlayerEncounters)
@@ -248,6 +290,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 			player.gold = gold
 			player.statistics = stats
 			player.equipment = equipment
+			player.buffs.addAll(buffs)
 
 			return player
 		}

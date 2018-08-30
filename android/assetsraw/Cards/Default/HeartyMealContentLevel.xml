@@ -1,0 +1,79 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>...CSC...</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>C</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<Sinkable>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/items/carrot</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+			</Sinkable>
+			<Container>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/items/backpack</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Health>5</Health>
+				<AlwaysShowHP>true</AlwaysShowHP>
+			</Container>
+		</Symbol>
+		<Symbol>
+			<Character>S</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<Sinkable>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/items/steak</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+			</Sinkable>
+			<Container>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/items/backpack</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Health>5</Health>
+				<AlwaysShowHP>true</AlwaysShowHP>
+			</Container>
+		</Symbol>
+	</Symbols>
+	<AllowedVictories>
+		<Condition meta:RefKey="Sink">
+			<Count>3</Count>
+		</Condition>
+		<Condition meta:RefKey="Matches">
+			<Orbs>10</Orbs>
+			<Orbs>10</Orbs>
+			<Orbs>10</Orbs>
+			<Orbs>10</Orbs>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Turns">
+			<Turns>30</Turns>
+		</Condition>
+	</AllowedDefeats>
+</Level>

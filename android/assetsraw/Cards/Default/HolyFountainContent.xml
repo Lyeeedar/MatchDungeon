@@ -57,6 +57,14 @@
 					<MatchDamage>0</MatchDamage>
 					<AbilityDamage>0</AbilityDamage>
 					<PowerGain>0</PowerGain>
+					<Statistics meta:RefKey="Statistics">
+						<Health>2</Health>
+						<MatchDamage>0</MatchDamage>
+						<AbilityDamage>0</AbilityDamage>
+						<PowerGain>0</PowerGain>
+						<BonusGold>0</BonusGold>
+						<BonusTime>0</BonusTime>
+					</Statistics>
 				</Statistics>
 			</Rewards>
 		</Node>
@@ -67,6 +75,14 @@
 					<MatchDamage>0</MatchDamage>
 					<AbilityDamage>1</AbilityDamage>
 					<PowerGain>0</PowerGain>
+					<Statistics meta:RefKey="Statistics">
+						<Health>0</Health>
+						<MatchDamage>0</MatchDamage>
+						<AbilityDamage>1</AbilityDamage>
+						<PowerGain>0</PowerGain>
+						<BonusGold>0</BonusGold>
+						<BonusTime>0</BonusTime>
+					</Statistics>
 				</Statistics>
 			</Rewards>
 		</Node>
@@ -77,6 +93,14 @@
 					<MatchDamage>0</MatchDamage>
 					<AbilityDamage>0</AbilityDamage>
 					<PowerGain>2</PowerGain>
+					<Statistics meta:RefKey="Statistics">
+						<Health>0</Health>
+						<MatchDamage>0</MatchDamage>
+						<AbilityDamage>0</AbilityDamage>
+						<PowerGain>2</PowerGain>
+						<BonusGold>0</BonusGold>
+						<BonusTime>0</BonusTime>
+					</Statistics>
 				</Statistics>
 			</Rewards>
 		</Node>
@@ -87,6 +111,14 @@
 					<MatchDamage>0.5</MatchDamage>
 					<AbilityDamage>0</AbilityDamage>
 					<PowerGain>0</PowerGain>
+					<Statistics meta:RefKey="Statistics">
+						<Health>0</Health>
+						<MatchDamage>0.5</MatchDamage>
+						<AbilityDamage>0</AbilityDamage>
+						<PowerGain>0</PowerGain>
+						<BonusGold>0</BonusGold>
+						<BonusTime>0</BonusTime>
+					</Statistics>
 				</Statistics>
 			</Rewards>
 		</Node>

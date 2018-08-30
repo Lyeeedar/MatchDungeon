@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="5e7024bf-c1a7-472f-a47a-a1107b72ca30" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">d4ba8d6c-9909-4117-b929-29a470bb41f0</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="d4ba8d6c-9909-4117-b929-29a470bb41f0">
+			<Name>Cultivation Training</Name>
+			<Description>By channeling the energy within you can empower yourself with abilities. Have you trained enough?</Description>
+			<SpawnWeighting>Start</SpawnWeighting>
+			<Content>CultivationTrainingContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

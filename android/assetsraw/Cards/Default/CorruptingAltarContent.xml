@@ -35,6 +35,14 @@
 					<MatchDamage>1</MatchDamage>
 					<AbilityDamage>1</AbilityDamage>
 					<PowerGain>3</PowerGain>
+					<Statistics meta:RefKey="Statistics">
+						<Health>2</Health>
+						<MatchDamage>1</MatchDamage>
+						<AbilityDamage>1</AbilityDamage>
+						<PowerGain>3</PowerGain>
+						<BonusGold>0</BonusGold>
+						<BonusTime>0</BonusTime>
+					</Statistics>
 				</Statistics>
 			</Rewards>
 			<MarkComplete>

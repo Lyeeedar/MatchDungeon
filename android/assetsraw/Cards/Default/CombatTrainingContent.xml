@@ -1,0 +1,46 @@
+<CardContent meta:X="0" meta:Y="0" GUID="69d34dc4-4afd-4ba7-90ad-6f99369ac22b" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">f1c33ba0-d914-4b79-8947-9fe885b56e28</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="f1c33ba0-d914-4b79-8947-9fe885b56e28">
+			<Line>
+				<MultilineString>Combat is an integral part of an adventurers lifestyle, so to be successful you have to be very good at it.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You've been training at the guild practise field for a while, diligently striking the training dummies.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>CombatTrainingContentLevel</Level>
+				<Success meta:RefKey="Node">2ce5fd75-5953-438d-b44e-30ead73b5010</Success>
+				<Failure meta:RefKey="Node">7843ffa3-44df-4bac-9b20-e528cf63fc33</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="448" meta:Y="190" GUID="7843ffa3-44df-4bac-9b20-e528cf63fc33">
+			<Line>
+				<MultilineString>Sadly you still haven't mastered the art of combat. You still have much training ahead.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="482" meta:Y="0" GUID="2ce5fd75-5953-438d-b44e-30ead73b5010">
+			<Line>
+				<MultilineString>The training has paid off, you feel ready to fight anything now.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Statistics>
+					<Statistics meta:RefKey="Statistics">
+						<Health>0</Health>
+						<MatchDamage>1</MatchDamage>
+						<AbilityDamage>0</AbilityDamage>
+						<PowerGain>0</PowerGain>
+						<BonusGold>0</BonusGold>
+						<BonusTime>0</BonusTime>
+					</Statistics>
+				</Statistics>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

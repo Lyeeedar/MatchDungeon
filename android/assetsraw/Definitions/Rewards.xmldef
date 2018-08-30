@@ -29,12 +29,13 @@
 			<Data Name="Chance" Key="Chance" Default="Always" meta:RefKey="Enum" />
 			<Data Name="Item" Keys="Item" Nullable="False" meta:RefKey="Reference" />
 		</Data>
+		<Data Name="Buff" meta:RefKey="Struct">
+			<Data Name="Chance" Key="Chance" Default="Always" meta:RefKey="Enum" />
+			<Data Name="Buff" Keys="Buff" Nullable="False" meta:RefKey="Reference" />
+		</Data>
 		<Data Name="Statistics" meta:RefKey="Struct">
 			<Data Name="Chance" Key="Chance" Default="Always" meta:RefKey="Enum" />
-			<Data Name="Health" Type="Int" Min="-999999" SkipIfDefault="False" meta:RefKey="Number" />
-			<Data Name="MatchDamage" SkipIfDefault="False" meta:RefKey="Number" />
-			<Data Name="AbilityDamage" SkipIfDefault="False" meta:RefKey="Number" />
-			<Data Name="PowerGain" SkipIfDefault="False" meta:RefKey="Number" />
+			<Data Name="Statistics" Keys="Statistics" Nullable="False" meta:RefKey="Reference" />
 		</Data>
 	</Definition>
 	<Definition Name="Chance" meta:RefKey="EnumDef">VeryLow,Low,Medium,High,Always</Definition>

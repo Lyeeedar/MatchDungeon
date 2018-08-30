@@ -78,13 +78,21 @@
 				<State>Success</State>
 			</MarkComplete>
 		</Node>
-		<Node meta:X="813" meta:Y="133" GUID="687aacfa-1e9c-4109-86e6-0e9e5cedddfa">
+		<Node meta:X="813" meta:Y="134" GUID="687aacfa-1e9c-4109-86e6-0e9e5cedddfa">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Health>0</Health>
 					<MatchDamage>0.5</MatchDamage>
 					<AbilityDamage>0</AbilityDamage>
 					<PowerGain>0</PowerGain>
+					<Statistics meta:RefKey="Statistics">
+						<Health>0</Health>
+						<MatchDamage>0.5</MatchDamage>
+						<AbilityDamage>0</AbilityDamage>
+						<PowerGain>0</PowerGain>
+						<BonusGold>0</BonusGold>
+						<BonusTime>0</BonusTime>
+					</Statistics>
 				</Statistics>
 			</Rewards>
 		</Node>
@@ -95,6 +103,14 @@
 					<MatchDamage>0</MatchDamage>
 					<AbilityDamage>0</AbilityDamage>
 					<PowerGain>0</PowerGain>
+					<Statistics meta:RefKey="Statistics">
+						<Health>2</Health>
+						<MatchDamage>0</MatchDamage>
+						<AbilityDamage>0</AbilityDamage>
+						<PowerGain>0</PowerGain>
+						<BonusGold>0</BonusGold>
+						<BonusTime>0</BonusTime>
+					</Statistics>
 				</Statistics>
 			</Rewards>
 		</Node>
@@ -105,6 +121,14 @@
 					<MatchDamage>0</MatchDamage>
 					<AbilityDamage>0</AbilityDamage>
 					<PowerGain>3</PowerGain>
+					<Statistics meta:RefKey="Statistics">
+						<Health>0</Health>
+						<MatchDamage>0</MatchDamage>
+						<AbilityDamage>0</AbilityDamage>
+						<PowerGain>2</PowerGain>
+						<BonusGold>0</BonusGold>
+						<BonusTime>0</BonusTime>
+					</Statistics>
 				</Statistics>
 			</Rewards>
 		</Node>
