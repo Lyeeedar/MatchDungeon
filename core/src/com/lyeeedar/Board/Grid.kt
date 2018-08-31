@@ -1693,16 +1693,6 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			return
 		}
 
-		if (tile.special != null)
-		{
-			if (tile.special!!.canMatch)
-			{
-				tile.special!!.armed = true
-				tile.special!!.markedForDeletion = true
-				return
-			}
-		}
-
 		val matchable = tile.matchable ?: return
 		if (matchable.markedForDeletion) return // already completed, dont do it again
 
@@ -1715,17 +1705,24 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			return
 		}
 
+		if (matchable is Special)
+		{
+			if (matchable.canMatch)
+			{
+				matchable.armed = true
+			}
+			else
+			{
+				return
+			}
+		}
+
 		matchable.markedForDeletion = true
 		matchable.deletionEffectDelay = delay
 
 		if (matchable is Orb)
 		{
 			matchable.skipPowerOrb = skipPowerOrb
-		}
-
-		if (matchable is Special)
-		{
-			matchable.armed = true
 		}
 
 		matchable.sprite.visible = false

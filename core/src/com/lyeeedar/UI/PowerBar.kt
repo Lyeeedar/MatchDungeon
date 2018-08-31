@@ -1,6 +1,7 @@
 package com.lyeeedar.UI
 
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Widget
@@ -102,6 +103,7 @@ class PowerBar() : Widget()
 	override fun draw(batch: Batch?, parentAlpha: Float)
 	{
 		if (batch == null) return
+		batch.color = Color.WHITE
 
 		val numPips = (maxPower.toFloat() / powerPerPip.toFloat()).toInt()
 		val pw = pipWidth
