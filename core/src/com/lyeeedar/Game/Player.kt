@@ -147,15 +147,16 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 			table.row()
 
 			val bufftable = Table()
-			table.add(bufftable).growX()
+			table.add(bufftable).growX().height(50f)
 			table.row()
 
 			for (buff in buffs)
 			{
 				val card = buff.getCard()
+				card.setSize(25f, 45f)
 				card.setFacing(true, false)
 
-				bufftable.add(card).pad(0f, 5f, 0f, 5f)
+				bufftable.add(card).pad(0f, 5f, 0f, 5f).size(25f, 45f)
 			}
 
 			table.add(Seperator(Global.skin, "horizontalcard"))

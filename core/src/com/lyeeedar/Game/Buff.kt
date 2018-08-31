@@ -56,6 +56,12 @@ class Buff(val xml: XmlData)
 		table.add(titleStack).growX()
 		table.row()
 
+		table.add(Seperator(Global.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f)
+		table.row()
+
+		table.add(Label("Remaining Duration: $remainingDuration", Global.skin, "card")).pad(5f)
+		table.row()
+
 		if (statistics.any { it != 0f })
 		{
 			table.add(Seperator(Global.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f)

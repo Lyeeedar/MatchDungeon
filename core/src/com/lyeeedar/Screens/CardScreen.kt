@@ -25,6 +25,7 @@ import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.XmlData
 import ktx.actors.then
+import ktx.collections.toGdxArray
 
 class CardScreen : AbstractScreen()
 {
@@ -289,7 +290,7 @@ class CardScreen : AbstractScreen()
 	{
 		if (readyToSwitch && stage.actors.filter { it is Mote }.count() == 0)
 		{
-			for (buff in Global.player.buffs.toArray())
+			for (buff in Global.player.buffs.toGdxArray())
 			{
 				buff.remainingDuration--
 				if (buff.remainingDuration <= 0)

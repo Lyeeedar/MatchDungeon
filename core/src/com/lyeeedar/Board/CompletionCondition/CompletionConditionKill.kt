@@ -34,7 +34,7 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 	{
 		for (tile in grid.grid)
 		{
-			val monster = tile.monster ?: tile.container!!.contents as? Monster
+			val monster = tile.monster ?: tile.container?.contents as? Monster
 			if (monster != null)
 			{
 				if (all || monster.desc.name == named)

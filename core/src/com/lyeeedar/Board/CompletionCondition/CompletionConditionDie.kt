@@ -8,6 +8,7 @@ import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Mote
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
+import com.lyeeedar.Renderables.Particle.ParticleEffectActor
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.SpriteWidget
@@ -60,6 +61,12 @@ class CompletionConditionDie : AbstractCompletionCondition()
 				regenAccumulator -= 1f
 				hp += 1
 
+				val pos = hpLabel.localToStageCoordinates(Vector2(hpLabel.width/2f, hpLabel.height/2f))
+
+				val healSprite = AssetManager.loadParticleEffect("Heal")
+				val actor = ParticleEffectActor(healSprite, 32f, pos)
+				Global.stage.addActor(actor)
+
 				if (hp > maxHP)
 				{
 					hp = maxHP
@@ -82,13 +89,20 @@ class CompletionConditionDie : AbstractCompletionCondition()
 
 	fun updateBlink()
 	{
-		if (hp <= maxHP * 0.25f && blinkTable.children.size == 0)
+		if (hp <= maxHP * 0.25f)
 		{
-			val blinkSprite = AssetManager.loadSprite("Particle/glow")
-			blinkSprite.colour = Colour.RED.copy().a(0.5f)
-			blinkSprite.animation = ExpandAnimation.obtain().set(1f, 0.5f, 2f, false, true)
-			val actor = SpriteWidget(blinkSprite, 32f, 32f)
-			blinkTable.add(actor).grow()
+			if (blinkTable.children.size == 0)
+			{
+				val blinkSprite = AssetManager.loadSprite("Particle/glow")
+				blinkSprite.colour = Colour.RED.copy().a(0.5f)
+				blinkSprite.animation = ExpandAnimation.obtain().set(1f, 0.5f, 2f, false, true)
+				val actor = SpriteWidget(blinkSprite, 32f, 32f)
+				blinkTable.add(actor).grow()
+			}
+		}
+		else
+		{
+			blinkTable.clear()
 		}
 	}
 

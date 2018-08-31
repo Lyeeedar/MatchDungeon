@@ -333,6 +333,8 @@ class Level(val loadPath: String)
 
 								tile.monster = monster
 								monster.tiles[ix, iy] = tile
+
+								monsterGrid[gx, gy]!!.used = true
 							}
 						}
 					}

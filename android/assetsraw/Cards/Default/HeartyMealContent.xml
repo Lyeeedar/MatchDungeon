@@ -44,6 +44,9 @@
 					</Buff>
 				</Buff>
 			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
 		</Node>
 	</Nodes>
 </CardContent>
