@@ -1,6 +1,5 @@
 package com.lyeeedar.Util
 
-import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Vector3
 
 /**
@@ -87,6 +86,10 @@ class HSLColour
 	 */
 	fun toRGB(color: Colour? = null): Colour
 	{
+		val h = h.clamp(0f, 1f)
+		val s = s.clamp(0f, 1f)
+		val l = l.clamp(0f, 1f)
+
 		val r: Float
 		val g: Float
 		val b: Float

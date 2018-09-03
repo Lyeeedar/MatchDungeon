@@ -6,25 +6,25 @@
 		<Name>Oryx/uf_split/uf_items/armor_plate_chest</Name>
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
-		<Health>0</Health>
+		<Health>2</Health>
 		<MatchDamage>0</MatchDamage>
 		<AbilityDamage>0</AbilityDamage>
 		<PowerGain>0</PowerGain>
+		<BonusGold>0</BonusGold>
+		<BonusTime>0</BonusTime>
 	</Statistics>
 	<Ability>
-		<Name>Block</Name>
-		<Description>Turn to take an attack on your breastplate.</Description>
-		<Icon meta:RefKey="Sprite">
-			<Name>Oryx/uf_split/uf_items/armor_plate_chest</Name>
-		</Icon>
+		<Name>Body Slam</Name>
+		<Description>Smash your body into an attack.</Description>
 		<EffectData>
-			<Cost>3</Cost>
-			<Effect>1,Attack,Single,Pop</Effect>
+			<Cost>4</Cost>
+			<Effect>1,Attack,Block,Pop</Effect>
 			<Data>
+				<AOE>1</AOE>
 				<Damage>0</Damage>
 			</Data>
 			<HitEffect meta:RefKey="ParticleEffect">
-				<Name>Hit</Name>
+				<Name>Stomp</Name>
 			</HitEffect>
 		</EffectData>
 	</Ability>

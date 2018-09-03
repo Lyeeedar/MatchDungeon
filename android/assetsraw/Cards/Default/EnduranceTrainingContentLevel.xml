@@ -64,14 +64,14 @@
 	<AllowedVictories>
 		<Condition meta:RefKey="Matches">
 			<Orbs>20</Orbs>
-			<Orbs>15</Orbs>
-			<Orbs>15</Orbs>
-			<Orbs>10</Orbs>
+			<Orbs>20</Orbs>
+			<Orbs>20</Orbs>
+			<Orbs>20</Orbs>
 		</Condition>
 	</AllowedVictories>
 	<AllowedDefeats>
-		<Condition meta:RefKey="Turns">
-			<Turns>40</Turns>
+		<Condition meta:RefKey="Time">
+			<Seconds>60</Seconds>
 		</Condition>
 	</AllowedDefeats>
 </Level>

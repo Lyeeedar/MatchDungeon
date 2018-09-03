@@ -90,6 +90,7 @@
 			<Type>Pit</Type>
 		</Symbol>
 	</Symbols>
+	<OrbCount>5</OrbCount>
 	<AllowedVictories>
 		<Condition meta:RefKey="Kill" />
 	</AllowedVictories>

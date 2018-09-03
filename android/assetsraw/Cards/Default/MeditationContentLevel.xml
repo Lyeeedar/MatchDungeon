@@ -1,0 +1,27 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+		</Rows>
+	</Grid>
+	<AllowedVictories>
+		<Condition meta:RefKey="CustomOrb">
+			<Count>30</Count>
+			<OrbName>Brain</OrbName>
+			<Chance>0.2</Chance>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Turns">
+			<Turns>40</Turns>
+		</Condition>
+	</AllowedDefeats>
+</Level>

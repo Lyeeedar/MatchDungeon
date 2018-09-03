@@ -59,5 +59,15 @@
 				<Name>HeartBurst</Name>
 			</Death>
 		</Orb>
+		<Orb>
+			<Name>Brain</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_items/skull_small_blood</Name>
+				<DrawActualSize>true</DrawActualSize>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Heal</Name>
+			</Death>
+		</Orb>
 	</NamedOrbs>
 </Orbs>

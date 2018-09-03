@@ -60,6 +60,7 @@
 			</Container>
 		</Symbol>
 	</Symbols>
+	<OrbCount>5</OrbCount>
 	<AllowedVictories>
 		<Condition meta:RefKey="Sink">
 			<Count>3</Count>
