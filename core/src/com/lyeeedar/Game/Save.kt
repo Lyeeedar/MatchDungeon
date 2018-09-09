@@ -5,8 +5,10 @@ import com.esotericsoftware.kryo.Kryo
 import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.*
+import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.Screens.*
+import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.registerGdxSerialisers
 import com.lyeeedar.Util.registerLyeeedarSerialisers
 import java.util.zip.GZIPInputStream
@@ -146,7 +148,7 @@ class Save
 					else
 					{
 						val currentCardHash = input.readInt()
-						val currentCard = deck.encounters.uniqueMap.get(currentCardHash)
+						val currentCard = Card.Companion.load(XmlData.enumeratePaths ("", "Card").first{ it.hashCode() == currentCardHash })
 
 						val content = CardContent.load(kryo, input)
 
