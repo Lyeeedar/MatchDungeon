@@ -1723,9 +1723,8 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		if (matchable is Orb)
 		{
 			matchable.skipPowerOrb = skipPowerOrb
+			matchable.sprite.visible = false
 		}
-
-		matchable.sprite.visible = false
 
 		val sprite = matchable.desc.death.copy()
 		sprite.colour = matchable.sprite.colour

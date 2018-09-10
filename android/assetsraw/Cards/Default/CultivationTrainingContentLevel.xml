@@ -57,16 +57,15 @@
 		</Rows>
 	</Grid>
 	<AllowedVictories>
-		<Condition meta:RefKey="Matches">
-			<Orbs>25</Orbs>
-			<Orbs>25</Orbs>
-			<Orbs>10</Orbs>
-			<Orbs>10</Orbs>
+		<Condition meta:RefKey="CustomOrb">
+			<Count>20</Count>
+			<OrbName>Brain</OrbName>
+			<Chance>0.3</Chance>
 		</Condition>
 	</AllowedVictories>
 	<AllowedDefeats>
-		<Condition meta:RefKey="Turns">
-			<Turns>30</Turns>
+		<Condition meta:RefKey="Time">
+			<Seconds>60</Seconds>
 		</Condition>
 	</AllowedDefeats>
 </Level>

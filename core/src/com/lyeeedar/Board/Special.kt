@@ -46,7 +46,8 @@ abstract class Special(val orbDesc: OrbDesc, theme: Theme) : Matchable(theme)
 		fun saturate(colour: Colour): Colour
 		{
 			val hsl = HSLColour(colour)
-			hsl.s *= 1.3f
+			hsl.s += 0.3f
+			hsl.l += 0.1f
 			return hsl.toRGB()
 		}
 

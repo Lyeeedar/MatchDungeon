@@ -4,7 +4,7 @@
 	<Theme>Dungeon</Theme>
 	<BronzeRewards meta:RefKey="Rewards">
 		<Quest>
-			<File>Quests/Dungeon/RatKing</File>
+			<File>Dungeon/RatKing</File>
 		</Quest>
 	</BronzeRewards>
 	<SilverRewards meta:RefKey="Rewards">

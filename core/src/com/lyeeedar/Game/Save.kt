@@ -136,7 +136,7 @@ class Save
 				else
 				{
 					val currentQuestHash = input.readInt()
-					val currentQuest = deck.quests.uniqueMap.get(currentQuestHash)
+					val currentQuest = Quest.load(XmlData.enumeratePaths("", "Quest").first { it.hashCode() == currentQuestHash })
 
 					val questScreen = Global.game.getTypedScreen<QuestScreen>()!!
 					questScreen.setup(currentQuest)

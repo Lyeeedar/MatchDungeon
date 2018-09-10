@@ -7,7 +7,7 @@
 		</Data>
 		<Data Name="Quest" meta:RefKey="Struct">
 			<Data Name="Chance" Key="Chance" Default="Always" meta:RefKey="Enum" />
-			<Data Name="File" StripExtension="True" ResourceType="Quest" meta:RefKey="File" />
+			<Data Name="File" BasePath="Quests" StripExtension="True" ResourceType="Quest" meta:RefKey="File" />
 		</Data>
 		<Data Name="Character" meta:RefKey="Struct">
 			<Data Name="Chance" Key="Chance" Default="Always" meta:RefKey="Enum" />
