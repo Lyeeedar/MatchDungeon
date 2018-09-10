@@ -136,7 +136,7 @@ class Save
 				else
 				{
 					val currentQuestHash = input.readInt()
-					val currentQuest = Quest.load(XmlData.enumeratePaths("", "Quest").first { it.hashCode() == currentQuestHash })
+					val currentQuest = Quest.load(XmlData.enumeratePaths("", "Quest").map { it.replace("Quests/", "").replace(".xml", "") }.first { it.hashCode() == currentQuestHash })
 
 					val questScreen = Global.game.getTypedScreen<QuestScreen>()!!
 					questScreen.setup(currentQuest)
@@ -148,7 +148,7 @@ class Save
 					else
 					{
 						val currentCardHash = input.readInt()
-						val currentCard = Card.Companion.load(XmlData.enumeratePaths ("", "Card").first{ it.hashCode() == currentCardHash })
+						val currentCard = Card.Companion.load(XmlData.enumeratePaths ("", "Card").first{ it.replace(".xml", "").hashCode() == currentCardHash })
 
 						val content = CardContent.load(kryo, input)
 
