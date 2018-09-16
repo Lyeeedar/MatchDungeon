@@ -69,5 +69,16 @@
 				<Name>Heal</Name>
 			</Death>
 		</Orb>
+		<Orb>
+			<Name>Boot</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_items/armor_leather_boot</Name>
+				<DrawActualSize>true</DrawActualSize>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Heal</Name>
+				<Colour>227,156,76,255</Colour>
+			</Death>
+		</Orb>
 	</NamedOrbs>
 </Orbs>

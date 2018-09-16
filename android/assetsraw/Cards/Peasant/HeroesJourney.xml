@@ -2,21 +2,21 @@
 	<Root meta:RefKey="CardNode">b5b4cf07-d46e-4574-95e2-58cf7c7a0b9e</Root>
 	<Nodes>
 		<CardNode meta:X="178.31297302246094" meta:Y="-5.0805263519287109" GUID="b5b4cf07-d46e-4574-95e2-58cf7c7a0b9e">
-			<Name>Raiding Party</Name>
+			<Name>Heroes Journey 1: Raiding Party</Name>
 			<Description>Your peaceful farm life is shattered by the chittering cries of goblins smashing their way into your house.</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>RaidingParty</Content>
 			<Next meta:RefKey="CardNode">4b7fe158-3c51-4449-b7cd-d8dd55169ec2</Next>
 		</CardNode>
-		<CardNode meta:X="492.31297302246094" meta:Y="-5.0805263519287109" GUID="4b7fe158-3c51-4449-b7cd-d8dd55169ec2">
-			<Name>Village Rescue</Name>
+		<CardNode meta:X="492.31298828125" meta:Y="-4.0805263519287109" GUID="4b7fe158-3c51-4449-b7cd-d8dd55169ec2">
+			<Name>Heroes Journey 2: Village Rescue</Name>
 			<Description>You arrive at the village only to find it in flames. Quick, rescue anyone you can!</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>VillageRescue</Content>
 			<Next meta:RefKey="CardNode">c520ba0d-4247-46cb-a51c-800fcb097a9c</Next>
 		</CardNode>
-		<CardNode meta:X="802.31297302246094" meta:Y="-5.0805263519287109" GUID="c520ba0d-4247-46cb-a51c-800fcb097a9c">
-			<Name>Goblin Shaman</Name>
+		<CardNode meta:X="802.31298828125" meta:Y="-5.0805263519287109" GUID="c520ba0d-4247-46cb-a51c-800fcb097a9c">
+			<Name>Heroes Journey 3: Goblin Shaman</Name>
 			<Description>At the center of the village stands a savage goblin shaman, the small beast directing the goblin hoard. Take your revenge on him.</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>GoblinShaman</Content>

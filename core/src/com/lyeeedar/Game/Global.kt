@@ -91,7 +91,8 @@ class Global
 			game.getTypedScreen<QuestScreen>()?.setup(quest)
 			game.getTypedScreen<DeckScreen>()?.setup()
 			game.getTypedScreen<QuestSelectionScreen>()?.setup()
-			game.switchScreen(MainGame.ScreenEnum.QUESTSELECTION)
+
+			QuestScreen.instance.swapTo()
 		}
 
 		private fun loadSkin(): Skin
@@ -426,11 +427,9 @@ class GlobalDeck
 
 		characters.add(Character.load("Peasant"))
 		chosenCharacter = characters.first()
+
 		playerDeck.equipment.addAll(equipment)
 		playerDeck.encounters.addAll(encounters)
-
-		quests.add(Quest.load("Dungeon/TreasureHunt"))
-		quests.add(Quest.load("Test"))
 	}
 
 	fun getPlayer(): Player

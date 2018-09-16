@@ -4,16 +4,19 @@
 	<BronzeRewards meta:RefKey="Rewards" />
 	<SilverRewards meta:RefKey="Rewards" />
 	<GoldRewards meta:RefKey="Rewards">
-		<Quest>
-			<File>Dungeon/TreasureHunt</File>
-		</Quest>
+		<Character>
+			<File>Peasant</File>
+		</Character>
 		<Card>
 			<File>Peasant/HeroesJourney</File>
 		</Card>
+		<Quest>
+			<File>Dungeon/TreasureHunt</File>
+		</Quest>
 	</GoldRewards>
 	<Root meta:RefKey="QuestNode">7914f819-3cd5-4756-9d8b-6bace226cbc7</Root>
 	<Nodes>
-		<QuestNode meta:X="429.24699166852793" meta:Y="2" GUID="7914f819-3cd5-4756-9d8b-6bace226cbc7">
+		<QuestNode meta:X="429.24697875976562" meta:Y="2" GUID="7914f819-3cd5-4756-9d8b-6bace226cbc7">
 			<Type>Fixed</Type>
 			<FixedEvent>FarmLife</FixedEvent>
 			<Success meta:RefKey="QuestNode">32c7caae-8e6a-4814-835c-b519e4f7f645</Success>
@@ -25,37 +28,37 @@
 				</State>
 			</Custom>
 		</QuestNode>
-		<QuestNode meta:X="804.21034745675411" meta:Y="1.8679719907924413" GUID="32c7caae-8e6a-4814-835c-b519e4f7f645">
+		<QuestNode meta:X="804.2103271484375" meta:Y="1.8679720163345337" GUID="32c7caae-8e6a-4814-835c-b519e4f7f645">
 			<Type>Fixed</Type>
 			<FixedEvent>TheHarvest</FixedEvent>
 			<Success meta:RefKey="QuestNode">7cd048cf-d2a4-4f2b-986b-9162363dcfae</Success>
 			<Failure meta:RefKey="QuestNode">32c7caae-8e6a-4814-835c-b519e4f7f645</Failure>
 		</QuestNode>
-		<QuestNode meta:X="1076.2103474567541" meta:Y="1.8679719907924413" GUID="7cd048cf-d2a4-4f2b-986b-9162363dcfae">
+		<QuestNode meta:X="1076.2103271484375" meta:Y="1.8679720163345337" GUID="7cd048cf-d2a4-4f2b-986b-9162363dcfae">
 			<Type>Fixed</Type>
 			<FixedEvent>FarmersMarket</FixedEvent>
 			<Success meta:RefKey="QuestNode">a202b664-e060-4c54-bc70-56b31ff47bfd</Success>
 			<Failure meta:RefKey="QuestNode">7cd048cf-d2a4-4f2b-986b-9162363dcfae</Failure>
 		</QuestNode>
-		<QuestNode meta:X="1365.7533162067541" meta:Y="3.3249778790160893" GUID="a202b664-e060-4c54-bc70-56b31ff47bfd">
+		<QuestNode meta:X="1365.7532958984375" meta:Y="3.3249778747558594" GUID="a202b664-e060-4c54-bc70-56b31ff47bfd">
 			<Type>Fixed</Type>
 			<FixedEvent>TheFestival</FixedEvent>
 			<Success meta:RefKey="QuestNode">5e6c5931-aa20-42cb-8bdf-f1f2ed2950b5</Success>
 			<Failure meta:RefKey="QuestNode">a202b664-e060-4c54-bc70-56b31ff47bfd</Failure>
 		</QuestNode>
-		<QuestNode meta:X="1638.2103474567541" meta:Y="1.8679719907924413" GUID="5e6c5931-aa20-42cb-8bdf-f1f2ed2950b5">
+		<QuestNode meta:X="1638.2103271484375" meta:Y="1.8679720163345337" GUID="5e6c5931-aa20-42cb-8bdf-f1f2ed2950b5">
 			<Type>Fixed</Type>
 			<FixedEvent>Cleanup</FixedEvent>
 			<Success meta:RefKey="QuestNode">f073fc88-da25-4ca3-8e9e-1af181e0d4f5</Success>
 			<Failure meta:RefKey="QuestNode">5e6c5931-aa20-42cb-8bdf-f1f2ed2950b5</Failure>
 		</QuestNode>
-		<QuestNode meta:X="1894.2103474567541" meta:Y="1.8679719907924413" GUID="f073fc88-da25-4ca3-8e9e-1af181e0d4f5">
+		<QuestNode meta:X="1894.2103271484375" meta:Y="1.8679720163345337" GUID="f073fc88-da25-4ca3-8e9e-1af181e0d4f5">
 			<Type>Fixed</Type>
 			<FixedEvent>Devastation</FixedEvent>
 			<Success meta:RefKey="CompleteQuest">2939efcc-82a3-4bb7-85bf-f84510397f54</Success>
 			<Failure meta:RefKey="CompleteQuest">2939efcc-82a3-4bb7-85bf-f84510397f54</Failure>
 		</QuestNode>
-		<CompleteQuest meta:X="2168.2103474567539" meta:Y="1.8679719907924413" GUID="2939efcc-82a3-4bb7-85bf-f84510397f54" />
-		<CompleteQuest meta:X="754.66265555803716" meta:Y="308.05622407366047" GUID="e43200fc-8049-460e-a0fa-4f1c0b6ff4d8" />
+		<CompleteQuest meta:X="2168.21044921875" meta:Y="1.8679720163345337" GUID="2939efcc-82a3-4bb7-85bf-f84510397f54" />
+		<CompleteQuest meta:X="754.66265869140625" meta:Y="308.05621337890625" GUID="e43200fc-8049-460e-a0fa-4f1c0b6ff4d8" />
 	</Nodes>
 </Quest>

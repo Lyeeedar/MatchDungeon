@@ -448,7 +448,7 @@ class AtlasCreator
 			return true
 		}
 
-		val baseHandle = Gdx.files.internal("Sprites/$baseName.png")
+		val baseHandle = Gdx.files.internal("../assetsraw/Sprites/$baseName.png")
 		if (!baseHandle.exists())
 		{
 			System.err.println("Failed to find sprite for: " + baseName)
