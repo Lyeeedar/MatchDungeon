@@ -1550,7 +1550,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		// for each tile with 2 matches spawn the relevant special, and mark the matches as used, if cross point is used them spawn in a neighbouring tile that isnt specialed
 		for (tile in grid)
 		{
-			if (tile.associatedMatches[0] != null && tile.associatedMatches[1] != null)
+			if (tile.associatedMatches[0] != null && tile.associatedMatches[1] != null && !tile.matchable!!.desc.isNamed)
 			{
 				val sprite = tile.matchable!!.sprite
 
@@ -1596,27 +1596,30 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			{
 				val tile = grid[match.points().maxBy { grid[it].matchable?.cascadeCount ?: 0 }!!]
 
-				val sprite = tile.matchable!!.sprite
-
-				val special = getSpecial(match.length(), 0, match.direction(), tile.matchable!!.desc) ?: continue
-				if (tile.special != null)
+				if (!tile.matchable!!.desc.isNamed)
 				{
-					tile.special = tile.special!!.merge(special) ?: special.merge(tile.special!!) ?: special
-					tile.special!!.armed = true
-					tile.special!!.markedForDeletion = true
-				}
-				else
-				{
-					tile.special = special
-				}
+					val sprite = tile.matchable!!.sprite
 
-				for (point in match.points())
-				{
-					val sprite = sprite.copy()
-					sprite.drawActualSize = false
-					sprite.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(tile.getPosDiff(point)).invertY(), Interpolation.linear)
+					val special = getSpecial(match.length(), 0, match.direction(), tile.matchable!!.desc) ?: continue
+					if (tile.special != null)
+					{
+						tile.special = tile.special!!.merge(special) ?: special.merge(tile.special!!) ?: special
+						tile.special!!.armed = true
+						tile.special!!.markedForDeletion = true
+					}
+					else
+					{
+						tile.special = special
+					}
 
-					tile.effects.add(sprite)
+					for (point in match.points())
+					{
+						val sprite = sprite.copy()
+						sprite.drawActualSize = false
+						sprite.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(tile.getPosDiff(point)).invertY(), Interpolation.linear)
+
+						tile.effects.add(sprite)
+					}
 				}
 			}
 		}

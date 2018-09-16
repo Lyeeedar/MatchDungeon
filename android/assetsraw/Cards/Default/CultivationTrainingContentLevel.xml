@@ -58,9 +58,9 @@
 	</Grid>
 	<AllowedVictories>
 		<Condition meta:RefKey="CustomOrb">
-			<Count>20</Count>
+			<Count>30</Count>
 			<OrbName>Brain</OrbName>
-			<Chance>0.3</Chance>
+			<Chance>0.2</Chance>
 		</Condition>
 	</AllowedVictories>
 	<AllowedDefeats>

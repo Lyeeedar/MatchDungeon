@@ -25,6 +25,7 @@
 			</Data>
 			<FlightEffect meta:RefKey="ParticleEffect">
 				<Name>FireOrb</Name>
+				<KillOnAnimComplete>true</KillOnAnimComplete>
 			</FlightEffect>
 			<HitEffect meta:RefKey="ParticleEffect">
 				<Name>Fireburst</Name>
