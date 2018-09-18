@@ -21,6 +21,20 @@ class UniqueArray<T>(val uniqueFun: (T) -> Int) : Iterable<T>
 		}
 	}
 
+	fun replace(item: T)
+	{
+		val key = uniqueFun(item)
+
+		if (uniqueMap.containsKey(key))
+		{
+			val existing = uniqueMap[key]
+			backingArray.removeValue(existing, true)
+
+			backingArray.add(item)
+			uniqueMap.put(key, item)
+		}
+	}
+
 	fun addAll(items: Iterable<T>)
 	{
 		for (item in items)

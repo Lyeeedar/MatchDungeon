@@ -15,13 +15,13 @@
 	<Theme>Farm</Theme>
 	<AllowedVictories>
 		<Condition meta:RefKey="Matches">
-			<Orbs>30</Orbs>
-			<Orbs>30</Orbs>
+			<Orbs>20</Orbs>
+			<Orbs>20</Orbs>
 		</Condition>
 	</AllowedVictories>
 	<AllowedDefeats>
 		<Condition meta:RefKey="Turns">
-			<Turns>30</Turns>
+			<Turns>40</Turns>
 		</Condition>
 	</AllowedDefeats>
 </Level>

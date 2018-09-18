@@ -8,7 +8,6 @@ import com.lyeeedar.*
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.Screens.*
-import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.registerGdxSerialisers
 import com.lyeeedar.Util.registerLyeeedarSerialisers
 import java.util.zip.GZIPInputStream
@@ -70,7 +69,7 @@ class Save
 			else
 			{
 				val questScreen = Global.game.getTypedScreen<QuestScreen>()!!
-				output.writeInt(questScreen.currentQuest.path.hashCode())
+				questScreen.currentQuest.save(output)
 
 				if (currentScreen == MainGame.ScreenEnum.QUEST)
 				{
@@ -79,7 +78,7 @@ class Save
 				else
 				{
 					val cardScreen = Global.game.getTypedScreen<CardScreen>()!!
-					output.writeInt(cardScreen.currentCard.path.hashCode())
+					output.writeString(cardScreen.currentCard.path)
 
 					cardScreen.currentContent.save(kryo, output)
 				}
@@ -135,8 +134,8 @@ class Save
 				}
 				else
 				{
-					val currentQuestHash = input.readInt()
-					val currentQuest = Quest.load(XmlData.enumeratePaths("", "Quest").map { it.replace("Quests/", "").replace(".xml", "") }.first { it.hashCode() == currentQuestHash })
+					val currentQuest = Quest.load(input)
+					Global.deck.quests.replace(currentQuest)
 
 					val questScreen = Global.game.getTypedScreen<QuestScreen>()!!
 					questScreen.setup(currentQuest)
@@ -147,8 +146,9 @@ class Save
 					}
 					else
 					{
-						val currentCardHash = input.readInt()
-						val currentCard = Card.Companion.load(XmlData.enumeratePaths ("", "Card").first{ it.replace(".xml", "").hashCode() == currentCardHash })
+						val currentCardPath = input.readString()
+						val currentCard = Card.Companion.load(currentCardPath)
+						Global.deck.encounters.replace(currentCard)
 
 						val content = CardContent.load(kryo, input)
 

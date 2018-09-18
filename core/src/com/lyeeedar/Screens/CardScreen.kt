@@ -219,6 +219,12 @@ class CardScreen : AbstractScreen()
 	var readyToSwitch = false
 	fun advanceContent(canStart: Boolean = false)
 	{
+		if (currentContent.state != CardContent.CardContentState.INPROGRESS)
+		{
+			readyToSwitch = true
+			return
+		}
+
 		val completed = currentContent.advance(this, canStart)
 		if (completed)
 		{

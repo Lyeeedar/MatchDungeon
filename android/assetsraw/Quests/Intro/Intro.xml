@@ -8,7 +8,7 @@
 			<File>Peasant</File>
 		</Character>
 		<Card>
-			<File>Peasant/HeroesJourney</File>
+			<File>Cards/Peasant/HeroesJourney</File>
 		</Card>
 		<Quest>
 			<File>Dungeon/TreasureHunt</File>

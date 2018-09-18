@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="5e796cc6-61bf-48dd-9ddf-6db7a7f50cb6">
 			<Line>
-				<MultilineString>You wake late at night to the acrid smell of smoke. You rush outside, ready to combat the flames, only to find that the blaze isn't for farm at all. Instead the entire sky above the town is glowing read from a massive inferno.</MultilineString>
+				<MultilineString>You wake late at night to the acrid smell of smoke. You rush outside, ready to combat the flames, only to find that the blaze isn't on your farm at all. Instead the entire sky above the town is glowing red from a massive inferno.</MultilineString>
 			</Line>
 			<Line>
 				<MultilineString>You quickly dress and rush to the town.</MultilineString>
@@ -18,7 +18,7 @@
 				<MultilineString>Alas it is too late. The town is pillaged, ravaged. The survivors pack their things and travel north, to the great city of Gladsheim.</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You join them, spirits low. You cannot farm anymore, the distance to transport your goods is far too high. Instead you have to make your fortune adventuring, risking you life looting forgotten ruins in the search of treasures.</MultilineString>
+				<MultilineString>You join them, spirits low. You cannot farm anymore, the distance to transport your goods is far too high. Instead you have to make your fortune adventuring, risking your life looting forgotten ruins in the search of treasures.</MultilineString>
 			</Line>
 			<Line>
 				<MultilineString>And maybe one day, you can get revenge for the atrocity.</MultilineString>

@@ -1,16 +1,16 @@
 <Level xmlns:meta="Editor">
 	<Grid>
 		<Rows>
-			<Line>=.......=</Line>
-			<Line>=.......=</Line>
-			<Line>=.$.$.$.=</Line>
-			<Line>=.......=</Line>
-			<Line>=.......=</Line>
-			<Line>=.......=</Line>
-			<Line>=.......=</Line>
-			<Line>=.......=</Line>
-			<Line>=.......=</Line>
-			<Line>=.......=</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>..$.$.$..</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
 		</Rows>
 	</Grid>
 	<Theme>City</Theme>
@@ -22,7 +22,7 @@
 	</AllowedVictories>
 	<AllowedDefeats>
 		<Condition meta:RefKey="Turns">
-			<Turns>30</Turns>
+			<Turns>40</Turns>
 		</Condition>
 	</AllowedDefeats>
 </Level>
