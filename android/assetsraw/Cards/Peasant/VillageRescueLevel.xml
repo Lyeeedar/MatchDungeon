@@ -1,14 +1,14 @@
 <Level xmlns:meta="Editor">
 	<Grid>
 		<Rows>
-			<Line>........F</Line>
-			<Line>WW.WW.FFF</Line>
-			<Line>WV.FW.FFF</Line>
-			<Line>F...W....</Line>
-			<Line>W.V.W....</Line>
-			<Line>WWW.W.WWW</Line>
-			<Line>F...F.WVF</Line>
-			<Line>......W..</Line>
+			<Line>........f</Line>
+			<Line>WWwWW.fff</Line>
+			<Line>WVwFW.fff</Line>
+			<Line>FwwwW....</Line>
+			<Line>WwVwW....</Line>
+			<Line>WWWwW.WWW</Line>
+			<Line>f...f.WVF</Line>
+			<Line>......Www</Line>
 			<Line>......WFF</Line>
 			<Line>......WWW</Line>
 			<Line>.........</Line>
@@ -22,6 +22,7 @@
 			<Block>
 				<Sprite meta:RefKey="Sprite">
 					<Name>Oryx/uf_split/uf_terrain/crate</Name>
+					<DrawActualSize>true</DrawActualSize>
 				</Sprite>
 				<Health>3</Health>
 			</Block>
@@ -32,7 +33,23 @@
 			<SpecialOrb>None</SpecialOrb>
 		</Symbol>
 		<Symbol>
-			<Character>F</Character>
+			<Character>w</Character>
+			<Extends>.</Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<Spreader meta:RefKey="SpreaderDef">
+				<Name>Fire</Name>
+				<ParticleEffect meta:RefKey="ParticleEffect">
+					<Name>Fire</Name>
+				</ParticleEffect>
+				<Effect>Pop</Effect>
+			</Spreader>
+		</Symbol>
+		<Symbol>
+			<Character>f</Character>
 			<Extends>.</Extends>
 			<Plate>0</Plate>
 			<Seal>0</Seal>
@@ -49,7 +66,7 @@
 		</Symbol>
 		<Symbol>
 			<Character>V</Character>
-			<Extends>.</Extends>
+			<Extends>w</Extends>
 			<Plate>0</Plate>
 			<Seal>0</Seal>
 			<Attack>0</Attack>
@@ -61,6 +78,20 @@
 					<DrawActualSize>true</DrawActualSize>
 				</Sprite>
 			</Sinkable>
+		</Symbol>
+		<Symbol>
+			<Character>w</Character>
+			<Extends></Extends>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/floor_wood_1</Name>
+				</Sprite>
+			</Sprite>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
 		</Symbol>
 	</Symbols>
 	<Theme>City</Theme>

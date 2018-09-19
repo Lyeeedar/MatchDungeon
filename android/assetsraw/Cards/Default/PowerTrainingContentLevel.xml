@@ -19,6 +19,7 @@
 			<Block>
 				<Sprite meta:RefKey="Sprite">
 					<Name>Oryx/Custom/terrain/boulder</Name>
+					<DrawActualSize>true</DrawActualSize>
 				</Sprite>
 				<Health>15</Health>
 				<AlwaysShowHP>true</AlwaysShowHP>

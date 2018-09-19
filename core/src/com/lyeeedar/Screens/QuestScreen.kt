@@ -276,7 +276,7 @@ class QuestScreen : AbstractScreen()
 
 		val table = Table()
 
-		val text = if (currentQuest.state == Quest.QuestState.FAILURE) "Quest Failed!" else "Quest Completed!"
+		val text = if (currentQuest.state == Quest.QuestState.FAILURE) "Quest Failed!" else "Quest Completed!\n${currentQuest.state}"
 		table.add(Label(text, Global.skin, "cardtitle"))
 
 		val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("blank")!!, null)

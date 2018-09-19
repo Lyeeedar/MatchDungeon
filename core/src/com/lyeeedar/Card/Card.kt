@@ -211,6 +211,8 @@ class CardNode
 		guid = xmlData.getAttribute("GUID")
 
 		name = xmlData.get("Name")
+		name = name.replace(":", ":\n")
+
 		description = xmlData.get("Description")
 		spawnWeight = SpawnWeight.valueOf(xmlData.get("SpawnWeighting", "Any")!!.toUpperCase())
 		isShop = xmlData.getBoolean("IsShop", false)

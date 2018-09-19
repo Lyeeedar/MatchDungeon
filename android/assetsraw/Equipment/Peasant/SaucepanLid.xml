@@ -10,15 +10,14 @@
 		<MatchDamage>0</MatchDamage>
 		<AbilityDamage>0</AbilityDamage>
 		<PowerGain>0</PowerGain>
+		<BonusGold>0</BonusGold>
+		<BonusTime>0</BonusTime>
 	</Statistics>
 	<Ability>
 		<Name>Block</Name>
 		<Description>Block an enemies attack.</Description>
-		<Icon meta:RefKey="Sprite">
-			<Name>Oryx/uf_split/uf_items/shield_iron_buckler</Name>
-		</Icon>
 		<EffectData>
-			<Cost>7</Cost>
+			<Cost>4</Cost>
 			<Effect>1,Attack,Single,Pop</Effect>
 			<Data>
 				<Damage>0</Damage>
