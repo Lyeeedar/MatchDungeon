@@ -76,7 +76,7 @@ class CardScreen : AbstractScreen()
 
 		if (resetLevelFlags)
 		{
-			Global.levelflags = GameStateFlags()
+			Global.cardflags = GameStateFlags()
 		}
 
 		currentCard = card

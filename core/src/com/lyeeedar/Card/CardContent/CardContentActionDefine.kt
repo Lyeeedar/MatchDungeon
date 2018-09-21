@@ -21,7 +21,7 @@ class CardContentActionDefine : AbstractCardContentAction()
 
 	override fun advance(CardContent: CardContent, CardContentScreen: CardScreen): Boolean
 	{
-		val flags = if (global) Global.globalflags else Global.levelflags
+		val flags = if (global) Global.globalflags else Global.cardflags
 
 		flags.flags.put(key, value.evaluate(Global.getVariableMap()))
 

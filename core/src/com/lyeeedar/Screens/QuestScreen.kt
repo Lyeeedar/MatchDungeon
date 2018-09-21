@@ -146,6 +146,29 @@ class QuestScreen : AbstractScreen()
 				return true
 			})
 
+			debugConsole.register("PrintFlags", "", fun(args, console): Boolean
+			{
+				console.write("Global:")
+				for (flag in Global.globalflags.flags)
+				{
+					console.write(flag.key + ": " + flag.value)
+				}
+
+				console.write("Quest:")
+				for (flag in Global.questflags.flags)
+				{
+					console.write(flag.key + ": " + flag.value)
+				}
+
+				console.write("Card:")
+				for (flag in Global.cardflags.flags)
+				{
+					console.write(flag.key + ": " + flag.value)
+				}
+
+				return true
+			})
+
 			debugConsole.register("Equip", "", fun(args, console): Boolean
 			{
 				val equipmentName = args[0]

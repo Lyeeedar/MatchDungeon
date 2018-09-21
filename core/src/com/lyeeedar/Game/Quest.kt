@@ -660,7 +660,7 @@ class Define(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 		}
 		else
 		{
-			Global.levelflags.flags.put(key, newVal)
+			Global.questflags.flags.put(key, newVal)
 		}
 
 		return next.node.run()

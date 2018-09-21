@@ -55,7 +55,8 @@ class Global
 
 		lateinit var player: Player
 		var globalflags = GameStateFlags()
-		var levelflags = GameStateFlags()
+		var questflags = GameStateFlags()
+		var cardflags = GameStateFlags()
 
 		lateinit var deck: GlobalDeck
 
@@ -82,7 +83,8 @@ class Global
 
 			player = deck.getPlayer()
 			globalflags = GameStateFlags()
-			levelflags = GameStateFlags()
+			questflags = GameStateFlags()
+			cardflags = GameStateFlags()
 
 			settings = Settings()
 
@@ -357,7 +359,8 @@ class Global
 		{
 			val output = ObjectFloatMap<String>()
 			output.putAll(globalflags.flags)
-			output.putAll(levelflags.flags)
+			output.putAll(questflags.flags)
+			output.putAll(cardflags.flags)
 
 			output.put("money", player.gold.toFloat())
 

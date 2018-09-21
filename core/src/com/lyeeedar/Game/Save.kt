@@ -52,7 +52,8 @@ class Save
 			Global.deck.save(output)
 			Global.player.save(kryo, output)
 			Global.globalflags.save(kryo, output)
-			Global.levelflags.save(kryo, output)
+			Global.questflags.save(kryo, output)
+			Global.cardflags.save(kryo, output)
 			Global.settings.save(kryo, output)
 
 			val currentScreen = Global.game.currentScreenEnum
@@ -108,7 +109,8 @@ class Save
 				val deck = GlobalDeck.load(input)
 				val player = Player.load(kryo, input, deck)
 				val globalFlags = GameStateFlags.load(kryo, input)
-				val levelFlags = GameStateFlags.load(kryo, input)
+				val questFlags = GameStateFlags.load(kryo, input)
+				val cardFlags = GameStateFlags.load(kryo, input)
 				val settings = Settings.load(kryo, input)
 
 				val currentScreen = MainGame.ScreenEnum.values()[input.readInt()]
@@ -117,7 +119,8 @@ class Save
 				Global.deck = deck
 				Global.player = player
 				Global.globalflags = globalFlags
-				Global.levelflags = levelFlags
+				Global.questflags = questFlags
+				Global.cardflags = cardFlags
 				Global.settings = settings
 
 				if (currentScreen == MainGame.ScreenEnum.QUESTSELECTION)

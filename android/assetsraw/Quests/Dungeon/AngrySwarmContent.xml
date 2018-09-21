@@ -22,31 +22,43 @@
 				<State>Failure</State>
 			</MarkComplete>
 		</Node>
-		<Node meta:X="477" meta:Y="0" GUID="abc741de-6c49-4129-ab5e-6dc19568f80d">
+		<Node meta:X="476" meta:Y="0" GUID="abc741de-6c49-4129-ab5e-6dc19568f80d">
 			<Line>
 				<MultilineString>You manage to bring them all down.</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Chance>Medium</Chance>
-					<Health>2</Health>
-					<MatchDamage>0</MatchDamage>
-					<AbilityDamage>0</AbilityDamage>
-					<PowerGain>0</PowerGain>
+					<Statistics meta:RefKey="Statistics">
+						<Health>2</Health>
+						<MatchDamage>0</MatchDamage>
+						<AbilityDamage>0</AbilityDamage>
+						<PowerGain>0</PowerGain>
+						<BonusGold>0</BonusGold>
+						<BonusTime>0</BonusTime>
+					</Statistics>
 				</Statistics>
 				<Statistics>
 					<Chance>Medium</Chance>
-					<Health>0</Health>
-					<MatchDamage>0</MatchDamage>
-					<AbilityDamage>1</AbilityDamage>
-					<PowerGain>0</PowerGain>
+					<Statistics meta:RefKey="Statistics">
+						<Health>0</Health>
+						<MatchDamage>0.5</MatchDamage>
+						<AbilityDamage>0</AbilityDamage>
+						<PowerGain>0</PowerGain>
+						<BonusGold>0</BonusGold>
+						<BonusTime>0</BonusTime>
+					</Statistics>
 				</Statistics>
 				<Statistics>
 					<Chance>Medium</Chance>
-					<Health>0</Health>
-					<MatchDamage>0</MatchDamage>
-					<AbilityDamage>0</AbilityDamage>
-					<PowerGain>2</PowerGain>
+					<Statistics meta:RefKey="Statistics">
+						<Health>0</Health>
+						<MatchDamage>0</MatchDamage>
+						<AbilityDamage>1</AbilityDamage>
+						<PowerGain>0</PowerGain>
+						<BonusGold>0</BonusGold>
+						<BonusTime>0</BonusTime>
+					</Statistics>
 				</Statistics>
 			</Rewards>
 			<MarkComplete>
