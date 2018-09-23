@@ -50,7 +50,7 @@
 			<Define>
 				<Key>Loss</Key>
 				<Value>Money</Value>
-				<Global>false</Global>
+				<Storage>Card</Storage>
 			</Define>
 			<Node meta:RefKey="Node">04c442e9-e50c-4637-8165-e05021acb5af</Node>
 		</Node>
@@ -61,7 +61,7 @@
 			<Define>
 				<Key>Loss</Key>
 				<Value>Money*0.75</Value>
-				<Global>false</Global>
+				<Storage>Card</Storage>
 			</Define>
 			<Node meta:RefKey="Node">04c442e9-e50c-4637-8165-e05021acb5af</Node>
 		</Node>

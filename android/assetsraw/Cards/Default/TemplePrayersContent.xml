@@ -31,21 +31,21 @@
 			<Define>
 				<Key>Strength</Key>
 				<Value>1</Value>
-				<Global>false</Global>
+				<Storage>Card</Storage>
 			</Define>
 		</Node>
 		<Node meta:X="512" meta:Y="-133" GUID="764e515a-9b4f-40fa-ae78-d79447dc7179">
 			<Define>
 				<Key>Protection</Key>
 				<Value>1</Value>
-				<Global>false</Global>
+				<Storage>Card</Storage>
 			</Define>
 		</Node>
 		<Node meta:X="511" meta:Y="-53" GUID="21d0d3c3-907c-4cbb-9e49-45527fea452f">
 			<Define>
 				<Key>Power</Key>
 				<Value>1</Value>
-				<Global>false</Global>
+				<Storage>Card</Storage>
 			</Define>
 		</Node>
 		<Node meta:X="457" meta:Y="428" GUID="bd54cf2e-eb63-415a-ad93-37e7db3f2f41">
@@ -81,10 +81,6 @@
 		<Node meta:X="813" meta:Y="134" GUID="687aacfa-1e9c-4109-86e6-0e9e5cedddfa">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
-					<Health>0</Health>
-					<MatchDamage>0.5</MatchDamage>
-					<AbilityDamage>0</AbilityDamage>
-					<PowerGain>0</PowerGain>
 					<Statistics meta:RefKey="Statistics">
 						<Health>0</Health>
 						<MatchDamage>0.5</MatchDamage>
@@ -99,10 +95,6 @@
 		<Node meta:X="809" meta:Y="214" GUID="f16d5e15-c788-4c19-a7ed-a15226cb091e">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
-					<Health>2</Health>
-					<MatchDamage>0</MatchDamage>
-					<AbilityDamage>0</AbilityDamage>
-					<PowerGain>0</PowerGain>
 					<Statistics meta:RefKey="Statistics">
 						<Health>2</Health>
 						<MatchDamage>0</MatchDamage>
@@ -117,10 +109,6 @@
 		<Node meta:X="812" meta:Y="302" GUID="c82992d0-ae64-4490-81ef-96d3412802bc">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
-					<Health>0</Health>
-					<MatchDamage>0</MatchDamage>
-					<AbilityDamage>0</AbilityDamage>
-					<PowerGain>3</PowerGain>
 					<Statistics meta:RefKey="Statistics">
 						<Health>0</Health>
 						<MatchDamage>0</MatchDamage>

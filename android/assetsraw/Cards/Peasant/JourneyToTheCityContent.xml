@@ -8,14 +8,14 @@
 				<Failure meta:RefKey="Node">91e41773-f187-46c6-906d-f87d59996682</Failure>
 			</Match3>
 		</Node>
-		<Node meta:X="680.40264892578125" meta:Y="204.35824584960938" GUID="91e41773-f187-46c6-906d-f87d59996682">
+		<Node meta:X="682.40264892578125" meta:Y="204.35824584960938" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
 				<MultilineString>Night starts to fall with the city nowhere in sight. You begin to setup camp, you'll have to finish your journey tomorrow.</MultilineString>
 			</Line>
 			<Define>
 				<Key>HeroesJourney4Seen</Key>
 				<Value>1</Value>
-				<Global>true</Global>
+				<Storage>Global</Storage>
 			</Define>
 			<MarkComplete>
 				<State>Failure</State>

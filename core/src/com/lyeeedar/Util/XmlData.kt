@@ -375,6 +375,27 @@ class XmlData
 			return data
 		}
 
+		fun getExistingPaths(): Sequence<String>
+		{
+			if (existingPaths == null)
+			{
+				existingPaths = com.badlogic.gdx.utils.Array()
+
+				val xml = getXml("ProcessedPaths.xml")
+				for (el in xml.children)
+				{
+					existingPaths?.add(el.text)
+				}
+			}
+
+			return buildSequence {
+				for (path in existingPaths!!)
+				{
+					yield(path)
+				}
+			}
+		}
+
 		fun enumeratePaths(base: String, type: String): Sequence<String>
 		{
 			if (existingPaths == null)

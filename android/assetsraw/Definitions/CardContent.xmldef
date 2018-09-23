@@ -44,7 +44,7 @@
 		<Data Name="Define" TextColour="192,207,109" meta:RefKey="Struct">
 			<Data Name="Key" meta:RefKey="String" />
 			<Data Name="Value" meta:RefKey="String" />
-			<Data Name="Global" SkipIfDefault="False" meta:RefKey="Boolean" />
+			<Data Name="Storage" EnumValues="Card,Quest,Global" SkipIfDefault="False" meta:RefKey="Enum" />
 		</Data>
 		<Data Name="MarkComplete" SkipIfDefault="False" TextColour="242,183,30" meta:RefKey="Struct">
 			<Data Name="State" EnumValues="Success,Failure,Custom" SkipIfDefault="False" meta:RefKey="Enum" />
