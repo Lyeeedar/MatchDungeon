@@ -52,7 +52,7 @@
 			<Plate>0</Plate>
 			<Seal>0</Seal>
 			<Attack>0</Attack>
-			<IsMonster>false</IsMonster>
+			<IsMonster>true</IsMonster>
 			<MonsterDesc meta:RefKey="MonsterDesc">
 				<Name>Golem</Name>
 				<Sprite meta:RefKey="Sprite">

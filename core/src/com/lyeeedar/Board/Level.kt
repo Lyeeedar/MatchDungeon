@@ -138,6 +138,13 @@ class Level(val loadPath: String)
 
 				hasMonster = true
 			}
+			else if (char == '?')
+			{
+				tile.canHaveOrb = true
+				tile.spriteSetter = theme.floor.copy()
+
+				hasMonster = true
+			}
 			else if (symbolMap.containsKey(char.toInt()))
 			{
 				val symbol = symbolMap[char.toInt()]
@@ -171,6 +178,10 @@ class Level(val loadPath: String)
 				tile.plateStrength = symbol.plate
 
 				if (symbol.isMonster)
+				{
+					hasMonster = true
+				}
+				else if (symbol.monsterDesc != null)
 				{
 					hasMonster = true
 				}
@@ -268,7 +279,7 @@ class Level(val loadPath: String)
 						monster = loadMonster(tile, symbol.extends)
 					}
 
-					if (symbol.isMonster)
+					if (symbol.isMonster || symbol.monsterDesc != null)
 					{
 						monster = MonsterMarker(symbol.monsterDesc, false)
 					}

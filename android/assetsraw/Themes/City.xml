@@ -50,18 +50,19 @@
 	</Block>
 	<Seal>
 		<Sprite meta:RefKey="Sprite">
-			<Name>Oryx/Custom/terrain/spiderweb</Name>
+			<Name>Oryx/uf_split/uf_terrain/rune_1</Name>
 			<DrawActualSize>true</DrawActualSize>
-			<Colour>255,255,255,54</Colour>
+			<Colour>255,0,233,132</Colour>
 		</Sprite>
 		<Sprite meta:RefKey="Sprite">
-			<Name>Oryx/Custom/terrain/spiderweb</Name>
+			<Name>Oryx/uf_split/uf_terrain/rune_1</Name>
 			<DrawActualSize>true</DrawActualSize>
-			<Colour>255,255,255,142</Colour>
+			<Colour>255,0,220,217</Colour>
 		</Sprite>
 		<Sprite meta:RefKey="Sprite">
-			<Name>Oryx/Custom/terrain/spiderweb</Name>
+			<Name>Oryx/uf_split/uf_terrain/rune_1</Name>
 			<DrawActualSize>true</DrawActualSize>
+			<Colour>255,0,220,255</Colour>
 		</Sprite>
 	</Seal>
 	<Shield>

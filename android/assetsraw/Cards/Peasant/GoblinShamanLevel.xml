@@ -2,30 +2,30 @@
 	<Grid>
 		<Rows>
 			<Line>...........</Line>
-			<Line>.FWFF......</Line>
-			<Line>..WFF......</Line>
-			<Line>.!WF.!..!..</Line>
-			<Line>F..........</Line>
-			<Line>WWW........</Line>
-			<Line>.....?....F</Line>
-			<Line>.........FF</Line>
-			<Line>........!FF</Line>
-			<Line>.!........F</Line>
-			<Line>........WWW</Line>
-			<Line>.......W...</Line>
-			<Line>.......W...</Line>
+			<Line>wFWFf......</Line>
+			<Line>wwWFf......</Line>
+			<Line>wwwF.!..!..</Line>
+			<Line>Fwww.......</Line>
+			<Line>WWWw.......</Line>
+			<Line>.....?....f</Line>
+			<Line>.........ff</Line>
+			<Line>........!ff</Line>
+			<Line>.!........f</Line>
+			<Line>.......wWWW</Line>
+			<Line>.......Wwww</Line>
+			<Line>.......Wwww</Line>
 		</Rows>
 	</Grid>
 	<Symbols>
 		<Symbol>
 			<Character>W</Character>
-			<Extends>.</Extends>
+			<Extends>w</Extends>
 			<Block>
 				<Sprite meta:RefKey="Sprite">
 					<Name>Oryx/uf_split/uf_terrain/crate</Name>
+					<DrawActualSize>true</DrawActualSize>
 				</Sprite>
 				<Health>3</Health>
-				<AlwaysShowHP>true</AlwaysShowHP>
 			</Block>
 			<Plate>0</Plate>
 			<Seal>0</Seal>
@@ -34,13 +34,50 @@
 			<SpecialOrb>None</SpecialOrb>
 		</Symbol>
 		<Symbol>
-			<Character>F</Character>
+			<Character>w</Character>
+			<Extends></Extends>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/floor_wood_1</Name>
+				</Sprite>
+			</Sprite>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>f</Character>
 			<Extends>.</Extends>
 			<Plate>0</Plate>
 			<Seal>0</Seal>
 			<Attack>0</Attack>
 			<IsMonster>false</IsMonster>
 			<SpecialOrb>None</SpecialOrb>
+			<Spreader meta:RefKey="SpreaderDef">
+				<Name>Fire</Name>
+				<ParticleEffect meta:RefKey="ParticleEffect">
+					<Name>Fire</Name>
+				</ParticleEffect>
+				<Effect>Pop</Effect>
+			</Spreader>
+		</Symbol>
+		<Symbol>
+			<Character>F</Character>
+			<Extends>w</Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<Spreader meta:RefKey="SpreaderDef">
+				<Name>Fire</Name>
+				<ParticleEffect meta:RefKey="ParticleEffect">
+					<Name>Fire</Name>
+				</ParticleEffect>
+				<Effect>Pop</Effect>
+			</Spreader>
 		</Symbol>
 	</Symbols>
 	<Faction>Goblin</Faction>
