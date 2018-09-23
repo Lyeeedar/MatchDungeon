@@ -1,0 +1,17 @@
+<Head xmlns:meta="Editor">
+	<Name>Explorers Hat</Name>
+	<Description>The hat of an adventurer. Seems to give good luck with finding treasure.</Description>
+	<Cost>100</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/armor_leather_helm</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>1</Health>
+		<MatchDamage>0</MatchDamage>
+		<AbilityDamage>0</AbilityDamage>
+		<PowerGain>0</PowerGain>
+		<BonusGold>0.1</BonusGold>
+		<BonusTime>0</BonusTime>
+	</Statistics>
+</Head>

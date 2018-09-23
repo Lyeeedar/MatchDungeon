@@ -93,7 +93,7 @@
 	<AllowedDefeats>
 		<Condition meta:RefKey="Die" />
 		<Condition meta:RefKey="Turns">
-			<Turns>30</Turns>
+			<Turns>35</Turns>
 		</Condition>
 	</AllowedDefeats>
 </Level>

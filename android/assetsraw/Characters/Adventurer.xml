@@ -1,0 +1,20 @@
+<Character xmlns:meta="Editor">
+	<Name>Adventurer</Name>
+	<Description>They make their living by risking their lives in ancient tombs or forgotten ruins. Treasure is their goal.</Description>
+	<Sprite meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_heroes/warden</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Sprite>
+	<Statistics meta:RefKey="Statistics">
+		<Health>7</Health>
+		<MatchDamage>0</MatchDamage>
+		<AbilityDamage>1</AbilityDamage>
+		<PowerGain>1</PowerGain>
+		<BonusGold>0</BonusGold>
+		<BonusTime>0</BonusTime>
+	</Statistics>
+	<StartingEquipment>
+		<Head>Characters/Equipment/AdventurerHat</Head>
+		<MainHand>Characters/Equipment/Whip</MainHand>
+	</StartingEquipment>
+</Character>
