@@ -293,16 +293,22 @@ class MoneyReward : AbstractReward()
 		table.add(title).expandX().center().padTop(10f)
 		table.row()
 
-		val amount = amount + ((Global.player.getStat(Statistic.BONUSGOLD) / 100) * amount).toInt()
+		val bonus = (Global.player.getStat(Statistic.BONUSGOLD) * amount).toInt()
 
-		val amountLbl = Label(amount.toString(), Global.skin, "cardtitle")
+		var amountStr = amount.toString()
+		if (bonus > 0)
+		{
+			amountStr += "+$bonus"
+		}
+
+		val amountLbl = Label(amountStr, Global.skin, "cardtitle")
 		table.add(amountLbl).expandX().center().padTop(10f)
 		table.row()
 
 		val card = CardWidget(table, table, AssetManager.loadTextureRegion("GUI/MoneyCardback")!!, null)
 		card.addPick("Take", {
 
-			Global.player.gold += amount
+			Global.player.gold += amount + bonus
 
 			val sprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_gold")
 

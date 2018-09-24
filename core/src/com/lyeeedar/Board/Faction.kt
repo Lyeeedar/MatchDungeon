@@ -37,7 +37,7 @@ class Faction
 		{
 			for (monster in size.value)
 			{
-				if (monster.name == name) return monster
+				if (monster.name.toUpperCase() == name.toUpperCase()) return monster
 			}
 		}
 
@@ -73,7 +73,7 @@ class Faction
 	{
 		fun load(path: String): Faction
 		{
-			val xml = getXml(path)
+			val xml = getXml("Factions/$path")
 
 			val faction = Faction()
 

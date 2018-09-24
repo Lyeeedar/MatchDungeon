@@ -37,6 +37,7 @@
 					<Data Name="TileName" VisibleIf="Parent.TargetRestriction==NamedTile" meta:RefKey="String" />
 					<Data Name="SpreaderName" VisibleIf="Parent.TargetRestriction == Spreader" meta:RefKey="String" />
 					<Data Name="Spreader" Keys="SpreaderDef" VisibleIf="Parent.Effect == Spreader" meta:RefKey="Reference" />
+					<Data Name="IsSummon" SkipIfDefault="False" VisibleIf="Parent.Effect == Summon" meta:RefKey="Boolean" />
 				</Data>
 			</Data>
 		</Data>

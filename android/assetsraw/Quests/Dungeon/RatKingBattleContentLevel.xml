@@ -34,11 +34,11 @@
 				<AttackNumPips>5</AttackNumPips>
 				<AttackCooldown>2,4</AttackCooldown>
 				<Size>3</Size>
-				<HP>25</HP>
+				<HP>30</HP>
 				<DamageReduction>1</DamageReduction>
 				<Abilities>
 					<Ability>
-						<Cooldown>6,10</Cooldown>
+						<Cooldown>5,8</Cooldown>
 						<Target>Random</Target>
 						<TargetRestriction>NamedTile</TargetRestriction>
 						<Effect>Summon</Effect>
@@ -46,6 +46,7 @@
 							<Faction>Rats</Faction>
 							<Name>Small Rat</Name>
 							<TileName>Grate</TileName>
+							<IsSummon>false</IsSummon>
 						</Data>
 					</Ability>
 				</Abilities>
@@ -55,6 +56,7 @@
 		<Symbol>
 			<Character>G</Character>
 			<Extends>.</Extends>
+			<NameKey>Grate</NameKey>
 			<Sprite meta:RefKey="SpriteWrapper">
 				<Sprite meta:RefKey="Sprite">
 					<Name>Oryx/uf_split/uf_terrain/floor_set_blue_7</Name>

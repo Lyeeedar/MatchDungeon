@@ -30,7 +30,7 @@ class XmlLoadTester
 						"LEVEL" -> Level.load(path)
 						"HEAD", "BODY", "MAINHAND", "OFFHAND" -> Equipment.load(path)
 						"CHARACTER" -> Character.load(path.split("Characters/")[1])
-						"FACTION" -> Faction.load(path)
+						"FACTION" -> Faction.load(path.split("Factions/")[1])
 						"ORBS", "DATA" -> { }
 						"EFFECT" -> ParticleEffect.load(path.split("Particles/")[1])
 						"THEME" -> Theme.load(path)

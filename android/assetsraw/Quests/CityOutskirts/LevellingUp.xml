@@ -13,5 +13,13 @@
 	<BronzeRewards meta:RefKey="Rewards" />
 	<SilverRewards meta:RefKey="Rewards" />
 	<GoldRewards meta:RefKey="Rewards" />
-	<Nodes />
+	<Root meta:RefKey="QuestNode">c24b3fb4-8de9-40e8-aa8b-b15683af5be1</Root>
+	<Nodes>
+		<QuestNode meta:X="322" meta:Y="2" GUID="c24b3fb4-8de9-40e8-aa8b-b15683af5be1">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+		</QuestNode>
+	</Nodes>
 </Quest>

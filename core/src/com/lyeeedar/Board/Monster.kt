@@ -350,9 +350,11 @@ class MonsterAbility
 				val factionName = data["FACTION"].toString()
 				val name = data["NAME"].toString()
 
-				val faction = Faction.load(factionName)
+				val factionPath = XmlData.enumeratePaths("Factions", "Faction").first { it.toUpperCase().endsWith("$factionName.XML") }.split("Factions/")[1]
+
+				val faction = Faction.load(factionPath)
 				val summoned = Monster(faction.get(name)!!)
-				summoned.isSummon = true
+				summoned.isSummon = data["ISSUMMON"].toString().toBoolean()
 
 				summoned.setTile(target, grid)
 			}

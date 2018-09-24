@@ -216,6 +216,8 @@ class Level(val loadPath: String)
 				{
 					tile.spreader = symbol.spreader.copy()
 				}
+
+				tile.nameKey = symbol.nameKey?.toUpperCase()
 			}
 			else
 			{
