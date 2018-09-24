@@ -11,7 +11,7 @@
 			<File>Cards/Peasant/HeroesJourney</File>
 		</Card>
 		<Quest>
-			<File>Dungeon/TreasureHunt</File>
+			<File>CityOutskirts/LevellingUp</File>
 		</Quest>
 	</GoldRewards>
 	<Root meta:RefKey="QuestNode">7914f819-3cd5-4756-9d8b-6bace226cbc7</Root>

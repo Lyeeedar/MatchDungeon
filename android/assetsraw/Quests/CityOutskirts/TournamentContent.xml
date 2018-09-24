@@ -1,0 +1,94 @@
+<CardContent meta:X="0" meta:Y="0" GUID="66e443d0-9028-4749-875a-5f805717c774" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
+			<Line>
+				<MultilineString>You enter the tournament with a feeling of confidence swelling within you. Looking around at the others in your division you feel you have a great shot at winning.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>The cheers of the crowd washes over you as you enter the arena.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Opposite you a wild looking man also enters, glowering in your direction.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>TournamentContentLevel</Level>
+				<Success meta:RefKey="Node">8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f</Success>
+				<Failure meta:RefKey="Node">91e41773-f187-46c6-906d-f87d59996682</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="438" meta:Y="275" GUID="91e41773-f187-46c6-906d-f87d59996682">
+			<Line>
+				<MultilineString>Knocked out in the first round you slink away dejected.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="444.62825788751712" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
+			<Line>
+				<MultilineString>You emerge victorious from the first round and head back into the waiting area to prepare for your next match.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Not long after you are ushered back to the arena. This time the crowd cheers out even louder, and you can hear some people shouting your name.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Opposite you a dapper looking man in a feathered hat bows theatrically to you then raises a rapier. On Garde!</MultilineString>
+			</Line>
+			<Match3>
+				<Level>TournamentContentLevel2</Level>
+				<Success meta:RefKey="Node">ceb78f30-ea9e-43ec-99f8-cfaa93cdc718</Success>
+				<Failure meta:RefKey="Node">0e73547e-b79a-4082-a7c8-32831f4092bf</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="699" meta:Y="213" GUID="0e73547e-b79a-4082-a7c8-32831f4092bf">
+			<Line>
+				<MultilineString>The man triumphs over you, knocking you out of the tournament. You leave, but not completely empty handed. Some merchants come to you with work proposals searching nearby ruins.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Custom</State>
+				<Key>Bronze</Key>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="723" meta:Y="-25" GUID="ceb78f30-ea9e-43ec-99f8-cfaa93cdc718">
+			<Line>
+				<MultilineString>With the cries of adoring fans echoing in your ears you leave the arena, hands quivering with excitement. You are in the final!</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Before you know it you are entering the arena again. This time the crowd is deafening. Rolling chants of your name clash against waves of of people chanting another.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Opposite you stands a man dressed in the garb of an alchemist. Strange potions are strapped all across his waist, and he peers at you through a large ornate monacle.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>TournamentContentLevel3</Level>
+				<Success meta:RefKey="Node">d61ab9c5-094e-4d9f-a762-3a883da4cdb1</Success>
+				<Failure meta:RefKey="Node">c728e54f-a4b1-43d8-8c0f-f65631742998</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="976.11522633744858" meta:Y="141.7434842249657" GUID="c728e54f-a4b1-43d8-8c0f-f65631742998">
+			<Line>
+				<MultilineString>His potions finally overwealm you and you collapse. The man walks over to you and thanks you for the match, then pours an antidote over you.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Despite having lost the buzz around you is incredible, with a great many people wanting to hire you to explore and loot all sorts of locations.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Custom</State>
+				<Key>Silver</Key>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="990" meta:Y="-18" GUID="d61ab9c5-094e-4d9f-a762-3a883da4cdb1">
+			<Line>
+				<MultilineString>Despite all the alchemists tricks you finally beat him down. Cheers erupt all around you as the crowd rushes down to carry you aloft.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Soon after you are swamped with requests for audiences from nobles and powerful merchants alike. Your future looks golden.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Custom</State>
+				<Key>Gold</Key>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>
