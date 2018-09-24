@@ -1,0 +1,17 @@
+<Quest meta:X="-3" meta:Y="2" GUID="9e3a62cd-3f18-400f-898e-bbaa3ed5c38f" xmlns:meta="Editor">
+	<Title>Levelling Up</Title>
+	<Description>Before you can brave the wilds you first have to grind out some levels. Kill the nearby wildlife and collect that experience!</Description>
+	<Theme>CityOutskirts</Theme>
+	<QuestCards>
+		<Card>FetchQuest</Card>
+		<Card>FetchQuest2</Card>
+		<Card>GatheringHerbs</Card>
+		<Card>GatheringHerbs2</Card>
+		<Card>GrindingMobs</Card>
+		<Card>GrindingMobs2</Card>
+	</QuestCards>
+	<BronzeRewards meta:RefKey="Rewards" />
+	<SilverRewards meta:RefKey="Rewards" />
+	<GoldRewards meta:RefKey="Rewards" />
+	<Nodes />
+</Quest>

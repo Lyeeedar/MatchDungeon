@@ -1,0 +1,124 @@
+<Faction xmlns:meta="Editor">
+	<Monsters>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>Frog</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_heroes/toad_blue</Name>
+				<DrawActualSize>true</DrawActualSize>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+			</Death>
+			<AttackNumPips>8</AttackNumPips>
+			<AttackCooldown>4,8</AttackCooldown>
+			<Size>1</Size>
+			<HP>5</HP>
+			<DamageReduction>0</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>3,7</Cooldown>
+					<Effect>Move</Effect>
+				</Ability>
+			</Abilities>
+		</Monster>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>Rabbit</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/Custom/heroes/rabbit</Name>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+			</Death>
+			<AttackNumPips>8</AttackNumPips>
+			<AttackCooldown>4,8</AttackCooldown>
+			<Size>1</Size>
+			<HP>5</HP>
+			<DamageReduction>0</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>3,7</Cooldown>
+					<Effect>Move</Effect>
+				</Ability>
+			</Abilities>
+		</Monster>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>Big Rabbit</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/Custom/heroes/rabbit</Name>
+				<DrawActualSize>true</DrawActualSize>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+			</Death>
+			<AttackNumPips>7</AttackNumPips>
+			<AttackCooldown>3,6</AttackCooldown>
+			<Size>2</Size>
+			<HP>8</HP>
+			<DamageReduction>0</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>3,7</Cooldown>
+					<Effect>Move</Effect>
+				</Ability>
+				<Ability>
+					<Cooldown>4,8</Cooldown>
+				</Ability>
+			</Abilities>
+		</Monster>
+	</Monsters>
+	<Bosses>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>Spirit Toad</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/Custom/heroes/toad_spirit_attack</Name>
+				<DrawActualSize>true</DrawActualSize>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+			</Death>
+			<AttackNumPips>5</AttackNumPips>
+			<AttackCooldown>2,5</AttackCooldown>
+			<Size>1</Size>
+			<HP>10</HP>
+			<DamageReduction>0</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>2,5</Cooldown>
+					<Count>2</Count>
+					<Data />
+				</Ability>
+				<Ability>
+					<Cooldown>2,5</Cooldown>
+					<Effect>Move</Effect>
+				</Ability>
+			</Abilities>
+		</Monster>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>Blood Rabbit</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/Custom/heroes/rabbit</Name>
+				<DrawActualSize>true</DrawActualSize>
+				<Colour>184,57,57,255</Colour>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+			</Death>
+			<AttackNumPips>5</AttackNumPips>
+			<AttackCooldown>2,5</AttackCooldown>
+			<Size>1</Size>
+			<HP>10</HP>
+			<DamageReduction>0</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>2,5</Cooldown>
+					<Count>2</Count>
+					<Data />
+				</Ability>
+				<Ability>
+					<Cooldown>2,5</Cooldown>
+					<Effect>Move</Effect>
+				</Ability>
+			</Abilities>
+		</Monster>
+	</Bosses>
+</Faction>
