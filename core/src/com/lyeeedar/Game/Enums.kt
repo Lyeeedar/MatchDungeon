@@ -295,7 +295,8 @@ enum class Statistic private constructor(val min: Float, val max: Float, val too
 	BONUSGOLD(-Float.MAX_VALUE, Float.MAX_VALUE, "The bonus multiplier you gain each time you gain gold"),
 	BONUSTIME(-Float.MAX_VALUE, Float.MAX_VALUE, "The bonus multiplier to turn count"),
 	REGENERATION(0f, Float.MAX_VALUE, "The amount of health you regenerate each turn"),
-	BERSERK(0f, Float.MAX_VALUE, "When below half health this is the amount MatchDamage, AbilityDamage and PowerGain is increased");
+	BERSERK(0f, Float.MAX_VALUE, "When below half health this is the amount MatchDamage, AbilityDamage and PowerGain is increased"),
+	PRICEREDUCTION(0f, Float.MAX_VALUE, "The percentage reduction in price of items from a shop");
 
 	companion object
 	{

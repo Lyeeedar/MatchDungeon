@@ -1,0 +1,175 @@
+<Faction xmlns:meta="Editor">
+	<Monsters>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>SlimeBlue</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/Custom/heroes/slime</Name>
+				<DrawActualSize>true</DrawActualSize>
+				<Colour>60,196,199,255</Colour>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+				<Colour>84,211,237,255</Colour>
+			</Death>
+			<AttackNumPips>6</AttackNumPips>
+			<AttackCooldown>2,6</AttackCooldown>
+			<Size>1</Size>
+			<HP>10</HP>
+			<DamageReduction>1</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>2,5</Cooldown>
+					<Effect>Move</Effect>
+				</Ability>
+			</Abilities>
+		</Monster>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>GiantSlimeBlue</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/Custom/heroes/slime</Name>
+				<DrawActualSize>true</DrawActualSize>
+				<Colour>60,196,199,255</Colour>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+				<Colour>84,211,237,255</Colour>
+			</Death>
+			<AttackNumPips>6</AttackNumPips>
+			<AttackCooldown>2,6</AttackCooldown>
+			<Size>2</Size>
+			<HP>15</HP>
+			<DamageReduction>1</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>2,5</Cooldown>
+					<Effect>Move</Effect>
+				</Ability>
+			</Abilities>
+		</Monster>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>SlimeRed</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/Custom/heroes/slime</Name>
+				<DrawActualSize>true</DrawActualSize>
+				<Colour>222,47,47,255</Colour>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+				<Colour>237,91,84,255</Colour>
+			</Death>
+			<AttackNumPips>6</AttackNumPips>
+			<AttackCooldown>2,6</AttackCooldown>
+			<Size>1</Size>
+			<HP>10</HP>
+			<DamageReduction>1</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>2,5</Cooldown>
+					<Effect>Move</Effect>
+				</Ability>
+			</Abilities>
+		</Monster>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>GiantSlimeRed</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/Custom/heroes/slime</Name>
+				<DrawActualSize>true</DrawActualSize>
+				<Colour>222,47,47,255</Colour>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+				<Colour>237,91,84,255</Colour>
+			</Death>
+			<AttackNumPips>6</AttackNumPips>
+			<AttackCooldown>2,6</AttackCooldown>
+			<Size>2</Size>
+			<HP>15</HP>
+			<DamageReduction>1</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>2,5</Cooldown>
+					<Effect>Move</Effect>
+				</Ability>
+			</Abilities>
+		</Monster>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>SlimePurple</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/Custom/heroes/slime</Name>
+				<DrawActualSize>true</DrawActualSize>
+				<Colour>170,47,222,255</Colour>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+				<Colour>236,84,237,255</Colour>
+			</Death>
+			<AttackNumPips>6</AttackNumPips>
+			<AttackCooldown>2,6</AttackCooldown>
+			<Size>1</Size>
+			<HP>10</HP>
+			<DamageReduction>1</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>2,5</Cooldown>
+					<Effect>Move</Effect>
+				</Ability>
+			</Abilities>
+		</Monster>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>GiantSlimePurple</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/Custom/heroes/slime</Name>
+				<DrawActualSize>true</DrawActualSize>
+				<Colour>170,47,222,255</Colour>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+				<Colour>236,84,237,255</Colour>
+			</Death>
+			<AttackNumPips>6</AttackNumPips>
+			<AttackCooldown>2,6</AttackCooldown>
+			<Size>2</Size>
+			<HP>15</HP>
+			<DamageReduction>1</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>2,5</Cooldown>
+					<Effect>Move</Effect>
+				</Ability>
+			</Abilities>
+		</Monster>
+	</Monsters>
+	<Bosses>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>SlimeSpawner</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/Custom/heroes/slime</Name>
+				<DrawActualSize>true</DrawActualSize>
+				<Colour>201,187,35,255</Colour>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+				<Colour>222,198,45,255</Colour>
+			</Death>
+			<AttackNumPips>6</AttackNumPips>
+			<AttackCooldown>2,6</AttackCooldown>
+			<Size>1</Size>
+			<HP>15</HP>
+			<DamageReduction>1</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>2,5</Cooldown>
+					<Effect>Move</Effect>
+				</Ability>
+				<Ability>
+					<Cooldown>5,10</Cooldown>
+					<Effect>Summon</Effect>
+					<Data>
+						<Faction>Slime</Faction>
+						<IsSummon>false</IsSummon>
+					</Data>
+				</Ability>
+			</Abilities>
+		</Monster>
+	</Bosses>
+</Faction>

@@ -18,6 +18,7 @@ import com.lyeeedar.Game.EquipmentReward
 import com.lyeeedar.Game.Quest
 import com.lyeeedar.Global
 import com.lyeeedar.Screens.CardScreen
+import com.lyeeedar.Statistic
 import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.UI.Seperator
 import com.lyeeedar.UI.addClickListener
@@ -61,6 +62,8 @@ class CardContentActionShop : AbstractCardContentAction()
 			val waresTable = Table()
 
 			val costMultiplier = this.costMultiplier.evaluate(Global.getVariableMap())
+			val priceReductionMultiplier = 1.0f - (Global.player.getStat(Statistic.PRICEREDUCTION) / 100.0f)
+
 			for (i in 0 until wares.size)
 			{
 				val currentWare = wares[i]
@@ -75,7 +78,7 @@ class CardContentActionShop : AbstractCardContentAction()
 					val card = currentWare.getCard()
 					card.setFacing(true, false)
 
-					val cost = (currentWare.cost.toFloat() * costMultiplier).toInt()
+					val cost = (currentWare.cost.toFloat() * costMultiplier * priceReductionMultiplier).toInt()
 
 					if (Global.player.gold >= cost)
 					{

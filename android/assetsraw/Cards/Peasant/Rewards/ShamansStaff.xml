@@ -19,14 +19,15 @@
 		<Description>Summon a poison cloud at the target location. This does damage every turn, but is dispersed if you match next to it.</Description>
 		<EffectData>
 			<Cost>6</Cost>
-			<Effect>1,Orb,Single,Spreader</Effect>
+			<Effect>1,Tile,Block,Spreader</Effect>
 			<Data>
+				<AOE>1</AOE>
 				<Spreader meta:RefKey="SpreaderDef">
 					<Name>Poison Cloud</Name>
 					<Sprite meta:RefKey="SpriteWrapper">
 						<Sprite meta:RefKey="Sprite">
 							<Name>Oryx/Custom/terrain/cloud</Name>
-							<Colour>16,143,5,159</Colour>
+							<Colour>16,143,5,255</Colour>
 						</Sprite>
 					</Sprite>
 					<Effect>Damage</Effect>

@@ -21,5 +21,6 @@
 		<Data Name="Regeneration" Min="0" meta:RefKey="Number" />
 		<Data Name="Pierce" Min="0" meta:RefKey="Number" />
 		<Data Name="Berserk" Min="0" meta:RefKey="Number" />
+		<Data Name="PriceReduction" Min="0" meta:RefKey="Number" />
 	</Definition>
 </Definitions>

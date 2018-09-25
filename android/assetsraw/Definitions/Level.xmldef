@@ -70,7 +70,9 @@
 				<Data Name="Type" EnumValues="Floor,Wall,Pit" meta:RefKey="Enum" />
 			</Data>
 		</Data>
-		<Data Name="Faction" meta:RefKey="String" />
+		<Data Name="Faction" Collapse="True" meta:RefKey="Collection">
+			<Data Name="Faction" BasePath="Factions" StripExtension="True" ResourceType="Faction" meta:RefKey="File" />
+		</Data>
 		<Data Name="Theme" BasePath="Themes" StripExtension="True" ResourceType="Theme" meta:RefKey="File" />
 		<Data Name="CustomMonster" Keys="MonsterDesc" meta:RefKey="Reference" />
 		<Data Name="OrbCount" Type="Int" Min="4" Default="6" meta:RefKey="Number" />

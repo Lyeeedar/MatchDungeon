@@ -32,7 +32,7 @@
 					<Data Name="Count" Type="Int" Min="1" Default="1" VisibleIf="Parent.Permuter==Random || Parent.Permuter==NOfType" meta:RefKey="Number" />
 					<Data Name="Type" VisibleIf="Parent.Permuter==NofType || Parent.Permuter==AllOfType" meta:RefKey="String" />
 					<Data Name="Range" Type="Int" Min="1" Default="1" VisibleIf="Parent.Target==Neighbour" meta:RefKey="Number" />
-					<Data Name="Faction" VisibleIf="Parent.Effect==Summon" meta:RefKey="String" />
+					<Data Name="Faction" BasePath="Factions" StripExtension="True" ResourceType="Faction" VisibleIf="Parent.Effect==Summon" meta:RefKey="File" />
 					<Data Name="Name" VisibleIf="Parent.Effect==Summon || Parent.Effect==CustomOrb" meta:RefKey="String" />
 					<Data Name="TileName" VisibleIf="Parent.TargetRestriction==NamedTile" meta:RefKey="String" />
 					<Data Name="SpreaderName" VisibleIf="Parent.TargetRestriction == Spreader" meta:RefKey="String" />

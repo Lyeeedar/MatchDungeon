@@ -6,19 +6,10 @@
 		</Sprite>
 	</Floor>
 	<Wall meta:RefKey="SpriteWrapper">
-		<TilingSprite meta:RefKey="TilingSprite">
-			<Name>Wall</Name>
-			<Mode>Premade</Mode>
-			<Front meta:RefKey="Sprite">
-				<Name>Oryx/uf_split/uf_terrain/wall_stone_14</Name>
-			</Front>
-			<Top meta:RefKey="Sprite">
-				<Name>Oryx/uf_split/uf_terrain/wall_stone_7</Name>
-			</Top>
-			<Overhang meta:RefKey="Sprite">
-				<Name>Oryx/uf_split/uf_terrain/wall_stone_1</Name>
-			</Overhang>
-		</TilingSprite>
+		<Sprite meta:RefKey="Sprite">
+			<Name>Oryx/Custom/terrain/tree1</Name>
+			<DrawActualSize>true</DrawActualSize>
+		</Sprite>
 	</Wall>
 	<Pit meta:RefKey="SpriteWrapper">
 		<Sprite meta:RefKey="Sprite">
@@ -45,15 +36,24 @@
 	</Plate>
 	<Block>
 		<Sprite meta:RefKey="Sprite">
-			<Name>Oryx/uf_split/uf_terrain/crate</Name>
+			<Name>Oryx/Custom/terrain/hedge</Name>
 			<DrawActualSize>true</DrawActualSize>
 		</Sprite>
 	</Block>
 	<Seal>
 		<Sprite meta:RefKey="Sprite">
-			<Name>Oryx/Custom/terrain/Rubbish_1</Name>
+			<Name>Oryx/Custom/terrain/spiderweb</Name>
 			<DrawActualSize>true</DrawActualSize>
 			<Colour>255,255,255,54</Colour>
+		</Sprite>
+		<Sprite meta:RefKey="Sprite">
+			<Name>Oryx/Custom/terrain/spiderweb</Name>
+			<DrawActualSize>true</DrawActualSize>
+			<Colour>255,255,255,142</Colour>
+		</Sprite>
+		<Sprite meta:RefKey="Sprite">
+			<Name>Oryx/Custom/terrain/spiderweb</Name>
+			<DrawActualSize>true</DrawActualSize>
 		</Sprite>
 	</Seal>
 	<Shield>
@@ -66,7 +66,8 @@
 		<Spawn>Orb,1</Spawn>
 	</SpawnWeights>
 	<Factions>
-		<Faction>AssortedMobs</Faction>
+		<Faction>Slime</Faction>
+		<Faction>Spider</Faction>
 	</Factions>
 	<BackgroundTile>Oryx/uf_split/uf_terrain/ground_grass_1</BackgroundTile>
 </Theme>

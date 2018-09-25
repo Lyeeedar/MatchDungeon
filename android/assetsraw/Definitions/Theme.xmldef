@@ -25,7 +25,7 @@
 			</Data>
 		</Data>
 		<Data Name="Factions" meta:RefKey="Collection">
-			<Data Name="Faction" meta:RefKey="String" />
+			<Data Name="Faction" BasePath="Factions" StripExtension="True" ResourceType="Faction" meta:RefKey="File" />
 		</Data>
 		<Data Name="BackgroundTile" BasePath="Sprites" StripExtension="True" AllowedFileTypes="png" meta:RefKey="File" />
 	</Definition>

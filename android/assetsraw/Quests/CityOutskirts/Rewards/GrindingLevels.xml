@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="f20c6a22-4453-49cc-b3fb-fd82cb7f9c4f" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">de230c7a-8960-4026-851d-6870a3b1679d</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="de230c7a-8960-4026-851d-6870a3b1679d">
+			<Name>Grinding Levels</Name>
+			<Description>Slaughtering heaps of monsters is a great way to get stronger.</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>GrindingLevelsContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>
