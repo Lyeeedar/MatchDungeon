@@ -140,7 +140,8 @@ class MonsterAbility
 		BLOCK,
 		MOVE,
 		HEAL,
-		SUMMON
+		SUMMON,
+		SPREADER
 	}
 
 	var cooldownTimer: Int = 0
@@ -357,6 +358,11 @@ class MonsterAbility
 				summoned.isSummon = data["ISSUMMON"].toString().toBoolean()
 
 				summoned.setTile(target, grid)
+			}
+			if (effect == Effect.SPREADER)
+			{
+				val spreader = data["SPREADER"] as Spreader
+				target.spreader = spreader.copy()
 			}
 		}
 	}

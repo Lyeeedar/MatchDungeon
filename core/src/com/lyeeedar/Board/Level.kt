@@ -152,7 +152,7 @@ class Level(val loadPath: String)
 				{
 					loadTile(tile, symbol.extends)
 				}
-				else
+				else if (char != '.')
 				{
 					loadTile(tile, '.')
 				}

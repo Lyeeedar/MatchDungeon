@@ -21,6 +21,22 @@
 					<Cooldown>2,5</Cooldown>
 					<Effect>Move</Effect>
 				</Ability>
+				<Ability>
+					<Cooldown>3,9</Cooldown>
+					<Effect>Spreader</Effect>
+					<Data>
+						<Spreader meta:RefKey="SpreaderDef">
+							<Name>Goop</Name>
+							<Sprite meta:RefKey="SpriteWrapper">
+								<Sprite meta:RefKey="Sprite">
+									<Name>Oryx/Custom/terrain/cloud</Name>
+									<Colour>46,232,183,255</Colour>
+								</Sprite>
+							</Sprite>
+							<Spreads>false</Spreads>
+						</Spreader>
+					</Data>
+				</Ability>
 			</Abilities>
 		</Monster>
 		<Monster meta:RefKey="MonsterDesc">
@@ -43,6 +59,22 @@
 				<Ability>
 					<Cooldown>2,5</Cooldown>
 					<Effect>Move</Effect>
+				</Ability>
+				<Ability>
+					<Cooldown>3,9</Cooldown>
+					<Effect>Spreader</Effect>
+					<Data>
+						<Spreader meta:RefKey="SpreaderDef">
+							<Name>Goop</Name>
+							<Sprite meta:RefKey="SpriteWrapper">
+								<Sprite meta:RefKey="Sprite">
+									<Name>Oryx/Custom/terrain/cloud</Name>
+									<Colour>46,232,183,255</Colour>
+								</Sprite>
+							</Sprite>
+							<Spreads>false</Spreads>
+						</Spreader>
+					</Data>
 				</Ability>
 			</Abilities>
 		</Monster>
@@ -67,6 +99,22 @@
 					<Cooldown>2,5</Cooldown>
 					<Effect>Move</Effect>
 				</Ability>
+				<Ability>
+					<Cooldown>3,9</Cooldown>
+					<Effect>Spreader</Effect>
+					<Data>
+						<Spreader meta:RefKey="SpreaderDef">
+							<Name>Goop</Name>
+							<Sprite meta:RefKey="SpriteWrapper">
+								<Sprite meta:RefKey="Sprite">
+									<Name>Oryx/Custom/terrain/cloud</Name>
+									<Colour>232,46,46,255</Colour>
+								</Sprite>
+							</Sprite>
+							<Spreads>false</Spreads>
+						</Spreader>
+					</Data>
+				</Ability>
 			</Abilities>
 		</Monster>
 		<Monster meta:RefKey="MonsterDesc">
@@ -89,6 +137,22 @@
 				<Ability>
 					<Cooldown>2,5</Cooldown>
 					<Effect>Move</Effect>
+				</Ability>
+				<Ability>
+					<Cooldown>3,9</Cooldown>
+					<Effect>Spreader</Effect>
+					<Data>
+						<Spreader meta:RefKey="SpreaderDef">
+							<Name>Goop</Name>
+							<Sprite meta:RefKey="SpriteWrapper">
+								<Sprite meta:RefKey="Sprite">
+									<Name>Oryx/Custom/terrain/cloud</Name>
+									<Colour>232,46,46,255</Colour>
+								</Sprite>
+							</Sprite>
+							<Spreads>false</Spreads>
+						</Spreader>
+					</Data>
 				</Ability>
 			</Abilities>
 		</Monster>
@@ -113,6 +177,22 @@
 					<Cooldown>2,5</Cooldown>
 					<Effect>Move</Effect>
 				</Ability>
+				<Ability>
+					<Cooldown>3,9</Cooldown>
+					<Effect>Spreader</Effect>
+					<Data>
+						<Spreader meta:RefKey="SpreaderDef">
+							<Name>Goop</Name>
+							<Sprite meta:RefKey="SpriteWrapper">
+								<Sprite meta:RefKey="Sprite">
+									<Name>Oryx/Custom/terrain/cloud</Name>
+									<Colour>141,46,232,255</Colour>
+								</Sprite>
+							</Sprite>
+							<Spreads>false</Spreads>
+						</Spreader>
+					</Data>
+				</Ability>
 			</Abilities>
 		</Monster>
 		<Monster meta:RefKey="MonsterDesc">
@@ -135,6 +215,22 @@
 				<Ability>
 					<Cooldown>2,5</Cooldown>
 					<Effect>Move</Effect>
+				</Ability>
+				<Ability>
+					<Cooldown>3,9</Cooldown>
+					<Effect>Spreader</Effect>
+					<Data>
+						<Spreader meta:RefKey="SpreaderDef">
+							<Name>Goop</Name>
+							<Sprite meta:RefKey="SpriteWrapper">
+								<Sprite meta:RefKey="Sprite">
+									<Name>Oryx/Custom/terrain/cloud</Name>
+									<Colour>141,46,232,255</Colour>
+								</Sprite>
+							</Sprite>
+							<Spreads>false</Spreads>
+						</Spreader>
+					</Data>
 				</Ability>
 			</Abilities>
 		</Monster>
@@ -167,6 +263,22 @@
 					<Data>
 						<Faction>Slime</Faction>
 						<IsSummon>false</IsSummon>
+					</Data>
+				</Ability>
+				<Ability>
+					<Cooldown>3,9</Cooldown>
+					<Effect>Spreader</Effect>
+					<Data>
+						<Spreader meta:RefKey="SpreaderDef">
+							<Name>Goop</Name>
+							<Sprite meta:RefKey="SpriteWrapper">
+								<Sprite meta:RefKey="Sprite">
+									<Name>Oryx/Custom/terrain/cloud</Name>
+									<Colour>232,171,46,255</Colour>
+								</Sprite>
+							</Sprite>
+							<Spreads>false</Spreads>
+						</Spreader>
 					</Data>
 				</Ability>
 			</Abilities>

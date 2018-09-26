@@ -181,7 +181,8 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 			if (spreader != null)
 			{
-				if (!processedSpreaders.contains(spreader.nameKey))
+				// do spreading
+				if (!processedSpreaders.contains(spreader.nameKey) && spreader.spreads)
 				{
 					processedSpreaders.add(spreader.nameKey)
 
@@ -237,6 +238,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					}
 				}
 
+				// do on turn effects
 				if (spreader != newspreader)
 				{
 					if (spreader.effect == Spreader.SpreaderEffect.POP)

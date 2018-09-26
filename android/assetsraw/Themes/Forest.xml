@@ -63,7 +63,8 @@
 		</Sprite>
 	</Shield>
 	<SpawnWeights>
-		<Spawn>Orb,1</Spawn>
+		<Spawn>Orb,5</Spawn>
+		<Spawn>Changer,1</Spawn>
 	</SpawnWeights>
 	<Factions>
 		<Faction>Slime</Faction>

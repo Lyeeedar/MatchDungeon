@@ -23,12 +23,16 @@ class Spreader
 
 	var damage: Float = 0f
 
+	var spreads = true
+
 	fun copy(): Spreader
 	{
 		val out = Spreader()
 		out.nameKey = nameKey
 		out.spriteWrapper = spriteWrapper?.copy()
 		out.particleEffect = particleEffect?.copy()
+
+		out.spreads = spreads
 
 		out.damage = damage
 
@@ -60,6 +64,8 @@ class Spreader
 			spreader.effect = SpreaderEffect.valueOf(xmlData.get("Effect", "seal")!!.toUpperCase())
 
 			spreader.damage = xmlData.getFloat("Damage", 0f)
+
+			spreader.spreads = xmlData.getBoolean("Spreads", true)
 
 			return spreader
 		}

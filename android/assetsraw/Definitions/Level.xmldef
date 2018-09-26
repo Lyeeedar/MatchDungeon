@@ -34,6 +34,7 @@
 		<Data Name="ParticleEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
 		<Data Name="Effect" EnumValues="Seal,Pop,Damage" meta:RefKey="Enum" />
 		<Data Name="Damage" Min="0" VisibleIf="Effect == Pop || Effect == Damage" meta:RefKey="Number" />
+		<Data Name="Spreads" Default="True" meta:RefKey="Boolean" />
 	</Definition>
 	<!--Level-->
 	<Definition Name="Level" meta:RefKey="Struct">
