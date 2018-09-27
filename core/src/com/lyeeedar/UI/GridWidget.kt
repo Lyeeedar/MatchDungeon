@@ -387,6 +387,11 @@ class GridWidget(val grid: Grid) : Widget()
 								yii += offset[1]
 							}
 
+							if (swappable.nextDesc == null)
+							{
+								swappable.nextDesc = Orb.getRandomOrb(grid.level, swappable.desc)
+							}
+
 							tempCol.set(orbColour).mul(swappable.nextDesc!!.sprite.colour)
 
 							var scaleX = swappable.sprite.baseScale[0]

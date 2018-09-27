@@ -30,24 +30,18 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 
 	val table = Table()
 
+	lateinit var grid: Grid
+
 	override fun attachHandlers(grid: Grid)
 	{
-		for (tile in grid.grid)
-		{
-			val monster = tile.monster ?: tile.container?.contents as? Monster
-			if (monster != null)
-			{
-				if (all || monster.desc.name == named)
-				{
-					if (!monsters.contains(monster, true))
-					{
-						monsters.add(monster)
-					}
-				}
-			}
-		}
+		this.grid = grid
 
 		grid.onDamaged += fun(c) : Boolean {
+			rebuildWidget()
+			return false
+		}
+
+		grid.onTurn += fun() : Boolean {
 			rebuildWidget()
 			return false
 		}
@@ -80,6 +74,22 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 
 	fun rebuildWidget()
 	{
+		monsters.clear()
+		for (tile in grid.grid)
+		{
+			val monster = tile.monster ?: tile.container?.contents as? Monster
+			if (monster != null)
+			{
+				if (all || monster.desc.name == named)
+				{
+					if (!monsters.contains(monster, true))
+					{
+						monsters.add(monster)
+					}
+				}
+			}
+		}
+
 		table.clear()
 
 		monsterMap.clear()

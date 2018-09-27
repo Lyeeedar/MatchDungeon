@@ -2,6 +2,7 @@ package com.lyeeedar.Board
 
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.IntMap
+import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.AssetManager
@@ -71,8 +72,15 @@ class Faction
 
 	companion object
 	{
+		val loadedFactions = ObjectMap<String, Faction>()
+
 		fun load(path: String): Faction
 		{
+			if (loadedFactions.containsKey(path.toLowerCase()))
+			{
+				return loadedFactions[path.toLowerCase()]
+			}
+
 			val xml = getXml("Factions/$path")
 
 			val faction = Faction()
@@ -107,6 +115,8 @@ class Faction
 					faction.bossSizeMap[desc.size].add(desc)
 				}
 			}
+
+			loadedFactions[path.toLowerCase().replace(".xml", "")] = faction
 
 			return faction
 		}

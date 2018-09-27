@@ -349,7 +349,7 @@ class MonsterAbility
 			if (effect == Effect.SUMMON)
 			{
 				val factionName = data["FACTION"].toString()
-				val name = data["NAME"].toString()
+				val name = data["NAME"]?.toString() ?: ""
 
 				val factionPath = XmlData.enumeratePaths("Factions", "Faction").first { it.toUpperCase().endsWith("$factionName.XML") }.split("Factions/")[1]
 

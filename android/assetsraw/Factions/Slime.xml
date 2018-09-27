@@ -42,7 +42,7 @@
 		<Monster meta:RefKey="MonsterDesc">
 			<Name>GiantSlimeBlue</Name>
 			<Sprite meta:RefKey="Sprite">
-				<Name>Oryx/Custom/heroes/slime</Name>
+				<Name>Oryx/Custom/heroes/slime_large</Name>
 				<DrawActualSize>true</DrawActualSize>
 				<Colour>60,196,199,255</Colour>
 			</Sprite>
@@ -120,7 +120,7 @@
 		<Monster meta:RefKey="MonsterDesc">
 			<Name>GiantSlimeRed</Name>
 			<Sprite meta:RefKey="Sprite">
-				<Name>Oryx/Custom/heroes/slime</Name>
+				<Name>Oryx/Custom/heroes/slime_large</Name>
 				<DrawActualSize>true</DrawActualSize>
 				<Colour>222,47,47,255</Colour>
 			</Sprite>
@@ -198,7 +198,7 @@
 		<Monster meta:RefKey="MonsterDesc">
 			<Name>GiantSlimePurple</Name>
 			<Sprite meta:RefKey="Sprite">
-				<Name>Oryx/Custom/heroes/slime</Name>
+				<Name>Oryx/Custom/heroes/slime_large</Name>
 				<DrawActualSize>true</DrawActualSize>
 				<Colour>170,47,222,255</Colour>
 			</Sprite>
@@ -239,7 +239,7 @@
 		<Monster meta:RefKey="MonsterDesc">
 			<Name>SlimeSpawner</Name>
 			<Sprite meta:RefKey="Sprite">
-				<Name>Oryx/Custom/heroes/slime</Name>
+				<Name>Oryx/Custom/heroes/slime_spined</Name>
 				<DrawActualSize>true</DrawActualSize>
 				<Colour>201,187,35,255</Colour>
 			</Sprite>

@@ -37,7 +37,11 @@ class Level(val loadPath: String)
 	var customMonster: MonsterDesc? = null
 
 	// Active state data
-	lateinit var theme: Theme
+	var levelTheme: Theme? = null
+	var questTheme: Theme? = null
+	val theme: Theme
+		get() = levelTheme ?: questTheme!!
+
 	lateinit var grid: Grid
 	lateinit var player: Player
 	var completed = false
@@ -79,9 +83,10 @@ class Level(val loadPath: String)
 		return Orb(Orb.getRandomOrb(this), theme)
 	}
 
-	fun create(theme: Theme, player: Player, victoryAction: () -> Unit, defeatAction: () -> Unit)
+	fun create(questTheme: Theme, player: Player, victoryAction: () -> Unit, defeatAction: () -> Unit)
 	{
-		this.theme = theme
+		this.questTheme = questTheme
+
 		this.player = player
 		this.victoryAction = victoryAction
 		this.defeatAction = defeatAction
@@ -640,6 +645,11 @@ class Level(val loadPath: String)
 				level.blockStrength = xml.getInt("BlockStrength", 1)
 
 				level.factions.addAll(xml.get("Faction", "")!!.split(",").asSequence())
+
+				if (xml.get("Theme", null) != null)
+				{
+					level.levelTheme = Theme.Companion.load("Themes/" + xml.get("Theme"))
+				}
 
 				val customMonsterDesc = xml.getChildByName("CustomMonster")
 				if (customMonsterDesc != null)
