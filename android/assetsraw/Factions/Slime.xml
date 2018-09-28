@@ -258,11 +258,16 @@
 					<Effect>Move</Effect>
 				</Ability>
 				<Ability>
-					<Cooldown>5,10</Cooldown>
-					<Effect>Summon</Effect>
+					<Cooldown>2,6</Cooldown>
+					<Target>Random</Target>
+					<Effect>DelayedSummon</Effect>
 					<Data>
 						<Faction>Slime</Faction>
 						<IsSummon>false</IsSummon>
+						<SpawnEffect meta:RefKey="ParticleEffect">
+							<Name>Splatter</Name>
+							<Colour>212,178,26,255</Colour>
+						</SpawnEffect>
 					</Data>
 				</Ability>
 				<Ability>

@@ -1,17 +1,24 @@
 package com.lyeeedar.Board
 
 import com.badlogic.gdx.utils.ObjectMap
+import com.lyeeedar.Renderables.Animation.BumpAnimation
+import com.lyeeedar.Renderables.Animation.ExpandAnimation
+import com.lyeeedar.Renderables.Animation.LeapAnimation
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Colour
+import com.lyeeedar.Util.XmlData
+import kotlin.math.min
 
 enum class MonsterEffectType
 {
 	ATTACK,
+	BIGATTACK,
 	HEAL,
 	SUMMON
 }
 
-class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, Object>, desc: OrbDesc, theme: Theme) : Matchable(theme)
+class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, Any>, desc: OrbDesc, theme: Theme) : Matchable(theme)
 {
 	override var desc: OrbDesc = OrbDesc()
 		set(value)
@@ -37,7 +44,10 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, O
 	{
 		actualSprite = when (effect)
 		{
-			MonsterEffectType.ATTACK -> AssetManager.loadSprite("Oryx/uf_split/uf_items/skull_small", drawActualSize = true)
+			MonsterEffectType.ATTACK -> AssetManager.loadSprite("Oryx/Custom/items/skull_small", drawActualSize = true)
+			MonsterEffectType.BIGATTACK -> AssetManager.loadSprite("Oryx/Custom/items/skull_large", drawActualSize = true)
+			MonsterEffectType.HEAL -> AssetManager.loadSprite("Oryx/Custom/items/heart", drawActualSize = true)
+			MonsterEffectType.SUMMON -> AssetManager.loadSprite("Oryx/Custom/items/egg", drawActualSize = true)
 			else -> throw Exception("Unhandled monster effect type '$effect'!")
 		}
 		sprite = desc.sprite.copy()
@@ -45,11 +55,14 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, O
 		this.desc = desc
 	}
 
-	fun apply(grid: Grid)
+	fun apply(grid: Grid, tile: Tile)
 	{
 		when(effect)
 		{
 			MonsterEffectType.ATTACK -> applyAttack(grid)
+			MonsterEffectType.BIGATTACK -> applyBigAttack(grid)
+			MonsterEffectType.HEAL -> applyHeal(grid, tile)
+			MonsterEffectType.SUMMON -> applySummon(grid, tile)
 			else -> throw Exception("Unhandled monster effect type '$effect'!")
 		}
 	}
@@ -57,5 +70,67 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, O
 	fun applyAttack(grid: Grid)
 	{
 		grid.onAttacked(this)
+	}
+
+	fun applyBigAttack(grid: Grid)
+	{
+		val dam = data["DAMAGE"].toString().toInt()
+
+		for (i in 0 until dam)
+		{
+			grid.onAttacked(this)
+		}
+	}
+
+	fun applyHeal(grid: Grid, srcTile: Tile)
+	{
+		val heal = data["AMOUNT", "1"].toString().toFloat()
+
+		for (tile in grid.grid)
+		{
+			val monster = tile.monster ?: continue
+			monster.hp += heal
+			monster.hp = min(monster.hp, monster.maxhp.toFloat())
+
+			val diff = monster.tiles[0, 0].getPosDiff(srcTile)
+			diff[0].y *= -1
+			monster.sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
+
+			val dst = monster.tiles[0, 0].euclideanDist(srcTile)
+			val animDuration = 0.4f + dst * 0.025f
+			val attackSprite = actualSprite.copy()
+			attackSprite.drawActualSize = false
+			attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
+			attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
+			monster.tiles[0, 0].effects.add(attackSprite)
+
+			val sprite = AssetManager.loadSprite("EffectSprites/Heal/Heal", 0.1f, Colour(0f,1f,0f,1f))
+			sprite.size[0] = monster.size
+			sprite.size[1] = monster.size
+			sprite.renderDelay = animDuration
+
+			monster.tiles[0, 0].effects.add(sprite)
+		}
+	}
+
+	fun applySummon(grid: Grid, tile: Tile)
+	{
+		val factionName = data["FACTION"].toString()
+		val name = data["NAME"]?.toString() ?: ""
+
+		val factionPath = XmlData.enumeratePaths("Factions", "Faction").first { it.toUpperCase().endsWith("$factionName.XML") }.split("Factions/")[1]
+
+		val faction = Faction.load(factionPath)
+		val summoned = if (name.isBlank()) Monster(faction.get(1)) else Monster(faction.get(name)!!)
+		summoned.isSummon = data["ISSUMMON"].toString().toBoolean()
+
+		summoned.setTile(tile, grid)
+
+		val spawnEffectEl = data["SPAWNEFFECT", null] as? XmlData
+		if (spawnEffectEl != null)
+		{
+			val spawnEffect = AssetManager.loadParticleEffect(spawnEffectEl)
+			tile.effects.add(spawnEffect)
+		}
 	}
 }

@@ -142,6 +142,7 @@ class MonsterAbility
 		MOVE,
 		HEAL,
 		SUMMON,
+		DELAYEDSUMMON,
 		SPREADER
 	}
 
@@ -176,20 +177,6 @@ class MonsterAbility
 		if (!Global.release)
 		{
 			println("Monster trying to use ability '$effect'")
-		}
-
-		if (effect == Effect.HEAL)
-		{
-			monster.hp += data["AMOUNT"].toString().toInt()
-			if (monster.hp > monster.maxhp) monster.hp = monster.maxhp.toFloat()
-
-			val sprite = AssetManager.loadSprite("EffectSprites/Heal/Heal", 0.1f, Colour(0f,1f,0f,1f))
-			sprite.size[0] = monster.size
-			sprite.size[1] = monster.size
-
-			monster.tiles[0, 0].effects.add(sprite)
-
-			return
 		}
 
 		val availableTargets = Array<Tile>()
@@ -299,18 +286,33 @@ class MonsterAbility
 		{
 			val strength = data.get("STRENGTH", "1").toString().toInt()
 
-			if (effect == Effect.ATTACK || effect == Effect.SEALEDATTACK)
+			if (effect == Effect.ATTACK || effect == Effect.SEALEDATTACK || effect == Effect.HEAL || effect == Effect.DELAYEDSUMMON)
 			{
-				val speed = data.get("SPEED", monster.desc.attackNumPips.toString()).toString().toInt()
+				val speed = data.get("NUMPIPS", monster.desc.attackNumPips.toString()).toString().toInt()
+
+				val monsterEffectType: MonsterEffectType
+				if (effect == Effect.HEAL)
+				{
+					monsterEffectType = MonsterEffectType.HEAL
+				}
+				else if (effect == Effect.DELAYEDSUMMON)
+				{
+					monsterEffectType = MonsterEffectType.SUMMON
+				}
+				else
+				{
+					val dam = data.get("DAMAGE", "1").toString().toInt()
+					monsterEffectType = if (dam > 1) MonsterEffectType.BIGATTACK else MonsterEffectType.ATTACK
+				}
 
 				if (target.orb == null)
 				{
 					target.effects.add(grid.hitEffect.copy())
-					target.monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap(), Orb.getRandomOrb(grid.level), grid.level.theme)
+					target.monsterEffect = MonsterEffect(monsterEffectType, data, Orb.getRandomOrb(grid.level), grid.level.theme)
 				}
 				else
 				{
-					target.monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap(), target.orb!!.desc, grid.level.theme)
+					target.monsterEffect = MonsterEffect(monsterEffectType, data, target.orb!!.desc, grid.level.theme)
 				}
 
 				target.monsterEffect!!.timer = speed
@@ -320,8 +322,8 @@ class MonsterAbility
 
 				val dst = target.euclideanDist(monster.tiles[0, 0])
 				val animDuration = 0.4f + dst * 0.025f
-				val attackSprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/skull_small", drawActualSize = true)
-				attackSprite.colour = target.orb!!.sprite.colour
+				val attackSprite = target.monsterEffect!!.actualSprite.copy()
+				attackSprite.colour = target.monsterEffect!!.sprite.colour
 				attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
 				attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
 				target.effects.add(attackSprite)
@@ -344,6 +346,17 @@ class MonsterAbility
 			{
 				target.block = Block(grid.level.theme)
 				target.block!!.maxhp = strength
+
+				val diff = target.getPosDiff(monster.tiles[0, 0])
+				diff[0].y *= -1
+				monster.sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
+
+				val dst = target.euclideanDist(monster.tiles[0, 0])
+				val animDuration = 0.4f + dst * 0.025f
+				val attackSprite = target.block!!.sprite.copy()
+				attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
+				attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
+				target.effects.add(attackSprite)
 			}
 			if (effect == Effect.SUMMON)
 			{
@@ -357,6 +370,13 @@ class MonsterAbility
 				summoned.isSummon = data["ISSUMMON"].toString().toBoolean()
 
 				summoned.setTile(target, grid)
+
+				val spawnEffectEl = data["SPAWNEFFECT", null] as? XmlData
+				if (spawnEffectEl != null)
+				{
+					val spawnEffect = AssetManager.loadParticleEffect(spawnEffectEl)
+					target.effects.add(spawnEffect)
+				}
 			}
 			if (effect == Effect.SPREADER)
 			{
@@ -395,6 +415,10 @@ class MonsterAbility
 					{
 						val spreader = Spreader.load(el)
 						ability.data[el.name.toUpperCase()] = spreader
+					}
+					else if (el.name == "SpawnEffect")
+					{
+						ability.data[el.name.toUpperCase()] = el
 					}
 					else
 					{

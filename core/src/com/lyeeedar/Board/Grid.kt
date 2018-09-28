@@ -903,9 +903,10 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					{
 						if (matchable.timer == 0 && matchable.sprite.animation == null)
 						{
-							matchable.apply(this)
-							tile.orb = null
+							tile.matchable = null
 							onPop(matchable, matchable.deletionEffectDelay)
+
+							matchable.apply(this, tile)
 						}
 						else if (matchable.delayDisplay > 0)
 						{
