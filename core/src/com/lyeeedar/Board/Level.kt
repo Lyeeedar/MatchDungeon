@@ -2,6 +2,7 @@ package com.lyeeedar.Board
 
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.IntMap
+import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Board.CompletionCondition.AbstractCompletionCondition
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionCustomOrb
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionSink
@@ -74,9 +75,8 @@ class Level(val loadPath: String)
 		}
 		else if (toSpawn == "Attack")
 		{
-			val orb = Orb(Orb.getRandomOrb(this), theme)
-			orb.hasAttack = true
-			orb.attackTimer = 10
+			val orb = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap(), Orb.getRandomOrb (this), theme)
+			orb.timer = 10
 			return orb
 		}
 
@@ -403,11 +403,13 @@ class Level(val loadPath: String)
 
 				if (symbol.attack > 0)
 				{
-					var orb = swappable as? Orb
-					if (orb == null) orb = Orb(Orb.getRandomOrb(this), theme)
-					orb.attackTimer = symbol.attack
-					orb.hasAttack = true
-					tile.orb = orb
+					val orb = swappable as? Matchable
+					val desc = orb?.desc ?: Orb.getRandomOrb(this)
+
+					val monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap(), desc, theme)
+					monsterEffect.timer = symbol.attack
+
+					tile.monsterEffect = monsterEffect
 				}
 
 				var orb = swappable as? Orb

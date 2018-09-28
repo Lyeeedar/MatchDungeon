@@ -62,8 +62,8 @@
 				<AttackNumPips>3</AttackNumPips>
 				<AttackCooldown>2,6</AttackCooldown>
 				<Size>1</Size>
-				<HP>15</HP>
-				<DamageReduction>0</DamageReduction>
+				<HP>20</HP>
+				<DamageReduction>1</DamageReduction>
 				<Abilities>
 					<Ability>
 						<Cooldown>1,4</Cooldown>

@@ -3,10 +3,8 @@ package com.lyeeedar.Board
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
-import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Sprite.Sprite
-import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.getXml
 import ktx.collections.set
@@ -18,7 +16,6 @@ import ktx.collections.set
 class Orb(desc: OrbDesc, theme: Theme): Matchable(theme)
 {
 	override var desc: OrbDesc = OrbDesc()
-		get() = field
 		set(value)
 		{
 			field = value
@@ -38,44 +35,6 @@ class Orb(desc: OrbDesc, theme: Theme): Matchable(theme)
 	override var deletionEffectDelay: Float = 0f
 	var skipPowerOrb = false
 
-	var delayDisplayAttack: Float = 0f
-	var hasAttack: Boolean = false
-		set(value)
-		{
-			if (!field && value)
-			{
-				field = value
-				val nsprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/skull_small", drawActualSize = true)
-				nsprite.colour = sprite.colour
-				sprite = nsprite
-
-				val grid = this.grid!!
-				if (grid.level.defeatConditions.filter { it is CompletionConditionDie }.isEmpty())
-				{
-					val die = CompletionConditionDie()
-					die.attachHandlers(grid)
-					GridScreen.instance.defeatTable.add(die.createTable(grid))
-					GridScreen.instance.defeatTable.row()
-
-					grid.level.defeatConditions.add(die)
-				}
-			}
-		}
-
-	var attackTimer = 0
-
-	var isChanger: Boolean = false
-	var nextDesc: OrbDesc? = null
-		set(value)
-		{
-			field = value
-			nextSprite = sprite.copy()
-			nextSprite!!.colour = nextDesc!!.sprite.colour.copy().a(0.75f)
-			nextSprite!!.baseScale[0] = 1.25f
-			nextSprite!!.baseScale[1] = 1.25f
-		}
-	var nextSprite: Sprite? = null
-
 	override val canMove: Boolean
 		get() = !sealed
 
@@ -87,8 +46,6 @@ class Orb(desc: OrbDesc, theme: Theme): Matchable(theme)
 	fun setAttributes(orb: Orb)
 	{
 		sealCount = orb.sealCount
-		hasAttack = orb.hasAttack
-		attackTimer = orb.attackTimer
 	}
 
 	companion object

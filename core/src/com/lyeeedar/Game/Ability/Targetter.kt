@@ -30,14 +30,14 @@ class Targetter(val type: Type)
 	{
 		isValid = when(type)
 		{
-			Type.BASICORB -> fun(tile: Tile, data: ObjectMap<String, Any>) = tile.orb != null && !tile.orb!!.hasAttack && !tile.orb!!.sealed && tile.spreader == null
-			Type.ORB -> fun(tile: Tile, data: ObjectMap<String, Any>) = ((tile.orb != null && !tile.orb!!.hasAttack) || tile.special != null) && tile.spreader == null
+			Type.BASICORB -> fun(tile: Tile, data: ObjectMap<String, Any>) = tile.orb != null && !tile.orb!!.sealed && tile.spreader == null
+			Type.ORB -> fun(tile: Tile, data: ObjectMap<String, Any>) = (tile.orb != null || tile.special != null) && tile.spreader == null
 			Type.SPECIAL -> fun(tile: Tile, data: ObjectMap<String, Any>) = tile.special != null && tile.spreader == null
 			Type.BLOCK -> fun(tile: Tile, data: ObjectMap<String, Any>) = tile.block != null && tile.spreader == null
 			Type.EMPTY -> fun(tile: Tile, data: ObjectMap<String, Any>) = tile.contents == null && tile.canHaveOrb && tile.spreader == null
 			Type.SEALED -> fun(tile: Tile, data: ObjectMap<String, Any>) = tile.swappable?.sealed ?: false && tile.spreader == null
 			Type.MONSTER ->  fun(tile: Tile, data: ObjectMap<String, Any>) = tile.monster != null && tile.spreader == null
-			Type.ATTACK ->  fun(tile: Tile, data: ObjectMap<String, Any>) = tile.orb?.hasAttack ?: false && tile.spreader == null
+			Type.ATTACK ->  fun(tile: Tile, data: ObjectMap<String, Any>) = tile.monsterEffect != null && tile.spreader == null
 			Type.TILE -> fun(tile: Tile, data: ObjectMap<String, Any>) = tile.canHaveOrb
 			Type.SPREADER ->  fun(tile: Tile, data: ObjectMap<String, Any>) = tile.spreader?.nameKey == data["SPREADERNAME"]
 			Type.NAMEDTILE -> fun(tile: Tile, data: ObjectMap<String, Any>) = tile.nameKey == data["TILENAME"]

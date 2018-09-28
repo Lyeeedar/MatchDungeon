@@ -10,11 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Widget
+import com.lyeeedar.Board.*
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionTime
-import com.lyeeedar.Board.Grid
-import com.lyeeedar.Board.Orb
-import com.lyeeedar.Board.Sinkable
-import com.lyeeedar.Board.Special
 import com.lyeeedar.Game.Ability.Targetter
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Particle.ParticleEffect
@@ -417,33 +414,30 @@ class GridWidget(val grid: Grid) : Widget()
 						}
 					}
 
-					if (swappable is Orb && swappable.sprite.renderDelay <= 0)
+					if (swappable is MonsterEffect && swappable.sprite.renderDelay <= 0 && swappable.delayDisplay <= 0f)
 					{
-						if (swappable.hasAttack)
+						val cx = xi + (swappable.sprite.animation?.renderOffset(false)?.get(0) ?: 0f)
+						val cy = yi + 0.15f + (swappable.sprite.animation?.renderOffset(false)?.get(1) ?: 0f)
+
+						val currentPoint = Vector2(0f, 0.4f)
+
+						val maxdots = 10
+						val degreesStep = 360f / maxdots
+						for (i in 0 until maxdots)
 						{
-							val cx = xi + (swappable.sprite.animation?.renderOffset(false)?.get(0) ?: 0f)
-							val cy = yi + 0.15f + (swappable.sprite.animation?.renderOffset(false)?.get(1) ?: 0f)
+							val sprite = if (i < swappable.timer) atk_full else atk_empty
 
-							val currentPoint = Vector2(0f, 0.4f)
+							floating.queueSprite(sprite, cx + currentPoint.x, cy + currentPoint.y, ORB, 2, orbColour)
 
-							val maxdots = 10
-							val degreesStep = 360f / maxdots
-							for (i in 0 until maxdots)
-							{
-								val sprite = if (i < swappable.attackTimer) atk_full else atk_empty
+							currentPoint.rotate(degreesStep)
+						}
 
-								floating.queueSprite(sprite, cx + currentPoint.x, cy + currentPoint.y, ORB, 2, orbColour)
-
-								currentPoint.rotate(degreesStep)
-							}
-
-							if (!Global.settings.get("Attack", false) && !grid.inTurn )
-							{
-								val tutorial = Tutorial("Attack")
-								tutorial.addPopup("This is an attack. The pips surrounding the skull indicate the turns remaining until it activates.", getRect(swappable))
-								tutorial.addPopup("Match it like a normal orb to remove it from the board. If you fail to remove it then you will lose 1 hp", getRect(swappable))
-								tutorial.show()
-							}
+						if (!Global.settings.get("Attack", false) && !grid.inTurn )
+						{
+							val tutorial = Tutorial("Attack")
+							tutorial.addPopup("This is an attack. The pips surrounding the skull indicate the turns remaining until it activates.", getRect(swappable))
+							tutorial.addPopup("Match it like a normal orb to remove it from the board. If you fail to remove it then you will lose 1 hp", getRect(swappable))
+							tutorial.show()
 						}
 					}
 

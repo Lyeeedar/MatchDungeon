@@ -67,7 +67,9 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 			{
 				val startTile = tiles.minBy { it.dist(tile) }!!
 
-				tile.orb!!.attackTimer = desc.attackNumPips
+				tile.monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap(), tile.orb!!.desc, grid.level.theme)
+
+				tile.monsterEffect!!.timer = desc.attackNumPips
 				val diff = tile.getPosDiff(startTile)
 				diff[0].y *= -1
 				sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
@@ -75,12 +77,12 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 				val dst = tile.euclideanDist(startTile)
 				val animDuration = 0.4f + tile.euclideanDist(startTile) * 0.025f
 				val attackSprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/skull_small", drawActualSize = true)
-				attackSprite.colour = tile.orb!!.sprite.colour
+				attackSprite.colour = tile.monsterEffect!!.sprite.colour
 				attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
 				attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
 				tile.effects.add(attackSprite)
 
-				tile.orb!!.delayDisplayAttack = animDuration
+				tile.monsterEffect!!.delayDisplay = animDuration
 			}
 		}
 
@@ -110,8 +112,7 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 fun validAttack(grid: Grid, tile: Tile): Boolean
 {
 	if (tile.orb == null) return false
-	if (tile.orb!!.hasAttack) return false
-	if (tile.orb!!.delayDisplayAttack > 0f) return false
+	if (tile.monsterEffect != null) return false
 	if (tile.spreader != null) return false
 
 	for (dir in Direction.CardinalValues)
@@ -257,12 +258,6 @@ class MonsterAbility
 							{
 								return false
 							}
-
-							val orb = tile.orb
-							if (orb != null && (orb.hasAttack || orb.delayDisplayAttack > 0f))
-							{
-								return false
-							}
 						}
 					}
 				}
@@ -311,10 +306,14 @@ class MonsterAbility
 				if (target.orb == null)
 				{
 					target.effects.add(grid.hitEffect.copy())
-					target.orb = Orb(Orb.getRandomOrb(grid.level), grid.level.theme)
+					target.monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap(), Orb.getRandomOrb(grid.level), grid.level.theme)
+				}
+				else
+				{
+					target.monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap(), target.orb!!.desc, grid.level.theme)
 				}
 
-				target.orb!!.attackTimer = speed
+				target.monsterEffect!!.timer = speed
 				val diff = target.getPosDiff(monster.tiles[0, 0])
 				diff[0].y *= -1
 				monster.sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
@@ -327,7 +326,7 @@ class MonsterAbility
 				attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
 				target.effects.add(attackSprite)
 
-				target.orb!!.delayDisplayAttack = animDuration
+				target.monsterEffect!!.delayDisplay = animDuration
 			}
 			if (effect == Effect.CUSTOMORB)
 			{

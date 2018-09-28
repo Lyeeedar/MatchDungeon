@@ -62,8 +62,8 @@
 				<AttackNumPips>6</AttackNumPips>
 				<AttackCooldown>3,6</AttackCooldown>
 				<Size>1</Size>
-				<HP>15</HP>
-				<DamageReduction>1</DamageReduction>
+				<HP>20</HP>
+				<DamageReduction>3</DamageReduction>
 				<Abilities>
 					<Ability>
 						<Cooldown>2,5</Cooldown>
@@ -74,25 +74,12 @@
 						<Data />
 					</Ability>
 					<Ability>
-						<Cooldown>4,8</Cooldown>
-						<Target>Random</Target>
-						<Count>2</Count>
-						<Effect>Seal</Effect>
-						<Data />
-					</Ability>
-					<Ability>
-						<Cooldown>4,8</Cooldown>
+						<Cooldown>2,4</Cooldown>
 						<Target>Random</Target>
 						<Effect>SealedAttack</Effect>
 						<Data>
 							<NumPips>10</NumPips>
 						</Data>
-					</Ability>
-					<Ability>
-						<Cooldown>3,6</Cooldown>
-						<Target>Random</Target>
-						<Effect>Block</Effect>
-						<Data />
 					</Ability>
 				</Abilities>
 			</MonsterDesc>

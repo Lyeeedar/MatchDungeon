@@ -51,7 +51,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	val onSunk = Event1Arg<Sinkable>()
 	val onDamaged = Event1Arg<Damageable>()
 	val onSpawn = Event1Arg<Swappable>()
-	val onAttacked = Event1Arg<Orb>()
+	val onAttacked = Event1Arg<MonsterEffect>()
 
 	// ----------------------------------------------------------------------
 	var noMatchTimer = 0f
@@ -178,6 +178,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		{
 			val orb = tile.orb
 			val spreader = tile.spreader
+			val matchable = tile.matchable
 
 			if (spreader != null)
 			{
@@ -254,19 +255,19 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					}
 				}
 			}
-			else if (orb != null)
+			else if (matchable != null)
 			{
 				// Process attacks
-				if (orb.hasAttack)
+				if (matchable is MonsterEffect)
 				{
-					orb.attackTimer--
+					matchable.timer--
 				}
-				if (orb.isChanger)
+				if (matchable.isChanger)
 				{
-					orb.desc = orb.nextDesc!!
-					orb.nextDesc = Orb.getRandomOrb(level, orb.desc)
+					matchable.desc = matchable.nextDesc!!
+					matchable.nextDesc = Orb.getRandomOrb(level, matchable.desc)
 
-					val effect = AssetManager.loadSprite("EffectSprites/Heal/Heal", 0.05f, orb.desc.sprite.colour)
+					val effect = AssetManager.loadSprite("EffectSprites/Heal/Heal", 0.05f, matchable.desc.sprite.colour)
 					tile.effects.add(effect)
 				}
 			}
@@ -898,21 +899,22 @@ class Grid(val width: Int, val height: Int, val level: Level)
 							tile.effects.add(sprite)
 						}
 					}
-					else if (matchable is Orb)
+					else if (matchable is MonsterEffect)
 					{
-						if (matchable.hasAttack && matchable.attackTimer == 0 && matchable.sprite.animation == null)
+						if (matchable.timer == 0 && matchable.sprite.animation == null)
 						{
-							if (!level.completed) onAttacked(matchable)
+							matchable.apply(this)
 							tile.orb = null
 							onPop(matchable, matchable.deletionEffectDelay)
 						}
-						else if (matchable.delayDisplayAttack > 0)
+						else if (matchable.delayDisplay > 0)
 						{
-							matchable.delayDisplayAttack -= delta
+							matchable.delayDisplay -= delta
 
-							if (matchable.delayDisplayAttack <= 0)
+							if (matchable.delayDisplay <= 0)
 							{
-								matchable.hasAttack = true
+								matchable.sprite = matchable.actualSprite
+								matchable.sprite.colour = matchable.desc.sprite.colour
 							}
 						}
 					}
@@ -1238,36 +1240,23 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			for (y in 0 until height)
 			{
 				val oldorb = tempgrid[x, y].swappable
-				if (oldorb == null || oldorb !is Orb || oldorb.desc.isNamed)
+				if (oldorb == null || oldorb !is Matchable || oldorb.desc.isNamed)
 				{
 					grid[x, y].contents = tempgrid[x, y].contents
 				}
-				else
+				else if (grid[x, y].matchable != null)
 				{
-					val orb = grid[x, y].orb!!
-					grid[x, y].orb = tempgrid[x, y].orb
-
-					orb.sealCount = oldorb.sealCount
-					if (oldorb.hasAttack)
-					{
-						orb.hasAttack = true
-						orb.attackTimer = oldorb.attackTimer
-					}
-					if (oldorb.isChanger)
-					{
-						orb.isChanger = true
-						orb.nextDesc = oldorb.nextDesc
-					}
-
+					val newmatchable = grid[x, y].matchable!!
+					grid[x, y].contents = tempgrid[x, y].contents
+					val oldmatchable = grid[x, y].matchable!!
 
 					val delay = grid[x, y].taxiDist(Point.ZERO).toFloat() * 0.1f
 
 					Future.call(
 							{
-								grid[x, y].orb = orb
-
 								val sprite = refillSprite.copy()
-								sprite.colour = orb.sprite.colour
+
+								oldmatchable.desc = newmatchable.desc
 
 								grid[x, y].effects.add(sprite)
 							}, delay + 0.2f)

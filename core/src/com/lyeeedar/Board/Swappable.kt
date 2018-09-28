@@ -26,6 +26,19 @@ abstract class Swappable(val theme: Theme) : Point()
 		get() = sealCount > 0
 
 	var grid: Grid? = null
+
+	var isChanger: Boolean = false
+
+	var nextDesc: OrbDesc? = null
+		set(value)
+		{
+			field = value
+			nextSprite = sprite.copy()
+			nextSprite!!.colour = nextDesc!!.sprite.colour.copy().a(0.75f)
+			nextSprite!!.baseScale[0] = 1.25f
+			nextSprite!!.baseScale[1] = 1.25f
+		}
+	var nextSprite: Sprite? = null
 }
 
 abstract class Matchable(theme: Theme) : Swappable(theme)

@@ -27,7 +27,17 @@ abstract class Special(val orbDesc: OrbDesc, theme: Theme) : Matchable(theme)
 
 	override var markedForDeletion: Boolean = false
 
-	override var desc: OrbDesc = orbDesc
+	override var desc: OrbDesc = OrbDesc()
+		set(value)
+		{
+			field = value
+
+			if (this !is GemSpecial)
+			{
+				sprite = desc.sprite.copy()
+				sprite.colour = desc.sprite.colour
+			}
+		}
 
 	abstract fun merge(other: Swappable): Special?
 	abstract fun apply(point: Point, grid: Grid)

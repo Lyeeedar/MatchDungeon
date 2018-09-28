@@ -39,6 +39,10 @@ class Tile(x: Int, y: Int) : Point(x, y)
 		get() = contents as? Special
 		set(value) { contents = value }
 
+	var monsterEffect: MonsterEffect?
+		get() = contents as? MonsterEffect
+		set(value) { contents = value }
+
 	var block: Block?
 		get() = contents as? Block
 		set(value) { contents = value }

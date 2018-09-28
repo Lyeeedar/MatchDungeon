@@ -30,7 +30,7 @@ class Friendly(val desc: FriendlyDesc) : Creature(desc.hp, desc.size, desc.sprit
 		val border = getBorderTiles(grid)
 		for (tile in border)
 		{
-			if (tile.orb != null && tile.orb!!.hasAttack && !tile.orb!!.sealed)
+			if (tile.monsterEffect != null && !tile.monsterEffect!!.sealed)
 			{
 				grid.pop(tile, 0f)
 				hp -= 1
@@ -275,7 +275,7 @@ class MoveAbility : FriendlyAbility()
 		val validTargets = availableTargets.filter(::isValid)
 		val destinations = when (destination)
 		{
-			Destination.ATTACK -> grid.grid.filter { it.orb != null && it.orb!!.hasAttack }
+			Destination.ATTACK -> grid.grid.filter { it.monsterEffect != null }
 			Destination.MONSTER -> grid.grid.filter { it.monster != null }
 			Destination.BLOCK -> grid.grid.filter { it.block != null }
 			Destination.RANDOM -> grid.grid.asSequence()
