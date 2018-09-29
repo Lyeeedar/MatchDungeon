@@ -1,7 +1,7 @@
 <Head xmlns:meta="Editor">
 	<Name>Skull Necklace</Name>
 	<Description>A necklace of finely carved skulls. Balefire glows from within their empty eye sockets.</Description>
-	<Cost>210</Cost>
+	<Cost>180</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/necklace_dark</Name>
 	</Icon>

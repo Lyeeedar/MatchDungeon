@@ -42,6 +42,14 @@
 					<Effect>Move</Effect>
 					<Data />
 				</Ability>
+				<Ability>
+					<Cooldown>3,10</Cooldown>
+					<Target>Random</Target>
+					<Data>
+						<NumPips>10</NumPips>
+						<Damage>3</Damage>
+					</Data>
+				</Ability>
 			</Abilities>
 		</Monster>
 	</Monsters>
@@ -68,9 +76,9 @@
 				</Ability>
 				<Ability>
 					<Cooldown>4,6</Cooldown>
-					<Count>2</Count>
 					<Data>
-						<NumPips>4</NumPips>
+						<NumPips>6</NumPips>
+						<Damage>3</Damage>
 					</Data>
 				</Ability>
 			</Abilities>
@@ -99,7 +107,7 @@
 					<Cooldown>4,6</Cooldown>
 					<Count>2</Count>
 					<Data>
-						<NumPips>4</NumPips>
+						<Damage>3</Damage>
 					</Data>
 				</Ability>
 			</Abilities>

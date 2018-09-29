@@ -1,0 +1,18 @@
+<OffHand xmlns:meta="Editor">
+	<Name>Ring of Regeneration</Name>
+	<Description>This little ring constantly heals your wounds, sealing cuts in mere seconds.</Description>
+	<Cost>150</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/ring_ruby</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>0</Health>
+		<MatchDamage>0</MatchDamage>
+		<AbilityDamage>0</AbilityDamage>
+		<PowerGain>0</PowerGain>
+		<BonusGold>0</BonusGold>
+		<BonusTime>0</BonusTime>
+		<Regeneration>0.2</Regeneration>
+	</Statistics>
+</OffHand>

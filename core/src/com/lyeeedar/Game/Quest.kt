@@ -250,12 +250,23 @@ class Quest(val path: String)
 				else if (currentNode is QuestNode)
 				{
 					if (currentNode.successNode != null) recursiveWalk(currentNode.successNode!!.node, currentRun+1)
-					if (currentNode.failureNode != null) recursiveWalk(currentNode.failureNode!!.node, currentRun+1)
+					if (currentNode.failureNode != null && currentNode.failureNode?.node != currentNode.successNode?.node) recursiveWalk(currentNode.failureNode!!.node, currentRun+1)
 
 					for (custom in currentNode.customNodes)
 					{
-						recursiveWalk(custom.node, currentRun+1)
+						if (custom.node != currentNode.successNode?.node && custom.node != currentNode.failureNode?.node)
+						{
+							recursiveWalk(custom.node, currentRun + 1)
+						}
 					}
+				}
+				else if (currentNode is Define)
+				{
+					recursiveWalk(currentNode.next.node, currentRun+1)
+				}
+				else
+				{
+					throw Exception("Unhandled quest node type '" + currentNode.javaClass.name + "'!")
 				}
 			}
 		}

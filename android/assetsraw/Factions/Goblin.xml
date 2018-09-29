@@ -91,9 +91,8 @@
 					<Effect>Move</Effect>
 				</Ability>
 				<Ability>
-					<Cooldown>4,9</Cooldown>
+					<Cooldown>2,9</Cooldown>
 					<Target>Random</Target>
-					<TargetRestriction>Monster</TargetRestriction>
 					<Effect>Heal</Effect>
 					<Data>
 						<Amount>4</Amount>
@@ -102,14 +101,9 @@
 				<Ability>
 					<Cooldown>3,6</Cooldown>
 					<Target>Random</Target>
-					<Count>2</Count>
-					<Data />
-				</Ability>
-				<Ability>
-					<Cooldown>3,6</Cooldown>
-					<Count>2</Count>
-					<Effect>Seal</Effect>
-					<Data />
+					<Data>
+						<Damage>3</Damage>
+					</Data>
 				</Ability>
 			</Abilities>
 		</Monster>

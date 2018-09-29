@@ -1,0 +1,17 @@
+<Body xmlns:meta="Editor">
+	<Name>Boots of Speed</Name>
+	<Description>These boots make you move and react much faster. Everyone else seems to merely crawl along. </Description>
+	<Cost>250</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/armor_cloth_boot</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>0</Health>
+		<MatchDamage>0</MatchDamage>
+		<AbilityDamage>0</AbilityDamage>
+		<PowerGain>0</PowerGain>
+		<BonusGold>0</BonusGold>
+		<BonusTime>20</BonusTime>
+	</Statistics>
+</Body>

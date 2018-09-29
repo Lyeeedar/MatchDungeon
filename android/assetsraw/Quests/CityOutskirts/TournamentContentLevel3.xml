@@ -70,15 +70,35 @@
 						<Effect>Move</Effect>
 					</Ability>
 					<Ability>
-						<Cooldown>3,8</Cooldown>
-						<Data />
+						<Cooldown>2,6</Cooldown>
+						<Data>
+							<Damage>3</Damage>
+						</Data>
 					</Ability>
 					<Ability>
-						<Cooldown>2,4</Cooldown>
+						<Cooldown>1,5</Cooldown>
 						<Target>Random</Target>
-						<Effect>SealedAttack</Effect>
+						<Effect>Heal</Effect>
 						<Data>
-							<NumPips>10</NumPips>
+							<Amount>2</Amount>
+						</Data>
+					</Ability>
+					<Ability>
+						<Cooldown>4,12</Cooldown>
+						<Target>Random</Target>
+						<TargetRestriction>Special</TargetRestriction>
+						<Effect>Spreader</Effect>
+						<Data>
+							<Spreader meta:RefKey="SpreaderDef">
+								<Name>Goop</Name>
+								<Sprite meta:RefKey="SpriteWrapper">
+									<Sprite meta:RefKey="Sprite">
+										<Name>Oryx/Custom/terrain/cloud</Name>
+										<Colour>147,224,81,226</Colour>
+									</Sprite>
+								</Sprite>
+								<Spreads>false</Spreads>
+							</Spreader>
 						</Data>
 					</Ability>
 				</Abilities>

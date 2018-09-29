@@ -62,6 +62,9 @@
 				</Ability>
 				<Ability>
 					<Cooldown>4,8</Cooldown>
+					<Data>
+						<Damage>2</Damage>
+					</Data>
 				</Ability>
 			</Abilities>
 		</Monster>
@@ -84,8 +87,9 @@
 			<Abilities>
 				<Ability>
 					<Cooldown>2,5</Cooldown>
-					<Count>2</Count>
-					<Data />
+					<Data>
+						<Damage>3</Damage>
+					</Data>
 				</Ability>
 				<Ability>
 					<Cooldown>2,5</Cooldown>
@@ -111,8 +115,9 @@
 			<Abilities>
 				<Ability>
 					<Cooldown>2,5</Cooldown>
-					<Count>2</Count>
-					<Data />
+					<Data>
+						<Damage>3</Damage>
+					</Data>
 				</Ability>
 				<Ability>
 					<Cooldown>2,5</Cooldown>

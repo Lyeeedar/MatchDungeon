@@ -258,7 +258,7 @@
 					<Effect>Move</Effect>
 				</Ability>
 				<Ability>
-					<Cooldown>2,6</Cooldown>
+					<Cooldown>2,5</Cooldown>
 					<Target>Random</Target>
 					<Effect>DelayedSummon</Effect>
 					<Data>

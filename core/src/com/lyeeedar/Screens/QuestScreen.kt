@@ -38,6 +38,7 @@ class QuestScreen : AbstractScreen()
 	val bodySlot = Table()
 	val playerSlot = Table()
 	lateinit var goldLabel: Label
+	lateinit var questProgressWidget: QuestProgressWidget
 
 	val cardsTable = Table()
 
@@ -79,10 +80,15 @@ class QuestScreen : AbstractScreen()
 			FullscreenTable.createCard(table, statsTable.localToStageCoordinates(Vector2()))
 		}
 
+		questProgressWidget = QuestProgressWidget()
+
 		mainTable.add(statsTable).expandX().left().pad(20f)
 		mainTable.row()
 
 		mainTable.add(Seperator(Global.skin)).growX().pad(0f, 10f, 0f, 10f)
+		mainTable.row()
+
+		mainTable.add(questProgressWidget).growX().height(20f)
 		mainTable.row()
 
 		mainTable.add(cardsTable).grow()
@@ -204,6 +210,8 @@ class QuestScreen : AbstractScreen()
 			baseCreate()
 			created = true
 		}
+
+		questProgressWidget.quest = quest
 
 		currentQuest = quest
 

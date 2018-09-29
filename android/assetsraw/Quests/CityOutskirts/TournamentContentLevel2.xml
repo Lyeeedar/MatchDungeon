@@ -63,17 +63,17 @@
 				<AttackCooldown>2,6</AttackCooldown>
 				<Size>1</Size>
 				<HP>20</HP>
-				<DamageReduction>1</DamageReduction>
+				<DamageReduction>0</DamageReduction>
 				<Abilities>
 					<Ability>
-						<Cooldown>1,4</Cooldown>
+						<Cooldown>1,3</Cooldown>
 						<Effect>Move</Effect>
 					</Ability>
 					<Ability>
 						<Cooldown>4,9</Cooldown>
 						<Count>4</Count>
 						<Data>
-							<NumPips>8</NumPips>
+							<NumPips>5</NumPips>
 						</Data>
 					</Ability>
 				</Abilities>
