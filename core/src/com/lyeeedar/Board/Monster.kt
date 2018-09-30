@@ -37,7 +37,7 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 		if (desc.attackNumPips > 0)
 		{
 			var max = desc.attackCooldown.max
-			max += ((Global.player.getStat(Statistic.BONUSTIME) / 100f) * max).toInt()
+			max += ((Global.player.getStat(Statistic.HASTE) / 100f) * max).toInt()
 
 			atkCooldown = (MathUtils.random() * max).toInt()
 		}
@@ -45,6 +45,8 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 		{
 			atkCooldown = Int.MAX_VALUE
 		}
+
+		hp -= Global.player.getStat(Statistic.WEAKNESSAURA)
 	}
 
 	override fun onTurn(grid: Grid)
@@ -53,10 +55,10 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 		if (atkCooldown <= 0)
 		{
 			var min = desc.attackCooldown.min
-			min += ((Global.player.getStat(Statistic.BONUSTIME) / 100f) * min).toInt()
+			min += ((Global.player.getStat(Statistic.HASTE) / 100f) * min).toInt()
 
 			var max = desc.attackCooldown.max
-			max += ((Global.player.getStat(Statistic.BONUSTIME) / 100f) * max).toInt()
+			max += ((Global.player.getStat(Statistic.HASTE) / 100f) * max).toInt()
 
 			atkCooldown = min + MathUtils.random(max - min)
 
@@ -92,10 +94,10 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 			if (ability.cooldownTimer <= 0)
 			{
 				var min = ability.cooldownMin
-				min += ((Global.player.getStat(Statistic.BONUSTIME) / 100f) * min).toInt()
+				min += ((Global.player.getStat(Statistic.HASTE) / 100f) * min).toInt()
 
 				var max = ability.cooldownMax
-				max += ((Global.player.getStat(Statistic.BONUSTIME) / 100f) * max).toInt()
+				max += ((Global.player.getStat(Statistic.HASTE) / 100f) * max).toInt()
 
 				ability.cooldownTimer = min + MathUtils.random(max - min)
 				ability.activate(grid, this)

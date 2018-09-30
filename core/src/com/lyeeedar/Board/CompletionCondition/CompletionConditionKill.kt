@@ -92,7 +92,10 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 
 		table.clear()
 
-		monsterMap.clear()
+		for (monster in monsterMap.keys().toList())
+		{
+			monsterMap[monster] = 0
+		}
 
 		for (monster in monsters)
 		{

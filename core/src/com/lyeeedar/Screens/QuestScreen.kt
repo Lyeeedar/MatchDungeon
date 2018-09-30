@@ -9,17 +9,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.badlogic.gdx.utils.Array
+import com.lyeeedar.*
 import com.lyeeedar.Board.Mote
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
-import com.lyeeedar.Direction
-import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.*
-import com.lyeeedar.Global
-import com.lyeeedar.MainGame
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Random
 import com.lyeeedar.Util.XmlData
 import ktx.actors.then
 import ktx.collections.toGdxArray
@@ -88,7 +86,10 @@ class QuestScreen : AbstractScreen()
 		mainTable.add(Seperator(Global.skin)).growX().pad(0f, 10f, 0f, 10f)
 		mainTable.row()
 
-		mainTable.add(questProgressWidget).growX().height(20f)
+		mainTable.add(questProgressWidget).growX().height(20f).pad(2f)
+		mainTable.row()
+
+		mainTable.add(Seperator(Global.skin)).growX().pad(0f, 10f, 0f, 10f)
 		mainTable.row()
 
 		mainTable.add(cardsTable).grow()
@@ -226,6 +227,30 @@ class QuestScreen : AbstractScreen()
 	var needsLayout = false
 	fun updateQuest()
 	{
+		val chaoticNature = Global.player.getStat(Statistic.CHAOTICNATURE, false)
+		if (chaoticNature != 0f)
+		{
+			for (stat in Statistic.Values)
+			{
+				val value = Global.player.getStat(stat, false)
+				if (value != stat.min && value != 0f)
+				{
+					if (Random.random.nextBoolean())
+					{
+						Global.player.choaticNature[stat] = value * chaoticNature
+					}
+					else
+					{
+						Global.player.choaticNature[stat] = value * chaoticNature * -1f
+					}
+				}
+				else
+				{
+					Global.player.choaticNature[stat] = 0f
+				}
+			}
+		}
+
 		for (widget in cardWidgets)
 		{
 			widget.remove()

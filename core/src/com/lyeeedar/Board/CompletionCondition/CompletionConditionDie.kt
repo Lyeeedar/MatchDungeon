@@ -9,22 +9,19 @@ import com.lyeeedar.Board.Mote
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffectActor
+import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Colour
-import com.lyeeedar.Util.Future
-import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.*
 
 class CompletionConditionDie : AbstractCompletionCondition()
 {
-	var regenAccumulator = 0f
-
 	lateinit var hpLabel: Label
 	var maxHP: Int = 1
 	var hp = 1
+	var fractionalHp = 0f
 
 	val blinkTable = Table()
 
@@ -41,9 +38,62 @@ class CompletionConditionDie : AbstractCompletionCondition()
 
 			Mote(src, dst, sprite, GridWidget.instance.tileSize,
 				 {
-					 if (hp > 0) hp--
-					 hpLabel.setText("$hp/$maxHP")
-					 updateBlink()
+					 fun tryBlock(chance: Float): Boolean
+					 {
+						 return chance > 0f && Random.random.nextFloat() < chance
+					 }
+
+					 var blocked = false
+					 var countered = false
+					 if (tryBlock(Global.player.getStat(Statistic.REFLECT)))
+					 {
+						 blocked = true
+						 countered = true
+					 }
+					 else if (tryBlock(Global.player.getStat(Statistic.AEGIS)))
+					 {
+						 blocked = true
+					 }
+					 else if (tryBlock(Global.player.getStat(Statistic.COUNTER)))
+					 {
+						 countered = true
+					 }
+
+					 if (blocked)
+					 {
+						 val pos = hpLabel.localToStageCoordinates(Vector2(hpLabel.width/2f, hpLabel.height/2f))
+
+						 val healSprite = AssetManager.loadParticleEffect("Block")
+						 val actor = ParticleEffectActor(healSprite, 32f, pos)
+						 Global.stage.addActor(actor)
+					 }
+					 else
+					 {
+						 if (hp > 0) hp--
+
+						 val pos = hpLabel.localToStageCoordinates(Vector2(hpLabel.width/2f, hpLabel.height/2f))
+
+						 val healSprite = AssetManager.loadParticleEffect("Hit")
+						 val actor = ParticleEffectActor(healSprite, 32f, pos)
+						 Global.stage.addActor(actor)
+
+						 hpLabel.setText("$hp/$maxHP")
+						 updateBlink()
+					 }
+
+					 if (countered)
+					 {
+						 val src = hpLabel.localToStageCoordinates(Vector2(hpLabel.width/2f, hpLabel.height/2f))
+						 val target = grid.grid.filter { it.monster != null }.random()
+						 if (target != null)
+						 {
+							 var dst = GridScreen.instance.grid!!.pointToScreenspace(target)
+							 Mote(src, dst, sprite, GridWidget.instance.tileSize,
+								  {
+									  grid.pop(target, 0f, Global.player, Global.player.getStat(Statistic.MATCHDAMAGE), Global.player.getStat(Statistic.PIERCE))
+								  })
+						 }
+					 }
 				 })
 
 
@@ -55,10 +105,10 @@ class CompletionConditionDie : AbstractCompletionCondition()
 
 			grid.level.player.isInBerserkRange = hp <= maxHP / 2
 
-			regenAccumulator += grid.level.player.getStat(Statistic.REGENERATION)
-			while (regenAccumulator > 1f)
+			fractionalHp += grid.level.player.getStat(Statistic.REGENERATION)
+			while (fractionalHp > 1f)
 			{
-				regenAccumulator -= 1f
+				fractionalHp -= 1f
 				hp += 1
 
 				val pos = hpLabel.localToStageCoordinates(Vector2(hpLabel.width/2f, hpLabel.height/2f))

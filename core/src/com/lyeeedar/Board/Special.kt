@@ -13,7 +13,7 @@ import com.lyeeedar.Util.*
 
 val beamMoveSpeed = 0.1f
 
-abstract class Special(val orbDesc: OrbDesc, theme: Theme) : Matchable(theme)
+abstract class Special(orbDesc: OrbDesc, theme: Theme) : Matchable(theme)
 {
 	var armed = false
 
@@ -27,14 +27,13 @@ abstract class Special(val orbDesc: OrbDesc, theme: Theme) : Matchable(theme)
 
 	override var markedForDeletion: Boolean = false
 
-	override var desc: OrbDesc = OrbDesc()
+	override var desc: OrbDesc = orbDesc
 		set(value)
 		{
 			field = value
 
 			if (this !is GemSpecial)
 			{
-				sprite = desc.sprite.copy()
 				sprite.colour = desc.sprite.colour
 			}
 		}
@@ -252,8 +251,8 @@ class Horizontal4(orbDesc: OrbDesc, theme: Theme) : HorizontalBeamSpecial(orbDes
 		if (other is Horizontal4 || other is Vertical4)
 		{
 			val desc = OrbDesc()
-			desc.death = orbDesc.death.copy()
-			desc.sprite = orbDesc.sprite.copy()
+			desc.death = desc.death.copy()
+			desc.sprite = desc.sprite.copy()
 			desc.sprite.colour = saturate(sprite.colour.copy().lerp(other.sprite.colour, 0.5f))
 			desc.name = "Merged"
 
@@ -288,8 +287,8 @@ class Vertical4(orbDesc: OrbDesc, theme: Theme) : VerticalBeamSpecial(orbDesc, t
 		if (other is Horizontal4 || other is Vertical4)
 		{
 			val desc = OrbDesc()
-			desc.death = orbDesc.death.copy()
-			desc.sprite = orbDesc.sprite.copy()
+			desc.death = desc.death.copy()
+			desc.sprite = desc.sprite.copy()
 			desc.sprite.colour = saturate(sprite.colour.copy().lerp(other.sprite.colour, 0.5f))
 			desc.name = "Merged"
 
@@ -467,8 +466,8 @@ class DualMatch(orbDesc: OrbDesc, theme: Theme) : BombSpecial(orbDesc, theme)
 	override fun merge(other: Swappable): Special?
 	{
 		val desc = OrbDesc()
-		desc.death = orbDesc.death.copy()
-		desc.sprite = orbDesc.sprite.copy()
+		desc.death = desc.death.copy()
+		desc.sprite = desc.sprite.copy()
 		desc.sprite.colour = saturate(sprite.colour.copy().lerp(other.sprite.colour, 0.5f))
 		desc.name = "Merged"
 
@@ -517,8 +516,8 @@ class Match5(orbDesc: OrbDesc, theme: Theme) : GemSpecial(orbDesc, theme)
 		if (other is Orb)
 		{
 			targetDesc = other.desc
-			sprite.animation = null
-			sprite.colour = other.sprite.colour.copy()
+			sprite.colourAnimation = null
+			sprite.colour = targetDesc!!.sprite.colour.copy()
 
 			return this
 		}
@@ -526,11 +525,11 @@ class Match5(orbDesc: OrbDesc, theme: Theme) : GemSpecial(orbDesc, theme)
 		{
 			if (other is GemSpecial)
 			{
-				return Match5Dual(orbDesc, theme)
+				return Match5Dual(desc, theme)
 			}
 			else
 			{
-				return Match5Spread(orbDesc, theme, other)
+				return Match5Spread(desc, theme, other)
 			}
 		}
 
@@ -606,9 +605,9 @@ class Match5Spread(orbDesc: OrbDesc, theme: Theme, val special: Special) : GemSp
 			sprite.colourAnimation = ChromaticAnimation.obtain().set(15f)
 		}
 
-		targetDesc = special.orbDesc
+		targetDesc = special.desc
 		sprite.colourAnimation = null
-		sprite.colour = special.desc.sprite.colour
+		sprite.colour = targetDesc!!.sprite.colour
 	}
 
 	override fun merge(other: Swappable): Special?
@@ -623,7 +622,7 @@ class Match5Spread(orbDesc: OrbDesc, theme: Theme, val special: Special) : GemSp
 		{
 			if (other is GemSpecial)
 			{
-				return Match5Dual(orbDesc, theme)
+				return Match5Dual(desc, theme)
 			}
 		}
 

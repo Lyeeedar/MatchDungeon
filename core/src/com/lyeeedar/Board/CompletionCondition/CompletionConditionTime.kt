@@ -53,7 +53,7 @@ class CompletionConditionTime(): AbstractCompletionCondition()
 
 	override fun attachHandlers(grid: Grid)
 	{
-		maxTime += ((Global.player.getStat(Statistic.BONUSTIME) / 100f) * maxTime).toInt()
+		maxTime += ((Global.player.getStat(Statistic.HASTE) / 100f) * maxTime).toInt()
 		time = maxTime
 
 		grid.onTime +=

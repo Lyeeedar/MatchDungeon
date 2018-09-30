@@ -60,7 +60,7 @@ class Effect(val type: Type)
 			{
 				val special = tile.special ?: return
 
-				val mergeSpecial = DualMatch(special.orbDesc, grid.level.theme)
+				val mergeSpecial = DualMatch(special.desc, grid.level.theme)
 
 				tile.special = special.merge(mergeSpecial) ?: mergeSpecial.merge(special) ?: special
 				tile.special!!.armed = true

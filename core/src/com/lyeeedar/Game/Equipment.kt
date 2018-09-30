@@ -116,9 +116,18 @@ class Equipment(val path: String)
 					if (showAsPlus)
 					{
 						val diff = statVal
-						val diffLabel = Label("+" + diff.toString(), Global.skin, "cardwhite")
-						diffLabel.color = Color.GREEN
-						statTable.add(diffLabel)
+						if (diff >= 0)
+						{
+							val diffLabel = Label("+" + diff.toString(), Global.skin, "cardwhite")
+							diffLabel.color = Color.GREEN
+							statTable.add(diffLabel)
+						}
+						else
+						{
+							val diffLabel = Label(diff.toString(), Global.skin, "cardwhite")
+							diffLabel.color = Color.RED
+							statTable.add(diffLabel)
+						}
 					}
 				}
 

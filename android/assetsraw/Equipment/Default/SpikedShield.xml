@@ -12,6 +12,7 @@
 		<PowerGain>0</PowerGain>
 		<BonusGold>0</BonusGold>
 		<BonusTime>0</BonusTime>
+		<Aegis>0.1</Aegis>
 	</Statistics>
 	<Ability>
 		<Name>Block</Name>

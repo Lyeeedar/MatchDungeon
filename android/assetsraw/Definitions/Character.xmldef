@@ -17,10 +17,17 @@
 		<Data Name="AbilityDamage" SkipIfDefault="False" meta:RefKey="Number" />
 		<Data Name="PowerGain" SkipIfDefault="False" meta:RefKey="Number" />
 		<Data Name="BonusGold" SkipIfDefault="False" meta:RefKey="Number" />
-		<Data Name="BonusTime" SkipIfDefault="False" meta:RefKey="Number" />
+		<Data Name="Haste" SkipIfDefault="False" meta:RefKey="Number" />
 		<Data Name="Regeneration" Min="0" meta:RefKey="Number" />
 		<Data Name="Pierce" Min="0" meta:RefKey="Number" />
 		<Data Name="Berserk" Min="0" meta:RefKey="Number" />
 		<Data Name="PriceReduction" Min="0" meta:RefKey="Number" />
+		<Data Name="Aegis" Min="0" Max="1" meta:RefKey="Number" />
+		<Data Name="Counter" Min="0" Max="1" meta:RefKey="Number" />
+		<Data Name="Reflect" Min="0" Max="1" meta:RefKey="Number" />
+		<Data Name="ChaoticNature" Min="0" Max="1" meta:RefKey="Number" />
+		<Data Name="WeaknessAura" Min="0" meta:RefKey="Number" />
+		<Data Name="NecroticAura" Min="0" meta:RefKey="Number" />
+		<Data Name="BuffDuration" Min="0" meta:RefKey="Number" />
 	</Definition>
 </Definitions>

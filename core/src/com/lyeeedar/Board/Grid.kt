@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionCustomOrb
+import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Global
@@ -953,6 +954,16 @@ class Grid(val width: Int, val height: Int, val level: Level)
 						death.size[1] = creature.size
 
 						tile.effects.add(death)
+
+						val necroticAura = Global.player.getStat(Statistic.NECROTICAURA)
+						if (necroticAura != 0f)
+						{
+							val die = level.defeatConditions.firstOrNull { it is CompletionConditionDie } as? CompletionConditionDie
+							if (die != null)
+							{
+								die.fractionalHp += necroticAura
+							}
+						}
 					}
 				}
 			}

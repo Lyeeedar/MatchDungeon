@@ -52,7 +52,7 @@ class CompletionConditionTurns(): AbstractCompletionCondition()
 
 	override fun attachHandlers(grid: Grid)
 	{
-		maxTurnCount += ((Global.player.getStat(Statistic.BONUSTIME) / 100f) * maxTurnCount).toInt()
+		maxTurnCount += ((Global.player.getStat(Statistic.HASTE) / 100f) * maxTurnCount).toInt()
 		turnCount = maxTurnCount
 
 		grid.onTurn +=

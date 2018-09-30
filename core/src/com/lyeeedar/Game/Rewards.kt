@@ -347,6 +347,7 @@ class BuffReward : AbstractReward()
 		val output = Array<CardWidget>()
 
 		val buff = Buff.load(buffXml)
+		buff.remainingDuration += (buff.remainingDuration * Global.player.getStat(Statistic.BUFFDURATION)).toInt()
 		buff.remainingDuration++ // add one cause as soon as the level ends itll be decreased by 1
 
 		val card = buff.getCard()

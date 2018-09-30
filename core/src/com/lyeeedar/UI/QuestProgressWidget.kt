@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Game.*
 import com.lyeeedar.Util.AssetManager
+import kotlin.math.min
 
 class QuestProgressWidget() : Widget()
 {
@@ -20,7 +21,7 @@ class QuestProgressWidget() : Widget()
 
 	override fun draw(batch: Batch?, parentAlpha: Float)
 	{
-		if (!questPath.contains(quest.current))
+		if (!questPath.contains(quest.current) && quest.current != null)
 		{
 			// We arent on the quest path, so update it
 			questPath.clear()
@@ -82,6 +83,10 @@ class QuestProgressWidget() : Widget()
 						pathToCurrent.add(current)
 						return true
 					}
+				}
+				else if (current is CompleteQuest)
+				{
+
 				}
 				else
 				{
@@ -152,6 +157,10 @@ class QuestProgressWidget() : Widget()
 						return true
 					}
 				}
+				else if (current is CompleteQuest)
+				{
+
+				}
 				else
 				{
 					throw Exception("Unhandled quest node type '" + current.javaClass.name + "'!")
@@ -182,7 +191,7 @@ class QuestProgressWidget() : Widget()
 		// render path
 
 		val sectionSize = width / questPath.size
-		val boxSize = sectionSize - 8
+		val boxSize = min(sectionSize - 8, height - 4)
 
 		for (i in 0 until questPath.size)
 		{
@@ -194,7 +203,7 @@ class QuestProgressWidget() : Widget()
 				else -> empty
 			}
 
-			val sx = sectionSize*i + 4
+			val sx = sectionSize*i + (sectionSize - boxSize) / 2f
 			val sy = height / 2f - boxSize / 2f
 
 			batch?.draw(img, x + sx, y + sy, boxSize, boxSize)

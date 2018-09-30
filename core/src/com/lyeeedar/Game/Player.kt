@@ -33,10 +33,17 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 
 	var buffs = Array<Buff>()
 
-	fun getStat(statistic: Statistic): Float
+	var choaticNature = FastEnumMap<Statistic, Float>(Statistic::class.java)
+
+	fun getStat(statistic: Statistic, withChoaticNature: Boolean = true): Float
 	{
 		var stat = baseCharacter.baseStatistics[statistic] ?: 0f
 		stat += statistics[statistic] ?: 0f
+
+		if (withChoaticNature && statistic != Statistic.CHAOTICNATURE)
+		{
+			stat += choaticNature[statistic] ?: 0f
+		}
 
 		for (slot in EquipmentSlot.Values)
 		{

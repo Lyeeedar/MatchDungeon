@@ -293,10 +293,17 @@ enum class Statistic private constructor(val min: Float, val max: Float, val too
 	PIERCE(0f, Float.MAX_VALUE, "The amount of damage resistance you remove each time you hit something with damage resistance"),
 	POWERGAIN(0f, Float.MAX_VALUE, "The bonus power you gain the first time you gain power each turn"),
 	BONUSGOLD(-Float.MAX_VALUE, Float.MAX_VALUE, "The bonus multiplier you gain each time you gain gold"),
-	BONUSTIME(-Float.MAX_VALUE, Float.MAX_VALUE, "The bonus multiplier to turn count"),
+	HASTE(-Float.MAX_VALUE, Float.MAX_VALUE, "How much faster you move. This increases turn count, delay between monster attacks and abilities, and buff durations"),
 	REGENERATION(0f, Float.MAX_VALUE, "The amount of health you regenerate each turn"),
 	BERSERK(0f, Float.MAX_VALUE, "When below half health this is the amount MatchDamage, AbilityDamage and PowerGain is increased"),
-	PRICEREDUCTION(0f, Float.MAX_VALUE, "The percentage reduction in price of items from a shop");
+	PRICEREDUCTION(0f, Float.MAX_VALUE, "The percentage reduction in price of items from a shop"),
+	AEGIS(0f, 1f, "The chance to block the damage from an attack as it hits"),
+	COUNTER(0f, 1f, "When taking damage from an attack, the chance to hit back at a random enemy"),
+	REFLECT(0f, 1f, "The chance to block the damage from an attack, then hit back at a random enemy"),
+	CHAOTICNATURE(0f, 1f, "The percentage increase or decrease to randomly apply to each statistic. Changes whenever you complete an encounter"),
+	WEAKNESSAURA(0f, Float.MAX_VALUE, "The value to subtract from enemy life as they spawn"),
+	NECROTICAURA(0f, Float.MAX_VALUE, "The amount you health you gain each time you kill an enemy"),
+	BUFFDURATION(0f, Float.MAX_VALUE, "The percentage modifier to increase buff duration by");
 
 	companion object
 	{
