@@ -302,8 +302,9 @@ enum class Statistic private constructor(val min: Float, val max: Float, val too
 	REFLECT(0f, 1f, "The chance to block the damage from an attack, then hit back at a random enemy"),
 	CHAOTICNATURE(0f, 1f, "The percentage increase or decrease to randomly apply to each statistic. Changes whenever you complete an encounter"),
 	WEAKNESSAURA(0f, Float.MAX_VALUE, "The value to subtract from enemy life as they spawn"),
-	NECROTICAURA(0f, Float.MAX_VALUE, "The amount you health you gain each time you kill an enemy"),
-	BUFFDURATION(0f, Float.MAX_VALUE, "The percentage modifier to increase buff duration by");
+	NECROTICAURA(0f, Float.MAX_VALUE, "The amount of health you gain each time you kill an enemy"),
+	BUFFDURATION(0f, Float.MAX_VALUE, "The multiplier to increase buff duration by"),
+	LUCK(-1f, 1f, "Affects your chance of gaining rewards");
 
 	companion object
 	{

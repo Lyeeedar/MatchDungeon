@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
-import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Board.Mote
 import com.lyeeedar.Card.Card
 import com.lyeeedar.EquipmentSlot
@@ -13,20 +12,17 @@ import com.lyeeedar.Global
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.CardWidget
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Colour
-import com.lyeeedar.Util.FastEnumMap
-import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.*
 
-enum class Chance private constructor(val eqn: String, val uiString: String, val colour: Colour)
+enum class Chance private constructor(val chance: Float, val uiString: String, val colour: Colour)
 {
-	VERYLOW("chance(1,5)", "very low", Colour(124, 115, 98, 255)),
-	LOW("chance(1,4)", "low", Colour(237, 154, 21, 255)),
-	MEDIUM("chance(1,3)", "medium", Colour(200, 200, 200, 255)),
-	HIGH("chance(1,2)", "high", Colour(255, 238, 163, 255)),
-	ALWAYS("1", "certain", Colour(249, 209, 27, 255));
+	VERYLOW(0.1f, "very low", Colour(124, 115, 98, 255)),
+	LOW(0.25f, "low", Colour(237, 154, 21, 255)),
+	MEDIUM(0.5f, "medium", Colour(200, 200, 200, 255)),
+	HIGH(0.75f, "high", Colour(255, 238, 163, 255)),
+	ALWAYS(1f, "certain", Colour(249, 209, 27, 255));
 
-	fun evaluate(): Boolean = eqn.evaluate() != 0f
+	fun evaluate(): Boolean = Random.random() <= chance + Global.player.getStat(Statistic.LUCK)
 }
 
 abstract class AbstractReward

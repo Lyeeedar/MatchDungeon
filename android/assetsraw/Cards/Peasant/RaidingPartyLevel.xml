@@ -14,20 +14,43 @@
 	</Grid>
 	<Symbols>
 		<Symbol>
-			<Character>W</Character>
+			<Character>.</Character>
 			<Extends></Extends>
-			<Block>
+			<Sprite meta:RefKey="SpriteWrapper">
 				<Sprite meta:RefKey="Sprite">
-					<Name>Oryx/uf_split/uf_terrain/crate</Name>
-					<DrawActualSize>true</DrawActualSize>
+					<Name>Oryx/uf_split/uf_terrain/floor_wood_1</Name>
 				</Sprite>
-				<Health>3</Health>
-			</Block>
+			</Sprite>
 			<Plate>0</Plate>
 			<Seal>0</Seal>
 			<Attack>0</Attack>
 			<IsMonster>false</IsMonster>
 			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>w</Character>
+			<Extends>.</Extends>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<TilingSprite meta:RefKey="TilingSprite">
+					<Name>Wall</Name>
+					<Mode>Premade</Mode>
+					<Front meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_stone_14</Name>
+					</Front>
+					<Top meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_stone_7</Name>
+					</Top>
+					<Overhang meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_stone_1</Name>
+					</Overhang>
+				</TilingSprite>
+			</Sprite>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<Type>Wall</Type>
 		</Symbol>
 	</Symbols>
 	<Faction>Goblin</Faction>

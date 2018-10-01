@@ -206,6 +206,15 @@ class CardNode
 		return table
 	}
 
+	fun fillWithDefaults()
+	{
+		guid = ""
+		name = ""
+		description = ""
+		spawnWeight = SpawnWeight.ANY
+		content = ""
+	}
+
 	fun parse(xmlData: XmlData)
 	{
 		guid = xmlData.getAttribute("GUID")
@@ -236,6 +245,11 @@ class CardNode
 
 	fun getContent(): CardContent
 	{
+		if (name == "" && description == "")
+		{
+			return CardContent.load(content)
+		}
+
 		return CardContent.load(parent.path.directory() + "/" + content)
 	}
 

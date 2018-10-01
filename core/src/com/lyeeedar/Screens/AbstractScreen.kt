@@ -4,6 +4,8 @@ import com.badlogic.gdx.*
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.input.GestureDetector
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Scaling
@@ -22,7 +24,7 @@ import ktx.actors.setKeyboardFocus
  * Created by Philip on 20-Mar-16.
  */
 
-abstract class AbstractScreen() : Screen, InputProcessor
+abstract class AbstractScreen() : Screen, InputProcessor, GestureDetector.GestureListener
 {
     //############################################################################
     //region Abstract Methods
@@ -184,10 +186,73 @@ abstract class AbstractScreen() : Screen, InputProcessor
     // ----------------------------------------------------------------------
     override fun mouseMoved( screenX: Int, screenY: Int ) = false
 
-    // ----------------------------------------------------------------------
+	// ----------------------------------------------------------------------
+	override fun touchDown(x: Float, y: Float, pointer: Int, button: Int): Boolean = false
+
+	// ----------------------------------------------------------------------
     override fun scrolled(amount: Int) = false
 
-    //endregion
+	// ----------------------------------------------------------------------
+	override fun tap(x: Float, y: Float, count: Int, button: Int): Boolean = false
+
+	// ----------------------------------------------------------------------
+	override fun longPress(x: Float, y: Float): Boolean = false
+
+	// ----------------------------------------------------------------------
+	/** Called when the user dragged a finger over the screen and lifted it. Reports the last known velocity of the finger in
+	 * pixels per second.
+	 * @param velocityX velocity on x in seconds
+	 * @param velocityY velocity on y in seconds
+	 */
+	override fun fling(velocityX: Float, velocityY: Float, button: Int): Boolean
+	{
+		if (!Global.release)
+		{
+			debugConsole.isVisible = !debugConsole.isVisible
+			debugConsole.text.setKeyboardFocus(true)
+
+			debugConsoleTable.toFront()
+
+			return true
+		}
+
+		return false
+	}
+
+	// ----------------------------------------------------------------------
+	/** Called when the user drags a finger over the screen.
+	 * @param deltaX the difference in pixels to the last drag event on x.
+	 * @param deltaY the difference in pixels to the last drag event on y.
+	 */
+	override fun pan(x: Float, y: Float, deltaX: Float, deltaY: Float): Boolean = false
+
+	// ----------------------------------------------------------------------
+	/** Called when no longer panning.  */
+	override fun panStop(x: Float, y: Float, pointer: Int, button: Int): Boolean = false
+
+	// ----------------------------------------------------------------------
+	/** Called when the user performs a pinch zoom gesture. The original distance is the distance in pixels when the gesture
+	 * started.
+	 * @param initialDistance distance between fingers when the gesture started.
+	 * @param distance current distance between fingers.
+	 */
+	override fun zoom(initialDistance: Float, distance: Float): Boolean = false
+
+	// ----------------------------------------------------------------------
+	/** Called when a user performs a pinch zoom gesture. Reports the initial positions of the two involved fingers and their
+	 * current positions.
+	 * @param initialPointer1
+	 * @param initialPointer2
+	 * @param pointer1
+	 * @param pointer2
+	 */
+	override fun pinch(initialPointer1: Vector2, initialPointer2: Vector2, pointer1: Vector2, pointer2: Vector2): Boolean = false
+
+	// ----------------------------------------------------------------------
+	/** Called when no longer pinching.  */
+	override fun pinchStop() { }
+
+	//endregion
     //############################################################################
     //region Methods
 
@@ -219,10 +284,12 @@ abstract class AbstractScreen() : Screen, InputProcessor
 
         inputMultiplexer = InputMultiplexer()
 
+		val gestureProcess = GestureDetector(this)
         val inputProcessorOne = this
         val inputProcessorTwo = stage
 
         inputMultiplexer.addProcessor(inputProcessorTwo)
+		inputMultiplexer.addProcessor(gestureProcess)
         inputMultiplexer.addProcessor(inputProcessorOne)
 
         create()

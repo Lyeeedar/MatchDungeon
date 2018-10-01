@@ -30,11 +30,17 @@ abstract class Special(orbDesc: OrbDesc, theme: Theme) : Matchable(theme)
 	override var desc: OrbDesc = orbDesc
 		set(value)
 		{
-			field = value
-
 			if (this !is GemSpecial)
 			{
-				sprite.colour = desc.sprite.colour
+				if (value.key != -1)
+				{
+					field = value
+					sprite.colour = desc.sprite.colour
+				}
+			}
+			else
+			{
+				field = value
 			}
 		}
 

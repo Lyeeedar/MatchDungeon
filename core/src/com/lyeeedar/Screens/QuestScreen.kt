@@ -13,12 +13,14 @@ import com.lyeeedar.*
 import com.lyeeedar.Board.Mote
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
+import com.lyeeedar.Card.CardNode
 import com.lyeeedar.Game.*
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Random
 import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.getXml
 import ktx.actors.then
 import ktx.collections.toGdxArray
 
@@ -114,7 +116,21 @@ class QuestScreen : AbstractScreen()
 						return false
 					}
 
-					card = Card.load(cardPath)
+					val xml = getXml(cardPath)
+					if (xml.name == "CardContent")
+					{
+						val node = CardNode()
+						node.fillWithDefaults()
+						node.content = cardPath
+
+						val nodes = Array<CardNode>()
+						nodes.add(node)
+						card = Card("", nodes, node)
+					}
+					else
+					{
+						card = Card.load(cardPath)
+					}
 				}
 
 				val cardScreen = CardScreen.instance

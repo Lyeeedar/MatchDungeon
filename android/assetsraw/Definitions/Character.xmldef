@@ -12,22 +12,29 @@
 		</Data>
 	</Definition>
 	<Definition Name="Statistics" IsGlobal="True" meta:RefKey="StructDef">
-		<Data Name="Health" Type="Int" Min="-999999" SkipIfDefault="False" meta:RefKey="Number" />
-		<Data Name="MatchDamage" SkipIfDefault="False" meta:RefKey="Number" />
-		<Data Name="AbilityDamage" SkipIfDefault="False" meta:RefKey="Number" />
-		<Data Name="PowerGain" SkipIfDefault="False" meta:RefKey="Number" />
-		<Data Name="BonusGold" SkipIfDefault="False" meta:RefKey="Number" />
-		<Data Name="Haste" SkipIfDefault="False" meta:RefKey="Number" />
+		<!--Health-->
+		<Data Name="Health" Type="Int" Min="-999999" meta:RefKey="Number" />
 		<Data Name="Regeneration" Min="0" meta:RefKey="Number" />
+		<!--Damage-->
+		<Data Name="MatchDamage" meta:RefKey="Number" />
+		<Data Name="AbilityDamage" meta:RefKey="Number" />
 		<Data Name="Pierce" Min="0" meta:RefKey="Number" />
 		<Data Name="Berserk" Min="0" meta:RefKey="Number" />
+		<!--Gold-->
+		<Data Name="BonusGold" meta:RefKey="Number" />
 		<Data Name="PriceReduction" Min="0" meta:RefKey="Number" />
+		<!--Defense-->
 		<Data Name="Aegis" Min="0" Max="1" meta:RefKey="Number" />
 		<Data Name="Counter" Min="0" Max="1" meta:RefKey="Number" />
 		<Data Name="Reflect" Min="0" Max="1" meta:RefKey="Number" />
-		<Data Name="ChaoticNature" Min="0" Max="1" meta:RefKey="Number" />
+		<!--Aura-->
 		<Data Name="WeaknessAura" Min="0" meta:RefKey="Number" />
 		<Data Name="NecroticAura" Min="0" meta:RefKey="Number" />
+		<!--Misc-->
+		<Data Name="PowerGain" meta:RefKey="Number" />
 		<Data Name="BuffDuration" Min="0" meta:RefKey="Number" />
+		<Data Name="Haste" meta:RefKey="Number" />
+		<Data Name="ChaoticNature" Min="0" Max="1" meta:RefKey="Number" />
+		<Data Name="Luck" Min="-1" Max="1" meta:RefKey="Number" />
 	</Definition>
 </Definitions>
