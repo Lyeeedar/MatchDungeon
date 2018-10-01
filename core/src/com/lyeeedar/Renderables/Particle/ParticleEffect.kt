@@ -244,7 +244,13 @@ class ParticleEffect : Renderable()
 
 					for (pdata in particle.particles)
 					{
-						val size = particle.size.valAt(pdata.sizeStream, pdata.life).lerp(pdata.ranVal)
+						val keyframe1 = pdata.keyframe1
+						val keyframe2 = pdata.keyframe2
+						val alpha = pdata.keyframeAlpha
+
+						val sizeRange = keyframe1.size[pdata.sizeStream].lerp(keyframe2.size[pdata.sizeStream], alpha, particle.tempRange)
+
+						val size = sizeRange.lerp(pdata.ranVal)
 						var sizex = size
 						var sizey = size
 

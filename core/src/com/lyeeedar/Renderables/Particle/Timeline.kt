@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Util.Colour
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.asGdxArray
+import com.lyeeedar.Util.lerp
 
 /**
  * Created by Philip on 14-Aug-16.
@@ -122,7 +123,14 @@ data class Range(var v1: Float, var v2: Float)
 		v2 = split[1].toFloat()
 	}
 
-	fun lerp(alpha: Float) = Interpolation.linear.apply(v1, v2, alpha)
+	fun lerp(other: Range, alpha: Float, container: Range): Range
+	{
+		container.v1 = v1.lerp(other.v1, alpha)
+		container.v2 = v2.lerp(other.v2, alpha)
+		return container
+	}
+
+	fun lerp(alpha: Float) = v1.lerp(v2, alpha)
 }
 
 class RangeLerpTimeline : Timeline<Range>()

@@ -1,9 +1,13 @@
 package com.lyeeedar.Renderables.Particle
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion
+import com.badlogic.gdx.math.MathUtils
+import com.badlogic.gdx.math.MathUtils.cos
+import com.badlogic.gdx.math.MathUtils.sin
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Array
+import com.badlogic.gdx.utils.ObjectSet
 import com.badlogic.gdx.utils.Pool
 import com.badlogic.gdx.utils.Pools
 import com.lyeeedar.BlendMode
@@ -14,6 +18,17 @@ import ktx.math.div
 /**
  * Created by Philip on 14-Aug-16.
  */
+
+class ParticleKeyframe(
+		val time: Float,
+		val texture: kotlin.Array<TextureRegion>,
+		val colour: kotlin.Array<Colour>,
+		val alpha: kotlin.Array<Float>,
+		val rotationSpeed: kotlin.Array<Range>,
+		val size: kotlin.Array<Range>)
+{
+	constructor() : this(0f, emptyArray<TextureRegion>(), emptyArray<Colour>(), emptyArray<Float>(), emptyArray<Range>(), emptyArray<Range>())
+}
 
 class Particle(val emitter: Emitter)
 {
@@ -31,6 +46,7 @@ class Particle(val emitter: Emitter)
 	private val reflection = Vector2()
 	private val temp = Vector2()
 	private val temp2 = Vector2()
+	val tempRange = Range(0f, 0f)
 	private val collisionList = Array<Direction>(false, 16)
 
 	val particles = Array<ParticleData>(false, 16)
@@ -43,36 +59,73 @@ class Particle(val emitter: Emitter)
 	var velocityAligned = false
 	lateinit var collision: CollisionAction
 	var blendKeyframes = false
-	val texture = StepTimeline<TextureRegion>()
-	val colour = ColourTimeline()
-	val alpha = LerpTimeline()
-	val rotationSpeed = RangeLerpTimeline()
-	val size = RangeLerpTimeline()
+	var keyframes: kotlin.Array<ParticleKeyframe> = emptyArray()
 
 	fun particleCount() = particles.size
 	fun complete() = particles.size == 0
 
 	fun simulate(delta: Float, collisionGrid: Array2D<Boolean>?, gravity: Float)
 	{
+		var particleI = 0
+
 		val itr = particles.iterator()
 		while (itr.hasNext())
 		{
+			particleI++
+
 			val particle = itr.next()
 			particle.life += delta
-			if (particle.life > lifetime.v2)
+			val life = particle.life
+			if (life > lifetime.v2)
 			{
 				itr.remove()
 				particle.free()
 			}
 			else
 			{
-				if (velocityAligned)
+				var keyframeIndex = particle.keyframeIndex
+				while (keyframeIndex < keyframes.size-1)
 				{
-					particle.rotation = vectorToAngle(particle.velocity.x, particle.velocity.y)
+					if (life >= keyframes[keyframeIndex+1].time)
+					{
+						keyframeIndex++
+					}
+					else
+					{
+						break
+					}
+				}
+
+				val keyframe1 = keyframes[keyframeIndex]
+				val keyframe2: ParticleKeyframe
+				val alpha: Float
+
+				if (keyframeIndex < keyframes.size-1)
+				{
+					keyframe2 = keyframes[keyframeIndex+1]
+					alpha = (life - keyframe1.time) / (keyframe2.time - keyframe1.time)
 				}
 				else
 				{
-					var rotation = rotationSpeed.valAt(particle.rotStream, particle.life).lerp(particle.ranVal)
+					keyframe2 = keyframes[keyframeIndex]
+					alpha = 0f
+				}
+
+				particle.keyframeIndex = keyframeIndex
+				particle.keyframe1 = keyframe1
+				particle.keyframe2 = keyframe2
+				particle.keyframeAlpha = alpha
+
+				val velocity = particle.velocity
+
+				if (velocityAligned)
+				{
+					particle.rotation = vectorToAngle(velocity.x, velocity.y)
+				}
+				else
+				{
+					val rotationRange = keyframe1.rotationSpeed[particle.rotStream].lerp(keyframe2.rotationSpeed[particle.rotStream], alpha, tempRange)
+					var rotation = rotationRange.lerp(particle.ranVal)
 
 					if (emitter.particleEffect.flipX && emitter.particleEffect.flipY)
 					{
@@ -86,34 +139,35 @@ class Particle(val emitter: Emitter)
 					particle.rotation += rotation * delta
 				}
 
-				temp.set(particle.velocity).scl(drag * delta)
-				particle.velocity.sub(temp)
+				temp.set(velocity).scl(drag * delta)
+				velocity.sub(temp)
 
-				particle.velocity.y += gravity * delta
+				velocity.y += gravity * delta
 
 				if (brownian > 0f)
 				{
-					val direction = temp2.set(particle.velocity)
-					val length = particle.velocity.len()
+					val direction = temp2.set(velocity)
+					val length = velocity.len()
 
 					if (length != 0f) direction.div(length)
 
-					val impulseVector = temp.set(Random.random()-0.5f, Random.random()-0.5f)
-					impulseVector.nor()
+					val brownianSampleVal = (particleI + largePrime).rem(numBrownianVectors)
+
+					val impulseVector = temp.set(brownianVectors[brownianSampleVal])
 
 					direction.lerp(impulseVector, brownian * delta)
 					direction.nor()
 
-					particle.velocity.set(direction).scl(length)
+					velocity.set(direction).scl(length)
 				}
 
-				moveVec.set(particle.velocity).scl(delta)
+				moveVec.set(velocity).scl(delta)
 
 				oldPos.set(particle.position)
 
 				particle.position.add(moveVec)
 
-				if (collisionGrid != null && collision != CollisionAction.NONE)
+				if (collision != CollisionAction.NONE && collisionGrid != null)
 				{
 					val aabb = getBoundingBox(particle)
 
@@ -138,7 +192,7 @@ class Particle(val emitter: Emitter)
 							if (collision == CollisionAction.BOUNCE)
 							{
 								particle.position.set(oldPos)
-								particle.velocity.set(reflected)
+								velocity.set(reflected)
 							}
 							else
 							{
@@ -246,7 +300,12 @@ class Particle(val emitter: Emitter)
 
 	fun getBoundingBox(particle: ParticleData, overridePos: Vector2? = null): Rectangle
 	{
-		val scale = size.valAt(particle.sizeStream, particle.life).lerp(particle.ranVal)
+		val keyframe1 = particle.keyframe1
+		val keyframe2 = particle.keyframe2
+		val alpha = particle.keyframeAlpha
+
+		val sizeRange = keyframe1.size[particle.sizeStream].lerp(keyframe2.size[particle.sizeStream], alpha, tempRange)
+		val scale = sizeRange.lerp(particle.ranVal)
 		val sx = scale * emitter.size.x
 		val sy = scale * emitter.size.y
 
@@ -290,11 +349,12 @@ class Particle(val emitter: Emitter)
 		val particle = ParticleData.obtain().set(
 				position, velocity,
 				rotation, (lifetime.v2 - lifetime.v1) * Random.random(),
-				Random.random(texture.streams.size-1),
-				Random.random(colour.streams.size-1),
-				Random.random(alpha.streams.size-1),
-				Random.random(rotationSpeed.streams.size-1),
-				Random.random(size.streams.size-1),
+				0, keyframes[0], keyframes[0], 0f,
+				Random.random(keyframes[0].texture.size-1),
+				Random.random(keyframes[0].colour.size-1),
+				Random.random(keyframes[0].alpha.size-1),
+				Random.random(keyframes[0].rotationSpeed.size-1),
+				Random.random(keyframes[0].size.size-1),
 				Random.random())
 
 		particles.add(particle)
@@ -302,6 +362,18 @@ class Particle(val emitter: Emitter)
 
 	companion object
 	{
+		val numBrownianVectors = 30
+		val brownianVectors = kotlin.Array<Vector2>(numBrownianVectors) { i -> Vector2() }
+		val largePrime = 829
+		fun generateBrownianVectors()
+		{
+			for (i in 0 until numBrownianVectors)
+			{
+				val azimuth = Random.random() * MathUtils.PI2
+				brownianVectors[i].set(cos(azimuth), sin(azimuth))
+			}
+		}
+
 		fun load(xml: XmlData, emitter: Emitter): Particle
 		{
 			val particle = Particle(emitter)
@@ -316,75 +388,117 @@ class Particle(val emitter: Emitter)
 
 			particle.blendKeyframes = xml.getBoolean("BlendKeyframes", false)
 
+			// Load timelines
+			val texture = StepTimeline<TextureRegion>()
+			val colour = ColourTimeline()
+			val alpha = LerpTimeline()
+			val rotationSpeed = RangeLerpTimeline()
+			val size = RangeLerpTimeline()
+
 			val textureEls = xml.getChildByName("TextureKeyframes")
 			if (textureEls != null)
 			{
-				particle.texture.parse(textureEls, { AssetManager.loadTextureRegion(it) ?: throw RuntimeException("Failed to find texture $it!") }, particle.lifetime.v2)
+				texture.parse(textureEls, { AssetManager.loadTextureRegion(it) ?: throw RuntimeException("Failed to find texture $it!") }, particle.lifetime.v2)
 			}
 			else
 			{
-				particle.texture[0, 0f] = AssetManager.loadTextureRegion("white")!!
+				texture[0, 0f] = AssetManager.loadTextureRegion("white")!!
 			}
 
 			val colourEls = xml.getChildByName("ColourKeyframes")
 			if (colourEls != null)
 			{
-				particle.colour.parse(colourEls, { AssetManager.loadColour(it) }, particle.lifetime.v2)
+				colour.parse(colourEls, { AssetManager.loadColour(it) }, particle.lifetime.v2)
 			}
 			else
 			{
-				particle.colour[0, 0f] = Colour(1f, 1f, 1f, 1f)
+				colour[0, 0f] = Colour(1f, 1f, 1f, 1f)
 			}
 
 			val alphaEls = xml.getChildByName("AlphaKeyframes")
 			if (alphaEls != null)
 			{
-				particle.alpha.parse(alphaEls, { it.toFloat() }, particle.lifetime.v2)
+				alpha.parse(alphaEls, { it.toFloat() }, particle.lifetime.v2)
 			}
 			else
 			{
-				particle.alpha[0, 0f] = 1f
+				alpha[0, 0f] = 1f
 			}
 
 			val rotationSpeedEls = xml.getChildByName("RotationSpeedKeyframes")
 			if (rotationSpeedEls != null)
 			{
-				particle.rotationSpeed.parse(rotationSpeedEls, { Range(it) }, particle.lifetime.v2)
+				rotationSpeed.parse(rotationSpeedEls, { Range(it) }, particle.lifetime.v2)
 			}
 			else
 			{
-				particle.rotationSpeed[0, 0f] = Range(0f, 0f)
+				rotationSpeed[0, 0f] = Range(0f, 0f)
 			}
 
 			val sizeEls = xml.getChildByName("SizeKeyframes")
 			if (sizeEls != null)
 			{
-				particle.size.parse(sizeEls, { Range(it) }, particle.lifetime.v2)
+				size.parse(sizeEls, { Range(it) }, particle.lifetime.v2)
 			}
 			else
 			{
-				particle.size[0, 0f] = Range(1f, 1f)
+				size[0, 0f] = Range(1f, 1f)
 			}
+
+			// Make map of times
+			val times = ObjectSet<Float>()
+			for (keyframe in texture.streams.flatMap { it }) { times.add(keyframe.first) }
+			for (keyframe in colour.streams.flatMap { it }) { times.add(keyframe.first) }
+			for (keyframe in alpha.streams.flatMap { it }) { times.add(keyframe.first) }
+			for (keyframe in rotationSpeed.streams.flatMap { it }) { times.add(keyframe.first) }
+			for (keyframe in size.streams.flatMap { it }) { times.add(keyframe.first) }
+
+			// Sample timelines at each time to make keyframes
+			val keyframes = kotlin.Array<ParticleKeyframe>(times.size) { i -> ParticleKeyframe() }
+			var keyframeI = 0
+			for (time in times.sortedBy { it })
+			{
+				val textureArr = kotlin.Array<TextureRegion>(texture.streams.size) { i -> texture.valAt(i, time) }
+				val colourArr = kotlin.Array<Colour>(colour.streams.size) { i -> colour.valAt(i, time).copy() }
+				val alphaArr = kotlin.Array<Float>(alpha.streams.size) { i -> alpha.valAt(i, time) }
+				val rotationSpeedArr = kotlin.Array<Range>(rotationSpeed.streams.size) { i -> rotationSpeed.valAt(i, time).copy() }
+				val sizeArr = kotlin.Array<Range>(size.streams.size) { i -> size.valAt(i, time).copy() }
+
+				val keyframe = ParticleKeyframe(
+						time,
+						textureArr,
+						colourArr,
+						alphaArr,
+						rotationSpeedArr,
+						sizeArr)
+				keyframes[keyframeI++] = keyframe
+			}
+			particle.keyframes = keyframes
 
 			return particle
 		}
 	}
 }
 
-data class ParticleData(val position: Vector2, val velocity: Vector2,
+class ParticleData(val position: Vector2, val velocity: Vector2,
 						var rotation: Float, var life: Float,
+						var keyframeIndex: Int, var keyframe1: ParticleKeyframe, var keyframe2: ParticleKeyframe, var keyframeAlpha: Float,
 						var texStream: Int, var colStream: Int, var alphaStream: Int, var rotStream: Int, var sizeStream: Int,
 						var ranVal: Float,
 						val parentBlock: ParticleBlock, val parentBlockIndex: Int)
 {
-	constructor(parentBlock: ParticleBlock, parentBlockIndex: Int): this(Vector2(), Vector2(0f, 1f), 0f, 0f, 0, 0, 0, 0, 0, 0f, parentBlock, parentBlockIndex)
+	constructor(parentBlock: ParticleBlock, parentBlockIndex: Int): this(Vector2(), Vector2(0f, 1f), 0f, 0f, 0, ParticleKeyframe(), ParticleKeyframe(), 0f, 0, 0, 0, 0, 0, 0f, parentBlock, parentBlockIndex)
 
-	fun set(position: Vector2, velocity: Vector2, rotation: Float, life: Float, texStream: Int, colStream: Int, alphaStream: Int, rotStream: Int, sizeStream: Int, ranVal: Float): ParticleData
+	fun set(position: Vector2, velocity: Vector2, rotation: Float, life: Float, keyframeIndex: Int, keyframe1: ParticleKeyframe, keyframe2: ParticleKeyframe, keyframeAlpha: Float, texStream: Int, colStream: Int, alphaStream: Int, rotStream: Int, sizeStream: Int, ranVal: Float): ParticleData
 	{
 		this.position.set(position)
 		this.velocity.set(velocity)
 		this.life = life
 		this.rotation = rotation
+		this.keyframeIndex = keyframeIndex
+		this.keyframe1 = keyframe1
+		this.keyframe2 = keyframe2
+		this.keyframeAlpha = keyframeAlpha
 		this.texStream = texStream
 		this.colStream = colStream
 		this.alphaStream = alphaStream

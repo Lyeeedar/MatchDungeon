@@ -13,6 +13,7 @@ import com.lyeeedar.BlendMode
 import com.lyeeedar.Direction
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Particle.Emitter
+import com.lyeeedar.Renderables.Particle.Particle
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.RadixSort.Companion.MOST_SIGNIFICANT_BYTE_INDEX
 import com.lyeeedar.Renderables.Sprite.Sprite
@@ -237,6 +238,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 			debugDrawIndex = 0
 
 			batchID = random.nextInt()
+			Particle.generateBrownianVectors()
 
 			for (entry in tilingMap)
 			{
@@ -359,10 +361,19 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 
 				for (pdata in particle.particles)
 				{
-					val texWindow = particle.texture.valAround(pdata.texStream, pdata.life)
-					val col = tempCol.set(particle.colour.valAt(pdata.colStream, pdata.life))
-					col.a = particle.alpha.valAt(pdata.alphaStream, pdata.life)
-					val size = particle.size.valAt(pdata.sizeStream, pdata.life).lerp(pdata.ranVal)
+					val keyframe1 = pdata.keyframe1
+					val keyframe2 = pdata.keyframe2
+					val alpha = pdata.keyframeAlpha
+
+					val tex1 = keyframe1.texture[pdata.texStream]
+					val tex2 = keyframe2.texture[pdata.texStream]
+
+					val col = tempCol.set(keyframe1.colour[pdata.colStream]).lerp(keyframe2.colour[pdata.colStream], alpha)
+					col.a = keyframe1.alpha[pdata.alphaStream].lerp(keyframe2.alpha[pdata.alphaStream], alpha)
+
+					val sizeRange = keyframe1.size[pdata.sizeStream].lerp(keyframe2.size[pdata.sizeStream], alpha, particle.tempRange)
+
+					val size = sizeRange.lerp(pdata.ranVal)
 					var sizex = size * width
 					var sizey = size * height
 
@@ -392,12 +403,12 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 
 					val comparisonVal = getComparisonVal((drawx-sizex*0.5f).toInt(), (drawy-sizey*0.5f).toInt(), layer, index, particle.blend)
 
-					val rs = RenderSprite.obtain().set( null, null, texWindow.v1, null, drawx * tileSize, drawy * tileSize, tempVec.x, tempVec.y, col, sizex, sizey, rotation, 1f, 1f, effect.flipX, effect.flipY, particle.blend, comparisonVal )
+					val rs = RenderSprite.obtain().set( null, null, tex1, null, drawx * tileSize, drawy * tileSize, tempVec.x, tempVec.y, col, sizex, sizey, rotation, 1f, 1f, effect.flipX, effect.flipY, particle.blend, comparisonVal )
 
 					if (particle.blendKeyframes)
 					{
-						rs.nextTexture = texWindow.v2
-						rs.blendAlpha = texWindow.alpha
+						rs.nextTexture = tex2
+						rs.blendAlpha = alpha
 					}
 
 					storeRenderSprite(rs)

@@ -32,12 +32,12 @@ class Leap() : Interpolation()
 }
 val leap = Leap()
 
-fun vectorToAngle(x: Float, y: Float) : Float
+inline fun vectorToAngle(x: Float, y: Float) : Float
 {
 	// basis vector 0,1
-	val dot = (0 * x + 1 * y).toDouble() // dot product
-	val det = (0 * y - 1 * x).toDouble() // determinant
-	val angle = Math.atan2(det, dot).toFloat() * MathUtils.radiansToDegrees
+	val dot = 0f * x + 1f * y // dot product
+	val det = 0f * y - 1f * x // determinant
+	val angle = MathUtils.atan2(det, dot) * MathUtils.radiansToDegrees
 
 	return angle
 }
@@ -80,7 +80,7 @@ fun Float.floor() = MathUtils.floor(this)
 fun Float.round() = MathUtils.round(this)
 fun Float.clamp(min: Float, max: Float) = MathUtils.clamp(this, min , max)
 
-fun Float.lerp(target: Float, alpha: Float) = MathUtils.lerp(this, target, alpha)
+inline fun Float.lerp(target: Float, alpha: Float) = this + (target - this) * alpha
 
 fun Int.romanNumerals(): String
 {
