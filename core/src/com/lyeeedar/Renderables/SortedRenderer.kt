@@ -371,9 +371,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 					val col = tempCol.set(keyframe1.colour[pdata.colStream]).lerp(keyframe2.colour[pdata.colStream], alpha)
 					col.a = keyframe1.alpha[pdata.alphaStream].lerp(keyframe2.alpha[pdata.alphaStream], alpha)
 
-					val sizeRange = keyframe1.size[pdata.sizeStream].lerp(keyframe2.size[pdata.sizeStream], alpha, particle.tempRange)
-
-					val size = sizeRange.lerp(pdata.ranVal)
+					val size = keyframe1.size[pdata.sizeStream].lerp(keyframe2.size[pdata.sizeStream], alpha, pdata.ranVal)
 					var sizex = size * width
 					var sizey = size * height
 
@@ -403,11 +401,11 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 
 					val comparisonVal = getComparisonVal((drawx-sizex*0.5f).toInt(), (drawy-sizey*0.5f).toInt(), layer, index, particle.blend)
 
-					val rs = RenderSprite.obtain().set( null, null, tex1, null, drawx * tileSize, drawy * tileSize, tempVec.x, tempVec.y, col, sizex, sizey, rotation, 1f, 1f, effect.flipX, effect.flipY, particle.blend, comparisonVal )
+					val rs = RenderSprite.obtain().set( null, null, tex1.second, null, drawx * tileSize, drawy * tileSize, tempVec.x, tempVec.y, col, sizex, sizey, rotation, 1f, 1f, effect.flipX, effect.flipY, particle.blend, comparisonVal )
 
 					if (particle.blendKeyframes)
 					{
-						rs.nextTexture = tex2
+						rs.nextTexture = tex2.second
 						rs.blendAlpha = alpha
 					}
 

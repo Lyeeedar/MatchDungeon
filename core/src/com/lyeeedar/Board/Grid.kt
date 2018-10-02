@@ -806,6 +806,8 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 		if (oldTile == null || newTile == null) return false
 
+		if (oldTile.spreader != null || newTile.spreader != null) return false
+
 		val oldSwap = oldTile.swappable ?: return false
 		val newSwap = newTile.swappable ?: return false
 

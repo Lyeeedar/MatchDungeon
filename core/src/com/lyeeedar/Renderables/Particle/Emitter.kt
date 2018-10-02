@@ -2,6 +2,9 @@ package com.lyeeedar.Renderables.Particle
 
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Array
+import com.esotericsoftware.kryo.Kryo
+import com.esotericsoftware.kryo.io.Input
+import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.Direction
 import com.lyeeedar.Util.Array2D
 import com.lyeeedar.Util.Random
@@ -356,6 +359,113 @@ class Emitter(val particleEffect: ParticleEffect)
 		if (!isCollisionEmitter) return
 
 		for (particle in particles) particle.callCollisionFunc(func)
+	}
+
+	fun store(kryo: Kryo, output: Output)
+	{
+		output.writeInt(type.ordinal)
+		output.writeInt(simulationSpace.ordinal)
+		output.writeInt(shape.ordinal)
+		output.writeFloat(width)
+		output.writeFloat(height)
+		output.writeFloat(emitterRotation)
+		output.writeInt(area.ordinal)
+		output.writeInt(dir.ordinal)
+		output.writeFloat(particleSpeed.v1)
+		output.writeFloat(particleSpeed.v2)
+		output.writeFloat(particleRotation.v1)
+		output.writeFloat(particleRotation.v2)
+		output.writeFloat(gravity)
+		output.writeBoolean(isCollisionEmitter)
+		output.writeBoolean(isBlockingEmitter)
+
+		output.writeInt(offset.streams.size)
+		for (stream in offset.streams)
+		{
+			output.writeInt(stream.size)
+			for (keyframe in stream)
+			{
+				output.writeFloat(keyframe.first)
+				output.writeFloat(keyframe.second.x)
+				output.writeFloat(keyframe.second.y)
+			}
+		}
+
+		output.writeInt(emissionRate.streams.size)
+		for (stream in emissionRate.streams)
+		{
+			output.writeInt(stream.size)
+			for (keyframe in stream)
+			{
+				output.writeFloat(keyframe.first)
+				output.writeFloat(keyframe.second)
+			}
+		}
+
+		output.writeBoolean(singleBurst)
+
+		output.writeInt(particles.size)
+		for (particle in particles)
+		{
+			particle.store(kryo, output)
+		}
+	}
+
+	fun restore(kryo: Kryo, input: Input)
+	{
+		type = EmissionType.values()[input.readInt()]
+		simulationSpace = SimulationSpace.values()[input.readInt()]
+		shape = EmissionShape.values()[input.readInt()]
+		width = input.readFloat()
+		height = input.readFloat()
+		emitterRotation = input.readFloat()
+		area = EmissionArea.values()[input.readInt()]
+		dir = EmissionDirection.values()[input.readInt()]
+		particleSpeed = Range(input.readFloat(), input.readFloat())
+		particleRotation = Range(input.readFloat(), input.readFloat())
+		gravity = input.readFloat()
+		isCollisionEmitter = input.readBoolean()
+		isBlockingEmitter = input.readBoolean()
+
+		val numOffsetStreams = input.readInt()
+		for (i in 0 until numOffsetStreams)
+		{
+			val stream = Array<Pair<Float, Vector2>>()
+			offset.streams.add(stream)
+
+			val numKeyframes = input.readInt()
+			for (ii in 0 until numKeyframes)
+			{
+				val time = input.readFloat()
+				val range = Vector2(input.readFloat(), input.readFloat())
+				stream.add(Pair(time, range))
+			}
+		}
+
+		val numRateStreams = input.readInt()
+		for (i in 0 until numRateStreams)
+		{
+			val stream = Array<Pair<Float, Float>>()
+			emissionRate.streams.add(stream)
+
+			val numKeyframes = input.readInt()
+			for (ii in 0 until numKeyframes)
+			{
+				val time = input.readFloat()
+				val rate = input.readFloat()
+				stream.add(Pair(time, rate))
+			}
+		}
+
+		singleBurst = input.readBoolean()
+
+		val numParticles = input.readInt()
+		for (i in 0 until numParticles)
+		{
+			val particle = Particle(this)
+			particle.restore(kryo, input)
+			particles.add(particle)
+		}
 	}
 
 	companion object

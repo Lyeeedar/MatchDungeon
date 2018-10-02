@@ -10,6 +10,9 @@ import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectSet
 import com.badlogic.gdx.utils.Pool
 import com.badlogic.gdx.utils.Pools
+import com.esotericsoftware.kryo.Kryo
+import com.esotericsoftware.kryo.io.Input
+import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.BlendMode
 import com.lyeeedar.Direction
 import com.lyeeedar.Util.*
@@ -21,13 +24,13 @@ import ktx.math.div
 
 class ParticleKeyframe(
 		val time: Float,
-		val texture: kotlin.Array<TextureRegion>,
+		val texture: kotlin.Array<Pair<String, TextureRegion>>,
 		val colour: kotlin.Array<Colour>,
 		val alpha: kotlin.Array<Float>,
 		val rotationSpeed: kotlin.Array<Range>,
 		val size: kotlin.Array<Range>)
 {
-	constructor() : this(0f, emptyArray<TextureRegion>(), emptyArray<Colour>(), emptyArray<Float>(), emptyArray<Range>(), emptyArray<Range>())
+	constructor() : this(0f, emptyArray<Pair<String, TextureRegion>>(), emptyArray<Colour>(), emptyArray<Float>(), emptyArray<Range>(), emptyArray<Range>())
 }
 
 class Particle(val emitter: Emitter)
@@ -46,7 +49,6 @@ class Particle(val emitter: Emitter)
 	private val reflection = Vector2()
 	private val temp = Vector2()
 	private val temp2 = Vector2()
-	val tempRange = Range(0f, 0f)
 	private val collisionList = Array<Direction>(false, 16)
 
 	val particles = Array<ParticleData>(false, 16)
@@ -124,8 +126,7 @@ class Particle(val emitter: Emitter)
 				}
 				else
 				{
-					val rotationRange = keyframe1.rotationSpeed[particle.rotStream].lerp(keyframe2.rotationSpeed[particle.rotStream], alpha, tempRange)
-					var rotation = rotationRange.lerp(particle.ranVal)
+					var rotation = keyframe1.rotationSpeed[particle.rotStream].lerp(keyframe2.rotationSpeed[particle.rotStream], alpha, particle.ranVal)
 
 					if (emitter.particleEffect.flipX && emitter.particleEffect.flipY)
 					{
@@ -304,8 +305,7 @@ class Particle(val emitter: Emitter)
 		val keyframe2 = particle.keyframe2
 		val alpha = particle.keyframeAlpha
 
-		val sizeRange = keyframe1.size[particle.sizeStream].lerp(keyframe2.size[particle.sizeStream], alpha, tempRange)
-		val scale = sizeRange.lerp(particle.ranVal)
+		val scale = keyframe1.size[particle.sizeStream].lerp(keyframe2.size[particle.sizeStream], alpha, particle.ranVal)
 		val sx = scale * emitter.size.x
 		val sy = scale * emitter.size.y
 
@@ -360,6 +360,90 @@ class Particle(val emitter: Emitter)
 		particles.add(particle)
 	}
 
+	fun store(kryo: Kryo, output: Output)
+	{
+		output.writeFloat(lifetime.v1)
+		output.writeFloat(lifetime.v2)
+		output.writeInt(blend.ordinal)
+		output.writeInt(collision.ordinal)
+		output.writeFloat(drag)
+		output.writeBoolean(velocityAligned)
+		output.writeBoolean(allowResize)
+		output.writeFloat(brownian)
+		output.writeBoolean(blendKeyframes)
+
+		output.writeInt(keyframes.size)
+		output.writeInt(keyframes[0].texture.size)
+		output.writeInt(keyframes[0].colour.size)
+		output.writeInt(keyframes[0].alpha.size)
+		output.writeInt(keyframes[0].rotationSpeed.size)
+		output.writeInt(keyframes[0].size.size)
+
+		for (keyframe in keyframes)
+		{
+			output.writeFloat(keyframe.time)
+
+			for (texture in keyframe.texture)
+			{
+				output.writeString(texture.first)
+			}
+
+			for (colour in keyframe.colour)
+			{
+				kryo.writeObject(output, colour)
+			}
+
+			for (alpha in keyframe.alpha)
+			{
+				output.writeFloat(alpha)
+			}
+
+			for (rotationSpeed in keyframe.rotationSpeed)
+			{
+				output.writeFloat(rotationSpeed.v1)
+				output.writeFloat(rotationSpeed.v2)
+			}
+
+			for (size in keyframe.size)
+			{
+				output.writeFloat(size.v1)
+				output.writeFloat(size.v2)
+			}
+		}
+	}
+
+	fun restore(kryo: Kryo, input: Input)
+	{
+		lifetime = Range(input.readFloat(), input.readFloat())
+		blend = BlendMode.values()[input.readInt()]
+		collision = CollisionAction.values()[input.readInt()]
+		drag = input.readFloat()
+		velocityAligned = input.readBoolean()
+		allowResize = input.readBoolean()
+		brownian = input.readFloat()
+		blendKeyframes = input.readBoolean()
+
+		val numKeyframes = input.readInt()
+		val numTextureStreams = input.readInt()
+		val numColourStreams = input.readInt()
+		val numAlphaStreams = input.readInt()
+		val numRotationSpeedStreams = input.readInt()
+		val numSizeStreams = input.readInt()
+
+		keyframes = kotlin.Array<ParticleKeyframe>(numKeyframes) { i -> ParticleKeyframe() }
+		for (i in 0 until numKeyframes)
+		{
+			keyframes[i] = ParticleKeyframe(
+					input.readFloat(),
+					kotlin.Array<Pair<String, TextureRegion>>(numTextureStreams) { i -> val name = input.readString(); Pair(name, AssetManager.loadTextureRegion(name)!!) },
+					kotlin.Array<Colour>(numColourStreams) { i -> kryo.readObject(input, Colour::class.java) },
+					kotlin.Array<Float>(numAlphaStreams) { i -> input.readFloat() },
+					kotlin.Array<Range>(numRotationSpeedStreams) { i -> Range(input.readFloat(), input.readFloat()) },
+					kotlin.Array<Range>(numSizeStreams) { i -> Range(input.readFloat(), input.readFloat()) }
+										   )
+		}
+	}
+
 	companion object
 	{
 		val numBrownianVectors = 30
@@ -389,7 +473,7 @@ class Particle(val emitter: Emitter)
 			particle.blendKeyframes = xml.getBoolean("BlendKeyframes", false)
 
 			// Load timelines
-			val texture = StepTimeline<TextureRegion>()
+			val texture = StepTimeline<Pair<String, TextureRegion>>()
 			val colour = ColourTimeline()
 			val alpha = LerpTimeline()
 			val rotationSpeed = RangeLerpTimeline()
@@ -398,11 +482,11 @@ class Particle(val emitter: Emitter)
 			val textureEls = xml.getChildByName("TextureKeyframes")
 			if (textureEls != null)
 			{
-				texture.parse(textureEls, { AssetManager.loadTextureRegion(it) ?: throw RuntimeException("Failed to find texture $it!") }, particle.lifetime.v2)
+				texture.parse(textureEls, { Pair(it, AssetManager.loadTextureRegion(it) ?: throw RuntimeException("Failed to find texture $it!")) }, particle.lifetime.v2)
 			}
 			else
 			{
-				texture[0, 0f] = AssetManager.loadTextureRegion("white")!!
+				texture[0, 0f] = Pair("white", AssetManager.loadTextureRegion("white")!!)
 			}
 
 			val colourEls = xml.getChildByName("ColourKeyframes")
@@ -458,7 +542,7 @@ class Particle(val emitter: Emitter)
 			var keyframeI = 0
 			for (time in times.sortedBy { it })
 			{
-				val textureArr = kotlin.Array<TextureRegion>(texture.streams.size) { i -> texture.valAt(i, time) }
+				val textureArr = kotlin.Array<Pair<String, TextureRegion>>(texture.streams.size) { i -> texture.valAt(i, time) }
 				val colourArr = kotlin.Array<Colour>(colour.streams.size) { i -> colour.valAt(i, time).copy() }
 				val alphaArr = kotlin.Array<Float>(alpha.streams.size) { i -> alpha.valAt(i, time) }
 				val rotationSpeedArr = kotlin.Array<Range>(rotationSpeed.streams.size) { i -> rotationSpeed.valAt(i, time).copy() }

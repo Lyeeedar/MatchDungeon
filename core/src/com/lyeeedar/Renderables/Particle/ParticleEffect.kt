@@ -5,13 +5,16 @@ import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Array
+import com.badlogic.gdx.utils.ObjectMap
 import com.badlogic.gdx.utils.Pools
+import com.esotericsoftware.kryo.Kryo
+import com.esotericsoftware.kryo.io.Input
+import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.Direction
 import com.lyeeedar.Renderables.Renderable
-import com.lyeeedar.Util.Array2D
-import com.lyeeedar.Util.Colour
-import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.getXml
+import com.lyeeedar.Util.*
+import ktx.collections.set
+
 
 /**
  * Created by Philip on 14-Aug-16.
@@ -248,9 +251,7 @@ class ParticleEffect : Renderable()
 						val keyframe2 = pdata.keyframe2
 						val alpha = pdata.keyframeAlpha
 
-						val sizeRange = keyframe1.size[pdata.sizeStream].lerp(keyframe2.size[pdata.sizeStream], alpha, particle.tempRange)
-
-						val size = sizeRange.lerp(pdata.ranVal)
+						val size = keyframe1.size[pdata.sizeStream].lerp(keyframe2.size[pdata.sizeStream], alpha, pdata.ranVal)
 						var sizex = size
 						var sizey = size
 
@@ -302,8 +303,50 @@ class ParticleEffect : Renderable()
 		return effect
 	}
 
+	fun store(kryo: Kryo, output: Output)
+	{
+		output.writeString(loadPath)
+
+		output.writeFloat(warmupTime)
+		output.writeBoolean(loop)
+		output.writeInt(emitters.size)
+
+		for (emitter in emitters)
+		{
+			emitter.store(kryo, output)
+		}
+	}
+
+	fun restore(kryo: Kryo, input: Input)
+	{
+		loadPath = input.readString()
+		warmupTime = input.readFloat()
+		loop = input.readBoolean()
+
+		val numEmitters = input.readInt()
+		for (i in 0 until numEmitters)
+		{
+			val emitter = Emitter(this)
+			emitter.restore(kryo, input)
+			emitters.add(emitter)
+		}
+	}
+
 	companion object
 	{
+		val kryo: Kryo by lazy { initKryo() }
+		fun initKryo(): Kryo
+		{
+			val kryo = Kryo()
+			kryo.isRegistrationRequired = false
+
+			kryo.registerGdxSerialisers()
+			kryo.registerLyeeedarSerialisers()
+
+			return kryo
+		}
+		val storedMap = ObjectMap<String, ByteArray>()
+
 		fun load(xml: XmlData): ParticleEffect
 		{
 			val effect = ParticleEffect()
@@ -324,10 +367,28 @@ class ParticleEffect : Renderable()
 
 		fun load(path: String): ParticleEffect
 		{
-			val xml = getXml("Particles/$path")
-			val effect = load(xml)
-			effect.loadPath = path
-			return effect
+			if (storedMap.containsKey(path))
+			{
+				val bytes = storedMap[path]
+				val input = Input(bytes, 0, bytes.size)
+
+				val effect = ParticleEffect()
+				effect.restore(kryo, input)
+
+				return effect
+			}
+			else
+			{
+				val xml = getXml("Particles/$path")
+				val effect = load(xml)
+				effect.loadPath = path
+
+				val output = Output(1024, -1)
+				effect.store(kryo, output)
+				storedMap[path] = output.buffer
+
+				return effect
+			}
 		}
 	}
 }

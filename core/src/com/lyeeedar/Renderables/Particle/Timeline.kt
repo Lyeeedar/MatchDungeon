@@ -123,11 +123,11 @@ data class Range(var v1: Float, var v2: Float)
 		v2 = split[1].toFloat()
 	}
 
-	fun lerp(other: Range, alpha: Float, container: Range): Range
+	fun lerp(other: Range, lerpAlpha: Float, rangeAlpha: Float): Float
 	{
-		container.v1 = v1.lerp(other.v1, alpha)
-		container.v2 = v2.lerp(other.v2, alpha)
-		return container
+		val min = v1.lerp(other.v1, lerpAlpha)
+		val max = v2.lerp(other.v2, lerpAlpha)
+		return min.lerp(max, rangeAlpha)
 	}
 
 	fun lerp(alpha: Float) = v1.lerp(v2, alpha)

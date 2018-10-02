@@ -28,18 +28,22 @@
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>
-					<Count>40</Count>
+					<Count>85</Count>
 				</Money>
 				<Money>
 					<Chance>High</Chance>
-					<Count>15</Count>
+					<Count>25</Count>
 				</Money>
 				<Money>
 					<Chance>High</Chance>
-					<Count>15</Count>
+					<Count>20</Count>
 				</Money>
 				<Equipment>
-					<Chance>Low</Chance>
+					<Chance>Medium</Chance>
+					<FromDeck>true</FromDeck>
+				</Equipment>
+				<Equipment>
+					<Chance>Medium</Chance>
 					<FromDeck>true</FromDeck>
 				</Equipment>
 			</Rewards>
