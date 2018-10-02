@@ -84,6 +84,19 @@ class LeapAnimation : AbstractMoveAnimation
 		return this
 	}
 
+	fun setAbsolute(duration: Float, p1: Vector2, p2: Vector2, height: Float): LeapAnimation
+	{
+		this.duration = duration
+		this.p1.set(p1.x, p1.y)
+		this.p2.set(p2.x, p2.y)
+		this.height = height
+		this.time = 0f
+
+		update(0f)
+
+		return this
+	}
+
 	fun set(duration: Float, path: Array<Vector2>, height: Float): LeapAnimation
 	{
 		this.duration = duration

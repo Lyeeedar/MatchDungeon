@@ -1,20 +1,26 @@
 package com.lyeeedar.Renderables.Particle
 
 import com.badlogic.gdx.graphics.g2d.Batch
-import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Actor
 import com.lyeeedar.Global
+import com.lyeeedar.Renderables.SortedRenderer
+import com.lyeeedar.Util.Colour
 
-open class ParticleEffectActor(val particle: ParticleEffect, val tileSize: Float, val pos: Vector2, var completionFunc: (() -> Unit)? = null): Actor()
+open class ParticleEffectActor(val particle: ParticleEffect, var completionFunc: (() -> Unit)? = null): Actor()
 {
+	val renderer: SortedRenderer
+	val colour = Colour()
+
 	init
 	{
 		Global.stage.addActor(this)
+		renderer = SortedRenderer(1f, stage.width, stage.height, 1, true)
 	}
 
 	override fun act(delta: Float)
 	{
+		particle.setPosition(x, y)
+
 		super.act(delta)
 		val complete = particle.update(delta)
 		if (complete)
@@ -28,20 +34,11 @@ open class ParticleEffectActor(val particle: ParticleEffect, val tileSize: Float
 	{
 		super.draw(batch, parentAlpha)
 
-		var x = pos.x
-		var y = pos.y
+		colour.set(color)
+		colour.a *= parentAlpha
 
-		if ( particle.animation != null )
-		{
-			val offset = particle.animation?.renderOffset(false)
-
-			if (offset != null)
-			{
-				x += offset[0]
-				y += offset[1]
-			}
-		}
-
-		particle.render(batch as SpriteBatch, x, y, tileSize)
+		renderer.begin(0f, 0f, 0f)
+		renderer.queueParticle(particle, x, y, 0, 0, colour, width, height)
+		renderer.flush(batch!!)
 	}
 }

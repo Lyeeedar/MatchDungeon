@@ -25,6 +25,8 @@ class CompletionConditionDie : AbstractCompletionCondition()
 
 	val blinkTable = Table()
 
+	lateinit var table: Table
+
 	override fun attachHandlers(grid: Grid)
 	{
 		maxHP = grid.level.player.getStat(Statistic.HEALTH).toInt()
@@ -33,7 +35,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 		grid.onAttacked += fun(c): Boolean {
 
 			val sprite = c.sprite.copy()
-			val dst = hpLabel.localToStageCoordinates(Vector2())
+			val dst = table.localToStageCoordinates(Vector2(Random.random() * table.width - table.width / 2f, Random.random() * table.height - table.height / 2f))
 			val src = GridWidget.instance.pointToScreenspace(c)
 
 			Mote(src, dst, sprite, GridWidget.instance.tileSize,
@@ -61,20 +63,24 @@ class CompletionConditionDie : AbstractCompletionCondition()
 
 					 if (blocked)
 					 {
-						 val pos = hpLabel.localToStageCoordinates(Vector2(hpLabel.width/2f, hpLabel.height/2f))
+						 val pos = dst
 
 						 val healSprite = AssetManager.loadParticleEffect("Block")
-						 val actor = ParticleEffectActor(healSprite, 32f, pos)
+						 val actor = ParticleEffectActor(healSprite)
+						 actor.setSize(48f, 48f)
+						 actor.setPosition(pos.x, pos.y)
 						 Global.stage.addActor(actor)
 					 }
 					 else
 					 {
 						 if (hp > 0) hp--
 
-						 val pos = hpLabel.localToStageCoordinates(Vector2(hpLabel.width/2f, hpLabel.height/2f))
+						 val pos = dst
 
 						 val healSprite = AssetManager.loadParticleEffect("Hit")
-						 val actor = ParticleEffectActor(healSprite, 32f, pos)
+						 val actor = ParticleEffectActor(healSprite)
+						 actor.setSize(48f, 48f)
+						 actor.setPosition(pos.x, pos.y)
 						 Global.stage.addActor(actor)
 
 						 hpLabel.setText("$hp/$maxHP")
@@ -83,18 +89,18 @@ class CompletionConditionDie : AbstractCompletionCondition()
 
 					 if (countered)
 					 {
-						 val src = hpLabel.localToStageCoordinates(Vector2(hpLabel.width/2f, hpLabel.height/2f))
+						 val src = dst
 						 val target = grid.grid.filter { it.monster != null }.random()
 						 if (target != null)
 						 {
-							 var dst = GridScreen.instance.grid!!.pointToScreenspace(target)
+							 val dst = GridScreen.instance.grid!!.pointToScreenspace(target)
 							 Mote(src, dst, sprite, GridWidget.instance.tileSize,
 								  {
 									  grid.pop(target, 0f, Global.player, Global.player.getStat(Statistic.MATCHDAMAGE), Global.player.getStat(Statistic.PIERCE))
-								  })
+								  }, animSpeed = 0.35f, leap = true)
 						 }
 					 }
-				 })
+				 }, animSpeed = 0.35f, leap = true)
 
 
 
@@ -114,7 +120,9 @@ class CompletionConditionDie : AbstractCompletionCondition()
 				val pos = hpLabel.localToStageCoordinates(Vector2(hpLabel.width/2f, hpLabel.height/2f))
 
 				val healSprite = AssetManager.loadParticleEffect("Heal")
-				val actor = ParticleEffectActor(healSprite, 32f, pos)
+				val actor = ParticleEffectActor(healSprite)
+				actor.setSize(48f, 48f)
+				actor.setPosition(pos.x, pos.y)
 				Global.stage.addActor(actor)
 
 				if (hp > maxHP)
@@ -171,7 +179,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 		stack.add(blinkTable)
 		stack.add(hpLabel)
 
-		val table = Table()
+		table = Table()
 		table.defaults().pad(10f)
 		table.add(stack).grow()
 
