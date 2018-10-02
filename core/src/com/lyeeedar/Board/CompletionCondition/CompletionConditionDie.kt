@@ -15,6 +15,7 @@ import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
+import ktx.math.minus
 
 class CompletionConditionDie : AbstractCompletionCondition()
 {
@@ -35,10 +36,11 @@ class CompletionConditionDie : AbstractCompletionCondition()
 		grid.onAttacked += fun(c): Boolean {
 
 			val sprite = c.sprite.copy()
-			val dst = table.localToStageCoordinates(Vector2(Random.random() * table.width - table.width / 2f, Random.random() * table.height - table.height / 2f))
+			val dst = table.localToStageCoordinates(Vector2(Random.random() * table.width, Random.random() * table.height))
+			val moteDst = dst.cpy() - Vector2(GridWidget.instance.tileSize / 2f, GridWidget.instance.tileSize / 2f)
 			val src = GridWidget.instance.pointToScreenspace(c)
 
-			Mote(src, dst, sprite, GridWidget.instance.tileSize,
+			Mote(src, moteDst, sprite, GridWidget.instance.tileSize,
 				 {
 					 fun tryBlock(chance: Float): Boolean
 					 {
