@@ -135,7 +135,7 @@ class DeckScreen : AbstractScreen()
 					createCharacterScreen()
 				})
 				card.setFacing(true, false)
-				scrollTable.add(card).height(cardHeight).expandX().center().pad(5f)
+				scrollTable.add(card).width(cardWidth).height(cardHeight).expandX().center().pad(5f)
 				scrollTable.row()
 			}
 		}
