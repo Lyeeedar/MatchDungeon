@@ -13,6 +13,7 @@ import com.lyeeedar.Statistic
 import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.UI.Seperator
 import com.lyeeedar.UI.SpriteWidget
+import com.lyeeedar.UI.addTapToolTip
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.FastEnumMap
 import com.lyeeedar.Util.XmlData
@@ -77,6 +78,7 @@ class Buff(val xml: XmlData)
 				val statTable = Table()
 				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Global.skin, "card")).expandX().left()
 				statTable.add(Label(statVal.toString(), Global.skin, "card"))
+				statTable.addTapToolTip(stat.tooltip)
 
 				var add = false
 

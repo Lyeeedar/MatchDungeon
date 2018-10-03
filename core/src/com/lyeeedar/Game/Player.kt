@@ -16,10 +16,7 @@ import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Global
 import com.lyeeedar.GlobalDeck
 import com.lyeeedar.Statistic
-import com.lyeeedar.UI.FullscreenTable
-import com.lyeeedar.UI.Seperator
-import com.lyeeedar.UI.SpriteWidget
-import com.lyeeedar.UI.addClickListener
+import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.FastEnumMap
 
@@ -139,6 +136,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 				val statTable = Table()
 				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ":", Global.skin, "card")).expandX().left()
 				statTable.add(Label(truestat.toString() + " (" + basestat + diffStr + ")", Global.skin, "card"))
+				statTable.addTapToolTip(stat.tooltip)
 
 				table.add(statTable).growX()
 				table.row()

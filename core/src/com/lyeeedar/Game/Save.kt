@@ -7,7 +7,10 @@ import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.*
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
-import com.lyeeedar.Screens.*
+import com.lyeeedar.Screens.CardScreen
+import com.lyeeedar.Screens.DeckScreen
+import com.lyeeedar.Screens.QuestScreen
+import com.lyeeedar.Screens.QuestSelectionScreen
 import com.lyeeedar.Util.registerGdxSerialisers
 import com.lyeeedar.Util.registerLyeeedarSerialisers
 import java.util.zip.GZIPInputStream
@@ -145,7 +148,7 @@ class Save
 
 					if (currentScreen == MainGame.ScreenEnum.QUEST)
 					{
-						questScreen.swapTo()
+
 					}
 					else
 					{
@@ -157,26 +160,38 @@ class Save
 
 						val cardScreen = Global.game.getTypedScreen<CardScreen>()!!
 						cardScreen.setup(currentCard, currentQuest, false, content)
+					}
 
-						if (currentScreen == MainGame.ScreenEnum.CARD)
+					// try swapping to the desired screen
+					val screens = arrayOf(MainGame.ScreenEnum.GRID, MainGame.ScreenEnum.CARD, MainGame.ScreenEnum.QUEST, MainGame.ScreenEnum.QUESTSELECTION)
+					val current = screens.indexOf(currentScreen)
+
+					for (i in current until screens.size)
+					{
+						try
 						{
-							cardScreen.swapTo()
+							Global.game.switchScreen(screens[i])
+							break
 						}
-						else
+						catch (ex: Exception)
 						{
-							val gridScreen = Global.game.getTypedScreen<GridScreen>()!!
-
-							gridScreen.swapTo()
+							if (!Global.release)
+							{
+								throw ex
+							}
 						}
 					}
 				}
 			}
-			catch (e: Exception)
+			catch (ex: Exception)
 			{
-				throw e
+				if (!Global.release)
+				{
+					throw ex
+				}
+
 				doingLoad = false
 				return false
-				//e.printStackTrace()
 			}
 			finally
 			{

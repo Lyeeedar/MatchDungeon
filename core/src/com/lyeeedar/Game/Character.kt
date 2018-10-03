@@ -60,6 +60,7 @@ class Character(val path: String)
 				val statTable = Table()
 				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Global.skin, "card")).expandX().left()
 				statTable.add(Label(statVal.toString(), Global.skin, "card"))
+				statTable.addTapToolTip(stat.tooltip)
 
 				table.add(statTable)
 				table.row()
