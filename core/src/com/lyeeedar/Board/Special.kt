@@ -36,6 +36,7 @@ abstract class Special(orbDesc: OrbDesc, theme: Theme) : Matchable(theme)
 				{
 					field = value
 					sprite.colour = desc.sprite.colour
+					sprite.colourAnimation = BlinkAnimation.obtain().set(sprite.colour, 0.1f, 2.5f, false)
 				}
 			}
 			else
