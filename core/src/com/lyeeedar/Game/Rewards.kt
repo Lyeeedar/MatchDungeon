@@ -143,6 +143,8 @@ class CardReward : AbstractReward()
 			Global.deck.encounters.add(card)
 			Global.deck.newencounters.add(card)
 
+			Global.deck.hasNewEncounters = true
+
 			cardWidget.addPick("", {
 				val sprite = AssetManager.loadSprite("Oryx/Custom/items/card")
 
@@ -243,6 +245,8 @@ class CharacterReward : AbstractReward()
 
 			Global.deck.characters.add(c)
 			Global.deck.newcharacters.add(c)
+
+			Global.deck.hasNewCharacters = true
 
 			cardWidget.addPick("", {
 
@@ -471,6 +475,8 @@ class EquipmentReward : AbstractReward()
 			{
 				Global.deck.equipment.add(equipment)
 				Global.deck.newequipment.add(equipment)
+
+				Global.deck.hasNewEquipment = true
 			}
 		}
 

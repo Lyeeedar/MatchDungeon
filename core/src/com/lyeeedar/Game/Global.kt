@@ -393,6 +393,10 @@ class GlobalDeck
 	val newcharacters = UniqueArray<Character>({it.path.hashCode()})
 	val newquests = UniqueArray<Quest>({it.path.hashCode()})
 
+	var hasNewEncounters = false
+	var hasNewEquipment = false
+	var hasNewCharacters = false
+
 	val playerDeck = PlayerDeck()
 	lateinit var chosenCharacter: Character
 
@@ -517,6 +521,10 @@ class GlobalDeck
 		}
 
 		output.writeInt(chosenCharacter.path.hashCode())
+
+		output.writeBoolean(hasNewCharacters)
+		output.writeBoolean(hasNewEncounters)
+		output.writeBoolean(hasNewEquipment)
 	}
 
 	companion object
@@ -597,6 +605,10 @@ class GlobalDeck
 
 			val chosenCharacterHash = input.readInt()
 			deck.chosenCharacter = deck.characters.uniqueMap[chosenCharacterHash]
+
+			deck.hasNewCharacters = input.readBoolean()
+			deck.hasNewEncounters = input.readBoolean()
+			deck.hasNewEquipment = input.readBoolean()
 
 			return deck
 		}

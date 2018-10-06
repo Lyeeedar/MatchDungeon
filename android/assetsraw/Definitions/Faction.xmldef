@@ -13,6 +13,7 @@
 		<Data Name="Death" Keys="ParticleEffect" meta:RefKey="Reference" />
 		<Data Name="AttackNumPips" Type="Int" Min="0" Default="5" SkipIfDefault="False" meta:RefKey="Number" />
 		<Data Name="AttackCooldown" Name1="Min" Name2="Max" Min="1" Default="6" Type="Int" SkipIfDefault="False" meta:RefKey="Vector" />
+		<Data Name="AttackDamage" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
 		<Data Name="Size" Type="Int" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
 		<Data Name="HP" Type="Int" Min="1" Default="10" SkipIfDefault="False" meta:RefKey="Number" />
 		<Data Name="DamageReduction" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />

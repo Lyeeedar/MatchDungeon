@@ -409,7 +409,9 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 
 		if (type == QuestNodeType.FIXED)
 		{
-			output.add(Card.load(("Quests/" + quest.path).directory() + "/" + fixedEventString))
+			val card = Card.load(("Quests/" + quest.path).directory() + "/" + fixedEventString)
+			card.current.hasBeenPlayed = true
+			output.add(card)
 		}
 		else
 		{
@@ -441,6 +443,8 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 			{
 				for (card in quest.questCards)
 				{
+					card.current.hasBeenPlayed = true
+
 					val pool = if (card.current.isShop) shops else pool
 
 					if (card.current.spawnWeight.subWeights.contains(spawnWeight))
@@ -461,6 +465,8 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 			{
 				for (card in quest.themeCards)
 				{
+					card.current.hasBeenPlayed = true
+
 					val pool = if (card.current.isShop) shops else pool
 
 					if (card.current.spawnWeight.subWeights.contains(spawnWeight))

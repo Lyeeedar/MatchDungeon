@@ -32,20 +32,21 @@
 					<Name>Death</Name>
 				</Death>
 				<AttackNumPips>5</AttackNumPips>
-				<AttackCooldown>2,4</AttackCooldown>
+				<AttackCooldown>2,5</AttackCooldown>
+				<AttackDamage>3</AttackDamage>
 				<Size>3</Size>
 				<HP>30</HP>
-				<DamageReduction>1</DamageReduction>
+				<DamageReduction>2</DamageReduction>
 				<Abilities>
 					<Ability>
-						<Cooldown>5,8</Cooldown>
+						<Cooldown>2,8</Cooldown>
 						<Target>Random</Target>
 						<TargetRestriction>NamedTile</TargetRestriction>
 						<Effect>Summon</Effect>
 						<Data>
+							<TileName>Grate</TileName>
 							<Faction>Rats</Faction>
 							<Name>Small Rat</Name>
-							<TileName>Grate</TileName>
 							<IsSummon>false</IsSummon>
 						</Data>
 					</Ability>

@@ -7,7 +7,7 @@
 		<Data Name="Seconds" Min="1" Default="60" SkipIfDefault="False" meta:RefKey="Number" />
 	</Definition>
 	<Definition Name="Turns" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef">
-		<Data Name="Turns" Type="Int" Min="1" Default="30" SkipIfDefault="False" meta:RefKey="Number" />
+		<Data Name="Turns" Type="Int" Min="1" Default="40" SkipIfDefault="False" meta:RefKey="Number" />
 	</Definition>
 	<!--Success-->
 	<Definition Name="Plate" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />

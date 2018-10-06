@@ -73,3 +73,20 @@ Thumbs.db
 /android/assets/error.log
 /android/assets/Layout.xml
 /android/assets/UnlockTrees/FireOld.oldxml
+
+## Compiled data
+/android/assets/CompressedData
+/android/assets/settings.dat
+/android/assetsraw/Atlases/SpriteAtlas.atlas
+/android/assetsraw/Atlases/SpriteAtlas.png
+/android/assetsraw/Layout.xml
+/android/assetsraw/ProcessedPaths.xml
+/android/assetsraw/Settings.xml
+/android/assetsraw/atlasPackCache
+/android/assetsraw/textureCompressionCache
+/android/assetsraw/attempt_save.dat
+/android/assetsraw/badlogic.jpg
+/android/assetsraw/error.log
+/android/assetsraw/settings.dat
+/android/assetsraw/test.xmldata
+/core/Libraries/exp4j.jar

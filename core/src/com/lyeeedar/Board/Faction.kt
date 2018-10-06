@@ -139,6 +139,7 @@ class MonsterDesc
 	lateinit var death: ParticleEffect
 	var attackNumPips: Int = 5
 	var attackCooldown: Point = Point(6, 6)
+	var attackDamage: Int = 1
 	var size: Int = 1
 	var hp: Int = 10
 	var damageReduction: Int = 0
@@ -159,6 +160,8 @@ class MonsterDesc
 
 			val atkCooldown = xml.get("AttackCooldown").split(',');
 			desc.attackCooldown = Point(atkCooldown[0].toInt(), atkCooldown[1].toInt())
+
+			desc.attackDamage = xml.getInt("AttackDamage", 1)
 
 			desc.size = xml.getInt("Size", 1)
 

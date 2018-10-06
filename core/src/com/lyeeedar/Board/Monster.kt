@@ -69,7 +69,11 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 			{
 				val startTile = tiles.minBy { it.dist(tile) }!!
 
-				tile.monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap(), tile.orb!!.desc, grid.level.theme)
+				val monsterEffectType = if (desc.attackDamage > 1) MonsterEffectType.BIGATTACK else MonsterEffectType.ATTACK
+				val data = ObjectMap<String, Any>()
+				data["DAMAGE"] = desc.attackDamage.toString()
+
+				tile.monsterEffect = MonsterEffect(monsterEffectType, data, tile.orb!!.desc, grid.level.theme)
 
 				tile.monsterEffect!!.timer = desc.attackNumPips
 				val diff = tile.getPosDiff(startTile)
@@ -78,8 +82,7 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 
 				val dst = tile.euclideanDist(startTile)
 				val animDuration = 0.4f + tile.euclideanDist(startTile) * 0.025f
-				val attackSprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/skull_small", drawActualSize = true)
-				attackSprite.colour = tile.monsterEffect!!.sprite.colour
+				val attackSprite = tile.monsterEffect!!.sprite.copy()
 				attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
 				attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
 				tile.effects.add(attackSprite)

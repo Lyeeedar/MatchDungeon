@@ -83,6 +83,8 @@ class CardScreen : AbstractScreen()
 		currentContent = content?: currentCard.current.getContent()
 		currentQuest = quest
 
+		currentCard.current.hasBeenPlayed = true
+
 		mainTable.clear()
 
 		mainTable.add(statsTable).expandX().left().pad(20f)

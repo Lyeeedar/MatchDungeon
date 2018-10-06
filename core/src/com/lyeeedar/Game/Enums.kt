@@ -326,9 +326,9 @@ enum class Statistic private constructor(val min: Float, val max: Float, val too
 enum class EquipmentSlot
 {
 	HEAD,
-	BODY,
 	MAINHAND,
-	OFFHAND;
+	OFFHAND,
+	BODY;
 
 	companion object
 	{

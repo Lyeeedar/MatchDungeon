@@ -1,8 +1,6 @@
 package com.lyeeedar.Screens
 
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
-import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton
+import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.lyeeedar.Game.Quest
 import com.lyeeedar.Global
 import com.lyeeedar.UI.Tutorial
@@ -63,12 +61,28 @@ class QuestSelectionScreen : AbstractScreen()
 		mainTable.add(scrollPane).growX().expandY().bottom()
 		mainTable.row()
 
+		val editButtonTable = Table()
+		editButtonTable.add(editButton).pad(10f)
+
+		val editStack = Stack()
+		editStack.add(editButtonTable)
+
 		editButton.addClickListener {
 			val screen = Global.game.getTypedScreen<DeckScreen>()!!
 			screen.setup()
 			screen.swapTo()
 		}
-		mainTable.add(editButton).expand().right().bottom().pad(10f)
+
+		if (Global.deck.hasNewEquipment || Global.deck.hasNewEncounters || Global.deck.hasNewCharacters)
+		{
+			val newTable = Table()
+			val newLabel = Label("New", Global.skin)
+			newTable.add(newLabel).expand().left().top().pad(3f)
+
+			editStack.add(newTable)
+		}
+
+		mainTable.add(editStack).expand().right().bottom()
 		mainTable.row()
 	}
 

@@ -40,6 +40,11 @@ class Card(val path: String, val nodes: Array<CardNode>, val root: CardNode)
 	{
 		output.writeString(path)
 		output.writeString(current.guid)
+
+		for (node in nodes)
+		{
+			output.writeBoolean(node.hasBeenPlayed)
+		}
 	}
 
 	companion object
@@ -77,6 +82,11 @@ class Card(val path: String, val nodes: Array<CardNode>, val root: CardNode)
 			val card = load(path)
 			card.current = card.nodes.first { it.guid == currentGuid }
 
+			for (node in card.nodes)
+			{
+				node.hasBeenPlayed = input.readBoolean()
+			}
+
 			return card
 		}
 	}
@@ -94,6 +104,8 @@ class CardNode
 	var isShop = false
 	lateinit var content: String
 
+	var hasBeenPlayed = false
+
 	var nextNode: CardNodeWrapper? = null
 
 	fun getCard(): CardWidget
@@ -103,7 +115,13 @@ class CardNode
 
 	fun createTable(detail: Boolean): Table
 	{
+		val wrapperTable = Table()
+
+		val wrapperStack = Stack()
+		wrapperTable.add(wrapperStack).grow()
+
 		val table = Table()
+		wrapperStack.add(table)
 
 		val title = Label(name, Global.skin, "cardtitle")
 		table.add(title).expandX().center().pad(10f, 0f, 0f, 0f)
@@ -203,7 +221,16 @@ class CardNode
 			table.add(stack).expandX().center().pad(5f).padBottom(32f)
 		}
 
-		return table
+		if (!hasBeenPlayed)
+		{
+			val newTable = Table()
+			val newLabel = Label("New", Global.skin)
+			newTable.add(newLabel).expand().top().left().pad(3f)
+
+			wrapperStack.add(newTable)
+		}
+
+		return wrapperTable
 	}
 
 	fun fillWithDefaults()

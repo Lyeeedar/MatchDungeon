@@ -1,9 +1,6 @@
 package com.lyeeedar.Screens
 
-import com.badlogic.gdx.scenes.scene2d.ui.Label
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
-import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton
+import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Game.Equipment
@@ -52,7 +49,20 @@ class DeckScreen : AbstractScreen()
 
 		charCard.height = cardHeight
 		charCard.width = cardWidth
-		mainTable.add(charCard).growX().center().height(cardHeight)
+
+		val charStack = Stack()
+		charStack.add(charCard)
+
+		if (Global.deck.hasNewCharacters)
+		{
+			val newTable = Table()
+			val newLabel = Label("New", Global.skin)
+			newTable.add(newLabel).expand().top().pad(3f)
+
+			charStack.add(newTable)
+		}
+
+		mainTable.add(charStack).growX().center().height(cardHeight)
 		mainTable.row()
 
 		mainTable.add(Label("Encounters", Global.skin, "title")).expandX().center()
@@ -67,7 +77,20 @@ class DeckScreen : AbstractScreen()
 		deckCard.canZoom = false
 		deckCard.canPickFaceDown = true
 		deckCard.height = cardHeight
-		mainTable.add(deckCard).growX().center().height(cardHeight)
+
+		val cardStack = Stack()
+		cardStack.add(deckCard)
+
+		if (Global.deck.hasNewEncounters)
+		{
+			val newTable = Table()
+			val newLabel = Label("New", Global.skin)
+			newTable.add(newLabel).expand().top().pad(3f)
+
+			cardStack.add(newTable)
+		}
+
+		mainTable.add(cardStack).growX().center().height(cardHeight)
 		mainTable.row()
 
 		mainTable.add(Label("Equipment", Global.skin, "title")).expandX().center()
@@ -82,7 +105,20 @@ class DeckScreen : AbstractScreen()
 		equipCard.canZoom = false
 		equipCard.canPickFaceDown = true
 		equipCard.height = cardHeight
-		mainTable.add(equipCard).growX().center().height(cardHeight)
+
+		val equipStack = Stack()
+		equipStack.add(equipCard)
+
+		if (Global.deck.hasNewEquipment)
+		{
+			val newTable = Table()
+			val newLabel = Label("New", Global.skin)
+			newTable.add(newLabel).expand().top().pad(3f)
+
+			equipStack.add(newTable)
+		}
+
+		mainTable.add(equipStack).growX().center().height(cardHeight)
 		mainTable.row()
 
 		val returnButton = TextButton("Return", Global.skin)
@@ -97,6 +133,8 @@ class DeckScreen : AbstractScreen()
 
 	fun createCharacterScreen()
 	{
+		Global.deck.hasNewCharacters = false
+
 		mainTable.clear()
 
 		val cardHeight = (Global.resolution.y.toFloat() * 0.7f) * 0.3f
@@ -150,6 +188,8 @@ class DeckScreen : AbstractScreen()
 
 	fun createEncounterScreen()
 	{
+		Global.deck.hasNewEncounters = false
+
 		mainTable.clear()
 
 		val cardHeight = (Global.resolution.y.toFloat() * 0.7f) * 0.3f
@@ -223,6 +263,8 @@ class DeckScreen : AbstractScreen()
 
 	fun createEquipmentScreen()
 	{
+		Global.deck.hasNewEquipment = false
+
 		mainTable.clear()
 
 		val cardHeight = (Global.resolution.y.toFloat() * 0.7f) * 0.3f
