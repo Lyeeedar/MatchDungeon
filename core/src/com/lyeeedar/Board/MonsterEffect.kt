@@ -1,13 +1,20 @@
 package com.lyeeedar.Board
 
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.ObjectMap
+import com.lyeeedar.Game.Buff
+import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Animation.BumpAnimation
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.Animation.LeapAnimation
 import com.lyeeedar.Renderables.Sprite.Sprite
+import com.lyeeedar.Screens.GridScreen
+import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
+import com.lyeeedar.Util.Random
 import com.lyeeedar.Util.XmlData
+import ktx.math.minus
 import kotlin.math.min
 
 enum class MonsterEffectType
@@ -15,7 +22,8 @@ enum class MonsterEffectType
 	ATTACK,
 	BIGATTACK,
 	HEAL,
-	SUMMON
+	SUMMON,
+	DEBUFF
 }
 
 class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, Any>, desc: OrbDesc, theme: Theme) : Matchable(theme)
@@ -48,6 +56,7 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 			MonsterEffectType.BIGATTACK -> AssetManager.loadSprite("Oryx/Custom/items/skull_large", drawActualSize = true)
 			MonsterEffectType.HEAL -> AssetManager.loadSprite("Oryx/Custom/items/heart", drawActualSize = true)
 			MonsterEffectType.SUMMON -> AssetManager.loadSprite("Oryx/Custom/items/egg", drawActualSize = true)
+			MonsterEffectType.DEBUFF -> AssetManager.loadSprite("GUI/Debuff", drawActualSize = true)
 			else -> throw Exception("Unhandled monster effect type '$effect'!")
 		}
 		sprite = desc.sprite.copy()
@@ -63,6 +72,7 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 			MonsterEffectType.BIGATTACK -> applyBigAttack(grid)
 			MonsterEffectType.HEAL -> applyHeal(grid, tile)
 			MonsterEffectType.SUMMON -> applySummon(grid, tile)
+			MonsterEffectType.DEBUFF -> applyDebuff(grid, tile)
 			else -> throw Exception("Unhandled monster effect type '$effect'!")
 		}
 	}
@@ -132,5 +142,24 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 			val spawnEffect = AssetManager.loadParticleEffect(spawnEffectEl)
 			tile.effects.add(spawnEffect)
 		}
+	}
+
+	fun applyDebuff(grid: Grid, tile: Tile)
+	{
+		val buff = data["BUFF"] as Buff
+
+		val dstTable = GridScreen.instance.debuffTable
+
+		val sprite = buff.icon.copy()
+		val dst = dstTable.localToStageCoordinates(Vector2(Random.random() * dstTable.width, Random.random() * dstTable.height))
+		val moteDst = dst.cpy() - Vector2(GridWidget.instance.tileSize / 2f, GridWidget.instance.tileSize / 2f)
+		val src = GridWidget.instance.pointToScreenspace(tile)
+
+		Mote(src, moteDst, sprite, GridWidget.instance.tileSize,
+			 {
+				 Global.player.leveldebuffs.add(buff)
+				 GridScreen.instance.updateBuffTable()
+			 }, animSpeed = 0.35f, leap = true)
+
 	}
 }

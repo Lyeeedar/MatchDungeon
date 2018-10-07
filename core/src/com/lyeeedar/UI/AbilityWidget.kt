@@ -68,7 +68,7 @@ class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val gr
 		{
 			override fun clicked(event: InputEvent?, x: Float, y: Float)
 			{
-				if (PowerBar.instance.pips >= ability.cost && ability.getValidTargets(grid).size > 0)
+				if (PowerBar.instance.pips >= ability.cost && ability.hasValidTargets(grid))
 				{
 					if (grid.activeAbility == ability)
 					{
@@ -89,7 +89,7 @@ class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val gr
 	var colour: Color = Color.DARK_GRAY
 	fun updateEnabled()
 	{
-		if (PowerBar.instance.pips >= ability.cost && ability.getValidTargets(grid).size > 0)
+		if (PowerBar.instance.pips >= ability.cost && ability.hasValidTargets(grid))
 		{
 			colour = Color.WHITE
 		}

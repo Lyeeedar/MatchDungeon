@@ -7,12 +7,8 @@
 		<DrawActualSize>true</DrawActualSize>
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
-		<Health>0</Health>
-		<MatchDamage>0</MatchDamage>
 		<AbilityDamage>1</AbilityDamage>
 		<PowerGain>3</PowerGain>
-		<BonusGold>0</BonusGold>
-		<BonusTime>0</BonusTime>
 	</Statistics>
 	<Ability>
 		<Name>Summon Poison Cloud</Name>
@@ -21,6 +17,7 @@
 			<Cost>6</Cost>
 			<Effect>1,Tile,Block,Spreader</Effect>
 			<Data>
+				<Coverage>0.5</Coverage>
 				<AOE>1</AOE>
 				<Spreader meta:RefKey="SpreaderDef">
 					<Name>Poison Cloud</Name>

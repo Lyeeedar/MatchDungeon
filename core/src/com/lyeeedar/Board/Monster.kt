@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.Permuter
 import com.lyeeedar.Game.Ability.Targetter
+import com.lyeeedar.Game.Buff
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Animation.BumpAnimation
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
@@ -148,7 +149,8 @@ class MonsterAbility
 		HEAL,
 		SUMMON,
 		DELAYEDSUMMON,
-		SPREADER
+		SPREADER,
+		DEBUFF
 	}
 
 	var cooldownTimer: Int = 0
@@ -229,6 +231,16 @@ class MonsterAbility
 			}
 		}
 
+		val coverage = data["COVERAGE", "1"]?.toString()?.toFloat() ?: 1f
+		if (coverage < 1f)
+		{
+			val chosenCount = (finalTargets.size.toFloat() * coverage).ciel()
+			while (finalTargets.size > chosenCount)
+			{
+				finalTargets.removeRandom(Random.random)
+			}
+		}
+
 		if (effect == Effect.MOVE)
 		{
 			fun isValid(t: Tile): Boolean
@@ -291,7 +303,7 @@ class MonsterAbility
 		{
 			val strength = data.get("STRENGTH", "1").toString().toInt()
 
-			if (effect == Effect.ATTACK || effect == Effect.SEALEDATTACK || effect == Effect.HEAL || effect == Effect.DELAYEDSUMMON)
+			if (effect == Effect.ATTACK || effect == Effect.SEALEDATTACK || effect == Effect.HEAL || effect == Effect.DELAYEDSUMMON || effect == Effect.DEBUFF)
 			{
 				val speed = data.get("NUMPIPS", monster.desc.attackNumPips.toString()).toString().toInt()
 
@@ -299,6 +311,10 @@ class MonsterAbility
 				if (effect == Effect.HEAL)
 				{
 					monsterEffectType = MonsterEffectType.HEAL
+				}
+				else if (effect == Effect.DEBUFF)
+				{
+					monsterEffectType = MonsterEffectType.DEBUFF
 				}
 				else if (effect == Effect.DELAYEDSUMMON)
 				{
@@ -420,6 +436,11 @@ class MonsterAbility
 					{
 						val spreader = Spreader.load(el)
 						ability.data[el.name.toUpperCase()] = spreader
+					}
+					else if (el.name == "Debuff")
+					{
+						val buff = Buff.load(el)
+						ability.data[el.name.toUpperCase()] = buff
 					}
 					else if (el.name == "SpawnEffect")
 					{

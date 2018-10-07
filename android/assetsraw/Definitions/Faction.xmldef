@@ -24,19 +24,21 @@
 				<Data Name="Count" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
 				<Data Name="TargetRestriction" EnumValues="Orb,Special,Block,Empty,Sealed,Monster,Attack,Tile,NamedTile,Spreader" meta:RefKey="Enum" />
 				<Data Name="Permuter" EnumValues="Single,AllOfType,NofType,Column,Row,Cross,Block,Diamond,Random" meta:RefKey="Enum" />
-				<Data Name="Effect" EnumValues="Attack,Seal,CustomOrb,Block,Move,Heal,SealedAttack,Summon,DelayedSummon,Spreader" meta:RefKey="Enum" />
+				<Data Name="Effect" EnumValues="Attack,Seal,CustomOrb,Block,Move,Heal,SealedAttack,Summon,DelayedSummon,Spreader,Debuff" meta:RefKey="Enum" />
 				<Data Name="Data" meta:RefKey="Struct">
 					<!--Attack-->
 					<Data Name="NumPips" Type="Int" Min="1" Default="7" VisibleIf="Parent.Effect==Attack || Parent.Effect==SealedAttack || Parent.Effect == Heal || Parent.Effect == DelayedSummon" meta:RefKey="Number" />
 					<Data Name="Damage" Type="Int" Min="1" Default="1" VisibleIf="Parent.Effect == Attack || Parent.Effect == SealedAttack" meta:RefKey="Number" />
 					<Data Name="Strength" Type="Int" Min="1" Default="1" VisibleIf="Parent.Effect==Seal || Parent.Effect==Shield || Parent.Effect == SealedAttack || Parent.Effect == Block" meta:RefKey="Number" />
 					<Data Name="Amount" Type="Int" Min="1" Default="10" VisibleIf="Parent.Effect==Heal" meta:RefKey="Number" />
+					<Data Name="Debuff" Keys="Buff" VisibleIf="Parent.Effect == Debuff" meta:RefKey="Reference" />
 					<!--Permuter-->
 					<Data Name="AOE" Type="Int" Min="1" Default="1" VisibleIf="Parent.Permuter==Block || Parent.Permuter==Diamond" meta:RefKey="Number" />
 					<Data Name="Count" Type="Int" Min="1" Default="1" VisibleIf="Parent.Permuter==Random || Parent.Permuter==NOfType" meta:RefKey="Number" />
 					<Data Name="Type" VisibleIf="Parent.Permuter==NofType || Parent.Permuter==AllOfType" meta:RefKey="String" />
 					<Data Name="Range" Type="Int" Min="1" Default="1" VisibleIf="Parent.Target==Neighbour" meta:RefKey="Number" />
 					<Data Name="TileName" VisibleIf="Parent.TargetRestriction==NamedTile" meta:RefKey="String" />
+					<Data Name="Coverage" Min="0" Max="1" Default="1" VisibleIf="Parent.Permuter != Single &amp;&amp; Parent.Permuter != Random" meta:RefKey="Number" />
 					<!--Spreader-->
 					<Data Name="SpreaderName" VisibleIf="Parent.TargetRestriction == Spreader" meta:RefKey="String" />
 					<Data Name="Spreader" Keys="SpreaderDef" VisibleIf="Parent.Effect == Spreader" meta:RefKey="Reference" />

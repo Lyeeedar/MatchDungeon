@@ -5,18 +5,10 @@
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/weapon_trident</Name>
 	</Icon>
-	<Statistics meta:RefKey="Statistics">
-		<Health>0</Health>
-		<MatchDamage>0</MatchDamage>
-		<AbilityDamage>0</AbilityDamage>
-		<PowerGain>0</PowerGain>
-	</Statistics>
+	<Statistics meta:RefKey="Statistics" />
 	<Ability>
 		<Name>Stab</Name>
 		<Description>Stab a foe with your pitchfork</Description>
-		<Icon meta:RefKey="Sprite">
-			<Name>Oryx/uf_split/uf_items/weapon_trident</Name>
-		</Icon>
 		<EffectData>
 			<Cost>7</Cost>
 			<Effect>1,Monster,Single,Pop</Effect>

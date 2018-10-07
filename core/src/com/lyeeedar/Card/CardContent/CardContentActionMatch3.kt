@@ -42,6 +42,9 @@ class CardContentActionMatch3 : AbstractCardContentAction()
 								   cardContent.CardContentStack.add(CardContentNodeState(successNode!!))
 							   }
 
+							   Global.player.levelbuffs.clear()
+							   Global.player.leveldebuffs.clear()
+
 							   Global.game.switchScreen(MainGame.ScreenEnum.CARD)
 							   CardContentScreen.advanceContent()
 						   },
@@ -53,6 +56,9 @@ class CardContentActionMatch3 : AbstractCardContentAction()
 							   {
 								   cardContent.CardContentStack.add(CardContentNodeState(failureNode!!))
 							   }
+
+							   Global.player.levelbuffs.clear()
+							   Global.player.leveldebuffs.clear()
 
 							   Global.game.switchScreen(MainGame.ScreenEnum.CARD)
 							   CardContentScreen.advanceContent()

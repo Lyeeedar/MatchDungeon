@@ -3,7 +3,9 @@ package com.lyeeedar.Game.Ability
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Board.*
+import com.lyeeedar.Game.Buff
 import com.lyeeedar.Global
+import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.Util.filename
 
@@ -20,6 +22,7 @@ class Effect(val type: Type)
 		SUMMON,
 		SPREADER,
 		SUPERCHARGE,
+		BUFF,
 		TEST
 	}
 
@@ -51,9 +54,9 @@ class Effect(val type: Type)
 
 			Type.SPREADER -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>)
 			{
-				val spreader = data["SPREADER"] as Spreader
+				val spreader = (data["SPREADER"] as Spreader).copy()
 				spreader.damage += Global.player.getStat(Statistic.ABILITYDAMAGE) / 3f
-				tile.spreader = spreader.copy()
+				tile.spreader = spreader
 			}
 
 			Type.SUPERCHARGE -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>)
@@ -65,6 +68,16 @@ class Effect(val type: Type)
 				tile.special = special.merge(mergeSpecial) ?: mergeSpecial.merge(special) ?: special
 				tile.special!!.armed = true
 				tile.special!!.markedForDeletion = true
+			}
+
+			Type.BUFF -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>)
+			{
+				val buff = (data["BUFF"] as Buff).copy()
+				buff.remainingDuration += (Global.player.getStat(Statistic.BUFFDURATION, true) * buff.remainingDuration).toInt()
+
+				Global.player.levelbuffs.add(buff)
+
+				GridScreen.instance.updateBuffTable()
 			}
 
 			Type.TEST ->  fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>) { val orb = tile.orb ?: return; tile.special = Match5(orb.desc, grid.level.theme) }
@@ -87,6 +100,10 @@ class Effect(val type: Type)
 			}
 
 			Type.SUPERCHARGE -> "Supercharge"
+
+			Type.BUFF -> {
+				throw Exception("Shouldnt ever hit this")
+			}
 
 			Type.TEST -> "TEST"
 		}

@@ -10,10 +10,12 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Spreader
 import com.lyeeedar.Board.Tile
+import com.lyeeedar.Game.Buff
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Screens.GridScreen
+import com.lyeeedar.Statistic
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.PowerBar
 import com.lyeeedar.UI.Seperator
@@ -65,21 +67,53 @@ class Ability
 		table.add(Seperator(Global.skin, "horizontalcard")).growX().pad(10f)
 		table.row()
 
-		var effectDesc = "Target $targets " + targetter.type.toString().toLowerCase().capitalize().pluralize(targets)
-
-		if (permuter.type != Permuter.Type.SINGLE)
+		if (effect.type == Effect.Type.BUFF)
 		{
-			effectDesc += " then " + permuter.toString(data)
+			val buff = data["BUFF"] as Buff
+
+			var turns = buff.remainingDuration.toString()
+
+			if (Global.player.getStat(Statistic.BUFFDURATION, true) > 0f)
+			{
+				val bonus = (buff.remainingDuration.toFloat() * Global.player.getStat(Statistic.BUFFDURATION, true)).toInt()
+				turns = "($turns + $bonus)"
+			}
+
+			val effectDesc = "For $turns gain buff:"
+
+			val effectLabel = Label(effectDesc, Global.skin, "card")
+			effectLabel.setWrap(true)
+
+			table.add(effectLabel).growX()
+			table.row()
+
+			table.add(Seperator(Global.skin)).growX()
+			table.row()
+
+			table.add(buff.createTable(false)).growX()
+			table.row()
+
+			table.add(Seperator(Global.skin)).growX()
+			table.row()
 		}
+		else
+		{
+			var effectDesc = "Target $targets " + targetter.type.toString().toLowerCase().capitalize().pluralize(targets)
 
-		val them = if (targets > 1 || permuter.type != Permuter.Type.SINGLE) "them" else "it"
-		effectDesc += " and " + effect.toString(data, them, targetter.popAction())
+			if (permuter.type != Permuter.Type.SINGLE)
+			{
+				effectDesc += " then " + permuter.toString(data)
+			}
 
-		val effectLabel = Label(effectDesc, Global.skin, "card")
-		effectLabel.setWrap(true)
+			val them = if (targets > 1 || permuter.type != Permuter.Type.SINGLE) "them" else "it"
+			effectDesc += " and " + effect.toString(data, them, targetter.popAction())
 
-		table.add(effectLabel).growX()
-		table.row()
+			val effectLabel = Label(effectDesc, Global.skin, "card")
+			effectLabel.setWrap(true)
+
+			table.add(effectLabel).growX()
+			table.row()
+		}
 
 		table.add(Label("Cost: $cost", Global.skin, "card")).growX()
 		table.row()
@@ -90,6 +124,12 @@ class Ability
 	fun activate(grid: Grid)
 	{
 		PowerBar.instance.pips -= cost
+
+		if (effect.type == Effect.Type.BUFF)
+		{
+			effect.apply(Tile(0, 0), grid, 0f, data, Array())
+			return
+		}
 
 		val finalTargets = Array<Tile>()
 
@@ -119,6 +159,16 @@ class Ability
 					if (!finalTargets.contains(t, true))
 					{
 						finalTargets.add(t)
+					}
+				}
+
+				val coverage = data["COVERAGE", "1"]?.toString()?.toFloat() ?: 1f
+				if (coverage < 1f)
+				{
+					val chosenCount = (finalTargets.size.toFloat() * coverage).ciel()
+					while (finalTargets.size > chosenCount)
+					{
+						finalTargets.removeRandom(Random.random)
 					}
 				}
 			}
@@ -206,6 +256,18 @@ class Ability
 		selectedTargets.clear()
 	}
 
+	fun hasValidTargets(grid: Grid): Boolean
+	{
+		if (effect.type == Effect.Type.BUFF)
+		{
+			return true
+		}
+		else
+		{
+			return getValidTargets(grid).size > 0
+		}
+	}
+
 	fun getValidTargets(grid: Grid): Array<Point>
 	{
 		val output = Array<Point>()
@@ -249,6 +311,11 @@ class Ability
 					data[el.name.toUpperCase()] = spreader
 
 				}
+				else if (el.name == "Buff")
+				{
+					val buff = Buff.load(el)
+					data[el.name.toUpperCase()] = buff
+				}
 				else
 				{
 					data[el.name.toUpperCase()] = el.text.toUpperCase()
@@ -260,6 +327,11 @@ class Ability
 		if (hitEffectData != null) hitEffect = AssetManager.loadParticleEffect(hitEffectData)
 		val flightEffectData = dataEl.getChildByName("FlightEffect")
 		if (flightEffectData != null) flightEffect = AssetManager.loadParticleEffect(flightEffectData)
+
+		if (effect.type == Effect.Type.BUFF)
+		{
+			targets = 0
+		}
 	}
 
 	companion object

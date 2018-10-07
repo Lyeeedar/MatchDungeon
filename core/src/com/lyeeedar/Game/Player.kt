@@ -32,6 +32,9 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 
 	var choaticNature = FastEnumMap<Statistic, Float>(Statistic::class.java)
 
+	var levelbuffs = Array<Buff>()
+	var leveldebuffs = Array<Buff>()
+
 	fun getStat(statistic: Statistic, withChoaticNature: Boolean = true): Float
 	{
 		var stat = baseCharacter.baseStatistics[statistic] ?: 0f
@@ -52,6 +55,16 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 		}
 
 		for (buff in buffs)
+		{
+			stat += buff.statistics[statistic] ?: 0f
+		}
+
+		for (buff in levelbuffs)
+		{
+			stat += buff.statistics[statistic] ?: 0f
+		}
+
+		for (buff in leveldebuffs)
 		{
 			stat += buff.statistics[statistic] ?: 0f
 		}

@@ -1,8 +1,8 @@
 <Theme xmlns:meta="Editor">
 	<Floor meta:RefKey="SpriteWrapper">
 		<Sprite meta:RefKey="Sprite">
-			<Name>Oryx/uf_split/uf_terrain/ground_grass_1</Name>
-			<Colour>217,217,217,255</Colour>
+			<Name>Oryx/Custom/terrain/dirt_grassy</Name>
+			<Colour>200,200,200,255</Colour>
 		</Sprite>
 	</Floor>
 	<Wall meta:RefKey="SpriteWrapper">

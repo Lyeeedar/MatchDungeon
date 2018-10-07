@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
+import com.badlogic.gdx.scenes.scene2d.ui.Value
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
@@ -44,6 +45,10 @@ class GridScreen(): AbstractScreen()
 	var grid: GridWidget? = null
 	lateinit var level: Level
 	val defeatTable = Table()
+	val victoryTable = Table()
+
+	val buffTable = Table()
+	val debuffTable = Table()
 
 	// ----------------------------------------------------------------------
 	init
@@ -159,9 +164,10 @@ class GridScreen(): AbstractScreen()
 		val gridWidget = GridWidget(level.grid)
 		grid = gridWidget
 
-		val powerBar = PowerBar()
+		Global.player.levelbuffs.clear()
+		Global.player.leveldebuffs.clear()
 
-		val victoryTable = Table()
+		val powerBar = PowerBar()
 
 		defeatTable.clear()
 		for (defeat in level.defeatConditions)
@@ -171,6 +177,7 @@ class GridScreen(): AbstractScreen()
 			defeatTable.row()
 		}
 
+		victoryTable.clear()
 		for (victory in level.victoryConditions)
 		{
 			val table = victory.createTable(level.grid)
@@ -178,8 +185,18 @@ class GridScreen(): AbstractScreen()
 			victoryTable.row()
 		}
 
+		val buffDebuffTable = Table()
+		buffTable.clear()
+		debuffTable.clear()
+
+		buffDebuffTable.add(buffTable).grow()
+		buffDebuffTable.row()
+		buffDebuffTable.add(debuffTable).grow()
+
 		defeatTable.background = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("Sprites/GUI/background.png"), 24, 24, 24, 24))
 		victoryTable.background = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("Sprites/GUI/background.png"), 24, 24, 24, 24))
+
+		buffDebuffTable.background = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("Sprites/GUI/background.png"), 24, 24, 24, 24))
 
 		val abilityTable = Table()
 		for (slot in EquipmentSlot.Values)
@@ -204,6 +221,11 @@ class GridScreen(): AbstractScreen()
 
 		mainTable.clear()
 		//val table = mainTable
+
+		val baseTable = Table()
+		baseTable.add(victoryTable).width(Value.percentWidth(0.35f, baseTable)).growY()
+		baseTable.add(buffDebuffTable).width(Value.percentWidth(0.3f, baseTable)).growY()
+		baseTable.add(defeatTable).width(Value.percentWidth(0.35f, baseTable)).growY()
 
 		val table = table {
 			defaults().pad(10f).growX()
@@ -267,12 +289,7 @@ class GridScreen(): AbstractScreen()
 			row()
 			add(gridWidget).grow()
 			row()
-			table {
-				add(victoryTable).grow().left()
-
-
-				add(defeatTable).grow().right()
-			}
+			add(baseTable).growX()
 		}
 
 		mainTable.add(table).grow()
@@ -290,6 +307,28 @@ class GridScreen(): AbstractScreen()
 		tutorial.addPopup("This area contains the orbs you match. Make rows of 3 orbs of the same colour to match them.", gridWidget)
 		tutorial.addPopup("Make rows of 4 or 5 to spawn a special orb, which when matched has a special effect.", gridWidget)
 		tutorial.show()
+	}
+
+	// ----------------------------------------------------------------------
+	fun updateBuffTable()
+	{
+		buffTable.clear()
+		for (buff in Global.player.levelbuffs)
+		{
+			val card = buff.getCardSmall(true)
+			card.setFacing(true, false)
+			card.setSize(15f, 25f)
+			buffTable.add(card).size(15f, 25f)
+		}
+
+		debuffTable.clear()
+		for (debuff in Global.player.leveldebuffs)
+		{
+			val card = debuff.getCardSmall(false)
+			card.setFacing(true, false)
+			card.setSize(15f, 25f)
+			debuffTable.add(card).size(15f, 25f)
+		}
 	}
 
 	// ----------------------------------------------------------------------

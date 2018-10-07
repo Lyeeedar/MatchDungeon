@@ -7,6 +7,7 @@ import com.lyeeedar.Board.CompletionCondition.AbstractCompletionCondition
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionCustomOrb
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionSink
 import com.lyeeedar.Game.Player
+import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Renderables.Sprite.SpriteWrapper
 import com.lyeeedar.Util.*
@@ -513,6 +514,8 @@ class Level(val loadPath: String)
 		{
 			defeatAction.invoke()
 		}
+		Global.player.levelbuffs.clear()
+		Global.player.leveldebuffs.clear()
 	}
 
 	fun copy(): Level

@@ -59,12 +59,17 @@ abstract class Special(orbDesc: OrbDesc, theme: Theme) : Matchable(theme)
 			return lerped
 		}
 
-		fun saturate(colour: Colour): Colour
+		fun mix(colour1: Colour, colour2: Colour): Colour
 		{
-			val hsl = HSLColour(colour)
-			hsl.s += 0.3f
-			hsl.l += 0.1f
-			return hsl.toRGB()
+			val hsl1 = HSLColour(colour1)
+			val hsl2 = HSLColour(colour2)
+
+			val out = HSLColour()
+			out.l = 0.6f
+			out.s = 1.0f
+			out.h = hsl1.h.lerp(hsl2.h, 0.5f)
+
+			return out.toRGB()
 		}
 
 		fun popColumn(special: Special, colour: Colour, x: Int, sy: Int, grid: Grid)
@@ -260,7 +265,7 @@ class Horizontal4(orbDesc: OrbDesc, theme: Theme) : HorizontalBeamSpecial(orbDes
 			val desc = OrbDesc()
 			desc.death = desc.death.copy()
 			desc.sprite = desc.sprite.copy()
-			desc.sprite.colour = saturate(sprite.colour.copy().lerp(other.sprite.colour, 0.5f))
+			desc.sprite.colour = mix(sprite.colour, other.sprite.colour)
 			desc.name = "Merged"
 
 			return HoriVert4(desc, theme)
@@ -296,7 +301,7 @@ class Vertical4(orbDesc: OrbDesc, theme: Theme) : VerticalBeamSpecial(orbDesc, t
 			val desc = OrbDesc()
 			desc.death = desc.death.copy()
 			desc.sprite = desc.sprite.copy()
-			desc.sprite.colour = saturate(sprite.colour.copy().lerp(other.sprite.colour, 0.5f))
+			desc.sprite.colour = mix(sprite.colour, other.sprite.colour)
 			desc.name = "Merged"
 
 			return HoriVert4(desc, theme)
@@ -475,7 +480,7 @@ class DualMatch(orbDesc: OrbDesc, theme: Theme) : BombSpecial(orbDesc, theme)
 		val desc = OrbDesc()
 		desc.death = desc.death.copy()
 		desc.sprite = desc.sprite.copy()
-		desc.sprite.colour = saturate(sprite.colour.copy().lerp(other.sprite.colour, 0.5f))
+		desc.sprite.colour = mix(sprite.colour, other.sprite.colour)
 		desc.name = "Merged"
 
 		if (other is DualMatch)

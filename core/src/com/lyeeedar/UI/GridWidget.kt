@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Widget
 import com.lyeeedar.Board.*
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionTime
+import com.lyeeedar.Game.Ability.Effect
 import com.lyeeedar.Game.Ability.Targetter
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Particle.ParticleEffect
@@ -219,7 +220,7 @@ class GridWidget(val grid: Grid) : Widget()
 
 				if (grid.activeAbility != null)
 				{
-					if (grid.activeAbility!!.targetter.isValid(tile, grid.activeAbility!!.data))
+					if (grid.activeAbility!!.effect.type != Effect.Type.BUFF && grid.activeAbility!!.targetter.isValid (tile, grid.activeAbility!!.data))
 					{
 						if (grid.activeAbility!!.targetter.type == Targetter.Type.ORB)
 						{

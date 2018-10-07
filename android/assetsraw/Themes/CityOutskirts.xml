@@ -2,6 +2,7 @@
 	<Floor meta:RefKey="SpriteWrapper">
 		<Sprite meta:RefKey="Sprite">
 			<Name>Oryx/uf_split/uf_terrain/ground_grass_1</Name>
+			<Colour>200,200,200,255</Colour>
 		</Sprite>
 	</Floor>
 	<Wall meta:RefKey="SpriteWrapper">

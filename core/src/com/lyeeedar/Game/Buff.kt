@@ -43,7 +43,23 @@ class Buff(val xml: XmlData)
 		return card
 	}
 
-	fun createTable(): Table
+	fun getCardSmall(isBuff: Boolean): CardWidget
+	{
+		val basicTable = Table()
+
+		val icon = if (isBuff)
+			AssetManager.loadSprite("GUI/Buff")
+		else
+			AssetManager.loadSprite("GUI/Debuff")
+
+		basicTable.add(SpriteWidget(icon, 64f, 64f)).grow()
+		basicTable.row()
+
+		val card = CardWidget(basicTable, createTable(), icon.currentTexture, this)
+		return card
+	}
+
+	fun createTable(showTurns: Boolean = true): Table
 	{
 		val table = Table()
 		table.defaults().growX()
@@ -60,8 +76,11 @@ class Buff(val xml: XmlData)
 		table.add(Seperator(Global.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f)
 		table.row()
 
-		table.add(Label("Remaining Duration: $remainingDuration", Global.skin, "card")).pad(5f)
-		table.row()
+		if (showTurns)
+		{
+			table.add(Label("Remaining Duration: $remainingDuration", Global.skin, "card")).pad(5f)
+			table.row()
+		}
 
 		if (statistics.any { it != 0f })
 		{
@@ -111,6 +130,11 @@ class Buff(val xml: XmlData)
 		}
 
 		return table
+	}
+
+	fun copy(): Buff
+	{
+		return Buff(xml)
 	}
 
 	fun save(kryo: Kryo, output: Output)
