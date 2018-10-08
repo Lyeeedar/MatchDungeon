@@ -1,27 +1,13 @@
-<CardContent meta:X="0" meta:Y="0" GUID="dfc51b13-7aeb-4ca9-9440-027da2a39d2b" xmlns:meta="Editor" meta:GraphCommentData="d3775fca-18cb-4eef-af1b-3a6c12945196$University$$255,255,255,255%bef3f650-08a9-4698-af73-17230b34a067$Barracks$$255,255,255,255">
+<CardContent meta:X="-560.8373105616339" meta:Y="101.34010827564381" GUID="dfc51b13-7aeb-4ca9-9440-027da2a39d2b" xmlns:meta="Editor" meta:GraphCommentData="d3775fca-18cb-4eef-af1b-3a6c12945196$University$$255,255,255,255%bef3f650-08a9-4698-af73-17230b34a067$Barracks$$255,255,255,255%f8c06f29-95bc-4ade-ab89-a9d313c5c766$Adventurers Guild$$255,255,255,255">
 	<Root meta:RefKey="Node">96e2c83d-2ca0-4f89-abfc-77d464c66d45</Root>
 	<Nodes>
-		<Node meta:X="204" meta:Y="0" GUID="96e2c83d-2ca0-4f89-abfc-77d464c66d45">
+		<Node meta:X="-400.45135102702045" meta:Y="114.76698604564416" GUID="96e2c83d-2ca0-4f89-abfc-77d464c66d45">
 			<Line>
 				<MultilineString>In the city there are many chances to reinvent yourself by learning new skills or professions. </MultilineString>
 			</Line>
-			<Line>
-				<MultilineString>What would you like to do?</MultilineString>
-			</Line>
-			<Choice>
-				<Choices>
-					<Choice>
-						<Text>Check out the university</Text>
-						<Node meta:RefKey="Node">903f2ddc-f097-4376-9195-9494e26ea976</Node>
-					</Choice>
-					<Choice>
-						<Text>Visit the barracks</Text>
-						<Node meta:RefKey="Node">29cfc827-f1f2-4f4f-a4c0-7b9b9cca2b36</Node>
-					</Choice>
-				</Choices>
-			</Choice>
+			<Node meta:RefKey="Node">2841e04f-22ed-46d2-b6ae-e70324544e6d</Node>
 		</Node>
-		<Node meta:X="877.30864197530866" meta:Y="-192.62962962962962" meta:Comment="d3775fca-18cb-4eef-af1b-3a6c12945196" GUID="58ae1082-740b-4b7e-8056-7f36eb731629">
+		<Node meta:X="501.60440841836157" meta:Y="-137.35144252620094" meta:Comment="d3775fca-18cb-4eef-af1b-3a6c12945196" GUID="58ae1082-740b-4b7e-8056-7f36eb731629">
 			<Line>
 				<MultilineString>You arrive at the university just as they are doing admissions to another year.</MultilineString>
 			</Line>
@@ -36,8 +22,14 @@
 					<File>Wizard</File>
 				</Character>
 			</Rewards>
+			<Define>
+				<Key>University</Key>
+				<Value>1</Value>
+				<Storage>Card</Storage>
+			</Define>
+			<Node meta:RefKey="Node" meta:ControlPoints="462.522294861499,93.8481353779514,True">2841e04f-22ed-46d2-b6ae-e70324544e6d</Node>
 		</Node>
-		<Node meta:X="883.432098765432" meta:Y="422.22222222222217" meta:Comment="bef3f650-08a9-4698-af73-17230b34a067" GUID="ae1ad8cb-a27b-4d95-a109-80b3396d79de">
+		<Node meta:X="498.35869933828843" meta:Y="140.20981464878105" meta:Comment="bef3f650-08a9-4698-af73-17230b34a067" GUID="ae1ad8cb-a27b-4d95-a109-80b3396d79de">
 			<Line>
 				<MultilineString>You arrive at the barracks and ask about work. The sergeant eagerly hurries you in and begins to sign you up.</MultilineString>
 			</Line>
@@ -49,23 +41,14 @@
 					<File>Knight</File>
 				</Character>
 			</Rewards>
+			<Define>
+				<Key>Barracks</Key>
+				<Value>1</Value>
+				<Storage>Card</Storage>
+			</Define>
+			<Node meta:RefKey="Node" meta:ControlPoints="492.503681105234,369.30212149226,True">2841e04f-22ed-46d2-b6ae-e70324544e6d</Node>
 		</Node>
-		<Node meta:X="479.5185185185187" meta:Y="-25.716049382716051" GUID="903f2ddc-f097-4376-9195-9494e26ea976">
-			<Node meta:RefKey="Node">58ae1082-740b-4b7e-8056-7f36eb731629</Node>
-			<Line>
-				<MultilineString>Where would you like to go next?</MultilineString>
-			</Line>
-			<Choice>
-				<Choices>
-					<Choice>
-						<Text>Visit the barracks</Text>
-						<Node meta:RefKey="Node">ae1ad8cb-a27b-4d95-a109-80b3396d79de</Node>
-					</Choice>
-				</Choices>
-			</Choice>
-			<Node meta:RefKey="Node">27708abc-e8e1-478b-a1af-b0c500254ad1</Node>
-		</Node>
-		<Node meta:X="1112.851851851852" meta:Y="113.79012345679014" GUID="27708abc-e8e1-478b-a1af-b0c500254ad1">
+		<Node meta:X="524.51108436036554" meta:Y="419.38457582073187" meta:Comment="f8c06f29-95bc-4ade-ab89-a9d313c5c766" GUID="27708abc-e8e1-478b-a1af-b0c500254ad1">
 			<Line>
 				<MultilineString>Finally you head over to the adventurers guild to check out the quests on offer.</MultilineString>
 			</Line>
@@ -73,20 +56,29 @@
 				<State>Success</State>
 			</MarkComplete>
 		</Node>
-		<Node meta:X="477.04938271604948" meta:Y="176.75308641975309" GUID="29cfc827-f1f2-4f4f-a4c0-7b9b9cca2b36">
-			<Node meta:RefKey="Node">ae1ad8cb-a27b-4d95-a109-80b3396d79de</Node>
+		<Node meta:X="-136.09195459354993" meta:Y="117.47617671779778" GUID="2841e04f-22ed-46d2-b6ae-e70324544e6d">
 			<Line>
-				<MultilineString>Where would you like to go next?</MultilineString>
+				<MultilineString>What would you like to do?</MultilineString>
 			</Line>
 			<Choice>
 				<Choices>
 					<Choice>
 						<Text>Check out the university</Text>
+						<Condition>University == 0</Condition>
 						<Node meta:RefKey="Node">58ae1082-740b-4b7e-8056-7f36eb731629</Node>
+					</Choice>
+					<Choice>
+						<Text>Visit the barracks</Text>
+						<Condition>Barracks == 0</Condition>
+						<Node meta:RefKey="Node">ae1ad8cb-a27b-4d95-a109-80b3396d79de</Node>
+					</Choice>
+					<Choice>
+						<Text>Check out the adventurers guild</Text>
+						<Condition>University == 1 &amp;&amp; Barracks == 1</Condition>
+						<Node meta:RefKey="Node">27708abc-e8e1-478b-a1af-b0c500254ad1</Node>
 					</Choice>
 				</Choices>
 			</Choice>
-			<Node meta:RefKey="Node">27708abc-e8e1-478b-a1af-b0c500254ad1</Node>
 		</Node>
 	</Nodes>
 </CardContent>

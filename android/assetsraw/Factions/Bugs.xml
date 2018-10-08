@@ -1,0 +1,134 @@
+<Faction xmlns:meta="Editor">
+	<Monsters>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>BlackBeetle</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_heroes/beetle</Name>
+				<DrawActualSize>true</DrawActualSize>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+			</Death>
+			<AttackNumPips>5</AttackNumPips>
+			<AttackCooldown>3,6</AttackCooldown>
+			<Size>1</Size>
+			<HP>15</HP>
+			<DamageReduction>1</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>2,5</Cooldown>
+					<Target>Random</Target>
+					<Effect>Move</Effect>
+				</Ability>
+				<Ability>
+					<Cooldown>3,8</Cooldown>
+					<Target>Random</Target>
+					<Effect>Debuff</Effect>
+					<Data>
+						<Debuff meta:RefKey="Buff">
+							<Name>Weakness</Name>
+							<Icon meta:RefKey="Sprite">
+								<Name>Oryx/uf_split/uf_items/heart_green_half</Name>
+								<DrawActualSize>true</DrawActualSize>
+								<Colour>153,113,113,255</Colour>
+							</Icon>
+							<Statistics meta:RefKey="Statistics">
+								<MatchDamage>-1</MatchDamage>
+								<AbilityDamage>-2</AbilityDamage>
+								<PowerGain>-3</PowerGain>
+							</Statistics>
+							<Duration>5</Duration>
+						</Debuff>
+					</Data>
+				</Ability>
+			</Abilities>
+		</Monster>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>BigBlackBeetle</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_heroes/beetle_giant</Name>
+				<DrawActualSize>true</DrawActualSize>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+			</Death>
+			<AttackNumPips>5</AttackNumPips>
+			<AttackCooldown>3,6</AttackCooldown>
+			<AttackDamage>2</AttackDamage>
+			<Size>2</Size>
+			<HP>20</HP>
+			<DamageReduction>1</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>2,5</Cooldown>
+					<Target>Random</Target>
+					<Effect>Move</Effect>
+				</Ability>
+				<Ability>
+					<Cooldown>3,8</Cooldown>
+					<Target>Random</Target>
+					<Count>2</Count>
+					<Effect>Debuff</Effect>
+					<Data>
+						<Debuff meta:RefKey="Buff">
+							<Name>Weakness</Name>
+							<Icon meta:RefKey="Sprite">
+								<Name>Oryx/uf_split/uf_items/heart_green_half</Name>
+								<DrawActualSize>true</DrawActualSize>
+								<Colour>153,113,113,255</Colour>
+							</Icon>
+							<Statistics meta:RefKey="Statistics">
+								<MatchDamage>-1</MatchDamage>
+								<AbilityDamage>-2</AbilityDamage>
+								<PowerGain>-3</PowerGain>
+							</Statistics>
+							<Duration>5</Duration>
+						</Debuff>
+					</Data>
+				</Ability>
+			</Abilities>
+		</Monster>
+	</Monsters>
+	<Bosses>
+		<Monster meta:RefKey="MonsterDesc">
+			<Name>Acid Bug</Name>
+			<Sprite meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_heroes/beetle_fire_giant</Name>
+				<DrawActualSize>true</DrawActualSize>
+			</Sprite>
+			<Death meta:RefKey="ParticleEffect">
+				<Name>Death</Name>
+			</Death>
+			<AttackNumPips>4</AttackNumPips>
+			<AttackCooldown>1,4</AttackCooldown>
+			<Size>1</Size>
+			<HP>20</HP>
+			<DamageReduction>1</DamageReduction>
+			<Abilities>
+				<Ability>
+					<Cooldown>1,4</Cooldown>
+					<Target>Random</Target>
+					<Effect>Move</Effect>
+				</Ability>
+				<Ability>
+					<Cooldown>1,6</Cooldown>
+					<Target>Random</Target>
+					<Effect>Debuff</Effect>
+					<Data>
+						<Debuff meta:RefKey="Buff">
+							<Name>Acid</Name>
+							<Icon meta:RefKey="Sprite">
+								<Name>Oryx/uf_split/uf_items/heart_green_full</Name>
+								<DrawActualSize>true</DrawActualSize>
+							</Icon>
+							<Statistics meta:RefKey="Statistics">
+								<Regeneration>-0.34</Regeneration>
+							</Statistics>
+							<Duration>6</Duration>
+						</Debuff>
+					</Data>
+				</Ability>
+			</Abilities>
+		</Monster>
+	</Bosses>
+</Faction>

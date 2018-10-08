@@ -13,12 +13,23 @@
 					</Choice>
 					<Choice>
 						<Text>Deep into the forest (medium)</Text>
+						<Condition>UnlockedForest</Condition>
 						<Node meta:RefKey="Node">22495a9c-7bc1-4235-97f3-0c53cbad5750</Node>
+					</Choice>
+					<Choice>
+						<Text>Deep into the forest (Locked)</Text>
+						<Condition>UnlockedForest == 0</Condition>
+						<Node meta:RefKey="Node">6168e679-3729-4fa0-a310-a4aa7c4dd366</Node>
+					</Choice>
+					<Choice>
+						<Text>Head to the volcano (Locked)</Text>
+						<Condition>UnlockedVolcano == 0</Condition>
+						<Node meta:RefKey="Node">6168e679-3729-4fa0-a310-a4aa7c4dd366</Node>
 					</Choice>
 				</Choices>
 			</Choice>
 		</Node>
-		<Node meta:X="621.83128357127748" meta:Y="-399.3382881003738" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="163595b9-9532-48c2-b6fd-8aa4a648e40e">
+		<Node meta:X="621.831298828125" meta:Y="-399.33828735351562" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="163595b9-9532-48c2-b6fd-8aa4a648e40e">
 			<Line>
 				<MultilineString>You head out of the city to join the other newbies in killing the surrounding wildlife.</MultilineString>
 			</Line>
@@ -28,15 +39,15 @@
 				<Failure meta:RefKey="Node">b3ec1c35-3fe5-49b6-ba13-c4f1f28d71ee</Failure>
 			</Match3>
 		</Node>
-		<Node meta:X="1550.9369909616412" meta:Y="38.7718956290947" GUID="b3ec1c35-3fe5-49b6-ba13-c4f1f28d71ee">
+		<Node meta:X="1550.93701171875" meta:Y="38.771896362304688" GUID="b3ec1c35-3fe5-49b6-ba13-c4f1f28d71ee">
 			<Line>
-				<MultilineString>The monsters prove to much and you have to flee.</MultilineString>
+				<MultilineString>The monsters prove too much and you have to flee.</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
 			</MarkComplete>
 		</Node>
-		<Node meta:X="844.45566182681114" meta:Y="-393.69491174816494" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="f19626a1-5d33-4cb5-a491-a0b3fae25eb0">
+		<Node meta:X="844.4556884765625" meta:Y="-393.69491577148438" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="f19626a1-5d33-4cb5-a491-a0b3fae25eb0">
 			<Line>
 				<MultilineString>As you slay the final monster a wash of strength runs through you.</MultilineString>
 			</Line>
@@ -67,63 +78,43 @@
 				<State>Success</State>
 			</MarkComplete>
 		</Node>
-		<Node meta:X="1132.4556618268111" meta:Y="-393.69491174816494" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="e743a4ac-c682-4ef6-9aee-6ff21dca7e45">
+		<Node meta:X="1132.4556884765625" meta:Y="-393.69491577148438" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="e743a4ac-c682-4ef6-9aee-6ff21dca7e45">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
 						<Health>3</Health>
-						<MatchDamage>0</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>
 		</Node>
-		<Node meta:X="1133.5178191124812" meta:Y="-324.65468817961164" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="1a506b06-040c-47b8-90cd-98ec00873c8c">
+		<Node meta:X="1133.517822265625" meta:Y="-324.65469360351562" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="1a506b06-040c-47b8-90cd-98ec00873c8c">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
 						<MatchDamage>1</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>
 		</Node>
-		<Node meta:X="1132.4556618268111" meta:Y="-255.61446461105837" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="6ca9d79f-d4a5-493b-9860-dc03808171f4">
+		<Node meta:X="1132.4556884765625" meta:Y="-255.61447143554688" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="6ca9d79f-d4a5-493b-9860-dc03808171f4">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
-						<MatchDamage>0</MatchDamage>
 						<AbilityDamage>1.5</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>
 		</Node>
-		<Node meta:X="1132.4556618268111" meta:Y="-185.51208375683504" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="8b5b8105-bb23-441e-a8d0-fd1f50a25d0e">
+		<Node meta:X="1132.4556884765625" meta:Y="-185.5120849609375" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="8b5b8105-bb23-441e-a8d0-fd1f50a25d0e">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
-						<MatchDamage>0</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
 						<PowerGain>4</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>
 		</Node>
-		<Node meta:X="622.5745101864793" meta:Y="-60.135073036844844" meta:Comment="df747cf2-3922-49a1-932b-6cbaee99d275" GUID="22495a9c-7bc1-4235-97f3-0c53cbad5750">
+		<Node meta:X="622.57452392578125" meta:Y="-60.135074615478516" meta:Comment="df747cf2-3922-49a1-932b-6cbaee99d275" GUID="22495a9c-7bc1-4235-97f3-0c53cbad5750">
 			<Line>
 				<MultilineString>You delve deep into the creepy forest, looking for a clearing filled with monsters.</MultilineString>
 			</Line>
@@ -133,7 +124,7 @@
 				<Failure meta:RefKey="Node">b3ec1c35-3fe5-49b6-ba13-c4f1f28d71ee</Failure>
 			</Match3>
 		</Node>
-		<Node meta:X="861.47214485604457" meta:Y="-56.29983979049446" meta:Comment="df747cf2-3922-49a1-932b-6cbaee99d275" GUID="f2e2dfe7-43ba-43b1-a7f5-2facc39060fa">
+		<Node meta:X="861.47216796875" meta:Y="-56.299839019775391" meta:Comment="df747cf2-3922-49a1-932b-6cbaee99d275" GUID="f2e2dfe7-43ba-43b1-a7f5-2facc39060fa">
 			<Line>
 				<MultilineString>As you slay the final monster a wash of strength runs through you.</MultilineString>
 			</Line>
@@ -168,72 +159,46 @@
 				<State>Success</State>
 			</MarkComplete>
 		</Node>
-		<Node meta:X="1133.1988998349166" meta:Y="-54.491701454813594" meta:Comment="df747cf2-3922-49a1-932b-6cbaee99d275" GUID="6f95d6bb-3ede-4c78-8264-3d5b4d8182dd">
+		<Node meta:X="1133.1988525390625" meta:Y="-54.491703033447266" meta:Comment="df747cf2-3922-49a1-932b-6cbaee99d275" GUID="6f95d6bb-3ede-4c78-8264-3d5b4d8182dd">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
 						<Health>6</Health>
-						<MatchDamage>0</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>
 		</Node>
-		<Node meta:X="1134.2610336239791" meta:Y="14.548520713155142" meta:Comment="df747cf2-3922-49a1-932b-6cbaee99d275" GUID="7c21e46e-ab38-4753-941c-cc3fe5f9d1e8">
+		<Node meta:X="1134.260986328125" meta:Y="14.548521041870117" meta:Comment="df747cf2-3922-49a1-932b-6cbaee99d275" GUID="7c21e46e-ab38-4753-941c-cc3fe5f9d1e8">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
 						<MatchDamage>2</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>
 		</Node>
-		<Node meta:X="1133.1988998349166" meta:Y="83.588742881123892" meta:Comment="df747cf2-3922-49a1-932b-6cbaee99d275" GUID="46eef5a8-ce12-4579-8ffb-6a1b2bc88003">
+		<Node meta:X="1133.1988525390625" meta:Y="83.5887451171875" meta:Comment="df747cf2-3922-49a1-932b-6cbaee99d275" GUID="46eef5a8-ce12-4579-8ffb-6a1b2bc88003">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
-						<MatchDamage>0</MatchDamage>
 						<AbilityDamage>3</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>
 		</Node>
-		<Node meta:X="1133.1988998349166" meta:Y="153.69112935573327" meta:Comment="df747cf2-3922-49a1-932b-6cbaee99d275" GUID="c4ba644a-12f9-41a5-a89e-adafa496a393">
+		<Node meta:X="1133.1988525390625" meta:Y="153.69113159179688" meta:Comment="df747cf2-3922-49a1-932b-6cbaee99d275" GUID="c4ba644a-12f9-41a5-a89e-adafa496a393">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
-						<MatchDamage>0</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
 						<PowerGain>6</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>
 		</Node>
-		<Node meta:X="1133.7541817887352" meta:Y="224.37807212574063" meta:Comment="df747cf2-3922-49a1-932b-6cbaee99d275" GUID="bdb19f4d-c17e-4b99-a686-57e27bb44fce">
+		<Node meta:X="1133.754150390625" meta:Y="224.37806701660156" meta:Comment="df747cf2-3922-49a1-932b-6cbaee99d275" GUID="bdb19f4d-c17e-4b99-a686-57e27bb44fce">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
-						<MatchDamage>0</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 						<Regeneration>0.2</Regeneration>
 					</Statistics>
 				</Statistics>

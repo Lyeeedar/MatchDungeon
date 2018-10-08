@@ -20,7 +20,7 @@
 		</Data>
 		<Data Name="SpawnWeights" meta:RefKey="Collection">
 			<Data Name="Spawn" Nullable="False" Collapse="True" meta:RefKey="Struct">
-				<Data Name="Swappable" EnumValues="Orb,Shield,Changer,Attack" SkipIfDefault="False" meta:RefKey="Enum" />
+				<Data Name="Swappable" EnumValues="Orb,Shield,Changer,Attack,Summon" SkipIfDefault="False" meta:RefKey="Enum" />
 				<Data Name="Weight" Type="Int" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
 			</Data>
 		</Data>

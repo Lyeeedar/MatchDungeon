@@ -4,12 +4,51 @@
 			<Name>Oryx/uf_split/uf_terrain/ground_grass_1</Name>
 			<Colour>205,208,174,255</Colour>
 		</Sprite>
+		<SpriteVariants>
+			<Sprite>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/ground_grass_3</Name>
+					<Colour>205,208,174,255</Colour>
+				</Sprite>
+				<Chance>0.1</Chance>
+			</Sprite>
+			<Sprite>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/ground_grass_4</Name>
+					<Colour>205,208,174,255</Colour>
+				</Sprite>
+				<Chance>0.2</Chance>
+			</Sprite>
+		</SpriteVariants>
 	</Floor>
 	<Wall meta:RefKey="SpriteWrapper">
 		<Sprite meta:RefKey="Sprite">
 			<Name>Oryx/Custom/terrain/tree1</Name>
 			<DrawActualSize>true</DrawActualSize>
 		</Sprite>
+		<SpriteVariants>
+			<Sprite>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/terrain/tree2</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Chance>0.3</Chance>
+			</Sprite>
+			<Sprite>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/terrain/tree3</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Chance>0.1</Chance>
+			</Sprite>
+			<Sprite>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/terrain/tree4</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Chance>0.05</Chance>
+			</Sprite>
+		</SpriteVariants>
 	</Wall>
 	<Pit meta:RefKey="SpriteWrapper">
 		<Sprite meta:RefKey="Sprite">

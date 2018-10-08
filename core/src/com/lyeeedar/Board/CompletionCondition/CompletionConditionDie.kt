@@ -114,6 +114,8 @@ class CompletionConditionDie : AbstractCompletionCondition()
 			grid.level.player.isInBerserkRange = hp <= maxHP / 2
 
 			fractionalHp += grid.level.player.getStat(Statistic.REGENERATION)
+
+			// do regen
 			while (fractionalHp > 1f)
 			{
 				fractionalHp -= 1f
@@ -122,6 +124,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 				val pos = hpLabel.localToStageCoordinates(Vector2(hpLabel.width/2f, hpLabel.height/2f))
 
 				val healSprite = AssetManager.loadParticleEffect("Heal")
+				healSprite.colour = Colour.GREEN
 				val actor = ParticleEffectActor(healSprite)
 				actor.setSize(48f, 48f)
 				actor.setPosition(pos.x, pos.y)
@@ -131,6 +134,26 @@ class CompletionConditionDie : AbstractCompletionCondition()
 				{
 					hp = maxHP
 				}
+
+				hpLabel.setText("$hp/$maxHP")
+				updateBlink()
+			}
+
+			// do degen
+			while (fractionalHp < -1f)
+			{
+				fractionalHp += 1f
+				hp -= 1
+
+				val pos = hpLabel.localToStageCoordinates(Vector2(hpLabel.width/2f, hpLabel.height/2f))
+
+				val healSprite = AssetManager.loadParticleEffect("Heal")
+				healSprite.colour = Colour.RED
+				healSprite.flipY = true
+				val actor = ParticleEffectActor(healSprite)
+				actor.setSize(48f, 48f)
+				actor.setPosition(pos.x, pos.y)
+				Global.stage.addActor(actor)
 
 				hpLabel.setText("$hp/$maxHP")
 				updateBlink()

@@ -17,8 +17,9 @@
 		</Data>
 		<Data Name="Choice" TextColour="82,204,95" meta:RefKey="Struct">
 			<Data Name="Choices" meta:RefKey="Collection">
-				<Data Name="Choice" Description="{Text}" meta:RefKey="Struct">
+				<Data Name="Choice" Description="{Text} ({Condition})" meta:RefKey="Struct">
 					<Data Name="Text" meta:RefKey="String" />
+					<Data Name="Condition" Default="1" meta:RefKey="String" />
 					<Data Name="Node" Keys="Node" UseParentDescription="True" meta:RefKey="GraphReference" />
 				</Data>
 			</Data>

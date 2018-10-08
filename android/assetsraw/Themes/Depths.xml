@@ -1,7 +1,8 @@
 <Theme xmlns:meta="Editor">
 	<Floor meta:RefKey="SpriteWrapper">
 		<Sprite meta:RefKey="Sprite">
-			<Name>Oryx/uf_split/uf_terrain/floor_extra_8</Name>
+			<Name>Oryx/uf_split/uf_terrain/floor_extra_6</Name>
+			<Colour>225,225,225,255</Colour>
 		</Sprite>
 	</Floor>
 	<Wall meta:RefKey="SpriteWrapper">
@@ -24,16 +25,32 @@
 					<Name>Wall</Name>
 					<Mode>Premade</Mode>
 					<Front meta:RefKey="Sprite">
-						<Name>Oryx/uf_split/uf_terrain/wall_dungeon_15</Name>
+						<Name>Oryx/uf_split/uf_terrain/wall_dungeon_18</Name>
 					</Front>
 					<Top meta:RefKey="Sprite">
-						<Name>Oryx/uf_split/uf_terrain/wall_dungeon_7</Name>
+						<Name>Oryx/uf_split/uf_terrain/wall_dungeon_10</Name>
 					</Top>
 					<Overhang meta:RefKey="Sprite">
 						<Name>Oryx/uf_split/uf_terrain/wall_dungeon_1</Name>
 					</Overhang>
 				</TilingSprite>
-				<Chance>0.2</Chance>
+				<Chance>0.1</Chance>
+			</TilingSprite>
+			<TilingSprite>
+				<TilingSprite meta:RefKey="TilingSprite">
+					<Name>Wall</Name>
+					<Mode>Premade</Mode>
+					<Front meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_dungeon_19</Name>
+					</Front>
+					<Top meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_dungeon_11</Name>
+					</Top>
+					<Overhang meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_dungeon_1</Name>
+					</Overhang>
+				</TilingSprite>
+				<Chance>0.1</Chance>
 			</TilingSprite>
 			<TilingSprite>
 				<TilingSprite meta:RefKey="TilingSprite">
@@ -43,19 +60,20 @@
 						<Name>Oryx/uf_split/uf_terrain/wall_dungeon_16</Name>
 					</Front>
 					<Top meta:RefKey="Sprite">
-						<Name>Oryx/uf_split/uf_terrain/wall_dungeon_7</Name>
+						<Name>Oryx/uf_split/uf_terrain/wall_dungeon_12</Name>
 					</Top>
 					<Overhang meta:RefKey="Sprite">
 						<Name>Oryx/uf_split/uf_terrain/wall_dungeon_1</Name>
 					</Overhang>
 				</TilingSprite>
-				<Chance>0.05</Chance>
+				<Chance>0.1</Chance>
 			</TilingSprite>
 		</TilingSpriteVariants>
 	</Wall>
 	<Pit meta:RefKey="SpriteWrapper">
 		<Sprite meta:RefKey="Sprite">
 			<Name>Oryx/uf_split/uf_terrain/water_green</Name>
+			<Colour>218,103,224,255</Colour>
 		</Sprite>
 	</Pit>
 	<Chest>
@@ -71,6 +89,7 @@
 	<Coin meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/coin_gold</Name>
 		<DrawActualSize>true</DrawActualSize>
+		<Colour>173,158,158,255</Colour>
 	</Coin>
 	<Plate meta:RefKey="Sprite">
 		<Name>white</Name>
@@ -79,6 +98,7 @@
 		<Sprite meta:RefKey="Sprite">
 			<Name>Oryx/uf_split/uf_terrain/crate</Name>
 			<DrawActualSize>true</DrawActualSize>
+			<Colour>176,152,152,255</Colour>
 		</Sprite>
 	</Block>
 	<Seal>
@@ -104,10 +124,12 @@
 		</Sprite>
 	</Shield>
 	<SpawnWeights>
-		<Spawn>Orb,1</Spawn>
+		<Spawn>Orb,20</Spawn>
+		<Spawn>Summon,1</Spawn>
 	</SpawnWeights>
 	<Factions>
-		<Faction>Rats</Faction>
+		<Faction>Spider</Faction>
+		<Faction>Bugs</Faction>
 	</Factions>
-	<BackgroundTile>Oryx/uf_split/uf_terrain/floor_extra_8</BackgroundTile>
+	<BackgroundTile>Oryx/uf_split/uf_terrain/floor_extra_6</BackgroundTile>
 </Theme>

@@ -31,6 +31,18 @@
 	<Definition Name="SpriteWrapper" IsGlobal="True" meta:RefKey="StructDef">
 		<Data Name="Sprite" Keys="Sprite" meta:RefKey="Reference" />
 		<Data Name="TilingSprite" Keys="TilingSprite" meta:RefKey="Reference" />
+		<Data Name="SpriteVariants" meta:RefKey="Collection">
+			<Data Name="Sprite" meta:RefKey="Struct">
+				<Data Name="Sprite" Keys="Sprite" Nullable="False" meta:RefKey="Reference" />
+				<Data Name="Chance" Min="0" Max="1" Default="0.2" SkipIfDefault="False" meta:RefKey="Number" />
+			</Data>
+		</Data>
+		<Data Name="TilingSpriteVariants" meta:RefKey="Collection">
+			<Data Name="TilingSprite" meta:RefKey="Struct">
+				<Data Name="TilingSprite" Keys="TilingSprite" Nullable="False" meta:RefKey="Reference" />
+				<Data Name="Chance" Min="0" Max="1" Default="0.2" SkipIfDefault="False" meta:RefKey="Number" />
+			</Data>
+		</Data>
 	</Definition>
 	<Definition Name="ParticleEffect" IsGlobal="True" meta:RefKey="StructDef">
 		<Data Name="Name" BasePath="Particles" StripExtension="True" AllowedFileTypes="xml" SkipIfDefault="False" meta:RefKey="File" />

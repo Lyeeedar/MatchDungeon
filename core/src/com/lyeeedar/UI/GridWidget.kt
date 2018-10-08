@@ -287,16 +287,48 @@ class GridWidget(val grid: Grid) : Widget()
 				val yi = (grid.height-1) - y.toFloat()
 
 				var tileHeight = 0
-				for (sprite in tile.sprites)
+
+				val groundSprite = tile.groundSprite
+				if (groundSprite != null)
 				{
-					if (sprite.sprite != null)
+					if (!groundSprite.hasChosenSprites)
 					{
-						ground.queueSprite(sprite.sprite!!, xi, yi, TILE, tileHeight, tileColour)
+						groundSprite.chooseSprites()
 					}
-					if (sprite.tilingSprite != null)
+
+					val sprite = groundSprite.chosenSprite
+					if (sprite != null)
 					{
-						val tiling = sprite.tilingSprite!!
-						ground.queueSprite(tiling, xi, yi, TILE, tileHeight, tileColour)
+						ground.queueSprite(sprite, xi, yi, TILE, tileHeight, tileColour)
+					}
+
+					val tilingSprite = groundSprite.chosenTilingSprite
+					if (tilingSprite != null)
+					{
+						ground.queueSprite(tilingSprite, xi, yi, TILE, tileHeight, tileColour)
+					}
+
+					tileHeight++
+				}
+
+				val wallSprite = tile.wallSprite
+				if (wallSprite != null)
+				{
+					if (!wallSprite.hasChosenSprites)
+					{
+						wallSprite.chooseSprites()
+					}
+
+					val sprite = wallSprite.chosenSprite
+					if (sprite != null)
+					{
+						ground.queueSprite(sprite, xi, yi, TILE, tileHeight, tileColour)
+					}
+
+					val tilingSprite = wallSprite.chosenTilingSprite
+					if (tilingSprite != null)
+					{
+						ground.queueSprite(tilingSprite, xi, yi, TILE, tileHeight, tileColour)
 					}
 
 					tileHeight++

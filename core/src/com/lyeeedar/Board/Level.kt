@@ -80,6 +80,15 @@ class Level(val loadPath: String)
 			orb.timer = 10
 			return orb
 		}
+		else if (toSpawn == "Summon")
+		{
+			val data = ObjectMap<String, Any>()
+			data["FACTION"] = factions.random()
+
+			val orb = MonsterEffect(MonsterEffectType.SUMMON, data, Orb.getRandomOrb (this), theme)
+			orb.timer = 10
+			return orb
+		}
 
 		return Orb(Orb.getRandomOrb(this), theme)
 	}
@@ -101,25 +110,25 @@ class Level(val loadPath: String)
 			if (char == '#')
 			{
 				tile.canHaveOrb = false
-				tile.spriteSetter = theme.floor.copy()
-				tile.spriteSetter = theme.wall.copy()
+				tile.groundSprite = theme.floor.copy()
+				tile.wallSprite = theme.wall.copy()
 			}
 			else if (char == '~')
 			{
 				tile.canHaveOrb = false
 				tile.isPit = true
-				tile.spriteSetter = theme.pit.copy()
+				tile.groundSprite = theme.pit.copy()
 			}
 			else if (char == 'p')
 			{
 				tile.canHaveOrb = true
-				tile.spriteSetter = theme.floor.copy()
+				tile.groundSprite = theme.floor.copy()
 				tile.plateStrength = plateStrength
 			}
 			else if (char == '=')
 			{
 				tile.canHaveOrb = true
-				tile.spriteSetter = theme.floor.copy()
+				tile.groundSprite = theme.floor.copy()
 				tile.block = Block(theme)
 				tile.block!!.maxhp = blockStrength
 			}
@@ -127,27 +136,27 @@ class Level(val loadPath: String)
 			{
 				tile.chest = Chest(true, theme)
 				tile.canHaveOrb = false
-				tile.spriteSetter = theme.floor.copy()
+				tile.groundSprite = theme.floor.copy()
 				tile.chest!!.attachHandlers(grid)
 			}
 			else if (char == '£')
 			{
 				tile.chest = Chest(false, theme)
 				tile.canHaveOrb = false
-				tile.spriteSetter = theme.floor.copy()
+				tile.groundSprite = theme.floor.copy()
 				tile.chest!!.attachHandlers(grid)
 			}
 			else if (char == '!')
 			{
 				tile.canHaveOrb = true
-				tile.spriteSetter = theme.floor.copy()
+				tile.groundSprite = theme.floor.copy()
 
 				hasMonster = true
 			}
 			else if (char == '?')
 			{
 				tile.canHaveOrb = true
-				tile.spriteSetter = theme.floor.copy()
+				tile.groundSprite = theme.floor.copy()
 
 				hasMonster = true
 			}
@@ -161,11 +170,6 @@ class Level(val loadPath: String)
 				else if (char != '.')
 				{
 					loadTile(tile, '.')
-				}
-
-				if (symbol.sprite != null)
-				{
-					tile.spriteSetter = symbol.sprite.copy()
 				}
 
 				if (symbol.block != null)
@@ -196,22 +200,37 @@ class Level(val loadPath: String)
 				{
 					tile.canHaveOrb = false
 					tile.isPit = true
+
+					if (symbol.sprite != null)
+					{
+						tile.groundSprite = symbol.sprite.copy()
+					}
 				}
 				else if (symbol.type == SymbolType.WALL)
 				{
 					tile.canHaveOrb = false
 					tile.isPit = false
+
+					if (symbol.sprite != null)
+					{
+						tile.wallSprite = symbol.sprite.copy()
+					}
 				}
 				else
 				{
 					tile.canHaveOrb = true
 					tile.isPit = false
+
+					if (symbol.sprite != null)
+					{
+						tile.groundSprite = symbol.sprite.copy()
+					}
 				}
 
 				if (symbol.isChest)
 				{
 					tile.chest = Chest(true, theme)
-					tile.spriteSetter = theme.floor.copy()
+					tile.groundSprite = theme.floor.copy()
 					tile.chest!!.attachHandlers(grid)
 
 					tile.canHaveOrb = false
@@ -227,7 +246,7 @@ class Level(val loadPath: String)
 			}
 			else
 			{
-				tile.spriteSetter = theme.floor.copy()
+				tile.groundSprite = theme.floor.copy()
 			}
 		}
 

@@ -11,13 +11,8 @@ import com.lyeeedar.Util.Point
 
 class Tile(x: Int, y: Int) : Point(x, y)
 {
-	val sprites = Array<SpriteWrapper>()
-
-	var spriteSetter: SpriteWrapper? = null
-		set(value)
-		{
-			sprites.add(value)
-		}
+	var groundSprite: SpriteWrapper? = null
+	var wallSprite: SpriteWrapper? = null
 
 	var orb: Orb?
 		get() = contents as? Orb

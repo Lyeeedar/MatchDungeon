@@ -14,7 +14,7 @@
 	<Definition Name="Statistics" IsGlobal="True" meta:RefKey="StructDef">
 		<!--Health-->
 		<Data Name="Health" Type="Int" Min="-999999" meta:RefKey="Number" />
-		<Data Name="Regeneration" Min="0" meta:RefKey="Number" />
+		<Data Name="Regeneration" meta:RefKey="Number" />
 		<!--Damage-->
 		<Data Name="MatchDamage" meta:RefKey="Number" />
 		<Data Name="AbilityDamage" meta:RefKey="Number" />
