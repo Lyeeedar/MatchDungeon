@@ -1,0 +1,18 @@
+<Character xmlns:meta="Editor">
+	<Name>Wizard</Name>
+	<Description>A powerful wizard, an expert at lobbing around spells.</Description>
+	<Sprite meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_heroes/witch</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Sprite>
+	<Statistics meta:RefKey="Statistics">
+		<Health>5</Health>
+		<AbilityDamage>3</AbilityDamage>
+		<PowerGain>5</PowerGain>
+	</Statistics>
+	<StartingEquipment>
+		<Body>Characters/Equipment/WizardsRobes</Body>
+		<MainHand>Characters/Equipment/SpellMagicMissile</MainHand>
+		<OffHand>Characters/Equipment/SpellReflect</OffHand>
+	</StartingEquipment>
+</Character>

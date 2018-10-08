@@ -1,0 +1,18 @@
+<Character xmlns:meta="Editor">
+	<Name>Knight</Name>
+	<Description>A knight clad in tough armour and sporting a powerful resolve. A dangerous foe to anything that would disturb the peace.</Description>
+	<Sprite meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_heroes/knight</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Sprite>
+	<Statistics meta:RefKey="Statistics">
+		<Health>10</Health>
+		<MatchDamage>1</MatchDamage>
+		<Pierce>1</Pierce>
+		<Counter>0.1</Counter>
+	</Statistics>
+	<StartingEquipment>
+		<Body>Characters/Equipment/Fullplate</Body>
+		<MainHand>Characters/Equipment/Longsword</MainHand>
+	</StartingEquipment>
+</Character>

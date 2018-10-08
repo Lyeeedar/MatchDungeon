@@ -27,6 +27,13 @@
 			<Description>With nothing left for you at the village you decide to travel to the nearest large city to seek your fortune.</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>JourneyToTheCityContent</Content>
+			<Next meta:RefKey="CardNode">b38efc94-f4b0-4395-9eec-aa6faeb65c64</Next>
+		</CardNode>
+		<CardNode meta:X="1430.31298828125" meta:Y="-5.0805263519287109" GUID="b38efc94-f4b0-4395-9eec-aa6faeb65c64">
+			<Name>Heroes Journey 5:Career Change</Name>
+			<Description>In the city there are many opportunities to reinvent yourself.</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>CareerChangeCardContent</Content>
 		</CardNode>
 	</Nodes>
 </Card>

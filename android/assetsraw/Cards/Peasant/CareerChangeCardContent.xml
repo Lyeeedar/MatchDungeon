@@ -1,0 +1,92 @@
+<CardContent meta:X="0" meta:Y="0" GUID="dfc51b13-7aeb-4ca9-9440-027da2a39d2b" xmlns:meta="Editor" meta:GraphCommentData="d3775fca-18cb-4eef-af1b-3a6c12945196$University$$255,255,255,255%bef3f650-08a9-4698-af73-17230b34a067$Barracks$$255,255,255,255">
+	<Root meta:RefKey="Node">96e2c83d-2ca0-4f89-abfc-77d464c66d45</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="96e2c83d-2ca0-4f89-abfc-77d464c66d45">
+			<Line>
+				<MultilineString>In the city there are many chances to reinvent yourself by learning new skills or professions. </MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>What would you like to do?</MultilineString>
+			</Line>
+			<Choice>
+				<Choices>
+					<Choice>
+						<Text>Check out the university</Text>
+						<Node meta:RefKey="Node">903f2ddc-f097-4376-9195-9494e26ea976</Node>
+					</Choice>
+					<Choice>
+						<Text>Visit the barracks</Text>
+						<Node meta:RefKey="Node">29cfc827-f1f2-4f4f-a4c0-7b9b9cca2b36</Node>
+					</Choice>
+				</Choices>
+			</Choice>
+		</Node>
+		<Node meta:X="877.30864197530866" meta:Y="-192.62962962962962" meta:Comment="d3775fca-18cb-4eef-af1b-3a6c12945196" GUID="58ae1082-740b-4b7e-8056-7f36eb731629">
+			<Line>
+				<MultilineString>You arrive at the university just as they are doing admissions to another year.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Powerful wizards are showing off their craft by flinging around spells, trying to entice applicants to their school over the others.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You decide to drop in your application.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Character>
+					<File>Wizard</File>
+				</Character>
+			</Rewards>
+		</Node>
+		<Node meta:X="883.432098765432" meta:Y="422.22222222222217" meta:Comment="bef3f650-08a9-4698-af73-17230b34a067" GUID="ae1ad8cb-a27b-4d95-a109-80b3396d79de">
+			<Line>
+				<MultilineString>You arrive at the barracks and ask about work. The sergeant eagerly hurries you in and begins to sign you up.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You are quickly furnished with a set of armour and a weapon, and given a time and place to report for training.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Character>
+					<File>Knight</File>
+				</Character>
+			</Rewards>
+		</Node>
+		<Node meta:X="479.5185185185187" meta:Y="-25.716049382716051" GUID="903f2ddc-f097-4376-9195-9494e26ea976">
+			<Node meta:RefKey="Node">58ae1082-740b-4b7e-8056-7f36eb731629</Node>
+			<Line>
+				<MultilineString>Where would you like to go next?</MultilineString>
+			</Line>
+			<Choice>
+				<Choices>
+					<Choice>
+						<Text>Visit the barracks</Text>
+						<Node meta:RefKey="Node">ae1ad8cb-a27b-4d95-a109-80b3396d79de</Node>
+					</Choice>
+				</Choices>
+			</Choice>
+			<Node meta:RefKey="Node">27708abc-e8e1-478b-a1af-b0c500254ad1</Node>
+		</Node>
+		<Node meta:X="1112.851851851852" meta:Y="113.79012345679014" GUID="27708abc-e8e1-478b-a1af-b0c500254ad1">
+			<Line>
+				<MultilineString>Finally you head over to the adventurers guild to check out the quests on offer.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="477.04938271604948" meta:Y="176.75308641975309" GUID="29cfc827-f1f2-4f4f-a4c0-7b9b9cca2b36">
+			<Node meta:RefKey="Node">ae1ad8cb-a27b-4d95-a109-80b3396d79de</Node>
+			<Line>
+				<MultilineString>Where would you like to go next?</MultilineString>
+			</Line>
+			<Choice>
+				<Choices>
+					<Choice>
+						<Text>Check out the university</Text>
+						<Node meta:RefKey="Node">58ae1082-740b-4b7e-8056-7f36eb731629</Node>
+					</Choice>
+				</Choices>
+			</Choice>
+			<Node meta:RefKey="Node">27708abc-e8e1-478b-a1af-b0c500254ad1</Node>
+		</Node>
+	</Nodes>
+</CardContent>

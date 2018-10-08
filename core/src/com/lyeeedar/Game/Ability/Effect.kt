@@ -1,7 +1,9 @@
 package com.lyeeedar.Game.Ability
 
 import com.badlogic.gdx.utils.Array
+import com.badlogic.gdx.utils.ObjectFloatMap
 import com.badlogic.gdx.utils.ObjectMap
+import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Board.*
 import com.lyeeedar.Game.Buff
 import com.lyeeedar.Global
@@ -26,15 +28,31 @@ class Effect(val type: Type)
 		TEST
 	}
 
-	lateinit var apply: (tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>) -> Unit
+	lateinit var apply: (tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>) -> Unit
 
 	init
 	{
 		apply = when(type)
 		{
-			Type.POP -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>) { grid.pop(tile, delay, damSource = this, bonusDam = data["DAMAGE", "0"].toString().toInt() + grid.level.player.getStat(Statistic.ABILITYDAMAGE), pierce = grid.level.player.getStat(Statistic.PIERCE), skipPowerOrb = true) }
+			Type.POP -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>)
+			{
+				val dam = data["DAMAGE", "0"].toString().evaluate(variables)
 
-			Type.CONVERT -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>)
+				val bonusDam: Float
+				if (data["DAMAGE", "0"].toString().length == 1)
+				{
+					// only add on ability dam if we havent used an equation
+					bonusDam = dam + grid.level.player.getStat(Statistic.ABILITYDAMAGE)
+				}
+				else
+				{
+					bonusDam = dam
+				}
+
+				grid.pop(tile, delay, damSource = this, bonusDam = bonusDam, pierce = grid.level.player.getStat(Statistic.PIERCE), skipPowerOrb = true)
+			}
+
+			Type.CONVERT -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>)
 			{
 				val orb = tile.orb ?: return
 
@@ -50,16 +68,16 @@ class Effect(val type: Type)
 				tile.orb!!.setAttributes(orb)
 			}
 
-			Type.SUMMON ->  fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>) { Friendly.load(data["SUMMON"].toString(), true).setTile(tile, grid) }
+			Type.SUMMON ->  fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>) { Friendly.load(data["SUMMON"].toString(), true).setTile(tile, grid) }
 
-			Type.SPREADER -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>)
+			Type.SPREADER -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>)
 			{
 				val spreader = (data["SPREADER"] as Spreader).copy()
 				spreader.damage += Global.player.getStat(Statistic.ABILITYDAMAGE) / 3f
 				tile.spreader = spreader
 			}
 
-			Type.SUPERCHARGE -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>)
+			Type.SUPERCHARGE -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>)
 			{
 				val special = tile.special ?: return
 
@@ -70,7 +88,7 @@ class Effect(val type: Type)
 				tile.special!!.markedForDeletion = true
 			}
 
-			Type.BUFF -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>)
+			Type.BUFF -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>)
 			{
 				val buff = (data["BUFF"] as Buff).copy()
 				buff.remainingDuration += (Global.player.getStat(Statistic.BUFFDURATION, true) * buff.remainingDuration).toInt()
@@ -80,7 +98,7 @@ class Effect(val type: Type)
 				GridScreen.instance.updateBuffTable()
 			}
 
-			Type.TEST ->  fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>) { val orb = tile.orb ?: return; tile.special = Match5(orb.desc, grid.level.theme) }
+			Type.TEST ->  fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>) { val orb = tile.orb ?: return; tile.special = Match5(orb.desc, grid.level.theme) }
 		}
 	}
 

@@ -2,6 +2,7 @@ package com.lyeeedar.Util
 
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
+import com.badlogic.gdx.utils.ObjectFloatMap
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.launch
@@ -149,4 +150,9 @@ suspend fun <T> Iterable<T>.parallelForEach(func: (T) -> Unit)
 		jobs.add(job)
 	}
 	for (job in jobs) job.join()
+}
+
+operator fun <K> ObjectFloatMap<K>.set(key: K, value: Float)
+{
+	this.put(key, value)
 }

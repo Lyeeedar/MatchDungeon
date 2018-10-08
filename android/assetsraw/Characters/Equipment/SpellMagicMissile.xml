@@ -1,0 +1,26 @@
+<MainHand xmlns:meta="Editor">
+	<Name>Spell: Magic Missile</Name>
+	<Description>A spell that fires 3 energy bolts that home in on enemies.</Description>
+	<Cost>200</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/book_red</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Icon>
+	<Statistics meta:RefKey="Statistics" />
+	<Ability>
+		<Name>Magic Missile</Name>
+		<Description>This spell fires 3 energy bolts that home in on random enemies.</Description>
+		<EffectData>
+			<Cost>4</Cost>
+			<Effect>0,Monster,Random,Pop</Effect>
+			<Data>
+				<Count>3</Count>
+				<Damage>0</Damage>
+			</Data>
+			<FlightEffect meta:RefKey="ParticleEffect">
+				<Name>SpecialBeam</Name>
+				<Colour>140,219,255,255</Colour>
+			</FlightEffect>
+		</EffectData>
+	</Ability>
+</MainHand>

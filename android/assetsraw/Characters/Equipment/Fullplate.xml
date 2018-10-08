@@ -1,0 +1,13 @@
+<Body xmlns:meta="Editor">
+	<Name>Fullplate</Name>
+	<Description>A set of plate armour that provides excellent protection.</Description>
+	<Cost>150</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/armor_plate_chest</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>3</Health>
+		<Aegis>0.2</Aegis>
+	</Statistics>
+</Body>

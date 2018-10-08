@@ -1,0 +1,28 @@
+<MainHand xmlns:meta="Editor">
+	<Name>Longsword</Name>
+	<Description>A long blade, kept sharp through careful maintenace and powerful enchantments.</Description>
+	<Cost>150</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/weapon_broadsword</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<MatchDamage>2</MatchDamage>
+		<Pierce>1</Pierce>
+		<Counter>0.1</Counter>
+	</Statistics>
+	<Ability>
+		<Name>Chop</Name>
+		<Description>Chop a foe in two.</Description>
+		<EffectData>
+			<Cost>5</Cost>
+			<Effect>1,Monster,Single,Pop</Effect>
+			<Data>
+				<Damage>3</Damage>
+			</Data>
+			<HitEffect meta:RefKey="ParticleEffect">
+				<Name>slash</Name>
+			</HitEffect>
+		</EffectData>
+	</Ability>
+</MainHand>

@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
+import com.badlogic.gdx.utils.ObjectFloatMap
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Spreader
@@ -127,7 +128,7 @@ class Ability
 
 		if (effect.type == Effect.Type.BUFF)
 		{
-			effect.apply(Tile(0, 0), grid, 0f, data, Array())
+			effect.apply(Tile(0, 0), grid, 0f, data, Array(), ObjectFloatMap())
 			return
 		}
 
@@ -216,6 +217,17 @@ class Ability
 			selectedDelays[target] = delay
 		}
 
+		// make variables map
+		val variables = ObjectFloatMap<String>()
+		for (stat in Statistic.Values)
+		{
+			variables[stat.toString().toUpperCase()] = Global.player.getStat(stat, true)
+		}
+		val monsters = finalTargets.mapNotNull { it.monster }.toGdxArray()
+		variables["MONSTERCOUNT"] = monsters.size.toFloat()
+		variables["MONSTERHP"] = monsters.map { it.hp }.sum()
+		variables["TILECOUNT"] = finalTargets.filter { it.canHaveOrb }.size.toFloat()
+
 		val originalTargets = selectedTargets.toGdxArray()
 		for (target in finalTargets)
 		{
@@ -248,7 +260,7 @@ class Ability
 							}
 						}
 
-						effect.apply(target, grid, delay, data, originalTargets)
+						effect.apply(target, grid, delay, data, originalTargets, variables)
 					}, selectedDelays[closest] - 0.05f)
 
 		}

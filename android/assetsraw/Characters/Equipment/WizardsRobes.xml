@@ -1,0 +1,36 @@
+<Body xmlns:meta="Editor">
+	<Name>Wizards Robes</Name>
+	<Description>The robes of a mage. Ensorcelled to enhance the speed and power of spellcasting.</Description>
+	<Cost>170</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/cloak_leather</Name>
+		<DrawActualSize>true</DrawActualSize>
+		<Colour>99,50,199,255</Colour>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<AbilityDamage>2</AbilityDamage>
+		<PowerGain>5</PowerGain>
+	</Statistics>
+	<Ability>
+		<Name>Overcharge</Name>
+		<Description>For a limited time boost the damage of your spells.</Description>
+		<EffectData>
+			<Cost>5</Cost>
+			<Effect>1,Orb,Single,Buff</Effect>
+			<Data>
+				<Buff meta:RefKey="Buff">
+					<Name>Overcharge</Name>
+					<Icon meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_items/book_brown</Name>
+						<DrawActualSize>true</DrawActualSize>
+					</Icon>
+					<Statistics meta:RefKey="Statistics">
+						<AbilityDamage>4</AbilityDamage>
+						<PowerGain>10</PowerGain>
+					</Statistics>
+					<Duration>6</Duration>
+				</Buff>
+			</Data>
+		</EffectData>
+	</Ability>
+</Body>
