@@ -112,24 +112,36 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 			monsterMap[monster.desc] = count
 		}
 
+		var row = Table()
+		var counter = 0
+
 		for (monster in monsterMap)
 		{
 			val sprite = monster.key.sprite.copy()
 			val count = monster.value
 
-			table.add(SpriteWidget(sprite, 24f, 24f)).padLeft(5f)
+			row.add(SpriteWidget(sprite, 24f, 24f)).padLeft(5f)
 
 			if (count == 0)
 			{
-				table.add(SpriteWidget(tick, 24f, 24f))
+				row.add(SpriteWidget(tick, 24f, 24f))
 			}
 			else
 			{
-				table.add(Label(" x $count", Global.skin))
+				row.add(Label(" x $count", Global.skin))
 			}
 
-			table.row()
+			counter++
+			if (counter == 2)
+			{
+				counter = 0
+				table.add(row).expand().fill()
+				table.row()
+				row = Table()
+			}
 		}
+
+		table.add(row)
 	}
 
 	override fun getDescription(grid: Grid): Table

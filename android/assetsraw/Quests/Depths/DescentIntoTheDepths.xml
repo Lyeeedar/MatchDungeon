@@ -1,0 +1,9 @@
+<Quest meta:X="0" meta:Y="0" GUID="673b5bd2-8d4b-4abc-b7a3-0b2e0c78ee90" xmlns:meta="Editor">
+	<Title>Descent into the Depths</Title>
+	<Description>You discover a tunnel leading from the ancient ruin deep underground. It may be full of treasure.</Description>
+	<Theme>Depths</Theme>
+	<BronzeRewards meta:RefKey="Rewards" />
+	<SilverRewards meta:RefKey="Rewards" />
+	<GoldRewards meta:RefKey="Rewards" />
+	<Nodes />
+</Quest>
