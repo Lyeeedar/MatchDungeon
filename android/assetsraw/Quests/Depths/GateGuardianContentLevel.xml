@@ -1,0 +1,78 @@
+<Level xmlns:meta="Editor">
+	<Grid />
+	<Symbols>
+		<Symbol>
+			<Character>C</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>true</IsMonster>
+			<MonsterDesc meta:RefKey="MonsterDesc">
+				<Name>Capra Demon</Name>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/heroes/caprademon</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Death meta:RefKey="ParticleEffect">
+					<Name>Death</Name>
+				</Death>
+				<AttackNumPips>5</AttackNumPips>
+				<AttackCooldown>2,6</AttackCooldown>
+				<Size>1</Size>
+				<HP>25</HP>
+				<DamageReduction>1</DamageReduction>
+				<Abilities>
+					<Ability>
+						<Cooldown>3,8</Cooldown>
+						<Target>Random</Target>
+						<Effect>Move</Effect>
+						<Data />
+					</Ability>
+					<Ability>
+						<Cooldown>2,6</Cooldown>
+						<Effect>Move</Effect>
+					</Ability>
+					<Ability>
+						<Cooldown>2,5</Cooldown>
+						<Count>2</Count>
+						<Data>
+							<Damage>3</Damage>
+						</Data>
+					</Ability>
+					<Ability>
+						<Cooldown>1,6</Cooldown>
+						<Effect>Summon</Effect>
+						<Data>
+							<MonsterDesc meta:RefKey="MonsterDesc">
+								<Name>Hellhound</Name>
+								<Sprite meta:RefKey="Sprite">
+									<Name>Oryx/uf_split/uf_heroes/wolf_black</Name>
+									<DrawActualSize>true</DrawActualSize>
+								</Sprite>
+								<Death meta:RefKey="ParticleEffect">
+									<Name>Death</Name>
+								</Death>
+								<AttackNumPips>5</AttackNumPips>
+								<AttackCooldown>2,6</AttackCooldown>
+								<Size>1</Size>
+								<HP>10</HP>
+								<DamageReduction>0</DamageReduction>
+								<Abilities>
+									<Ability>
+										<Cooldown>1,2</Cooldown>
+										<Effect>Move</Effect>
+									</Ability>
+								</Abilities>
+							</MonsterDesc>
+							<IsSummon>true</IsSummon>
+						</Data>
+					</Ability>
+				</Abilities>
+			</MonsterDesc>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+	</Symbols>
+	<AllowedVictories />
+	<AllowedDefeats />
+</Level>

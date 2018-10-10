@@ -43,6 +43,7 @@
 					<Data Name="SpreaderName" VisibleIf="Parent.TargetRestriction == Spreader" meta:RefKey="String" />
 					<Data Name="Spreader" Keys="SpreaderDef" VisibleIf="Parent.Effect == Spreader" meta:RefKey="Reference" />
 					<!--Summon-->
+					<Data Name="MonsterDesc" Keys="MonsterDesc" VisibleIf="Parent.Effect == Summon || Parent.Effect == DelayedSummon" meta:RefKey="Reference" />
 					<Data Name="Faction" BasePath="Factions" StripExtension="True" ResourceType="Faction" VisibleIf="Parent.Effect==Summon || Parent.Effect == DelayedSummon" meta:RefKey="File" />
 					<Data Name="Name" VisibleIf="Parent.Effect==Summon || Parent.Effect == DelayedSummon || Parent.Effect==CustomOrb" meta:RefKey="String" />
 					<Data Name="IsSummon" SkipIfDefault="False" VisibleIf="Parent.Effect == Summon || Parent.Effect == DelayedSummon" meta:RefKey="Boolean" />

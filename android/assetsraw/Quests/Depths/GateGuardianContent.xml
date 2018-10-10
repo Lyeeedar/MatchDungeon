@@ -1,0 +1,31 @@
+<CardContent meta:X="0" meta:Y="0" GUID="66e443d0-9028-4749-875a-5f805717c774" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
+			<Line>
+				<MultilineString>Before the gate to the depths stands a hulking creature wielding a pair of blades. If you want to go down you'll have to defeat it.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>GateGuardianContentLevel</Level>
+				<Success meta:RefKey="Node">8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f</Success>
+				<Failure meta:RefKey="Node">91e41773-f187-46c6-906d-f87d59996682</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
+			<Line>
+				<MultilineString>You barely escape with your life. You'll have to return when you are stronger.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
+			<Line>
+				<MultilineString>The creature finally falls. From beneath its loincloth rolls a large key, you take it and unlock the ancient padlock sealing the gate. You can now descend.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

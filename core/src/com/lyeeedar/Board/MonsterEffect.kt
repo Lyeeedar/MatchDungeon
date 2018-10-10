@@ -125,13 +125,19 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 
 	fun applySummon(grid: Grid, tile: Tile)
 	{
-		val factionName = data["FACTION"].toString()
-		val name = data["NAME"]?.toString() ?: ""
+		var desc = data["MONSTERDESC", null] as? MonsterDesc
+		if (desc == null)
+		{
+			val factionName = data["FACTION"].toString()
+			val name = data["NAME"]?.toString() ?: ""
 
-		val factionPath = XmlData.enumeratePaths("Factions", "Faction").first { it.toUpperCase().endsWith("$factionName.XML") }.split("Factions/")[1]
+			val factionPath = XmlData.enumeratePaths("Factions", "Faction").first { it.toUpperCase().endsWith("$factionName.XML") }.split("Factions/")[1]
 
-		val faction = Faction.load(factionPath)
-		val summoned = if (name.isBlank()) Monster(faction.get(1)) else Monster(faction.get(name)!!)
+			val faction = Faction.load(factionPath)
+			desc = if (name.isBlank()) faction.get(1) else faction.get(name)
+		}
+
+		val summoned = Monster(desc!!)
 		summoned.isSummon = data["ISSUMMON"].toString().toBoolean()
 
 		summoned.setTile(tile, grid)
