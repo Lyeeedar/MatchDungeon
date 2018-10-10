@@ -407,7 +407,9 @@ class Level(val loadPath: String)
 				val symbol = symbolMap[char.toInt()]
 				if (symbol.sinkableDesc != null)
 				{
-					val sinkable = Sinkable(symbol.sinkableDesc.sprite.copy(), theme)
+					val sprite = if (symbol.sinkableDesc.usePlayer) Global.player.baseCharacter.sprite.copy() else symbol.sinkableDesc.sprite!!.copy()
+
+					val sinkable = Sinkable(sprite, theme)
 					tile.sinkable = sinkable
 				}
 
@@ -600,8 +602,12 @@ class Level(val loadPath: String)
 					val sinkableDescEl = symbolEl.getChildByName("Sinkable")
 					if (sinkableDescEl != null)
 					{
-						val sinkSprite = AssetManager.loadSprite(sinkableDescEl.getChildByName("Sprite")!!)
-						sinkableDesc = SinkableDesc(sinkSprite)
+						val spriteDesc = sinkableDescEl.getChildByName("Sprite")
+						val sprite = if (spriteDesc != null) AssetManager.loadSprite(spriteDesc) else null
+
+						val usePlayerSprite = sinkableDescEl.getBoolean("UsePlayerSprite", false)
+
+						sinkableDesc = SinkableDesc(sprite, usePlayerSprite)
 					}
 
 					val isChest = symbolEl.getBoolean("IsChest", false)
@@ -689,7 +695,7 @@ class Level(val loadPath: String)
 	}
 }
 
-data class SinkableDesc(val sprite: Sprite)
+data class SinkableDesc(val sprite: Sprite?, val usePlayer: Boolean)
 
 data class ContainerDesc(val sprite: Sprite, val hp: Int, val alwaysShowHP: Boolean)
 

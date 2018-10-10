@@ -1,5 +1,18 @@
 <Level xmlns:meta="Editor">
-	<Grid />
+	<Grid>
+		<Rows>
+			<Line>..........</Line>
+			<Line>.#.#.#.#..</Line>
+			<Line>.=........</Line>
+			<Line>.#..C.....</Line>
+			<Line>.=........</Line>
+			<Line>.#........</Line>
+			<Line>.=........</Line>
+			<Line>=.........</Line>
+			<Line>..........</Line>
+			<Line>..........</Line>
+		</Rows>
+	</Grid>
 	<Symbols>
 		<Symbol>
 			<Character>C</Character>
@@ -25,9 +38,10 @@
 				<Abilities>
 					<Ability>
 						<Cooldown>3,8</Cooldown>
-						<Target>Random</Target>
 						<Effect>Move</Effect>
-						<Data />
+						<Data>
+							<Range>3</Range>
+						</Data>
 					</Ability>
 					<Ability>
 						<Cooldown>2,6</Cooldown>
@@ -73,6 +87,13 @@
 			<SpecialOrb>None</SpecialOrb>
 		</Symbol>
 	</Symbols>
-	<AllowedVictories />
-	<AllowedDefeats />
+	<AllowedVictories>
+		<Condition meta:RefKey="Kill">
+			<All>false</All>
+			<Named>Capra Demon</Named>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Die" />
+	</AllowedDefeats>
 </Level>

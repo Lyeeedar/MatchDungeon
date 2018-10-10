@@ -19,10 +19,28 @@
 				<State>Failure</State>
 			</MarkComplete>
 		</Node>
-		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
+		<Node meta:X="442" meta:Y="-85" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
 				<MultilineString>The creature finally falls. From beneath its loincloth rolls a large key, you take it and unlock the ancient padlock sealing the gate. You can now descend.</MultilineString>
 			</Line>
+			<Line>
+				<MultilineString>To the side of the gate you find a large sword propped against the wall.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Equipment>
+					<Unlock>true</Unlock>
+					<Equipment>Quests/Depths/Rewards/Zweihander.xml</Equipment>
+				</Equipment>
+			</Rewards>
+			<Line>
+				<MultilineString>As you pick it up you get a strange urge to take off your pants.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Equipment>
+					<Unlock>true</Unlock>
+					<Equipment>Quests/Depths/Rewards/NoPants.xml</Equipment>
+				</Equipment>
+			</Rewards>
 			<MarkComplete>
 				<State>Success</State>
 			</MarkComplete>

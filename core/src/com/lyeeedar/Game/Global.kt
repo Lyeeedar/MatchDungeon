@@ -374,6 +374,12 @@ class Global
 				output.put(slot.toString().toLowerCase(), if(player.getEquipment(slot) != null) 1f else 0f)
 			}
 
+			for (quest in Global.deck.quests)
+			{
+				val theme = quest.theme.path.filename(false)
+				output.put("Unlocked$theme", 1f)
+			}
+
 			output.put(player.baseCharacter.name.toLowerCase(), 1f)
 
 			return output

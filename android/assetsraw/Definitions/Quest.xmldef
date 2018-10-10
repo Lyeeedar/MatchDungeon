@@ -1,5 +1,5 @@
 <Definitions Colour="187,126,235" Icon="Sprites/Icons/QuestIcon.png" xmlns:meta="Editor">
-	<Definition Name="QuestNodeDefs" Keys="QuestNode,Branch,CompleteQuest,Define" meta:RefKey="ReferenceDef" />
+	<Definition Name="QuestNodeDefs" Keys="QuestNode,Branch,CompleteQuest,Define,SetTheme" meta:RefKey="ReferenceDef" />
 	<Definition Name="Quest" AllowCircularLinks="True" FlattenData="True" meta:RefKey="GraphStruct">
 		<Data Name="Title" meta:RefKey="String" />
 		<Data Name="Description" meta:RefKey="String" />
@@ -13,7 +13,7 @@
 		<Data Name="Root" DefKey="QuestNodeDefs" meta:RefKey="GraphReference" />
 	</Definition>
 	<Definition Name="QuestNode" TextColour="240,156,204" meta:RefKey="GraphStructDef">
-		<Data Name="Type" EnumValues="Fixed,Deck" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Type" EnumValues="Fixed,Deck" Default="Deck" SkipIfDefault="False" meta:RefKey="Enum" />
 		<!--Deck-->
 		<Data Name="IsShop" meta:RefKey="Boolean" />
 		<Data Name="AllowDeckCards" Default="True" SkipIfDefault="False" VisibleIf="Type==Deck" meta:RefKey="Boolean" />
@@ -44,6 +44,10 @@
 		<Data Name="Key" meta:RefKey="String" />
 		<Data Name="Value" meta:RefKey="String" />
 		<Data Name="IsGlobal" meta:RefKey="Boolean" />
+		<Data Name="Next" DefKey="QuestNodeDefs" meta:RefKey="GraphReference" />
+	</Definition>
+	<Definition Name="SetTheme" TextColour="96,197,242" meta:RefKey="GraphStruct">
+		<Data Name="Theme" BasePath="Themes" StripExtension="True" ResourceType="Theme" meta:RefKey="File" />
 		<Data Name="Next" DefKey="QuestNodeDefs" meta:RefKey="GraphReference" />
 	</Definition>
 </Definitions>

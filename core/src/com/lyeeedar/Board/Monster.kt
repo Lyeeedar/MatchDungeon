@@ -76,7 +76,7 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 
 				tile.monsterEffect = MonsterEffect(monsterEffectType, data, tile.orb!!.desc, grid.level.theme)
 
-				tile.monsterEffect!!.timer = desc.attackNumPips
+				tile.monsterEffect!!.timer = desc.attackNumPips + ((Global.player.getStat(Statistic.HASTE) / 100f) * desc.attackNumPips).toInt()
 				val diff = tile.getPosDiff(startTile)
 				diff[0].y *= -1
 				sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
@@ -305,7 +305,8 @@ class MonsterAbility
 
 			if (effect == Effect.ATTACK || effect == Effect.SEALEDATTACK || effect == Effect.HEAL || effect == Effect.DELAYEDSUMMON || effect == Effect.DEBUFF)
 			{
-				val speed = data.get("NUMPIPS", monster.desc.attackNumPips.toString()).toString().toInt()
+				var speed = data.get("NUMPIPS", monster.desc.attackNumPips.toString()).toString().toInt()
+				speed += ((Global.player.getStat(Statistic.HASTE) / 100f) * speed).toInt()
 
 				val monsterEffectType: MonsterEffectType
 				if (effect == Effect.HEAL)

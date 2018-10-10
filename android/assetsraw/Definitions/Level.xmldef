@@ -59,7 +59,8 @@
 				<Data Name="MonsterDesc" Keys="MonsterDesc" meta:RefKey="Reference" />
 				<Data Name="SpecialOrb" EnumValues="None,3x3,4x4,H4,3H4,V4,3V4,5,All" SkipIfDefault="False" meta:RefKey="Enum" />
 				<Data Name="Sinkable" meta:RefKey="Struct">
-					<Data Name="Sprite" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+					<Data Name="Sprite" Keys="Sprite" SkipIfDefault="False" VisibleIf="UsePlayerSprite == false" meta:RefKey="Reference" />
+					<Data Name="UsePlayerSprite" VisibleIf="Sprite == null" meta:RefKey="Boolean" />
 				</Data>
 				<Data Name="IsChest" meta:RefKey="Boolean" />
 				<Data Name="Container" meta:RefKey="Struct">

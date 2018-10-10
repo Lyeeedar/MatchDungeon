@@ -1,0 +1,33 @@
+<Body xmlns:meta="Editor">
+	<Name>No Pants</Name>
+	<Description>Your lack of clothing aids your mobility to the point you can just roll away from any attack. It's not the most flattering look though.</Description>
+	<Cost>50</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/armor_leather_leg</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Haste>0.05</Haste>
+		<Luck>0.05</Luck>
+	</Statistics>
+	<Ability>
+		<Name>Dodge Roll</Name>
+		<Description>Roll out of the way of any attack.</Description>
+		<EffectData>
+			<Cost>2</Cost>
+			<Effect>1,Orb,Single,Buff</Effect>
+			<Data>
+				<Buff meta:RefKey="Buff">
+					<Name>Dodge</Name>
+					<Icon meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_skills/uf_skills_33</Name>
+					</Icon>
+					<Statistics meta:RefKey="Statistics">
+						<Aegis>1</Aegis>
+					</Statistics>
+					<Duration>1</Duration>
+				</Buff>
+			</Data>
+		</EffectData>
+	</Ability>
+</Body>

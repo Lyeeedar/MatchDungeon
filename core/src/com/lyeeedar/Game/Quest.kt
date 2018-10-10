@@ -41,6 +41,7 @@ class Quest(val path: String)
 	var current: AbstractQuestNode? = null
 
 	val theme: Theme
+	lateinit var currentTheme: Theme
 
 	val bronzeRewards = Array<AbstractReward>()
 	val silverRewards = Array<AbstractReward>()
@@ -65,6 +66,7 @@ class Quest(val path: String)
 
 		val themeName = xml.get("Theme")
 		theme = Theme.Companion.load("Themes/$themeName")
+		currentTheme = theme
 
 		for (themeCardPath in XmlData.enumeratePaths("Cards/$themeName", "Card"))
 		{
@@ -285,6 +287,8 @@ class Quest(val path: String)
 		output.writeString(path)
 		output.writeInt(state.ordinal)
 
+		output.writeString(currentTheme.path)
+
 		output.writeInt(questCards.size)
 		for (card in questCards)
 		{
@@ -319,6 +323,8 @@ class Quest(val path: String)
 
 			val state = input.readInt()
 			quest.state = QuestState.values()[state]
+
+			quest.currentTheme = Theme.load(input.readString())
 
 			quest.questCards.clear()
 			val numQuestCards = input.readInt()
@@ -373,6 +379,7 @@ abstract class AbstractQuestNode(val quest: Quest, val guid: String)
 				"BRANCH" -> Branch(quest, guid)
 				"COMPLETEQUEST" -> CompleteQuest(quest, guid)
 				"DEFINE" -> Define(quest, guid)
+				"SETTHEME" -> SetTheme(quest, guid)
 				else -> throw Exception("Unknown quest node type '" + xmlData.name + "'!")
 			}
 
@@ -688,6 +695,40 @@ class Define(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 		key = xmlData.get("Key").toLowerCase()
 		value = xmlData.get("Value").toLowerCase()
 		isGlobal = xmlData.getBoolean("IsGlobal", false)
+
+		val nextID = xmlData.get("Next")
+		next = QuestNode.QuestNodeWrapper(nextID)
+	}
+}
+
+class SetTheme(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
+{
+	lateinit var next: QuestNode.QuestNodeWrapper
+
+	lateinit var theme: String
+
+	override fun resolve(nodeMap: ObjectMap<String, AbstractQuestNode>)
+	{
+		next.resolve(nodeMap)
+	}
+
+	override fun run(): QuestNode?
+	{
+		if (theme.isBlank())
+		{
+			quest.currentTheme = quest.theme
+		}
+		else
+		{
+			quest.currentTheme = Theme.load("Themes/$theme")
+		}
+
+		return next.node.run()
+	}
+
+	override fun parse(xmlData: XmlData)
+	{
+		theme = xmlData.get("Theme", "")!!
 
 		val nextID = xmlData.get("Next")
 		next = QuestNode.QuestNodeWrapper(nextID)

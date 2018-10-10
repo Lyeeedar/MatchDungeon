@@ -28,6 +28,7 @@
 					<Data Name="Spreader" Keys="SpreaderDef" VisibleIf="Parent.Effect.Effect == Spreader" meta:RefKey="Reference" />
 					<Data Name="ConvertTo" VisibleIf="Parent.Effect.Effect == Convert" meta:RefKey="String" />
 					<Data Name="Buff" Keys="Buff" VisibleIf="Parent.Effect.Effect == Buff" meta:RefKey="Reference" />
+					<Data Name="Range" Type="Int" Min="1" Default="9999999" VisibleIf="Parent.Effect.Permuter == Row || Parent.Effect.Permuter == Column || Parent.Effect.Permuter == Cross" meta:RefKey="Number" />
 				</Data>
 				<Data Name="FlightEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
 				<Data Name="HitEffect" Keys="ParticleEffect" meta:RefKey="Reference" />

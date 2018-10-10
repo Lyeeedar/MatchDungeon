@@ -1,0 +1,28 @@
+<MainHand xmlns:meta="Editor">
+	<Name>Zweihander</Name>
+	<Description>A giant, heavy blade. Makes you slow but a single hit from this beast will ruin anyones day.</Description>
+	<Cost>200</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/weapon_lance</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<MatchDamage>3</MatchDamage>
+		<Haste>-10</Haste>
+	</Statistics>
+	<Ability>
+		<Name>Smash</Name>
+		<Description>Smash a line of tiles into pieces.</Description>
+		<EffectData>
+			<Cost>6</Cost>
+			<Effect>1,Orb,Column,Pop</Effect>
+			<Data>
+				<Damage>1</Damage>
+				<Range>1</Range>
+			</Data>
+			<HitEffect meta:RefKey="ParticleEffect">
+				<Name>Stomp</Name>
+			</HitEffect>
+		</EffectData>
+	</Ability>
+</MainHand>

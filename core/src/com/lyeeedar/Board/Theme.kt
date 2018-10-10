@@ -4,10 +4,9 @@ import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Renderables.Sprite.SpriteWrapper
 import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.getXml
 
-class Theme
+class Theme(val path: String)
 {
 	lateinit var floor: SpriteWrapper
 	lateinit var wall: SpriteWrapper
@@ -32,12 +31,7 @@ class Theme
 		fun load(path: String): Theme
 		{
 			val xml = getXml(path)
-			return load(xml)
-		}
-
-		fun load(xml: XmlData): Theme
-		{
-			val theme = Theme()
+			val theme = Theme(path)
 
 			theme.floor = SpriteWrapper.load(xml.getChildByName("Floor")!!)
 			theme.wall = SpriteWrapper.load(xml.getChildByName("Wall")!!)
