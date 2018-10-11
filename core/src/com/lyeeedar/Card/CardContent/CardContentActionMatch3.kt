@@ -32,7 +32,7 @@ class CardContentActionMatch3 : AbstractCardContentAction()
 		if (level == null)
 		{
 			level = Level.load(cardContent.path.directory() + "/" + levelFile).random()
-			level!!.create(CardContentScreen.currentQuest.theme, Global.player,
+			level!!.create(CardContentScreen.currentQuest.currentTheme, Global.player,
 						   {
 							   cardContent.CardContentStack.last().index++
 							   level = null

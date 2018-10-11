@@ -185,6 +185,44 @@ class GridWidget(val grid: Grid) : Widget()
 		tileSize = Math.min(w, h)
 	}
 
+	fun drawHPBar(space: Float, currentHp: Float, lostHP: Int, remainingReduction: Int, maxHp: Int, dr: Int, xi: Float, yi: Float, hp_full: Sprite)
+	{
+		// do hp bar
+		val solidSpaceRatio = 0.12f // 20% free space
+
+		val maxSingleLineHP = space * 15
+
+		val pips = maxHp + dr
+
+		var lines = 1
+		var pipsPerLine = pips
+		if (pips > maxSingleLineHP)
+		{
+			lines = 2
+			pipsPerLine = pips / 2
+		}
+
+		val spacePerPip = space / pipsPerLine.toFloat()
+		val spacing = spacePerPip * solidSpaceRatio
+		val solid = spacePerPip - spacing
+
+		val hp = currentHp.ciel()
+		for (i in 0 until pips)
+		{
+			val sprite = when {
+				i < hp -> hp_full
+				i < hp + remainingReduction -> hp_dr
+				i < hp + lostHP -> hp_damaged
+				else -> hp_empty
+			}
+
+			val y = if (i < pipsPerLine && lines > 1) yi+0.25f else yi+0.1f
+			val x = if (i >= pipsPerLine && lines > 1) xi+(i-pipsPerLine)*spacePerPip else xi+i*spacePerPip
+
+			floating.queueSprite(sprite, x, y, ORB, 2, width = solid, height = 0.15f)
+		}
+	}
+
 	var renderY = 0f
 	override fun draw(batch: Batch?, parentAlpha: Float)
 	{
@@ -492,24 +530,7 @@ class GridWidget(val grid: Grid) : Widget()
 					ground.queueSprite(monster.sprite, xi, yi, ORB, 1, monsterColour)
 
 					// do hp bar
-					val solidSpaceRatio = 0.12f // 20% free space
-					val space = monster.size.toFloat()
-					val pips = monster.maxhp + monster.damageReduction
-					val spacePerPip = space / pips.toFloat()
-					val spacing = spacePerPip * solidSpaceRatio
-					val solid = spacePerPip - spacing
-
-					val hp = monster.hp.ciel()
-					for (i in 0 until pips)
-					{
-						val sprite = when {
-							i < hp -> hp_full
-							i < hp + monster.remainingReduction -> hp_dr
-							i < hp + monster.lostHP -> hp_damaged
-							else -> hp_empty
-						}
-						floating.queueSprite(sprite, xi+i*spacePerPip, yi+0.1f, ORB, 2, width = solid, height = 0.15f)
-					}
+					drawHPBar(monster.size.toFloat(), monster.hp, monster.lostHP, monster.remainingReduction, monster.maxhp, monster.damageReduction, xi, yi, hp_full)
 
 					if (!Global.settings.get("Monster", false) && !grid.inTurn )
 					{
@@ -535,26 +556,8 @@ class GridWidget(val grid: Grid) : Widget()
 					ground.queueSprite(friendly.sprite, xi, yi, ORB, 1, orbColour)
 
 					// do hp bar
-					val solidSpaceRatio = 0.12f // 20% free space
-					val space = friendly.size.toFloat()
-					val pips = friendly.maxhp + friendly.damageReduction
-					val spacePerPip = space / pips.toFloat()
-					val spacing = spacePerPip * solidSpaceRatio
-					val solid = spacePerPip - spacing
-
 					val fullHp = if (friendly.isSummon) hp_full_summon else hp_full_friendly
-
-					val hp = friendly.hp.ciel()
-					for (i in 0 until pips)
-					{
-						val sprite = when {
-							i < hp -> fullHp
-							i < hp + friendly.remainingReduction -> hp_dr
-							i < hp + friendly.lostHP -> hp_damaged
-							else -> hp_empty
-						}
-						floating.queueSprite(sprite, xi+i*spacePerPip, yi+0.1f, ORB, 2, width = solid, height = 0.15f)
-					}
+					drawHPBar(friendly.size.toFloat(), friendly.hp, friendly.lostHP, friendly.remainingReduction, friendly.maxhp, friendly.damageReduction, xi, yi, fullHp)
 
 					if (!Global.settings.get("Friendly", false) && !grid.inTurn )
 					{
@@ -572,25 +575,7 @@ class GridWidget(val grid: Grid) : Widget()
 					// do hp bar
 					if (block.hp < block.maxhp || block.alwaysShowHP)
 					{
-						val solidSpaceRatio = 0.12f // 20% free space
-						val space = 1f
-						val pips = block.maxhp + block.damageReduction
-						val spacePerPip = space / pips.toFloat()
-						val spacing = spacePerPip * solidSpaceRatio
-						val solid = spacePerPip - spacing
-
-						val hp = block.hp.ciel()
-						for (i in 0 until pips)
-						{
-							val sprite = when
-							{
-								i < hp -> hp_neutral
-								i < hp + block.remainingReduction -> hp_dr
-								i < hp + block.lostHP -> hp_damaged
-								else -> hp_empty
-							}
-							floating.queueSprite(sprite, xi + i * spacePerPip, yi + 0.1f, ORB, 2, width = solid, height = 0.15f)
-						}
+						drawHPBar(1f, block.hp, block.lostHP, block.remainingReduction, block.maxhp, block.damageReduction, xi, yi, hp_neutral)
 					}
 
 					if (!Global.settings.get("Block", false) && !grid.inTurn )
@@ -608,25 +593,7 @@ class GridWidget(val grid: Grid) : Widget()
 					// do hp bar
 					if (container.hp < container.maxhp || container.alwaysShowHP)
 					{
-						val solidSpaceRatio = 0.12f // 20% free space
-						val space = 1f
-						val pips = container.maxhp + container.damageReduction
-						val spacePerPip = space / pips.toFloat()
-						val spacing = spacePerPip * solidSpaceRatio
-						val solid = spacePerPip - spacing
-
-						val hp = container.hp.ciel()
-						for (i in 0 until pips)
-						{
-							val sprite = when
-							{
-								i < hp -> hp_neutral
-								i < hp + container.remainingReduction -> hp_dr
-								i < hp + container.lostHP -> hp_damaged
-								else -> hp_empty
-							}
-							floating.queueSprite(sprite, xi + i * spacePerPip, yi + 0.1f, ORB, 2, width = solid, height = 0.15f)
-						}
+						drawHPBar(1f, container.hp, container.lostHP, container.remainingReduction, container.maxhp, container.damageReduction, xi, yi, hp_neutral)
 					}
 				}
 

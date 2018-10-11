@@ -36,29 +36,29 @@
 			<Success meta:RefKey="QuestNode">e2237341-1813-4456-b185-f5743b4938b9</Success>
 			<Failure meta:RefKey="QuestNode">e2237341-1813-4456-b185-f5743b4938b9</Failure>
 		</QuestNode>
-		<QuestNode meta:X="-214.85808518316048" meta:Y="386.97963619646572" meta:Comment="747ad511-c564-4c69-b485-865dc062a2bb" GUID="e2237341-1813-4456-b185-f5743b4938b9">
+		<QuestNode meta:X="-382.39956813094591" meta:Y="396.95234351478626" meta:Comment="747ad511-c564-4c69-b485-865dc062a2bb" GUID="e2237341-1813-4456-b185-f5743b4938b9">
 			<Type>Fixed</Type>
 			<FixedEvent>GateGuardian</FixedEvent>
 			<Success meta:RefKey="SetTheme">c13720bb-4038-421e-be85-2980aee2d387</Success>
 			<Failure meta:RefKey="CompleteQuest">7c894ab3-2afe-4b32-b5cb-f74964e12500</Failure>
 		</QuestNode>
-		<QuestNode meta:X="364.70843416434468" meta:Y="392.91596289212862" meta:Comment="2f947a90-54cc-47f8-9353-6359d9fd6fbf" GUID="306b8776-743e-4f6d-9a8b-535d16331108">
+		<QuestNode meta:X="253.0141121991544" meta:Y="400.8941287467851" meta:Comment="2f947a90-54cc-47f8-9353-6359d9fd6fbf" GUID="306b8776-743e-4f6d-9a8b-535d16331108">
 			<Type>Fixed</Type>
 			<FixedEvent>Descent</FixedEvent>
 			<Success meta:RefKey="QuestNode">f6263d4b-4e67-4b93-964c-ac4c728f1a91</Success>
 			<Failure meta:RefKey="CompleteQuest">76681422-900b-4e91-8b38-118e09366d83</Failure>
 		</QuestNode>
-		<CompleteQuest meta:X="15.653916722001441" meta:Y="721.57285261730146" meta:Comment="747ad511-c564-4c69-b485-865dc062a2bb" GUID="7c894ab3-2afe-4b32-b5cb-f74964e12500">
+		<CompleteQuest meta:X="-145.90394183479168" meta:Y="601.9003647974547" meta:Comment="747ad511-c564-4c69-b485-865dc062a2bb" GUID="7c894ab3-2afe-4b32-b5cb-f74964e12500">
 			<State>Failure</State>
 		</CompleteQuest>
-		<CompleteQuest meta:X="541.17423549378532" meta:Y="735.39703391891385" meta:Comment="2f947a90-54cc-47f8-9353-6359d9fd6fbf" GUID="76681422-900b-4e91-8b38-118e09366d83">
+		<CompleteQuest meta:X="491.31069890218254" meta:Y="595.77913146242588" meta:Comment="2f947a90-54cc-47f8-9353-6359d9fd6fbf" GUID="76681422-900b-4e91-8b38-118e09366d83">
 			<State>Failure</State>
 		</CompleteQuest>
-		<SetTheme meta:X="175.57868740903973" meta:Y="397.8568524602299" meta:Comment="2f947a90-54cc-47f8-9353-6359d9fd6fbf" GUID="c13720bb-4038-421e-be85-2980aee2d387">
+		<SetTheme meta:X="63.884365443849433" meta:Y="405.83501831488638" meta:Comment="2f947a90-54cc-47f8-9353-6359d9fd6fbf" GUID="c13720bb-4038-421e-be85-2980aee2d387">
 			<Theme>Depths</Theme>
 			<Next meta:RefKey="QuestNode">306b8776-743e-4f6d-9a8b-535d16331108</Next>
 		</SetTheme>
-		<QuestNode meta:X="-217.44450189148051" meta:Y="872.97726482848941" meta:Comment="0d631a86-f04d-4aed-8541-a8150556b5a6" GUID="f6263d4b-4e67-4b93-964c-ac4c728f1a91">
+		<QuestNode meta:X="-438.838604358197" meta:Y="950.76438191138982" meta:Comment="0d631a86-f04d-4aed-8541-a8150556b5a6" GUID="f6263d4b-4e67-4b93-964c-ac4c728f1a91">
 			<Type>Deck</Type>
 			<AllowDeckCards>true</AllowDeckCards>
 			<AllowQuestCards>true</AllowQuestCards>
@@ -66,7 +66,7 @@
 			<Success meta:RefKey="QuestNode">3f8169ac-7580-48a0-8e60-59428514cda4</Success>
 			<Failure meta:RefKey="QuestNode">3f8169ac-7580-48a0-8e60-59428514cda4</Failure>
 		</QuestNode>
-		<QuestNode meta:X="58.555498108519487" meta:Y="872.97726482848941" meta:Comment="0d631a86-f04d-4aed-8541-a8150556b5a6" GUID="3f8169ac-7580-48a0-8e60-59428514cda4">
+		<QuestNode meta:X="-162.83860435819702" meta:Y="950.76438191138982" meta:Comment="0d631a86-f04d-4aed-8541-a8150556b5a6" GUID="3f8169ac-7580-48a0-8e60-59428514cda4">
 			<Type>Deck</Type>
 			<AllowDeckCards>true</AllowDeckCards>
 			<AllowQuestCards>true</AllowQuestCards>
@@ -74,7 +74,7 @@
 			<Success meta:RefKey="QuestNode">5cbce064-7b8f-4290-a569-e98dc7334b23</Success>
 			<Failure meta:RefKey="QuestNode">5cbce064-7b8f-4290-a569-e98dc7334b23</Failure>
 		</QuestNode>
-		<QuestNode meta:X="334.55549810851926" meta:Y="872.97726482848941" meta:Comment="0d631a86-f04d-4aed-8541-a8150556b5a6" GUID="5cbce064-7b8f-4290-a569-e98dc7334b23">
+		<QuestNode meta:X="113.16139564180276" meta:Y="950.76438191138982" meta:Comment="0d631a86-f04d-4aed-8541-a8150556b5a6" GUID="5cbce064-7b8f-4290-a569-e98dc7334b23">
 			<Type>Deck</Type>
 			<AllowDeckCards>true</AllowDeckCards>
 			<AllowQuestCards>true</AllowQuestCards>
@@ -82,7 +82,7 @@
 			<Success meta:RefKey="QuestNode">a61c3ffd-cd3d-432e-b119-dda80522e8d9</Success>
 			<Failure meta:RefKey="QuestNode">a61c3ffd-cd3d-432e-b119-dda80522e8d9</Failure>
 		</QuestNode>
-		<QuestNode meta:X="610.55549810851926" meta:Y="872.97726482848941" meta:Comment="0d631a86-f04d-4aed-8541-a8150556b5a6" GUID="a61c3ffd-cd3d-432e-b119-dda80522e8d9">
+		<QuestNode meta:X="389.16139564180276" meta:Y="950.76438191138982" meta:Comment="0d631a86-f04d-4aed-8541-a8150556b5a6" GUID="a61c3ffd-cd3d-432e-b119-dda80522e8d9">
 			<Type>Deck</Type>
 			<AllowDeckCards>true</AllowDeckCards>
 			<AllowQuestCards>true</AllowQuestCards>
@@ -90,7 +90,7 @@
 			<Success meta:RefKey="QuestNode">b6cf29b9-b389-4528-832b-9f10d9489e95</Success>
 			<Failure meta:RefKey="QuestNode">b6cf29b9-b389-4528-832b-9f10d9489e95</Failure>
 		</QuestNode>
-		<QuestNode meta:X="886.55549810851926" meta:Y="874.22430319289981" meta:Comment="0d631a86-f04d-4aed-8541-a8150556b5a6" GUID="b6cf29b9-b389-4528-832b-9f10d9489e95">
+		<QuestNode meta:X="665.16139564180276" meta:Y="952.01142027580022" meta:Comment="0d631a86-f04d-4aed-8541-a8150556b5a6" GUID="b6cf29b9-b389-4528-832b-9f10d9489e95">
 			<Type>Deck</Type>
 			<IsShop>true</IsShop>
 			<AllowDeckCards>true</AllowDeckCards>
@@ -99,7 +99,7 @@
 			<Success meta:RefKey="QuestNode">55c68f9f-eeee-45be-ab36-1b5495a14ce0</Success>
 			<Failure meta:RefKey="QuestNode">55c68f9f-eeee-45be-ab36-1b5495a14ce0</Failure>
 		</QuestNode>
-		<QuestNode meta:X="-277.31188720706905" meta:Y="1279.125518672098" meta:Comment="73a9565a-af37-4ce1-b710-e9a85c747a73" GUID="55c68f9f-eeee-45be-ab36-1b5495a14ce0">
+		<QuestNode meta:X="-347.0840837911245" meta:Y="1346.8455918272107" meta:Comment="73a9565a-af37-4ce1-b710-e9a85c747a73" GUID="55c68f9f-eeee-45be-ab36-1b5495a14ce0">
 			<Type>Fixed</Type>
 			<FixedEvent>StickyAmbush</FixedEvent>
 			<Failure meta:RefKey="CompleteQuest">b760cf39-c9cc-4daa-a63d-af71ba6a48e3</Failure>
@@ -118,18 +118,18 @@
 				</State>
 			</Custom>
 		</QuestNode>
-		<CompleteQuest meta:X="38.942805356977715" meta:Y="1307.7369420624577" meta:Comment="73a9565a-af37-4ce1-b710-e9a85c747a73" GUID="b760cf39-c9cc-4daa-a63d-af71ba6a48e3">
+		<CompleteQuest meta:X="-30.829391227077735" meta:Y="1375.4570152175704" meta:Comment="73a9565a-af37-4ce1-b710-e9a85c747a73" GUID="b760cf39-c9cc-4daa-a63d-af71ba6a48e3">
 			<State>Failure</State>
 		</CompleteQuest>
-		<QuestNode meta:X="418.44267762802838" meta:Y="1867.3017347277105" meta:Comment="a36934b4-30be-4562-bef7-48ead8c8f697" GUID="6d7040c5-1fd0-449e-bbc6-30e458d64384">
+		<QuestNode meta:X="254.13931901726531" meta:Y="2185.6039142961718" meta:Comment="a36934b4-30be-4562-bef7-48ead8c8f697" GUID="6d7040c5-1fd0-449e-bbc6-30e458d64384">
 			<Type>Deck</Type>
 			<AllowDeckCards>true</AllowDeckCards>
 			<AllowQuestCards>true</AllowQuestCards>
 			<AllowThemeCards>true</AllowThemeCards>
-			<Success meta:RefKey="Define">7c9a1753-c450-4dbb-91cd-3043d3e93e78</Success>
-			<Failure meta:RefKey="Define">7c9a1753-c450-4dbb-91cd-3043d3e93e78</Failure>
+			<Success meta:RefKey="QuestNode">2b00cefe-bd8c-4d22-95dd-7f6242929df8</Success>
+			<Failure meta:RefKey="QuestNode">2b00cefe-bd8c-4d22-95dd-7f6242929df8</Failure>
 		</QuestNode>
-		<Branch meta:X="1235.529290766965" meta:Y="1598.3378449519883" meta:Comment="eeda5940-4a28-4d46-933f-b7e73bc7f1e3" GUID="2ac3be5b-2e2e-42e7-9058-39efc8807835">
+		<Branch meta:X="1648.4874622702707" meta:Y="1907.4231021507817" meta:Comment="eeda5940-4a28-4d46-933f-b7e73bc7f1e3" GUID="2ac3be5b-2e2e-42e7-9058-39efc8807835">
 			<Branch>
 				<Condition>Explored == 3</Condition>
 				<Node meta:RefKey="CompleteQuest">278b8a44-826a-4269-8f6b-0cd16f33b811</Node>
@@ -143,33 +143,78 @@
 				<Node meta:RefKey="CompleteQuest">6a672ab2-b08f-44ad-a9da-acf66d36145a</Node>
 			</Branch>
 		</Branch>
-		<Define meta:X="1016.3763403968793" meta:Y="1574.2551031530777" meta:Comment="eeda5940-4a28-4d46-933f-b7e73bc7f1e3" GUID="7c9a1753-c450-4dbb-91cd-3043d3e93e78">
+		<Define meta:X="1429.3345119001851" meta:Y="1883.3403603518709" meta:Comment="eeda5940-4a28-4d46-933f-b7e73bc7f1e3" GUID="7c9a1753-c450-4dbb-91cd-3043d3e93e78">
 			<Key>Explored</Key>
 			<Value>DepthsExploredLeft+DepthsExploredMiddle+DepthsExploredRight</Value>
 			<Next meta:RefKey="Branch">2ac3be5b-2e2e-42e7-9058-39efc8807835</Next>
 		</Define>
-		<CompleteQuest meta:X="1511.2837827775643" meta:Y="1565.826143523459" meta:Comment="eeda5940-4a28-4d46-933f-b7e73bc7f1e3" GUID="278b8a44-826a-4269-8f6b-0cd16f33b811" />
-		<CompleteQuest meta:X="1513.6920569574554" meta:Y="1665.7695219889379" meta:Comment="eeda5940-4a28-4d46-933f-b7e73bc7f1e3" GUID="007070df-be68-4a79-ba7e-deeaa6c00e79">
+		<CompleteQuest meta:X="1924.24195428087" meta:Y="1874.9114007222524" meta:Comment="eeda5940-4a28-4d46-933f-b7e73bc7f1e3" GUID="278b8a44-826a-4269-8f6b-0cd16f33b811" />
+		<CompleteQuest meta:X="1926.6502284607611" meta:Y="1974.8547791877313" meta:Comment="eeda5940-4a28-4d46-933f-b7e73bc7f1e3" GUID="007070df-be68-4a79-ba7e-deeaa6c00e79">
 			<State>Silver</State>
 		</CompleteQuest>
-		<CompleteQuest meta:X="1512.4879198675094" meta:Y="1759.6922150046889" meta:Comment="eeda5940-4a28-4d46-933f-b7e73bc7f1e3" GUID="6a672ab2-b08f-44ad-a9da-acf66d36145a">
+		<CompleteQuest meta:X="1925.4460913708151" meta:Y="2068.7774722034824" meta:Comment="eeda5940-4a28-4d46-933f-b7e73bc7f1e3" GUID="6a672ab2-b08f-44ad-a9da-acf66d36145a">
 			<State>Bronze</State>
 		</CompleteQuest>
-		<QuestNode meta:X="429.66502765605856" meta:Y="1202.8295802885141" meta:Comment="fafbe05d-9d17-4ebb-be66-5143ec951fa3" GUID="17259993-c15e-4b76-b6c5-44e0c0a6b3d2">
+		<QuestNode meta:X="251.90461773431144" meta:Y="1478.3823511227513" meta:Comment="fafbe05d-9d17-4ebb-be66-5143ec951fa3" GUID="17259993-c15e-4b76-b6c5-44e0c0a6b3d2">
 			<Type>Deck</Type>
 			<AllowDeckCards>true</AllowDeckCards>
 			<AllowQuestCards>true</AllowQuestCards>
 			<AllowThemeCards>true</AllowThemeCards>
-			<Success meta:RefKey="Define">7c9a1753-c450-4dbb-91cd-3043d3e93e78</Success>
-			<Failure meta:RefKey="Define">7c9a1753-c450-4dbb-91cd-3043d3e93e78</Failure>
+			<Success meta:RefKey="QuestNode">2c488642-49a8-490e-a755-c398d2c91036</Success>
+			<Failure meta:RefKey="QuestNode">2c488642-49a8-490e-a755-c398d2c91036</Failure>
 		</QuestNode>
-		<QuestNode meta:X="418.00291274227675" meta:Y="1538.0386970709405" meta:Comment="1369cb80-6593-401f-bdbb-c5815eb10b65" GUID="1299c406-aa4b-4cae-a579-5e4f9817e78a">
+		<QuestNode meta:X="257.30857891445214" meta:Y="1835.9255708284386" meta:Comment="1369cb80-6593-401f-bdbb-c5815eb10b65" GUID="1299c406-aa4b-4cae-a579-5e4f9817e78a">
 			<Type>Deck</Type>
 			<AllowDeckCards>true</AllowDeckCards>
 			<AllowQuestCards>true</AllowQuestCards>
 			<AllowThemeCards>true</AllowThemeCards>
-			<Success meta:RefKey="Define">7c9a1753-c450-4dbb-91cd-3043d3e93e78</Success>
-			<Failure meta:RefKey="Define">7c9a1753-c450-4dbb-91cd-3043d3e93e78</Failure>
+			<Success meta:RefKey="QuestNode">e93beb4b-d3ba-4340-a9f8-02ea51685fd0</Success>
+			<Failure meta:RefKey="QuestNode">e93beb4b-d3ba-4340-a9f8-02ea51685fd0</Failure>
 		</QuestNode>
+		<Define meta:X="657.52879907591864" meta:Y="1473.9125517661441" meta:Comment="fafbe05d-9d17-4ebb-be66-5143ec951fa3" GUID="61bebbdd-48d0-4250-9be1-2b4756cb5a43">
+			<Key>DepthsExploredLeft</Key>
+			<Value>1</Value>
+			<IsGlobal>true</IsGlobal>
+			<Next meta:RefKey="Define">7c9a1753-c450-4dbb-91cd-3043d3e93e78</Next>
+		</Define>
+		<QuestNode meta:X="451.94807899786548" meta:Y="1473.7322260385511" meta:Comment="fafbe05d-9d17-4ebb-be66-5143ec951fa3" GUID="2c488642-49a8-490e-a755-c398d2c91036">
+			<Type>Fixed</Type>
+			<FixedEvent></FixedEvent>
+			<Success meta:RefKey="Define">61bebbdd-48d0-4250-9be1-2b4756cb5a43</Success>
+			<Failure meta:RefKey="CompleteQuest">5e9c9749-0b27-429c-bc3c-93230ad941c6</Failure>
+		</QuestNode>
+		<CompleteQuest meta:X="675.06580257994381" meta:Y="1655.0758496259964" meta:Comment="fafbe05d-9d17-4ebb-be66-5143ec951fa3" GUID="5e9c9749-0b27-429c-bc3c-93230ad941c6">
+			<State>Failure</State>
+		</CompleteQuest>
+		<QuestNode meta:X="464.33019378162584" meta:Y="1831.3270118195835" meta:Comment="1369cb80-6593-401f-bdbb-c5815eb10b65" GUID="e93beb4b-d3ba-4340-a9f8-02ea51685fd0">
+			<Type>Fixed</Type>
+			<FixedEvent></FixedEvent>
+			<Success meta:RefKey="Define">eb233f3e-c982-4bfc-8b7f-20a839eac31c</Success>
+			<Failure meta:RefKey="CompleteQuest">c794bfd6-f539-4a23-a69a-877795906500</Failure>
+		</QuestNode>
+		<Define meta:X="662.74025194384137" meta:Y="1827.4881613238367" meta:Comment="1369cb80-6593-401f-bdbb-c5815eb10b65" GUID="eb233f3e-c982-4bfc-8b7f-20a839eac31c">
+			<Key>DepthsExploredMiddle</Key>
+			<Value>1</Value>
+			<IsGlobal>true</IsGlobal>
+			<Next meta:RefKey="Define">7c9a1753-c450-4dbb-91cd-3043d3e93e78</Next>
+		</Define>
+		<CompleteQuest meta:X="661.78053931990473" meta:Y="2012.7126977436196" meta:Comment="1369cb80-6593-401f-bdbb-c5815eb10b65" GUID="c794bfd6-f539-4a23-a69a-877795906500">
+			<State>Failure</State>
+		</CompleteQuest>
+		<QuestNode meta:X="463.25436557475291" meta:Y="2181.2418521151385" meta:Comment="a36934b4-30be-4562-bef7-48ead8c8f697" GUID="2b00cefe-bd8c-4d22-95dd-7f6242929df8">
+			<Type>Fixed</Type>
+			<FixedEvent></FixedEvent>
+			<Success meta:RefKey="Define">d6f89626-5222-48ec-a814-e4acf478ad23</Success>
+			<Failure meta:RefKey="CompleteQuest">5cb6454f-b310-45f6-826d-53f9cd8a75a4</Failure>
+		</QuestNode>
+		<Define meta:X="695.25436557475291" meta:Y="2181.2418521151385" meta:Comment="a36934b4-30be-4562-bef7-48ead8c8f697" GUID="d6f89626-5222-48ec-a814-e4acf478ad23">
+			<Key>DepthsExploredRight</Key>
+			<Value>1</Value>
+			<IsGlobal>true</IsGlobal>
+			<Next meta:RefKey="Define">7c9a1753-c450-4dbb-91cd-3043d3e93e78</Next>
+		</Define>
+		<CompleteQuest meta:X="689.43828266670846" meta:Y="2403.707023347843" meta:Comment="a36934b4-30be-4562-bef7-48ead8c8f697" GUID="5cb6454f-b310-45f6-826d-53f9cd8a75a4">
+			<State>Failure</State>
+		</CompleteQuest>
 	</Nodes>
 </Quest>

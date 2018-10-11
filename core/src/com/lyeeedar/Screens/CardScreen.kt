@@ -106,7 +106,7 @@ class CardScreen : AbstractScreen()
 		contentTable.background = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("Sprites/GUI/background.png"), 24, 24, 24, 24))
 
 		mainTable.add(contentTable).grow().pad(15f, 35f, 15f, 35f)
-		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(quest.theme.backgroundTile))).tint(Color.DARK_GRAY)
+		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(quest.currentTheme.backgroundTile))).tint(Color.DARK_GRAY)
 
 		updateEquipment()
 		advanceContent(true)
