@@ -136,7 +136,7 @@ class Ability
 
 		if (permuter.type == Permuter.Type.RANDOM && targets == 0)
 		{
-			for (t in permuter.permute(grid.tile(grid.width/2, grid.height/2)!!, grid, data, selectedTargets, this))
+			for (t in permuter.permute(grid.tile(grid.width/2, grid.height/2)!!, grid, data, selectedTargets, this, null))
 			{
 				if (!selectedTargets.contains(t, true))
 				{
@@ -155,7 +155,7 @@ class Ability
 			}
 			else
 			{
-				for (t in permuter.permute(target, grid, data, selectedTargets, this))
+				for (t in permuter.permute(target, grid, data, selectedTargets, this, null))
 				{
 					if (!finalTargets.contains(t, true))
 					{

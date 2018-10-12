@@ -13,6 +13,8 @@ import com.lyeeedar.Renderables.Animation.BumpAnimation
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.Animation.LeapAnimation
 import com.lyeeedar.Renderables.Animation.MoveAnimation
+import com.lyeeedar.Renderables.Particle.ParticleEffect
+import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
 import com.lyeeedar.Util.*
 import ktx.collections.set
@@ -29,6 +31,11 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 	var atkCooldown = 0
 
 	val abilities = Array<MonsterAbility>()
+
+	var immuneCooldown = -1
+
+	var fastAttacks = -1
+	var powerfulAttacks = -1
 
 	init
 	{
@@ -52,6 +59,27 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 
 	override fun onTurn(grid: Grid)
 	{
+		if (immune)
+		{
+			immuneCooldown--
+			if (immuneCooldown <= 0)
+			{
+				immune = false
+			}
+		}
+
+		if (fastAttacks > 0)
+		{
+			fastAttacks--
+
+			atkCooldown = 0
+		}
+
+		if (powerfulAttacks > 0)
+		{
+			powerfulAttacks--
+		}
+
 		atkCooldown--
 		if (atkCooldown <= 0)
 		{
@@ -70,9 +98,11 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 			{
 				val startTile = tiles.minBy { it.dist(tile) }!!
 
-				val monsterEffectType = if (desc.attackDamage > 1) MonsterEffectType.BIGATTACK else MonsterEffectType.ATTACK
+				val damage = if (powerfulAttacks > 0) desc.attackDamage + 2 else desc.attackDamage
+
+				val monsterEffectType = if (damage > 1) MonsterEffectType.BIGATTACK else MonsterEffectType.ATTACK
 				val data = ObjectMap<String, Any>()
-				data["DAMAGE"] = desc.attackDamage.toString()
+				data["DAMAGE"] = damage.toString()
 
 				tile.monsterEffect = MonsterEffect(monsterEffectType, data, tile.orb!!.desc, grid.level.theme)
 
@@ -146,11 +176,20 @@ class MonsterAbility
 		SEAL,
 		BLOCK,
 		MOVE,
+		DASH,
 		HEAL,
 		SUMMON,
 		DELAYEDSUMMON,
 		SPREADER,
-		DEBUFF
+		DEBUFF,
+		SELFBUFF
+	}
+
+	enum class MoveType
+	{
+		BASIC,
+		LEAP,
+		TELEPORT
 	}
 
 	var cooldownTimer: Int = 0
@@ -161,6 +200,9 @@ class MonsterAbility
 	var targetCount: Int = 1
 	lateinit var permuter: Permuter
 	lateinit var effect: Effect
+	var repeatable = true
+
+	var hasBeenUsed = false
 	val data = ObjectMap<String, Any>()
 
 	fun copy(): MonsterAbility
@@ -174,6 +216,7 @@ class MonsterAbility
 		ability.targetCount = targetCount
 		ability.permuter = permuter
 		ability.effect = effect
+		ability.repeatable = repeatable
 		ability.data.putAll(data)
 
 		return ability
@@ -181,19 +224,52 @@ class MonsterAbility
 
 	fun activate(grid: Grid, monster: Monster)
 	{
+		if (!repeatable && hasBeenUsed)
+		{
+			return
+		}
+		hasBeenUsed = true
+
 		if (!Global.release)
 		{
 			println("Monster trying to use ability '$effect'")
+		}
+
+		if (effect == Effect.SELFBUFF)
+		{
+			val type = data["BUFFTYPE", "Immunity"].toString()
+			val duration =  data["DURATION", "1"].toString().toInt()
+
+			when (type)
+			{
+				"Immunity" -> { monster.immune = true; monster.immuneCooldown = duration }
+				"FastAttacks" -> monster.fastAttacks = duration
+				"PowerfulAttacks" -> monster.powerfulAttacks = duration
+				else -> throw Exception("Unknown monster selfbuff '$type'!")
+			}
+
+			val effect = data["PARTICLEEFFECT", null]
+			if (effect is ParticleEffect)
+			{
+				val e = effect.copy()
+				e.size[0] = monster.size
+				e.size[1] = monster.size
+				monster.tiles[0, 0].effects.add(e)
+			}
+
+			return
 		}
 
 		val availableTargets = Array<Tile>()
 
 		if (target == Target.NEIGHBOUR)
 		{
-			if (effect == Effect.MOVE)
+			if (effect == Effect.MOVE || effect == Effect.DASH)
 			{
 				val range = data["RANGE", "1"].toString().toInt()
-				availableTargets.addAll(grid.grid.filter { it != monster.tiles[0,0] && it.taxiDist(monster.tiles[0, 0]) <= range })
+				val minRange = data["MINRANGE", "0"].toString().toInt()
+
+				availableTargets.addAll(grid.grid.filter { it != monster.tiles[0,0] && it.taxiDist(monster.tiles[0, 0]) <= range && it.taxiDist(monster.tiles[0, 0]) >= minRange })
 			}
 			else
 			{
@@ -202,7 +278,9 @@ class MonsterAbility
 		}
 		else if (target == Target.RANDOM)
 		{
-			availableTargets.addAll(grid.grid.filter { !monster.tiles.contains(it) })
+			val minRange = data["MINRANGE", "0"].toString().toInt()
+
+			availableTargets.addAll(grid.grid.filter { !monster.tiles.contains(it) && it.taxiDist(monster.tiles[0, 0]) >= minRange })
 		}
 		else
 		{
@@ -211,7 +289,7 @@ class MonsterAbility
 
 		var validTargets = availableTargets.filter { targetRestriction.isValid(it, data) }
 
-		if (targetRestriction.type == Targetter.Type.ORB && (effect == Effect.ATTACK || effect == Effect.SEALEDATTACK))
+		if (targetRestriction.type == Targetter.Type.ORB && (effect == Effect.ATTACK || effect == Effect.SEALEDATTACK || effect == Effect.HEAL || effect == Effect.DELAYEDSUMMON || effect == Effect.DEBUFF))
 		{
 			validTargets = validTargets.filter { validAttack(grid, it) }
 		}
@@ -222,7 +300,8 @@ class MonsterAbility
 
 		for (target in chosen)
 		{
-			for (t in permuter.permute(target, grid, data, chosen, null))
+			val source = monster.getBorderTiles(grid, 1).minBy { it.dist(target) }
+			for (t in permuter.permute(target, grid, data, chosen, null, source))
 			{
 				if (!finalTargets.contains(t, true))
 				{
@@ -241,7 +320,7 @@ class MonsterAbility
 			}
 		}
 
-		if (effect == Effect.MOVE)
+		if (effect == Effect.MOVE || effect == Effect.DASH)
 		{
 			fun isValid(t: Tile): Boolean
 			{
@@ -276,7 +355,7 @@ class MonsterAbility
 			if (target != null)
 			{
 				val dst = monster.tiles[0,0].euclideanDist(target)
-				val animDuration = 0.25f + dst * 0.025f
+				var animDuration = 0.25f + dst * 0.025f
 
 				val start = monster.tiles.first()
 				monster.setTile(target, grid, animDuration - 0.1f)
@@ -285,14 +364,107 @@ class MonsterAbility
 				val diff = end.getPosDiff(start)
 				diff[0].y *= -1
 
-				if (this.target == Target.RANDOM)
+				val moveType: MoveType
+				if (effect == Effect.DASH)
+				{
+					moveType = MoveType.BASIC
+				}
+				else if (data.containsKey("MOVETYPE"))
+				{
+					val moveTypeStr = data["MOVETYPE"]
+					moveType = when(moveTypeStr)
+					{
+						"Basic" -> MoveType.BASIC
+						"Leap" -> MoveType.LEAP
+						"Teleport" -> MoveType.TELEPORT
+						else -> throw Exception("Unknown move type '$moveTypeStr'!")
+					}
+				}
+				else if (this.target == Target.RANDOM)
+				{
+					moveType = MoveType.LEAP
+				}
+				else
+				{
+					moveType = MoveType.BASIC
+				}
+
+				if (moveType == MoveType.LEAP)
 				{
 					monster.sprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
 					monster.sprite.animation = ExpandAnimation.obtain().set(animDuration, 1f, 2f, false)
 				}
+				else if (moveType == MoveType.TELEPORT)
+				{
+					animDuration = 0.2f
+					monster.sprite.renderDelay = animDuration
+					monster.sprite.showBeforeRender = false
+				}
 				else
 				{
 					monster.sprite.animation = MoveAnimation.obtain().set(animDuration, UnsmoothedPath(diff), Interpolation.linear)
+				}
+
+				val startParticle = data["STARTEFFECT", null]
+				val endParticle = data["ENDEFFECT", null]
+
+				if (startParticle is ParticleEffect)
+				{
+					val particle = startParticle.copy()
+					particle.size[0] = monster.size
+					particle.size[1] = monster.size
+
+					start.effects.add(particle)
+				}
+
+				if (endParticle is ParticleEffect)
+				{
+					val particle = endParticle.copy()
+					particle.size[0] = monster.size
+					particle.size[1] = monster.size
+
+					particle.renderDelay = animDuration
+
+					end.effects.add(particle)
+				}
+
+				if (effect == Effect.DASH)
+				{
+					// get line from start to end
+					val points = start.lineTo(end).toGdxArray()
+
+
+					val maxDist = start.euclideanDist(end)
+
+					val hitEffect = data["HITEFFECT", null]
+
+					var timer = data["NUMPIPS", monster.desc.attackNumPips.toString()].toString().toInt()
+					timer += (Global.player.getStat(Statistic.HASTE) * timer).toInt()
+
+					// make them all attacks in order
+					for (point in points)
+					{
+						val tile = grid.tile(point)
+						if (tile != null && validAttack(grid, tile))
+						{
+							val dist = start.euclideanDist(point)
+							val alpha = dist / maxDist
+							val delay = animDuration * alpha
+
+							Future.call(
+									{
+										tile.monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap(), tile.orb!!.desc, grid.level.theme)
+										tile.monsterEffect!!.timer = timer
+
+										if (hitEffect is ParticleEffect)
+										{
+											val particle = hitEffect.copy()
+											tile.effects.add(particle)
+										}
+
+									}, delay)
+						}
+					}
 				}
 			}
 
@@ -343,14 +515,31 @@ class MonsterAbility
 				monster.sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
 
 				val dst = target.euclideanDist(monster.tiles[0, 0])
-				val animDuration = 0.4f + dst * 0.025f
-				val attackSprite = target.monsterEffect!!.actualSprite.copy()
-				attackSprite.colour = target.monsterEffect!!.sprite.colour
-				attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
-				attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
-				target.effects.add(attackSprite)
+				var animDuration = dst * 0.025f
 
-				target.monsterEffect!!.delayDisplay = animDuration
+				if (data["SHOWATTACKLEAP", "true"].toString().toBoolean())
+				{
+					animDuration += 0.4f
+					val attackSprite = target.monsterEffect!!.actualSprite.copy()
+					attackSprite.colour = target.monsterEffect!!.sprite.colour
+					attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
+					attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
+					target.effects.add(attackSprite)
+
+					target.monsterEffect!!.delayDisplay = animDuration
+				}
+
+				val hitEffect = data["HITEFFECT", null]
+				if (hitEffect is ParticleEffect)
+				{
+					val particle = hitEffect.copy()
+					particle.renderDelay = animDuration
+
+					animDuration += particle.lifetime / 2f
+					target.monsterEffect!!.delayDisplay = animDuration
+
+					target.effects.add(particle)
+				}
 			}
 			if (effect == Effect.CUSTOMORB)
 			{
@@ -359,10 +548,6 @@ class MonsterAbility
 			if (effect == Effect.SEAL || effect == Effect.SEALEDATTACK)
 			{
 				target.swappable?.sealCount = strength
-			}
-			if (effect == Effect.MOVE)
-			{
-
 			}
 			if (effect == Effect.BLOCK)
 			{
@@ -456,6 +641,14 @@ class MonsterAbility
 					else if (el.name == "MonsterDesc")
 					{
 						ability.data[el.name.toUpperCase()] = MonsterDesc.load(el)
+					}
+					else if (el.name == "ParticleEffect" || el.name == "StartEffect" || el.name == "EndEffect" || el.name == "HitEffect")
+					{
+						ability.data[el.name.toUpperCase()] = AssetManager.loadParticleEffect(el)
+					}
+					else if (el.name == "Sprite")
+					{
+						ability.data[el.name.toUpperCase()] = AssetManager.loadSprite(el)
 					}
 					else
 					{

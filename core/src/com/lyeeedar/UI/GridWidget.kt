@@ -185,7 +185,7 @@ class GridWidget(val grid: Grid) : Widget()
 		tileSize = Math.min(w, h)
 	}
 
-	fun drawHPBar(space: Float, currentHp: Float, lostHP: Int, remainingReduction: Int, maxHp: Int, dr: Int, xi: Float, yi: Float, hp_full: Sprite)
+	fun drawHPBar(space: Float, currentHp: Float, lostHP: Int, remainingReduction: Int, maxHp: Int, dr: Int, immune: Boolean, xi: Float, yi: Float, hp_full: Sprite)
 	{
 		// do hp bar
 		val solidSpaceRatio = 0.12f // 20% free space
@@ -210,6 +210,7 @@ class GridWidget(val grid: Grid) : Widget()
 		for (i in 0 until pips)
 		{
 			val sprite = when {
+				immune -> hp_dr
 				i < hp -> hp_full
 				i < hp + remainingReduction -> hp_dr
 				i < hp + lostHP -> hp_damaged
@@ -530,7 +531,7 @@ class GridWidget(val grid: Grid) : Widget()
 					ground.queueSprite(monster.sprite, xi, yi, ORB, 1, monsterColour)
 
 					// do hp bar
-					drawHPBar(monster.size.toFloat(), monster.hp, monster.lostHP, monster.remainingReduction, monster.maxhp, monster.damageReduction, xi, yi, hp_full)
+					drawHPBar(monster.size.toFloat(), monster.hp, monster.lostHP, monster.remainingReduction, monster.maxhp, monster.damageReduction, monster.immune, xi, yi, hp_full)
 
 					if (!Global.settings.get("Monster", false) && !grid.inTurn )
 					{
@@ -557,7 +558,7 @@ class GridWidget(val grid: Grid) : Widget()
 
 					// do hp bar
 					val fullHp = if (friendly.isSummon) hp_full_summon else hp_full_friendly
-					drawHPBar(friendly.size.toFloat(), friendly.hp, friendly.lostHP, friendly.remainingReduction, friendly.maxhp, friendly.damageReduction, xi, yi, fullHp)
+					drawHPBar(friendly.size.toFloat(), friendly.hp, friendly.lostHP, friendly.remainingReduction, friendly.maxhp, friendly.damageReduction, friendly.immune, xi, yi, fullHp)
 
 					if (!Global.settings.get("Friendly", false) && !grid.inTurn )
 					{
@@ -575,7 +576,7 @@ class GridWidget(val grid: Grid) : Widget()
 					// do hp bar
 					if (block.hp < block.maxhp || block.alwaysShowHP)
 					{
-						drawHPBar(1f, block.hp, block.lostHP, block.remainingReduction, block.maxhp, block.damageReduction, xi, yi, hp_neutral)
+						drawHPBar(1f, block.hp, block.lostHP, block.remainingReduction, block.maxhp, block.damageReduction, block.immune, xi, yi, hp_neutral)
 					}
 
 					if (!Global.settings.get("Block", false) && !grid.inTurn )
@@ -593,7 +594,7 @@ class GridWidget(val grid: Grid) : Widget()
 					// do hp bar
 					if (container.hp < container.maxhp || container.alwaysShowHP)
 					{
-						drawHPBar(1f, container.hp, container.lostHP, container.remainingReduction, container.maxhp, container.damageReduction, xi, yi, hp_neutral)
+						drawHPBar(1f, container.hp, container.lostHP, container.remainingReduction, container.maxhp, container.damageReduction, container.immune, xi, yi, hp_neutral)
 					}
 				}
 

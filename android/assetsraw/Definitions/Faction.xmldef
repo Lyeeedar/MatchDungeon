@@ -20,23 +20,26 @@
 		<Data Name="Abilities" meta:RefKey="Collection">
 			<Data Name="Ability" meta:RefKey="Struct">
 				<Data Name="Cooldown" Name1="Min" Name2="Max" Min="1" Type="Int" SkipIfDefault="False" meta:RefKey="Vector" />
-				<Data Name="Target" EnumValues="Neighbour,Random" meta:RefKey="Enum" />
-				<Data Name="Count" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
-				<Data Name="TargetRestriction" EnumValues="Orb,Special,Block,Empty,Sealed,Monster,Attack,Tile,NamedTile,Spreader" meta:RefKey="Enum" />
-				<Data Name="Permuter" EnumValues="Single,AllOfType,NofType,Column,Row,Cross,Block,Diamond,Random" meta:RefKey="Enum" />
-				<Data Name="Effect" EnumValues="Attack,Seal,CustomOrb,Block,Move,Heal,SealedAttack,Summon,DelayedSummon,Spreader,Debuff" meta:RefKey="Enum" />
+				<Data Name="Target" EnumValues="Neighbour,Random" VisibleIf="Effect != SelfBuff" meta:RefKey="Enum" />
+				<Data Name="Count" Type="Int" Min="1" Default="1" VisibleIf="Effect != SelfBuff" meta:RefKey="Number" />
+				<Data Name="TargetRestriction" EnumValues="Orb,Special,Block,Empty,Sealed,Monster,Attack,Tile,NamedTile,Spreader" VisibleIf="Effect != SelfBuff" meta:RefKey="Enum" />
+				<Data Name="Permuter" EnumValues="Single,AllOfType,NofType,Column,Row,Cross,Block,Diamond,Cone,Random" VisibleIf="Effect != SelfBuff" meta:RefKey="Enum" />
+				<Data Name="Effect" EnumValues="Attack,Seal,CustomOrb,Block,Move,Dash,Heal,SealedAttack,Summon,DelayedSummon,Spreader,Debuff,SelfBuff" meta:RefKey="Enum" />
 				<Data Name="Data" meta:RefKey="Struct">
 					<!--Attack-->
-					<Data Name="NumPips" Type="Int" Min="1" Default="7" VisibleIf="Parent.Effect==Attack || Parent.Effect==SealedAttack || Parent.Effect == Heal || Parent.Effect == DelayedSummon" meta:RefKey="Number" />
+					<Data Name="NumPips" Type="Int" Min="1" Default="7" VisibleIf="Parent.Effect==Attack || Parent.Effect==SealedAttack || Parent.Effect == Heal || Parent.Effect == DelayedSummon || Parent.Effect==Dash" meta:RefKey="Number" />
 					<Data Name="Damage" Type="Int" Min="1" Default="1" VisibleIf="Parent.Effect == Attack || Parent.Effect == SealedAttack" meta:RefKey="Number" />
 					<Data Name="Strength" Type="Int" Min="1" Default="1" VisibleIf="Parent.Effect==Seal || Parent.Effect==Shield || Parent.Effect == SealedAttack || Parent.Effect == Block" meta:RefKey="Number" />
 					<Data Name="Amount" Type="Int" Min="1" Default="10" VisibleIf="Parent.Effect==Heal" meta:RefKey="Number" />
 					<Data Name="Debuff" Keys="Buff" VisibleIf="Parent.Effect == Debuff" meta:RefKey="Reference" />
+					<Data Name="HitEffect" Keys="ParticleEffect" VisibleIf="Parent.Effect==Attack || Parent.Effect==SealedAttack || Parent.Effect == Heal || Parent.Effect == DelayedSummon || Parent.Effect==Dash" meta:RefKey="Reference" />
+					<Data Name="ShowAttackLeap" Default="True" VisibleIf="Parent.Effect==Attack || Parent.Effect==SealedAttack || Parent.Effect == Heal || Parent.Effect == DelayedSummon || Parent.Effect==Dash" meta:RefKey="Boolean" />
 					<!--Permuter-->
 					<Data Name="AOE" Type="Int" Min="1" Default="1" VisibleIf="Parent.Permuter==Block || Parent.Permuter==Diamond" meta:RefKey="Number" />
 					<Data Name="Count" Type="Int" Min="1" Default="1" VisibleIf="Parent.Permuter==Random || Parent.Permuter==NOfType" meta:RefKey="Number" />
 					<Data Name="Type" VisibleIf="Parent.Permuter==NofType || Parent.Permuter==AllOfType" meta:RefKey="String" />
-					<Data Name="Range" Type="Int" Min="1" Default="1" VisibleIf="Parent.Target==Neighbour" meta:RefKey="Number" />
+					<Data Name="Range" Type="Int" Min="1" Default="9999999" VisibleIf="Parent.Target==Neighbour || Parent.Permuter == Cone" meta:RefKey="Number" />
+					<Data Name="MinRange" Type="Int" Min="0" meta:RefKey="Number" />
 					<Data Name="TileName" VisibleIf="Parent.TargetRestriction==NamedTile" meta:RefKey="String" />
 					<Data Name="Coverage" Min="0" Max="1" Default="1" VisibleIf="Parent.Permuter != Single &amp;&amp; Parent.Permuter != Random" meta:RefKey="Number" />
 					<!--Spreader-->
@@ -48,6 +51,14 @@
 					<Data Name="Name" VisibleIf="Parent.Effect==Summon || Parent.Effect == DelayedSummon || Parent.Effect==CustomOrb" meta:RefKey="String" />
 					<Data Name="IsSummon" SkipIfDefault="False" VisibleIf="Parent.Effect == Summon || Parent.Effect == DelayedSummon" meta:RefKey="Boolean" />
 					<Data Name="SpawnEffect" Keys="ParticleEffect" VisibleIf="Parent.Effect == Summon || Parent.Effect == DelayedSummon" meta:RefKey="Reference" />
+					<!--Move-->
+					<Data Name="MoveType" EnumValues="Basic,Leap,Teleport" VisibleIf="Parent.Effect==Move || Parent.Effect==Dash" meta:RefKey="Enum" />
+					<Data Name="StartEffect" Keys="ParticleEffect" VisibleIf="Parent.Effect==Move || Parent.Effect==Dash" meta:RefKey="Reference" />
+					<Data Name="EndEffect" Keys="ParticleEffect" VisibleIf="Parent.Effect==Move || Parent.Effect==Dash" meta:RefKey="Reference" />
+					<!--Other-->
+					<Data Name="BuffType" EnumValues="Immunity,FastAttacks,PowerfulAttacks" VisibleIf="Parent.Effect==SelfBuff" meta:RefKey="Enum" />
+					<Data Name="Duration" Type="Int" Min="1" Default="1" VisibleIf="Parent.Effect==SelfBuff" meta:RefKey="Number" />
+					<Data Name="ParticleEffect" Keys="ParticleEffect" VisibleIf="Parent.Effect==SelfBuff" meta:RefKey="Reference" />
 				</Data>
 			</Data>
 		</Data>

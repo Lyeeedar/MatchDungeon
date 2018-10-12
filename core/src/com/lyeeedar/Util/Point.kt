@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.Pool
 import com.badlogic.gdx.utils.Pools
 import com.lyeeedar.Direction
+import squidpony.squidmath.Bresenham
 import squidpony.squidmath.LightRNG
 
 /**
@@ -175,6 +176,8 @@ open class Point : Pool.Poolable, Comparable<Point>
 			free()
 		}
 	}
+
+	inline fun lineTo(other: Point) = Bresenham.line2D_(x, y, other.x, other.y).map { Point.obtain().set(it.x, it.y) }
 
 	inline fun taxiDist(other: Point) = Math.max( Math.abs(other.x - x), Math.abs(other.y - y) )
 	inline fun dist(other: Point) = Math.abs(other.x - x) + Math.abs(other.y - y)

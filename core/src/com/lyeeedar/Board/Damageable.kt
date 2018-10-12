@@ -10,9 +10,16 @@ import com.lyeeedar.Util.ciel
 
 abstract class Damageable
 {
+	var immune = false
+
 	var damageReduction: Int = 0
 		set(value)
 		{
+			if (immune && value < field)
+			{
+				return
+			}
+
 			field = value
 			remainingReduction = value
 		}
@@ -21,6 +28,11 @@ abstract class Damageable
 	var hp: Float = 1f
 		set(value)
 		{
+			if (immune && value < field)
+			{
+				return
+			}
+
 			if (value < field)
 			{
 				val loss = field.ciel() - value.ciel()

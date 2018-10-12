@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Tile
+import com.lyeeedar.Direction
 import com.lyeeedar.Util.random
 
 /**
@@ -22,38 +23,39 @@ class Permuter(val type: Type)
 		CROSS,
 		BLOCK,
 		DIAMOND,
-		RANDOM
+		RANDOM,
+		CONE
 	}
 
-	lateinit var permute: (tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?) -> Sequence<Tile>
+	lateinit var permute: (tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?) -> Sequence<Tile>
 
 	init
 	{
 		permute = when(type)
 		{
-			Type.SINGLE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?) = sequenceOf(tile)
-			Type.ALLOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?) = grid.grid.filter{ val key = data["TYPE"]?.hashCode() ?: tile.orb!!.desc.key; it.orb?.desc?.key == key }
-			Type.NOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?): Sequence<Tile> { val type = data["TYPE"].hashCode(); val count = data["COUNT"].toString().toInt(); return grid.grid.filter{ it.orb?.desc?.key == type }.random(count) }
+			Type.SINGLE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?) = sequenceOf(tile)
+			Type.ALLOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?) = grid.grid.filter{ val key = data["TYPE"]?.hashCode() ?: tile.orb!!.desc.key; it.orb?.desc?.key == key }
+			Type.NOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> { val type = data["TYPE"].hashCode(); val count = data["COUNT"].toString().toInt(); return grid.grid.filter{ it.orb?.desc?.key == type }.random(count) }
 
-			Type.COLUMN ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?): Sequence<Tile> {
-				val range = data["RANGE", "99999"]!!.toString().toInt()
+			Type.COLUMN -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> {
+				val range = data["RANGE", "9999999"]!!.toString().toInt()
 				return grid.grid.filter{ it.x == tile.x && it.dist(tile) <= range }
 			}
 
-			Type.ROW ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?): Sequence<Tile> {
-				val range = data["RANGE", "99999"]!!.toString().toInt()
+			Type.ROW -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> {
+				val range = data["RANGE", "9999999"]!!.toString().toInt()
 				return grid.grid.filter{ it.y == tile.y && it.dist(tile) <= range }
 			}
 
-			Type.CROSS ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?): Sequence<Tile> {
-				val range = data["RANGE", "99999"]!!.toString().toInt()
+			Type.CROSS -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> {
+				val range = data["RANGE", "9999999"]!!.toString().toInt()
 				return grid.grid.filter{ (it.y == tile.y || it.x == tile.x) && it.dist(tile) <= range }
 			}
 
-			Type.BLOCK ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?): Sequence<Tile> { val dst = data["AOE"].toString().toInt(); return grid.grid.filter{ it.taxiDist(tile) <= dst } }
-			Type.DIAMOND ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?): Sequence<Tile> { val dst = data["AOE"].toString().toInt(); return grid.grid.filter{ it.dist(tile) <= dst } }
+			Type.BLOCK ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> { val dst = data["AOE"].toString().toInt(); return grid.grid.filter{ it.taxiDist(tile) <= dst } }
+			Type.DIAMOND ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> { val dst = data["AOE"].toString().toInt(); return grid.grid.filter{ it.dist(tile) <= dst } }
 
-			Type.RANDOM ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?): Sequence<Tile> {
+			Type.RANDOM ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> {
 				val count = data["COUNT"].toString().toInt()
 
 				if (ability != null && selectedTargets.size > 0 && ability.effect.type == Effect.Type.CONVERT)
@@ -63,6 +65,15 @@ class Permuter(val type: Type)
 				}
 
 				return grid.grid.filter{ it.canHaveOrb }.random(count)
+			}
+
+			Type.CONE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> {
+				val range = data["RANGE", "3"]!!.toString().toInt()
+
+				val dir = Direction.getCardinalDirection(source!!, tile)
+				val cone = Direction.buildCone(dir, source, range)
+
+				return cone.map { grid.grid.get(it) }.asSequence()
 			}
 
 			else -> throw Exception("Invalid permuter type $type")
@@ -112,6 +123,7 @@ class Permuter(val type: Type)
 			Type.BLOCK -> { val dst = data["AOE"].toString().toInt(); "select block of size $dst" }
 			Type.DIAMOND ->  { val dst = data["AOE"].toString().toInt(); "select diamond of size $dst" }
 			Type.RANDOM -> { val count = data["COUNT"].toString().toInt(); "select $count randomly" }
+			Type.CONE -> throw Exception("Cone not valid for player use")
 		}
 	}
 }
