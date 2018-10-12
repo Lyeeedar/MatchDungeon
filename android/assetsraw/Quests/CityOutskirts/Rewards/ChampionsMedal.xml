@@ -7,13 +7,8 @@
 		<DrawActualSize>true</DrawActualSize>
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
-		<Health>0</Health>
-		<MatchDamage>0</MatchDamage>
-		<AbilityDamage>0</AbilityDamage>
-		<PowerGain>5</PowerGain>
-		<BonusGold>0</BonusGold>
-		<BonusTime>0</BonusTime>
 		<Regeneration>0.1</Regeneration>
-		<PriceReduction>20</PriceReduction>
+		<PriceReduction>0.2</PriceReduction>
+		<PowerGain>5</PowerGain>
 	</Statistics>
 </Head>

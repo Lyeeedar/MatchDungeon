@@ -38,7 +38,7 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 		if (desc.attackNumPips > 0)
 		{
 			var max = desc.attackCooldown.max
-			max += ((Global.player.getStat(Statistic.HASTE) / 100f) * max).toInt()
+			max += (Global.player.getStat(Statistic.HASTE) * max).toInt()
 
 			atkCooldown = (MathUtils.random() * max).toInt()
 		}
@@ -56,10 +56,10 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 		if (atkCooldown <= 0)
 		{
 			var min = desc.attackCooldown.min
-			min += ((Global.player.getStat(Statistic.HASTE) / 100f) * min).toInt()
+			min += (Global.player.getStat(Statistic.HASTE) * min).toInt()
 
 			var max = desc.attackCooldown.max
-			max += ((Global.player.getStat(Statistic.HASTE) / 100f) * max).toInt()
+			max += (Global.player.getStat(Statistic.HASTE) * max).toInt()
 
 			atkCooldown = min + MathUtils.random(max - min)
 
@@ -76,7 +76,7 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 
 				tile.monsterEffect = MonsterEffect(monsterEffectType, data, tile.orb!!.desc, grid.level.theme)
 
-				tile.monsterEffect!!.timer = desc.attackNumPips + ((Global.player.getStat(Statistic.HASTE) / 100f) * desc.attackNumPips).toInt()
+				tile.monsterEffect!!.timer = desc.attackNumPips + (Global.player.getStat(Statistic.HASTE) * desc.attackNumPips).toInt()
 				val diff = tile.getPosDiff(startTile)
 				diff[0].y *= -1
 				sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
@@ -98,10 +98,10 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 			if (ability.cooldownTimer <= 0)
 			{
 				var min = ability.cooldownMin
-				min += ((Global.player.getStat(Statistic.HASTE) / 100f) * min).toInt()
+				min += (Global.player.getStat(Statistic.HASTE) * min).toInt()
 
 				var max = ability.cooldownMax
-				max += ((Global.player.getStat(Statistic.HASTE) / 100f) * max).toInt()
+				max += (Global.player.getStat(Statistic.HASTE) * max).toInt()
 
 				ability.cooldownTimer = min + MathUtils.random(max - min)
 				ability.activate(grid, this)
@@ -306,7 +306,7 @@ class MonsterAbility
 			if (effect == Effect.ATTACK || effect == Effect.SEALEDATTACK || effect == Effect.HEAL || effect == Effect.DELAYEDSUMMON || effect == Effect.DEBUFF)
 			{
 				var speed = data.get("NUMPIPS", monster.desc.attackNumPips.toString()).toString().toInt()
-				speed += ((Global.player.getStat(Statistic.HASTE) / 100f) * speed).toInt()
+				speed += (Global.player.getStat(Statistic.HASTE) * speed).toInt()
 
 				val monsterEffectType: MonsterEffectType
 				if (effect == Effect.HEAL)

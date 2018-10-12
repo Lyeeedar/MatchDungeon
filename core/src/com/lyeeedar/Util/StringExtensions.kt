@@ -24,8 +24,36 @@ fun String.pluralize(count: Int): String
 {
 	if (count > 1)
 	{
+		if (this.endsWith('y'))
+		{
+			return this.substring(0, this.length - 1) + "ies"
+		}
+
 		return this + "s"
 	}
 
 	return this
+}
+
+fun String.addSpaces(): String
+{
+	val build = StringBuilder()
+	for (char in this)
+	{
+		if (build.isEmpty())
+		{
+			build.append(char)
+		}
+		else if (char.isLetter() && char.isUpperCase())
+		{
+			build.append(' ')
+			build.append(char)
+		}
+		else
+		{
+			build.append(char)
+		}
+	}
+
+	return build.toString()
 }

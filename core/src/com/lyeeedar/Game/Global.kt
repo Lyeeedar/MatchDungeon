@@ -285,6 +285,24 @@ class Global
 					TextureRegionDrawable(AssetManager.loadTextureRegion("Sprites/Oryx/uf_split/uf_interface/uf_interface_573.png")).tint(Color(0.87f, 0.77f, 0.6f, 1f)))
 			skin.add("info", infoButton)
 
+			val leftButton = Button.ButtonStyle()
+			leftButton.up = LayeredDrawable(
+					buttonBackground,
+					TextureRegionDrawable(AssetManager.loadTextureRegion("Sprites/Oryx/uf_split/uf_interface/uf_interface_787.png")).tint(Color(0.97f, 0.87f, 0.7f, 1f)))
+			leftButton.over = LayeredDrawable(
+					buttonBackground.tint(Color.LIGHT_GRAY),
+					TextureRegionDrawable(AssetManager.loadTextureRegion("Sprites/Oryx/uf_split/uf_interface/uf_interface_787.png")).tint(Color(0.87f, 0.77f, 0.6f, 1f)))
+			skin.add("left", leftButton)
+
+			val rightButton = Button.ButtonStyle()
+			rightButton.up = LayeredDrawable(
+					buttonBackground,
+					TextureRegionDrawable(AssetManager.loadTextureRegion("Sprites/Oryx/uf_split/uf_interface/uf_interface_785.png")).tint(Color(0.97f, 0.87f, 0.7f, 1f)))
+			rightButton.over = LayeredDrawable(
+					buttonBackground.tint(Color.LIGHT_GRAY),
+					TextureRegionDrawable(AssetManager.loadTextureRegion("Sprites/Oryx/uf_split/uf_interface/uf_interface_785.png")).tint(Color(0.87f, 0.77f, 0.6f, 1f)))
+			skin.add("right", rightButton)
+
 
 			val infoCardButton = Button.ButtonStyle()
 			infoCardButton.up = LayeredDrawable(

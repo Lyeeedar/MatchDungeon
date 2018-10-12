@@ -228,6 +228,9 @@ class QuestScreen : AbstractScreen()
 			created = true
 		}
 
+		quest.played = true
+		quest.currentTheme = quest.theme
+
 		questProgressWidget.quest = quest
 
 		currentQuest = quest

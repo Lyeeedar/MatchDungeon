@@ -1,6 +1,7 @@
 package com.lyeeedar.Game
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
@@ -52,6 +53,8 @@ class Quest(val path: String)
 	var gotBronze = false
 	var gotSilver = false
 	var gotGold = false
+
+	var played = false
 
 	val title: String
 	val description: String
@@ -134,7 +137,12 @@ class Quest(val path: String)
 
 	fun createTable(detail: Boolean): Table
 	{
+		val wrapperTable = Table()
+		val wrapperStack = Stack()
+		wrapperTable.add(wrapperStack).grow()
+
 		val table = Table()
+		wrapperStack.add(table)
 
 		val title = Label(title, Global.skin, "cardtitle")
 		table.add(title).expandX().center().pad(10f, 0f, 0f, 0f)
@@ -175,7 +183,16 @@ class Quest(val path: String)
 			table.add(descLabel).grow().pad(0f, 10f, 0f, 10f)
 		}
 
-		return table
+		if (!played)
+		{
+			val newTable = Table()
+			val newLabel = Label("New", Global.skin)
+			newTable.add(newLabel).expand().top().left().pad(3f)
+
+			wrapperStack.add(newTable)
+		}
+
+		return wrapperTable
 	}
 
 	fun getCard(): CardWidget
@@ -306,6 +323,8 @@ class Quest(val path: String)
 		output.writeBoolean(gotBronze)
 		output.writeBoolean(gotSilver)
 		output.writeBoolean(gotGold)
+
+		output.writeBoolean(played)
 	}
 
 	companion object
@@ -355,6 +374,8 @@ class Quest(val path: String)
 			quest.gotBronze = input.readBoolean()
 			quest.gotSilver = input.readBoolean()
 			quest.gotGold = input.readBoolean()
+
+			quest.played = input.readBoolean()
 
 			return quest
 		}

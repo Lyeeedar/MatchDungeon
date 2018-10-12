@@ -4,12 +4,12 @@
 			<Line>......~....</Line>
 			<Line>......~....</Line>
 			<Line>.G....~~...</Line>
-			<Line>.......~~~~</Line>
+			<Line>..!....~~~~</Line>
 			<Line>...RRR.....</Line>
 			<Line>...RRR.G...</Line>
 			<Line>...RRR...G.</Line>
-			<Line>...........</Line>
-			<Line>...........</Line>
+			<Line>.......!...</Line>
+			<Line>...!.......</Line>
 			<Line>..G........</Line>
 			<Line>...........</Line>
 		</Rows>
@@ -35,11 +35,11 @@
 				<AttackCooldown>2,5</AttackCooldown>
 				<AttackDamage>3</AttackDamage>
 				<Size>3</Size>
-				<HP>30</HP>
+				<HP>60</HP>
 				<DamageReduction>2</DamageReduction>
 				<Abilities>
 					<Ability>
-						<Cooldown>2,8</Cooldown>
+						<Cooldown>2,6</Cooldown>
 						<Target>Random</Target>
 						<TargetRestriction>NamedTile</TargetRestriction>
 						<Effect>Summon</Effect>

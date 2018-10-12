@@ -31,6 +31,15 @@
 				</Sprite>
 			</Sinkable>
 		</Symbol>
+		<Symbol>
+			<Character>-</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>3V4</SpecialOrb>
+		</Symbol>
 	</Symbols>
 	<OrbCount>5</OrbCount>
 	<AllowedVictories>

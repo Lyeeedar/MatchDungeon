@@ -8,7 +8,7 @@
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
 		<MatchDamage>3</MatchDamage>
-		<Haste>-10</Haste>
+		<Haste>-0.1</Haste>
 	</Statistics>
 	<Ability>
 		<Name>Smash</Name>

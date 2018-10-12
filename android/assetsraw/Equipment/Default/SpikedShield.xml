@@ -8,11 +8,7 @@
 	<Statistics meta:RefKey="Statistics">
 		<Health>1</Health>
 		<MatchDamage>0.5</MatchDamage>
-		<AbilityDamage>0</AbilityDamage>
-		<PowerGain>0</PowerGain>
-		<BonusGold>0</BonusGold>
-		<BonusTime>0</BonusTime>
-		<Aegis>0.1</Aegis>
+		<Aegis>0.2</Aegis>
 	</Statistics>
 	<Ability>
 		<Name>Block</Name>

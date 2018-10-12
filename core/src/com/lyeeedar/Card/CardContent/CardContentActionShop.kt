@@ -62,7 +62,7 @@ class CardContentActionShop : AbstractCardContentAction()
 			val waresTable = Table()
 
 			val costMultiplier = this.costMultiplier.evaluate(Global.getVariableMap())
-			val priceReductionMultiplier = 1.0f - (Global.player.getStat(Statistic.PRICEREDUCTION) / 100.0f)
+			val priceReductionMultiplier = 1.0f - Global.player.getStat(Statistic.PRICEREDUCTION)
 
 			for (i in 0 until wares.size)
 			{
