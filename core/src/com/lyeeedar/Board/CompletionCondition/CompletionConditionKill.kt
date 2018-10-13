@@ -99,17 +99,19 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 
 		for (monster in monsters)
 		{
-			if (!monsterMap.containsKey(monster.desc))
+			val desc = monster.desc.originalDesc ?: monster.desc
+
+			if (!monsterMap.containsKey(desc))
 			{
-				monsterMap[monster.desc] = 0
+				monsterMap[desc] = 0
 			}
 
-			var count = monsterMap[monster.desc]
+			var count = monsterMap[desc]
 			if (monster.hp > 0)
 			{
 				count++
 			}
-			monsterMap[monster.desc] = count
+			monsterMap[desc] = count
 		}
 
 		var row = Table()

@@ -14,7 +14,6 @@ import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.Animation.LeapAnimation
 import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
-import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
 import com.lyeeedar.Util.*
 import ktx.collections.set
@@ -211,12 +210,12 @@ class MonsterAbility
 		ability.cooldownMin = cooldownMin
 		ability.cooldownMax = cooldownMax
 		ability.cooldownTimer = ability.cooldownMin + MathUtils.random(ability.cooldownMax - ability.cooldownMin)
+		ability.repeatable = repeatable
 		ability.target = target
 		ability.targetRestriction = targetRestriction
 		ability.targetCount = targetCount
 		ability.permuter = permuter
 		ability.effect = effect
-		ability.repeatable = repeatable
 		ability.data.putAll(data)
 
 		return ability
@@ -609,6 +608,8 @@ class MonsterAbility
 			ability.cooldownMin = cooldown[0].toInt()
 			ability.cooldownMax = cooldown[1].toInt()
 			ability.cooldownTimer = ability.cooldownMin + MathUtils.random(ability.cooldownMax - ability.cooldownMin)
+
+			ability.repeatable = xml.getBoolean("Repeatable", true)
 
 			ability.target = Target.valueOf(xml.get("Target", "NEIGHBOUR")!!.toUpperCase())
 			ability.targetCount = xml.getInt("Count", 1)

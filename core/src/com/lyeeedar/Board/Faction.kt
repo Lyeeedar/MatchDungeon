@@ -144,6 +144,9 @@ class MonsterDesc
 	var hp: Int = 10
 	var damageReduction: Int = 0
 	val abilities = Array<MonsterAbility>()
+	val stages = Array<MonsterDesc>()
+
+	var originalDesc: MonsterDesc? = null
 
 	companion object
 	{
@@ -177,6 +180,18 @@ class MonsterDesc
 					val el = abilitiesEl.getChild(i)
 					val ability = MonsterAbility.load(el)
 					desc.abilities.add(ability)
+				}
+			}
+
+			val stagesEl = xml.getChildByName("Stages")
+			if (stagesEl != null)
+			{
+				for (stageEl in stagesEl.children)
+				{
+					val monsterDesc = load(stageEl)
+					monsterDesc.name = desc.name
+					desc.stages.add(monsterDesc)
+					monsterDesc.originalDesc = desc
 				}
 			}
 

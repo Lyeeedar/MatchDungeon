@@ -988,6 +988,22 @@ class Grid(val width: Int, val height: Int, val level: Level)
 								die.fractionalHp += necroticAura
 							}
 						}
+
+						if (creature is Monster)
+						{
+							val rootDesc = creature.desc.originalDesc ?: creature.desc
+							if (rootDesc.stages.size > 0)
+							{
+								val currentStage = if (creature.desc.originalDesc == null) -1 else rootDesc.stages.indexOf(creature.desc)
+
+								if (currentStage < rootDesc.stages.size - 1)
+								{
+									val nextDesc = rootDesc.stages[currentStage + 1]
+									val monster = Monster(nextDesc)
+									monster.setTile(tile, this)
+								}
+							}
+						}
 					}
 				}
 			}

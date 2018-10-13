@@ -50,6 +50,8 @@ class GridWidget(val grid: Grid) : Widget()
 	val hp_empty: Sprite = AssetManager.loadSprite("GUI/health_empty")
 	val atk_full: Sprite = AssetManager.loadSprite("GUI/attack_full")
 	val atk_empty: Sprite = AssetManager.loadSprite("GUI/attack_empty")
+	val stage_full: Sprite = AssetManager.loadSprite("GUI/attack_full")
+	val stage_empty: Sprite = AssetManager.loadSprite("GUI/attack_empty")
 	val changer: Sprite = AssetManager.loadSprite("Oryx/Custom/items/changer", drawActualSize = true)
 
 	val TILE = 0
@@ -185,7 +187,7 @@ class GridWidget(val grid: Grid) : Widget()
 		tileSize = Math.min(w, h)
 	}
 
-	fun drawHPBar(space: Float, currentHp: Float, lostHP: Int, remainingReduction: Int, maxHp: Int, dr: Int, immune: Boolean, xi: Float, yi: Float, hp_full: Sprite)
+	fun drawHPBar(space: Float, currentHp: Float, lostHP: Int, remainingReduction: Int, maxHp: Int, dr: Int, immune: Boolean, xi: Float, yi: Float, hp_full: Sprite): Float
 	{
 		// do hp bar
 		val solidSpaceRatio = 0.12f // 20% free space
@@ -221,6 +223,15 @@ class GridWidget(val grid: Grid) : Widget()
 			val x = if (i >= pipsPerLine && lines > 1) xi+(i-pipsPerLine)*spacePerPip else xi+i*spacePerPip
 
 			floating.queueSprite(sprite, x, y, ORB, 2, width = solid, height = 0.15f)
+		}
+
+		if (lines > 1)
+		{
+			return yi+0.35f
+		}
+		else
+		{
+			return yi+0.25f
 		}
 	}
 
@@ -531,7 +542,37 @@ class GridWidget(val grid: Grid) : Widget()
 					ground.queueSprite(monster.sprite, xi, yi, ORB, 1, monsterColour)
 
 					// do hp bar
-					drawHPBar(monster.size.toFloat(), monster.hp, monster.lostHP, monster.remainingReduction, monster.maxhp, monster.damageReduction, monster.immune, xi, yi, hp_full)
+					val maxY = drawHPBar(monster.size.toFloat(), monster.hp, monster.lostHP, monster.remainingReduction, monster.maxhp, monster.damageReduction, monster.immune, xi, yi, hp_full)
+
+					val rootDesc = monster.desc.originalDesc ?: monster.desc
+					if (rootDesc.stages.size > 0)
+					{
+						val currentStage = if (monster.desc.originalDesc == null) -1 else rootDesc.stages.indexOf(monster.desc)
+						var x = xi
+						val y = maxY
+						val size = 0.15f
+
+						for (i in 0 until rootDesc.stages.size+1)
+						{
+							val sprite = when
+							{
+								i < rootDesc.stages.size-currentStage -> stage_full
+								else -> stage_empty
+							}
+
+							floating.queueSprite(sprite, x, y, ORB, 2, width = size, height = size)
+
+							x += size
+						}
+
+						if (!Global.settings.get("MonsterStages", false) && !grid.inTurn)
+						{
+							val tutorial = Tutorial("MonsterStages")
+							val tiles: com.badlogic.gdx.utils.Array<Point> = monster.tiles.toList().toGdxArray()
+							tutorial.addPopup("This enemy has multiple stages, indicated by the orbs above its hp bar. When its hp bar is empty it will mutate into a new creature, so watch out!", getRect(tiles))
+							tutorial.show()
+						}
+					}
 
 					if (!Global.settings.get("Monster", false) && !grid.inTurn )
 					{

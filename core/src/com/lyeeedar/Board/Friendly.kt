@@ -156,7 +156,7 @@ class AttackAbility : FriendlyAbility()
 
 		for (c in chosen)
 		{
-			for (t in permuter.permute(c, grid, data, chosen, null))
+			for (t in permuter.permute(c, grid, data, chosen, null, friendly.tiles[0, 0]))
 			{
 				if (!final.contains(t))
 				{
