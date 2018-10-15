@@ -9,18 +9,4 @@
 		<Health>1</Health>
 		<Aegis>0.1</Aegis>
 	</Statistics>
-	<Ability>
-		<Name>Block</Name>
-		<Description>Block an enemies attack.</Description>
-		<EffectData>
-			<Cost>4</Cost>
-			<Effect>1,Attack,Single,Pop</Effect>
-			<Data>
-				<Damage>0</Damage>
-			</Data>
-			<HitEffect meta:RefKey="ParticleEffect">
-				<Name>Hit</Name>
-			</HitEffect>
-		</EffectData>
-	</Ability>
 </OffHand>

@@ -21,6 +21,7 @@
 			<Sprite meta:RefKey="SpriteWrapper">
 				<Sprite meta:RefKey="Sprite">
 					<Name>Oryx/uf_split/uf_terrain/ground_sand_1</Name>
+					<Colour>201,201,201,255</Colour>
 				</Sprite>
 			</Sprite>
 			<Plate>0</Plate>

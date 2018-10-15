@@ -19,7 +19,7 @@
 			<Extends></Extends>
 			<Sprite meta:RefKey="SpriteWrapper">
 				<Sprite meta:RefKey="Sprite">
-					<Name>Oryx/uf_split/uf_terrain/ground_grass_1</Name>
+					<Name>Oryx/Custom/terrain/dirt_grassy</Name>
 					<Colour>217,217,217,255</Colour>
 				</Sprite>
 				<TilingSprite meta:RefKey="TilingSprite">

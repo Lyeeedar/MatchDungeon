@@ -64,7 +64,7 @@ class Permuter(val type: Type)
 					return grid.grid.filter{ it.orb != null && it.orb!!.desc != selectedType }.random(count)
 				}
 
-				return grid.grid.filter{ it.canHaveOrb }.random(count)
+				return grid.grid.filter{ ability?.targetter?.isValid?.invoke(it, data) ?: it.canHaveOrb }.random(count)
 			}
 
 			Type.CONE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> {

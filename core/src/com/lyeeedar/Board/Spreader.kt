@@ -11,7 +11,8 @@ class Spreader
 	{
 		POP,
 		SEAL,
-		DAMAGE
+		DAMAGE,
+		ATTACK
 	}
 
 	lateinit var nameKey: String
@@ -23,6 +24,13 @@ class Spreader
 
 	var damage: Float = 0f
 
+	var attackCooldownMin = 0
+	var attackCooldownMax = 0
+	var attackCooldown = 0
+	var attackNumPips = 0
+
+	var attackEffect: ParticleEffect? = null
+
 	var spreads = true
 
 	fun copy(): Spreader
@@ -33,10 +41,13 @@ class Spreader
 		out.particleEffect = particleEffect?.copy()
 
 		out.spreads = spreads
-
 		out.damage = damage
-
 		out.effect = effect
+
+		out.attackCooldownMin = attackCooldownMin
+		out.attackCooldownMax = attackCooldownMax
+		out.attackEffect = attackEffect
+		out.attackNumPips = attackNumPips
 
 		return out
 	}
@@ -66,6 +77,16 @@ class Spreader
 			spreader.damage = xmlData.getFloat("Damage", 0f)
 
 			spreader.spreads = xmlData.getBoolean("Spreads", true)
+
+			spreader.attackCooldownMin = xmlData.getInt("AttackMin", 0)
+			spreader.attackCooldownMax = xmlData.getInt("AttackMax", 0)
+			spreader.attackNumPips = xmlData.getInt("AttackNumPips", 0)
+
+			val attackEffectEl = xmlData.getChildByName("AttackEffect")
+			if (attackEffectEl != null)
+			{
+				spreader.attackEffect = AssetManager.loadParticleEffect(attackEffectEl)
+			}
 
 			return spreader
 		}

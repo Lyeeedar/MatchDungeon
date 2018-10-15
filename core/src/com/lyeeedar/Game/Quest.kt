@@ -152,28 +152,64 @@ class Quest(val path: String)
 		table.add(rewardsTable).growX().center()
 		table.row()
 
-		if (!gotBronze && bronzeRewards.size > 0)
+		if (bronzeRewards.size > 0)
 		{
-			val icon = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/coin_copper")!!
-			val widget = SpriteWidget(Sprite(icon), 64f, 64f)
-			widget.addTapToolTip("Can gain a bronze level reward.")
-			rewardsTable.add(widget).expandX().center().pad(10f)
+			if (!gotBronze)
+			{
+				val icon = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/coin_copper")!!
+				val widget = SpriteWidget(Sprite(icon), 64f, 64f)
+				widget.addTapToolTip("Can gain a bronze level reward.")
+				rewardsTable.add(widget).expandX().center().pad(10f)
+			}
+			else
+			{
+				val icon = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/coin_copper")!!
+				val sprite = Sprite(icon)
+				sprite.colour = Colour.DARK_GRAY
+				val widget = SpriteWidget(sprite, 64f, 64f)
+				widget.addTapToolTip("Bronze reward already acquired.")
+				rewardsTable.add(widget).expandX().center().pad(10f)
+			}
 		}
 
-		if (!gotSilver && silverRewards.size > 0)
+		if (silverRewards.size > 0)
 		{
-			val icon = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/coin_silver")!!
-			val widget = SpriteWidget(Sprite(icon), 64f, 64f)
-			widget.addTapToolTip("Can gain a silver level reward.")
-			rewardsTable.add(widget).expandX().center().pad(10f)
+			if (!gotSilver)
+			{
+				val icon = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/coin_silver")!!
+				val widget = SpriteWidget(Sprite(icon), 64f, 64f)
+				widget.addTapToolTip("Can gain a silver level reward.")
+				rewardsTable.add(widget).expandX().center().pad(10f)
+			}
+			else
+			{
+				val icon = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/coin_silver")!!
+				val sprite = Sprite(icon)
+				sprite.colour = Colour.DARK_GRAY
+				val widget = SpriteWidget(sprite, 64f, 64f)
+				widget.addTapToolTip("Silver reward already acquired.")
+				rewardsTable.add(widget).expandX().center().pad(10f)
+			}
 		}
 
-		if (!gotGold && goldRewards.size > 0)
+		if (goldRewards.size > 0)
 		{
-			val icon = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/coin_gold")!!
-			val widget = SpriteWidget(Sprite(icon), 64f, 64f)
-			widget.addTapToolTip("Can gain a gold level reward.")
-			rewardsTable.add(widget).expandX().center().pad(10f)
+			if (!gotGold)
+			{
+				val icon = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/coin_gold")!!
+				val widget = SpriteWidget(Sprite(icon), 64f, 64f)
+				widget.addTapToolTip("Can gain a gold level reward.")
+				rewardsTable.add(widget).expandX().center().pad(10f)
+			}
+			else
+			{
+				val icon = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/coin_gold")!!
+				val sprite = Sprite(icon)
+				sprite.colour = Colour.DARK_GRAY
+				val widget = SpriteWidget(sprite, 64f, 64f)
+				widget.addTapToolTip("Gold reward already acquired.")
+				rewardsTable.add(widget).expandX().center().pad(10f)
+			}
 		}
 
 		if (detail)

@@ -80,7 +80,7 @@ class Ability
 				turns = "($turns + $bonus)"
 			}
 
-			val effectDesc = "For $turns gain buff:"
+			val effectDesc = "For $turns turns gain buff:"
 
 			val effectLabel = Label(effectDesc, Global.skin, "card")
 			effectLabel.setWrap(true)

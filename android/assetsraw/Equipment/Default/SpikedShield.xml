@@ -10,18 +10,4 @@
 		<MatchDamage>0.5</MatchDamage>
 		<Aegis>0.2</Aegis>
 	</Statistics>
-	<Ability>
-		<Name>Block</Name>
-		<Description>Block an enemies attack.</Description>
-		<EffectData>
-			<Cost>6</Cost>
-			<Effect>1,Attack,Single,Pop</Effect>
-			<Data>
-				<Damage>0</Damage>
-			</Data>
-			<HitEffect meta:RefKey="ParticleEffect">
-				<Name>Hit</Name>
-			</HitEffect>
-		</EffectData>
-	</Ability>
 </MainHand>

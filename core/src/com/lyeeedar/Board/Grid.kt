@@ -6,16 +6,14 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.*
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.Array
+import com.badlogic.gdx.utils.ObjectMap
 import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionCustomOrb
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Global
-import com.lyeeedar.Renderables.Animation.AlphaAnimation
-import com.lyeeedar.Renderables.Animation.BumpAnimation
-import com.lyeeedar.Renderables.Animation.ExpandAnimation
-import com.lyeeedar.Renderables.Animation.MoveAnimation
+import com.lyeeedar.Renderables.Animation.*
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Statistic
@@ -274,6 +272,48 @@ class Grid(val width: Int, val height: Int, val level: Level)
 						if (tile.damageable != null)
 						{
 							damage(tile, tile.damageable!!, 0f, spreader.nameKey, spreader.damage)
+						}
+					}
+					else if (spreader.effect == Spreader.SpreaderEffect.ATTACK)
+					{
+						if (spreader.attackCooldown == 0)
+						{
+							spreader.attackCooldown = spreader.attackCooldownMin + (spreader.attackCooldownMax - spreader.attackCooldownMin)
+							spreader.attackCooldown += (spreader.attackCooldown * Global.player.getStat(Statistic.HASTE, true)).toInt()
+						}
+
+						spreader.attackCooldown--
+						if (spreader.attackCooldown == 0)
+						{
+							val attackedTile: Tile
+							if (tile.orb != null)
+							{
+								attackedTile = tile
+							}
+							else
+							{
+								attackedTile = grid.filter { it.orb != null }.minBy { it.dist(tile) } ?: continue
+							}
+
+							val attack = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap(), attackedTile.matchable!!.desc, level.theme)
+							attackedTile.monsterEffect = attack
+
+							attackedTile.monsterEffect!!.timer = spreader.attackNumPips + (Global.player.getStat(Statistic.HASTE) * spreader.attackNumPips).toInt()
+							val diff = attackedTile.getPosDiff(tile)
+							diff[0].y *= -1
+
+							val dst = attackedTile.euclideanDist(tile)
+							val animDuration = 0.4f + attackedTile.euclideanDist(tile) * 0.025f
+							val attackSprite = attackedTile.monsterEffect!!.sprite.copy()
+							attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
+							attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
+							tile.effects.add(attackSprite)
+
+							if (spreader.attackEffect != null)
+							{
+								val effect = spreader.attackEffect!!.copy()
+								tile.effects.add(effect)
+							}
 						}
 					}
 				}

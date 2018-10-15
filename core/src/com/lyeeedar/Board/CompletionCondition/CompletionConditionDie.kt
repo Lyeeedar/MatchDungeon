@@ -40,29 +40,29 @@ class CompletionConditionDie : AbstractCompletionCondition()
 			val moteDst = dst.cpy() - Vector2(GridWidget.instance.tileSize / 2f, GridWidget.instance.tileSize / 2f)
 			val src = GridWidget.instance.pointToScreenspace(c)
 
+			fun tryBlock(chance: Float): Boolean
+			{
+				return chance > 0f && Random.random.nextFloat() < chance
+			}
+
+			var blocked = false
+			var countered = false
+			if (tryBlock(Global.player.getStat(Statistic.REFLECT)))
+			{
+				blocked = true
+				countered = true
+			}
+			else if (tryBlock(Global.player.getStat(Statistic.AEGIS)))
+			{
+				blocked = true
+			}
+			else if (tryBlock(Global.player.getStat(Statistic.COUNTER)))
+			{
+				countered = true
+			}
+
 			Mote(src, moteDst, sprite, GridWidget.instance.tileSize,
 				 {
-					 fun tryBlock(chance: Float): Boolean
-					 {
-						 return chance > 0f && Random.random.nextFloat() < chance
-					 }
-
-					 var blocked = false
-					 var countered = false
-					 if (tryBlock(Global.player.getStat(Statistic.REFLECT)))
-					 {
-						 blocked = true
-						 countered = true
-					 }
-					 else if (tryBlock(Global.player.getStat(Statistic.AEGIS)))
-					 {
-						 blocked = true
-					 }
-					 else if (tryBlock(Global.player.getStat(Statistic.COUNTER)))
-					 {
-						 countered = true
-					 }
-
 					 if (blocked)
 					 {
 						 val pos = dst
