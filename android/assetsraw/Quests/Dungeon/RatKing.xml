@@ -11,7 +11,7 @@
 	<GoldRewards meta:RefKey="Rewards">
 		<Equipment>
 			<Unlock>true</Unlock>
-			<Equipment>Quests/Dungeon/Rewards/Crown of Hector.xml</Equipment>
+			<Equipment>Quests/Dungeon/Rewards/CrownOfHector.xml</Equipment>
 		</Equipment>
 	</GoldRewards>
 	<Root meta:RefKey="QuestNode">b73ca6a2-224c-417d-9193-a66ababab453</Root>
