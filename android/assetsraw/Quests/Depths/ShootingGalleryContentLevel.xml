@@ -1,0 +1,57 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>~~.....~~</Line>
+			<Line>C~.....~~</Line>
+			<Line>~~.....~~</Line>
+			<Line>~~.....~C</Line>
+			<Line>~~.....~~</Line>
+			<Line>C~.....~~</Line>
+			<Line>~~.....~~</Line>
+			<Line>~~.....~C</Line>
+			<Line>~~.....~~</Line>
+			<Line>C~.....~~</Line>
+			<Line>~~~....~~</Line>
+			<Line>~~.....~C</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>C</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>true</IsMonster>
+			<MonsterDesc meta:RefKey="MonsterDesc">
+				<Name>Channeler</Name>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_heroes/skeleton_mage</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Death meta:RefKey="ParticleEffect">
+					<Name>Death</Name>
+				</Death>
+				<AttackNumPips>5</AttackNumPips>
+				<AttackCooldown>3,7</AttackCooldown>
+				<Size>1</Size>
+				<HP>3</HP>
+				<DamageReduction>0</DamageReduction>
+			</MonsterDesc>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+	</Symbols>
+	<AllowedVictories>
+		<Condition meta:RefKey="Matches">
+			<Orbs>30</Orbs>
+			<Orbs>30</Orbs>
+			<Orbs>20</Orbs>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Die" />
+		<Condition meta:RefKey="Turns">
+			<Turns>40</Turns>
+		</Condition>
+	</AllowedDefeats>
+</Level>

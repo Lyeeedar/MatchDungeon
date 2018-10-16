@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="b27dae2f-b403-4bf1-80fa-038159340c7c" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
+	<Nodes>
+		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
+			<Name>Sewer Outflow</Name>
+			<Description>You arrive at the crux of the ancient sewer network, a vast room filled with mold and water.</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>SewerOutflowContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

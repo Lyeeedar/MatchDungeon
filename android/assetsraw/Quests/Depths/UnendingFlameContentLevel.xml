@@ -1,0 +1,116 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>llll.......</Line>
+			<Line>llll.......</Line>
+			<Line>llll.......</Line>
+			<Line>EEEE.......</Line>
+			<Line>EEEE.......</Line>
+			<Line>EEEE.......</Line>
+			<Line>EEEE.......</Line>
+			<Line>llll.......</Line>
+			<Line>llll.......</Line>
+			<Line>llll.......</Line>
+			<Line>llll.......</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>l</Character>
+			<Extends></Extends>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/water_lava</Name>
+				</Sprite>
+			</Sprite>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<Type>Pit</Type>
+		</Symbol>
+		<Symbol>
+			<Character>E</Character>
+			<Extends>l</Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>true</IsMonster>
+			<MonsterDesc meta:RefKey="MonsterDesc">
+				<Name>Elemental</Name>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_heroes/golem_fire</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Death meta:RefKey="ParticleEffect">
+					<Name>Fireburst</Name>
+				</Death>
+				<AttackNumPips>5</AttackNumPips>
+				<AttackCooldown>2,7</AttackCooldown>
+				<AttackDamage>3</AttackDamage>
+				<Size>4</Size>
+				<HP>50</HP>
+				<DamageReduction>2</DamageReduction>
+				<Abilities>
+					<Ability>
+						<Cooldown>1,7</Cooldown>
+						<Target>Random</Target>
+						<Count>3</Count>
+						<Effect>Spreader</Effect>
+						<Data>
+							<Spreader meta:RefKey="SpreaderDef">
+								<Name>Lava</Name>
+								<Sprite meta:RefKey="SpriteWrapper">
+									<Sprite meta:RefKey="Sprite">
+										<Name>Oryx/uf_split/uf_terrain/water_lava</Name>
+									</Sprite>
+								</Sprite>
+								<Effect>Attack</Effect>
+								<AttackEffect meta:RefKey="ParticleEffect">
+									<Name>Fireburst</Name>
+								</AttackEffect>
+							</Spreader>
+						</Data>
+					</Ability>
+					<Ability>
+						<Cooldown>1,6</Cooldown>
+						<Target>Random</Target>
+						<Count>3</Count>
+						<Data>
+							<Damage>3</Damage>
+							<HitEffect meta:RefKey="ParticleEffect">
+								<Name>Fireburst</Name>
+							</HitEffect>
+						</Data>
+					</Ability>
+				</Abilities>
+			</MonsterDesc>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>.</Character>
+			<Extends></Extends>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/ground_crusted_light_1</Name>
+					<Colour>171,171,171,255</Colour>
+				</Sprite>
+			</Sprite>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+	</Symbols>
+	<AllowedVictories>
+		<Condition meta:RefKey="Kill">
+			<All>false</All>
+			<Named>Elemental</Named>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Die" />
+	</AllowedDefeats>
+</Level>

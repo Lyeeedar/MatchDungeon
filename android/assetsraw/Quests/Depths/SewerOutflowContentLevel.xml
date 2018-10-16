@@ -1,0 +1,120 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>~~~~~~~~~~~~~</Line>
+			<Line>~~~~~~~~~~~~~</Line>
+			<Line>......DD.....</Line>
+			<Line>......DD.....</Line>
+			<Line>..p..........</Line>
+			<Line>.............</Line>
+			<Line>...........p.</Line>
+			<Line>.............</Line>
+			<Line>.p...........</Line>
+			<Line>.............</Line>
+			<Line>.............</Line>
+			<Line>...........##</Line>
+			<Line>...........#C</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>p</Character>
+			<Extends>.</Extends>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/wall_hedge_7</Name>
+					<DrawActualSize>true</DrawActualSize>
+					<Colour>110,110,110,255</Colour>
+				</Sprite>
+			</Sprite>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<Type>Wall</Type>
+		</Symbol>
+		<Symbol>
+			<Character>C</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>true</IsMonster>
+			<MonsterDesc meta:RefKey="MonsterDesc">
+				<Name>Channeler</Name>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_heroes/skeleton_mage</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Death meta:RefKey="ParticleEffect">
+					<Name>Death</Name>
+				</Death>
+				<AttackNumPips>5</AttackNumPips>
+				<AttackCooldown>3,7</AttackCooldown>
+				<Size>1</Size>
+				<HP>3</HP>
+				<DamageReduction>0</DamageReduction>
+			</MonsterDesc>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>D</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>true</IsMonster>
+			<MonsterDesc meta:RefKey="MonsterDesc">
+				<Name>Dragon</Name>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/heroes/gapingdragon</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Death meta:RefKey="ParticleEffect">
+					<Name>Death</Name>
+				</Death>
+				<AttackNumPips>5</AttackNumPips>
+				<AttackCooldown>1,6</AttackCooldown>
+				<AttackDamage>2</AttackDamage>
+				<Size>2</Size>
+				<HP>45</HP>
+				<DamageReduction>2</DamageReduction>
+				<Abilities>
+					<Ability>
+						<Cooldown>2,6</Cooldown>
+						<Effect>Move</Effect>
+					</Ability>
+					<Ability>
+						<Cooldown>2,6</Cooldown>
+						<Permuter>Cone</Permuter>
+						<Effect>Debuff</Effect>
+						<Data>
+							<Debuff meta:RefKey="Buff">
+								<Name>Slow</Name>
+								<Icon meta:RefKey="Sprite">
+									<Name>GUI/Debuff</Name>
+								</Icon>
+								<Statistics meta:RefKey="Statistics">
+									<Haste>-0.1</Haste>
+								</Statistics>
+								<Duration>4</Duration>
+							</Debuff>
+							<Range>2</Range>
+						</Data>
+					</Ability>
+				</Abilities>
+			</MonsterDesc>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+	</Symbols>
+	<AllowedVictories>
+		<Condition meta:RefKey="Kill">
+			<All>false</All>
+			<Named>Dragon</Named>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Die" />
+	</AllowedDefeats>
+</Level>

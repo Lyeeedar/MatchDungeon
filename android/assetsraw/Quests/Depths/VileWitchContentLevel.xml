@@ -1,0 +1,110 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>.~~........</Line>
+			<Line>...........</Line>
+			<Line>.....QQ...~</Line>
+			<Line>.~...QQ....</Line>
+			<Line>...........</Line>
+			<Line>...........</Line>
+			<Line>.......~~..</Line>
+			<Line>........~..</Line>
+			<Line>..~........</Line>
+			<Line>~..........</Line>
+			<Line>~......~...</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>Q</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>true</IsMonster>
+			<MonsterDesc meta:RefKey="MonsterDesc">
+				<Name>Queen</Name>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/heroes/dryderqueen</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<AttackNumPips>5</AttackNumPips>
+				<AttackCooldown>1,6</AttackCooldown>
+				<AttackDamage>2</AttackDamage>
+				<Size>2</Size>
+				<HP>50</HP>
+				<DamageReduction>2</DamageReduction>
+				<Abilities>
+					<Ability>
+						<Cooldown>2,6</Cooldown>
+						<Effect>Move</Effect>
+					</Ability>
+					<Ability>
+						<Cooldown>1,9</Cooldown>
+						<Target>Random</Target>
+						<Effect>Move</Effect>
+						<Data>
+							<MoveType>Leap</MoveType>
+							<EndEffect meta:RefKey="ParticleEffect">
+								<Name>Shout</Name>
+							</EndEffect>
+						</Data>
+					</Ability>
+					<Ability>
+						<Cooldown>2,6</Cooldown>
+						<Permuter>Cone</Permuter>
+						<Effect>Spreader</Effect>
+						<Data>
+							<Range>2</Range>
+							<Spreader meta:RefKey="SpreaderDef">
+								<Name>Lava</Name>
+								<Sprite meta:RefKey="SpriteWrapper">
+									<Sprite meta:RefKey="Sprite">
+										<Name>Oryx/uf_split/uf_terrain/water_lava</Name>
+									</Sprite>
+								</Sprite>
+								<Effect>Attack</Effect>
+								<AttackEffect meta:RefKey="ParticleEffect">
+									<Name>Fireburst</Name>
+								</AttackEffect>
+							</Spreader>
+						</Data>
+					</Ability>
+				</Abilities>
+			</MonsterDesc>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>.</Character>
+			<Extends></Extends>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/ground_crusted</Name>
+				</Sprite>
+				<TilingSprite meta:RefKey="TilingSprite">
+					<Name>Web</Name>
+					<Mode>Masked</Mode>
+					<Mask>Masks/web</Mask>
+					<Sprite meta:RefKey="Sprite">
+						<Name>white</Name>
+						<Colour>207,203,203,226</Colour>
+					</Sprite>
+				</TilingSprite>
+			</Sprite>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+	</Symbols>
+	<AllowedVictories>
+		<Condition meta:RefKey="Kill">
+			<All>false</All>
+			<Named>Queen</Named>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Die" />
+	</AllowedDefeats>
+</Level>

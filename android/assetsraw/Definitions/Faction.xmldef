@@ -28,7 +28,7 @@
 				<Data Name="Effect" EnumValues="Attack,Seal,CustomOrb,Block,Move,Dash,Heal,SealedAttack,Summon,DelayedSummon,Spreader,Debuff,SelfBuff" meta:RefKey="Enum" />
 				<Data Name="Data" meta:RefKey="Struct">
 					<!--Attack-->
-					<Data Name="NumPips" Type="Int" Min="1" Default="7" VisibleIf="Parent.Effect==Attack || Parent.Effect==SealedAttack || Parent.Effect == Heal || Parent.Effect == DelayedSummon || Parent.Effect==Dash" meta:RefKey="Number" />
+					<Data Name="NumPips" Type="Int" Min="1" Default="7" VisibleIf="Parent.Effect==Attack || Parent.Effect==SealedAttack || Parent.Effect == Heal || Parent.Effect == DelayedSummon || Parent.Effect==Dash || Parent.Effect==Debuff" meta:RefKey="Number" />
 					<Data Name="Damage" Type="Int" Min="1" Default="1" VisibleIf="Parent.Effect == Attack || Parent.Effect == SealedAttack" meta:RefKey="Number" />
 					<Data Name="Strength" Type="Int" Min="1" Default="1" VisibleIf="Parent.Effect==Seal || Parent.Effect==Shield || Parent.Effect == SealedAttack || Parent.Effect == Block" meta:RefKey="Number" />
 					<Data Name="Amount" Type="Int" Min="1" Default="10" VisibleIf="Parent.Effect==Heal" meta:RefKey="Number" />

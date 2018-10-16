@@ -1,0 +1,42 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>#......#</Line>
+			<Line>#......#</Line>
+			<Line>#......#</Line>
+			<Line>#......#</Line>
+			<Line>#......#</Line>
+			<Line>#......#</Line>
+			<Line>#......#</Line>
+			<Line>#..BB..#</Line>
+			<Line>#.BBBB.#</Line>
+			<Line>###..###</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>B</Character>
+			<Extends></Extends>
+			<Block>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/terrain/boulder</Name>
+				</Sprite>
+				<Health>8</Health>
+				<AlwaysShowHP>true</AlwaysShowHP>
+			</Block>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+	</Symbols>
+	<AllowedVictories>
+		<Condition meta:RefKey="Break" />
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Turns">
+			<Turns>40</Turns>
+		</Condition>
+	</AllowedDefeats>
+</Level>

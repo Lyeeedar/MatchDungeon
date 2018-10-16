@@ -72,9 +72,19 @@
 	</Wall>
 	<Pit meta:RefKey="SpriteWrapper">
 		<Sprite meta:RefKey="Sprite">
-			<Name>Oryx/uf_split/uf_terrain/water_green</Name>
-			<Colour>218,103,224,255</Colour>
+			<Name>white</Name>
+			<Colour>0,0,0,255</Colour>
 		</Sprite>
+		<TilingSprite meta:RefKey="TilingSprite">
+			<Name>Pit</Name>
+			<Mode>PremadeDirectional</Mode>
+			<Directions>
+				<North meta:RefKey="Sprite">
+					<Name>Oryx/Custom/terrain/cliff</Name>
+					<Colour>135,135,135,175</Colour>
+				</North>
+			</Directions>
+		</TilingSprite>
 	</Pit>
 	<Chest>
 		<Full meta:RefKey="Sprite">

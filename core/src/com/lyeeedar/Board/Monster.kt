@@ -146,6 +146,7 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 
 fun validAttack(grid: Grid, tile: Tile): Boolean
 {
+	if (!tile.canHaveOrb) return false
 	if (tile.orb == null) return false
 	if (tile.monsterEffect != null) return false
 	if (tile.spreader != null) return false

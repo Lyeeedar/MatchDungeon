@@ -852,7 +852,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	}
 
 	// ----------------------------------------------------------------------
-	private fun beginTurn()
+	public fun beginTurn()
 	{
 		inTurn = true
 		gridNeedsUpdate = true
