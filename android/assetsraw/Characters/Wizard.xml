@@ -13,6 +13,6 @@
 	<StartingEquipment>
 		<Body>Characters/Equipment/WizardsRobes</Body>
 		<MainHand>Characters/Equipment/SpellMagicMissile</MainHand>
-		<OffHand>Characters/Equipment/SpellReflect</OffHand>
+		<OffHand>Characters/Equipment/SpellShockShield</OffHand>
 	</StartingEquipment>
 </Character>

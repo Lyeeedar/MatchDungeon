@@ -8,7 +8,12 @@
 		</Quest>
 	</BronzeRewards>
 	<SilverRewards meta:RefKey="Rewards" />
-	<GoldRewards meta:RefKey="Rewards" />
+	<GoldRewards meta:RefKey="Rewards">
+		<Equipment>
+			<Unlock>true</Unlock>
+			<Equipment>Quests/Dungeon/Rewards/Crown of Hector.xml</Equipment>
+		</Equipment>
+	</GoldRewards>
 	<Root meta:RefKey="QuestNode">b73ca6a2-224c-417d-9193-a66ababab453</Root>
 	<Nodes>
 		<QuestNode meta:X="771.249267578125" meta:Y="8.5406560897827148" meta:Comment="a8066850-b232-4f7a-bc23-36b1cc67e15d" GUID="58016e14-26df-44bf-81c1-f7b6a39439df">

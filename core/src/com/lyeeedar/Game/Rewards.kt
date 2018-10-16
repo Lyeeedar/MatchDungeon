@@ -5,13 +5,17 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
+import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Board.Mote
 import com.lyeeedar.Card.Card
+import com.lyeeedar.Card.CardContent.Storage
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Global
+import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.CardWidget
+import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.Util.*
 
 enum class Chance private constructor(val chance: Float, val uiString: String, val colour: Colour)
@@ -47,6 +51,7 @@ abstract class AbstractReward
 				"CHARACTER" -> CharacterReward()
 				"STATISTICS" -> StatisticsReward()
 				"BUFF" -> BuffReward()
+				"ITEM" -> ItemReward()
 				else -> throw RuntimeException("Invalid reward type: " + xmlData.name)
 			}
 
@@ -515,6 +520,71 @@ class EquipmentReward : AbstractReward()
 		})
 
 		output.add(card)
+
+		return output
+	}
+}
+
+class ItemReward : AbstractReward()
+{
+	lateinit var name: String
+	lateinit var icon: Sprite
+	lateinit var key: String
+	lateinit var value: String
+	lateinit var storage: Storage
+
+	override fun parse(xmlData: XmlData)
+	{
+		name = xmlData.get("Name")
+		icon = AssetManager.loadSprite(xmlData.getChildByName("Icon")!!)
+
+		key = xmlData.get("Key").toLowerCase()
+		value = xmlData.get("Value").toLowerCase()
+		storage = Storage.valueOf(xmlData.get("Storage").toUpperCase())
+	}
+
+	override fun isValid(): Boolean = true
+
+	override fun cardIcon(): TextureRegion = AssetManager.loadTextureRegion("GUI/ItemCardback")!!
+
+	override fun reward(): Array<CardWidget>
+	{
+		val output = Array<CardWidget>()
+
+		if (isValid())
+		{
+			val flags = when (storage){
+				Storage.CARD -> Global.cardflags
+				Storage.QUEST -> Global.questflags
+				Storage.GLOBAL -> Global.globalflags
+			}
+
+			flags.flags.put(key, value.evaluate(Global.getVariableMap()))
+
+			val table = Table()
+			table.add(Label(name, Global.skin, "cardtitle"))
+			table.row()
+			table.add(SpriteWidget(icon, 128f, 128f))
+			table.row()
+
+			val cardWidget = CardWidget(table, table, AssetManager.loadTextureRegion("GUI/ItemCardback")!!, null)
+			cardWidget.canZoom = false
+			cardWidget.addPick("", {
+				val sprite = icon.copy()
+
+				val src = cardWidget.localToStageCoordinates(Vector2(cardWidget.width / 2f, cardWidget.height / 2f))
+
+				val dstTable = CardScreen.instance.playerSlot
+				val dst = dstTable.localToStageCoordinates(Vector2())
+
+				Mote(src, dst, sprite, 32f, {
+				}, 0.75f)
+			})
+
+			cardWidget.canZoom = false
+
+			output.add(cardWidget)
+		}
 
 		return output
 	}

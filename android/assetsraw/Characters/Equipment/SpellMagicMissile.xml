@@ -21,6 +21,9 @@
 				<Name>SpecialBeam</Name>
 				<Colour>140,219,255,255</Colour>
 			</FlightEffect>
+			<HitEffect meta:RefKey="ParticleEffect">
+				<Name>SpecialExplosion</Name>
+			</HitEffect>
 		</EffectData>
 	</Ability>
 </MainHand>

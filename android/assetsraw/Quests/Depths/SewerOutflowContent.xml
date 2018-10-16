@@ -25,14 +25,14 @@
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Item>
-					<Item meta:RefKey="Item">
-						<Name>Life Crystal of the Rotting Dragon</Name>
-						<Description>The lifeforce crystal you gained from the rotting dragon, in the depths of the sewers. Could be useful to a master forger, if you find one.</Description>
-						<Icon meta:RefKey="Sprite">
-							<Name>Oryx/Custom/items/gem</Name>
-							<DrawActualSize>true</DrawActualSize>
-						</Icon>
-					</Item>
+					<Name>Life Crystal of the Rotting Dragon</Name>
+					<Icon meta:RefKey="Sprite">
+						<Name>Oryx/Custom/items/gem</Name>
+						<DrawActualSize>true</DrawActualSize>
+					</Icon>
+					<Key>RottingDragonCrystal</Key>
+					<Value>1</Value>
+					<Storage>Global</Storage>
 				</Item>
 			</Rewards>
 			<MarkComplete>

@@ -24,8 +24,20 @@
 		</Node>
 		<Node meta:X="479" meta:Y="0" GUID="206c2daa-dc08-47c8-8f4a-fdbe3337498d">
 			<Line>
-				<MultilineString>You slay the rat! Its enormous body collapses down, the glimmering crown rolling from its head.</MultilineString>
+				<MultilineString>You slay the rat! Its enormous body collapses down, the glimmering crown rolling from its head. From within its body a powerful soul emerges and coalesces in you hands into a large crystal.</MultilineString>
 			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Item>
+					<Name>Life Crystal of the Swarm Lord</Name>
+					<Icon meta:RefKey="Sprite">
+						<Name>Oryx/Custom/items/gem</Name>
+						<DrawActualSize>true</DrawActualSize>
+					</Icon>
+					<Key>SwarmLordCrystal</Key>
+					<Value>1</Value>
+					<Storage>Global</Storage>
+				</Item>
+			</Rewards>
 			<Line>
 				<MultilineString>You gather the crown and a large piece of its tail as proof of your victory and leave.</MultilineString>
 			</Line>

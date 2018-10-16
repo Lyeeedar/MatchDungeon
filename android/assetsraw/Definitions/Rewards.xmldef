@@ -27,7 +27,11 @@
 		</Data>
 		<Data Name="Item" meta:RefKey="Struct">
 			<Data Name="Chance" Key="Chance" Default="Always" meta:RefKey="Enum" />
-			<Data Name="Item" Keys="Item" Nullable="False" meta:RefKey="Reference" />
+			<Data Name="Name" meta:RefKey="String" />
+			<Data Name="Icon" Keys="Sprite" Nullable="False" meta:RefKey="Reference" />
+			<Data Name="Key" meta:RefKey="String" />
+			<Data Name="Value" meta:RefKey="String" />
+			<Data Name="Storage" EnumValues="Card,Quest,Global" SkipIfDefault="False" meta:RefKey="Enum" />
 		</Data>
 		<Data Name="Buff" meta:RefKey="Struct">
 			<Data Name="Chance" Key="Chance" Default="Always" meta:RefKey="Enum" />

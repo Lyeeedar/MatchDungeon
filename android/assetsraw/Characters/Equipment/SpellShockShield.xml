@@ -1,0 +1,32 @@
+<OffHand xmlns:meta="Editor">
+	<Name>Spell: Shock Shield</Name>
+	<Description>A spell that summons a magic shield that blocks some attacks, and shocks the attackers.</Description>
+	<Cost>200</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/book_blue</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Icon>
+	<Statistics meta:RefKey="Statistics" />
+	<Ability>
+		<Name>Shock Shield</Name>
+		<Description>Block some attacks, and shock the attackers.</Description>
+		<EffectData>
+			<Cost>7</Cost>
+			<Effect>1,Orb,Single,Buff</Effect>
+			<Data>
+				<Buff meta:RefKey="Buff">
+					<Name>Shock Shield</Name>
+					<Icon meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_items/shield_mystic_buckler</Name>
+						<DrawActualSize>true</DrawActualSize>
+					</Icon>
+					<Statistics meta:RefKey="Statistics">
+						<Counter>1</Counter>
+						<Reflect>0.2</Reflect>
+					</Statistics>
+					<Duration>5</Duration>
+				</Buff>
+			</Data>
+		</EffectData>
+	</Ability>
+</OffHand>

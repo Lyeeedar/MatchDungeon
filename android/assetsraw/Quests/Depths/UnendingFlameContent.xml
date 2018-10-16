@@ -23,6 +23,18 @@
 			<Line>
 				<MultilineString>The elemental collapses, its heat finally extinguished. From its body a powerful soul emerges and coalesces into your hand as a beautiful crystal.</MultilineString>
 			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Item>
+					<Name>Life Crystal of the Unending Flame</Name>
+					<Icon meta:RefKey="Sprite">
+						<Name>Oryx/Custom/items/gem</Name>
+						<DrawActualSize>true</DrawActualSize>
+					</Icon>
+					<Key>UnendingFlameCrystal</Key>
+					<Value>1</Value>
+					<Storage>Global</Storage>
+				</Item>
+			</Rewards>
 			<MarkComplete>
 				<State>Success</State>
 			</MarkComplete>

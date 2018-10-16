@@ -72,11 +72,6 @@
 					<Data Name="Amount" Min="-999999" SkipIfDefault="False" meta:RefKey="Number" />
 					<Data Name="OnPurchaseDefine" Keys="OnPurchaseDefine" meta:RefKey="Reference" />
 				</Data>
-				<Data Name="Item" meta:RefKey="Struct">
-					<Data Name="Cost" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
-					<Data Name="Item" Keys="Item" Nullable="False" meta:RefKey="Reference" />
-					<Data Name="OnPurchaseDefine" Keys="OnPurchaseDefine" meta:RefKey="Reference" />
-				</Data>
 				<!--Progression-->
 				<Data Name="Card" meta:RefKey="Struct">
 					<Data Name="Cost" Type="Int" Min="1" Default="1" meta:RefKey="Number" />

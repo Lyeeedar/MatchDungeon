@@ -1,7 +1,0 @@
-<Definitions xmlns:meta="Editor">
-	<Definition Name="Item" meta:RefKey="Struct">
-		<Data Name="Name" meta:RefKey="String" />
-		<Data Name="Description" meta:RefKey="String" />
-		<Data Name="Icon" Keys="Sprite" Nullable="False" meta:RefKey="Reference" />
-	</Definition>
-</Definitions>

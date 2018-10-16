@@ -23,6 +23,18 @@
 			<Line>
 				<MultilineString>The vile witch falls dead, and from within her a poweful soul flows out, coalesing into a crystal in your hand.</MultilineString>
 			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Item>
+					<Name>Life Crystal of the Vile Witch</Name>
+					<Icon meta:RefKey="Sprite">
+						<Name>Oryx/Custom/items/gem</Name>
+						<DrawActualSize>true</DrawActualSize>
+					</Icon>
+					<Key>VileWitchCrystal</Key>
+					<Value>1</Value>
+					<Storage>Global</Storage>
+				</Item>
+			</Rewards>
 			<MarkComplete>
 				<State>Success</State>
 			</MarkComplete>

@@ -1,0 +1,17 @@
+<Head xmlns:meta="Editor">
+	<Name>Crown of Hector</Name>
+	<Description>A golden crown, inlaid with gems. Contains powerful enchantments that gives the wearer great strength.</Description>
+	<Cost>270</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/armor_gold_helm</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Health>1</Health>
+		<MatchDamage>1</MatchDamage>
+		<AbilityDamage>1</AbilityDamage>
+		<Pierce>1</Pierce>
+		<Berserk>1</Berserk>
+		<PowerGain>2</PowerGain>
+	</Statistics>
+</Head>
