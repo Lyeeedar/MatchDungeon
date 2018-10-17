@@ -36,6 +36,9 @@
 				<Money>
 					<Count>50</Count>
 				</Money>
+				<Card>
+					<File>Cards/Peasant/Rewards/Firefighting</File>
+				</Card>
 			</Rewards>
 			<MarkComplete>
 				<State>Success</State>

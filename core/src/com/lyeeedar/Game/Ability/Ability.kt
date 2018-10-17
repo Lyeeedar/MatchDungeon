@@ -272,6 +272,12 @@ class Ability
 	{
 		if (effect.type == Effect.Type.BUFF)
 		{
+			val buff = data["BUFF"] as Buff
+			if (Global.player.levelbuffs.any { it.name == buff.name && it.remainingDuration > 1 })
+			{
+				return false
+			}
+
 			return true
 		}
 		else

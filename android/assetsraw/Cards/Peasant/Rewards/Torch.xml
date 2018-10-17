@@ -1,0 +1,29 @@
+<OffHand xmlns:meta="Editor">
+	<Name>Torch</Name>
+	<Description>A burning torch, great for lighting up places and setting fire to things.</Description>
+	<Cost>150</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/torch_lit</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<MatchDamage>0.5</MatchDamage>
+	</Statistics>
+	<Ability>
+		<Name>Light Fire</Name>
+		<Description>Set an object on fire.</Description>
+		<EffectData>
+			<Cost>3</Cost>
+			<Effect>1,Block,Single,Spreader</Effect>
+			<Data>
+				<Spreader meta:RefKey="SpreaderDef">
+					<Name>Fire</Name>
+					<ParticleEffect meta:RefKey="ParticleEffect">
+						<Name>Fire</Name>
+					</ParticleEffect>
+					<Effect>Pop</Effect>
+				</Spreader>
+			</Data>
+		</EffectData>
+	</Ability>
+</OffHand>

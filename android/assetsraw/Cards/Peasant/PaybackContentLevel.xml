@@ -1,0 +1,89 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>##......###</Line>
+			<Line>#.........#</Line>
+			<Line>...!.T.....</Line>
+			<Line>...........</Line>
+			<Line>..T...!.T..</Line>
+			<Line>...!.T.....</Line>
+			<Line>#..........</Line>
+			<Line>#...T..!...</Line>
+			<Line>#.!.....T.#</Line>
+			<Line>##.......##</Line>
+			<Line>####...####</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>T</Character>
+			<Extends></Extends>
+			<Block>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/terrain/GoblinTent</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Health>7</Health>
+				<AlwaysShowHP>true</AlwaysShowHP>
+			</Block>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>.</Character>
+			<Extends></Extends>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/ground_dirt_dark_1</Name>
+				</Sprite>
+			</Sprite>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>#</Character>
+			<Extends></Extends>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<TilingSprite meta:RefKey="TilingSprite">
+					<Name>Wall</Name>
+					<Mode>Premade</Mode>
+					<Front meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_cave_14</Name>
+						<Colour>102,102,102,255</Colour>
+					</Front>
+					<Top meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_cave_7</Name>
+						<Colour>102,102,102,255</Colour>
+					</Top>
+					<Overhang meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_cave_1</Name>
+						<Colour>102,102,102,255</Colour>
+					</Overhang>
+				</TilingSprite>
+			</Sprite>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<Type>Wall</Type>
+		</Symbol>
+	</Symbols>
+	<Faction>Goblin</Faction>
+	<Theme>Farm</Theme>
+	<AllowedVictories>
+		<Condition meta:RefKey="Break" />
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Turns">
+			<Turns>40</Turns>
+		</Condition>
+		<Condition meta:RefKey="Die" />
+	</AllowedDefeats>
+</Level>

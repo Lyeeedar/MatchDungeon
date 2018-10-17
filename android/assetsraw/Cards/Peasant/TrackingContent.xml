@@ -1,19 +1,19 @@
 <CardContent meta:X="-319" meta:Y="-58" GUID="66e443d0-9028-4749-875a-5f805717c774" xmlns:meta="Editor">
 	<Root meta:RefKey="Node">5b2aedda-65b7-4e20-bcde-9bf795d10542</Root>
 	<Nodes>
-		<Node meta:X="440.40261840820312" meta:Y="40.358245849609375" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
+		<Node meta:X="440.40261840820312" meta:Y="39.358245849609375" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Match3>
-				<Level>JourneyToTheCityContentLevel</Level>
+				<Level>TrackingContentLevel</Level>
 				<Success meta:RefKey="Node">8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f</Success>
 				<Failure meta:RefKey="Node">91e41773-f187-46c6-906d-f87d59996682</Failure>
 			</Match3>
 		</Node>
-		<Node meta:X="682.40264892578125" meta:Y="204.35824584960938" GUID="91e41773-f187-46c6-906d-f87d59996682">
+		<Node meta:X="683.40264892578125" meta:Y="200.35824584960938" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>Night starts to fall with the city nowhere in sight. You begin to setup camp, you'll have to finish your journey tomorrow.</MultilineString>
+				<MultilineString>Night starts to fall with the lair nowhere in sight. You begin to setup camp, you'll have to continue tomorrow.</MultilineString>
 			</Line>
 			<Define>
-				<Key>HeroesJourney4Seen</Key>
+				<Key>GoblinScourge4Seen</Key>
 				<Value>1</Value>
 				<Storage>Global</Storage>
 			</Define>
@@ -23,17 +23,12 @@
 		</Node>
 		<Node meta:X="682.40264892578125" meta:Y="15.358244895935059" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>Finally the majestic walls of the city come into sight. Hopefully life will be easier here.</MultilineString>
+				<MultilineString>Finally the stench of rotting and burning flesh asails your nose. The remains of creatures are impaled on spikes around a large cave entrance. This must be the goblins lair.</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
 						<Health>2</Health>
-						<MatchDamage>0</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>
@@ -44,7 +39,7 @@
 		<Node meta:X="-143" meta:Y="-51.666667938232422" GUID="5b2aedda-65b7-4e20-bcde-9bf795d10542">
 			<Branch>
 				<Branch>
-					<Condition>HeroesJourney4Seen</Condition>
+					<Condition>GoblinScourge4Seen</Condition>
 					<Node meta:RefKey="Node">5befdd46-577e-47a4-ba57-367c24edb68e</Node>
 				</Branch>
 				<Branch>
@@ -53,21 +48,18 @@
 				</Branch>
 			</Branch>
 		</Node>
-		<Node meta:X="148.41824340820313" meta:Y="84.125434875488281" GUID="c4398737-12bb-48de-a0bf-eccc8d36eead">
+		<Node meta:X="148.41824340820313" meta:Y="85.125434875488281" GUID="c4398737-12bb-48de-a0bf-eccc8d36eead">
 			<Line>
 				<MultilineString>The village lies in ruins, most of the population dead. The fields are ruined for miles around, burnt down or festering with dead bodies.</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>Even if you recover some of your crops, there's noone here to buy them anymore. Your only option is to seek out work in the nearest city.</MultilineString>
-			</Line>
-			<Line>
-				<MultilineString>With a heavy heart you set out on your journey.</MultilineString>
+				<MultilineString>In your heart seeths a murderous rage. You fidn the tracks of the goblin raiders and begin to follow them back to their lair.</MultilineString>
 			</Line>
 			<Node meta:RefKey="Node">7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17</Node>
 		</Node>
 		<Node meta:X="154" meta:Y="-51.666667938232422" GUID="5befdd46-577e-47a4-ba57-367c24edb68e">
 			<Line>
-				<MultilineString>You break camp and continue on your journey towards the city.</MultilineString>
+				<MultilineString>You break camp and continue following the tracks.</MultilineString>
 			</Line>
 			<Node meta:RefKey="Node">7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17</Node>
 		</Node>

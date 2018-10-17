@@ -1,0 +1,9 @@
+<Quest meta:X="0" meta:Y="0" GUID="52a7b6f4-7f02-4f1a-bce2-d9745b9b0518" xmlns:meta="Editor">
+	<Title>Changing Careers</Title>
+	<Description>The city holds many opportunities for a new start, for those that seek them out.</Description>
+	<Theme>City</Theme>
+	<BronzeRewards meta:RefKey="Rewards" />
+	<SilverRewards meta:RefKey="Rewards" />
+	<GoldRewards meta:RefKey="Rewards" />
+	<Nodes />
+</Quest>

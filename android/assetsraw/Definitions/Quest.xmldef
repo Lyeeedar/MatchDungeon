@@ -40,13 +40,13 @@
 	<Definition Name="CompleteQuest" TextColour="245,216,33" meta:RefKey="GraphStructDef">
 		<Data Name="State" EnumValues="Gold,Silver,Bronze,Failure" meta:RefKey="Enum" />
 	</Definition>
-	<Definition Name="Define" TextColour="131,187,174" meta:RefKey="GraphStruct">
+	<Definition Name="Define" TextColour="131,187,174" meta:RefKey="GraphStructDef">
 		<Data Name="Key" meta:RefKey="String" />
 		<Data Name="Value" meta:RefKey="String" />
 		<Data Name="IsGlobal" meta:RefKey="Boolean" />
 		<Data Name="Next" DefKey="QuestNodeDefs" meta:RefKey="GraphReference" />
 	</Definition>
-	<Definition Name="SetTheme" TextColour="96,197,242" meta:RefKey="GraphStruct">
+	<Definition Name="SetTheme" TextColour="96,197,242" meta:RefKey="GraphStructDef">
 		<Data Name="Theme" BasePath="Themes" StripExtension="True" ResourceType="Theme" meta:RefKey="File" />
 		<Data Name="Next" DefKey="QuestNodeDefs" meta:RefKey="GraphReference" />
 	</Definition>

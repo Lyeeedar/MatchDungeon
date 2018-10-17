@@ -28,7 +28,7 @@
 						<AbilityDamage>4</AbilityDamage>
 						<PowerGain>10</PowerGain>
 					</Statistics>
-					<Duration>6</Duration>
+					<Duration>10</Duration>
 				</Buff>
 			</Data>
 		</EffectData>

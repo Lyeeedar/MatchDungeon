@@ -83,6 +83,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				if (value.targets == 0)
 				{
 					value.activate(this)
+					beginTurn()
 					field = null
 				}
 			}
@@ -852,7 +853,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	}
 
 	// ----------------------------------------------------------------------
-	public fun beginTurn()
+	private fun beginTurn()
 	{
 		inTurn = true
 		gridNeedsUpdate = true

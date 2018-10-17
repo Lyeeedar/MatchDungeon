@@ -2,38 +2,38 @@
 	<Root meta:RefKey="CardNode">b5b4cf07-d46e-4574-95e2-58cf7c7a0b9e</Root>
 	<Nodes>
 		<CardNode meta:X="179.31297302246094" meta:Y="-5.0805263519287109" GUID="b5b4cf07-d46e-4574-95e2-58cf7c7a0b9e">
-			<Name>Heroes Journey 1:Raiding Party</Name>
+			<Name>Goblin Scourge 1:Raiding Party</Name>
 			<Description>Your peaceful farm life is shattered by the chittering cries of goblins smashing their way into your house.</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>RaidingParty</Content>
 			<Next meta:RefKey="CardNode">4b7fe158-3c51-4449-b7cd-d8dd55169ec2</Next>
 		</CardNode>
 		<CardNode meta:X="492.31298828125" meta:Y="-4.0805263519287109" GUID="4b7fe158-3c51-4449-b7cd-d8dd55169ec2">
-			<Name>Heroes Journey 2:Village Rescue</Name>
+			<Name>Goblin Scourge 2:Village Rescue</Name>
 			<Description>You arrive at the village only to find it in flames. Quick, rescue anyone you can!</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>VillageRescue</Content>
 			<Next meta:RefKey="CardNode">c520ba0d-4247-46cb-a51c-800fcb097a9c</Next>
 		</CardNode>
 		<CardNode meta:X="802.31298828125" meta:Y="-5.0805263519287109" GUID="c520ba0d-4247-46cb-a51c-800fcb097a9c">
-			<Name>Heroes Journey 3:Goblin Shaman</Name>
+			<Name>Goblin Scourge 3:Goblin Shaman</Name>
 			<Description>At the center of the village stands a savage goblin shaman, the small beast directing the goblin hoard. Take your revenge on him.</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>GoblinShaman</Content>
 			<Next meta:RefKey="CardNode">bd399de9-85e1-434d-833b-7927948c4e47</Next>
 		</CardNode>
 		<CardNode meta:X="1115.31298828125" meta:Y="-5.0805263519287109" GUID="bd399de9-85e1-434d-833b-7927948c4e47">
-			<Name>Heroes Journey 4:Journey to the City</Name>
-			<Description>With nothing left for you at the village you decide to travel to the nearest large city to seek your fortune.</Description>
+			<Name>Goblin Scourge 4:Tracking</Name>
+			<Description>The goblins have fled, leaving the village in ruins. You decide to track them back to their lair.</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
-			<Content>JourneyToTheCityContent</Content>
-			<Next meta:RefKey="CardNode">b38efc94-f4b0-4395-9eec-aa6faeb65c64</Next>
+			<Content>TrackingContent</Content>
+			<Next meta:RefKey="CardNode">6e34ff8e-e6c5-4665-8259-d1633e65f661</Next>
 		</CardNode>
-		<CardNode meta:X="1430.31298828125" meta:Y="-5.0805263519287109" GUID="b38efc94-f4b0-4395-9eec-aa6faeb65c64">
-			<Name>Heroes Journey 5:Career Change</Name>
-			<Description>In the city there are many opportunities to reinvent yourself.</Description>
+		<CardNode meta:X="1434" meta:Y="-3.6666666666666856" GUID="6e34ff8e-e6c5-4665-8259-d1633e65f661">
+			<Name>Goblin Scourge 5:Payback</Name>
+			<Description>You see the goblins have erected a small town of tents in the cavern. It would be a shame if someone destroyed it all.</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
-			<Content>CareerChangeCardContent</Content>
+			<Content>PaybackContent</Content>
 		</CardNode>
 	</Nodes>
 </Card>

@@ -28,6 +28,9 @@
 					<Name>Oryx/Custom/heroes/dryderqueen</Name>
 					<DrawActualSize>true</DrawActualSize>
 				</Sprite>
+				<Death meta:RefKey="ParticleEffect">
+					<Name>Death</Name>
+				</Death>
 				<AttackNumPips>5</AttackNumPips>
 				<AttackCooldown>1,6</AttackCooldown>
 				<AttackDamage>2</AttackDamage>
