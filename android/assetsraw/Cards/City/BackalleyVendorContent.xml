@@ -1,0 +1,31 @@
+<CardContent meta:X="0" meta:Y="0" GUID="66e443d0-9028-4749-875a-5f805717c774" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
+			<Line>
+				<MultilineString>As you wander down the alley you come across a stall set into the wall. The shady man behind it gestures you over, revealing a large collection of items.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Find something that interests you friend? I've got great prices for those who don't ask too many questions about where the items came from."</MultilineString>
+			</Line>
+			<Shop>
+				<CostMultiplier>0.6</CostMultiplier>
+				<Items>
+					<Equipment />
+					<Equipment />
+					<Equipment />
+					<Equipment />
+					<Equipment />
+					<Equipment />
+					<Equipment />
+				</Items>
+			</Shop>
+			<Line>
+				<MultilineString>"Nice to do business with ya. If anything happens to come into your possession that may have belonged to someone else, then come see me. I'll take it off your hands."</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

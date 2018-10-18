@@ -1,9 +1,353 @@
-<Quest meta:X="0" meta:Y="0" GUID="52a7b6f4-7f02-4f1a-bce2-d9745b9b0518" xmlns:meta="Editor">
+<Quest meta:X="0" meta:Y="0" GUID="52a7b6f4-7f02-4f1a-bce2-d9745b9b0518" xmlns:meta="Editor" meta:GraphCommentData="d74ba28b-33b4-4bbf-a0a2-84a9b3cf4948$Start$$51,51,51,255%f60eac7c-f567-4e27-967e-debf3abe4407$Branch$$112,199,88,255%c3c020a2-9a28-42ab-9e47-778297078a13$Wizard$$203,53,252,255%9e0344c5-5f90-479e-aa5b-faf7f95ff6de$Alchemist$$199,156,13,255%b58932ec-9b94-4de2-ac68-55594aed21c2$Complete$$222,235,4,255%a07e5911-882c-472b-894f-8a44fe885130$Knight$$99,57,57,255">
 	<Title>Changing Careers</Title>
 	<Description>The city holds many opportunities for a new start, for those that seek them out.</Description>
 	<Theme>City</Theme>
 	<BronzeRewards meta:RefKey="Rewards" />
 	<SilverRewards meta:RefKey="Rewards" />
 	<GoldRewards meta:RefKey="Rewards" />
-	<Nodes />
+	<Root meta:RefKey="QuestNode">64370f6b-c741-4d49-b34a-50fe5c1389d6</Root>
+	<Nodes>
+		<QuestNode meta:X="325" meta:Y="0" meta:Comment="d74ba28b-33b4-4bbf-a0a2-84a9b3cf4948" GUID="64370f6b-c741-4d49-b34a-50fe5c1389d6">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>false</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">c0325c7a-a7b3-46ef-b0a7-9d26e9ee9cdf</Success>
+			<Failure meta:RefKey="QuestNode">c0325c7a-a7b3-46ef-b0a7-9d26e9ee9cdf</Failure>
+		</QuestNode>
+		<QuestNode meta:X="527.24258028932979" meta:Y="0" meta:Comment="d74ba28b-33b4-4bbf-a0a2-84a9b3cf4948" GUID="c0325c7a-a7b3-46ef-b0a7-9d26e9ee9cdf">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>false</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">da1652a6-a889-48a7-949e-2aaec4b8b6ec</Success>
+			<Failure meta:RefKey="QuestNode">da1652a6-a889-48a7-949e-2aaec4b8b6ec</Failure>
+		</QuestNode>
+		<QuestNode meta:X="732.95530722779108" meta:Y="-2.2350733245657635" meta:Comment="d74ba28b-33b4-4bbf-a0a2-84a9b3cf4948" GUID="da1652a6-a889-48a7-949e-2aaec4b8b6ec">
+			<Type>Deck</Type>
+			<AllowDeckCards>false</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">c6f9c775-10f0-4dc9-9609-336ff2d22ce2</Success>
+			<Failure meta:RefKey="QuestNode">c6f9c775-10f0-4dc9-9609-336ff2d22ce2</Failure>
+		</QuestNode>
+		<QuestNode meta:X="940.43296084168674" meta:Y="-4.4701466491315269" meta:Comment="d74ba28b-33b4-4bbf-a0a2-84a9b3cf4948" GUID="c6f9c775-10f0-4dc9-9609-336ff2d22ce2">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">4227c2db-321c-4abc-9770-69781339fd0c</Success>
+			<Failure meta:RefKey="QuestNode">4227c2db-321c-4abc-9770-69781339fd0c</Failure>
+		</QuestNode>
+		<QuestNode meta:X="1142.6755411310164" meta:Y="-6.70521997369729" meta:Comment="d74ba28b-33b4-4bbf-a0a2-84a9b3cf4948" GUID="4227c2db-321c-4abc-9770-69781339fd0c">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">c0a88e0a-008b-40d7-a5b0-361a46331889</Success>
+			<Failure meta:RefKey="QuestNode">c0a88e0a-008b-40d7-a5b0-361a46331889</Failure>
+		</QuestNode>
+		<QuestNode meta:X="1342.6830480957806" meta:Y="-6.70521997369729" meta:Comment="d74ba28b-33b4-4bbf-a0a2-84a9b3cf4948" GUID="c0a88e0a-008b-40d7-a5b0-361a46331889">
+			<Type>Deck</Type>
+			<IsShop>true</IsShop>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">1aa9d053-e4ee-46df-8ca5-c5724f9cb300</Success>
+			<Failure meta:RefKey="QuestNode">1aa9d053-e4ee-46df-8ca5-c5724f9cb300</Failure>
+		</QuestNode>
+		<QuestNode meta:X="1603.2022245545636" meta:Y="-8.9402932982630539" meta:Comment="f60eac7c-f567-4e27-967e-debf3abe4407" GUID="1aa9d053-e4ee-46df-8ca5-c5724f9cb300">
+			<Type>Fixed</Type>
+			<FixedEvent></FixedEvent>
+			<Custom>
+				<State>
+					<Key>Wizard</Key>
+					<Node meta:RefKey="QuestNode">209ece14-0e7b-45c6-b53d-72001d9d5b0a</Node>
+				</State>
+				<State>
+					<Key>Knight</Key>
+					<Node meta:RefKey="QuestNode">8f028da9-cdc2-4805-b4f2-ff14e91b8347</Node>
+				</State>
+				<State>
+					<Key>Alchemist</Key>
+					<Node meta:RefKey="QuestNode">e2eab4e1-ecbe-47c5-a9ae-b921ddd42bc1</Node>
+				</State>
+			</Custom>
+		</QuestNode>
+		<QuestNode meta:X="2011.7483243386334" meta:Y="-596.36783496973612" meta:Comment="c3c020a2-9a28-42ab-9e47-778297078a13" GUID="209ece14-0e7b-45c6-b53d-72001d9d5b0a">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>false</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">f4294704-0d29-41ec-8898-f9625b9b1b3d</Success>
+			<Failure meta:RefKey="QuestNode">f4294704-0d29-41ec-8898-f9625b9b1b3d</Failure>
+		</QuestNode>
+		<QuestNode meta:X="2204.6016521509946" meta:Y="-592.40846962746764" meta:Comment="c3c020a2-9a28-42ab-9e47-778297078a13" GUID="f4294704-0d29-41ec-8898-f9625b9b1b3d">
+			<Type>Deck</Type>
+			<AllowDeckCards>false</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">dff76a42-af12-4c4d-af75-d5cac0373ef0</Success>
+			<Failure meta:RefKey="QuestNode">dff76a42-af12-4c4d-af75-d5cac0373ef0</Failure>
+		</QuestNode>
+		<QuestNode meta:X="2395.3400406622909" meta:Y="-595.04804652231314" meta:Comment="c3c020a2-9a28-42ab-9e47-778297078a13" GUID="dff76a42-af12-4c4d-af75-d5cac0373ef0">
+			<Type>Deck</Type>
+			<IsShop>true</IsShop>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">464ba534-443e-4031-94cf-89253f46f53a</Success>
+			<Failure meta:RefKey="QuestNode">464ba534-443e-4031-94cf-89253f46f53a</Failure>
+		</QuestNode>
+		<QuestNode meta:X="2582.9142146849608" meta:Y="-589.76889273262191" meta:Comment="c3c020a2-9a28-42ab-9e47-778297078a13" GUID="464ba534-443e-4031-94cf-89253f46f53a">
+			<Type>Fixed</Type>
+			<FixedEvent></FixedEvent>
+			<Success meta:RefKey="QuestNode">c6b502a8-6c3f-4728-8f40-7990aba4d7cb</Success>
+			<Failure meta:RefKey="CompleteQuest">eced1ab7-8289-4774-ad28-e91ce2916344</Failure>
+		</QuestNode>
+		<QuestNode meta:X="2899.4132626890951" meta:Y="-594.73846651612757" meta:Comment="c3c020a2-9a28-42ab-9e47-778297078a13" GUID="c6b502a8-6c3f-4728-8f40-7990aba4d7cb">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">b8534b8e-2463-4e02-bb56-30a9a6602c47</Success>
+			<Failure meta:RefKey="QuestNode">b8534b8e-2463-4e02-bb56-30a9a6602c47</Failure>
+		</QuestNode>
+		<QuestNode meta:X="3090.686103101456" meta:Y="-567.039202804784" meta:Comment="c3c020a2-9a28-42ab-9e47-778297078a13" GUID="b8534b8e-2463-4e02-bb56-30a9a6602c47">
+			<Type>Fixed</Type>
+			<FixedEvent></FixedEvent>
+			<Success meta:RefKey="QuestNode">70c77d01-2f1d-480d-a422-d147855dae20</Success>
+			<Failure meta:RefKey="CompleteQuest">3967d7de-2f29-44a9-9482-db383ada9574</Failure>
+		</QuestNode>
+		<CompleteQuest meta:X="2766.5270100747884" meta:Y="-444.8092622485255" meta:Comment="c3c020a2-9a28-42ab-9e47-778297078a13" GUID="eced1ab7-8289-4774-ad28-e91ce2916344">
+			<State>Failure</State>
+		</CompleteQuest>
+		<QuestNode meta:X="3407.4132626890951" meta:Y="-588.22099270169383" meta:Comment="c3c020a2-9a28-42ab-9e47-778297078a13" GUID="70c77d01-2f1d-480d-a422-d147855dae20">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">d5b61d33-bbde-4373-a762-c729089c5f5e</Success>
+			<Failure meta:RefKey="QuestNode">d5b61d33-bbde-4373-a762-c729089c5f5e</Failure>
+		</QuestNode>
+		<QuestNode meta:X="3610.0916822767149" meta:Y="-591.4797296089107" meta:Comment="c3c020a2-9a28-42ab-9e47-778297078a13" GUID="d5b61d33-bbde-4373-a762-c729089c5f5e">
+			<Type>Deck</Type>
+			<IsShop>true</IsShop>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">0a1781b1-1397-4ac2-bf04-35ecffc96187</Success>
+			<Failure meta:RefKey="QuestNode">0a1781b1-1397-4ac2-bf04-35ecffc96187</Failure>
+		</QuestNode>
+		<QuestNode meta:X="3806.2526280499014" meta:Y="-591.4797296089107" meta:Comment="c3c020a2-9a28-42ab-9e47-778297078a13" GUID="0a1781b1-1397-4ac2-bf04-35ecffc96187">
+			<Type>Fixed</Type>
+			<FixedEvent></FixedEvent>
+			<Success meta:RefKey="Define">31f05f43-61f4-4eb8-987f-366625feecb0</Success>
+			<Failure meta:RefKey="CompleteQuest">c6334d61-0397-418f-a310-9c35182ea5c4</Failure>
+		</QuestNode>
+		<CompleteQuest meta:X="3292.6038144942736" meta:Y="-485.80158201541491" GUID="3967d7de-2f29-44a9-9482-db383ada9574">
+			<State>Failure</State>
+		</CompleteQuest>
+		<CompleteQuest meta:X="4006.2036359380281" meta:Y="-412.00537378242109" meta:Comment="c3c020a2-9a28-42ab-9e47-778297078a13" GUID="c6334d61-0397-418f-a310-9c35182ea5c4">
+			<State>Failure</State>
+		</CompleteQuest>
+		<Define meta:X="4021.9619926429359" meta:Y="-583.46748158094238" meta:Comment="c3c020a2-9a28-42ab-9e47-778297078a13" GUID="31f05f43-61f4-4eb8-987f-366625feecb0">
+			<Key>AcquiredWizard</Key>
+			<Value>1</Value>
+			<IsGlobal>true</IsGlobal>
+			<Next meta:RefKey="Define">935cfe14-50bf-4a54-9ecc-6454e12bfb6f</Next>
+		</Define>
+		<Define meta:X="4379.5505075442588" meta:Y="-202.02000446523203" meta:Comment="b58932ec-9b94-4de2-ac68-55594aed21c2" GUID="935cfe14-50bf-4a54-9ecc-6454e12bfb6f">
+			<Key>Acquired</Key>
+			<Value>AcquiredWizard+AcquiredKnight+AcquiredAlchemist</Value>
+			<Next meta:RefKey="Branch">77c9fd4f-4e3f-470e-873e-3bca51a61e48</Next>
+		</Define>
+		<Branch meta:X="4656.5505075442588" meta:Y="-202.02000446523203" meta:Comment="b58932ec-9b94-4de2-ac68-55594aed21c2" GUID="77c9fd4f-4e3f-470e-873e-3bca51a61e48">
+			<Branch>
+				<Condition>Acquired==1</Condition>
+				<Node meta:RefKey="CompleteQuest">e9e02d09-994e-4208-affc-887cc2c2c7ec</Node>
+			</Branch>
+			<Branch>
+				<Condition>Acquired==2</Condition>
+				<Node meta:RefKey="CompleteQuest">25cca469-3673-41f2-8cf2-963f57069769</Node>
+			</Branch>
+			<Branch>
+				<Condition>Acquired==3</Condition>
+				<Node meta:RefKey="CompleteQuest">f5c14f88-c343-4adb-871b-2e7e0bbbcc76</Node>
+			</Branch>
+		</Branch>
+		<CompleteQuest meta:X="4949.5505075442588" meta:Y="-202.02000446523203" meta:Comment="b58932ec-9b94-4de2-ac68-55594aed21c2" GUID="e9e02d09-994e-4208-affc-887cc2c2c7ec">
+			<State>Bronze</State>
+		</CompleteQuest>
+		<CompleteQuest meta:X="4951.99717544322" meta:Y="-109.0466243047004" meta:Comment="b58932ec-9b94-4de2-ac68-55594aed21c2" GUID="25cca469-3673-41f2-8cf2-963f57069769">
+			<State>Silver</State>
+		</CompleteQuest>
+		<CompleteQuest meta:X="4956.890511241143" meta:Y="-27.083249689494895" meta:Comment="b58932ec-9b94-4de2-ac68-55594aed21c2" GUID="f5c14f88-c343-4adb-871b-2e7e0bbbcc76" />
+		<QuestNode meta:X="2018.9455229364676" meta:Y="-243.48101982550185" meta:Comment="a07e5911-882c-472b-894f-8a44fe885130" GUID="8f028da9-cdc2-4805-b4f2-ff14e91b8347">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>false</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">f633ea3b-5cbc-45b5-9a6b-3c8db5e24df3</Success>
+			<Failure meta:RefKey="QuestNode">f633ea3b-5cbc-45b5-9a6b-3c8db5e24df3</Failure>
+		</QuestNode>
+		<QuestNode meta:X="2211.7987944208421" meta:Y="-239.52166923956435" meta:Comment="a07e5911-882c-472b-894f-8a44fe885130" GUID="f633ea3b-5cbc-45b5-9a6b-3c8db5e24df3">
+			<Type>Deck</Type>
+			<AllowDeckCards>false</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">b91d0303-a53d-486b-973c-92e92c3a407b</Success>
+			<Failure meta:RefKey="QuestNode">b91d0303-a53d-486b-973c-92e92c3a407b</Failure>
+		</QuestNode>
+		<QuestNode meta:X="2402.5373198114671" meta:Y="-242.1612566419081" meta:Comment="a07e5911-882c-472b-894f-8a44fe885130" GUID="b91d0303-a53d-486b-973c-92e92c3a407b">
+			<Type>Deck</Type>
+			<IsShop>true</IsShop>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">8b740ed0-67d0-4450-8175-09673f073334</Success>
+			<Failure meta:RefKey="QuestNode">8b740ed0-67d0-4450-8175-09673f073334</Failure>
+		</QuestNode>
+		<QuestNode meta:X="2590.1115385614671" meta:Y="-236.8820818372206" meta:Comment="a07e5911-882c-472b-894f-8a44fe885130" GUID="8b740ed0-67d0-4450-8175-09673f073334">
+			<Type>Fixed</Type>
+			<FixedEvent></FixedEvent>
+			<Success meta:RefKey="QuestNode">fb7194a5-b451-476c-a4d5-594c1f73403b</Success>
+			<Failure meta:RefKey="CompleteQuest">ee6843b9-0388-4e5f-8148-548eee538c56</Failure>
+		</QuestNode>
+		<QuestNode meta:X="2906.6105619989671" meta:Y="-241.8516863294081" meta:Comment="a07e5911-882c-472b-894f-8a44fe885130" GUID="fb7194a5-b451-476c-a4d5-594c1f73403b">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">88d51454-2cd0-432f-b5d8-d6aac73f7279</Success>
+			<Failure meta:RefKey="QuestNode">88d51454-2cd0-432f-b5d8-d6aac73f7279</Failure>
+		</QuestNode>
+		<QuestNode meta:X="3097.8832670770921" meta:Y="-214.1524065442519" meta:Comment="a07e5911-882c-472b-894f-8a44fe885130" GUID="88d51454-2cd0-432f-b5d8-d6aac73f7279">
+			<Type>Fixed</Type>
+			<FixedEvent></FixedEvent>
+			<Success meta:RefKey="QuestNode">d23549f8-8f3b-4123-be32-b0a589001824</Success>
+			<Failure meta:RefKey="CompleteQuest">fa079a20-d82f-450d-8134-cb8e9ef781c9</Failure>
+		</QuestNode>
+		<CompleteQuest meta:X="2773.7243315302171" meta:Y="-91.922487110658139" meta:Comment="a07e5911-882c-472b-894f-8a44fe885130" GUID="ee6843b9-0388-4e5f-8148-548eee538c56">
+			<State>Failure</State>
+		</CompleteQuest>
+		<QuestNode meta:X="3414.6105619989671" meta:Y="-235.3342302747206" meta:Comment="a07e5911-882c-472b-894f-8a44fe885130" GUID="d23549f8-8f3b-4123-be32-b0a589001824">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">ccf898cf-2a38-497c-aa8f-14c23d5a94f7</Success>
+			<Failure meta:RefKey="QuestNode">ccf898cf-2a38-497c-aa8f-14c23d5a94f7</Failure>
+		</QuestNode>
+		<QuestNode meta:X="3617.2887846552171" meta:Y="-238.59295830206435" meta:Comment="a07e5911-882c-472b-894f-8a44fe885130" GUID="ccf898cf-2a38-497c-aa8f-14c23d5a94f7">
+			<Type>Deck</Type>
+			<IsShop>true</IsShop>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">d26d74b0-33b7-4a87-bc19-d714e3f16a1b</Success>
+			<Failure meta:RefKey="QuestNode">d26d74b0-33b7-4a87-bc19-d714e3f16a1b</Failure>
+		</QuestNode>
+		<QuestNode meta:X="3813.4499174677171" meta:Y="-238.59295830206435" meta:Comment="a07e5911-882c-472b-894f-8a44fe885130" GUID="d26d74b0-33b7-4a87-bc19-d714e3f16a1b">
+			<Type>Fixed</Type>
+			<FixedEvent></FixedEvent>
+			<Success meta:RefKey="Define">41f213d2-5bc5-4028-9c5e-ddf024828a7f</Success>
+			<Failure meta:RefKey="CompleteQuest">d8de7ed3-312d-4c1c-b98a-c33d28f67f1c</Failure>
+		</QuestNode>
+		<CompleteQuest meta:X="3290.0905424677171" meta:Y="-57.658876270814389" meta:Comment="a07e5911-882c-472b-894f-8a44fe885130" GUID="fa079a20-d82f-450d-8134-cb8e9ef781c9">
+			<State>Failure</State>
+		</CompleteQuest>
+		<CompleteQuest meta:X="4013.4008452020921" meta:Y="-59.118593067689389" meta:Comment="a07e5911-882c-472b-894f-8a44fe885130" GUID="d8de7ed3-312d-4c1c-b98a-c33d28f67f1c">
+			<State>Failure</State>
+		</CompleteQuest>
+		<Define meta:X="4024.0265915183977" meta:Y="-228.01441300318595" meta:Comment="a07e5911-882c-472b-894f-8a44fe885130" GUID="41f213d2-5bc5-4028-9c5e-ddf024828a7f">
+			<Key>AcquiredKnight</Key>
+			<Value>1</Value>
+			<IsGlobal>true</IsGlobal>
+			<Next meta:RefKey="Define">935cfe14-50bf-4a54-9ecc-6454e12bfb6f</Next>
+		</Define>
+		<QuestNode meta:X="2023.6310008592811" meta:Y="107.983151680596" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="e2eab4e1-ecbe-47c5-a9ae-b921ddd42bc1">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>false</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">68b53e98-5256-424d-913c-e7bffdb9d861</Success>
+			<Failure meta:RefKey="QuestNode">68b53e98-5256-424d-913c-e7bffdb9d861</Failure>
+		</QuestNode>
+		<QuestNode meta:X="2216.4842723436559" meta:Y="111.9425022665335" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="68b53e98-5256-424d-913c-e7bffdb9d861">
+			<Type>Deck</Type>
+			<AllowDeckCards>false</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">2544341a-3066-4ffc-91af-ca0c6f9e72e3</Success>
+			<Failure meta:RefKey="QuestNode">2544341a-3066-4ffc-91af-ca0c6f9e72e3</Failure>
+		</QuestNode>
+		<QuestNode meta:X="2407.2227977342809" meta:Y="109.30291486418975" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="2544341a-3066-4ffc-91af-ca0c6f9e72e3">
+			<Type>Deck</Type>
+			<IsShop>true</IsShop>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">7eded3cd-14ea-4df8-a440-073628a4fd89</Success>
+			<Failure meta:RefKey="QuestNode">7eded3cd-14ea-4df8-a440-073628a4fd89</Failure>
+		</QuestNode>
+		<QuestNode meta:X="2594.7970164842809" meta:Y="114.58208966887725" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="7eded3cd-14ea-4df8-a440-073628a4fd89">
+			<Type>Fixed</Type>
+			<FixedEvent></FixedEvent>
+			<Success meta:RefKey="QuestNode">547761a5-a2be-4869-ae5d-da8a6f0a0a6f</Success>
+			<Failure meta:RefKey="CompleteQuest">06365a74-4ada-4687-b462-0cbd7ed06d4c</Failure>
+		</QuestNode>
+		<QuestNode meta:X="2911.2960399217809" meta:Y="109.61248517668975" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="547761a5-a2be-4869-ae5d-da8a6f0a0a6f">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">8341d906-a43a-40fb-9024-cc2a63a1a0aa</Success>
+			<Failure meta:RefKey="QuestNode">8341d906-a43a-40fb-9024-cc2a63a1a0aa</Failure>
+		</QuestNode>
+		<QuestNode meta:X="3102.5687449999059" meta:Y="137.311764961846" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="8341d906-a43a-40fb-9024-cc2a63a1a0aa">
+			<Type>Fixed</Type>
+			<FixedEvent></FixedEvent>
+			<Success meta:RefKey="QuestNode">8c158097-e7ba-4387-b1d1-4817696d7daf</Success>
+			<Failure meta:RefKey="CompleteQuest">5b7cba6f-341f-414e-af0b-fe929916b387</Failure>
+		</QuestNode>
+		<CompleteQuest meta:X="2778.4098094530309" meta:Y="259.54168439543974" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="06365a74-4ada-4687-b462-0cbd7ed06d4c">
+			<State>Failure</State>
+		</CompleteQuest>
+		<QuestNode meta:X="3419.2960399217809" meta:Y="116.12994123137725" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="8c158097-e7ba-4387-b1d1-4817696d7daf">
+			<Type>Deck</Type>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">458bf00d-ba08-4fd1-b8f5-cc92f5b43958</Success>
+			<Failure meta:RefKey="QuestNode">458bf00d-ba08-4fd1-b8f5-cc92f5b43958</Failure>
+		</QuestNode>
+		<QuestNode meta:X="3621.9742625780309" meta:Y="112.8712132040335" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="458bf00d-ba08-4fd1-b8f5-cc92f5b43958">
+			<Type>Deck</Type>
+			<IsShop>true</IsShop>
+			<AllowDeckCards>true</AllowDeckCards>
+			<AllowQuestCards>true</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
+			<Success meta:RefKey="QuestNode">e1e208b1-f829-4f14-8eb5-71b387b82a76</Success>
+			<Failure meta:RefKey="QuestNode">e1e208b1-f829-4f14-8eb5-71b387b82a76</Failure>
+		</QuestNode>
+		<QuestNode meta:X="3818.1353953905309" meta:Y="112.8712132040335" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="e1e208b1-f829-4f14-8eb5-71b387b82a76">
+			<Type>Fixed</Type>
+			<FixedEvent></FixedEvent>
+			<Success meta:RefKey="Define">15ffb8a5-2183-4c69-b74b-0bacba0db688</Success>
+			<Failure meta:RefKey="CompleteQuest">bf20c190-2fba-48fb-b038-4c1b96d0568d</Failure>
+		</QuestNode>
+		<CompleteQuest meta:X="3294.7760203905309" meta:Y="293.8052952352835" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="5b7cba6f-341f-414e-af0b-fe929916b387">
+			<State>Failure</State>
+		</CompleteQuest>
+		<CompleteQuest meta:X="4018.0863231249059" meta:Y="292.3455784384085" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="bf20c190-2fba-48fb-b038-4c1b96d0568d">
+			<State>Failure</State>
+		</CompleteQuest>
+		<Define meta:X="4033.8446239061554" meta:Y="120.88348127043976" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="15ffb8a5-2183-4c69-b74b-0bacba0db688">
+			<Key>AcquiredAlchemist</Key>
+			<Value>1</Value>
+			<IsGlobal>true</IsGlobal>
+			<Next meta:RefKey="Define">935cfe14-50bf-4a54-9ecc-6454e12bfb6f</Next>
+		</Define>
+	</Nodes>
 </Quest>

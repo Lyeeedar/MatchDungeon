@@ -1,10 +1,11 @@
 <Card meta:X="0" meta:Y="0" GUID="44839ecd-cfe6-4d08-9687-aaf5621e9c73" xmlns:meta="Editor">
 	<Root meta:RefKey="CardNode">7dab10a5-6329-4c16-94f4-ae70f18048cc</Root>
 	<Nodes>
-		<CardNode meta:X="204" meta:Y="0" GUID="7dab10a5-6329-4c16-94f4-ae70f18048cc">
-			<Name>Mugging</Name>
-			<Description>A group of thieves accosted you in the street before you embarked.</Description>
-			<SpawnWeighting>StartMiddle</SpawnWeighting>
+		<CardNode meta:X="205" meta:Y="0" GUID="7dab10a5-6329-4c16-94f4-ae70f18048cc">
+			<Name>Alleyways</Name>
+			<Description>The alleyways of the city offer many opportunities, for those willing to explore them.</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<HiddenRewards>true</HiddenRewards>
 			<Content>MuggingContent</Content>
 		</CardNode>
 	</Nodes>

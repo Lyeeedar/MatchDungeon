@@ -17,13 +17,14 @@ import com.lyeeedar.Direction
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Colour
 import com.lyeeedar.Util.min
 import ktx.actors.alpha
 import ktx.actors.then
 
 data class Pick(val string: String, var pickFun: (card: CardWidget) -> Unit)
 
-class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backImage: TextureRegion, var data: Any?) : WidgetGroup()
+class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backImage: TextureRegion, var data: Any?, val colour: Colour = Colour.WHITE) : WidgetGroup()
 {
 	val referenceWidth = Global.resolution.x - 100f
 	val referenceHeight = Global.resolution.y - 200f
@@ -48,7 +49,7 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 	init
 	{
 		addActor(contentTable)
-		contentTable.background = NinePatchDrawable(back)
+		contentTable.background = NinePatchDrawable(back).tint(colour.color())
 
 		backTable = Table()
 		backTable.add(SpriteWidget(Sprite(backImage), referenceWidth - 60, referenceWidth - 60)).expand().center()
@@ -260,7 +261,7 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 		zoomTable.isTransform = true
 		zoomTable.originX = referenceWidth / 2
 		zoomTable.originY = referenceHeight / 2
-		zoomTable.background = NinePatchDrawable(back)
+		zoomTable.background = NinePatchDrawable(back).tint(colour.color())
 		zoomTable.setPosition(contentTable.x, contentTable.y)
 		zoomTable.setSize(referenceWidth, referenceHeight)
 		zoomTable.setScale(contentTable.scaleX, contentTable.scaleY)
@@ -420,49 +421,53 @@ class CardWidget(val frontTable: Table, val frontDetailTable: Table, val backIma
 				cardWidgets[3].setPosition(padding * 2f + cardWidth + areapos.x, padding * 2f + cardHeight + areapos.y)
 			}
 
-			// calculate start position
-			val startX: Float = when (enterFrom)
+			for (widget in cardWidgets)
 			{
-				Direction.CENTER -> areaWidth / 2f - cardWidth / 2f
-				Direction.NORTH -> areaWidth / 2f - cardWidth / 2f
-				Direction.SOUTH -> areaWidth / 2f - cardWidth / 2f
-
-				Direction.EAST -> areaWidth
-				Direction.NORTHEAST -> areaWidth
-				Direction.SOUTHEAST -> areaWidth
-
-				Direction.WEST -> -cardWidth
-				Direction.NORTHWEST -> -cardWidth
-				Direction.SOUTHWEST -> -cardWidth
-			}
-
-			val startY: Float = when (enterFrom)
-			{
-				Direction.CENTER -> areaHeight / 2f - cardHeight / 2f
-				Direction.EAST -> areaHeight / 2f - cardHeight / 2f
-				Direction.WEST -> areaHeight / 2f - cardHeight / 2f
-
-				Direction.NORTH -> areaHeight
-				Direction.NORTHWEST -> areaHeight
-				Direction.NORTHEAST -> areaHeight
-
-				Direction.SOUTH -> -cardHeight
-				Direction.SOUTHWEST -> -cardHeight
-				Direction.SOUTHEAST -> -cardHeight
+				widget.setSize(cardWidth, cardHeight)
 			}
 
 			// do animation
-			var delay = 0.2f
-			for (widget in cardWidgets)
+			if (animate)
 			{
-				val x = widget.x
-				val y = widget.y
-
-				widget.setSize(cardWidth, cardHeight)
-				widget.setPosition(startX + areapos.x, startY + areapos.y)
-
-				if (animate)
+				// calculate start position
+				val startX: Float = when (enterFrom)
 				{
+					Direction.CENTER -> areaWidth / 2f - cardWidth / 2f
+					Direction.NORTH -> areaWidth / 2f - cardWidth / 2f
+					Direction.SOUTH -> areaWidth / 2f - cardWidth / 2f
+
+					Direction.EAST -> areaWidth
+					Direction.NORTHEAST -> areaWidth
+					Direction.SOUTHEAST -> areaWidth
+
+					Direction.WEST -> -cardWidth
+					Direction.NORTHWEST -> -cardWidth
+					Direction.SOUTHWEST -> -cardWidth
+				}
+
+				val startY: Float = when (enterFrom)
+				{
+					Direction.CENTER -> areaHeight / 2f - cardHeight / 2f
+					Direction.EAST -> areaHeight / 2f - cardHeight / 2f
+					Direction.WEST -> areaHeight / 2f - cardHeight / 2f
+
+					Direction.NORTH -> areaHeight
+					Direction.NORTHWEST -> areaHeight
+					Direction.NORTHEAST -> areaHeight
+
+					Direction.SOUTH -> -cardHeight
+					Direction.SOUTHWEST -> -cardHeight
+					Direction.SOUTHEAST -> -cardHeight
+				}
+
+				var delay = 0.2f
+				for (widget in cardWidgets)
+				{
+					val x = widget.x
+					val y = widget.y
+
+					widget.setPosition(startX + areapos.x, startY + areapos.y)
+
 					widget.clickable = false
 
 					val delayVal = delay

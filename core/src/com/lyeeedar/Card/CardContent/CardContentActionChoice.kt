@@ -11,6 +11,7 @@ import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.UI.addClickListener
 import com.lyeeedar.UI.lambda
 import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.expandVariables
 import ktx.actors.then
 
 class CardContentActionChoice : AbstractCardContentAction()
@@ -32,7 +33,7 @@ class CardContentActionChoice : AbstractCardContentAction()
 		{
 			if (choice.condition.evaluate(Global.getVariableMap()).toInt() != 0)
 			{
-				val response = TextButton(choice.text, skin, "responseButton")
+				val response = TextButton(choice.text.expandVariables(), skin, "responseButton")
 				response.label.setWrap(true)
 				responsesTable.add(response).growX().pad(5f, 0f, 5f, 0f).height(75f)
 				responsesTable.row()

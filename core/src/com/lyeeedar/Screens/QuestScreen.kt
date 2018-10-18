@@ -125,7 +125,7 @@ class QuestScreen : AbstractScreen()
 
 						val nodes = Array<CardNode>()
 						nodes.add(node)
-						card = Card("", nodes, node)
+						card = Card("", null, nodes, node)
 					}
 					else
 					{

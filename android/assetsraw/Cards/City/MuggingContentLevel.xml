@@ -86,7 +86,6 @@
 		</Rows>
 	</Grid>
 	<Faction>Thug</Faction>
-	<Theme>City</Theme>
 	<AllowedVictories>
 		<Condition meta:RefKey="Kill" />
 	</AllowedVictories>

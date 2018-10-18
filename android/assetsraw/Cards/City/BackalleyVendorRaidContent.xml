@@ -1,0 +1,52 @@
+<CardContent meta:X="0" meta:Y="0" GUID="66e443d0-9028-4749-875a-5f805717c774" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
+			<Line>
+				<MultilineString>As you wander down the alley you come across a stall set into the wall. The shady man behind it gestures you over, revealing a large collection of items.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Find something that interests you friend? I've got great prices for those who don't ask too many questions about where the items came from."</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Just as you start browsing the items the clanking of boots of the ground sounds from the entrance to the alley.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Its the fuzz! Run!"</MultilineString>
+			</Line>
+			<Match3>
+				<Level>BackalleyVendorRaidContentLevel</Level>
+				<Success meta:RefKey="Node">8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f</Success>
+				<Failure meta:RefKey="Node">91e41773-f187-46c6-906d-f87d59996682</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
+			<Line>
+				<MultilineString>You stumble and the guards catch you. Saveral hours of questioning later they release you, but not before confiscating most of your money as 'evidence'.</MultilineString>
+			</Line>
+			<Spend>
+				<Key>Money</Key>
+				<Count>Money/2</Count>
+			</Spend>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
+			<Line>
+				<MultilineString>You manage to outrun the guards.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Statistics>
+					<Statistics meta:RefKey="Statistics">
+						<Health>1</Health>
+						<Luck>0.1</Luck>
+					</Statistics>
+				</Statistics>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

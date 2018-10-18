@@ -1,0 +1,103 @@
+<CardContent meta:X="0" meta:Y="0" GUID="66e443d0-9028-4749-875a-5f805717c774" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
+			<Line>
+				<MultilineString>As you wander down the alley you come across a stall set into the wall. A lady dressed in gaudy clothing stands behind it gesturing to a small group of onlookers.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Come on up and try your luck! Do the gods smile on you? Is lady luck your friend? It's a mere 100 gold to try it, and you can win 300!"</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Who is brave enough to try? How about you stranger?"</MultilineString>
+			</Line>
+			<Choice>
+				<Choices>
+					<Choice>
+						<Text>I'll give it a try (100)</Text>
+						<Condition>Money&gt;=100</Condition>
+						<Node meta:RefKey="Node">3e7778cf-c873-4c77-99d4-4171d3a2c784</Node>
+					</Choice>
+					<Choice>
+						<Text>I'm sorry I don't have 100gold</Text>
+						<Condition>Money&lt;100</Condition>
+						<Node meta:RefKey="Node">e5ff6f20-f0e8-4829-951a-995a678e840f</Node>
+					</Choice>
+					<Choice>
+						<Text>No thank you</Text>
+						<Node meta:RefKey="Node">e5ff6f20-f0e8-4829-951a-995a678e840f</Node>
+					</Choice>
+				</Choices>
+			</Choice>
+		</Node>
+		<Node meta:X="890" meta:Y="170" GUID="91e41773-f187-46c6-906d-f87d59996682">
+			<Line>
+				<MultilineString>It's a blank paper.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Ahh such a shame, better luck next time!"</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="889" meta:Y="-22" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
+			<Line>
+				<MultilineString>It's a piece of paper with 'Luck' written on it!</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"We have a winner! Congratulations friend!"</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>300</Count>
+				</Money>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="601" meta:Y="314" GUID="e5ff6f20-f0e8-4829-951a-995a678e840f">
+			<Line>
+				<MultilineString>"Someone else then, how about you."</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>The crowd ignore you.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="605" meta:Y="-38.090908050537109" GUID="3e7778cf-c873-4c77-99d4-4171d3a2c784">
+			<Spend>
+				<Key>Money</Key>
+				<Count>100</Count>
+			</Spend>
+			<Line>
+				<MultilineString>"Step right up then, and draw from this box."</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You step up and reach into the box. Various papers brush your fingers and you pick out one at random...</MultilineString>
+			</Line>
+			<ChanceCards>
+				<ChanceCards>
+					<Chance>GreatPositive</Chance>
+					<Chance>Negative</Chance>
+					<Chance>Negative</Chance>
+					<Chance>Negative</Chance>
+				</ChanceCards>
+				<ShuffleSpeedMultiplier>1</ShuffleSpeedMultiplier>
+				<Nodes>
+					<Branch>
+						<Chance>GreatPositive</Chance>
+						<Node meta:RefKey="Node">8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f</Node>
+					</Branch>
+					<Branch>
+						<Chance>Negative</Chance>
+						<Node meta:RefKey="Node">91e41773-f187-46c6-906d-f87d59996682</Node>
+					</Branch>
+				</Nodes>
+			</ChanceCards>
+		</Node>
+	</Nodes>
+</CardContent>

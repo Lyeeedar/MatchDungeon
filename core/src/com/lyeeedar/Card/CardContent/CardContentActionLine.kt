@@ -3,6 +3,7 @@ package com.lyeeedar.Card.CardContent
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.expandVariables
 
 class CardContentActionLine : AbstractCardContentAction()
 {
@@ -15,8 +16,10 @@ class CardContentActionLine : AbstractCardContentAction()
 
 	override fun advance(CardContent: CardContent, CardContentScreen: CardScreen): Boolean
 	{
+		val expanded = text.expandVariables()
+
 		val scrollingTextLabel = CardContentScreen.text
-		if (scrollingTextLabel.text.toString() == text)
+		if (scrollingTextLabel.text.toString() == expanded)
 		{
 			if (scrollingTextLabel.isComplete)
 			{
@@ -29,9 +32,9 @@ class CardContentActionLine : AbstractCardContentAction()
 			}
 		}
 
-		if (scrollingTextLabel.text.toString() != text)
+		if (scrollingTextLabel.text.toString() != expanded)
 		{
-			scrollingTextLabel.setText(text)
+			scrollingTextLabel.setText(expanded)
 		}
 
 		return false

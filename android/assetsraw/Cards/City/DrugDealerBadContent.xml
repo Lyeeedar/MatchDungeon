@@ -1,0 +1,108 @@
+<CardContent meta:X="0" meta:Y="0" GUID="66e443d0-9028-4749-875a-5f805717c774" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
+			<Line>
+				<MultilineString>You wander down the alley. A man steps out of the dark and gestures to you.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Oy mate, wanna by somefin to get your mind extra speedy? Just fifty gold."</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"How about 25?" You respond.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>DrugDealerBadContentLevel</Level>
+				<Success meta:RefKey="Node">8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f</Success>
+				<Failure meta:RefKey="Node">91e41773-f187-46c6-906d-f87d59996682</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="441" meta:Y="212" GUID="91e41773-f187-46c6-906d-f87d59996682">
+			<Line>
+				<MultilineString>"Nah mate I don't do discounts. It'll be 50."</MultilineString>
+			</Line>
+			<Define>
+				<Key>Cost</Key>
+				<Value>50</Value>
+				<Storage>Card</Storage>
+			</Define>
+			<Node meta:RefKey="Node">f6c0d1f2-f8a5-4ccd-a5e0-fef01bbcbfc8</Node>
+		</Node>
+		<Node meta:X="447" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
+			<Line>
+				<MultilineString>"Sure mate, I can see you're a nice fella. 25, just for ya."</MultilineString>
+			</Line>
+			<Define>
+				<Key>Cost</Key>
+				<Value>25</Value>
+				<Storage>Card</Storage>
+			</Define>
+			<Node meta:RefKey="Node">f6c0d1f2-f8a5-4ccd-a5e0-fef01bbcbfc8</Node>
+		</Node>
+		<Node meta:X="837" meta:Y="120" GUID="f6c0d1f2-f8a5-4ccd-a5e0-fef01bbcbfc8">
+			<Line>
+				<MultilineString>Would you like to buy it?</MultilineString>
+			</Line>
+			<Choice>
+				<Choices>
+					<Choice>
+						<Text>Buy it ({Cost})</Text>
+						<Condition>Money &gt;= Cost</Condition>
+						<Node meta:RefKey="Node">a5d31a69-eb0c-483b-b387-3d51532f1616</Node>
+					</Choice>
+					<Choice>
+						<Text>Don't buy it</Text>
+						<Condition>Money &gt;= Cost</Condition>
+						<Node meta:RefKey="Node">90570280-6d8c-44e6-b4f2-9c3debdf7146</Node>
+					</Choice>
+					<Choice>
+						<Text>I can't afford that.</Text>
+						<Condition>Money &lt; Cost</Condition>
+						<Node meta:RefKey="Node">90570280-6d8c-44e6-b4f2-9c3debdf7146</Node>
+					</Choice>
+				</Choices>
+			</Choice>
+		</Node>
+		<Node meta:X="1169" meta:Y="327" GUID="90570280-6d8c-44e6-b4f2-9c3debdf7146">
+			<Line>
+				<MultilineString>"Piss off then mate."</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="1179" meta:Y="120" GUID="a5d31a69-eb0c-483b-b387-3d51532f1616">
+			<Line>
+				<MultilineString>"Here you go. Enjoy!"</MultilineString>
+			</Line>
+			<Spend>
+				<Key>Money</Key>
+				<Count>Cost</Count>
+			</Spend>
+			<Line>
+				<MultilineString>As you take the drug you start to feel really angry.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Buff>
+					<Buff meta:RefKey="Buff">
+						<Name>Frenzy</Name>
+						<Icon meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_items/skull_large_closed</Name>
+							<Colour>255,13,13,255</Colour>
+						</Icon>
+						<Statistics meta:RefKey="Statistics">
+							<Health>-1</Health>
+							<MatchDamage>1</MatchDamage>
+							<Berserk>3</Berserk>
+							<Haste>-0.1</Haste>
+						</Statistics>
+						<Duration>6</Duration>
+					</Buff>
+				</Buff>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

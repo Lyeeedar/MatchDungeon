@@ -90,6 +90,18 @@
 				</Data>
 			</Data>
 		</Data>
+		<Data Name="ChanceCards" TextColour="29,201,224" meta:RefKey="Struct">
+			<Data Name="ChanceCards" MinCount="4" MaxCount="4" SkipIfDefault="False" meta:RefKey="Collection">
+				<Data Name="Chance" EnumValues="GreatPositive,Positive,Negative,GreatNegative" Default="Positive" SkipIfDefault="False" meta:RefKey="Enum" />
+			</Data>
+			<Data Name="ShuffleSpeedMultiplier" Min="0" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+			<Data Name="Nodes" meta:RefKey="Collection">
+				<Data Name="Branch" Description="{Chance}" meta:RefKey="Struct">
+					<Data Name="Chance" EnumValues="GreatPositive,Positive,Negative,GreatNegative" Default="Positive" SkipIfDefault="False" meta:RefKey="Enum" />
+					<Data Name="Node" Keys="Node" UseParentDescription="True" meta:RefKey="GraphReference" />
+				</Data>
+			</Data>
+		</Data>
 	</Definition>
 	<Definition Name="OnPurchaseDefine" meta:RefKey="StructDef">
 		<Data Name="Key" meta:RefKey="String" />

@@ -474,7 +474,7 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 		if (type == QuestNodeType.FIXED)
 		{
 			val card = Card.load(("Quests/" + quest.path).directory() + "/" + fixedEventString)
-			card.current.hasBeenPlayed = true
+			card.current.isQuestCard = true
 			output.add(card)
 		}
 		else
@@ -511,7 +511,7 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 			{
 				for (card in quest.questCards)
 				{
-					card.current.hasBeenPlayed = true
+					card.current.isQuestCard = true
 
 					val pool = if (card.current.isShop) shops else pool
 
@@ -533,7 +533,7 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 			{
 				for (card in quest.themeCards)
 				{
-					card.current.hasBeenPlayed = true
+					card.current.isQuestCard = true
 
 					val pool = if (card.current.isShop) shops else pool
 

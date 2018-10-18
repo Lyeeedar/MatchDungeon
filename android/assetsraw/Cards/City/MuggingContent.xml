@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="861e95be-cca7-433e-b9ab-ab59fc2fbad9">
 			<Line>
-				<MultilineString>As you are wandering through the city you suddenly find yourself surrounded by thieves.</MultilineString>
+				<MultilineString>You wander down the alleyway. Suddenly a noise sounds behind you, you spin around only to find yourself surrounded by mean looking men.</MultilineString>
 			</Line>
 			<Line>
 				<MultilineString>"Hand us yer money, or I'll stick a 'ole in ya."</MultilineString>

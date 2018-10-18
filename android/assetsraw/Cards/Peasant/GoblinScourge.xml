@@ -1,4 +1,5 @@
-<Card meta:X="0" meta:Y="0" GUID="a2361de1-fa39-4522-baa1-07b6765f22b4" xmlns:meta="Editor">
+<Card meta:X="-81" meta:Y="-8" GUID="a2361de1-fa39-4522-baa1-07b6765f22b4" xmlns:meta="Editor">
+	<CharacterRestriction>Peasant</CharacterRestriction>
 	<Root meta:RefKey="CardNode">b5b4cf07-d46e-4574-95e2-58cf7c7a0b9e</Root>
 	<Nodes>
 		<CardNode meta:X="179.31297302246094" meta:Y="-5.0805263519287109" GUID="b5b4cf07-d46e-4574-95e2-58cf7c7a0b9e">
@@ -29,7 +30,7 @@
 			<Content>TrackingContent</Content>
 			<Next meta:RefKey="CardNode">6e34ff8e-e6c5-4665-8259-d1633e65f661</Next>
 		</CardNode>
-		<CardNode meta:X="1434" meta:Y="-3.6666666666666856" GUID="6e34ff8e-e6c5-4665-8259-d1633e65f661">
+		<CardNode meta:X="1434" meta:Y="-3.6666667461395264" GUID="6e34ff8e-e6c5-4665-8259-d1633e65f661">
 			<Name>Goblin Scourge 5:Payback</Name>
 			<Description>You see the goblins have erected a small town of tents in the cavern. It would be a shame if someone destroyed it all.</Description>
 			<SpawnWeighting>Any</SpawnWeighting>

@@ -1,14 +1,21 @@
 package com.lyeeedar.Screens
 
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.*
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
+import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
+import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Card.Card
+import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.Equipment
 import com.lyeeedar.Global
 import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.UI.Seperator
 import com.lyeeedar.UI.addClickListener
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.FastEnumMap
+import com.lyeeedar.Util.neaten
 
 class DeckScreen : AbstractScreen()
 {
@@ -28,11 +35,43 @@ class DeckScreen : AbstractScreen()
 		createMainScreen()
 	}
 
+	val encounterDeckSize = 30
+	val equipmentDeckSize = 20
+
+	fun isDeckInvalid(): Boolean = containsRestrictedCard() || containsTooManyEncounters() || containsTooFewEncounters() || containsTooManyEquipment() || containsTooFewEquipment()
+
+	fun containsTooManyEncounters() = Global.deck.playerDeck.encounters.size > encounterDeckSize
+	fun containsTooFewEncounters() = Global.deck.playerDeck.encounters.size < encounterDeckSize
+
+	fun containsTooManyEquipment() = Global.deck.playerDeck.equipment.size > equipmentDeckSize
+	fun containsTooFewEquipment() = Global.deck.playerDeck.equipment.size < equipmentDeckSize
+
+	fun containsRestrictedCard(): Boolean = restrictedCards().size > 0
+
+	fun restrictedCards(): com.badlogic.gdx.utils.Array<Card>
+	{
+		val output = com.badlogic.gdx.utils.Array<Card>()
+		for (card in Global.deck.playerDeck.encounters)
+		{
+			if (card.characterRestriction != null)
+			{
+				if (Global.deck.chosenCharacter.name != card.characterRestriction)
+				{
+					output.add(card)
+				}
+			}
+		}
+
+		return output
+	}
+
 	fun createMainScreen()
 	{
 		mainTable.clear()
 
-		mainTable.add(Label("Character", Global.skin, "title")).expandX().center()
+		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion("Oryx/uf_split/uf_terrain/floor_wood_1"))).tint(Color.DARK_GRAY)
+
+		mainTable.add(Label("Character", Global.skin, "title")).expandX().center().padTop(20f)
 		mainTable.row()
 		mainTable.add(Seperator(Global.skin)).growX()
 		mainTable.row()
@@ -62,7 +101,13 @@ class DeckScreen : AbstractScreen()
 			charStack.add(newTable)
 		}
 
-		mainTable.add(charStack).growX().center().height(cardHeight)
+		val charTable = Table()
+		charTable.add(charStack).grow().width(Value.percentWidth(0.5f, charTable))
+		val charDetails = Table()
+		charTable.add(charDetails).grow().width(Value.percentWidth(0.5f, charTable))
+
+		mainTable.add(charTable).growX().center().height(cardHeight)
+
 		mainTable.row()
 
 		mainTable.add(Label("Encounters", Global.skin, "title")).expandX().center()
@@ -90,7 +135,45 @@ class DeckScreen : AbstractScreen()
 			cardStack.add(newTable)
 		}
 
-		mainTable.add(cardStack).growX().center().height(cardHeight)
+		val encountersTable = Table()
+		encountersTable.add(cardStack).grow().width(Value.percentWidth(0.5f, encountersTable))
+		val encountersDetails = Table()
+		encountersTable.add(encountersDetails).grow().width(Value.percentWidth(0.5f, encountersTable))
+
+		encountersDetails.add(Label(Global.deck.playerDeck.encounters.size.toString() + " / $encounterDeckSize", Global.skin))
+		encountersDetails.row()
+
+		for (card in restrictedCards())
+		{
+			val label = Label("Deck contains card '" + card.current.name + "' which is restricted to the character '" + card.characterRestriction + "'!", Global.skin)
+			label.setWrap(true)
+			label.color = Color.RED
+
+			encountersDetails.add(label).growX()
+			encountersDetails.row()
+		}
+
+		if (containsTooManyEncounters())
+		{
+			val label = Label("Deck contains too many encounters.", Global.skin)
+			label.setWrap(true)
+			label.color = Color.RED
+
+			encountersDetails.add(label).growX()
+			encountersDetails.row()
+		}
+
+		if (containsTooFewEncounters())
+		{
+			val label = Label("Deck contains too few encounters.", Global.skin)
+			label.setWrap(true)
+			label.color = Color.RED
+
+			encountersDetails.add(label).growX()
+			encountersDetails.row()
+		}
+
+		mainTable.add(encountersTable).growX().center().height(cardHeight)
 		mainTable.row()
 
 		mainTable.add(Label("Equipment", Global.skin, "title")).expandX().center()
@@ -118,17 +201,56 @@ class DeckScreen : AbstractScreen()
 			equipStack.add(newTable)
 		}
 
-		mainTable.add(equipStack).growX().center().height(cardHeight)
+		val equipTable = Table()
+		equipTable.add(equipStack).grow().width(Value.percentWidth(0.5f, equipTable))
+		val equipDetails = Table()
+		equipTable.add(equipDetails).grow().width(Value.percentWidth(0.5f, equipTable))
+
+		equipDetails.add(Label(Global.deck.playerDeck.equipment.size.toString() + " / $equipmentDeckSize", Global.skin))
+		equipDetails.row()
+
+		if (containsTooManyEquipment())
+		{
+			val label = Label("Deck contains too many.", Global.skin)
+			label.setWrap(true)
+			label.color = Color.RED
+
+			equipDetails.add(label).growX()
+			equipDetails.row()
+		}
+
+		if (containsTooFewEquipment())
+		{
+			val label = Label("Deck contains too few equipment.", Global.skin)
+			label.setWrap(true)
+			label.color = Color.RED
+
+			equipDetails.add(label).growX()
+			equipDetails.row()
+		}
+
+		mainTable.add(equipTable).growX().center().height(cardHeight)
 		mainTable.row()
 
-		val returnButton = TextButton("Return", Global.skin)
-		returnButton.addClickListener {
-			val screen = Global.game.getTypedScreen<QuestSelectionScreen>()!!
-			screen.setup()
-			screen.swapTo()
+		if (isDeckInvalid())
+		{
+			val returnButton = TextButton("Return", Global.skin)
+			returnButton.color = Color.DARK_GRAY
+			mainTable.add(returnButton).expandX().right().pad(10f).expandY().bottom()
+			mainTable.row()
 		}
-		mainTable.add(returnButton).expandX().right().pad(10f).expandY().bottom()
-		mainTable.row()
+		else
+		{
+			val returnButton = TextButton("Return", Global.skin)
+			returnButton.addClickListener {
+
+				val screen = Global.game.getTypedScreen<QuestSelectionScreen>()!!
+				screen.setup()
+				screen.swapTo()
+			}
+			mainTable.add(returnButton).expandX().right().pad(10f).expandY().bottom()
+			mainTable.row()
+		}
 	}
 
 	fun createCharacterScreen()
@@ -136,6 +258,8 @@ class DeckScreen : AbstractScreen()
 		Global.deck.hasNewCharacters = false
 
 		mainTable.clear()
+
+		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion("Oryx/uf_split/uf_terrain/floor_wood_1"))).tint(Color.DARK_GRAY)
 
 		val cardHeight = (Global.resolution.y.toFloat() * 0.7f) * 0.3f
 		val cardWidth = Global.resolution.x.toFloat() * 0.8f
@@ -192,11 +316,31 @@ class DeckScreen : AbstractScreen()
 
 		mainTable.clear()
 
+		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion("Oryx/uf_split/uf_terrain/floor_wood_1"))).tint(Color.DARK_GRAY)
+
 		val cardHeight = (Global.resolution.y.toFloat() * 0.7f) * 0.3f
 		val cardWidth = Global.resolution.x.toFloat() * 0.3f
 
 		val title = Label("Encounter Selection", Global.skin, "title")
 		mainTable.add(title).expandX().center().pad(20f)
+		mainTable.row()
+
+		mainTable.add(Seperator(Global.skin)).growX().pad(2f)
+		mainTable.row()
+
+		mainTable.add(Label(Global.deck.playerDeck.encounters.size.toString() + " / $encounterDeckSize", Global.skin))
+		mainTable.row()
+
+		for (card in restrictedCards())
+		{
+			val label = Label("Deck contains card '" + card.current.name + "' which is restricted to the character '" + card.characterRestriction + "'!", Global.skin)
+			label.color = Color.RED
+
+			mainTable.add(label)
+			mainTable.row()
+		}
+
+		mainTable.add(Seperator(Global.skin)).growX().pad(2f)
 		mainTable.row()
 
 		val bodyTable = Table()
@@ -212,19 +356,58 @@ class DeckScreen : AbstractScreen()
 		bodyTable.add(leftScrollPane).grow().uniform()
 
 		val used = ObjectSet<Card>()
+		val deckShops = Array<CardWidget>()
+		val deckEncounters = Array<CardWidget>()
+
 		for (enc in Global.deck.playerDeck.encounters)
 		{
 			val card = enc.current.getCard()
+			if (enc.characterRestriction != null && Global.deck.chosenCharacter.name != enc.characterRestriction)
+			{
+				card.color = Color.RED
+			}
+
 			card.setSize(cardWidth, cardHeight)
 			card.addPick("Remove", {
 				Global.deck.playerDeck.encounters.removeValue(enc, true)
 				createEncounterScreen()
 			})
 			card.setFacing(true, false)
-			leftScrollTable.add(card).width(cardWidth).height(cardHeight).expandX().center().pad(5f)
-			leftScrollTable.row()
+
+			if (enc.current.isShop)
+			{
+				deckShops.add(card)
+			}
+			else
+			{
+				deckEncounters.add(card)
+			}
 
 			used.add(enc)
+		}
+
+		if (deckShops.size > 0)
+		{
+			leftScrollTable.add(Label("Shops", Global.skin, "title"))
+			leftScrollTable.row()
+
+			for (card in deckShops)
+			{
+				leftScrollTable.add(card).width(cardWidth).height(cardHeight).expandX().center().pad(5f)
+				leftScrollTable.row()
+			}
+		}
+
+		if (deckEncounters.size > 0)
+		{
+			leftScrollTable.add(Label("Encounters", Global.skin, "title"))
+			leftScrollTable.row()
+
+			for (card in deckEncounters)
+			{
+				leftScrollTable.add(card).width(cardWidth).height(cardHeight).expandX().center().pad(5f)
+				leftScrollTable.row()
+			}
 		}
 
 		bodyTable.add(Seperator(Global.skin, true)).growY()
@@ -237,17 +420,56 @@ class DeckScreen : AbstractScreen()
 		rightScrollPane.setScrollingDisabled(true, false)
 		bodyTable.add(rightScrollPane).grow().uniform()
 
+		val unusedShops = Array<CardWidget>()
+		val unusedEncounters = Array<CardWidget>()
+
 		for (enc in Global.deck.encounters)
 		{
 			if (!used.contains(enc))
 			{
 				val card = enc.current.getCard()
+				if (enc.characterRestriction != null && Global.deck.chosenCharacter.name != enc.characterRestriction)
+				{
+					card.color = Color.RED
+				}
+
 				card.setSize(cardWidth, cardHeight)
 				card.addPick("Add", {
 					Global.deck.playerDeck.encounters.add(enc)
 					createEncounterScreen()
 				})
 				card.setFacing(true, false)
+
+				if (enc.current.isShop)
+				{
+					unusedShops.add(card)
+				}
+				else
+				{
+					unusedEncounters.add(card)
+				}
+			}
+		}
+
+		if (unusedShops.size > 0)
+		{
+			rightScrollTable.add(Label("Shops", Global.skin, "title"))
+			rightScrollTable.row()
+
+			for (card in unusedShops)
+			{
+				rightScrollTable.add(card).width(cardWidth).height(cardHeight).expandX().center().pad(5f)
+				rightScrollTable.row()
+			}
+		}
+
+		if (unusedEncounters.size > 0)
+		{
+			rightScrollTable.add(Label("Encounters", Global.skin, "title"))
+			rightScrollTable.row()
+
+			for (card in unusedEncounters)
+			{
 				rightScrollTable.add(card).width(cardWidth).height(cardHeight).expandX().center().pad(5f)
 				rightScrollTable.row()
 			}
@@ -267,11 +489,22 @@ class DeckScreen : AbstractScreen()
 
 		mainTable.clear()
 
+		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion("Oryx/uf_split/uf_terrain/floor_wood_1"))).tint(Color.DARK_GRAY)
+
 		val cardHeight = (Global.resolution.y.toFloat() * 0.7f) * 0.3f
 		val cardWidth = Global.resolution.x.toFloat() * 0.3f
 
 		val title = Label("Equipment Selection", Global.skin, "title")
 		mainTable.add(title).expandX().center().pad(20f)
+		mainTable.row()
+
+		mainTable.add(Seperator(Global.skin)).growX().pad(2f)
+		mainTable.row()
+
+		mainTable.add(Label(Global.deck.playerDeck.equipment.size.toString() + " / $equipmentDeckSize", Global.skin))
+		mainTable.row()
+
+		mainTable.add(Seperator(Global.skin)).growX().pad(2f)
 		mainTable.row()
 
 		val bodyTable = Table()
@@ -287,6 +520,8 @@ class DeckScreen : AbstractScreen()
 		leftScrollPane.setScrollingDisabled(true, false)
 		bodyTable.add(leftScrollPane).grow().uniform()
 
+		val groupedDeckEquipment = FastEnumMap<EquipmentSlot, Array<CardWidget>>(EquipmentSlot::class.java)
+
 		val used = ObjectSet<Equipment>()
 		for (equip in Global.deck.playerDeck.equipment)
 		{
@@ -297,10 +532,32 @@ class DeckScreen : AbstractScreen()
 				createEquipmentScreen()
 			})
 			card.setFacing(true, false)
-			leftScrollTable.add(card).width(cardWidth).height(cardHeight).expandX().center().pad(5f)
-			leftScrollTable.row()
+
+			var array = groupedDeckEquipment[equip.slot]
+			if (array == null)
+			{
+				array = Array()
+				groupedDeckEquipment[equip.slot] = array
+			}
+			array.add(card)
 
 			used.add(equip)
+		}
+
+		for (slot in EquipmentSlot.Values)
+		{
+			val array = groupedDeckEquipment[slot]
+			if (array != null)
+			{
+				leftScrollTable.add(Label(slot.toString().neaten(), Global.skin, "title"))
+				leftScrollTable.row()
+
+				for (card in array)
+				{
+					leftScrollTable.add(card).width(cardWidth).height(cardHeight).expandX().center().pad(5f)
+					leftScrollTable.row()
+				}
+			}
 		}
 
 		bodyTable.add(Seperator(Global.skin, true)).growY()
@@ -313,6 +570,8 @@ class DeckScreen : AbstractScreen()
 		rightScrollPane.setScrollingDisabled(true, false)
 		bodyTable.add(rightScrollPane).grow().uniform()
 
+		val groupedUnusedEquipment = FastEnumMap<EquipmentSlot, Array<CardWidget>>(EquipmentSlot::class.java)
+
 		for (equip in Global.deck.equipment)
 		{
 			if (!used.contains(equip))
@@ -324,8 +583,30 @@ class DeckScreen : AbstractScreen()
 					createEquipmentScreen()
 				})
 				card.setFacing(true, false)
-				rightScrollTable.add(card).width(cardWidth).height(cardHeight).expandX().center().pad(5f)
+
+				var array = groupedUnusedEquipment[equip.slot]
+				if (array == null)
+				{
+					array = Array()
+					groupedUnusedEquipment[equip.slot] = array
+				}
+				array.add(card)
+			}
+		}
+
+		for (slot in EquipmentSlot.Values)
+		{
+			val array = groupedUnusedEquipment[slot]
+			if (array != null)
+			{
+				rightScrollTable.add(Label(slot.toString().neaten(), Global.skin, "title"))
 				rightScrollTable.row()
+
+				for (card in array)
+				{
+					rightScrollTable.add(card).width(cardWidth).height(cardHeight).expandX().center().pad(5f)
+					rightScrollTable.row()
+				}
 			}
 		}
 

@@ -24,7 +24,7 @@ import com.lyeeedar.Util.*
 import ktx.collections.set
 import ktx.collections.toGdxArray
 
-class Card(val path: String, val nodes: Array<CardNode>, val root: CardNode)
+class Card(val path: String, val characterRestriction: String?, val nodes: Array<CardNode>, val root: CardNode)
 {
 	var current: CardNode = root
 
@@ -55,6 +55,8 @@ class Card(val path: String, val nodes: Array<CardNode>, val root: CardNode)
 
 			val nodeMap = ObjectMap<String, CardNode>()
 
+			val restriction = xml.get("CharacterRestriction", null)
+
 			val rootNode = xml.get("Root")
 			val nodesEl = xml.getChildByName("Nodes")!!
 			for (nodeEl in nodesEl.children())
@@ -70,7 +72,7 @@ class Card(val path: String, val nodes: Array<CardNode>, val root: CardNode)
 				node.resolve(nodeMap)
 			}
 
-			val card = Card(path, nodeMap.values().toGdxArray(), nodeMap[rootNode])
+			val card = Card(path, restriction, nodeMap.values().toGdxArray(), nodeMap[rootNode])
 			return card
 		}
 
@@ -102,15 +104,18 @@ class CardNode
 	lateinit var description: String
 	lateinit var spawnWeight: SpawnWeight
 	var isShop = false
+	var hiddenRewards = false
 	lateinit var content: String
 
 	var hasBeenPlayed = false
+	var isQuestCard = false
 
 	var nextNode: CardNodeWrapper? = null
 
 	fun getCard(): CardWidget
 	{
-		return CardWidget(createTable(false), createTable(true), AssetManager.loadTextureRegion("GUI/CardCardback")!!, this)
+		val colour = if (isQuestCard) Colour(1f, 0.8f, 0.6f, 1f) else Colour.WHITE
+		return CardWidget(createTable(false), createTable(true), AssetManager.loadTextureRegion("GUI/CardCardback")!!, this, colour)
 	}
 
 	fun createTable(detail: Boolean): Table
@@ -126,6 +131,14 @@ class CardNode
 		val title = Label(name, Global.skin, "cardtitle")
 		table.add(title).expandX().center().pad(10f, 0f, 0f, 0f)
 		table.row()
+
+		if (parent.characterRestriction != null)
+		{
+			val restriction = Label("Restricted: " + parent.characterRestriction, Global.skin)
+			restriction.color = Color.RED
+			table.add(restriction)
+			table.row()
+		}
 
 		val rewardsTable = Table()
 		table.add(rewardsTable).growX()
@@ -143,6 +156,20 @@ class CardNode
 			stack.add(widget)
 
 			stack.addTapToolTip("This encounter contains a shop.")
+			rewardsTable.add(stack).expandX().center().pad(10f)
+		}
+		else if (hiddenRewards)
+		{
+			val icon = AssetManager.loadTextureRegion("GUI/UnknownCardback")!!
+			val widget = SpriteWidget(Sprite(icon), 64f, 64f)
+
+			val stack = Stack()
+			stack.touchable = Touchable.enabled
+
+			stack.add(SpriteWidget(AssetManager.loadSprite("GUI/RewardChanceBorder", colour = Colour.LIGHT_GRAY), 64f, 64f))
+			stack.add(widget)
+
+			stack.addTapToolTip("Have an unknown chance to gain unknown rewards.")
 			rewardsTable.add(stack).expandX().center().pad(10f)
 		}
 		else
@@ -221,7 +248,7 @@ class CardNode
 			table.add(stack).expandX().center().pad(5f).padBottom(32f)
 		}
 
-		if (!hasBeenPlayed)
+		if (!hasBeenPlayed && !isQuestCard)
 		{
 			val newTable = Table()
 			val newLabel = Label("New", Global.skin)
@@ -252,6 +279,7 @@ class CardNode
 		description = xmlData.get("Description")
 		spawnWeight = SpawnWeight.valueOf(xmlData.get("SpawnWeighting", "Any")!!.toUpperCase())
 		isShop = xmlData.getBoolean("IsShop", false)
+		hiddenRewards = xmlData.getBoolean("HiddenRewards", false)
 		content = xmlData.get("Content")
 
 		val nextEl = xmlData.getChildByName("Next")

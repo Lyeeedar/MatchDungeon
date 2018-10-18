@@ -3,10 +3,31 @@ package com.lyeeedar.Util
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Pool
+import com.lyeeedar.Global
 
 /**
  * Created by Philip on 04-Jul-16.
  */
+
+fun String.expandVariables(): String
+{
+	var output = this
+
+	val variables = Global.getVariableMap()
+	for (variable in variables)
+	{
+		if (variable.value.toInt().toFloat() == variable.value)
+		{
+			output = output.replace("{" + variable.key + "}", variable.value.toInt().toString())
+		}
+		else
+		{
+			output = output.replace("{" + variable.key + "}", variable.value.toString())
+		}
+	}
+
+	return output
+}
 
 fun String.neaten() = this.substring(0, 1).toUpperCase() + this.substring(1).toLowerCase()
 
