@@ -1,0 +1,95 @@
+<CardContent meta:X="0" meta:Y="0" GUID="f66901d4-4902-4b48-9dc5-9d45b022f95f" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">94be5c97-c544-4208-b08c-62f0cadc656e</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="94be5c97-c544-4208-b08c-62f0cadc656e">
+			<Line>
+				<MultilineString>You visit an alchemist looking for some potions. As you enter the shop he smiles at you and gestures at the potions displayed.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"See anything you like?"</MultilineString>
+			</Line>
+			<Shop>
+				<Items>
+					<Buff>
+						<Cost>150</Cost>
+						<Buff meta:RefKey="Buff">
+							<Name>Potion of Heartiness</Name>
+							<Icon meta:RefKey="Sprite">
+								<Name>Oryx/uf_split/uf_items/potion_red</Name>
+								<DrawActualSize>true</DrawActualSize>
+							</Icon>
+							<Statistics meta:RefKey="Statistics">
+								<Health>4</Health>
+								<Regeneration>0.1</Regeneration>
+							</Statistics>
+							<Duration>5</Duration>
+						</Buff>
+					</Buff>
+					<Buff>
+						<Cost>250</Cost>
+						<Buff meta:RefKey="Buff">
+							<Name>Potion of Strength</Name>
+							<Icon meta:RefKey="Sprite">
+								<Name>Oryx/uf_split/uf_items/potion_red</Name>
+								<DrawActualSize>true</DrawActualSize>
+								<Colour>148,148,148,255</Colour>
+							</Icon>
+							<Statistics meta:RefKey="Statistics">
+								<MatchDamage>1.5</MatchDamage>
+								<Pierce>1</Pierce>
+							</Statistics>
+							<Duration>5</Duration>
+						</Buff>
+					</Buff>
+					<Buff>
+						<Cost>200</Cost>
+						<Buff meta:RefKey="Buff">
+							<Name>Potion of Iron Skin</Name>
+							<Icon meta:RefKey="Sprite">
+								<Name>Oryx/uf_split/uf_items/potion_black</Name>
+								<DrawActualSize>true</DrawActualSize>
+							</Icon>
+							<Statistics meta:RefKey="Statistics">
+								<Health>1</Health>
+								<Aegis>0.3</Aegis>
+							</Statistics>
+							<Duration>5</Duration>
+						</Buff>
+					</Buff>
+					<Buff>
+						<Cost>150</Cost>
+						<Buff meta:RefKey="Buff">
+							<Name>Potion of Energy</Name>
+							<Icon meta:RefKey="Sprite">
+								<Name>Oryx/uf_split/uf_items/potion_blue</Name>
+								<DrawActualSize>true</DrawActualSize>
+							</Icon>
+							<Statistics meta:RefKey="Statistics">
+								<PowerGain>6</PowerGain>
+							</Statistics>
+							<Duration>5</Duration>
+						</Buff>
+					</Buff>
+					<Buff>
+						<Cost>150</Cost>
+						<Buff meta:RefKey="Buff">
+							<Name>Potion of Fury</Name>
+							<Icon meta:RefKey="Sprite">
+								<Name>Oryx/uf_split/uf_items/potion_red</Name>
+								<DrawActualSize>true</DrawActualSize>
+								<Colour>129,176,141,255</Colour>
+							</Icon>
+							<Statistics meta:RefKey="Statistics">
+								<Berserk>1</Berserk>
+							</Statistics>
+							<Duration>5</Duration>
+						</Buff>
+					</Buff>
+				</Items>
+			</Shop>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

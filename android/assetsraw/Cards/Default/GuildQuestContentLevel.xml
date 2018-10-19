@@ -1,0 +1,34 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>......=$=</Line>
+			<Line>.!..!..=.</Line>
+			<Line>.......=.</Line>
+			<Line>..!......</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+		</Rows>
+	</Grid>
+	<OrbCount>5</OrbCount>
+	<AllowedVictories>
+		<Condition meta:RefKey="Sink">
+			<Count>2</Count>
+		</Condition>
+		<Condition meta:RefKey="Kill" />
+		<Condition meta:RefKey="Matches">
+			<Orbs>20</Orbs>
+			<Orbs>15</Orbs>
+			<Orbs>10</Orbs>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Die" />
+		<Condition meta:RefKey="Turns">
+			<Turns>40</Turns>
+		</Condition>
+	</AllowedDefeats>
+</Level>

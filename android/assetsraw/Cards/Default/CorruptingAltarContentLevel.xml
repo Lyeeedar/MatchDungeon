@@ -101,7 +101,7 @@
 					<Name>Oryx/uf_split/uf_terrain/altar_blood</Name>
 					<DrawActualSize>true</DrawActualSize>
 				</Sprite>
-				<Health>15</Health>
+				<Health>20</Health>
 				<AlwaysShowHP>true</AlwaysShowHP>
 			</Block>
 			<Plate>0</Plate>

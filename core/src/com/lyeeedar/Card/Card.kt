@@ -135,7 +135,7 @@ class CardNode
 		if (parent.characterRestriction != null)
 		{
 			val restriction = Label("Restricted: " + parent.characterRestriction, Global.skin)
-			restriction.color = Color.RED
+			restriction.color = if (Global.deck.chosenCharacter.name == parent.characterRestriction) Color.GREEN else Color.RED
 			table.add(restriction)
 			table.row()
 		}

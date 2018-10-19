@@ -1,0 +1,88 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>..$...$..</Line>
+			<Line>#..cAc..#</Line>
+			<Line>...ccc...</Line>
+			<Line>#..ccc..#</Line>
+			<Line>...ccc...</Line>
+			<Line>#..ccc..#</Line>
+			<Line>...ccc...</Line>
+			<Line>#..ccc..#</Line>
+			<Line>.........</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>c</Character>
+			<Extends>.</Extends>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<TilingSprite meta:RefKey="TilingSprite">
+					<Name>carpet</Name>
+					<Mode>PremadeDirectional</Mode>
+					<Directions>
+						<Center meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_terrain/carpet_9</Name>
+						</Center>
+						<North meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_terrain/carpet_6</Name>
+						</North>
+						<South meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_terrain/carpet_7</Name>
+						</South>
+						<East meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_terrain/carpet_8</Name>
+						</East>
+						<West meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_terrain/carpet_5</Name>
+						</West>
+						<NorthEast meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_terrain/carpet_1</Name>
+						</NorthEast>
+						<NorthWest meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_terrain/carpet_10</Name>
+						</NorthWest>
+						<SouthEast meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_terrain/carpet_3</Name>
+						</SouthEast>
+						<SouthWest meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_terrain/carpet_2</Name>
+						</SouthWest>
+					</Directions>
+				</TilingSprite>
+			</Sprite>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>A</Character>
+			<Extends>c</Extends>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/terrain/altar_fancy</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+			</Sprite>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<Type>Wall</Type>
+		</Symbol>
+	</Symbols>
+	<OrbCount>5</OrbCount>
+	<AllowedVictories>
+		<Condition meta:RefKey="Sink">
+			<Count>4</Count>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Turns">
+			<Turns>40</Turns>
+		</Condition>
+	</AllowedDefeats>
+</Level>

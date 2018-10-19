@@ -23,7 +23,7 @@ import ktx.collections.toGdxArray
  * Created by Philip on 22-Jul-16.
  */
 
-class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.copy(), desc.death.copy())
+class Monster(val desc: MonsterDesc, val difficulty: Int) : Creature(desc.hp, desc.size, desc.sprite.copy(), desc.death.copy())
 {
 	var isSummon = false
 
@@ -36,10 +36,42 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 	var fastAttacks = -1
 	var powerfulAttacks = -1
 
+	var attackDamage = 1
+	var attackNumPips = 7
+	var attackCooldown: Point = Point(6, 6)
+
 	init
 	{
+		attackDamage = desc.attackDamage
+		attackNumPips = desc.attackNumPips
+		attackCooldown = desc.attackCooldown.copy()
+
+		maxhp += (maxhp.toFloat() * (difficulty / 10f)).ciel()
+
 		abilities.addAll(desc.abilities.map{ it.copy() }.toGdxArray())
 		damageReduction = desc.damageReduction
+
+		if (difficulty >= 1)
+		{
+			atkCooldown -= (difficulty.toFloat() / 3f).ciel()
+		}
+
+		if (difficulty >= 2)
+		{
+			for (ability in abilities)
+			{
+				ability.cooldownMin -= (difficulty.toFloat() / 3f).ciel()
+				ability.cooldownMax -= (difficulty.toFloat() / 3f).ciel()
+			}
+
+			attackNumPips -= (difficulty.toFloat() / 3f).ciel()
+		}
+
+		if (difficulty >= 3)
+		{
+			damageReduction += (difficulty.toFloat() / 5f).ciel()
+			attackDamage += (difficulty.toFloat() / 4f).ciel()
+		}
 
 		if (desc.attackNumPips > 0)
 		{
@@ -82,10 +114,10 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 		atkCooldown--
 		if (atkCooldown <= 0)
 		{
-			var min = desc.attackCooldown.min
+			var min = attackCooldown.min
 			min += (Global.player.getStat(Statistic.HASTE) * min).toInt()
 
-			var max = desc.attackCooldown.max
+			var max = attackCooldown.max
 			max += (Global.player.getStat(Statistic.HASTE) * max).toInt()
 
 			atkCooldown = min + MathUtils.random(max - min)
@@ -97,7 +129,7 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 			{
 				val startTile = tiles.minBy { it.dist(tile) }!!
 
-				val damage = if (powerfulAttacks > 0) desc.attackDamage + 2 else desc.attackDamage
+				val damage = if (powerfulAttacks > 0) attackDamage + 2 else attackDamage
 
 				val monsterEffectType = if (damage > 1) MonsterEffectType.BIGATTACK else MonsterEffectType.ATTACK
 				val data = ObjectMap<String, Any>()
@@ -105,7 +137,7 @@ class Monster(val desc: MonsterDesc) : Creature(desc.hp, desc.size, desc.sprite.
 
 				tile.monsterEffect = MonsterEffect(monsterEffectType, data, tile.orb!!.desc, grid.level.theme)
 
-				tile.monsterEffect!!.timer = desc.attackNumPips + (Global.player.getStat(Statistic.HASTE) * desc.attackNumPips).toInt()
+				tile.monsterEffect!!.timer = attackNumPips + (Global.player.getStat(Statistic.HASTE) * attackNumPips).toInt()
 				val diff = tile.getPosDiff(startTile)
 				diff[0].y *= -1
 				sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
@@ -438,7 +470,7 @@ class MonsterAbility
 
 					val hitEffect = data["HITEFFECT", null]
 
-					var timer = data["NUMPIPS", monster.desc.attackNumPips.toString()].toString().toInt()
+					var timer = data["NUMPIPS", monster.attackNumPips.toString()].toString().toInt()
 					timer += (Global.player.getStat(Statistic.HASTE) * timer).toInt()
 
 					// make them all attacks in order
@@ -477,7 +509,7 @@ class MonsterAbility
 
 			if (effect == Effect.ATTACK || effect == Effect.SEALEDATTACK || effect == Effect.HEAL || effect == Effect.DELAYEDSUMMON || effect == Effect.DEBUFF)
 			{
-				var speed = data.get("NUMPIPS", monster.desc.attackNumPips.toString()).toString().toInt()
+				var speed = data.get("NUMPIPS", monster.attackNumPips.toString()).toString().toInt()
 				speed += (Global.player.getStat(Statistic.HASTE) * speed).toInt()
 
 				val monsterEffectType: MonsterEffectType
@@ -579,7 +611,9 @@ class MonsterAbility
 					desc = if (name.isBlank()) faction.get(1) else faction.get(name)
 				}
 
-				val summoned = Monster(desc!!)
+				val difficulty = data["DIFFICULTY", "0"].toString().toInt()
+
+				val summoned = Monster(desc!!, difficulty)
 				summoned.isSummon = data["ISSUMMON"].toString().toBoolean()
 
 				summoned.setTile(target, grid)

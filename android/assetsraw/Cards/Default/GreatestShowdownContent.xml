@@ -3,17 +3,17 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You sit down to meditate. Clearig your mind and focusing your will is a great way to enhance your skills.</MultilineString>
+				<MultilineString>A pack of monsters surrounds another that exudes an aura of deadliness. This will be a tough fight.</MultilineString>
 			</Line>
 			<Match3>
-				<Level>MeditationContentLevel</Level>
+				<Level>GreatestShowdownContentLevel</Level>
 				<Success meta:RefKey="Node">8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f</Success>
 				<Failure meta:RefKey="Node">91e41773-f187-46c6-906d-f87d59996682</Failure>
 			</Match3>
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>You can't relax enough. You don't feel focused at all.</MultilineString>
+				<MultilineString>You are forced to flee, they are way too strong.</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,23 +21,35 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You feel focused and ready to take on anything.</MultilineString>
+				<MultilineString>You prevail against the odds. You are a champion!</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Buff>
 					<Buff meta:RefKey="Buff">
-						<Name>Focused</Name>
+						<Name>Mark of the Champion</Name>
 						<Icon meta:RefKey="Sprite">
-							<Name>Oryx/uf_split/uf_items/skull_small_blood</Name>
+							<Name>Oryx/uf_split/uf_items/skull_small_gold</Name>
 							<DrawActualSize>true</DrawActualSize>
 						</Icon>
 						<Statistics meta:RefKey="Statistics">
-							<AbilityDamage>2</AbilityDamage>
+							<Health>3</Health>
+							<Regeneration>0.1</Regeneration>
+							<MatchDamage>1</MatchDamage>
+							<AbilityDamage>1</AbilityDamage>
+							<Pierce>1</Pierce>
+							<Aegis>0.1</Aegis>
 							<PowerGain>5</PowerGain>
+							<Luck>0.2</Luck>
 						</Statistics>
 						<Duration>6</Duration>
 					</Buff>
 				</Buff>
+				<Money>
+					<Count>150</Count>
+				</Money>
+				<Equipment>
+					<FromDeck>true</FromDeck>
+				</Equipment>
 			</Rewards>
 			<MarkComplete>
 				<State>Success</State>

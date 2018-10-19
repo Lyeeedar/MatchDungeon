@@ -60,6 +60,10 @@
 				<Data Name="Seal" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
 				<Data Name="Attack" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
 				<Data Name="IsMonster" SkipIfDefault="False" meta:RefKey="Boolean" />
+				<Data Name="FactionMonster" meta:RefKey="Struct">
+					<Data Name="IsBoss" meta:RefKey="Boolean" />
+					<Data Name="DifficultyModifier" Type="Int" Min="0" meta:RefKey="Number" />
+				</Data>
 				<Data Name="MonsterDesc" Keys="MonsterDesc" meta:RefKey="Reference" />
 				<Data Name="SpecialOrb" EnumValues="None,3x3,4x4,H4,3H4,V4,3V4,5,All" SkipIfDefault="False" meta:RefKey="Enum" />
 				<Data Name="Sinkable" meta:RefKey="Struct">

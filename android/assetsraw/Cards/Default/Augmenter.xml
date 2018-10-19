@@ -1,0 +1,12 @@
+<Card meta:X="-1" meta:Y="0" GUID="3b2169cd-2f17-43b6-b434-b2180e6c404d" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">ebe8512c-e450-4d06-87f8-8502632e8073</Root>
+	<Nodes>
+		<CardNode meta:X="262" meta:Y="0" GUID="ebe8512c-e450-4d06-87f8-8502632e8073">
+			<Name>Augmenter</Name>
+			<Description>There is a man who can enchant your very body, for a price.</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<IsShop>true</IsShop>
+			<Content>AugmenterContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

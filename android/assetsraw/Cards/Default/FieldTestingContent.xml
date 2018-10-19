@@ -3,17 +3,17 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You sit down to meditate. Clearig your mind and focusing your will is a great way to enhance your skills.</MultilineString>
+				<MultilineString>The best way to try out new armour is in combat. The blacksmith is offering one of his latest creations to anyone who volunteers. You show up and are handed a piece of gear and told to take on the 3 burly men standing in the courtyard. En Garde.</MultilineString>
 			</Line>
 			<Match3>
-				<Level>MeditationContentLevel</Level>
+				<Level>FieldTestingContentLevel</Level>
 				<Success meta:RefKey="Node">8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f</Success>
 				<Failure meta:RefKey="Node">91e41773-f187-46c6-906d-f87d59996682</Failure>
 			</Match3>
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>You can't relax enough. You don't feel focused at all.</MultilineString>
+				<MultilineString>You get thoroughly beaten up and the blacksmith retrieves his item, grumbling about needing to make adjustments.</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,23 +21,13 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You feel focused and ready to take on anything.</MultilineString>
+				<MultilineString>The gear works great, and you soundly thrash your opponents. The blacksmith lets you keep the item, thanking for for trying it out.</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
-				<Buff>
-					<Buff meta:RefKey="Buff">
-						<Name>Focused</Name>
-						<Icon meta:RefKey="Sprite">
-							<Name>Oryx/uf_split/uf_items/skull_small_blood</Name>
-							<DrawActualSize>true</DrawActualSize>
-						</Icon>
-						<Statistics meta:RefKey="Statistics">
-							<AbilityDamage>2</AbilityDamage>
-							<PowerGain>5</PowerGain>
-						</Statistics>
-						<Duration>6</Duration>
-					</Buff>
-				</Buff>
+				<Equipment>
+					<FromDeck>true</FromDeck>
+					<Type>Body</Type>
+				</Equipment>
 			</Rewards>
 			<MarkComplete>
 				<State>Success</State>

@@ -1040,7 +1040,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 								if (currentStage < rootDesc.stages.size - 1)
 								{
 									val nextDesc = rootDesc.stages[currentStage + 1]
-									val monster = Monster(nextDesc)
+									val monster = Monster(nextDesc, creature.difficulty)
 									monster.setTile(tile, this)
 								}
 							}

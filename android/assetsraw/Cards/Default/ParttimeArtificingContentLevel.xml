@@ -1,0 +1,49 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>........</Line>
+			<Line>........</Line>
+			<Line>........</Line>
+			<Line>...I....</Line>
+			<Line>.....I..</Line>
+			<Line>..I.....</Line>
+			<Line>.I....I.</Line>
+			<Line>....I...</Line>
+			<Line>........</Line>
+			<Line>........</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>I</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<Sinkable>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/items/ingot</Name>
+					<Colour>137,204,167,255</Colour>
+				</Sprite>
+			</Sinkable>
+		</Symbol>
+	</Symbols>
+	<OrbCount>5</OrbCount>
+	<AllowedVictories>
+		<Condition meta:RefKey="Sink">
+			<Count>6</Count>
+		</Condition>
+		<Condition meta:RefKey="Matches">
+			<Orbs>20</Orbs>
+			<Orbs>20</Orbs>
+			<Orbs>10</Orbs>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Turns">
+			<Turns>40</Turns>
+		</Condition>
+	</AllowedDefeats>
+</Level>

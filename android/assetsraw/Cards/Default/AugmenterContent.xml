@@ -1,0 +1,51 @@
+<CardContent meta:X="0" meta:Y="0" GUID="914d44e4-9432-4bcd-90d7-afacb18424cd" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">a5a64da8-a67c-41e3-99cc-dec01c13be2f</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="a5a64da8-a67c-41e3-99cc-dec01c13be2f">
+			<Line>
+				<MultilineString>You go to visit the augmenter. After a short wait in a queue you are ushered into a room with various glowing gems, each labelled with the effect it'll have on you.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>What would you like to buy?</MultilineString>
+			</Line>
+			<Shop>
+				<Items>
+					<Statistics>
+						<Cost>100</Cost>
+						<Statistics meta:RefKey="Statistics">
+							<Health>1</Health>
+						</Statistics>
+						<Amount>1</Amount>
+					</Statistics>
+					<Statistics>
+						<Cost>150</Cost>
+						<Statistics meta:RefKey="Statistics">
+							<MatchDamage>0.5</MatchDamage>
+						</Statistics>
+						<Amount>0.5</Amount>
+					</Statistics>
+					<Statistics>
+						<Cost>150</Cost>
+						<Statistics meta:RefKey="Statistics">
+							<AbilityDamage>1</AbilityDamage>
+						</Statistics>
+						<Amount>1</Amount>
+					</Statistics>
+					<Statistics>
+						<Cost>100</Cost>
+						<Statistics meta:RefKey="Statistics">
+							<PowerGain>2</PowerGain>
+						</Statistics>
+						<Amount>2</Amount>
+					</Statistics>
+				</Items>
+			</Shop>
+			<Line>
+				<MultilineString>"Come back again!"</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

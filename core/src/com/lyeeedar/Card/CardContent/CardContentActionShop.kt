@@ -12,17 +12,16 @@ import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Board.Mote
 import com.lyeeedar.Card.Card
 import com.lyeeedar.EquipmentSlot
-import com.lyeeedar.Game.Character
-import com.lyeeedar.Game.Equipment
-import com.lyeeedar.Game.EquipmentReward
-import com.lyeeedar.Game.Quest
+import com.lyeeedar.Game.*
 import com.lyeeedar.Global
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.UI.Seperator
 import com.lyeeedar.UI.addClickListener
+import com.lyeeedar.UI.addTapToolTip
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.FastEnumMap
 import com.lyeeedar.Util.XmlData
 
 class CardContentActionShop : AbstractCardContentAction()
@@ -182,7 +181,9 @@ abstract class ShopWares
 				"QUEST" -> QuestWare()
 				"CARD" -> CardWare()
 				"CHARACTER" -> CharacterWare()
-				else -> throw Exception("Unknown are type '" + xmlData.name.toUpperCase() + "'!")
+				"STATISTICS" -> StatisticWare()
+				"BUFF" -> BuffWare()
+				else -> throw Exception("Unknown ware type '" + xmlData.name.toUpperCase() + "'!")
 			}
 
 			ware.cost = xmlData.getInt("Cost", 1)
@@ -393,5 +394,98 @@ class CharacterWare : ShopWares()
 	{
 		Global.deck.characters.add(character)
 		Global.deck.newcharacters.add(character)
+	}
+}
+
+class StatisticWare : ShopWares()
+{
+	val statistics = FastEnumMap<Statistic, Float>(Statistic::class.java)
+
+	override fun isValid(): Boolean = true
+
+	override fun resolve(shop: CardContentActionShop)
+	{
+
+	}
+
+	override fun parse(xmlData: XmlData)
+	{
+		val stats = xmlData.getChildByName("Statistics")!!
+		Statistic.parse(stats, statistics)
+	}
+
+	override fun getCard(): CardWidget
+	{
+		val table = Table()
+		for (stat in Statistic.Values)
+		{
+			val statVal = statistics[stat] ?: 0f
+
+			if (statVal != 0f)
+			{
+				val diff = statVal
+				val diffStr: String
+				if (diff > 0)
+				{
+					diffStr = "[GREEN]+$diff[]"
+				}
+				else if (diff < 0)
+				{
+					diffStr = "[RED]$diff[]"
+				}
+				else
+				{
+					diffStr = ""
+				}
+
+				val statTable = Table()
+				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ":", Global.skin, "card")).expandX().left()
+				statTable.add(Label(statVal.toString() + diffStr, Global.skin, "card"))
+				statTable.addTapToolTip(stat.tooltip)
+
+				table.add(statTable).growX()
+				table.row()
+			}
+		}
+
+		return CardWidget(table, table, AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, null)
+	}
+
+	override fun reward()
+	{
+		for (stat in Statistic.Values)
+		{
+			val statVal = statistics[stat] ?: 0f
+			Global.player.statistics[stat] = Global.player.statistics[stat] + statVal
+		}
+	}
+
+}
+
+class BuffWare : ShopWares()
+{
+	lateinit var buff: Buff
+
+	override fun isValid(): Boolean = true
+
+	override fun resolve(shop: CardContentActionShop)
+	{
+
+	}
+
+	override fun parse(xmlData: XmlData)
+	{
+		val buffEl = xmlData.getChildByName("Buff")!!
+		buff = Buff.load(buffEl)
+	}
+
+	override fun getCard(): CardWidget
+	{
+		return buff.getCard()
+	}
+
+	override fun reward()
+	{
+		Global.player.buffs.add(buff.copy())
 	}
 }

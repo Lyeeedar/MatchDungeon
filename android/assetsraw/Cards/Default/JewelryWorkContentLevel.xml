@@ -1,0 +1,53 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>....J....</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>J</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<Sinkable>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/items/gem_gem</Name>
+					<DrawActualSize>true</DrawActualSize>
+					<Colour>252,157,252,255</Colour>
+				</Sprite>
+			</Sinkable>
+			<Container>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/terrain/CrystalFull</Name>
+					<DrawActualSize>true</DrawActualSize>
+					<Colour>255,168,247,255</Colour>
+				</Sprite>
+				<Health>12</Health>
+				<AlwaysShowHP>true</AlwaysShowHP>
+			</Container>
+		</Symbol>
+	</Symbols>
+	<OrbCount>5</OrbCount>
+	<AllowedVictories>
+		<Condition meta:RefKey="Sink">
+			<Count>1</Count>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Turns">
+			<Turns>40</Turns>
+		</Condition>
+	</AllowedDefeats>
+</Level>

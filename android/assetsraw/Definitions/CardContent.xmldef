@@ -68,8 +68,12 @@
 				</Data>
 				<Data Name="Statistics" meta:RefKey="Struct">
 					<Data Name="Cost" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
-					<Data Name="Type" EnumValues="Health,MatchDamage,AbilityDamage,PowerGain" Default="Always" meta:RefKey="Enum" />
-					<Data Name="Amount" Min="-999999" SkipIfDefault="False" meta:RefKey="Number" />
+					<Data Name="Statistics" Keys="Statistics" Nullable="False" meta:RefKey="Reference" />
+					<Data Name="OnPurchaseDefine" Keys="OnPurchaseDefine" meta:RefKey="Reference" />
+				</Data>
+				<Data Name="Buff" meta:RefKey="Struct">
+					<Data Name="Cost" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
+					<Data Name="Buff" Keys="Buff" Nullable="False" meta:RefKey="Reference" />
 					<Data Name="OnPurchaseDefine" Keys="OnPurchaseDefine" meta:RefKey="Reference" />
 				</Data>
 				<!--Progression-->

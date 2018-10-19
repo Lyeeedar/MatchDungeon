@@ -283,7 +283,7 @@ class Level(val loadPath: String)
 			}
 
 			// iterate through and find groups
-			data class MonsterMarker(val monsterDesc: MonsterDesc?, val isBoss: Boolean, var used: Boolean = false)
+			data class MonsterMarker(val monsterDesc: MonsterDesc?, val isBoss: Boolean, val difficulty: Int = 0, var used: Boolean = false)
 			val monsterGrid = Array2D<MonsterMarker?>(charGrid.xSize, charGrid.ySize)
 
 			fun loadMonster(tile: Tile, char: Char): MonsterMarker?
@@ -306,7 +306,11 @@ class Level(val loadPath: String)
 						monster = loadMonster(tile, symbol.extends)
 					}
 
-					if (symbol.isMonster || symbol.monsterDesc != null)
+					if (symbol.factionMonster != null)
+					{
+						monster = MonsterMarker(null, symbol.factionMonster.isBoss, symbol.factionMonster.difficultyModifier)
+					}
+					else if (symbol.isMonster || symbol.monsterDesc != null)
 					{
 						monster = MonsterMarker(symbol.monsterDesc, false)
 					}
@@ -357,7 +361,14 @@ class Level(val loadPath: String)
 
 						// Spawn monster for found size
 						val monsterDesc = monsterMarker.monsterDesc ?: if (monsterMarker.isBoss) chosenFaction.getBoss(size) else chosenFaction.get(size)
-						val monster = Monster(monsterDesc)
+
+						var difficulty = monsterMarker.difficulty
+						if (monsterDesc.size < size)
+						{
+							difficulty += 3
+						}
+
+						val monster = Monster(monsterDesc, difficulty)
 						monster.size = size
 
 						for (ix in 0 until size)
@@ -589,6 +600,16 @@ class Level(val loadPath: String)
 					val attack = symbolEl.getInt("Attack", 0)
 
 					val isMonster = symbolEl.getBoolean("IsMonster", false)
+
+					val factionMonsterEl = symbolEl.getChildByName("FactionMonster")
+					var factionMonster: FactionMonster? = null
+					if (factionMonsterEl != null)
+					{
+						val isBoss = factionMonsterEl.getBoolean("IsBoss", false)
+						val difficulty = factionMonsterEl.getInt("DifficultyModifier", 0)
+						factionMonster = FactionMonster(isBoss, difficulty)
+					}
+
 					val monsterDescEl = symbolEl.getChildByName("MonsterDesc")
 					var monsterDesc: MonsterDesc? = null
 					if (monsterDescEl != null)
@@ -629,7 +650,7 @@ class Level(val loadPath: String)
 
 					val type = SymbolType.valueOf(symbolEl.get("Type", "Floor")!!.toUpperCase())
 
-					symbolsMap[character.toInt()] = Symbol(character, extends, nameKey, sprite, blockDesc, plate, seal, attack, isMonster, monsterDesc, special, sinkableDesc, isChest, containerDesc, spreader, type)
+					symbolsMap[character.toInt()] = Symbol(character, extends, nameKey, sprite, blockDesc, plate, seal, attack, isMonster, factionMonster, monsterDesc, special, sinkableDesc, isChest, containerDesc, spreader, type)
 				}
 			}
 
@@ -701,6 +722,8 @@ data class ContainerDesc(val sprite: Sprite, val hp: Int, val alwaysShowHP: Bool
 
 data class BlockDesc(val sprite: Sprite?, val hp: Int, val alwaysShowHP: Boolean)
 
+data class FactionMonster(val isBoss: Boolean, val difficultyModifier: Int)
+
 enum class SymbolType
 {
 	FLOOR,
@@ -712,7 +735,7 @@ data class Symbol(
 		val nameKey: String?,
 		val sprite: SpriteWrapper?,
 		val block: BlockDesc?, val plate: Int, val seal: Int, val attack: Int,
-		val isMonster: Boolean, val monsterDesc: MonsterDesc?,
+		val isMonster: Boolean, val factionMonster: FactionMonster?, val monsterDesc: MonsterDesc?,
 		val special: String,
 		val sinkableDesc: SinkableDesc?,
 		val isChest: Boolean,

@@ -1,0 +1,27 @@
+<MainHand xmlns:meta="Editor">
+	<Name>Bow</Name>
+	<Description>A bow and arrow. Great for shooting things.</Description>
+	<Cost>100</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/weapon_longbow</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<MatchDamage>0.5</MatchDamage>
+		<Pierce>1</Pierce>
+	</Statistics>
+	<Ability>
+		<Name>Shoot</Name>
+		<Description>Shoot an arrow at an enemy.</Description>
+		<EffectData>
+			<Cost>2</Cost>
+			<Effect>1,Monster,Single,Pop</Effect>
+			<Data>
+				<Damage>0</Damage>
+			</Data>
+			<FlightEffect meta:RefKey="ParticleEffect">
+				<Name>Arrow</Name>
+			</FlightEffect>
+		</EffectData>
+	</Ability>
+</MainHand>

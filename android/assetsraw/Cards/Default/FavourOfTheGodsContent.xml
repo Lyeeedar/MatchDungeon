@@ -3,37 +3,47 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You sit down to meditate. Clearig your mind and focusing your will is a great way to enhance your skills.</MultilineString>
+				<MultilineString>It is well know that large donations to the temple also equal large favours from the gods. You head to the cities largest temple and begin to pray (and pay) for their attention.</MultilineString>
 			</Line>
 			<Match3>
-				<Level>MeditationContentLevel</Level>
+				<Level>FavourOfTheGodsContentLevel</Level>
 				<Success meta:RefKey="Node">8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f</Success>
 				<Failure meta:RefKey="Node">91e41773-f187-46c6-906d-f87d59996682</Failure>
 			</Match3>
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>You can't relax enough. You don't feel focused at all.</MultilineString>
+				<MultilineString>The gods seem to be ignoring you, but they don't turn down your money.</MultilineString>
 			</Line>
+			<Spend>
+				<Key>Money</Key>
+				<Count>25</Count>
+			</Spend>
 			<MarkComplete>
 				<State>Failure</State>
 			</MarkComplete>
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You feel focused and ready to take on anything.</MultilineString>
+				<MultilineString>The gods smile on you for your donation.</MultilineString>
 			</Line>
+			<Spend>
+				<Key>Money</Key>
+				<Count>25</Count>
+			</Spend>
 			<Rewards meta:RefKey="Rewards">
 				<Buff>
 					<Buff meta:RefKey="Buff">
-						<Name>Focused</Name>
+						<Name>Favour of the Gods</Name>
 						<Icon meta:RefKey="Sprite">
-							<Name>Oryx/uf_split/uf_items/skull_small_blood</Name>
+							<Name>Oryx/uf_split/uf_items/weapon_cross</Name>
 							<DrawActualSize>true</DrawActualSize>
 						</Icon>
 						<Statistics meta:RefKey="Statistics">
-							<AbilityDamage>2</AbilityDamage>
-							<PowerGain>5</PowerGain>
+							<Health>3</Health>
+							<Regeneration>0.2</Regeneration>
+							<Haste>0.1</Haste>
+							<Luck>0.2</Luck>
 						</Statistics>
 						<Duration>6</Duration>
 					</Buff>

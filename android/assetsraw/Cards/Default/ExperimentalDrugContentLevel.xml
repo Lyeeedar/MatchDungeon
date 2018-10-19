@@ -1,0 +1,28 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>..........</Line>
+			<Line>..........</Line>
+			<Line>......~...</Line>
+			<Line>..........</Line>
+			<Line>.~...~....</Line>
+			<Line>..........</Line>
+			<Line>..........</Line>
+			<Line>.......~..</Line>
+			<Line>...~......</Line>
+			<Line>..........</Line>
+		</Rows>
+	</Grid>
+	<Theme>City</Theme>
+	<AllowedVictories>
+		<Condition meta:RefKey="Matches">
+			<Orbs>30</Orbs>
+			<Orbs>30</Orbs>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Turns">
+			<Turns>40</Turns>
+		</Condition>
+	</AllowedDefeats>
+</Level>

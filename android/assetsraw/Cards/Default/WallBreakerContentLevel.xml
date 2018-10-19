@@ -1,0 +1,47 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>..........</Line>
+			<Line>..........</Line>
+			<Line>..........</Line>
+			<Line>..........</Line>
+			<Line>..........</Line>
+			<Line>bbbbbbbbbb</Line>
+			<Line>£bb£bb£bb£</Line>
+			<Line>bbbbbbbbbb</Line>
+			<Line>..........</Line>
+			<Line>..........</Line>
+			<Line>..........</Line>
+			<Line>..........</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>b</Character>
+			<Extends></Extends>
+			<Block>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/crate</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Health>2</Health>
+			</Block>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+	</Symbols>
+	<OrbCount>5</OrbCount>
+	<AllowedVictories>
+		<Condition meta:RefKey="Sink">
+			<Count>5</Count>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Turns">
+			<Turns>40</Turns>
+		</Condition>
+	</AllowedDefeats>
+</Level>

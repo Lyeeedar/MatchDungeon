@@ -33,14 +33,9 @@
 						</Icon>
 						<Statistics meta:RefKey="Statistics">
 							<Health>5</Health>
-							<MatchDamage>0</MatchDamage>
-							<AbilityDamage>0</AbilityDamage>
-							<PowerGain>0</PowerGain>
-							<BonusGold>0</BonusGold>
-							<BonusTime>0</BonusTime>
 							<Regeneration>0.1</Regeneration>
 						</Statistics>
-						<Duration>4</Duration>
+						<Duration>6</Duration>
 					</Buff>
 				</Buff>
 			</Rewards>

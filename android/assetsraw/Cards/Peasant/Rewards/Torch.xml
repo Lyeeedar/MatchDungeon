@@ -24,6 +24,9 @@
 					<Effect>Pop</Effect>
 				</Spreader>
 			</Data>
+			<FlightEffect meta:RefKey="ParticleEffect">
+				<Name>TorchThrow</Name>
+			</FlightEffect>
 		</EffectData>
 	</Ability>
 </OffHand>

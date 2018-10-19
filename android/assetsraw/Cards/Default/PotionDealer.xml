@@ -1,0 +1,12 @@
+<Card meta:X="0" meta:Y="0" GUID="68d08e9d-b21a-4c66-9250-7204382d1559" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">dfe1fbb4-b2fc-4008-ad6c-df1151abb567</Root>
+	<Nodes>
+		<CardNode meta:X="263" meta:Y="0" GUID="dfe1fbb4-b2fc-4008-ad6c-df1151abb567">
+			<Name>Potion Dealer</Name>
+			<Description>You visit an alchemist to buy some potions to enhance your body temporarily.</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<IsShop>true</IsShop>
+			<Content>PotionDealerContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>
