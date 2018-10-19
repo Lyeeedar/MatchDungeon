@@ -33,6 +33,7 @@
 					<Data Name="Strength" Type="Int" Min="1" Default="1" VisibleIf="Parent.Effect==Seal || Parent.Effect==Shield || Parent.Effect == SealedAttack || Parent.Effect == Block" meta:RefKey="Number" />
 					<Data Name="Amount" Type="Int" Min="1" Default="10" VisibleIf="Parent.Effect==Heal" meta:RefKey="Number" />
 					<Data Name="Debuff" Keys="Buff" VisibleIf="Parent.Effect == Debuff" meta:RefKey="Reference" />
+					<Data Name="FlightEffect" Keys="ParticleEffect" VisibleIf="Parent.Effect==Attack || Parent.Effect==SealedAttack || Parent.Effect == Heal || Parent.Effect == DelayedSummon || Parent.Effect==Dash" meta:RefKey="Reference" />
 					<Data Name="HitEffect" Keys="ParticleEffect" VisibleIf="Parent.Effect==Attack || Parent.Effect==SealedAttack || Parent.Effect == Heal || Parent.Effect == DelayedSummon || Parent.Effect==Dash" meta:RefKey="Reference" />
 					<Data Name="ShowAttackLeap" Default="True" VisibleIf="Parent.Effect==Attack || Parent.Effect==SealedAttack || Parent.Effect == Heal || Parent.Effect == DelayedSummon || Parent.Effect==Dash" meta:RefKey="Boolean" />
 					<!--Permuter-->

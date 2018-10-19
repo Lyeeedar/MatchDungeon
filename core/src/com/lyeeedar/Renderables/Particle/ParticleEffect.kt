@@ -63,7 +63,14 @@ class ParticleEffect : Renderable()
 
 	fun stop()
 	{
-		for (emitter in emitters) emitter.stop()
+		for (emitter in emitters)
+		{
+			emitter.stop()
+			if (emitter.killParticlesOnStop)
+			{
+				emitter.killParticles()
+			}
+		}
 	}
 
 	override fun doUpdate(delta: Float): Boolean

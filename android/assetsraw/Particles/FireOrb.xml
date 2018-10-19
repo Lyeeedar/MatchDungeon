@@ -46,6 +46,7 @@
 		</Emitter>
 		<Emitter>
 			<Name>Orb</Name>
+			<KillParticlesOnStop>true</KillParticlesOnStop>
 			<Type>Accumulated</Type>
 			<Space>Local</Space>
 			<Width>0.1</Width>

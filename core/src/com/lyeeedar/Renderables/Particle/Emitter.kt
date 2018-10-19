@@ -77,6 +77,7 @@ class Emitter(val particleEffect: ParticleEffect)
 	var gravity: Float = 0f
 	var isCollisionEmitter: Boolean = false
 	var isBlockingEmitter: Boolean = true
+	var killParticlesOnStop: Boolean = false
 
 	var time: Float = 0f
 		set(value)
@@ -104,6 +105,18 @@ class Emitter(val particleEffect: ParticleEffect)
 
 	fun stop() { stopped = true }
 	fun start() { stopped = false }
+
+	fun killParticles()
+	{
+		for (particle in particles)
+		{
+			for (pdata in particle.particles)
+			{
+				pdata.free()
+			}
+			particle.particles.clear()
+		}
+	}
 
 	fun update(delta: Float, collisionGrid: Array2D<Boolean>?)
 	{
@@ -378,6 +391,7 @@ class Emitter(val particleEffect: ParticleEffect)
 		output.writeFloat(gravity)
 		output.writeBoolean(isCollisionEmitter)
 		output.writeBoolean(isBlockingEmitter)
+		output.writeBoolean(killParticlesOnStop)
 
 		output.writeInt(offset.streams.size)
 		for (stream in offset.streams)
@@ -426,6 +440,7 @@ class Emitter(val particleEffect: ParticleEffect)
 		gravity = input.readFloat()
 		isCollisionEmitter = input.readBoolean()
 		isBlockingEmitter = input.readBoolean()
+		killParticlesOnStop = input.readBoolean()
 
 		val numOffsetStreams = input.readInt()
 		for (i in 0 until numOffsetStreams)
@@ -491,6 +506,7 @@ class Emitter(val particleEffect: ParticleEffect)
 			emitter.gravity = xml.getFloat("Gravity", 0f)
 			emitter.isCollisionEmitter = xml.getBoolean("IsCollisionEmitter", false)
 			emitter.isBlockingEmitter = xml.getBoolean("IsBlockingEmitter", true)
+			emitter.killParticlesOnStop = xml.getBoolean("KillParticlesOnStop", false)
 
 			val offset = xml.getChildByName("Offset")
 			if (offset != null)

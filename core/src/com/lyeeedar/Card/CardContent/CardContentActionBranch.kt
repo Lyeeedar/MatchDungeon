@@ -19,7 +19,6 @@ class CardContentActionBranch : AbstractCardContentAction()
 		{
 			if (branch.condition == "else" || branch.condition.evaluate(variables).round() == 1)
 			{
-				CardContent.CardContentStack.last().index++
 				if (branch.hasNode)
 				{
 					CardContent.CardContentStack.add(CardContentNodeState(branch.node))

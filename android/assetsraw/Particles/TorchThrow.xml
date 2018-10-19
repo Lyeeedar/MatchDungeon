@@ -2,6 +2,7 @@
 	<Emitters>
 		<Emitter>
 			<Name>Torch</Name>
+			<KillParticlesOnStop>true</KillParticlesOnStop>
 			<Width>0</Width>
 			<Height>0</Height>
 			<Direction>Up</Direction>

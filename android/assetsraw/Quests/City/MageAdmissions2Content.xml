@@ -1,0 +1,43 @@
+<CardContent meta:X="0" meta:Y="0" GUID="66e443d0-9028-4749-875a-5f805717c774" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
+			<Line>
+				<MultilineString>After a long wait the second round of admissions begins. You are finally led into another room, infront of the same panel of instructors.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Congratulations on passing the first round of the admissions. Now we'd like to see how you handle a more powerful spell."</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Equipment>
+					<Unlock>false</Unlock>
+					<Equipment>Equipment/Spells/Necroracia.xml</Equipment>
+				</Equipment>
+			</Rewards>
+			<Line>
+				<MultilineString>"Please use it to destroy the wisps."</MultilineString>
+			</Line>
+			<Match3>
+				<Level>MageAdmissions2ContentLevel</Level>
+				<Success meta:RefKey="Node">8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f</Success>
+				<Failure meta:RefKey="Node">91e41773-f187-46c6-906d-f87d59996682</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
+			<Line>
+				<MultilineString>You fail the admission and are gently escorted from the building. Better luck next time.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
+			<Line>
+				<MultilineString>You pass the second round! You are ushered into a third hall with only a few others.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

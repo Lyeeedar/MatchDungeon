@@ -8,6 +8,7 @@
 				<Data Name="Enabled" Default="True" meta:RefKey="Boolean" />
 				<Data Name="IsCollisionEmitter" meta:RefKey="Boolean" />
 				<Data Name="IsBlockingEmitter" Default="True" meta:RefKey="Boolean" />
+				<Data Name="KillParticlesOnStop" meta:RefKey="Boolean" />
 				<Data Name="Type" EnumValues="Absolute,Accumulated" meta:RefKey="Enum" />
 				<Data Name="Space" EnumValues="World,Local" meta:RefKey="Enum" />
 				<Data Name="Shape" EnumValues="Box,Circle,Cone" meta:RefKey="Enum" />

@@ -43,6 +43,7 @@
 		<Emitter>
 			<Name>Head</Name>
 			<IsCollisionEmitter>true</IsCollisionEmitter>
+			<KillParticlesOnStop>true</KillParticlesOnStop>
 			<Space>Local</Space>
 			<Shape>Cone</Shape>
 			<Width>25</Width>

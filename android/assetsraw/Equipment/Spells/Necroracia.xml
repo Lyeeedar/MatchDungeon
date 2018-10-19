@@ -1,0 +1,25 @@
+<OffHand xmlns:meta="Editor">
+	<Name>Necroracia</Name>
+	<Description>A dark and powerful spell. Deals more damage depending on how many creatures are within its area of effect.</Description>
+	<Cost>250</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/book_evil</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Icon>
+	<Statistics meta:RefKey="Statistics" />
+	<Ability>
+		<Name>Necroracia</Name>
+		<Description>A dark and powerful spell. Deals more damage depending on how many creatures are within its area of effect.</Description>
+		<EffectData>
+			<Cost>8</Cost>
+			<Effect>1,Monster,Diamond,Pop</Effect>
+			<Data>
+				<AOE>2</AOE>
+				<Damage>2+MONSTERHP/2</Damage>
+			</Data>
+			<HitEffect meta:RefKey="ParticleEffect">
+				<Name>Necroracia</Name>
+			</HitEffect>
+		</EffectData>
+	</Ability>
+</OffHand>

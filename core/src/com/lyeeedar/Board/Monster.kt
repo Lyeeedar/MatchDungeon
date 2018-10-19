@@ -560,6 +560,21 @@ class MonsterAbility
 
 					target.monsterEffect!!.delayDisplay = animDuration
 				}
+				else
+				{
+					val flightEffect = data["FLIGHTEFFECT", null]
+					if (flightEffect is ParticleEffect)
+					{
+						animDuration += 0.4f
+						val particle = flightEffect.copy()
+						particle.animation = MoveAnimation.obtain().set(animDuration, diff)
+						particle.killOnAnimComplete = true
+
+						target.effects.add(particle)
+
+						target.monsterEffect!!.delayDisplay = animDuration
+					}
+				}
 
 				val hitEffect = data["HITEFFECT", null]
 				if (hitEffect is ParticleEffect)
@@ -678,7 +693,7 @@ class MonsterAbility
 					{
 						ability.data[el.name.toUpperCase()] = MonsterDesc.load(el)
 					}
-					else if (el.name == "ParticleEffect" || el.name == "StartEffect" || el.name == "EndEffect" || el.name == "HitEffect")
+					else if (el.name.contains("Effect"))
 					{
 						ability.data[el.name.toUpperCase()] = AssetManager.loadParticleEffect(el)
 					}

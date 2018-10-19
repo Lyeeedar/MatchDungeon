@@ -2,6 +2,7 @@
 	<Emitters>
 		<Emitter>
 			<Name>Arrow</Name>
+			<KillParticlesOnStop>true</KillParticlesOnStop>
 			<Width>0</Width>
 			<Height>0</Height>
 			<Direction>Up</Direction>
