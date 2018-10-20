@@ -1,0 +1,48 @@
+<CardContent meta:X="0" meta:Y="0" GUID="66e443d0-9028-4749-875a-5f805717c774" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
+			<Line>
+				<MultilineString>You arrive back at the chapterhouse. There you are greeted by the first knight, and ushered inside. He hands you a blindfold and asks you to put it on. You are then guided gently through the building.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Eventually an unrecognised voice tells you to remove the blindfold.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You are standing on a platform, surrounded by a long drop. A series of platforms leads to a door at the other side of the room, with large gaps between. At the door the knight-captain stands, grinning.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Your final trial is to test if you can persist and overcome dangerous situations. Do you have the wisdom to prevail? Show us!"</MultilineString>
+			</Line>
+			<Match3>
+				<Level>TestOfWisdomContentLevel</Level>
+				<Success meta:RefKey="Node">8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f</Success>
+				<Failure meta:RefKey="Node">91e41773-f187-46c6-906d-f87d59996682</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
+			<Line>
+				<MultilineString>Sadly you don't quite have what it takes to join the order.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
+			<Line>
+				<MultilineString>You finally make it to the door, where the knight-captain pulls you into a giant hug.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Welcome to the chapter! I know you will do us proud."</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Character>
+					<File>Knight</File>
+				</Character>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

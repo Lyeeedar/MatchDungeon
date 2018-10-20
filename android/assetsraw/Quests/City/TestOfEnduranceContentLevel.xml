@@ -1,0 +1,98 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>....P..##</Line>
+			<Line>#.......#</Line>
+			<Line>#........</Line>
+			<Line>....B....</Line>
+			<Line>....B....</Line>
+			<Line>....B#...</Line>
+			<Line>....B....</Line>
+			<Line>...#B....</Line>
+			<Line>....B....</Line>
+			<Line>....B...#</Line>
+			<Line>....B...#</Line>
+			<Line>#...B...#</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>P</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<Sinkable>
+				<UsePlayerSprite>true</UsePlayerSprite>
+			</Sinkable>
+		</Symbol>
+		<Symbol>
+			<Character>B</Character>
+			<Extends></Extends>
+			<Block>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/terrain/boulder</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Health>7</Health>
+				<AlwaysShowHP>true</AlwaysShowHP>
+			</Block>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>.</Character>
+			<Extends></Extends>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/floor_extra_8</Name>
+				</Sprite>
+			</Sprite>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>#</Character>
+			<Extends></Extends>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<TilingSprite meta:RefKey="TilingSprite">
+					<Name>Wall</Name>
+					<Mode>Premade</Mode>
+					<Front meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_stone_14</Name>
+					</Front>
+					<Top meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_stone_7</Name>
+					</Top>
+					<Overhang meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_stone_1</Name>
+					</Overhang>
+				</TilingSprite>
+			</Sprite>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<Type>Wall</Type>
+		</Symbol>
+	</Symbols>
+	<AllowedVictories>
+		<Condition meta:RefKey="Sink">
+			<Count>1</Count>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Turns">
+			<Turns>40</Turns>
+		</Condition>
+	</AllowedDefeats>
+</Level>

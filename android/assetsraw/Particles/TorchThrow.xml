@@ -3,6 +3,7 @@
 		<Emitter>
 			<Name>Torch</Name>
 			<KillParticlesOnStop>true</KillParticlesOnStop>
+			<Space>Local</Space>
 			<Width>0</Width>
 			<Height>0</Height>
 			<Direction>Up</Direction>

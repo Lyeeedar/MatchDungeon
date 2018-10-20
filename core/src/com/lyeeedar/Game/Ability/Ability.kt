@@ -107,7 +107,7 @@ class Ability
 			}
 
 			val them = if (targets > 1 || permuter.type != Permuter.Type.SINGLE) "them" else "it"
-			effectDesc += " and " + effect.toString(data, them, targetter.popAction())
+			effectDesc += " and " + effect.toString(data, them, targetter.popAction(), this)
 
 			val effectLabel = Label(effectDesc, Global.skin, "card")
 			effectLabel.setWrap(true)

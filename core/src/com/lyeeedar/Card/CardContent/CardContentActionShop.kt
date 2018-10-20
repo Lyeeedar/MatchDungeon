@@ -86,6 +86,7 @@ class CardContentActionShop : AbstractCardContentAction()
 							Global.player.gold -= cost
 
 							currentWare.reward()
+							CardScreen.instance.updateEquipment()
 
 							val sprite = AssetManager.loadSprite("Oryx/Custom/items/card")
 
@@ -297,7 +298,6 @@ class EquipmentWare : ShopWares()
 	override fun reward()
 	{
 		Global.player.equipment[equipment!!.slot] = equipment
-		CardScreen.instance.updateEquipment()
 	}
 }
 
@@ -423,24 +423,10 @@ class StatisticWare : ShopWares()
 
 			if (statVal != 0f)
 			{
-				val diff = statVal
-				val diffStr: String
-				if (diff > 0)
-				{
-					diffStr = "[GREEN]+$diff[]"
-				}
-				else if (diff < 0)
-				{
-					diffStr = "[RED]$diff[]"
-				}
-				else
-				{
-					diffStr = ""
-				}
-
 				val statTable = Table()
-				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ":", Global.skin, "card")).expandX().left()
-				statTable.add(Label(statVal.toString() + diffStr, Global.skin, "card"))
+				statTable.add(Label(stat.toString().toLowerCase().capitalize(), Global.skin, "cardtitle")).expandX().center()
+				statTable.row()
+				statTable.add(Label(statVal.toString(), Global.skin, "cardtitle")).expandX().center()
 				statTable.addTapToolTip(stat.tooltip)
 
 				table.add(statTable).growX()
@@ -456,7 +442,12 @@ class StatisticWare : ShopWares()
 		for (stat in Statistic.Values)
 		{
 			val statVal = statistics[stat] ?: 0f
-			Global.player.statistics[stat] = Global.player.statistics[stat] + statVal
+
+			if (statVal != 0f)
+			{
+				val currentStat = Global.player.statistics[stat] ?: 0f
+				Global.player.statistics[stat] = currentStat + statVal
+			}
 		}
 	}
 

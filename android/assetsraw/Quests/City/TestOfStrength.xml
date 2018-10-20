@@ -2,11 +2,10 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Alleyways</Name>
-			<Description>The alleyways of the city offer many opportunities, for those willing to explore them.</Description>
+			<Name>Order of the Sun 1:Trial of Strength</Name>
+			<Description>To become a knight of the Order of the Sun you have to pass a series of trials.</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
-			<HiddenRewards>true</HiddenRewards>
-			<Content>CoinTossContent</Content>
+			<Content>TestOfStrengthContent</Content>
 		</CardNode>
 	</Nodes>
 </Card>

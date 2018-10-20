@@ -110,11 +110,23 @@ class Effect(val type: Type)
 		}
 	}
 
-	fun toString(data: ObjectMap<String, Any>, them: String, popAction: String): String
+	fun toString(data: ObjectMap<String, Any>, them: String, popAction: String, ability: Ability): String
 	{
 		return when(type)
 		{
-			Type.POP -> { val dam = data["DAMAGE", "0"].toString().toInt() + Global.player.getStat(Statistic.ABILITYDAMAGE) + 1; "$popAction $them, dealing $dam damage." }
+			Type.POP ->
+			{
+				val dam = data["DAMAGE", "0"].toString().toInt() + Global.player.getStat(Statistic.ABILITYDAMAGE) + 1
+
+				if (ability.permuter.type == Permuter.Type.SINGLE)
+				{
+					"$popAction $them"
+				}
+				else
+				{
+					"$popAction $them, dealing $dam damage."
+				}
+			}
 
 			Type.CONVERT -> { val t = data["CONVERTTO"]?.toString()?.toLowerCase()?.capitalize() ?: "Random"; "convert $them to $t." }
 

@@ -54,17 +54,24 @@ class Monster(val desc: MonsterDesc, val difficulty: Int) : Creature(desc.hp, de
 		if (difficulty >= 1)
 		{
 			atkCooldown -= (difficulty.toFloat() / 3f).ciel()
+
+			for (ability in abilities)
+			{
+				ability.cooldownMin -= (difficulty.toFloat() / 4f).ciel()
+				ability.cooldownMax -= (difficulty.toFloat() / 4f).ciel()
+			}
 		}
 
 		if (difficulty >= 2)
 		{
-			for (ability in abilities)
+			if (attackNumPips > 4)
 			{
-				ability.cooldownMin -= (difficulty.toFloat() / 3f).ciel()
-				ability.cooldownMax -= (difficulty.toFloat() / 3f).ciel()
+				attackNumPips -= (difficulty.toFloat() / 5f).ciel()
+				if (attackNumPips < 4)
+				{
+					attackNumPips = 4
+				}
 			}
-
-			attackNumPips -= (difficulty.toFloat() / 3f).ciel()
 		}
 
 		if (difficulty >= 3)

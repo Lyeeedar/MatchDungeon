@@ -61,7 +61,7 @@
 					<Name>Death</Name>
 				</Death>
 				<AttackNumPips>3</AttackNumPips>
-				<AttackCooldown>2,6</AttackCooldown>
+				<AttackCooldown>1,4</AttackCooldown>
 				<Size>1</Size>
 				<HP>20</HP>
 				<DamageReduction>0</DamageReduction>
@@ -71,7 +71,8 @@
 						<Effect>Move</Effect>
 					</Ability>
 					<Ability>
-						<Cooldown>4,9</Cooldown>
+						<Cooldown>1,6</Cooldown>
+						<Target>Random</Target>
 						<Count>4</Count>
 						<Data>
 							<NumPips>5</NumPips>
