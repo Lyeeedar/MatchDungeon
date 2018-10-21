@@ -525,15 +525,7 @@ class Match5(orbDesc: OrbDesc, theme: Theme) : GemSpecial(orbDesc, theme)
 
 	override fun merge(other: Swappable): Special?
 	{
-		if (other is Orb)
-		{
-			targetDesc = other.desc
-			sprite.colourAnimation = null
-			sprite.colour = targetDesc!!.sprite.colour.copy()
-
-			return this
-		}
-		else if (other is Special)
+		if (other is Special)
 		{
 			if (other is GemSpecial)
 			{
@@ -543,6 +535,14 @@ class Match5(orbDesc: OrbDesc, theme: Theme) : GemSpecial(orbDesc, theme)
 			{
 				return Match5Spread(desc, theme, other)
 			}
+		}
+		else if (other is Matchable)
+		{
+			targetDesc = other.desc
+			sprite.colourAnimation = null
+			sprite.colour = targetDesc!!.sprite.colour.copy()
+
+			return this
 		}
 
 		return null
@@ -624,18 +624,18 @@ class Match5Spread(orbDesc: OrbDesc, theme: Theme, val special: Special) : GemSp
 
 	override fun merge(other: Swappable): Special?
 	{
-		if (other is Orb)
-		{
-			targetDesc = other.desc
-
-			return this
-		}
-		else if (other is Special)
+		if (other is Special)
 		{
 			if (other is GemSpecial)
 			{
 				return Match5Dual(desc, theme)
 			}
+		}
+		else if (other is Matchable)
+		{
+			targetDesc = other.desc
+
+			return this
 		}
 
 		return null
@@ -726,7 +726,7 @@ class Match5Dual(orbDesc: OrbDesc, theme: Theme) : GemSpecial(orbDesc, theme)
 
 	override fun merge(other: Swappable): Special?
 	{
-		if (other is Orb)
+		if (other is Matchable)
 		{
 			return this
 		}

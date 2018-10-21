@@ -38,6 +38,8 @@ class Level(val loadPath: String)
 
 	var customMonster: MonsterDesc? = null
 
+	val spawnList = Array<String>()
+
 	// Active state data
 	var levelTheme: Theme? = null
 	var questTheme: Theme? = null
@@ -55,18 +57,7 @@ class Level(val loadPath: String)
 
 	fun spawnOrb(): Swappable
 	{
-		for (v in victoryConditions)
-		{
-			if (v is CompletionConditionCustomOrb)
-			{
-				if (Random.random.nextFloat() < v.orbChance)
-				{
-					return Orb(Orb.getNamedOrb(v.targetOrbName), theme)
-				}
-			}
-		}
-
-		val toSpawn = theme.spawnList.random()
+		val toSpawn = spawnList.random()
 
 		if (toSpawn == "Changer")
 		{
@@ -89,13 +80,47 @@ class Level(val loadPath: String)
 			orb.timer = 10
 			return orb
 		}
-
-		return Orb(Orb.getRandomOrb(this), theme)
+		else if (toSpawn == "Orb")
+		{
+			return Orb(Orb.getRandomOrb(this), theme)
+		}
+		else
+		{
+			return Orb(Orb.getNamedOrb(toSpawn), theme)
+		}
 	}
 
 	fun create(questTheme: Theme, player: Player, victoryAction: () -> Unit, defeatAction: () -> Unit)
 	{
 		this.questTheme = questTheme
+
+		if (spawnList.size == 0)
+		{
+			spawnList.addAll(questTheme.spawnList)
+		}
+
+		if (spawnList.size == 1)
+		{
+			for (i in 0 until 9)
+			{
+				spawnList.add("Orb")
+			}
+		}
+
+		val spawnWeightTotal = spawnList.size
+		for (victory in victoryConditions)
+		{
+			if (victory is CompletionConditionCustomOrb)
+			{
+				val chance = victory.orbChance
+				val weight = (spawnWeightTotal.toFloat() * chance).ciel()
+
+				for (i in 0 until weight)
+				{
+					spawnList.add(victory.targetOrbName)
+				}
+			}
+		}
 
 		this.player = player
 		this.victoryAction = victoryAction
@@ -691,6 +716,21 @@ class Level(val loadPath: String)
 				}
 
 				level.orbs = xml.getInt("OrbCount", 6)
+
+				val spawnWeightsOverrideEl = xml.getChildByName("SpawnWeightsOverride")
+				if (spawnWeightsOverrideEl != null)
+				{
+					val spawnWeightsEl = spawnWeightsOverrideEl.getChildByName("SpawnWeights")!!
+					for (el in spawnWeightsEl.children)
+					{
+						val split = el.text.split(",")
+
+						for (i in 0 until split[1].toInt())
+						{
+							level.spawnList.add(split[0])
+						}
+					}
+				}
 
 				level.sealStrength = xml.getInt("SealStrength", 1)
 				level.blockStrength = xml.getInt("BlockStrength", 1)

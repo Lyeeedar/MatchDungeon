@@ -93,11 +93,11 @@ class StatisticsReward : AbstractReward()
 				table.add(Label(statVal.toString(), Global.skin, "cardtitle"))
 				table.row()
 
+				Global.player.statistics[stat] = (Global.player.statistics[stat] ?: 0f) + statVal
+
 				val card = CardWidget(table, table, AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, null)
 				card.canZoom = false
 				card.addPick("Take", {
-
-					Global.player.statistics[stat] = (Global.player.statistics[stat] ?: 0f) + statVal
 
 					val sprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/key_ornate")
 
@@ -355,18 +355,18 @@ class BuffReward : AbstractReward()
 		buff.remainingDuration += (buff.remainingDuration * Global.player.getStat(Statistic.BUFFDURATION)).toInt()
 		buff.remainingDuration++ // add one cause as soon as the level ends itll be decreased by 1
 
+		val existing = Global.player.buffs.firstOrNull{ it.name != buff.name }
+		if (existing != null)
+		{
+			existing.remainingDuration = buff.remainingDuration
+		}
+		else
+		{
+			Global.player.buffs.add(buff)
+		}
+
 		val card = buff.getCard()
 		card.addPick("", {
-
-			val existing = Global.player.buffs.firstOrNull{ it.name != buff.name }
-			if (existing != null)
-			{
-				existing.remainingDuration = buff.remainingDuration
-			}
-			else
-			{
-				Global.player.buffs.add(buff)
-			}
 
 			val sprite = buff.icon.copy()
 

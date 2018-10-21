@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.NinePatch
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.*
+import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
@@ -205,8 +206,21 @@ class CardScreen : AbstractScreen()
 			val equip = Global.player.getEquipment(slot)
 			if (equip != null)
 			{
+				val stack = Stack()
 				val widget = SpriteWidget(equip.icon, 32f, 32f)
-				tableSlot.add(widget).grow()
+
+				stack.add(widget)
+
+				if (equip.ability != null)
+				{
+					if (equip.ability!!.maxUsages > 0)
+					{
+						val label = Label(equip.ability!!.remainingUsages.toString(), Global.skin)
+						stack.add(label)
+					}
+				}
+
+				tableSlot.add(stack).grow()
 			}
 		}
 

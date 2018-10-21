@@ -86,6 +86,16 @@
 		<Data Name="Theme" BasePath="Themes" StripExtension="True" ResourceType="Theme" meta:RefKey="File" />
 		<Data Name="CustomMonster" Keys="MonsterDesc" meta:RefKey="Reference" />
 		<Data Name="OrbCount" Type="Int" Min="4" Default="6" meta:RefKey="Number" />
+		<Data Name="SpawnWeightsOverride" meta:RefKey="Struct">
+			<Data Name="SpawnWeights" meta:RefKey="Collection">
+				<Data Name="Spawn" Nullable="False" Collapse="True" meta:RefKey="Struct">
+					<Data Name="Swappable" EnumValues="Orb,Shield,Changer,Attack,Summon" SkipIfDefault="False" meta:RefKey="Enum" />
+					<Data Name="Weight" Type="Int" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+				</Data>
+			</Data>
+		</Data>
+		<Data Name="SealStength" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
+		<Data Name="BlockStength" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
 		<Data Name="AllowedVictories" MinCount="1" meta:RefKey="Collection">
 			<Data Name="Condition" Keys="None,Kill,Matches,Sink,CustomOrb,Plate,Turns,Break" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		</Data>

@@ -11,6 +11,7 @@
 			<Data Name="Description" meta:RefKey="String" />
 			<Data Name="EffectData" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
 				<Data Name="Cost" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
+				<Data Name="Usages" Type="Int" Min="-1" Default="-1" meta:RefKey="Number" />
 				<Data Name="Effect" Nullable="False" Collapse="True" meta:RefKey="Struct">
 					<Data Name="Target Count" Type="Int" Min="0" Default="1" SkipIfDefault="False" VisibleIf="Effect != Buff" meta:RefKey="Number" />
 					<Data Name="Targetter" EnumValues="Orb,Special,Block,Empty,Sealed,Monster,Attack,Tile,Spreader" VisibleIf="Effect != Buff" meta:RefKey="Enum" />

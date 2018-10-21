@@ -38,6 +38,9 @@ class Ability
 
 	var cost: Int = 2
 
+	var maxUsages: Int = -1
+	var remainingUsages: Int = -1
+
 	var targets = 1
 	var targetter: Targetter = Targetter(Targetter.Type.ORB)
 	var permuter: Permuter = Permuter(Permuter.Type.SINGLE)
@@ -119,11 +122,27 @@ class Ability
 		table.add(Label("Cost: $cost", Global.skin, "card")).growX()
 		table.row()
 
+		if (maxUsages > 0)
+		{
+			table.add(Label("Remaining Usages: $remainingUsages", Global.skin, "card")).growX()
+			table.row()
+		}
+
 		return table
 	}
 
 	fun activate(grid: Grid)
 	{
+		if (maxUsages > 0)
+		{
+			if (remainingUsages == 0)
+			{
+				return
+			}
+
+			remainingUsages--
+		}
+
 		PowerBar.instance.pips -= cost
 
 		if (effect.type == Effect.Type.BUFF)
@@ -180,7 +199,7 @@ class Ability
 				val fs = flightEffect!!.copy()
 				fs.killOnAnimComplete = true
 
-				val p1 = Vector2()
+				val p1 = Vector2(Global.stage.width / 2f, 0f)
 				val p2 = GridWidget.instance.pointToScreenspace(target)
 
 				val gridWidget = GridScreen.instance.grid!!
@@ -205,7 +224,7 @@ class Ability
 //				}
 //				else
 //				{
-					fs.animation = MoveAnimation.obtain().set(0.25f + dist * 0.025f, arrayOf(p1, p2), Interpolation.linear)
+					fs.animation = MoveAnimation.obtain().set((0.25f + dist * 0.025f) * (1.0f / fs.timeMultiplier), arrayOf(p1, p2), Interpolation.linear)
 //				}
 
 				fs.rotation = getRotation(p1, p2)
@@ -270,7 +289,11 @@ class Ability
 
 	fun hasValidTargets(grid: Grid): Boolean
 	{
-		if (effect.type == Effect.Type.BUFF)
+		if (maxUsages > 0 && remainingUsages == 0)
+		{
+			return false
+		}
+		else if (effect.type == Effect.Type.BUFF)
 		{
 			val buff = data["BUFF"] as Buff
 			if (Global.player.levelbuffs.any { it.name == buff.name && it.remainingDuration > 1 })
@@ -309,6 +332,9 @@ class Ability
 		val dataEl = xml.getChildByName("EffectData")!!
 
 		cost = dataEl.getInt("Cost", 1)
+
+		maxUsages = dataEl.getInt("Usages", -1)
+		remainingUsages = maxUsages
 
 		val effectDesc = dataEl.get("Effect")
 		val split = effectDesc.toUpperCase().split(",")

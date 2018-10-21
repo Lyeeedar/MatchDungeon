@@ -84,6 +84,14 @@ class QuestProgressWidget() : Widget()
 						return true
 					}
 				}
+				else if (current is SetTheme)
+				{
+					if (recursiveWalkToCurrent(current.next.node))
+					{
+						pathToCurrent.add(current)
+						return true
+					}
+				}
 				else if (current is CompleteQuest)
 				{
 
@@ -150,6 +158,14 @@ class QuestProgressWidget() : Widget()
 					}
 				}
 				else if (current is Define)
+				{
+					if (recursiveWalkToEnd(current.next.node))
+					{
+						pathToEnd.add(current)
+						return true
+					}
+				}
+				else if (current is SetTheme)
 				{
 					if (recursiveWalkToEnd(current.next.node))
 					{

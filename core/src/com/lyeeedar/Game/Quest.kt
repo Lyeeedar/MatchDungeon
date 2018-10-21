@@ -319,6 +319,10 @@ class Quest(val path: String)
 				{
 					recursiveWalk(currentNode.next.node, currentRun+1)
 				}
+				else if (currentNode is SetTheme)
+				{
+					recursiveWalk(currentNode.next.node, currentRun+1)
+				}
 				else
 				{
 					throw Exception("Unhandled quest node type '" + currentNode.javaClass.name + "'!")

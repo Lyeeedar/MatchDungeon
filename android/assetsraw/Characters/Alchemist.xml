@@ -1,0 +1,9 @@
+<Character xmlns:meta="Editor">
+	<Name>Alchemist</Name>
+	<Description></Description>
+	<Sprite meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_heroes/merchant_a</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Sprite>
+	<Statistics meta:RefKey="Statistics" />
+</Character>

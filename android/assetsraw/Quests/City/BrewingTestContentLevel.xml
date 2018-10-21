@@ -1,0 +1,76 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>....T....</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+			<Line>.........</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>.</Character>
+			<Extends></Extends>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/floor_wood_1</Name>
+				</Sprite>
+			</Sprite>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>T</Character>
+			<Extends></Extends>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/table_lab</Name>
+				</Sprite>
+			</Sprite>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<Type>Wall</Type>
+		</Symbol>
+	</Symbols>
+	<SpawnWeightsOverride>
+		<SpawnWeights>
+			<Spawn>Orb,9</Spawn>
+			<Spawn>Attack,1</Spawn>
+		</SpawnWeights>
+	</SpawnWeightsOverride>
+	<AllowedVictories>
+		<Condition meta:RefKey="CustomOrb">
+			<Count>10</Count>
+			<OrbName>PotionRed</OrbName>
+			<Chance>0.2</Chance>
+		</Condition>
+		<Condition meta:RefKey="CustomOrb">
+			<Count>10</Count>
+			<OrbName>PotionGreen</OrbName>
+			<Chance>0.2</Chance>
+		</Condition>
+		<Condition meta:RefKey="CustomOrb">
+			<Count>10</Count>
+			<OrbName>PotionBlue</OrbName>
+			<Chance>0.2</Chance>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Turns">
+			<Turns>40</Turns>
+		</Condition>
+		<Condition meta:RefKey="Die" />
+	</AllowedDefeats>
+</Level>

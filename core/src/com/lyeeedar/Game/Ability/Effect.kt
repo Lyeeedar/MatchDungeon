@@ -118,7 +118,7 @@ class Effect(val type: Type)
 			{
 				val dam = data["DAMAGE", "0"].toString().toInt() + Global.player.getStat(Statistic.ABILITYDAMAGE) + 1
 
-				if (ability.permuter.type == Permuter.Type.SINGLE)
+				if (ability.permuter.type == Permuter.Type.SINGLE && ability.targetter.type == Targetter.Type.ATTACK)
 				{
 					"$popAction $them"
 				}

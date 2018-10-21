@@ -215,6 +215,11 @@ class Equipment(val path: String)
 	fun save(output: Output)
 	{
 		output.writeString(path)
+
+		if (ability != null)
+		{
+			output.writeInt(ability!!.remainingUsages)
+		}
 	}
 
 	companion object
@@ -231,7 +236,14 @@ class Equipment(val path: String)
 		fun load(input: Input): Equipment
 		{
 			val path = input.readString()
-			return load(path)
+			val equip = load(path)
+
+			if (equip.ability != null)
+			{
+				equip.ability!!.remainingUsages = input.readInt()
+			}
+
+			return equip
 		}
 	}
 }

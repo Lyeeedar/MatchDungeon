@@ -14,14 +14,18 @@
 		<Name>Shoot</Name>
 		<Description>Shoot an arrow at an enemy.</Description>
 		<EffectData>
-			<Cost>2</Cost>
+			<Usages>15</Usages>
 			<Effect>1,Monster,Single,Pop</Effect>
 			<Data>
 				<Damage>0</Damage>
 			</Data>
 			<FlightEffect meta:RefKey="ParticleEffect">
 				<Name>Arrow</Name>
+				<TimeMultiplier>2</TimeMultiplier>
 			</FlightEffect>
+			<HitEffect meta:RefKey="ParticleEffect">
+				<Name>Hit</Name>
+			</HitEffect>
 		</EffectData>
 	</Ability>
 </MainHand>

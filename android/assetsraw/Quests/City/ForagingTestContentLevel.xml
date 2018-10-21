@@ -1,0 +1,69 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>......#....</Line>
+			<Line>.........#.</Line>
+			<Line>#..........</Line>
+			<Line>..F..f.F..#</Line>
+			<Line>.........f.</Line>
+			<Line>...........</Line>
+			<Line>#.f.F.f.f.#</Line>
+			<Line>...........</Line>
+			<Line>...........</Line>
+			<Line>#....f.....</Line>
+			<Line>.......f..#</Line>
+			<Line>..#........</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>F</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<Sinkable>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/items/VitaBud</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+			</Sinkable>
+			<Container>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/terrain/VitaBloom3</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Health>5</Health>
+			</Container>
+		</Symbol>
+		<Symbol>
+			<Character>f</Character>
+			<Extends></Extends>
+			<Block>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/terrain/VitaBloom2</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Health>5</Health>
+			</Block>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+	</Symbols>
+	<Theme>Forest</Theme>
+	<AllowedVictories>
+		<Condition meta:RefKey="Sink">
+			<Count>3</Count>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Turns">
+			<Turns>40</Turns>
+		</Condition>
+	</AllowedDefeats>
+</Level>

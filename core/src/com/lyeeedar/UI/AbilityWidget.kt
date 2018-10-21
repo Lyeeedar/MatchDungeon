@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Button
+import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
@@ -32,6 +33,8 @@ class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val gr
 
 	val ability = equipment.ability!!
 
+	val usagesLabel = Label("", Global.skin)
+
 	init
 	{
 		val stack = Stack()
@@ -46,6 +49,8 @@ class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val gr
 		}
 		val infoButtonTable = Table()
 		infoButtonTable.add(infoButton).size(16f).expand().top().right().pad(5f)
+
+		stack.add(usagesLabel)
 
 		stack.add(infoButtonTable)
 
@@ -96,6 +101,11 @@ class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val gr
 		else
 		{
 			colour = Color.DARK_GRAY
+		}
+
+		if (ability.maxUsages > 0)
+		{
+			usagesLabel.setText("" + ability.remainingUsages)
 		}
 	}
 
