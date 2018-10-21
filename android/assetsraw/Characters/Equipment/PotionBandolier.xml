@@ -1,0 +1,37 @@
+<Body xmlns:meta="Editor">
+	<Name>Potion Bandolier</Name>
+	<Description>A bandolier of potions, filled with all kinds of elixirs.</Description>
+	<Cost>150</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/potion_white</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Icon>
+	<Statistics meta:RefKey="Statistics">
+		<Regeneration>0.2</Regeneration>
+		<PowerGain>2</PowerGain>
+		<BuffDuration>0.2</BuffDuration>
+	</Statistics>
+	<Ability>
+		<Name>Drink Potion</Name>
+		<Description>Drink a potion to gain temporary strength.</Description>
+		<EffectData>
+			<Cost>3</Cost>
+			<Effect>1,Orb,Single,Buff</Effect>
+			<Data>
+				<Buff meta:RefKey="Buff">
+					<Name>Potion of Minor Strength</Name>
+					<Icon meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_items/potion_red</Name>
+						<DrawActualSize>true</DrawActualSize>
+					</Icon>
+					<Statistics meta:RefKey="Statistics">
+						<MatchDamage>1</MatchDamage>
+						<AbilityDamage>1</AbilityDamage>
+						<Pierce>1</Pierce>
+					</Statistics>
+					<Duration>4</Duration>
+				</Buff>
+			</Data>
+		</EffectData>
+	</Ability>
+</Body>

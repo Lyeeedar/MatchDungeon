@@ -1,0 +1,29 @@
+<OffHand xmlns:meta="Editor">
+	<Name>Grenade</Name>
+	<Description>A powerful explosive packed into a hard ceramic shell. Detonates when thrown.</Description>
+	<Cost>100</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/flask_red</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Icon>
+	<Statistics meta:RefKey="Statistics" />
+	<Ability>
+		<Name>Throw Grenade</Name>
+		<Description>Throw the grenade at the target</Description>
+		<EffectData>
+			<Cost>3</Cost>
+			<Usages>1</Usages>
+			<Effect>1,Tile,Diamond,Pop</Effect>
+			<Data>
+				<AOE>3</AOE>
+				<Damage>5</Damage>
+			</Data>
+			<FlightEffect meta:RefKey="ParticleEffect">
+				<Name>ThrowGrenade</Name>
+			</FlightEffect>
+			<HitEffect meta:RefKey="ParticleEffect">
+				<Name>Explosion</Name>
+			</HitEffect>
+		</EffectData>
+	</Ability>
+</OffHand>

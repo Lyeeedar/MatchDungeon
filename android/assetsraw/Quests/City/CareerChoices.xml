@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="2fb1edb8-1706-4887-a724-067abe32004f" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">e7e04dd5-19d0-4408-8633-bf5ccb0a96db</Root>
+	<Nodes>
+		<CardNode meta:X="263" meta:Y="0" GUID="e7e04dd5-19d0-4408-8633-bf5ccb0a96db">
+			<Name>Career Choices</Name>
+			<Description>The city is filled with opportunities for those willing to seize them</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>CareerChoicesContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

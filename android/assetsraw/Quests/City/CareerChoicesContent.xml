@@ -1,0 +1,83 @@
+<CardContent meta:X="0" meta:Y="0" GUID="ebd94a94-b8be-4d49-b1ac-712039603586" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">7b40d31c-a270-425f-8e7b-d80524a34e94</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="7b40d31c-a270-425f-8e7b-d80524a34e94">
+			<Line>
+				<MultilineString>The city is filled with opportunities for those willing to seize them. As you are walking around you hear people talked about all sorts of things.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Did you hear? The university is holding admissions for aspiring mages today?"</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Wow what a coincidence, so is the Order of the Golden Sun. They are putting the initiates through trials."</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Oh and the alchemists guild is currently running their entrance exams."</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>What would you like to check out?</MultilineString>
+			</Line>
+			<Choice>
+				<Choices>
+					<Choice>
+						<Text>Check out the Magic University</Text>
+						<Condition>AcquiredWizard == 0</Condition>
+						<Node meta:RefKey="Node">99494c0a-8d44-4798-a1ec-a905695a69af</Node>
+					</Choice>
+					<Choice>
+						<Text>Check out the Magic University (Completed)</Text>
+						<Condition>AcquiredWizard == 1</Condition>
+						<Node meta:RefKey="Node">99494c0a-8d44-4798-a1ec-a905695a69af</Node>
+					</Choice>
+					<Choice>
+						<Text>Check out the Order of the Golden Sun</Text>
+						<Condition>AcquiredKnight == 0</Condition>
+						<Node meta:RefKey="Node">cd85ef23-575f-4a08-99bb-2a49635c91fc</Node>
+					</Choice>
+					<Choice>
+						<Text>Check out the Order of the Golden Sun (Completed)</Text>
+						<Condition>AcquiredKnight == 1</Condition>
+						<Node meta:RefKey="Node">cd85ef23-575f-4a08-99bb-2a49635c91fc</Node>
+					</Choice>
+					<Choice>
+						<Text>Check out the Alchemists Guild</Text>
+						<Condition>AcquiredAlchemist == 0</Condition>
+						<Node meta:RefKey="Node">35935377-463d-4a4a-8577-6aba33875f43</Node>
+					</Choice>
+					<Choice>
+						<Text>Check out the Alchemists Guild (Completed)</Text>
+						<Condition>AcquiredAlchemist == 1</Condition>
+						<Node meta:RefKey="Node">35935377-463d-4a4a-8577-6aba33875f43</Node>
+					</Choice>
+				</Choices>
+			</Choice>
+		</Node>
+		<Node meta:X="747" meta:Y="0" GUID="99494c0a-8d44-4798-a1ec-a905695a69af">
+			<Line>
+				<MultilineString>You head towards the Magic University.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Custom</State>
+				<Key>Wizard</Key>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="749" meta:Y="129" GUID="cd85ef23-575f-4a08-99bb-2a49635c91fc">
+			<Line>
+				<MultilineString>You head towards the Order of the Golden Sun</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Custom</State>
+				<Key>Knight</Key>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="745" meta:Y="265" GUID="35935377-463d-4a4a-8577-6aba33875f43">
+			<Line>
+				<MultilineString>You head towards the Alchemists Guild</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Custom</State>
+				<Key>Alchemist</Key>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

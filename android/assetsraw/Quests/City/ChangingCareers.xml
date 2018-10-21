@@ -58,7 +58,7 @@
 		</QuestNode>
 		<QuestNode meta:X="1603.2022705078125" meta:Y="-8.9402933120727539" meta:Comment="f60eac7c-f567-4e27-967e-debf3abe4407" GUID="1aa9d053-e4ee-46df-8ca5-c5724f9cb300">
 			<Type>Fixed</Type>
-			<FixedEvent></FixedEvent>
+			<FixedEvent>CareerChoices</FixedEvent>
 			<Custom>
 				<State>
 					<Key>Wizard</Key>

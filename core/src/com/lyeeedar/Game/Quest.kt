@@ -479,6 +479,7 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 		{
 			val card = Card.load(("Quests/" + quest.path).directory() + "/" + fixedEventString)
 			card.current.isQuestCard = true
+			card.current.hiddenRewards = true
 			output.add(card)
 		}
 		else

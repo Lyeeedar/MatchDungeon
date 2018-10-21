@@ -14,10 +14,11 @@
 		<Name>Shoot</Name>
 		<Description>Shoot an arrow at an enemy.</Description>
 		<EffectData>
+			<Cost>2</Cost>
 			<Usages>15</Usages>
 			<Effect>1,Monster,Single,Pop</Effect>
 			<Data>
-				<Damage>0</Damage>
+				<Damage>1</Damage>
 			</Data>
 			<FlightEffect meta:RefKey="ParticleEffect">
 				<Name>Arrow</Name>

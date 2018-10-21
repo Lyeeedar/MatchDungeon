@@ -3,9 +3,8 @@
 	<Description>The robes of a mage. Ensorcelled to enhance the speed and power of spellcasting.</Description>
 	<Cost>170</Cost>
 	<Icon meta:RefKey="Sprite">
-		<Name>Oryx/uf_split/uf_items/cloak_leather</Name>
+		<Name>Oryx/uf_split/uf_items/cloak_ornate</Name>
 		<DrawActualSize>true</DrawActualSize>
-		<Colour>99,50,199,255</Colour>
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
 		<AbilityDamage>2</AbilityDamage>

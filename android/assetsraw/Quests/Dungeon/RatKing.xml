@@ -6,6 +6,9 @@
 		<Quest>
 			<File>Depths/DescentIntoTheDepths</File>
 		</Quest>
+		<Quest>
+			<File>City/ChangingCareers</File>
+		</Quest>
 	</BronzeRewards>
 	<SilverRewards meta:RefKey="Rewards" />
 	<GoldRewards meta:RefKey="Rewards">

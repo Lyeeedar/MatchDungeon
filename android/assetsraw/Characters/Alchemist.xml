@@ -2,8 +2,16 @@
 	<Name>Alchemist</Name>
 	<Description></Description>
 	<Sprite meta:RefKey="Sprite">
-		<Name>Oryx/uf_split/uf_heroes/merchant_a</Name>
+		<Name>Oryx/Custom/heroes/alchemist</Name>
 		<DrawActualSize>true</DrawActualSize>
 	</Sprite>
-	<Statistics meta:RefKey="Statistics" />
+	<Statistics meta:RefKey="Statistics">
+		<Health>8</Health>
+		<AbilityDamage>1</AbilityDamage>
+		<PowerGain>1</PowerGain>
+	</Statistics>
+	<StartingEquipment>
+		<Body>Characters/Equipment/PotionBandolier</Body>
+		<OffHand>Characters/Equipment/Grenade</OffHand>
+	</StartingEquipment>
 </Character>
