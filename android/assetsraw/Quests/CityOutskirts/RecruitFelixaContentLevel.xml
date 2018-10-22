@@ -1,0 +1,78 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>......#..</Line>
+			<Line>......###</Line>
+			<Line>#..CCC...</Line>
+			<Line>#.F......</Line>
+			<Line>#.......#</Line>
+			<Line>#.......#</Line>
+			<Line>#......##</Line>
+			<Line>.......#.</Line>
+			<Line>.......#.</Line>
+			<Line>.......#.</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>F</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<Friendly meta:RefKey="Friendly">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_heroes/thief</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Death meta:RefKey="ParticleEffect">
+					<Name>Death</Name>
+				</Death>
+				<Abilities>
+					<Move>
+						<Cooldown>2,4</Cooldown>
+					</Move>
+					<Pop>
+						<Cooldown>2,4</Cooldown>
+						<Count>1</Count>
+					</Pop>
+					<Break>
+						<Cooldown>1,2</Cooldown>
+						<Count>1</Count>
+						<Damage>1</Damage>
+					</Break>
+				</Abilities>
+			</Friendly>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>C</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<IsChest>true</IsChest>
+			<Container>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_items/chest_gold</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Health>5</Health>
+				<AlwaysShowHP>true</AlwaysShowHP>
+			</Container>
+		</Symbol>
+	</Symbols>
+	<AllowedVictories>
+		<Condition meta:RefKey="Sink">
+			<Count>7</Count>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Turns">
+			<Turns>40</Turns>
+		</Condition>
+	</AllowedDefeats>
+</Level>

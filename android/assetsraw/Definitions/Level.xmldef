@@ -49,6 +49,8 @@
 			<Data Name="Symbol" meta:RefKey="Struct">
 				<Data Name="Character" MaxLength="1" SkipIfDefault="False" meta:RefKey="String" />
 				<Data Name="Extends" MaxLength="1" SkipIfDefault="False" meta:RefKey="String" />
+				<Data Name="UsageCondition" Default="1" meta:RefKey="String" />
+				<Data Name="FallbackCharacter" MaxLength="1" Default="." VisibleIf="UsageCondition != 1" meta:RefKey="String" />
 				<Data Name="NameKey" meta:RefKey="String" />
 				<Data Name="Sprite" Keys="SpriteWrapper" meta:RefKey="Reference" />
 				<Data Name="Block" meta:RefKey="Struct">
@@ -59,6 +61,7 @@
 				<Data Name="Plate" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
 				<Data Name="Seal" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
 				<Data Name="Attack" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
+				<Data Name="Friendly" Keys="Friendly" meta:RefKey="Reference" />
 				<Data Name="IsMonster" SkipIfDefault="False" meta:RefKey="Boolean" />
 				<Data Name="FactionMonster" meta:RefKey="Struct">
 					<Data Name="IsBoss" meta:RefKey="Boolean" />

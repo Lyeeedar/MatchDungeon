@@ -54,6 +54,8 @@ class Orb(desc: OrbDesc, theme: Theme): Matchable(theme)
 		private val validOrbs: Array<OrbDesc> = Array()
 		private val namedOrbs = ObjectMap<String, OrbDesc>()
 
+		fun isNamedOrb(orbDesc: OrbDesc) = namedOrbs.containsKey(orbDesc.name)
+
 		fun getNamedOrb(name: String) = namedOrbs[name]
 
 		fun getRandomOrb(level: Level, toIgnore: OrbDesc? = null): OrbDesc

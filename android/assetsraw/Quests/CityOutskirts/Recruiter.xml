@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="ea6df0d1-52bc-4a63-bcca-d51889f2e82b" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">38f2b46e-5bd2-45e4-af30-a090f9abf7de</Root>
+	<Nodes>
+		<CardNode meta:X="263" meta:Y="0" GUID="38f2b46e-5bd2-45e4-af30-a090f9abf7de">
+			<Name>Recruiter</Name>
+			<Description>Just as you leave the city a man attracts your attention...</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>RecruiterContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

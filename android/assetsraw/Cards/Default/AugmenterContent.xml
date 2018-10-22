@@ -11,32 +11,28 @@
 			<Shop>
 				<Items>
 					<Statistics>
-						<Cost>100</Cost>
+						<Cost>75</Cost>
 						<Statistics meta:RefKey="Statistics">
 							<Health>1</Health>
 						</Statistics>
-						<Amount>1</Amount>
 					</Statistics>
 					<Statistics>
-						<Cost>150</Cost>
+						<Cost>175</Cost>
 						<Statistics meta:RefKey="Statistics">
 							<MatchDamage>0.5</MatchDamage>
 						</Statistics>
-						<Amount>0.5</Amount>
 					</Statistics>
 					<Statistics>
 						<Cost>150</Cost>
 						<Statistics meta:RefKey="Statistics">
 							<AbilityDamage>1</AbilityDamage>
 						</Statistics>
-						<Amount>1</Amount>
 					</Statistics>
 					<Statistics>
 						<Cost>100</Cost>
 						<Statistics meta:RefKey="Statistics">
 							<PowerGain>2</PowerGain>
 						</Statistics>
-						<Amount>2</Amount>
 					</Statistics>
 				</Items>
 			</Shop>

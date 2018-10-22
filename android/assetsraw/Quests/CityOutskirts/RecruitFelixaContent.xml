@@ -1,0 +1,45 @@
+<CardContent meta:X="0" meta:Y="0" GUID="60f8de57-1464-489d-a3a6-38e646526b91" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">8efd2569-702f-4e2c-9724-4042faab0d32</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="8efd2569-702f-4e2c-9724-4042faab0d32">
+			<Line>
+				<MultilineString>You find Felixa crouched over a large treasure chest, trying to pry it open. She doesn't seem to be having much luck.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Graaaa! Why doesn't the damned key work!"</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>She stand up and throws the key at the floor, before turning and spotting you. You introduce yourself and say that Grayheart recruited you. </MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"I'll come with you if we can get the treasure out of this bloody chest. Come here, help me pry it open."</MultilineString>
+			</Line>
+			<Match3>
+				<Level>RecruitFelixaContentLevel</Level>
+				<Success meta:RefKey="Node">bb1aa628-e332-4a45-8e27-ee94fe2bfdea</Success>
+				<Failure meta:RefKey="Node">06af8b93-e905-4fd6-b39a-3b42b8662572</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="499.08204071137038" meta:Y="243.59876323034067" GUID="06af8b93-e905-4fd6-b39a-3b42b8662572">
+			<Line>
+				<MultilineString>"Dammit! Look I'm not leaving until I've gotten into this chest. You go on without me, I'll be here a while."</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="497" meta:Y="0" GUID="bb1aa628-e332-4a45-8e27-ee94fe2bfdea">
+			<Line>
+				<MultilineString>"Victory! So much gold! Here, you can have a little, for your help. Now lets go get the others."</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>150</Count>
+				</Money>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

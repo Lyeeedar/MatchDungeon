@@ -492,22 +492,27 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 			{
 				for (card in Global.player.deck.encounters)
 				{
-					val pool = if (card.current.isShop) shops else pool
+					val weight = if (card.characterRestriction != null) 3 else 1
 
-					val playedWeight = if (card.current.hasBeenPlayed) 1 else 2
-					for (w in 0 until playedWeight)
+					for (iw in 0 until weight)
 					{
-						if (card.current.spawnWeight.subWeights.contains(spawnWeight))
+						val pool = if (card.current.isShop) shops else pool
+
+						val playedWeight = if (card.current.hasBeenPlayed) 1 else 2
+						for (w in 0 until playedWeight)
 						{
-							// make it 4x more likely
-							for (i in 0 until 4)
+							if (card.current.spawnWeight.subWeights.contains(spawnWeight))
+							{
+								// make it 4x more likely
+								for (i in 0 until 4)
+								{
+									pool.add(card)
+								}
+							}
+							else
 							{
 								pool.add(card)
 							}
-						}
-						else
-						{
-							pool.add(card)
 						}
 					}
 				}

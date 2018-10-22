@@ -3,6 +3,7 @@ package com.lyeeedar.Board
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.IntMap
 import com.badlogic.gdx.utils.ObjectMap
+import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Board.CompletionCondition.AbstractCompletionCondition
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionCustomOrb
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionSink
@@ -197,6 +198,12 @@ class Level(val loadPath: String)
 					loadTile(tile, '.')
 				}
 
+				if (symbol.usageCondition.evaluate(Global.getVariableMap()) == 0f)
+				{
+					loadTile(tile, symbol.fallbackChar)
+					return
+				}
+
 				if (symbol.block != null)
 				{
 					tile.block = Block(theme)
@@ -250,6 +257,11 @@ class Level(val loadPath: String)
 					{
 						tile.groundSprite = symbol.sprite.copy()
 					}
+				}
+
+				if (symbol.friendlyDesc != null)
+				{
+					tile.friendly = Friendly(symbol.friendlyDesc)
 				}
 
 				if (symbol.isChest)
@@ -598,10 +610,13 @@ class Level(val loadPath: String)
 				{
 					val character = symbolEl.get("Character")[0]
 					val extends = symbolEl.get("Extends", " ")!!.firstOrNull() ?: ' '
-					var sprite: SpriteWrapper? = null
+
+					val usageCondition = symbolEl.get("UsageCondition", "1")!!
+					val fallbackChar = symbolEl.get("FallbackCharacter", ".")!!.firstOrNull() ?: '.'
 
 					val nameKey = symbolEl.get("NameKey", null)
 
+					var sprite: SpriteWrapper? = null
 					val symbolSpriteEl = symbolEl.getChildByName("Sprite")
 					if (symbolSpriteEl != null)
 					{
@@ -623,6 +638,13 @@ class Level(val loadPath: String)
 					val plate = symbolEl.getInt("Plate", 0)
 					val seal = symbolEl.getInt("Seal", 0)
 					val attack = symbolEl.getInt("Attack", 0)
+
+					var friendlyDesc: FriendlyDesc? = null
+					val friendlyDescEl = symbolEl.getChildByName("Friendly")
+					if (friendlyDescEl != null)
+					{
+						friendlyDesc = FriendlyDesc.load(friendlyDescEl)
+					}
 
 					val isMonster = symbolEl.getBoolean("IsMonster", false)
 
@@ -675,7 +697,18 @@ class Level(val loadPath: String)
 
 					val type = SymbolType.valueOf(symbolEl.get("Type", "Floor")!!.toUpperCase())
 
-					symbolsMap[character.toInt()] = Symbol(character, extends, nameKey, sprite, blockDesc, plate, seal, attack, isMonster, factionMonster, monsterDesc, special, sinkableDesc, isChest, containerDesc, spreader, type)
+					symbolsMap[character.toInt()] = Symbol(
+							character, extends,
+							usageCondition, fallbackChar,
+							nameKey,
+							sprite,
+							blockDesc, plate, seal, attack,
+							friendlyDesc,
+							isMonster, factionMonster, monsterDesc,
+							special, sinkableDesc,
+							isChest, containerDesc,
+							spreader,
+							type)
 				}
 			}
 
@@ -772,9 +805,11 @@ enum class SymbolType
 }
 data class Symbol(
 		val char: Char, val extends: Char,
+		val usageCondition: String, val fallbackChar: Char,
 		val nameKey: String?,
 		val sprite: SpriteWrapper?,
 		val block: BlockDesc?, val plate: Int, val seal: Int, val attack: Int,
+		val friendlyDesc: FriendlyDesc?,
 		val isMonster: Boolean, val factionMonster: FactionMonster?, val monsterDesc: MonsterDesc?,
 		val special: String,
 		val sinkableDesc: SinkableDesc?,

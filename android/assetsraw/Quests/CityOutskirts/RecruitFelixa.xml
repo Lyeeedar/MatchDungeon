@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="819ad6d5-8235-4442-ba48-f924329ffb98" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">b8db35ed-b62e-464d-bf25-4f290dbd84f1</Root>
+	<Nodes>
+		<CardNode meta:X="263" meta:Y="0" GUID="b8db35ed-b62e-464d-bf25-4f290dbd84f1">
+			<Name>Recruit Felixa</Name>
+			<Description>You find Felixa hunched over a large treasure chest...</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>RecruitFelixaContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

@@ -4,25 +4,35 @@
 		<Data Name="Death" Keys="ParticleEffect" meta:RefKey="Reference" />
 		<Data Name="Size" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
 		<Data Name="HP" Type="Int" Min="1" Default="10" meta:RefKey="Number" />
+		<Data Name="DamageReduction" Type="Int" Min="0" meta:RefKey="Number" />
 		<Data Name="Abilities" meta:RefKey="Collection">
 			<Data Name="Attack" Extends="FriendlyAbility" Nullable="False" meta:RefKey="Struct">
-				<Data Name="Range" Type="Int" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
 				<Data Name="Count" Type="Int" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
-				<Data Name="TargetRestriction" EnumValues="Orb,Special,Block,Empty,Sealed,Monster,Attack,Tile,Shield" SkipIfDefault="False" meta:RefKey="Enum" />
-				<Data Name="Permuter" EnumValues="Single,AllOfType,NofType,Column,Row,Cross,Block,Diamond,Random" meta:RefKey="Enum" />
-				<Data Name="Data" meta:RefKey="Struct">
-					<Data Name="AOE" Type="Int" Min="1" Default="1" VisibleIf="Parent.Permuter==Block || Parent.Permuter==Diamond" meta:RefKey="Number" />
-					<Data Name="Count" Type="Int" Min="1" Default="1" VisibleIf="Parent.Permuter==Random || Parent.Permuter==NOfType" meta:RefKey="Number" />
-					<Data Name="Type" VisibleIf="Parent.Permuter==NofType || Parent.Permuter==AllOfType" meta:RefKey="String" />
-				</Data>
+				<Data Name="Damage" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+				<Data Name="FlightEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
+				<Data Name="HitEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
 			</Data>
-			<Data Name="Move" Extends="FriendlyAbility" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
-				<Data Name="Target" EnumValues="Neighbour,Random" SkipIfDefault="False" meta:RefKey="Enum" />
-				<Data Name="Destination" EnumValues="Attack,Monster,Block,Random" SkipIfDefault="False" meta:RefKey="Enum" />
+			<Data Name="Break" Extends="FriendlyAbility" Nullable="False" meta:RefKey="Struct">
+				<Data Name="Count" Type="Int" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+				<Data Name="Damage" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+				<Data Name="FlightEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
+				<Data Name="HitEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
 			</Data>
+			<Data Name="Block" Extends="FriendlyAbility" Nullable="False" meta:RefKey="Struct">
+				<Data Name="Count" Type="Int" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+				<Data Name="FlightEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
+				<Data Name="HitEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
+			</Data>
+			<Data Name="Pop" Extends="FriendlyAbility" Nullable="False" meta:RefKey="Struct">
+				<Data Name="Count" Type="Int" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+				<Data Name="FlightEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
+				<Data Name="HitEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
+			</Data>
+			<Data Name="Move" Extends="FriendlyAbility" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct" />
 		</Data>
 	</Definition>
 	<Definition Name="FriendlyAbility" Nullable="False" meta:RefKey="StructDef">
 		<Data Name="Cooldown" Name1="Min" Name2="Max" Min="1" Type="Int" SkipIfDefault="False" meta:RefKey="Vector" />
+		<Data Name="Range" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
 	</Definition>
 </Definitions>

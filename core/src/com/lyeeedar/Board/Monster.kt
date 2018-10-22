@@ -46,7 +46,7 @@ class Monster(val desc: MonsterDesc, val difficulty: Int) : Creature(desc.hp, de
 		attackNumPips = desc.attackNumPips
 		attackCooldown = desc.attackCooldown.copy()
 
-		maxhp += (maxhp.toFloat() * (difficulty / 10f)).ciel()
+		maxhp += (maxhp.toFloat() * (difficulty.toFloat() / 7f)).ciel()
 
 		abilities.addAll(desc.abilities.map{ it.copy() }.toGdxArray())
 		damageReduction = desc.damageReduction

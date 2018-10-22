@@ -1,0 +1,148 @@
+<Theme xmlns:meta="Editor">
+	<Floor meta:RefKey="SpriteWrapper">
+		<Sprite meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_terrain/ground_crusted_1</Name>
+			<Colour>189,189,189,255</Colour>
+		</Sprite>
+		<SpriteVariants>
+			<Sprite>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/ground_crusted_2</Name>
+					<Colour>189,189,189,255</Colour>
+				</Sprite>
+				<Chance>0.2</Chance>
+			</Sprite>
+			<Sprite>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/ground_crusted_3</Name>
+					<Colour>189,189,189,255</Colour>
+				</Sprite>
+				<Chance>0.05</Chance>
+			</Sprite>
+			<Sprite>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/ground_crusted_4</Name>
+					<Colour>189,189,189,255</Colour>
+				</Sprite>
+				<Chance>0.1</Chance>
+			</Sprite>
+		</SpriteVariants>
+	</Floor>
+	<Wall meta:RefKey="SpriteWrapper">
+		<TilingSprite meta:RefKey="TilingSprite">
+			<Name>Wall</Name>
+			<Mode>Premade</Mode>
+			<Front meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_terrain/wall_cave_14</Name>
+				<Colour>145,145,145,255</Colour>
+			</Front>
+			<Top meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_terrain/wall_cave_7</Name>
+				<Colour>145,145,145,255</Colour>
+			</Top>
+			<Overhang meta:RefKey="Sprite">
+				<Name>Oryx/uf_split/uf_terrain/wall_cave_1</Name>
+				<Colour>145,145,145,255</Colour>
+			</Overhang>
+		</TilingSprite>
+		<TilingSpriteVariants>
+			<TilingSprite>
+				<TilingSprite meta:RefKey="TilingSprite">
+					<Name>Wall</Name>
+					<Mode>Premade</Mode>
+					<Front meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_cave_15</Name>
+						<Colour>145,145,145,255</Colour>
+					</Front>
+					<Top meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_cave_8</Name>
+						<Colour>145,145,145,255</Colour>
+					</Top>
+					<Overhang meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_cave_1</Name>
+						<Colour>145,145,145,255</Colour>
+					</Overhang>
+				</TilingSprite>
+				<Chance>0.1</Chance>
+			</TilingSprite>
+			<TilingSprite>
+				<TilingSprite meta:RefKey="TilingSprite">
+					<Name>Wall</Name>
+					<Mode>Premade</Mode>
+					<Front meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_cave_16</Name>
+						<Colour>145,145,145,255</Colour>
+					</Front>
+					<Top meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_cave_9</Name>
+						<Colour>145,145,145,255</Colour>
+					</Top>
+					<Overhang meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_cave_1</Name>
+						<Colour>145,145,145,255</Colour>
+					</Overhang>
+				</TilingSprite>
+				<Chance>0.05</Chance>
+			</TilingSprite>
+		</TilingSpriteVariants>
+	</Wall>
+	<Pit meta:RefKey="SpriteWrapper">
+		<Sprite meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_terrain/water_green</Name>
+		</Sprite>
+	</Pit>
+	<Chest>
+		<Full meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_items/chest_silver_open</Name>
+			<DrawActualSize>true</DrawActualSize>
+		</Full>
+		<Empty meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_items/chest_silver_empty</Name>
+			<DrawActualSize>true</DrawActualSize>
+		</Empty>
+	</Chest>
+	<Coin meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/coin_gold</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Coin>
+	<Plate meta:RefKey="Sprite">
+		<Name>white</Name>
+	</Plate>
+	<Block>
+		<Sprite meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_terrain/crate</Name>
+			<DrawActualSize>true</DrawActualSize>
+		</Sprite>
+	</Block>
+	<Seal>
+		<Sprite meta:RefKey="Sprite">
+			<Name>Oryx/Custom/terrain/spiderweb</Name>
+			<DrawActualSize>true</DrawActualSize>
+			<Colour>255,255,255,54</Colour>
+		</Sprite>
+		<Sprite meta:RefKey="Sprite">
+			<Name>Oryx/Custom/terrain/spiderweb</Name>
+			<DrawActualSize>true</DrawActualSize>
+			<Colour>255,255,255,142</Colour>
+		</Sprite>
+		<Sprite meta:RefKey="Sprite">
+			<Name>Oryx/Custom/terrain/spiderweb</Name>
+			<DrawActualSize>true</DrawActualSize>
+		</Sprite>
+	</Seal>
+	<Shield>
+		<Sprite meta:RefKey="Sprite">
+			<Name>Oryx/uf_split/uf_items/shield_iron_heater</Name>
+			<DrawActualSize>true</DrawActualSize>
+		</Sprite>
+	</Shield>
+	<SpawnWeights>
+		<Spawn>Orb,1</Spawn>
+	</SpawnWeights>
+	<Factions>
+		<Faction>Rats</Faction>
+		<Faction>Goblin</Faction>
+		<Faction>Spider</Faction>
+	</Factions>
+	<BackgroundTile>Oryx/uf_split/uf_terrain/ground_crusted_1</BackgroundTile>
+</Theme>

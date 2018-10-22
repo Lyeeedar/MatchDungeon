@@ -1,0 +1,31 @@
+<CardContent meta:X="0" meta:Y="0" GUID="29227588-cbeb-45f5-a5a1-37e7f0ac10f9" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">c2880e70-9149-4021-85cd-0d739f50dc58</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="c2880e70-9149-4021-85cd-0d739f50dc58">
+			<Line>
+				<MultilineString>Just as you leave the city a man attracts your attention.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Recruiting members for a raid on local boss! Need 1 attacker! Apply soon!"</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You wander over to see what the fuss is about. As you approach the man smiles and waves to you.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Hey there adventurer, interested in joining my party? You'll get an equal share of any loot we collect."</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You don't see why not, so you agree to join him.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Perfect! That means our party is full. I'm Grayheart, nice to meet you. Now we just need to gather up the other members from their own quests. We need Felixa the Thief, Barron the Guardian and Ruffletop the Cleric. Would you mind going to these locations to get them?"</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You agree and head off.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

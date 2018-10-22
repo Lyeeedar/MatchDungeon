@@ -4,7 +4,7 @@
 	<Theme>Dungeon</Theme>
 	<BronzeRewards meta:RefKey="Rewards">
 		<Quest>
-			<File>Dungeon/RatKing</File>
+			<File>CityOutskirts/PartyingUp</File>
 		</Quest>
 		<Character>
 			<File>Adventurer</File>
