@@ -9,6 +9,7 @@ import com.lyeeedar.Game.Buff
 import com.lyeeedar.Global
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Statistic
+import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.filename
 
 /**
@@ -68,7 +69,7 @@ class Effect(val type: Type)
 				tile.orb!!.setAttributes(orb)
 			}
 
-			Type.SUMMON ->  fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>) { Friendly.load(data["SUMMON"].toString(), true).setTile(tile, grid) }
+			Type.SUMMON ->  fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>) { Friendly.load(data["SUMMON"] as XmlData, true).setTile(tile, grid) }
 
 			Type.SPREADER -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>)
 			{

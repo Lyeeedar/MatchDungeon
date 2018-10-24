@@ -1,0 +1,105 @@
+<CardContent meta:X="0" meta:Y="0" GUID="6ba06ef2-615a-4143-9f93-140c369a1f1b" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">aa5db3b7-4f37-4bc8-8e80-389ad71b0abe</Root>
+	<Nodes>
+		<Node meta:X="203" meta:Y="-1" GUID="aa5db3b7-4f37-4bc8-8e80-389ad71b0abe">
+			<Line>
+				<MultilineString>You finally make your way to the heart of the cave. In the chamber beyond the vast tentacled mass of the loathsome beholder floats menacingly.</MultilineString>
+			</Line>
+			<Branch>
+				<Branch>
+					<Condition>Total&gt;0</Condition>
+					<Node meta:RefKey="Node">1faa0004-7a2b-4d89-81ad-dd9f51090f86</Node>
+				</Branch>
+				<Branch>
+					<Condition>else</Condition>
+					<Node meta:RefKey="Node">50b09d89-ceb3-4a6a-a6a8-924c5fae997e</Node>
+				</Branch>
+			</Branch>
+			<Line>
+				<MultilineString>With that he draws his blade and charges. The battle is on!</MultilineString>
+			</Line>
+			<Match3>
+				<Level>BeholderBattleContentLevel</Level>
+				<Success meta:RefKey="Node">38a72ade-225a-4000-a66f-89d04291b454</Success>
+				<Failure meta:RefKey="Node">ec27bca5-5385-42b8-bcd0-87e359b95156</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="477" meta:Y="34" GUID="1faa0004-7a2b-4d89-81ad-dd9f51090f86">
+			<Line>
+				<MultilineString>Grayheart looks at the party and nods his head, indicating to the creature. Each person nods their head in turn, including you.</MultilineString>
+			</Line>
+		</Node>
+		<Node meta:X="477" meta:Y="116" GUID="50b09d89-ceb3-4a6a-a6a8-924c5fae997e">
+			<Line>
+				<MultilineString>Grayheart looks at you and nods his head, indicating to the creature. You nod back.</MultilineString>
+			</Line>
+		</Node>
+		<Node meta:X="467" meta:Y="291" GUID="ec27bca5-5385-42b8-bcd0-87e359b95156">
+			<Line>
+				<MultilineString>The beast is too strong, and you barely manage to get everyone out alive.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="698" meta:Y="203" GUID="38a72ade-225a-4000-a66f-89d04291b454">
+			<Line>
+				<MultilineString>The beast falls, you are triumphant! Grayheart walks over and excitedly shakes your hand.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Thank you so much friend! Without you I would never have been able to pull this off.</MultilineString>
+			</Line>
+			<Branch>
+				<Branch>
+					<Condition>GotBarron</Condition>
+					<Node meta:RefKey="Node">282149ed-e50c-4d27-9094-71afc241c403</Node>
+				</Branch>
+			</Branch>
+			<Branch>
+				<Branch>
+					<Condition>GotFelixa</Condition>
+					<Node meta:RefKey="Node">791c4cc4-7899-41bf-9b61-1640568fe0be</Node>
+				</Branch>
+			</Branch>
+			<Branch>
+				<Branch>
+					<Condition>GotRuffletop</Condition>
+					<Node meta:RefKey="Node">f08c2918-db0c-43a9-bf3c-f3d239ade3cb</Node>
+				</Branch>
+			</Branch>
+			<Line>
+				<MultilineString>Grayheart cuts out the core of the beast and hands it to you. "I think you've earned this."</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Item>
+					<Name>Life Crystal of the Beholder</Name>
+					<Icon meta:RefKey="Sprite">
+						<Name>Oryx/Custom/items/gem</Name>
+						<DrawActualSize>true</DrawActualSize>
+					</Icon>
+					<Key>BeholderCrystal</Key>
+					<Value>1</Value>
+					<Storage>Global</Storage>
+				</Item>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="975" meta:Y="203" GUID="282149ed-e50c-4d27-9094-71afc241c403">
+			<Line>
+				<MultilineString>Barron also claps you on the shoulder. "Indeed, you were most spectacular."</MultilineString>
+			</Line>
+		</Node>
+		<Node meta:X="967" meta:Y="362" GUID="791c4cc4-7899-41bf-9b61-1640568fe0be">
+			<Line>
+				<MultilineString>Felixa smiles at you and starts to dig around the creatures body. "The value of this thing is far more than that treasure, I'm glad you dragged me out here."</MultilineString>
+			</Line>
+		</Node>
+		<Node meta:X="959" meta:Y="459" GUID="f08c2918-db0c-43a9-bf3c-f3d239ade3cb">
+			<Line>
+				<MultilineString>Ruffletop flicks his hair back. "Well this will make quite the tale to the ladies. The dashing cleric taking down the terrible beast. With a little help from his sidekicks of course."</MultilineString>
+			</Line>
+		</Node>
+	</Nodes>
+</CardContent>

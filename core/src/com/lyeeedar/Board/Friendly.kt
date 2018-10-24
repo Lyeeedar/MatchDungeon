@@ -528,9 +528,62 @@ class MoveAbility : FriendlyAbility()
 {
 	override fun activate(friendly: Friendly, grid: Grid)
 	{
+		// check if there are any targets in range, if so stay put
+		val srcTile = friendly.tiles[0, 0]
+
+		for (ability in friendly.abilities)
+		{
+			when (ability)
+			{
+				is AttackAbility -> for (tile in friendly.monsterTiles)
+				{
+					if (tile.dist(srcTile) <= ability.range)
+					{
+						return
+					}
+				}
+				is BreakAbility -> for (tile in friendly.blockTiles)
+				{
+					if (tile.dist(srcTile) <= ability.range)
+					{
+						return
+					}
+				}
+				is BlockAbility -> for (tile in friendly.attackTiles)
+				{
+					if (tile.dist(srcTile) <= ability.range)
+					{
+						return
+					}
+				}
+				is PopAbility ->
+				{
+					for (tile in friendly.sinkPathTiles)
+					{
+						if (tile.dist(srcTile) <= ability.range)
+						{
+							return
+						}
+					}
+
+					for (tile in friendly.namedOrbTiles)
+					{
+						if (tile.dist(srcTile) <= ability.range)
+						{
+							return
+						}
+					}
+				}
+				is MoveAbility ->
+				{
+
+				}
+				else -> throw Exception("Unknown friendly ability type!")
+			}
+		}
+
 		// look within radius 2, if dest found move towards it, else widen search
 		var searchRadius = 2
-		val srcTile = friendly.tiles[0, 0]
 		val validTiles = Array<Tile>()
 
 		while (true)
@@ -539,81 +592,81 @@ class MoveAbility : FriendlyAbility()
 
 			for (ability in friendly.abilities)
 			{
-				if (ability is AttackAbility)
+				when (ability)
 				{
-					if (friendly.monsterTiles.size > 0)
+					is AttackAbility ->
 					{
-						possibleToHaveValidTiles = true
-					}
-
-					for (tile in friendly.monsterTiles)
-					{
-						if (tile.dist(srcTile) <= searchRadius)
+						if (friendly.monsterTiles.size > 0)
 						{
-							validTiles.add(tile)
+							possibleToHaveValidTiles = true
+						}
+
+						for (tile in friendly.monsterTiles)
+						{
+							if (tile.dist(srcTile) <= searchRadius)
+							{
+								validTiles.add(tile)
+							}
 						}
 					}
-				}
-				else if (ability is BreakAbility)
-				{
-					if (friendly.blockTiles.size > 0)
+					is BreakAbility ->
 					{
-						possibleToHaveValidTiles = true
-					}
-
-					for (tile in friendly.blockTiles)
-					{
-						if (tile.dist(srcTile) <= searchRadius)
+						if (friendly.blockTiles.size > 0)
 						{
-							validTiles.add(tile)
+							possibleToHaveValidTiles = true
+						}
+
+						for (tile in friendly.blockTiles)
+						{
+							if (tile.dist(srcTile) <= searchRadius)
+							{
+								validTiles.add(tile)
+							}
 						}
 					}
-				}
-				else if (ability is BlockAbility)
-				{
-					if (friendly.attackTiles.size > 0)
+					is BlockAbility ->
 					{
-						possibleToHaveValidTiles = true
-					}
-
-					for (tile in friendly.attackTiles)
-					{
-						if (tile.dist(srcTile) <= searchRadius)
+						if (friendly.attackTiles.size > 0)
 						{
-							validTiles.add(tile)
+							possibleToHaveValidTiles = true
+						}
+
+						for (tile in friendly.attackTiles)
+						{
+							if (tile.dist(srcTile) <= searchRadius)
+							{
+								validTiles.add(tile)
+							}
 						}
 					}
-				}
-				else if (ability is PopAbility)
-				{
-					if (friendly.sinkPathTiles.size > 0 || friendly.namedOrbTiles.size > 0)
+					is PopAbility ->
 					{
-						possibleToHaveValidTiles = true
-					}
-
-					for (tile in friendly.sinkPathTiles)
-					{
-						if (tile.dist(srcTile) <= searchRadius)
+						if (friendly.sinkPathTiles.size > 0 || friendly.namedOrbTiles.size > 0)
 						{
-							validTiles.add(tile)
+							possibleToHaveValidTiles = true
+						}
+
+						for (tile in friendly.sinkPathTiles)
+						{
+							if (tile.dist(srcTile) <= searchRadius)
+							{
+								validTiles.add(tile)
+							}
+						}
+
+						for (tile in friendly.namedOrbTiles)
+						{
+							if (tile.dist(srcTile) <= searchRadius)
+							{
+								validTiles.add(tile)
+							}
 						}
 					}
-
-					for (tile in friendly.namedOrbTiles)
+					is MoveAbility ->
 					{
-						if (tile.dist(srcTile) <= searchRadius)
-						{
-							validTiles.add(tile)
-						}
-					}
-				}
-				else if (ability is MoveAbility)
-				{
 
-				}
-				else
-				{
-					throw Exception("Unknown friendly ability type!")
+					}
+					else -> throw Exception("Unknown friendly ability type!")
 				}
 			}
 
@@ -699,8 +752,11 @@ class MoveAbility : FriendlyAbility()
 
 		val chosen = validTargets.random()!!
 
+		val borderTiles = friendly.getBorderTiles(grid, 1)
+		val targetTile = borderTiles.minBy { it.dist(chosen) }!!
+
 		val start = friendly.tiles.first()
-		friendly.setTile(chosen, grid)
+		friendly.setTile(targetTile, grid)
 		val end = friendly.tiles.first()
 
 		friendly.sprite.animation = MoveAnimation.obtain().set(0.25f, UnsmoothedPath(end.getPosDiff(start)), Interpolation.linear)

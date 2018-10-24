@@ -1,4 +1,4 @@
-<Quest meta:X="0" meta:Y="0" GUID="15966115-f36d-476e-a6cb-ccdc80f608d1" xmlns:meta="Editor" meta:GraphCommentData="55149447-bdf4-4945-8c6e-fdc96443dcba$Introduction$$112,71,138,255%de4925e1-71d2-4527-adc2-d3bd1a2b69c5$Branch$$255,255,255,255%b41615ba-153f-4294-b9ba-7a6c3cfb742c$Felixa$$107,50,50,255%3fb62115-288d-4c35-8447-f3fec232854b$Barron$$19,17,89,255%8f10bd30-3e91-4ee5-bd76-b773379c5be3$Ruffletop$$13,74,29,255%c7c4eddd-df14-4772-b274-88a684b8a7af$Boss$$250,205,7,255">
+<Quest meta:X="-62" meta:Y="-7" GUID="15966115-f36d-476e-a6cb-ccdc80f608d1" xmlns:meta="Editor" meta:GraphCommentData="55149447-bdf4-4945-8c6e-fdc96443dcba$Introduction$$112,71,138,255%de4925e1-71d2-4527-adc2-d3bd1a2b69c5$Branch$$255,255,255,255%b41615ba-153f-4294-b9ba-7a6c3cfb742c$Felixa$$107,50,50,255%3fb62115-288d-4c35-8447-f3fec232854b$Barron$$19,17,89,255%8f10bd30-3e91-4ee5-bd76-b773379c5be3$Ruffletop$$13,74,29,255%c7c4eddd-df14-4772-b274-88a684b8a7af$Boss$$250,205,7,255">
 	<Title>Partying Up</Title>
 	<Description>All adventurers know that to take on the most dangerous locations you need a party.</Description>
 	<Theme>CityOutskirts</Theme>
@@ -216,9 +216,9 @@
 			<Success meta:RefKey="QuestNode">4cdf65af-6e20-4f6c-a94d-94d4e2478be4</Success>
 			<Failure meta:RefKey="QuestNode">4cdf65af-6e20-4f6c-a94d-94d4e2478be4</Failure>
 		</QuestNode>
-		<QuestNode meta:X="2959.47802734375" meta:Y="730.7677001953125" meta:Comment="c7c4eddd-df14-4772-b274-88a684b8a7af" GUID="4cdf65af-6e20-4f6c-a94d-94d4e2478be4">
+		<QuestNode meta:X="2913.47802734375" meta:Y="733.7677001953125" meta:Comment="c7c4eddd-df14-4772-b274-88a684b8a7af" GUID="4cdf65af-6e20-4f6c-a94d-94d4e2478be4">
 			<Type>Fixed</Type>
-			<FixedEvent></FixedEvent>
+			<FixedEvent>BeholderBattle</FixedEvent>
 			<Success meta:RefKey="Branch">c2ab7ce7-6896-4613-bdbe-5db79ccf5a87</Success>
 			<Failure meta:RefKey="CompleteQuest">ebd9e6c8-97a9-411d-9cc0-41528ca7c03a</Failure>
 		</QuestNode>

@@ -40,6 +40,7 @@ class Ability
 
 	var maxUsages: Int = -1
 	var remainingUsages: Int = -1
+	var resetUsagesPerLevel = false
 
 	var targets = 1
 	var targetter: Targetter = Targetter(Targetter.Type.ORB)
@@ -124,8 +125,16 @@ class Ability
 
 		if (maxUsages > 0)
 		{
-			table.add(Label("Remaining Usages: $remainingUsages", Global.skin, "card")).growX()
-			table.row()
+			if (resetUsagesPerLevel)
+			{
+				table.add(Label("Usages Per Encounter: $maxUsages", Global.skin, "card")).growX()
+				table.row()
+			}
+			else
+			{
+				table.add(Label("Remaining Usages: $remainingUsages", Global.skin, "card")).growX()
+				table.row()
+			}
 		}
 
 		return table
@@ -335,6 +344,7 @@ class Ability
 
 		maxUsages = dataEl.getInt("Usages", -1)
 		remainingUsages = maxUsages
+		resetUsagesPerLevel = dataEl.getBoolean("ResetUsagesPerLevel", false)
 
 		val effectDesc = dataEl.get("Effect")
 		val split = effectDesc.toUpperCase().split(",")
@@ -359,6 +369,10 @@ class Ability
 				{
 					val buff = Buff.load(el)
 					data[el.name.toUpperCase()] = buff
+				}
+				else if (el.name == "Summon")
+				{
+					data[el.name.toUpperCase()] = el
 				}
 				else
 				{

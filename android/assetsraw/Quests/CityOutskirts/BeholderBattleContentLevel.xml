@@ -1,0 +1,251 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>#..#...#....</Line>
+			<Line>#..........#</Line>
+			<Line>...s.bb..s..</Line>
+			<Line>..F..bb.....</Line>
+			<Line>............</Line>
+			<Line>..s.........</Line>
+			<Line>.....B.....s</Line>
+			<Line>.........G..</Line>
+			<Line>#...........</Line>
+			<Line>.......R...#</Line>
+			<Line>#..s......##</Line>
+			<Line>##.....#####</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>s</Character>
+			<Extends></Extends>
+			<Block>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/heroes/prisoner_idle_1</Name>
+					<DrawActualSize>true</DrawActualSize>
+					<Colour>145,116,56,255</Colour>
+				</Sprite>
+				<Health>3</Health>
+			</Block>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>b</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>true</IsMonster>
+			<MonsterDesc meta:RefKey="MonsterDesc">
+				<Name>Beholder</Name>
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_heroes/beholder</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Death meta:RefKey="ParticleEffect">
+					<Name>Death</Name>
+				</Death>
+				<AttackNumPips>6</AttackNumPips>
+				<AttackCooldown>1,7</AttackCooldown>
+				<AttackDamage>2</AttackDamage>
+				<Size>2</Size>
+				<HP>65</HP>
+				<DamageReduction>2</DamageReduction>
+				<Abilities>
+					<Ability>
+						<Cooldown>2,5</Cooldown>
+						<Effect>Move</Effect>
+					</Ability>
+					<Ability>
+						<Cooldown>2,6</Cooldown>
+						<Effect>Debuff</Effect>
+						<Data>
+							<Debuff meta:RefKey="Buff">
+								<Name>Petrify</Name>
+								<Icon meta:RefKey="Sprite">
+									<Name>Oryx/Custom/heroes/prisoner_idle_1</Name>
+									<DrawActualSize>true</DrawActualSize>
+									<Colour>138,116,59,255</Colour>
+								</Icon>
+								<Statistics meta:RefKey="Statistics">
+									<Regeneration>-0.1</Regeneration>
+									<PowerGain>-2</PowerGain>
+									<Haste>-0.2</Haste>
+								</Statistics>
+								<Duration>4</Duration>
+							</Debuff>
+						</Data>
+					</Ability>
+					<Ability>
+						<Cooldown>1,5</Cooldown>
+						<Target>Random</Target>
+						<Effect>Seal</Effect>
+						<Data />
+					</Ability>
+					<Ability>
+						<Cooldown>1,5</Cooldown>
+						<Target>Random</Target>
+						<Count>2</Count>
+						<Data />
+					</Ability>
+				</Abilities>
+			</MonsterDesc>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>B</Character>
+			<Extends></Extends>
+			<UsageCondition>GotBarron</UsageCondition>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<Friendly meta:RefKey="Friendly">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/heroes/barron</Name>
+				</Sprite>
+				<Death meta:RefKey="ParticleEffect">
+					<Name>Death</Name>
+				</Death>
+				<DamageReduction>1</DamageReduction>
+				<Abilities>
+					<Attack>
+						<Cooldown>2,3</Cooldown>
+						<Range>2</Range>
+						<Count>1</Count>
+						<Damage>1</Damage>
+					</Attack>
+					<Move>
+						<Cooldown>2,6</Cooldown>
+					</Move>
+					<Block>
+						<Cooldown>1,3</Cooldown>
+						<Range>2</Range>
+						<Count>1</Count>
+						<HitEffect meta:RefKey="ParticleEffect">
+							<Name>Block</Name>
+						</HitEffect>
+					</Block>
+				</Abilities>
+			</Friendly>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>F</Character>
+			<Extends></Extends>
+			<UsageCondition>GotFelixa</UsageCondition>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<Friendly meta:RefKey="Friendly">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_heroes/thief</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Death meta:RefKey="ParticleEffect">
+					<Name>Death</Name>
+				</Death>
+				<Abilities>
+					<Move>
+						<Cooldown>2,4</Cooldown>
+					</Move>
+					<Pop>
+						<Cooldown>2,4</Cooldown>
+						<Count>1</Count>
+					</Pop>
+					<Break>
+						<Cooldown>1,2</Cooldown>
+						<Count>1</Count>
+						<Damage>1</Damage>
+					</Break>
+					<Attack>
+						<Cooldown>1,4</Cooldown>
+						<Count>1</Count>
+						<Damage>1</Damage>
+					</Attack>
+				</Abilities>
+			</Friendly>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>R</Character>
+			<Extends></Extends>
+			<UsageCondition>GotRuffletop</UsageCondition>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<Friendly meta:RefKey="Friendly">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/heroes/ruffletop</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Death meta:RefKey="ParticleEffect">
+					<Name>Death</Name>
+				</Death>
+				<HP>5</HP>
+				<Abilities>
+					<Move>
+						<Cooldown>2,4</Cooldown>
+					</Move>
+					<Block>
+						<Cooldown>3,7</Cooldown>
+						<Count>1</Count>
+						<HitEffect meta:RefKey="ParticleEffect">
+							<Name>Heal</Name>
+							<Colour>31,240,0,255</Colour>
+						</HitEffect>
+					</Block>
+				</Abilities>
+			</Friendly>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>G</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<Friendly meta:RefKey="Friendly">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_heroes/archer</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Sprite>
+				<Death meta:RefKey="ParticleEffect">
+					<Name>Death</Name>
+				</Death>
+				<Abilities>
+					<Attack>
+						<Cooldown>1,4</Cooldown>
+						<Range>4</Range>
+						<Count>1</Count>
+						<Damage>1</Damage>
+						<FlightEffect meta:RefKey="ParticleEffect">
+							<Name>Arrow</Name>
+							<KillOnAnimComplete>true</KillOnAnimComplete>
+						</FlightEffect>
+					</Attack>
+					<Move>
+						<Cooldown>1,5</Cooldown>
+					</Move>
+				</Abilities>
+			</Friendly>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+	</Symbols>
+	<AllowedVictories>
+		<Condition meta:RefKey="Kill">
+			<All>false</All>
+			<Named>Beholder</Named>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Die" />
+	</AllowedDefeats>
+</Level>

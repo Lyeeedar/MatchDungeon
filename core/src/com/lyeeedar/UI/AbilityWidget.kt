@@ -103,7 +103,7 @@ class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val gr
 			colour = Color.DARK_GRAY
 		}
 
-		if (ability.maxUsages > 0)
+		if (ability.maxUsages > 0 && !ability.resetUsagesPerLevel)
 		{
 			usagesLabel.setText("" + ability.remainingUsages)
 		}

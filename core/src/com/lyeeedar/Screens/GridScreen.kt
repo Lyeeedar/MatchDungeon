@@ -202,20 +202,26 @@ class GridScreen(): AbstractScreen()
 		for (slot in EquipmentSlot.Values)
 		{
 			val equip = player.getEquipment(slot)
-			if (equip?.ability != null)
+			val ability = equip?.ability
+			when
 			{
-				val widget = AbilityWidget(equip, 64f, 64f, level.grid)
-				abilityTable.add(widget).expand()
-			}
-			else if (equip != null)
-			{
-				val sprite = SpriteWidget(equip.icon.copy(), 64f, 64f)
-				sprite.color = Color.DARK_GRAY
-				abilityTable.add(sprite).expand()
-			}
-			else
-			{
-				abilityTable.add(SpriteWidget(emptySlot, 64f, 64f)).expand()
+				ability != null ->
+				{
+					val widget = AbilityWidget(equip, 64f, 64f, level.grid)
+					abilityTable.add(widget).expand()
+
+					if (ability.resetUsagesPerLevel)
+					{
+						ability.remainingUsages = ability.maxUsages
+					}
+				}
+				equip != null ->
+				{
+					val sprite = SpriteWidget(equip.icon.copy(), 64f, 64f)
+					sprite.color = Color.DARK_GRAY
+					abilityTable.add(sprite).expand()
+				}
+				else -> abilityTable.add(SpriteWidget(emptySlot, 64f, 64f)).expand()
 			}
 		}
 
