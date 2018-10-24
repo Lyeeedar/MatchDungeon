@@ -1,0 +1,47 @@
+<CardContent meta:X="0" meta:Y="0" GUID="6f8f126d-269c-4cfb-8ee8-c555c0f14bf6" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">7687a16d-5393-4e78-994f-beb556a86b71</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="7687a16d-5393-4e78-994f-beb556a86b71">
+			<Line>
+				<MultilineString>You find Ruffletop in the tavern, chatting to a young lady. He seem to be trying hard to impress her. You walk over to introduce yourself anyway. Ruffletop quickly pulls you to one side.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Yeh yeh mate, Grayheart whatever. Look help me seduce this girl, talk me up to her. I've been trying to get her into my bed for weeks, I'm not leaving until I've succeeded."</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>With that he pulls you back over to the girl and sits you down alongside the couple.</MultilineString>
+			</Line>
+			<Match3>
+				<Level>RecruitRuffletopContentLevel</Level>
+				<Success meta:RefKey="Node">01aa3937-188f-4fdf-980e-ebe196c36ab9</Success>
+				<Failure meta:RefKey="Node">d74ed67b-aa61-4f3a-a15d-a6ab20958aa9</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="452" meta:Y="211" GUID="d74ed67b-aa61-4f3a-a15d-a6ab20958aa9">
+			<Line>
+				<MultilineString>The girl doesn't seem impressed and make some excuse to leave. Ruffletop glares at you and hurries after her.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="481" meta:Y="0" GUID="01aa3937-188f-4fdf-980e-ebe196c36ab9">
+			<Line>
+				<MultilineString>The girl seems totally smitten, and after a long kiss with Ruffletop agrees on a late night rendevous with him.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Alright, lets go take down this beast, I have an appointment to attend."</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Statistics>
+					<Statistics meta:RefKey="Statistics">
+						<PowerGain>2</PowerGain>
+					</Statistics>
+				</Statistics>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

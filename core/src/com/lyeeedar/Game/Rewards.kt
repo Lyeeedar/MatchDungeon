@@ -562,7 +562,10 @@ class ItemReward : AbstractReward()
 			flags.flags.put(key, value.evaluate(Global.getVariableMap()))
 
 			val table = Table()
-			table.add(Label(name, Global.skin, "cardtitle"))
+			val title = Label(name, Global.skin, "cardtitle")
+			title.setWrap(true)
+
+			table.add(title)
 			table.row()
 			table.add(SpriteWidget(icon, 128f, 128f))
 			table.row()

@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="b6f416b6-cecd-4eb0-a106-22b9c908250b" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">51527c4f-faeb-46ec-8e7f-3702be290034</Root>
+	<Nodes>
+		<CardNode meta:X="263" meta:Y="0" GUID="51527c4f-faeb-46ec-8e7f-3702be290034">
+			<Name>Recruit Barron</Name>
+			<Description>You find Barron facing down a hoard of enemies...</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>RecruitBarronContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

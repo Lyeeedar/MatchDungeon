@@ -1,0 +1,44 @@
+<CardContent meta:X="0" meta:Y="0" GUID="18b7e411-040a-4a59-8c04-6a9e375d2b25" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">2bccef5c-0721-4d78-a51a-f8faaba6a58e</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="2bccef5c-0721-4d78-a51a-f8faaba6a58e">
+			<Line>
+				<MultilineString>You find barron in the forest, facing down a swarm of enemies.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Come at me beasts! I, Barron, Will not let you prevail! Have at you!"</MultilineString>
+			</Line>
+			<Match3>
+				<Level>RecruitBarronContentLevel</Level>
+				<Success meta:RefKey="Node">19a5732a-8018-4f15-83f2-a8c0eaf1206c</Success>
+				<Failure meta:RefKey="Node">05e7ddb9-bb19-447d-8c7e-05d37fb66b88</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="451" meta:Y="217" GUID="05e7ddb9-bb19-447d-8c7e-05d37fb66b88">
+			<Line>
+				<MultilineString>You just about manage to drag Barron away before the monsters finish him off. He's badly injured though.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="479" meta:Y="0" GUID="19a5732a-8018-4f15-83f2-a8c0eaf1206c">
+			<Line>
+				<MultilineString>Together you defeat the enemies.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Well met me dear fellow. Quite the fighter aren't you! Come, let us depart this place."</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Statistics>
+					<Statistics meta:RefKey="Statistics">
+						<Health>1</Health>
+					</Statistics>
+				</Statistics>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

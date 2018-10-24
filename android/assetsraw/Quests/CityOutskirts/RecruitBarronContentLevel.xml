@@ -1,0 +1,63 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>...........</Line>
+			<Line>..........#</Line>
+			<Line>#..........</Line>
+			<Line>...!.!.!...</Line>
+			<Line>..!...!..#.</Line>
+			<Line>...........</Line>
+			<Line>...........</Line>
+			<Line>.#...B.....</Line>
+			<Line>...........</Line>
+			<Line>...........</Line>
+			<Line>..........#</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>B</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<Friendly meta:RefKey="Friendly">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/Custom/heroes/barron</Name>
+				</Sprite>
+				<Death meta:RefKey="ParticleEffect">
+					<Name>Death</Name>
+				</Death>
+				<DamageReduction>1</DamageReduction>
+				<Abilities>
+					<Attack>
+						<Cooldown>2,3</Cooldown>
+						<Range>2</Range>
+						<Count>1</Count>
+						<Damage>1</Damage>
+					</Attack>
+					<Move>
+						<Cooldown>2,6</Cooldown>
+					</Move>
+					<Block>
+						<Cooldown>1,3</Cooldown>
+						<Range>2</Range>
+						<Count>1</Count>
+						<HitEffect meta:RefKey="ParticleEffect">
+							<Name>Block</Name>
+						</HitEffect>
+					</Block>
+				</Abilities>
+			</Friendly>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+	</Symbols>
+	<Theme>Forest</Theme>
+	<AllowedVictories>
+		<Condition meta:RefKey="Kill" />
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Die" />
+	</AllowedDefeats>
+</Level>

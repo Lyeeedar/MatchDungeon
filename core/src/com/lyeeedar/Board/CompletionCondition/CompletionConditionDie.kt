@@ -40,6 +40,24 @@ class CompletionConditionDie : AbstractCompletionCondition()
 			val moteDst = dst.cpy() - Vector2(GridWidget.instance.tileSize / 2f, GridWidget.instance.tileSize / 2f)
 			val src = GridWidget.instance.pointToScreenspace(c)
 
+			// attack all friendlies
+			for (tile in grid.grid)
+			{
+				val friendly = tile.friendly ?: continue
+				val sprite = c.sprite.copy()
+				val dst = GridWidget.instance.pointToScreenspace(tile)
+
+				Mote(src, dst, sprite, GridWidget.instance.tileSize,
+					 {
+						 if (friendly.hp > 0) friendly.hp--
+
+						 val hitSprite = AssetManager.loadParticleEffect("Hit")
+						 tile.effects.add(hitSprite)
+
+					 }, animSpeed = 0.35f, leap = true)
+			}
+
+			// calculate block and counter
 			fun tryBlock(chance: Float): Boolean
 			{
 				return chance > 0f && Random.random.nextFloat() < chance
@@ -61,14 +79,15 @@ class CompletionConditionDie : AbstractCompletionCondition()
 				countered = true
 			}
 
+			// animate player attack
 			Mote(src, moteDst, sprite, GridWidget.instance.tileSize,
 				 {
 					 if (blocked)
 					 {
 						 val pos = dst
 
-						 val healSprite = AssetManager.loadParticleEffect("Block")
-						 val actor = ParticleEffectActor(healSprite)
+						 val sprite = AssetManager.loadParticleEffect("Block")
+						 val actor = ParticleEffectActor(sprite)
 						 actor.setSize(48f, 48f)
 						 actor.setPosition(pos.x, pos.y)
 						 Global.stage.addActor(actor)
@@ -79,8 +98,8 @@ class CompletionConditionDie : AbstractCompletionCondition()
 
 						 val pos = dst
 
-						 val healSprite = AssetManager.loadParticleEffect("Hit")
-						 val actor = ParticleEffectActor(healSprite)
+						 val sprite = AssetManager.loadParticleEffect("Hit")
+						 val actor = ParticleEffectActor(sprite)
 						 actor.setSize(48f, 48f)
 						 actor.setPosition(pos.x, pos.y)
 						 Global.stage.addActor(actor)

@@ -1,6 +1,7 @@
 package com.lyeeedar.Board
 
 import com.lyeeedar.Renderables.Particle.ParticleEffect
+import com.lyeeedar.Renderables.Renderable
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.Array2D
 
@@ -24,6 +25,7 @@ abstract class Creature(maxHp: Int, size: Int, override var sprite: Sprite, deat
 		this.death = death
 	}
 
+	val queuedTileSprites = com.badlogic.gdx.utils.Array<Renderable>()
 	fun setTile(target: Tile, grid: Grid, delay: Float = 0f)
 	{
 		for (tile in tiles)
@@ -51,6 +53,14 @@ abstract class Creature(maxHp: Int, size: Int, override var sprite: Sprite, deat
 				tiles[x, y] = tile
 			}
 		}
+
+		for (effect in queuedTileSprites)
+		{
+			effect.size[0] = size
+			effect.size[1] = size
+			tiles[0, 0].effects.add(effect)
+		}
+		queuedTileSprites.clear()
 	}
 
 	abstract fun onTurn(grid: Grid)
