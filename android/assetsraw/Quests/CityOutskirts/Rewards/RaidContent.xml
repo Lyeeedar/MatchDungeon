@@ -1,0 +1,47 @@
+<CardContent meta:X="0" meta:Y="0" GUID="d8e2415f-11ad-490f-9862-453d61c6c289" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">a5176c50-4edb-4994-ba4f-c8ae6bb52ca9</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="a5176c50-4edb-4994-ba4f-c8ae6bb52ca9">
+			<Line>
+				<MultilineString>You meet up with Grayheart, but he's alone.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Just us this time friend. Lets do this."</MultilineString>
+			</Line>
+			<Match3>
+				<Level>RaidContentLevel</Level>
+				<Success meta:RefKey="Node">3bbccab5-63e5-4aa7-b004-cbd3cc9e8240</Success>
+				<Failure meta:RefKey="Node">3f5afb11-df14-4273-8ef9-cd606011073e</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="464" meta:Y="183" GUID="3f5afb11-df14-4273-8ef9-cd606011073e">
+			<Line>
+				<MultilineString>You just barely drag yourself and Grayheart out of there.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="480" meta:Y="0" GUID="3bbccab5-63e5-4aa7-b004-cbd3cc9e8240">
+			<Line>
+				<MultilineString>You stand triumphant over the fallen boss.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>80</Count>
+				</Money>
+				<Statistics>
+					<Statistics meta:RefKey="Statistics">
+						<Health>1</Health>
+						<MatchDamage>1</MatchDamage>
+						<AbilityDamage>1</AbilityDamage>
+						<PowerGain>2</PowerGain>
+					</Statistics>
+				</Statistics>
+				<Equipment>
+					<FromDeck>true</FromDeck>
+				</Equipment>
+			</Rewards>
+		</Node>
+	</Nodes>
+</CardContent>

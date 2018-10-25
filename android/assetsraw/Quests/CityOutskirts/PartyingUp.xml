@@ -18,8 +18,17 @@
 			<File>Dungeon/RatKing</File>
 		</Quest>
 	</BronzeRewards>
-	<SilverRewards meta:RefKey="Rewards" />
-	<GoldRewards meta:RefKey="Rewards" />
+	<SilverRewards meta:RefKey="Rewards">
+		<Card>
+			<File>Quests/CityOutskirts/Rewards/Raid</File>
+		</Card>
+	</SilverRewards>
+	<GoldRewards meta:RefKey="Rewards">
+		<Equipment>
+			<Unlock>true</Unlock>
+			<Equipment>Quests/CityOutskirts/Rewards/DistressFlare.xml</Equipment>
+		</Equipment>
+	</GoldRewards>
 	<Root meta:RefKey="QuestNode">7616faa5-e8c6-4fec-9b72-feb5e05ea794</Root>
 	<Nodes>
 		<QuestNode meta:X="299.14959716796875" meta:Y="-1.9106084108352661" meta:Comment="55149447-bdf4-4945-8c6e-fdc96443dcba" GUID="7616faa5-e8c6-4fec-9b72-feb5e05ea794">

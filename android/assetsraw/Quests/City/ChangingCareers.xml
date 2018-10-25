@@ -3,7 +3,11 @@
 	<Description>The city holds many opportunities for a new start, for those that seek them out.</Description>
 	<Theme>City</Theme>
 	<BronzeRewards meta:RefKey="Rewards" />
-	<SilverRewards meta:RefKey="Rewards" />
+	<SilverRewards meta:RefKey="Rewards">
+		<Card>
+			<File>Quests/City/Rewards/BackalleyGambling</File>
+		</Card>
+	</SilverRewards>
 	<GoldRewards meta:RefKey="Rewards" />
 	<Root meta:RefKey="QuestNode">64370f6b-c741-4d49-b34a-50fe5c1389d6</Root>
 	<Nodes>
@@ -297,7 +301,7 @@
 			<Success meta:RefKey="QuestNode">547761a5-a2be-4869-ae5d-da8a6f0a0a6f</Success>
 			<Failure meta:RefKey="CompleteQuest">06365a74-4ada-4687-b462-0cbd7ed06d4c</Failure>
 		</QuestNode>
-		<QuestNode meta:X="2918.5840286538896" meta:Y="126.61755530308676" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="547761a5-a2be-4869-ae5d-da8a6f0a0a6f">
+		<QuestNode meta:X="2918.583984375" meta:Y="126.6175537109375" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="547761a5-a2be-4869-ae5d-da8a6f0a0a6f">
 			<Type>Deck</Type>
 			<AllowDeckCards>true</AllowDeckCards>
 			<AllowQuestCards>true</AllowQuestCards>
@@ -305,16 +309,16 @@
 			<Success meta:RefKey="QuestNode">8341d906-a43a-40fb-9024-cc2a63a1a0aa</Success>
 			<Failure meta:RefKey="QuestNode">8341d906-a43a-40fb-9024-cc2a63a1a0aa</Failure>
 		</QuestNode>
-		<QuestNode meta:X="3109.8567337320146" meta:Y="154.316835088243" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="8341d906-a43a-40fb-9024-cc2a63a1a0aa">
+		<QuestNode meta:X="3109.856689453125" meta:Y="154.31683349609375" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="8341d906-a43a-40fb-9024-cc2a63a1a0aa">
 			<Type>Fixed</Type>
 			<FixedEvent>ForagingTest</FixedEvent>
 			<Success meta:RefKey="QuestNode">8c158097-e7ba-4387-b1d1-4817696d7daf</Success>
 			<Failure meta:RefKey="CompleteQuest">5b7cba6f-341f-414e-af0b-fe929916b387</Failure>
 		</QuestNode>
-		<CompleteQuest meta:X="2785.6977981851396" meta:Y="276.54675452183676" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="06365a74-4ada-4687-b462-0cbd7ed06d4c">
+		<CompleteQuest meta:X="2785.69775390625" meta:Y="276.5467529296875" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="06365a74-4ada-4687-b462-0cbd7ed06d4c">
 			<State>Failure</State>
 		</CompleteQuest>
-		<QuestNode meta:X="3426.5840286538896" meta:Y="137.99360207495082" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="8c158097-e7ba-4387-b1d1-4817696d7daf">
+		<QuestNode meta:X="3426.583984375" meta:Y="137.99360656738281" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="8c158097-e7ba-4387-b1d1-4817696d7daf">
 			<Type>Deck</Type>
 			<AllowDeckCards>true</AllowDeckCards>
 			<AllowQuestCards>true</AllowQuestCards>
@@ -322,7 +326,7 @@
 			<Success meta:RefKey="QuestNode">458bf00d-ba08-4fd1-b8f5-cc92f5b43958</Success>
 			<Failure meta:RefKey="QuestNode">458bf00d-ba08-4fd1-b8f5-cc92f5b43958</Failure>
 		</QuestNode>
-		<QuestNode meta:X="3629.2622513101396" meta:Y="134.73487404760709" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="458bf00d-ba08-4fd1-b8f5-cc92f5b43958">
+		<QuestNode meta:X="3629.26220703125" meta:Y="134.73487854003906" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="458bf00d-ba08-4fd1-b8f5-cc92f5b43958">
 			<Type>Deck</Type>
 			<IsShop>true</IsShop>
 			<AllowDeckCards>true</AllowDeckCards>
@@ -331,19 +335,19 @@
 			<Success meta:RefKey="QuestNode">e1e208b1-f829-4f14-8eb5-71b387b82a76</Success>
 			<Failure meta:RefKey="QuestNode">e1e208b1-f829-4f14-8eb5-71b387b82a76</Failure>
 		</QuestNode>
-		<QuestNode meta:X="3825.4233841226396" meta:Y="134.73487404760709" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="e1e208b1-f829-4f14-8eb5-71b387b82a76">
+		<QuestNode meta:X="3825.42333984375" meta:Y="134.73487854003906" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="e1e208b1-f829-4f14-8eb5-71b387b82a76">
 			<Type>Fixed</Type>
 			<FixedEvent>BrewingTest</FixedEvent>
 			<Success meta:RefKey="Define">15ffb8a5-2183-4c69-b74b-0bacba0db688</Success>
 			<Failure meta:RefKey="CompleteQuest">bf20c190-2fba-48fb-b038-4c1b96d0568d</Failure>
 		</QuestNode>
-		<CompleteQuest meta:X="3302.0640091226396" meta:Y="315.66895607885709" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="5b7cba6f-341f-414e-af0b-fe929916b387">
+		<CompleteQuest meta:X="3302.06396484375" meta:Y="315.6689453125" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="5b7cba6f-341f-414e-af0b-fe929916b387">
 			<State>Failure</State>
 		</CompleteQuest>
-		<CompleteQuest meta:X="4015.6571304226618" meta:Y="323.9264207163352" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="bf20c190-2fba-48fb-b038-4c1b96d0568d">
+		<CompleteQuest meta:X="4015.6572265625" meta:Y="323.92642211914062" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="bf20c190-2fba-48fb-b038-4c1b96d0568d">
 			<State>Failure</State>
 		</CompleteQuest>
-		<Define meta:X="4031.4154312039122" meta:Y="152.46432354836648" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="15ffb8a5-2183-4c69-b74b-0bacba0db688">
+		<Define meta:X="4031.41552734375" meta:Y="152.46432495117188" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="15ffb8a5-2183-4c69-b74b-0bacba0db688">
 			<Key>AcquiredAlchemist</Key>
 			<Value>1</Value>
 			<IsGlobal>true</IsGlobal>

@@ -277,13 +277,13 @@ class CharacterReward : AbstractReward()
 
 class MoneyReward : AbstractReward()
 {
-	var amount: Int = 0
+	lateinit var amountEqn: String
 
 	override fun isValid(): Boolean = true
 
 	override fun parse(xmlData: XmlData)
 	{
-		amount = xmlData.getInt("Count")
+		amountEqn = xmlData.get("Count")
 	}
 
 	override fun cardIcon(): TextureRegion = AssetManager.loadTextureRegion("GUI/MoneyCardback")!!
@@ -298,6 +298,7 @@ class MoneyReward : AbstractReward()
 		table.add(title).expandX().center().padTop(10f)
 		table.row()
 
+		val amount = amountEqn.evaluate(Global.getVariableMap()).toInt()
 		val bonus = (Global.player.getStat(Statistic.BONUSGOLD) * amount).toInt()
 
 		var amountStr = amount.toString()

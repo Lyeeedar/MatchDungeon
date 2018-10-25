@@ -1,0 +1,61 @@
+<OffHand xmlns:meta="Editor">
+	<Name>Distress Flare</Name>
+	<Description>A alchemical flare that can be shot into the air to signal that you need assistance. Another adventurer will surely come to you aid.</Description>
+	<Cost>120</Cost>
+	<Icon meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/torch</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</Icon>
+	<Statistics meta:RefKey="Statistics" />
+	<Ability>
+		<Name>Shoot Flare</Name>
+		<Description>Shoots a flare to summon an allied adventurer to your aid.</Description>
+		<EffectData>
+			<Cost>5</Cost>
+			<Usages>1</Usages>
+			<ResetUsagesPerLevel>true</ResetUsagesPerLevel>
+			<Effect>1,Orb,Single,Summon</Effect>
+			<Data>
+				<Summon meta:RefKey="Friendly">
+					<Sprite meta:RefKey="Sprite">
+						<Name>Oryx/Custom/heroes/barron</Name>
+						<DrawActualSize>true</DrawActualSize>
+					</Sprite>
+					<Death meta:RefKey="ParticleEffect">
+						<Name>Death</Name>
+					</Death>
+					<DamageReduction>1</DamageReduction>
+					<Abilities>
+						<Attack>
+							<Cooldown>1,3</Cooldown>
+							<Count>1</Count>
+							<Damage>1</Damage>
+						</Attack>
+						<Move>
+							<Cooldown>1,4</Cooldown>
+						</Move>
+						<Block>
+							<Cooldown>1,4</Cooldown>
+							<Range>2</Range>
+							<Count>1</Count>
+						</Block>
+						<Break>
+							<Cooldown>1,4</Cooldown>
+							<Count>1</Count>
+							<Damage>1</Damage>
+						</Break>
+					</Abilities>
+				</Summon>
+			</Data>
+			<FlightEffect meta:RefKey="ParticleEffect">
+				<Name>FireOrb</Name>
+				<Colour>140,140,140,255</Colour>
+				<TimeMultiplier>1.5</TimeMultiplier>
+				<KillOnAnimComplete>true</KillOnAnimComplete>
+			</FlightEffect>
+			<HitEffect meta:RefKey="ParticleEffect">
+				<Name>Shout</Name>
+			</HitEffect>
+		</EffectData>
+	</Ability>
+</OffHand>

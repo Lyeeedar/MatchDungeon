@@ -166,7 +166,7 @@ class CardNode
 			val stack = Stack()
 			stack.touchable = Touchable.enabled
 
-			stack.add(SpriteWidget(AssetManager.loadSprite("GUI/RewardChanceBorder", colour = Colour.LIGHT_GRAY), 64f, 64f))
+			stack.add(SpriteWidget(AssetManager.loadSprite("GUI/RewardChanceBorder", colour = Colour.DARK_GRAY), 64f, 64f))
 			stack.add(widget)
 
 			stack.addTapToolTip("Have an unknown chance to gain unknown rewards.")

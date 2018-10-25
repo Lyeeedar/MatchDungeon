@@ -16,7 +16,7 @@
 		<!--Temporary-->
 		<Data Name="Money" meta:RefKey="Struct">
 			<Data Name="Chance" Key="Chance" Default="Always" meta:RefKey="Enum" />
-			<Data Name="Count" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
+			<Data Name="Count" Default="0" SkipIfDefault="False" meta:RefKey="String" />
 		</Data>
 		<Data Name="Equipment" meta:RefKey="Struct">
 			<Data Name="Chance" Key="Chance" Default="Always" meta:RefKey="Enum" />

@@ -1,0 +1,271 @@
+<CardContent meta:X="0" meta:Y="0" GUID="8d9bdc41-dcc7-48b0-b802-a5e049fe7443" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">edbedf37-be97-4910-98d2-60e7fc7dfc47</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="edbedf37-be97-4910-98d2-60e7fc7dfc47">
+			<Line>
+				<MultilineString>In the backallys of the city many gambling rings operate. Anyone can join in, assuming that have the cash for a buy in.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You approach the on of these rings, determined to make great money. A large imposing bouncer stops you at the door.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>"Buy in first. What level you goin for?"</MultilineString>
+			</Line>
+			<Choice>
+				<Choices>
+					<Choice>
+						<Text>VIP (250)</Text>
+						<Condition>Money &gt;= 250</Condition>
+						<Node meta:RefKey="Node">5335c311-fb81-46f3-afbd-b8626983984c</Node>
+					</Choice>
+					<Choice>
+						<Text>VIP (250) (Not enough money)</Text>
+						<Condition>Money&lt;250</Condition>
+						<Node meta:RefKey="Node">edbedf37-be97-4910-98d2-60e7fc7dfc47</Node>
+					</Choice>
+					<Choice>
+						<Text>High (150)</Text>
+						<Condition>Money&gt;=150</Condition>
+						<Node meta:RefKey="Node">5003e087-a81b-4da4-adce-e2e80b7d98f1</Node>
+					</Choice>
+					<Choice>
+						<Text>High (150) (Not enough money)</Text>
+						<Condition>Money&lt;150</Condition>
+						<Node meta:RefKey="Node">edbedf37-be97-4910-98d2-60e7fc7dfc47</Node>
+					</Choice>
+					<Choice>
+						<Text>Normal (75)</Text>
+						<Condition>Money&gt;=75</Condition>
+						<Node meta:RefKey="Node">78d79c9b-e7dd-4245-ad2c-d96eeb58226a</Node>
+					</Choice>
+					<Choice>
+						<Text>Normal (75) (Not enough money)</Text>
+						<Condition>Money&lt;75</Condition>
+						<Node meta:RefKey="Node">edbedf37-be97-4910-98d2-60e7fc7dfc47</Node>
+					</Choice>
+					<Choice>
+						<Text>Actually I think I'm in the wrong place.</Text>
+						<Node meta:RefKey="Node">e4bb286f-dc79-4443-9ea3-eb03bb3d2755</Node>
+					</Choice>
+				</Choices>
+			</Choice>
+		</Node>
+		<Node meta:X="579" meta:Y="421" GUID="e4bb286f-dc79-4443-9ea3-eb03bb3d2755">
+			<Line>
+				<MultilineString>"Scram then."</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="615" meta:Y="1" GUID="5335c311-fb81-46f3-afbd-b8626983984c">
+			<Define>
+				<Key>GambledAmount</Key>
+				<Value>250</Value>
+				<Storage>Card</Storage>
+			</Define>
+			<Node meta:RefKey="Node">007427da-d4df-425b-817f-fd8017851887</Node>
+		</Node>
+		<Node meta:X="616" meta:Y="135.33332824707031" GUID="5003e087-a81b-4da4-adce-e2e80b7d98f1">
+			<Define>
+				<Key>GambledAmount</Key>
+				<Value>150</Value>
+				<Storage>Card</Storage>
+			</Define>
+			<Node meta:RefKey="Node">007427da-d4df-425b-817f-fd8017851887</Node>
+		</Node>
+		<Node meta:X="616" meta:Y="252.33332824707031" GUID="78d79c9b-e7dd-4245-ad2c-d96eeb58226a">
+			<Define>
+				<Key>GambledAmount</Key>
+				<Value>75</Value>
+				<Storage>Card</Storage>
+			</Define>
+			<Node meta:RefKey="Node">007427da-d4df-425b-817f-fd8017851887</Node>
+		</Node>
+		<Node meta:X="951" meta:Y="41" GUID="007427da-d4df-425b-817f-fd8017851887">
+			<Line>
+				<MultilineString>The bouncer holds out his hand and you hand over the money.</MultilineString>
+			</Line>
+			<Spend>
+				<Key>Money</Key>
+				<Count>GambledAmount</Count>
+			</Spend>
+			<Line>
+				<MultilineString>"Right this way sir." The bouncer directs you inside, handing you a chip to represent what you paid him.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>Inside theres multiple games running, crowded around with lots of people all excited.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>What game do you want to play?</MultilineString>
+			</Line>
+			<Choice>
+				<Choices>
+					<Choice>
+						<Text>Spinning Jester (Low Risk, Low Reward)</Text>
+						<Node meta:RefKey="Node">8b3edcb8-ff23-4729-b260-96609294c135</Node>
+					</Choice>
+					<Choice>
+						<Text>Bleeding Cassocks (Medium Risk, Medium Reward)</Text>
+						<Node meta:RefKey="Node">7b554fba-3587-4704-841b-1a7e2fac9731</Node>
+					</Choice>
+					<Choice>
+						<Text>Blind Mans Hand (High Risk, High Reward)</Text>
+						<Node meta:RefKey="Node">39e29bde-2681-4628-8af0-0f4b16a2fc06</Node>
+					</Choice>
+				</Choices>
+			</Choice>
+		</Node>
+		<Node meta:X="1398" meta:Y="-28" GUID="8b3edcb8-ff23-4729-b260-96609294c135">
+			<Line>
+				<MultilineString>You head over to the game of Spinning Jester. After watching for a little while you think you understand the rules, and step forward to play.</MultilineString>
+			</Line>
+			<ChanceCards>
+				<ChanceCards>
+					<Chance>Positive</Chance>
+					<Chance>Positive</Chance>
+					<Chance>Negative</Chance>
+					<Chance>Negative</Chance>
+				</ChanceCards>
+				<ShuffleSpeedMultiplier>1</ShuffleSpeedMultiplier>
+				<Nodes>
+					<Branch>
+						<Chance>Positive</Chance>
+						<Node meta:RefKey="Node">7e3d78f8-e575-48b0-8828-426e4974e1af</Node>
+					</Branch>
+					<Branch>
+						<Chance>Negative</Chance>
+						<Node meta:RefKey="Node">bc6d460c-5637-4196-a46c-885c5ffd6319</Node>
+					</Branch>
+				</Nodes>
+			</ChanceCards>
+		</Node>
+		<Node meta:X="1387" meta:Y="190" GUID="7b554fba-3587-4704-841b-1a7e2fac9731">
+			<Line>
+				<MultilineString>You decide to try out Bleeding Cassocks. This game seems pretty complicated, but you think you can manage it.</MultilineString>
+			</Line>
+			<ChanceCards>
+				<ChanceCards>
+					<Chance>Positive</Chance>
+					<Chance>Positive</Chance>
+					<Chance>Negative</Chance>
+					<Chance>GreatNegative</Chance>
+				</ChanceCards>
+				<ShuffleSpeedMultiplier>0.7</ShuffleSpeedMultiplier>
+				<Nodes>
+					<Branch>
+						<Chance>Positive</Chance>
+						<Node meta:RefKey="Node">7e3d78f8-e575-48b0-8828-426e4974e1af</Node>
+					</Branch>
+					<Branch>
+						<Chance>Negative</Chance>
+						<Node meta:RefKey="Node">bc6d460c-5637-4196-a46c-885c5ffd6319</Node>
+					</Branch>
+					<Branch>
+						<Chance>GreatNegative</Chance>
+						<Node meta:RefKey="Node">391f04c4-e677-4141-bbfe-b849d5edd254</Node>
+					</Branch>
+				</Nodes>
+			</ChanceCards>
+		</Node>
+		<Node meta:X="1382" meta:Y="426" GUID="39e29bde-2681-4628-8af0-0f4b16a2fc06">
+			<Line>
+				<MultilineString>You wander over to the game of Blind Mans Hand. It seems to be pure luck, but you're feeling lucky.</MultilineString>
+			</Line>
+			<ChanceCards>
+				<ChanceCards>
+					<Chance>GreatPositive</Chance>
+					<Chance>Negative</Chance>
+					<Chance>Negative</Chance>
+					<Chance>GreatNegative</Chance>
+				</ChanceCards>
+				<ShuffleSpeedMultiplier>1</ShuffleSpeedMultiplier>
+				<Nodes>
+					<Branch>
+						<Chance>GreatPositive</Chance>
+						<Node meta:RefKey="Node">95b4e87c-4fbc-4381-b365-a754a7fc48fe</Node>
+					</Branch>
+					<Branch>
+						<Chance>Negative</Chance>
+						<Node meta:RefKey="Node">bc6d460c-5637-4196-a46c-885c5ffd6319</Node>
+					</Branch>
+					<Branch>
+						<Chance>GreatNegative</Chance>
+						<Node meta:RefKey="Node">391f04c4-e677-4141-bbfe-b849d5edd254</Node>
+					</Branch>
+				</Nodes>
+			</ChanceCards>
+		</Node>
+		<Node meta:X="1769" meta:Y="-28" GUID="7e3d78f8-e575-48b0-8828-426e4974e1af">
+			<Line>
+				<MultilineString>You win the game! You make a great amount of money.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>GambledAmount*2</Count>
+				</Money>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="1769" meta:Y="135.33332824707031" GUID="bc6d460c-5637-4196-a46c-885c5ffd6319">
+			<Line>
+				<MultilineString>Sadly you lose, you leave with nothing.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="1769" meta:Y="421" GUID="391f04c4-e677-4141-bbfe-b849d5edd254">
+			<Line>
+				<MultilineString>You lose spectacularly. Your luck must be dire.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Buff>
+					<Buff meta:RefKey="Buff">
+						<Name>Bad Luck</Name>
+						<Icon meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_items/coin_copper</Name>
+							<DrawActualSize>true</DrawActualSize>
+							<Colour>252,38,38,255</Colour>
+						</Icon>
+						<Statistics meta:RefKey="Statistics">
+							<Luck>-0.2</Luck>
+						</Statistics>
+						<Duration>4</Duration>
+					</Buff>
+				</Buff>
+			</Rewards>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="1769" meta:Y="266" GUID="95b4e87c-4fbc-4381-b365-a754a7fc48fe">
+			<Line>
+				<MultilineString>You win spectacularly! Lady Luck must be smiling on you.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>GambledAmount*2.5</Count>
+				</Money>
+				<Buff>
+					<Buff meta:RefKey="Buff">
+						<Name>Good Luck</Name>
+						<Icon meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_items/coin_silver</Name>
+							<DrawActualSize>true</DrawActualSize>
+						</Icon>
+						<Statistics meta:RefKey="Statistics">
+							<Luck>0.2</Luck>
+						</Statistics>
+						<Duration>4</Duration>
+					</Buff>
+				</Buff>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

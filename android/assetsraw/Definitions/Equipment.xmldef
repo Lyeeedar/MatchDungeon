@@ -25,7 +25,7 @@
 					<Data Name="Count" Type="Int" Min="1" Default="1" SkipIfDefault="False" VisibleIf="Parent.Effect.Permuter==Random || Parent.Effect.Permuter==NOfType" meta:RefKey="Number" />
 					<Data Name="Type" SkipIfDefault="False" VisibleIf="Parent.Effect.Permuter==NofType || Parent.Effect.Permuter==AllOfType" meta:RefKey="String" />
 					<Data Name="Damage" Default="0" SkipIfDefault="False" VisibleIf="Parent.Effect.Effect == Pop" meta:RefKey="String" />
-					<Data Name="Summon" SkipIfDefault="False" VisibleIf="Parent.Effect.Effect == Summon" meta:RefKey="String" />
+					<Data Name="Summon" Keys="Friendly" SkipIfDefault="False" VisibleIf="Parent.Effect.Effect == Summon" meta:RefKey="Reference" />
 					<Data Name="SpreaderName" VisibleIf="Parent.Effect.Targetter == Spreader" meta:RefKey="String" />
 					<Data Name="Spreader" Keys="SpreaderDef" VisibleIf="Parent.Effect.Effect == Spreader" meta:RefKey="Reference" />
 					<Data Name="ConvertTo" VisibleIf="Parent.Effect.Effect == Convert" meta:RefKey="String" />

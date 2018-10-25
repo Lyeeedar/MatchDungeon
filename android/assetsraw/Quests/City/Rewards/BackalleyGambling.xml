@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="9cecbf42-399b-47f0-9788-070413a634dc" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">ba9dc2f2-73f6-467e-bfea-b25d38173da5</Root>
+	<Nodes>
+		<CardNode meta:X="263" meta:Y="0" GUID="ba9dc2f2-73f6-467e-bfea-b25d38173da5">
+			<Name>Backalley Gambling</Name>
+			<Description>In the backalleys of the city many gambling rings operate.</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
+			<Content>BackalleyGamblingContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>

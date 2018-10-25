@@ -1,0 +1,11 @@
+<Card meta:X="0" meta:Y="0" GUID="a6bfb16e-0c1e-46d2-97c9-719db4b9ee51" xmlns:meta="Editor">
+	<Root meta:RefKey="CardNode">d2b3e896-001f-4ac9-91b6-50cd237770b9</Root>
+	<Nodes>
+		<CardNode meta:X="263" meta:Y="0" GUID="d2b3e896-001f-4ac9-91b6-50cd237770b9">
+			<Name>Raid</Name>
+			<Description>Grayheart invites you on another boss raid.</Description>
+			<SpawnWeighting>MiddleEnd</SpawnWeighting>
+			<Content>RaidContent</Content>
+		</CardNode>
+	</Nodes>
+</Card>
