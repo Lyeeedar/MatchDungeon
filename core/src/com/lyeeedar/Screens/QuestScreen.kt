@@ -230,13 +230,12 @@ class QuestScreen : AbstractScreen()
 		}
 
 		quest.played = true
-		quest.currentTheme = quest.theme
 
 		questProgressWidget.quest = quest
 
 		currentQuest = quest
 
-		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(quest.theme.backgroundTile))).tint(Color.DARK_GRAY)
+		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(quest.currentTheme.backgroundTile))).tint(Color.DARK_GRAY)
 
 		updateEquipment()
 		updateQuest()
@@ -284,6 +283,8 @@ class QuestScreen : AbstractScreen()
 			Save.save()
 			return
 		}
+
+		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(currentQuest.currentTheme.backgroundTile))).tint(Color.DARK_GRAY)
 
 		val cards = (currentQuest.current as QuestNode).getCards()
 		if (cards.size == 0)

@@ -7,6 +7,7 @@ import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Board.CompletionCondition.AbstractCompletionCondition
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionCustomOrb
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionSink
+import com.lyeeedar.Game.Buff
 import com.lyeeedar.Game.Player
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
@@ -261,7 +262,8 @@ class Level(val loadPath: String)
 
 				if (symbol.friendlyDesc != null)
 				{
-					tile.friendly = Friendly(symbol.friendlyDesc)
+					val friendly = Friendly(symbol.friendlyDesc)
+					friendly.setTile(tile, grid)
 				}
 
 				if (symbol.isChest)
@@ -817,3 +819,40 @@ data class Symbol(
 		val container: ContainerDesc?,
 		val spreader: Spreader?,
 		val type: SymbolType)
+
+fun loadDataBlock(xmlData: XmlData): ObjectMap<String, Any>
+{
+	val data = ObjectMap<String, Any>()
+
+	for (el in xmlData.children)
+	{
+		if (el.name == "Spreader")
+		{
+			val spreader = Spreader.load(el)
+			data[el.name.toUpperCase()] = spreader
+		}
+		else if (el.name == "Debuff")
+		{
+			val buff = Buff.load(el)
+			data[el.name.toUpperCase()] = buff
+		}
+		else if (el.name == "MonsterDesc")
+		{
+			data[el.name.toUpperCase()] = MonsterDesc.load(el)
+		}
+		else if (el.name.contains("Effect"))
+		{
+			data[el.name.toUpperCase()] = AssetManager.loadParticleEffect(el)
+		}
+		else if (el.name == "Sprite")
+		{
+			data[el.name.toUpperCase()] = AssetManager.loadSprite(el)
+		}
+		else
+		{
+			data[el.name.toUpperCase()] = el.text.toUpperCase()
+		}
+	}
+
+	return data
+}

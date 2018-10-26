@@ -88,6 +88,7 @@
 			</Container>
 		</Symbol>
 	</Symbols>
+	<Theme>CityOutskirts</Theme>
 	<OrbCount>5</OrbCount>
 	<AllowedVictories>
 		<Condition meta:RefKey="Sink">

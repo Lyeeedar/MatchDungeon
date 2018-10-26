@@ -73,6 +73,33 @@
 			<Line>..........</Line>
 		</Rows>
 	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>!</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>true</IsMonster>
+			<FactionMonster>
+				<DifficultyModifier>2</DifficultyModifier>
+			</FactionMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>?</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>true</IsMonster>
+			<FactionMonster>
+				<IsBoss>true</IsBoss>
+				<DifficultyModifier>2</DifficultyModifier>
+			</FactionMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+	</Symbols>
 	<Faction>AssortedMobs</Faction>
 	<Theme>CityOutskirts</Theme>
 	<AllowedVictories>

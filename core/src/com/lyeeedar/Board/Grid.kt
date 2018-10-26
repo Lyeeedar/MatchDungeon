@@ -1613,7 +1613,18 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			// pop all borders
 			for (t in borderTiles)
 			{
-				if (t.damageable != null)
+				if (t.friendly != null)
+				{
+					val friendly = t.friendly!!
+					if (friendly.hp < friendly.maxhp)
+					{
+						t.friendly!!.hp++
+						val healSprite = AssetManager.loadParticleEffect("Heal")
+						healSprite.colour = Colour.GREEN
+						t.effects.add(healSprite)
+					}
+				}
+				else if (t.damageable != null)
 				{
 					damage(t, t.damageable!!, 0f, this, level.player.getStat(Statistic.MATCHDAMAGE), level.player.getStat(Statistic.PIERCE))
 				}
@@ -1774,7 +1785,20 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			tile.effects.add(hit)
 		}
 
-		if (tile.damageable != null)
+		if (tile.friendly != null)
+		{
+			val friendly = tile.friendly!!
+			if (friendly.hp < friendly.maxhp)
+			{
+				tile.friendly!!.hp++
+				val healSprite = AssetManager.loadParticleEffect("Heal")
+				healSprite.colour = Colour.GREEN
+				tile.effects.add(healSprite)
+			}
+
+			return
+		}
+		else if (tile.damageable != null)
 		{
 			damage(tile, tile.damageable!!, delay, damSource, bonusDam, pierce)
 			return

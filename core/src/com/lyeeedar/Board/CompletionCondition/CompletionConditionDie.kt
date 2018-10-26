@@ -49,10 +49,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 
 				Mote(src, dst, sprite, GridWidget.instance.tileSize,
 					 {
-						 if (friendly.hp > 0) friendly.hp--
-
-						 val hitSprite = AssetManager.loadParticleEffect("Hit")
-						 tile.effects.add(hitSprite)
+						grid.damage(tile, friendly, 0f)
 
 					 }, animSpeed = 0.35f, leap = true)
 			}

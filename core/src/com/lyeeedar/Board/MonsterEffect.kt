@@ -7,6 +7,7 @@ import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Animation.BumpAnimation
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.Animation.LeapAnimation
+import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.UI.GridWidget
@@ -144,10 +145,10 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 
 		summoned.setTile(tile, grid)
 
-		val spawnEffectEl = data["SPAWNEFFECT", null] as? XmlData
-		if (spawnEffectEl != null)
+		val spawnEffect = data["SPAWNEFFECT", null] as? ParticleEffect
+		if (spawnEffect != null)
 		{
-			val spawnEffect = AssetManager.loadParticleEffect(spawnEffectEl)
+			val spawnEffect = spawnEffect.copy()
 			tile.effects.add(spawnEffect)
 		}
 	}

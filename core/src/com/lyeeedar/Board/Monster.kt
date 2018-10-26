@@ -7,7 +7,6 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.Permuter
 import com.lyeeedar.Game.Ability.Targetter
-import com.lyeeedar.Game.Buff
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Animation.BumpAnimation
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
@@ -645,10 +644,10 @@ class MonsterAbility
 
 				summoned.setTile(target, grid)
 
-				val spawnEffectEl = data["SPAWNEFFECT", null] as? XmlData
-				if (spawnEffectEl != null)
+				val spawnEffect = data["SPAWNEFFECT", null] as? ParticleEffect
+				if (spawnEffect != null)
 				{
-					val spawnEffect = AssetManager.loadParticleEffect(spawnEffectEl)
+					val spawnEffect = spawnEffect.copy()
 					target.effects.add(spawnEffect)
 				}
 			}
@@ -683,41 +682,8 @@ class MonsterAbility
 			val dEl = xml.getChildByName("Data")
 			if (dEl != null)
 			{
-				for (i in 0 until dEl.childCount)
-				{
-					val el = dEl.getChild(i)
-
-					if (el.name == "Spreader")
-					{
-						val spreader = Spreader.load(el)
-						ability.data[el.name.toUpperCase()] = spreader
-					}
-					else if (el.name == "Debuff")
-					{
-						val buff = Buff.load(el)
-						ability.data[el.name.toUpperCase()] = buff
-					}
-					else if (el.name == "SpawnEffect")
-					{
-						ability.data[el.name.toUpperCase()] = el
-					}
-					else if (el.name == "MonsterDesc")
-					{
-						ability.data[el.name.toUpperCase()] = MonsterDesc.load(el)
-					}
-					else if (el.name.contains("Effect"))
-					{
-						ability.data[el.name.toUpperCase()] = AssetManager.loadParticleEffect(el)
-					}
-					else if (el.name == "Sprite")
-					{
-						ability.data[el.name.toUpperCase()] = AssetManager.loadSprite(el)
-					}
-					else
-					{
-						ability.data[el.name.toUpperCase()] = el.text.toUpperCase()
-					}
-				}
+				val dBlock = loadDataBlock(dEl)
+				ability.data.putAll(dBlock)
 			}
 
 			return ability

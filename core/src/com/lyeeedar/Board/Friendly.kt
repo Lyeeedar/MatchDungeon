@@ -68,7 +68,7 @@ class Friendly(val desc: FriendlyDesc) : Creature(desc.hp, desc.size, desc.sprit
 			}
 		}
 
-		for (ability in abilities)
+		for (ability in abilities.toGdxArray())
 		{
 			ability.cooldownTimer--
 			if (ability.cooldownTimer <= 0)
@@ -120,7 +120,7 @@ class FriendlyDesc
 			val abilitiesEl = xml.getChildByName("Abilities")
 			if (abilitiesEl != null)
 			{
-				for (i in 0..abilitiesEl.childCount-1)
+				for (i in 0 until abilitiesEl.childCount)
 				{
 					val el = abilitiesEl.getChild(i)
 					val ability = FriendlyAbility.load(el)
@@ -191,12 +191,12 @@ class AttackAbility : FriendlyAbility()
 		{
 			var delay = 0f
 
+			val diff = tile.getPosDiff(friendly.tiles[0, 0])
+			diff[0].y *= -1
+			friendly.sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
+
 			if (flightEffect != null)
 			{
-				val diff = tile.getPosDiff(friendly.tiles[0, 0])
-				diff[0].y *= -1
-				friendly.sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
-
 				val dst = tile.euclideanDist(friendly.tiles[0, 0])
 				val animDuration = dst * 0.025f
 
@@ -276,12 +276,12 @@ class BreakAbility : FriendlyAbility()
 		{
 			var delay = 0f
 
+			val diff = tile.getPosDiff(friendly.tiles[0, 0])
+			diff[0].y *= -1
+			friendly.sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
+
 			if (flightEffect != null)
 			{
-				val diff = tile.getPosDiff(friendly.tiles[0, 0])
-				diff[0].y *= -1
-				friendly.sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
-
 				val dst = tile.euclideanDist(friendly.tiles[0, 0])
 				val animDuration = dst * 0.025f
 
@@ -360,12 +360,12 @@ class BlockAbility : FriendlyAbility()
 		{
 			var delay = 0f
 
+			val diff = tile.getPosDiff(friendly.tiles[0, 0])
+			diff[0].y *= -1
+			friendly.sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
+
 			if (flightEffect != null)
 			{
-				val diff = tile.getPosDiff(friendly.tiles[0, 0])
-				diff[0].y *= -1
-				friendly.sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
-
 				val dst = tile.euclideanDist(friendly.tiles[0, 0])
 				val animDuration = dst * 0.025f
 
@@ -459,12 +459,12 @@ class PopAbility : FriendlyAbility()
 
 			var delay = 0f
 
+			val diff = tile.getPosDiff(friendly.tiles[0, 0])
+			diff[0].y *= -1
+			friendly.sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
+
 			if (flightEffect != null)
 			{
-				val diff = tile.getPosDiff(friendly.tiles[0, 0])
-				diff[0].y *= -1
-				friendly.sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
-
 				val dst = tile.euclideanDist(friendly.tiles[0, 0])
 				val animDuration = dst * 0.025f
 
@@ -689,7 +689,7 @@ class MoveAbility : FriendlyAbility()
 
 			if (borderTiles.size > 0)
 			{
-				validTiles.add(borderTiles.random())
+				validTiles.addAll(borderTiles)
 			}
 		}
 		else
@@ -752,13 +752,14 @@ class MoveAbility : FriendlyAbility()
 
 		val chosen = validTargets.random()!!
 
-		val borderTiles = friendly.getBorderTiles(grid, 1)
+		val borderTiles = friendly.getBorderTiles(grid, 1).filter(::isValid)
 		val targetTile = borderTiles.minBy { it.dist(chosen) }!!
 
 		val start = friendly.tiles.first()
 		friendly.setTile(targetTile, grid)
 		val end = friendly.tiles.first()
 
+		friendly.sprite.animation = null
 		friendly.sprite.animation = MoveAnimation.obtain().set(0.25f, UnsmoothedPath(end.getPosDiff(start)), Interpolation.linear)
 	}
 

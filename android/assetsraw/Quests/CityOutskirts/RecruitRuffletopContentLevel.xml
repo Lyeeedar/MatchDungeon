@@ -30,7 +30,7 @@
 		</Symbol>
 		<Symbol>
 			<Character>T</Character>
-			<Extends></Extends>
+			<Extends>.</Extends>
 			<Sprite meta:RefKey="SpriteWrapper">
 				<Sprite meta:RefKey="Sprite">
 					<Name>Oryx/uf_split/uf_terrain/table</Name>
@@ -45,7 +45,7 @@
 		</Symbol>
 		<Symbol>
 			<Character>G</Character>
-			<Extends></Extends>
+			<Extends>.</Extends>
 			<Sprite meta:RefKey="SpriteWrapper">
 				<Sprite meta:RefKey="Sprite">
 					<Name>Oryx/Custom/heroes/barmaid</Name>
@@ -57,6 +57,7 @@
 			<Attack>0</Attack>
 			<IsMonster>false</IsMonster>
 			<SpecialOrb>None</SpecialOrb>
+			<Type>Wall</Type>
 		</Symbol>
 		<Symbol>
 			<Character>R</Character>
