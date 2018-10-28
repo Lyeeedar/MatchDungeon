@@ -102,6 +102,10 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	val processedCreatures = ObjectSet<Creature>()
 	val processedSpreaders = ObjectSet<String>()
 
+	val spreaderTiles = Array<Tile>()
+	val creatureTiles = Array<Tile>()
+	val matchableTiles = Array<Tile>()
+
 	// ----------------------------------------------------------------------
 	init
 	{
@@ -195,13 +199,44 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		processedCreatures.clear()
 		processedSpreaders.clear()
 
-		var newspreader: Spreader? = null
+		spreaderTiles.clear()
+		creatureTiles.clear()
+		matchableTiles.clear()
+
 		for (tile in grid)
 		{
-			val orb = tile.orb
 			val spreader = tile.spreader
 			val matchable = tile.matchable
+			val creature = tile.creature
 
+			if (spreader != null)
+			{
+				spreaderTiles.add(tile)
+			}
+			if (matchable != null)
+			{
+				matchableTiles.add(tile)
+			}
+			if (creature != null)
+			{
+				creatureTiles.add(tile)
+			}
+		}
+
+		for (tile in creatureTiles)
+		{
+			val creature = tile.creature
+			if (creature != null && tile == creature.tiles[0, 0] && !processedCreatures.contains(creature))
+			{
+				processedCreatures.add(creature)
+
+				creature.onTurn(this@Grid)
+			}
+		}
+
+		for (tile in spreaderTiles)
+		{
+			val spreader = tile.spreader
 			if (spreader != null)
 			{
 				// do spreading
@@ -236,7 +271,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 						{
 							val chosenTile = border.asSequence().random()!!
 
-							newspreader = spreader.copy()
+							val newspreader = spreader.copy()
 
 							if (newspreader.particleEffect != null)
 							{
@@ -262,64 +297,66 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				}
 
 				// do on turn effects
-				if (spreader != newspreader)
+				if (spreader.effect == Spreader.SpreaderEffect.POP)
 				{
-					if (spreader.effect == Spreader.SpreaderEffect.POP)
+					pop(tile, 0f, spreader, spreader.damage, 0f, true)
+				}
+				else if (spreader.effect == Spreader.SpreaderEffect.DAMAGE)
+				{
+					if (tile.damageable != null)
 					{
-						pop(tile, 0f, spreader, spreader.damage, 0f, true)
+						damage(tile, tile.damageable!!, 0f, spreader.nameKey, spreader.damage)
 					}
-					else if (spreader.effect == Spreader.SpreaderEffect.DAMAGE)
+				}
+				else if (spreader.effect == Spreader.SpreaderEffect.ATTACK)
+				{
+					if (spreader.attackCooldown == 0)
 					{
-						if (tile.damageable != null)
-						{
-							damage(tile, tile.damageable!!, 0f, spreader.nameKey, spreader.damage)
-						}
+						spreader.attackCooldown = spreader.attackCooldownMin + (spreader.attackCooldownMax - spreader.attackCooldownMin)
+						spreader.attackCooldown += (spreader.attackCooldown * Global.player.getStat(Statistic.HASTE, true)).toInt()
 					}
-					else if (spreader.effect == Spreader.SpreaderEffect.ATTACK)
+
+					spreader.attackCooldown--
+					if (spreader.attackCooldown == 0)
 					{
-						if (spreader.attackCooldown == 0)
+						val attackedTile: Tile
+						if (tile.orb != null)
 						{
-							spreader.attackCooldown = spreader.attackCooldownMin + (spreader.attackCooldownMax - spreader.attackCooldownMin)
-							spreader.attackCooldown += (spreader.attackCooldown * Global.player.getStat(Statistic.HASTE, true)).toInt()
+							attackedTile = tile
+						}
+						else
+						{
+							attackedTile = grid.filter { it.orb != null }.minBy { it.dist(tile) } ?: continue
 						}
 
-						spreader.attackCooldown--
-						if (spreader.attackCooldown == 0)
+						val attack = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap(), attackedTile.matchable!!.desc, level.theme)
+						attackedTile.monsterEffect = attack
+
+						attackedTile.monsterEffect!!.timer = spreader.attackNumPips + (Global.player.getStat(Statistic.HASTE) * spreader.attackNumPips).toInt()
+						val diff = attackedTile.getPosDiff(tile)
+						diff[0].y *= -1
+
+						val dst = attackedTile.euclideanDist(tile)
+						val animDuration = 0.4f + attackedTile.euclideanDist(tile) * 0.025f
+						val attackSprite = attackedTile.monsterEffect!!.sprite.copy()
+						attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
+						attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
+						tile.effects.add(attackSprite)
+
+						if (spreader.attackEffect != null)
 						{
-							val attackedTile: Tile
-							if (tile.orb != null)
-							{
-								attackedTile = tile
-							}
-							else
-							{
-								attackedTile = grid.filter { it.orb != null }.minBy { it.dist(tile) } ?: continue
-							}
-
-							val attack = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap(), attackedTile.matchable!!.desc, level.theme)
-							attackedTile.monsterEffect = attack
-
-							attackedTile.monsterEffect!!.timer = spreader.attackNumPips + (Global.player.getStat(Statistic.HASTE) * spreader.attackNumPips).toInt()
-							val diff = attackedTile.getPosDiff(tile)
-							diff[0].y *= -1
-
-							val dst = attackedTile.euclideanDist(tile)
-							val animDuration = 0.4f + attackedTile.euclideanDist(tile) * 0.025f
-							val attackSprite = attackedTile.monsterEffect!!.sprite.copy()
-							attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
-							attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
-							tile.effects.add(attackSprite)
-
-							if (spreader.attackEffect != null)
-							{
-								val effect = spreader.attackEffect!!.copy()
-								tile.effects.add(effect)
-							}
+							val effect = spreader.attackEffect!!.copy()
+							tile.effects.add(effect)
 						}
 					}
 				}
 			}
-			else if (matchable != null)
+		}
+
+		for (tile in matchableTiles)
+		{
+			val matchable = tile.matchable
+			if (matchable != null)
 			{
 				// Process attacks
 				if (matchable is MonsterEffect)
@@ -334,15 +371,6 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					val effect = AssetManager.loadSprite("EffectSprites/Heal/Heal", 0.05f, matchable.desc.sprite.colour)
 					tile.effects.add(effect)
 				}
-			}
-
-			// process creatures
-			val creature = tile.creature
-			if (creature != null && tile == creature.tiles[0, 0] && !processedCreatures.contains(creature))
-			{
-				processedCreatures.add(creature)
-
-				creature.onTurn(this@Grid)
 			}
 		}
 	}

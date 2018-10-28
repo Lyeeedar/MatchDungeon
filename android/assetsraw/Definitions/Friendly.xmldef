@@ -29,6 +29,9 @@
 				<Data Name="HitEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
 			</Data>
 			<Data Name="Move" Extends="FriendlyAbility" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct" />
+			<Data Name="Heal" Extends="FriendlyAbility" Nullable="False" meta:RefKey="Struct">
+				<Data Name="Amount" Type="Int" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+			</Data>
 		</Data>
 	</Definition>
 	<Definition Name="FriendlyAbility" Nullable="False" meta:RefKey="StructDef">

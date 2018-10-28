@@ -144,7 +144,7 @@ class Level(val loadPath: String)
 			{
 				tile.canHaveOrb = false
 				tile.isPit = true
-				tile.groundSprite = theme.pit.copy()
+				tile.wallSprite = theme.pit.copy()
 			}
 			else if (char == 'p')
 			{
@@ -236,7 +236,7 @@ class Level(val loadPath: String)
 
 					if (symbol.sprite != null)
 					{
-						tile.groundSprite = symbol.sprite.copy()
+						tile.wallSprite = symbol.sprite.copy()
 					}
 				}
 				else if (symbol.type == SymbolType.WALL)
@@ -613,7 +613,7 @@ class Level(val loadPath: String)
 					val character = symbolEl.get("Character")[0]
 					val extends = symbolEl.get("Extends", " ")!!.firstOrNull() ?: ' '
 
-					val usageCondition = symbolEl.get("UsageCondition", "1")!!
+					val usageCondition = symbolEl.get("UsageCondition", "1")!!.toLowerCase()
 					val fallbackChar = symbolEl.get("FallbackCharacter", ".")!!.firstOrNull() ?: '.'
 
 					val nameKey = symbolEl.get("NameKey", null)

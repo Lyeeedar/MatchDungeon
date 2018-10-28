@@ -61,7 +61,7 @@ abstract class Damageable
 			hp = value.toFloat()
 		}
 
-	val damSources = ObjectSet<Any>()
+	val damSources = ObjectSet<Any?>()
 
 	abstract var sprite: Sprite
 }

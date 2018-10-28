@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Game.Quest
+import com.lyeeedar.GameStateFlags
 import com.lyeeedar.Global
 import com.lyeeedar.UI.Seperator
 import com.lyeeedar.UI.Tutorial
@@ -27,7 +28,38 @@ class QuestSelectionScreen : AbstractScreen()
 
 	override fun create()
 	{
+		if (!Global.release)
+		{
+			debugConsole.register("loadquest", "", fun(args, console): Boolean
+			{
+				if (args.size != 1)
+				{
+					console.error("Invalid number of arguments! Expected 1!")
+					return false
+				}
 
+				val questPath = XmlData.enumeratePaths("Quests", "Quest").firstOrNull { it.toLowerCase().contains(args[0].toLowerCase()) }
+				if (questPath == null)
+				{
+					console.error("Could not ind quest!")
+					return false
+				}
+
+				val quest = Quest.load(questPath.replace("Quests/", ""))
+
+				val screen = Global.game.getTypedScreen<QuestScreen>()!!
+				quest.current = quest.root
+				quest.currentTheme = quest.theme
+				quest.state = Quest.QuestState.INPROGRESS
+				Global.player = Global.deck.getPlayer()
+				Global.questflags = GameStateFlags()
+				screen.setup(quest)
+				screen.swapTo()
+
+				return true
+			})
+
+		}
 	}
 
 	val titleLabel = Label("", Global.skin, "title")
@@ -173,38 +205,6 @@ class QuestSelectionScreen : AbstractScreen()
 		mainTable.row()
 
 		updateQuestsTable()
-
-		if (!Global.release)
-		{
-			debugConsole.register("loadquest", "", fun(args, console): Boolean
-			{
-				if (args.size != 1)
-				{
-					console.error("Invalid number of arguments! Expected 1!")
-					return false
-				}
-
-				val questPath = XmlData.enumeratePaths("Quests", "Quest").firstOrNull { it.toLowerCase().contains(args[0].toLowerCase()) }
-				if (questPath == null)
-				{
-					console.error("Could not ind quest!")
-					return false
-				}
-
-				val quest = Quest.load(questPath.replace("Quests/", ""))
-
-				val screen = Global.game.getTypedScreen<QuestScreen>()!!
-				quest.current = quest.root
-				quest.currentTheme = quest.theme
-				quest.state = Quest.QuestState.INPROGRESS
-				Global.player = Global.deck.getPlayer()
-				screen.setup(quest)
-				screen.swapTo()
-
-				return true
-			})
-
-		}
 	}
 
 	fun updateQuestsTable()
@@ -278,6 +278,7 @@ class QuestSelectionScreen : AbstractScreen()
 				quest.currentTheme = quest.theme
 				quest.state = Quest.QuestState.INPROGRESS
 				Global.player = Global.deck.getPlayer()
+				Global.questflags = GameStateFlags()
 				screen.setup(quest)
 				screen.swapTo()
 			})

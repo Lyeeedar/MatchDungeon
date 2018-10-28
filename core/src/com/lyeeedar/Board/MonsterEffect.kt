@@ -57,7 +57,7 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 			MonsterEffectType.BIGATTACK -> AssetManager.loadSprite("Oryx/Custom/items/skull_large", drawActualSize = true)
 			MonsterEffectType.HEAL -> AssetManager.loadSprite("Oryx/Custom/items/heart", drawActualSize = true)
 			MonsterEffectType.SUMMON -> AssetManager.loadSprite("Oryx/Custom/items/egg", drawActualSize = true)
-			MonsterEffectType.DEBUFF -> AssetManager.loadSprite("GUI/Debuff", drawActualSize = true)
+			MonsterEffectType.DEBUFF -> AssetManager.loadSprite("Oryx/Custom/items/Debuff", drawActualSize = true)
 			else -> throw Exception("Unhandled monster effect type '$effect'!")
 		}
 		sprite = desc.sprite.copy()
@@ -155,11 +155,11 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 
 	fun applyDebuff(grid: Grid, tile: Tile)
 	{
-		val buff = data["BUFF"] as Buff
+		val buff = data["DEBUFF"] as Buff
 
 		val dstTable = GridScreen.instance.debuffTable
 
-		val sprite = buff.icon.copy()
+		val sprite = actualSprite.copy()
 		val dst = dstTable.localToStageCoordinates(Vector2(Random.random() * dstTable.width, Random.random() * dstTable.height))
 		val moteDst = dst.cpy() - Vector2(GridWidget.instance.tileSize / 2f, GridWidget.instance.tileSize / 2f)
 		val src = GridWidget.instance.pointToScreenspace(tile)

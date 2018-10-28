@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Renderables.Animation.*
 import com.lyeeedar.Statistic
 import com.lyeeedar.Util.*
+import java.util.*
 
 /**
  * Created by Philip on 30-Jul-16.
@@ -44,6 +45,8 @@ abstract class Special(orbDesc: OrbDesc, theme: Theme) : Matchable(theme)
 				field = value
 			}
 		}
+
+	val uniqueID = UUID.randomUUID().toString()
 
 	abstract fun merge(other: Swappable): Special?
 	abstract fun apply(point: Point, grid: Grid)
@@ -99,7 +102,7 @@ abstract class Special(orbDesc: OrbDesc, theme: Theme) : Matchable(theme)
 					if (tile != null && cx == x && cy in min..max && !hitSet.contains(tile))
 					{
 						hitSet.add(tile)
-						grid.pop(cx, cy, 0f, special, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
+						grid.pop(cx, cy, 0f, special.uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
 					}
 				}
 				grid.grid[x, y].effects.add(effect)
@@ -168,7 +171,7 @@ abstract class Special(orbDesc: OrbDesc, theme: Theme) : Matchable(theme)
 					if (tile != null && cy == y && cx in min..max && !hitSet.contains(tile))
 					{
 						hitSet.add(tile)
-						grid.pop(cx, cy, 0f, special, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
+						grid.pop(cx, cy, 0f, special.uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
 					}
 
 				}
@@ -346,7 +349,7 @@ class DoubleDualMatch(orbDesc: OrbDesc, theme: Theme) : BombSpecial(orbDesc, the
 			if (tile != null && !hitSet.contains(tile) && tile.dist(point) < 4)
 			{
 				hitSet.add(tile)
-				grid.pop(cx, cy, 0f, this@DoubleDualMatch, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
+				grid.pop(cx, cy, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
 			}
 		}
 
@@ -356,7 +359,7 @@ class DoubleDualMatch(orbDesc: OrbDesc, theme: Theme) : BombSpecial(orbDesc, the
 							if (!hitSet.contains(tile) && tile.dist(point) < 4)
 							{
 								hitSet.add(tile)
-								grid.pop(tile.x, tile.y, 0f, this@DoubleDualMatch, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
+								grid.pop(tile.x, tile.y, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
 							}
 						}
 					}, 0.1f)
@@ -457,7 +460,7 @@ class DualMatch(orbDesc: OrbDesc, theme: Theme) : BombSpecial(orbDesc, theme)
 			if (tile != null && !hitSet.contains(tile) && tile.dist(point) < 3)
 			{
 				hitSet.add(tile)
-				grid.pop(cx, cy, 0f, this@DualMatch, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
+				grid.pop(cx, cy, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
 			}
 		}
 
@@ -467,7 +470,7 @@ class DualMatch(orbDesc: OrbDesc, theme: Theme) : BombSpecial(orbDesc, theme)
 							if (!hitSet.contains(tile) && tile.dist(point) < 3)
 							{
 								hitSet.add(tile)
-								grid.pop(tile.x, tile.y, 0f, this@DualMatch, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
+								grid.pop(tile.x, tile.y, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
 							}
 						}
 					}, 0.1f)
@@ -579,7 +582,7 @@ class Match5(orbDesc: OrbDesc, theme: Theme) : GemSpecial(orbDesc, theme)
 				s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.3f, false)
 				s.completionCallback = fun()
 				{
-					grid.pop(tile, 0f, this, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
+					grid.pop(tile, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
 				}
 				tile.effects.add(s)
 			}
@@ -683,7 +686,7 @@ class Match5Spread(orbDesc: OrbDesc, theme: Theme, val special: Special) : GemSp
 						newspecial.armed = true
 					}
 
-					grid.pop(tile, 0f, this, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
+					grid.pop(tile, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
 				}
 				tile.effects.add(s)
 			}
@@ -703,7 +706,7 @@ class Match5Spread(orbDesc: OrbDesc, theme: Theme, val special: Special) : GemSp
 				s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.3f, false)
 				s.completionCallback = fun()
 				{
-					grid.pop(tile, 0f, this, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
+					grid.pop(tile, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
 				}
 				tile.effects.add(s)
 			}
@@ -767,7 +770,7 @@ class Match5Dual(orbDesc: OrbDesc, theme: Theme) : GemSpecial(orbDesc, theme)
 			s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.3f, false)
 			s.completionCallback = fun()
 			{
-				grid.pop(tile, 0f, this, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
+				grid.pop(tile, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
 			}
 			tile.effects.add(s)
 		}

@@ -10,7 +10,6 @@ import com.lyeeedar.Global
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.filename
 
 /**
  * Created by Philip on 21-Jul-16.
@@ -69,7 +68,11 @@ class Effect(val type: Type)
 				tile.orb!!.setAttributes(orb)
 			}
 
-			Type.SUMMON ->  fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>) { Friendly.load(data["SUMMON"] as XmlData, true).setTile(tile, grid) }
+			Type.SUMMON ->  fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>)
+			{
+				val friendly = Friendly.load(data["SUMMON"] as XmlData, data["DEGENSUMMON", "true"].toString().toBoolean())
+				friendly.setTile(tile, grid)
+			}
 
 			Type.SPREADER -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>)
 			{
@@ -131,7 +134,10 @@ class Effect(val type: Type)
 
 			Type.CONVERT -> { val t = data["CONVERTTO"]?.toString()?.toLowerCase()?.capitalize() ?: "Random"; "convert $them to $t." }
 
-			Type.SUMMON -> { val f = data["SUMMON"].toString(); "summon " + f.filename(false) + "." }
+			Type.SUMMON ->
+			{
+				"summon " + data["SUMMONNAME"] + "."
+			}
 
 			Type.SPREADER -> {
 				val spreader = data["SPREADER"] as Spreader

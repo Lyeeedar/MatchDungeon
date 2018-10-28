@@ -49,7 +49,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 
 				Mote(src, dst, sprite, GridWidget.instance.tileSize,
 					 {
-						grid.damage(tile, friendly, 0f)
+						grid.damage(tile, friendly, 0f, friendly)
 
 					 }, animSpeed = 0.35f, leap = true)
 			}
@@ -131,49 +131,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 
 			fractionalHp += grid.level.player.getStat(Statistic.REGENERATION)
 
-			// do regen
-			while (fractionalHp > 1f)
-			{
-				fractionalHp -= 1f
-				hp += 1
-
-				val pos = hpLabel.localToStageCoordinates(Vector2(hpLabel.width/2f, hpLabel.height/2f))
-
-				val healSprite = AssetManager.loadParticleEffect("Heal")
-				healSprite.colour = Colour.GREEN
-				val actor = ParticleEffectActor(healSprite)
-				actor.setSize(48f, 48f)
-				actor.setPosition(pos.x, pos.y)
-				Global.stage.addActor(actor)
-
-				if (hp > maxHP)
-				{
-					hp = maxHP
-				}
-
-				hpLabel.setText("$hp/$maxHP")
-				updateBlink()
-			}
-
-			// do degen
-			while (fractionalHp < -1f)
-			{
-				fractionalHp += 1f
-				hp -= 1
-
-				val pos = hpLabel.localToStageCoordinates(Vector2(hpLabel.width/2f, hpLabel.height/2f))
-
-				val healSprite = AssetManager.loadParticleEffect("Heal")
-				healSprite.colour = Colour.RED
-				healSprite.flipY = true
-				val actor = ParticleEffectActor(healSprite)
-				actor.setSize(48f, 48f)
-				actor.setPosition(pos.x, pos.y)
-				Global.stage.addActor(actor)
-
-				hpLabel.setText("$hp/$maxHP")
-				updateBlink()
-			}
+			updateFractionalHp()
 
 			false
 		}
@@ -202,6 +160,53 @@ class CompletionConditionDie : AbstractCompletionCondition()
 		else
 		{
 			blinkTable.clear()
+		}
+	}
+
+	fun updateFractionalHp()
+	{
+		// do regen
+		while (fractionalHp > 1f)
+		{
+			fractionalHp -= 1f
+			hp += 1
+
+			val pos = hpLabel.localToStageCoordinates(Vector2(hpLabel.width/2f, hpLabel.height/2f))
+
+			val healSprite = AssetManager.loadParticleEffect("Heal")
+			healSprite.colour = Colour.GREEN
+			val actor = ParticleEffectActor(healSprite)
+			actor.setSize(48f, 48f)
+			actor.setPosition(pos.x, pos.y)
+			Global.stage.addActor(actor)
+
+			if (hp > maxHP)
+			{
+				hp = maxHP
+			}
+
+			hpLabel.setText("$hp/$maxHP")
+			updateBlink()
+		}
+
+		// do degen
+		while (fractionalHp < -1f)
+		{
+			fractionalHp += 1f
+			hp -= 1
+
+			val pos = hpLabel.localToStageCoordinates(Vector2(hpLabel.width/2f, hpLabel.height/2f))
+
+			val healSprite = AssetManager.loadParticleEffect("Heal")
+			healSprite.colour = Colour.RED
+			healSprite.flipY = true
+			val actor = ParticleEffectActor(healSprite)
+			actor.setSize(48f, 48f)
+			actor.setPosition(pos.x, pos.y)
+			Global.stage.addActor(actor)
+
+			hpLabel.setText("$hp/$maxHP")
+			updateBlink()
 		}
 	}
 

@@ -24,6 +24,7 @@
 			<Friendly meta:RefKey="Friendly">
 				<Sprite meta:RefKey="Sprite">
 					<Name>Oryx/Custom/heroes/barron</Name>
+					<DrawActualSize>true</DrawActualSize>
 				</Sprite>
 				<Death meta:RefKey="ParticleEffect">
 					<Name>Death</Name>

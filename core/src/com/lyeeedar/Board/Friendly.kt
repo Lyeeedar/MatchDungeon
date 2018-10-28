@@ -2,13 +2,19 @@ package com.lyeeedar.Board
 
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.MathUtils
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Array
+import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
 import com.lyeeedar.Renderables.Animation.BumpAnimation
+import com.lyeeedar.Renderables.Animation.ExpandAnimation
+import com.lyeeedar.Renderables.Animation.LeapAnimation
 import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Sprite.Sprite
+import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.Util.*
 import ktx.collections.toGdxArray
+import ktx.math.minus
 
 class Friendly(val desc: FriendlyDesc) : Creature(desc.hp, desc.size, desc.sprite.copy(), desc.death.copy())
 {
@@ -156,6 +162,7 @@ abstract class FriendlyAbility
 				"Break" -> BreakAbility()
 				"Block" -> BlockAbility()
 				"Pop" -> PopAbility()
+				"Heal" -> HealAbility()
 				else -> throw NotImplementedError()
 			}
 
@@ -443,15 +450,13 @@ class PopAbility : FriendlyAbility()
 			{
 				if (friendly.sinkPathTiles.contains(target) || friendly.namedOrbTiles.contains(target))
 				{
-					for (i in 0 until 5)
-					{
-						validTargets.add(target)
-					}
-				}
-				else
-				{
 					validTargets.add(target)
 				}
+			}
+
+			if (validTargets.size == 0)
+			{
+				validTargets.addAll(availableTargets)
 			}
 
 			val tile = validTargets.random()!!
@@ -524,6 +529,76 @@ class PopAbility : FriendlyAbility()
 	}
 }
 
+class HealAbility : FriendlyAbility()
+{
+	val heartSprite = AssetManager.loadSprite("Oryx/Custom/items/heart")
+	var amount: Int = 1
+
+	override fun activate(friendly: Friendly, grid: Grid)
+	{
+		for (tile in grid.grid)
+		{
+			val friendly = tile.friendly ?: continue
+
+			val diff = tile.getPosDiff(friendly.tiles[0, 0])
+			diff[0].y *= -1
+			friendly.sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
+
+			val dst = tile.euclideanDist(friendly.tiles[0, 0])
+			var animDuration = dst * 0.025f
+
+			animDuration += 0.4f
+			val heartSprite = heartSprite.copy()
+			heartSprite.colour = Colour.GREEN
+			heartSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
+			heartSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
+			tile.effects.add(heartSprite)
+
+			val healEffect = AssetManager.loadParticleEffect("Heal")
+			healEffect.colour = Colour.GREEN
+			healEffect.renderDelay = animDuration
+			tile.effects.add(healEffect)
+
+
+			Future.call({ friendly.hp++ }, animDuration)
+		}
+
+		for (condition in grid.level.defeatConditions)
+		{
+			if (condition is CompletionConditionDie)
+			{
+				val sprite = heartSprite.copy()
+				val dst = condition.table.localToStageCoordinates(Vector2(Random.random() * condition.table.width, Random.random() * condition.table.height))
+				val moteDst = dst.cpy() - Vector2(GridWidget.instance.tileSize / 2f, GridWidget.instance.tileSize / 2f)
+				val src = GridWidget.instance.pointToScreenspace(friendly.tiles[0, 0])
+
+				Mote(src, moteDst, sprite, GridWidget.instance.tileSize,
+					 {
+						 condition.fractionalHp += 1f
+						 condition.updateFractionalHp()
+					 }, animSpeed = 0.35f, leap = true)
+			}
+		}
+	}
+
+	override fun parse(xml: XmlData)
+	{
+		amount = xml.getInt("Amount", 1)
+	}
+
+	override fun copy(): FriendlyAbility
+	{
+		val out = HealAbility()
+		out.cooldownMin = cooldownMin
+		out.cooldownMax = cooldownMax
+		out.cooldownTimer = out.cooldownMin + MathUtils.random(out.cooldownMax - out.cooldownMin)
+		out.range = range
+		out.amount = amount
+
+		return out
+	}
+}
+
 class MoveAbility : FriendlyAbility()
 {
 	override fun activate(friendly: Friendly, grid: Grid)
@@ -575,6 +650,10 @@ class MoveAbility : FriendlyAbility()
 					}
 				}
 				is MoveAbility ->
+				{
+
+				}
+				is HealAbility ->
 				{
 
 				}
@@ -663,6 +742,10 @@ class MoveAbility : FriendlyAbility()
 						}
 					}
 					is MoveAbility ->
+					{
+
+					}
+					is HealAbility ->
 					{
 
 					}
@@ -759,8 +842,10 @@ class MoveAbility : FriendlyAbility()
 		friendly.setTile(targetTile, grid)
 		val end = friendly.tiles.first()
 
-		friendly.sprite.animation = null
-		friendly.sprite.animation = MoveAnimation.obtain().set(0.25f, UnsmoothedPath(end.getPosDiff(start)), Interpolation.linear)
+		val diff = end.getPosDiff(start)
+		diff[0].y *= -1
+
+		friendly.sprite.animation = MoveAnimation.obtain().set(0.25f, UnsmoothedPath(diff), Interpolation.linear)
 	}
 
 	override fun parse(xml: XmlData)

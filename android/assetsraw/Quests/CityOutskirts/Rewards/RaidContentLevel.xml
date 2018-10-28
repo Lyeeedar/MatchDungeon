@@ -50,11 +50,11 @@
 					<Name>Death</Name>
 				</Death>
 				<AttackNumPips>6</AttackNumPips>
-				<AttackCooldown>1,7</AttackCooldown>
+				<AttackCooldown>1,4</AttackCooldown>
 				<AttackDamage>2</AttackDamage>
 				<Size>2</Size>
 				<HP>65</HP>
-				<DamageReduction>2</DamageReduction>
+				<DamageReduction>1</DamageReduction>
 				<Abilities>
 					<Ability>
 						<Cooldown>2,5</Cooldown>
@@ -83,14 +83,10 @@
 					<Ability>
 						<Cooldown>1,5</Cooldown>
 						<Target>Random</Target>
-						<Effect>Seal</Effect>
-						<Data />
-					</Ability>
-					<Ability>
-						<Cooldown>1,5</Cooldown>
-						<Target>Random</Target>
 						<Count>2</Count>
-						<Data />
+						<Data>
+							<Damage>2</Damage>
+						</Data>
 					</Ability>
 				</Abilities>
 			</MonsterDesc>
