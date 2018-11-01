@@ -143,6 +143,7 @@ class MonsterDesc
 	var size: Int = 1
 	var hp: Int = 10
 	var damageReduction: Int = 0
+	val onTurnEffects = Array<TurnEffect>()
 	val abilities = Array<MonsterAbility>()
 	val stages = Array<MonsterDesc>()
 
@@ -171,6 +172,15 @@ class MonsterDesc
 			desc.hp = xml.getInt("HP", 10)
 
 			desc.damageReduction = xml.getInt("DamageReduction", 0)
+
+			val onTurnEffectsEl = xml.getChildByName("TurnEffects")
+			if (onTurnEffectsEl != null)
+			{
+				for (el in onTurnEffectsEl.children)
+				{
+					desc.onTurnEffects.add(TurnEffect.load(el))
+				}
+			}
 
 			val abilitiesEl = xml.getChildByName("Abilities")
 			if (abilitiesEl != null)

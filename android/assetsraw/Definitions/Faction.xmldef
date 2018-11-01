@@ -20,7 +20,7 @@
 		<Data Name="Abilities" meta:RefKey="Collection">
 			<Data Name="Ability" meta:RefKey="Struct">
 				<Data Name="Cooldown" Name1="Min" Name2="Max" Min="1" Type="Int" SkipIfDefault="False" meta:RefKey="Vector" />
-				<Data Name="Repeatable" Default="True" meta:RefKey="Boolean" />
+				<Data Name="Usages" Type="Int" Min="-1" Default="-1" meta:RefKey="Number" />
 				<Data Name="Target" EnumValues="Neighbour,Random" VisibleIf="Effect != SelfBuff" meta:RefKey="Enum" />
 				<Data Name="Count" Type="Int" Min="1" Default="1" VisibleIf="Effect != SelfBuff" meta:RefKey="Number" />
 				<Data Name="TargetRestriction" EnumValues="Orb,Special,Block,Empty,Sealed,Monster,Attack,Tile,NamedTile,Spreader" VisibleIf="Effect != SelfBuff" meta:RefKey="Enum" />
@@ -68,5 +68,6 @@
 		<Data Name="Stages" meta:RefKey="Collection">
 			<Data Name="MonsterDesc" Keys="MonsterDesc" Nullable="False" meta:RefKey="Reference" />
 		</Data>
+		<Data Name="TurnEffects" Keys="TurnEffects" meta:RefKey="Reference" />
 	</Definition>
 </Definitions>

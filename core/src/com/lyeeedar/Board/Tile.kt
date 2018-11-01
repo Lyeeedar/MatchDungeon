@@ -9,7 +9,7 @@ import com.lyeeedar.Util.Point
  * Created by Philip on 04-Jul-16.
  */
 
-class Tile(x: Int, y: Int) : Point(x, y)
+class Tile(x: Int, y: Int) : Point(x, y), IHasTurnEffect
 {
 	var groundSprite: SpriteWrapper? = null
 	var wallSprite: SpriteWrapper? = null
@@ -93,6 +93,8 @@ class Tile(x: Int, y: Int) : Point(x, y)
 	val effects: Array<Renderable> = Array()
 
 	val associatedMatches = kotlin.Array<Match?>(2) {e -> null}
+
+	override val onTurnEffects: Array<TurnEffect> = Array()
 
 	override fun toString(): String
 	{

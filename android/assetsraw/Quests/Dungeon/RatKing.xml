@@ -10,7 +10,11 @@
 			<File>City/ChangingCareers</File>
 		</Quest>
 	</BronzeRewards>
-	<SilverRewards meta:RefKey="Rewards" />
+	<SilverRewards meta:RefKey="Rewards">
+		<Card>
+			<File>Quests/Dungeon/Rewards/HordeMode</File>
+		</Card>
+	</SilverRewards>
 	<GoldRewards meta:RefKey="Rewards">
 		<Equipment>
 			<Unlock>true</Unlock>

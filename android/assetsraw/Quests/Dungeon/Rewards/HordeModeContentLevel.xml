@@ -1,0 +1,45 @@
+<Level xmlns:meta="Editor">
+	<Grid>
+		<Rows>
+			<Line>##..##.S.##</Line>
+			<Line>..........S</Line>
+			<Line>#..........</Line>
+			<Line>#..!...!..#</Line>
+			<Line>S.........S</Line>
+			<Line>...........</Line>
+			<Line>#.........#</Line>
+			<Line>#...!..!..S</Line>
+			<Line>S..........</Line>
+			<Line>#.........#</Line>
+			<Line>###.S.##S.#</Line>
+		</Rows>
+	</Grid>
+	<Symbols>
+		<Symbol>
+			<Character>S</Character>
+			<Extends></Extends>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+			<TurnEffects meta:RefKey="TurnEffects">
+				<TurnEffect>
+					<Cooldown>1,10</Cooldown>
+					<Effect>Summon</Effect>
+					<Data>
+						<IsSummon>false</IsSummon>
+					</Data>
+				</TurnEffect>
+			</TurnEffects>
+		</Symbol>
+	</Symbols>
+	<AllowedVictories>
+		<Condition meta:RefKey="Turns">
+			<Turns>30</Turns>
+		</Condition>
+	</AllowedVictories>
+	<AllowedDefeats>
+		<Condition meta:RefKey="Die" />
+	</AllowedDefeats>
+</Level>

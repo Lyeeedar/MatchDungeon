@@ -1,0 +1,46 @@
+<CardContent meta:X="0" meta:Y="0" GUID="585ae13e-fe81-4355-815f-b7931a3a8969" xmlns:meta="Editor">
+	<Root meta:RefKey="Node">ba9a5748-2dce-40d6-91f7-6e9ec7b018d4</Root>
+	<Nodes>
+		<Node meta:X="204" meta:Y="0" GUID="ba9a5748-2dce-40d6-91f7-6e9ec7b018d4">
+			<Line>
+				<MultilineString>You enter an open area and suddenly find yourself surrounded by a swarm of enemies.</MultilineString>
+			</Line>
+			<Line>
+				<MultilineString>You'll need to fight for your life to escape the encirclement!</MultilineString>
+			</Line>
+			<Match3>
+				<Level>HordeModeContentLevel</Level>
+				<Success meta:RefKey="Node">7a28d5e9-b665-44ff-9238-c29822f54049</Success>
+				<Failure meta:RefKey="Node">2c60b45b-dc4f-4376-bf07-d6b337f2e983</Failure>
+			</Match3>
+		</Node>
+		<Node meta:X="475" meta:Y="201" GUID="2c60b45b-dc4f-4376-bf07-d6b337f2e983">
+			<Line>
+				<MultilineString>You barely escape, but with great cost.</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Failure</State>
+			</MarkComplete>
+		</Node>
+		<Node meta:X="480" meta:Y="0" GUID="7a28d5e9-b665-44ff-9238-c29822f54049">
+			<Line>
+				<MultilineString>You repel the swarm.</MultilineString>
+			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Statistics>
+					<Statistics meta:RefKey="Statistics">
+						<Berserk>2</Berserk>
+						<Counter>0.2</Counter>
+						<WeaknessAura>1</WeaknessAura>
+					</Statistics>
+				</Statistics>
+				<Money>
+					<Count>100</Count>
+				</Money>
+			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
+		</Node>
+	</Nodes>
+</CardContent>

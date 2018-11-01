@@ -221,6 +221,20 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			{
 				creatureTiles.add(tile)
 			}
+
+			for (effect in tile.onTurnEffects)
+			{
+				effect.onTurn(this, tile)
+			}
+
+			val content = tile.contents
+			if (content is IHasTurnEffect)
+			{
+				for (effect in content.onTurnEffects)
+				{
+					effect.onTurn(this, tile)
+				}
+			}
 		}
 
 		for (tile in creatureTiles)

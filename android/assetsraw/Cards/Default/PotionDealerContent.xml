@@ -22,7 +22,7 @@
 								<Health>4</Health>
 								<Regeneration>0.1</Regeneration>
 							</Statistics>
-							<Duration>5</Duration>
+							<Duration>6</Duration>
 						</Buff>
 					</Buff>
 					<Buff>
@@ -38,7 +38,7 @@
 								<MatchDamage>1.5</MatchDamage>
 								<Pierce>1</Pierce>
 							</Statistics>
-							<Duration>5</Duration>
+							<Duration>6</Duration>
 						</Buff>
 					</Buff>
 					<Buff>
@@ -53,11 +53,11 @@
 								<Health>1</Health>
 								<Aegis>0.3</Aegis>
 							</Statistics>
-							<Duration>5</Duration>
+							<Duration>6</Duration>
 						</Buff>
 					</Buff>
 					<Buff>
-						<Cost>150</Cost>
+						<Cost>100</Cost>
 						<Buff meta:RefKey="Buff">
 							<Name>Potion of Energy</Name>
 							<Icon meta:RefKey="Sprite">
@@ -67,11 +67,11 @@
 							<Statistics meta:RefKey="Statistics">
 								<PowerGain>6</PowerGain>
 							</Statistics>
-							<Duration>5</Duration>
+							<Duration>6</Duration>
 						</Buff>
 					</Buff>
 					<Buff>
-						<Cost>150</Cost>
+						<Cost>100</Cost>
 						<Buff meta:RefKey="Buff">
 							<Name>Potion of Fury</Name>
 							<Icon meta:RefKey="Sprite">
@@ -82,7 +82,7 @@
 							<Statistics meta:RefKey="Statistics">
 								<Berserk>1</Berserk>
 							</Statistics>
-							<Duration>5</Duration>
+							<Duration>6</Duration>
 						</Buff>
 					</Buff>
 				</Items>

@@ -37,6 +37,7 @@ class Level(val loadPath: String)
 	var plateStrength = 1
 
 	val factions = Array<String>()
+	var chosenFaction: Faction? = null
 
 	var customMonster: MonsterDesc? = null
 
@@ -216,9 +217,18 @@ class Level(val loadPath: String)
 
 					tile.block!!.maxhp = symbol.block.hp
 					tile.block!!.alwaysShowHP = symbol.block.alwaysShowHP
+					for (effect in symbol.block.onTurnEffects)
+					{
+						tile.block!!.onTurnEffects.add(effect.copy())
+					}
 				}
 
 				tile.plateStrength = symbol.plate
+
+				for (effect in symbol.onTurnEffects)
+				{
+					tile.onTurnEffects.add(effect.copy())
+				}
 
 				if (symbol.isMonster)
 				{
@@ -303,7 +313,6 @@ class Level(val loadPath: String)
 		if (hasMonster)
 		{
 			val chosenFactionName = factions.random()
-			var chosenFaction: Faction? = null
 			if (chosenFactionName.isBlank())
 			{
 				if (customMonster != null)
@@ -399,7 +408,7 @@ class Level(val loadPath: String)
 						}
 
 						// Spawn monster for found size
-						val monsterDesc = monsterMarker.monsterDesc ?: if (monsterMarker.isBoss) chosenFaction.getBoss(size) else chosenFaction.get(size)
+						val monsterDesc = monsterMarker.monsterDesc ?: if (monsterMarker.isBoss) chosenFaction!!.getBoss(size) else chosenFaction!!.get(size)
 
 						var difficulty = monsterMarker.difficulty
 						if (monsterDesc.size < size)
@@ -509,6 +518,11 @@ class Level(val loadPath: String)
 				{
 					tile.container = Container(symbol.container.sprite.copy(), symbol.container.hp, tile.contents!!)
 					tile.container!!.alwaysShowHP = symbol.container.alwaysShowHP
+
+					for (effect in symbol.container.onTurnEffects)
+					{
+						tile.container!!.onTurnEffects.add(effect.copy())
+					}
 				}
 			}
 		}
@@ -633,8 +647,9 @@ class Level(val loadPath: String)
 						val blockSprite = if(blockSpriteEl != null) AssetManager.loadSprite(blockSpriteEl) else null
 						val blockHP = blockEl.getInt("Health", 1)
 						val showHP = blockEl.getBoolean("AlwaysShowHP", false)
+						val turnEffects = TurnEffect.loadFromElement(blockEl.getChildByName("TurnEffects"))
 
-						blockDesc = BlockDesc(blockSprite, blockHP, showHP)
+						blockDesc = BlockDesc(blockSprite, blockHP, showHP, turnEffects)
 					}
 
 					val plate = symbolEl.getInt("Plate", 0)
@@ -687,7 +702,11 @@ class Level(val loadPath: String)
 					if (containerDescEl != null)
 					{
 						val containerSprite = AssetManager.loadSprite(containerDescEl.getChildByName("Sprite")!!)
-						containerDesc = ContainerDesc(containerSprite, containerDescEl.getInt("Health", 1), containerDescEl.getBoolean("AlwaysShowHP", false))
+						val hp = containerDescEl.getInt("Health", 1)
+						val alwaysShowHP = containerDescEl.getBoolean("AlwaysShowHP", false)
+						val turnEffects = TurnEffect.loadFromElement(containerDescEl.getChildByName("TurnEffects"))
+
+						containerDesc = ContainerDesc(containerSprite, hp, alwaysShowHP, turnEffects)
 					}
 
 					var spreader: Spreader? = null
@@ -697,6 +716,8 @@ class Level(val loadPath: String)
 						spreader = Spreader.load(spreaderEl)
 					}
 
+					val turnEffects = TurnEffect.loadFromElement(symbolEl.getChildByName("TurnEffects"))
+
 					val type = SymbolType.valueOf(symbolEl.get("Type", "Floor")!!.toUpperCase())
 
 					symbolsMap[character.toInt()] = Symbol(
@@ -704,6 +725,7 @@ class Level(val loadPath: String)
 							usageCondition, fallbackChar,
 							nameKey,
 							sprite,
+							turnEffects,
 							blockDesc, plate, seal, attack,
 							friendlyDesc,
 							isMonster, factionMonster, monsterDesc,
@@ -793,9 +815,9 @@ class Level(val loadPath: String)
 
 data class SinkableDesc(val sprite: Sprite?, val usePlayer: Boolean)
 
-data class ContainerDesc(val sprite: Sprite, val hp: Int, val alwaysShowHP: Boolean)
+data class ContainerDesc(val sprite: Sprite, val hp: Int, val alwaysShowHP: Boolean, val onTurnEffects: Array<TurnEffect>)
 
-data class BlockDesc(val sprite: Sprite?, val hp: Int, val alwaysShowHP: Boolean)
+data class BlockDesc(val sprite: Sprite?, val hp: Int, val alwaysShowHP: Boolean, val onTurnEffects: Array<TurnEffect>)
 
 data class FactionMonster(val isBoss: Boolean, val difficultyModifier: Int)
 
@@ -810,6 +832,7 @@ data class Symbol(
 		val usageCondition: String, val fallbackChar: Char,
 		val nameKey: String?,
 		val sprite: SpriteWrapper?,
+		val onTurnEffects: Array<TurnEffect>,
 		val block: BlockDesc?, val plate: Int, val seal: Int, val attack: Int,
 		val friendlyDesc: FriendlyDesc?,
 		val isMonster: Boolean, val factionMonster: FactionMonster?, val monsterDesc: MonsterDesc?,

@@ -1,11 +1,12 @@
 package com.lyeeedar.Board
 
+import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Renderable
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.Array2D
 
-abstract class Creature(maxHp: Int, size: Int, override var sprite: Sprite, death: ParticleEffect) : Damageable()
+abstract class Creature(maxHp: Int, size: Int, override var sprite: Sprite, death: ParticleEffect) : Damageable(), IHasTurnEffect
 {
 	var size = 2
 		set(value)
@@ -70,4 +71,6 @@ abstract class Creature(maxHp: Int, size: Int, override var sprite: Sprite, deat
 		fun isBorder(tile: Tile) = tiles.map { it.taxiDist(tile) }.min()!! <= range
 		return grid.grid.filter(::isBorder)
 	}
+
+	override val onTurnEffects: Array<TurnEffect> = Array()
 }

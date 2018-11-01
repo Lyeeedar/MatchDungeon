@@ -83,6 +83,10 @@
 					<Name>Oryx/Custom/terrain/cliff</Name>
 					<Colour>135,135,135,175</Colour>
 				</North>
+				<Center meta:RefKey="Sprite">
+					<Name>white</Name>
+					<Colour>0,0,0,255</Colour>
+				</Center>
 			</Directions>
 		</TilingSprite>
 	</Pit>

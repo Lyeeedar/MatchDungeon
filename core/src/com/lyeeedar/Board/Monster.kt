@@ -41,6 +41,11 @@ class Monster(val desc: MonsterDesc, val difficulty: Int) : Creature(desc.hp, de
 
 	init
 	{
+		for (effect in desc.onTurnEffects)
+		{
+			onTurnEffects.add(effect.copy())
+		}
+
 		attackDamage = desc.attackDamage
 		attackNumPips = desc.attackNumPips
 		attackCooldown = desc.attackCooldown.copy()
@@ -243,9 +248,8 @@ class MonsterAbility
 	var targetCount: Int = 1
 	lateinit var permuter: Permuter
 	lateinit var effect: Effect
-	var repeatable = true
+	var usages = -1
 
-	var hasBeenUsed = false
 	val data = ObjectMap<String, Any>()
 
 	fun copy(): MonsterAbility
@@ -254,7 +258,7 @@ class MonsterAbility
 		ability.cooldownMin = cooldownMin
 		ability.cooldownMax = cooldownMax
 		ability.cooldownTimer = ability.cooldownMin + MathUtils.random(ability.cooldownMax - ability.cooldownMin)
-		ability.repeatable = repeatable
+		ability.usages = usages
 		ability.target = target
 		ability.targetRestriction = targetRestriction
 		ability.targetCount = targetCount
@@ -267,11 +271,15 @@ class MonsterAbility
 
 	fun activate(grid: Grid, monster: Monster)
 	{
-		if (!repeatable && hasBeenUsed)
+		if (usages == 0)
 		{
 			return
 		}
-		hasBeenUsed = true
+
+		if (usages != -1)
+		{
+			usages--
+		}
 
 		if (!Global.release)
 		{
@@ -628,12 +636,21 @@ class MonsterAbility
 				var desc = data["MONSTERDESC", null] as? MonsterDesc
 				if (desc == null)
 				{
-					val factionName = data["FACTION"].toString()
+					val factionName = data["FACTION"]?.toString()
+
+					val faction: Faction
+					if (factionName != null)
+					{
+						val factionPath = XmlData.enumeratePaths("Factions", "Faction").first { it.toUpperCase().endsWith("$factionName.XML") }.split("Factions/")[1]
+
+						faction = Faction.load(factionPath)
+					}
+					else
+					{
+						faction = grid.level.chosenFaction!!
+					}
+
 					val name = data["NAME"]?.toString() ?: ""
-
-					val factionPath = XmlData.enumeratePaths("Factions", "Faction").first { it.toUpperCase().endsWith("$factionName.XML") }.split("Factions/")[1]
-
-					val faction = Faction.load(factionPath)
 					desc = if (name.isBlank()) faction.get(1) else faction.get(name)
 				}
 
@@ -670,7 +687,7 @@ class MonsterAbility
 			ability.cooldownMax = cooldown[1].toInt()
 			ability.cooldownTimer = ability.cooldownMin + MathUtils.random(ability.cooldownMax - ability.cooldownMin)
 
-			ability.repeatable = xml.getBoolean("Repeatable", true)
+			ability.usages = xml.getInt("Usages", -1)
 
 			ability.target = Target.valueOf(xml.get("Target", "NEIGHBOUR")!!.toUpperCase())
 			ability.targetCount = xml.getInt("Count", 1)

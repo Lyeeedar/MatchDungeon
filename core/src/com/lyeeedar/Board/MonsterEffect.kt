@@ -129,12 +129,21 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 		var desc = data["MONSTERDESC", null] as? MonsterDesc
 		if (desc == null)
 		{
-			val factionName = data["FACTION"].toString()
+			val factionName = data["FACTION"]?.toString()
+
+			val faction: Faction
+			if (factionName != null)
+			{
+				val factionPath = XmlData.enumeratePaths("Factions", "Faction").first { it.toUpperCase().endsWith("$factionName.XML") }.split("Factions/")[1]
+
+				faction = Faction.load(factionPath)
+			}
+			else
+			{
+				faction = grid.level.chosenFaction!!
+			}
+
 			val name = data["NAME"]?.toString() ?: ""
-
-			val factionPath = XmlData.enumeratePaths("Factions", "Faction").first { it.toUpperCase().endsWith("$factionName.XML") }.split("Factions/")[1]
-
-			val faction = Faction.load(factionPath)
 			desc = if (name.isBlank()) faction.get(1) else faction.get(name)
 		}
 

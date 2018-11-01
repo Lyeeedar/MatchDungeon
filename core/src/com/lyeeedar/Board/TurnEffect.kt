@@ -41,8 +41,7 @@ class TurnEffect
 
 	var cooldownRange = Point()
 	var currentCooldown = 0
-	var repeatable = true
-	var hasFired = false
+	var repeats = -1
 
 	lateinit var target: MonsterAbility.Target
 	lateinit var targetRestriction: Targetter
@@ -51,7 +50,7 @@ class TurnEffect
 
 	fun onTurn(grid: Grid, tile: Tile)
 	{
-		if (!repeatable && hasFired) return
+		if (repeats == 0) return
 
 		currentCooldown--
 		if (currentCooldown <= 0)
@@ -61,11 +60,14 @@ class TurnEffect
 
 			execute(grid, tile)
 
-			hasFired = true
+			if (repeats > 0)
+			{
+				repeats--
+			}
 		}
 	}
 
-	fun execute(grid: Grid, tile: Tile)
+	private fun execute(grid: Grid, tile: Tile)
 	{
 		if (!Global.release)
 		{
@@ -237,12 +239,21 @@ class TurnEffect
 				var desc = data["MONSTERDESC", null] as? MonsterDesc
 				if (desc == null)
 				{
-					val factionName = data["FACTION"].toString()
+					val factionName = data["FACTION"]?.toString()
+
+					val faction: Faction
+					if (factionName != null)
+					{
+						val factionPath = XmlData.enumeratePaths("Factions", "Faction").first { it.toUpperCase().endsWith("$factionName.XML") }.split("Factions/")[1]
+
+						faction = Faction.load(factionPath)
+					}
+					else
+					{
+						faction = grid.level.chosenFaction!!
+					}
+
 					val name = data["NAME"]?.toString() ?: ""
-
-					val factionPath = XmlData.enumeratePaths("Factions", "Faction").first { it.toUpperCase().endsWith("$factionName.XML") }.split("Factions/")[1]
-
-					val faction = Faction.load(factionPath)
 					desc = if (name.isBlank()) faction.get(1) else faction.get(name)
 				}
 
@@ -268,13 +279,13 @@ class TurnEffect
 		}
 	}
 
-	fun parse(xmlData: XmlData)
+	private fun parse(xmlData: XmlData)
 	{
 		val cooldown = xmlData.get("Cooldown").split(",")
 		cooldownRange = Point(cooldown[0].toInt(), cooldown[1].toInt())
 		currentCooldown = cooldownRange.x + ((cooldownRange.y - cooldownRange.x).toFloat() * Random.random()).toInt()
 
-		repeatable = xmlData.getBoolean("Repeatable", true)
+		repeats = xmlData.getInt("Repeats", -1)
 
 		type = TurnEffectType.valueOf(xmlData.get("Type").toUpperCase())
 
@@ -305,6 +316,21 @@ class TurnEffect
 			effect.xmlData = xmlData
 			effect.parse(xmlData)
 			return effect
+		}
+
+		fun loadFromElement(xmlData: XmlData?): Array<TurnEffect>
+		{
+			val effects = Array<TurnEffect>()
+
+			if (xmlData != null)
+			{
+				for (el in xmlData.children)
+				{
+					effects.add(load(el))
+				}
+			}
+
+			return effects
 		}
 	}
 }

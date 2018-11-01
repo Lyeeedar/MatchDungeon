@@ -10,6 +10,7 @@ import com.lyeeedar.Global
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.neaten
 
 /**
  * Created by Philip on 21-Jul-16.
@@ -136,7 +137,7 @@ class Effect(val type: Type)
 
 			Type.SUMMON ->
 			{
-				"summon " + data["SUMMONNAME"] + "."
+				"summon " + data["SUMMONNAME"].toString().neaten() + "."
 			}
 
 			Type.SPREADER -> {
