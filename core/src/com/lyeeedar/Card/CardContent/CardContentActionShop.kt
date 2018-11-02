@@ -272,7 +272,8 @@ class EquipmentWare : ShopWares()
 					}
 				}
 
-				equipment = biasedArray.random()
+				val chosen = biasedArray.random()
+				equipment = Equipment.Companion.load(chosen.path)
 			}
 		}
 		else

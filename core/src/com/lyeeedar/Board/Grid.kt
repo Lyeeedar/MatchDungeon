@@ -782,6 +782,13 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			for (y in 0 until height)
 			{
 				val tile = grid[x, y]
+
+				if (tile.delayedActions.size > 0)
+				{
+					hasAnim = true
+					break
+				}
+
 				for (effect in tile.effects)
 				{
 					if (effect is ParticleEffect)
@@ -818,6 +825,16 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					hasAnim = true
 					break
 				}
+
+				if (hasAnim)
+				{
+					break
+				}
+			}
+
+			if (hasAnim)
+			{
+				break
 			}
 		}
 
@@ -977,6 +994,22 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			for (y in 0 until height)
 			{
 				val tile = grid[x, y]
+
+				if (tile.delayedActions.size > 0)
+				{
+					val itr = tile.delayedActions.iterator()
+					while (itr.hasNext())
+					{
+						val action = itr.next()
+						action.delay -= delta
+
+						if (action.delay <= 0)
+						{
+							action.function.invoke()
+							itr.remove()
+						}
+					}
+				}
 
 				if (tile.special != null)
 				{

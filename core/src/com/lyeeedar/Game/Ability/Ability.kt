@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectFloatMap
 import com.badlogic.gdx.utils.ObjectMap
+import com.lyeeedar.Board.DelayedAction
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Spreader
 import com.lyeeedar.Board.Tile
@@ -262,7 +263,7 @@ class Ability
 			val closest = selectedTargets.minBy { it.dist(target) }!!
 			val dst = if (permuter.type == Permuter.Type.RANDOM) 0 else closest.dist(target)
 
-			Future.call(
+			target.delayedActions.add(DelayedAction(
 					{
 						var delay = 0.0f
 						if (hitEffect != null)
@@ -289,7 +290,7 @@ class Ability
 						}
 
 						effect.apply(target, grid, delay, data, originalTargets, variables)
-					}, selectedDelays[closest] - 0.05f)
+					}, selectedDelays[closest] - 0.05f))
 
 		}
 

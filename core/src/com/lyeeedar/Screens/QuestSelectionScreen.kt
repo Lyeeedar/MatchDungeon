@@ -247,7 +247,7 @@ class QuestSelectionScreen : AbstractScreen()
 		}
 		else
 		{
-			for (i in currentIndex until themeOrder.size)
+			for (i in currentIndex + 1 until themeOrder.size)
 			{
 				val theme = themeOrder[i]
 				val quests = themeMap[theme]

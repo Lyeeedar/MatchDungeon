@@ -91,6 +91,12 @@ class Tile(x: Int, y: Int) : Point(x, y), IHasTurnEffect
 	var nameKey: String? = null
 
 	val effects: Array<Renderable> = Array()
+	val delayedActions: Array<DelayedAction> = Array()
+
+	fun addDelayedAction(function: () -> Unit, delay: Float)
+	{
+		delayedActions.add(DelayedAction(function, delay))
+	}
 
 	val associatedMatches = kotlin.Array<Match?>(2) {e -> null}
 
@@ -111,3 +117,5 @@ class Tile(x: Int, y: Int) : Point(x, y), IHasTurnEffect
 		return " "
 	}
 }
+
+class DelayedAction(val function: () -> Unit, var delay: Float)

@@ -467,7 +467,8 @@ class EquipmentReward : AbstractReward()
 					}
 				}
 
-				equipment = biasedArray.random()
+				val chosen = biasedArray.random()
+				equipment = Equipment.Companion.load(chosen.path) // load a copy
 			}
 			else
 			{

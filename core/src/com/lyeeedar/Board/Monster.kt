@@ -502,7 +502,7 @@ class MonsterAbility
 							val alpha = dist / maxDist
 							val delay = animDuration * alpha
 
-							Future.call(
+							tile.addDelayedAction(
 									{
 										tile.monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap(), tile.orb!!.desc, grid.level.theme)
 										tile.monsterEffect!!.timer = timer

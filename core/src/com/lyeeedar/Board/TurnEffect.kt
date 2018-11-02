@@ -287,7 +287,7 @@ class TurnEffect
 
 		repeats = xmlData.getInt("Repeats", -1)
 
-		type = TurnEffectType.valueOf(xmlData.get("Type").toUpperCase())
+		type = TurnEffectType.valueOf(xmlData.get("Effect", "Attack")!!.toUpperCase())
 
 		target = MonsterAbility.Target.valueOf(xmlData.get("Target", "NEIGHBOUR")!!.toUpperCase())
 		targetCount = xmlData.getInt("Count", 1)
