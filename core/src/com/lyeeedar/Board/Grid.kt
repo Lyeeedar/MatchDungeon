@@ -310,6 +310,16 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					}
 				}
 
+				// do fade
+				if (spreader.fadeOut > 0)
+				{
+					spreader.fadeOut--
+					if (spreader.fadeOut == 0)
+					{
+						tile.spreader = null
+					}
+				}
+
 				// do on turn effects
 				if (spreader.effect == Spreader.SpreaderEffect.POP)
 				{
@@ -324,14 +334,14 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				}
 				else if (spreader.effect == Spreader.SpreaderEffect.ATTACK)
 				{
-					if (spreader.attackCooldown == 0)
+					if (spreader.attackCooldown <= 0)
 					{
-						spreader.attackCooldown = spreader.attackCooldownMin + (spreader.attackCooldownMax - spreader.attackCooldownMin)
+						spreader.attackCooldown = spreader.attackCooldownMin + ((spreader.attackCooldownMax - spreader.attackCooldownMin) * Random.random()).toInt()
 						spreader.attackCooldown += (spreader.attackCooldown * Global.player.getStat(Statistic.HASTE, true)).toInt()
 					}
 
 					spreader.attackCooldown--
-					if (spreader.attackCooldown == 0)
+					if (spreader.attackCooldown <= 0)
 					{
 						val attackedTile: Tile
 						if (tile.orb != null)

@@ -42,6 +42,9 @@
 					<FromDeck>true</FromDeck>
 				</Equipment>
 			</Rewards>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
 		</Node>
 	</Nodes>
 </CardContent>

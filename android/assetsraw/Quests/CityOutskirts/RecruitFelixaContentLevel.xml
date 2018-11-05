@@ -30,7 +30,7 @@
 				</Death>
 				<Abilities>
 					<Move>
-						<Cooldown>2,4</Cooldown>
+						<Cooldown>1,3</Cooldown>
 					</Move>
 					<Pop>
 						<Cooldown>2,4</Cooldown>

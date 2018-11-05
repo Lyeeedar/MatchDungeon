@@ -35,9 +35,11 @@
 		<Data Name="Effect" EnumValues="Seal,Pop,Damage,Attack" meta:RefKey="Enum" />
 		<Data Name="Damage" Min="0" VisibleIf="Effect == Pop || Effect == Damage" meta:RefKey="Number" />
 		<Data Name="Spreads" Default="True" meta:RefKey="Boolean" />
-		<Data Name="AttackCooldownMin" Type="Int" Min="0" VisibleIf="Effect == Attack" meta:RefKey="Number" />
-		<Data Name="AttackCooldownMax" Type="Int" Min="7" VisibleIf="Effect == Attack" meta:RefKey="Number" />
-		<Data Name="AttackNumPips" Type="Int" Min="0" Default="7" VisibleIf="Effect == Attack" meta:RefKey="Number" />
+		<Data Name="FadeOut" Type="Int" Min="-1" Default="-1" meta:RefKey="Number" />
+		<Data Name="RenderAbove" Default="True" meta:RefKey="Boolean" />
+		<Data Name="AttackCooldownMin" Type="Int" Min="3" VisibleIf="Effect == Attack" meta:RefKey="Number" />
+		<Data Name="AttackCooldownMax" Type="Int" Min="3" Default="10" VisibleIf="Effect == Attack" meta:RefKey="Number" />
+		<Data Name="AttackNumPips" Type="Int" Min="3" Default="7" VisibleIf="Effect == Attack" meta:RefKey="Number" />
 		<Data Name="AttackEffect" Keys="ParticleEffect" VisibleIf="Effect == Attack" meta:RefKey="Reference" />
 	</Definition>
 	<Definition Name="TurnEffects" IsGlobal="True" meta:RefKey="CollectionDef">

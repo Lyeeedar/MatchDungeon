@@ -35,7 +35,7 @@
 				<AttackCooldown>1,6</AttackCooldown>
 				<AttackDamage>2</AttackDamage>
 				<Size>2</Size>
-				<HP>50</HP>
+				<HP>60</HP>
 				<DamageReduction>2</DamageReduction>
 				<Abilities>
 					<Ability>
@@ -54,11 +54,12 @@
 						</Data>
 					</Ability>
 					<Ability>
-						<Cooldown>2,6</Cooldown>
+						<Cooldown>4,8</Cooldown>
 						<Permuter>Cone</Permuter>
 						<Effect>Spreader</Effect>
 						<Data>
 							<Range>2</Range>
+							<Coverage>0.8</Coverage>
 							<Spreader meta:RefKey="SpreaderDef">
 								<Name>Lava</Name>
 								<Sprite meta:RefKey="SpriteWrapper">
@@ -67,6 +68,10 @@
 									</Sprite>
 								</Sprite>
 								<Effect>Attack</Effect>
+								<Spreads>false</Spreads>
+								<FadeOut>15</FadeOut>
+								<RenderAbove>false</RenderAbove>
+								<AttackCooldownMin>2</AttackCooldownMin>
 								<AttackEffect meta:RefKey="ParticleEffect">
 									<Name>Fireburst</Name>
 								</AttackEffect>
@@ -82,7 +87,8 @@
 			<Extends></Extends>
 			<Sprite meta:RefKey="SpriteWrapper">
 				<Sprite meta:RefKey="Sprite">
-					<Name>Oryx/uf_split/uf_terrain/ground_crusted</Name>
+					<Name>Oryx/uf_split/uf_terrain/ground_crusted_1</Name>
+					<Colour>156,156,156,255</Colour>
 				</Sprite>
 				<TilingSprite meta:RefKey="TilingSprite">
 					<Name>Web</Name>
@@ -90,7 +96,7 @@
 					<Mask>Masks/web</Mask>
 					<Sprite meta:RefKey="Sprite">
 						<Name>white</Name>
-						<Colour>207,203,203,226</Colour>
+						<Colour>87,86,86,226</Colour>
 					</Sprite>
 				</TilingSprite>
 			</Sprite>

@@ -25,7 +25,7 @@
 			<SpecialOrb>None</SpecialOrb>
 			<TurnEffects meta:RefKey="TurnEffects">
 				<TurnEffect>
-					<Cooldown>1,10</Cooldown>
+					<Cooldown>6,15</Cooldown>
 					<Effect>Summon</Effect>
 					<Data>
 						<IsSummon>false</IsSummon>

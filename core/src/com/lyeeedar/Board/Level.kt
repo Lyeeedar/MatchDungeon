@@ -71,6 +71,8 @@ class Level(val loadPath: String)
 		else if (toSpawn == "Attack")
 		{
 			val orb = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap(), Orb.getRandomOrb (this), theme)
+			orb.sprite = orb.actualSprite
+			orb.sprite.colour = orb.desc.sprite.colour
 			orb.timer = 10
 			return orb
 		}
@@ -80,6 +82,8 @@ class Level(val loadPath: String)
 			data["FACTION"] = factions.random()
 
 			val orb = MonsterEffect(MonsterEffectType.SUMMON, data, Orb.getRandomOrb (this), theme)
+			orb.sprite = orb.actualSprite
+			orb.sprite.colour = orb.desc.sprite.colour
 			orb.timer = 10
 			return orb
 		}

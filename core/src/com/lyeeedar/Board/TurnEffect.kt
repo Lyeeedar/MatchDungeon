@@ -155,17 +155,20 @@ class TurnEffect
 					monsterEffectType = if (dam > 1) MonsterEffectType.BIGATTACK else MonsterEffectType.ATTACK
 				}
 
+				val monsterEffect: MonsterEffect
 				if (target.orb == null)
 				{
 					target.effects.add(grid.hitEffect.copy())
-					target.monsterEffect = MonsterEffect(monsterEffectType, data, Orb.getRandomOrb(grid.level), grid.level.theme)
+					monsterEffect = MonsterEffect(monsterEffectType, data, Orb.getRandomOrb(grid.level), grid.level.theme)
+					target.monsterEffect = monsterEffect
 				}
 				else
 				{
-					target.monsterEffect = MonsterEffect(monsterEffectType, data, target.orb!!.desc, grid.level.theme)
+					monsterEffect = MonsterEffect(monsterEffectType, data, target.orb!!.desc, grid.level.theme)
+					target.monsterEffect = monsterEffect
 				}
 
-				target.monsterEffect!!.timer = speed
+				monsterEffect.timer = speed
 				val diff = target.getPosDiff(tile)
 				diff[0].y *= -1
 
@@ -175,13 +178,13 @@ class TurnEffect
 				if (data["SHOWATTACKLEAP", "true"].toString().toBoolean())
 				{
 					animDuration += 0.4f
-					val attackSprite = target.monsterEffect!!.actualSprite.copy()
-					attackSprite.colour = target.monsterEffect!!.sprite.colour
+					val attackSprite = monsterEffect.actualSprite.copy()
+					attackSprite.colour = monsterEffect.sprite.colour
 					attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
 					attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
 					target.effects.add(attackSprite)
 
-					target.monsterEffect!!.delayDisplay = animDuration
+					monsterEffect.delayDisplay = animDuration
 				}
 				else
 				{
@@ -195,7 +198,7 @@ class TurnEffect
 
 						target.effects.add(particle)
 
-						target.monsterEffect!!.delayDisplay = animDuration
+						monsterEffect.delayDisplay = animDuration
 					}
 				}
 
@@ -206,9 +209,15 @@ class TurnEffect
 					particle.renderDelay = animDuration
 
 					animDuration += particle.lifetime / 2f
-					target.monsterEffect!!.delayDisplay = animDuration
+					monsterEffect.delayDisplay = animDuration
 
 					target.effects.add(particle)
+				}
+
+				if (monsterEffect.delayDisplay == 0f)
+				{
+					monsterEffect.sprite = monsterEffect.actualSprite
+					monsterEffect.sprite.colour = monsterEffect.desc.sprite.colour
 				}
 			}
 			if (type == TurnEffectType.CUSTOMORB)

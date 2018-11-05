@@ -32,6 +32,8 @@ class Spreader
 	var attackEffect: ParticleEffect? = null
 
 	var spreads = true
+	var renderAbove = true
+	var fadeOut = -1
 
 	fun copy(): Spreader
 	{
@@ -41,6 +43,8 @@ class Spreader
 		out.particleEffect = particleEffect?.copy()
 
 		out.spreads = spreads
+		out.renderAbove = renderAbove
+		out.fadeOut = fadeOut
 		out.damage = damage
 		out.effect = effect
 
@@ -77,10 +81,12 @@ class Spreader
 			spreader.damage = xmlData.getFloat("Damage", 0f)
 
 			spreader.spreads = xmlData.getBoolean("Spreads", true)
+			spreader.renderAbove = xmlData.getBoolean("RenderAbove", true)
+			spreader.fadeOut = xmlData.getInt("FadeOut", -1)
 
-			spreader.attackCooldownMin = xmlData.getInt("AttackMin", 0)
-			spreader.attackCooldownMax = xmlData.getInt("AttackMax", 0)
-			spreader.attackNumPips = xmlData.getInt("AttackNumPips", 0)
+			spreader.attackCooldownMin = xmlData.getInt("AttackCooldownMin", 3)
+			spreader.attackCooldownMax = xmlData.getInt("AttackCooldownMax", 10)
+			spreader.attackNumPips = xmlData.getInt("AttackNumPips", 7)
 
 			val attackEffectEl = xmlData.getChildByName("AttackEffect")
 			if (attackEffectEl != null)

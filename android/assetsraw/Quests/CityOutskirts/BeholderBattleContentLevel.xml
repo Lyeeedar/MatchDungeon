@@ -115,7 +115,7 @@
 						<Damage>1</Damage>
 					</Attack>
 					<Move>
-						<Cooldown>2,6</Cooldown>
+						<Cooldown>1,3</Cooldown>
 					</Move>
 					<Block>
 						<Cooldown>1,6</Cooldown>
@@ -147,10 +147,10 @@
 				</Death>
 				<Abilities>
 					<Move>
-						<Cooldown>2,4</Cooldown>
+						<Cooldown>1,3</Cooldown>
 					</Move>
 					<Attack>
-						<Cooldown>2,6</Cooldown>
+						<Cooldown>2,4</Cooldown>
 						<Count>1</Count>
 						<Damage>1</Damage>
 					</Attack>
@@ -188,7 +188,7 @@
 						</HitEffect>
 					</Block>
 					<Heal>
-						<Cooldown>5,12</Cooldown>
+						<Cooldown>2,6</Cooldown>
 						<Amount>1</Amount>
 					</Heal>
 				</Abilities>

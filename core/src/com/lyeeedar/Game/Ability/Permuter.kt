@@ -73,7 +73,7 @@ class Permuter(val type: Type)
 				val dir = Direction.getCardinalDirection(source!!, tile)
 				val cone = Direction.buildCone(dir, source, range)
 
-				return cone.map { grid.grid.get(it) }.asSequence()
+				return cone.mapNotNull { if (grid.grid.inBounds(it)) grid.grid.get(it) else null }.asSequence()
 			}
 
 			else -> throw Exception("Invalid permuter type $type")

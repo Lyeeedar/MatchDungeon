@@ -138,7 +138,7 @@
 		</Sprite>
 	</Shield>
 	<SpawnWeights>
-		<Spawn>Orb,20</Spawn>
+		<Spawn>Orb,40</Spawn>
 		<Spawn>Summon,1</Spawn>
 	</SpawnWeights>
 	<Factions>

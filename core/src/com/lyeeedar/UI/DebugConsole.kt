@@ -225,6 +225,15 @@ class DebugConsole(val historyKey: String) : Table()
 		println("Console: " + line)
 	}
 
+	fun reregister(name: String, help: String, callback: (args: kotlin.Array<String>, console: DebugConsole) -> Boolean)
+	{
+		if (Global.release) return
+
+		val lname = name.toLowerCase()
+
+		commands[lname] = ConsoleCommand(name, help, callback)
+	}
+
 	fun register(name: String, help: String, callback: (args: kotlin.Array<String>, console: DebugConsole) -> Boolean)
 	{
 		if (Global.release) return

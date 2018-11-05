@@ -1,18 +1,7 @@
-<Quest meta:X="-66.396678924560547" meta:Y="-26.878549695014954" GUID="9e3a62cd-3f18-400f-898e-bbaa3ed5c38f" xmlns:meta="Editor" meta:GraphCommentData="74890cae-256c-474a-b77f-954026119e4b$Phase 1$$166,247,142,255%aaca01a9-e43d-4fa5-986b-9ef94396d78d$Phase 2$$143,233,245,255%ceeb0440-dad9-465c-a311-e5ddaed94d1b$Tournament$$255,212,23,255">
+<Quest meta:X="-66.396682739257812" meta:Y="-26.878549575805664" GUID="9e3a62cd-3f18-400f-898e-bbaa3ed5c38f" xmlns:meta="Editor" meta:GraphCommentData="74890cae-256c-474a-b77f-954026119e4b$Phase 1$$166,247,142,255%aaca01a9-e43d-4fa5-986b-9ef94396d78d$Phase 2$$143,233,245,255%ceeb0440-dad9-465c-a311-e5ddaed94d1b$Tournament$$255,212,23,255">
 	<Title>Levelling Up</Title>
 	<Description>Before you can brave the wilds you first have to grind out some levels. Kill the nearby wildlife and collect that experience!</Description>
 	<Theme>CityOutskirts</Theme>
-	<QuestCards>
-		<Card>FetchQuest</Card>
-		<Card>FetchQuest2</Card>
-		<Card>FetchQuest3</Card>
-		<Card>GatheringHerbs</Card>
-		<Card>GatheringHerbs2</Card>
-		<Card>GatheringHerbs3</Card>
-		<Card>GrindingMobs</Card>
-		<Card>GrindingMobs2</Card>
-		<Card>GrindingMobs3</Card>
-	</QuestCards>
 	<BronzeRewards meta:RefKey="Rewards">
 		<Quest>
 			<File>Dungeon/TreasureHunt</File>
@@ -42,8 +31,8 @@
 		<QuestNode meta:X="548.27630615234375" meta:Y="4.5447163581848145" meta:Comment="74890cae-256c-474a-b77f-954026119e4b" GUID="bbc17713-ab3a-415e-8290-51273cb513b1">
 			<Type>Deck</Type>
 			<AllowDeckCards>false</AllowDeckCards>
-			<AllowQuestCards>true</AllowQuestCards>
-			<AllowThemeCards>false</AllowThemeCards>
+			<AllowQuestCards>false</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
 			<Success meta:RefKey="QuestNode">bbaf2769-ae72-45b9-a0a4-5b963914c3a3</Success>
 			<Failure meta:RefKey="QuestNode">bbaf2769-ae72-45b9-a0a4-5b963914c3a3</Failure>
 		</QuestNode>
@@ -51,15 +40,15 @@
 			<Type>Deck</Type>
 			<AllowDeckCards>true</AllowDeckCards>
 			<AllowQuestCards>false</AllowQuestCards>
-			<AllowThemeCards>true</AllowThemeCards>
+			<AllowThemeCards>false</AllowThemeCards>
 			<Success meta:RefKey="QuestNode">aa8b3ba1-73db-46e1-836e-e1d010f992d6</Success>
 			<Failure meta:RefKey="QuestNode">aa8b3ba1-73db-46e1-836e-e1d010f992d6</Failure>
 		</QuestNode>
 		<QuestNode meta:X="991.30877685546875" meta:Y="5.8170747756958008" meta:Comment="74890cae-256c-474a-b77f-954026119e4b" GUID="aa8b3ba1-73db-46e1-836e-e1d010f992d6">
 			<Type>Deck</Type>
 			<AllowDeckCards>false</AllowDeckCards>
-			<AllowQuestCards>true</AllowQuestCards>
-			<AllowThemeCards>false</AllowThemeCards>
+			<AllowQuestCards>false</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
 			<Success meta:RefKey="QuestNode">cfbe8d16-ec59-41be-976d-356360daee1d</Success>
 			<Failure meta:RefKey="QuestNode">cfbe8d16-ec59-41be-976d-356360daee1d</Failure>
 		</QuestNode>
@@ -82,15 +71,15 @@
 			<Type>Deck</Type>
 			<AllowDeckCards>true</AllowDeckCards>
 			<AllowQuestCards>false</AllowQuestCards>
-			<AllowThemeCards>true</AllowThemeCards>
+			<AllowThemeCards>false</AllowThemeCards>
 			<Success meta:RefKey="QuestNode">f7b34c9d-0d6c-4b84-8c9b-7e9c606f0d35</Success>
 			<Failure meta:RefKey="QuestNode">f7b34c9d-0d6c-4b84-8c9b-7e9c606f0d35</Failure>
 		</QuestNode>
 		<QuestNode meta:X="1930.2347412109375" meta:Y="5.8170747756958008" meta:Comment="aaca01a9-e43d-4fa5-986b-9ef94396d78d" GUID="f7b34c9d-0d6c-4b84-8c9b-7e9c606f0d35">
 			<Type>Deck</Type>
 			<AllowDeckCards>false</AllowDeckCards>
-			<AllowQuestCards>true</AllowQuestCards>
-			<AllowThemeCards>false</AllowThemeCards>
+			<AllowQuestCards>false</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
 			<Success meta:RefKey="QuestNode">519d1236-a003-4966-bec9-3b6e0ddfdab7</Success>
 			<Failure meta:RefKey="QuestNode">519d1236-a003-4966-bec9-3b6e0ddfdab7</Failure>
 		</QuestNode>
@@ -98,15 +87,15 @@
 			<Type>Deck</Type>
 			<AllowDeckCards>true</AllowDeckCards>
 			<AllowQuestCards>false</AllowQuestCards>
-			<AllowThemeCards>true</AllowThemeCards>
+			<AllowThemeCards>false</AllowThemeCards>
 			<Success meta:RefKey="QuestNode">7bfd6ddc-2f2e-46d5-939e-1047d6e7eeea</Success>
 			<Failure meta:RefKey="QuestNode">7bfd6ddc-2f2e-46d5-939e-1047d6e7eeea</Failure>
 		</QuestNode>
 		<QuestNode meta:X="2329.90283203125" meta:Y="8.3224277496337891" meta:Comment="aaca01a9-e43d-4fa5-986b-9ef94396d78d" GUID="7bfd6ddc-2f2e-46d5-939e-1047d6e7eeea">
 			<Type>Deck</Type>
 			<AllowDeckCards>false</AllowDeckCards>
-			<AllowQuestCards>true</AllowQuestCards>
-			<AllowThemeCards>false</AllowThemeCards>
+			<AllowQuestCards>false</AllowQuestCards>
+			<AllowThemeCards>true</AllowThemeCards>
 			<Success meta:RefKey="QuestNode">4d9d9764-88f0-4501-a0cf-80d873f23923</Success>
 			<Failure meta:RefKey="QuestNode">4d9d9764-88f0-4501-a0cf-80d873f23923</Failure>
 		</QuestNode>

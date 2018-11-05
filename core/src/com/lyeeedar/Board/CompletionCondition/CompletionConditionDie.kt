@@ -24,6 +24,8 @@ class CompletionConditionDie : AbstractCompletionCondition()
 	var hp = 1
 	var fractionalHp = 0f
 
+	var godMode = false
+
 	val blinkTable = Table()
 
 	lateinit var table: Table
@@ -74,6 +76,11 @@ class CompletionConditionDie : AbstractCompletionCondition()
 			else if (tryBlock(Global.player.getStat(Statistic.COUNTER)))
 			{
 				countered = true
+			}
+
+			if (godMode)
+			{
+				blocked = true
 			}
 
 			// animate player attack
@@ -142,6 +149,20 @@ class CompletionConditionDie : AbstractCompletionCondition()
 					tutorial.addPopup("This is your remaining health. Attacks will reduce it, and when it reaches 0 you will fail the level.", hpLabel)
 					tutorial.show()
 				}, 0.5f)
+
+		if (!Global.release)
+		{
+			Future.call({
+							GridScreen.instance.debugConsole.reregister("god", "", fun(args, console): Boolean
+							{
+
+								godMode = !godMode
+								console.write("God Mode: $godMode")
+
+								return true
+							})
+						}, 1f)
+		}
 	}
 
 	fun updateBlink()
