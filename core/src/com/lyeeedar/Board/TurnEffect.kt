@@ -248,10 +248,10 @@ class TurnEffect
 				var desc = data["MONSTERDESC", null] as? MonsterDesc
 				if (desc == null)
 				{
-					val factionName = data["FACTION"]?.toString()
+					val factionName = data["FACTION", null]?.toString()
 
 					val faction: Faction
-					if (factionName != null)
+					if (!factionName.isNullOrBlank())
 					{
 						val factionPath = XmlData.enumeratePaths("Factions", "Faction").first { it.toUpperCase().endsWith("$factionName.XML") }.split("Factions/")[1]
 
@@ -262,14 +262,14 @@ class TurnEffect
 						faction = grid.level.chosenFaction!!
 					}
 
-					val name = data["NAME"]?.toString() ?: ""
+					val name = data["NAME", null]?.toString() ?: ""
 					desc = if (name.isBlank()) faction.get(1) else faction.get(name)
 				}
 
 				val difficulty = data["DIFFICULTY", "0"].toString().toInt()
 
 				val summoned = Monster(desc!!, difficulty)
-				summoned.isSummon = data["ISSUMMON"].toString().toBoolean()
+				summoned.isSummon = data["ISSUMMON", "false"].toString().toBoolean()
 
 				summoned.setTile(target, grid)
 

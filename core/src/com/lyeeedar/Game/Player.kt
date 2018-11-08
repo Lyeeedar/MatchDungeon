@@ -69,11 +69,18 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 			stat += buff.statistics[statistic] ?: 0f
 		}
 
-		if (statistic == Statistic.MATCHDAMAGE || statistic == Statistic.ABILITYDAMAGE || statistic == Statistic.POWERGAIN)
+		if (statistic == Statistic.MATCHDAMAGE || statistic == Statistic.ABILITYDAMAGE || statistic == Statistic.POWERGAIN || statistic == Statistic.PIERCE)
 		{
 			if (isInBerserkRange)
 			{
-				stat += getStat(Statistic.BERSERK)
+				if (statistic == Statistic.PIERCE)
+				{
+					stat += getStat(Statistic.BERSERK) * 0.5f
+				}
+				else
+				{
+					stat += getStat(Statistic.BERSERK)
+				}
 			}
 		}
 

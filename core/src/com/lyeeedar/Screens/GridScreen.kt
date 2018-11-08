@@ -6,9 +6,7 @@ import com.badlogic.gdx.graphics.g2d.NinePatch
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.Touchable
-import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton
-import com.badlogic.gdx.scenes.scene2d.ui.Value
+import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
@@ -19,6 +17,7 @@ import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.Player
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
+import com.lyeeedar.Statistic
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.random
@@ -322,6 +321,86 @@ class GridScreen(): AbstractScreen()
 		for (buff in Global.player.levelbuffs)
 		{
 			val card = buff.getCardSmall(true)
+			card.setFacing(true, false)
+			card.setSize(15f, 25f)
+			buffTable.add(card).size(15f, 25f)
+		}
+
+		val berserk = Global.player.getStat(Statistic.BERSERK)
+		if (Global.player.isInBerserkRange && berserk > 0)
+		{
+			val basicTable = Table()
+
+			val icon = AssetManager.loadSprite("GUI/Buff")
+
+			basicTable.add(SpriteWidget(icon, 64f, 64f)).grow()
+			basicTable.row()
+
+			val table = Table()
+			table.defaults().growX()
+
+			val titleStack = Stack()
+			val iconTable = Table()
+			iconTable.add(SpriteWidget(icon, 64f, 64f)).expandX().right().pad(5f)
+			titleStack.add(iconTable)
+			titleStack.add(Label("Berserk", Global.skin, "cardtitle"))
+
+			table.add(titleStack).growX()
+			table.row()
+
+			table.add(Seperator(Global.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f)
+			table.row()
+
+			table.add(Seperator(Global.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f)
+			table.row()
+
+			table.add(Label("Statistics", Global.skin, "cardtitle"))
+			table.row()
+
+			for (stat in Statistic.Values)
+			{
+				if (stat != Statistic.MATCHDAMAGE && stat != Statistic.ABILITYDAMAGE && stat != Statistic.POWERGAIN && stat != Statistic.PIERCE)
+				{
+					continue
+				}
+
+				val statVal = if (stat == Statistic.PIERCE) berserk * 0.5f else berserk
+
+				val statTable = Table()
+				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Global.skin, "card")).expandX().left()
+				statTable.add(Label(statVal.toString(), Global.skin, "card"))
+				statTable.addTapToolTip(stat.tooltip)
+
+				var add = false
+
+				if (statVal != 0f)
+				{
+					add = true
+				}
+
+				if (statVal > 0)
+				{
+					val diff = statVal
+					val diffLabel = Label("+" + diff.toString(), Global.skin, "cardwhite")
+					diffLabel.color = Color.GREEN
+					statTable.add(diffLabel)
+				}
+				else if (statVal < 0)
+				{
+					val diff = statVal
+					val diffLabel = Label(diff.toString(), Global.skin, "cardwhite")
+					diffLabel.color = Color.RED
+					statTable.add(diffLabel)
+				}
+
+				if (add)
+				{
+					table.add(statTable)
+					table.row()
+				}
+			}
+
+			val card = CardWidget(basicTable, table, icon.currentTexture, this)
 			card.setFacing(true, false)
 			card.setSize(15f, 25f)
 			buffTable.add(card).size(15f, 25f)

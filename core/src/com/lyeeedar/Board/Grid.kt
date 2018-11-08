@@ -1375,10 +1375,12 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		for (x in 0 until width)
 		{
 			var y = height-1
-			while (grid[x, y].isPit && y >= 0)
+			while (y >= 0 && grid[x, y].isPit)
 			{
 				y--
 			}
+
+			if (y == -1) continue
 
 			val tile = grid[x, y]
 			val sink = tile.sinkable

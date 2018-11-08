@@ -132,7 +132,7 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 			val factionName = data["FACTION", null]?.toString()
 
 			val faction: Faction
-			if (factionName != null)
+			if (!factionName.isNullOrBlank())
 			{
 				val factionPath = XmlData.enumeratePaths("Factions", "Faction").first { it.toUpperCase().endsWith("$factionName.XML") }.split("Factions/")[1]
 
