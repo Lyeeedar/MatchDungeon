@@ -31,7 +31,7 @@
 					<Name>Death</Name>
 				</Death>
 				<AttackNumPips>5</AttackNumPips>
-				<AttackCooldown>1,6</AttackCooldown>
+				<AttackCooldown>3,6</AttackCooldown>
 				<Size>1</Size>
 				<HP>20</HP>
 				<DamageReduction>0</DamageReduction>

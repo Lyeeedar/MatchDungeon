@@ -85,6 +85,7 @@
 			<Type>Wall</Type>
 		</Symbol>
 	</Symbols>
+	<Theme>Cave</Theme>
 	<AllowedVictories>
 		<Condition meta:RefKey="Sink">
 			<Count>1</Count>

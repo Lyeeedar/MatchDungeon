@@ -60,7 +60,7 @@ class CompletionConditionTurns(): AbstractCompletionCondition()
 					turnCount--
 					label.setText("$turnCount\nTurns")
 
-					if (turnCount <= maxTurnCount * 0.25f && blinkTable.children.size == 0)
+					if (turnCount <= maxTurnCount * 0.25f && blinkTable.children.size == 0 && grid.level.defeatConditions.contains(this))
 					{
 						val blinkSprite = AssetManager.loadSprite("Particle/glow")
 						blinkSprite.colour = Colour.RED.copy().a(0.5f)

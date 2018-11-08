@@ -1,18 +1,18 @@
 <Level xmlns:meta="Editor">
 	<Grid>
 		<Rows>
-			<Line>...P..</Line>
-			<Line>......</Line>
-			<Line>......</Line>
-			<Line>......</Line>
-			<Line>......</Line>
-			<Line>......</Line>
-			<Line>......</Line>
-			<Line>......</Line>
-			<Line>......</Line>
-			<Line>......</Line>
-			<Line>......</Line>
-			<Line>......</Line>
+			<Line>..P..</Line>
+			<Line>.....</Line>
+			<Line>.....</Line>
+			<Line>.....</Line>
+			<Line>.....</Line>
+			<Line>..!..</Line>
+			<Line>.....</Line>
+			<Line>..!..</Line>
+			<Line>.!.!.</Line>
+			<Line>.....</Line>
+			<Line>.....</Line>
+			<Line>.....</Line>
 		</Rows>
 	</Grid>
 	<Symbols>
@@ -37,7 +37,7 @@
 	</AllowedVictories>
 	<AllowedDefeats>
 		<Condition meta:RefKey="Turns">
-			<Turns>40</Turns>
+			<Turns>25</Turns>
 		</Condition>
 	</AllowedDefeats>
 </Level>

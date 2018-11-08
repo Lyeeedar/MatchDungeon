@@ -71,7 +71,7 @@ class Quest(val path: String)
 		theme = Theme.Companion.load("Themes/$themeName")
 		currentTheme = theme
 
-		for (themeCardPath in XmlData.enumeratePaths("Cards/$themeName", "Card"))
+		for (themeCardPath in XmlData.enumeratePaths("Cards/$themeName/", "Card"))
 		{
 			val card = Card.load(themeCardPath)
 			themeCards.add(card)

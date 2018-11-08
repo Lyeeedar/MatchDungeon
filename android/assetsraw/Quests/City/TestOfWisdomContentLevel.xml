@@ -27,6 +27,35 @@
 				<UsePlayerSprite>true</UsePlayerSprite>
 			</Sinkable>
 		</Symbol>
+		<Symbol>
+			<Character>~</Character>
+			<Extends></Extends>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<Sprite meta:RefKey="Sprite">
+					<Name>white</Name>
+					<Colour>0,0,0,255</Colour>
+				</Sprite>
+				<TilingSprite meta:RefKey="TilingSprite">
+					<Name>Pit</Name>
+					<Mode>PremadeDirectional</Mode>
+					<Directions>
+						<North meta:RefKey="Sprite">
+							<Name>Oryx/Custom/terrain/cliff</Name>
+							<Colour>135,135,135,175</Colour>
+						</North>
+						<Center meta:RefKey="Sprite">
+							<Name>white</Name>
+							<Colour>0,0,0,255</Colour>
+						</Center>
+					</Directions>
+				</TilingSprite>
+			</Sprite>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
 	</Symbols>
 	<AllowedVictories>
 		<Condition meta:RefKey="Sink">
