@@ -74,7 +74,7 @@
 						</Data>
 					</Ability>
 					<Ability>
-						<Cooldown>1,6</Cooldown>
+						<Cooldown>4,8</Cooldown>
 						<Target>Random</Target>
 						<Count>3</Count>
 						<Data>

@@ -211,11 +211,8 @@ class CompletionConditionDie : AbstractCompletionCondition()
 		}
 
 		// do degen
-		while (fractionalHp < -1f)
+		if (Global.player.getStat(Statistic.REGENERATION) < 0f)
 		{
-			fractionalHp += 1f
-			hp -= 1
-
 			val pos = hpLabel.localToStageCoordinates(Vector2(hpLabel.width/2f, hpLabel.height/2f))
 
 			val healSprite = AssetManager.loadParticleEffect("Heal")
@@ -225,6 +222,12 @@ class CompletionConditionDie : AbstractCompletionCondition()
 			actor.setSize(48f, 48f)
 			actor.setPosition(pos.x, pos.y)
 			Global.stage.addActor(actor)
+		}
+
+		while (fractionalHp < -1f)
+		{
+			fractionalHp += 1f
+			hp -= 1
 
 			hpLabel.setText("$hp/$maxHP")
 			updateBlink()

@@ -129,7 +129,7 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 		var desc = data["MONSTERDESC", null] as? MonsterDesc
 		if (desc == null)
 		{
-			val factionName = data["FACTION", null]?.toString()
+			val factionName = data["FACTION", null]?.toString()?.toUpperCase()
 
 			val faction: Faction
 			if (!factionName.isNullOrBlank())

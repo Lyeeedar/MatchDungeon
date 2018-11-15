@@ -211,6 +211,8 @@ class AttackAbility : FriendlyAbility()
 				particle.animation = MoveAnimation.obtain().set(animDuration, diff)
 				particle.killOnAnimComplete = true
 
+				particle.rotation = getRotation(friendly.tiles[0, 0], tile)
+
 				tile.effects.add(particle)
 
 				delay += animDuration
@@ -296,6 +298,8 @@ class BreakAbility : FriendlyAbility()
 				particle.animation = MoveAnimation.obtain().set(animDuration, diff)
 				particle.killOnAnimComplete = true
 
+				particle.rotation = getRotation(friendly.tiles[0, 0], tile)
+
 				tile.effects.add(particle)
 
 				delay += animDuration
@@ -379,6 +383,8 @@ class BlockAbility : FriendlyAbility()
 				val particle = flightEffect!!.copy()
 				particle.animation = MoveAnimation.obtain().set(animDuration, diff)
 				particle.killOnAnimComplete = true
+
+				particle.rotation = getRotation(friendly.tiles[0, 0], tile)
 
 				tile.effects.add(particle)
 
@@ -476,6 +482,8 @@ class PopAbility : FriendlyAbility()
 				val particle = flightEffect!!.copy()
 				particle.animation = MoveAnimation.obtain().set(animDuration, diff)
 				particle.killOnAnimComplete = true
+
+				particle.rotation = getRotation(friendly.tiles[0, 0], tile)
 
 				tile.effects.add(particle)
 

@@ -218,24 +218,7 @@ class Ability
 
 				val dist = p1.dst(p2)
 
-//				if (fs.moveType == ParticleEffect.MoveType.Leap)
-//				{
-//					val animDuration = (0.25f + dist * 0.025f) * fs.moveSpeed
-//
-//					val path = arrayOf(p1, p2)
-//					for (point in path)
-//					{
-//						point.x -= path.last().x
-//						point.y -= path.last().y
-//					}
-//
-//					fs.animation = LeapAnimation.obtain().set(animDuration, path, 1f + dist * 0.25f)
-//					fs.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
-//				}
-//				else
-//				{
-					fs.animation = MoveAnimation.obtain().set((0.25f + dist * 0.025f) * (1.0f / fs.timeMultiplier), arrayOf(p1, p2), Interpolation.linear)
-//				}
+				fs.animation = MoveAnimation.obtain().set((0.25f + dist * 0.025f) * (1.0f / fs.timeMultiplier), arrayOf(p1, p2), Interpolation.linear)
 
 				fs.rotation = getRotation(p1, p2)
 				delay += fs.lifetime

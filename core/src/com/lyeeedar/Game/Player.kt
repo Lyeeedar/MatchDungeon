@@ -35,6 +35,14 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 	var levelbuffs = Array<Buff>()
 	var leveldebuffs = Array<Buff>()
 
+	init
+	{
+		for (slot in EquipmentSlot.Values)
+		{
+			equipment[slot] = baseCharacter.equipment[slot]?.copy()
+		}
+	}
+
 	fun getStat(statistic: Statistic, withChoaticNature: Boolean = true): Float
 	{
 		var stat = baseCharacter.baseStatistics[statistic] ?: 0f
@@ -47,7 +55,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 
 		for (slot in EquipmentSlot.Values)
 		{
-			val equip = getEquipment(slot)
+			val equip = equipment[slot]
 			if (equip != null)
 			{
 				stat += equip.statistics[statistic] ?: 0f
@@ -87,18 +95,13 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 		return clamp(stat, statistic.min, statistic.max)
 	}
 
-	fun getEquipment(equipmentSlot: EquipmentSlot): Equipment?
-	{
-		return equipment[equipmentSlot] ?: baseCharacter.equipment[equipmentSlot]
-	}
-
 	fun getEquippedSet(): ObjectSet<String>
 	{
 		val output = ObjectSet<String>()
 
 		for (slot in EquipmentSlot.Values)
 		{
-			val equip = getEquipment(slot) ?: continue
+			val equip = equipment[slot] ?: continue
 			output.add(equip.path)
 		}
 
@@ -195,7 +198,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 
 		for (slot in EquipmentSlot.Values)
 		{
-			val equipment = getEquipment(slot)
+			val equipment = equipment[slot]
 
 			if (equipment == null)
 			{

@@ -52,8 +52,8 @@ class Permuter(val type: Type)
 				return grid.grid.filter{ (it.y == tile.y || it.x == tile.x) && it.dist(tile) <= range }
 			}
 
-			Type.BLOCK ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> { val dst = data["AOE"].toString().toInt(); return grid.grid.filter{ it.taxiDist(tile) <= dst } }
-			Type.DIAMOND ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> { val dst = data["AOE"].toString().toInt(); return grid.grid.filter{ it.dist(tile) <= dst } }
+			Type.BLOCK ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> { val dst = data["AOE", "1"].toString().toInt(); return grid.grid.filter{ it.taxiDist(tile) <= dst } }
+			Type.DIAMOND ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> { val dst = data["AOE", "1"].toString().toInt(); return grid.grid.filter{ it.dist(tile) <= dst } }
 
 			Type.RANDOM ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> {
 				val count = data["COUNT"].toString().toInt()

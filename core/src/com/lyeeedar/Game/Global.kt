@@ -389,7 +389,7 @@ class Global
 
 			for (slot in EquipmentSlot.Values)
 			{
-				output.put(slot.toString().toLowerCase(), if(player.getEquipment(slot) != null) 1f else 0f)
+				output.put(slot.toString().toLowerCase(), if(player.equipment[slot] != null) 1f else 0f)
 			}
 
 			for (quest in Global.deck.quests)

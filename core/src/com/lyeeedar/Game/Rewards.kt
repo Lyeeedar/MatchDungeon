@@ -283,7 +283,7 @@ class MoneyReward : AbstractReward()
 
 	override fun parse(xmlData: XmlData)
 	{
-		amountEqn = xmlData.get("Count")
+		amountEqn = xmlData.get("Count").toLowerCase()
 	}
 
 	override fun cardIcon(): TextureRegion = AssetManager.loadTextureRegion("GUI/MoneyCardback")!!
@@ -456,7 +456,7 @@ class EquipmentReward : AbstractReward()
 				val biasedArray = Array<Equipment>()
 				for (equip in validEquipment)
 				{
-					if (Global.player.getEquipment(equip.slot) == null)
+					if (Global.player.equipment[equip.slot] == null)
 					{
 						biasedArray.add(equip)
 						biasedArray.add(equip)
@@ -487,7 +487,7 @@ class EquipmentReward : AbstractReward()
 			}
 		}
 
-		val equipped = Global.player.getEquipment(equipment.slot)
+		val equipped = Global.player.equipment[equipment.slot]
 
 		val card = equipment.getCard(equipped, true)
 		card.addPick("Equip", {

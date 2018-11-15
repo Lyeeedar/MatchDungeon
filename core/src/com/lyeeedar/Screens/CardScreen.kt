@@ -203,7 +203,7 @@ class CardScreen : AbstractScreen()
 			tableSlot.clearChildren()
 			tableSlot.clearListeners()
 
-			val equip = Global.player.getEquipment(slot)
+			val equip = Global.player.equipment[slot]
 			if (equip != null)
 			{
 				val stack = Stack()

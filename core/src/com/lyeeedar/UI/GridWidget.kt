@@ -55,10 +55,9 @@ class GridWidget(val grid: Grid) : Widget()
 	val changer: Sprite = AssetManager.loadSprite("Oryx/Custom/items/changer", drawActualSize = true)
 
 	val TILE = 0
-	val SPREADERBELOW = TILE+1
-	val ORB = SPREADERBELOW+1
-	val SPREADERABOVE = ORB+1
-	val EFFECT = SPREADERABOVE+1
+	val SPREADER = TILE+1
+	val ORB = SPREADER+1
+	val EFFECT = ORB+1
 
 	val ground = SortedRenderer(tileSize, grid.width.toFloat(), grid.height.toFloat(), EFFECT+1, true)
 	val floating = SortedRenderer(tileSize, grid.width.toFloat(), grid.height.toFloat(), EFFECT+1, true)
@@ -642,23 +641,23 @@ class GridWidget(val grid: Grid) : Widget()
 
 				if (spreader != null)
 				{
-					val level = if (spreader.renderAbove) SPREADERABOVE else SPREADERBELOW
+					val level = if (spreader.renderAbove) floating else ground
 
 					if (spreader.spriteWrapper != null)
 					{
 						if (spreader.spriteWrapper!!.sprite != null)
 						{
-							ground.queueSprite(spreader.spriteWrapper!!.sprite!!, xi, yi, level, 0, orbColour)
+							level.queueSprite(spreader.spriteWrapper!!.sprite!!, xi, yi, SPREADER, 0, orbColour)
 						}
 						if (spreader.spriteWrapper!!.tilingSprite != null)
 						{
-							ground.queueSprite(spreader.spriteWrapper!!.tilingSprite!!, xi, yi, level, 0, orbColour)
+							level.queueSprite(spreader.spriteWrapper!!.tilingSprite!!, xi, yi, SPREADER, 0, orbColour)
 						}
 					}
 
 					if (spreader.particleEffect != null)
 					{
-						ground.queueParticle(spreader.particleEffect!!, xi, yi, level, 1, orbColour)
+						level.queueParticle(spreader.particleEffect!!, xi, yi, SPREADER, 1, orbColour)
 					}
 
 					if (!Global.settings.get("Spreader", false) && !grid.inTurn )

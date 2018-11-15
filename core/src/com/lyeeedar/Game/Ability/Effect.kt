@@ -121,7 +121,18 @@ class Effect(val type: Type)
 		{
 			Type.POP ->
 			{
-				val dam = data["DAMAGE", "0"].toString().toInt() + Global.player.getStat(Statistic.ABILITYDAMAGE) + 1
+				val dam = data["DAMAGE", "0"].toString().evaluate(Global.getVariableMap())
+
+				val bonusDam: Float
+				if (data["DAMAGE", "0"].toString().length == 1)
+				{
+					// only add on ability dam if we havent used an equation
+					bonusDam = dam + Global.player.getStat(Statistic.ABILITYDAMAGE)
+				}
+				else
+				{
+					bonusDam = dam
+				}
 
 				if (ability.permuter.type == Permuter.Type.SINGLE && ability.targetter.type == Targetter.Type.ATTACK)
 				{

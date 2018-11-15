@@ -163,6 +163,7 @@ class GridScreen(): AbstractScreen()
 		val gridWidget = GridWidget(level.grid)
 		grid = gridWidget
 
+		Global.player.isInBerserkRange = false
 		Global.player.levelbuffs.clear()
 		Global.player.leveldebuffs.clear()
 
@@ -200,7 +201,7 @@ class GridScreen(): AbstractScreen()
 		val abilityTable = Table()
 		for (slot in EquipmentSlot.Values)
 		{
-			val equip = player.getEquipment(slot)
+			val equip = player.equipment[slot]
 			val ability = equip?.ability
 			when
 			{

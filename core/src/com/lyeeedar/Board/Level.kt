@@ -314,26 +314,26 @@ class Level(val loadPath: String)
 			}
 		}
 
+		val chosenFactionName = factions.random()
+		if (chosenFactionName.isBlank())
+		{
+			if (customMonster != null)
+			{
+				chosenFaction = Faction.createCustomFaction(this)
+			}
+		}
+		else
+		{
+			chosenFaction = Faction.load(chosenFactionName)
+		}
+
+		if (chosenFaction == null)
+		{
+			chosenFaction = Faction.load(theme.factions.random())
+		}
+
 		if (hasMonster)
 		{
-			val chosenFactionName = factions.random()
-			if (chosenFactionName.isBlank())
-			{
-				if (customMonster != null)
-				{
-					chosenFaction = Faction.createCustomFaction(this)
-				}
-			}
-			else
-			{
-				chosenFaction = Faction.load(chosenFactionName)
-			}
-
-			if (chosenFaction == null)
-			{
-				chosenFaction = Faction.load(theme.factions.random())
-			}
-
 			// iterate through and find groups
 			data class MonsterMarker(val monsterDesc: MonsterDesc?, val isBoss: Boolean, val difficulty: Int = 0, var used: Boolean = false)
 			val monsterGrid = Array2D<MonsterMarker?>(charGrid.xSize, charGrid.ySize)

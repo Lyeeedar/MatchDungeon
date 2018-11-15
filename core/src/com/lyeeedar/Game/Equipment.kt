@@ -212,6 +212,8 @@ class Equipment(val path: String)
 		slot = EquipmentSlot.valueOf(xml.name.toUpperCase())
 	}
 
+	fun copy(): Equipment = load(path)
+
 	fun save(output: Output)
 	{
 		output.writeString(path)

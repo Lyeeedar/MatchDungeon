@@ -37,7 +37,7 @@
 				<DamageReduction>0</DamageReduction>
 				<Abilities>
 					<Ability>
-						<Cooldown>0,6</Cooldown>
+						<Cooldown>3,6</Cooldown>
 						<Target>Random</Target>
 						<Count>2</Count>
 						<Data />

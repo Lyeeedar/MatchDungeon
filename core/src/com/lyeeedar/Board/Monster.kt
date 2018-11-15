@@ -592,6 +592,8 @@ class MonsterAbility
 						particle.animation = MoveAnimation.obtain().set(animDuration, diff)
 						particle.killOnAnimComplete = true
 
+						particle.rotation = getRotation(monster.tiles[0, 0], target)
+
 						target.effects.add(particle)
 
 						monsterEffect.delayDisplay = animDuration

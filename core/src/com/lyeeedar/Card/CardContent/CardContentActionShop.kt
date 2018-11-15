@@ -225,7 +225,7 @@ class EquipmentWare : ShopWares()
 
 	var equipment: Equipment? = null
 
-	override fun isValid(): Boolean = equipment != null && Global.player.getEquipment(equipment!!.slot)?.path != equipment!!.path
+	override fun isValid(): Boolean = equipment != null && Global.player.equipment[equipment!!.slot]?.path != equipment!!.path
 
 	override fun resolve(shop: CardContentActionShop)
 	{
@@ -261,7 +261,7 @@ class EquipmentWare : ShopWares()
 				val biasedArray = Array<Equipment>()
 				for (equip in validEquipment)
 				{
-					if (Global.player.getEquipment(equip.slot) == null)
+					if (Global.player.equipment[equip.slot] == null)
 					{
 						biasedArray.add(equip)
 						biasedArray.add(equip)
@@ -293,7 +293,7 @@ class EquipmentWare : ShopWares()
 
 	override fun getCard(): CardWidget
 	{
-		return equipment!!.getCard(Global.player.getEquipment(equipment!!.slot), true)
+		return equipment!!.getCard(Global.player.equipment[equipment!!.slot], true)
 	}
 
 	override fun reward()

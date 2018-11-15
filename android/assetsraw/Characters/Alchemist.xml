@@ -8,7 +8,7 @@
 	<Statistics meta:RefKey="Statistics">
 		<Health>8</Health>
 		<AbilityDamage>1</AbilityDamage>
-		<PowerGain>1</PowerGain>
+		<PowerGain>4</PowerGain>
 	</Statistics>
 	<StartingEquipment>
 		<Body>Characters/Equipment/PotionBandolier</Body>
