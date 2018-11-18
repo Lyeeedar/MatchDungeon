@@ -14,8 +14,9 @@
 			<SingleBurst>true</SingleBurst>
 			<Particles>
 				<Particle>
-					<Lifetime>10,10</Lifetime>
+					<Lifetime>1,1.5</Lifetime>
 					<BlendMode>Multiplicative</BlendMode>
+					<Brownian>2</Brownian>
 					<VelocityAligned>true</VelocityAligned>
 					<TextureKeyframes>
 						<Stream>
@@ -56,7 +57,7 @@
 			<SingleBurst>true</SingleBurst>
 			<Particles>
 				<Particle>
-					<Lifetime>0.05,0.1</Lifetime>
+					<Lifetime>0.2,0.3</Lifetime>
 					<BlendMode>Multiplicative</BlendMode>
 					<TextureKeyframes>
 						<Stream>
@@ -66,19 +67,62 @@
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|0|0</Keyframe>
-							<Keyframe>0.2|0.8|1.2</Keyframe>
-							<Keyframe>1|0.8|1.2</Keyframe>
+							<Keyframe>0.2|1.4|1.8</Keyframe>
 						</Stream>
 					</SizeKeyframes>
 					<ColourKeyframes>
 						<Stream>
-							<Keyframe>0|54,54,54,255</Keyframe>
+							<Keyframe>0|38,38,38,255</Keyframe>
 						</Stream>
 					</ColourKeyframes>
 					<AlphaKeyframes>
 						<Stream>
-							<Keyframe>0|0.6</Keyframe>
-							<Keyframe>0.5|0.6</Keyframe>
+							<Keyframe>0|1</Keyframe>
+							<Keyframe>0.5|1</Keyframe>
+							<Keyframe>1|0</Keyframe>
+						</Stream>
+					</AlphaKeyframes>
+				</Particle>
+			</Particles>
+		</Emitter>
+		<Emitter>
+			<Name>Cloud</Name>
+			<Shape>Circle</Shape>
+			<Width>0.5</Width>
+			<Height>0.5</Height>
+			<ParticleSpeed>0,0</ParticleSpeed>
+			<ParticleRotation>0,360</ParticleRotation>
+			<RateKeyframes>
+				<Keyframe>0|10</Keyframe>
+			</RateKeyframes>
+			<SingleBurst>true</SingleBurst>
+			<Particles>
+				<Particle>
+					<Lifetime>0.5,1</Lifetime>
+					<BlendMode>Multiplicative</BlendMode>
+					<TextureKeyframes>
+						<Stream>
+							<Keyframe>0|Particle/plasma_1</Keyframe>
+						</Stream>
+						<Stream>
+							<Keyframe>0|Particle/plasma_2</Keyframe>
+						</Stream>
+					</TextureKeyframes>
+					<SizeKeyframes>
+						<Stream>
+							<Keyframe>0|0|0</Keyframe>
+							<Keyframe>0.2979167|0.3|0.6</Keyframe>
+						</Stream>
+					</SizeKeyframes>
+					<ColourKeyframes>
+						<Stream>
+							<Keyframe>0|0,0,0,255</Keyframe>
+						</Stream>
+					</ColourKeyframes>
+					<AlphaKeyframes>
+						<Stream>
+							<Keyframe>0|1</Keyframe>
+							<Keyframe>0.8321121|1</Keyframe>
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>

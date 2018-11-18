@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Touchable
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
@@ -49,6 +50,7 @@ class ParticleEditorScreen : AbstractScreen()
 	var colour: java.awt.Color = java.awt.Color.WHITE
 	val crossedTiles = ObjectSet<Point>()
 	val particlePos = Point()
+	lateinit var debugButton: CheckBox
 
 	override fun show()
 	{
@@ -123,11 +125,14 @@ class ParticleEditorScreen : AbstractScreen()
 			particle = nparticle
 		}
 
+		debugButton = CheckBox("Debug", Global.skin)
+
 		val buttonsTable = Table()
 		buttonsTable.add(browseButton).expandY().top()
 		buttonsTable.add(updateButton).expandY().top()
 		buttonsTable.add(playbackSpeedBox).expandY().top()
 		buttonsTable.add(colourButton).expandY().top()
+		buttonsTable.add(debugButton).expandY().top()
 
 		mainTable.add(buttonsTable).growX()
 		mainTable.row()
@@ -238,13 +243,16 @@ class ParticleEditorScreen : AbstractScreen()
 		spriteRender.flush(batch)
 		batch.end()
 
-		shape.projectionMatrix = stage.camera.combined
-		shape.setAutoShapeType(true)
-		shape.begin()
+		if (debugButton.isChecked)
+		{
+			shape.projectionMatrix = stage.camera.combined
+			shape.setAutoShapeType(true)
+			shape.begin()
 
-		particle.debug(shape, 0f, 0f, tileSize, true, true)
+			particle.debug(shape, 0f, 0f, tileSize, true, true)
 
-		shape.end()
+			shape.end()
+		}
 	}
 }
 

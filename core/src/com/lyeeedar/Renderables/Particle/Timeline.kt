@@ -32,8 +32,20 @@ abstract class Timeline<T>
 
 	fun valAt(stream: Int, time: Float): T
 	{
-		val window = valAround(stream, time)
-		return lerpValue(window.v1, window.v2, window.alpha)
+		val streamData = streams[stream]
+		if (time < streamData[0].first)
+		{
+			return streamData[0].second
+		}
+		else if (time > streamData.last().first)
+		{
+			return streamData.last().second
+		}
+		else
+		{
+			val window = valAround(stream, time)
+			return lerpValue(window.v1, window.v2, window.alpha)
+		}
 	}
 
 	fun valAround(stream: Int, time: Float): ValOutput<T>
