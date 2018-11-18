@@ -48,13 +48,7 @@ class MainGame : Game()
 
 		if (Global.android)
 		{
-//			val sw = StringWriter()
-//			val handler = Thread.UncaughtExceptionHandler { myThread, e ->
-//				val exceptionAsString = sw.toString()
-//				JOptionPane.showMessageDialog(null, "A fatal error occurred:\n" + exceptionAsString, "An error occurred", JOptionPane.ERROR_MESSAGE)
-//			}
-//
-//			Thread.currentThread().uncaughtExceptionHandler = handler
+
 		}
 		else if (Global.release)
 		{
@@ -76,19 +70,27 @@ class MainGame : Game()
 			Thread.currentThread().uncaughtExceptionHandler = handler
 		}
 
-		screens.put(ScreenEnum.GRID, GridScreen())
-		screens.put(ScreenEnum.QUEST, QuestScreen())
-		screens.put(ScreenEnum.CARD, CardScreen())
-		screens.put(ScreenEnum.DECK, DeckScreen())
-		screens.put(ScreenEnum.QUESTSELECTION, QuestSelectionScreen())
-		//screens.put(ScreenEnum.PARTICLEEDITOR, ParticleEditorScreen())
-
-		val success = Save.load()
-
-		if (!success)
+		if (Global.PARTICLE_EDITOR)
 		{
-			Global.newGame()
+			screens.put(ScreenEnum.PARTICLEEDITOR, ParticleEditorScreen())
+			switchScreen(ScreenEnum.PARTICLEEDITOR)
 		}
+		else
+		{
+			screens.put(ScreenEnum.GRID, GridScreen())
+			screens.put(ScreenEnum.QUEST, QuestScreen())
+			screens.put(ScreenEnum.CARD, CardScreen())
+			screens.put(ScreenEnum.DECK, DeckScreen())
+			screens.put(ScreenEnum.QUESTSELECTION, QuestSelectionScreen())
+
+			val success = Save.load()
+
+			if (!success)
+			{
+				Global.newGame()
+			}
+		}
+
 	}
 
 	fun switchScreen(screen: AbstractScreen)

@@ -67,6 +67,7 @@
 									</Sprite>
 								</Sprite>
 								<Effect>Attack</Effect>
+								<RenderAbove>false</RenderAbove>
 								<AttackEffect meta:RefKey="ParticleEffect">
 									<Name>Fireburst</Name>
 								</AttackEffect>

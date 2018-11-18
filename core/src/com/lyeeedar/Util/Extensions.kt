@@ -11,22 +11,44 @@ import com.lyeeedar.Global
 
 fun String.expandVariables(): String
 {
-	var output = this
-
-	val variables = Global.getVariableMap()
-	for (variable in variables)
+	val split = this.split('{')
+	if (split.size == 1)
 	{
-		if (variable.value.toInt().toFloat() == variable.value)
-		{
-			output = output.replace("{" + variable.key + "}", variable.value.toInt().toString())
-		}
-		else
-		{
-			output = output.replace("{" + variable.key + "}", variable.value.toString())
-		}
+		return this
 	}
+	else
+	{
+		val variables = Global.getVariableMap()
 
-	return output
+		var output = ""
+
+		var isVar = this[0] == '{'
+		for (word in split)
+		{
+			if (isVar)
+			{
+				val clean = word.replace("}", "").toLowerCase()
+				val variable = variables[clean, 0.0f]
+
+				if (variable.toInt().toFloat() == variable)
+				{
+					output += variable.toInt().toString()
+				}
+				else
+				{
+					output += variable.toString()
+				}
+			}
+			else
+			{
+				output += word
+			}
+
+			isVar = !isVar
+		}
+
+		return output
+	}
 }
 
 fun String.neaten() = this.substring(0, 1).toUpperCase() + this.substring(1).toLowerCase()

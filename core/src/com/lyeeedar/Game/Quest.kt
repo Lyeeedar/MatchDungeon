@@ -42,7 +42,8 @@ class Quest(val path: String)
 	var current: AbstractQuestNode? = null
 
 	val theme: Theme
-	lateinit var currentTheme: Theme
+	val themeName: String
+	var currentTheme: Theme
 
 	val bronzeRewards = Array<AbstractReward>()
 	val silverRewards = Array<AbstractReward>()
@@ -67,25 +68,11 @@ class Quest(val path: String)
 		title = xml.get("Title", "")!!
 		description = xml.get("Description", "")!!
 
-		val themeName = xml.get("Theme")
+		themeName = xml.get("Theme")
 		theme = Theme.Companion.load("Themes/$themeName")
 		currentTheme = theme
 
-		for (themeCardPath in XmlData.enumeratePaths("Cards/$themeName/", "Card"))
-		{
-			val card = Card.load(themeCardPath)
-			themeCards.add(card)
-		}
-
-		val questCardsEl = xml.getChildByName("QuestCards")
-		if (questCardsEl != null)
-		{
-			for (questCardEl in questCardsEl.children())
-			{
-				val card = Card.load(rawPath.directory() + "/" + questCardEl.text)
-				questCards.add(card)
-			}
-		}
+		resetCards()
 
 		val bronzeRewardsEl = xml.getChildByName("BronzeRewards")
 		if (bronzeRewardsEl != null)
@@ -133,6 +120,30 @@ class Quest(val path: String)
 		root = nodeMap[rootNode]
 
 		current = root
+	}
+
+	fun resetCards()
+	{
+		val rawPath = "Quests/$path"
+		val xml = getXml(rawPath)
+
+		themeCards.clear()
+		for (themeCardPath in XmlData.enumeratePaths("Cards/$themeName/", "Card"))
+		{
+			val card = Card.load(themeCardPath)
+			themeCards.add(card)
+		}
+
+		questCards.clear()
+		val questCardsEl = xml.getChildByName("QuestCards")
+		if (questCardsEl != null)
+		{
+			for (questCardEl in questCardsEl.children())
+			{
+				val card = Card.load(rawPath.directory() + "/" + questCardEl.text)
+				questCards.add(card)
+			}
+		}
 	}
 
 	fun createTable(detail: Boolean): Table

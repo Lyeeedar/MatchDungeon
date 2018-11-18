@@ -14,7 +14,7 @@
 			<SingleBurst>true</SingleBurst>
 			<Particles>
 				<Particle>
-					<Lifetime>1,1</Lifetime>
+					<Lifetime>10,10</Lifetime>
 					<BlendMode>Multiplicative</BlendMode>
 					<VelocityAligned>true</VelocityAligned>
 					<TextureKeyframes>

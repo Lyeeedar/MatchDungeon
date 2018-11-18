@@ -99,8 +99,16 @@ class Monster(val desc: MonsterDesc, val difficulty: Int) : Creature(desc.hp, de
 		val weaknessAura = Global.player.getStat(Statistic.WEAKNESSAURA)
 		if (weaknessAura > 0)
 		{
-			hp -= weaknessAura
-			queuedTileSprites.add(AssetManager.loadParticleEffect("Weakness"))
+			queuedTileActions.add(DelayedAction(
+					{
+						hp -= weaknessAura
+
+						val effect = AssetManager.loadParticleEffect("Weakness")
+						effect.size[0] = size
+						effect.size[1] = size
+
+						tiles[0, 0].effects.add(effect)
+					}, 0.5f))
 		}
 	}
 

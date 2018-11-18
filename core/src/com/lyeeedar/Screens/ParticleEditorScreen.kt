@@ -7,7 +7,11 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Actor
+import com.badlogic.gdx.scenes.scene2d.InputEvent
+import com.badlogic.gdx.scenes.scene2d.InputListener
+import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox
+import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener
 import com.badlogic.gdx.utils.Array
@@ -23,8 +27,10 @@ import com.lyeeedar.Renderables.Sprite.TilingSprite
 import com.lyeeedar.UI.addClickListener
 import com.lyeeedar.Util.*
 import ktx.collections.set
+import java.awt.FileDialog
+import java.awt.Frame
+import java.io.File
 import javax.swing.JColorChooser
-import javax.swing.JFileChooser
 
 /**
  * Created by Philip on 14-Aug-16.
@@ -37,11 +43,23 @@ class ParticleEditorScreen : AbstractScreen()
 	val batch = HDRColourSpriteBatch()
 	lateinit var background: Array2D<Symbol>
 	lateinit var collision: Array2D<Boolean>
-	val tileSize = 32f
-	val spriteRender = SortedRenderer(tileSize, 100f, 100f, 2, true)
+	var tileSize = 32f
+	lateinit var spriteRender: SortedRenderer
 	val shape = ShapeRenderer()
 	var colour: java.awt.Color = java.awt.Color.WHITE
 	val crossedTiles = ObjectSet<Point>()
+	val particlePos = Point()
+
+	override fun show()
+	{
+		if ( !created )
+		{
+			baseCreate()
+			created = true
+		}
+
+		Gdx.input.inputProcessor = inputMultiplexer
+	}
 
 	override fun create()
 	{
@@ -69,27 +87,25 @@ class ParticleEditorScreen : AbstractScreen()
 		}
 
 		browseButton.addClickListener {
-			val fc = JFileChooser()
-			fc.currentDirectory = Gdx.files.internal("Particles").file().absoluteFile
-			val returnVal = fc.showOpenDialog(null)
+			val fc = java.awt.FileDialog(Frame(), "Load", FileDialog.LOAD)
+			fc.directory = Gdx.files.internal("../assetsraw/Particles").file().absoluteFile.path
 
-			if (returnVal == JFileChooser.APPROVE_OPTION)
-			{
-				val file = fc.selectedFile
+			fc.isVisible = true
 
-				currentPath = file.path
+			val file = fc.file ?: return@addClickListener
 
-				val rawxml = getRawXml(currentPath!!)
-				val xmlData = XmlData.loadFromElement(rawxml)
+			currentPath = File("../assetsraw/Particles/$file").absolutePath
 
-				val nparticle = ParticleEffect.Companion.load(xmlData)
-				nparticle.killOnAnimComplete = false
-				nparticle.setPosition(particle.position.x, particle.position.y)
-				nparticle.rotation = particle.rotation
-				//nparticle.speedMultiplier = playbackSpeedBox.selected
-				nparticle.colour.set(colour.red / 255f, colour.green / 255f, colour.blue / 255f, colour.alpha / 255f)
-				particle = nparticle
-			}
+			val rawxml = getRawXml(currentPath!!)
+			val xmlData = XmlData.loadFromElement(rawxml)
+
+			val nparticle = ParticleEffect.Companion.load(xmlData)
+			nparticle.killOnAnimComplete = false
+			nparticle.setPosition(particle.position.x, particle.position.y)
+			nparticle.rotation = particle.rotation
+			//nparticle.speedMultiplier = playbackSpeedBox.selected
+			nparticle.colour.set(colour.red / 255f, colour.green / 255f, colour.blue / 255f, colour.alpha / 255f)
+			particle = nparticle
 		}
 
 		updateButton.addClickListener {
@@ -107,14 +123,54 @@ class ParticleEditorScreen : AbstractScreen()
 			particle = nparticle
 		}
 
-		mainTable.add(browseButton).expandY().top()
-		mainTable.add(updateButton).expandY().top()
-		mainTable.add(playbackSpeedBox).expandY().top()
-		mainTable.add(colourButton).expandY().top()
+		val buttonsTable = Table()
+		buttonsTable.add(browseButton).expandY().top()
+		buttonsTable.add(updateButton).expandY().top()
+		buttonsTable.add(playbackSpeedBox).expandY().top()
+		buttonsTable.add(colourButton).expandY().top()
+
+		mainTable.add(buttonsTable).growX()
+		mainTable.row()
 
 		particle = ParticleEffect()
 
 		loadLevel()
+
+		val clickTable = Table()
+		clickTable.debug()
+		clickTable.touchable = Touchable.enabled
+
+		clickTable.addListener(object : InputListener()
+							   {
+								   override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean
+								   {
+									   val xp = x + ((spriteRender.width * tileSize) / 2f) - (clickTable.width / 2f)
+
+									   val sx = (xp / tileSize).toInt()
+									   val sy = spriteRender.height.toInt() - ((spriteRender.height.toInt()-1) - (y / tileSize).toInt()) - 1
+
+									   val p1 = Vector2(particle.position)
+									   val p2 = Vector2(sx.toFloat(), sy.toFloat())
+
+									   particlePos.set(sx, sy)
+
+									   val dist = p1.dst(p2)
+
+									   particle.animation = null
+									   particle.animation = MoveAnimation.obtain().set(dist, arrayOf(p1, p2), Interpolation.linear)
+									   particle.rotation = getRotation(p1, p2)
+
+									   Point.freeAll(crossedTiles)
+									   crossedTiles.clear()
+									   particle.collisionFun = fun(x:Int, y:Int) { crossedTiles.add(Point.obtain().set(x, y)) }
+
+									   particle.start()
+
+									   return true
+								   }
+							   })
+
+		mainTable.add(clickTable).grow()
 	}
 
 	fun loadLevel()
@@ -137,11 +193,18 @@ class ParticleEditorScreen : AbstractScreen()
 
 		background = Array2D(width, height) { x, y -> symbolMap[rowsEl.getChild(height - y - 1).text[x]].copy() }
 		collision = Array2D(width, height) { x, y -> background[x, y].isWall }
+
+		val tilex = Global.resolution.x.toFloat() / width.toFloat()
+		tileSize = tilex
+
+		spriteRender = SortedRenderer(tileSize, width.toFloat(), height.toFloat(), 2, true)
 	}
 
 	val tempPoint = Point()
 	override fun doRender(delta: Float)
 	{
+		batch.projectionMatrix = stage.camera.combined
+
 		particle.collisionGrid = collision
 
 		spriteRender.begin(delta, 0f, 0f)
@@ -168,7 +231,7 @@ class ParticleEditorScreen : AbstractScreen()
 				}
 			}
 		}
-		spriteRender.queueParticle(particle, 0f, 0f, 1, 0)
+		spriteRender.queueParticle(particle, particlePos.x.toFloat(), particlePos.y.toFloat(), 1, 0)
 
 		batch.color = Color.WHITE
 		batch.begin()
@@ -182,27 +245,6 @@ class ParticleEditorScreen : AbstractScreen()
 		particle.debug(shape, 0f, 0f, tileSize, true, true)
 
 		shape.end()
-	}
-
-	override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean
-	{
-		val p1 = Vector2(particle.position)
-		val p2 = Vector2(screenX / tileSize, (stage.height - screenY) / tileSize)
-
-		particle.position.set(p2)
-
-		val dist = p1.dst(p2)
-
-		particle.animation = MoveAnimation.obtain().set(dist, arrayOf(p1, p2), Interpolation.linear)
-		particle.rotation = getRotation(p1, p2)
-
-		Point.freeAll(crossedTiles)
-		crossedTiles.clear()
-		particle.collisionFun = fun(x:Int, y:Int) { crossedTiles.add(Point.obtain().set(x, y)) }
-
-		particle.start()
-
-		return true
 	}
 }
 

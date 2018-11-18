@@ -29,6 +29,7 @@
 			</Sinkable>
 		</Symbol>
 	</Symbols>
+	<Faction>Thug</Faction>
 	<OrbCount>5</OrbCount>
 	<AllowedVictories>
 		<Condition meta:RefKey="Sink">

@@ -27,6 +27,11 @@
 			<Line>
 				<MultilineString>The man comes up to you and thanks you profusely. He introduces himself as a merchant and presses a large bag of coins into your hands, insisting you deserve it for saving him.</MultilineString>
 			</Line>
+			<Rewards meta:RefKey="Rewards">
+				<Money>
+					<Count>100</Count>
+				</Money>
+			</Rewards>
 			<MarkComplete>
 				<State>Success</State>
 			</MarkComplete>
