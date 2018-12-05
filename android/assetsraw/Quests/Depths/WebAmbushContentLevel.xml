@@ -2,60 +2,49 @@
 	<Grid>
 		<Rows>
 			<Line>...........</Line>
-			<Line>.....D.....</Line>
+			<Line>.....!.....</Line>
 			<Line>...........</Line>
-			<Line>###.###.###</Line>
-			<Line>.......D...</Line>
+			<Line>##..##..###</Line>
+			<Line>.......!...</Line>
 			<Line>...........</Line>
-			<Line>..D........</Line>
-			<Line>###.###.###</Line>
+			<Line>..!........</Line>
+			<Line>###..##..##</Line>
 			<Line>...........</Line>
-			<Line>.....D.....</Line>
+			<Line>.....!.....</Line>
 			<Line>...........</Line>
 		</Rows>
 	</Grid>
-	<Symbols>
-		<Symbol>
-			<Character>D</Character>
-			<Extends></Extends>
-			<Plate>0</Plate>
-			<Seal>0</Seal>
-			<Attack>0</Attack>
-			<IsMonster>true</IsMonster>
-			<MonsterDesc meta:RefKey="MonsterDesc">
-				<Name>Dryder</Name>
-				<Sprite meta:RefKey="Sprite">
-					<Name>Oryx/Custom/heroes/dryder</Name>
-					<DrawActualSize>true</DrawActualSize>
-				</Sprite>
-				<Death meta:RefKey="ParticleEffect">
-					<Name>Death</Name>
-				</Death>
-				<AttackNumPips>6</AttackNumPips>
-				<AttackCooldown>2,6</AttackCooldown>
-				<Size>1</Size>
-				<HP>20</HP>
-				<DamageReduction>1</DamageReduction>
-				<Abilities>
-					<Ability>
-						<Cooldown>2,5</Cooldown>
-						<Effect>Move</Effect>
-					</Ability>
-					<Ability>
-						<Cooldown>2,6</Cooldown>
-						<Count>2</Count>
-						<Effect>Seal</Effect>
-					</Ability>
-					<Ability>
-						<Cooldown>1,9</Cooldown>
-						<Effect>SealedAttack</Effect>
-						<Data />
-					</Ability>
-				</Abilities>
-			</MonsterDesc>
-			<SpecialOrb>None</SpecialOrb>
-		</Symbol>
-	</Symbols>
+	<CustomMonster meta:RefKey="MonsterDesc">
+		<Name>Dryder</Name>
+		<Sprite meta:RefKey="Sprite">
+			<Name>Oryx/Custom/heroes/dryder</Name>
+			<DrawActualSize>true</DrawActualSize>
+		</Sprite>
+		<Death meta:RefKey="ParticleEffect">
+			<Name>Death</Name>
+		</Death>
+		<AttackNumPips>6</AttackNumPips>
+		<AttackCooldown>2,6</AttackCooldown>
+		<Size>1</Size>
+		<HP>20</HP>
+		<DamageReduction>1</DamageReduction>
+		<Abilities>
+			<Ability>
+				<Cooldown>2,5</Cooldown>
+				<Effect>Move</Effect>
+			</Ability>
+			<Ability>
+				<Cooldown>2,6</Cooldown>
+				<Count>2</Count>
+				<Effect>Seal</Effect>
+			</Ability>
+			<Ability>
+				<Cooldown>1,9</Cooldown>
+				<Effect>SealedAttack</Effect>
+				<Data />
+			</Ability>
+		</Abilities>
+	</CustomMonster>
 	<AllowedVictories>
 		<Condition meta:RefKey="Kill" />
 	</AllowedVictories>

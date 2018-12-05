@@ -14,7 +14,7 @@
 		<Description>Set an object on fire.</Description>
 		<EffectData>
 			<Cost>3</Cost>
-			<Effect>1,Block,Single,Spreader</Effect>
+			<Effect>1,Tile,Single,Spreader</Effect>
 			<Data>
 				<Spreader meta:RefKey="SpreaderDef">
 					<Name>Fire</Name>

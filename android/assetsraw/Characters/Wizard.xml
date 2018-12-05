@@ -6,7 +6,7 @@
 		<DrawActualSize>true</DrawActualSize>
 	</Sprite>
 	<Statistics meta:RefKey="Statistics">
-		<Health>5</Health>
+		<Health>8</Health>
 		<AbilityDamage>3</AbilityDamage>
 		<PowerGain>5</PowerGain>
 	</Statistics>

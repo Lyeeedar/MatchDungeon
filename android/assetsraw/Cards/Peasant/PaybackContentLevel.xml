@@ -16,8 +16,22 @@
 	</Grid>
 	<Symbols>
 		<Symbol>
-			<Character>T</Character>
+			<Character>.</Character>
 			<Extends></Extends>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/ground_dirt_dark_1</Name>
+				</Sprite>
+			</Sprite>
+			<Plate>0</Plate>
+			<Seal>0</Seal>
+			<Attack>0</Attack>
+			<IsMonster>false</IsMonster>
+			<SpecialOrb>None</SpecialOrb>
+		</Symbol>
+		<Symbol>
+			<Character>T</Character>
+			<Extends>.</Extends>
 			<Block>
 				<Sprite meta:RefKey="Sprite">
 					<Name>Oryx/Custom/terrain/GoblinTent</Name>
@@ -26,20 +40,6 @@
 				<Health>7</Health>
 				<AlwaysShowHP>true</AlwaysShowHP>
 			</Block>
-			<Plate>0</Plate>
-			<Seal>0</Seal>
-			<Attack>0</Attack>
-			<IsMonster>false</IsMonster>
-			<SpecialOrb>None</SpecialOrb>
-		</Symbol>
-		<Symbol>
-			<Character>.</Character>
-			<Extends></Extends>
-			<Sprite meta:RefKey="SpriteWrapper">
-				<Sprite meta:RefKey="Sprite">
-					<Name>Oryx/uf_split/uf_terrain/ground_dirt_dark_1</Name>
-				</Sprite>
-			</Sprite>
 			<Plate>0</Plate>
 			<Seal>0</Seal>
 			<Attack>0</Attack>

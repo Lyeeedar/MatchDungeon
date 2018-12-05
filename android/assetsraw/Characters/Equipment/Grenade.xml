@@ -16,7 +16,7 @@
 			<Effect>1,Tile,Diamond,Pop</Effect>
 			<Data>
 				<AOE>3</AOE>
-				<Damage>5</Damage>
+				<Damage>10</Damage>
 			</Data>
 			<FlightEffect meta:RefKey="ParticleEffect">
 				<Name>ThrowGrenade</Name>

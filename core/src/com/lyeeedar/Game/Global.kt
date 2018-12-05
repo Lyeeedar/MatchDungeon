@@ -35,7 +35,7 @@ class Global
 {
 	companion object
 	{
-		val PARTICLE_EDITOR = true
+		val PARTICLE_EDITOR = false
 
 		lateinit var skin: Skin
 		var fps = 60

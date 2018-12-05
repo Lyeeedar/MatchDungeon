@@ -34,7 +34,7 @@
 			</Line>
 			<Define>
 				<Key>Cost</Key>
-				<Value>25</Value>
+				<Value>0</Value>
 				<Storage>Card</Storage>
 			</Define>
 			<Node meta:RefKey="Node">f6c0d1f2-f8a5-4ccd-a5e0-fef01bbcbfc8</Node>

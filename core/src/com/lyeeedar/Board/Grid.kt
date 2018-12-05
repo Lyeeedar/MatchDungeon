@@ -135,7 +135,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			for (buff in Global.player.levelbuffs.toGdxArray())
 			{
 				buff.remainingDuration--
-				if (buff.remainingDuration == 0)
+				if (buff.remainingDuration <= 0)
 				{
 					Global.player.levelbuffs.removeValue(buff, true)
 				}
@@ -144,7 +144,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			for (debuff in Global.player.leveldebuffs.toGdxArray())
 			{
 				debuff.remainingDuration--
-				if (debuff.remainingDuration == 0)
+				if (debuff.remainingDuration <= 0)
 				{
 					Global.player.leveldebuffs.removeValue(debuff, true)
 				}
