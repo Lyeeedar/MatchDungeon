@@ -21,7 +21,7 @@ open class Point : Pool.Poolable, Comparable<Point>
 	var locked: Boolean = false
 	var fromPool: Boolean = false
 
-	var x: Int = 0
+	internal var x: Int = 0
 		set(value)
 		{
 			if (locked) throw RuntimeException("Tried to edit a locked point")
@@ -30,7 +30,7 @@ open class Point : Pool.Poolable, Comparable<Point>
 			field = value
 		}
 
-	var y: Int = 0
+	internal var y: Int = 0
 		set(value)
 		{
 			if (locked) throw RuntimeException("Tried to edit a locked point")
@@ -69,57 +69,90 @@ open class Point : Pool.Poolable, Comparable<Point>
 	}
     constructor( other: Point ) : this(other.x, other.y)
 
-	lateinit var obtainPath: String
-//	protected fun finalize()
-//	{
-//		if (obtained)
-//		{
-//			if (leakMap.containsKey(obtainPath))
-//			{
-//				var oldVal = leakMap[obtainPath]
-//				oldVal++
-//				leakMap[obtainPath] = oldVal
-//			}
-//			else
-//			{
-//				leakMap[obtainPath] = 1
-//			}
-//		}
-//	}
+	constructor(block: PointBlock)
+	{
+		parentBlock = block
+	}
+
+	var parentBlock: PointBlock? = null
 
     companion object
     {
-		//private val leakMap = ObjectMap<String, Long>()
-
 		@JvmField val ZERO = Point(0, 0, true)
 		@JvmField val ONE = Point(1, 1, true)
 		@JvmField val MINUS_ONE = Point(-1, -1, true)
 		@JvmField val MAX = Point(Int.MAX_VALUE, Int.MAX_VALUE, true)
 		@JvmField val MIN = Point(-Int.MAX_VALUE, -Int.MAX_VALUE, true)
 
-        private val pool: Pool<Point> = object : Pool<Point>() {
-			override fun newObject(): Point
+		// ----------------------------------------------------------------------
+		class PointBlock
+		{
+			var count = 0
+			var index: Int = 0
+			val points = Array(blockSize) { Point(this) }
+
+			fun obtain(): Point
 			{
-				return Point()
+				val point = points[index]
+				index++
+				count++
+
+				return point
+			}
+
+			fun free(data: Point)
+			{
+				count--
+
+				if (count == 0 && index == blockSize)
+				{
+					pool.free(this)
+					index = 0
+				}
+			}
+
+			companion object
+			{
+				public const val blockSize: Int = 128
+
+				fun obtain(): PointBlock
+				{
+					val block = pool.obtain()
+					return block
+				}
+
+				private val pool: Pool<PointBlock> = object : Pool<PointBlock>() {
+					override fun newObject(): PointBlock
+					{
+						return PointBlock()
+					}
+				}
 			}
 		}
 
-        @JvmStatic fun obtain(): Point
+		var currentBlock: PointBlock = PointBlock.obtain()
+
+		@JvmStatic fun obtain(): Point
 		{
-			val point = pool.obtain()
+			val point = currentBlock.obtain()
+
+			if (currentBlock.index == PointBlock.blockSize)
+			{
+				currentBlock = PointBlock.obtain()
+			}
+
 			point.fromPool = true
 			point.locked = false
 
 			if (point.obtained) throw RuntimeException()
-
-			//point.obtainPath = Thread.currentThread().stackTrace.joinToString(separator = "\n") { it.toString() }
 			point.obtained = true
+
 			return point
 		}
 
 		fun obtainTS(): Point
 		{
-			synchronized(pool)
+			synchronized(currentBlock)
 			{
 				return obtain()
 			}
@@ -129,14 +162,34 @@ open class Point : Pool.Poolable, Comparable<Point>
 
 		fun freeAllTS(items: Iterable<Point>)
 		{
-			synchronized(pool)
+			synchronized(currentBlock)
 			{
 				freeAll(items)
 			}
 		}
+
+		inline fun getHashcode(x: Int, y: Int): Int
+		{
+			return x * X_HASH_SIZE + y
+		}
+
+		inline fun getHashcode(x: Int, y: Int, direction: Direction): Int
+		{
+			return (x + direction.x) * X_HASH_SIZE + (y + direction.y)
+		}
+
+		internal inline fun getHashcode(point: Point, direction: Direction): Int
+		{
+			val x = point.x + direction.x
+			val y = point.y + direction.y
+
+			return x * X_HASH_SIZE + y
+		}
     }
 
     private var obtained = false
+
+	fun toVec(): Vector2 = Vector2(x.toFloat(), y.toFloat())
 
 	fun set(string: String): Point
 	{
@@ -163,31 +216,38 @@ open class Point : Pool.Poolable, Comparable<Point>
 
 	inline fun set(other: Vector2) = set(other.x.toInt(), other.y.toInt())
 
-	inline fun set(other: Point) = set(other.x, other.y)
+	internal inline fun set(other: Point) = set(other.x, other.y)
 
-	inline fun copy() = Point.obtain().set(this)
+	internal inline fun copy() = Point.obtain().set(this)
 
-	fun free() { if (obtained) { Point.pool.free(this); obtained = false; obtainPath = "" } }
+	fun free()
+	{
+		if (obtained)
+		{
+			parentBlock?.free(this)
+			obtained = false
+		}
+	}
 
 	fun freeTS()
 	{
-		synchronized(pool)
+		synchronized(currentBlock)
 		{
 			free()
 		}
 	}
 
-	inline fun lineTo(other: Point) = Bresenham.line2D_(x, y, other.x, other.y).map { Point.obtain().set(it.x, it.y) }
+	internal inline fun lineTo(other: Point) = Bresenham.line2D_(x, y, other.x, other.y).map { Point.obtain().set(it.x, it.y) }
 
-	inline fun taxiDist(other: Point) = Math.max( Math.abs(other.x - x), Math.abs(other.y - y) )
-	inline fun dist(other: Point) = Math.abs(other.x - x) + Math.abs(other.y - y)
-	inline fun dist(ox: Int, oy: Int) = Math.abs(ox - x) + Math.abs(oy - y)
-	inline fun euclideanDist(other: Point) = Vector2.dst(x.toFloat(), y.toFloat(), other.x.toFloat(), other.y.toFloat())
-	inline fun euclideanDist(ox: Float, oy:Float) = Vector2.dst(x.toFloat(), y.toFloat(), ox, oy)
-	inline fun euclideanDist2(other: Point) = Vector2.dst2(x.toFloat(), y.toFloat(), other.x.toFloat(), other.y.toFloat())
-	inline fun euclideanDist2(ox: Float, oy:Float) = Vector2.dst2(x.toFloat(), y.toFloat(), ox, oy)
+	internal inline fun taxiDist(other: Point) = Math.max( Math.abs(other.x - x), Math.abs(other.y - y) )
+	internal inline fun dist(other: Point) = Math.abs(other.x - x) + Math.abs(other.y - y)
+	internal inline fun dist(ox: Int, oy: Int) = Math.abs(ox - x) + Math.abs(oy - y)
+	internal inline fun euclideanDist(other: Point) = Vector2.dst(x.toFloat(), y.toFloat(), other.x.toFloat(), other.y.toFloat())
+	internal inline fun euclideanDist(ox: Float, oy:Float) = Vector2.dst(x.toFloat(), y.toFloat(), ox, oy)
+	internal inline fun euclideanDist2(other: Point) = Vector2.dst2(x.toFloat(), y.toFloat(), other.x.toFloat(), other.y.toFloat())
+	internal inline fun euclideanDist2(ox: Float, oy:Float) = Vector2.dst2(x.toFloat(), y.toFloat(), ox, oy)
 
-	inline fun liesInRect(min: Point, max: Point): Boolean = x >= min.x && x <= max.x && y >= min.y&& y <= max.y
+	internal inline fun liesInRect(min: Point, max: Point): Boolean = x >= min.x && x <= max.x && y >= min.y&& y <= max.y
 
 	fun liesOnLine(p1: Point, p2: Point): Boolean
 	{
@@ -242,12 +302,13 @@ open class Point : Pool.Poolable, Comparable<Point>
 		return false
 	}
 
-	inline fun lerp(p2: Point, alpha: Float) = obtain().set(x + ((p2.x - x) * alpha).toInt(), y + ((p2.y - y) * alpha).toInt())
+	internal inline fun lerp(p2: Point, alpha: Float) = obtain().set(x + ((p2.x - x) * alpha).toInt(), y + ((p2.y - y) * alpha).toInt())
 
-	inline fun getPosDiff(p: Point, invertY: Boolean = false): kotlin.Array<Vector2> = getPosDiff(p.x, p.y, invertY)
-	inline fun getPosDiff(px: Int, py: Int, invertY: Boolean = false): kotlin.Array<Vector2>
+	internal inline fun getPosDiff(p: Point, invertY: Boolean = false): kotlin.Array<Vector2> = getPosDiff(p.x.toFloat(), p.y.toFloat(), invertY)
+	internal inline fun getPosDiff(px: Int, py: Int, invertY: Boolean = false): kotlin.Array<Vector2> = getPosDiff(px.toFloat(), py.toFloat(), invertY)
+	internal inline fun getPosDiff(px: Float, py: Float, invertY: Boolean = false): kotlin.Array<Vector2>
 	{
-		val oldPos = Vector2(px.toFloat(), py.toFloat())
+		val oldPos = Vector2(px, py)
 		val newPos = Vector2(x.toFloat(), y.toFloat())
 
 		val diff = oldPos.sub(newPos)
@@ -278,6 +339,7 @@ open class Point : Pool.Poolable, Comparable<Point>
 
 	operator fun plus(other: Direction) = obtain().set(x + other.x, y + other.y)
 	operator fun plus(other: Point) = obtain().set(x + other.x, y + other.y)
+	operator fun minus(other: Direction) = obtain().set(x - other.x, y - other.y)
 	operator fun minus(other: Point) = obtain().set(x - other.x, y - other.y)
 	operator fun times(other: Point) = obtain().set(x * other.x, y * other.y)
 	operator fun div(other: Point) = obtain().set(x / other.x, y / other.y)
@@ -288,6 +350,7 @@ open class Point : Pool.Poolable, Comparable<Point>
 	operator fun plusAssign(other: Point) { x += other.x; y += other.y }
 	operator fun plusAssign(other: Direction) { x += other.x; y += other.y }
 	operator fun minusAssign(other: Point) { x -= other.x; y -= other.y }
+	operator fun minusAssign(other: Direction) { x -= other.x; y -= other.y }
 	operator fun timesAssign(other: Point) { x *= other.x; y *= other.y }
 	operator fun divAssign(other: Point) { x /= other.x; y /= other.y }
 

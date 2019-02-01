@@ -51,6 +51,8 @@ class Global
 		var resolution = Point(360, 640)
 		var screenSize = Point(resolution.x, resolution.y)
 
+		var collisionGrid: Array2D<Boolean>? = null
+
 		lateinit var controls: Controls
 
 		lateinit var player: Player

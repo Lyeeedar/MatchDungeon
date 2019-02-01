@@ -198,6 +198,7 @@ class ParticleEditorScreen : AbstractScreen()
 
 		background = Array2D(width, height) { x, y -> symbolMap[rowsEl.getChild(height - y - 1).text[x]].copy() }
 		collision = Array2D(width, height) { x, y -> background[x, y].isWall }
+		Global.collisionGrid = collision
 
 		val tilex = Global.resolution.x.toFloat() / width.toFloat()
 		tileSize = tilex
@@ -210,9 +211,7 @@ class ParticleEditorScreen : AbstractScreen()
 	{
 		batch.projectionMatrix = stage.camera.combined
 
-		particle.collisionGrid = collision
-
-		spriteRender.begin(delta, 0f, 0f)
+		spriteRender.begin(delta, 0f, 0f, Colour.DARK_GRAY)
 
 		for (x in 0..background.xSize-1)
 		{
@@ -240,7 +239,7 @@ class ParticleEditorScreen : AbstractScreen()
 
 		batch.color = Color.WHITE
 		batch.begin()
-		spriteRender.flush(batch)
+		spriteRender.end(batch)
 		batch.end()
 
 		if (debugButton.isChecked)

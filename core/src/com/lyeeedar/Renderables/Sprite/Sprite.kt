@@ -4,13 +4,13 @@ import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.HDRColourSpriteBatch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.MathUtils
-import com.badlogic.gdx.math.Matrix3
-import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Renderables.Animation.AbstractColourAnimation
 import com.lyeeedar.Renderables.Renderable
+import com.lyeeedar.Renderables.SortedRenderer
 import com.lyeeedar.Util.Colour
+import com.lyeeedar.Util.doDraw
 import com.lyeeedar.Util.draw
 import com.lyeeedar.Util.drawBlend
 
@@ -46,10 +46,7 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 	var repeatAccumulator: Float = 0.toFloat()
 	var animationAccumulator: Float = 0.toFloat()
 
-	var faceInMoveDirection: Boolean = false
-	val lastPos: Vector2 = Vector2()
 	var fixPosition: Boolean = false
-
 
 	var completed = false
 
@@ -65,16 +62,21 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 
 	var texIndex: Int = 0
 
+	var smoothShade = false
+
+	private val tempColour = Colour()
+	private val tempVec = Vector3()
+
 	init
 	{
 		this.colour = colour
 	}
 
 	val lifetime: Float
-		get() = if (animation != null) animation!!.duration() else animationDelay * textures.size
+		get() = if (hasAnim) animation!!.duration() else animationDelay * textures.size
 
 	val remainingLifetime: Float
-		get() = if (animation != null) animation!!.duration() - animation!!.time() else animationDelay * (textures.size - texIndex)
+		get() = if (hasAnim) animation!!.duration() - animation!!.time() else animationDelay * (textures.size - texIndex)
 
 	override fun doUpdate(delta: Float): Boolean
 	{
@@ -108,7 +110,7 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 			}
 		}
 
-		if (animation != null)
+		if (hasAnim)
 		{
 			if (animationStage == AnimationStage.INVALID) animationStage = AnimationStage.START
 			looped = animation!!.update(delta)
@@ -155,7 +157,7 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 		var scaleX = baseScale[0]
 		var scaleY = baseScale[1]
 
-		if (animation != null)
+		if (hasAnim)
 		{
 			val scale = animation!!.renderScale()
 			if (scale != null)
@@ -173,7 +175,7 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 		var scaleX = baseScale[0] * scaleX
 		var scaleY = baseScale[1] * scaleY
 
-		if (animation != null)
+		if (hasAnim)
 		{
 			val scale = animation!!.renderScale()
 			if (scale != null)
@@ -252,7 +254,7 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 
 		if (rotation != 0f && fixPosition)
 		{
-			val offset = getPositionCorrectionOffsets(x, y, width / 2.0f, height / 2.0f, width, height, scaleX, scaleY, rotation)
+			val offset = getPositionCorrectionOffsets(x, y, width / 2.0f, height / 2.0f, width, height, scaleX, scaleY, rotation, tempVec)
 			x -= offset.x
 			y -= offset.y
 		}
@@ -267,6 +269,140 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 		else
 		{
 			draw(batch, texture, x, y, width / 2.0f, height / 2.0f, width, height, scaleX, scaleY, rotation, flipX, flipY, removeAmount)
+		}
+	}
+
+	fun getRenderColour(): Colour
+	{
+		val renderCol = when
+		{
+			(colourAnimation != null) -> colourAnimation!!.renderColour()!!
+			(animation?.renderColour() != null) -> animation!!.renderColour()!!
+			else -> this.colour
+		}
+
+		return renderCol
+	}
+
+	private class VertexHash(private var colour: Float, private var x: Float, private var y: Float, private var width: Float, private var height: Float, private var scaleX: Float, private var scaleY: Float, private var rotation: Float, private var texIndex: Int)
+	{
+		fun isSame(colour: Float, x: Float, y: Float, width: Float, height: Float, scaleX: Float, scaleY: Float, rotation: Float, texIndex: Int): Boolean
+		{
+			return this.colour == colour && this.x == x && this.y == y && this.width == width && this.height == height && this.scaleX == scaleX && this.scaleY == scaleY && this.rotation == rotation && this.texIndex == texIndex
+		}
+
+		fun update(colour: Float, x: Float, y: Float, width: Float, height: Float, scaleX: Float, scaleY: Float, rotation: Float, texIndex: Int)
+		{
+			this.colour = colour
+			this.x = x
+			this.y = y
+			this.width = width
+			this.height = height
+			this.scaleX = scaleX
+			this.scaleY = scaleY
+			this.rotation = rotation
+			this.texIndex = texIndex
+		}
+	}
+	private val lastRenderHash = VertexHash(-1f, -1f, -1f, -1f, -1f, -1f, -1f, -1f, -1)
+	private val cachedRenderHash = VertexHash(-1f, -1f, -1f, -1f, -1f, -1f, -1f, -1f, -1)
+	private val vertexCache = FloatArray(SortedRenderer.verticesASprite)
+	fun render(vertices: FloatArray, offset: Int, colour: Colour, x: Float, y: Float, width: Float, height: Float, scaleX: Float, scaleY: Float, rotation: Float, isLit: Boolean)
+	{
+		var cacheVertices = false
+		if (!hasAnim && !frameBlend)
+		{
+			if (cachedRenderHash.isSame(colour.toFloatBits(), x, y, width, height, scaleX, scaleY, rotation, texIndex))
+			{
+				System.arraycopy(vertexCache, 0, vertices, offset, SortedRenderer.verticesASprite)
+				return
+			}
+			else if (lastRenderHash.isSame(colour.toFloatBits(), x, y, width, height, scaleX, scaleY, rotation, texIndex))
+			{
+				cacheVertices = true
+			}
+			else
+			{
+				lastRenderHash.update(colour.toFloatBits(), x, y, width, height, scaleX, scaleY, rotation, texIndex)
+			}
+		}
+
+		var scaleX = baseScale[0] * scaleX
+		var scaleY = baseScale[1] * scaleY
+
+		if (hasAnim)
+		{
+			val scale = animation!!.renderScale()
+			if (scale != null)
+			{
+				scaleX *= scale[0]
+				scaleY *= scale[1]
+			}
+		}
+
+		val rotation = rotation + this.rotation
+
+		var x = x
+		var y = y
+		var width = width
+		var height = height
+
+		width *= size[0]
+		height *= size[1]
+
+		val texture = textures[texIndex]
+
+		if (drawActualSize)
+		{
+			val widthRatio = width / 32f
+			val heightRatio = height / 32f
+
+			val regionWidth = referenceSize ?: texture.regionWidth.toFloat()
+			val regionHeight = referenceSize ?: texture.regionHeight.toFloat()
+
+			val trueWidth = regionWidth * widthRatio
+			val trueHeight = regionHeight * heightRatio
+
+			val widthOffset = (trueWidth - width) / 2
+
+			x -= widthOffset
+			width = trueWidth
+			height = trueHeight
+		}
+
+		if (rotation != 0f && fixPosition)
+		{
+			val tempVec = Vector3()
+			val offset = getPositionCorrectionOffsets(x, y, width / 2.0f, height / 2.0f, width, height, scaleX, scaleY, rotation, tempVec)
+			x -= offset.x
+			y -= offset.y
+		}
+
+		val tex1: TextureRegion
+		val tex2: TextureRegion
+		val texAlpha: Float
+		if (frameBlend && textures.size > 1)
+		{
+			val alpha = animationAccumulator / animationDelay
+			val nextIndex = if (texIndex+1 == textures.size) 0 else texIndex+1
+
+			tex1 = texture
+			tex2 = textures[nextIndex]
+			texAlpha = alpha
+		}
+		else
+		{
+			tex1 = texture
+			tex2 = texture
+			texAlpha = 0f
+		}
+
+		doDraw(vertices, offset, tex1, tex2, colour, x, y, width / 2.0f, height / 2.0f, width, height, scaleX, scaleY, rotation, flipX, flipY, removeAmount, texAlpha, isLit, smoothShade)
+
+		if (cacheVertices)
+		{
+			cachedRenderHash.update(colour.toFloatBits(), x, y, width, height, scaleX, scaleY, rotation, texIndex)
+			System.arraycopy(vertices, offset, vertexCache, 0, SortedRenderer.verticesASprite)
 		}
 	}
 
@@ -287,20 +423,15 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 		sprite.animation = animation?.copy()
 		sprite.colourAnimation = colourAnimation?.copy() as? AbstractColourAnimation
 		sprite.disableHDR = disableHDR
+		sprite.light = light?.copy()
 
 		return sprite
 	}
 
 	companion object
 	{
-
-		private val tempColour = Colour()
-
-		private val tempVec = Vector3()
-		private val tempMat = Matrix3()
-
-		fun getPositionCorrectionOffsets(x: Float, y: Float, originX: Float, originY: Float, width: Float, height: Float,
-												 scaleX: Float, scaleY: Float, rotation: Float): Vector3
+		inline fun getPositionCorrectionOffsets(x: Float, y: Float, originX: Float, originY: Float, width: Float, height: Float,
+												 scaleX: Float, scaleY: Float, rotation: Float, tempVec: Vector3): Vector3
 		{
 			// bottom left and top right corner points relative to origin
 			val worldOriginX = x + originX

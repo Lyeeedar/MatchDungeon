@@ -13,6 +13,8 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Renderables.Animation.AbstractAnimation
+import com.lyeeedar.Renderables.Light
+import com.lyeeedar.Renderables.LightAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Renderable
 import com.lyeeedar.Renderables.Sprite.DirectionalSprite
@@ -166,6 +168,7 @@ class AssetManager
 
 			effect.flipX = xml.getBoolean("FlipX", false)
 			effect.flipY = xml.getBoolean("FlipY", false)
+			effect.scale = xml.getFloat("Scale", 1f)
 			effect.useFacing = xml.getBoolean("UseFacing", true)
 			effect.timeMultiplier = xml.getFloat("TimeMultiplier", 1f)
 			effect.killOnAnimComplete = xml.getBoolean("KillOnAnimComplete", false)
@@ -183,7 +186,7 @@ class AssetManager
 			return loadSprite(name, updateTime, Colour(1f, 1f, 1f, 1f), false, reverse)
 		}
 
-		@JvmOverloads fun loadSprite(name: String, updateTime: Float = 0.5f, colour: Colour = Colour(1f, 1f, 1f, 1f), drawActualSize: Boolean = false, reverse: Boolean = false): Sprite
+		@JvmOverloads fun loadSprite(name: String, updateTime: Float = 0.5f, colour: Colour = Colour(1f, 1f, 1f, 1f), drawActualSize: Boolean = false, reverse: Boolean = false, light: Light? = null): Sprite
 		{
 			var updateTime = updateTime
 			val textures = Array<TextureRegion>(false, 1, TextureRegion::class.java)
@@ -252,6 +255,7 @@ class AssetManager
 			}
 
 			val sprite = Sprite(name, updateTime, textures, colour, drawActualSize)
+			sprite.light = light
 
 			return sprite
 		}
@@ -301,6 +305,12 @@ class AssetManager
 				sprite.animation = AbstractAnimation.load(animationElement.getChild(0))
 			}
 
+			val lightEl = xml.getChildByName("Light")
+			if (lightEl != null)
+			{
+				sprite.light = loadLight(lightEl)
+			}
+
 			return sprite
 		}
 
@@ -338,8 +348,34 @@ class AssetManager
 				sprite.animation = AbstractAnimation.load(animationElement.getChild(0))
 			}
 
+			val lightEl = xml.getChildByName("Light")
+			if (lightEl != null)
+			{
+				sprite.light = loadLight(lightEl)
+			}
 
 			return sprite
+		}
+
+		fun loadLight(xml: XmlData): Light
+		{
+			val light = Light()
+			light.colour.set(loadColour(xml.getChildByName("Colour")!!))
+			light.baseColour.set(light.colour)
+			val brightness = xml.getFloat("Brightness")
+			light.baseBrightness = brightness
+			light.colour.mul(brightness, brightness, brightness, 1.0f)
+			light.range = xml.getFloat("Range")
+			light.baseRange = light.range
+			light.hasShadows = xml.getBoolean("HasShadows", false)
+
+			val animEl = xml.getChildByName("Animation")
+			if (animEl != null)
+			{
+				light.anim = LightAnimation.load(animEl)
+			}
+
+			return light
 		}
 
 		fun loadColour(stringCol: String, colour: Colour = Colour()): Colour
@@ -361,6 +397,36 @@ class AssetManager
 		fun loadTilingSprite(xml:XmlData): TilingSprite
 		{
 			return TilingSprite.load(xml)
+		}
+
+		fun loadLayeredSprite(xml: XmlData): Sprite
+		{
+			val paths = Array<String>()
+			var drawActualSize = false
+
+			val layers = xml.getChildByName("Layers")!!
+			for (layer in layers.children)
+			{
+				val name = layer.get("Name")
+				drawActualSize = drawActualSize || layer.getBoolean("DrawActualSize", false)
+
+				paths.add(name)
+			}
+
+			val mergedName = paths.joinToString("+")
+			val tex = loadTextureRegion("Sprites/$mergedName.png")
+					  ?: throw RuntimeException("Cant find any textures for layered sprite $mergedName!")
+
+			val sprite = Sprite(tex)
+			sprite.drawActualSize = drawActualSize
+
+			val lightEl = xml.getChildByName("Light")
+			if (lightEl != null)
+			{
+				sprite.light = loadLight(lightEl)
+			}
+
+			return sprite
 		}
 
 		fun loadDirectionalSprite(xml:XmlData, size: Int = 1): DirectionalSprite

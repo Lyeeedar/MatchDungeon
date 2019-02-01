@@ -17,7 +17,10 @@
 package com.badlogic.gdx.graphics.g2d
 
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.graphics.*
+import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.GL20
+import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.graphics.VertexAttribute
 import com.badlogic.gdx.graphics.VertexAttributes.Usage
 import com.badlogic.gdx.graphics.glutils.ShaderProgram
 import com.badlogic.gdx.math.Affine2
@@ -44,7 +47,7 @@ class HDRColourSpriteBatch
  * *
  * @param defaultShader The default shader to use. This is not owned by the HDRColourSpriteBatch and must be disposed separately.
  */
-@JvmOverloads constructor(size: Int = 4000, defaultShader: ShaderProgram? = null) : Batch
+@JvmOverloads constructor(size: Int = 40000, defaultShader: ShaderProgram? = null) : Batch
 {
 	override fun getBlendDstFuncAlpha(): Int
 	{
@@ -61,7 +64,7 @@ class HDRColourSpriteBatch
 		TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
 	}
 
-	private val mesh: Mesh
+	private val mesh: BigMesh
 
 	internal val vertices: FloatArray
 	internal var idx = 0
@@ -101,15 +104,7 @@ class HDRColourSpriteBatch
 
 	init
 	{
-		// 32767 is max index, so 32767 / 6 - (32767 / 6 % 3) = 5460.
-		if (size > 5460) throw IllegalArgumentException("Can't have more than 5460 sprites per batchHDRColour: " + size)
-
-		var vertexDataType: Mesh.VertexDataType = Mesh.VertexDataType.VertexArray
-		if (Gdx.gl30 != null)
-		{
-			vertexDataType = Mesh.VertexDataType.VertexBufferObjectWithVAO
-		}
-		mesh = Mesh(vertexDataType, false, size * 4, size * 6,
+		mesh = BigMesh(false, size * 4, size * 6,
 					VertexAttribute(Usage.Position, 2, ShaderProgram.POSITION_ATTRIBUTE),
 					VertexAttribute(Usage.ColorUnpacked, 4, ShaderProgram.COLOR_ATTRIBUTE),
 					VertexAttribute(Usage.TextureCoordinates, 2, ShaderProgram.TEXCOORD_ATTRIBUTE + "0"),
@@ -122,17 +117,17 @@ class HDRColourSpriteBatch
 		vertices = FloatArray(size * (2 + 4 + 2 + 2 + 1))
 
 		val len = size * 6
-		val indices = ShortArray(len)
+		val indices = IntArray(len)
 		var j = 0
 		var i = 0
 		while (i < len)
 		{
-			indices[i] = j.toShort()
-			indices[i + 1] = (j + 1).toShort()
-			indices[i + 2] = (j + 2).toShort()
-			indices[i + 3] = (j + 2).toShort()
-			indices[i + 4] = (j + 3).toShort()
-			indices[i + 5] = j.toShort()
+			indices[i] = j
+			indices[i + 1] = j + 1
+			indices[i + 2] = j + 2
+			indices[i + 3] = j + 2
+			indices[i + 4] = j + 3
+			indices[i + 5] = j
 			i += 6
 			j += 4
 		}
@@ -328,6 +323,27 @@ class HDRColourSpriteBatch
 		}
 	}
 
+	fun getVertexArray() = vertices
+
+	fun prepareDrawVertices(texture: Texture, count: Int): Int
+	{
+		if (!drawing) throw IllegalStateException("SpriteBatch.begin must be called before draw.")
+
+		if (texture !== lastTexture)
+		{
+			switchTexture(texture)
+		}
+		else if (idx+count >= vertices.size)
+		{
+			flush()
+		}
+
+		val index = idx
+		idx += count
+
+		return index
+	}
+
 	fun drawVertices(texture: Texture, spriteVertices: FloatArray, offset: Int, count: Int)
 	{
 		var offset = offset
@@ -402,8 +418,6 @@ class HDRColourSpriteBatch
 		lastTexture!!.bind()
 		val mesh = this.mesh
 		mesh.setVertices(vertices, 0, idx)
-		mesh.indicesBuffer.position(0)
-		mesh.indicesBuffer.limit(count)
 
 		if (blendingDisabled)
 		{
@@ -415,7 +429,7 @@ class HDRColourSpriteBatch
 			if (blendSrcFunc != -1) Gdx.gl.glBlendFunc(blendSrcFunc, blendDstFunc)
 		}
 
-		mesh.render(if (customShader != null) customShader else shader, GL20.GL_TRIANGLES, 0, count)
+		//mesh.render(if (customShader != null) customShader!! else shader, GL20.GL_TRIANGLES, count)
 
 		idx = 0
 	}
@@ -564,6 +578,7 @@ varying float v_blendAlpha;
 void main()
 {
 	v_color = ${ShaderProgram.COLOR_ATTRIBUTE};
+	v_color.a = min(v_color.a, 1.0);
 	v_texCoords1 = ${ShaderProgram.TEXCOORD_ATTRIBUTE}0;
 	v_texCoords2 = ${ShaderProgram.TEXCOORD_ATTRIBUTE}1;
 	v_blendAlpha = a_blendAlpha;

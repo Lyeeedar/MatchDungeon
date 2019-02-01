@@ -34,8 +34,7 @@ class GridWidget(val grid: Grid) : Widget()
 		set(value)
 		{
 			field = value
-			ground.tileSize = value
-			floating.tileSize = value
+			renderer.tileSize = value
 		}
 
 	val glow: Sprite = AssetManager.loadSprite("glow")
@@ -59,8 +58,7 @@ class GridWidget(val grid: Grid) : Widget()
 	val ORB = SPREADER+1
 	val EFFECT = ORB+1
 
-	val ground = SortedRenderer(tileSize, grid.width.toFloat(), grid.height.toFloat(), EFFECT+1, true)
-	val floating = SortedRenderer(tileSize, grid.width.toFloat(), grid.height.toFloat(), EFFECT+1, true)
+	val renderer = SortedRenderer(tileSize, grid.width.toFloat(), grid.height.toFloat(), EFFECT+1, true)
 
 	val shapeRenderer = ShapeRenderer()
 
@@ -112,11 +110,6 @@ class GridWidget(val grid: Grid) : Widget()
 
 			override fun keyTyped(event: InputEvent?, character: Char): Boolean
 			{
-				if (character == 'd')
-				{
-					ground.debugDraw = !ground.debugDraw
-				}
-
 				return false
 			}
 		})
@@ -222,7 +215,7 @@ class GridWidget(val grid: Grid) : Widget()
 			val y = if (i < pipsPerLine && lines > 1) yi+0.25f else yi+0.1f
 			val x = if (i >= pipsPerLine && lines > 1) xi+(i-pipsPerLine)*spacePerPip else xi+i*spacePerPip
 
-			floating.queueSprite(sprite, x, y, ORB, 2, width = solid, height = 0.15f)
+			renderer.queueSprite(sprite, x, y, ORB, 2, width = solid, height = 0.15f)
 		}
 
 		if (lines > 1)
@@ -238,12 +231,13 @@ class GridWidget(val grid: Grid) : Widget()
 	var renderY = 0f
 	override fun draw(batch: Batch?, parentAlpha: Float)
 	{
+		batch!!.end()
+
 		val xp = this.x + (this.width / 2f) - ((grid.width * tileSize) / 2f)
 		val yp = this.y
 		renderY = yp
 
-		ground.begin(Gdx.app.graphics.deltaTime, xp, yp)
-		floating.begin(Gdx.app.graphics.deltaTime, xp, yp)
+		renderer.begin(Gdx.app.graphics.deltaTime, xp, yp, Colour.WHITE)
 
 		if (grid.activeAbility == null)
 		{
@@ -338,24 +332,24 @@ class GridWidget(val grid: Grid) : Widget()
 
 				var tileHeight = 0
 
-				val groundSprite = tile.groundSprite
-				if (groundSprite != null)
+				val rendererSprite = tile.groundSprite
+				if (rendererSprite != null)
 				{
-					if (!groundSprite.hasChosenSprites)
+					if (!rendererSprite.hasChosenSprites)
 					{
-						groundSprite.chooseSprites()
+						rendererSprite.chooseSprites()
 					}
 
-					val sprite = groundSprite.chosenSprite
+					val sprite = rendererSprite.chosenSprite
 					if (sprite != null)
 					{
-						ground.queueSprite(sprite, xi, yi, TILE, tileHeight, tileColour)
+						renderer.queueSprite(sprite, xi, yi, TILE, tileHeight, tileColour)
 					}
 
-					val tilingSprite = groundSprite.chosenTilingSprite
+					val tilingSprite = rendererSprite.chosenTilingSprite
 					if (tilingSprite != null)
 					{
-						ground.queueSprite(tilingSprite, xi, yi, TILE, tileHeight, tileColour)
+						renderer.queueSprite(tilingSprite, xi, yi, TILE, tileHeight, tileColour)
 					}
 
 					tileHeight++
@@ -372,13 +366,13 @@ class GridWidget(val grid: Grid) : Widget()
 					val sprite = wallSprite.chosenSprite
 					if (sprite != null)
 					{
-						ground.queueSprite(sprite, xi, yi, TILE, tileHeight, tileColour)
+						renderer.queueSprite(sprite, xi, yi, TILE, tileHeight, tileColour)
 					}
 
 					val tilingSprite = wallSprite.chosenTilingSprite
 					if (tilingSprite != null)
 					{
-						ground.queueSprite(tilingSprite, xi, yi, TILE, tileHeight, tileColour)
+						renderer.queueSprite(tilingSprite, xi, yi, TILE, tileHeight, tileColour)
 					}
 
 					tileHeight++
@@ -386,7 +380,7 @@ class GridWidget(val grid: Grid) : Widget()
 
 				if (tile.hasPlate)
 				{
-					ground.queueSprite(grid.level.theme.plate, xi, yi, TILE, tileHeight, tileColour)
+					renderer.queueSprite(grid.level.theme.plate, xi, yi, TILE, tileHeight, tileColour)
 
 					if ( !grid.inTurn )
 					{
@@ -400,7 +394,7 @@ class GridWidget(val grid: Grid) : Widget()
 
 				if (chest != null)
 				{
-					ground.queueSprite(chest.sprite, xi, yi, TILE, tileHeight, tileColour)
+					renderer.queueSprite(chest.sprite, xi, yi, TILE, tileHeight, tileColour)
 
 					if (chest.numToSpawn > 0 && !grid.inTurn && !Global.settings.get("Chest", false))
 					{
@@ -420,7 +414,7 @@ class GridWidget(val grid: Grid) : Widget()
 						}
 						else
 						{
-							floating.queueSprite(effect, xi, yi, EFFECT, 0)
+							renderer.queueSprite(effect, xi, yi, EFFECT, 0)
 						}
 					}
 					else if (effect is ParticleEffect)
@@ -431,18 +425,18 @@ class GridWidget(val grid: Grid) : Widget()
 						}
 						else
 						{
-							floating.queueParticle(effect, xi, yi, EFFECT, 0)
+							renderer.queueParticle(effect, xi, yi, EFFECT, 0)
 						}
 					}
 				}
 
 				if (swappable != null)
 				{
-					ground.queueSprite(swappable.sprite, xi, yi, ORB, 1, orbColour)
+					renderer.queueSprite(swappable.sprite, xi, yi, ORB, 1, orbColour)
 
 					if (swappable.sealed)
 					{
-						ground.queueSprite(swappable.sealSprite, xi, yi, ORB, 2, orbColour)
+						renderer.queueSprite(swappable.sealSprite, xi, yi, ORB, 2, orbColour)
 
 						if (!Global.settings.get("Seal", false) && !grid.inTurn )
 						{
@@ -485,7 +479,7 @@ class GridWidget(val grid: Grid) : Widget()
 								scaleY *= scale[1]
 							}
 
-							ground.queueSprite(changer, xii, yii, ORB, 2, tempCol, scaleX = scaleX, scaleY = scaleY)
+							renderer.queueSprite(changer, xii, yii, ORB, 2, tempCol, scaleX = scaleX, scaleY = scaleY)
 						}
 					}
 
@@ -493,7 +487,7 @@ class GridWidget(val grid: Grid) : Widget()
 					{
 						if (swappable.armed)
 						{
-							ground.queueSprite(glow, xi, yi, ORB, 0)
+							renderer.queueSprite(glow, xi, yi, ORB, 0)
 						}
 					}
 
@@ -510,7 +504,7 @@ class GridWidget(val grid: Grid) : Widget()
 						{
 							val sprite = if (i < swappable.timer) atk_full else atk_empty
 
-							floating.queueSprite(sprite, cx + currentPoint.x, cy + currentPoint.y, ORB, 2, orbColour)
+							renderer.queueSprite(sprite, cx + currentPoint.x, cy + currentPoint.y, ORB, 2, orbColour)
 
 							currentPoint.rotate(degreesStep)
 						}
@@ -539,7 +533,7 @@ class GridWidget(val grid: Grid) : Widget()
 				{
 					monster.sprite.size[0] = monster.size
 					monster.sprite.size[1] = monster.size
-					ground.queueSprite(monster.sprite, xi, yi, ORB, 1, monsterColour)
+					renderer.queueSprite(monster.sprite, xi, yi, ORB, 1, monsterColour)
 
 					// do hp bar
 					val maxY = drawHPBar(monster.size.toFloat(), monster.hp, monster.lostHP, monster.remainingReduction, monster.maxhp, monster.damageReduction, monster.immune, xi, yi, hp_full)
@@ -560,7 +554,7 @@ class GridWidget(val grid: Grid) : Widget()
 								else -> stage_empty
 							}
 
-							floating.queueSprite(sprite, x, y, ORB, 2, width = size, height = size)
+							renderer.queueSprite(sprite, x, y, ORB, 2, width = size, height = size)
 
 							x += size
 						}
@@ -595,7 +589,7 @@ class GridWidget(val grid: Grid) : Widget()
 				{
 					friendly.sprite.size[0] = friendly.size
 					friendly.sprite.size[1] = friendly.size
-					ground.queueSprite(friendly.sprite, xi, yi, ORB, 1, orbColour)
+					renderer.queueSprite(friendly.sprite, xi, yi, ORB, 1, orbColour)
 
 					// do hp bar
 					val fullHp = if (friendly.isSummon) hp_full_summon else hp_full_friendly
@@ -612,7 +606,7 @@ class GridWidget(val grid: Grid) : Widget()
 
 				if (block != null)
 				{
-					ground.queueSprite(block.sprite, xi, yi, ORB, 1, blockColour)
+					renderer.queueSprite(block.sprite, xi, yi, ORB, 1, blockColour)
 
 					// do hp bar
 					if (block.hp < block.maxhp || block.alwaysShowHP)
@@ -630,7 +624,7 @@ class GridWidget(val grid: Grid) : Widget()
 
 				if (container != null)
 				{
-					ground.queueSprite(container.sprite, xi, yi, ORB, 1, blockColour)
+					renderer.queueSprite(container.sprite, xi, yi, ORB, 1, blockColour)
 
 					// do hp bar
 					if (container.hp < container.maxhp || container.alwaysShowHP)
@@ -641,7 +635,7 @@ class GridWidget(val grid: Grid) : Widget()
 
 				if (spreader != null)
 				{
-					val level = if (spreader.renderAbove) floating else ground
+					val level = if (spreader.renderAbove) renderer else renderer
 
 					if (spreader.spriteWrapper != null)
 					{
@@ -670,7 +664,7 @@ class GridWidget(val grid: Grid) : Widget()
 
 				if (tile.isSelected)
 				{
-					ground.queueSprite(frame, xi, yi, ORB, 0)
+					renderer.queueSprite(frame, xi, yi, ORB, 0)
 				}
 
 				val waitTime = if (grid.level.defeatConditions.any{ it is CompletionConditionTime }) 3f else 8f
@@ -678,14 +672,15 @@ class GridWidget(val grid: Grid) : Widget()
 				{
 					if (tile == grid.matchHint!!.first || tile == grid.matchHint!!.second)
 					{
-						ground.queueSprite(border, xi, yi, ORB, 0)
+						renderer.queueSprite(border, xi, yi, ORB, 0)
 					}
 				}
 			}
 		}
 
-		ground.flush(batch!!)
-		floating.flush(batch)
+		renderer.end(batch)
+
+		batch.begin()
 	}
 
 	companion object

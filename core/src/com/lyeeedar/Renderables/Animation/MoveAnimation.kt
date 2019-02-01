@@ -18,7 +18,7 @@ class MoveAnimation : AbstractMoveAnimation
 	override fun renderOffset(screenPositionMode: Boolean): FloatArray? = offset
 
 	private lateinit var path: Path<Vector2>
-	private var eqn: Interpolation? = null
+	public var eqn: Interpolation? = null
 
 	private var duration: Float = 0f
 	private var time: Float = 0f

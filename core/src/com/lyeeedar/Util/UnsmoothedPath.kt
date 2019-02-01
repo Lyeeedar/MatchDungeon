@@ -75,7 +75,7 @@ class UnsmoothedPath(val path: Array<Vector2>): Path<Vector2>
 
 	override fun approxLength(samples: Int): Float
 	{
-		throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+		return distPoints.last()
 	}
 
 	override fun approximate(v: Vector2?): Float

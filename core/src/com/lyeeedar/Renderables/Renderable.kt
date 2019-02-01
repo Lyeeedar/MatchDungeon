@@ -1,6 +1,7 @@
 package com.lyeeedar.Renderables
 
 import com.badlogic.gdx.graphics.g2d.Batch
+import com.badlogic.gdx.math.Vector2
 import com.lyeeedar.Renderables.Animation.*
 
 
@@ -14,13 +15,19 @@ abstract class Renderable
 
 	val size = intArrayOf(1, 1)
 
-	var rotation: Float = 0f
+	internal var rotation: Float = 0f
 
-	var flipX: Boolean = false
-	var flipY: Boolean = false
+	internal var flipX: Boolean = false
+	internal var flipY: Boolean = false
 
 	var isCentered: Boolean = false
 
+	var faceInMoveDirection: Boolean = false
+	val lastPos: Vector2 = Vector2()
+
+	open var light: Light? = null
+
+	protected var hasAnim = false
 	var animation: AbstractAnimation? = null
 		set(value)
 		{
@@ -65,6 +72,8 @@ abstract class Renderable
 			{
 				field = value
 			}
+
+			hasAnim = field != null
 		}
 
 	fun update(delta: Float): Boolean

@@ -98,5 +98,26 @@
 				</Data>
 			</Data>
 		</Data>
+		<Data Name="Light" meta:RefKey="Struct">
+			<Data Name="Colour" meta:RefKey="Timeline">
+				<Keyframe Name="Keyframe" Collapse="True" Seperator="|" meta:RefKey="Keyframe">
+					<Time Name="Time" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
+					<Data Name="Colour" SkipIfDefault="False" meta:RefKey="Colour" />
+				</Keyframe>
+			</Data>
+			<Data Name="Brightness" meta:RefKey="Timeline">
+				<Keyframe Name="Keyframe" Collapse="True" Seperator="|" meta:RefKey="Keyframe">
+					<Time Name="Time" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
+					<Data Name="Brightness" Min="0" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+				</Keyframe>
+			</Data>
+			<Data Name="Range" meta:RefKey="Timeline">
+				<Keyframe Name="Keyframe" Collapse="True" Seperator="|" meta:RefKey="Keyframe">
+					<Time Name="Time" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
+					<Data Name="Range" Min="0" Default="3" SkipIfDefault="False" meta:RefKey="Number" />
+				</Keyframe>
+			</Data>
+			<Data Name="HasShadows" meta:RefKey="Boolean" />
+		</Data>
 	</Definition>
 </Definitions>

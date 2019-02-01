@@ -1,6 +1,8 @@
 package com.lyeeedar.Util
 
+import com.badlogic.gdx.math.MathUtils.clamp
 import com.lyeeedar.Direction
+import kotlin.coroutines.experimental.buildSequence
 
 /**
  * Created by Philip on 08-Apr-16.
@@ -29,17 +31,31 @@ class Array2D<T> (val xSize: Int, val ySize: Int, val array: Array<Array<T>>): S
 		}
 	}
 
-	inline fun inBounds(point: Point) = inBounds(point.x, point.y)
+	internal inline fun inBounds(point: Point) = inBounds(point.x, point.y)
 
-	inline fun inBounds(x: Int, y: Int) = x in 0..(xSize - 1) && y in 0..(ySize - 1)
+	internal inline fun inBounds(x: Int, y: Int) = x in 0..(xSize - 1) && y in 0..(ySize - 1)
 
-	inline fun tryGet(x:Int, y:Int, fallback:T?): T?
+	internal inline fun tryGet(x:Int, y:Int, fallback:T?): T?
 	{
 		if (!inBounds(x, y)) return fallback
 		else return this[x, y]
 	}
 
+	internal inline fun tryGet(x:Int, y:Int, dir: Direction, fallback:T?): T?
+	{
+		val x = x + dir.x
+		val y = y + dir.y
+		if (!inBounds(x, y)) return fallback
+		else return this[x, y]
+	}
+
 	operator fun get(x: Int, y: Int, fallback:T?): T? = tryGet(x, y, fallback)
+
+	fun getClamped(x: Int, y: Int): T {
+		val x = clamp(x, 0, width-1)
+		val y = clamp(y, 0, height-1)
+		return array[x][y]
+	}
 
 	operator fun get(x: Int, y: Int): T {
 		return array[x][y]
@@ -67,6 +83,24 @@ class Array2D<T> (val xSize: Int, val ySize: Int, val array: Array<Array<T>>): S
 
 	inline fun forEachIndexed(operation: (x: Int, y: Int, T) -> Unit) {
 		array.forEachIndexed { x, p -> p.forEachIndexed { y, t -> operation.invoke(x, y, t) } }
+	}
+
+	fun get(p: Point, range: Int): Sequence<T>
+	{
+		return buildSequence {
+			val minx = max(p.x - range, 0)
+			val miny = max(p.y - range, 0)
+			val maxx = min(p.x + range, width-1)
+			val maxy = min(p.y + range, height-1)
+
+			for (x in minx..maxx)
+			{
+				for (y in miny..maxy)
+				{
+					yield(array[x][y])
+				}
+			}
+		}
 	}
 
 	override operator fun iterator(): Iterator<T> =  Array2DIterator(this)

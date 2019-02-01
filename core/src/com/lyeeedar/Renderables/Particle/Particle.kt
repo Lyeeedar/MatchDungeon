@@ -15,6 +15,7 @@ import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.BlendMode
 import com.lyeeedar.Direction
+import com.lyeeedar.Global.Companion.collisionGrid
 import com.lyeeedar.Util.*
 import ktx.math.div
 
@@ -66,7 +67,7 @@ class Particle(val emitter: Emitter)
 	fun particleCount() = particles.size
 	fun complete() = particles.size == 0
 
-	fun simulate(delta: Float, collisionGrid: Array2D<Boolean>?, gravity: Float)
+	fun simulate(delta: Float, gravity: Float)
 	{
 		var particleI = 0
 
@@ -172,7 +173,7 @@ class Particle(val emitter: Emitter)
 				{
 					val aabb = getBoundingBox(particle)
 
-					if (checkColliding(aabb, collisionGrid))
+					if (checkColliding(aabb, collisionGrid!!))
 					{
 						if (collision == CollisionAction.DIE)
 						{
@@ -201,12 +202,12 @@ class Particle(val emitter: Emitter)
 								val xaabb = getBoundingBox(particle, temp.set(oldPos.x, particle.position.y))
 
 								// negate y
-								if (!checkColliding(yaabb, collisionGrid))
+								if (!checkColliding(yaabb, collisionGrid!!))
 								{
 									particle.position.y = oldPos.y
 								}
 								// negate x
-								else if (!checkColliding(xaabb, collisionGrid))
+								else if (!checkColliding(xaabb, collisionGrid!!))
 								{
 									particle.position.x = oldPos.x
 								}
@@ -317,7 +318,7 @@ class Particle(val emitter: Emitter)
 
 		if (emitter.simulationSpace == Emitter.SimulationSpace.LOCAL)
 		{
-			temp.set(emitter.offset.valAt(0, emitter.time))
+			temp.set(emitter.keyframe1.offset.lerp(emitter.keyframe2.offset, emitter.keyframeAlpha))
 			temp.scl(emitter.size)
 
 			if (emitter.particleEffect.flipX)

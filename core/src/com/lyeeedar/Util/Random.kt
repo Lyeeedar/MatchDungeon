@@ -35,6 +35,17 @@ class Random
 			}
 		}
 
+		fun sign(): Float
+		{
+			return if (random.nextBoolean()) 1.0f else -1.0f
+		}
+
+		fun randomWeighted(): Float
+		{
+			val ran = random()
+			return ran * ran
+		}
+
 		fun random(): Float
 		{
 			return random.nextFloat()

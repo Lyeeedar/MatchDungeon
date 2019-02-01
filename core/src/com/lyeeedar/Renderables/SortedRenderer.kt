@@ -1,11 +1,18 @@
 package com.lyeeedar.Renderables
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.GL20
+import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.graphics.VertexAttribute
+import com.badlogic.gdx.graphics.VertexAttributes
 import com.badlogic.gdx.graphics.g2d.Batch
-import com.badlogic.gdx.graphics.g2d.HDRColourSpriteBatch
-import com.badlogic.gdx.graphics.g2d.NinePatch
+import com.badlogic.gdx.graphics.g2d.BigMesh
 import com.badlogic.gdx.graphics.g2d.TextureRegion
+import com.badlogic.gdx.graphics.glutils.ShaderProgram
+import com.badlogic.gdx.math.Matrix4
 import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.math.Vector3
+import com.badlogic.gdx.utils.IntMap
 import com.badlogic.gdx.utils.ObjectMap
 import com.badlogic.gdx.utils.ObjectSet
 import com.badlogic.gdx.utils.Pool
@@ -20,6 +27,7 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Renderables.Sprite.TilingSprite
 import com.lyeeedar.Util.*
 import ktx.collections.set
+import ktx.collections.toGdxArray
 import squidpony.squidmath.LightRNG
 
 
@@ -27,65 +35,201 @@ import squidpony.squidmath.LightRNG
  * Created by Philip on 04-Jul-16.
  */
 
+// ----------------------------------------------------------------------
 class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, val layers: Int, val alwaysOnscreen: Boolean)
 {
-	var batchID: Int = 0
+	private var batchID: Int = random.nextInt()
 
-	val tempVec = Vector2()
-	val tempPoint = Point()
-	val tempCol = Colour()
-	val tempCol2 = Colour()
-	val bitflag = EnumBitflag<Direction>()
+	private val tempVec = Vector2()
+	private val tempVec3 = Vector3()
+	private val tempCol = Colour()
+	private val bitflag = EnumBitflag<Direction>()
 
-	val startingArraySize = 128
-	var spriteArray = Array<RenderSprite?>(startingArraySize) { null }
-	var queuedSprites = 0
+	private val startingArraySize = 128
+	private var spriteArray = Array<RenderSprite?>(startingArraySize) { null }
+	private var sortedArray = Array<RenderSprite?>(startingArraySize) { null }
+	private var queuedSprites = 0
 
-	var tilingMap: ObjectMap<Point, ObjectSet<Long>> = ObjectMap()
+	private val tilingMap: IntMap<ObjectSet<Long>> = IntMap()
 
-	val setPool: Pool<ObjectSet<Long>> = object : Pool<ObjectSet<Long>>() {
+	private val setPool: Pool<ObjectSet<Long>> = object : Pool<ObjectSet<Long>>() {
 		override fun newObject(): ObjectSet<Long>
 		{
 			return ObjectSet()
 		}
-
 	}
 
-	var screenShakeRadius: Float = 0f
-	var screenShakeAccumulator: Float = 0f
-	var screenShakeSpeed: Float = 0f
-	var screenShakeAngle: Float = 0f
-	var screenShakeLocked: Boolean = false
+	private val basicLights = com.badlogic.gdx.utils.Array<Light>()
+	private val shadowLights = com.badlogic.gdx.utils.Array<Light>()
 
-	val BLENDMODES = BlendMode.values().size
-	val MAX_INDEX = 6 * BLENDMODES
-	val X_BLOCK_SIZE = layers * MAX_INDEX
-	val Y_BLOCK_SIZE = X_BLOCK_SIZE * width.toInt()
-	val MAX_Y_BLOCK_SIZE = Y_BLOCK_SIZE * height.toInt()
-	val MAX_X_BLOCK_SIZE = X_BLOCK_SIZE * width.toInt()
+	private var screenShakeRadius: Float = 0f
+	private var screenShakeAccumulator: Float = 0f
+	private var screenShakeSpeed: Float = 0f
+	private var screenShakeAngle: Float = 0f
+	private var screenShakeLocked: Boolean = false
 
-	var delta: Float = 0f
+	private val BLENDMODES = BlendMode.values().size
+	private val MAX_INDEX = 6 * BLENDMODES
+	private val X_BLOCK_SIZE = layers * MAX_INDEX
+	private val Y_BLOCK_SIZE = X_BLOCK_SIZE * width.toInt()
+	private val MAX_Y_BLOCK_SIZE = Y_BLOCK_SIZE * height.toInt()
+	private val MAX_X_BLOCK_SIZE = X_BLOCK_SIZE * width.toInt()
 
-	var debugDrawSpeed = 1.0f
-	var debugDrawAccumulator = 0.0f
-	var debugDraw = false
-	var debugDrawIndex = 0
-	var inDebugFrame = false
-	var debugDrawList = com.badlogic.gdx.utils.Array<RenderSprite>()
+	private var delta: Float = 0f
 
-	var inBegin = false
-	var offsetx: Float = 0f
-	var offsety: Float = 0f
+	private var inBegin = false
+	private var inStaticBegin = false
+	private var offsetx: Float = 0f
+	private var offsety: Float = 0f
+
+	private val ambientLight = Colour()
 
 	// ----------------------------------------------------------------------
-	fun begin(deltaTime: Float, offsetx: Float, offsety: Float)
+	private class VertexBuffer
+	{
+		var offset = -1
+		var count = -1
+		lateinit var texture: Texture
+		var blendSrc: Int = -1
+		var blendDst: Int = -1
+
+		init
+		{
+
+		}
+
+		fun reset(blendSrc: Int, blendDst: Int, texture: Texture): VertexBuffer
+		{
+			this.blendSrc = blendSrc
+			this.blendDst = blendDst
+			this.texture = texture
+			count = 0
+			offset = 0
+
+			return this
+		}
+	}
+
+	// ----------------------------------------------------------------------
+	private val mesh: BigMesh
+	private val staticMesh: BigMesh
+	private var currentBuffer: VertexBuffer? = null
+	private val vertices: FloatArray
+	private var currentVertexCount = 0
+	private val staticBuffers = com.badlogic.gdx.utils.Array<VertexBuffer>()
+	private val queuedBuffers = com.badlogic.gdx.utils.Array<VertexBuffer>()
+	private lateinit var shader: ShaderProgram
+	private var shaderLightNum: Int = 0
+	private var shaderShadowLightNum: Int = 0
+	private var shaderRegionsPerLight: IntArray = IntArray(0)
+	private var lightPosRange: FloatArray
+	private var lightColourBrightness: FloatArray
+	private var lightShadowPosRange: FloatArray
+	private var lightShadowColourBrightness: FloatArray
+	private var lightShadowRegions: FloatArray
+	private val combinedMatrix: Matrix4 = Matrix4()
+
+	private val executor = LightweightThreadpool(3)
+
+	// ----------------------------------------------------------------------
+	private val bufferPool: Pool<VertexBuffer> = object : Pool<VertexBuffer>() {
+		override fun newObject(): VertexBuffer
+		{
+			return VertexBuffer()
+		}
+	}
+
+	init
+	{
+		mesh = BigMesh(false, maxSprites * 4, maxSprites * 6,
+					   VertexAttribute(VertexAttributes.Usage.Position, 4, ShaderProgram.POSITION_ATTRIBUTE),
+					   VertexAttribute(VertexAttributes.Usage.TextureCoordinates, 4, ShaderProgram.TEXCOORD_ATTRIBUTE),
+					   VertexAttribute(VertexAttributes.Usage.ColorPacked, 4, ShaderProgram.COLOR_ATTRIBUTE),
+					   VertexAttribute(VertexAttributes.Usage.ColorPacked, 4, "a_additionalData")
+					  )
+
+		staticMesh = BigMesh(true, maxSprites * 4, maxSprites * 6,
+							 VertexAttribute(VertexAttributes.Usage.Position, 4, ShaderProgram.POSITION_ATTRIBUTE),
+							 VertexAttribute(VertexAttributes.Usage.TextureCoordinates, 4, ShaderProgram.TEXCOORD_ATTRIBUTE),
+							 VertexAttribute(VertexAttributes.Usage.ColorPacked, 4, ShaderProgram.COLOR_ATTRIBUTE),
+							 VertexAttribute(VertexAttributes.Usage.ColorPacked, 4, "a_additionalData")
+					  )
+
+		val len = maxSprites * 6
+		val indices = IntArray(len)
+		var j = 0
+		var i = 0
+		while (i < len)
+		{
+			indices[i] = j
+			indices[i + 1] = j + 1
+			indices[i + 2] = j + 2
+			indices[i + 3] = j + 2
+			indices[i + 4] = j + 3
+			indices[i + 5] = j
+			i += 6
+			j += 4
+		}
+		mesh.setIndices(indices)
+		staticMesh.setIndices(indices)
+
+		vertices = FloatArray(maxVertices)
+
+		shaderLightNum = 0
+		lightPosRange = FloatArray(shaderLightNum * 3)
+		lightColourBrightness = FloatArray(shaderLightNum * 4)
+		lightShadowPosRange = FloatArray(0)
+		lightShadowColourBrightness = FloatArray(0)
+		lightShadowRegions = FloatArray(0)
+		shader = createShader(shaderLightNum, shaderShadowLightNum, IntArray(0))
+	}
+
+	// ----------------------------------------------------------------------
+	fun begin(deltaTime: Float, offsetx: Float, offsety: Float, ambientLight: Colour)
 	{
 		if (inBegin) throw Exception("Begin called again before flush!")
 
+		this.ambientLight.set(ambientLight)
 		delta = deltaTime
 		this.offsetx = offsetx
 		this.offsety = offsety
 		inBegin = true
+	}
+
+	// ----------------------------------------------------------------------
+	fun beginStatic()
+	{
+		if (inBegin) throw Exception("BeginStatic called within begin!")
+		if (inStaticBegin) throw Exception("BeginStatic called BeginStatic!")
+
+		for (buffer in staticBuffers)
+		{
+			bufferPool.free(buffer)
+		}
+		staticBuffers.clear()
+
+		delta = 0f
+		inStaticBegin = true
+	}
+
+	// ----------------------------------------------------------------------
+	fun end(batch: Batch)
+	{
+		if (!inBegin) throw Exception("End called before begin!")
+
+		flush(batch)
+
+		inBegin = false
+	}
+
+	// ----------------------------------------------------------------------
+	fun endStatic(batch: Batch)
+	{
+		if (!inStaticBegin) throw Exception("EndStatic called before beginstatic!")
+
+		flush(batch)
+
+		inStaticBegin = false
 	}
 
 	// ----------------------------------------------------------------------
@@ -108,55 +252,341 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 	}
 
 	// ----------------------------------------------------------------------
-	fun flush(batch: Batch)
+	private fun requestRender(blendSrc: Int, blendDst: Int, texture: Texture, drawFun: (vertices: FloatArray, offset: Int) -> Unit)
 	{
-		if (!inBegin) throw Exception("Flush called before begin!")
-
-		// sort
-		RadixSort.sort(spriteArray, spriteArray.copyOfRange(0, queuedSprites), 0, 0, queuedSprites, MOST_SIGNIFICANT_BYTE_INDEX)
-		//spriteArray.sort(0, queuedSprites)
-
-		// do screen shake
-		if ( screenShakeRadius > 2 )
+		if (currentBuffer == null)
 		{
-			screenShakeAccumulator += delta
-
-			while ( screenShakeAccumulator >= screenShakeSpeed )
-			{
-				screenShakeAccumulator -= screenShakeSpeed
-				screenShakeAngle += (150 + Random.random() * 60)
-
-				if (!screenShakeLocked)
-				{
-					screenShakeRadius *= 0.9f
-				}
-			}
-
-			offsetx += Math.sin( screenShakeAngle.toDouble() ).toFloat() * screenShakeRadius
-			offsety += Math.cos( screenShakeAngle.toDouble() ).toFloat() * screenShakeRadius
+			currentBuffer = bufferPool.obtain()
+			currentBuffer!!.reset(blendSrc, blendDst, texture)
+			currentBuffer!!.offset = currentVertexCount
 		}
 
-		fun draw(rs: RenderSprite)
+		var buffer = currentBuffer!!
+		if (buffer.blendSrc != blendSrc || buffer.blendDst != blendDst || buffer.texture != texture)
 		{
-			val localx = rs.x + offsetx
-			val localy = rs.y + offsety
-			val localw = rs.width * tileSize
-			val localh = rs.height * tileSize
+			queuedBuffers.add(currentBuffer)
+			buffer = bufferPool.obtain()
+			buffer.reset(blendSrc, blendDst, texture)
+			buffer.offset = currentVertexCount
 
-			batch.setBlendFunction(rs.blend.src, rs.blend.dst)
+			currentBuffer = buffer
+		}
 
-			if (batch is HDRColourSpriteBatch) batch.setColor(rs.colour)
-			else batch.setColor(rs.colour.toFloatBits())
+		val offset = currentVertexCount
+		buffer.count += verticesASprite
+		currentVertexCount += verticesASprite
 
-			rs.sprite?.render(batch, localx, localy, localw, localh, rs.scaleX, rs.scaleY, rs.rotation)
+		if (currentVertexCount == maxVertices) throw Exception("Too many vertices queued!")
 
+		executor.addJob {
+			drawFun.invoke(vertices, offset)
+		}
+	}
+
+	// ----------------------------------------------------------------------
+	private fun storeStatic()
+	{
+		executor.awaitAllJobs()
+
+		queuedBuffers.add(currentBuffer!!)
+		currentBuffer = null
+
+		staticBuffers.addAll(queuedBuffers)
+		queuedBuffers.clear()
+
+		staticMesh.setVertices(vertices, 0, currentVertexCount)
+		currentVertexCount = 0
+	}
+
+	// ----------------------------------------------------------------------
+	private fun waitOnRender()
+	{
+		if (currentBuffer == null) return
+
+		var rebuildShader = false
+
+		if (basicLights.size > shaderLightNum)
+		{
+			shaderLightNum = basicLights.size
+			rebuildShader = true
+
+			lightPosRange = FloatArray(shaderLightNum * 3)
+			lightColourBrightness = FloatArray(shaderLightNum * 4)
+		}
+
+		val sortedShadowLights = shadowLights.filter { it.cache.anyClear() }.sortedBy { if (shadowMode == ShadowMode.TILE) it.cache.currentCastRegions.size else it.cache.opaqueRegions.size }.toGdxArray()
+
+		if (sortedShadowLights.size != shaderShadowLightNum)
+		{
+			shaderShadowLightNum = sortedShadowLights.size
+			rebuildShader = true
+
+			val shadowPosRangeSize = if (shadowMode == ShadowMode.TILE) 4 else 3
+			lightShadowPosRange = FloatArray(shaderShadowLightNum * shadowPosRangeSize)
+			lightShadowColourBrightness = FloatArray(shaderShadowLightNum * 4)
+		}
+
+		val regionsPerLight = IntArray(shaderShadowLightNum)
+		var regionsDifferent = false
+		if (Global.collisionGrid != null)
+		{
+			var i = 0
+			for (light in sortedShadowLights)
+			{
+				val numCount: Int
+				if (shadowMode == ShadowMode.TILE)
+				{
+					numCount = light.cache.currentCastRegions.size
+				}
+				else
+				{
+					numCount = light.cache.opaqueRegions.size
+				}
+
+				if (i < shaderRegionsPerLight.size)
+				{
+					val shaderNumCount = shaderRegionsPerLight[i]
+					if (numCount > shaderNumCount || numCount < shaderNumCount * 0.75f)
+					{
+						regionsDifferent = true
+					}
+				}
+
+				regionsPerLight[i++] = numCount
+			}
+		}
+
+		if (regionsPerLight.size != shaderRegionsPerLight.size || regionsDifferent)
+		{
+			rebuildShader = true
+			shaderRegionsPerLight = regionsPerLight
+			lightShadowRegions = FloatArray(regionsPerLight.sum() * 4)
+		}
+
+		var i = 0
+		for (light in basicLights)
+		{
+			lightPosRange[(i*3)+0] = light.pos.x * tileSize + offsetx
+			lightPosRange[(i*3)+1] = light.pos.y * tileSize + offsety
+			lightPosRange[(i*3)+2] = (light.range * tileSize * 0.9f) * (light.range * tileSize * 0.9f)
+
+			lightColourBrightness[(i*4)+0] = light.colour.r
+			lightColourBrightness[(i*4)+1] = light.colour.g
+			lightColourBrightness[(i*4)+2] = light.colour.b
+			lightColourBrightness[(i*4)+3] = light.brightness
+
+			i++
+		}
+
+		while (i < shaderLightNum)
+		{
+			lightPosRange[(i*3)+0] = -1f
+			lightPosRange[(i*3)+1] = -1f
+			lightPosRange[(i*3)+2] = -1f
+
+			i++
+		}
+
+		var shadowCacheOffset = 0
+		i = 0
+		for (light in sortedShadowLights)
+		{
+			lightShadowColourBrightness[(i*4)+0] = light.colour.r
+			lightShadowColourBrightness[(i*4)+1] = light.colour.g
+			lightShadowColourBrightness[(i*4)+2] = light.colour.b
+			lightShadowColourBrightness[(i*4)+3] = light.brightness
+
+			val regionsToSet: com.badlogic.gdx.utils.Array<PointRect>
+			if (shadowMode == ShadowMode.TILE)
+			{
+				regionsToSet = light.cache.currentCastRegions
+
+				lightShadowPosRange[(i * 4) + 0] = light.pos.x * tileSize + offsetx
+				lightShadowPosRange[(i * 4) + 1] = light.pos.y * tileSize + offsety
+				lightShadowPosRange[(i * 4) + 2] = (light.range * tileSize * 0.9f) * (light.range * tileSize * 0.9f)
+				lightShadowPosRange[(i * 4) + 3] = if (light.cache.regionsVisible) 2.0f else -2.0f
+			}
+			else
+			{
+				regionsToSet = light.cache.opaqueRegions
+
+				lightShadowPosRange[(i * 3) + 0] = light.pos.x * tileSize + offsetx
+				lightShadowPosRange[(i * 3) + 1] = light.pos.y * tileSize + offsety
+				lightShadowPosRange[(i * 3) + 2] = (light.range * tileSize * 0.9f) * (light.range * tileSize * 0.9f)
+			}
+
+			val cacheStart = shadowCacheOffset
+			var minx = 0f
+			var miny = 0f
+			var maxx = 0f
+			var maxy = 0f
+			for (region in regionsToSet)
+			{
+				minx = region.x * tileSize
+				miny = region.y * tileSize
+				maxx = minx + region.width * tileSize
+				maxy = miny + region.height * tileSize
+
+				lightShadowRegions[shadowCacheOffset++] = minx
+				lightShadowRegions[shadowCacheOffset++] = miny
+				lightShadowRegions[shadowCacheOffset++] = maxx
+				lightShadowRegions[shadowCacheOffset++] = maxy
+			}
+
+			while (shadowCacheOffset < cacheStart + shaderRegionsPerLight[i] * 4)
+			{
+				lightShadowRegions[shadowCacheOffset++] = minx
+				lightShadowRegions[shadowCacheOffset++] = miny
+				lightShadowRegions[shadowCacheOffset++] = maxx
+				lightShadowRegions[shadowCacheOffset++] = maxy
+			}
+
+			i++
+		}
+
+		while (i < shaderShadowLightNum)
+		{
+			if (shadowMode == ShadowMode.TILE)
+			{
+				lightShadowPosRange[(i * 4) + 0] = -1f
+				lightShadowPosRange[(i * 4) + 1] = -1f
+				lightShadowPosRange[(i * 4) + 2] = -1f
+				lightShadowPosRange[(i * 4) + 3] = -1f
+			}
+			else
+			{
+				lightShadowPosRange[(i * 3) + 0] = -1f
+				lightShadowPosRange[(i * 3) + 1] = -1f
+				lightShadowPosRange[(i * 3) + 2] = -1f
+			}
+
+			i++
+		}
+
+		if (rebuildShader)
+		{
+			//shader.dispose()
+			shader = createShader(shaderLightNum, shaderShadowLightNum, shaderRegionsPerLight)
+		}
+
+		Gdx.gl.glEnable(GL20.GL_BLEND)
+		Gdx.gl.glDepthMask(false)
+		shader.begin()
+
+		shader.setUniformMatrix("u_projTrans", combinedMatrix)
+		shader.setUniformf("u_offset", offsetx, offsety)
+		shader.setUniformi("u_texture", 0)
+		shader.setUniformf("u_ambient", ambientLight.vec3())
+
+		if (shaderLightNum + shaderShadowLightNum > 0)
+		{
+			shader.setUniformf("u_tileSize", tileSize)
+		}
+
+		if (shaderLightNum > 0)
+		{
+			shader.setUniform3fv("u_lightPosRange", lightPosRange, 0, lightPosRange.size)
+			shader.setUniform4fv("u_lightColourBrightness", lightColourBrightness, 0, lightColourBrightness.size)
+		}
+
+		if (shaderShadowLightNum > 0)
+		{
+			if (shadowMode == ShadowMode.TILE)
+			{
+				shader.setUniform4fv("u_shadowedLightPosRangeMode", lightShadowPosRange, 0, lightShadowPosRange.size)
+			}
+			else
+			{
+				shader.setUniform3fv("u_shadowedLightPosRange", lightShadowPosRange, 0, lightShadowPosRange.size)
+			}
+
+			shader.setUniform4fv("u_shadowedLightColourBrightness", lightShadowColourBrightness, 0, lightShadowColourBrightness.size)
+			shader.setUniform4fv("u_shadowedLightRegions", lightShadowRegions, 0, lightShadowRegions.size)
+		}
+
+		executor.awaitAllJobs()
+
+		queuedBuffers.add(currentBuffer!!)
+		currentBuffer = null
+
+		var lastBlendSrc = -1
+		var lastBlendDst = -1
+		var lastTexture: Texture? = null
+		var currentOffset = 0
+
+		fun drawBuffer(buffer: VertexBuffer, mesh: BigMesh)
+		{
+			if (buffer.texture != lastTexture)
+			{
+				buffer.texture.bind()
+				lastTexture = buffer.texture
+			}
+
+			if (buffer.blendSrc != lastBlendSrc || buffer.blendDst != lastBlendDst)
+			{
+				Gdx.gl.glBlendFunc(buffer.blendSrc, buffer.blendDst)
+
+				lastBlendSrc = buffer.blendSrc
+				lastBlendDst = buffer.blendDst
+			}
+
+			val spritesInBuffer = buffer.count / (4 * vertexSize)
+			val drawCount = spritesInBuffer * 6
+			mesh.render(shader, GL20.GL_TRIANGLES, currentOffset, drawCount)
+			currentOffset += drawCount
+		}
+
+		if (staticBuffers.size > 0)
+		{
+			staticMesh.bind(shader)
+
+			for (buffer in staticBuffers)
+			{
+				drawBuffer(buffer, staticMesh)
+			}
+
+			staticMesh.unbind(shader)
+		}
+
+		if (queuedBuffers.size > 0)
+		{
+			currentOffset = 0
+			mesh.setVertices(vertices, 0, currentVertexCount)
+			mesh.bind(shader)
+
+			for (buffer in queuedBuffers)
+			{
+				drawBuffer(buffer, mesh)
+				bufferPool.free(buffer)
+			}
+			queuedBuffers.clear()
+
+			mesh.unbind(shader)
+		}
+
+		Gdx.gl.glDepthMask(true)
+		Gdx.gl.glDisable(GL20.GL_BLEND)
+		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
+		shader.end()
+
+		currentVertexCount = 0
+	}
+
+	// ----------------------------------------------------------------------
+	private fun queueRenderJobs()
+	{
+		for (i in 0 until queuedSprites)
+		{
+			val rs = spriteArray[i]!!
+
+			var sprite = rs.sprite
 			if (rs.tilingSprite != null)
 			{
 				bitflag.clear()
 				for (dir in Direction.Values)
 				{
-					tempPoint.set(rs.point).plusAssign(dir)
-					val keys = tilingMap[tempPoint]
+					val hash = Point.getHashcode(rs.px, rs.py, dir)
+					val keys = tilingMap[hash]
 
 					if (keys?.contains(rs.tilingSprite!!.checkID) != true)
 					{
@@ -164,104 +594,137 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 					}
 				}
 
-				val sprite = rs.tilingSprite!!.getSprite(bitflag)
-				sprite.render(batch, localx, localy, localw, localh, rs.scaleX, rs.scaleY )
+				sprite = rs.tilingSprite!!.getSprite(bitflag)
 			}
 
-			if (rs.texture != null)
+			var texture = rs.texture?.texture
+
+			if (sprite != null)
 			{
-				if (rs.nextTexture != null)
+				texture = sprite.currentTexture.texture
+			}
+
+			requestRender(rs.blend.src, rs.blend.dst, texture!!, { vertices: FloatArray, offset: Int ->
+				val localx = rs.x
+				val localy = rs.y
+				val localw = rs.width * tileSize
+				val localh = rs.height * tileSize
+
+				val colour = rs.colour
+
+				if (sprite != null)
 				{
-					drawBlend(batch, rs.texture!!, rs.nextTexture!!, rs.blendAlpha, localx, localy, 0.5f, 0.5f, 1f, 1f, localw * rs.scaleX, localh * rs.scaleY, rs.rotation, rs.flipX, rs.flipY, 0f)
+					val renderCol = sprite.getRenderColour()
+					if (!renderCol.isWhite()) colour.mul(renderCol)
+
+					sprite.render(vertices, offset, colour, localx, localy, localw, localh, rs.scaleX, rs.scaleY, rs.rotation, rs.isLit)
 				}
-				else
+
+				if (rs.texture != null)
 				{
-					com.lyeeedar.Util.draw(batch, rs.texture!!, localx, localy, 0.5f, 0.5f, 1f, 1f, localw * rs.scaleX, localh * rs.scaleY, rs.rotation, rs.flipX, rs.flipY, 0f)
+					doDraw(vertices, offset,
+						   rs.texture!!, rs.nextTexture ?: rs.texture!!, colour,
+						   localx, localy, 0.5f, 0.5f, 1f, 1f, localw * rs.scaleX, localh * rs.scaleY, rs.rotation, rs.flipX, rs.flipY,
+						   0f, rs.blendAlpha, rs.isLit, false)
 				}
-			}
-
-			if (rs.ninePatch != null)
-			{
-				val w = localw * rs.scaleX
-				val h = localh * rs.scaleY
-
-				rs.ninePatch!!.draw(batch, localx - w/2f, localy - h/2f, 0.5f, 0.5f, w, h, 1f, 1f, rs.rotation)
-			}
+			} )
 		}
-
-		if (debugDraw)
-		{
-			for (rs in debugDrawList)
-			{
-				draw(rs)
-			}
-
-			val drawSpeed = if (debugDrawSpeed < 0) -1.0f / debugDrawSpeed else debugDrawSpeed
-
-			debugDrawAccumulator += drawSpeed
-
-			while (debugDrawIndex < queuedSprites && debugDrawAccumulator > 1.0f)
-			{
-				if (debugDraw) inDebugFrame = true
-
-				val rs = spriteArray[debugDrawIndex++]!!
-
-				draw(rs)
-
-				debugDrawList.add(rs)
-
-				debugDrawAccumulator -= 1.0f
-				if (debugDrawAccumulator < 1.0f)
-				{
-					break
-				}
-			}
-		}
-		else
-		{
-			for (i in 0 until queuedSprites)
-			{
-				val rs = spriteArray[i]!!
-
-				draw(rs)
-
-				rs.free()
-			}
-		}
-
-		if (!debugDraw || debugDrawIndex == queuedSprites-1)
-		{
-			inDebugFrame = false
-
-			for (rs in debugDrawList) rs.free()
-			debugDrawList.clear()
-			debugDrawIndex = 0
-
-			batchID = random.nextInt()
-			Particle.generateBrownianVectors()
-
-			for (entry in tilingMap)
-			{
-				entry.key.free()
-				setPool.free(entry.value)
-			}
-			tilingMap.clear()
-
-			if (queuedSprites < spriteArray.size / 4)
-			{
-				spriteArray = spriteArray.copyOf(spriteArray.size / 4)
-			}
-
-			queuedSprites = 0
-		}
-
-		inBegin = false
-
-		batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
 	}
 
 	// ----------------------------------------------------------------------
-	fun getComparisonVal(x: Int, y: Int, layer: Int, index: Int, blend: BlendMode) : Int
+	private fun cleanup()
+	{
+		// clean up
+		for (i in 0 until queuedSprites)
+		{
+			val rs = spriteArray[i]!!
+			rs.free()
+		}
+
+		batchID = random.nextInt()
+		Particle.generateBrownianVectors()
+
+		for (entry in tilingMap)
+		{
+			setPool.free(entry.value)
+		}
+		tilingMap.clear()
+
+		basicLights.clear()
+		shadowLights.clear()
+
+		if (queuedSprites < spriteArray.size / 4)
+		{
+			spriteArray = spriteArray.copyOf(spriteArray.size / 4)
+			sortedArray = sortedArray.copyOf(sortedArray.size / 4)
+		}
+
+		queuedSprites = 0
+	}
+
+	// ----------------------------------------------------------------------
+	private fun flush(batch: Batch)
+	{
+		// Begin prerender work
+		executor.addJob {
+			// sort
+			RadixSort.sort(spriteArray, sortedArray, 0, 0, queuedSprites, MOST_SIGNIFICANT_BYTE_INDEX)
+
+			// do screen shake
+			if ( screenShakeRadius > 2 )
+			{
+				screenShakeAccumulator += delta
+
+				while ( screenShakeAccumulator >= screenShakeSpeed )
+				{
+					screenShakeAccumulator -= screenShakeSpeed
+					screenShakeAngle += (150 + Random.random() * 60)
+
+					if (!screenShakeLocked)
+					{
+						screenShakeRadius *= 0.9f
+					}
+				}
+
+				offsetx += Math.sin( screenShakeAngle.toDouble() ).toFloat() * screenShakeRadius
+				offsety += Math.cos( screenShakeAngle.toDouble() ).toFloat() * screenShakeRadius
+			}
+		}
+
+		for (light in basicLights)
+		{
+			executor.addJob {
+				light.update(delta)
+			}
+		}
+
+		for (light in shadowLights)
+		{
+			executor.addJob {
+				light.update(delta)
+			}
+		}
+
+		executor.awaitAllJobs()
+
+		// begin rendering
+		queueRenderJobs()
+
+		if (inStaticBegin)
+		{
+			storeStatic()
+		}
+		else
+		{
+			combinedMatrix.set(batch.projectionMatrix).mul(batch.transformMatrix)
+			waitOnRender()
+		}
+
+		cleanup()
+	}
+
+	// ----------------------------------------------------------------------
+	private fun getComparisonVal(x: Int, y: Int, layer: Int, index: Int, blend: BlendMode) : Int
 	{
 		if (index > MAX_INDEX-1) throw RuntimeException("Index too high! $index >= $MAX_INDEX!")
 		if (layer > layers-1) throw RuntimeException("Layer too high! $index >= $layers!")
@@ -291,41 +754,54 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 	}
 
 	// ----------------------------------------------------------------------
-	fun storeRenderSprite(renderSprite: RenderSprite)
+	private fun storeRenderSprite(renderSprite: RenderSprite)
 	{
 		if (queuedSprites == spriteArray.size-1)
 		{
 			spriteArray = spriteArray.copyOf(spriteArray.size * 2)
+			sortedArray = sortedArray.copyOf(sortedArray.size * 2)
 		}
 
-		spriteArray[queuedSprites++] = renderSprite
+		spriteArray[queuedSprites] = renderSprite
+		sortedArray[queuedSprites] = renderSprite
+
+		queuedSprites++
 	}
 
 	// ----------------------------------------------------------------------
-	fun queueParticle(effect: ParticleEffect, ix: Float, iy: Float, layer: Int, index: Int, colour: Colour = Colour.WHITE, width: Float = 1f, height: Float = 1f)
+	fun queueParticle(effect: ParticleEffect, ix: Float, iy: Float, layer: Int, index: Int, colour: Colour = Colour.WHITE, width: Float = 1f, height: Float = 1f, lit: Boolean = true)
 	{
-		if (!inBegin) throw Exception("Queue called before begin!")
+		if (!inBegin && !inStaticBegin) throw Exception("Queue called before begin!")
 
-		if (debugDraw && inDebugFrame) return
+		var lx = ix
+		var ly = iy
 
 		if (effect.lockPosition)
 		{
 
 		}
-		else if (effect.facing.x != 0)
-		{
-			effect.setPosition(ix + effect.size[1].toFloat() * 0.5f, iy + effect.size[0].toFloat() * 0.5f)
-		}
 		else
 		{
-			if (effect.isCentered)
+			if (effect.facing.x != 0)
 			{
-				effect.setPosition(ix + 0.5f, iy + 0.5f)
+				lx = ix + effect.size[1].toFloat() * 0.5f
+				ly = iy + effect.size[0].toFloat() * 0.5f
 			}
 			else
 			{
-				effect.setPosition(ix + effect.size[0].toFloat() * 0.5f, iy + effect.size[1].toFloat() * 0.5f)
+				if (effect.isCentered)
+				{
+					lx = ix + 0.5f
+					ly = iy + 0.5f
+				}
+				else
+				{
+					lx = ix + effect.size[0].toFloat() * 0.5f
+					ly = iy + effect.size[1].toFloat() * 0.5f
+				}
 			}
+
+			effect.setPosition(lx, ly)
 		}
 
 		update(effect)
@@ -336,14 +812,29 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 			return
 		}
 
-		val x = ix
-		val y = iy
+		val posOffset = effect.animation?.renderOffset(false)
+		lx += (posOffset?.get(0) ?: 0f)
+		ly += (posOffset?.get(1) ?: 0f)
+
+		if (effect.faceInMoveDirection)
+		{
+			val angle = getRotation(effect.lastPos, tempVec.set(lx, ly))
+			effect.rotation = angle
+			effect.lastPos.set(lx, ly)
+		}
+
+		if (effect.light != null)
+		{
+			addLight(effect.light!!, lx + 0.5f, ly + 0.5f)
+		}
 
 		//val scale = effect.animation?.renderScale()?.get(0) ?: 1f
 		val animCol = effect.animation?.renderColour() ?: Colour.WHITE
 
 		for (emitter in effect.emitters)
 		{
+			val emitterOffset = emitter.keyframe1.offset.lerp(emitter.keyframe2.offset, emitter.keyframeAlpha)
+
 			for (particle in emitter.particles)
 			{
 				var px = 0f
@@ -351,7 +842,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 
 				if (emitter.simulationSpace == Emitter.SimulationSpace.LOCAL)
 				{
-					tempVec.set(emitter.offset.valAt(0, emitter.time))
+					tempVec.set(emitterOffset)
 					tempVec.scl(emitter.size)
 					tempVec.rotate(emitter.rotation)
 
@@ -401,7 +892,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 
 					val comparisonVal = getComparisonVal((drawx-sizex*0.5f).toInt(), (drawy-sizey*0.5f).toInt(), layer, index, particle.blend)
 
-					val rs = RenderSprite.obtain().set( null, null, tex1.second, null, drawx * tileSize, drawy * tileSize, tempVec.x, tempVec.y, col, sizex, sizey, rotation, 1f, 1f, effect.flipX, effect.flipY, particle.blend, comparisonVal )
+					val rs = RenderSprite.obtain().set( null, null, tex1.second, drawx * tileSize, drawy * tileSize, tempVec.x, tempVec.y, col, sizex, sizey, rotation, 1f, 1f, effect.flipX, effect.flipY, particle.blend, lit, comparisonVal )
 
 					if (particle.blendKeyframes)
 					{
@@ -416,26 +907,40 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 	}
 
 	// ----------------------------------------------------------------------
-	fun addToMap(tilingSprite: TilingSprite, ix: Float, iy: Float)
+	private fun addToMap(tilingSprite: TilingSprite, ix: Float, iy: Float)
 	{
 		// Add to map
-		val point = Point.obtain().set(ix.toInt(), iy.toInt())
-		var keys = tilingMap[point]
+		val hash = Point.getHashcode(ix.toInt(), iy.toInt())
+		var keys = tilingMap[hash]
 		if (keys == null)
 		{
 			keys = setPool.obtain()
 			keys.clear()
+
+			tilingMap[hash] = keys
 		}
 		keys.add(tilingSprite.checkID)
-		tilingMap[point] = keys
 	}
 
 	// ----------------------------------------------------------------------
-	fun queueSprite(tilingSprite: TilingSprite, ix: Float, iy: Float, layer: Int, index: Int, colour: Colour = Colour.WHITE, width: Float = 1f, height: Float = 1f)
+	fun addLight(light: Light, ix: Float, iy: Float)
 	{
-		if (!inBegin) throw Exception("Queue called before begin!")
+		light.pos.set(ix, iy)
 
-		if (debugDraw && inDebugFrame) return
+		if (Global.collisionGrid != null && light.hasShadows && shadowMode != ShadowMode.NONE)
+		{
+			shadowLights.add(light)
+		}
+		else
+		{
+			basicLights.add(light)
+		}
+	}
+
+	// ----------------------------------------------------------------------
+	fun queueSprite(tilingSprite: TilingSprite, ix: Float, iy: Float, layer: Int, index: Int, colour: Colour = Colour.WHITE, width: Float = 1f, height: Float = 1f, lit: Boolean = true)
+	{
+		if (!inBegin && !inStaticBegin) throw Exception("Queue called before begin!")
 
 		update(tilingSprite)
 
@@ -467,22 +972,25 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 
 		addToMap(tilingSprite, ix, iy)
 
+		if (tilingSprite.light != null)
+		{
+			addLight(tilingSprite.light!!, lx + 0.5f, ly + 0.5f)
+		}
+
 		// check if onscreen
 		if (!alwaysOnscreen && !isSpriteOnscreen(tilingSprite, x, y, width, height)) return
 
 		val comparisonVal = getComparisonVal(lx.toInt(), ly.toInt(), layer, index, BlendMode.MULTIPLICATIVE)
 
-		val rs = RenderSprite.obtain().set(null, tilingSprite, null, null, x, y, ix, iy, colour, width, height, 0f, 1f, 1f, false, false, BlendMode.MULTIPLICATIVE, comparisonVal)
+		val rs = RenderSprite.obtain().set(null, tilingSprite, null, x, y, ix, iy, colour, width, height, 0f, 1f, 1f, false, false, BlendMode.MULTIPLICATIVE, lit, comparisonVal)
 
 		storeRenderSprite(rs)
 	}
 
 	// ----------------------------------------------------------------------
-	fun queueSprite(sprite: Sprite, ix: Float, iy: Float, layer: Int, index: Int, colour: Colour = Colour.WHITE, width: Float = 1f, height: Float = 1f, scaleX: Float = 1f, scaleY: Float = 1f)
+	fun queueSprite(sprite: Sprite, ix: Float, iy: Float, layer: Int, index: Int, colour: Colour = Colour.WHITE, width: Float = 1f, height: Float = 1f, scaleX: Float = 1f, scaleY: Float = 1f, lit: Boolean = true)
 	{
-		if (!inBegin) throw Exception("Queue called before begin!")
-
-		if (debugDraw && inDebugFrame) return
+		if (!inBegin && !inStaticBegin) throw Exception("Queue called before begin!")
 
 		update(sprite)
 
@@ -546,22 +1054,25 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 			sprite.lastPos.set(x, y)
 		}
 
+		if (sprite.light != null)
+		{
+			addLight(sprite.light!!, ix + 0.5f, iy + 0.5f)
+		}
+
 		// check if onscreen
 		if (!alwaysOnscreen && !isSpriteOnscreen(sprite, x, y, width, height, scaleX, scaleY)) return
 
 		val comparisonVal = getComparisonVal(lx.toInt(), ly.toInt(), layer, index, BlendMode.MULTIPLICATIVE)
 
-		val rs = RenderSprite.obtain().set(sprite, null, null, null, x, y, ix, iy, colour, width, height, rotation, scaleX, scaleY, false, false, BlendMode.MULTIPLICATIVE, comparisonVal)
+		val rs = RenderSprite.obtain().set(sprite, null, null, x, y, ix, iy, colour, width, height, rotation, scaleX, scaleY, false, false, BlendMode.MULTIPLICATIVE, lit, comparisonVal)
 
 		storeRenderSprite(rs)
 	}
 
 	// ----------------------------------------------------------------------
-	fun queueTexture(texture: TextureRegion, ix: Float, iy: Float, layer: Int, index: Int, colour: Colour = Colour.WHITE, width: Float = 1f, height: Float = 1f, scaleX: Float = 1f, scaleY: Float = 1f, sortX: Float? = null, sortY: Float? = null)
+	fun queueTexture(texture: TextureRegion, ix: Float, iy: Float, layer: Int, index: Int, colour: Colour = Colour.WHITE, width: Float = 1f, height: Float = 1f, scaleX: Float = 1f, scaleY: Float = 1f, sortX: Float? = null, sortY: Float? = null, lit: Boolean = true)
 	{
-		if (!inBegin) throw Exception("Queue called before begin!")
-
-		if (debugDraw && inDebugFrame) return
+		if (!inBegin && !inStaticBegin) throw Exception("Queue called before begin!")
 
 		val lx = ix - width
 		val ly = iy - height
@@ -580,43 +1091,13 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 
 		val comparisonVal = getComparisonVal((sortX ?: lx).toInt(), (sortY ?: ly).toInt(), layer, index, BlendMode.MULTIPLICATIVE)
 
-		val rs = RenderSprite.obtain().set(null, null, texture, null, x, y, ix, iy, colour, width, height, 0f, scaleX, scaleY, false, false, BlendMode.MULTIPLICATIVE, comparisonVal)
+		val rs = RenderSprite.obtain().set(null, null, texture, x, y, ix, iy, colour, width, height, 0f, scaleX, scaleY, false, false, BlendMode.MULTIPLICATIVE, lit, comparisonVal)
 
 		storeRenderSprite(rs)
 	}
 
 	// ----------------------------------------------------------------------
-	fun queueNinepatch(ninePatch: NinePatch, ix: Float, iy: Float, layer: Int, index: Int, colour: Colour = Colour.WHITE, width: Float = 1f, height: Float = 1f, scaleX: Float = 1f, scaleY: Float = 1f)
-	{
-		if (!inBegin) throw Exception("Queue called before begin!")
-
-		if (debugDraw && inDebugFrame) return
-
-		val lx = ix - width/2
-		val ly = iy - height/2
-
-		val x = ix * tileSize
-		val y = iy * tileSize
-
-		// check if onscreen
-
-		val localx = x + offsetx
-		val localy = y + offsety
-		val localw = width * tileSize
-		val localh = height * tileSize
-
-		if (localx + localw < 0 || localx > Global.stage.width || localy + localh < 0 || localy > Global.stage.height) return
-
-		val comparisonVal = getComparisonVal(lx.toInt(), ly.toInt(), layer, index, BlendMode.MULTIPLICATIVE)
-
-		val rs = RenderSprite.obtain().set(null, null, null, ninePatch, x, y, ix, iy, colour, width, height, 0f, scaleX, scaleY, false, false, BlendMode.MULTIPLICATIVE, comparisonVal)
-
-		storeRenderSprite(rs)
-	}
-
-
-	// ----------------------------------------------------------------------
-	fun isSpriteOnscreen(sprite: Sprite, x: Float, y: Float, width: Float, height: Float, scaleX: Float = 1f, scaleY: Float = 1f): Boolean
+	private fun isSpriteOnscreen(sprite: Sprite, x: Float, y: Float, width: Float, height: Float, scaleX: Float = 1f, scaleY: Float = 1f): Boolean
 	{
 		var localx = x + offsetx
 		var localy = y + offsety
@@ -658,7 +1139,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 
 		if (sprite.rotation != 0f && sprite.fixPosition)
 		{
-			val offset = Sprite.getPositionCorrectionOffsets(x, y, localw / 2.0f, localh / 2.0f, localw, localh, scaleX, scaleY, sprite.rotation)
+			val offset = Sprite.getPositionCorrectionOffsets(x, y, localw / 2.0f, localh / 2.0f, localw, localh, scaleX, scaleY, sprite.rotation, tempVec3)
 			localx -= offset.x
 			localy -= offset.y
 		}
@@ -686,7 +1167,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 	}
 
 	// ----------------------------------------------------------------------
-	fun isSpriteOnscreen(sprite: TilingSprite, x: Float, y: Float, width: Float, height: Float): Boolean
+	private fun isSpriteOnscreen(sprite: TilingSprite, x: Float, y: Float, width: Float, height: Float): Boolean
 	{
 		val localx = x + offsetx
 		val localy = y + offsety
@@ -701,36 +1182,646 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 	// ----------------------------------------------------------------------
 	companion object
 	{
-		val random = LightRNG()
+		enum class ShadowMode
+		{
+			NONE,
+			TILE,
+			SMOOTH
+		}
+
+		// Optimisation reference:
+		// https://zz85.github.io/glsl-optimizer/
+
+		private val smoothLighting = true
+		private val shadowMode: ShadowMode = ShadowMode.TILE
+		private val random = LightRNG()
+
+		public const val vertexSize = 4 + 4 + 1 + 1
+		private const val maxSprites = 10000
+		public const val verticesASprite = vertexSize * 4
+		private const val maxVertices = maxSprites * vertexSize
+
+		private val cachedShaders = ObjectMap<String, ShaderProgram>()
+
+		fun createShader(numLights: Int, numShadowLights: Int, regionsPerLight: IntArray): ShaderProgram
+		{
+			val key = numLights.toString() + numShadowLights.toString() + regionsPerLight.map { it.toString() }.joinToString()
+
+			val existing = cachedShaders[key]
+			if (existing != null)
+			{
+				return existing
+			}
+
+			val vertexShader = getVertexOptimised()
+			val fragmentShader = getFragmentOptimised(numLights, numShadowLights, regionsPerLight)
+
+			val shader = ShaderProgram(vertexShader, fragmentShader)
+			if (!shader.isCompiled) throw IllegalArgumentException("Error compiling shader: " + shader.log)
+
+			cachedShaders[key] = shader
+
+			return shader
+		}
+
+		fun getVertexUnoptimised(): String
+		{
+			val vertexShader = """
+attribute vec4 ${ShaderProgram.POSITION_ATTRIBUTE};
+attribute vec4 ${ShaderProgram.TEXCOORD_ATTRIBUTE};
+attribute vec4 ${ShaderProgram.COLOR_ATTRIBUTE};
+attribute vec4 a_additionalData;
+
+uniform mat4 u_projTrans;
+uniform vec2 u_offset;
+
+varying vec4 v_color;
+varying vec2 v_spritePos;
+varying vec2 v_pixelPos;
+varying vec2 v_texCoords1;
+varying vec2 v_texCoords2;
+varying float v_blendAlpha;
+varying float v_isLit;
+
+void main()
+{
+	v_color = ${ShaderProgram.COLOR_ATTRIBUTE};
+
+	vec2 worldPos = ${ShaderProgram.POSITION_ATTRIBUTE}.xy + u_offset;
+	vec4 truePos = vec4(worldPos.x, worldPos.y, 0.0, 1.0);
+
+	v_pixelPos = worldPos;
+	v_spritePos = ${ShaderProgram.POSITION_ATTRIBUTE}.zw;
+	v_texCoords1 = ${ShaderProgram.TEXCOORD_ATTRIBUTE}.xy;
+	v_texCoords2 = ${ShaderProgram.TEXCOORD_ATTRIBUTE}.zw;
+	v_blendAlpha = a_additionalData.x;
+	v_isLit = float(a_additionalData.y == 0.0);
+	gl_Position = u_projTrans * truePos;
+}
+"""
+
+			return vertexShader
+		}
+
+		fun getVertexOptimised(): String
+		{
+			val androidDefine = if (Global.android) "#define LOWP lowp" else "#define LOWP"
+
+			val vertexShader = """
+$androidDefine
+
+attribute vec4 ${ShaderProgram.POSITION_ATTRIBUTE};
+attribute vec4 ${ShaderProgram.TEXCOORD_ATTRIBUTE};
+attribute LOWP vec4 ${ShaderProgram.COLOR_ATTRIBUTE};
+attribute LOWP vec4 a_additionalData;
+
+uniform mat4 u_projTrans;
+uniform vec2 u_offset;
+
+varying LOWP vec4 v_color;
+varying vec4 v_pos;
+varying vec4 v_texCoords;
+varying LOWP vec4 v_additionalData;
+
+void main()
+{
+	v_color = ${ShaderProgram.COLOR_ATTRIBUTE};
+
+	vec2 worldPos = ${ShaderProgram.POSITION_ATTRIBUTE}.xy + u_offset;
+	vec4 truePos;
+	truePos.xy = worldPos;
+	truePos.zw = vec2(0.0, 1.0);
+
+	v_pos.xy = worldPos;
+	v_pos.zw = ${ShaderProgram.POSITION_ATTRIBUTE}.zw;
+	v_texCoords = ${ShaderProgram.TEXCOORD_ATTRIBUTE};
+	v_additionalData = a_additionalData;
+
+	gl_Position = u_projTrans * truePos;
+}
+"""
+
+			return vertexShader
+		}
+
+		fun getFragmentUnoptimised(numLights: Int, numShadowLights: Int, regionsPerLight: IntArray): String
+		{
+			val shadowDefine =
+				if (numShadowLights > 0)
+				{
+					when (shadowMode)
+					{
+						ShadowMode.NONE -> ""
+						ShadowMode.SMOOTH -> "#define SMOOTHSHADOWS 1"
+						ShadowMode.TILE -> "#define TILESHADOWS 1"
+					}
+				}
+				else ""
+
+			var regionsDefine = "const vec2 regionSizes[${regionsPerLight.size}] = vec2[${regionsPerLight.size}]("
+
+			var currentRegionIndex = 0
+			for (region in regionsPerLight)
+			{
+				if (currentRegionIndex != 0)
+				{
+					regionsDefine += ", "
+				}
+
+				regionsDefine += "vec2($currentRegionIndex, $region)"
+				currentRegionIndex += region
+			}
+
+			regionsDefine += ");"
+
+			val tileLightingDefine = if (!smoothLighting) "#define TILELIGHTING 1" else ""
+			val fragmentShader = """
+
+$shadowDefine
+$tileLightingDefine
+
+varying vec4 v_color;
+varying vec2 v_spritePos;
+varying vec2 v_pixelPos;
+varying vec2 v_texCoords1;
+varying vec2 v_texCoords2;
+varying float v_blendAlpha;
+varying float v_isLit;
+
+uniform float u_tileSize;
+
+uniform vec3 u_ambient;
+
+uniform vec3 u_lightPosRange[$numLights];
+uniform vec4 u_lightColourBrightness[$numLights];
+
+#ifdef SMOOTHSHADOWS
+uniform vec3 u_shadowedLightPosRange[$numShadowLights];
+uniform vec4 u_shadowedLightColourBrightness[$numShadowLights];
+$regionsDefine
+uniform vec4 u_shadowedLightRegions[${regionsPerLight.sum()}];
+#endif
+
+#ifdef TILESHADOWS
+uniform vec4 u_shadowedLightPosRangeMode[$numShadowLights];
+uniform vec4 u_shadowedLightColourBrightness[$numShadowLights];
+$regionsDefine
+uniform vec4 u_shadowedLightRegions[${regionsPerLight.sum()}];
+#endif
+
+uniform sampler2D u_texture;
+
+// ------------------------------------------------------
+float calculateLightStrength(vec3 posRange)
+{
+	vec2 pos = posRange.xy;
+	float rangeSq = posRange.z;
+
+	vec2 pixelPos = v_pixelPos;
+
+#ifdef TILELIGHTING
+	pixelPos = (floor(v_spritePos / u_tileSize)) * u_tileSize;
+	pos = (floor(pos / u_tileSize)) * u_tileSize;
+#endif
+
+	vec2 diff = pos - pixelPos;
+	float distSq = (diff.x * diff.x) + (diff.y * diff.y);
+
+	float lightStrength = step(distSq, rangeSq);
+	float alpha = 1.0 - (distSq / rangeSq);
+
+	return lightStrength * alpha;
+}
+
+// ------------------------------------------------------
+vec3 calculateLight(int index)
+{
+	vec3 posRange = u_lightPosRange[index];
+	vec4 colourBrightness = u_lightColourBrightness[index];
+
+	float lightStrength = calculateLightStrength(posRange);
+
+	vec3 lightCol = colourBrightness.rgb;
+	float brightness = colourBrightness.a;
+
+	return lightCol * brightness * lightStrength;
+}
+
+#ifdef TILESHADOWS
+
+// ------------------------------------------------------
+bool insideBox(vec2 v, vec2 bottomLeft, vec2 topRight)
+{
+    vec2 s = step(bottomLeft, v) - step(topRight, v);
+    return s.x * s.y != 0.0;
+}
+
+// ------------------------------------------------------
+bool isPointVisible(int index, vec2 point, bool regionsAreLit)
+{
+	bool inRegion = false;
+	for (int i = 0; i < regionSizes[index].y; i++)
+	{
+		vec4 region = u_shadowedLightRegions[regionSizes[index].x + i];
+		inRegion = inRegion || insideBox(point, region.xy, region.zw);
+	}
+
+	return (regionsAreLit == inRegion);
+}
+
+// ------------------------------------------------------
+vec3 calculateShadowLight(int index)
+{
+	vec4 posRangeMode = u_shadowedLightPosRangeMode[index];
+	vec4 colourBrightness = u_shadowedLightColourBrightness[index];
+
+	float lightStrength = calculateLightStrength(posRangeMode.xyz);
+
+	vec2 pixelPos = v_pixelPos;
+	pixelPos.y = v_spritePos.y + min(pixelPos.y - v_spritePos.y, u_tileSize*0.9);
+
+	float multiplier = float(isPointVisible(index, pixelPos, posRangeMode.w > 0.0));
+
+	lightStrength *= multiplier;
+
+	vec3 lightCol = colourBrightness.rgb;
+	float brightness = colourBrightness.a;
+
+	return lightCol * brightness * lightStrength;
+}
+
+#endif
+
+#ifdef SMOOTHSHADOWS
+
+// ------------------------------------------------------
+float rayBoxIntersect ( vec2 rpos, vec2 rdir, vec2 vmin, vec2 vmax )
+{
+	float t0 = (vmin.x - rpos.x) * rdir.x;
+	float t1 = (vmax.x - rpos.x) * rdir.x;
+	float t2 = (vmin.y - rpos.y) * rdir.y;
+	float t3 = (vmax.y - rpos.y) * rdir.y;
+
+	float t4 = max(min(t0, t1), min(t2, t3));
+	float t5 = min(max(t0, t1), max(t2, t3));
+
+	float t6 = (t5 < 0.0 || t4 > t5) ? -1.0 : t4;
+	return t6;
+}
+
+// ------------------------------------------------------
+float insideBox(vec2 v, vec2 bottomLeft, vec2 topRight)
+{
+    vec2 s = step(bottomLeft, v) - step(topRight, v);
+    return s.x * s.y;
+}
+
+// ------------------------------------------------------
+bool isPointVisible(int index, vec2 point)
+{
+	vec3 posRange = u_shadowedLightPosRange[index];
+
+	vec2 baseTile = (floor(v_spritePos / u_tileSize)) * u_tileSize;
+	vec2 lightTile = (floor(posRange.xy / u_tileSize)) * u_tileSize;
+
+	vec2 pixelPos = v_pixelPos;
+	pixelPos.y = v_spritePos.y + min(pixelPos.y - v_spritePos.y, u_tileSize*0.9);
+
+	vec2 diff = point - pixelPos;
+	float rayLen = length(diff);
+	vec2 rdir = 1.0 / (diff / rayLen);
+
+	float collided = 0.0;
+	float collidedOverride = 0.0;
+	for (int i = 0; i < regionSizes[index].y; i++)
+	{
+		vec4 occluder = u_shadowedLightRegions[regionSizes[index].x + i];
+		float intersect = rayBoxIntersect(pixelPos, rdir, occluder.xy, occluder.zw);
+
+		collided += float(intersect > 0.0 && intersect < rayLen);
+
+		occluder.xy = (floor(occluder.xy / u_tileSize)) * u_tileSize;
+		collidedOverride += insideBox(baseTile, occluder.xy, occluder.zw);
+	}
+
+	return collided == 0.0 || collidedOverride > 0.0;
+}
+
+// ------------------------------------------------------
+vec3 calculateShadowLight(int index)
+{
+	vec3 posRange = u_shadowedLightPosRange[index];
+	vec4 colourBrightness = u_shadowedLightColourBrightness[index];
+
+	float lightStrength = calculateLightStrength(posRange);
+
+	float multiplier = float(isPointVisible(index, posRange.xy));
+
+	lightStrength *= multiplier;
+
+	vec3 lightCol = colourBrightness.rgb;
+	float brightness = colourBrightness.a;
+
+	return lightCol * brightness * lightStrength;
+}
+#endif
+
+// ------------------------------------------------------
+void main()
+{
+	vec4 col1 = texture2D(u_texture, v_texCoords1);
+	vec4 col2 = texture2D(u_texture, v_texCoords2);
+
+	vec4 outCol = mix(col1, col2, v_blendAlpha);
+
+	vec3 lightCol = u_ambient;
+
+	for (int i = 0; i < $numLights; i++)
+	{
+		lightCol += calculateLight(i);
+	}
+
+#ifdef SMOOTHSHADOWS
+	for (int i = 0; i < $numShadowLights; i++)
+	{
+		lightCol += calculateShadowLight(i);
+	}
+#endif
+
+#ifdef TILESHADOWS
+	for (int i = 0; i < $numShadowLights; i++)
+	{
+		lightCol += calculateShadowLight(i);
+	}
+#endif
+
+	lightCol = mix(vec3(1.0, 1.0, 1.0), lightCol, v_isLit);
+
+	vec4 finalCol = clamp(v_color * outCol * vec4(lightCol, 1.0), 0.0, 1.0);
+	gl_FragColor = finalCol;
+}
+"""
+
+			return fragmentShader
+		}
+
+		fun getFragmentOptimised(numLights: Int, numShadowLights: Int, regionsPerLight: IntArray): String
+		{
+			val androidDefine = if (Global.android) "#define LOWP lowp\nprecision mediump float;" else "#define LOWP"
+
+			val shadowDefine =
+				if (numShadowLights > 0)
+				{
+					when (shadowMode)
+					{
+						ShadowMode.NONE -> ""
+						ShadowMode.SMOOTH -> "#define SMOOTHSHADOWS 1"
+						ShadowMode.TILE -> "#define TILESHADOWS 1"
+					}
+				}
+				else ""
+
+			val lightingDefine = if (numLights > 0) "#define LIGHTING 1" else ""
+
+			val tileLightingDefine = if (!smoothLighting) "#define TILELIGHTING 1" else ""
+			var fragmentShader = """
+
+$shadowDefine
+$tileLightingDefine
+$androidDefine
+$lightingDefine
+
+varying LOWP vec4 v_color;
+varying vec4 v_pos;
+varying vec4 v_texCoords;
+varying LOWP vec4 v_additionalData;
+
+uniform float u_tileSize;
+
+uniform LOWP vec3 u_ambient;
+
+#ifdef LIGHTING
+uniform vec3 u_lightPosRange[$numLights];
+uniform LOWP vec4 u_lightColourBrightness[$numLights];
+#endif
+
+#ifdef SMOOTHSHADOWS
+uniform vec3 u_shadowedLightPosRange[$numShadowLights];
+uniform LOWP vec4 u_shadowedLightColourBrightness[$numShadowLights];
+uniform vec4 u_shadowedLightRegions[${regionsPerLight.sum()}];
+#endif
+
+#ifdef TILESHADOWS
+uniform vec4 u_shadowedLightPosRangeMode[$numShadowLights];
+uniform LOWP vec4 u_shadowedLightColourBrightness[$numShadowLights];
+uniform vec4 u_shadowedLightRegions[${regionsPerLight.sum()}];
+#endif
+
+uniform sampler2D u_texture;
+
+// ------------------------------------------------------
+void main ()
+{
+	LOWP vec3 lightCol = u_ambient;
+
+#ifdef TILELIGHTING
+	vec2 spriteTile = floor(v_pos.zw / u_tileSize) * u_tileSize;
+#endif
+
+"""
+
+			fragmentShader += "//########## Basic Lighting ##########//\n"
+			for (i in 0 until numLights)
+			{
+				fragmentShader += """
+	vec3 posRange_$i = u_lightPosRange[$i];
+	LOWP vec4 colourBrightness_$i = u_lightColourBrightness[$i];
+
+#ifdef TILELIGHTING
+	vec2 diff_$i = posRange_$i.xy - spriteTile;
+#else
+	vec2 diff_$i = posRange_$i.xy - v_pos.xy;
+#endif
+
+	float len_$i = (diff_$i.x * diff_$i.x) + (diff_$i.y * diff_$i.y);
+	lightCol = lightCol + (colourBrightness_$i.rgb * (colourBrightness_$i.a * (1.0 - (len_$i / posRange_$i.z)) * float(posRange_$i.z >= len_$i)));
+
+"""
+			}
+
+			if (shadowMode == ShadowMode.SMOOTH)
+			{
+				if (numShadowLights > 0)
+				{
+				fragmentShader += """
+//########## Shadow Lighting ##########//
+
+	vec2 shadowPixelPos;
+	shadowPixelPos.x = v_pixelPos.x;
+	shadowPixelPos.y = (v_spritePos.y + min((v_pixelPos.y - v_spritePos.y), (u_tileSize * 0.9)));
+
+				"""
+
+					var regionIndex = 0
+					for (li in 0 until numShadowLights)
+					{
+						fragmentShader += """
+	vec3 shadowPosRange_$li = u_shadowedLightPosRange[$li];
+	LOWP vec4 shadowColourBrightness_$li = u_shadowedLightColourBrightness[$li];
+
+#ifdef TILELIGHTING
+	vec2 shadowDiff_$li = (shadowPosRange_$li.xy - spriteTile);
+#else
+	vec2 shadowDiff_$li = (shadowPosRange_$li.xy - v_pos.xy);
+#endif
+	float shadowLen_$li = ((shadowDiff_$li.x * shadowDiff_$li.x) + (shadowDiff_$li.y * shadowDiff_$li.y));
+
+	LOWP float shadowLightStrength_$li = (float((shadowPosRange_$li.z >= shadowLen_$li)) * (1.0 - (shadowLen_$li / shadowPosRange_$li.z)));
+
+	vec2 rayDiff_$li = (shadowPosRange_$li.xy - shadowPixelPos);
+	float rayLen_$li = sqrt(dot(rayDiff_$li, rayDiff_$li));
+
+	LOWP vec2 rdir_$li = (1.0/((rayDiff_$li / rayLen_$li)));
+	LOWP float collided_$li = 0.0;
+	LOWP float collidedOverride_$li = 0.0;
+
+	vec2 occluderPixel_${li};
+	vec2 tmax_${li};
+	vec2 tmin_${li};
+						"""
+
+						for (oi in 0 until regionsPerLight[li])
+						{
+							fragmentShader += """
+
+	vec4 occluder_${li}_$oi = u_shadowedLightRegions[${regionIndex++}];
+
+	tmin_${li} = (occluder_${li}_$oi.xy - shadowPixelPos) * rdir_$li;
+	tmax_${li} = (occluder_${li}_$oi.zw - shadowPixelPos) * rdir_$li;
+
+	float t4_${li}_$oi = max(min(tmin_${li}.x, tmax_${li}.x), min(tmin_${li}.y, tmax_${li}.y));
+	float t5_${li}_$oi = min(max(tmin_${li}.x, tmax_${li}.x), max(tmin_${li}.y, tmax_${li}.y));
+
+	LOWP float intersection_${li}_$oi = (t5_${li}_$oi < 0.0 || t4_${li}_$oi > t5_${li}_$oi) ? -1.0 : t4_${li}_$oi;
+
+	collided_$li = collided_$li + float((intersection_${li}_$oi > 0.0) && (intersection_${li}_$oi < rayLen_$li));
+
+	LOWP vec2 inBox_${li}_$oi = (vec2(greaterThanEqual(baseTile, occluder_${li}_$oi.xy)) - vec2(greaterThanEqual(baseTile, occluder_${li}_$oi.zw)));
+	collidedOverride_$li = (collidedOverride_$li + (inBox_${li}_$oi.x * inBox_${li}_$oi.y));
+
+	"""
+						}
+
+						fragmentShader += """
+	shadowLightStrength_$li *= float(((collided_$li == 0.0) || (collidedOverride_$li > 0.0)));
+	lightCol = (lightCol + ((shadowColourBrightness_$li.xyz * shadowColourBrightness_$li.w) * shadowLightStrength_$li));
+
+						"""
+					}
+				}
+			}
+			else if (shadowMode == ShadowMode.TILE)
+			{
+				if (numShadowLights > 0)
+				{
+					fragmentShader += """
+//########## Shadow Lighting ##########//
+
+	vec2 shadowPixelPos;
+	shadowPixelPos.x = v_pos.x;
+	shadowPixelPos.y = v_pos.w + min(v_pos.y - v_pos.w, u_tileSize * 0.9);
+	"""
+					var regionIndex = 0
+					for (li in 0 until numShadowLights)
+					{
+						fragmentShader += """
+	vec4 shadowPosRangeMode_$li = u_shadowedLightPosRangeMode[$li];
+	LOWP vec4 shadowColourBrightness_$li = u_shadowedLightColourBrightness[$li];
+
+#ifdef TILELIGHTING
+	vec2 shadowDiff_$li = shadowPosRangeMode_$li.xy - spriteTile;
+#else
+	vec2 shadowDiff_$li = shadowPosRangeMode_$li.xy - v_pos.xy;
+#endif
+	float shadowLen_$li = (shadowDiff_$li.x * shadowDiff_$li.x) + (shadowDiff_$li.y * shadowDiff_$li.y);
+
+	LOWP float shadowLightStrength_$li = float(shadowPosRangeMode_$li.z >= shadowLen_$li) * (1.0 - (shadowLen_$li / shadowPosRangeMode_$li.z));
+
+	LOWP float inRegion_$li = 0.0;
+						"""
+
+						for (oi in 0 until regionsPerLight[li])
+						{
+							fragmentShader += """
+
+	vec4 region_${li}_$oi = u_shadowedLightRegions[${regionIndex++}];
+
+	LOWP vec2 inBox_${li}_$oi = vec2(greaterThanEqual(shadowPixelPos, region_${li}_$oi.xy)) - vec2(greaterThanEqual(shadowPixelPos, region_${li}_$oi.zw));
+	inRegion_$li = inRegion_$li + (inBox_${li}_$oi.x * inBox_${li}_$oi.y);
+
+	"""
+						}
+
+						fragmentShader += """
+
+	shadowLightStrength_$li = shadowLightStrength_$li * float(shadowPosRangeMode_$li.w > 0.0 == inRegion_$li > 0.0);
+	lightCol = lightCol + (shadowColourBrightness_$li.xyz * (shadowColourBrightness_$li.w * shadowLightStrength_$li));
+
+						"""
+					}
+				}
+			}
+
+			fragmentShader += """
+
+//########## final composite ##########//
+	LOWP vec4 lightCol4;
+	lightCol4.rgb = mix(vec3(1.0, 1.0, 1.0), lightCol, 1.0 - v_additionalData.y);
+	lightCol4.a = 1.0;
+
+	LOWP vec4 outCol = clamp(v_color * mix(texture2D(u_texture, v_texCoords.xy), texture2D(u_texture, v_texCoords.zw), v_additionalData.x) * lightCol4, 0.0, 1.0);
+	gl_FragColor = outCol;
+}
+				"""
+
+			return fragmentShader
+		}
 	}
 }
 
 // ----------------------------------------------------------------------
 class RenderSprite(val parentBlock: RenderSpriteBlock, val parentBlockIndex: Int) : Comparable<RenderSprite>
 {
-	val point = Point()
-	val colour: Colour = Colour(1f, 1f, 1f, 1f)
-	var sprite: Sprite? = null
-	var tilingSprite: TilingSprite? = null
-	var texture: TextureRegion? = null
-	var nextTexture: TextureRegion? = null
-	var ninePatch: NinePatch? = null
-	var blendAlpha = 0f
-	var x: Float = 0f
-	var y: Float = 0f
-	var width: Float = 1f
-	var height: Float = 1f
-	var rotation: Float = 0f
-	var scaleX: Float = 1f
-	var scaleY: Float = 1f
-	var flipX: Boolean = false
-	var flipY: Boolean = false
-	var blend: BlendMode = BlendMode.MULTIPLICATIVE
+	internal var px: Int = 0
+	internal var py: Int = 0
+	internal val colour: Colour = Colour(1f, 1f, 1f, 1f)
+	internal var sprite: Sprite? = null
+	internal var tilingSprite: TilingSprite? = null
+	internal var texture: TextureRegion? = null
+	internal var nextTexture: TextureRegion? = null
+	internal var blendAlpha = 0f
+	internal var x: Float = 0f
+	internal var y: Float = 0f
+	internal var width: Float = 1f
+	internal var height: Float = 1f
+	internal var rotation: Float = 0f
+	internal var scaleX: Float = 1f
+	internal var scaleY: Float = 1f
+	internal var flipX: Boolean = false
+	internal var flipY: Boolean = false
+	internal var blend: BlendMode = BlendMode.MULTIPLICATIVE
+	internal var isLit: Boolean = true
 
-	var comparisonVal: Int = 0
+	val tempColour = Colour()
+	val tlCol = Colour()
+	val trCol = Colour()
+	val blCol = Colour()
+	val brCol = Colour()
+
+	internal var comparisonVal: Int = 0
 
 	// ----------------------------------------------------------------------
-	operator fun set(sprite: Sprite?, tilingSprite: TilingSprite?, texture: TextureRegion?, ninePatch: NinePatch?,
+	operator fun set(sprite: Sprite?, tilingSprite: TilingSprite?, texture: TextureRegion?,
 					 x: Float, y: Float,
 					 ix: Float, iy: Float,
 					 colour: Colour,
@@ -738,19 +1829,15 @@ class RenderSprite(val parentBlock: RenderSpriteBlock, val parentBlockIndex: Int
 					 rotation: Float,
 					 scaleX: Float, scaleY: Float,
 					 flipX: Boolean, flipY: Boolean,
-					 blend: BlendMode,
+					 blend: BlendMode, lit: Boolean,
 					 comparisonVal: Int): RenderSprite
 	{
-		this.point.x = ix.toInt()
-		this.point.y = iy.toInt()
-		this.colour.r = colour.r
-		this.colour.g = colour.g
-		this.colour.b = colour.b
-		this.colour.a = colour.a
+		this.px = ix.toInt()
+		this.py = iy.toInt()
+		this.colour.set(colour)
 		this.sprite = sprite
 		this.tilingSprite = tilingSprite
 		this.texture = texture
-		this.ninePatch = ninePatch
 		this.x = x
 		this.y = y
 		this.width = width
@@ -762,6 +1849,7 @@ class RenderSprite(val parentBlock: RenderSpriteBlock, val parentBlockIndex: Int
 		this.scaleY = scaleY
 		this.flipX = flipX
 		this.flipY = flipY
+		this.isLit = lit
 
 		nextTexture = null
 
@@ -775,18 +1863,18 @@ class RenderSprite(val parentBlock: RenderSpriteBlock, val parentBlockIndex: Int
 	}
 
 	// ----------------------------------------------------------------------
-	fun free() = parentBlock.free(this)
+	internal fun free() = parentBlock.free(this)
 
 	// ----------------------------------------------------------------------
 	companion object
 	{
-		var currentBlock: RenderSpriteBlock = RenderSpriteBlock.obtain()
+		private var currentBlock: RenderSpriteBlock = RenderSpriteBlock.obtain()
 
-		fun obtain(): RenderSprite
+		internal fun obtain(): RenderSprite
 		{
 			val rs = currentBlock.obtain()
 
-			if (currentBlock.index == RenderSpriteBlock.blockSize)
+			if (currentBlock.full())
 			{
 				currentBlock = RenderSpriteBlock.obtain()
 			}
@@ -799,11 +1887,13 @@ class RenderSprite(val parentBlock: RenderSpriteBlock, val parentBlockIndex: Int
 // ----------------------------------------------------------------------
 class RenderSpriteBlock
 {
-	var count = 0
-	var index: Int = 0
-	val sprites = Array(blockSize) { RenderSprite(this, it) }
+	private var count = 0
+	private var index: Int = 0
+	private val sprites = Array(blockSize) { RenderSprite(this, it) }
 
-	fun obtain(): RenderSprite
+	internal inline fun full() = index == blockSize
+
+	internal fun obtain(): RenderSprite
 	{
 		val sprite = sprites[index]
 		index++
@@ -812,7 +1902,7 @@ class RenderSpriteBlock
 		return sprite
 	}
 
-	fun free(data: RenderSprite)
+	internal fun free(data: RenderSprite)
 	{
 		count--
 
@@ -874,6 +1964,13 @@ class RadixSort
 
 		private const val QUICKSORT_THRESHOLD = 128
 
+		private val bucketPool: Pool<IntArray> = object : Pool<IntArray>() {
+			override fun newObject(): IntArray
+			{
+				return IntArray(BUCKET_AMOUNT)
+			}
+		}
+
 		public fun sort(
 				source: Array<RenderSprite?>, target: Array<RenderSprite?>,
 				sourceOffset: Int, targetOffset: Int, rangeLength: Int,
@@ -891,7 +1988,11 @@ class RadixSort
 				return
 			}
 
-			val bucketSizeMap = IntArray(BUCKET_AMOUNT)
+			val bucketSizeMap = bucketPool.obtain()
+			for (i in 0 until BUCKET_AMOUNT)
+			{
+				bucketSizeMap[i] = 0
+			}
 
 			// Count the size of each bucket.
 			for (i in sourceOffset until sourceOffset + rangeLength)
@@ -900,7 +2001,8 @@ class RadixSort
 			}
 
 			// Compute the map mapping each bucket to its beginning index.
-			val startIndexMap = IntArray(BUCKET_AMOUNT)
+			val startIndexMap = bucketPool.obtain()
+			startIndexMap[0] = 0
 
 			for (i in 1 until BUCKET_AMOUNT)
 			{
@@ -909,7 +2011,11 @@ class RadixSort
 
 			// The map mapping each bucket index to amount of elements already put
 			// in the bucket.
-			val processedMap = IntArray(BUCKET_AMOUNT)
+			val processedMap = bucketPool.obtain()
+			for (i in 0 until BUCKET_AMOUNT)
+			{
+				processedMap[i] = 0
+			}
 
 			for (i in sourceOffset until sourceOffset + rangeLength)
 			{
@@ -935,6 +2041,10 @@ class RadixSort
 					}
 				}
 			}
+
+			bucketPool.free(bucketSizeMap)
+			bucketPool.free(startIndexMap)
+			bucketPool.free(processedMap)
 		}
 
 		/**

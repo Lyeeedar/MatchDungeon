@@ -2,7 +2,7 @@ package com.lyeeedar.Util
 
 import squidpony.squidmath.LightRNG
 
-data class Range(val min: Float, val max: Float)
+class Range(val min: Float, val max: Float)
 {
 	fun getValue(ran: LightRNG): Float
 	{

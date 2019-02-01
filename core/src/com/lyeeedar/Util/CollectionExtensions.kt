@@ -11,6 +11,9 @@ import kotlin.coroutines.experimental.buildSequence
 
 fun <T> com.badlogic.gdx.utils.Array<T>.tryGet(i: Int): T = this[MathUtils.clamp(i, 0, this.size-1)]
 fun <T> com.badlogic.gdx.utils.Array<T>.random(ran: LightRNG): T = this[ran.nextInt(this.size)]
+fun <T> com.badlogic.gdx.utils.Array<T>.randomOrNull(ran: LightRNG): T? = if (this.size == 0) null else this[ran.nextInt(this.size)]
+
+fun <T> com.badlogic.gdx.utils.Array<T>.removeRandom() = this.removeRandom(Random.random)
 fun <T> com.badlogic.gdx.utils.Array<T>.removeRandom(ran: LightRNG): T
 {
 	val index = ran.nextInt(this.size)

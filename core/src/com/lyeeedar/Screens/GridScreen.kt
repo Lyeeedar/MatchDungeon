@@ -1,6 +1,5 @@
 package com.lyeeedar.Screens
 
-import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.NinePatch
 import com.badlogic.gdx.math.Rectangle
@@ -421,25 +420,6 @@ class GridScreen(): AbstractScreen()
 	override fun keyDown(keycode: Int): Boolean
 	{
 		super.keyDown(keycode)
-
-		if (keycode == Input.Keys.D)
-		{
-			grid!!.ground.debugDraw = !grid!!.ground.debugDraw
-		}
-		else if (keycode == Input.Keys.UP)
-		{
-			if (grid!!.ground.debugDraw)
-			{
-				grid!!.ground.debugDrawSpeed++
-			}
-		}
-		else if (keycode == Input.Keys.DOWN)
-		{
-			if (grid!!.ground.debugDraw)
-			{
-				grid!!.ground.debugDrawSpeed--
-			}
-		}
 
 		return false
 	}

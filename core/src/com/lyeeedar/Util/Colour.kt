@@ -1,6 +1,7 @@
 package com.lyeeedar.Util
 
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.NumberUtils
 import com.badlogic.gdx.utils.Pool
 
@@ -8,37 +9,19 @@ import com.badlogic.gdx.utils.Pool
  * Created by Philip on 30-Mar-16.
  */
 
+const val componentRange = 100
+const val bRange = componentRange
+const val gRange = bRange * componentRange
+const val rRange = gRange * componentRange
+
 class Colour()
 {
 	var fixed: Boolean = false
 
-	var r: Float = 0f
-		set(value)
-		{
-			if (fixed) throw Exception("Tried to modify fixed colour!")
-			field = value
-		}
-
-	var g: Float = 0f
-		set(value)
-		{
-			if (fixed) throw Exception("Tried to modify fixed colour!")
-			field = value
-		}
-
-	var b: Float = 0f
-		set(value)
-		{
-			if (fixed) throw Exception("Tried to modify fixed colour!")
-			field = value
-		}
-
-	var a: Float = 0f
-		set(value)
-		{
-			if (fixed) throw Exception("Tried to modify fixed colour!")
-			field = value
-		}
+	internal var r: Float = 0f
+	internal var g: Float = 0f
+	internal var b: Float = 0f
+	internal var a: Float = 0f
 
 	constructor(col: Float, fixed: Boolean = false) : this()
 	{
@@ -72,42 +55,62 @@ class Colour()
 
 	fun copy(): Colour = Colour(this)
 
+	fun isWhite(): Boolean = r == 1f && g == 1f && b == 1f && a == 1f
+
 	fun r(r: Float): Colour
 	{
+		if (fixed) throw Exception("Tried to modify fixed colour!")
+
 		this.r = r
 		return this
 	}
 
 	fun g(g: Float): Colour
 	{
+		if (fixed) throw Exception("Tried to modify fixed colour!")
+
 		this.g = g
 		return this
 	}
 
 	fun b(b: Float): Colour
 	{
+		if (fixed) throw Exception("Tried to modify fixed colour!")
+
 		this.b = b
 		return this
 	}
 
 	fun a(a: Float): Colour
 	{
+		if (fixed) throw Exception("Tried to modify fixed colour!")
+
 		this.a = a
 		return this
 	}
 
 	fun set(other: Colour): Colour
 	{
+		if (fixed) throw Exception("Tried to modify fixed colour!")
+
 		r = other.r
 		g = other.g
 		b = other.b
 		a = other.a
+
+		this.cachedR = other.cachedR
+		this.cachedG = other.cachedG
+		this.cachedB = other.cachedB
+		this.cachedA = other.cachedA
+		this.cachedFB = other.cachedFB
 
 		return this
 	}
 
 	fun set(col: Float): Colour
 	{
+		if (fixed) throw Exception("Tried to modify fixed colour!")
+
 		r = col
 		g = col
 		b = col
@@ -118,6 +121,8 @@ class Colour()
 
 	fun set(col: Color, packed: Float? = null): Colour
 	{
+		if (fixed) throw Exception("Tried to modify fixed colour!")
+
 		r = col.r
 		g = col.g
 		b = col.b
@@ -137,6 +142,8 @@ class Colour()
 
 	fun set(r: Float, g:Float, b:Float, a:Float): Colour
 	{
+		if (fixed) throw Exception("Tried to modify fixed colour!")
+
 		this.r = r
 		this.g = g
 		this.b = b
@@ -147,6 +154,8 @@ class Colour()
 
 	fun clamp()
 	{
+		if (fixed) throw Exception("Tried to modify fixed colour!")
+
 		r = r.clamp(0f, 1f)
 		g = g.clamp(0f, 1f)
 		b = b.clamp(0f, 1f)
@@ -155,12 +164,16 @@ class Colour()
 
 	fun mul(other: Colour) : Colour
 	{
+		if (fixed) throw Exception("Tried to modify fixed colour!")
+
 		timesAssign(other)
 		return this
 	}
 
 	fun mul(r: Float, g: Float, b: Float, a: Float): Colour
 	{
+		if (fixed) throw Exception("Tried to modify fixed colour!")
+
 		this.r *= r
 		this.g *= g
 		this.b *= b
@@ -193,6 +206,8 @@ class Colour()
 
 	operator fun timesAssign(other: Colour)
 	{
+		if (fixed) throw Exception("Tried to modify fixed colour!")
+
 		r *= other.r
 		g *= other.g
 		b *= other.b
@@ -201,6 +216,8 @@ class Colour()
 
 	operator fun timesAssign(other: Color)
 	{
+		if (fixed) throw Exception("Tried to modify fixed colour!")
+
 		r *= other.r
 		g *= other.g
 		b *= other.b
@@ -209,6 +226,8 @@ class Colour()
 
 	operator fun timesAssign(alpha: Float)
 	{
+		if (fixed) throw Exception("Tried to modify fixed colour!")
+
 		r *= alpha
 		g *= alpha
 		b *= alpha
@@ -217,6 +236,8 @@ class Colour()
 
 	operator fun plusAssign(other: Colour)
 	{
+		if (fixed) throw Exception("Tried to modify fixed colour!")
+
 		r += other.r
 		g += other.g
 		b += other.b
@@ -225,6 +246,8 @@ class Colour()
 
 	operator fun divAssign(value: Float)
 	{
+		if (fixed) throw Exception("Tried to modify fixed colour!")
+
 		r /= value
 		g /= value
 		b /= value
@@ -233,6 +256,8 @@ class Colour()
 
 	fun lerp(target: Colour, t: Float) : Colour
 	{
+		if (fixed) throw Exception("Tried to modify fixed colour!")
+
 		this.r += t * (target.r - this.r)
 		this.g += t * (target.g - this.g)
 		this.b += t * (target.b - this.b)
@@ -241,18 +266,33 @@ class Colour()
 		return this
 	}
 
+	fun lerpHSV(target: Colour, t: Float): Colour
+	{
+		val start = HSLColour(this)
+		val end = HSLColour(target)
+
+		val lerped = start.lerp(end, t)
+
+		return lerped.toRGB()
+	}
+
 	fun toFloatBits() : Float
 	{
 		if (cachedR == r && cachedG == g && cachedB == b && cachedA == a) return cachedFB
 		else
 		{
+			val r = r.clamp(0f, 1f)
+			val g = g.clamp(0f, 1f)
+			val b = b.clamp(0f, 1f)
+			val a = a.clamp(0f, 1f)
+
 			val intBits = (255 * a).toInt() shl 24 or ((255 * b).toInt() shl 16) or ((255 * g).toInt() shl 8) or (255 * r).toInt()
 			cachedFB = NumberUtils.intToFloatColor(intBits)
 
-			cachedR = r
-			cachedB = b
-			cachedG = g
-			cachedA = a
+			cachedR = this.r
+			cachedB = this.b
+			cachedG = this.g
+			cachedA = this.a
 
 			return cachedFB
 		}
@@ -262,6 +302,8 @@ class Colour()
 	var cachedB: Float = -1f
 	var cachedA: Float = -1f
 	var cachedFB: Float = -1f
+
+	fun vec3(): Vector3 = Vector3(r, g, b)
 
 	fun color() : Color
 	{
@@ -280,6 +322,11 @@ class Colour()
 		return true
 	}
 
+	override fun hashCode(): Int
+	{
+		return ((r * rRange + g * gRange + b * bRange + a) * 255).toInt()
+	}
+
 	fun freeTS()
 	{
 		synchronized(pool)
@@ -290,15 +337,17 @@ class Colour()
 
 	companion object
 	{
-		val BLACK = Colour(Color.BLACK, true)
-		val WHITE = Colour(Color.WHITE, true)
-		val LIGHT_GRAY = Colour(Color.LIGHT_GRAY, true)
-		val DARK_GRAY = Colour(Color.DARK_GRAY, true)
-		val GOLD = Colour(Color.GOLD, true)
-		val GREEN = Colour(Color.GREEN, true)
-		val RED = Colour(Color.RED, true)
-		val ORANGE = Colour(Color.ORANGE, true)
-		val YELLOW = Colour(Color.YELLOW, true)
+		internal val BLACK = Colour(Color.BLACK, true)
+		internal val WHITE = Colour(Color.WHITE, true)
+		internal val LIGHT_GRAY = Colour(Color.LIGHT_GRAY, true)
+		internal val DARK_GRAY = Colour(Color.DARK_GRAY, true)
+		internal val GOLD = Colour(Color.GOLD, true)
+		internal val BLUE = Colour(Color.BLUE, true)
+		internal val GREEN = Colour(Color.GREEN, true)
+		internal val RED = Colour(Color.RED, true)
+		internal val PINK = Colour(Color.PINK, true)
+		internal val ORANGE = Colour(Color.ORANGE, true)
+		internal val YELLOW = Colour(Color.YELLOW, true)
 
 		fun random(s: Float = 0.9f, l: Float = 0.7f): Colour
 		{

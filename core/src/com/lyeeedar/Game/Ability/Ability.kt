@@ -213,8 +213,8 @@ class Ability
 				val p2 = GridWidget.instance.pointToScreenspace(target)
 
 				val gridWidget = GridScreen.instance.grid!!
-				p1.scl(1f / gridWidget.ground.tileSize)
-				p2.scl(1f / gridWidget.ground.tileSize)
+				p1.scl(1f / gridWidget.renderer.tileSize)
+				p2.scl(1f / gridWidget.renderer.tileSize)
 
 				val dist = p1.dst(p2)
 

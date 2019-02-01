@@ -6,11 +6,13 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
+import com.badlogic.gdx.utils.ObjectSet
 import com.badlogic.gdx.utils.Pools
 import com.esotericsoftware.kryo.Kryo
 import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.Direction
+import com.lyeeedar.Renderables.Light
 import com.lyeeedar.Renderables.Renderable
 import com.lyeeedar.Util.*
 import ktx.collections.set
@@ -39,11 +41,18 @@ class ParticleEffect : Renderable()
 	var facing: Direction = Direction.NORTH
 	var useFacing = true
 
-	var collisionGrid: Array2D<Boolean>? = null
+	var scale = 1f
+
 	var collisionFun: ((x: Int, y: Int) -> Unit)? = null
 
 	var isShortened = false
 	var timeMultiplier = 1f
+
+	var particleLight: ParticleLight? = null
+
+	override var light: Light?
+		get() = particleLight?.light
+		set(value) { throw Exception("Cannot set particle light!") }
 
 	val time: Float
 		get() = (animation?.time() ?: emitters.minBy { it.time }!!.time)
@@ -92,8 +101,8 @@ class ParticleEffect : Renderable()
 		val y = position.y + (posOffset?.get(1) ?: 0f)
 
 		val scale = animation?.renderScale()
-		val sx = size[0] * (scale?.get(0) ?: 1f)
-		val sy = size[1] * (scale?.get(1) ?: 1f)
+		val sx = size[0].toFloat() * (scale?.get(0) ?: 1f) * this.scale
+		val sy = size[1].toFloat() * (scale?.get(1) ?: 1f) * this.scale
 
 		for (emitter in emitters)
 		{
@@ -110,11 +119,11 @@ class ParticleEffect : Renderable()
 			val steps = (warmupTime / deltaStep).toInt()
 			for (i in 0..steps-1)
 			{
-				for (emitter in emitters) emitter.update(deltaStep, collisionGrid)
+				for (emitter in emitters) emitter.update(deltaStep)
 			}
 		}
 
-		for (emitter in emitters) emitter.update(delta, collisionGrid)
+		for (emitter in emitters) emitter.update(delta)
 
 		if (collisionFun != null)
 		{
@@ -137,6 +146,8 @@ class ParticleEffect : Renderable()
 				complete = false
 			}
 		}
+
+		particleLight?.update(time, max(sx, sy))
 
 		return complete
 	}
@@ -178,7 +189,7 @@ class ParticleEffect : Renderable()
 			val emitterx = emitter.position.x * tileSize + offsetx
 			val emittery = emitter.position.y * tileSize + offsety
 
-			temp.set(emitter.offset.valAt(0, emitter.time))
+			temp.set(emitter.keyframe1.offset.lerp(emitter.keyframe2.offset, emitter.keyframeAlpha))
 			temp.scl(emitter.size)
 			temp.rotate(emitter.rotation)
 
@@ -237,6 +248,8 @@ class ParticleEffect : Renderable()
 
 			if (drawParticles)
 			{
+				val emitterOffset = emitter.keyframe1.offset.lerp(emitter.keyframe2.offset, emitter.keyframeAlpha)
+
 				for (particle in emitter.particles)
 				{
 					var px = 0f
@@ -244,7 +257,7 @@ class ParticleEffect : Renderable()
 
 					if (emitter.simulationSpace == Emitter.SimulationSpace.LOCAL)
 					{
-						temp.set(emitter.offset.valAt(0, emitter.time))
+						temp.set(emitterOffset)
 						temp.scl(emitter.size)
 						temp.rotate(emitter.rotation)
 
@@ -305,6 +318,7 @@ class ParticleEffect : Renderable()
 		effect.useFacing = useFacing
 		effect.size[0] = size[0]
 		effect.size[1] = size[1]
+		effect.scale = scale
 		effect.isShortened = isShortened
 		effect.timeMultiplier = timeMultiplier
 		return effect
@@ -322,6 +336,12 @@ class ParticleEffect : Renderable()
 		{
 			emitter.store(kryo, output)
 		}
+
+		output.writeBoolean(particleLight != null)
+		if (particleLight != null)
+		{
+			particleLight!!.store(kryo, output)
+		}
 	}
 
 	fun restore(kryo: Kryo, input: Input)
@@ -336,6 +356,13 @@ class ParticleEffect : Renderable()
 			val emitter = Emitter(this)
 			emitter.restore(kryo, input)
 			emitters.add(emitter)
+		}
+
+		val hasLight = input.readBoolean()
+		if (hasLight)
+		{
+			particleLight = ParticleLight()
+			particleLight!!.restore(kryo, input)
 		}
 	}
 
@@ -369,6 +396,12 @@ class ParticleEffect : Renderable()
 				effect.emitters.add(emitter)
 			}
 
+			val lightEl = xml.getChildByName("Light")
+			if (lightEl != null)
+			{
+				effect.particleLight = ParticleLight.load(lightEl)
+			}
+
 			return effect
 		}
 
@@ -396,6 +429,160 @@ class ParticleEffect : Renderable()
 
 				return effect
 			}
+		}
+	}
+}
+
+class ParticleLightKeyframe(
+	val time: Float = 0f,
+	val colour: Colour = Colour(),
+	val brightness: Float = 0f,
+	val range: Float = 0f)
+{
+
+}
+
+class ParticleLight
+{
+	val light = Light()
+
+	var keyframeIndex: Int = 0
+	lateinit var keyframe1: ParticleLightKeyframe
+	lateinit var keyframe2: ParticleLightKeyframe
+	var keyframeAlpha: Float = 0f
+	var keyframes: kotlin.Array<ParticleLightKeyframe> = emptyArray()
+
+	var hasShadows = false
+
+	fun update(time: Float, size: Float)
+	{
+		var keyframeIndex = keyframeIndex
+		while (keyframeIndex < keyframes.size-1)
+		{
+			if (time >= keyframes[keyframeIndex+1].time)
+			{
+				keyframeIndex++
+			}
+			else
+			{
+				break
+			}
+		}
+
+		keyframe1 = keyframes[keyframeIndex]
+		val alpha: Float
+
+		if (keyframeIndex < keyframes.size-1)
+		{
+			keyframe2 = keyframes[keyframeIndex+1]
+			alpha = (time - keyframe1.time) / (keyframe2.time - keyframe1.time)
+		}
+		else
+		{
+			keyframe2 = keyframes[keyframeIndex]
+			alpha = 0f
+		}
+
+		keyframeAlpha = alpha
+
+		val col = keyframe1.colour.lerp(keyframe2.colour, keyframeAlpha)
+		light.colour.set(col)
+
+		val brightness = keyframe1.brightness.lerp(keyframe2.brightness, keyframeAlpha)
+		light.colour.mul(brightness, brightness, brightness, 1f)
+
+		val range = (keyframe1.range.lerp(keyframe2.range, keyframeAlpha))
+		light.range = range * size
+
+		light.hasShadows = hasShadows
+	}
+
+	fun store(kryo: Kryo, output: Output)
+	{
+		output.writeInt(keyframes.size)
+		for (keyframe in keyframes)
+		{
+			output.writeFloat(keyframe.time)
+
+			output.writeFloat(keyframe.colour.r)
+			output.writeFloat(keyframe.colour.g)
+			output.writeFloat(keyframe.colour.b)
+			output.writeFloat(keyframe.colour.a)
+
+			output.writeFloat(keyframe.brightness)
+
+			output.writeFloat(keyframe.range)
+		}
+
+		output.writeBoolean(hasShadows)
+	}
+
+	fun restore(kryo: Kryo, input: Input)
+	{
+		val numKeyframes = input.readInt()
+		keyframes = kotlin.Array<ParticleLightKeyframe>(numKeyframes) { i -> ParticleLightKeyframe() }
+
+		for (i in 0 until numKeyframes)
+		{
+			val time = input.readFloat()
+
+			val r = input.readFloat()
+			val g = input.readFloat()
+			val b = input.readFloat()
+			val a = input.readFloat()
+
+			val brightness = input.readFloat()
+
+			val range = input.readFloat()
+
+			keyframes[i] = ParticleLightKeyframe(time, Colour(r, g, b, a), brightness, range)
+		}
+
+		hasShadows = input.readBoolean()
+	}
+
+	companion object
+	{
+		fun load(xml: XmlData): ParticleLight
+		{
+			val light = ParticleLight()
+
+			val colour = ColourTimeline()
+			val colourEls = xml.getChildByName("Colour")!!
+			colour.parse(colourEls, { AssetManager.loadColour(it) })
+
+			val brightness = LerpTimeline()
+			val brightnessEls = xml.getChildByName("Brightness")!!
+			brightness.parse(brightnessEls, { it.toFloat() })
+
+			val range = LerpTimeline()
+			val rangeEls = xml.getChildByName("Range")!!
+			range.parse(rangeEls, { it.toFloat() })
+
+			light.hasShadows = xml.getBoolean("HasShadows", false)
+
+			// Make map of times
+			val times = ObjectSet<Float>()
+			for (keyframe in colour.streams.flatMap { it }) { times.add(keyframe.first) }
+			for (keyframe in brightness.streams.flatMap { it }) { times.add(keyframe.first) }
+			for (keyframe in range.streams.flatMap { it }) { times.add(keyframe.first) }
+
+			val keyframes = kotlin.Array<ParticleLightKeyframe>(times.size) { i -> ParticleLightKeyframe() }
+			var keyframeI = 0
+			for (time in times.sortedBy { it })
+			{
+				val keyframe = ParticleLightKeyframe(
+					time,
+					colour.valAt(0, time),
+					brightness.valAt(0, time),
+					range.valAt(0, time))
+				keyframes[keyframeI++] = keyframe
+			}
+			light.keyframes = keyframes
+			light.keyframe1 = keyframes[0]
+			light.keyframe2 = keyframes[0]
+
+			return light
 		}
 	}
 }

@@ -4,6 +4,7 @@
 		<Data Name="DrawActualSize" meta:RefKey="Boolean" />
 		<Data Name="UpdateRate" Min="0" Default="0.5" meta:RefKey="Number" />
 		<Data Name="Colour" meta:RefKey="Colour" />
+		<Data Name="Light" Keys="Light" meta:RefKey="Reference" />
 	</Definition>
 	<Definition Name="TilingSprite" IsGlobal="True" meta:RefKey="StructDef">
 		<Data Name="Name" SkipIfDefault="False" meta:RefKey="String" />
@@ -60,6 +61,20 @@
 				<Data Name="Down" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 			</Data>
 		</Data>
+	</Definition>
+	<Definition Name="Light" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="Colour" SkipIfDefault="False" meta:RefKey="Colour" />
+		<Data Name="Brightness" Min="0" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+		<Data Name="Range" Min="0" Default="3" SkipIfDefault="False" meta:RefKey="Number" />
+		<Data Name="HasShadows" meta:RefKey="Boolean" />
+		<Data Name="Animation" Keys="PulseLightAnimation" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="PulseLightAnimation" meta:RefKey="StructDef">
+		<Data Name="Period" Name1="Min" Name2="Max" meta:RefKey="Vector" />
+		<Data Name="MinBrightness" Name1="Min" Name2="Max" meta:RefKey="Vector" />
+		<Data Name="MaxBrightness" Name1="Min" Name2="Max" meta:RefKey="Vector" />
+		<Data Name="MinRange" Name1="Min" Name2="Max" meta:RefKey="Vector" />
+		<Data Name="MaxRange" Name1="Min" Name2="Max" meta:RefKey="Vector" />
 	</Definition>
 	<Definition Name="Texture" IsGlobal="True" meta:RefKey="StructDef">
 		<Data Name="File" BasePath="Sprites" StripExtension="True" AllowedFileTypes="png" Default="blank" SkipIfDefault="False" meta:RefKey="File" />
