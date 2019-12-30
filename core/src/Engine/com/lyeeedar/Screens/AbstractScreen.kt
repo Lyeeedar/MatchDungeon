@@ -1,11 +1,5 @@
 package com.lyeeedar.Screens
 
-import com.lyeeedar.UI.DebugConsole
-import com.lyeeedar.UI.Tutorial
-import com.lyeeedar.Util.Future
-import com.lyeeedar.Util.KeyMapping
-import com.lyeeedar.Util.KeySource
-import com.lyeeedar.Util.Statics
 import com.badlogic.gdx.*
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
@@ -17,6 +11,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Scaling
 import com.badlogic.gdx.utils.viewport.ScalingViewport
 import com.lyeeedar.Game.Save
+import com.lyeeedar.UI.DebugConsole
+import com.lyeeedar.UI.Tutorial
+import com.lyeeedar.Util.Future
+import com.lyeeedar.Util.KeyMapping
+import com.lyeeedar.Util.KeySource
+import com.lyeeedar.Util.Statics
 import ktx.actors.setKeyboardFocus
 
 

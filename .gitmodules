@@ -1,0 +1,6 @@
+[submodule "core/src/core/src/exp4j"]
+	path = core/src/core/src/exp4j
+	url = https://github.com/Lyeeedar/exp4j.git
+[submodule "core/src/exp4j"]
+	path = core/src/exp4j
+	url = https://github.com/Lyeeedar/exp4j.git
