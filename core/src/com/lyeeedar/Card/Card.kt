@@ -1,5 +1,10 @@
 package com.lyeeedar.Card
 
+import com.lyeeedar.Renderables.Sprite.Sprite
+import com.lyeeedar.UI.CardWidget
+import com.lyeeedar.UI.SpriteWidget
+import com.lyeeedar.UI.addTapToolTip
+import com.lyeeedar.Util.*
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.scenes.scene2d.Touchable
@@ -14,13 +19,8 @@ import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.Card.CardContent.CardContentActionRewards
 import com.lyeeedar.Game.AbstractReward
 import com.lyeeedar.Game.Chance
-import com.lyeeedar.Global
-import com.lyeeedar.Renderables.Sprite.Sprite
+import com.lyeeedar.Game.Global
 import com.lyeeedar.SpawnWeight
-import com.lyeeedar.UI.CardWidget
-import com.lyeeedar.UI.SpriteWidget
-import com.lyeeedar.UI.addTapToolTip
-import com.lyeeedar.Util.*
 import ktx.collections.set
 import ktx.collections.toGdxArray
 
@@ -128,13 +128,13 @@ class CardNode
 		val table = Table()
 		wrapperStack.add(table)
 
-		val title = Label(name, Global.skin, "cardtitle")
+		val title = Label(name, Statics.skin, "cardtitle")
 		table.add(title).expandX().center().pad(10f, 0f, 0f, 0f)
 		table.row()
 
 		if (parent.characterRestriction != null)
 		{
-			val restriction = Label("Restricted: " + parent.characterRestriction, Global.skin)
+			val restriction = Label("Restricted: " + parent.characterRestriction, Statics.skin)
 			restriction.color = if (Global.deck.chosenCharacter.name == parent.characterRestriction) Color.GREEN else Color.RED
 			table.add(restriction)
 			table.row()
@@ -227,7 +227,7 @@ class CardNode
 
 		if (detail)
 		{
-			val descLabel = Label(description, Global.skin, "card")
+			val descLabel = Label(description, Statics.skin, "card")
 			descLabel.setWrap(true)
 			table.add(descLabel).grow().pad(0f, 10f, 0f, 10f)
 			table.row()
@@ -251,7 +251,7 @@ class CardNode
 		if (!hasBeenPlayed && !isQuestCard)
 		{
 			val newTable = Table()
-			val newLabel = Label("New", Global.skin)
+			val newLabel = Label("New", Statics.skin)
 			newTable.add(newLabel).expand().top().left().pad(3f)
 
 			wrapperStack.add(newTable)

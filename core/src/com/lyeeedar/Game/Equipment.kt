@@ -10,14 +10,10 @@ import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.Ability.Ability
-import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.*
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.FastEnumMap
-import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.getXml
+import com.lyeeedar.Util.*
 
 class Equipment(val path: String)
 {
@@ -33,7 +29,7 @@ class Equipment(val path: String)
 	fun getCard(other: Equipment?, showAsPlus: Boolean): CardWidget
 	{
 		val basicTable = Table()
-		basicTable.add(Label(name, Global.skin, "cardtitle")).expandX().center()
+		basicTable.add(Label(name, Statics.skin, "cardtitle")).expandX().center()
 		basicTable.row()
 		basicTable.add(SpriteWidget(icon.copy(), 64f, 64f)).grow()
 		basicTable.row()
@@ -51,21 +47,21 @@ class Equipment(val path: String)
 		val iconTable = Table()
 		iconTable.add(SpriteWidget(icon, 64f, 64f)).expandX().right().pad(5f)
 		titleStack.add(iconTable)
-		titleStack.add(Label(name, Global.skin, "cardtitle"))
+		titleStack.add(Label(name, Statics.skin, "cardtitle"))
 
 		table.add(titleStack).growX()
 		table.row()
-		val descLabel = Label(description, Global.skin, "card")
+		val descLabel = Label(description, Statics.skin, "card")
 		descLabel.setWrap(true)
 		table.add(descLabel)
 		table.row()
 
 		if (statistics.any { it != 0f } || (other != null && other.statistics.any{ it != 0f }))
 		{
-			table.add(Seperator(Global.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f)
+			table.add(Seperator(Statics.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f)
 			table.row()
 
-			table.add(Label("Statistics", Global.skin, "cardtitle"))
+			table.add(Label("Statistics", Statics.skin, "cardtitle"))
 			table.row()
 
 			for (stat in Statistic.Values)
@@ -73,8 +69,8 @@ class Equipment(val path: String)
 				val statVal = statistics[stat] ?: 0f
 
 				val statTable = Table()
-				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Global.skin, "card")).expandX().left()
-				statTable.add(Label(statVal.toString(), Global.skin, "card"))
+				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Statics.skin, "card")).expandX().left()
+				statTable.add(Label(statVal.toString(), Statics.skin, "card"))
 				statTable.addTapToolTip(stat.tooltip)
 
 				var add = false
@@ -95,14 +91,14 @@ class Equipment(val path: String)
 					else if (otherStatVal < statVal)
 					{
 						val diff = statVal - otherStatVal
-						val diffLabel = Label("+" + diff.toString(), Global.skin, "cardwhite")
+						val diffLabel = Label("+" + diff.toString(), Statics.skin, "cardwhite")
 						diffLabel.color = Color.GREEN
 						statTable.add(diffLabel)
 					}
 					else if (statVal < otherStatVal)
 					{
 						val diff = otherStatVal - statVal
-						val diffLabel = Label("-" + diff.toString(), Global.skin, "cardwhite")
+						val diffLabel = Label("-" + diff.toString(), Statics.skin, "cardwhite")
 						diffLabel.color = Color.RED
 						statTable.add(diffLabel)
 					}
@@ -119,13 +115,13 @@ class Equipment(val path: String)
 						val diff = statVal
 						if (diff >= 0)
 						{
-							val diffLabel = Label("+" + diff.toString(), Global.skin, "cardwhite")
+							val diffLabel = Label("+" + diff.toString(), Statics.skin, "cardwhite")
 							diffLabel.color = Color.GREEN
 							statTable.add(diffLabel)
 						}
 						else
 						{
-							val diffLabel = Label(diff.toString(), Global.skin, "cardwhite")
+							val diffLabel = Label(diff.toString(), Statics.skin, "cardwhite")
 							diffLabel.color = Color.RED
 							statTable.add(diffLabel)
 						}
@@ -142,15 +138,15 @@ class Equipment(val path: String)
 
 		if (ability != null || (other?.ability != null))
 		{
-			table.add(Seperator(Global.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f)
+			table.add(Seperator(Statics.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f)
 			table.row()
 
-			table.add(Label("Ability", Global.skin, "cardtitle"))
+			table.add(Label("Ability", Statics.skin, "cardtitle"))
 			table.row()
 
 			if (other?.ability != null)
 			{
-				val otherAbLabel = Label("-" + other.ability!!.name, Global.skin, "cardwhite")
+				val otherAbLabel = Label("-" + other.ability!!.name, Statics.skin, "cardwhite")
 				otherAbLabel.color = Color.RED
 
 				val abilityTable = Table()
@@ -158,7 +154,7 @@ class Equipment(val path: String)
 
 				abilityTable.add(SpriteWidget(other.icon, 32f, 32f))
 
-				val infoButton = Button(Global.skin, "infocard")
+				val infoButton = Button(Statics.skin, "infocard")
 				infoButton.setSize(24f, 24f)
 				infoButton.addClickListener {
 					val t = other.ability!!.createTable()
@@ -174,10 +170,10 @@ class Equipment(val path: String)
 			if (ability != null)
 			{
 				val abilityTable = Table()
-				abilityTable.add(Label(ability!!.name, Global.skin, "card"))
+				abilityTable.add(Label(ability!!.name, Statics.skin, "card"))
 				abilityTable.add(SpriteWidget(icon, 32f, 32f))
 
-				val infoButton = Button(Global.skin, "infocard")
+				val infoButton = Button(Statics.skin, "infocard")
 				infoButton.setSize(24f, 24f)
 				infoButton.addClickListener {
 					val t = ability!!.createTable()

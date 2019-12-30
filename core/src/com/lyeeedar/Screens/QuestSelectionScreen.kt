@@ -7,15 +7,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
+import com.lyeeedar.Game.GameStateFlags
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Game.Quest
-import com.lyeeedar.GameStateFlags
-import com.lyeeedar.Global
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.UI.addClickListener
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.addSpaces
-import com.lyeeedar.Util.filename
+import com.lyeeedar.Util.*
 import ktx.collections.set
 
 class QuestSelectionScreen : AbstractScreen()
@@ -27,7 +24,7 @@ class QuestSelectionScreen : AbstractScreen()
 
 	override fun create()
 	{
-		if (!Global.release)
+		if (!Statics.release)
 		{
 			debugConsole.register("loadquest", "", fun(args, console): Boolean
 			{
@@ -46,7 +43,7 @@ class QuestSelectionScreen : AbstractScreen()
 
 				val quest = Quest.load(questPath.replace("Quests/", ""))
 
-				val screen = Global.game.getTypedScreen<QuestScreen>()!!
+				val screen = Statics.game.getTypedScreen<QuestScreen>()!!
 				quest.current = quest.root
 				quest.currentTheme = quest.theme
 				quest.state = Quest.QuestState.INPROGRESS
@@ -61,10 +58,10 @@ class QuestSelectionScreen : AbstractScreen()
 		}
 	}
 
-	val titleLabel = Label("", Global.skin, "title")
+	val titleLabel = Label("", Statics.skin, "title")
 
 	val scrollTable = Table()
-	val editButton = TextButton("Edit Deck", Global.skin)
+	val editButton = TextButton("Edit Deck", Statics.skin)
 
 	lateinit var leftButton: Button
 	lateinit var rightButton: Button
@@ -87,7 +84,7 @@ class QuestSelectionScreen : AbstractScreen()
 		mainTable.clear()
 		scrollTable.clear()
 
-		leftButton = Button(Global.skin, "left")
+		leftButton = Button(Statics.skin, "left")
 		leftButton.addClickListener {
 			var index = themeOrder.indexOf(currentTheme)
 			if (index > 0)
@@ -99,16 +96,16 @@ class QuestSelectionScreen : AbstractScreen()
 		}
 
 		val leftNew = Table()
-		leftNewLabel = Label("New", Global.skin)
+		leftNewLabel = Label("New", Statics.skin)
 		leftNewLabel.touchable = Touchable.disabled
 		leftNew.add(leftNewLabel).expand().left().top().pad(3f)
 
 		val rightNew = Table()
-		rightNewLabel = Label("New", Global.skin)
+		rightNewLabel = Label("New", Statics.skin)
 		rightNewLabel.touchable = Touchable.disabled
 		rightNew.add(rightNewLabel).expand().left().top().pad(3f)
 
-		rightButton = Button(Global.skin, "right")
+		rightButton = Button(Statics.skin, "right")
 		rightButton.addClickListener {
 			var index = themeOrder.indexOf(currentTheme)
 			if (index < themeOrder.size-1)
@@ -119,7 +116,7 @@ class QuestSelectionScreen : AbstractScreen()
 			}
 		}
 
-		val scrollPane = ScrollPane(scrollTable, Global.skin)
+		val scrollPane = ScrollPane(scrollTable, Statics.skin)
 		scrollPane.setFadeScrollBars(false)
 		scrollPane.setScrollingDisabled(true, false)
 		scrollPane.setForceScroll(false, true)
@@ -186,7 +183,7 @@ class QuestSelectionScreen : AbstractScreen()
 		editStack.add(editButtonTable)
 
 		editButton.addClickListener {
-			val screen = Global.game.getTypedScreen<DeckScreen>()!!
+			val screen = Statics.game.getTypedScreen<DeckScreen>()!!
 			screen.setup()
 			screen.swapTo()
 		}
@@ -194,7 +191,7 @@ class QuestSelectionScreen : AbstractScreen()
 		if (Global.deck.hasNewEquipment || Global.deck.hasNewEncounters || Global.deck.hasNewCharacters)
 		{
 			val newTable = Table()
-			val newLabel = Label("New", Global.skin)
+			val newLabel = Label("New", Statics.skin)
 			newTable.add(newLabel).expand().left().top().pad(3f)
 
 			newLabel.touchable = Touchable.disabled
@@ -272,13 +269,13 @@ class QuestSelectionScreen : AbstractScreen()
 
 		scrollTable.clear()
 
-		val cardHeight = (Global.resolution.y.toFloat() * 0.7f) * 0.3f
-		val cardWidth = Global.resolution.x.toFloat() * 0.8f
+		val cardHeight = (Statics.resolution.y.toFloat() * 0.7f) * 0.3f
+		val cardWidth = Statics.resolution.x.toFloat() * 0.8f
 		for (quest in themeMap[currentTheme])
 		{
 			val card = quest.getCard()
 			card.addPick("Embark", {
-				val screen = Global.game.getTypedScreen<QuestScreen>()!!
+				val screen = Statics.game.getTypedScreen<QuestScreen>()!!
 				quest.resetCards()
 				quest.current = quest.root
 				quest.currentTheme = quest.theme

@@ -5,16 +5,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Align
 import com.lyeeedar.Board.Grid
-import com.lyeeedar.Global
-import com.lyeeedar.Global.Companion.skin
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Colour
-import com.lyeeedar.Util.Future
-import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.*
 
 /**
  * Created by Philip on 13-Jul-16.
@@ -30,7 +26,7 @@ class CompletionConditionTurns(): AbstractCompletionCondition()
 
 	override fun createTable(grid: Grid): Table
 	{
-		label = Label("$turnCount\nTurns", skin)
+		label = Label("$turnCount\nTurns", Statics.skin)
 		label.setAlignment(Align.center)
 
 		val stack = Stack()
@@ -86,7 +82,7 @@ class CompletionConditionTurns(): AbstractCompletionCondition()
 	{
 		val table = Table()
 
-		table.add(Label("Within $turnCount turns.", Global.skin))
+		table.add(Label("Within $turnCount turns.", Statics.skin))
 
 		return table
 	}

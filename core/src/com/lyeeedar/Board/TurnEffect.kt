@@ -4,7 +4,7 @@ import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Game.Ability.Permuter
 import com.lyeeedar.Game.Ability.Targetter
-import com.lyeeedar.Global
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.Animation.LeapAnimation
 import com.lyeeedar.Renderables.Animation.MoveAnimation
@@ -69,7 +69,7 @@ class TurnEffect
 
 	private fun execute(grid: Grid, tile: Tile)
 	{
-		if (!Global.release)
+		if (!Statics.release)
 		{
 			println("On turn effect triggering")
 		}

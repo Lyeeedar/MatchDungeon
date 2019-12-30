@@ -13,12 +13,11 @@ import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.Card.Card
 import com.lyeeedar.EquipmentSlot
-import com.lyeeedar.Global
-import com.lyeeedar.GlobalDeck
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.FastEnumMap
+import com.lyeeedar.Util.Statics
 
 class Player(val baseCharacter: Character, val deck: PlayerDeck)
 {
@@ -117,21 +116,21 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 		val iconTable = Table()
 		iconTable.add(SpriteWidget(baseCharacter.sprite.copy(), 64f, 64f)).left().pad(5f)
 		titleStack.add(iconTable)
-		titleStack.add(Label(baseCharacter.name, Global.skin, "cardtitle"))
+		titleStack.add(Label(baseCharacter.name, Statics.skin, "cardtitle"))
 
 		table.add(titleStack).growX()
 		table.row()
 
-		val descLabel = Label(baseCharacter.description, Global.skin, "card")
+		val descLabel = Label(baseCharacter.description, Statics.skin, "card")
 		descLabel.setWrap(true)
 
 		table.add(descLabel).growX()
 		table.row()
 
-		table.add(Seperator(Global.skin, "horizontalcard"))
+		table.add(Seperator(Statics.skin, "horizontalcard"))
 		table.row()
 
-		table.add(Label("Statistics", Global.skin, "cardtitle"))
+		table.add(Label("Statistics", Statics.skin, "cardtitle"))
 		table.row()
 
 		for (stat in Statistic.Values)
@@ -157,8 +156,8 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 				}
 
 				val statTable = Table()
-				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ":", Global.skin, "card")).expandX().left()
-				statTable.add(Label(truestat.toString() + " (" + basestat + diffStr + ")", Global.skin, "card"))
+				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ":", Statics.skin, "card")).expandX().left()
+				statTable.add(Label(truestat.toString() + " (" + basestat + diffStr + ")", Statics.skin, "card"))
 				statTable.addTapToolTip(stat.tooltip)
 
 				table.add(statTable).growX()
@@ -166,12 +165,12 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 			}
 		}
 
-		table.add(Seperator(Global.skin, "horizontalcard"))
+		table.add(Seperator(Statics.skin, "horizontalcard"))
 		table.row()
 
 		if (buffs.size > 0)
 		{
-			table.add(Label("Buffs", Global.skin, "cardtitle"))
+			table.add(Label("Buffs", Statics.skin, "cardtitle"))
 			table.row()
 
 			val bufftable = Table()
@@ -187,11 +186,11 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 				bufftable.add(card).pad(0f, 5f, 0f, 5f).size(25f, 45f)
 			}
 
-			table.add(Seperator(Global.skin, "horizontalcard"))
+			table.add(Seperator(Statics.skin, "horizontalcard"))
 			table.row()
 		}
 
-		table.add(Label("Equipment", Global.skin, "cardtitle"))
+		table.add(Label("Equipment", Statics.skin, "cardtitle"))
 		table.row()
 
 		val emptySlot = AssetManager.loadSprite("Icons/Empty")
@@ -206,7 +205,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 				table.add(equipTable).growX().padBottom(2f)
 				table.row()
 
-				equipTable.add(Label("None", Global.skin,"card"))
+				equipTable.add(Label("None", Statics.skin,"card"))
 				equipTable.add(SpriteWidget(emptySlot, 32f, 32f)).size(32f).expandX().right()
 			}
 			else
@@ -215,9 +214,9 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 				table.add(equipTable).growX().padBottom(2f)
 				table.row()
 
-				equipTable.add(Label(equipment.name, Global.skin, "card"))
+				equipTable.add(Label(equipment.name, Statics.skin, "card"))
 
-				val infoButton = Button(Global.skin, "infocard")
+				val infoButton = Button(Statics.skin, "infocard")
 				infoButton.setSize(24f, 24f)
 				infoButton.addClickListener {
 					val t = equipment.createTable(null, false)

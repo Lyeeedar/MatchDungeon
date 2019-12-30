@@ -3,9 +3,11 @@ package com.lyeeedar
 import com.badlogic.gdx.Game
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Screen
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Game.Save
 import com.lyeeedar.Screens.*
 import com.lyeeedar.Util.Future
+import com.lyeeedar.Util.Statics
 import java.io.PrintWriter
 import java.io.StringWriter
 import java.util.*
@@ -13,8 +15,6 @@ import javax.swing.JOptionPane
 
 class MainGame : Game()
 {
-	val debugOverride = false
-
 	enum class ScreenEnum
 	{
 		GRID,
@@ -43,14 +43,14 @@ class MainGame : Game()
 
 	override fun create()
 	{
-		Global.applicationChanger.processResources()
-		Global.setup()
+		Statics.applicationChanger.processResources()
+		Statics.setup()
 
-		if (Global.android)
+		if (Statics.android)
 		{
 
 		}
-		else if (Global.release)
+		else if (Statics.release)
 		{
 			val sw = StringWriter()
 			val pw = PrintWriter(sw)
@@ -70,7 +70,7 @@ class MainGame : Game()
 			Thread.currentThread().uncaughtExceptionHandler = handler
 		}
 
-		if (Global.PARTICLE_EDITOR)
+		if (Statics.PARTICLE_EDITOR)
 		{
 			screens.put(ScreenEnum.PARTICLEEDITOR, ParticleEditorScreen())
 			switchScreen(ScreenEnum.PARTICLEEDITOR)

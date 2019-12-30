@@ -15,13 +15,12 @@ import com.lyeeedar.Board.Mote
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.Card.CardNode
+import com.lyeeedar.Direction
 import com.lyeeedar.Game.*
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.*
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Random
-import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.getXml
+import com.lyeeedar.Util.*
 import ktx.actors.then
 import ktx.collections.toGdxArray
 
@@ -51,7 +50,7 @@ class QuestScreen : AbstractScreen()
 		greyOutTable.touchable = Touchable.enabled
 		greyOutTable.setFillParent(true)
 
-		goldLabel = Label("Gold: 0", Global.skin)
+		goldLabel = Label("Gold: 0", Statics.skin)
 
 		headSlot.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/TileBackground"))
 		mainhandSlot.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/TileBackground"))
@@ -92,13 +91,13 @@ class QuestScreen : AbstractScreen()
 		nonCard.add(statsTable).expandX().left().pad(10f)
 		nonCard.row()
 
-		nonCard.add(Seperator(Global.skin)).growX().pad(0f, 10f, 0f, 10f)
+		nonCard.add(Seperator(Statics.skin)).growX().pad(0f, 10f, 0f, 10f)
 		nonCard.row()
 
 		nonCard.add(questProgressWidget).growX().height(20f).pad(2f)
 		nonCard.row()
 
-		nonCard.add(Seperator(Global.skin)).growX().pad(0f, 10f, 0f, 10f)
+		nonCard.add(Seperator(Statics.skin)).growX().pad(0f, 10f, 0f, 10f)
 		nonCard.row()
 
 		mainTable.add(nonCard).growX()
@@ -106,7 +105,7 @@ class QuestScreen : AbstractScreen()
 
 		mainTable.add(cardsTable).grow()
 
-		if (!Global.release)
+		if (!Statics.release)
 		{
 			debugConsole.register("LoadCard", "LoadCard cardName", fun(args, console): Boolean
 			{
@@ -145,7 +144,7 @@ class QuestScreen : AbstractScreen()
 
 				val cardScreen = CardScreen.instance
 				cardScreen.setup(card, currentQuest)
-				Global.game.switchScreen(MainGame.ScreenEnum.CARD)
+				Statics.game.switchScreen(MainGame.ScreenEnum.CARD)
 
 				Global.player.deck.encounters.removeValue(card, true)
 				currentQuest.questCards.removeValue(card, true)
@@ -350,7 +349,7 @@ class QuestScreen : AbstractScreen()
 				{
 					if (equip.ability!!.maxUsages > 0 && !equip.ability!!.resetUsagesPerLevel)
 					{
-						val label = Label(equip.ability!!.remainingUsages.toString(), Global.skin)
+						val label = Label(equip.ability!!.remainingUsages.toString(), Statics.skin)
 						stack.add(label)
 					}
 				}
@@ -376,7 +375,7 @@ class QuestScreen : AbstractScreen()
 		val table = Table()
 
 		val text = if (currentQuest.state == Quest.QuestState.FAILURE) "Quest Failed!" else "Quest Completed!\n${currentQuest.state}"
-		table.add(Label(text, Global.skin, "cardtitle"))
+		table.add(Label(text, Statics.skin, "cardtitle"))
 
 		val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("blank")!!, null)
 		card.canZoom = false
@@ -437,7 +436,7 @@ class QuestScreen : AbstractScreen()
 					})
 
 					currentGroup.add(card)
-					Global.stage.addActor(card)
+					Statics.stage.addActor(card)
 
 					if (currentGroup.size == 4)
 					{
@@ -462,7 +461,7 @@ class QuestScreen : AbstractScreen()
 
 				val spawnIntroCard = fun(name:String, icon:Sprite) {
 					val table = Table()
-					table.add(Label(name, Global.skin, "cardtitle"))
+					table.add(Label(name, Statics.skin, "cardtitle"))
 					table.row()
 					table.add(SpriteWidget(icon, 64f, 64f)).expandX().center()
 
@@ -477,7 +476,7 @@ class QuestScreen : AbstractScreen()
 					val cards = Array<CardWidget>()
 					cards.add(card)
 
-					Global.stage.addActor(card)
+					Statics.stage.addActor(card)
 					CardWidget.layoutCards(cards, Direction.CENTER, cardsTable, animate = false, flip = true)
 				}
 
@@ -604,7 +603,7 @@ class QuestScreen : AbstractScreen()
 						}
 					}
 
-					Global.stage.addActor(card)
+					Statics.stage.addActor(card)
 				}
 
 				if (currentGroup.size > 0)
@@ -654,7 +653,7 @@ class QuestScreen : AbstractScreen()
 
 				val cardScreen = CardScreen.instance
 				cardScreen.setup(card, currentQuest)
-				Global.game.switchScreen(MainGame.ScreenEnum.CARD)
+				Statics.game.switchScreen(MainGame.ScreenEnum.CARD)
 
 				if (!card.current.isShop)
 				{

@@ -12,7 +12,6 @@ import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Board.Theme
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
-import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.SpawnWeight
 import com.lyeeedar.UI.CardWidget
@@ -155,7 +154,7 @@ class Quest(val path: String)
 		val table = Table()
 		wrapperStack.add(table)
 
-		val title = Label(title, Global.skin, "cardtitle")
+		val title = Label(title, Statics.skin, "cardtitle")
 		table.add(title).expandX().center().pad(10f, 0f, 0f, 0f)
 		table.row()
 
@@ -225,7 +224,7 @@ class Quest(val path: String)
 
 		if (detail)
 		{
-			val descLabel = Label(description, Global.skin, "card")
+			val descLabel = Label(description, Statics.skin, "card")
 			descLabel.setWrap(true)
 			table.add(descLabel).grow().pad(0f, 10f, 0f, 10f)
 		}
@@ -233,7 +232,7 @@ class Quest(val path: String)
 		if (!played)
 		{
 			val newTable = Table()
-			val newLabel = Label("New", Global.skin)
+			val newLabel = Label("New", Statics.skin)
 			newTable.add(newLabel).expand().top().left().pad(3f)
 
 			wrapperStack.add(newTable)

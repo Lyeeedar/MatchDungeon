@@ -14,14 +14,10 @@ import com.lyeeedar.Board.*
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionTime
 import com.lyeeedar.Game.Ability.Effect
 import com.lyeeedar.Game.Ability.Targetter
-import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.SortedRenderer
 import com.lyeeedar.Renderables.Sprite.Sprite
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Colour
-import com.lyeeedar.Util.Point
-import com.lyeeedar.Util.ciel
+import com.lyeeedar.Util.*
 import ktx.collections.toGdxArray
 
 /**
@@ -398,7 +394,7 @@ class GridWidget(val grid: Grid) : Widget()
 				{
 					renderer.queueSprite(chest.sprite, xi, yi, TILE, tileHeight, tileColour)
 
-					if (chest.numToSpawn > 0 && !grid.inTurn && !Global.settings.get("Chest", false))
+					if (chest.numToSpawn > 0 && !grid.inTurn && !Statics.settings.get("Chest", false))
 					{
 						val tutorial = Tutorial("Chest")
 						tutorial.addPopup("This is a chest. Match in the tiles beneath this to spawn coins. When there are no more coins to spawn, it will appear empty.", getRect(tile))
@@ -440,7 +436,7 @@ class GridWidget(val grid: Grid) : Widget()
 					{
 						renderer.queueSprite(swappable.sealSprite, xi, yi, ORB, 2, orbColour)
 
-						if (!Global.settings.get("Seal", false) && !grid.inTurn )
+						if (!Statics.settings.get("Seal", false) && !grid.inTurn )
 						{
 							val tutorial = Tutorial("Seal")
 							tutorial.addPopup("This orb has been sealed. It won't move until the seal is broken. To break the seal use the orb in a match.", getRect(swappable))
@@ -511,7 +507,7 @@ class GridWidget(val grid: Grid) : Widget()
 							currentPoint.rotate(degreesStep)
 						}
 
-						if (!Global.settings.get("Attack", false) && !grid.inTurn )
+						if (!Statics.settings.get("Attack", false) && !grid.inTurn )
 						{
 							val tutorial = Tutorial("Attack")
 							tutorial.addPopup("This is an attack. The pips surrounding the skull indicate the turns remaining until it activates.", getRect(swappable))
@@ -522,7 +518,7 @@ class GridWidget(val grid: Grid) : Widget()
 
 					if (swappable is Sinkable)
 					{
-						if (!Global.settings.get("Sinkable", false) && !grid.inTurn )
+						if (!Statics.settings.get("Sinkable", false) && !grid.inTurn )
 						{
 							val tutorial = Tutorial("Sinkable")
 							tutorial.addPopup("This is a sinkable item. If you move it to the bottom of the board you will successfully sink it.", getRect(tile, true))
@@ -561,7 +557,7 @@ class GridWidget(val grid: Grid) : Widget()
 							x += size
 						}
 
-						if (!Global.settings.get("MonsterStages", false) && !grid.inTurn)
+						if (!Statics.settings.get("MonsterStages", false) && !grid.inTurn)
 						{
 							val tutorial = Tutorial("MonsterStages")
 							val tiles: com.badlogic.gdx.utils.Array<Point> = monster.tiles.toList().toGdxArray()
@@ -570,7 +566,7 @@ class GridWidget(val grid: Grid) : Widget()
 						}
 					}
 
-					if (!Global.settings.get("Monster", false) && !grid.inTurn )
+					if (!Statics.settings.get("Monster", false) && !grid.inTurn )
 					{
 						val tutorial = Tutorial("Monster")
 						val tiles: com.badlogic.gdx.utils.Array<Point> = monster.tiles.toList().toGdxArray()
@@ -578,7 +574,7 @@ class GridWidget(val grid: Grid) : Widget()
 						tutorial.show()
 					}
 
-					if (monster.damageReduction > 0 && !grid.inTurn  && !Global.settings.get("DR", false))
+					if (monster.damageReduction > 0 && !grid.inTurn  && !Statics.settings.get("DR", false))
 					{
 						val tutorial = Tutorial("DR")
 						val tiles: com.badlogic.gdx.utils.Array<Point> = monster.tiles.toList().toGdxArray()
@@ -597,7 +593,7 @@ class GridWidget(val grid: Grid) : Widget()
 					val fullHp = if (friendly.isSummon) hp_full_summon else hp_full_friendly
 					drawHPBar(friendly.size.toFloat(), friendly.hp, friendly.lostHP, friendly.remainingReduction, friendly.maxhp, friendly.damageReduction, friendly.immune, xi, yi, fullHp)
 
-					if (!Global.settings.get("Friendly", false) && !grid.inTurn )
+					if (!Statics.settings.get("Friendly", false) && !grid.inTurn )
 					{
 						val tutorial = Tutorial("Friendly")
 						val tiles: com.badlogic.gdx.utils.Array<Point> = friendly.tiles.toList().toGdxArray()
@@ -616,7 +612,7 @@ class GridWidget(val grid: Grid) : Widget()
 						drawHPBar(1f, block.hp, block.lostHP, block.remainingReduction, block.maxhp, block.damageReduction, block.immune, xi, yi, hp_neutral)
 					}
 
-					if (!Global.settings.get("Block", false) && !grid.inTurn )
+					if (!Statics.settings.get("Block", false) && !grid.inTurn )
 					{
 						val tutorial = Tutorial("Block")
 						tutorial.addPopup("This is a block. Match in the tiles surrounding it to break it.", getRect(tile, true))
@@ -656,7 +652,7 @@ class GridWidget(val grid: Grid) : Widget()
 						level.queueParticle(spreader.particleEffect!!, xi, yi, SPREADER, 1, orbColour)
 					}
 
-					if (!Global.settings.get("Spreader", false) && !grid.inTurn )
+					if (!Statics.settings.get("Spreader", false) && !grid.inTurn )
 					{
 						val tutorial = Tutorial("Spreader")
 						tutorial.addPopup("This is a spreading field. Match in the tiles surrounding it to remove it and stop it spreading this turn.", getRect(tile))

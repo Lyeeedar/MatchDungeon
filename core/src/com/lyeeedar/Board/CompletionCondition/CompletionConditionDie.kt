@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Mote
-import com.lyeeedar.Global
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Statistic
@@ -94,7 +94,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 						 val actor = ParticleEffectActor(sprite.getParticleEffect())
 						 actor.setSize(48f, 48f)
 						 actor.setPosition(pos.x, pos.y)
-						 Global.stage.addActor(actor)
+						 Statics.stage.addActor(actor)
 					 }
 					 else
 					 {
@@ -106,7 +106,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 						 val actor = ParticleEffectActor(sprite.getParticleEffect())
 						 actor.setSize(48f, 48f)
 						 actor.setPosition(pos.x, pos.y)
-						 Global.stage.addActor(actor)
+						 Statics.stage.addActor(actor)
 
 						 hpLabel.setText("$hp/$maxHP")
 						 updateBlink()
@@ -150,7 +150,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 					tutorial.show()
 				}, 0.5f)
 
-		if (!Global.release)
+		if (!Statics.release)
 		{
 			Future.call({
 							GridScreen.instance.debugConsole.reregister("god", "", fun(args, console): Boolean
@@ -199,7 +199,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 			val actor = ParticleEffectActor(healSprite.getParticleEffect())
 			actor.setSize(48f, 48f)
 			actor.setPosition(pos.x, pos.y)
-			Global.stage.addActor(actor)
+			Statics.stage.addActor(actor)
 
 			if (hp > maxHP)
 			{
@@ -221,7 +221,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 			val actor = ParticleEffectActor(healSprite.getParticleEffect())
 			actor.setSize(48f, 48f)
 			actor.setPosition(pos.x, pos.y)
-			Global.stage.addActor(actor)
+			Statics.stage.addActor(actor)
 		}
 
 		while (fractionalHp < -1f)
@@ -243,7 +243,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 
 	override fun createTable(grid: Grid): Table
 	{
-		hpLabel = Label("$hp/$maxHP", Global.skin)
+		hpLabel = Label("$hp/$maxHP", Statics.skin)
 
 		val stack = Stack()
 		stack.add(blinkTable)
@@ -260,7 +260,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 	{
 		val table = Table()
 
-		table.add(Label("Don't let your hp reach 0.", Global.skin))
+		table.add(Label("Don't let your hp reach 0.", Statics.skin))
 
 		return table
 	}

@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.badlogic.gdx.backends.android.AndroidApplication
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
 import com.crashlytics.android.Crashlytics
+import com.lyeeedar.Game.Global
 import io.fabric.sdk.android.Fabric
 
 class AndroidLauncher : AndroidApplication()

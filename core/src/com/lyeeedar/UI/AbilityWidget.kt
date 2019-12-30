@@ -14,8 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Game.Equipment
-import com.lyeeedar.Global
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Statics
 
 /**
  * Created by Philip on 20-Jul-16.
@@ -33,14 +33,14 @@ class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val gr
 
 	val ability = equipment.ability!!
 
-	val usagesLabel = Label("", Global.skin)
+	val usagesLabel = Label("", Statics.skin)
 
 	init
 	{
 		val stack = Stack()
 		stack.add(widget)
 
-		val infoButton = Button(Global.skin, "info")
+		val infoButton = Button(Statics.skin, "info")
 		infoButton.setSize(16f, 16f)
 		infoButton.addClickListener {
 			val t = ability.createTable()
@@ -137,7 +137,7 @@ class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val gr
 			sprite.render(batch as SpriteBatch, x + padding * i + (i-1) * pipSize, y, pipSize, 10f)
 		}
 
-		if (!Global.settings.get("Ability", false))
+		if (!Statics.settings.get("Ability", false))
 		{
 			val tutorial = Tutorial("Ability")
 			tutorial.addPopup("This is a usable ability, granted by your current equipment.", this)

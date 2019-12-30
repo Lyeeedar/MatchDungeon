@@ -6,13 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Matchable
 import com.lyeeedar.Board.Orb
-import com.lyeeedar.Global
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Colour
-import com.lyeeedar.Util.Future
-import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.*
 
 class CompletionConditionCustomOrb : AbstractCompletionCondition()
 {
@@ -79,7 +75,7 @@ class CompletionConditionCustomOrb : AbstractCompletionCondition()
 		}
 		else
 		{
-			table.add(Label(" x $matchCount", Global.skin))
+			table.add(Label(" x $matchCount", Statics.skin))
 		}
 	}
 
@@ -87,13 +83,13 @@ class CompletionConditionCustomOrb : AbstractCompletionCondition()
 	{
 		val table = Table()
 
-		table.add(Label("Match", Global.skin))
+		table.add(Label("Match", Statics.skin))
 
 		val targetDesc = Orb.getNamedOrb(targetOrbName)
 		val sprite = targetDesc.sprite
 
 		table.add(SpriteWidget(sprite, 24f, 24f)).padLeft(5f)
-		table.add(Label("x$matchCount", Global.skin))
+		table.add(Label("x$matchCount", Statics.skin))
 
 		return table
 	}

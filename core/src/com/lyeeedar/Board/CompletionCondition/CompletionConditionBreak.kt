@@ -7,13 +7,9 @@ import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Board.Block
 import com.lyeeedar.Board.Grid
-import com.lyeeedar.Global
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Colour
-import com.lyeeedar.Util.Future
-import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.*
 import ktx.collections.set
 
 class CompletionConditionBreak : AbstractCompletionCondition()
@@ -103,7 +99,7 @@ class CompletionConditionBreak : AbstractCompletionCondition()
 			}
 			else
 			{
-				row.add(Label(" x $count", Global.skin))
+				row.add(Label(" x $count", Statics.skin))
 			}
 
 			counter++
@@ -123,7 +119,7 @@ class CompletionConditionBreak : AbstractCompletionCondition()
 	{
 		val table = Table()
 
-		table.add(Label("Break all blocks.", Global.skin))
+		table.add(Label("Break all blocks.", Statics.skin))
 
 		return table
 	}

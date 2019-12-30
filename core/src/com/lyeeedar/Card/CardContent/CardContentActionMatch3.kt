@@ -2,10 +2,11 @@ package com.lyeeedar.Card.CardContent
 
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Board.Level
-import com.lyeeedar.Global
+import com.lyeeedar.Game.Global
 import com.lyeeedar.MainGame
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Screens.GridScreen
+import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.directory
 
@@ -45,7 +46,7 @@ class CardContentActionMatch3 : AbstractCardContentAction()
 							   Global.player.levelbuffs.clear()
 							   Global.player.leveldebuffs.clear()
 
-							   Global.game.switchScreen(MainGame.ScreenEnum.CARD)
+							   Statics.game.switchScreen(MainGame.ScreenEnum.CARD)
 							   CardContentScreen.advanceContent()
 						   },
 						   {
@@ -60,12 +61,12 @@ class CardContentActionMatch3 : AbstractCardContentAction()
 							   Global.player.levelbuffs.clear()
 							   Global.player.leveldebuffs.clear()
 
-							   Global.game.switchScreen(MainGame.ScreenEnum.CARD)
+							   Statics.game.switchScreen(MainGame.ScreenEnum.CARD)
 							   CardContentScreen.advanceContent()
 						   })
-			val screen = Global.game.getScreen(MainGame.ScreenEnum.GRID) as GridScreen
+			val screen = Statics.game.getScreen(MainGame.ScreenEnum.GRID) as GridScreen
 			screen.updateLevel(level!!, Global.player)
-			Global.game.switchScreen(screen)
+			Statics.game.switchScreen(screen)
 		}
 
 		return false

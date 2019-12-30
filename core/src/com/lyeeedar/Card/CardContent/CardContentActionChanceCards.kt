@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Direction
-import com.lyeeedar.Global
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Statistic
@@ -19,6 +19,7 @@ import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.lambda
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Future
+import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
 import ktx.actors.then
 import ktx.collections.toGdxArray
@@ -150,8 +151,8 @@ class CardContentActionChanceCards : AbstractCardContentAction()
 		val positions = cards.map { Vector2(it.x, it.y) }.toGdxArray()
 
 		// Reset cards to center for animation
-		val areaWidth = Global.resolution.x.toFloat()
-		val areaHeight = Global.resolution.y.toFloat()
+		val areaWidth = Statics.resolution.x.toFloat()
+		val areaHeight = Statics.resolution.y.toFloat()
 
 		val padding = 20f
 		val cardWidth = (areaWidth - 3f * padding) / 2f

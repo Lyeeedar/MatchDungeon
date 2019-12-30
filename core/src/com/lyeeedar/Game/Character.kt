@@ -8,14 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.EquipmentSlot
-import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.*
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.FastEnumMap
-import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.getXml
+import com.lyeeedar.Util.*
 
 class Character(val path: String)
 {
@@ -36,19 +32,19 @@ class Character(val path: String)
 		val iconTable = Table()
 		iconTable.add(SpriteWidget(Sprite(sprite.textures[0]), 48f, 48f)).expandX().right().pad(5f).padRight(25f)
 		titleStack.add(iconTable)
-		titleStack.add(Label(name, Global.skin, "cardtitle"))
+		titleStack.add(Label(name, Statics.skin, "cardtitle"))
 
 		table.add(titleStack).growX()
 		table.row()
-		val descLabel = Label(description, Global.skin, "card")
+		val descLabel = Label(description, Statics.skin, "card")
 		descLabel.setWrap(true)
 		table.add(descLabel)
 		table.row()
 
-		table.add(Seperator(Global.skin, "horizontalcard"))
+		table.add(Seperator(Statics.skin, "horizontalcard"))
 		table.row()
 
-		table.add(Label("Statistics", Global.skin, "cardtitle"))
+		table.add(Label("Statistics", Statics.skin, "cardtitle"))
 		table.row()
 
 		for (stat in Statistic.Values)
@@ -58,8 +54,8 @@ class Character(val path: String)
 			if (statVal != 0f)
 			{
 				val statTable = Table()
-				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Global.skin, "card")).expandX().left()
-				statTable.add(Label(statVal.toString(), Global.skin, "card"))
+				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Statics.skin, "card")).expandX().left()
+				statTable.add(Label(statVal.toString(), Statics.skin, "card"))
 				statTable.addTapToolTip(stat.tooltip)
 
 				table.add(statTable)
@@ -67,10 +63,10 @@ class Character(val path: String)
 			}
 		}
 
-		table.add(Seperator(Global.skin, "horizontalcard"))
+		table.add(Seperator(Statics.skin, "horizontalcard"))
 		table.row()
 
-		table.add(Label("Equipment", Global.skin, "cardtitle"))
+		table.add(Label("Equipment", Statics.skin, "cardtitle"))
 		table.row()
 
 		for (slot in EquipmentSlot.Values)
@@ -83,7 +79,7 @@ class Character(val path: String)
 				table.add(equipTable).growX().padBottom(2f)
 				table.row()
 
-				equipTable.add(Label("None", Global.skin, "card"))
+				equipTable.add(Label("None", Statics.skin, "card"))
 				equipTable.add(SpriteWidget(emptySlot, 32f, 32f)).size(32f).expandX().right()
 			}
 			else
@@ -92,9 +88,9 @@ class Character(val path: String)
 				table.add(equipTable).growX().padBottom(2f)
 				table.row()
 
-				equipTable.add(Label(equipment.name, Global.skin, "card"))
+				equipTable.add(Label(equipment.name, Statics.skin, "card"))
 
-				val infoButton = Button(Global.skin, "infocard")
+				val infoButton = Button(Statics.skin, "infocard")
 				infoButton.setSize(24f, 24f)
 				infoButton.addClickListener {
 					val t = equipment.createTable(null, false)
@@ -111,7 +107,7 @@ class Character(val path: String)
 		}
 
 		val basicTable = Table()
-		basicTable.add(Label(name, Global.skin, "cardtitle")).expandX().center()
+		basicTable.add(Label(name, Statics.skin, "cardtitle")).expandX().center()
 		basicTable.row()
 		basicTable.add(SpriteWidget(Sprite(sprite.textures[0]), 64f, 64f)).grow()
 		basicTable.row()

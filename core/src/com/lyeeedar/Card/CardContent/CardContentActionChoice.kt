@@ -5,11 +5,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.exp4j.Helpers.evaluate
-import com.lyeeedar.Global
-import com.lyeeedar.Global.Companion.skin
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.UI.addClickListener
 import com.lyeeedar.UI.lambda
+import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.expandVariables
 import ktx.actors.then
@@ -33,7 +33,7 @@ class CardContentActionChoice : AbstractCardContentAction()
 		{
 			if (choice.condition.evaluate(Global.getVariableMap()).toInt() != 0)
 			{
-				val response = TextButton(choice.text.expandVariables(), skin, "responseButton")
+				val response = TextButton(choice.text.expandVariables(), Statics.skin, "responseButton")
 				response.label.setWrap(true)
 				responsesTable.add(response).growX().pad(5f, 0f, 5f, 0f).height(75f)
 				responsesTable.row()

@@ -12,7 +12,7 @@ import com.lyeeedar.Board.CompletionCondition.CompletionConditionCustomOrb
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.Ability
-import com.lyeeedar.Global
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.*
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Screens.GridScreen
@@ -1180,7 +1180,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		{
 			val pos = GridWidget.instance.pointToScreenspace(point)
 
-			val label = Label(message.text, Global.skin, "popup")
+			val label = Label(message.text, Statics.skin, "popup")
 			label.color = message.colour.color()
 			label.setFontScale(message.size)
 			label.rotation = -60f
@@ -1197,13 +1197,13 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			label + sequence
 
 			val width = label.prefWidth
-			if (pos.x + width > Global.stage.width)
+			if (pos.x + width > Statics.stage.width)
 			{
-				label.setPosition(Global.stage.width - width - 20, pos.y)
+				label.setPosition(Statics.stage.width - width - 20, pos.y)
 			}
 
 			messageList.add(label)
-			Global.stage.addActor(label)
+			Statics.stage.addActor(label)
 		}
 	}
 	val messageList = Array<Label>()

@@ -1,5 +1,11 @@
 package com.lyeeedar.Screens
 
+import com.lyeeedar.UI.DebugConsole
+import com.lyeeedar.UI.Tutorial
+import com.lyeeedar.Util.Future
+import com.lyeeedar.Util.KeyMapping
+import com.lyeeedar.Util.KeySource
+import com.lyeeedar.Util.Statics
 import com.badlogic.gdx.*
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
@@ -11,12 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Scaling
 import com.badlogic.gdx.utils.viewport.ScalingViewport
 import com.lyeeedar.Game.Save
-import com.lyeeedar.Global
-import com.lyeeedar.UI.DebugConsole
-import com.lyeeedar.UI.Tutorial
-import com.lyeeedar.Util.Future
-import com.lyeeedar.Util.KeyMapping
-import com.lyeeedar.Util.KeySource
 import ktx.actors.setKeyboardFocus
 
 
@@ -55,7 +55,7 @@ abstract class AbstractScreen() : Screen, InputProcessor, GestureDetector.Gestur
 	// ----------------------------------------------------------------------
 	fun swapTo()
 	{
-		Global.game.switchScreen(this)
+		Statics.game.switchScreen(this)
 	}
 
     // ----------------------------------------------------------------------
@@ -146,7 +146,7 @@ abstract class AbstractScreen() : Screen, InputProcessor, GestureDetector.Gestur
 	// ----------------------------------------------------------------------
 	override fun keyDown( keycode: Int ): Boolean
 	{
-		if (keycode == Input.Keys.GRAVE && !Global.release)
+		if (keycode == Input.Keys.GRAVE && !Statics.release)
 		{
 			debugConsole.isVisible = !debugConsole.isVisible
 			debugConsole.text.setKeyboardFocus(true)
@@ -157,12 +157,12 @@ abstract class AbstractScreen() : Screen, InputProcessor, GestureDetector.Gestur
 		}
 		else
 		{
-			Global.controls.keyPressed(KeySource.KEYBOARD, keycode)
+			Statics.controls.keyPressed(KeySource.KEYBOARD, keycode)
 		}
 
-		Global.controls.onInput(KeyMapping(KeySource.KEYBOARD, keycode))
+		Statics.controls.onInput(KeyMapping(KeySource.KEYBOARD, keycode))
 
-		//val key = Global.controls.getKey(KeySource.KEYBOARD, keycode)
+		//val key = Statics.controls.getKey(KeySource.KEYBOARD, keycode)
 		//if (key != null) keyboardHelper?.keyDown(key)
 
 		return false
@@ -206,7 +206,7 @@ abstract class AbstractScreen() : Screen, InputProcessor, GestureDetector.Gestur
 	 */
 	override fun fling(velocityX: Float, velocityY: Float, button: Int): Boolean
 	{
-		if (!Global.release)
+		if (!Statics.release)
 		{
 			debugConsole.isVisible = !debugConsole.isVisible
 			debugConsole.text.setKeyboardFocus(true)
@@ -259,13 +259,13 @@ abstract class AbstractScreen() : Screen, InputProcessor, GestureDetector.Gestur
     // ----------------------------------------------------------------------
     fun baseCreate()
 	{
-        stage = Stage(ScalingViewport(Scaling.fit, Global.resolution.x.toFloat(), Global.resolution.y.toFloat()), SpriteBatch())
+        stage = Stage(ScalingViewport(Scaling.fit, Statics.resolution.x.toFloat(), Statics.resolution.y.toFloat()), SpriteBatch())
 
         mainTable = Table()
         mainTable.setFillParent(true)
         stage.addActor(mainTable)
 
-		if (!Global.release)
+		if (!Statics.release)
 		{
 			debugConsoleTable.setFillParent(true)
 			stage.addActor(debugConsoleTable)
@@ -298,9 +298,9 @@ abstract class AbstractScreen() : Screen, InputProcessor, GestureDetector.Gestur
     // ----------------------------------------------------------------------
     fun sleep() {
 		diff = System.currentTimeMillis() - start
-        if ( Global.fps > 0 ) {
+        if ( Statics.fps > 0 ) {
 
-            val targetDelay = 1000 / Global.fps
+            val targetDelay = 1000 / Statics.fps
             if ( diff < targetDelay ) {
                 try {
                     Thread.sleep(targetDelay - diff)

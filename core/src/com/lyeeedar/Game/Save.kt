@@ -4,13 +4,15 @@ import com.badlogic.gdx.Gdx
 import com.esotericsoftware.kryo.Kryo
 import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
-import com.lyeeedar.*
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
+import com.lyeeedar.MainGame
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Screens.DeckScreen
 import com.lyeeedar.Screens.QuestScreen
 import com.lyeeedar.Screens.QuestSelectionScreen
+import com.lyeeedar.Util.Settings
+import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.registerGdxSerialisers
 import com.lyeeedar.Util.registerLyeeedarSerialisers
 import java.util.zip.GZIPInputStream
@@ -57,9 +59,9 @@ class Save
 			Global.globalflags.save(kryo, output)
 			Global.questflags.save(kryo, output)
 			Global.cardflags.save(kryo, output)
-			Global.settings.save(kryo, output)
+			Statics.settings.save(kryo, output)
 
-			val currentScreen = Global.game.currentScreenEnum
+			val currentScreen = Statics.game.currentScreenEnum
 			output.writeInt(currentScreen.ordinal)
 
 			if (currentScreen == MainGame.ScreenEnum.QUESTSELECTION)
@@ -72,7 +74,7 @@ class Save
 			}
 			else
 			{
-				val questScreen = Global.game.getTypedScreen<QuestScreen>()!!
+				val questScreen = Statics.game.getTypedScreen<QuestScreen>()!!
 				questScreen.currentQuest.save(output)
 
 				if (currentScreen == MainGame.ScreenEnum.QUEST)
@@ -81,7 +83,7 @@ class Save
 				}
 				else
 				{
-					val cardScreen = Global.game.getTypedScreen<CardScreen>()!!
+					val cardScreen = Statics.game.getTypedScreen<CardScreen>()!!
 					output.writeString(cardScreen.currentCard.path)
 
 					cardScreen.currentContent.save(kryo, output)
@@ -124,17 +126,17 @@ class Save
 				Global.globalflags = globalFlags
 				Global.questflags = questFlags
 				Global.cardflags = cardFlags
-				Global.settings = settings
+				Statics.settings = settings
 
 				if (currentScreen == MainGame.ScreenEnum.QUESTSELECTION)
 				{
-					val screen = Global.game.getTypedScreen<QuestSelectionScreen>()!!
+					val screen = Statics.game.getTypedScreen<QuestSelectionScreen>()!!
 					screen.setup()
 					screen.swapTo()
 				}
 				else if (currentScreen == MainGame.ScreenEnum.DECK)
 				{
-					val screen = Global.game.getTypedScreen<DeckScreen>()!!
+					val screen = Statics.game.getTypedScreen<DeckScreen>()!!
 					screen.setup()
 					screen.swapTo()
 				}
@@ -143,7 +145,7 @@ class Save
 					val currentQuest = Quest.load(input)
 					Global.deck.quests.replace(currentQuest)
 
-					val questScreen = Global.game.getTypedScreen<QuestScreen>()!!
+					val questScreen = Statics.game.getTypedScreen<QuestScreen>()!!
 					questScreen.setup(currentQuest)
 
 					if (currentScreen == MainGame.ScreenEnum.QUEST)
@@ -158,7 +160,7 @@ class Save
 
 						val content = CardContent.load(kryo, input)
 
-						val cardScreen = Global.game.getTypedScreen<CardScreen>()!!
+						val cardScreen = Statics.game.getTypedScreen<CardScreen>()!!
 						cardScreen.setup(currentCard, currentQuest, false, content)
 					}
 
@@ -170,12 +172,12 @@ class Save
 					{
 						try
 						{
-							Global.game.switchScreen(screens[i])
+							Statics.game.switchScreen(screens[i])
 							break
 						}
 						catch (ex: Exception)
 						{
-							if (!Global.release)
+							if (!Statics.release)
 							{
 								throw ex
 							}
@@ -185,7 +187,7 @@ class Save
 			}
 			catch (ex: Exception)
 			{
-				if (!Global.release)
+				if (!Statics.release)
 				{
 					throw ex
 				}

@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Board.*
-import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.SpriteWidget
@@ -147,7 +146,7 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 			}
 			else
 			{
-				row.add(Label(" x $count", Global.skin))
+				row.add(Label(" x $count", Statics.skin))
 			}
 
 			counter++
@@ -180,9 +179,9 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 			}
 		}
 
-		table.add(Label("Move $count ", Global.skin))
+		table.add(Label("Move $count ", Statics.skin))
 		table.add(SpriteWidget(sprite, 24f, 24f))
-		table.add(Label(" to the bottom.", Global.skin))
+		table.add(Label(" to the bottom.", Statics.skin))
 
 		return table
 	}

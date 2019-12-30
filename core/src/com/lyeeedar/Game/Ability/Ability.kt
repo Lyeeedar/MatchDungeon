@@ -13,7 +13,7 @@ import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Spreader
 import com.lyeeedar.Board.Tile
 import com.lyeeedar.Game.Buff
-import com.lyeeedar.Global
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Screens.GridScreen
@@ -59,18 +59,18 @@ class Ability
 		val titleStack = Stack()
 		val iconTable = Table()
 		titleStack.add(iconTable)
-		titleStack.add(Label(name, Global.skin, "cardtitle"))
+		titleStack.add(Label(name, Statics.skin, "cardtitle"))
 
 		table.add(titleStack).growX()
 		table.row()
 
-		val descLabel = Label(description, Global.skin, "card")
+		val descLabel = Label(description, Statics.skin, "card")
 		descLabel.setWrap(true)
 
 		table.add(descLabel).growX()
 		table.row()
 
-		table.add(Seperator(Global.skin, "horizontalcard")).growX().pad(10f)
+		table.add(Seperator(Statics.skin, "horizontalcard")).growX().pad(10f)
 		table.row()
 
 		if (effect.type == Effect.Type.BUFF)
@@ -87,19 +87,19 @@ class Ability
 
 			val effectDesc = "For $turns turns gain buff:"
 
-			val effectLabel = Label(effectDesc, Global.skin, "card")
+			val effectLabel = Label(effectDesc, Statics.skin, "card")
 			effectLabel.setWrap(true)
 
 			table.add(effectLabel).growX()
 			table.row()
 
-			table.add(Seperator(Global.skin)).growX()
+			table.add(Seperator(Statics.skin)).growX()
 			table.row()
 
 			table.add(buff.createTable(false)).growX()
 			table.row()
 
-			table.add(Seperator(Global.skin)).growX()
+			table.add(Seperator(Statics.skin)).growX()
 			table.row()
 		}
 		else
@@ -114,26 +114,26 @@ class Ability
 			val them = if (targets > 1 || permuter.type != Permuter.Type.SINGLE) "them" else "it"
 			effectDesc += " and " + effect.toString(data, them, targetter.popAction(), this)
 
-			val effectLabel = Label(effectDesc, Global.skin, "card")
+			val effectLabel = Label(effectDesc, Statics.skin, "card")
 			effectLabel.setWrap(true)
 
 			table.add(effectLabel).growX()
 			table.row()
 		}
 
-		table.add(Label("Cost: $cost", Global.skin, "card")).growX()
+		table.add(Label("Cost: $cost", Statics.skin, "card")).growX()
 		table.row()
 
 		if (maxUsages > 0)
 		{
 			if (resetUsagesPerLevel)
 			{
-				table.add(Label("Usages Per Encounter: $maxUsages", Global.skin, "card")).growX()
+				table.add(Label("Usages Per Encounter: $maxUsages", Statics.skin, "card")).growX()
 				table.row()
 			}
 			else
 			{
-				table.add(Label("Remaining Usages: $remainingUsages", Global.skin, "card")).growX()
+				table.add(Label("Remaining Usages: $remainingUsages", Statics.skin, "card")).growX()
 				table.row()
 			}
 		}
@@ -209,7 +209,7 @@ class Ability
 				val fs = flightEffect!!.copy()
 				fs.killOnAnimComplete = true
 
-				val p1 = Vector2(Global.stage.width / 2f, 0f)
+				val p1 = Vector2(Statics.stage.width / 2f, 0f)
 				val p2 = GridWidget.instance.pointToScreenspace(target)
 
 				val gridWidget = GridScreen.instance.grid!!

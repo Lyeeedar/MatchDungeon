@@ -1,15 +1,15 @@
 package com.lyeeedar.desktop
 
-import com.lyeeedar.Global
 import com.lyeeedar.MainGame
+import com.lyeeedar.Util.Statics
 
 object DesktopLauncher
 {
 	@JvmStatic fun main(arg: Array<String>)
 	{
 		//Global.release = true
-		Global.game = MainGame()
-		Global.applicationChanger = LwjglApplicationChanger()
-		Global.applicationChanger.createApplication()
+		Statics.game = MainGame()
+		Statics.applicationChanger = LwjglApplicationChanger()
+		Statics.applicationChanger.createApplication()
 	}
 }

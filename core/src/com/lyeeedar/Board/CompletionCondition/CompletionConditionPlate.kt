@@ -5,10 +5,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Matchable
 import com.lyeeedar.Board.Tile
-import com.lyeeedar.Global
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.Future
+import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
 import com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table
 
@@ -53,7 +53,7 @@ class CompletionConditionPlate : AbstractCompletionCondition()
 		val table = Table()
 
 		val sprite = grid.level.theme.plate.copy()
-		label = Label(" x $remaining", Global.skin)
+		label = Label(" x $remaining", Statics.skin)
 
 		table.add(SpriteWidget(sprite, 24f, 24f))
 		table.add(label)
@@ -65,7 +65,7 @@ class CompletionConditionPlate : AbstractCompletionCondition()
 	{
 		val table = Table()
 
-		table.add(Label("Break $remaining ", Global.skin))
+		table.add(Label("Break $remaining ", Statics.skin))
 		table.add(SpriteWidget(grid.level.theme.plate.copy(), 24f, 24f))
 
 		return table

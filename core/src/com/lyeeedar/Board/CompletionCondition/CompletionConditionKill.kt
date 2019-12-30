@@ -8,13 +8,9 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Monster
 import com.lyeeedar.Board.MonsterDesc
-import com.lyeeedar.Global
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Colour
-import com.lyeeedar.Util.Future
-import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.*
 import ktx.collections.set
 
 
@@ -130,7 +126,7 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 			}
 			else
 			{
-				row.add(Label(" x $count", Global.skin))
+				row.add(Label(" x $count", Statics.skin))
 			}
 
 			counter++
@@ -150,7 +146,7 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 	{
 		val table = Table()
 
-		table.add(Label("Defeat all enemies.", Global.skin))
+		table.add(Label("Defeat all enemies.", Statics.skin))
 
 		return table
 	}

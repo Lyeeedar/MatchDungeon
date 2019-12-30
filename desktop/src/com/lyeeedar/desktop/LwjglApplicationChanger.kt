@@ -7,9 +7,9 @@ import com.badlogic.gdx.Preferences
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration
 import com.badlogic.gdx.backends.lwjgl.LwjglPreferences
-import com.lyeeedar.Global
 import com.lyeeedar.MainGame
 import com.lyeeedar.Util.AbstractApplicationChanger
+import com.lyeeedar.Util.Statics
 
 class LwjglApplicationChanger : AbstractApplicationChanger(LwjglPreferences("game-settings", "settings"))
 {
@@ -32,14 +32,14 @@ class LwjglApplicationChanger : AbstractApplicationChanger(LwjglPreferences("gam
 		cfg.addIcon("Sprites/Unpacked/Icon32.png", FileType.Internal)
 		cfg.allowSoftwareMode = true
 
-		Global.fps = pref.getInteger("fps")
+		Statics.fps = pref.getInteger("fps")
 
 		return LwjglApplication(game, cfg)
 	}
 
 	override fun processResources()
 	{
-		if (!Global.release)
+		if (!Statics.release)
 		{
 			AtlasCreator()
 			TextureCompressor()
@@ -56,7 +56,7 @@ class LwjglApplicationChanger : AbstractApplicationChanger(LwjglPreferences("gam
 		val height = pref.getInteger("resolutionY")
 		val fullscreen = pref.getBoolean("fullscreen")
 
-		Global.fps = pref.getInteger("fps")
+		Statics.fps = pref.getInteger("fps")
 
 		if (fullscreen)
 		{

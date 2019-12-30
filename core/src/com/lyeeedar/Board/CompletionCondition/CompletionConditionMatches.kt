@@ -9,14 +9,10 @@ import com.badlogic.gdx.utils.IntMap
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Matchable
 import com.lyeeedar.Board.Orb
-import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Colour
-import com.lyeeedar.Util.Future
-import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.*
 import ktx.collections.get
 import ktx.collections.set
 
@@ -59,7 +55,7 @@ class CompletionConditionMatches(): AbstractCompletionCondition()
 			}
 			else
 			{
-				row.add(Label("$count", Global.skin))
+				row.add(Label("$count", Statics.skin))
 			}
 
 			counter++
@@ -146,7 +142,7 @@ class CompletionConditionMatches(): AbstractCompletionCondition()
 	{
 		val table = Table()
 
-		table.add(Label("Match", Global.skin))
+		table.add(Label("Match", Statics.skin))
 
 		for (entry in toBeMatched.entries())
 		{
@@ -154,7 +150,7 @@ class CompletionConditionMatches(): AbstractCompletionCondition()
 			val count = entry.value
 
 			table.add(SpriteWidget(sprite, 24f, 24f)).padLeft(5f)
-			table.add(Label("x$count", Global.skin))
+			table.add(Label("x$count", Statics.skin))
 		}
 
 		return table

@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.Permuter
 import com.lyeeedar.Game.Ability.Targetter
-import com.lyeeedar.Global
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.BumpAnimation
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.Animation.LeapAnimation
@@ -289,7 +289,7 @@ class MonsterAbility
 			usages--
 		}
 
-		if (!Global.release)
+		if (!Statics.release)
 		{
 			println("Monster trying to use ability '$effect'")
 		}

@@ -13,7 +13,6 @@ import com.lyeeedar.Board.Mote
 import com.lyeeedar.Card.Card
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.*
-import com.lyeeedar.Global
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.CardWidget
@@ -22,6 +21,7 @@ import com.lyeeedar.UI.addClickListener
 import com.lyeeedar.UI.addTapToolTip
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.FastEnumMap
+import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
 
 class CardContentActionShop : AbstractCardContentAction()
@@ -104,7 +104,7 @@ class CardContentActionShop : AbstractCardContentAction()
 						})
 					}
 
-					val cardHeight = (Global.resolution.y.toFloat() * 0.7f) * 0.3f
+					val cardHeight = (Statics.resolution.y.toFloat() * 0.7f) * 0.3f
 					val cardWidth = card.getWidthFromHeight(cardHeight)
 					card.setSize(cardWidth, cardHeight)
 
@@ -112,7 +112,7 @@ class CardContentActionShop : AbstractCardContentAction()
 					table.add(card).size(cardWidth, cardHeight).expand()
 					table.row()
 
-					val costLabel = Label("$cost", Global.skin)
+					val costLabel = Label("$cost", Statics.skin)
 					if (cost > Global.player.gold)
 					{
 						costLabel.color = Color.DARK_GRAY
@@ -126,12 +126,12 @@ class CardContentActionShop : AbstractCardContentAction()
 
 			resolved = true
 
-			val scrollPane = ScrollPane(waresTable, Global.skin)
+			val scrollPane = ScrollPane(waresTable, Statics.skin)
 			scrollPane.setFadeScrollBars(false)
 			scrollPane.setScrollingDisabled(false, true)
 			scrollPane.setForceScroll(true, false)
 
-			val leaveButton = TextButton("Leave", Global.skin)
+			val leaveButton = TextButton("Leave", Statics.skin)
 			leaveButton.addClickListener {
 				doAdvance = true
 				CardContentScreen.buttonTable.clear()
@@ -140,13 +140,13 @@ class CardContentActionShop : AbstractCardContentAction()
 			}
 
 			val topTable = Table()
-			topTable.add(Label("Gold: " + Global.player.gold, Global.skin))
+			topTable.add(Label("Gold: " + Global.player.gold, Statics.skin))
 			topTable.add(leaveButton).expandX().right().pad(10f)
 
 			CardContentScreen.buttonTable.add(topTable).growX()
 			CardContentScreen.buttonTable.row()
 
-			CardContentScreen.buttonTable.add(Seperator(Global.skin)).growX()
+			CardContentScreen.buttonTable.add(Seperator(Statics.skin)).growX()
 			CardContentScreen.buttonTable.row()
 
 			CardContentScreen.buttonTable.add(scrollPane).grow()
@@ -425,9 +425,9 @@ class StatisticWare : ShopWares()
 			if (statVal != 0f)
 			{
 				val statTable = Table()
-				statTable.add(Label(stat.toString().toLowerCase().capitalize(), Global.skin, "cardtitle")).expandX().center()
+				statTable.add(Label(stat.toString().toLowerCase().capitalize(), Statics.skin, "cardtitle")).expandX().center()
 				statTable.row()
-				statTable.add(Label(statVal.toString(), Global.skin, "cardtitle")).expandX().center()
+				statTable.add(Label(statVal.toString(), Statics.skin, "cardtitle")).expandX().center()
 				statTable.addTapToolTip(stat.tooltip)
 
 				table.add(statTable).growX()

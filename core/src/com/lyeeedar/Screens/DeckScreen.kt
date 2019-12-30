@@ -9,12 +9,13 @@ import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Card.Card
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.Equipment
-import com.lyeeedar.Global
+import com.lyeeedar.Game.Global
 import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.UI.Seperator
 import com.lyeeedar.UI.addClickListener
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.FastEnumMap
+import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.neaten
 
 class DeckScreen : AbstractScreen()
@@ -71,13 +72,13 @@ class DeckScreen : AbstractScreen()
 
 		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion("Oryx/uf_split/uf_terrain/floor_wood_1"))).tint(Color.DARK_GRAY)
 
-		mainTable.add(Label("Character", Global.skin, "title")).expandX().center().padTop(20f)
+		mainTable.add(Label("Character", Statics.skin, "title")).expandX().center().padTop(20f)
 		mainTable.row()
-		mainTable.add(Seperator(Global.skin)).growX()
+		mainTable.add(Seperator(Statics.skin)).growX()
 		mainTable.row()
 
-		val cardHeight = (Global.resolution.y.toFloat() * 0.7f) * 0.3f
-		val cardWidth = Global.resolution.x.toFloat() * 0.8f
+		val cardHeight = (Statics.resolution.y.toFloat() * 0.7f) * 0.3f
+		val cardWidth = Statics.resolution.x.toFloat() * 0.8f
 
 		val charCard = Global.player.baseCharacter.getCard()
 		charCard.addPick("", {
@@ -95,7 +96,7 @@ class DeckScreen : AbstractScreen()
 		if (Global.deck.hasNewCharacters)
 		{
 			val newTable = Table()
-			val newLabel = Label("New", Global.skin)
+			val newLabel = Label("New", Statics.skin)
 			newTable.add(newLabel).expand().top().pad(3f)
 
 			charStack.add(newTable)
@@ -110,9 +111,9 @@ class DeckScreen : AbstractScreen()
 
 		mainTable.row()
 
-		mainTable.add(Label("Encounters", Global.skin, "title")).expandX().center()
+		mainTable.add(Label("Encounters", Statics.skin, "title")).expandX().center()
 		mainTable.row()
-		mainTable.add(Seperator(Global.skin)).growX()
+		mainTable.add(Seperator(Statics.skin)).growX()
 		mainTable.row()
 
 		val deckCard = CardWidget(Table(), Table(), AssetManager.loadTextureRegion("GUI/CardCardback")!!, null)
@@ -129,7 +130,7 @@ class DeckScreen : AbstractScreen()
 		if (Global.deck.hasNewEncounters)
 		{
 			val newTable = Table()
-			val newLabel = Label("New", Global.skin)
+			val newLabel = Label("New", Statics.skin)
 			newTable.add(newLabel).expand().top().pad(3f)
 
 			cardStack.add(newTable)
@@ -140,12 +141,12 @@ class DeckScreen : AbstractScreen()
 		val encountersDetails = Table()
 		encountersTable.add(encountersDetails).grow().width(Value.percentWidth(0.5f, encountersTable))
 
-		encountersDetails.add(Label(Global.deck.playerDeck.encounters.size.toString() + " / $encounterDeckSize", Global.skin))
+		encountersDetails.add(Label(Global.deck.playerDeck.encounters.size.toString() + " / $encounterDeckSize", Statics.skin))
 		encountersDetails.row()
 
 		for (card in restrictedCards())
 		{
-			val label = Label("Deck contains card '" + card.current.name + "' which is restricted to the character '" + card.characterRestriction + "'!", Global.skin)
+			val label = Label("Deck contains card '" + card.current.name + "' which is restricted to the character '" + card.characterRestriction + "'!", Statics.skin)
 			label.setWrap(true)
 			label.color = Color.RED
 
@@ -155,7 +156,7 @@ class DeckScreen : AbstractScreen()
 
 		if (containsTooManyEncounters())
 		{
-			val label = Label("Deck contains too many encounters.", Global.skin)
+			val label = Label("Deck contains too many encounters.", Statics.skin)
 			label.setWrap(true)
 			label.color = Color.RED
 
@@ -165,7 +166,7 @@ class DeckScreen : AbstractScreen()
 
 		if (containsTooFewEncounters())
 		{
-			val label = Label("Deck contains too few encounters.", Global.skin)
+			val label = Label("Deck contains too few encounters.", Statics.skin)
 			label.setWrap(true)
 			label.color = Color.RED
 
@@ -176,9 +177,9 @@ class DeckScreen : AbstractScreen()
 		mainTable.add(encountersTable).growX().center().height(cardHeight)
 		mainTable.row()
 
-		mainTable.add(Label("Equipment", Global.skin, "title")).expandX().center()
+		mainTable.add(Label("Equipment", Statics.skin, "title")).expandX().center()
 		mainTable.row()
-		mainTable.add(Seperator(Global.skin)).growX()
+		mainTable.add(Seperator(Statics.skin)).growX()
 		mainTable.row()
 
 		val equipCard = CardWidget(Table(), Table(), AssetManager.loadTextureRegion("GUI/EquipmentCardback")!!, null)
@@ -195,7 +196,7 @@ class DeckScreen : AbstractScreen()
 		if (Global.deck.hasNewEquipment)
 		{
 			val newTable = Table()
-			val newLabel = Label("New", Global.skin)
+			val newLabel = Label("New", Statics.skin)
 			newTable.add(newLabel).expand().top().pad(3f)
 
 			equipStack.add(newTable)
@@ -206,12 +207,12 @@ class DeckScreen : AbstractScreen()
 		val equipDetails = Table()
 		equipTable.add(equipDetails).grow().width(Value.percentWidth(0.5f, equipTable))
 
-		equipDetails.add(Label(Global.deck.playerDeck.equipment.size.toString() + " / $equipmentDeckSize", Global.skin))
+		equipDetails.add(Label(Global.deck.playerDeck.equipment.size.toString() + " / $equipmentDeckSize", Statics.skin))
 		equipDetails.row()
 
 		if (containsTooManyEquipment())
 		{
-			val label = Label("Deck contains too many.", Global.skin)
+			val label = Label("Deck contains too many.", Statics.skin)
 			label.setWrap(true)
 			label.color = Color.RED
 
@@ -221,7 +222,7 @@ class DeckScreen : AbstractScreen()
 
 		if (containsTooFewEquipment())
 		{
-			val label = Label("Deck contains too few equipment.", Global.skin)
+			val label = Label("Deck contains too few equipment.", Statics.skin)
 			label.setWrap(true)
 			label.color = Color.RED
 
@@ -234,17 +235,17 @@ class DeckScreen : AbstractScreen()
 
 		if (isDeckInvalid())
 		{
-			val returnButton = TextButton("Return", Global.skin)
+			val returnButton = TextButton("Return", Statics.skin)
 			returnButton.color = Color.DARK_GRAY
 			mainTable.add(returnButton).expandX().right().pad(10f).expandY().bottom()
 			mainTable.row()
 		}
 		else
 		{
-			val returnButton = TextButton("Return", Global.skin)
+			val returnButton = TextButton("Return", Statics.skin)
 			returnButton.addClickListener {
 
-				val screen = Global.game.getTypedScreen<QuestSelectionScreen>()!!
+				val screen = Statics.game.getTypedScreen<QuestSelectionScreen>()!!
 				screen.setup()
 				screen.swapTo()
 			}
@@ -261,10 +262,10 @@ class DeckScreen : AbstractScreen()
 
 		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion("Oryx/uf_split/uf_terrain/floor_wood_1"))).tint(Color.DARK_GRAY)
 
-		val cardHeight = (Global.resolution.y.toFloat() * 0.7f) * 0.3f
-		val cardWidth = Global.resolution.x.toFloat() * 0.8f
+		val cardHeight = (Statics.resolution.y.toFloat() * 0.7f) * 0.3f
+		val cardWidth = Statics.resolution.x.toFloat() * 0.8f
 
-		val title = Label("Character Selection", Global.skin, "title")
+		val title = Label("Character Selection", Statics.skin, "title")
 		mainTable.add(title).expandX().center().pad(20f)
 		mainTable.row()
 
@@ -277,10 +278,10 @@ class DeckScreen : AbstractScreen()
 		leftCard.setFacing(true, false)
 		bodyTable.add(leftCard).grow().center().height(cardHeight).pad(10f).uniform()
 
-		bodyTable.add(Seperator(Global.skin, true)).growY()
+		bodyTable.add(Seperator(Statics.skin, true)).growY()
 
 		val scrollTable = Table()
-		val scrollPane = ScrollPane(scrollTable, Global.skin)
+		val scrollPane = ScrollPane(scrollTable, Statics.skin)
 		scrollPane.setForceScroll(false, true)
 		scrollPane.setFadeScrollBars(false)
 		scrollPane.setScrollingDisabled(true, false)
@@ -302,7 +303,7 @@ class DeckScreen : AbstractScreen()
 			}
 		}
 
-		val returnButton = TextButton("Return", Global.skin)
+		val returnButton = TextButton("Return", Statics.skin)
 		returnButton.addClickListener {
 			createMainScreen()
 		}
@@ -318,29 +319,29 @@ class DeckScreen : AbstractScreen()
 
 		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion("Oryx/uf_split/uf_terrain/floor_wood_1"))).tint(Color.DARK_GRAY)
 
-		val cardHeight = (Global.resolution.y.toFloat() * 0.7f) * 0.3f
-		val cardWidth = Global.resolution.x.toFloat() * 0.3f
+		val cardHeight = (Statics.resolution.y.toFloat() * 0.7f) * 0.3f
+		val cardWidth = Statics.resolution.x.toFloat() * 0.3f
 
-		val title = Label("Encounter Selection", Global.skin, "title")
+		val title = Label("Encounter Selection", Statics.skin, "title")
 		mainTable.add(title).expandX().center().pad(20f)
 		mainTable.row()
 
-		mainTable.add(Seperator(Global.skin)).growX().pad(2f)
+		mainTable.add(Seperator(Statics.skin)).growX().pad(2f)
 		mainTable.row()
 
-		mainTable.add(Label(Global.deck.playerDeck.encounters.size.toString() + " / $encounterDeckSize", Global.skin))
+		mainTable.add(Label(Global.deck.playerDeck.encounters.size.toString() + " / $encounterDeckSize", Statics.skin))
 		mainTable.row()
 
 		for (card in restrictedCards())
 		{
-			val label = Label("Deck contains card '" + card.current.name + "' which is restricted to the character '" + card.characterRestriction + "'!", Global.skin)
+			val label = Label("Deck contains card '" + card.current.name + "' which is restricted to the character '" + card.characterRestriction + "'!", Statics.skin)
 			label.color = Color.RED
 
 			mainTable.add(label)
 			mainTable.row()
 		}
 
-		mainTable.add(Seperator(Global.skin)).growX().pad(2f)
+		mainTable.add(Seperator(Statics.skin)).growX().pad(2f)
 		mainTable.row()
 
 		val bodyTable = Table()
@@ -349,7 +350,7 @@ class DeckScreen : AbstractScreen()
 
 		// Left stuff
 		val leftScrollTable = Table()
-		val leftScrollPane = ScrollPane(leftScrollTable, Global.skin)
+		val leftScrollPane = ScrollPane(leftScrollTable, Statics.skin)
 		leftScrollPane.setForceScroll(false, true)
 		leftScrollPane.setFadeScrollBars(false)
 		leftScrollPane.setScrollingDisabled(true, false)
@@ -388,7 +389,7 @@ class DeckScreen : AbstractScreen()
 
 		if (deckShops.size > 0)
 		{
-			leftScrollTable.add(Label("Shops", Global.skin, "title"))
+			leftScrollTable.add(Label("Shops", Statics.skin, "title"))
 			leftScrollTable.row()
 
 			for (card in deckShops)
@@ -400,7 +401,7 @@ class DeckScreen : AbstractScreen()
 
 		if (deckEncounters.size > 0)
 		{
-			leftScrollTable.add(Label("Encounters", Global.skin, "title"))
+			leftScrollTable.add(Label("Encounters", Statics.skin, "title"))
 			leftScrollTable.row()
 
 			for (card in deckEncounters)
@@ -410,11 +411,11 @@ class DeckScreen : AbstractScreen()
 			}
 		}
 
-		bodyTable.add(Seperator(Global.skin, true)).growY()
+		bodyTable.add(Seperator(Statics.skin, true)).growY()
 
 		// Right stuff
 		val rightScrollTable = Table()
-		val rightScrollPane = ScrollPane(rightScrollTable, Global.skin)
+		val rightScrollPane = ScrollPane(rightScrollTable, Statics.skin)
 		rightScrollPane.setForceScroll(false, true)
 		rightScrollPane.setFadeScrollBars(false)
 		rightScrollPane.setScrollingDisabled(true, false)
@@ -453,7 +454,7 @@ class DeckScreen : AbstractScreen()
 
 		if (unusedShops.size > 0)
 		{
-			rightScrollTable.add(Label("Shops", Global.skin, "title"))
+			rightScrollTable.add(Label("Shops", Statics.skin, "title"))
 			rightScrollTable.row()
 
 			for (card in unusedShops)
@@ -465,7 +466,7 @@ class DeckScreen : AbstractScreen()
 
 		if (unusedEncounters.size > 0)
 		{
-			rightScrollTable.add(Label("Encounters", Global.skin, "title"))
+			rightScrollTable.add(Label("Encounters", Statics.skin, "title"))
 			rightScrollTable.row()
 
 			for (card in unusedEncounters)
@@ -475,7 +476,7 @@ class DeckScreen : AbstractScreen()
 			}
 		}
 
-		val returnButton = TextButton("Return", Global.skin)
+		val returnButton = TextButton("Return", Statics.skin)
 		returnButton.addClickListener {
 			createMainScreen()
 		}
@@ -491,20 +492,20 @@ class DeckScreen : AbstractScreen()
 
 		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion("Oryx/uf_split/uf_terrain/floor_wood_1"))).tint(Color.DARK_GRAY)
 
-		val cardHeight = (Global.resolution.y.toFloat() * 0.7f) * 0.3f
-		val cardWidth = Global.resolution.x.toFloat() * 0.3f
+		val cardHeight = (Statics.resolution.y.toFloat() * 0.7f) * 0.3f
+		val cardWidth = Statics.resolution.x.toFloat() * 0.3f
 
-		val title = Label("Equipment Selection", Global.skin, "title")
+		val title = Label("Equipment Selection", Statics.skin, "title")
 		mainTable.add(title).expandX().center().pad(20f)
 		mainTable.row()
 
-		mainTable.add(Seperator(Global.skin)).growX().pad(2f)
+		mainTable.add(Seperator(Statics.skin)).growX().pad(2f)
 		mainTable.row()
 
-		mainTable.add(Label(Global.deck.playerDeck.equipment.size.toString() + " / $equipmentDeckSize", Global.skin))
+		mainTable.add(Label(Global.deck.playerDeck.equipment.size.toString() + " / $equipmentDeckSize", Statics.skin))
 		mainTable.row()
 
-		mainTable.add(Seperator(Global.skin)).growX().pad(2f)
+		mainTable.add(Seperator(Statics.skin)).growX().pad(2f)
 		mainTable.row()
 
 		val bodyTable = Table()
@@ -514,7 +515,7 @@ class DeckScreen : AbstractScreen()
 
 		// Left stuff
 		val leftScrollTable = Table()
-		val leftScrollPane = ScrollPane(leftScrollTable, Global.skin)
+		val leftScrollPane = ScrollPane(leftScrollTable, Statics.skin)
 		leftScrollPane.setForceScroll(false, true)
 		leftScrollPane.setFadeScrollBars(false)
 		leftScrollPane.setScrollingDisabled(true, false)
@@ -549,7 +550,7 @@ class DeckScreen : AbstractScreen()
 			val array = groupedDeckEquipment[slot]
 			if (array != null)
 			{
-				leftScrollTable.add(Label(slot.toString().neaten(), Global.skin, "title"))
+				leftScrollTable.add(Label(slot.toString().neaten(), Statics.skin, "title"))
 				leftScrollTable.row()
 
 				for (card in array)
@@ -560,11 +561,11 @@ class DeckScreen : AbstractScreen()
 			}
 		}
 
-		bodyTable.add(Seperator(Global.skin, true)).growY()
+		bodyTable.add(Seperator(Statics.skin, true)).growY()
 
 		// Right stuff
 		val rightScrollTable = Table()
-		val rightScrollPane = ScrollPane(rightScrollTable, Global.skin)
+		val rightScrollPane = ScrollPane(rightScrollTable, Statics.skin)
 		rightScrollPane.setForceScroll(false, true)
 		rightScrollPane.setFadeScrollBars(false)
 		rightScrollPane.setScrollingDisabled(true, false)
@@ -599,7 +600,7 @@ class DeckScreen : AbstractScreen()
 			val array = groupedUnusedEquipment[slot]
 			if (array != null)
 			{
-				rightScrollTable.add(Label(slot.toString().neaten(), Global.skin, "title"))
+				rightScrollTable.add(Label(slot.toString().neaten(), Statics.skin, "title"))
 				rightScrollTable.row()
 
 				for (card in array)
@@ -610,7 +611,7 @@ class DeckScreen : AbstractScreen()
 			}
 		}
 
-		val returnButton = TextButton("Return", Global.skin)
+		val returnButton = TextButton("Return", Statics.skin)
 		returnButton.addClickListener {
 			createMainScreen()
 		}

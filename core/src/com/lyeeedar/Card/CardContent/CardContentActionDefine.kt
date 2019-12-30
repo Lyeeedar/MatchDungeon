@@ -2,7 +2,7 @@ package com.lyeeedar.Card.CardContent
 
 import com.badlogic.gdx.utils.ObjectMap
 import com.exp4j.Helpers.evaluate
-import com.lyeeedar.Global
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Util.XmlData
 

@@ -2,7 +2,7 @@ package com.lyeeedar.Screens
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.g2d.HDRColourSpriteBatch
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.Vector2
@@ -18,7 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.badlogic.gdx.utils.ObjectSet
-import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Particle.ParticleEffectDescription
@@ -42,7 +41,7 @@ class ParticleEditorScreen : AbstractScreen()
 {
 	var currentPath: String? = null
 	lateinit var particle: ParticleEffect
-	val batch = HDRColourSpriteBatch()
+	val batch = SpriteBatch()
 	lateinit var background: Array2D<Symbol>
 	lateinit var collision: Array2D<Boolean>
 	var tileSize = 32f
@@ -69,9 +68,9 @@ class ParticleEditorScreen : AbstractScreen()
 
 	override fun create()
 	{
-		val browseButton = TextButton("...", Global.skin)
-		val updateButton = TextButton("Update", Global.skin)
-		val playbackSpeedBox = SelectBox<Float>(Global.skin)
+		val browseButton = TextButton("...", Statics.skin)
+		val updateButton = TextButton("Update", Statics.skin)
+		val playbackSpeedBox = SelectBox<Float>(Statics.skin)
 		playbackSpeedBox.setItems(0.01f, 0.05f, 0.1f, 0.25f, 0.5f, 0.75f, 1f, 1.5f, 2f, 3f, 4f, 5f)
 		playbackSpeedBox.selected = 1f
 
@@ -84,7 +83,7 @@ class ParticleEditorScreen : AbstractScreen()
 
 		})
 
-		val colourButton = TextButton("Colour", Global.skin)
+		val colourButton = TextButton("Colour", Statics.skin)
 		colourButton.addClickListener {
 			colour = JColorChooser.showDialog(null, "Particle Colour", colour)
 			particle.colour.set(colour.red / 255f, colour.green / 255f, colour.blue / 255f, colour.alpha / 255f)
@@ -128,10 +127,10 @@ class ParticleEditorScreen : AbstractScreen()
 			particle = nparticle
 		}
 
-		debugButton = CheckBox("Debug", Global.skin)
-		alignUpButton = CheckBox("AlignUp", Global.skin)
+		debugButton = CheckBox("Debug", Statics.skin)
+		alignUpButton = CheckBox("AlignUp", Statics.skin)
 
-		val sizeBox = SelectBox<Int>(Global.skin)
+		val sizeBox = SelectBox<Int>(Statics.skin)
 		sizeBox.setItems(1, 2, 3, 4, 5)
 		sizeBox.selected = 1
 
@@ -219,7 +218,7 @@ class ParticleEditorScreen : AbstractScreen()
 		background = Array2D(width, height) { x, y -> symbolMap[rowsEl.getChild(height - y - 1).text[x]].copy() }
 		collision = Array2D(width, height) { x, y -> background[x, y].isWall }
 
-		val tilex = Global.resolution.x.toFloat() / width.toFloat()
+		val tilex = Statics.resolution.x.toFloat() / width.toFloat()
 		tileSize = tilex
 
 		spriteRender = SortedRenderer(tileSize, width.toFloat(), height.toFloat(), 2, true)
@@ -238,7 +237,7 @@ class ParticleEditorScreen : AbstractScreen()
 
 		batch.projectionMatrix = stage.camera.combined
 
-		Global.collisionGrid = collision
+		Statics.collisionGrid = collision
 
 		spriteRender.begin(delta * deltaMultiplier, 0f, 0f, Colour.WHITE)
 

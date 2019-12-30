@@ -10,7 +10,6 @@ import com.lyeeedar.Board.Mote
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.Storage
 import com.lyeeedar.EquipmentSlot
-import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Statistic
@@ -88,9 +87,9 @@ class StatisticsReward : AbstractReward()
 			if (statVal != 0f)
 			{
 				val table = Table()
-				table.add(Label(stat.toString().capitalize(), Global.skin, "cardtitle"))
+				table.add(Label(stat.toString().capitalize(), Statics.skin, "cardtitle"))
 				table.row()
-				table.add(Label(statVal.toString(), Global.skin, "cardtitle"))
+				table.add(Label(statVal.toString(), Statics.skin, "cardtitle"))
 				table.row()
 
 				Global.player.statistics[stat] = (Global.player.statistics[stat] ?: 0f) + statVal
@@ -294,7 +293,7 @@ class MoneyReward : AbstractReward()
 
 		val table = Table()
 
-		val title = Label("Gold", Global.skin, "cardtitle")
+		val title = Label("Gold", Statics.skin, "cardtitle")
 		table.add(title).expandX().center().padTop(10f)
 		table.row()
 
@@ -307,7 +306,7 @@ class MoneyReward : AbstractReward()
 			amountStr += "+$bonus"
 		}
 
-		val amountLbl = Label(amountStr, Global.skin, "cardtitle")
+		val amountLbl = Label(amountStr, Statics.skin, "cardtitle")
 		table.add(amountLbl).expandX().center().padTop(10f)
 		table.row()
 
@@ -564,7 +563,7 @@ class ItemReward : AbstractReward()
 			flags.flags.put(key, value.evaluate(Global.getVariableMap()))
 
 			val table = Table()
-			val title = Label(name, Global.skin, "cardtitle")
+			val title = Label(name, Statics.skin, "cardtitle")
 			title.setWrap(true)
 
 			table.add(title)

@@ -5,16 +5,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Align
 import com.lyeeedar.Board.Grid
-import com.lyeeedar.Global
-import com.lyeeedar.Global.Companion.skin
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Colour
-import com.lyeeedar.Util.Future
-import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.*
 
 /**
  * Created by Philip on 13-Jul-16.
@@ -31,7 +27,7 @@ class CompletionConditionTime(): AbstractCompletionCondition()
 	override fun createTable(grid: Grid): Table
 	{
 		val t = time.toInt()
-		label = Label("$t\nSeconds", skin)
+		label = Label("$t\nSeconds", Statics.skin)
 		label.setAlignment(Align.center)
 
 		val stack = Stack()
@@ -89,7 +85,7 @@ class CompletionConditionTime(): AbstractCompletionCondition()
 		val table = Table()
 
 		val t = time.toInt()
-		table.add(Label("Within $t seconds.", Global.skin))
+		table.add(Label("Within $t seconds.", Statics.skin))
 
 		return table
 	}

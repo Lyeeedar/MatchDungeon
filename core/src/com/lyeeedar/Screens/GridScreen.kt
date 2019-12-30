@@ -1,5 +1,10 @@
 package com.lyeeedar.Screens
 
+import com.lyeeedar.Renderables.Sprite.Sprite
+import com.lyeeedar.UI.*
+import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Statics
+import com.lyeeedar.Util.random
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.scenes.scene2d.Touchable
@@ -10,13 +15,9 @@ import com.lyeeedar.Board.*
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionTurns
 import com.lyeeedar.EquipmentSlot
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Game.Player
-import com.lyeeedar.Global
-import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
-import com.lyeeedar.UI.*
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.random
 
 /**
  * Created by Philip on 20-Mar-16.
@@ -49,7 +50,7 @@ class GridScreen(): AbstractScreen()
 	// ----------------------------------------------------------------------
 	override fun create()
 	{
-		if (!Global.release)
+		if (!Statics.release)
 		{
 			debugConsole.register("complete", "", { args, console ->
 				level.victoryAction.invoke()
@@ -217,15 +218,15 @@ class GridScreen(): AbstractScreen()
 		val baseTable = Table()
 		baseTable.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/BasePanel")).tint(Color(0.8f, 0.8f, 0.8f, 1f))
 		baseTable.add(victoryTable).width(Value.percentWidth(0.35f, baseTable)).growY()
-		baseTable.add(Seperator(Global.skin, true)).growY().expandX()
+		baseTable.add(Seperator(Statics.skin, true)).growY().expandX()
 		baseTable.add(buffDebuffTable).width(Value.percentWidth(0.2f, baseTable)).growY()
-		baseTable.add(Seperator(Global.skin, true)).growY().expandX()
+		baseTable.add(Seperator(Statics.skin, true)).growY().expandX()
 		baseTable.add(defeatTable).width(Value.percentWidth(0.35f, baseTable)).growY()
 
 		val powerBarStack = Stack()
 		powerBarStack.add(powerBar)
 
-		refreshButton = TextButton("No Valid Moves. Shuffle Grid?", Global.skin)
+		refreshButton = TextButton("No Valid Moves. Shuffle Grid?", Statics.skin)
 		refreshButton!!.isVisible = false
 		refreshButton!!.addClickListener {
 			if (level.grid.activeAbility == null && level.grid.noValidMoves)
@@ -236,7 +237,7 @@ class GridScreen(): AbstractScreen()
 		}
 		powerBarStack.add(refreshButton)
 
-		ultimateButton = TextButton("Full Power! Shuffle Grid?", Global.skin)
+		ultimateButton = TextButton("Full Power! Shuffle Grid?", Statics.skin)
 		ultimateButton!!.isVisible = false
 		ultimateButton!!.addClickListener {
 			if (powerBar.power == powerBar.maxPower)
@@ -247,7 +248,7 @@ class GridScreen(): AbstractScreen()
 		}
 		powerBarStack.add(ultimateButton)
 
-		launchButton = TextButton("Launch", Global.skin)
+		launchButton = TextButton("Launch", Statics.skin)
 		launchButton!!.isVisible = false
 		launchButton!!.addClickListener {
 			if (level.grid.activeAbility != null && level.grid.activeAbility!!.selectedTargets.size > 0)
@@ -257,7 +258,7 @@ class GridScreen(): AbstractScreen()
 		}
 		powerBarStack.add(launchButton)
 
-		completeButton = TextButton("Level complete! Skip animations?", Global.skin)
+		completeButton = TextButton("Level complete! Skip animations?", Statics.skin)
 		completeButton!!.isVisible = false
 		completeButton!!.addClickListener {
 			if (level.victoryConditions.all { it.isCompleted() })
@@ -336,18 +337,18 @@ class GridScreen(): AbstractScreen()
 			val iconTable = Table()
 			iconTable.add(SpriteWidget(icon, 64f, 64f)).expandX().right().pad(5f)
 			titleStack.add(iconTable)
-			titleStack.add(Label("Berserk", Global.skin, "cardtitle"))
+			titleStack.add(Label("Berserk", Statics.skin, "cardtitle"))
 
 			table.add(titleStack).growX()
 			table.row()
 
-			table.add(Seperator(Global.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f)
+			table.add(Seperator(Statics.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f)
 			table.row()
 
-			table.add(Seperator(Global.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f)
+			table.add(Seperator(Statics.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f)
 			table.row()
 
-			table.add(Label("Statistics", Global.skin, "cardtitle"))
+			table.add(Label("Statistics", Statics.skin, "cardtitle"))
 			table.row()
 
 			for (stat in Statistic.Values)
@@ -360,8 +361,8 @@ class GridScreen(): AbstractScreen()
 				val statVal = if (stat == Statistic.PIERCE) berserk * 0.5f else berserk
 
 				val statTable = Table()
-				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Global.skin, "card")).expandX().left()
-				statTable.add(Label(statVal.toString(), Global.skin, "card"))
+				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Statics.skin, "card")).expandX().left()
+				statTable.add(Label(statVal.toString(), Statics.skin, "card"))
 				statTable.addTapToolTip(stat.tooltip)
 
 				var add = false
@@ -374,14 +375,14 @@ class GridScreen(): AbstractScreen()
 				if (statVal > 0)
 				{
 					val diff = statVal
-					val diffLabel = Label("+" + diff.toString(), Global.skin, "cardwhite")
+					val diffLabel = Label("+" + diff.toString(), Statics.skin, "cardwhite")
 					diffLabel.color = Color.GREEN
 					statTable.add(diffLabel)
 				}
 				else if (statVal < 0)
 				{
 					val diff = statVal
-					val diffLabel = Label(diff.toString(), Global.skin, "cardwhite")
+					val diffLabel = Label(diff.toString(), Statics.skin, "cardwhite")
 					diffLabel.color = Color.RED
 					statTable.add(diffLabel)
 				}

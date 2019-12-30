@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Board.*
 import com.lyeeedar.Game.Buff
-import com.lyeeedar.Global
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.Util.XmlData

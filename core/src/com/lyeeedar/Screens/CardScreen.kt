@@ -1,5 +1,9 @@
 package com.lyeeedar.Screens
 
+import com.lyeeedar.UI.*
+import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Statics
+import com.lyeeedar.Util.XmlData
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.NinePatch
 import com.badlogic.gdx.math.Vector2
@@ -15,16 +19,8 @@ import com.lyeeedar.Board.Mote
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.EquipmentSlot
-import com.lyeeedar.Game.Equipment
-import com.lyeeedar.Game.Quest
-import com.lyeeedar.Game.QuestNode
-import com.lyeeedar.Game.Save
-import com.lyeeedar.GameStateFlags
-import com.lyeeedar.Global
+import com.lyeeedar.Game.*
 import com.lyeeedar.MainGame
-import com.lyeeedar.UI.*
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.XmlData
 import ktx.actors.then
 import ktx.collections.toGdxArray
 
@@ -120,10 +116,10 @@ class CardScreen : AbstractScreen()
 
 	override fun create()
 	{
-		val skin = Global.skin
+		val skin = Statics.skin
 
 		text = ScrollingTextLabel("", skin)
-		goldLabel = NumberChangeLabel("Gold: ", Global.skin)
+		goldLabel = NumberChangeLabel("Gold: ", Statics.skin)
 
 		headSlot.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/TileBackground"))
 		mainhandSlot.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/TileBackground"))
@@ -155,7 +151,7 @@ class CardScreen : AbstractScreen()
 			FullscreenTable.createCard(table, statsTable.localToStageCoordinates(Vector2()))
 		}
 
-		if (!Global.release)
+		if (!Statics.release)
 		{
 			debugConsole.register("AddGold", "", fun(args, console): Boolean
 			{
@@ -220,7 +216,7 @@ class CardScreen : AbstractScreen()
 				{
 					if (equip.ability!!.maxUsages > 0 && !equip.ability!!.resetUsagesPerLevel)
 					{
-						val label = Label(equip.ability!!.remainingUsages.toString(), Global.skin)
+						val label = Label(equip.ability!!.remainingUsages.toString(), Statics.skin)
 						stack.add(label)
 					}
 				}
@@ -283,8 +279,8 @@ class CardScreen : AbstractScreen()
 
 					prevCard.frontTable.remove()
 					val newCard = CardWidget(prevCard.frontTable, transitionTable, prevCard.backImage, null)
-					newCard.setPosition(Global.resolution.x / 2f, Global.resolution.y / 2f)
-					Global.stage.addActor(newCard)
+					newCard.setPosition(Statics.resolution.x / 2f, Statics.resolution.y / 2f)
+					Statics.stage.addActor(newCard)
 					newCard.focus()
 					newCard.collapseFun = {
 						readyToSwitch = true
@@ -331,7 +327,7 @@ class CardScreen : AbstractScreen()
 			goldLabel.complete()
 
 			QuestScreen.instance.updateQuest()
-			Global.game.switchScreen(MainGame.ScreenEnum.QUEST)
+			Statics.game.switchScreen(MainGame.ScreenEnum.QUEST)
 		}
 	}
 
