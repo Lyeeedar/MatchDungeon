@@ -45,6 +45,8 @@ class QuestScreen : AbstractScreen()
 
 	override fun create()
 	{
+		cardsTable.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/shadowborder"))
+
 		greyOutTable.background = TextureRegionDrawable(AssetManager.loadTextureRegion("white")).tint(Color(0f, 0f, 0f, 0.5f))
 		greyOutTable.touchable = Touchable.enabled
 		greyOutTable.setFillParent(true)
@@ -83,16 +85,23 @@ class QuestScreen : AbstractScreen()
 
 		questProgressWidget = QuestProgressWidget()
 
-		mainTable.add(statsTable).expandX().left().pad(20f)
-		mainTable.row()
+		val nonCard = Table()
+		nonCard.pad(10f)
+		nonCard.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/BasePanel")).tint(Color(0.8f, 0.8f, 0.8f, 1f))
 
-		mainTable.add(Seperator(Global.skin)).growX().pad(0f, 10f, 0f, 10f)
-		mainTable.row()
+		nonCard.add(statsTable).expandX().left().pad(10f)
+		nonCard.row()
 
-		mainTable.add(questProgressWidget).growX().height(20f).pad(2f)
-		mainTable.row()
+		nonCard.add(Seperator(Global.skin)).growX().pad(0f, 10f, 0f, 10f)
+		nonCard.row()
 
-		mainTable.add(Seperator(Global.skin)).growX().pad(0f, 10f, 0f, 10f)
+		nonCard.add(questProgressWidget).growX().height(20f).pad(2f)
+		nonCard.row()
+
+		nonCard.add(Seperator(Global.skin)).growX().pad(0f, 10f, 0f, 10f)
+		nonCard.row()
+
+		mainTable.add(nonCard).growX()
 		mainTable.row()
 
 		mainTable.add(cardsTable).grow()
@@ -284,7 +293,7 @@ class QuestScreen : AbstractScreen()
 			return
 		}
 
-		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(currentQuest.currentTheme.backgroundTile))).tint(Color.DARK_GRAY)
+		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(currentQuest.currentTheme.backgroundTile))).tint(Color(0.5f, 0.5f, 0.5f, 1f))
 
 		val cards = (currentQuest.current as QuestNode).getCards()
 		if (cards.size == 0)

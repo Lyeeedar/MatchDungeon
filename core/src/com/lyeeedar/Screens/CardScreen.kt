@@ -88,10 +88,11 @@ class CardScreen : AbstractScreen()
 
 		mainTable.clear()
 
-		mainTable.add(statsTable).expandX().left().pad(20f)
-		mainTable.row()
+		val statsContainerTable = Table()
+		statsContainerTable.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/BasePanel")).tint(Color(0.8f, 0.8f, 0.8f, 1f))
+		statsContainerTable.add(statsTable).expandX().left().pad(20f)
 
-		mainTable.add(Seperator(Global.skin)).growX().pad(0f, 10f, 0f, 10f)
+		mainTable.add(statsContainerTable).growX()
 		mainTable.row()
 
 		val contentTable = Table()
@@ -106,7 +107,11 @@ class CardScreen : AbstractScreen()
 
 		contentTable.background = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("Sprites/GUI/background.png"), 24, 24, 24, 24))
 
-		mainTable.add(contentTable).grow().pad(15f, 35f, 15f, 35f)
+		val nonStatsTable = Table()
+		nonStatsTable.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/shadowborder"))
+		nonStatsTable.add(contentTable).grow().pad(15f, 35f, 15f, 35f)
+
+		mainTable.add(nonStatsTable).grow()
 		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(quest.currentTheme.backgroundTile))).tint(Color.DARK_GRAY)
 
 		updateEquipment()

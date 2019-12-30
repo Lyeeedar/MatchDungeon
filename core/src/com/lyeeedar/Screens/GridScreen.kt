@@ -1,12 +1,9 @@
 package com.lyeeedar.Screens
 
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.g2d.NinePatch
 import com.badlogic.gdx.math.Rectangle
-import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.*
-import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.lyeeedar.Board.*
@@ -20,11 +17,6 @@ import com.lyeeedar.Statistic
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.random
-import ktx.actors.onClick
-import ktx.scene2d.KTextButton
-import ktx.scene2d.stack
-import ktx.scene2d.table
-import ktx.scene2d.textButton
 
 /**
  * Created by Philip on 20-Mar-16.
@@ -192,11 +184,6 @@ class GridScreen(): AbstractScreen()
 		buffDebuffTable.row()
 		buffDebuffTable.add(debuffTable).grow()
 
-		defeatTable.background = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("Sprites/GUI/background.png"), 24, 24, 24, 24))
-		victoryTable.background = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("Sprites/GUI/background.png"), 24, 24, 24, 24))
-
-		buffDebuffTable.background = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("Sprites/GUI/background.png"), 24, 24, 24, 24))
-
 		val abilityTable = Table()
 		for (slot in EquipmentSlot.Values)
 		{
@@ -228,74 +215,80 @@ class GridScreen(): AbstractScreen()
 		//val table = mainTable
 
 		val baseTable = Table()
+		baseTable.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/BasePanel")).tint(Color(0.8f, 0.8f, 0.8f, 1f))
 		baseTable.add(victoryTable).width(Value.percentWidth(0.35f, baseTable)).growY()
-		baseTable.add(buffDebuffTable).width(Value.percentWidth(0.3f, baseTable)).growY()
+		baseTable.add(Seperator(Global.skin, true)).growY().expandX()
+		baseTable.add(buffDebuffTable).width(Value.percentWidth(0.2f, baseTable)).growY()
+		baseTable.add(Seperator(Global.skin, true)).growY().expandX()
 		baseTable.add(defeatTable).width(Value.percentWidth(0.35f, baseTable)).growY()
 
-		val table = table {
-			defaults().pad(10f).growX()
-			background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(level.theme.backgroundTile))).tint(Color.DARK_GRAY)
+		val powerBarStack = Stack()
+		powerBarStack.add(powerBar)
 
-			add(abilityTable)
-			row()
-			stack { cell -> cell.height(25f)
-				add(powerBar)
-
-				refreshButton = textButton("No Valid Moves. Shuffle Grid?", "default", Global.skin) {
-					isVisible = false
-					onClick { inputEvent: InputEvent, kTextButton: KTextButton ->
-						if (level.grid.activeAbility == null && level.grid.noValidMoves)
-						{
-							level.grid.refill()
-							powerBar.power = 0
-						}
-					}
-				}
-
-				ultimateButton = textButton("Full Power! Shuffle Grid?", "default", Global.skin) {
-					isVisible = false
-					onClick { inputEvent: InputEvent, kTextButton: KTextButton ->
-						if (powerBar.power == powerBar.maxPower)
-						{
-							level.grid.refill()
-							powerBar.power = 0
-						}
-					}
-				}
-
-				launchButton = textButton("Launch", "default", Global.skin) {
-					isVisible = false
-					onClick { inputEvent: InputEvent, kTextButton: KTextButton ->
-						if (level.grid.activeAbility != null && level.grid.activeAbility!!.selectedTargets.size > 0)
-						{
-							level.grid.activateAbility()
-						}
-					}
-				}
-
-				completeButton = textButton("Level complete! Skip animations?", "default", Global.skin) {
-					isVisible = false
-					onClick { inputEvent: InputEvent, kTextButton: KTextButton ->
-						if (level.victoryConditions.all { it.isCompleted() })
-						{
-							Mote.clear()
-
-							for (label in level.grid.messageList)
-							{
-								label.remove()
-							}
-
-							level.completed = true
-							level.complete()
-						}
-					}
-				}
+		refreshButton = TextButton("No Valid Moves. Shuffle Grid?", Global.skin)
+		refreshButton!!.isVisible = false
+		refreshButton!!.addClickListener {
+			if (level.grid.activeAbility == null && level.grid.noValidMoves)
+			{
+				level.grid.refill()
+				powerBar.power = 0
 			}
-			row()
-			add(gridWidget).grow()
-			row()
-			add(baseTable).growX()
 		}
+		powerBarStack.add(refreshButton)
+
+		ultimateButton = TextButton("Full Power! Shuffle Grid?", Global.skin)
+		ultimateButton!!.isVisible = false
+		ultimateButton!!.addClickListener {
+			if (powerBar.power == powerBar.maxPower)
+			{
+				level.grid.refill()
+				powerBar.power = 0
+			}
+		}
+		powerBarStack.add(ultimateButton)
+
+		launchButton = TextButton("Launch", Global.skin)
+		launchButton!!.isVisible = false
+		launchButton!!.addClickListener {
+			if (level.grid.activeAbility != null && level.grid.activeAbility!!.selectedTargets.size > 0)
+			{
+				level.grid.activateAbility()
+			}
+		}
+		powerBarStack.add(launchButton)
+
+		completeButton = TextButton("Level complete! Skip animations?", Global.skin)
+		completeButton!!.isVisible = false
+		completeButton!!.addClickListener {
+			if (level.victoryConditions.all { it.isCompleted() })
+			{
+				Mote.clear()
+
+				for (label in level.grid.messageList)
+				{
+					label.remove()
+				}
+
+				level.completed = true
+				level.complete()
+			}
+		}
+		powerBarStack.add(completeButton)
+
+		val topTable = Table()
+		topTable.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/BasePanel")).tint(Color(0.8f, 0.8f, 0.8f, 1f))
+		topTable.add(abilityTable).pad(10f).growX()
+		topTable.row()
+		topTable.add(powerBarStack).height(25f).pad(10f).growX()
+
+		val table = Table()
+		table.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(level.theme.backgroundTile))).tint(Color(0.5f, 0.5f, 0.5f, 1f))
+
+		table.add(topTable).growX()
+		table.row()
+		table.add(gridWidget).grow()
+		table.row()
+		table.add(baseTable).growX()
 
 		mainTable.add(table).grow()
 

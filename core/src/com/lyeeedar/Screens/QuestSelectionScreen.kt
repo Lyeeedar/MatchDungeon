@@ -10,7 +10,6 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Game.Quest
 import com.lyeeedar.GameStateFlags
 import com.lyeeedar.Global
-import com.lyeeedar.UI.Seperator
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.UI.addClickListener
 import com.lyeeedar.Util.AssetManager
@@ -166,16 +165,18 @@ class QuestSelectionScreen : AbstractScreen()
 		rightButtonStack.add(rightNew)
 
 		val titleTable = Table()
+		titleTable.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/BasePanel")).tint(Color(0.8f, 0.8f, 0.8f, 1f))
 		titleTable.add(leftButtonStack).expandY().center().pad(20f)
 		titleTable.add(titleLabel).expand().center()
 		titleTable.add(rightButtonStack).expandY().center().pad(20f)
 
-		mainTable.add(titleTable).growX().padTop(20f)
-		mainTable.row()
-		mainTable.add(Seperator(Global.skin)).growX()
+		mainTable.add(titleTable).growX()
 		mainTable.row()
 
-		mainTable.add(scrollPane).growX().expandY().bottom()
+		val scrollPaneTable = Table()
+		scrollPaneTable.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/shadowborder"))
+		scrollPaneTable.add(scrollPane).grow()
+		mainTable.add(scrollPaneTable).grow()
 		mainTable.row()
 
 		val editButtonTable = Table()
@@ -201,7 +202,11 @@ class QuestSelectionScreen : AbstractScreen()
 			editStack.add(newTable)
 		}
 
-		mainTable.add(editStack).expand().right().bottom()
+		val editTable = Table()
+		editTable.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/BasePanel")).tint(Color(0.8f, 0.8f, 0.8f, 1f))
+		editTable.add(editStack).expand().right().bottom()
+
+		mainTable.add(editTable).growX().right().bottom()
 		mainTable.row()
 
 		updateQuestsTable()

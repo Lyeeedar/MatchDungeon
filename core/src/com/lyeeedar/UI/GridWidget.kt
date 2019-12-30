@@ -77,9 +77,10 @@ class GridWidget(val grid: Grid) : Widget()
 			override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean
 			{
 				val xp = x + ((grid.width * tileSize) / 2f) - (width / 2f)
+				val yp = y + ((grid.height * tileSize) / 2f) - (height / 2f)
 
 				val sx = (xp / tileSize).toInt()
-				val sy = (grid.height-1) - (y / tileSize).toInt()
+				val sy = (grid.height-1) - (yp / tileSize).toInt()
 
 				grid.select(Point(sx, sy))
 
@@ -96,9 +97,10 @@ class GridWidget(val grid: Grid) : Widget()
 			override fun touchDragged (event: InputEvent?, x: Float, y: Float, pointer: Int)
 			{
 				val xp = x + ((grid.width * tileSize) / 2f) - (width / 2f)
+				val yp = y + ((grid.height * tileSize) / 2f) - (height / 2f)
 
 				val sx = (xp / tileSize).toInt()
-				val sy = (grid.height - 1) - (y / tileSize).toInt()
+				val sy = (grid.height - 1) - (yp / tileSize).toInt()
 
 				val point = Point(sx, sy)
 
@@ -234,7 +236,7 @@ class GridWidget(val grid: Grid) : Widget()
 		batch!!.end()
 
 		val xp = this.x + (this.width / 2f) - ((grid.width * tileSize) / 2f)
-		val yp = this.y
+		val yp = this.y + (this.height / 2f) - ((grid.height * tileSize) / 2f)
 		renderY = yp
 
 		renderer.begin(Gdx.app.graphics.deltaTime, xp, yp, Colour.WHITE)

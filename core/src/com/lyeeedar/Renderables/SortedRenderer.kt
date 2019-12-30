@@ -22,7 +22,6 @@ import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Particle.Emitter
 import com.lyeeedar.Renderables.Particle.Particle
 import com.lyeeedar.Renderables.Particle.ParticleEffect
-import com.lyeeedar.Renderables.RadixSort.Companion.MOST_SIGNIFICANT_BYTE_INDEX
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Renderables.Sprite.TilingSprite
 import com.lyeeedar.Util.*
@@ -47,7 +46,9 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 
 	private val startingArraySize = 128
 	private var spriteArray = Array<RenderSprite?>(startingArraySize) { null }
-	private var sortedArray = Array<RenderSprite?>(startingArraySize) { null }
+	private var tempArray = Array<RenderSprite?>(startingArraySize) { null }
+	private lateinit var sortedArray: Array<RenderSprite?>
+
 	private var queuedSprites = 0
 
 	private val tilingMap: IntMap<ObjectSet<Long>> = IntMap()
@@ -118,7 +119,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 	private var currentVertexCount = 0
 	private val staticBuffers = com.badlogic.gdx.utils.Array<VertexBuffer>()
 	private val queuedBuffers = com.badlogic.gdx.utils.Array<VertexBuffer>()
-	private lateinit var shader: ShaderProgram
+	private var shader: ShaderProgram
 	private var shaderLightNum: Int = 0
 	private var shaderShadowLightNum: Int = 0
 	private var shaderRegionsPerLight: IntArray = IntArray(0)
@@ -577,7 +578,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 	{
 		for (i in 0 until queuedSprites)
 		{
-			val rs = spriteArray[i]!!
+			val rs = sortedArray[i]!!
 
 			var sprite = rs.sprite
 			if (rs.tilingSprite != null)
@@ -656,7 +657,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 		if (queuedSprites < spriteArray.size / 4)
 		{
 			spriteArray = spriteArray.copyOf(spriteArray.size / 4)
-			sortedArray = sortedArray.copyOf(sortedArray.size / 4)
+			tempArray = tempArray.copyOf(tempArray.size / 4)
 		}
 
 		queuedSprites = 0
@@ -668,7 +669,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 		// Begin prerender work
 		executor.addJob {
 			// sort
-			RadixSort.sort(spriteArray, sortedArray, 0, 0, queuedSprites, MOST_SIGNIFICANT_BYTE_INDEX)
+			sortedArray = RadixSort.sort(spriteArray, queuedSprites, tempArray)
 
 			// do screen shake
 			if ( screenShakeRadius > 2 )
@@ -759,11 +760,10 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 		if (queuedSprites == spriteArray.size-1)
 		{
 			spriteArray = spriteArray.copyOf(spriteArray.size * 2)
-			sortedArray = sortedArray.copyOf(sortedArray.size * 2)
+			tempArray = tempArray.copyOf(tempArray.size * 2)
 		}
 
 		spriteArray[queuedSprites] = renderSprite
-		sortedArray[queuedSprites] = renderSprite
 
 		queuedSprites++
 	}
@@ -1937,133 +1937,127 @@ class RadixSort
 {
 	companion object
 	{
-		/**
-		 * The byte index of the most significant byte in each 32-bit integer.
-		 */
-		public const val MOST_SIGNIFICANT_BYTE_INDEX = 3
-
-		/**
-		 * The mask for manipulating the sign bit.
-		 */
-		private const val SIGN_BIT_MASK = -0x80000000
-
-		/**
-		 * The amount of bits per byte.
-		 */
-		private const val BITS_PER_BYTE = 8
-
-		/**
-		 * The mask for extracting the bucket index.
-		 */
-		private const val EXTRACT_BYTE_MASK = 0xff
-
-		/**
-		 * The amount of buckets considered for sorting.
-		 */
-		private const val BUCKET_AMOUNT = 256
-
-		private const val QUICKSORT_THRESHOLD = 128
-
-		private val bucketPool: Pool<IntArray> = object : Pool<IntArray>() {
-			override fun newObject(): IntArray
-			{
-				return IntArray(BUCKET_AMOUNT)
-			}
-		}
-
-		public fun sort(
-				source: Array<RenderSprite?>, target: Array<RenderSprite?>,
-				sourceOffset: Int, targetOffset: Int, rangeLength: Int,
-				byteIndex: Int)
+		val Z = IntArray(1024)
+		fun sort(A: Array<RenderSprite?>, N: Int, Temp: Array<RenderSprite?>): Array<RenderSprite?>
 		{
-			if (rangeLength < QUICKSORT_THRESHOLD)
-			{
-				source.sort(sourceOffset, sourceOffset + rangeLength)
+			Z.fill(0)
+			var A = A
+			var Temp = Temp
 
-				if (byteIndex and 1 == 0)
+			val Jump: Int
+			val Jump2: Int
+			val Jump3: Int
+			val Jump4: Int
+			var i: Int
+			var swp: Array<RenderSprite?>
+
+			// Sort-circuit set-up
+			Jump = A[0]!!.comparisonVal and 255
+			Z[Jump] = 1
+			Jump2 = (A[0]!!.comparisonVal shr 8 and 255) + 256
+			Z[Jump2] = 1
+			Jump3 = (A[0]!!.comparisonVal shr 16 and 255) + 512
+			Z[Jump3] = 1
+			Jump4 = (A[0]!!.comparisonVal shr 24 and 255) + 768
+			Z[Jump4] = 1
+
+			// Histograms creation
+			i = 1
+			while (i < N)
+			{
+				++Z[A[i]!!.comparisonVal and 255]
+				++Z[(A[i]!!.comparisonVal shr 8 and 255) + 256]
+				++Z[(A[i]!!.comparisonVal shr 16 and 255) + 512]
+				++Z[(A[i]!!.comparisonVal shr 24 and 255) + 768]
+				++i
+			}
+
+			// 1st LSB byte sort
+			if (Z[Jump] != N)
+			{
+				i = 1
+				while (i < 256)
 				{
-					System.arraycopy(source, sourceOffset, target, targetOffset, rangeLength)
+					Z[i] = Z[i - 1] + Z[i]
+					++i
 				}
-
-				return
-			}
-
-			val bucketSizeMap = bucketPool.obtain()
-			for (i in 0 until BUCKET_AMOUNT)
-			{
-				bucketSizeMap[i] = 0
-			}
-
-			// Count the size of each bucket.
-			for (i in sourceOffset until sourceOffset + rangeLength)
-			{
-				bucketSizeMap[getBucketIndex(source[i]!!.comparisonVal, byteIndex)]++
-			}
-
-			// Compute the map mapping each bucket to its beginning index.
-			val startIndexMap = bucketPool.obtain()
-			startIndexMap[0] = 0
-
-			for (i in 1 until BUCKET_AMOUNT)
-			{
-				startIndexMap[i] = startIndexMap[i - 1] + bucketSizeMap[i - 1]
-			}
-
-			// The map mapping each bucket index to amount of elements already put
-			// in the bucket.
-			val processedMap = bucketPool.obtain()
-			for (i in 0 until BUCKET_AMOUNT)
-			{
-				processedMap[i] = 0
-			}
-
-			for (i in sourceOffset until sourceOffset + rangeLength)
-			{
-				val element = source[i]
-				val bucket = getBucketIndex(element!!.comparisonVal, byteIndex)
-				target[targetOffset + startIndexMap[bucket] +
-					   processedMap[bucket]++] = element
-			}
-
-			if (byteIndex > 0)
-			{
-				// Recursively sort the buckets.
-				for (i in 0 until BUCKET_AMOUNT)
+				i = N - 1
+				while (i >= 0)
 				{
-					if (bucketSizeMap[i] != 0)
-					{
-						sort(target,
-							 source,
-							 targetOffset + startIndexMap[i],
-							 sourceOffset + startIndexMap[i],
-							 bucketSizeMap[i],
-							 byteIndex - 1)
-					}
+					Temp[--Z[A[i]!!.comparisonVal and 255]] = A[i]
+					--i
 				}
+				swp = A
+				A = Temp
+				Temp = swp
 			}
 
-			bucketPool.free(bucketSizeMap)
-			bucketPool.free(startIndexMap)
-			bucketPool.free(processedMap)
-		}
-
-		/**
-		 * Returns the bucket index for `element` when considering
-		 * `byteIndex`th byte within the element. The indexing starts from
-		 * the least significant bytes.
-		 *
-		 * @param element   the element for which to compute the bucket index.
-		 * @param byteIndex the index of the byte to be considered.
-		 * @return the bucket index.
-		 */
-		private fun getBucketIndex(element: Int, byteIndex: Int): Int
-		{
-			var result = element
-			if (byteIndex == MOST_SIGNIFICANT_BYTE_INDEX)
+			// 2nd LSB byte sort
+			if (Z[Jump2] != N)
 			{
-				result = result xor SIGN_BIT_MASK
+				i = 257
+				while (i < 512)
+				{
+					Z[i] = Z[i - 1] + Z[i]
+					++i
+				}
+				i = N - 1
+				while (i >= 0)
+				{
+					Temp[--Z[(A[i]!!.comparisonVal shr 8 and 255) + 256]] = A[i]
+					--i
+				}
+				swp = A
+				A = Temp
+				Temp = swp
 			}
-			return result.ushr(byteIndex * BITS_PER_BYTE) and EXTRACT_BYTE_MASK
+
+			// 3rd LSB byte sort
+			if (Z[Jump3] != N)
+			{
+				i = 513
+				while (i < 768)
+				{
+					Z[i] = Z[i - 1] + Z[i]
+					++i
+				}
+				i = N - 1
+				while (i >= 0)
+				{
+					Temp[--Z[(A[i]!!.comparisonVal shr 16 and 255) + 512]] = A[i]
+					--i
+				}
+				swp = A
+				A = Temp
+				Temp = swp
+			}
+
+			// 4th LSB byte sort and negative numbers sort
+			if (Z[Jump4] != N)
+			{
+				i = 897
+				while (i < 1024)
+				// -ve values frequency starts after index 895, i.e at 896 ( 896 = 768 + 128 ), goes upto 1023
+				{
+					Z[i] = Z[i - 1] + Z[i]
+					++i
+				}
+				Z[768] = Z[768] + Z[1023]
+				i = 769
+				while (i < 896)
+				{
+					Z[i] = Z[i - 1] + Z[i]
+					++i
+				}
+				i = N - 1
+				while (i >= 0)
+				{
+					Temp[--Z[(A[i]!!.comparisonVal shr 24 and 255) + 768]] = A[i]
+					--i
+				}
+				return Temp
+			}
+			return A
 		}
 	}
 }
