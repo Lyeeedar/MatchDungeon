@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.badlogic.gdx.backends.android.AndroidApplication
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
 import com.crashlytics.android.Crashlytics
-import com.lyeeedar.Game.Global
+import com.lyeeedar.Util.Statics
 import io.fabric.sdk.android.Fabric
 
 class AndroidLauncher : AndroidApplication()
@@ -19,12 +19,12 @@ class AndroidLauncher : AndroidApplication()
 		config.resolutionStrategy.calcMeasures(360, 640)
 		config.disableAudio = false
 
-		Global.android = true
-		Global.game = MainGame()
+		Statics.android = true
+		Statics.game = MainGame()
 
-		initialize(Global.game, config)
+		initialize(Statics.game, config)
 
-		Global.applicationChanger = AndroidApplicationChanger()
-		Global.applicationChanger.updateApplication(Global.applicationChanger.prefs)
+		Statics.applicationChanger = AndroidApplicationChanger()
+		Statics.applicationChanger.updateApplication(Statics.applicationChanger.prefs)
 	}
 }
