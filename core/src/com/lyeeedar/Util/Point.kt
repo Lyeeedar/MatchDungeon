@@ -21,7 +21,7 @@ open class Point : Pool.Poolable, Comparable<Point>
 	var locked: Boolean = false
 	var fromPool: Boolean = false
 
-	internal var x: Int = 0
+	var x: Int = 0
 		set(value)
 		{
 			if (locked) throw RuntimeException("Tried to edit a locked point")
@@ -30,7 +30,7 @@ open class Point : Pool.Poolable, Comparable<Point>
 			field = value
 		}
 
-	internal var y: Int = 0
+	var y: Int = 0
 		set(value)
 		{
 			if (locked) throw RuntimeException("Tried to edit a locked point")
@@ -345,6 +345,8 @@ open class Point : Pool.Poolable, Comparable<Point>
 	operator fun div(other: Point) = obtain().set(x / other.x, y / other.y)
 	operator fun div(other: Int) = obtain().set(x / other, y / other)
 
+	operator fun times(scale: Float) = Vector2(x * scale, y * scale)
+
 	operator fun timesAssign(other: Int) { x *= other; y *= other; }
 
 	operator fun plusAssign(other: Point) { x += other.x; y += other.y }
@@ -397,6 +399,13 @@ open class Point : Pool.Poolable, Comparable<Point>
     {
 
     }
+
+	fun parse(str: String)
+	{
+		val split = str.split(',')
+		x = split[0].toInt()
+		y = split[1].toInt()
+	}
 }
 
 class PointRange(override val endInclusive: Point, override val start: Point) : ClosedRange<Point>, PointProgression(start, endInclusive)

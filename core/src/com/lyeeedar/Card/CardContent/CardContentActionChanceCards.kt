@@ -144,7 +144,7 @@ class CardContentActionChanceCards : AbstractCardContentAction()
 		}
 
 		// place in grid
-		CardWidget.layoutCards(cards, Direction.CENTER, animate = false)
+		CardWidget.layoutCards(cards, Direction.CENTER, animate = false, flip = true)
 
 		// store grid positions
 		val positions = cards.map { Vector2(it.x, it.y) }.toGdxArray()

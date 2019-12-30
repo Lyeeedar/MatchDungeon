@@ -117,7 +117,7 @@ class FriendlyDesc
 			val desc = FriendlyDesc()
 
 			desc.sprite = AssetManager.loadSprite(xml.getChildByName("Sprite")!!)
-			desc.death = AssetManager.loadParticleEffect(xml.getChildByName("Death")!!)
+			desc.death = AssetManager.loadParticleEffect(xml.getChildByName("Death")!!).getParticleEffect()
 
 			desc.size = xml.getInt("Size", 1)
 			desc.hp = xml.getInt("HP", 10)
@@ -241,13 +241,13 @@ class AttackAbility : FriendlyAbility()
 		val flightEffectEl = xml.getChildByName("FlightEffect")
 		if (flightEffectEl != null)
 		{
-			flightEffect = AssetManager.loadParticleEffect(flightEffectEl)
+			flightEffect = AssetManager.loadParticleEffect(flightEffectEl).getParticleEffect()
 		}
 
 		val hitEffectEl = xml.getChildByName("HitEffect")
 		if (hitEffectEl != null)
 		{
-			hitEffect = AssetManager.loadParticleEffect(hitEffectEl)
+			hitEffect = AssetManager.loadParticleEffect(hitEffectEl).getParticleEffect()
 		}
 	}
 
@@ -328,13 +328,13 @@ class BreakAbility : FriendlyAbility()
 		val flightEffectEl = xml.getChildByName("FlightEffect")
 		if (flightEffectEl != null)
 		{
-			flightEffect = AssetManager.loadParticleEffect(flightEffectEl)
+			flightEffect = AssetManager.loadParticleEffect(flightEffectEl).getParticleEffect()
 		}
 
 		val hitEffectEl = xml.getChildByName("HitEffect")
 		if (hitEffectEl != null)
 		{
-			hitEffect = AssetManager.loadParticleEffect(hitEffectEl)
+			hitEffect = AssetManager.loadParticleEffect(hitEffectEl).getParticleEffect()
 		}
 	}
 
@@ -413,13 +413,13 @@ class BlockAbility : FriendlyAbility()
 		val flightEffectEl = xml.getChildByName("FlightEffect")
 		if (flightEffectEl != null)
 		{
-			flightEffect = AssetManager.loadParticleEffect(flightEffectEl)
+			flightEffect = AssetManager.loadParticleEffect(flightEffectEl).getParticleEffect()
 		}
 
 		val hitEffectEl = xml.getChildByName("HitEffect")
 		if (hitEffectEl != null)
 		{
-			hitEffect = AssetManager.loadParticleEffect(hitEffectEl)
+			hitEffect = AssetManager.loadParticleEffect(hitEffectEl).getParticleEffect()
 		}
 	}
 
@@ -512,13 +512,13 @@ class PopAbility : FriendlyAbility()
 		val flightEffectEl = xml.getChildByName("FlightEffect")
 		if (flightEffectEl != null)
 		{
-			flightEffect = AssetManager.loadParticleEffect(flightEffectEl)
+			flightEffect = AssetManager.loadParticleEffect(flightEffectEl).getParticleEffect()
 		}
 
 		val hitEffectEl = xml.getChildByName("HitEffect")
 		if (hitEffectEl != null)
 		{
-			hitEffect = AssetManager.loadParticleEffect(hitEffectEl)
+			hitEffect = AssetManager.loadParticleEffect(hitEffectEl).getParticleEffect()
 		}
 	}
 
@@ -562,7 +562,7 @@ class HealAbility : FriendlyAbility()
 			heartSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
 			tile.effects.add(heartSprite)
 
-			val healEffect = AssetManager.loadParticleEffect("Heal")
+			val healEffect = AssetManager.loadParticleEffect("Heal").getParticleEffect()
 			healEffect.colour = Colour.GREEN
 			healEffect.renderDelay = animDuration
 			tile.effects.add(healEffect)

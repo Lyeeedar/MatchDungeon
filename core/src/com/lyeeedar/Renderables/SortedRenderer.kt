@@ -12,10 +12,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram
 import com.badlogic.gdx.math.Matrix4
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
-import com.badlogic.gdx.utils.IntMap
-import com.badlogic.gdx.utils.ObjectMap
-import com.badlogic.gdx.utils.ObjectSet
-import com.badlogic.gdx.utils.Pool
+import com.badlogic.gdx.utils.*
 import com.lyeeedar.BlendMode
 import com.lyeeedar.Direction
 import com.lyeeedar.Global
@@ -35,20 +32,18 @@ import squidpony.squidmath.LightRNG
  */
 
 // ----------------------------------------------------------------------
-class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, val layers: Int, val alwaysOnscreen: Boolean)
+class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, val layers: Int, val alwaysOnscreen: Boolean) : Disposable
 {
 	private var batchID: Int = random.nextInt()
 
 	private val tempVec = Vector2()
+	private val tempVec2 = Vector2()
 	private val tempVec3 = Vector3()
 	private val tempCol = Colour()
 	private val bitflag = EnumBitflag<Direction>()
 
 	private val startingArraySize = 128
 	private var spriteArray = Array<RenderSprite?>(startingArraySize) { null }
-	private var tempArray = Array<RenderSprite?>(startingArraySize) { null }
-	private lateinit var sortedArray: Array<RenderSprite?>
-
 	private var queuedSprites = 0
 
 	private val tilingMap: IntMap<ObjectSet<Long>> = IntMap()
@@ -69,12 +64,15 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 	private var screenShakeAngle: Float = 0f
 	private var screenShakeLocked: Boolean = false
 
-	private val BLENDMODES = BlendMode.values().size
-	private val MAX_INDEX = 6 * BLENDMODES
-	private val X_BLOCK_SIZE = layers * MAX_INDEX
+	private val MAX_INDEX = 5
+	private val MAX_LAYER = layers
+	private val NUM_BLENDS = BlendMode.values().size
+
+	private val BLEND_BLOCK_SIZE = 1
+	private val INDEX_BLOCK_SIZE = BLEND_BLOCK_SIZE * NUM_BLENDS
+	private val LAYER_BLOCK_SIZE = INDEX_BLOCK_SIZE * MAX_INDEX
+	private val X_BLOCK_SIZE = LAYER_BLOCK_SIZE * MAX_LAYER
 	private val Y_BLOCK_SIZE = X_BLOCK_SIZE * width.toInt()
-	private val MAX_Y_BLOCK_SIZE = Y_BLOCK_SIZE * height.toInt()
-	private val MAX_X_BLOCK_SIZE = X_BLOCK_SIZE * width.toInt()
 
 	private var delta: Float = 0f
 
@@ -119,7 +117,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 	private var currentVertexCount = 0
 	private val staticBuffers = com.badlogic.gdx.utils.Array<VertexBuffer>()
 	private val queuedBuffers = com.badlogic.gdx.utils.Array<VertexBuffer>()
-	private var shader: ShaderProgram
+	private lateinit var shader: ShaderProgram
 	private var shaderLightNum: Int = 0
 	private var shaderShadowLightNum: Int = 0
 	private var shaderRegionsPerLight: IntArray = IntArray(0)
@@ -140,20 +138,21 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 		}
 	}
 
+	// ----------------------------------------------------------------------
 	init
 	{
 		mesh = BigMesh(false, maxSprites * 4, maxSprites * 6,
 					   VertexAttribute(VertexAttributes.Usage.Position, 4, ShaderProgram.POSITION_ATTRIBUTE),
 					   VertexAttribute(VertexAttributes.Usage.TextureCoordinates, 4, ShaderProgram.TEXCOORD_ATTRIBUTE),
 					   VertexAttribute(VertexAttributes.Usage.ColorPacked, 4, ShaderProgram.COLOR_ATTRIBUTE),
-					   VertexAttribute(VertexAttributes.Usage.ColorPacked, 4, "a_additionalData")
+					   VertexAttribute(VertexAttributes.Usage.ColorPacked, 4, "a_additionalData") // blendalpha, islit, alpharef, brightness
 					  )
 
 		staticMesh = BigMesh(true, maxSprites * 4, maxSprites * 6,
 							 VertexAttribute(VertexAttributes.Usage.Position, 4, ShaderProgram.POSITION_ATTRIBUTE),
 							 VertexAttribute(VertexAttributes.Usage.TextureCoordinates, 4, ShaderProgram.TEXCOORD_ATTRIBUTE),
 							 VertexAttribute(VertexAttributes.Usage.ColorPacked, 4, ShaderProgram.COLOR_ATTRIBUTE),
-							 VertexAttribute(VertexAttributes.Usage.ColorPacked, 4, "a_additionalData")
+							 VertexAttribute(VertexAttributes.Usage.ColorPacked, 4, "a_additionalData") // blendalpha, islit, alpharef, brightness
 					  )
 
 		val len = maxSprites * 6
@@ -176,13 +175,19 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 
 		vertices = FloatArray(maxVertices)
 
-		shaderLightNum = 0
+		shaderLightNum = 10
 		lightPosRange = FloatArray(shaderLightNum * 3)
 		lightColourBrightness = FloatArray(shaderLightNum * 4)
 		lightShadowPosRange = FloatArray(0)
 		lightShadowColourBrightness = FloatArray(0)
 		lightShadowRegions = FloatArray(0)
 		shader = createShader(shaderLightNum, shaderShadowLightNum, IntArray(0))
+	}
+
+	override fun dispose()
+	{
+		mesh.dispose()
+		staticMesh.dispose()
 	}
 
 	// ----------------------------------------------------------------------
@@ -302,7 +307,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 	// ----------------------------------------------------------------------
 	private fun waitOnRender()
 	{
-		if (currentBuffer == null) return
+		if (currentBuffer == null && staticBuffers.size == 0 && queuedBuffers.size == 0) return
 
 		var rebuildShader = false
 
@@ -466,7 +471,6 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 
 		if (rebuildShader)
 		{
-			//shader.dispose()
 			shader = createShader(shaderLightNum, shaderShadowLightNum, shaderRegionsPerLight)
 		}
 
@@ -479,16 +483,13 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 		shader.setUniformi("u_texture", 0)
 		shader.setUniformf("u_ambient", ambientLight.vec3())
 
-		if (shaderLightNum + shaderShadowLightNum > 0)
+		if (shaderShadowLightNum > 0 || !smoothLighting)
 		{
 			shader.setUniformf("u_tileSize", tileSize)
 		}
 
-		if (shaderLightNum > 0)
-		{
-			shader.setUniform3fv("u_lightPosRange", lightPosRange, 0, lightPosRange.size)
-			shader.setUniform4fv("u_lightColourBrightness", lightColourBrightness, 0, lightColourBrightness.size)
-		}
+		shader.setUniform3fv("u_lightPosRange", lightPosRange, 0, lightPosRange.size)
+		shader.setUniform4fv("u_lightColourBrightness", lightColourBrightness, 0, lightColourBrightness.size)
 
 		if (shaderShadowLightNum > 0)
 		{
@@ -507,8 +508,11 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 
 		executor.awaitAllJobs()
 
-		queuedBuffers.add(currentBuffer!!)
-		currentBuffer = null
+		if (currentBuffer != null)
+		{
+			queuedBuffers.add(currentBuffer!!)
+			currentBuffer = null
+		}
 
 		var lastBlendSrc = -1
 		var lastBlendDst = -1
@@ -578,7 +582,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 	{
 		for (i in 0 until queuedSprites)
 		{
-			val rs = sortedArray[i]!!
+			val rs = spriteArray[i]!!
 
 			var sprite = rs.sprite
 			if (rs.tilingSprite != null)
@@ -626,7 +630,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 					doDraw(vertices, offset,
 						   rs.texture!!, rs.nextTexture ?: rs.texture!!, colour,
 						   localx, localy, 0.5f, 0.5f, 1f, 1f, localw * rs.scaleX, localh * rs.scaleY, rs.rotation, rs.flipX, rs.flipY,
-						   0f, rs.blendAlpha, rs.isLit, false)
+						   0f, rs.blendAlpha, rs.alphaRef, rs.isLit, false)
 				}
 			} )
 		}
@@ -657,7 +661,6 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 		if (queuedSprites < spriteArray.size / 4)
 		{
 			spriteArray = spriteArray.copyOf(spriteArray.size / 4)
-			tempArray = tempArray.copyOf(tempArray.size / 4)
 		}
 
 		queuedSprites = 0
@@ -669,7 +672,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 		// Begin prerender work
 		executor.addJob {
 			// sort
-			sortedArray = RadixSort.sort(spriteArray, queuedSprites, tempArray)
+			spriteArray.sortWith(compareBy{ it?.comparisonVal ?: 0 }, 0, queuedSprites)
 
 			// do screen shake
 			if ( screenShakeRadius > 2 )
@@ -725,17 +728,18 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 	}
 
 	// ----------------------------------------------------------------------
-	private fun getComparisonVal(x: Int, y: Int, layer: Int, index: Int, blend: BlendMode) : Int
+	private fun getComparisonVal(x: Float, y: Float, layer: Int, index: Int, blend: BlendMode) : Float
 	{
 		if (index > MAX_INDEX-1) throw RuntimeException("Index too high! $index >= $MAX_INDEX!")
-		if (layer > layers-1) throw RuntimeException("Layer too high! $index >= $layers!")
+		if (layer > MAX_LAYER-1) throw RuntimeException("Layer too high! $layer >= $MAX_LAYER!")
 
-		val yBlock = MAX_Y_BLOCK_SIZE - y * Y_BLOCK_SIZE
-		val xBlock = (MAX_X_BLOCK_SIZE - x * X_BLOCK_SIZE)
-		val lBlock = layer * MAX_INDEX
-		val iBlock = index * BLENDMODES
+		val yBlock = y * Y_BLOCK_SIZE * -1f
+		val xBlock = x * X_BLOCK_SIZE * -1f
+		val lBlock = layer * LAYER_BLOCK_SIZE
+		val iBlock = index * INDEX_BLOCK_SIZE
+		val bBlock = blend.ordinal * BLEND_BLOCK_SIZE
 
-		return yBlock + xBlock + lBlock + iBlock + blend.ordinal
+		return yBlock + xBlock + lBlock + iBlock + bBlock
 	}
 
 	// ----------------------------------------------------------------------
@@ -760,7 +764,6 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 		if (queuedSprites == spriteArray.size-1)
 		{
 			spriteArray = spriteArray.copyOf(spriteArray.size * 2)
-			tempArray = tempArray.copyOf(tempArray.size * 2)
 		}
 
 		spriteArray[queuedSprites] = renderSprite
@@ -833,8 +836,6 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 
 		for (emitter in effect.emitters)
 		{
-			val emitterOffset = emitter.keyframe1.offset.lerp(emitter.keyframe2.offset, emitter.keyframeAlpha)
-
 			for (particle in emitter.particles)
 			{
 				var px = 0f
@@ -842,7 +843,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 
 				if (emitter.simulationSpace == Emitter.SimulationSpace.LOCAL)
 				{
-					tempVec.set(emitterOffset)
+					tempVec.set(emitter.currentOffset)
 					tempVec.scl(emitter.size)
 					tempVec.rotate(emitter.rotation)
 
@@ -863,8 +864,17 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 					col.a = keyframe1.alpha[pdata.alphaStream].lerp(keyframe2.alpha[pdata.alphaStream], alpha)
 
 					val size = keyframe1.size[pdata.sizeStream].lerp(keyframe2.size[pdata.sizeStream], alpha, pdata.ranVal)
-					var sizex = size * width
-					var sizey = size * height
+
+					var w = width
+					var h = height
+					if (particle.maintainAspectRatio)
+					{
+						w = min(width, height)
+						h = w
+					}
+
+					var sizex = if (particle.sizeMode == Particle.SizeMode.YONLY) w else size * w
+					var sizey = if (particle.sizeMode == Particle.SizeMode.XONLY) h else size * h
 
 					if (particle.allowResize)
 					{
@@ -880,8 +890,25 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 
 					if (emitter.simulationSpace == Emitter.SimulationSpace.LOCAL) tempVec.scl(emitter.size).rotate(emitter.rotation + emitter.emitterRotation)
 
-					val drawx = tempVec.x + px
-					val drawy = tempVec.y + py
+					var drawx = tempVec.x + px
+					var drawy = tempVec.y + py
+
+					when (particle.sizeOrigin)
+					{
+						Particle.SizeOrigin.CENTER -> { }
+						Particle.SizeOrigin.BOTTOM -> {
+							drawy += sizey*0.5f
+						}
+						Particle.SizeOrigin.TOP -> {
+							drawy -= sizey*0.5f
+						}
+						Particle.SizeOrigin.LEFT -> {
+							drawx += sizex*0.5f
+						}
+						Particle.SizeOrigin.RIGHT -> {
+							drawx -= sizex*0.5f
+						}
+					}
 
 					val localx = drawx * tileSize + offsetx
 					val localy = drawy * tileSize + offsety
@@ -890,15 +917,23 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 
 					if (localx + localw < 0 || localx > Global.stage.width || localy + localh < 0 || localy > Global.stage.height) continue
 
-					val comparisonVal = getComparisonVal((drawx-sizex*0.5f).toInt(), (drawy-sizey*0.5f).toInt(), layer, index, particle.blend)
+					val comparisonVal = getComparisonVal((drawx-sizex*0.5f-1f).floor().toFloat(), (drawy-sizey*0.5f-1f).floor().toFloat(), layer, index, particle.blend)
 
-					val rs = RenderSprite.obtain().set( null, null, tex1.second, drawx * tileSize, drawy * tileSize, tempVec.x, tempVec.y, col, sizex, sizey, rotation, 1f, 1f, effect.flipX, effect.flipY, particle.blend, lit, comparisonVal )
+					val tex1Index = tex1.toInt()
+					val texture1 = particle.textures[pdata.texStream][tex1Index].second
+
+					val rs = RenderSprite.obtain().set( null, null, texture1, drawx * tileSize, drawy * tileSize, tempVec.x, tempVec.y, col, sizex, sizey, rotation, 1f, 1f, effect.flipX, effect.flipY, particle.blend, lit, comparisonVal )
 
 					if (particle.blendKeyframes)
 					{
-						rs.nextTexture = tex2.second
-						rs.blendAlpha = alpha
+						val tex2Index = min(particle.textures[pdata.texStream].size-1, tex1Index+1)
+						val texture2 = particle.textures[pdata.texStream][tex2Index].second
+						val blendAlpha = tex1.lerp(tex2, pdata.keyframeAlpha)
+
+						rs.nextTexture = texture2
+						rs.blendAlpha = blendAlpha
 					}
+					rs.alphaRef = keyframe1.alphaRef[pdata.alphaRefStream].lerp(keyframe2.alphaRef[pdata.alphaRefStream], alpha)
 
 					storeRenderSprite(rs)
 				}
@@ -980,7 +1015,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 		// check if onscreen
 		if (!alwaysOnscreen && !isSpriteOnscreen(tilingSprite, x, y, width, height)) return
 
-		val comparisonVal = getComparisonVal(lx.toInt(), ly.toInt(), layer, index, BlendMode.MULTIPLICATIVE)
+		val comparisonVal = getComparisonVal(lx, ly, layer, index, BlendMode.MULTIPLICATIVE)
 
 		val rs = RenderSprite.obtain().set(null, tilingSprite, null, x, y, ix, iy, colour, width, height, 0f, 1f, 1f, false, false, BlendMode.MULTIPLICATIVE, lit, comparisonVal)
 
@@ -1062,7 +1097,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 		// check if onscreen
 		if (!alwaysOnscreen && !isSpriteOnscreen(sprite, x, y, width, height, scaleX, scaleY)) return
 
-		val comparisonVal = getComparisonVal(lx.toInt(), ly.toInt(), layer, index, BlendMode.MULTIPLICATIVE)
+		val comparisonVal = getComparisonVal(lx, ly, layer, index, BlendMode.MULTIPLICATIVE)
 
 		val rs = RenderSprite.obtain().set(sprite, null, null, x, y, ix, iy, colour, width, height, rotation, scaleX, scaleY, false, false, BlendMode.MULTIPLICATIVE, lit, comparisonVal)
 
@@ -1089,7 +1124,7 @@ class SortedRenderer(var tileSize: Float, val width: Float, val height: Float, v
 
 		if (localx + localw < 0 || localx > Global.stage.width || localy + localh < 0 || localy > Global.stage.height) return
 
-		val comparisonVal = getComparisonVal((sortX ?: lx).toInt(), (sortY ?: ly).toInt(), layer, index, BlendMode.MULTIPLICATIVE)
+		val comparisonVal = getComparisonVal(sortX ?: lx, sortY ?: ly, layer, index, BlendMode.MULTIPLICATIVE)
 
 		val rs = RenderSprite.obtain().set(null, null, texture, x, y, ix, iy, colour, width, height, 0f, scaleX, scaleY, false, false, BlendMode.MULTIPLICATIVE, lit, comparisonVal)
 
@@ -1242,6 +1277,8 @@ varying vec2 v_texCoords1;
 varying vec2 v_texCoords2;
 varying float v_blendAlpha;
 varying float v_isLit;
+varying float v_alphaRef;
+varying float v_brightness;
 
 void main()
 {
@@ -1256,6 +1293,8 @@ void main()
 	v_texCoords2 = ${ShaderProgram.TEXCOORD_ATTRIBUTE}.zw;
 	v_blendAlpha = a_additionalData.x;
 	v_isLit = float(a_additionalData.y == 0.0);
+	v_alphaRef = a_additionalData.z;
+	v_brightness = a_additionalData.w;
 	gl_Position = u_projTrans * truePos;
 }
 """
@@ -1347,6 +1386,8 @@ varying vec2 v_texCoords1;
 varying vec2 v_texCoords2;
 varying float v_blendAlpha;
 varying float v_isLit;
+varying float v_alphaRef;
+varying float v_brightness;
 
 uniform float u_tileSize;
 
@@ -1557,7 +1598,14 @@ void main()
 
 	lightCol = mix(vec3(1.0, 1.0, 1.0), lightCol, v_isLit);
 
-	vec4 finalCol = clamp(v_color * outCol * vec4(lightCol, 1.0), 0.0, 1.0);
+	if (v_color.a * outCol.a < v_alphaRef)
+	{
+		outCol = vec4(0.0, 0.0, 0.0, 0.0);
+	}
+
+	vec4 objCol = vec4(v_color.rgb * v_brightness * 255.0, v_color.a);
+
+	vec4 finalCol = clamp(objCol * outCol * vec4(lightCol, 1.0), 0.0, 1.0);
 	gl_FragColor = finalCol;
 }
 """
@@ -1581,15 +1629,12 @@ void main()
 				}
 				else ""
 
-			val lightingDefine = if (numLights > 0) "#define LIGHTING 1" else ""
-
 			val tileLightingDefine = if (!smoothLighting) "#define TILELIGHTING 1" else ""
 			var fragmentShader = """
 
 $shadowDefine
 $tileLightingDefine
 $androidDefine
-$lightingDefine
 
 varying LOWP vec4 v_color;
 varying vec4 v_pos;
@@ -1600,10 +1645,8 @@ uniform float u_tileSize;
 
 uniform LOWP vec3 u_ambient;
 
-#ifdef LIGHTING
 uniform vec3 u_lightPosRange[$numLights];
 uniform LOWP vec4 u_lightColourBrightness[$numLights];
-#endif
 
 #ifdef SMOOTHSHADOWS
 uniform vec3 u_shadowedLightPosRange[$numShadowLights];
@@ -1779,7 +1822,11 @@ void main ()
 	lightCol4.rgb = mix(vec3(1.0, 1.0, 1.0), lightCol, 1.0 - v_additionalData.y);
 	lightCol4.a = 1.0;
 
-	LOWP vec4 outCol = clamp(v_color * mix(texture2D(u_texture, v_texCoords.xy), texture2D(u_texture, v_texCoords.zw), v_additionalData.x) * lightCol4, 0.0, 1.0);
+	LOWP vec4 objCol = vec4(v_color.rgb * (v_additionalData.w * 255.0), v_color.a);
+
+	LOWP vec4 outCol = clamp(objCol * mix(texture2D(u_texture, v_texCoords.xy), texture2D(u_texture, v_texCoords.zw), v_additionalData.x) * lightCol4, 0.0, 1.0);
+	outCol *= float(outCol.a > v_additionalData.z); // apply alpharef
+
 	gl_FragColor = outCol;
 }
 				"""
@@ -1811,6 +1858,7 @@ class RenderSprite(val parentBlock: RenderSpriteBlock, val parentBlockIndex: Int
 	internal var flipY: Boolean = false
 	internal var blend: BlendMode = BlendMode.MULTIPLICATIVE
 	internal var isLit: Boolean = true
+	internal var alphaRef: Float = 0f
 
 	val tempColour = Colour()
 	val tlCol = Colour()
@@ -1818,7 +1866,7 @@ class RenderSprite(val parentBlock: RenderSpriteBlock, val parentBlockIndex: Int
 	val blCol = Colour()
 	val brCol = Colour()
 
-	internal var comparisonVal: Int = 0
+	internal var comparisonVal: Float = 0f
 
 	// ----------------------------------------------------------------------
 	operator fun set(sprite: Sprite?, tilingSprite: TilingSprite?, texture: TextureRegion?,
@@ -1830,7 +1878,7 @@ class RenderSprite(val parentBlock: RenderSpriteBlock, val parentBlockIndex: Int
 					 scaleX: Float, scaleY: Float,
 					 flipX: Boolean, flipY: Boolean,
 					 blend: BlendMode, lit: Boolean,
-					 comparisonVal: Int): RenderSprite
+					 comparisonVal: Float): RenderSprite
 	{
 		this.px = ix.toInt()
 		this.py = iy.toInt()
@@ -1850,6 +1898,8 @@ class RenderSprite(val parentBlock: RenderSpriteBlock, val parentBlockIndex: Int
 		this.flipX = flipX
 		this.flipY = flipY
 		this.isLit = lit
+		this.blendAlpha = 0f
+		this.alphaRef = 0f
 
 		nextTexture = null
 
@@ -1928,136 +1978,6 @@ class RenderSpriteBlock
 			{
 				return RenderSpriteBlock()
 			}
-		}
-	}
-}
-
-// ----------------------------------------------------------------------
-class RadixSort
-{
-	companion object
-	{
-		val Z = IntArray(1024)
-		fun sort(A: Array<RenderSprite?>, N: Int, Temp: Array<RenderSprite?>): Array<RenderSprite?>
-		{
-			Z.fill(0)
-			var A = A
-			var Temp = Temp
-
-			val Jump: Int
-			val Jump2: Int
-			val Jump3: Int
-			val Jump4: Int
-			var i: Int
-			var swp: Array<RenderSprite?>
-
-			// Sort-circuit set-up
-			Jump = A[0]!!.comparisonVal and 255
-			Z[Jump] = 1
-			Jump2 = (A[0]!!.comparisonVal shr 8 and 255) + 256
-			Z[Jump2] = 1
-			Jump3 = (A[0]!!.comparisonVal shr 16 and 255) + 512
-			Z[Jump3] = 1
-			Jump4 = (A[0]!!.comparisonVal shr 24 and 255) + 768
-			Z[Jump4] = 1
-
-			// Histograms creation
-			i = 1
-			while (i < N)
-			{
-				++Z[A[i]!!.comparisonVal and 255]
-				++Z[(A[i]!!.comparisonVal shr 8 and 255) + 256]
-				++Z[(A[i]!!.comparisonVal shr 16 and 255) + 512]
-				++Z[(A[i]!!.comparisonVal shr 24 and 255) + 768]
-				++i
-			}
-
-			// 1st LSB byte sort
-			if (Z[Jump] != N)
-			{
-				i = 1
-				while (i < 256)
-				{
-					Z[i] = Z[i - 1] + Z[i]
-					++i
-				}
-				i = N - 1
-				while (i >= 0)
-				{
-					Temp[--Z[A[i]!!.comparisonVal and 255]] = A[i]
-					--i
-				}
-				swp = A
-				A = Temp
-				Temp = swp
-			}
-
-			// 2nd LSB byte sort
-			if (Z[Jump2] != N)
-			{
-				i = 257
-				while (i < 512)
-				{
-					Z[i] = Z[i - 1] + Z[i]
-					++i
-				}
-				i = N - 1
-				while (i >= 0)
-				{
-					Temp[--Z[(A[i]!!.comparisonVal shr 8 and 255) + 256]] = A[i]
-					--i
-				}
-				swp = A
-				A = Temp
-				Temp = swp
-			}
-
-			// 3rd LSB byte sort
-			if (Z[Jump3] != N)
-			{
-				i = 513
-				while (i < 768)
-				{
-					Z[i] = Z[i - 1] + Z[i]
-					++i
-				}
-				i = N - 1
-				while (i >= 0)
-				{
-					Temp[--Z[(A[i]!!.comparisonVal shr 16 and 255) + 512]] = A[i]
-					--i
-				}
-				swp = A
-				A = Temp
-				Temp = swp
-			}
-
-			// 4th LSB byte sort and negative numbers sort
-			if (Z[Jump4] != N)
-			{
-				i = 897
-				while (i < 1024)
-				// -ve values frequency starts after index 895, i.e at 896 ( 896 = 768 + 128 ), goes upto 1023
-				{
-					Z[i] = Z[i - 1] + Z[i]
-					++i
-				}
-				Z[768] = Z[768] + Z[1023]
-				i = 769
-				while (i < 896)
-				{
-					Z[i] = Z[i - 1] + Z[i]
-					++i
-				}
-				i = N - 1
-				while (i >= 0)
-				{
-					Temp[--Z[(A[i]!!.comparisonVal shr 24 and 255) + 768]] = A[i]
-					--i
-				}
-				return Temp
-			}
-			return A
 		}
 	}
 }

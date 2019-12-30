@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Pools
 import com.esotericsoftware.kryo.Kryo
 import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
+import com.lyeeedar.BlendMode
 import com.lyeeedar.Direction
 import com.lyeeedar.Renderables.Light
 import com.lyeeedar.Renderables.Renderable
@@ -22,7 +23,49 @@ import ktx.collections.set
  * Created by Philip on 14-Aug-16.
  */
 
-class ParticleEffect : Renderable()
+class TextureOverride(val oldName: String, val newName: String, val blendMode: BlendMode?)
+
+class ParticleEffectDescription(val path: String)
+{
+	var colour = Colour.WHITE.copy()
+	var flipX = false
+	var flipY = false
+	var scale = 1f
+	var useFacing = true
+	var timeMultiplier = 1f
+	var killOnAnimComplete = false
+
+	val textureOverrides = Array<TextureOverride>()
+
+	fun getParticleEffect(): ParticleEffect
+	{
+		val effect = ParticleEffect.load(path, this)
+		effect.colour = colour
+		effect.flipX = flipX
+		effect.flipY = flipY
+		effect.scale = scale
+		effect.useFacing = useFacing
+		effect.timeMultiplier = timeMultiplier
+		effect.killOnAnimComplete = killOnAnimComplete
+
+		return effect
+	}
+
+	fun getTexture(name: String): TextureOverride?
+	{
+		for (texOverride in textureOverrides)
+		{
+			if (texOverride.oldName == name)
+			{
+				return texOverride
+			}
+		}
+
+		return null
+	}
+}
+
+class ParticleEffect(val description: ParticleEffectDescription) : Renderable()
 {
 	private lateinit var loadPath: String
 
@@ -33,7 +76,7 @@ class ParticleEffect : Renderable()
 	var killOnAnimComplete = false
 	private var warmupTime = 0f
 	private var doneWarmup = false
-	val emitters = Array<Emitter>()
+	val emitters = Array<Emitter>(1)
 
 	// local stuff
 	val position = Vector2()
@@ -59,6 +102,9 @@ class ParticleEffect : Renderable()
 
 	val lifetime: Float
 		get() = (animation?.duration() ?: emitters.maxBy { it.lifetime() }!!.lifetime())
+
+	val blockinglifetime: Float
+		get() = (animation?.duration() ?: emitters.filter { it.isBlockingEmitter }.maxBy { it.lifetime() }!!.lifetime())
 
 	fun start()
 	{
@@ -91,9 +137,13 @@ class ParticleEffect : Renderable()
 		complete = animation?.update(delta) ?: false
 		if (complete)
 		{
-			if (killOnAnimComplete) stop()
 			animation?.free()
 			animation = null
+
+			if (killOnAnimComplete)
+			{
+				stop()
+			}
 		}
 
 		val posOffset = animation?.renderOffset(false)
@@ -117,7 +167,7 @@ class ParticleEffect : Renderable()
 			doneWarmup = true
 			val deltaStep = 1f / 15f // simulate at 15 fps
 			val steps = (warmupTime / deltaStep).toInt()
-			for (i in 0..steps-1)
+			for (i in 0 until steps)
 			{
 				for (emitter in emitters) emitter.update(deltaStep)
 			}
@@ -155,6 +205,9 @@ class ParticleEffect : Renderable()
 	fun complete() = emitters.all{ it.complete() }
 	fun blocked() = emitters.any { it.isBlockingEmitter && !it.complete() }
 
+	override val isBlocking: Boolean
+		get() = blocked()
+
 	fun setPosition(x: Float, y: Float)
 	{
 		position.set(x, y)
@@ -165,7 +218,7 @@ class ParticleEffect : Renderable()
 
 	}
 
-	fun debug(shape: ShapeRenderer, offsetx: Float, offsety: Float, tileSize: Float, drawEmitter: Boolean, drawParticles: Boolean)
+	fun debug(shape: ShapeRenderer, offsetx: Float, offsety: Float, tileSize: Float, drawEmitter: Boolean, drawParticles: Boolean, drawEffectors: Boolean)
 	{
 		val posOffset = animation?.renderOffset(false)
 		val x = position.x + (posOffset?.get(0) ?: 0f)
@@ -181,23 +234,26 @@ class ParticleEffect : Renderable()
 		val temp = Pools.obtain(Vector2::class.java)
 		val temp2 = Pools.obtain(Vector2::class.java)
 		val temp3 = Pools.obtain(Vector2::class.java)
+		val temp4 = Pools.obtain(Vector2::class.java)
+		val temp5 = Pools.obtain(Vector2::class.java)
 
 		// draw emitter volumes
-		shape.color = Color.GOLDENROD
 		for (emitter in emitters)
 		{
+			shape.color = Color.GOLDENROD
+
 			val emitterx = emitter.position.x * tileSize + offsetx
 			val emittery = emitter.position.y * tileSize + offsety
 
-			temp.set(emitter.keyframe1.offset.lerp(emitter.keyframe2.offset, emitter.keyframeAlpha))
+			temp.set(emitter.currentOffset)
 			temp.scl(emitter.size)
 			temp.rotate(emitter.rotation)
 
 			val ex = emitterx + temp.x * tileSize
 			val ey = emittery + temp.y * tileSize
 
-			val w = emitter.width * tileSize * emitter.size.x
-			val h = emitter.height * tileSize * emitter.size.y
+			val w = emitter.width * tileSize * emitter.size.x * emitter.currentSize
+			val h = emitter.height * tileSize * emitter.size.y * emitter.currentSize
 
 			val w2 = w * 0.5f
 			val h2 = h * 0.5f
@@ -216,30 +272,49 @@ class ParticleEffect : Renderable()
 			}
 			else if (emitter.shape == Emitter.EmissionShape.CONE)
 			{
-				val angleMin = -emitter.width*0.5f
-				val angleMax = emitter.width*.5f
+				val angleMin = -emitter.angle*0.5f
+				val angleMax = emitter.angle*.5f
 
-				val core = temp
+				val coreLeft = temp
+				val coreRight = temp4
 				val min = temp2
 				val max = temp3
+				val mid = temp5
 
-				core.set(ex, ey)
+				coreLeft.set(w2, 0f)
+				coreLeft.rotate(emitter.emitterRotation)
+				coreLeft.rotate(emitter.rotation)
+				coreLeft.add(ex, ey)
+
+				coreRight.set(-w2, 0f)
+				coreRight.rotate(emitter.emitterRotation)
+				coreRight.rotate(emitter.rotation)
+				coreRight.add(ex, ey)
 
 				min.set(0f, h)
 				min.rotate(angleMin)
+				min.x += w2
 				min.rotate(emitter.emitterRotation)
 				min.rotate(emitter.rotation)
-				min.add(core)
+				min.add(ex, ey)
 
 				max.set(0f, h)
 				max.rotate(angleMax)
+				max.x -= w2
 				max.rotate(emitter.emitterRotation)
 				max.rotate(emitter.rotation)
-				max.add(core)
+				max.add(ex, ey)
 
-				shape.line(core, min)
-				shape.line(core, max)
-				shape.line(min, max)
+				mid.set(0f, h)
+				mid.rotate(emitter.emitterRotation)
+				mid.rotate(emitter.rotation)
+				mid.add(ex, ey)
+
+				shape.line(coreLeft, coreRight)
+				shape.line(coreLeft, min)
+				shape.line(coreRight, max)
+				shape.line(min, mid)
+				shape.line(max, mid)
 			}
 			else
 			{
@@ -248,7 +323,7 @@ class ParticleEffect : Renderable()
 
 			if (drawParticles)
 			{
-				val emitterOffset = emitter.keyframe1.offset.lerp(emitter.keyframe2.offset, emitter.keyframeAlpha)
+				shape.color = Color.PINK
 
 				for (particle in emitter.particles)
 				{
@@ -257,7 +332,7 @@ class ParticleEffect : Renderable()
 
 					if (emitter.simulationSpace == Emitter.SimulationSpace.LOCAL)
 					{
-						temp.set(emitterOffset)
+						temp.set(emitter.currentOffset)
 						temp.scl(emitter.size)
 						temp.rotate(emitter.rotation)
 
@@ -297,30 +372,36 @@ class ParticleEffect : Renderable()
 					}
 				}
 			}
+
+			if (drawEffectors)
+			{
+				shape.color = Color.GREEN
+
+				for (i in 0 until emitter.effectors.size)
+				{
+					val effector = emitter.effectors[i]
+
+					temp.set(effector.offset)
+					temp.scl(emitter.size)
+					temp.rotate(emitter.rotation)
+
+					val ex = emitterx + temp.x * tileSize
+					val ey = emittery + temp.y * tileSize
+					shape.ellipse(ex - tileSize/2f, ey - tileSize/2f, tileSize, tileSize, emitter.emitterRotation + rotation)
+				}
+			}
 		}
 
 		Pools.free(temp)
 		Pools.free(temp2)
 		Pools.free(temp3)
+		Pools.free(temp4)
+		Pools.free(temp5)
 	}
 
 	override fun copy(): ParticleEffect
 	{
-		val effect = ParticleEffect.load(loadPath)
-		effect.killOnAnimComplete = killOnAnimComplete
-		effect.setPosition(position.x, position.y)
-		effect.rotation = rotation
-		effect.colour.set(colour)
-		effect.warmupTime = warmupTime
-		effect.loop = loop
-		effect.flipX = flipX
-		effect.flipY = flipY
-		effect.useFacing = useFacing
-		effect.size[0] = size[0]
-		effect.size[1] = size[1]
-		effect.scale = scale
-		effect.isShortened = isShortened
-		effect.timeMultiplier = timeMultiplier
+		val effect = description.getParticleEffect()
 		return effect
 	}
 
@@ -381,15 +462,15 @@ class ParticleEffect : Renderable()
 		}
 		val storedMap = ObjectMap<String, ByteArray>()
 
-		fun load(xml: XmlData): ParticleEffect
+		fun load(xml: XmlData, description: ParticleEffectDescription): ParticleEffect
 		{
-			val effect = ParticleEffect()
+			val effect = ParticleEffect(description)
 
 			effect.warmupTime = xml.getFloat("Warmup", 0f)
 			effect.loop = xml.getBoolean("Loop", true)
 
 			val emittersEl = xml.getChildByName("Emitters")!!
-			for (i in 0..emittersEl.childCount-1)
+			for (i in 0 until emittersEl.childCount)
 			{
 				val el = emittersEl.getChild(i)
 				val emitter = Emitter.load(el, effect) ?: continue
@@ -405,14 +486,14 @@ class ParticleEffect : Renderable()
 			return effect
 		}
 
-		fun load(path: String): ParticleEffect
+		fun load(path: String, description: ParticleEffectDescription): ParticleEffect
 		{
 			if (storedMap.containsKey(path))
 			{
 				val bytes = storedMap[path]
 				val input = Input(bytes, 0, bytes.size)
 
-				val effect = ParticleEffect()
+				val effect = ParticleEffect(description)
 				effect.restore(kryo, input)
 
 				return effect
@@ -420,14 +501,14 @@ class ParticleEffect : Renderable()
 			else
 			{
 				val xml = getXml("Particles/$path")
-				val effect = load(xml)
+				val effect = load(xml, description)
 				effect.loadPath = path
 
 				val output = Output(1024, -1)
 				effect.store(kryo, output)
 				storedMap[path] = output.buffer
 
-				return effect
+				return load(path, description)
 			}
 		}
 	}

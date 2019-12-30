@@ -205,10 +205,11 @@ internal inline fun doDraw(batch: Batch, region: TextureRegion, packedColor: Flo
 	batch.draw(region.texture, vertices, 0, 20)
 }
 
+val defaultData = packFloats(0f, 0f, 0f, 1f / 254.0f)
 internal inline fun doDraw(vertices: FloatArray, offset: Int, region1: TextureRegion, region2: TextureRegion, colour: Colour,
 		   x: Float, y: Float, originX: Float, originY: Float,
 		   width: Float, height: Float, scaleX: Float, scaleY: Float,
-		   rotation: Float, flipX: Boolean, flipY: Boolean, removeAmount: Float, blendAlpha: Float, isLit: Boolean, smoothShade: Boolean)
+		   rotation: Float, flipX: Boolean, flipY: Boolean, removeAmount: Float, blendAlpha: Float, alphaRef: Float, isLit: Boolean, smoothShade: Boolean)
 {
 	//##################################################################### Vertex Calculation #######################################//
 	// bottom left and top right corner points relative to origin
@@ -349,8 +350,15 @@ internal inline fun doDraw(vertices: FloatArray, offset: Int, region1: TextureRe
 	}
 	//##################################################################### Vertex Calculation #######################################//
 
-	val packedCol = colour.toFloatBits()
-	val packedData = if (blendAlpha == 0f && isLit) 0.0f else packFloats(blendAlpha, if (isLit) 0.0f else 1.0f, 0f, 0f)
+	val packedCol = colour.toScaledFloatBits()
+	val packedData = if (blendAlpha == 0f && isLit && alphaRef == 0f && packedCol.y == 1f)
+	{
+		defaultData
+	}
+	else
+	{
+		packFloats(blendAlpha, if (isLit) 0.0f else 1.0f, alphaRef, packedCol.y / 254.0f)
+	}
 
 	var i = offset
 	vertices[i++] = x1
@@ -361,7 +369,7 @@ internal inline fun doDraw(vertices: FloatArray, offset: Int, region1: TextureRe
 	vertices[i++] = r1v
 	vertices[i++] = r2u
 	vertices[i++] = r2v
-	vertices[i++] = packedCol
+	vertices[i++] = packedCol.x
 	vertices[i++] = packedData
 
 	vertices[i++] = x2
@@ -372,7 +380,7 @@ internal inline fun doDraw(vertices: FloatArray, offset: Int, region1: TextureRe
 	vertices[i++] = r1v2
 	vertices[i++] = r2u
 	vertices[i++] = r2v2
-	vertices[i++] = packedCol
+	vertices[i++] = packedCol.x
 	vertices[i++] = packedData
 
 	vertices[i++] = x3
@@ -383,7 +391,7 @@ internal inline fun doDraw(vertices: FloatArray, offset: Int, region1: TextureRe
 	vertices[i++] = r1v2
 	vertices[i++] = r2u2
 	vertices[i++] = r2v2
-	vertices[i++] = packedCol
+	vertices[i++] = packedCol.x
 	vertices[i++] = packedData
 
 	vertices[i++] = x4
@@ -394,7 +402,7 @@ internal inline fun doDraw(vertices: FloatArray, offset: Int, region1: TextureRe
 	vertices[i++] = r1v
 	vertices[i++] = r2u2
 	vertices[i++] = r2v
-	vertices[i++] = packedCol
+	vertices[i++] = packedCol.x
 	vertices[i++] = packedData
 }
 

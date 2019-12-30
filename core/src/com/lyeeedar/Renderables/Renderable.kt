@@ -75,6 +75,9 @@ abstract class Renderable
 
 			hasAnim = field != null
 		}
+	var animationBlocksUpdate = true
+
+	open val isBlocking = false
 
 	fun update(delta: Float): Boolean
 	{

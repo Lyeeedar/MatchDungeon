@@ -22,7 +22,7 @@ fun String.filename(extension: Boolean): String
 
 fun String.pluralize(count: Int): String
 {
-	if (count > 1)
+	if (count != 1)
 	{
 		if (this.endsWith('y'))
 		{

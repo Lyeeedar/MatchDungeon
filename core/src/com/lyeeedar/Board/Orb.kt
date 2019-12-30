@@ -100,7 +100,7 @@ class Orb(desc: OrbDesc, theme: Theme): Matchable(theme)
 
 			val template = xml.getChildByName("Template")!!
 			val baseSprite = AssetManager.loadSprite(template.getChildByName("Sprite")!!)
-			val deathEffect = AssetManager.loadParticleEffect(template.getChildByName("Death")!!)
+			val deathEffect = AssetManager.loadParticleEffect(template.getChildByName("Death")!!).getParticleEffect()
 
 			val types = xml.getChildByName("Types")!!
 			for (i in 0 until types.childCount)
@@ -127,7 +127,7 @@ class Orb(desc: OrbDesc, theme: Theme): Matchable(theme)
 				{
 					val name = orbEl.get("Name")
 					val sprite = AssetManager.loadSprite(orbEl.getChildByName("Sprite")!!)
-					val death = AssetManager.loadParticleEffect(orbEl.getChildByName("Death")!!)
+					val death = AssetManager.loadParticleEffect(orbEl.getChildByName("Death")!!).getParticleEffect()
 
 					val orbDesc = OrbDesc()
 					orbDesc.name = name
@@ -154,7 +154,7 @@ class OrbDesc()
 	}
 
 	var sprite: Sprite = AssetManager.loadSprite("white")
-	var death: ParticleEffect = AssetManager.loadParticleEffect("Death")
+	var death: ParticleEffect = AssetManager.loadParticleEffect("Death").getParticleEffect()
 	var key: Int = -1
 	var isNamed: Boolean = false
 	var name: String = ""

@@ -23,12 +23,13 @@ class XmlData
 	val childCount: Int
 		get() = children.size
 
-	lateinit var attributeMap: IntMap<XmlAttributeData>
+	var attributeMap: IntMap<XmlAttributeData> = IntMap()
 
 	var value: Any? = null
 
 	constructor()
-	{}
+	{
+	}
 
 	constructor(handle: FileHandle)
 	{
@@ -120,6 +121,36 @@ class XmlData
 		return getChildByName(name)?.boolean() ?: fallback
 	}
 
+	fun getLong(name: String): Long
+	{
+		return getChildByName(name)?.long() ?: throw GdxRuntimeException("Element ${this.name} has no child called $name!")
+	}
+
+	fun getLong(name: String, fallback: Long): Long
+	{
+		return getChildByName(name)?.long() ?: fallback
+	}
+
+	fun getPoint(name: String): Point
+	{
+		val str = get(name)
+		val split = str.split(",")
+		val x = split[0].toInt()
+		val y = split[1].toInt()
+
+		return Point(x, y)
+	}
+
+	fun getPoint(name: String, fallback: Point): Point
+	{
+		val str = get(name, null) ?: return fallback
+		val split = str.split(",")
+		val x = split[0].toInt()
+		val y = split[1].toInt()
+
+		return Point(x, y)
+	}
+
 	fun getAttribute(name: String): String
 	{
 		return attributeMap[name.toUpperCase().hashCode()]?.text() ?: throw GdxRuntimeException("Element ${this.name} has no attribute called $name!")
@@ -160,11 +191,38 @@ class XmlData
 		return attributeMap[name.toUpperCase().hashCode()]?.boolean() ?: fallback
 	}
 
+	fun set(name: String, value: Any)
+	{
+		val holder = XmlData()
+		holder.name = name
+		holder.nameId = name.hashCode()
+		holder.value = value
+
+		addChild(holder)
+	}
+
+	fun addChild(xmlData: XmlData)
+	{
+		children = Array(childCount+1) { i -> if (i < childCount) children[i] else xmlData }
+	}
+
+	fun addChild(name: String): XmlData
+	{
+		val holder = XmlData()
+		holder.name = name
+		holder.nameId = name.hashCode()
+
+		addChild(holder)
+
+		return holder
+	}
+
 	val text: String
 			get() = value?.toString() ?: ""
 	fun int(): Int = value as? Int ?: value.toString().toIntOrNull() ?: throw TypeCastException("Cannot cast $value to an Int!")
 	fun float(): Float = value as? Float ?: value.toString().toFloatOrNull() ?: throw TypeCastException("Cannot cast $value to a Float!")
 	fun boolean(): Boolean = value as? Boolean ?: value.toString().toBoolean()
+	fun long(): Long = value as? Long ?: value.toString().toLong()
 
 	fun save(path: String)
 	{
@@ -205,8 +263,18 @@ class XmlData
 					output.writeShort(2)
 					output.writeBoolean(value as Boolean)
 				}
+				is Long ->
+				{
+					output.writeShort(4)
+					output.writeLong(value as Long)
+				}
 				else ->
 				{
+					if (value == null)
+					{
+						value = ""
+					}
+
 					output.writeShort(3)
 					output.writeString(value as String)
 				}
@@ -259,6 +327,7 @@ class XmlData
 				1 -> input.readFloat()
 				2 -> input.readBoolean()
 				3 -> input.readString()
+				4 -> input.readLong()
 				else -> throw RuntimeException("Unknown xml data type '$valueType'!")
 			}
 		}

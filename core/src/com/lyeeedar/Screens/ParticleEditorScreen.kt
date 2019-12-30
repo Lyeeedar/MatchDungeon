@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
+import com.lyeeedar.Renderables.Particle.ParticleEffectDescription
 import com.lyeeedar.Renderables.Renderable
 import com.lyeeedar.Renderables.SortedRenderer
 import com.lyeeedar.Renderables.Sprite.Sprite
@@ -51,6 +52,9 @@ class ParticleEditorScreen : AbstractScreen()
 	val crossedTiles = ObjectSet<Point>()
 	val particlePos = Point()
 	lateinit var debugButton: CheckBox
+	lateinit var alignUpButton: CheckBox
+	var deltaMultiplier = 1f
+	var size = 1
 
 	override fun show()
 	{
@@ -71,17 +75,16 @@ class ParticleEditorScreen : AbstractScreen()
 		playbackSpeedBox.setItems(0.01f, 0.05f, 0.1f, 0.25f, 0.5f, 0.75f, 1f, 1.5f, 2f, 3f, 4f, 5f)
 		playbackSpeedBox.selected = 1f
 
-		val colourButton = TextButton("Colour", Global.skin)
-
 		playbackSpeedBox.addListener(object : ChangeListener()
 		{
 			override fun changed(event: ChangeEvent?, actor: Actor?)
 			{
-			//	particle.speedMultiplier = playbackSpeedBox.selected
+				deltaMultiplier = playbackSpeedBox.selected
 			}
 
 		})
 
+		val colourButton = TextButton("Colour", Global.skin)
 		colourButton.addClickListener {
 			colour = JColorChooser.showDialog(null, "Particle Colour", colour)
 			particle.colour.set(colour.red / 255f, colour.green / 255f, colour.blue / 255f, colour.alpha / 255f)
@@ -101,7 +104,7 @@ class ParticleEditorScreen : AbstractScreen()
 			val rawxml = getRawXml(currentPath!!)
 			val xmlData = XmlData.loadFromElement(rawxml)
 
-			val nparticle = ParticleEffect.Companion.load(xmlData)
+			val nparticle = ParticleEffect.Companion.load(xmlData, ParticleEffectDescription(currentPath!!))
 			nparticle.killOnAnimComplete = false
 			nparticle.setPosition(particle.position.x, particle.position.y)
 			nparticle.rotation = particle.rotation
@@ -115,7 +118,7 @@ class ParticleEditorScreen : AbstractScreen()
 			val rawxml = getRawXml(currentPath!!)
 			val xmlData = XmlData.loadFromElement(rawxml)
 
-			val nparticle = ParticleEffect.Companion.load(xmlData)
+			val nparticle = ParticleEffect.Companion.load(xmlData, ParticleEffectDescription(currentPath!!))
 
 			nparticle.killOnAnimComplete = false
 			nparticle.setPosition(particle.position.x, particle.position.y)
@@ -126,18 +129,35 @@ class ParticleEditorScreen : AbstractScreen()
 		}
 
 		debugButton = CheckBox("Debug", Global.skin)
+		alignUpButton = CheckBox("AlignUp", Global.skin)
+
+		val sizeBox = SelectBox<Int>(Global.skin)
+		sizeBox.setItems(1, 2, 3, 4, 5)
+		sizeBox.selected = 1
+
+		sizeBox.addListener(object : ChangeListener()
+									 {
+										 override fun changed(event: ChangeEvent?, actor: Actor?)
+										 {
+											 size = sizeBox.selected
+										 }
+
+									 })
 
 		val buttonsTable = Table()
 		buttonsTable.add(browseButton).expandY().top()
 		buttonsTable.add(updateButton).expandY().top()
 		buttonsTable.add(playbackSpeedBox).expandY().top()
 		buttonsTable.add(colourButton).expandY().top()
+		buttonsTable.row()
 		buttonsTable.add(debugButton).expandY().top()
+		buttonsTable.add(alignUpButton).expandY().top()
+		buttonsTable.add(sizeBox).expandY().top()
 
 		mainTable.add(buttonsTable).growX()
 		mainTable.row()
 
-		particle = ParticleEffect()
+		particle = ParticleEffect(ParticleEffectDescription(""))
 
 		loadLevel()
 
@@ -198,7 +218,6 @@ class ParticleEditorScreen : AbstractScreen()
 
 		background = Array2D(width, height) { x, y -> symbolMap[rowsEl.getChild(height - y - 1).text[x]].copy() }
 		collision = Array2D(width, height) { x, y -> background[x, y].isWall }
-		Global.collisionGrid = collision
 
 		val tilex = Global.resolution.x.toFloat() / width.toFloat()
 		tileSize = tilex
@@ -209,9 +228,19 @@ class ParticleEditorScreen : AbstractScreen()
 	val tempPoint = Point()
 	override fun doRender(delta: Float)
 	{
+		particle.size[0] = size
+		particle.size[1] = size
+
+		if (alignUpButton.isChecked)
+		{
+			particle.rotation = 0f
+		}
+
 		batch.projectionMatrix = stage.camera.combined
 
-		spriteRender.begin(delta, 0f, 0f, Colour.DARK_GRAY)
+		Global.collisionGrid = collision
+
+		spriteRender.begin(delta * deltaMultiplier, 0f, 0f, Colour.WHITE)
 
 		for (x in 0..background.xSize-1)
 		{
@@ -238,9 +267,7 @@ class ParticleEditorScreen : AbstractScreen()
 		spriteRender.queueParticle(particle, particlePos.x.toFloat(), particlePos.y.toFloat(), 1, 0)
 
 		batch.color = Color.WHITE
-		batch.begin()
 		spriteRender.end(batch)
-		batch.end()
 
 		if (debugButton.isChecked)
 		{
@@ -248,7 +275,7 @@ class ParticleEditorScreen : AbstractScreen()
 			shape.setAutoShapeType(true)
 			shape.begin()
 
-			particle.debug(shape, 0f, 0f, tileSize, true, true)
+			particle.debug(shape, 0f, 0f, tileSize, true, true, true)
 
 			shape.end()
 		}

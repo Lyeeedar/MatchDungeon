@@ -52,7 +52,7 @@ fun Actor.ensureOnScreen(pad: Float = 0f)
 	setPosition(x, y)
 }
 
-fun Actor.addClickListener(func: () -> Unit)
+fun Actor.addClickListener(func: () -> Unit): Actor
 {
 	this.touchable = Touchable.enabled
 	this.addListener(object : ClickListener() {
@@ -63,6 +63,8 @@ fun Actor.addClickListener(func: () -> Unit)
 			func()
 		}
 	})
+
+	return this
 }
 
 fun Actor.addClickListenerFull(func: (InputEvent?, Float, Float) -> Unit)
@@ -78,7 +80,7 @@ fun Actor.addClickListenerFull(func: (InputEvent?, Float, Float) -> Unit)
 	})
 }
 
-fun Actor.addTapToolTip(content: String)
+fun Actor.addTapToolTip(content: String): Actor
 {
 	this.addClickListenerFull { event, x, y ->
 
@@ -102,9 +104,11 @@ fun Actor.addTapToolTip(content: String)
 		tooltip.toFront()
 		tooltip.show(event, x, y)
 	}
+
+	return this
 }
 
-fun Actor.addToolTip(title: String, body: String, stage: Stage)
+fun Actor.addToolTip(title: String, body: String, stage: Stage): Actor
 {
 	val titleLabel = Label(title, Global.skin, "title")
 	val bodyLabel = Label(body, Global.skin)
@@ -117,4 +121,6 @@ fun Actor.addToolTip(title: String, body: String, stage: Stage)
 	val tooltip = Tooltip(table, Global.skin, stage)
 
 	this.addListener(TooltipListener(tooltip))
+
+	return this
 }

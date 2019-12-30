@@ -25,16 +25,17 @@
 			<Data Name="SouthEast" Keys="Sprite" meta:RefKey="Reference" />
 			<Data Name="SouthWest" Keys="Sprite" meta:RefKey="Reference" />
 		</Data>
+		<Data Name="Light" Keys="Light" meta:RefKey="Reference" />
 	</Definition>
 	<Definition Name="DirectedSprite" Collapse="True" IsGlobal="True" meta:RefKey="StructDef">
 		<Data Name="Path" BasePath="Sprites" StripExtension="True" AllowedFileTypes="png" SkipIfDefault="False" meta:RefKey="File" />
 	</Definition>
 	<Definition Name="SpriteWrapper" IsGlobal="True" meta:RefKey="StructDef">
-		<Data Name="Sprite" Keys="Sprite" meta:RefKey="Reference" />
+		<Data Name="Sprite" Keys="RenderedLayeredSprite,Sprite" meta:RefKey="Reference" />
 		<Data Name="TilingSprite" Keys="TilingSprite" meta:RefKey="Reference" />
 		<Data Name="SpriteVariants" meta:RefKey="Collection">
 			<Data Name="Sprite" meta:RefKey="Struct">
-				<Data Name="Sprite" Keys="Sprite" Nullable="False" meta:RefKey="Reference" />
+				<Data Name="Sprite" Keys="RenderedLayeredSprite,Sprite" Nullable="False" meta:RefKey="Reference" />
 				<Data Name="Chance" Min="0" Max="1" Default="0.2" SkipIfDefault="False" meta:RefKey="Number" />
 			</Data>
 		</Data>
@@ -50,8 +51,19 @@
 		<Data Name="Colour" meta:RefKey="Colour" />
 		<Data Name="FlipX" meta:RefKey="Boolean" />
 		<Data Name="FlipY" meta:RefKey="Boolean" />
+		<Data Name="Scale" Min="0" Default="1" meta:RefKey="Number" />
 		<Data Name="TimeMultiplier" Min="0" Default="1" meta:RefKey="Number" />
 		<Data Name="KillOnAnimComplete" meta:RefKey="Boolean" />
+	</Definition>
+	<Definition Name="ParticleEffectTemplate" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="Base" Keys="ParticleEffect" Nullable="False" meta:RefKey="Reference" />
+		<Data Name="Overrides" meta:RefKey="Collection">
+			<Data Name="OverrideTexture" meta:RefKey="Struct">
+				<Data Name="Name" meta:RefKey="String" />
+				<Data Name="Texture" Keys="Texture" Nullable="False" meta:RefKey="Reference" />
+				<Data Name="BlendMode" EnumValues="Current,Additive,Multiplicative" meta:RefKey="Enum" />
+			</Data>
+		</Data>
 	</Definition>
 	<Definition Name="DirectionalSprite" IsGlobal="True" meta:RefKey="StructDef">
 		<Data Name="Animations" meta:RefKey="Collection">
@@ -62,12 +74,32 @@
 			</Data>
 		</Data>
 	</Definition>
+	<Definition Name="Texture" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="File" BasePath="Sprites" StripExtension="True" AllowedFileTypes="png" Default="blank" SkipIfDefault="False" meta:RefKey="File" />
+	</Definition>
+	<Definition Name="MoveAnimation" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="SpeedMultiplier" Min="0" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="LeapAnimation" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="SpeedMultiplier" Min="0" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
+		<Data Name="Height" Min="0" Default="2" SkipIfDefault="False" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="Animations" Keys="MoveAnimation,LeapAnimation" IsGlobal="True" meta:RefKey="ReferenceDef" />
 	<Definition Name="Light" IsGlobal="True" meta:RefKey="StructDef">
 		<Data Name="Colour" SkipIfDefault="False" meta:RefKey="Colour" />
 		<Data Name="Brightness" Min="0" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
 		<Data Name="Range" Min="0" Default="3" SkipIfDefault="False" meta:RefKey="Number" />
 		<Data Name="HasShadows" meta:RefKey="Boolean" />
 		<Data Name="Animation" Keys="PulseLightAnimation" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="RenderedLayeredSprite" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="Layers" MinCount="1" meta:RefKey="Collection">
+			<Data Name="Layer" meta:RefKey="Struct">
+				<Data Name="Name" BasePath="Sprites" StripExtension="True" AllowedFileTypes="png" Default="white" SkipIfDefault="False" meta:RefKey="File" />
+				<Data Name="DrawActualSize" meta:RefKey="Boolean" />
+			</Data>
+		</Data>
+		<Data Name="Light" Keys="Light" meta:RefKey="Reference" />
 	</Definition>
 	<Definition Name="PulseLightAnimation" meta:RefKey="StructDef">
 		<Data Name="Period" Name1="Min" Name2="Max" meta:RefKey="Vector" />
@@ -76,7 +108,12 @@
 		<Data Name="MinRange" Name1="Min" Name2="Max" meta:RefKey="Vector" />
 		<Data Name="MaxRange" Name1="Min" Name2="Max" meta:RefKey="Vector" />
 	</Definition>
-	<Definition Name="Texture" IsGlobal="True" meta:RefKey="StructDef">
-		<Data Name="File" BasePath="Sprites" StripExtension="True" AllowedFileTypes="png" Default="blank" SkipIfDefault="False" meta:RefKey="File" />
+	<Definition Name="MaskedTexture" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="Base" BasePath="Sprites" StripExtension="True" AllowedFileTypes="png" Default="white" SkipIfDefault="False" meta:RefKey="File" />
+		<Data Name="Glow" BasePath="Sprites" StripExtension="True" AllowedFileTypes="png" Default="white" SkipIfDefault="False" meta:RefKey="File" />
+		<Data Name="Mask" BasePath="Sprites" StripExtension="True" AllowedFileTypes="png" Default="white" SkipIfDefault="False" meta:RefKey="File" />
+		<Data Name="Layer1" BasePath="Sprites" StripExtension="True" AllowedFileTypes="png" Default="white" SkipIfDefault="False" meta:RefKey="File" />
+		<Data Name="Layer2" BasePath="Sprites" StripExtension="True" AllowedFileTypes="png" Default="white" SkipIfDefault="False" meta:RefKey="File" />
+		<Data Name="Layer3" BasePath="Sprites" StripExtension="True" AllowedFileTypes="png" Default="white" SkipIfDefault="False" meta:RefKey="File" />
 	</Definition>
 </Definitions>

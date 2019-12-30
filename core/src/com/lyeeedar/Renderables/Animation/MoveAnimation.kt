@@ -83,7 +83,7 @@ class MoveAnimation : AbstractMoveAnimation
 
 	fun set(duration: Float, path: Array<Point>, eqn: Interpolation = Interpolation.linear): MoveAnimation
 	{
-		val vectorPath = com.badlogic.gdx.utils.Array<Vector2>()
+		val vectorPath = com.badlogic.gdx.utils.Array<Vector2>(path.size)
 
 		for (point in path)
 		{

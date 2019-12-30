@@ -1,6 +1,7 @@
 package com.lyeeedar.Util
 
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.NumberUtils
 import com.badlogic.gdx.utils.Pool
@@ -104,6 +105,12 @@ class Colour()
 		this.cachedA = other.cachedA
 		this.cachedFB = other.cachedFB
 
+		this.scaledCachedR = other.scaledCachedR
+		this.scaledCachedG = other.scaledCachedG
+		this.scaledCachedB = other.scaledCachedB
+		this.scaledCachedA = other.scaledCachedA
+		this.scaledCachedFB.set(other.scaledCachedFB)
+
 		return this
 	}
 
@@ -179,6 +186,11 @@ class Colour()
 		this.b *= b
 		this.a *= a
 		return this
+	}
+
+	fun mul(value: Float): Colour
+	{
+		return mul(value, value, value, 1f)
 	}
 
 	operator fun times(other: Colour): Colour
@@ -303,6 +315,42 @@ class Colour()
 	var cachedA: Float = -1f
 	var cachedFB: Float = -1f
 
+	fun toScaledFloatBits() : Vector2
+	{
+		if (scaledCachedR == r && scaledCachedG == g && scaledCachedB == b && scaledCachedA == a) return scaledCachedFB
+		else
+		{
+			val mag = max(r, g, b).clamp(1f, 254f)
+
+			val r = (r / mag).clamp(0f, 1f)
+			val g = (g / mag).clamp(0f, 1f)
+			val b = (b / mag).clamp(0f, 1f)
+			val a = a.clamp(0f, 1f)
+
+			if (mag != 1f)
+			{
+
+			}
+
+			val intBits = (255 * a).toInt() shl 24 or ((255 * b).toInt() shl 16) or ((255 * g).toInt() shl 8) or (255 * r).toInt()
+			val fb = NumberUtils.intToFloatColor(intBits)
+
+			scaledCachedFB.set(fb, mag)
+
+			scaledCachedR = this.r
+			scaledCachedG = this.b
+			scaledCachedB = this.g
+			scaledCachedA = this.a
+
+			return scaledCachedFB
+		}
+	}
+	var scaledCachedR: Float = -1f
+	var scaledCachedG: Float = -1f
+	var scaledCachedB: Float = -1f
+	var scaledCachedA: Float = -1f
+	val scaledCachedFB = Vector2()
+
 	fun vec3(): Vector3 = Vector3(r, g, b)
 
 	fun color() : Color
@@ -345,9 +393,11 @@ class Colour()
 		internal val BLUE = Colour(Color.BLUE, true)
 		internal val GREEN = Colour(Color.GREEN, true)
 		internal val RED = Colour(Color.RED, true)
+		internal val CYAN = Colour(Color.CYAN, true)
 		internal val PINK = Colour(Color.PINK, true)
 		internal val ORANGE = Colour(Color.ORANGE, true)
 		internal val YELLOW = Colour(Color.YELLOW, true)
+		internal val TRANSPARENT = Colour(0f, 0f, 0f, 0f, true)
 
 		fun random(s: Float = 0.9f, l: Float = 0.7f): Colour
 		{

@@ -3,18 +3,24 @@ package com.lyeeedar.Util
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectFloatMap
+import com.badlogic.gdx.utils.ObjectMap
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.launch
 import squidpony.squidmath.LightRNG
 import kotlin.coroutines.experimental.buildSequence
 
-fun <T> com.badlogic.gdx.utils.Array<T>.tryGet(i: Int): T = this[MathUtils.clamp(i, 0, this.size-1)]
-fun <T> com.badlogic.gdx.utils.Array<T>.random(ran: LightRNG): T = this[ran.nextInt(this.size)]
-fun <T> com.badlogic.gdx.utils.Array<T>.randomOrNull(ran: LightRNG): T? = if (this.size == 0) null else this[ran.nextInt(this.size)]
+fun <T> kotlin.Array<T>.random(ran: LightRNG = Random.random): T = this[ran.nextInt(this.size)]
+fun <T> List<T>.Array(ran: LightRNG = Random.random): T? = if (this.isEmpty()) null else this[ran.nextInt(this.size)]
 
-fun <T> com.badlogic.gdx.utils.Array<T>.removeRandom() = this.removeRandom(Random.random)
-fun <T> com.badlogic.gdx.utils.Array<T>.removeRandom(ran: LightRNG): T
+fun <T> List<T>.random(ran: LightRNG = Random.random): T = this[ran.nextInt(this.size)]
+fun <T> List<T>.randomOrNull(ran: LightRNG = Random.random): T? = if (this.isEmpty()) null else this[ran.nextInt(this.size)]
+
+fun <T> com.badlogic.gdx.utils.Array<T>.tryGet(i: Int): T = this[MathUtils.clamp(i, 0, this.size-1)]
+fun <T> com.badlogic.gdx.utils.Array<T>.random(ran: LightRNG = Random.random): T = this[ran.nextInt(this.size)]
+fun <T> com.badlogic.gdx.utils.Array<T>.randomOrNull(ran: LightRNG = Random.random): T? = if (this.size == 0) null else this[ran.nextInt(this.size)]
+
+fun <T> com.badlogic.gdx.utils.Array<T>.removeRandom(ran: LightRNG = Random.random): T
 {
 	val index = ran.nextInt(this.size)
 	val item = this[index]
@@ -76,7 +82,7 @@ inline fun <reified T> Sequence<T>.random(num: Int): Sequence<T>
 	val array = Array<T>(this.count())
 	for (item in this) array.add(item)
 
-	val outArray = Array<T>()
+	val outArray = Array<T>(num)
 	for (i in 0 until num)
 	{
 		if (array.size == 0) break
@@ -90,7 +96,7 @@ inline fun <reified T> Sequence<T>.random(num: Int, ran: LightRNG): Sequence<T>
 	val array = Array<T>(this.count())
 	for (item in this) array.add(item)
 
-	val outArray = Array<T>()
+	val outArray = Array<T>(num)
 	for (i in 0 until num)
 	{
 		if (array.size == 0) break
@@ -158,4 +164,30 @@ suspend fun <T> Iterable<T>.parallelForEach(func: (T) -> Unit)
 operator fun <K> ObjectFloatMap<K>.set(key: K, value: Float)
 {
 	this.put(key, value)
+}
+
+fun <K> ObjectFloatMap(variables: Map<K, Float>): ObjectFloatMap<K>
+{
+	val map = ObjectFloatMap<K>()
+
+	for (pair in variables)
+	{
+		map[pair.key] = pair.value
+	}
+
+	return map
+}
+
+fun <T, K> ObjectMap<T, K>.copy(): ObjectMap<T, K>
+{
+	val map = ObjectMap<T, K>()
+	map.putAll(this)
+	return map
+}
+
+fun <K> ObjectFloatMap<K>.copy(): ObjectFloatMap<K>
+{
+	val map = ObjectFloatMap<K>()
+	map.putAll(this)
+	return map
 }

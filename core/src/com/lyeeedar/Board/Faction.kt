@@ -158,7 +158,7 @@ class MonsterDesc
 			desc.name = xml.get("Name", "")!!
 
 			desc.sprite = AssetManager.loadSprite(xml.getChildByName("Sprite")!!)
-			desc.death = AssetManager.loadParticleEffect(xml.getChildByName("Death")!!)
+			desc.death = AssetManager.loadParticleEffect(xml.getChildByName("Death")!!).getParticleEffect()
 
 			desc.attackNumPips = xml.getInt("AttackNumPips")
 

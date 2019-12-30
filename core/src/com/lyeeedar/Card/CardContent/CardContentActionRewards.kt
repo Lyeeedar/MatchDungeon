@@ -87,7 +87,7 @@ class CardContentActionRewards : AbstractCardContentAction()
 
 				if (currentGroup.size > 0)
 				{
-					CardWidget.layoutCards(currentGroup, Direction.CENTER)
+					CardWidget.layoutCards(currentGroup, Direction.CENTER, flip = true)
 				}
 				else
 				{

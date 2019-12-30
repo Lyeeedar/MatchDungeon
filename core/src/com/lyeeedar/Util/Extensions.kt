@@ -53,6 +53,52 @@ fun String.expandVariables(): String
 
 fun String.neaten() = this.substring(0, 1).toUpperCase() + this.substring(1).toLowerCase()
 
+fun Char.isVowel(): Boolean
+{
+	return when(this.toLowerCase())
+	{
+		'a', 'e', 'i', 'o', 'u' -> true
+		else -> false
+	}
+}
+
+fun Long.millisToPrettyTime(showHours: Boolean = true, showMinutes: Boolean = true, showSeconds: Boolean = true): String
+{
+	val difference = this
+	val seconds = difference / 1000L
+	val minutes = seconds / 60L
+	val hours = minutes / 60L
+
+	val displayHours = kotlin.math.max(hours, 0)
+	val displayMinutes = kotlin.math.max(minutes - hours * 60L, 0)
+	val displaySeconds = kotlin.math.max(seconds - minutes * 60L, 0)
+
+	var output = ""
+	if (showHours) output += "$displayHours" + " hour".pluralize(displayHours.toInt())
+	if (showMinutes) output += " $displayMinutes" + " minute".pluralize(displayMinutes.toInt())
+	if (showSeconds) output += " $displaySeconds" + " second".pluralize(displaySeconds.toInt())
+
+	return output
+}
+
+
+fun Float.toString(sigFig: Int): String
+{
+	return String.format("%.${sigFig}f", this)
+}
+
+fun Int.prettyPrint(): String
+{
+	if (this < 10000)
+	{
+		return this.toString()
+	}
+	else
+	{
+		return String.format("%,d", this)
+	}
+}
+
 fun Color.toHSV(out: FloatArray? = null): FloatArray
 {
 	val max = Math.max(this.r, Math.max(this.g, this.b))

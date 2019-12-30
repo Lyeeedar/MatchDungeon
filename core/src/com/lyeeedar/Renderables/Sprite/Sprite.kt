@@ -9,14 +9,11 @@ import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Renderables.Animation.AbstractColourAnimation
 import com.lyeeedar.Renderables.Renderable
 import com.lyeeedar.Renderables.SortedRenderer
-import com.lyeeedar.Util.Colour
-import com.lyeeedar.Util.doDraw
-import com.lyeeedar.Util.draw
-import com.lyeeedar.Util.drawBlend
+import com.lyeeedar.Util.*
 
 class Sprite(val fileName: String, var animationDelay: Float, var textures: Array<TextureRegion>, colour: Colour, var drawActualSize: Boolean) : Renderable()
 {
-	constructor(image: TextureRegion) : this("", 1f, Array<TextureRegion>(arrayOf(image)), Colour.WHITE, false)
+	constructor(image: TextureRegion, colour: Colour = Colour.WHITE, drawActualSize: Boolean = false) : this("", 1f, Array<TextureRegion>(arrayOf(image)), colour, drawActualSize)
 	{
 	}
 
@@ -77,6 +74,12 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 
 	val remainingLifetime: Float
 		get() = if (hasAnim) animation!!.duration() - animation!!.time() else animationDelay * (textures.size - texIndex)
+
+	fun randomiseAnimation()
+	{
+		texIndex = Random.random(textures.size)
+		animationAccumulator = Random.random(animationDelay)
+	}
 
 	override fun doUpdate(delta: Float): Boolean
 	{
@@ -397,7 +400,7 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 			texAlpha = 0f
 		}
 
-		doDraw(vertices, offset, tex1, tex2, colour, x, y, width / 2.0f, height / 2.0f, width, height, scaleX, scaleY, rotation, flipX, flipY, removeAmount, texAlpha, isLit, smoothShade)
+		doDraw(vertices, offset, tex1, tex2, colour, x, y, width / 2.0f, height / 2.0f, width, height, scaleX, scaleY, rotation, flipX, flipY, removeAmount, texAlpha, 0f, isLit, smoothShade)
 
 		if (cacheVertices)
 		{
@@ -424,6 +427,7 @@ class Sprite(val fileName: String, var animationDelay: Float, var textures: Arra
 		sprite.colourAnimation = colourAnimation?.copy() as? AbstractColourAnimation
 		sprite.disableHDR = disableHDR
 		sprite.light = light?.copy()
+		sprite.colour = colour.copy()
 
 		return sprite
 	}

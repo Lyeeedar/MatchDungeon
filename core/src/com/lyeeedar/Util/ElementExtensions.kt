@@ -103,7 +103,7 @@ fun XmlReader.Element.getChildrenRecursively(out: Array<XmlReader.Element> = Arr
 	return out
 }
 
-fun XmlReader.Element.toCharGrid(): Array2D<Char>
+fun XmlData.toCharGrid(): Array2D<Char>
 {
 	val grid = Array2D<Char>(this.getChild(0).text.length, this.childCount) {x, y -> ' '}
 
@@ -119,7 +119,7 @@ fun XmlReader.Element.toCharGrid(): Array2D<Char>
 	return grid
 }
 
-fun XmlReader.Element.toHitPointArray(): com.badlogic.gdx.utils.Array<Point>
+fun XmlData.toHitPointArray(): com.badlogic.gdx.utils.Array<Point>
 {
 	val grid = this.toCharGrid()
 	val center = Point(-1, -1)

@@ -233,16 +233,16 @@ class TilingSprite() : Renderable()
 
 	companion object
 	{
-		private val CENTER = 1 shl Direction.CENTER.ordinal + 1
-		private val SOUTH = 1 shl Direction.SOUTH.ordinal + 1
-		private val NORTH = 1 shl Direction.NORTH.ordinal + 1
-		private val EAST = 1 shl Direction.EAST.ordinal + 1
-		private val WEST = 1 shl Direction.WEST.ordinal + 1
-		private val NORTHSOUTH = 0 or NORTH or SOUTH
-		private val NORTHEAST = 0 or NORTH or EAST
-		private val NORTHWEST = 0 or NORTH or WEST
-		private val SOUTHEAST = 0 or SOUTH or EAST
-		private val SOUTHWEST = 0 or SOUTH or WEST
+		public val CENTER = 1 shl Direction.CENTER.ordinal + 1
+		public val SOUTH = 1 shl Direction.SOUTH.ordinal + 1
+		public val NORTH = 1 shl Direction.NORTH.ordinal + 1
+		public val EAST = 1 shl Direction.EAST.ordinal + 1
+		public val WEST = 1 shl Direction.WEST.ordinal + 1
+		public val NORTHSOUTH = 0 or NORTH or SOUTH
+		public val NORTHEAST = 0 or NORTH or EAST
+		public val NORTHWEST = 0 or NORTH or WEST
+		public val SOUTHEAST = 0 or SOUTH or EAST
+		public val SOUTHWEST = 0 or SOUTH or WEST
 
 		fun load(xml:XmlData): TilingSprite
 		{
@@ -281,7 +281,7 @@ class TilingSprite() : Renderable()
 
 		fun getMasks(emptyDirections: EnumBitflag<Direction>): Array<String>
 		{
-			val masks = Array<String>()
+			val masks = Array<String>(8)
 
 			if (emptyDirections.bitFlag == 0)
 			{

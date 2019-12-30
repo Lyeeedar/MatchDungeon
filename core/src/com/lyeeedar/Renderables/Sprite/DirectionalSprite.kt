@@ -2,49 +2,84 @@ package com.lyeeedar.Renderables.Sprite
 
 import com.badlogic.gdx.utils.ObjectMap
 import com.badlogic.gdx.utils.ObjectSet
-import com.lyeeedar.Direction
-import com.lyeeedar.Util.FastEnumMap
 import ktx.collections.set
 
 class DirectionalSprite
 {
-	private val sprites = ObjectMap<String, FastEnumMap<Direction, Sprite>>()
+	enum class VDir
+	{
+		UP,
+		DOWN
+	}
+
+	enum class HDir
+	{
+		LEFT,
+		RIGHT
+	}
+
+	private val upSprites = ObjectMap<String, Sprite>()
+	private val downSprites = ObjectMap<String, Sprite>()
 	private val availableAnimations = ObjectSet<String>()
 
 	var size: Int
 		get() = -1
 		set(value)
 		{
-			for (anim in sprites)
+			for (up in upSprites)
 			{
-				for (sprite in anim.value)
-				{
-					sprite.size[0] = value
-					sprite.size[1] = value
-				}
+				up.value.size[0] = value
+				up.value.size[1] = value
+			}
+
+			for (down in downSprites)
+			{
+				down.value.size[0] = value
+				down.value.size[1] = value
+			}
+		}
+
+	var scale: Float
+		get() = -1f
+		set(value)
+		{
+			for (up in upSprites)
+			{
+				up.value.baseScale[0] = value
+				up.value.baseScale[1] = value
+			}
+
+			for (down in downSprites)
+			{
+				down.value.baseScale[0] = value
+				down.value.baseScale[1] = value
 			}
 		}
 
 	fun hasAnim(anim: String) = availableAnimations.contains(anim)
 
-	fun addAnim(name: String, up: Sprite, down: Sprite, left: Sprite, right: Sprite)
+	fun addAnim(name: String, up: Sprite, down: Sprite)
 	{
 		if (availableAnimations.contains(name)) throw RuntimeException("Tried to add a duplicate animation for '$name'!")
 
-		val map = FastEnumMap<Direction, Sprite>(Direction::class.java)
-		sprites[name] = map
-
-		map[Direction.NORTH] = up
-		map[Direction.SOUTH] = down
-		map[Direction.EAST] = right
-		map[Direction.WEST] = left
-
+		upSprites[name] = up
+		downSprites[name] = down
 		availableAnimations.add(name)
 	}
 
-	fun getSprite(anim: String, dir: Direction): Sprite
+	fun getSprite(anim: String, v: VDir, h: HDir): Sprite
 	{
-		val sprite = sprites[anim] ?: throw RuntimeException("Failed to find direction sprite for $anim!")
-		return sprite[dir] ?: throw RuntimeException("Failed to find direction $dir on anim $anim!")
+		val map = when (v)
+		{
+			VDir.UP -> upSprites
+			VDir.DOWN -> downSprites
+			else -> throw NotImplementedError()
+		}
+
+		val sprite = map[anim] ?: throw RuntimeException("Failed to find direction sprite for $anim!")
+
+		sprite.flipX = h == HDir.LEFT
+
+		return sprite
 	}
 }

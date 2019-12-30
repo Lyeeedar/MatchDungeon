@@ -9,6 +9,7 @@ import com.lyeeedar.Game.Character
 import com.lyeeedar.Game.Equipment
 import com.lyeeedar.Game.Quest
 import com.lyeeedar.Renderables.Particle.ParticleEffect
+import com.lyeeedar.Renderables.Particle.ParticleEffectDescription
 import com.lyeeedar.Util.XmlData
 
 class XmlLoadTester
@@ -32,7 +33,7 @@ class XmlLoadTester
 						"CHARACTER" -> Character.load(path.split("Characters/")[1])
 						"FACTION" -> Faction.load(path.split("Factions/")[1])
 						"ORBS", "DATA" -> { }
-						"EFFECT" -> ParticleEffect.load(path.split("Particles/")[1])
+						"EFFECT" -> ParticleEffect.load(path.split("Particles/")[1], ParticleEffectDescription(""))
 						"THEME" -> Theme.load(path)
 						else -> throw RuntimeException("Unhandled path type '${xml.name}'!")
 					}

@@ -73,7 +73,7 @@ class Spreader
 			val particleEl = xmlData.getChildByName("ParticleEffect")
 			if (particleEl != null)
 			{
-				spreader.particleEffect = AssetManager.loadParticleEffect(particleEl)
+				spreader.particleEffect = AssetManager.loadParticleEffect(particleEl).getParticleEffect()
 			}
 
 			spreader.effect = SpreaderEffect.valueOf(xmlData.get("Effect", "seal")!!.toUpperCase())
@@ -91,7 +91,7 @@ class Spreader
 			val attackEffectEl = xmlData.getChildByName("AttackEffect")
 			if (attackEffectEl != null)
 			{
-				spreader.attackEffect = AssetManager.loadParticleEffect(attackEffectEl)
+				spreader.attackEffect = AssetManager.loadParticleEffect(attackEffectEl).getParticleEffect()
 			}
 
 			return spreader

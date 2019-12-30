@@ -366,9 +366,9 @@ class Ability
 		}
 
 		val hitEffectData = dataEl.getChildByName("HitEffect")
-		if (hitEffectData != null) hitEffect = AssetManager.loadParticleEffect(hitEffectData)
+		if (hitEffectData != null) hitEffect = AssetManager.loadParticleEffect(hitEffectData).getParticleEffect()
 		val flightEffectData = dataEl.getChildByName("FlightEffect")
-		if (flightEffectData != null) flightEffect = AssetManager.loadParticleEffect(flightEffectData)
+		if (flightEffectData != null) flightEffect = AssetManager.loadParticleEffect(flightEffectData).getParticleEffect()
 
 		if (effect.type == Effect.Type.BUFF)
 		{

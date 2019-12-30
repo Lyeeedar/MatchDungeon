@@ -59,7 +59,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	var matchHint: Pair<Point, Point>? = null
 
 	// ----------------------------------------------------------------------
-	val hitEffect = AssetManager.loadParticleEffect("Hit")
+	val hitEffect = AssetManager.loadParticleEffect("Hit").getParticleEffect()
 
 	// ----------------------------------------------------------------------
 	var activeAbility: Ability? = null
@@ -1706,7 +1706,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					if (friendly.hp < friendly.maxhp)
 					{
 						t.friendly!!.hp++
-						val healSprite = AssetManager.loadParticleEffect("Heal")
+						val healSprite = AssetManager.loadParticleEffect("Heal").getParticleEffect()
 						healSprite.colour = Colour.GREEN
 						t.effects.add(healSprite)
 					}
@@ -1878,7 +1878,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			if (friendly.hp < friendly.maxhp)
 			{
 				tile.friendly!!.hp++
-				val healSprite = AssetManager.loadParticleEffect("Heal")
+				val healSprite = AssetManager.loadParticleEffect("Heal").getParticleEffect()
 				healSprite.colour = Colour.GREEN
 				tile.effects.add(healSprite)
 			}

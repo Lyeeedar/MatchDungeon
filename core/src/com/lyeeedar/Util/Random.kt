@@ -79,3 +79,5 @@ fun LightRNG.freeTS()
 {
 	Random.freeTS(this)
 }
+
+fun LightRNG.nextFloat(value: Float) = this.nextFloat() * value

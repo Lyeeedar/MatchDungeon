@@ -13,8 +13,8 @@ class SpriteWrapper
 	var sprite: Sprite? = null
 	var tilingSprite: TilingSprite? = null
 
-	val spriteVariants = com.badlogic.gdx.utils.Array<Pair<Float, Sprite>>()
-	val tilingSpriteVariants = com.badlogic.gdx.utils.Array<Pair<Float, TilingSprite>>()
+	val spriteVariants = com.badlogic.gdx.utils.Array<Pair<Float, Sprite>>(1)
+	val tilingSpriteVariants = com.badlogic.gdx.utils.Array<Pair<Float, TilingSprite>>(1)
 
 	var chosenSprite: Sprite? = null
 	var chosenTilingSprite: TilingSprite? = null
@@ -62,8 +62,17 @@ class SpriteWrapper
 		val wrapper = SpriteWrapper()
 		wrapper.sprite = sprite?.copy()
 		wrapper.tilingSprite = tilingSprite?.copy()
-		wrapper.spriteVariants.addAll(spriteVariants)
-		wrapper.tilingSpriteVariants.addAll(tilingSpriteVariants)
+
+		for (variant in spriteVariants)
+		{
+			wrapper.spriteVariants.add(Pair(variant.first, variant.second.copy()))
+		}
+
+		for (variant in tilingSpriteVariants)
+		{
+			wrapper.tilingSpriteVariants.add(Pair(variant.first, variant.second.copy()))
+		}
+
 		return wrapper
 	}
 
@@ -81,7 +90,16 @@ class SpriteWrapper
 			}
 
 			val wrapper = SpriteWrapper()
-			if (spriteEl != null) wrapper.sprite = AssetManager.loadSprite(spriteEl)
+			if (spriteEl != null)
+			{
+				val refKey = spriteEl.getAttribute("meta:RefKey")
+				wrapper.sprite = when (refKey)
+				{
+					"Sprite" -> AssetManager.loadSprite(spriteEl)
+					"RenderedLayeredSprite" -> AssetManager.loadLayeredSprite(spriteEl)
+					else -> throw RuntimeException("Unhandled spriteVariant refKey '$refKey'")
+				}
+			}
 			if (tilingEl != null) wrapper.tilingSprite = AssetManager.loadTilingSprite(tilingEl)
 
 			val spriteVariantsEl = xml.getChildByName("SpriteVariants")
@@ -89,7 +107,15 @@ class SpriteWrapper
 			{
 				for (el in spriteVariantsEl.children)
 				{
-					val sprite = AssetManager.loadSprite(el.getChildByName("Sprite")!!)
+					val spriteVariantEl = el.getChildByName("Sprite")!!
+					val refKey = spriteVariantEl.getAttribute("meta:RefKey")
+					val sprite = when (refKey)
+					{
+						"Sprite" -> AssetManager.loadSprite(spriteVariantEl)
+						"RenderedLayeredSprite" -> AssetManager.loadLayeredSprite(spriteVariantEl)
+						else -> throw RuntimeException("Unhandled spriteVariant refKey '$refKey'")
+					}
+
 					val weight = el.getFloat("Chance")
 
 					wrapper.spriteVariants.add(Pair(weight, sprite))

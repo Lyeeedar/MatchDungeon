@@ -10,10 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
-import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Global
 import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Point
 import ktx.actors.alpha
 import ktx.actors.then
 
@@ -25,7 +23,7 @@ class TutorialPopup(val text: String, val emphasisSource: Any, val advance: () -
 		{
 			is Rectangle -> emphasisSource
 			is Actor -> emphasisSource.getBounds()
-			is Array<*> -> GridWidget.instance.getRect(emphasisSource as Array<Point>)
+			//is Array<*> -> GridWidget.instance.getRect(emphasisSource as Array<Point>)
 			else -> Rectangle(Global.stage.width / 2f, Global.stage.height / 2f, 0f, 0f)
 		}
 	}

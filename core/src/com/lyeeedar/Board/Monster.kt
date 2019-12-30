@@ -103,7 +103,7 @@ class Monster(val desc: MonsterDesc, val difficulty: Int) : Creature(desc.hp, de
 					{
 						hp -= weaknessAura
 
-						val effect = AssetManager.loadParticleEffect("Weakness")
+						val effect = AssetManager.loadParticleEffect("Weakness").getParticleEffect()
 						effect.size[0] = size
 						effect.size[1] = size
 

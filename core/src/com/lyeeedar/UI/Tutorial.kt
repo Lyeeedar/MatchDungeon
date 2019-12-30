@@ -1,7 +1,6 @@
 package com.lyeeedar.UI
 
 import com.badlogic.gdx.utils.Array
-import com.lyeeedar.Game.Save
 import com.lyeeedar.Global
 
 class Tutorial(val key: String)
@@ -71,8 +70,6 @@ class Tutorial(val key: String)
 		if (index >= actions.size)
 		{
 			current = null
-
-			Save.save()
 
 			if (queue.size > 0)
 			{

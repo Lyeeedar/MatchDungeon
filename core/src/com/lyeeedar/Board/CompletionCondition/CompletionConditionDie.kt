@@ -8,10 +8,10 @@ import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Mote
 import com.lyeeedar.Global
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
-import com.lyeeedar.Renderables.Particle.ParticleEffectActor
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.GridWidget
+import com.lyeeedar.UI.ParticleEffectActor
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
@@ -91,7 +91,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 						 val pos = dst
 
 						 val sprite = AssetManager.loadParticleEffect("Block")
-						 val actor = ParticleEffectActor(sprite)
+						 val actor = ParticleEffectActor(sprite.getParticleEffect())
 						 actor.setSize(48f, 48f)
 						 actor.setPosition(pos.x, pos.y)
 						 Global.stage.addActor(actor)
@@ -103,7 +103,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 						 val pos = dst
 
 						 val sprite = AssetManager.loadParticleEffect("Hit")
-						 val actor = ParticleEffectActor(sprite)
+						 val actor = ParticleEffectActor(sprite.getParticleEffect())
 						 actor.setSize(48f, 48f)
 						 actor.setPosition(pos.x, pos.y)
 						 Global.stage.addActor(actor)
@@ -196,7 +196,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 
 			val healSprite = AssetManager.loadParticleEffect("Heal")
 			healSprite.colour = Colour.GREEN
-			val actor = ParticleEffectActor(healSprite)
+			val actor = ParticleEffectActor(healSprite.getParticleEffect())
 			actor.setSize(48f, 48f)
 			actor.setPosition(pos.x, pos.y)
 			Global.stage.addActor(actor)
@@ -218,7 +218,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 			val healSprite = AssetManager.loadParticleEffect("Heal")
 			healSprite.colour = Colour.RED
 			healSprite.flipY = true
-			val actor = ParticleEffectActor(healSprite)
+			val actor = ParticleEffectActor(healSprite.getParticleEffect())
 			actor.setSize(48f, 48f)
 			actor.setPosition(pos.x, pos.y)
 			Global.stage.addActor(actor)

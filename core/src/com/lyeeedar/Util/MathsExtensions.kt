@@ -4,7 +4,11 @@ import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Path
 import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.Pools
+import ktx.collections.gdxArrayOf
+
+
 
 fun Vector2.lerp(targetx: Float, targety: Float, alpha: Float): Vector2
 {
@@ -124,4 +128,58 @@ fun Int.romanNumerals(): String
 		20 -> "XX"
 		else -> "--"
 	}
+}
+
+fun getCircleLineIntersectionPoint(pointA: Vector2, pointB: Vector2, center: Vector2, radius: Float): Array<Vector2>
+{
+	val baX = pointB.x - pointA.x
+	val baY = pointB.y - pointA.y
+	val caX = center.x - pointA.x
+	val caY = center.y - pointA.y
+
+	val a = baX * baX + baY * baY
+	val bBy2 = baX * caX + baY * caY
+	val c = caX * caX + caY * caY - radius * radius
+
+	val pBy2 = bBy2 / a
+	val q = c / a
+
+	val disc = pBy2 * pBy2 - q
+	if (disc < 0)
+	{
+		return Array()
+	}
+
+	val tmpSqrt = Math.sqrt(disc.toDouble()).toFloat()
+	val abScalingFactor1 = -pBy2 + tmpSqrt
+	val abScalingFactor2 = -pBy2 - tmpSqrt
+
+	val p1 = Vector2(pointA.x - baX * abScalingFactor1, pointA.y - baY * abScalingFactor1)
+
+	if (disc == 0.0f)
+	{
+		return gdxArrayOf(p1)
+	}
+
+	val p2 = Vector2(pointA.x - baX * abScalingFactor2, pointA.y - baY * abScalingFactor2)
+
+	return gdxArrayOf(p1, p2)
+}
+
+fun doesLineIntersectCircle(pointA: Vector2, pointB: Vector2, center: Vector2, radius: Float): Boolean
+{
+	val baX = pointB.x - pointA.x
+	val baY = pointB.y - pointA.y
+	val caX = center.x - pointA.x
+	val caY = center.y - pointA.y
+
+	val a = baX * baX + baY * baY
+	val bBy2 = baX * caX + baY * caY
+	val c = caX * caX + caY * caY - radius * radius
+
+	val pBy2 = bBy2 / a
+	val q = c / a
+
+	val disc = pBy2 * pBy2 - q
+	return disc >= 0
 }

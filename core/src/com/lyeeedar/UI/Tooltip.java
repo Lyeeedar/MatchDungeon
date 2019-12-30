@@ -3,6 +3,7 @@ package com.lyeeedar.UI;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
@@ -15,10 +16,27 @@ public class Tooltip extends Table
 	private TooltipStyle m_style;
 	private Stage storedstage;
 
+	public Tooltip(String Content, Skin skin, Stage stage)
+	{
+		super( skin );
+
+		Table table = new Table();
+		Label label = new Label(Content, skin);
+		label.setWrap( true );
+		table.add(label).grow();
+
+		create( table, skin, stage );
+	}
+
 	public Tooltip( Table Content, Skin skin, Stage stage )
 	{
 		super( skin );
 
+		create( Content, skin, stage );
+	}
+
+	public void create( Table Content, Skin skin, Stage stage )
+	{
 		this.storedstage = stage;
 
 		this.Content = Content;

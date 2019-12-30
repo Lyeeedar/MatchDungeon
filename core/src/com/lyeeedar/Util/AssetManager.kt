@@ -12,10 +12,12 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
+import com.lyeeedar.BlendMode
 import com.lyeeedar.Renderables.Animation.AbstractAnimation
 import com.lyeeedar.Renderables.Light
 import com.lyeeedar.Renderables.LightAnimation
-import com.lyeeedar.Renderables.Particle.ParticleEffect
+import com.lyeeedar.Renderables.Particle.ParticleEffectDescription
+import com.lyeeedar.Renderables.Particle.TextureOverride
 import com.lyeeedar.Renderables.Renderable
 import com.lyeeedar.Renderables.Sprite.DirectionalSprite
 import com.lyeeedar.Renderables.Sprite.Sprite
@@ -147,17 +149,38 @@ class AssetManager
 			return region
 		}
 
-		fun loadParticleEffect(name: String): ParticleEffect
+		fun loadParticleEffect(name: String, colour: Colour = Colour.WHITE, flipX: Boolean = false, flipY: Boolean = false, scale: Float = 1f, useFacing: Boolean = true, timeMultiplier: Float = 1f, killOnAnimComplete: Boolean = false): ParticleEffectDescription
 		{
-			val effect = ParticleEffect.load(name)
+			val effect = ParticleEffectDescription(name)
+			effect.colour.set(colour)
+			effect.flipX = flipX
+			effect.flipY = flipY
+			effect.scale = scale
+			effect.useFacing = useFacing
+			effect.timeMultiplier = timeMultiplier
+			effect.killOnAnimComplete = killOnAnimComplete
 			return effect
 		}
 
-		fun loadParticleEffect(xml:XmlData): ParticleEffect
+		fun loadParticleEffect(xml:XmlData): ParticleEffectDescription
 		{
-			val effect = ParticleEffect.load(xml.get("Name"))
+			val effectXml: XmlData
+			val overridesEl: XmlData?
+			if (xml.getChildByName("Name") == null)
+			{
+				// its a template
+				effectXml = xml.getChildByName("Base")!!
+				overridesEl = xml.getChildByName("Overrides")
+			}
+			else
+			{
+				effectXml = xml
+				overridesEl = null
+			}
 
-			val colourElement = xml.getChildByName("Colour")
+			val effect = ParticleEffectDescription(effectXml.get("Name"))
+
+			val colourElement = effectXml.getChildByName("Colour")
 			var colour = Colour(1f, 1f, 1f, 1f)
 			if (colourElement != null)
 			{
@@ -166,12 +189,25 @@ class AssetManager
 
 			effect.colour.set(colour)
 
-			effect.flipX = xml.getBoolean("FlipX", false)
-			effect.flipY = xml.getBoolean("FlipY", false)
-			effect.scale = xml.getFloat("Scale", 1f)
-			effect.useFacing = xml.getBoolean("UseFacing", true)
-			effect.timeMultiplier = xml.getFloat("TimeMultiplier", 1f)
-			effect.killOnAnimComplete = xml.getBoolean("KillOnAnimComplete", false)
+			effect.flipX = effectXml.getBoolean("FlipX", false)
+			effect.flipY = effectXml.getBoolean("FlipY", false)
+			effect.scale = effectXml.getFloat("Scale", 1f)
+			effect.useFacing = effectXml.getBoolean("UseFacing", true)
+			effect.timeMultiplier = effectXml.getFloat("TimeMultiplier", 1f)
+			effect.killOnAnimComplete = effectXml.getBoolean("KillOnAnimComplete", false)
+
+			if (overridesEl != null)
+			{
+				for (overrideEl in overridesEl.children)
+				{
+					val texName = overrideEl.get("Name")
+					val overrideName = overrideEl.getChildByName("Texture")!!.get("File")
+					val blendModeStr = overrideEl.get("BlendMode", "Current")!!
+					val blendMode = if (blendModeStr != "Current") BlendMode.valueOf(blendModeStr.toUpperCase()) else null
+
+					effect.textureOverrides.add(TextureOverride(texName, overrideName, blendMode))
+				}
+			}
 
 			return effect
 		}
@@ -401,7 +437,7 @@ class AssetManager
 
 		fun loadLayeredSprite(xml: XmlData): Sprite
 		{
-			val paths = Array<String>()
+			val paths = Array<String>(1)
 			var drawActualSize = false
 
 			val layers = xml.getChildByName("Layers")!!
@@ -434,14 +470,12 @@ class AssetManager
 			val directionalSprite = DirectionalSprite()
 
 			val anims = xml.getChildByName("Animations")!!
-			for (i in 0.. anims.childCount-1)
+			for (i in 0 until anims.childCount)
 			{
 				val el = anims.getChild(i)
 				val name = el.get("Name").toLowerCase()
 				val up = AssetManager.loadSprite(el.getChildByName("Up")!!)
 				val down = AssetManager.loadSprite(el.getChildByName("Down")!!)
-				val left = AssetManager.loadSprite(el.getChildByName("Left")!!)
-				val right = AssetManager.loadSprite(el.getChildByName("Right")!!)
 
 				up.size[0] = size
 				up.size[1] = size
@@ -449,7 +483,7 @@ class AssetManager
 				down.size[0] = size
 				down.size[1] = size
 
-				directionalSprite.addAnim(name, up, down, left, right)
+				directionalSprite.addAnim(name, up, down)
 			}
 
 			return directionalSprite
@@ -462,7 +496,7 @@ class AssetManager
 			return when(type)
 			{
 				"SPRITE" -> AssetManager.loadSprite(xml)
-				"PARTICLEEFFECT", "PARTICLE" -> AssetManager.loadParticleEffect(xml)
+				"PARTICLEEFFECT", "PARTICLE", "PARTICLEEFFECTTEMPLATE" -> AssetManager.loadParticleEffect(xml).getParticleEffect()
 				"TILINGSPRITE" -> AssetManager.loadTilingSprite(xml)
 				else -> throw Exception("Unknown renderable type '$type'!")
 			};

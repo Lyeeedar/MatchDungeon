@@ -88,7 +88,7 @@ abstract class Special(orbDesc: OrbDesc, theme: Theme) : Matchable(theme)
 
 				val hitSet = ObjectSet<Tile>()
 
-				val effect = AssetManager.loadParticleEffect("SpecialBeam")
+				val effect = AssetManager.loadParticleEffect("SpecialBeam").getParticleEffect()
 				effect.colour = modifyColour(colour)
 				effect.killOnAnimComplete = true
 				effect.animation = MoveAnimation.obtain().set(dist * beamMoveSpeed * grid.animSpeedMultiplier, arrayOf(p1, p2), Interpolation.linear)
@@ -157,7 +157,7 @@ abstract class Special(orbDesc: OrbDesc, theme: Theme) : Matchable(theme)
 
 				val hitSet = ObjectSet<Tile>()
 
-				val effect = AssetManager.loadParticleEffect("SpecialBeam")
+				val effect = AssetManager.loadParticleEffect("SpecialBeam").getParticleEffect()
 				effect.colour = modifyColour(colour)
 				effect.killOnAnimComplete = true
 				effect.animation = MoveAnimation.obtain().set(dist * beamMoveSpeed * grid.animSpeedMultiplier, arrayOf(p1, p2), Interpolation.linear)
@@ -336,7 +336,7 @@ class DoubleDualMatch(orbDesc: OrbDesc, theme: Theme) : BombSpecial(orbDesc, the
 
 		val hitSet = ObjectSet<Tile>()
 
-		val effect = AssetManager.loadParticleEffect("SpecialExplosion")
+		val effect = AssetManager.loadParticleEffect("SpecialExplosion").getParticleEffect()
 		effect.colour = modifyColour(sprite.colour)
 		effect.size[0] = 4
 		effect.size[1] = 4
@@ -447,7 +447,7 @@ class DualMatch(orbDesc: OrbDesc, theme: Theme) : BombSpecial(orbDesc, theme)
 
 		val hitSet = ObjectSet<Tile>()
 
-		val effect = AssetManager.loadParticleEffect("SpecialExplosion")
+		val effect = AssetManager.loadParticleEffect("SpecialExplosion").getParticleEffect()
 		effect.colour = modifyColour(sprite.colour)
 		effect.size[0] = 3
 		effect.size[1] = 3
@@ -556,7 +556,7 @@ class Match5(orbDesc: OrbDesc, theme: Theme) : GemSpecial(orbDesc, theme)
 		sprite.colourAnimation = null
 		sprite.colour = targetDesc!!.sprite.colour.copy()
 
-		val effect = AssetManager.loadParticleEffect("SpecialExplosion")
+		val effect = AssetManager.loadParticleEffect("SpecialExplosion").getParticleEffect()
 		effect.size[0] = 2
 		effect.size[1] = 2
 		effect.isCentered = true
@@ -646,7 +646,7 @@ class Match5Spread(orbDesc: OrbDesc, theme: Theme, val special: Special) : GemSp
 
 	override fun apply(point: Point, grid: Grid)
 	{
-		val effect = AssetManager.loadParticleEffect("SpecialExplosion")
+		val effect = AssetManager.loadParticleEffect("SpecialExplosion").getParticleEffect()
 		effect.size[0] = 2
 		effect.size[1] = 2
 		effect.isCentered = true
@@ -746,7 +746,7 @@ class Match5Dual(orbDesc: OrbDesc, theme: Theme) : GemSpecial(orbDesc, theme)
 		sprite.colourAnimation = null
 		sprite.colour = Colour.random()
 
-		val effect = AssetManager.loadParticleEffect("SpecialExplosion")
+		val effect = AssetManager.loadParticleEffect("SpecialExplosion").getParticleEffect()
 		effect.size[0] = 2
 		effect.size[1] = 2
 		effect.isCentered = true

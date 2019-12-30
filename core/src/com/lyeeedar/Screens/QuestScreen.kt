@@ -447,7 +447,7 @@ class QuestScreen : AbstractScreen()
 
 				if (currentGroup.size > 0)
 				{
-					CardWidget.layoutCards(currentGroup, Direction.CENTER)
+					CardWidget.layoutCards(currentGroup, Direction.CENTER, flip = true)
 				}
 				else
 				{
@@ -478,7 +478,7 @@ class QuestScreen : AbstractScreen()
 					cards.add(card)
 
 					Global.stage.addActor(card)
-					CardWidget.layoutCards(cards, Direction.CENTER, cardsTable, animate = false)
+					CardWidget.layoutCards(cards, Direction.CENTER, cardsTable, animate = false, flip = true)
 				}
 
 				if (Global.deck.newcharacters.size > 0 || Global.deck.newencounters.size > 0 || Global.deck.newequipment.size > 0 || Global.deck.newquests.size > 0)
@@ -609,7 +609,7 @@ class QuestScreen : AbstractScreen()
 
 				if (currentGroup.size > 0)
 				{
-					CardWidget.layoutCards(currentGroup, Direction.CENTER)
+					CardWidget.layoutCards(currentGroup, Direction.CENTER, flip = true)
 				}
 				else
 				{
@@ -633,7 +633,7 @@ class QuestScreen : AbstractScreen()
 
 		if (needsLayout && cardsTable.width != 0f)
 		{
-			CardWidget.layoutCards(cardWidgets, Direction.CENTER, cardsTable)
+			CardWidget.layoutCards(cardWidgets, Direction.CENTER, cardsTable, flip = true)
 			updateEquipment()
 			needsLayout = false
 		}

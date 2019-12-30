@@ -249,7 +249,6 @@ class DebugConsole(val historyKey: String) : Table()
 		if (Global.release) return
 
 		val lname = name.toLowerCase()
-		if (!commands.containsKey(lname)) throw Exception("No console command registered with name '$name'!")
 
 		commands.remove(lname)
 	}
@@ -311,7 +310,7 @@ class ConsoleCommand(val text: String, val help: String, val callback: (args: ko
 			}
 			catch (ex: Exception)
 			{
-				console.error(ex.message!!)
+				console.error(ex.message ?: "Unknown exception! $ex")
 
 				return false
 			}
@@ -321,6 +320,6 @@ class ConsoleCommand(val text: String, val help: String, val callback: (args: ko
 
 interface IDebugCommandProvider
 {
-	fun attachCommands()
-	fun detachCommands()
+	fun attachCommands(debugConsole: DebugConsole)
+	fun detachCommands(debugConsole: DebugConsole)
 }

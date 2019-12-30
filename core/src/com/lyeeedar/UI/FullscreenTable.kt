@@ -16,13 +16,17 @@ import com.lyeeedar.Util.Event0Arg
  * Created by Philip on 02-Aug-16.
  */
 
-open class FullscreenTable() : Table()
+open class FullscreenTable(opacity: Float = 0.4f) : Table()
 {
 	val onClosed = Event0Arg()
 
+	var closeButton: Button? = null
+
 	init
 	{
-		background = TextureRegionDrawable(AssetManager.loadTextureRegion("white")).tint(Color(0f, 0f, 0f, 0.4f))
+		openCount++
+
+		background = TextureRegionDrawable(AssetManager.loadTextureRegion("white")).tint(Color(0f, 0f, 0f, opacity))
 		touchable = Touchable.enabled
 		setFillParent(true)
 
@@ -31,7 +35,10 @@ open class FullscreenTable() : Table()
 
 	override fun remove(): Boolean
 	{
+		openCount--
+
 		onClosed()
+		closeButton?.remove()
 		return super.remove()
 	}
 
@@ -39,7 +46,7 @@ open class FullscreenTable() : Table()
 	{
 		var openCount = 0
 
-		fun createCloseable(content: Table)
+		fun createCloseable(content: Table): Table
 		{
 			val xPad = 15f * (openCount+1)
 
@@ -54,15 +61,14 @@ open class FullscreenTable() : Table()
 			val closeButton = Button(Global.skin, "close")
 			closeButton.setSize(24f, 24f)
 			closeButton.addClickListener {
-				closeButton.remove()
 				table.remove()
-				openCount--
 			}
 			closeButton.setPosition(Global.stage.width - 35 - xPad, Global.stage.height - 50)
 
 			Global.stage.addActor(closeButton)
+			table.closeButton = closeButton
 
-			openCount++
+			return table
 		}
 
 		fun createCard(content: Table, point: Vector2)

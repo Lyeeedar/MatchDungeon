@@ -13,7 +13,7 @@ class Block(val theme: Theme) : Damageable(), IHasTurnEffect
 	override var sprite = theme.blockSprites.tryGet(0).copy()
 	var alwaysShowHP: Boolean = false
 
-	val death = AssetManager.loadParticleEffect("Hit")
+	val death = AssetManager.loadParticleEffect("Hit").getParticleEffect()
 
 	override val onTurnEffects: Array<TurnEffect> = Array()
 }
