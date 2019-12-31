@@ -18,6 +18,10 @@ android {
         targetSdkVersion 28
     }
 
+    packagingOptions {
+        exclude 'META-INF/proguard/coroutines.pro'
+    }
+
     compileOptions.incremental = false
 }
 // called every time gradle gets executed, takes the native dependencies of
