@@ -19,7 +19,6 @@ import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.*
-import ktx.actors.plus
 import ktx.actors.then
 import ktx.collections.toGdxArray
 
@@ -1194,7 +1193,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 							lambda { messageList.removeValue(label, true) } then
 							removeActor()
 
-			label + sequence
+			label.addAction(sequence)
 
 			val width = label.prefWidth
 			if (pos.x + width > Statics.stage.width)
