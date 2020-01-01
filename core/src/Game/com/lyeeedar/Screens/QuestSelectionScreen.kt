@@ -265,7 +265,7 @@ class QuestSelectionScreen : AbstractScreen()
 
 		titleLabel.setText(currentTheme.addSpaces())
 
-		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(themeMap[currentTheme].first().theme.backgroundTile))).tint(Color.DARK_GRAY)
+		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(themeMap[currentTheme].first().theme.backgroundTile))).tint(Color(0.5f, 0.5f, 0.5f, 1.0f))
 
 		scrollTable.clear()
 
