@@ -1,4 +1,4 @@
-package com.lyeeedar.Screens
+ickage com.lyeeedar.Screens
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.*
@@ -260,7 +260,7 @@ class DeckScreen : AbstractScreen()
 
 		mainTable.clear()
 
-		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion("Oryx/uf_split/uf_terrain/floor_wood_1"))).tint(Color.DARK_GRAY)
+		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion("Oryx/uf_split/uf_terrain/floor_wood_1"))).tint(Color(0.5f, 0.5f, 0.5f, 1.0f))
 
 		val cardHeight = (Statics.resolution.y.toFloat() * 0.7f) * 0.3f
 		val cardWidth = Statics.resolution.x.toFloat() * 0.8f
@@ -317,7 +317,7 @@ class DeckScreen : AbstractScreen()
 
 		mainTable.clear()
 
-		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion("Oryx/uf_split/uf_terrain/floor_wood_1"))).tint(Color.DARK_GRAY)
+		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion("Oryx/uf_split/uf_terrain/floor_wood_1"))).tint(Color(0.5f, 0.5f, 0.5f, 1.0f))
 
 		val cardHeight = (Statics.resolution.y.toFloat() * 0.7f) * 0.3f
 		val cardWidth = Statics.resolution.x.toFloat() * 0.3f
@@ -490,7 +490,7 @@ class DeckScreen : AbstractScreen()
 
 		mainTable.clear()
 
-		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion("Oryx/uf_split/uf_terrain/floor_wood_1"))).tint(Color.DARK_GRAY)
+		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion("Oryx/uf_split/uf_terrain/floor_wood_1"))).tint(Color(0.5f, 0.5f, 0.5f, 1.0f))
 
 		val cardHeight = (Statics.resolution.y.toFloat() * 0.7f) * 0.3f
 		val cardWidth = Statics.resolution.x.toFloat() * 0.3f
