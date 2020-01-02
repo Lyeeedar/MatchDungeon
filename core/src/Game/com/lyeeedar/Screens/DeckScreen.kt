@@ -1,4 +1,4 @@
-ickage com.lyeeedar.Screens
+package com.lyeeedar.Screens
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.*
@@ -70,7 +70,7 @@ class DeckScreen : AbstractScreen()
 	{
 		mainTable.clear()
 
-		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion("Oryx/uf_split/uf_terrain/floor_wood_1"))).tint(Color.DARK_GRAY)
+		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion("Oryx/uf_split/uf_terrain/floor_wood_1"))).tint(Color(0.5f, 0.5f, 0.5f, 1f))
 
 		mainTable.add(Label("Character", Statics.skin, "title")).expandX().center().padTop(20f)
 		mainTable.row()
