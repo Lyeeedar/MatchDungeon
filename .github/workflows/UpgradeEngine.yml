@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     
-    - name: Checkout submodules
+    - name: Checkout submodules 1
       shell: bash
       run: |
         auth_header="$(git config --local --get http.https://github.com/.extraheader)"
