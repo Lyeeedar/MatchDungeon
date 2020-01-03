@@ -26,21 +26,21 @@ jobs:
       continue-on-error: true
   
     - name: Make gradlew executable
-      if: commit.success()
+      if: steps.commit.success()
       run: chmod +x ./gradlew
       
     - name: Build Desktop
-      if: commit.success()
+      if: steps.commit.success()
       run: ./gradlew :desktop:build
       
     - name: Build Android
-      if: commit.success()
+      if: steps.commit.success()
       run: ./gradlew :android:assembleDebug
     
     - name: Build Resources
-      if: commit.success()
+      if: steps.commit.success()
       run: ./gradlew :headless:compileResources
         
     - name: Push changes
-      if: commit.success()
+      if: steps.commit.success()
       run: git push
