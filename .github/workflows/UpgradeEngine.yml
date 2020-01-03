@@ -1,6 +1,8 @@
 name: UpgradeEngine
 
-on: 
+on:
+  schedule:
+    - cron: '* * * * *'
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -16,6 +18,9 @@ jobs:
         
     - name: Update submodules
       run: git submodule update --recursive --remote --rebase
+      
+    - name: Check if we updated
+      run: git diff --exit-code
   
     - name: Make gradlew executable
       run: chmod +x ./gradlew
@@ -29,6 +34,14 @@ jobs:
     - name: Build Resources
       run: ./gradlew :headless:compileResources
       
-    - name: Commit changes and push
-      run: git commit -m"Upgrade engine"
+    - uses: fregante/setup-git-token@v1
+      with:
+        name: EngineUpdaterAction
+        email: actions@github.com
+        token: ${{ secrets.GITHUB_TOKEN }}
+      
+    - name: Commit changes
+      run: git commit -m "Upgrade engine" -a
+        
+    - name: Push changes
       run: git push
