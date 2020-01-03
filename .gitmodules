@@ -7,3 +7,6 @@
 [submodule "core/src/Engine"]
 	path = core/src/Engine
 	url = https://github.com/Lyeeedar/TileEngine.git
+[submodule "android/assetsraw/Sprites"]
+	path = android/assetsraw/Sprites
+	url = https://github.com/Lyeeedar/Sprites.git
