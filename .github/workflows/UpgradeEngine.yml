@@ -23,6 +23,10 @@ jobs:
     - name: Commit changes
       run: git commit -m "Upgrade engine" -a
       id: commit
+      
+    - name: Commit Failure
+      if: failure()
+      run: echo "Engine up to date"
   
     - name: Make gradlew executable
       if: commit.success()
