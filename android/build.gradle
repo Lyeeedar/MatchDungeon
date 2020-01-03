@@ -14,8 +14,9 @@ android {
     }
     defaultConfig {
         applicationId "com.lyeeedar"
-        minSdkVersion 9
+        minSdkVersion 14
         targetSdkVersion 28
+        multiDexEnabled true
     }
 
     packagingOptions {
