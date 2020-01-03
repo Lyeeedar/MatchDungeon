@@ -28,6 +28,7 @@ allprojects {
         kryoVersion = '4.0.2'
         ktxVersion = '1.9.10-b3'
         squidlibVersion = '3.0.0-b10'
+		ashleyVersion = '1.7.3'
     }
 
     repositories {
@@ -49,6 +50,21 @@ project(":desktop") {
         api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         api "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
         api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    }
+}
+
+project(":headless") {
+    apply plugin: "java"
+    apply plugin: "kotlin"
+
+
+    dependencies {
+        api project(":core")
+        api "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+        api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+        api "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
+        api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+        api "org.mockito:mockito-all:1.9.+"
     }
 }
 
@@ -96,6 +112,7 @@ project(":core") {
         api "io.github.libktx:ktx-math:$ktxVersion"
         api "io.github.libktx:ktx-collections:$ktxVersion"
         api "io.github.libktx:ktx-actors:$ktxVersion"
+		api "com.badlogicgames.ashley:ashley:$ashleyVersion"
         api "com.squidpony:squidlib-util:$squidlibVersion"
         api "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
 

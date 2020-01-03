@@ -1,0 +1,26 @@
+name: CI
+
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Checkout submodules
+      shell: bash
+      run: |
+        auth_header="$(git config --local --get http.https://github.com/.extraheader)"
+        git submodule sync --recursive
+        git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
+  
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+      
+    - name: Build Desktop
+      run: ./gradlew :desktop:build
+      
+    - name: Build Android
+      run: ./gradlew :android:assembleDebug
+    
+    - name: Build Resources
+      run: ./gradlew :headless:compileResources

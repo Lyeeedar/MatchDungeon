@@ -43,7 +43,6 @@ class MainGame : Game()
 
 	override fun create()
 	{
-		Statics.applicationChanger.processResources()
 		Statics.setup()
 
 		if (Statics.android)

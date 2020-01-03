@@ -8,10 +8,6 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration
 import com.badlogic.gdx.backends.lwjgl.LwjglPreferences
 import com.lyeeedar.MainGame
-import com.lyeeedar.ResourceProcessors.AtlasCreator
-import com.lyeeedar.ResourceProcessors.TextureCompressor
-import com.lyeeedar.ResourceProcessors.XmlCompressor
-import com.lyeeedar.ResourceProcessors.XmlLoadTester
 import com.lyeeedar.Util.AbstractApplicationChanger
 import com.lyeeedar.Util.Statics
 
@@ -39,17 +35,6 @@ class LwjglApplicationChanger : AbstractApplicationChanger(LwjglPreferences("gam
 		Statics.fps = pref.getInteger("fps")
 
 		return LwjglApplication(game, cfg)
-	}
-
-	override fun processResources()
-	{
-		if (!Statics.release)
-		{
-			AtlasCreator()
-			TextureCompressor()
-			XmlCompressor()
-			XmlLoadTester.test()
-		}
 	}
 
 	override fun updateApplication(pref: Preferences)

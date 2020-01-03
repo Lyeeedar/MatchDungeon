@@ -16,10 +16,6 @@ class AndroidApplicationChanger : AbstractApplicationChanger(Gdx.app.getPreferen
 		return null
 	}
 
-	override fun processResources()
-	{
-	}
-
 	override fun updateApplication(pref: Preferences)
 	{
 		val width = pref.getInteger("resolutionX")
