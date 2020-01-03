@@ -9,15 +9,16 @@ jobs:
     steps:
     - uses: actions/checkout@master
     
-    - name: Checkout submodules 1
-      shell: bash
-      run: |
-        auth_header="$(git config --local --get http.https://github.com/.extraheader)"
-        git submodule sync --recursive
-        git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
+    - uses: fregante/setup-git-token@v1
+      with:
+        name: EngineUpdaterAction
+        email: actions@github.com
+        token: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Update submodules
-      run: git submodule update --recursive --remote --rebase
+      run: |
+        git submodule sync --recursive
+        git submodule update --init --force --recursive --remote --rebase
       
     - name: Check if we updated
       run: git diff --exit-code
@@ -38,12 +39,6 @@ jobs:
     - name: Build Resources
       if: steps.hasChanges != 0
       run: ./gradlew :headless:compileResources
-      
-    - uses: fregante/setup-git-token@v1
-      with:
-        name: EngineUpdaterAction
-        email: actions@github.com
-        token: ${{ secrets.GITHUB_TOKEN }}
       
     - name: Commit changes
       if: steps.hasChanges != 0
