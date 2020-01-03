@@ -19,17 +19,18 @@ jobs:
       run: |
         git submodule sync --recursive
         git submodule update --init --force --recursive --remote --rebase
+        
+    - name: Commit changes
+      run: git commit -m "Upgrade engine" -a
+      continue-on-error: true
   
     - name: Test it all builds
+      if: success()
       run: |
         chmod +x ./gradlew
         ./gradlew :desktop:build
         ./gradlew :android:assembleDebug
         ./gradlew :headless:compileResources
-
-    - name: Commit changes
-      run: git commit -m "Upgrade engine" -a
-      continue-on-error: true
         
     - name: Push changes
       run: git push
