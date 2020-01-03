@@ -22,8 +22,7 @@ jobs:
         
     - name: Commit changes
       run: git commit -m "Upgrade engine" -a
-      continue-on-error: true
-  
+        
     - name: Test it all builds
       if: success()
       run: |
