@@ -33,4 +33,5 @@ jobs:
         
     - name: Push changes
       run: git push
+      if: always()
       continue-on-error: true
