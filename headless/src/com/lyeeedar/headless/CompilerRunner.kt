@@ -8,6 +8,7 @@ import com.lyeeedar.ResourceProcessors.AtlasCreator
 import com.lyeeedar.ResourceProcessors.TextureCompressor
 import com.lyeeedar.ResourceProcessors.XmlCompressor
 import com.lyeeedar.ResourceProcessors.XmlLoadTester
+import com.lyeeedar.ResourceProcessors.OryxExtractor
 import org.mockito.Mockito
 
 object CompilerRunner
@@ -21,6 +22,7 @@ object CompilerRunner
 			Gdx.gl20 = Mockito.mock(GL20::class.java)
 			Gdx.app = HeadlessApplication(Mockito.mock(Game::class.java))
 
+			OryxExtractor()
 			AtlasCreator()
 			TextureCompressor()
 			XmlCompressor()
