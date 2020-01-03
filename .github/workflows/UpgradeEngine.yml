@@ -20,30 +20,26 @@ jobs:
         git submodule sync --recursive
         git submodule update --init --force --recursive --remote --rebase
       
-    - name: Check if we updated
-      run: git diff --exit-code
-      id: hasChanges
+    - name: Commit changes
+      run: git commit -m "Upgrade engine" -a
+      id: commit
   
     - name: Make gradlew executable
-      if: steps.hasChanges != 0
+      if: commit.success()
       run: chmod +x ./gradlew
       
     - name: Build Desktop
-      if: steps.hasChanges != 0
+      if: commit.success()
       run: ./gradlew :desktop:build
       
     - name: Build Android
-      if: steps.hasChanges != 0
+      if: commit.success()
       run: ./gradlew :android:assembleDebug
     
     - name: Build Resources
-      if: steps.hasChanges != 0
+      if: commit.success()
       run: ./gradlew :headless:compileResources
-      
-    - name: Commit changes
-      if: steps.hasChanges != 0
-      run: git commit -m "Upgrade engine" -a
         
     - name: Push changes
-      if: steps.hasChanges != 0
+      if: commit.success()
       run: git push
