@@ -21,17 +21,22 @@ jobs:
       
     - name: Check if we updated
       run: git diff --exit-code
+      id: hasChanges
   
     - name: Make gradlew executable
+      if: steps.hasChanges == 0
       run: chmod +x ./gradlew
       
     - name: Build Desktop
+      if: steps.hasChanges == 0
       run: ./gradlew :desktop:build
       
     - name: Build Android
+      if: steps.hasChanges == 0
       run: ./gradlew :android:assembleDebug
     
     - name: Build Resources
+      if: steps.hasChanges == 0
       run: ./gradlew :headless:compileResources
       
     - uses: fregante/setup-git-token@v1
@@ -41,7 +46,9 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
       
     - name: Commit changes
+      if: steps.hasChanges == 0
       run: git commit -m "Upgrade engine" -a
         
     - name: Push changes
+      if: steps.hasChanges == 0
       run: git push
