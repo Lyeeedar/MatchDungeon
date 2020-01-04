@@ -11,11 +11,10 @@ jobs:
     
     - name: Checkout submodules
       working-directory: MatchDungeon
-      shell: bash
       run: |
-        auth_header="$(git config --local --get http.https://github.com/.extraheader)"
-        git submodule sync --recursive
-        git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
+        git submodule update --init --recursive -j 8
+        git submodule foreach --recursive git fetch
+        git submodule foreach git rebase origin master
   
     - name: Checkout private
       uses: actions/checkout@master

@@ -27,8 +27,9 @@ jobs:
     - name: Update submodules
       working-directory: MatchDungeon
       run: |
-        git submodule sync --recursive
-        git submodule update --init --force --recursive --remote --rebase
+        git submodule update --init --recursive -j 8
+        git submodule foreach --recursive git fetch
+        git submodule foreach git rebase origin master
 
     - name: Test it all builds
       working-directory: MatchDungeon
