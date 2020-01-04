@@ -1,4 +1,4 @@
-name: UpgradeEngine
+name: ReleaseToPlaystore
 
 on:
   schedule:
