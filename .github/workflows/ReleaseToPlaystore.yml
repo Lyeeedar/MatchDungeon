@@ -29,6 +29,7 @@ jobs:
       run: chmod +x ./gradlew
     
     - name: Bump version number
+      working-directory: MatchDungeon
       run: ./gradlew :android:incrementVersion
         
     - name: Build it
