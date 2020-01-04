@@ -39,6 +39,7 @@ jobs:
       continue-on-error: true
         
     - name: Setup git credentials
+      working-directory: MatchDungeon
       run: |
         git config --local user.email "actions@github.com"
         git config --local user.name "ReleaseToPlaystoreAction"
@@ -46,5 +47,6 @@ jobs:
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
+        directory: MatchDungeon
         github_token: ${{ secrets.GITHUB_TOKEN }}
       continue-on-error: true
