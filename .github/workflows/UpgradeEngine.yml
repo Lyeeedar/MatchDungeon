@@ -33,16 +33,16 @@ jobs:
         ./gradlew :android:assembleDebug
         ./gradlew :headless:compileResources
         
-    - name: Commit changes
-      working-directory: MatchDungeon
-      run: git commit -m "Upgrade engine" -a
-      continue-on-error: true
-        
     - name: Setup git credentials
       working-directory: MatchDungeon
       run: |
         git config --local user.email "actions@github.com"
         git config --local user.name "ReleaseToPlaystoreAction"
+        
+    - name: Commit changes
+      working-directory: MatchDungeon
+      run: git commit -m "Upgrade engine" -a
+      continue-on-error: true
         
     - name: Push changes
       uses: ad-m/github-push-action@master
