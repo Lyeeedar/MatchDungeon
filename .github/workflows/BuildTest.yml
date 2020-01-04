@@ -17,7 +17,7 @@ jobs:
     - name: Checkout private
       uses: actions/checkout@master
       with:
-        repository: https://github.com/Lyeeedar/PrivateStuff.git
+        repository: Lyeeedar/PrivateStuff
         token: ${{ secrets.PRIVATESTUFF_ACCESS_TOKEN }}
   
     - name: Make gradlew executable
