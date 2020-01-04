@@ -30,6 +30,7 @@ jobs:
     
     - uses: fregante/setup-git-token@v1
       with:
+        path: MatchDungeon
         name: EngineUpdaterAction
         email: actions@github.com
         token: ${{ secrets.GITHUB_TOKEN }}
