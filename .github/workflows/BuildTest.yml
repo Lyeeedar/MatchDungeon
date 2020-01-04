@@ -19,6 +19,7 @@ jobs:
       with:
         repository: Lyeeedar/PrivateStuff
         token: ${{ secrets.PRIVATESTUFF_ACCESS_TOKEN }}
+        path: ../PrivateStuff
   
     - name: Make gradlew executable
       run: chmod +x ./gradlew

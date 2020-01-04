@@ -14,6 +14,7 @@ jobs:
       with:
         repository: Lyeeedar/PrivateStuff
         token: ${{ secrets.PRIVATESTUFF_ACCESS_TOKEN }}
+        path: ../PrivateStuff
     
     - uses: fregante/setup-git-token@v1
       with:
