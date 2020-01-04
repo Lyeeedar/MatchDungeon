@@ -6,8 +6,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
+      with:
+        path: MatchDungeon
     
     - name: Checkout submodules
+      working-directory: MatchDungeon
       shell: bash
       run: |
         auth_header="$(git config --local --get http.https://github.com/.extraheader)"
@@ -19,16 +22,20 @@ jobs:
       with:
         repository: Lyeeedar/PrivateStuff
         token: ${{ secrets.PRIVATESTUFF_ACCESS_TOKEN }}
-        path: ../PrivateStuff
+        path: PrivateStuff
   
     - name: Make gradlew executable
+      working-directory: MatchDungeon
       run: chmod +x ./gradlew
       
     - name: Build Desktop
+      working-directory: MatchDungeon
       run: ./gradlew :desktop:build
       
     - name: Build Android
+      working-directory: MatchDungeon
       run: ./gradlew :android:assembleDebug
     
     - name: Build Resources
+      working-directory: MatchDungeon
       run: ./gradlew :headless:compileResources
