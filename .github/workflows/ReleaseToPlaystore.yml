@@ -28,13 +28,6 @@ jobs:
       working-directory: MatchDungeon
       run: chmod +x ./gradlew
     
-    - uses: fregante/setup-git-token@v1
-      with:
-        path: MatchDungeon
-        name: EngineUpdaterAction
-        email: actions@github.com
-        token: ${{ secrets.GITHUB_TOKEN }}
-        
     - name: Bump version number
       run: ./gradlew :android:incrementVersion
         
@@ -48,7 +41,12 @@ jobs:
       working-directory: MatchDungeon
       run: ./gradlew doRelease
         
+    - name: Setup git credentials
+      run: |
+        git config --local user.email "actions@github.com"
+        git config --local user.name "ReleaseToPlaystoreAction"
+        
     - name: Push changes
-      working-directory: MatchDungeon
-      run: git push
-      continue-on-error: true
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
