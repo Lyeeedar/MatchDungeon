@@ -2,7 +2,7 @@ name: UpgradeEngine
 
 on:
   schedule:
-    - cron: '0 1 * * *'
+    - cron: '*/5 * * * *'
 jobs:
   test:
     runs-on: ubuntu-latest
