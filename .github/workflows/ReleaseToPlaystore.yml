@@ -1,0 +1,53 @@
+name: UpgradeEngine
+
+on:
+  schedule:
+    - cron: '0 1 * * *'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        path: MatchDungeon
+        
+    - name: Checkout submodules
+      working-directory: MatchDungeon
+      run: |
+        git submodule sync --recursive
+        git submodule update --init --force --recursive --rebase -j 8
+    
+    - name: Checkout private
+      uses: actions/checkout@master
+      with:
+        repository: Lyeeedar/PrivateStuff
+        token: ${{ secrets.PRIVATESTUFF_ACCESS_TOKEN }}
+        path: PrivateStuff
+        
+    - name: Make gradlew executable
+      working-directory: MatchDungeon
+      run: chmod +x ./gradlew
+    
+    - uses: fregante/setup-git-token@v1
+      with:
+        name: EngineUpdaterAction
+        email: actions@github.com
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Bump version number
+      run: ./gradlew :android:incrementVersion
+        
+    - name: Build it
+      working-directory: MatchDungeon
+      run: |
+        ./gradlew :headless:compileResources
+        ./gradlew :android:bundleRelease
+        
+    - name: Release to playstore
+      working-directory: MatchDungeon
+      run: ./gradlew doRelease
+        
+    - name: Push changes
+      working-directory: MatchDungeon
+      run: git push
+      continue-on-error: true

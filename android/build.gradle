@@ -102,6 +102,93 @@ task run(type: Exec) {
     def adb = path + "/platform-tools/adb"
     commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.lyeeedar/com.lyeeedar.AndroidLauncher'
 }
+
+task incrementVersion() {
+
+    doLast {
+        def manifestFile = new File('android/AndroidManifest.xml')
+        def manifestContent = manifestFile.text
+
+        def matches = manifestContent =~ ~/android:versionName="(.*)"/
+        String version = matches[0][1]
+
+        String[] split = version.split('\\.')
+        def versionCode = split.join('')
+
+        def last = split[split.length - 1]
+        def asInt = last.toInteger()
+        def newInt = asInt + 1
+        split[split.length - 1] = newInt.toString()
+        def newVersion = split.join('.')
+        def newVersionCode = split.join('')
+        manifestContent = manifestContent.replace('android:versionName="' + version + '"', 'android:versionName="' + newVersion + '"')
+        manifestContent = manifestContent.replace('android:versionCode="' + versionCode + '"', 'android:versionCode="' + newVersionCode + '"')
+
+        println "Old version: " + version
+        println "New version: " + newVersion
+
+        manifestFile.write manifestContent
+    }
+}
+
+task doRelease() {
+
+    ext.executeCmd = { cmd ->
+        println cmd
+
+        def proc = cmd.execute()
+        def b = new StringBuffer()
+        proc.consumeProcessErrorStream(b)
+
+        def output = proc.text + b.toString()
+        println output
+
+        return output
+    }
+
+    doLast {
+        String lastTag = executeCmd("git describe --tags --abbrev=0")
+        String commitsSinceRelease = executeCmd("git log " + lastTag + "..HEAD --oneline")
+
+        if (!commitsSinceRelease.trim()) {
+            println "Work to release, continuing"
+
+            def manifestFile = new File('android/AndroidManifest.xml')
+            def manifestContent = manifestFile.text
+
+            def matches = manifestContent =~ ~/android:versionName="(.*)"/
+            String version = matches[0][1]
+
+            def releaseFile = new File('android/build/outputs/bundle/release/android.aab')
+
+            // push to playstore
+
+            def post = new URL("https://www.googleapis.com/upload/androidpublisher/v3/applications/com.lyeeedar/edits/" + version + "/bundles").openConnection()
+            post.setRequestMethod("POST")
+            post.setDoOutput(true)
+            post.setRequestProperty("Content-Type", "application/octet-stream")
+            post.getOutputStream().write(releaseFile.bytes)
+            def postRC = post.getResponseCode()
+            println postRC
+
+            if (postRC.equals(200)) {
+                println(post.getInputStream().getText())
+
+                // commit changes
+                executeCmd("git add .")
+                executeCmd('git commit -m"Bump version number and release"')
+                executeCmd('git tag -a releases/' + version + ' -m "Release $version"')
+
+                println "Release complete"
+            } else {
+                throw new GradleException('Something went wrong with releasing!')
+            }
+        } else {
+            println "Release up to date"
+        }
+    }
+}
+
 // sets up the Android Idea project, using the old Ant based build.
 idea {
     module {
