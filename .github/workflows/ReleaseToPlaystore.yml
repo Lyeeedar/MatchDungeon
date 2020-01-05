@@ -10,46 +10,47 @@ jobs:
     - uses: actions/checkout@master
       with:
         path: MatchDungeon
-        
+
     - name: Checkout submodules
       working-directory: MatchDungeon
       run: |
         git submodule sync --recursive
         git submodule update --init --force --recursive --rebase -j 8
-    
+
     - name: Checkout private
       uses: actions/checkout@master
       with:
         repository: Lyeeedar/PrivateStuff
         token: ${{ secrets.PRIVATESTUFF_ACCESS_TOKEN }}
         path: PrivateStuff
-        
+
     - name: Make gradlew executable
       working-directory: MatchDungeon
       run: chmod +x ./gradlew
-    
+
     - name: Bump version number
       working-directory: MatchDungeon
       run: ./gradlew :android:incrementVersion
-        
+
     - name: Build it
       working-directory: MatchDungeon
       run: |
         ./gradlew :headless:compileResources
         ./gradlew :android:bundleRelease
-        
+
     - name: Setup git credentials
       working-directory: MatchDungeon
       run: |
         git config --local user.email "actions@github.com"
         git config --local user.name "ReleaseToPlaystoreAction"
-        
+
     - name: Release to playstore
       working-directory: MatchDungeon
       run: ./gradlew :headless:releaseAndroidToPlaystore
-        
+
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
         directory: MatchDungeon
+        tags: true
         github_token: ${{ secrets.GITHUB_TOKEN }}

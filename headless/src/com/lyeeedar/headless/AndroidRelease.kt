@@ -6,6 +6,9 @@ import com.google.api.client.http.AbstractInputStreamContent
 import com.google.api.client.http.FileContent
 import com.google.api.client.json.jackson2.JacksonFactory
 import com.google.api.services.androidpublisher.AndroidPublisher
+import com.google.api.services.androidpublisher.model.LocalizedText
+import com.google.api.services.androidpublisher.model.Track
+import com.google.api.services.androidpublisher.model.TrackRelease
 import java.io.File
 import java.io.FileInputStream
 import java.util.*
@@ -20,7 +23,7 @@ object AndroidRelease
 		return output
 	}
 
-	@JvmStatic fun uploadToPlaystore()
+	@JvmStatic fun uploadToPlaystore(version: String, versionCode: Long)
 	{
 		println("Loading credentials")
 
@@ -48,7 +51,17 @@ object AndroidRelease
 		service.Edits().Bundles().upload(packageName, editID, aabFile).execute()
 
 		println("Assigning to track")
-		//service.Edits().Tracks().
+		service.Edits().Tracks().update(packageName, editID, "alpha",
+										Track().setReleases(
+											Collections.singletonList(
+												TrackRelease()
+													.setName("Release: $version")
+													.setVersionCodes(Collections.singletonList(versionCode))
+													.setStatus("completed")
+													.setReleaseNotes(Collections.singletonList(
+														LocalizedText()
+															.setLanguage("en-US")
+															.setText("Automated nightly release")))))).execute()
 
 		println("Committing edit")
 
@@ -72,8 +85,12 @@ object AndroidRelease
 			val matches = regex.find(manifestContent)!!
 			val version = matches.groupValues[1]
 
+			val regex2 = Regex("android:versionCode=\"(.*)\"")
+			val matches2 = regex2.find(manifestContent)!!
+			val versionCode = matches2.groupValues[1]
+
 			// push to playstore
-			uploadToPlaystore()
+			uploadToPlaystore(version, versionCode.toLong())
 
 			// commit changes
 			"git add .".runCommand()
