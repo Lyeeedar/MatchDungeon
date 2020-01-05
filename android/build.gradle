@@ -17,7 +17,7 @@ android {
         }
     }
     defaultConfig {
-        applicationId "com.lyeeedar"
+        applicationId "com.lyeeedar.MatchDungeon"
         minSdkVersion 14
         targetSdkVersion 28
         multiDexEnabled true

@@ -38,7 +38,7 @@ object AndroidRelease
 		}
 
 		val releaseFile = File("android/build/outputs/bundle/release/android.aab")
-		val packageName = "com.lyeeedar"
+		val packageName = "com.lyeeedar.MatchDungeon"
 
 		println("Beginning edit")
 
@@ -55,12 +55,12 @@ object AndroidRelease
 										Track().setReleases(
 											Collections.singletonList(
 												TrackRelease()
-													.setName("Release: $version")
+													.setName(version)
 													.setVersionCodes(Collections.singletonList(versionCode))
 													.setStatus("completed")
 													.setReleaseNotes(Collections.singletonList(
 														LocalizedText()
-															.setLanguage("en-US")
+															.setLanguage("en-GB")
 															.setText("Automated nightly release")))))).execute()
 
 		println("Committing edit")
