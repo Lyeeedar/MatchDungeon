@@ -46,7 +46,7 @@ jobs:
         
     - name: Release to playstore
       working-directory: MatchDungeon
-      run: ./gradlew doRelease
+      run: ./gradlew :headless:releaseAndroidToPlaystore
         
     - name: Push changes
       uses: ad-m/github-push-action@master

@@ -131,64 +131,6 @@ task incrementVersion() {
     }
 }
 
-task doRelease() {
-
-    ext.executeCmd = { cmd ->
-        println cmd
-
-        def proc = cmd.execute()
-        def b = new StringBuffer()
-        proc.consumeProcessErrorStream(b)
-
-        def output = proc.text + b.toString()
-        println output
-
-        return output
-    }
-
-    doLast {
-        String lastTag = executeCmd("git describe --tags --abbrev=0")
-        String commitsSinceRelease = executeCmd("git log " + lastTag + "..HEAD --oneline")
-
-        if (!commitsSinceRelease.trim()) {
-            println "Work to release, continuing"
-
-            def manifestFile = new File('android/AndroidManifest.xml')
-            def manifestContent = manifestFile.text
-
-            def matches = manifestContent =~ ~/android:versionName="(.*)"/
-            String version = matches[0][1]
-
-            def releaseFile = new File('android/build/outputs/bundle/release/android.aab')
-
-            // push to playstore
-
-            def post = new URL("https://www.googleapis.com/upload/androidpublisher/v3/applications/com.lyeeedar/edits/" + version + "/bundles").openConnection()
-            post.setRequestMethod("POST")
-            post.setDoOutput(true)
-            post.setRequestProperty("Content-Type", "application/octet-stream")
-            post.getOutputStream().write(releaseFile.bytes)
-            def postRC = post.getResponseCode()
-            println postRC
-
-            if (postRC.equals(200)) {
-                println(post.getInputStream().getText())
-
-                // commit changes
-                executeCmd("git add .")
-                executeCmd('git commit -m"Bump version number and release"')
-                executeCmd('git tag -a releases/' + version + ' -m "Release $version"')
-
-                println "Release complete"
-            } else {
-                throw new GradleException('Something went wrong with releasing!')
-            }
-        } else {
-            println "Release up to date"
-        }
-    }
-}
-
 // sets up the Android Idea project, using the old Ant based build.
 idea {
     module {
