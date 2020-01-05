@@ -1,8 +1,11 @@
 package com.lyeeedar.headless
 
+import com.badlogic.gdx.utils.JsonReader
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential
+import java.io.DataOutputStream
 import java.io.File
 import java.io.FileInputStream
+import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*
@@ -34,26 +37,18 @@ object AndroidRelease
 	}
 
 	data class ResponseAndCode(val response: String, val code: Int)
-	@JvmStatic fun uploadToPlaystore(version: String): ResponseAndCode
+	@JvmStatic fun doHttpRequest(urlStr: String, accessToken: String, setter: (connection: HttpURLConnection) -> Unit): ResponseAndCode
 	{
-		val releaseFile = File("android/build/outputs/bundle/release/android.aab")
-		val aabBytes = releaseFile.readBytes()
-		val accessToken = getAccessToken()
-
-		println("Beginning upload to playstore")
-		val url = URL("https://www.googleapis.com/upload/androidpublisher/v3/applications/com.lyeeedar/edits/$version/bundles?uploadType=media")
+		val url = URL(urlStr)
 		with (url.openConnection() as HttpURLConnection) {
-			requestMethod = "POST"
 			doOutput = true
 			doInput = true
-			setRequestProperty("Content-Type", "application/octet-stream")
 			setRequestProperty("Authorization", "Bearer $accessToken")
-
-			outputStream.write(aabBytes)
-			outputStream.flush()
+			setter(this)
 
 			println("URL : $url")
 			println("Response Code : $responseCode")
+			println("Response Message: $responseMessage")
 
 			inputStream.bufferedReader().use {
 				val response = StringBuffer()
@@ -72,6 +67,66 @@ object AndroidRelease
 		}
 	}
 
+
+	@JvmStatic fun uploadToPlaystore(version: String)
+	{
+		val releaseFile = File("android/build/outputs/bundle/release/android.aab")
+		val aabBytes = releaseFile.readBytes()
+		val accessToken = getAccessToken()
+
+		val packageName = "com.lyeeedar"
+
+		println("Beginning upload to playstore")
+
+		val beginEditRequest = doHttpRequest("https://www.googleapis.com/androidpublisher/v3/applications/$packageName/edits", accessToken) {
+			it.requestMethod = "POST"
+			it.setRequestProperty("Content-Type", "application/json")
+
+			val requestJson = """
+|{
+	"id": "releaseAction-$version",
+	"expiryTimeSeconds": "${(Date().time/1000)+120}"
+| }""".trimMargin()
+
+			println(requestJson)
+
+			val wr = OutputStreamWriter(it.outputStream)
+			wr.write(requestJson)
+			wr.flush()
+		}
+
+		if (beginEditRequest.code != HttpURLConnection.HTTP_OK)
+		{
+			throw RuntimeException("Failed to begin edit!")
+		}
+		val editId = JsonReader().parse(beginEditRequest.response).getString("id")
+
+		val uploadRequest = doHttpRequest("https://www.googleapis.com/upload/androidpublisher/v3/applications/$packageName/edits/$editId/bundles?uploadType=media", accessToken) {
+			it.connectTimeout = 120000
+			it.requestMethod = "POST"
+			it.setRequestProperty("Content-Type", "application/octet-stream")
+			it.setRequestProperty("Content-Length", aabBytes.size.toString())
+
+			val stream = DataOutputStream(it.outputStream)
+			stream.write(aabBytes)
+			stream.flush()
+		}
+
+		if (uploadRequest.code != HttpURLConnection.HTTP_OK)
+		{
+			throw RuntimeException("Failed to upload aab!")
+		}
+
+		val commitRequest = doHttpRequest("https://www.googleapis.com/androidpublisher/v3/applications/$packageName/edits/$editId:commit", accessToken) {
+			it.requestMethod = "POST"
+		}
+
+		if (commitRequest.code != HttpURLConnection.HTTP_OK)
+		{
+			throw RuntimeException("Failed to commit change!")
+		}
+	}
+
 	@JvmStatic fun main(arg: Array<String>)
 	{
 		println("Running in: " + File("").absolutePath)
@@ -87,23 +142,17 @@ object AndroidRelease
 
 			val regex = Regex("android:versionName=\"(.*)\"")
 			val matches = regex.find(manifestContent)!!
-			val version = matches.groupValues[0]
+			val version = matches.groupValues[1]
 
 			// push to playstore
-			val responseAndCode = uploadToPlaystore(version)
+			uploadToPlaystore(version)
 
-			if (responseAndCode.code == 200) {
+			// commit changes
+			"git add .".runCommand()
+			"git commit -m\"Bump version number and release\"".runCommand()
+			("git tag -a releases/$version -m \"Release $version\"").runCommand()
 
-				// commit changes
-				"git add .".runCommand()
-				"git commit -m\"Bump version number and release\"".runCommand()
-				("git tag -a releases/$version -m \"Release $version\"").runCommand()
-
-				println("Release complete")
-			} else {
-				println("Something went wrong with releasing! Got code: " + responseAndCode.code)
-				throw RuntimeException("Something went wrong with releasing! Got code: " + responseAndCode.code)
-			}
+			println("Release complete")
 
 		} else {
 			println("Release up to date")
