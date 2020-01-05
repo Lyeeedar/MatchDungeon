@@ -10,6 +10,9 @@ jobs:
     - uses: actions/checkout@master
       with:
         path: MatchDungeon
+        
+    - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+      working-directory: MatchDungeon
 
     - name: Checkout submodules
       working-directory: MatchDungeon
