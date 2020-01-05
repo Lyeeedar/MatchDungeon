@@ -1,34 +1,18 @@
 package com.lyeeedar.headless
 
-import com.badlogic.gdx.utils.JsonReader
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential
-import java.io.DataOutputStream
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport
+import com.google.api.client.http.AbstractInputStreamContent
+import com.google.api.client.http.FileContent
+import com.google.api.client.json.jackson2.JacksonFactory
+import com.google.api.services.androidpublisher.AndroidPublisher
 import java.io.File
 import java.io.FileInputStream
-import java.io.OutputStreamWriter
-import java.net.HttpURLConnection
-import java.net.URL
 import java.util.*
+
 
 object AndroidRelease
 {
-	@JvmStatic fun getAccessToken(): String
-	{
-		val credential = GoogleCredential.fromStream(FileInputStream("../PrivateStuff/api-7634547800790039050-269564-2e4e30222b69.json"))
-			.createScoped(Collections.singleton("https://www.googleapis.com/auth/androidpublisher"))
-
-		val success = credential.refreshToken()
-
-		if (!success)
-		{
-			throw java.lang.RuntimeException("Unable to acquire access token")
-		}
-
-		println(credential.accessToken)
-
-		return credential.accessToken
-	}
-
 	@JvmStatic fun String.runCommand(): String {
 		println(this)
 		val output = Runtime.getRuntime().exec(this).inputStream.bufferedReader().readText().trim()
@@ -36,95 +20,39 @@ object AndroidRelease
 		return output
 	}
 
-	data class ResponseAndCode(val response: String, val code: Int)
-	@JvmStatic fun doHttpRequest(urlStr: String, accessToken: String, setter: (connection: HttpURLConnection) -> Unit): ResponseAndCode
+	@JvmStatic fun uploadToPlaystore()
 	{
-		val url = URL(urlStr)
-		with (url.openConnection() as HttpURLConnection) {
-			doOutput = true
-			doInput = true
-			setRequestProperty("Authorization", "Bearer $accessToken")
-			setter(this)
+		println("Loading credentials")
 
-			println("URL : $url")
-			println("Response Code : $responseCode")
-			println("Response Message: $responseMessage")
+		val credential = GoogleCredential.fromStream(FileInputStream("../PrivateStuff/api-7634547800790039050-269564-2e4e30222b69.json"))
+			.createScoped(Collections.singleton("https://www.googleapis.com/auth/androidpublisher"))
+		credential.expiresInSeconds = 120
 
-			inputStream.bufferedReader().use {
-				val response = StringBuffer()
-
-				var inputLine = it.readLine()
-				while (inputLine != null) {
-					response.append(inputLine)
-					inputLine = it.readLine()
-				}
-				it.close()
-
-				println("Response : $response")
-
-				return ResponseAndCode(response.toString(), responseCode)
-			}
+		val acquireToken = credential.refreshToken()
+		if (!acquireToken)
+		{
+			throw java.lang.RuntimeException("Unable to acquire access token")
 		}
-	}
 
-
-	@JvmStatic fun uploadToPlaystore(version: String)
-	{
 		val releaseFile = File("android/build/outputs/bundle/release/android.aab")
-		val aabBytes = releaseFile.readBytes()
-		val accessToken = getAccessToken()
-
 		val packageName = "com.lyeeedar"
 
-		println("Beginning upload to playstore")
+		println("Beginning edit")
 
-		val beginEditRequest = doHttpRequest("https://www.googleapis.com/androidpublisher/v3/applications/$packageName/edits", accessToken) {
-			it.requestMethod = "POST"
-			it.setRequestProperty("Content-Type", "application/json")
+		val service = AndroidPublisher.Builder(GoogleNetHttpTransport.newTrustedTransport(), JacksonFactory.getDefaultInstance(), credential).setApplicationName("AndroidReleaseAction").build()
+		val editID = service.Edits().insert(packageName, null).execute().id
 
-			val requestJson = """
-|{
-	"id": "releaseAction-$version",
-	"expiryTimeSeconds": "${(Date().time/1000)+120}"
-| }""".trimMargin()
+		println("Uploading aab")
 
-			println(requestJson)
+		val aabFile: AbstractInputStreamContent = FileContent("application/octet-stream", releaseFile)
+		service.Edits().Bundles().upload(packageName, editID, aabFile).execute()
 
-			val wr = OutputStreamWriter(it.outputStream)
-			wr.write(requestJson)
-			wr.flush()
-		}
+		println("Assigning to track")
+		//service.Edits().Tracks().
 
-		if (beginEditRequest.code != HttpURLConnection.HTTP_OK)
-		{
-			throw RuntimeException("Failed to begin edit!")
-		}
-		val editId = JsonReader().parse(beginEditRequest.response).getString("id")
+		println("Committing edit")
 
-		val uploadRequest = doHttpRequest("https://www.googleapis.com/upload/androidpublisher/v3/applications/$packageName/edits/$editId/bundles?uploadType=media", accessToken) {
-			it.connectTimeout = 120000
-			it.requestMethod = "POST"
-			it.setRequestProperty("Content-Type", "application/octet-stream")
-			it.setRequestProperty("Content-Length", aabBytes.size.toString())
-
-			val stream = DataOutputStream(it.outputStream)
-			stream.write(aabBytes)
-			stream.flush()
-		}
-
-		if (uploadRequest.code != HttpURLConnection.HTTP_OK)
-		{
-			throw RuntimeException("Failed to upload aab!")
-		}
-
-		val commitRequest = doHttpRequest("https://www.googleapis.com/androidpublisher/v3/applications/$packageName/edits/$editId:commit", accessToken) {
-			it.requestMethod = "POST"
-		}
-
-		if (commitRequest.code != HttpURLConnection.HTTP_OK)
-		{
-			throw RuntimeException("Failed to commit change!")
-		}
+		service.Edits().commit(packageName, editID).execute()
 	}
 
 	@JvmStatic fun main(arg: Array<String>)
@@ -145,7 +73,7 @@ object AndroidRelease
 			val version = matches.groupValues[1]
 
 			// push to playstore
-			uploadToPlaystore(version)
+			uploadToPlaystore()
 
 			// commit changes
 			"git add .".runCommand()

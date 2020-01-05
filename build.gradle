@@ -34,6 +34,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        jcenter()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
     }
@@ -67,6 +68,7 @@ project(":headless") {
         api "org.mockito:mockito-all:1.9.+"
         api 'com.auth0:java-jwt:3.9.0'
         api 'com.google.api-client:google-api-client:1.30.7'
+        api 'com.google.apis:google-api-services-androidpublisher:v3-rev20191113-1.30.3'
     }
 }
 
