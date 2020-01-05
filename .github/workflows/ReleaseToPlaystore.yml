@@ -11,7 +11,7 @@ jobs:
       with:
         path: MatchDungeon
         
-    - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+    - run: git fetch --tags
       working-directory: MatchDungeon
 
     - name: Checkout submodules
