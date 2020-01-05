@@ -94,7 +94,7 @@ object AndroidRelease
 
 			// commit changes
 			"git add .".runCommand()
-			"git commit -m\"Bump version number and release\"".runCommand()
+			"git commit -m\"Bump version number to $version and release\"".runCommand()
 			("git tag -a releases/$version -m \"Release $version\"").runCommand()
 
 			println("Release complete")
