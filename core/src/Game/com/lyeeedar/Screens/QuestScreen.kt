@@ -470,10 +470,10 @@ class QuestScreen : AbstractScreen()
 					val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("white")!!, null)
 					card.canZoom = false
 					card.setFacing(true, false)
-					card.addPick("", {
+					card.addPick("") {
 						card.remove()
 						updateRewards()
-					})
+					}
 
 					val cards = Array<CardWidget>()
 					cards.add(card)
@@ -582,7 +582,7 @@ class QuestScreen : AbstractScreen()
 				{
 					card.canZoom = false
 					card.pickFuns.clear()
-					card.addPick("", {
+					card.addPick("") {
 						currentGroup.removeValue(card, true)
 						if (currentGroup.size == 0)
 						{
@@ -594,7 +594,7 @@ class QuestScreen : AbstractScreen()
 						}
 
 						card.remove()
-					})
+					}
 
 					for (pick in card.pickFuns)
 					{
