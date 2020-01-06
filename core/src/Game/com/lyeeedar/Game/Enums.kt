@@ -1,9 +1,15 @@
 package com.lyeeedar
 
+import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Renderables.Sprite.Sprite
+import com.lyeeedar.UI.SpriteWidget
+import com.lyeeedar.UI.addTapToolTip
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.FastEnumMap
+import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
 
 // ----------------------------------------------------------------------
@@ -75,6 +81,8 @@ enum class Statistic private constructor(val min: Float, val max: Float, val too
 	BUFFDURATION(0f, Float.MAX_VALUE, "The multiplier to increase buff duration by", AssetManager.loadSprite("Oryx/uf_split/uf_items/necklace_mystic")),
 	LUCK(-1f, 1f, "Affects your chance of gaining rewards", AssetManager.loadSprite("Oryx/uf_split/uf_items/gem_tourmaline"));
 
+	val niceName = toString().toLowerCase().capitalize()
+
 	companion object
 	{
 		val Values = Statistic.values()
@@ -87,6 +95,76 @@ enum class Statistic private constructor(val min: Float, val max: Float, val too
 				value = xmlData.getFloat(stat.toString(), value)
 				statistics[stat] = value
 			}
+		}
+
+		enum class DisplayType
+		{
+			FLAT,
+			COMPARISON,
+			MODIFIER
+		}
+		fun createTable(stats: FastEnumMap<Statistic, Float>, type: DisplayType, other: FastEnumMap<Statistic, Float>? = null): Table
+		{
+			val table = Table()
+
+			for (stat in Values)
+			{
+				val statVal = stats[stat] ?: 0f
+				val otherStatVal = other?.get(stat) ?: 0f
+
+				if (statVal != 0f || otherStatVal != 0f)
+				{
+					val statTable = Table()
+					statTable.add(SpriteWidget(stat.icon.copy(), 16f, 16f))
+					statTable.add(Label("${stat.niceName}: ", Statics.skin, "card")).expandX().left()
+					statTable.addTapToolTip(stat.tooltip)
+
+					when (type)
+					{
+						DisplayType.FLAT -> {
+							statTable.add(Label(statVal.toString(), Statics.skin, "card"))
+						}
+						DisplayType.MODIFIER -> {
+							if (statVal > 0)
+							{
+								val diff = statVal
+								val diffLabel = Label("+$diff", Statics.skin, "cardwhite")
+								diffLabel.color = Color.GREEN
+								statTable.add(diffLabel)
+							}
+							else if (statVal < 0)
+							{
+								val diff = statVal
+								val diffLabel = Label(diff.toString(), Statics.skin, "cardwhite")
+								diffLabel.color = Color.RED
+								statTable.add(diffLabel)
+							}
+						}
+						DisplayType.COMPARISON -> {
+							statTable.add(Label(statVal.toString(), Statics.skin, "card"))
+							if (otherStatVal < statVal)
+							{
+								val diff = statVal - otherStatVal
+								val diffLabel = Label("+$diff", Statics.skin, "cardwhite")
+								diffLabel.color = Color.GREEN
+								statTable.add(diffLabel)
+							}
+							else if (statVal < otherStatVal)
+							{
+								val diff = otherStatVal - statVal
+								val diffLabel = Label("-$diff", Statics.skin, "cardwhite")
+								diffLabel.color = Color.RED
+								statTable.add(diffLabel)
+							}
+						}
+					}
+
+					table.add(statTable).growX()
+					table.row()
+				}
+			}
+
+			return table
 		}
 	}
 }

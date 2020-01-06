@@ -47,21 +47,8 @@ class Character(val path: String)
 		table.add(Label("Statistics", Statics.skin, "cardtitle"))
 		table.row()
 
-		for (stat in Statistic.Values)
-		{
-			val statVal = baseStatistics[stat] ?: 0f
-
-			if (statVal != 0f)
-			{
-				val statTable = Table()
-				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Statics.skin, "card")).expandX().left()
-				statTable.add(Label(statVal.toString(), Statics.skin, "card"))
-				statTable.addTapToolTip(stat.tooltip)
-
-				table.add(statTable)
-				table.row()
-			}
-		}
+		table.add(Statistic.createTable(baseStatistics, Statistic.Companion.DisplayType.FLAT)).growX()
+		table.row()
 
 		table.add(Seperator(Statics.skin, "horizontalcard"))
 		table.row()

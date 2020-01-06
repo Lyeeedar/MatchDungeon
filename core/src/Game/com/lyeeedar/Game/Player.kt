@@ -156,8 +156,9 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 				}
 
 				val statTable = Table()
-				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ":", Statics.skin, "card")).expandX().left()
-				statTable.add(Label(truestat.toString() + " (" + basestat + diffStr + ")", Statics.skin, "card"))
+				statTable.add(SpriteWidget(stat.icon.copy(), 16f, 16f))
+				statTable.add(Label("${stat.niceName}:", Statics.skin, "card")).expandX().left()
+				statTable.add(Label("$truestat ($basestat$diffStr)", Statics.skin, "card"))
 				statTable.addTapToolTip(stat.tooltip)
 
 				table.add(statTable).growX()

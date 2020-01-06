@@ -1,6 +1,5 @@
 package com.lyeeedar.Game
 
-import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
@@ -12,7 +11,6 @@ import com.lyeeedar.Statistic
 import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.UI.Seperator
 import com.lyeeedar.UI.SpriteWidget
-import com.lyeeedar.UI.addTapToolTip
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.FastEnumMap
 import com.lyeeedar.Util.Statics
@@ -84,43 +82,8 @@ class Buff(val xml: XmlData)
 			table.add(Label("Statistics", Statics.skin, "cardtitle"))
 			table.row()
 
-			for (stat in Statistic.Values)
-			{
-				val statVal = statistics[stat] ?: 0f
-
-				val statTable = Table()
-				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Statics.skin, "card")).expandX().left()
-				statTable.add(Label(statVal.toString(), Statics.skin, "card"))
-				statTable.addTapToolTip(stat.tooltip)
-
-				var add = false
-
-				if (statVal != 0f)
-				{
-					add = true
-				}
-
-				if (statVal > 0)
-				{
-					val diff = statVal
-					val diffLabel = Label("+" + diff.toString(), Statics.skin, "cardwhite")
-					diffLabel.color = Color.GREEN
-					statTable.add(diffLabel)
-				}
-				else if (statVal < 0)
-				{
-					val diff = statVal
-					val diffLabel = Label(diff.toString(), Statics.skin, "cardwhite")
-					diffLabel.color = Color.RED
-					statTable.add(diffLabel)
-				}
-
-				if (add)
-				{
-					table.add(statTable)
-					table.row()
-				}
-			}
+			table.add(Statistic.createTable(statistics, Statistic.Companion.DisplayType.MODIFIER)).growX()
+			table.row()
 		}
 
 		return table

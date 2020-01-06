@@ -2,8 +2,10 @@ package com.lyeeedar.Game
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.scenes.scene2d.ui.*
-import com.badlogic.gdx.utils.Align
+import com.badlogic.gdx.scenes.scene2d.ui.Button
+import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.Stack
+import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.EquipmentSlot
@@ -45,7 +47,7 @@ class Equipment(val path: String)
 		table.row()
 		val descLabel = Label(description, Statics.skin, "card")
 		descLabel.setWrap(true)
-		table.add(descLabel)
+		table.add(descLabel).grow()
 		table.row()
 
 		if (statistics.any { it != 0f } || (other != null && other.statistics.any{ it != 0f }))
@@ -56,75 +58,20 @@ class Equipment(val path: String)
 			table.add(Label("Statistics", Statics.skin, "cardtitle"))
 			table.row()
 
-			for (stat in Statistic.Values)
+			if (other != null)
 			{
-				val statVal = statistics[stat] ?: 0f
-
-				val statTable = Table()
-				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Statics.skin, "card")).expandX().left()
-				statTable.add(Label(statVal.toString(), Statics.skin, "card"))
-				statTable.addTapToolTip(stat.tooltip)
-
-				var add = false
-
-				if (other != null)
-				{
-					val otherStatVal = other.statistics[stat] ?: 0f
-
-					if (otherStatVal != 0f || statVal != 0f)
-					{
-						add = true
-					}
-
-					if (otherStatVal == statVal)
-					{
-
-					}
-					else if (otherStatVal < statVal)
-					{
-						val diff = statVal - otherStatVal
-						val diffLabel = Label("+" + diff.toString(), Statics.skin, "cardwhite")
-						diffLabel.color = Color.GREEN
-						statTable.add(diffLabel)
-					}
-					else if (statVal < otherStatVal)
-					{
-						val diff = otherStatVal - statVal
-						val diffLabel = Label("-" + diff.toString(), Statics.skin, "cardwhite")
-						diffLabel.color = Color.RED
-						statTable.add(diffLabel)
-					}
-				}
-				else
-				{
-					if (statVal != 0f)
-					{
-						add = true
-					}
-
-					if (showAsPlus)
-					{
-						val diff = statVal
-						if (diff >= 0)
-						{
-							val diffLabel = Label("+" + diff.toString(), Statics.skin, "cardwhite")
-							diffLabel.color = Color.GREEN
-							statTable.add(diffLabel)
-						}
-						else
-						{
-							val diffLabel = Label(diff.toString(), Statics.skin, "cardwhite")
-							diffLabel.color = Color.RED
-							statTable.add(diffLabel)
-						}
-					}
-				}
-
-				if (add)
-				{
-					table.add(statTable)
-					table.row()
-				}
+				table.add(Statistic.createTable(statistics, Statistic.Companion.DisplayType.COMPARISON, other.statistics)).growX()
+				table.row()
+			}
+			else if (showAsPlus)
+			{
+				table.add(Statistic.createTable(statistics, Statistic.Companion.DisplayType.MODIFIER)).growX()
+				table.row()
+			}
+			else
+			{
+				table.add(Statistic.createTable(statistics, Statistic.Companion.DisplayType.FLAT)).growX()
+				table.row()
 			}
 		}
 
