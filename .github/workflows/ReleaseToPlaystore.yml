@@ -7,13 +7,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-      with:
-        path: MatchDungeon
+      
+    - run: git clone https://github.com/Lyeeedar/MatchDungeon /home/runner/work/MatchDungeon/MatchDungeon/MatchDungeon
         
-    - run: git fetch --tags
-      working-directory: MatchDungeon
-
     - name: Checkout submodules
       working-directory: MatchDungeon
       run: |
