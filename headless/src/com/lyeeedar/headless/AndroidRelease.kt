@@ -99,12 +99,7 @@ object AndroidRelease
 			uploadToPlaystore(version, versionCode.toLong())
 
 			// commit changes
-			val added = "git commit -m\"Bump version number to $version and release\" -a".runCommand()
-			if (added.isBlank())
-			{
-				throw RuntimeException("git commit failed to add any changes!")
-			}
-
+			"git commit -m\"Bump version number to $version and release\" -a".runCommand()
 			("git tag -a releases/$version -m \"Release $version\"").runCommand()
 
 			println("Release complete")
