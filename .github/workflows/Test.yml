@@ -7,10 +7,15 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-      with:
-        path: MatchDungeon
-        fetch-depth: 0
+      
+    - run: |
+        git init /home/runner/work/MatchDungeon/MatchDungeon/MatchDungeon
+        git remote add origin https://github.com/Lyeeedar/MatchDungeon
+        git config --local gc.auto 0
+        git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+        git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+        git fetch
+        git checkout --progress --force -B master refs/remotes/origin/master
         
     - run: git tag
       working-directory: MatchDungeon
