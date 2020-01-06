@@ -54,4 +54,3 @@ jobs:
       with:
         directory: MatchDungeon
         github_token: ${{ secrets.GITHUB_TOKEN }}
-      continue-on-error: true
