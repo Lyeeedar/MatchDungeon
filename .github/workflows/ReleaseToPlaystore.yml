@@ -23,43 +23,55 @@ jobs:
         token: ${{ secrets.PRIVATESTUFF_ACCESS_TOKEN }}
         path: PrivateStuff
 
+    - run: |
+        git describe --exact-match
+        echo "::set-output name=status::false"
+      id: hasChanges
+      continue-on-error: true
+
     - name: Make gradlew executable
       working-directory: MatchDungeon
       run: chmod +x ./gradlew
+      if: steps.hasChanges.outputs.status != 'false'
 
     - name: Bump version number
       working-directory: MatchDungeon
       run: ./gradlew :android:incrementVersion
+      if: steps.hasChanges.outputs.status != 'false'
 
     - name: Build it
       working-directory: MatchDungeon
       run: |
         ./gradlew :headless:compileResources
         ./gradlew :android:bundleRelease
+      if: steps.hasChanges.outputs.status != 'false'
 
     - name: Setup git credentials
       working-directory: MatchDungeon
       run: |
         git config --local user.email "actions@github.com"
         git config --local user.name "ReleaseToPlaystoreAction"
+      if: steps.hasChanges.outputs.status != 'false'
 
     - name: Release to playstore
       working-directory: MatchDungeon
       run: ./gradlew :headless:releaseAndroidToPlaystore
       id: release
+      if: steps.hasChanges.outputs.status != 'false'
 
     - name: Commit changes
       working-directory: MatchDungeon
       run: |
         git commit -m"Bump version number to steps.release.outputs.version and release" -a
         git tag -a releases/steps.release.outputs.version -m "Release steps.release.outputs.version"
-      if: steps.release.outputs.status == 'Complete'
+      if: steps.hasChanges.outputs.status != 'false' && steps.release.outputs.status == 'Complete'
 
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
         directory: MatchDungeon
         github_token: ${{ secrets.GITHUB_TOKEN }}
+      if: steps.hasChanges.outputs.status != 'false' && steps.release.outputs.status == 'Complete'
 
     - name: Push tags
       uses: ad-m/github-push-action@master
@@ -67,3 +79,4 @@ jobs:
         directory: MatchDungeon
         tags: true
         github_token: ${{ secrets.GITHUB_TOKEN }}
+      if: steps.hasChanges.outputs.status != 'false' && steps.release.outputs.status == 'Complete'
