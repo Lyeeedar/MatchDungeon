@@ -35,7 +35,7 @@ jobs:
       working-directory: MatchDungeon
       run: |
         git commit -m "Upgrade engine" -a
-        echo "##[set-output name=status;]Success"
+        echo "::set-output name=status::Success"
       id: commit
       continue-on-error: true
 

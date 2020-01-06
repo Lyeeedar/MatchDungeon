@@ -99,12 +99,12 @@ object AndroidRelease
 			uploadToPlaystore(version, versionCode.toLong())
 
 			println("Release complete")
-			println("##[set-output name=version;]$version")
-			println("##[set-output name=status;]Complete")
+			println("::set-output name=version::$version")
+			println("::set-output name=status::Complete")
 
 		} else {
 			println("Release up to date")
-			println("##[set-output name=status;]Skipped")
+			println("::set-output name=status::Skipped")
 		}
 	}
 }
