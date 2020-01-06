@@ -46,11 +46,11 @@ jobs:
         ./gradlew :desktop:build
         ./gradlew :android:assembleDebug
         ./gradlew :headless:compileResources
-      if: steps.commit.outputs.status == Success
+      if: steps.commit.outputs.status == 'Success'
 
     - name: Push changes
       uses: ad-m/github-push-action@master
-      if: steps.commit.outputs.status == Success
+      if: steps.commit.outputs.status == 'Success'
       with:
         directory: MatchDungeon
         github_token: ${{ secrets.GITHUB_TOKEN }}

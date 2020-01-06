@@ -53,7 +53,7 @@ jobs:
       run: |
         git commit -m"Bump version number to steps.release.outputs.version and release" -a
         git tag -a releases/steps.release.outputs.version -m "Release steps.release.outputs.version"
-      if: steps.release.outputs.status == Complete
+      if: steps.release.outputs.status == 'Complete'
 
     - name: Push changes
       uses: ad-m/github-push-action@master
