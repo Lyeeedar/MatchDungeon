@@ -61,9 +61,11 @@ jobs:
 
     - name: Commit changes
       working-directory: MatchDungeon
+      env:
+        VERSION: ${{ steps.release.outputs.version }}
       run: |
-        git commit -m"Bump version number to steps.release.outputs.version and release" -a
-        git tag -a releases/steps.release.outputs.version -m "Release steps.release.outputs.version"
+        git commit -m"Bump version number to $VERSION and release" -a
+        git tag -a releases/$VERSION -m "Release $VERSION"
       if: steps.hasChanges.outputs.status != 'false' && steps.release.outputs.status == 'Complete'
 
     - name: Push changes
