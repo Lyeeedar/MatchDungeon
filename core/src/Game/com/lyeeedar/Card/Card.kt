@@ -1,16 +1,13 @@
 package com.lyeeedar.Card
 
-import com.lyeeedar.Renderables.Sprite.Sprite
-import com.lyeeedar.UI.CardWidget
-import com.lyeeedar.UI.SpriteWidget
-import com.lyeeedar.UI.addTapToolTip
-import com.lyeeedar.Util.*
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.scenes.scene2d.ui.Value
+import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.esotericsoftware.kryo.io.Input
@@ -20,7 +17,12 @@ import com.lyeeedar.Card.CardContent.CardContentActionRewards
 import com.lyeeedar.Game.AbstractReward
 import com.lyeeedar.Game.Chance
 import com.lyeeedar.Game.Global
+import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.SpawnWeight
+import com.lyeeedar.UI.CardWidget
+import com.lyeeedar.UI.SpriteWidget
+import com.lyeeedar.UI.addTapToolTip
+import com.lyeeedar.Util.*
 import ktx.collections.set
 import ktx.collections.toGdxArray
 
@@ -128,8 +130,10 @@ class CardNode
 		val table = Table()
 		wrapperStack.add(table)
 
-		val title = Label(name, Statics.skin, "cardtitle")
-		table.add(title).expandX().center().pad(10f, 0f, 0f, 0f)
+		val title = Label(name, Statics.skin, if (detail) "cardtitle" else "cardrewardtitle")
+		title.setWrap(true)
+		title.setAlignment(Align.center)
+		table.add(title).expandX().center().padTop(10f).width(Value.percentWidth(1f, table))
 		table.row()
 
 		if (parent.characterRestriction != null)

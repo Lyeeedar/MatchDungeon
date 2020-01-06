@@ -106,13 +106,7 @@ class Character(val path: String)
 			}
 		}
 
-		val basicTable = Table()
-		basicTable.add(Label(name, Statics.skin, "cardtitle")).expandX().center()
-		basicTable.row()
-		basicTable.add(SpriteWidget(Sprite(sprite.textures[0]), 64f, 64f)).grow()
-		basicTable.row()
-
-		return CardWidget(basicTable, table, AssetManager.loadTextureRegion("GUI/CharacterCardback")!!, this)
+		return CardWidget(CardWidget.createFrontTable(name, Sprite(sprite.textures[0])), table, AssetManager.loadTextureRegion("GUI/CharacterCardback")!!, this)
 	}
 
 	fun parse(xmlData: XmlData)

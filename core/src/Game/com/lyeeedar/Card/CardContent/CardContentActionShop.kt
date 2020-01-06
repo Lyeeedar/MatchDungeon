@@ -17,8 +17,8 @@ import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.UI.Seperator
+import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.addClickListener
-import com.lyeeedar.UI.addTapToolTip
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.FastEnumMap
 import com.lyeeedar.Util.Statics
@@ -82,7 +82,7 @@ class CardContentActionShop : AbstractCardContentAction()
 					if (Global.player.gold >= cost)
 					{
 						card.pickFuns.clear()
-						card.addPick("Buy ($cost)", {
+						card.addPick("Buy ($cost)") {
 							Global.player.gold -= cost
 
 							currentWare.reward()
@@ -101,7 +101,7 @@ class CardContentActionShop : AbstractCardContentAction()
 							// Rebuild the ui
 							shopActive = false
 							advance(CardContent, CardContentScreen)
-						})
+						}
 					}
 
 					val cardHeight = (Statics.resolution.y.toFloat() * 0.7f) * 0.3f
@@ -417,22 +417,46 @@ class StatisticWare : ShopWares()
 
 	override fun getCard(): CardWidget
 	{
-		val table = Table()
+		val table: Table
+
+		val modifiedStats = Array<Pair<Statistic, Float>>()
 		for (stat in Statistic.Values)
 		{
 			val statVal = statistics[stat] ?: 0f
 
 			if (statVal != 0f)
 			{
-				val statTable = Table()
-				statTable.add(Label(stat.toString().toLowerCase().capitalize(), Statics.skin, "cardtitle")).expandX().center()
-				statTable.row()
-				statTable.add(Label(statVal.toString(), Statics.skin, "cardtitle")).expandX().center()
-				statTable.addTapToolTip(stat.tooltip)
-
-				table.add(statTable).growX()
-				table.row()
+				modifiedStats.add(Pair(stat, statVal))
 			}
+		}
+
+		if (modifiedStats.size == 0)
+		{
+			val stat = modifiedStats[0].first
+			val value = modifiedStats[0].second
+
+			table = CardWidget.createFrontTable(stat.toString().capitalize(), stat.icon, value.toString())
+		}
+		else
+		{
+			val iconsTable = Table()
+			val statsTable = Table()
+			for (pair in modifiedStats)
+			{
+				val stat = pair.first
+				val value = pair.second
+
+				iconsTable.add(SpriteWidget(stat.icon.copy(), 64f, 64f)).grow()
+
+				statsTable.add(Label(stat.toString().capitalize() + ":", Statics.skin, "cardtitle"))
+				statsTable.add(Label(value.toString(), Statics.skin, "cardtitle"))
+				statsTable.row()
+			}
+
+			table = Table()
+			table.add(iconsTable).grow()
+			table.row()
+			table.add(statsTable)
 		}
 
 		return CardWidget(table, table, AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, null)

@@ -3,7 +3,6 @@ package com.lyeeedar.Game
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
-import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Board.Mote
@@ -14,7 +13,6 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.CardWidget
-import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.Util.*
 
 enum class Chance private constructor(val chance: Float, val uiString: String, val colour: Colour)
@@ -86,19 +84,14 @@ class StatisticsReward : AbstractReward()
 			val statVal = statsTable[stat]
 			if (statVal != 0f)
 			{
-				val table = Table()
-				table.add(Label(stat.toString().capitalize(), Statics.skin, "cardtitle"))
-				table.row()
-				table.add(Label(statVal.toString(), Statics.skin, "cardtitle"))
-				table.row()
-
+				val table = CardWidget.createFrontTable(stat.toString().capitalize(), stat.icon.copy(), statVal.toString())
 				Global.player.statistics[stat] = (Global.player.statistics[stat] ?: 0f) + statVal
 
 				val card = CardWidget(table, table, AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, null)
 				card.canZoom = false
 				card.addPick("Take") {
 
-					val sprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/key_ornate")
+					val sprite = stat.icon.copy()
 
 					val src = card.localToStageCoordinates(Vector2(card.width / 2f, card.height / 2f))
 
@@ -291,10 +284,7 @@ class MoneyReward : AbstractReward()
 	{
 		val output = Array<CardWidget>()
 
-		val table = Table()
-
-		val title = Label("Gold", Statics.skin, "cardtitle")
-		table.add(title).expandX().center().padTop(10f)
+		val table = CardWidget.createFrontTable("Gold", AssetManager.loadSprite("Oryx/Custom/items/coin_gold_pile"))
 		table.row()
 
 		val amount = amountEqn.evaluate(Global.getVariableMap()).toInt()
@@ -306,7 +296,7 @@ class MoneyReward : AbstractReward()
 			amountStr += "+$bonus"
 		}
 
-		val amountLbl = Label(amountStr, Statics.skin, "cardtitle")
+		val amountLbl = Label(amountStr, Statics.skin, "cardrewardtitle")
 		table.add(amountLbl).expandX().center().padTop(10f)
 		table.row()
 
@@ -562,14 +552,7 @@ class ItemReward : AbstractReward()
 
 			flags.flags.put(key, value.evaluate(Global.getVariableMap()))
 
-			val table = Table()
-			val title = Label(name, Statics.skin, "cardtitle")
-			title.setWrap(true)
-
-			table.add(title)
-			table.row()
-			table.add(SpriteWidget(icon, 128f, 128f))
-			table.row()
+			val table = CardWidget.createFrontTable(name, icon.copy())
 
 			val cardWidget = CardWidget(table, table, AssetManager.loadTextureRegion("GUI/ItemCardback")!!, null)
 			cardWidget.canZoom = false

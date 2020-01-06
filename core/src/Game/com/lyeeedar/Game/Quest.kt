@@ -3,6 +3,8 @@ package com.lyeeedar.Game
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.scenes.scene2d.ui.Value
+import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.badlogic.gdx.utils.ObjectSet
@@ -154,8 +156,10 @@ class Quest(val path: String)
 		val table = Table()
 		wrapperStack.add(table)
 
-		val title = Label(title, Statics.skin, "cardtitle")
-		table.add(title).expandX().center().pad(10f, 0f, 0f, 0f)
+		val title = Label(title, Statics.skin, if (detail) "cardtitle" else "cardrewardtitle")
+		title.setWrap(true)
+		title.setAlignment(Align.center)
+		table.add(title).expandX().center().padTop(10f).width(Value.percentWidth(1f, table))
 		table.row()
 
 		val rewardsTable = Table()

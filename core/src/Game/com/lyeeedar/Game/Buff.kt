@@ -33,13 +33,7 @@ class Buff(val xml: XmlData)
 
 	fun getCard(): CardWidget
 	{
-		val basicTable = Table()
-		basicTable.add(Label(name, Statics.skin, "cardtitle")).expandX().center()
-		basicTable.row()
-		basicTable.add(SpriteWidget(icon.copy(), 64f, 64f)).grow()
-		basicTable.row()
-
-		val card = CardWidget(basicTable, createTable(), AssetManager.loadTextureRegion("GUI/BuffCardback")!!, this)
+		val card = CardWidget(CardWidget.createFrontTable(name, icon.copy()), createTable(), AssetManager.loadTextureRegion("GUI/BuffCardback")!!, this)
 		return card
 	}
 

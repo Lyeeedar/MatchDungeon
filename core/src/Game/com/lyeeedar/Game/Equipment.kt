@@ -2,10 +2,8 @@ package com.lyeeedar.Game
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.scenes.scene2d.ui.Button
-import com.badlogic.gdx.scenes.scene2d.ui.Label
-import com.badlogic.gdx.scenes.scene2d.ui.Stack
-import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.scenes.scene2d.ui.*
+import com.badlogic.gdx.utils.Align
 import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.EquipmentSlot
@@ -28,13 +26,7 @@ class Equipment(val path: String)
 
 	fun getCard(other: Equipment?, showAsPlus: Boolean): CardWidget
 	{
-		val basicTable = Table()
-		basicTable.add(Label(name, Statics.skin, "cardtitle")).expandX().center()
-		basicTable.row()
-		basicTable.add(SpriteWidget(icon.copy(), 64f, 64f)).grow()
-		basicTable.row()
-
-		val card = CardWidget(basicTable, createTable(other, showAsPlus), AssetManager.loadTextureRegion("GUI/EquipmentCardback")!!, this)
+		val card = CardWidget(CardWidget.createFrontTable(name, icon.copy()), createTable(other, showAsPlus), AssetManager.loadTextureRegion("GUI/EquipmentCardback")!!, this)
 		return card
 	}
 
