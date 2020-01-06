@@ -12,7 +12,7 @@ jobs:
         path: MatchDungeon
         fetch-depth: 0
         
-    - run: git fetch --prune --unshallow
+    - run: git tag
       working-directory: MatchDungeon
         
     - run: git describe --abbrev=0
