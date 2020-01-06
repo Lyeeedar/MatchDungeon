@@ -72,6 +72,12 @@ object AndroidRelease
 	{
 		println("Running in: " + File("").absolutePath)
 
+		val changes = "git diff".runCommand()
+		if (changes.isBlank())
+		{
+			throw RuntimeException("No changes in the repo!")
+		}
+
 		val lastTag = "git describe --abbrev=0".runCommand().replace("'", "")
 		val commitsSinceRelease = ("git log $lastTag..HEAD --oneline").runCommand()
 
