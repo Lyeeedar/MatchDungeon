@@ -2,7 +2,7 @@ name: UpgradeEngine
 
 on:
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '*/5 * * * *'
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -10,20 +10,34 @@ jobs:
     - uses: actions/checkout@master
       with:
         path: MatchDungeon
-    
+
     - name: Checkout private
       uses: actions/checkout@master
       with:
         repository: Lyeeedar/PrivateStuff
         token: ${{ secrets.PRIVATESTUFF_ACCESS_TOKEN }}
         path: PrivateStuff
-    
+
     - name: Update submodules
       working-directory: MatchDungeon
       run: |
         git submodule sync --recursive
         git submodule update --init --force --recursive --remote --rebase -j 8
         git submodule update --force --recursive --remote --rebase
+
+    - name: Setup git credentials
+      working-directory: MatchDungeon
+      run: |
+        git config --local user.email "actions@github.com"
+        git config --local user.name "UpgradeEngineAction"
+
+    - name: Commit changes
+      working-directory: MatchDungeon
+      run: |
+        git commit -m "Upgrade engine" -a
+        echo "##[set-output name=status;]Success"
+      id: commit
+      continue-on-error: true
 
     - name: Test it all builds
       working-directory: MatchDungeon
@@ -32,20 +46,11 @@ jobs:
         ./gradlew :desktop:build
         ./gradlew :android:assembleDebug
         ./gradlew :headless:compileResources
-        
-    - name: Setup git credentials
-      working-directory: MatchDungeon
-      run: |
-        git config --local user.email "actions@github.com"
-        git config --local user.name "UpgradeEngineAction"
-        
-    - name: Commit changes
-      working-directory: MatchDungeon
-      run: git commit -m "Upgrade engine" -a
-      continue-on-error: true
-        
+      if: steps.commit.outputs.status == Success
+
     - name: Push changes
       uses: ad-m/github-push-action@master
+      if: steps.commit.outputs.status == Success
       with:
         directory: MatchDungeon
         github_token: ${{ secrets.GITHUB_TOKEN }}
