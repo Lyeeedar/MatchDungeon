@@ -7,9 +7,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      
+
     - run: git clone https://github.com/Lyeeedar/MatchDungeon /home/runner/work/MatchDungeon/MatchDungeon/MatchDungeon
-        
+
     - name: Checkout submodules
       working-directory: MatchDungeon
       run: |
@@ -46,7 +46,15 @@ jobs:
     - name: Release to playstore
       working-directory: MatchDungeon
       run: ./gradlew :headless:releaseAndroidToPlaystore
-      
+      id: release
+
+    - name: Commit changes
+        working-directory: MatchDungeon
+        run: |
+          git commit -m"Bump version number to steps.release.outputs.version and release" -a
+          git tag -a releases/steps.release.outputs.version -m "Release steps.release.outputs.version"
+        if: steps.release.outputs.status == Complete
+
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:

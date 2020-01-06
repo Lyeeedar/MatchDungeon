@@ -98,14 +98,13 @@ object AndroidRelease
 			// push to playstore
 			uploadToPlaystore(version, versionCode.toLong())
 
-			// commit changes
-			"git commit -m\"Bump version number to $version and release\" -a".runCommand()
-			("git tag -a releases/$version -m \"Release $version\"").runCommand()
-
 			println("Release complete")
+			println("##[set-output name=version;]$version")
+			println("##[set-output name=status;]Complete")
 
 		} else {
 			println("Release up to date")
+			println("##[set-output name=status;]Skipped")
 		}
 	}
 }
