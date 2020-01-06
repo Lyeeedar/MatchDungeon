@@ -72,7 +72,7 @@ object AndroidRelease
 	{
 		println("Running in: " + File("").absolutePath)
 
-		val lastTag = "git for-each-ref refs/tags --sort=-taggerdate --format='%(tag)' --count=1".runCommand()
+		val lastTag = "git for-each-ref refs/tags --sort=-taggerdate --format='%(tag)' --count=1".runCommand().replace("'", "")
 		val commitsSinceRelease = ("git log $lastTag..HEAD --oneline").runCommand()
 
 		if (!commitsSinceRelease.isNullOrEmpty()) {
