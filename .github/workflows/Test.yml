@@ -15,6 +15,11 @@ jobs:
     - run: git describe --abbrev=0
       working-directory: MatchDungeon
 
+    - run: git describe --tags
+      working-directory: MatchDungeon
+
+
+
     - name: Checkout submodules
       working-directory: MatchDungeon
       run: |
