@@ -45,6 +45,7 @@ jobs:
       run: |
         ./gradlew :headless:compileResources
         ./gradlew :android:build
+        ./gradlew :android:bundleRelease
       if: steps.hasChanges.outputs.status != 'false'
 
     - name: Setup git credentials
