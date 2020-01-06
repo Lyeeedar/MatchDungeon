@@ -1,0 +1,16 @@
+name: TagFetchTest
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+        
+    - run: git fetch --tags
+    
+    - run: git tag
+    
+    - run: git describe --tags --abbrev=0
