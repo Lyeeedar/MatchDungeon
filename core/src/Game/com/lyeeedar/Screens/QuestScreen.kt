@@ -3,22 +3,24 @@ package com.lyeeedar.Screens
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Touchable
-import com.badlogic.gdx.scenes.scene2d.actions.Actions.*
+import com.badlogic.gdx.scenes.scene2d.actions.Actions.delay
+import com.badlogic.gdx.scenes.scene2d.actions.Actions.removeActor
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.badlogic.gdx.utils.Array
-import com.lyeeedar.*
 import com.lyeeedar.Board.Mote
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.Card.CardNode
 import com.lyeeedar.Direction
+import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.*
-import com.lyeeedar.Game.Global
+import com.lyeeedar.MainGame
 import com.lyeeedar.Renderables.Sprite.Sprite
+import com.lyeeedar.Statistic
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.*
 import ktx.actors.then
@@ -311,14 +313,14 @@ class QuestScreen : AbstractScreen()
 			val widget = card.current.getCard()
 			widget.data = card
 
-			widget.addPick("Choose", {
+			widget.addPick("Choose") {
 				chosenQuestCard = it
 
 				for (w in cardWidgets)
 				{
 					w.clickable = false
 				}
-			})
+			}
 
 			cardWidgets.add(widget)
 			stage.addActor(widget)
@@ -380,11 +382,11 @@ class QuestScreen : AbstractScreen()
 		val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("blank")!!, null)
 		card.canZoom = false
 		card.setFacing(true, false)
-		card.addPick("", {
+		card.addPick("") {
 			card.remove()
 			currentGroup.clear()
 			updateRewards()
-		})
+		}
 
 		currentGroup.add(card)
 
@@ -425,7 +427,7 @@ class QuestScreen : AbstractScreen()
 					card.canZoom = false
 					card.setFacing(true, false)
 					card.pickFuns.clear()
-					card.addPick("", {
+					card.addPick("") {
 						currentGroup.removeValue(card, true)
 						if (currentGroup.size == 0)
 						{
@@ -433,7 +435,7 @@ class QuestScreen : AbstractScreen()
 						}
 
 						card.remove()
-					})
+					}
 
 					currentGroup.add(card)
 					Statics.stage.addActor(card)
@@ -643,12 +645,13 @@ class QuestScreen : AbstractScreen()
 			{
 				if (widget != chosenQuestCard)
 				{
-					val sequence = fadeOut(0.3f) then removeActor()
-					widget.addAction(sequence)
+					widget.dissolve(CardWidget.DissolveType.BURN, 0.6f, 2f)
 				}
 			}
 
-			val sequence = delay(0.5f) then lambda {
+			val delay = if (cardWidgets.size == 1) 0.2f else 0.8f
+
+			val sequence = delay(delay) then lambda {
 				val card = chosenQuestCard!!.data as Card
 
 				val cardScreen = CardScreen.instance

@@ -1,31 +1,35 @@
 <Effect xmlns:meta="Editor">
-	<Loop>false</Loop>
 	<Emitters>
 		<Emitter>
+			<Name>Tankard</Name>
+			<KillParticlesOnStop>true</KillParticlesOnStop>
+			<Space>Local</Space>
 			<Width>0</Width>
 			<Height>0</Height>
+			<Direction>Up</Direction>
 			<ParticleSpeed>0,0</ParticleSpeed>
-			<ParticleRotation>0,0</ParticleRotation>
+			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
 				<Keyframe>0|1</Keyframe>
 			</RateKeyframes>
 			<SingleBurst>true</SingleBurst>
 			<Particles>
 				<Particle>
-					<Lifetime>0.5,0.5</Lifetime>
+					<Lifetime>9999999,9999999</Lifetime>
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|1|1</Keyframe>
 						</Stream>
 					</SizeKeyframes>
-					<BlendMode>Additive</BlendMode>
-					<BlendKeyframes>true</BlendKeyframes>
+					<RotationSpeedKeyframes>
+						<Stream>
+							<Keyframe>0|-360|360</Keyframe>
+						</Stream>
+					</RotationSpeedKeyframes>
+					<BlendMode>Multiplicative</BlendMode>
 					<TextureKeyframes>
 						<Stream>
-							<Keyframe>0|EffectSprites/Strike/Strike_0</Keyframe>
-							<Keyframe>0.25|EffectSprites/Strike/Strike_1</Keyframe>
-							<Keyframe>0.5|EffectSprites/Strike/Strike_2</Keyframe>
-							<Keyframe>0.75|EffectSprites/Strike/Strike_3</Keyframe>
+							<Keyframe>0|Oryx/Custom/items/tankard</Keyframe>
 						</Stream>
 					</TextureKeyframes>
 					<ColourKeyframes>
@@ -38,11 +42,6 @@
 							<Keyframe>0|1</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
-					<AlphaRefKeyframes>
-						<Stream>
-							<Keyframe>0|0</Keyframe>
-						</Stream>
-					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>

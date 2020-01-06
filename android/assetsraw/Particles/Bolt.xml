@@ -1,33 +1,31 @@
 <Effect xmlns:meta="Editor">
-	<Loop>false</Loop>
 	<Emitters>
 		<Emitter>
-			<Name>Shockwave</Name>
+			<Name>Bolt</Name>
+			<KillParticlesOnStop>true</KillParticlesOnStop>
+			<Space>Local</Space>
 			<Width>0</Width>
 			<Height>0</Height>
-			<SizeMultiplier>
-				<Keyframe>0|1</Keyframe>
-			</SizeMultiplier>
+			<Direction>Up</Direction>
 			<ParticleSpeed>0,0</ParticleSpeed>
-			<ParticleRotation>0,360</ParticleRotation>
+			<ParticleRotation>0,0</ParticleRotation>
 			<RateKeyframes>
 				<Keyframe>0|1</Keyframe>
-				<Keyframe>0.9939377|1</Keyframe>
-				<Keyframe>1.012991|0</Keyframe>
 			</RateKeyframes>
+			<SingleBurst>true</SingleBurst>
 			<Particles>
 				<Particle>
-					<Lifetime>0.3,0.3</Lifetime>
+					<Lifetime>9999999,9999999</Lifetime>
+					<VelocityAligned>true</VelocityAligned>
 					<SizeKeyframes>
 						<Stream>
-							<Keyframe>0|0|0</Keyframe>
-							<Keyframe>1|1.5|1.5</Keyframe>
+							<Keyframe>0|0.4|0.6</Keyframe>
 						</Stream>
 					</SizeKeyframes>
-					<BlendMode>Additive</BlendMode>
+					<BlendMode>Multiplicative</BlendMode>
 					<TextureKeyframes>
 						<Stream>
-							<Keyframe>0|Particle/ring</Keyframe>
+							<Keyframe>0|EffectSprites/Bolt/Bolt_0</Keyframe>
 						</Stream>
 					</TextureKeyframes>
 					<ColourKeyframes>
@@ -37,9 +35,7 @@
 					</ColourKeyframes>
 					<AlphaKeyframes>
 						<Stream>
-							<Keyframe>0|0.6</Keyframe>
-							<Keyframe>0.8|0.6</Keyframe>
-							<Keyframe>1|0</Keyframe>
+							<Keyframe>0|1</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
 					<AlphaRefKeyframes>
@@ -51,52 +47,50 @@
 			</Particles>
 		</Emitter>
 		<Emitter>
-			<Name>Icon</Name>
-			<Width>0</Width>
-			<Height>0</Height>
-			<SizeMultiplier>
-				<Keyframe>0|1</Keyframe>
-			</SizeMultiplier>
-			<Offset>
-				<Keyframe>0|0,0.5</Keyframe>
-			</Offset>
-			<Direction>Up</Direction>
-			<ParticleSpeed>0.2,0.2</ParticleSpeed>
-			<ParticleRotation>0,0</ParticleRotation>
+			<Name>Trail</Name>
+			<IsBlockingEmitter>false</IsBlockingEmitter>
+			<Type>Accumulated</Type>
+			<Width>0.01</Width>
+			<Height>0.01</Height>
+			<Direction>Random</Direction>
+			<ParticleSpeed>0.05,0.2</ParticleSpeed>
+			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
-				<Keyframe>0|1</Keyframe>
+				<Keyframe>0|100</Keyframe>
 			</RateKeyframes>
-			<SingleBurst>true</SingleBurst>
 			<Particles>
 				<Particle>
-					<Lifetime>1,1</Lifetime>
+					<Lifetime>0.3,0.7</Lifetime>
+					<Brownian>10</Brownian>
+					<AllowResize>false</AllowResize>
 					<SizeKeyframes>
 						<Stream>
-							<Keyframe>0|0.4|0.4</Keyframe>
+							<Keyframe>0|0.02|0.05</Keyframe>
 						</Stream>
 					</SizeKeyframes>
-					<BlendMode>Multiplicative</BlendMode>
+					<BlendMode>Additive</BlendMode>
 					<TextureKeyframes>
 						<Stream>
-							<Keyframe>0|Icons/shouting</Keyframe>
+							<Keyframe>0|Particle/glow</Keyframe>
 						</Stream>
 					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
-							<Keyframe>0|199,197,155,255</Keyframe>
+							<Keyframe>0|255,255,255,255</Keyframe>
 						</Stream>
 					</ColourKeyframes>
 					<AlphaKeyframes>
 						<Stream>
-							<Keyframe>0|0</Keyframe>
-							<Keyframe>0.1975173|0.6</Keyframe>
+							<Keyframe>0|0.7</Keyframe>
+							<Keyframe>0.6859637|0.7</Keyframe>
 							<Keyframe>1|0</Keyframe>
-							<Keyframe>0.666224|0.6</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
 					<AlphaRefKeyframes>
 						<Stream>
 							<Keyframe>0|0</Keyframe>
+							<Keyframe>0.5965824|0</Keyframe>
+							<Keyframe>1|0.5</Keyframe>
 						</Stream>
 					</AlphaRefKeyframes>
 				</Particle>

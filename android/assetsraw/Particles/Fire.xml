@@ -1,12 +1,16 @@
 <Effect xmlns:meta="Editor">
 	<Warmup>5</Warmup>
+	<Loop>true</Loop>
 	<Emitters>
 		<Emitter>
 			<Name>Core</Name>
-			<Type>Accumulated</Type>
 			<Space>Local</Space>
+			<Type>Accumulated</Type>
 			<Width>0.4</Width>
 			<Height>0.1</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<Direction>Up</Direction>
 			<ParticleSpeed>0.5,1</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
@@ -16,19 +20,7 @@
 			<Particles>
 				<Particle>
 					<Lifetime>1,1</Lifetime>
-					<BlendMode>Additive</BlendMode>
 					<Brownian>3</Brownian>
-					<TextureKeyframes>
-						<Stream>
-							<Keyframe>0|Particle/plasma_3</Keyframe>
-						</Stream>
-						<Stream>
-							<Keyframe>0|Particle/plasma_1</Keyframe>
-						</Stream>
-						<Stream>
-							<Keyframe>0|Particle/plasma_2</Keyframe>
-						</Stream>
-					</TextureKeyframes>
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|0.2|0.4</Keyframe>
@@ -40,6 +32,18 @@
 							<Keyframe>0|-10|10</Keyframe>
 						</Stream>
 					</RotationSpeedKeyframes>
+					<BlendMode>Additive</BlendMode>
+					<TextureKeyframes>
+						<Stream>
+							<Keyframe>0|Particle/plasma_3</Keyframe>
+						</Stream>
+						<Stream>
+							<Keyframe>0|Particle/plasma_1</Keyframe>
+						</Stream>
+						<Stream>
+							<Keyframe>0|Particle/plasma_2</Keyframe>
+						</Stream>
+					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|255,250,194,255</Keyframe>
@@ -55,6 +59,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>
@@ -63,8 +72,12 @@
 			<IsBlockingEmitter>false</IsBlockingEmitter>
 			<Type>Accumulated</Type>
 			<Shape>Cone</Shape>
+			<Angle>90</Angle>
 			<Width>90</Width>
 			<Height>0.1</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>1,4</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
@@ -73,9 +86,14 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.4,1.2</Lifetime>
-					<BlendMode>Additive</BlendMode>
 					<Brownian>5</Brownian>
 					<VelocityAligned>true</VelocityAligned>
+					<SizeKeyframes>
+						<Stream>
+							<Keyframe>0|0.1|0.3</Keyframe>
+						</Stream>
+					</SizeKeyframes>
+					<BlendMode>Additive</BlendMode>
 					<TextureKeyframes>
 						<Stream>
 							<Keyframe>0|Particle/ember_1</Keyframe>
@@ -84,11 +102,6 @@
 							<Keyframe>0|Particle/ember_2</Keyframe>
 						</Stream>
 					</TextureKeyframes>
-					<SizeKeyframes>
-						<Stream>
-							<Keyframe>0|0.1|0.3</Keyframe>
-						</Stream>
-					</SizeKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|220,224,148,255</Keyframe>
@@ -102,6 +115,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>

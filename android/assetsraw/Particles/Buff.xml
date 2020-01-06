@@ -2,31 +2,33 @@
 	<Loop>false</Loop>
 	<Emitters>
 		<Emitter>
-			<Name>Splatter</Name>
-			<Gravity>-4</Gravity>
-			<Shape>Cone</Shape>
-			<Width>45</Width>
-			<Height>0.1</Height>
-			<ParticleSpeed>1.5,2</ParticleSpeed>
-			<ParticleRotation>0,1</ParticleRotation>
+			<Name>Icon</Name>
+			<Space>Local</Space>
+			<Width>0</Width>
+			<Height>0</Height>
+			<Offset>
+				<Keyframe>0|0,0.5</Keyframe>
+			</Offset>
+			<Direction>Up</Direction>
+			<ParticleSpeed>0.3,0.3</ParticleSpeed>
+			<ParticleRotation>0,0</ParticleRotation>
 			<RateKeyframes>
-				<Keyframe>0|10</Keyframe>
-				<Keyframe>0.1|0</Keyframe>
+				<Keyframe>0|1</Keyframe>
 			</RateKeyframes>
+			<SingleBurst>true</SingleBurst>
 			<Particles>
 				<Particle>
-					<Lifetime>0.5,1.2</Lifetime>
-					<Collision>Slide</Collision>
-					<VelocityAligned>true</VelocityAligned>
+					<Lifetime>1,1</Lifetime>
 					<SizeKeyframes>
 						<Stream>
-							<Keyframe>0|0.3|0.5</Keyframe>
+							<Keyframe>0|0.1|0.1</Keyframe>
+							<Keyframe>0.09275363|0.3|0.3</Keyframe>
 						</Stream>
 					</SizeKeyframes>
 					<BlendMode>Multiplicative</BlendMode>
 					<TextureKeyframes>
 						<Stream>
-							<Keyframe>0|Particle/droplet</Keyframe>
+							<Keyframe>0|white</Keyframe>
 						</Stream>
 					</TextureKeyframes>
 					<ColourKeyframes>
@@ -36,14 +38,17 @@
 					</ColourKeyframes>
 					<AlphaKeyframes>
 						<Stream>
-							<Keyframe>0|1</Keyframe>
-							<Keyframe>0.9|1</Keyframe>
+							<Keyframe>0|0</Keyframe>
+							<Keyframe>0.09492753|1</Keyframe>
+							<Keyframe>0.7036232|1</Keyframe>
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
 					<AlphaRefKeyframes>
 						<Stream>
 							<Keyframe>0|0</Keyframe>
+							<Keyframe>0.9096185|0</Keyframe>
+							<Keyframe>1|0.5</Keyframe>
 						</Stream>
 					</AlphaRefKeyframes>
 				</Particle>

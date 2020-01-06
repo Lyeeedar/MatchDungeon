@@ -2,32 +2,33 @@
 	<Loop>false</Loop>
 	<Emitters>
 		<Emitter>
-			<Name>Shockwave</Name>
-			<Width>0</Width>
-			<Height>0</Height>
+			<Name>Blade</Name>
+			<Shape>Cone</Shape>
+			<Width>60</Width>
+			<Height>2</Height>
 			<SizeMultiplier>
 				<Keyframe>0|1</Keyframe>
 			</SizeMultiplier>
-			<ParticleSpeed>0,0</ParticleSpeed>
-			<ParticleRotation>0,360</ParticleRotation>
+			<Area>Border</Area>
+			<ParticleSpeed>-8,-8</ParticleSpeed>
+			<ParticleRotation>0,0</ParticleRotation>
 			<RateKeyframes>
 				<Keyframe>0|1</Keyframe>
-				<Keyframe>0.9939377|1</Keyframe>
-				<Keyframe>1.012991|0</Keyframe>
 			</RateKeyframes>
+			<SingleBurst>true</SingleBurst>
 			<Particles>
 				<Particle>
-					<Lifetime>0.3,0.3</Lifetime>
+					<Lifetime>0.25,0.25</Lifetime>
+					<VelocityAligned>true</VelocityAligned>
 					<SizeKeyframes>
 						<Stream>
-							<Keyframe>0|0|0</Keyframe>
-							<Keyframe>1|1.5|1.5</Keyframe>
+							<Keyframe>0|1|1</Keyframe>
 						</Stream>
 					</SizeKeyframes>
-					<BlendMode>Additive</BlendMode>
+					<BlendMode>Multiplicative</BlendMode>
 					<TextureKeyframes>
 						<Stream>
-							<Keyframe>0|Particle/ring</Keyframe>
+							<Keyframe>0|Oryx/Custom/items/ataraxia_blade_flipped</Keyframe>
 						</Stream>
 					</TextureKeyframes>
 					<ColourKeyframes>
@@ -37,8 +38,9 @@
 					</ColourKeyframes>
 					<AlphaKeyframes>
 						<Stream>
-							<Keyframe>0|0.6</Keyframe>
-							<Keyframe>0.8|0.6</Keyframe>
+							<Keyframe>0|0</Keyframe>
+							<Keyframe>0.2948669|1</Keyframe>
+							<Keyframe>0.8567173|1</Keyframe>
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
@@ -51,47 +53,62 @@
 			</Particles>
 		</Emitter>
 		<Emitter>
-			<Name>Icon</Name>
-			<Width>0</Width>
-			<Height>0</Height>
+			<Name>Debris</Name>
+			<IsBlockingEmitter>false</IsBlockingEmitter>
+			<Gravity>-9</Gravity>
+			<Shape>Cone</Shape>
+			<Width>90</Width>
+			<Height>0.1</Height>
 			<SizeMultiplier>
 				<Keyframe>0|1</Keyframe>
 			</SizeMultiplier>
 			<Offset>
-				<Keyframe>0|0,0.5</Keyframe>
+				<Keyframe>0|0,-0.1</Keyframe>
 			</Offset>
-			<Direction>Up</Direction>
-			<ParticleSpeed>0.2,0.2</ParticleSpeed>
-			<ParticleRotation>0,0</ParticleRotation>
+			<ParticleSpeed>1,3</ParticleSpeed>
+			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
-				<Keyframe>0|1</Keyframe>
+				<Keyframe>0.2202788|20</Keyframe>
 			</RateKeyframes>
 			<SingleBurst>true</SingleBurst>
 			<Particles>
 				<Particle>
-					<Lifetime>1,1</Lifetime>
+					<Lifetime>0.1,0.4</Lifetime>
 					<SizeKeyframes>
 						<Stream>
-							<Keyframe>0|0.4|0.4</Keyframe>
+							<Keyframe>0|0.05|0.16</Keyframe>
 						</Stream>
 					</SizeKeyframes>
+					<RotationSpeedKeyframes>
+						<Stream>
+							<Keyframe>0|-20|20</Keyframe>
+						</Stream>
+					</RotationSpeedKeyframes>
 					<BlendMode>Multiplicative</BlendMode>
 					<TextureKeyframes>
 						<Stream>
-							<Keyframe>0|Icons/shouting</Keyframe>
+							<Keyframe>0|Particle/debris1</Keyframe>
+						</Stream>
+						<Stream>
+							<Keyframe>0|Particle/debris2</Keyframe>
+						</Stream>
+						<Stream>
+							<Keyframe>0|Particle/debris3</Keyframe>
+						</Stream>
+						<Stream>
+							<Keyframe>0|Particle/debris4</Keyframe>
 						</Stream>
 					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
-							<Keyframe>0|199,197,155,255</Keyframe>
+							<Keyframe>0|74,52,22,255</Keyframe>
 						</Stream>
 					</ColourKeyframes>
 					<AlphaKeyframes>
 						<Stream>
-							<Keyframe>0|0</Keyframe>
-							<Keyframe>0.1975173|0.6</Keyframe>
+							<Keyframe>0|0.5</Keyframe>
+							<Keyframe>0.541635|0.5</Keyframe>
 							<Keyframe>1|0</Keyframe>
-							<Keyframe>0.666224|0.6</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
 					<AlphaRefKeyframes>

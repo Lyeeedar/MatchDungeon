@@ -3,6 +3,9 @@
 	<Emitters>
 		<Emitter>
 			<Name>Hearts</Name>
+			<CustomBlockTime>
+				<Time>0.3</Time>
+			</CustomBlockTime>
 			<Shape>Cone</Shape>
 			<Width>90</Width>
 			<ParticleSpeed>0,1</ParticleSpeed>

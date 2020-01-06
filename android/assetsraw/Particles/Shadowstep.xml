@@ -2,66 +2,65 @@
 	<Loop>false</Loop>
 	<Emitters>
 		<Emitter>
-			<Name>Shockwave</Name>
-			<Width>0</Width>
-			<Height>0</Height>
-			<SizeMultiplier>
-				<Keyframe>0|1</Keyframe>
-			</SizeMultiplier>
-			<ParticleSpeed>0,0</ParticleSpeed>
+			<Name>Clouds</Name>
+			<Shape>Cone</Shape>
+			<Width>90</Width>
+			<ParticleSpeed>0.4,0.7</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
-				<Keyframe>0|1</Keyframe>
-				<Keyframe>0.9939377|1</Keyframe>
-				<Keyframe>1.012991|0</Keyframe>
+				<Keyframe>0|25</Keyframe>
 			</RateKeyframes>
+			<SingleBurst>true</SingleBurst>
 			<Particles>
 				<Particle>
-					<Lifetime>0.3,0.3</Lifetime>
+					<Lifetime>0.6,1</Lifetime>
+					<Drag>5</Drag>
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|0|0</Keyframe>
-							<Keyframe>1|1.5|1.5</Keyframe>
+							<Keyframe>1|0.3|0.6</Keyframe>
 						</Stream>
 					</SizeKeyframes>
-					<BlendMode>Additive</BlendMode>
+					<BlendMode>Multiplicative</BlendMode>
 					<TextureKeyframes>
 						<Stream>
-							<Keyframe>0|Particle/ring</Keyframe>
+							<Keyframe>0|Particle/plasma_1</Keyframe>
+						</Stream>
+						<Stream>
+							<Keyframe>0|Particle/plasma_2</Keyframe>
+						</Stream>
+						<Stream>
+							<Keyframe>0|Particle/plasma_3</Keyframe>
 						</Stream>
 					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
-							<Keyframe>0|255,255,255,255</Keyframe>
+							<Keyframe>0|0,0,0,255</Keyframe>
 						</Stream>
 					</ColourKeyframes>
 					<AlphaKeyframes>
 						<Stream>
-							<Keyframe>0|0.6</Keyframe>
-							<Keyframe>0.8|0.6</Keyframe>
+							<Keyframe>0|1</Keyframe>
+							<Keyframe>0.8747619|1</Keyframe>
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
 					<AlphaRefKeyframes>
 						<Stream>
 							<Keyframe>0|0</Keyframe>
+							<Keyframe>0.8440202|0</Keyframe>
+							<Keyframe>1|1</Keyframe>
 						</Stream>
 					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>
 		<Emitter>
-			<Name>Icon</Name>
+			<Name>Shockwave</Name>
 			<Width>0</Width>
 			<Height>0</Height>
-			<SizeMultiplier>
-				<Keyframe>0|1</Keyframe>
-			</SizeMultiplier>
-			<Offset>
-				<Keyframe>0|0,0.5</Keyframe>
-			</Offset>
 			<Direction>Up</Direction>
-			<ParticleSpeed>0.2,0.2</ParticleSpeed>
+			<ParticleSpeed>0,0</ParticleSpeed>
 			<ParticleRotation>0,0</ParticleRotation>
 			<RateKeyframes>
 				<Keyframe>0|1</Keyframe>
@@ -69,29 +68,29 @@
 			<SingleBurst>true</SingleBurst>
 			<Particles>
 				<Particle>
-					<Lifetime>1,1</Lifetime>
+					<Lifetime>0.05,0.05</Lifetime>
 					<SizeKeyframes>
 						<Stream>
-							<Keyframe>0|0.4|0.4</Keyframe>
+							<Keyframe>0|0|0</Keyframe>
+							<Keyframe>1|1.5|1.5</Keyframe>
 						</Stream>
 					</SizeKeyframes>
 					<BlendMode>Multiplicative</BlendMode>
 					<TextureKeyframes>
 						<Stream>
-							<Keyframe>0|Icons/shouting</Keyframe>
+							<Keyframe>0|Particle/shockwave</Keyframe>
 						</Stream>
 					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
-							<Keyframe>0|199,197,155,255</Keyframe>
+							<Keyframe>0|0,0,0,255</Keyframe>
 						</Stream>
 					</ColourKeyframes>
 					<AlphaKeyframes>
 						<Stream>
-							<Keyframe>0|0</Keyframe>
-							<Keyframe>0.1975173|0.6</Keyframe>
+							<Keyframe>0|1</Keyframe>
+							<Keyframe>0.8683191|1</Keyframe>
 							<Keyframe>1|0</Keyframe>
-							<Keyframe>0.666224|0.6</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
 					<AlphaRefKeyframes>

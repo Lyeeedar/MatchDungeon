@@ -161,6 +161,7 @@ class Save
 						val content = CardContent.load(kryo, input)
 
 						val cardScreen = Statics.game.getTypedScreen<CardScreen>()!!
+						cardScreen.swapTo()
 						cardScreen.setup(currentCard, currentQuest, false, content)
 					}
 

@@ -96,7 +96,7 @@ class StatisticsReward : AbstractReward()
 
 				val card = CardWidget(table, table, AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, null)
 				card.canZoom = false
-				card.addPick("Take", {
+				card.addPick("Take") {
 
 					val sprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/key_ornate")
 
@@ -105,10 +105,10 @@ class StatisticsReward : AbstractReward()
 					val dstTable = CardScreen.instance.playerSlot
 					val dst = dstTable.localToStageCoordinates(Vector2())
 
-					Mote(src, dst, sprite, 32f, {
+					Mote(src, dst, sprite, 64f, {
 
 					}, 0.75f)
-				})
+				}
 
 				output.add(card)
 			}
@@ -149,7 +149,7 @@ class CardReward : AbstractReward()
 
 			Global.deck.hasNewEncounters = true
 
-			cardWidget.addPick("", {
+			cardWidget.addPick("") {
 				val sprite = AssetManager.loadSprite("Oryx/Custom/items/card")
 
 				val src = cardWidget.localToStageCoordinates(Vector2(cardWidget.width / 2f, cardWidget.height / 2f))
@@ -157,9 +157,9 @@ class CardReward : AbstractReward()
 				val dstTable = CardScreen.instance.playerSlot
 				val dst = dstTable.localToStageCoordinates(Vector2())
 
-				Mote(src, dst, sprite, 32f, {
+				Mote(src, dst, sprite, 64f, {
 				}, 0.75f)
-			})
+			}
 
 			cardWidget.canZoom = false
 
@@ -199,7 +199,7 @@ class QuestReward : AbstractReward()
 			Global.deck.quests.add(quest)
 			Global.deck.newquests.add(quest)
 
-			cardWidget.addPick("", {
+			cardWidget.addPick("") {
 
 				val sprite = AssetManager.loadSprite("Oryx/Custom/items/card")
 
@@ -208,9 +208,9 @@ class QuestReward : AbstractReward()
 				val dstTable = CardScreen.instance.playerSlot
 				val dst = dstTable.localToStageCoordinates(Vector2())
 
-				Mote(src, dst, sprite, 32f, {
+				Mote(src, dst, sprite, 64f, {
 				}, 0.75f)
-			})
+			}
 
 			cardWidget.canZoom = false
 
@@ -252,7 +252,7 @@ class CharacterReward : AbstractReward()
 
 			Global.deck.hasNewCharacters = true
 
-			cardWidget.addPick("", {
+			cardWidget.addPick("") {
 
 				val sprite = AssetManager.loadSprite("Oryx/Custom/items/card")
 
@@ -261,9 +261,9 @@ class CharacterReward : AbstractReward()
 				val dstTable = CardScreen.instance.playerSlot
 				val dst = dstTable.localToStageCoordinates(Vector2())
 
-				Mote(src, dst, sprite, 32f, {
+				Mote(src, dst, sprite, 64f, {
 				}, 0.75f)
-			})
+			}
 
 			cardWidget.canZoom = false
 
@@ -311,7 +311,7 @@ class MoneyReward : AbstractReward()
 		table.row()
 
 		val card = CardWidget(table, table, AssetManager.loadTextureRegion("GUI/MoneyCardback")!!, null)
-		card.addPick("Take", {
+		card.addPick("Take") {
 
 			Global.player.gold += amount + bonus
 
@@ -322,10 +322,10 @@ class MoneyReward : AbstractReward()
 			val dstTable = CardScreen.instance.playerSlot
 			val dst = dstTable.localToStageCoordinates(Vector2())
 
-			Mote(src, dst, sprite, 32f, {
+			Mote(src, dst, sprite, 64f, {
 				CardScreen.instance.updateEquipment()
 			}, 0.75f)
-		})
+		}
 		card.canZoom = false
 
 		output.add(card)
@@ -366,7 +366,7 @@ class BuffReward : AbstractReward()
 		}
 
 		val card = buff.getCard()
-		card.addPick("", {
+		card.addPick("") {
 
 			val sprite = buff.icon.copy()
 
@@ -375,9 +375,9 @@ class BuffReward : AbstractReward()
 			val dstTable = CardScreen.instance.playerSlot
 			val dst = dstTable.localToStageCoordinates(Vector2())
 
-			Mote(src, dst, sprite, 32f, {
+			Mote(src, dst, sprite, 64f, {
 			}, 0.75f)
-		})
+		}
 		card.canZoom = false
 
 		output.add(card)
@@ -489,7 +489,7 @@ class EquipmentReward : AbstractReward()
 		val equipped = Global.player.equipment[equipment.slot]
 
 		val card = equipment.getCard(equipped, true)
-		card.addPick("Equip", {
+		card.addPick("Equip") {
 			Global.player.equipment[equipment.slot] = equipment
 
 			val sprite = equipment.icon.copy()
@@ -499,13 +499,13 @@ class EquipmentReward : AbstractReward()
 			val dstTable = CardScreen.instance.getSlot(equipment.slot)
 			val dst = dstTable.localToStageCoordinates(Vector2())
 
-			Mote(src, dst, sprite, 32f, {
+			Mote(src, dst, sprite, 64f, {
 				CardScreen.instance.updateEquipment()
 			}, 0.75f)
-		})
+		}
 
 		val sellAmount = equipment.cost / 4
-		card.addPick("Sell ($sellAmount)", {
+		card.addPick("Sell ($sellAmount)") {
 			Global.player.gold += sellAmount
 
 			val sprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_gold")
@@ -515,10 +515,10 @@ class EquipmentReward : AbstractReward()
 			val dstTable = CardScreen.instance.playerSlot
 			val dst = dstTable.localToStageCoordinates(Vector2())
 
-			Mote(src, dst, sprite, 32f, {
+			Mote(src, dst, sprite, 64f, {
 				CardScreen.instance.updateEquipment()
 			}, 0.75f)
-		})
+		}
 
 		output.add(card)
 
@@ -573,7 +573,7 @@ class ItemReward : AbstractReward()
 
 			val cardWidget = CardWidget(table, table, AssetManager.loadTextureRegion("GUI/ItemCardback")!!, null)
 			cardWidget.canZoom = false
-			cardWidget.addPick("", {
+			cardWidget.addPick("") {
 				val sprite = icon.copy()
 
 				val src = cardWidget.localToStageCoordinates(Vector2(cardWidget.width / 2f, cardWidget.height / 2f))
@@ -581,9 +581,9 @@ class ItemReward : AbstractReward()
 				val dstTable = CardScreen.instance.playerSlot
 				val dst = dstTable.localToStageCoordinates(Vector2())
 
-				Mote(src, dst, sprite, 32f, {
+				Mote(src, dst, sprite, 64f, {
 				}, 0.75f)
-			})
+			}
 
 			cardWidget.canZoom = false
 
