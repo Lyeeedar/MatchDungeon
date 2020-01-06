@@ -103,8 +103,7 @@ object AndroidRelease
 			println("::set-output name=status::Complete")
 
 		} else {
-			println("Release up to date")
-			println("::set-output name=status::Skipped")
+			throw RuntimeException("No commits since last release!")
 		}
 	}
 }
