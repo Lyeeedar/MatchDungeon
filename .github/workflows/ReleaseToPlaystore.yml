@@ -2,7 +2,7 @@ name: ReleaseToPlaystore
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '0 1 * * *'
 jobs:
   test:
     runs-on: ubuntu-latest

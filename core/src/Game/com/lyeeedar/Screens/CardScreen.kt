@@ -1,9 +1,5 @@
 package com.lyeeedar.Screens
 
-import com.lyeeedar.UI.*
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Statics
-import com.lyeeedar.Util.XmlData
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.NinePatch
 import com.badlogic.gdx.math.Vector2
@@ -21,6 +17,10 @@ import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.*
 import com.lyeeedar.MainGame
+import com.lyeeedar.UI.*
+import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Statics
+import com.lyeeedar.Util.XmlData
 import ktx.actors.then
 import ktx.collections.toGdxArray
 
@@ -151,7 +151,7 @@ class CardScreen : AbstractScreen()
 			FullscreenTable.createCard(table, statsTable.localToStageCoordinates(Vector2()))
 		}
 
-		if (!Statics.release)
+		if (Statics.debug)
 		{
 			debugConsole.register("AddGold", "", fun(args, console): Boolean
 			{
@@ -199,6 +199,12 @@ class CardScreen : AbstractScreen()
 
 	fun updateEquipment()
 	{
+		if (!created)
+		{
+			baseCreate()
+			created = true
+		}
+
 		val createFun = fun(slot: EquipmentSlot, tableSlot: Table)
 		{
 			tableSlot.clearChildren()

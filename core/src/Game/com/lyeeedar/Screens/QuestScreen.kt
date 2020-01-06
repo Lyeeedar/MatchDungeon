@@ -19,7 +19,6 @@ import com.lyeeedar.Direction
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.*
 import com.lyeeedar.MainGame
-import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.*
@@ -370,6 +369,13 @@ class QuestScreen : AbstractScreen()
 
 	fun completeQuest()
 	{
+		for (card in cardWidgets)
+		{
+			card.remove()
+		}
+		cardWidgets.clear()
+		cardsTable.clear()
+
 		chosenQuestCard = null
 
 		stage.addActor(greyOutTable)
@@ -384,11 +390,8 @@ class QuestScreen : AbstractScreen()
 		card.setFacing(true, false)
 		card.addPick("") {
 			card.remove()
-			currentGroup.clear()
 			updateRewards()
 		}
-
-		currentGroup.add(card)
 
 		cardWidgets.add(card)
 
@@ -410,214 +413,112 @@ class QuestScreen : AbstractScreen()
 		tutorial.show()
 	}
 
-	var grouped: Array<Array<AbstractReward>> = Array()
-	var currentGroup = Array<CardWidget>()
-	var shownIntro = false
 	val greyOutTable = Table()
-	val questunlocks = Array<CardWidget>()
 	fun updateRewards()
 	{
-		if (currentGroup.size == 0)
-		{
-			if (questunlocks.size > 0)
+		val doGoldReward = fun() {
+			val gold = currentQuest.goldRewards.filter { it.isValid() }.flatMap{ it.reward() }.toGdxArray()
+			if (currentQuest.state.ordinal >= Quest.QuestState.GOLD.ordinal && !currentQuest.gotGold && gold.size > 0)
 			{
-				while (questunlocks.size > 0)
+				for (card in gold)
 				{
-					val card = questunlocks.removeIndex(questunlocks.size-1)
 					card.canZoom = false
-					card.setFacing(true, false)
-					card.pickFuns.clear()
-					card.addPick("") {
-						currentGroup.removeValue(card, true)
-						if (currentGroup.size == 0)
-						{
-							updateRewards()
-						}
-
-						card.remove()
-					}
-
-					currentGroup.add(card)
-					Statics.stage.addActor(card)
-
-					if (currentGroup.size == 4)
-					{
-						break
-					}
 				}
 
-				if (currentGroup.size > 0)
-				{
-					CardWidget.layoutCards(currentGroup, Direction.CENTER, flip = true)
-				}
-				else
-				{
-					updateRewards()
-				}
-			}
-			else if (grouped.size == 0)
-			{
-				val bronze = currentQuest.bronzeRewards.filter { it.isValid() }.toGdxArray()
-				val silver = currentQuest.silverRewards.filter { it.isValid() }.toGdxArray()
-				val gold = currentQuest.goldRewards.filter { it.isValid() }.toGdxArray()
-
-				val spawnIntroCard = fun(name:String, icon:Sprite) {
-					val table = Table()
-					table.add(Label(name, Statics.skin, "cardtitle"))
-					table.row()
-					table.add(SpriteWidget(icon, 64f, 64f)).expandX().center()
-
-					val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("white")!!, null)
-					card.canZoom = false
-					card.setFacing(true, false)
-					card.addPick("") {
-						card.remove()
-						updateRewards()
-					}
-
-					val cards = Array<CardWidget>()
-					cards.add(card)
-
-					Statics.stage.addActor(card)
-					CardWidget.layoutCards(cards, Direction.CENTER, cardsTable, animate = false, flip = true)
-				}
-
-				if (Global.deck.newcharacters.size > 0 || Global.deck.newencounters.size > 0 || Global.deck.newequipment.size > 0 || Global.deck.newquests.size > 0)
-				{
-					if (!shownIntro)
-					{
-						shownIntro = true
-
-						spawnIntroCard("Quest Unlocks", AssetManager.loadSprite("blank", drawActualSize =  true))
-					}
-					else
-					{
-						shownIntro = false
-
-						for (reward in Global.deck.newcharacters)
-						{
-							questunlocks.add(reward.getCard())
-						}
-						Global.deck.newcharacters.clear()
-
-						for (reward in Global.deck.newencounters)
-						{
-							questunlocks.add(reward.current.getCard())
-						}
-						Global.deck.newencounters.clear()
-
-						for (reward in Global.deck.newequipment)
-						{
-							questunlocks.add(reward.getCard(null, false))
-						}
-						Global.deck.newequipment.clear()
-
-						for (reward in Global.deck.newquests)
-						{
-							questunlocks.add(reward.getCard())
-						}
-						Global.deck.newquests.clear()
-
-						updateRewards()
-						return
-					}
-				}
-				else if (currentQuest.state.ordinal >= Quest.QuestState.BRONZE.ordinal && !currentQuest.gotBronze && bronze.size > 0)
-				{
-					if (!shownIntro)
-					{
-						shownIntro = true
-
-						spawnIntroCard("Bronze Reward", AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_copper", drawActualSize =  true))
-					}
-					else
-					{
-						shownIntro = false
-						grouped = bronze.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
-						currentQuest.gotBronze = true
-					}
-				}
-				else if (currentQuest.state.ordinal >= Quest.QuestState.SILVER.ordinal && !currentQuest.gotSilver && silver.size > 0)
-				{
-					if (!shownIntro)
-					{
-						shownIntro = true
-
-						spawnIntroCard("Silver Reward", AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_silver", drawActualSize =  true))
-					}
-					else
-					{
-						shownIntro = false
-						grouped = silver.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
-						currentQuest.gotSilver = true
-					}
-				}
-				else if (currentQuest.state.ordinal >= Quest.QuestState.GOLD.ordinal && !currentQuest.gotGold && gold.size > 0)
-				{
-					if (!shownIntro)
-					{
-						shownIntro = true
-
-						spawnIntroCard("Gold Reward", AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_gold", drawActualSize =  true))
-					}
-					else
-					{
-						shownIntro = false
-						grouped = gold.groupBy { it.javaClass }.map { it.value.toGdxArray() }.toGdxArray()
-						currentQuest.gotGold = true
-					}
-				}
-				else
-				{
+				CardWidget.displayLoot(gold, CardWidget.Companion.LootAnimation.COIN_GOLD) {
 					needsAdvance = true
 				}
 			}
-
-			if (grouped.size > 0)
+			else
 			{
-				val chosen = grouped.removeIndex(0)
-				currentGroup = chosen.flatMap { it.reward() }.filter { it != null }.map { it!! }.toGdxArray()
-
-				for (card in currentGroup)
-				{
-					card.canZoom = false
-					card.pickFuns.clear()
-					card.addPick("") {
-						currentGroup.removeValue(card, true)
-						if (currentGroup.size == 0)
-						{
-							Global.deck.newcharacters.clear()
-							Global.deck.newencounters.clear()
-							Global.deck.newequipment.clear()
-							Global.deck.newquests.clear()
-							updateRewards()
-						}
-
-						card.remove()
-					}
-
-					for (pick in card.pickFuns)
-					{
-						val oldFun = pick.pickFun
-						pick.pickFun = {
-							oldFun(it)
-
-						}
-					}
-
-					Statics.stage.addActor(card)
-				}
-
-				if (currentGroup.size > 0)
-				{
-					CardWidget.layoutCards(currentGroup, Direction.CENTER, flip = true)
-				}
-				else
-				{
-					updateRewards()
-				}
+				needsAdvance = true
 			}
 		}
+
+		val doSilverReward = fun() {
+			val silver = currentQuest.silverRewards.filter { it.isValid() }.flatMap{ it.reward() }.toGdxArray()
+			if (currentQuest.state.ordinal >= Quest.QuestState.SILVER.ordinal && !currentQuest.gotSilver && silver.size > 0)
+			{
+				for (card in silver)
+				{
+					card.canZoom = false
+				}
+
+				CardWidget.displayLoot(silver, CardWidget.Companion.LootAnimation.COIN_SILVER) {
+					doGoldReward()
+				}
+			}
+			else
+			{
+				doGoldReward()
+			}
+		}
+
+		val doBronzeReward = fun() {
+			val bronze = currentQuest.bronzeRewards.filter { it.isValid() }.flatMap{ it.reward() }.toGdxArray()
+			if (currentQuest.state.ordinal >= Quest.QuestState.BRONZE.ordinal && !currentQuest.gotBronze && bronze.size > 0)
+			{
+				for (card in bronze)
+				{
+					card.canZoom = false
+				}
+
+				CardWidget.displayLoot(bronze, CardWidget.Companion.LootAnimation.COIN_BRONZE) {
+					doSilverReward()
+				}
+			}
+			else
+			{
+				doSilverReward()
+			}
+		}
+
+		val doQuestUnlocks = fun() {
+
+			val questunlocks = Array<CardWidget>()
+			for (reward in Global.deck.newcharacters)
+			{
+				questunlocks.add(reward.getCard())
+			}
+			Global.deck.newcharacters.clear()
+
+			for (reward in Global.deck.newencounters)
+			{
+				questunlocks.add(reward.current.getCard())
+			}
+			Global.deck.newencounters.clear()
+
+			for (reward in Global.deck.newequipment)
+			{
+				questunlocks.add(reward.getCard(null, false))
+			}
+			Global.deck.newequipment.clear()
+
+			for (reward in Global.deck.newquests)
+			{
+				questunlocks.add(reward.getCard())
+			}
+			Global.deck.newquests.clear()
+
+			if (questunlocks.size > 0)
+			{
+				for (card in questunlocks)
+				{
+					card.canZoom = false
+					card.addPick("") {  }
+				}
+
+				CardWidget.displayLoot(questunlocks, CardWidget.Companion.LootAnimation.CHEST) {
+					doBronzeReward()
+				}
+			}
+			else
+			{
+				doBronzeReward()
+			}
+		}
+
+		doQuestUnlocks()
 	}
 
 	var needsAdvance = false
@@ -626,6 +527,11 @@ class QuestScreen : AbstractScreen()
 		if (needsAdvance && Mote.motes.size == 0)
 		{
 			needsAdvance = false
+
+			Global.deck.newcharacters.clear()
+			Global.deck.newencounters.clear()
+			Global.deck.newequipment.clear()
+			Global.deck.newquests.clear()
 
 			QuestSelectionScreen.instance.setup()
 			QuestSelectionScreen.instance.swapTo()
