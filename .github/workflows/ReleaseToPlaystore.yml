@@ -2,7 +2,7 @@ name: ReleaseToPlaystore
 
 on:
   schedule:
-    - cron: '0 1 * * *'
+    - cron: '*/5 * * * *'
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -44,7 +44,7 @@ jobs:
       working-directory: MatchDungeon
       run: |
         ./gradlew :headless:compileResources
-        ./gradlew :android:bundleRelease
+        ./gradlew :android:build
       if: steps.hasChanges.outputs.status != 'false'
 
     - name: Setup git credentials
