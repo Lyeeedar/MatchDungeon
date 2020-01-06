@@ -13,4 +13,4 @@ jobs:
     
     - run: git tag
     
-    - run: git describe --tags --abbrev=0
+    - run: git for-each-ref refs/tags --sort=-taggerdate --format='%(refname)' --count=1
