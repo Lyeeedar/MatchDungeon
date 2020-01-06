@@ -72,7 +72,7 @@ object AndroidRelease
 	{
 		println("Running in: " + File("").absolutePath)
 
-		val lastTag = "git for-each-ref refs/tags --sort=-taggerdate --format='%(tag)' --count=1".runCommand().replace("'", "")
+		val lastTag = "git describe --abbrev=0".runCommand().replace("'", "")
 		val commitsSinceRelease = ("git log $lastTag..HEAD --oneline").runCommand()
 
 		if (!commitsSinceRelease.isNullOrEmpty()) {
@@ -93,8 +93,12 @@ object AndroidRelease
 			uploadToPlaystore(version, versionCode.toLong())
 
 			// commit changes
-			"git add .".runCommand()
-			"git commit -m\"Bump version number to $version and release\"".runCommand()
+			val added = "git commit -m\"Bump version number to $version and release\" -a".runCommand()
+			if (added.isBlank())
+			{
+				throw RuntimeException("git commit failed to add any changes!")
+			}
+
 			("git tag -a releases/$version -m \"Release $version\"").runCommand()
 
 			println("Release complete")
