@@ -417,7 +417,8 @@ class StatisticWare : ShopWares()
 
 	override fun getCard(): CardWidget
 	{
-		val table: Table
+		val t1: Table
+		val t2: Table
 
 		val modifiedStats = Array<Pair<Statistic, Float>>()
 		for (stat in Statistic.Values)
@@ -430,12 +431,13 @@ class StatisticWare : ShopWares()
 			}
 		}
 
-		if (modifiedStats.size == 0)
+		if (modifiedStats.size == 1)
 		{
 			val stat = modifiedStats[0].first
 			val value = modifiedStats[0].second
 
-			table = CardWidget.createFrontTable(stat.toString().capitalize(), stat.icon, value.toString())
+			t1 = CardWidget.createFrontTable(stat.niceName, stat.icon.copy(), value.toString())
+			t2 = CardWidget.createFrontTable(stat.niceName, stat.icon.copy(), value.toString())
 		}
 		else
 		{
@@ -448,18 +450,23 @@ class StatisticWare : ShopWares()
 
 				iconsTable.add(SpriteWidget(stat.icon.copy(), 64f, 64f)).grow()
 
-				statsTable.add(Label(stat.toString().capitalize() + ":", Statics.skin, "cardtitle"))
+				statsTable.add(Label(stat.niceName + ":", Statics.skin, "cardtitle"))
 				statsTable.add(Label(value.toString(), Statics.skin, "cardtitle"))
 				statsTable.row()
 			}
 
-			table = Table()
-			table.add(iconsTable).grow()
-			table.row()
-			table.add(statsTable)
+			t1 = Table()
+			t1.add(iconsTable).grow()
+			t1.row()
+			t1.add(statsTable)
+
+			t2 = Table()
+			t2.add(iconsTable).grow()
+			t2.row()
+			t2.add(statsTable)
 		}
 
-		return CardWidget(table, table, AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, null)
+		return CardWidget(t1, t2, AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, null)
 	}
 
 	override fun reward()

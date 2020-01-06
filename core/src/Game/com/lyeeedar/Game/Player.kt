@@ -2,10 +2,7 @@ package com.lyeeedar.Game
 
 import com.badlogic.gdx.math.MathUtils.clamp
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.scenes.scene2d.ui.Button
-import com.badlogic.gdx.scenes.scene2d.ui.Label
-import com.badlogic.gdx.scenes.scene2d.ui.Stack
-import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectSet
 import com.esotericsoftware.kryo.Kryo
@@ -124,114 +121,157 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 		val descLabel = Label(baseCharacter.description, Statics.skin, "card")
 		descLabel.setWrap(true)
 
-		table.add(descLabel).growX()
+		table.add(descLabel).growX().pad(10f)
 		table.row()
 
 		table.add(Seperator(Statics.skin, "horizontalcard"))
 		table.row()
 
-		table.add(Label("Statistics", Statics.skin, "cardtitle"))
-		table.row()
+		val statisticsButton = TextButton("Statistics", Statics.skin)
+		statisticsButton.addClickListener {
+			val statisticsTable = Table()
 
-		for (stat in Statistic.Values)
-		{
-			val basestat = (baseCharacter.baseStatistics[stat] ?: 0f) + (statistics[stat] ?: 0f)
-			val truestat = getStat(stat)
+			statisticsTable.add(Label("Statistics", Statics.skin, "cardtitle"))
+			statisticsTable.row()
 
-			if (truestat != 0f || basestat != 0f)
+			for (stat in Statistic.Values)
 			{
-				val diff = truestat - basestat
-				val diffStr: String
-				if (diff > 0)
+				val statVal = getStat(stat)
+				if (statVal != 0f)
 				{
-					diffStr = "[GREEN]+$diff[]"
-				}
-				else if (diff < 0)
-				{
-					diffStr = "[RED]$diff[]"
-				}
-				else
-				{
-					diffStr = ""
-				}
+					val statTable = Table()
+					statTable.add(SpriteWidget(stat.icon.copy(), 16f, 16f))
+					statTable.add(Label("${stat.niceName}:", Statics.skin, "card")).expandX().left()
+					statTable.add(Label("%.1f".format(statVal), Statics.skin, "card"))
 
-				val statTable = Table()
-				statTable.add(SpriteWidget(stat.icon.copy(), 16f, 16f))
-				statTable.add(Label("${stat.niceName}:", Statics.skin, "card")).expandX().left()
-				statTable.add(Label("$truestat ($basestat$diffStr)", Statics.skin, "card"))
-				statTable.addTapToolTip(stat.tooltip)
+					val statSources = Array<Pair<String, Float>>()
+					statSources.add(Pair("Rewards", statistics[stat] ?: 0f))
+					statSources.add(Pair("Equipment", EquipmentSlot.Values.map { equipment[it]?.statistics?.get(stat) ?: 0f }.sum()))
+					statSources.add(Pair("Buffs", buffs.map { it.statistics[stat] ?: 0f }.sum()))
+					statSources.add(Pair("ChaoticNature", choaticNature[stat] ?: 0f))
+					statSources.add(Pair("LevelBuffs", levelbuffs.map { it.statistics[stat] ?: 0f }.sum()))
+					statSources.add(Pair("LevelDebuffs", leveldebuffs.map { it.statistics[stat] ?: 0f }.sum()))
 
-				table.add(statTable).growX()
-				table.row()
+					val base = baseCharacter.baseStatistics[stat] ?: 0f
+					var eqn = "base(${base})"
+					for (source in statSources)
+					{
+						if (source.second != 0f)
+						{
+							eqn += " + ${source.first}(${source.second})"
+						}
+					}
+
+					statTable.addTapToolTip("Total($statVal) = \n${eqn}\n\n${stat.tooltip}")
+
+					statisticsTable.add(statTable).growX().pad(5f)
+					statisticsTable.row()
+				}
 			}
+
+			FullscreenTable.createCard(statisticsTable, statisticsButton.localToStageCoordinates(Vector2()))
 		}
+
+		table.add(statisticsButton).growX().pad(10f)
+		table.row()
 
 		table.add(Seperator(Statics.skin, "horizontalcard"))
 		table.row()
 
 		if (buffs.size > 0)
 		{
-			table.add(Label("Buffs", Statics.skin, "cardtitle"))
-			table.row()
+			val buffsButton = TextButton("Buffs", Statics.skin)
+			buffsButton.addClickListener {
+				val buffsTable = Table()
 
-			val bufftable = Table()
-			table.add(bufftable).growX().height(50f)
-			table.row()
+				buffsTable.add(Label("Buffs", Statics.skin, "cardtitle"))
+				buffsTable.row()
 
-			for (buff in buffs)
-			{
-				val card = buff.getCard()
-				card.setSize(25f, 45f)
-				card.setFacing(true, false)
+				val bufftable = Table()
+				buffsTable.add(bufftable).grow()
+				buffsTable.row()
 
-				bufftable.add(card).pad(0f, 5f, 0f, 5f).size(25f, 45f)
+				var i = 0
+				for (buff in buffs)
+				{
+					val card = buff.getCard()
+					card.setSize(25f, 45f)
+					card.setFacing(true, false)
+
+					bufftable.add(card).pad(0f, 5f, 0f, 5f).size(25f, 45f)
+
+					i++
+					if (i == 6)
+					{
+						i = 0
+						bufftable.row()
+					}
+				}
+
+				FullscreenTable.createCard(buffsTable, buffsButton.localToStageCoordinates(Vector2()))
 			}
+
+			table.add(buffsButton).growX().pad(10f)
+			table.row()
 
 			table.add(Seperator(Statics.skin, "horizontalcard"))
 			table.row()
 		}
 
-		table.add(Label("Equipment", Statics.skin, "cardtitle"))
+		val equipmentButton = TextButton("Equipment", Statics.skin)
+		equipmentButton.addClickListener {
+			val equipmentTable = Table()
+
+			equipmentTable.add(Label("Equipment", Statics.skin, "cardtitle"))
+			equipmentTable.row()
+
+			val emptySlot = AssetManager.loadSprite("Icons/Empty")
+
+			for (slot in EquipmentSlot.Values)
+			{
+				val equipment = equipment[slot]
+
+				if (equipment == null)
+				{
+					val equipTable = Table()
+					equipmentTable.add(equipTable).growX().padBottom(2f)
+					equipmentTable.row()
+
+					equipTable.add(Label("None", Statics.skin,"card"))
+					equipTable.add(SpriteWidget(emptySlot, 32f, 32f)).size(32f).expandX().right()
+				}
+				else
+				{
+					val equipTable = Table()
+					equipmentTable.add(equipTable).growX().padBottom(2f)
+					equipmentTable.row()
+
+					equipTable.add(Label(equipment.name, Statics.skin, "card"))
+
+					val infoButton = Button(Statics.skin, "infocard")
+					infoButton.setSize(24f, 24f)
+					infoButton.addClickListener {
+						val t = equipment.createTable(null, false)
+
+						FullscreenTable.createCard(t, infoButton.localToStageCoordinates(Vector2(12f, 12f)))
+					}
+					equipTable.add(infoButton).size(24f).pad(0f, 12f, 0f, 12f).expandX().right()
+
+					val iconStack = Stack()
+					iconStack.add(SpriteWidget(emptySlot, 32f, 32f))
+					iconStack.add(SpriteWidget(equipment.icon, 32f, 32f))
+					equipTable.add(iconStack).size(32f)
+				}
+			}
+
+			FullscreenTable.createCard(equipmentTable, equipmentButton.localToStageCoordinates(Vector2()))
+		}
+
+		table.add(equipmentButton).growX().pad(10f)
 		table.row()
 
-		val emptySlot = AssetManager.loadSprite("Icons/Empty")
-
-		for (slot in EquipmentSlot.Values)
-		{
-			val equipment = equipment[slot]
-
-			if (equipment == null)
-			{
-				val equipTable = Table()
-				table.add(equipTable).growX().padBottom(2f)
-				table.row()
-
-				equipTable.add(Label("None", Statics.skin,"card"))
-				equipTable.add(SpriteWidget(emptySlot, 32f, 32f)).size(32f).expandX().right()
-			}
-			else
-			{
-				val equipTable = Table()
-				table.add(equipTable).growX().padBottom(2f)
-				table.row()
-
-				equipTable.add(Label(equipment.name, Statics.skin, "card"))
-
-				val infoButton = Button(Statics.skin, "infocard")
-				infoButton.setSize(24f, 24f)
-				infoButton.addClickListener {
-					val t = equipment.createTable(null, false)
-
-					FullscreenTable.createCard(t, infoButton.localToStageCoordinates(Vector2(12f, 12f)))
-				}
-				equipTable.add(infoButton).size(24f).pad(0f, 12f, 0f, 12f).expandX().right()
-
-				val iconStack = Stack()
-				iconStack.add(SpriteWidget(emptySlot, 32f, 32f))
-				iconStack.add(SpriteWidget(equipment.icon, 32f, 32f))
-				equipTable.add(iconStack).size(32f)
-			}
-		}
+		table.add(Seperator(Statics.skin, "horizontalcard"))
+		table.row()
 
 		return table
 	}

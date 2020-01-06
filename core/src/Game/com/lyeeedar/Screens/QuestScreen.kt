@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions.removeActor
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.badlogic.gdx.utils.Array
@@ -89,7 +90,20 @@ class QuestScreen : AbstractScreen()
 		nonCard.pad(10f)
 		nonCard.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/BasePanel")).tint(Color(0.8f, 0.8f, 0.8f, 1f))
 
-		nonCard.add(statsTable).expandX().left().pad(10f)
+		val statsAndAbandon = Table()
+		statsAndAbandon.add(statsTable).expand().left()
+
+		val abandonQuestButton = TextButton("Abandon Quest", Statics.skin)
+		abandonQuestButton.addClickListener {
+			MessageBox(
+				"Abandon Quest",
+				"Are you sure you want to abandon the quest and return to the quest selection screen? You will lose any progress made, but keep any rewards you have earned.",
+				Pair("Continue Quest", {}),
+				Pair("Abandon Quest", { currentQuest.state = Quest.QuestState.FAILURE; completeQuest() }))
+		}
+		statsAndAbandon.add(abandonQuestButton).expand().right().bottom()
+
+		nonCard.add(statsAndAbandon).growX().pad(10f)
 		nonCard.row()
 
 		nonCard.add(Seperator(Statics.skin)).growX().pad(0f, 10f, 0f, 10f)
@@ -106,7 +120,7 @@ class QuestScreen : AbstractScreen()
 
 		mainTable.add(cardsTable).grow()
 
-		if (!Statics.release)
+		if (Statics.debug)
 		{
 			debugConsole.register("LoadCard", "LoadCard cardName", fun(args, console): Boolean
 			{

@@ -108,7 +108,7 @@ class CardScreen : AbstractScreen()
 		nonStatsTable.add(contentTable).grow().pad(15f, 35f, 15f, 35f)
 
 		mainTable.add(nonStatsTable).grow()
-		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(quest.currentTheme.backgroundTile))).tint(Color.DARK_GRAY)
+		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(quest.currentTheme.backgroundTile))).tint(Color(0.5f, 0.5f, 0.5f, 1f))
 
 		updateEquipment()
 		advanceContent(true)

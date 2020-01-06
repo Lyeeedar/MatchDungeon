@@ -3,6 +3,7 @@ package com.lyeeedar.Game
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Board.Mote
@@ -84,10 +85,10 @@ class StatisticsReward : AbstractReward()
 			val statVal = statsTable[stat]
 			if (statVal != 0f)
 			{
-				val table = CardWidget.createFrontTable(stat.toString().capitalize(), stat.icon.copy(), statVal.toString())
+				val table = CardWidget.createFrontTable(stat.niceName, stat.icon.copy(), statVal.toString())
 				Global.player.statistics[stat] = (Global.player.statistics[stat] ?: 0f) + statVal
 
-				val card = CardWidget(table, table, AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, null)
+				val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, null)
 				card.canZoom = false
 				card.addPick("Take") {
 
@@ -300,7 +301,7 @@ class MoneyReward : AbstractReward()
 		table.add(amountLbl).expandX().center().padTop(10f)
 		table.row()
 
-		val card = CardWidget(table, table, AssetManager.loadTextureRegion("GUI/MoneyCardback")!!, null)
+		val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("GUI/MoneyCardback")!!, null)
 		card.addPick("Take") {
 
 			Global.player.gold += amount + bonus
@@ -554,7 +555,7 @@ class ItemReward : AbstractReward()
 
 			val table = CardWidget.createFrontTable(name, icon.copy())
 
-			val cardWidget = CardWidget(table, table, AssetManager.loadTextureRegion("GUI/ItemCardback")!!, null)
+			val cardWidget = CardWidget(table, Table(), AssetManager.loadTextureRegion("GUI/ItemCardback")!!, null)
 			cardWidget.canZoom = false
 			cardWidget.addPick("") {
 				val sprite = icon.copy()

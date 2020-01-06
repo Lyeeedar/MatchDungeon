@@ -19,6 +19,31 @@ class QuestProgressWidget() : Widget()
 
 	val questPath = Array<QuestNode>()
 
+	init
+	{
+		addClickListenerFull { inputEvent, clickx, clicky ->
+			val sectionSize = width / questPath.size
+			val boxSize = min(sectionSize - 8, height - 4)
+
+			for (i in 0 until questPath.size)
+			{
+				val sx = sectionSize*i + (sectionSize - boxSize) / 2f
+				val sy = height / 2f - boxSize / 2f
+
+				if (clickx >= sx && clickx <= sx+boxSize)
+				{
+					when
+					{
+						questPath[i] == quest.current -> "The current encounter in the quest".showTooltip(inputEvent, clickx, clicky)
+						questPath[i].isShop -> "An encounter containing a shop".showTooltip(inputEvent, clickx, clicky)
+						questPath[i].type == QuestNode.QuestNodeType.FIXED -> "A quest encounter".showTooltip(inputEvent, clickx, clicky)
+						else -> "A random encounter".showTooltip(inputEvent, clickx, clicky)
+					}
+				}
+			}
+		}
+	}
+
 	override fun draw(batch: Batch?, parentAlpha: Float)
 	{
 		if (!questPath.contains(quest.current) && quest.current != null)
