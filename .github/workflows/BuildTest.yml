@@ -7,10 +7,10 @@ jobs:
     steps:
     - uses: actions/checkout@master
       with:
-        path: MatchDungeon
+        path: Game
     
     - name: Checkout submodules
-      working-directory: MatchDungeon
+      working-directory: Game
       run: |
         git submodule sync --recursive
         git submodule update --init --force --recursive --rebase -j 8
@@ -23,17 +23,17 @@ jobs:
         path: PrivateStuff
   
     - name: Make gradlew executable
-      working-directory: MatchDungeon
+      working-directory: Game
       run: chmod +x ./gradlew
       
     - name: Build Desktop
-      working-directory: MatchDungeon
+      working-directory: Game
       run: ./gradlew :desktop:build
       
     - name: Build Android
-      working-directory: MatchDungeon
+      working-directory: Game
       run: ./gradlew :android:assembleDebug
     
     - name: Build Resources
-      working-directory: MatchDungeon
+      working-directory: Game
       run: ./gradlew :headless:compileResources

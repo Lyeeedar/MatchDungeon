@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
       with:
-        path: MatchDungeon
+        path: Game
 
     - name: Checkout private
       uses: actions/checkout@master
@@ -19,20 +19,20 @@ jobs:
         path: PrivateStuff
 
     - name: Update submodules
-      working-directory: MatchDungeon
+      working-directory: Game
       run: |
         git submodule sync --recursive
         git submodule update --init --force --recursive --remote --rebase -j 8
         git submodule update --force --recursive --remote --rebase
 
     - name: Setup git credentials
-      working-directory: MatchDungeon
+      working-directory: Game
       run: |
         git config --local user.email "actions@github.com"
         git config --local user.name "UpgradeEngineAction"
 
     - name: Commit changes
-      working-directory: MatchDungeon
+      working-directory: Game
       run: |
         git commit -m "Upgrade engine" -a
         echo "::set-output name=status::Success"
@@ -40,7 +40,7 @@ jobs:
       continue-on-error: true
 
     - name: Test it all builds
-      working-directory: MatchDungeon
+      working-directory: Game
       run: |
         chmod +x ./gradlew
         ./gradlew :desktop:build
@@ -52,5 +52,5 @@ jobs:
       uses: ad-m/github-push-action@master
       if: steps.commit.outputs.status == 'Success'
       with:
-        directory: MatchDungeon
+        directory: Game
         github_token: ${{ secrets.GITHUB_TOKEN }}
