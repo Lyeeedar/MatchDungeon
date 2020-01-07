@@ -1,8 +1,10 @@
 package com.lyeeedar.Game
 
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.MathUtils.clamp
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.*
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectSet
 import com.esotericsoftware.kryo.Kryo
@@ -134,15 +136,22 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 			statisticsTable.add(Label("Statistics", Statics.skin, "cardtitle"))
 			statisticsTable.row()
 
+			var bright = true
 			for (stat in Statistic.Values)
 			{
 				val statVal = getStat(stat)
 				if (statVal != 0f)
 				{
 					val statTable = Table()
-					statTable.add(SpriteWidget(stat.icon.copy(), 16f, 16f))
-					statTable.add(Label("${stat.niceName}:", Statics.skin, "card")).expandX().left()
-					statTable.add(Label("%.1f".format(statVal), Statics.skin, "card"))
+					if (bright)
+					{
+						statTable.background = TextureRegionDrawable(AssetManager.loadTextureRegion("white")).tint(Color(1f, 1f, 1f, 0.1f))
+					}
+					bright = !bright
+
+					statTable.add(SpriteWidget(stat.icon.copy(), 16f, 16f)).pad(5f)
+					statTable.add(Label("${stat.niceName}:", Statics.skin, "card")).expandX().left().pad(5f)
+					statTable.add(Label("%.1f".format(statVal), Statics.skin, "card")).pad(5f)
 
 					val statSources = Array<Pair<String, Float>>()
 					statSources.add(Pair("Rewards", statistics[stat] ?: 0f))
@@ -164,7 +173,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 
 					statTable.addTapToolTip("Total($statVal) = \n${eqn}\n\n${stat.tooltip}")
 
-					statisticsTable.add(statTable).growX().pad(5f)
+					statisticsTable.add(statTable).growX()
 					statisticsTable.row()
 				}
 			}

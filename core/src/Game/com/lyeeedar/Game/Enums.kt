@@ -3,6 +3,7 @@ package com.lyeeedar
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.SpriteWidget
@@ -105,6 +106,7 @@ enum class Statistic private constructor(val niceName: String, val min: Float, v
 		{
 			val table = Table()
 
+			var bright = true
 			for (stat in Values)
 			{
 				val statVal = stats[stat] ?: 0f
@@ -113,46 +115,53 @@ enum class Statistic private constructor(val niceName: String, val min: Float, v
 				if (statVal != 0f || otherStatVal != 0f)
 				{
 					val statTable = Table()
-					statTable.add(SpriteWidget(stat.icon.copy(), 16f, 16f))
-					statTable.add(Label("${stat.niceName}: ", Statics.skin, "card")).expandX().left()
+
+					if (bright)
+					{
+						statTable.background = TextureRegionDrawable(AssetManager.loadTextureRegion("white")).tint(Color(1f, 1f, 1f, 0.1f))
+					}
+					bright = !bright
+
+					statTable.add(SpriteWidget(stat.icon.copy(), 16f, 16f)).pad(5f)
+					statTable.add(Label("${stat.niceName}: ", Statics.skin, "card")).expandX().left().pad(5f)
 					statTable.addTapToolTip(stat.tooltip)
 
 					when (type)
 					{
 						DisplayType.FLAT -> {
-							statTable.add(Label(statVal.toString(), Statics.skin, "card"))
+							statTable.add(Label(statVal.toString(), Statics.skin, "card")).pad(5f)
 						}
 						DisplayType.MODIFIER -> {
 							if (statVal > 0)
 							{
 								val diff = statVal
 								val diffLabel = Label("+$diff", Statics.skin, "cardwhite")
-								diffLabel.color = Color.GREEN
-								statTable.add(diffLabel)
+								diffLabel.color = Color(0f, 0.5f, 0f, 1f)
+								statTable.add(diffLabel).pad(5f)
 							}
 							else if (statVal < 0)
 							{
 								val diff = statVal
 								val diffLabel = Label(diff.toString(), Statics.skin, "cardwhite")
-								diffLabel.color = Color.RED
-								statTable.add(diffLabel)
+								diffLabel.color = Color(0.5f, 0f, 0f, 1f)
+								statTable.add(diffLabel).pad(5f)
 							}
 						}
 						DisplayType.COMPARISON -> {
-							statTable.add(Label(statVal.toString(), Statics.skin, "card"))
+							statTable.add(Label(statVal.toString(), Statics.skin, "card")).pad(5f)
 							if (otherStatVal < statVal)
 							{
 								val diff = statVal - otherStatVal
 								val diffLabel = Label("+$diff", Statics.skin, "cardwhite")
-								diffLabel.color = Color.GREEN
-								statTable.add(diffLabel)
+								diffLabel.color = Color(0f, 0.5f, 0f, 1f)
+								statTable.add(diffLabel).pad(5f)
 							}
 							else if (statVal < otherStatVal)
 							{
 								val diff = otherStatVal - statVal
 								val diffLabel = Label("-$diff", Statics.skin, "cardwhite")
-								diffLabel.color = Color.RED
-								statTable.add(diffLabel)
+								diffLabel.color = Color(0.5f, 0f, 0f, 1f)
+								statTable.add(diffLabel).pad(5f)
 							}
 						}
 					}

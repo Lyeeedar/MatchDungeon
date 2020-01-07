@@ -47,7 +47,7 @@ class Equipment(val path: String)
 		table.row()
 		val descLabel = Label(description, Statics.skin, "card")
 		descLabel.setWrap(true)
-		table.add(descLabel).grow()
+		table.add(descLabel)
 		table.row()
 
 		if (statistics.any { it != 0f } || (other != null && other.statistics.any{ it != 0f }))
@@ -86,7 +86,7 @@ class Equipment(val path: String)
 			if (other?.ability != null)
 			{
 				val otherAbLabel = Label("-" + other.ability!!.name, Statics.skin, "cardwhite")
-				otherAbLabel.color = Color.RED
+				otherAbLabel.color = Color(0.5f, 0f, 0f, 1f)
 
 				val abilityTable = Table()
 				abilityTable.add(otherAbLabel)
@@ -125,6 +125,9 @@ class Equipment(val path: String)
 				table.row()
 			}
 		}
+
+		table.add(Table()).grow()
+		table.row()
 
 		return table
 	}
