@@ -1,7 +1,7 @@
-<CardContent meta:X="-810" meta:Y="-525" GUID="5584a3aa-378a-40cc-aade-1884c7b632a8" xmlns:meta="Editor">
+<CardContent meta:X="-450" meta:Y="90" GUID="5584a3aa-378a-40cc-aade-1884c7b632a8" xmlns:meta="Editor">
 	<Root meta:RefKey="Node">cfa6b3c4-5eea-4a61-8249-290a965ffe04</Root>
 	<Nodes>
-		<Node meta:X="-30" meta:Y="-840" GUID="958ebc38-0723-4687-ac5f-d9fd72d0983e">
+		<Node meta:X="315" meta:Y="-210" GUID="958ebc38-0723-4687-ac5f-d9fd72d0983e">
 			<Line>
 				<MultilineString>You wander through the market, the crowds jolting you this way and that.</MultilineString>
 			</Line>
@@ -17,7 +17,7 @@
 				<Storage>Global</Storage>
 			</Define>
 		</Node>
-		<Node meta:X="-315" meta:Y="-750" GUID="caa56be0-cc3d-4eac-8c2d-ba94c17543cc">
+		<Node meta:X="30" meta:Y="-120" GUID="caa56be0-cc3d-4eac-8c2d-ba94c17543cc">
 			<Branch>
 				<Branch>
 					<Condition>StreetVendorVisited==0</Condition>
@@ -66,8 +66,14 @@
 					<Equipment />
 				</Items>
 			</Shop>
+			<Line>
+				<MultilineString>"Come back another time, I may have something new for sale."</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
 		</Node>
-		<Node meta:X="-30" meta:Y="-600" GUID="d8771763-298c-4109-b306-f3fdc6fc26cc">
+		<Node meta:X="315" meta:Y="15" GUID="d8771763-298c-4109-b306-f3fdc6fc26cc">
 			<Line>
 				<MultilineString>You wander over to the street vendors stall, glancing over the wide variety of equipment arrayed before you.</MultilineString>
 			</Line>
@@ -75,7 +81,7 @@
 				<MultilineString>The vendor sat behind the table smiles at you and gestures around him.</MultilineString>
 			</Line>
 		</Node>
-		<Node meta:X="-345" meta:Y="-465" GUID="842c50bc-b0d0-4109-bdf6-9316fbb8d95e">
+		<Node meta:X="0" meta:Y="150" GUID="842c50bc-b0d0-4109-bdf6-9316fbb8d95e">
 			<Node meta:RefKey="Node">d8771763-298c-4109-b306-f3fdc6fc26cc</Node>
 			<Line>
 				<MultilineString>"Welcome back friend! As you are one of my best customers, I have some more special items for you. Take a look."</MultilineString>
@@ -139,8 +145,14 @@
 					<Equipment />
 				</Items>
 			</Shop>
+			<Line>
+				<MultilineString>"Come back another time, I may have something new for sale."</MultilineString>
+			</Line>
+			<MarkComplete>
+				<State>Success</State>
+			</MarkComplete>
 		</Node>
-		<Node meta:X="-660" meta:Y="-540" GUID="cfa6b3c4-5eea-4a61-8249-290a965ffe04">
+		<Node meta:X="-300" meta:Y="75" GUID="cfa6b3c4-5eea-4a61-8249-290a965ffe04">
 			<Branch>
 				<Branch>
 					<Condition>StreetVendorBoughtGood&gt;=3</Condition>
