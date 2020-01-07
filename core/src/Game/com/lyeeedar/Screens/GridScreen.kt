@@ -1,10 +1,5 @@
 package com.lyeeedar.Screens
 
-import com.lyeeedar.Renderables.Sprite.Sprite
-import com.lyeeedar.UI.*
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Statics
-import com.lyeeedar.Util.random
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.scenes.scene2d.Touchable
@@ -17,7 +12,12 @@ import com.lyeeedar.Board.CompletionCondition.CompletionConditionTurns
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Game.Player
+import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
+import com.lyeeedar.UI.*
+import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Statics
+import com.lyeeedar.Util.random
 
 /**
  * Created by Philip on 20-Mar-16.
@@ -41,6 +41,8 @@ class GridScreen(): AbstractScreen()
 	val buffTable = Table()
 	val debuffTable = Table()
 
+	var timeMultiplier = 1f
+
 	// ----------------------------------------------------------------------
 	init
 	{
@@ -52,17 +54,17 @@ class GridScreen(): AbstractScreen()
 	{
 		if (!Statics.release)
 		{
-			debugConsole.register("complete", "", { args, console ->
+			debugConsole.register("complete", "") { args, console ->
 				level.victoryAction.invoke()
 
 				true
-			})
+			}
 
-			debugConsole.register("fail", "", { args, console ->
+			debugConsole.register("fail", "") { args, console ->
 				level.defeatAction.invoke()
 
 				true
-			})
+			}
 
 			debugConsole.register("setturns", "", fun(args, console): Boolean
 			{
@@ -96,11 +98,11 @@ class GridScreen(): AbstractScreen()
 				return true
 			})
 
-			debugConsole.register("maxpower", "", { args, console ->
+			debugConsole.register("maxpower", "") { args, console ->
 				PowerBar.instance.power = PowerBar.instance.maxPower
 
 				true
-			})
+			}
 
 			debugConsole.register("spawn", "", fun(args, console): Boolean {
 				if (args[0] == "match5")
@@ -134,6 +136,12 @@ class GridScreen(): AbstractScreen()
 				{
 					return false
 				}
+
+				return true
+			})
+
+			debugConsole.register("timemultiplier", "", fun(args, console): Boolean {
+				timeMultiplier = args[0].toFloat()
 
 				return true
 			})

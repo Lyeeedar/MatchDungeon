@@ -1,11 +1,14 @@
-<Effect>
-	<MoveSpeed>0</MoveSpeed>
+<Effect xmlns:meta="Editor">
+	<Loop>false</Loop>
 	<Emitters>
 		<Emitter>
 			<Name>Core</Name>
 			<Shape>Circle</Shape>
 			<Width>0.1</Width>
 			<Height>0.1</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<Area>Border</Area>
 			<ParticleSpeed>0.5,0.7</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
@@ -16,19 +19,19 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.3,0.6</Lifetime>
-					<BlendMode>Multiplicative</BlendMode>
 					<Drag>1</Drag>
 					<VelocityAligned>true</VelocityAligned>
-					<TextureKeyframes>
-						<Stream>
-							<Keyframe>0|Particle/droplet</Keyframe>
-						</Stream>
-					</TextureKeyframes>
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|0.1|0.3</Keyframe>
 						</Stream>
 					</SizeKeyframes>
+					<BlendMode>Multiplicative</BlendMode>
+					<TextureKeyframes>
+						<Stream>
+							<Keyframe>0|Particle/droplet</Keyframe>
+						</Stream>
+					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|255,255,255,255</Keyframe>
@@ -41,6 +44,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>
@@ -49,6 +57,9 @@
 			<IsCollisionEmitter>true</IsCollisionEmitter>
 			<Width>0</Width>
 			<Height>0</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>0,0</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
@@ -58,12 +69,6 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.05,0.1</Lifetime>
-					<BlendMode>Additive</BlendMode>
-					<TextureKeyframes>
-						<Stream>
-							<Keyframe>0|Particle/star</Keyframe>
-						</Stream>
-					</TextureKeyframes>
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|0|0</Keyframe>
@@ -71,6 +76,12 @@
 							<Keyframe>1|0.8|1.2</Keyframe>
 						</Stream>
 					</SizeKeyframes>
+					<BlendMode>Additive</BlendMode>
+					<TextureKeyframes>
+						<Stream>
+							<Keyframe>0|Particle/star</Keyframe>
+						</Stream>
+					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|247,239,150,255</Keyframe>
@@ -83,8 +94,30 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>
 	</Emitters>
+	<Light>
+		<Colour>
+			<Keyframe>0|255,255,255,255</Keyframe>
+			<Keyframe>0.462242|150,150,105,255</Keyframe>
+			<Keyframe>0.6894569|38,21,16,255</Keyframe>
+		</Colour>
+		<Brightness>
+			<Keyframe>0|0</Keyframe>
+			<Keyframe>0.3471726|0.6</Keyframe>
+			<Keyframe>0.5510758|0.2</Keyframe>
+			<Keyframe>0.6894569|0</Keyframe>
+		</Brightness>
+		<Range>
+			<Keyframe>0|4</Keyframe>
+			<Keyframe>0.6894569|1</Keyframe>
+		</Range>
+	</Light>
 </Effect>

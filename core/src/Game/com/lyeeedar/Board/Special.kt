@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Renderables.Animation.*
 import com.lyeeedar.Renderables.HSLColour
+import com.lyeeedar.Renderables.Light
 import com.lyeeedar.Statistic
 import com.lyeeedar.Util.*
 import java.util.*
@@ -14,6 +15,7 @@ import java.util.*
  */
 
 val beamMoveSpeed = 0.1f
+val lightTemplate = Light(Colour.WHITE, brightness = 0.3f, range = 2f)
 
 abstract class Special(orbDesc: OrbDesc, theme: Theme) : Matchable(theme)
 {
@@ -229,6 +231,8 @@ class HoriVert4(orbDesc: OrbDesc, theme: Theme) : HorizontalBeamSpecial(orbDesc,
 		sprite = AssetManager.loadSprite("Oryx/Custom/items/orb_hori_vert", drawActualSize = true)
 		sprite.colour = orbDesc.sprite.colour
 		sprite.colourAnimation = BlinkAnimation.obtain().set(sprite.colour, 0.1f, 2.5f, false)
+		sprite.light = lightTemplate.copy()
+		sprite.tintLight = true
 	}
 
 	override fun apply(point: Point, grid: Grid)
@@ -255,6 +259,8 @@ class Horizontal4(orbDesc: OrbDesc, theme: Theme) : HorizontalBeamSpecial(orbDes
 		sprite = AssetManager.loadSprite("Oryx/Custom/items/orb_vert", drawActualSize = true)
 		sprite.colour = orbDesc.sprite.colour
 		sprite.colourAnimation = BlinkAnimation.obtain().set(sprite.colour, 0.1f, 2.5f, false)
+		sprite.light = lightTemplate.copy()
+		sprite.tintLight = true
 	}
 
 	override fun apply(point: Point, grid: Grid)
@@ -291,6 +297,8 @@ class Vertical4(orbDesc: OrbDesc, theme: Theme) : VerticalBeamSpecial(orbDesc, t
 		sprite = AssetManager.loadSprite("Oryx/Custom/items/orb_hori", drawActualSize = true)
 		sprite.colour = orbDesc.sprite.colour
 		sprite.colourAnimation = BlinkAnimation.obtain().set(sprite.colour, 0.1f, 2.5f, false)
+		sprite.light = lightTemplate.copy()
+		sprite.tintLight = true
 	}
 
 	override fun apply(point: Point, grid: Grid)
@@ -329,6 +337,8 @@ class DoubleDualMatch(orbDesc: OrbDesc, theme: Theme) : BombSpecial(orbDesc, the
 		sprite = AssetManager.loadSprite("Oryx/Custom/items/orb_dual_dual", drawActualSize = true)
 		sprite.colour = orbDesc.sprite.colour
 		sprite.colourAnimation = BlinkAnimation.obtain().set(sprite.colour, 0.1f, 2.5f, false)
+		sprite.light = lightTemplate.copy()
+		sprite.tintLight = true
 	}
 
 	override fun apply(point: Point, grid: Grid)
@@ -386,6 +396,8 @@ class DualHori(orbDesc: OrbDesc, theme: Theme) : HorizontalBeamSpecial(orbDesc, 
 		sprite = AssetManager.loadSprite("Oryx/Custom/items/orb_dual_vert", drawActualSize = true)
 		sprite.colour = orbDesc.sprite.colour
 		sprite.colourAnimation = BlinkAnimation.obtain().set(sprite.colour, 0.1f, 2.5f, false)
+		sprite.light = lightTemplate.copy()
+		sprite.tintLight = true
 	}
 
 	override fun apply(point: Point, grid: Grid)
@@ -413,6 +425,8 @@ class DualVert(orbDesc: OrbDesc, theme: Theme) : VerticalBeamSpecial(orbDesc, th
 		sprite = AssetManager.loadSprite("Oryx/Custom/items/orb_dual_hori", drawActualSize = true)
 		sprite.colour = orbDesc.sprite.colour
 		sprite.colourAnimation = BlinkAnimation.obtain().set(sprite.colour, 0.1f, 2.5f, false)
+		sprite.light = lightTemplate.copy()
+		sprite.tintLight = true
 	}
 
 	override fun apply(point: Point, grid: Grid)
@@ -440,6 +454,8 @@ class DualMatch(orbDesc: OrbDesc, theme: Theme) : BombSpecial(orbDesc, theme)
 		sprite = AssetManager.loadSprite("Oryx/Custom/items/orb_dual", drawActualSize = true)
 		sprite.colour = orbDesc.sprite.colour
 		sprite.colourAnimation = BlinkAnimation.obtain().set(sprite.colour, 0.1f, 2.5f, false)
+		sprite.light = lightTemplate.copy()
+		sprite.tintLight = true
 	}
 
 	override fun apply(point: Point, grid: Grid)
@@ -525,6 +541,8 @@ class Match5(orbDesc: OrbDesc, theme: Theme) : GemSpecial(orbDesc, theme)
 	{
 		sprite = AssetManager.loadSprite("Oryx/Custom/items/gem", drawActualSize = true)
 		sprite.colourAnimation = ChromaticAnimation.obtain().set(15f)
+		sprite.light = lightTemplate.copy()
+		sprite.tintLight = true
 	}
 
 	override fun merge(other: Swappable): Special?
@@ -624,6 +642,9 @@ class Match5Spread(orbDesc: OrbDesc, theme: Theme, val special: Special) : GemSp
 		targetDesc = special.desc
 		sprite.colourAnimation = null
 		sprite.colour = targetDesc!!.sprite.colour
+
+		sprite.light = lightTemplate.copy()
+		sprite.tintLight = true
 	}
 
 	override fun merge(other: Swappable): Special?
@@ -726,6 +747,8 @@ class Match5Dual(orbDesc: OrbDesc, theme: Theme) : GemSpecial(orbDesc, theme)
 	{
 		sprite = AssetManager.loadSprite("Oryx/Custom/items/gem_gem", drawActualSize = true)
 		sprite.colourAnimation = ChromaticAnimation.obtain().set(15f)
+		sprite.light = lightTemplate.copy()
+		sprite.tintLight = true
 	}
 
 	override fun merge(other: Swappable): Special?

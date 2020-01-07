@@ -51,6 +51,34 @@
 				</TilingSprite>
 				<Chance>0.05</Chance>
 			</TilingSprite>
+			<TilingSprite>
+				<TilingSprite meta:RefKey="TilingSprite">
+					<Name>Wall</Name>
+					<Mode>Premade</Mode>
+					<Front meta:RefKey="Sprite">
+						<Name>Oryx/Custom/terrain/wall_dungeon_16_torch</Name>
+					</Front>
+					<Top meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_dungeon_7</Name>
+					</Top>
+					<Overhang meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_dungeon_1</Name>
+					</Overhang>
+					<Light meta:RefKey="Light">
+						<Colour>246,247,139,255</Colour>
+						<Brightness>0.2</Brightness>
+						<Range>5</Range>
+						<Animation meta:RefKey="PulseLightAnimation">
+							<Period>0.3,0.7</Period>
+							<MinBrightness>0.6,0.8</MinBrightness>
+							<MaxBrightness>1.1,1.4</MaxBrightness>
+							<MinRange>1,1</MinRange>
+							<MaxRange>1,1</MaxRange>
+						</Animation>
+					</Light>
+				</TilingSprite>
+				<Chance>0.05</Chance>
+			</TilingSprite>
 		</TilingSpriteVariants>
 	</Wall>
 	<Pit meta:RefKey="SpriteWrapper">

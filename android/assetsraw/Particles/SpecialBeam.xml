@@ -1,4 +1,5 @@
 <Effect xmlns:meta="Editor">
+	<Loop>true</Loop>
 	<Emitters>
 		<Emitter>
 			<Name>HeadGlow</Name>
@@ -7,6 +8,9 @@
 			<Shape>Circle</Shape>
 			<Width>0.2</Width>
 			<Height>0.2</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<Direction>Random</Direction>
 			<ParticleSpeed>0,0</ParticleSpeed>
 			<ParticleRotation>0,1</ParticleRotation>
@@ -16,17 +20,17 @@
 			<Particles>
 				<Particle>
 					<Lifetime>1,1</Lifetime>
+					<SizeKeyframes>
+						<Stream>
+							<Keyframe>0|0.5|1</Keyframe>
+						</Stream>
+					</SizeKeyframes>
 					<BlendMode>Additive</BlendMode>
 					<TextureKeyframes>
 						<Stream>
 							<Keyframe>0|Particle/glow</Keyframe>
 						</Stream>
 					</TextureKeyframes>
-					<SizeKeyframes>
-						<Stream>
-							<Keyframe>0|0.5|1</Keyframe>
-						</Stream>
-					</SizeKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|255,255,255,255</Keyframe>
@@ -37,6 +41,11 @@
 							<Keyframe>0|0.2</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>
@@ -46,8 +55,12 @@
 			<KillParticlesOnStop>true</KillParticlesOnStop>
 			<Space>Local</Space>
 			<Shape>Cone</Shape>
-			<Width>25</Width>
+			<Angle>25</Angle>
+			<Width>0.2</Width>
 			<Height>0.2</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<Area>Border</Area>
 			<Direction>Up</Direction>
 			<ParticleSpeed>0,0</ParticleSpeed>
@@ -58,18 +71,18 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.5,0.5</Lifetime>
-					<BlendMode>Multiplicative</BlendMode>
 					<VelocityAligned>true</VelocityAligned>
-					<TextureKeyframes>
-						<Stream>
-							<Keyframe>0|Particle/droplet</Keyframe>
-						</Stream>
-					</TextureKeyframes>
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|1|1</Keyframe>
 						</Stream>
 					</SizeKeyframes>
+					<BlendMode>Multiplicative</BlendMode>
+					<TextureKeyframes>
+						<Stream>
+							<Keyframe>0|Particle/droplet</Keyframe>
+						</Stream>
+					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|255,255,255,255</Keyframe>
@@ -80,6 +93,11 @@
 							<Keyframe>0|1</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>

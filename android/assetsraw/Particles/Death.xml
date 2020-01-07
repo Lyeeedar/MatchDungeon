@@ -6,6 +6,9 @@
 			<IsBlockingEmitter>false</IsBlockingEmitter>
 			<Width>0.6</Width>
 			<Height>0.8</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>5,6</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
@@ -15,8 +18,14 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.5,0.7</Lifetime>
-					<BlendMode>Additive</BlendMode>
 					<Brownian>20</Brownian>
+					<SizeKeyframes>
+						<Stream>
+							<Keyframe>0|0|0</Keyframe>
+							<Keyframe>1|0.2|0.3</Keyframe>
+						</Stream>
+					</SizeKeyframes>
+					<BlendMode>Additive</BlendMode>
 					<TextureKeyframes>
 						<Stream>
 							<Keyframe>0|Particle/star</Keyframe>
@@ -25,12 +34,6 @@
 							<Keyframe>0|Particle/spark</Keyframe>
 						</Stream>
 					</TextureKeyframes>
-					<SizeKeyframes>
-						<Stream>
-							<Keyframe>0|0|0</Keyframe>
-							<Keyframe>1|0.2|0.3</Keyframe>
-						</Stream>
-					</SizeKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|255,255,255,255</Keyframe>
@@ -44,6 +47,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>
@@ -51,6 +59,9 @@
 			<Name>shockwave</Name>
 			<Width>0</Width>
 			<Height>0</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>0,0</ParticleSpeed>
 			<ParticleRotation>0,0</ParticleRotation>
 			<RateKeyframes>
@@ -60,18 +71,18 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.2,0.2</Lifetime>
-					<BlendMode>Additive</BlendMode>
-					<TextureKeyframes>
-						<Stream>
-							<Keyframe>0|Particle/shockwave</Keyframe>
-						</Stream>
-					</TextureKeyframes>
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|0|0</Keyframe>
 							<Keyframe>1|2.5|2.5</Keyframe>
 						</Stream>
 					</SizeKeyframes>
+					<BlendMode>Additive</BlendMode>
+					<TextureKeyframes>
+						<Stream>
+							<Keyframe>0|Particle/shockwave</Keyframe>
+						</Stream>
+					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|255,255,255,255</Keyframe>
@@ -84,8 +95,30 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>
 	</Emitters>
+	<Light>
+		<Colour>
+			<Keyframe>0|255,163,163,255</Keyframe>
+			<Keyframe>0.08572235|227,17,17,255</Keyframe>
+			<Keyframe>0.3398011|107,25,6,255</Keyframe>
+		</Colour>
+		<Brightness>
+			<Keyframe>0|0</Keyframe>
+			<Keyframe>0.02913286|0.5</Keyframe>
+			<Keyframe>0.3074491|0.2</Keyframe>
+			<Keyframe>0.6894569|0</Keyframe>
+		</Brightness>
+		<Range>
+			<Keyframe>0|2</Keyframe>
+			<Keyframe>0.6894569|1</Keyframe>
+		</Range>
+	</Light>
 </Effect>
