@@ -38,6 +38,8 @@ class CardScreen : AbstractScreen()
 	lateinit var currentContent: CardContent
 
 	lateinit var text: ScrollingTextLabel
+	val contentTable = Table()
+	val textAndButtonsTable = Table()
 	val buttonTable = Table()
 	val statsTable = Table()
 	val headSlot = Table()
@@ -91,24 +93,18 @@ class CardScreen : AbstractScreen()
 		mainTable.add(statsContainerTable).growX()
 		mainTable.row()
 
-		val contentTable = Table()
-		contentTable.touchable = Touchable.enabled
-		contentTable.addClickListener {
-			advanceContent()
-		}
-
-		contentTable.add(text).grow().pad(5f).growX()
-		contentTable.row()
-		contentTable.add(buttonTable).pad(5f).growX()
-
-		contentTable.background = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("Sprites/GUI/background.png"), 24, 24, 24, 24))
-
 		val nonStatsTable = Table()
 		nonStatsTable.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/shadowborder"))
-		nonStatsTable.add(contentTable).grow().pad(15f, 35f, 15f, 35f)
+		nonStatsTable.add(contentTable).grow()
 
 		mainTable.add(nonStatsTable).grow()
 		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(quest.currentTheme.backgroundTile))).tint(Color(0.5f, 0.5f, 0.5f, 1f))
+
+		textAndButtonsTable.clear()
+		textAndButtonsTable.background = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("Sprites/GUI/background.png"), 24, 24, 24, 24))
+		textAndButtonsTable.add(text).grow().pad(5f).growX()
+		textAndButtonsTable.row()
+		textAndButtonsTable.add(buttonTable).pad(5f).growX()
 
 		updateEquipment()
 		advanceContent(true)
@@ -247,6 +243,13 @@ class CardScreen : AbstractScreen()
 			readyToSwitch = true
 			return
 		}
+
+		contentTable.clear()
+		contentTable.touchable = Touchable.enabled
+		contentTable.addClickListener {
+			advanceContent()
+		}
+		contentTable.add(textAndButtonsTable).grow().pad(15f, 35f, 15f, 35f)
 
 		val completed = currentContent.advance(this, canStart)
 		if (completed)

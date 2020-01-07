@@ -9,6 +9,10 @@
 				<MultilineString>"Find something that interests you friend? I've got great prices for those who don't ask too many questions about where the items came from."</MultilineString>
 			</Line>
 			<Shop>
+				<Shopkeep meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_heroes/thief</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Shopkeep>
 				<CostMultiplier>0.6</CostMultiplier>
 				<Items>
 					<Equipment />

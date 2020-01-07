@@ -9,6 +9,10 @@
 				<MultilineString>"See anything you like?"</MultilineString>
 			</Line>
 			<Shop>
+				<Shopkeep meta:RefKey="Sprite">
+					<Name>Oryx/Custom/heroes/alchemist</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Shopkeep>
 				<Items>
 					<Buff>
 						<Cost>150</Cost>

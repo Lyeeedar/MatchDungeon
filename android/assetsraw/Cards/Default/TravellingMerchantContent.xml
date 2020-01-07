@@ -9,6 +9,10 @@
 				<MultilineString>"Welcome adventurer to the stall of Ab-kulash, merchant extraordinaire! Take a look at my wares, I'm sure something will strike your fancy." </MultilineString>
 			</Line>
 			<Shop>
+				<Shopkeep meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_heroes/merchant_b</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Shopkeep>
 				<Items>
 					<Equipment />
 					<Equipment />

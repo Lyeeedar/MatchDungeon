@@ -57,6 +57,7 @@
 			<Data Name="Count" Default="1" SkipIfDefault="False" meta:RefKey="String" />
 		</Data>
 		<Data Name="Shop" TextColour="188,102,255" meta:RefKey="Struct">
+			<Data Name="Shopkeep" Keys="Sprite" Nullable="False" meta:RefKey="Reference" />
 			<Data Name="CostMultiplier" Default="1" meta:RefKey="String" />
 			<Data Name="Items" meta:RefKey="Collection">
 				<!--Quest-->

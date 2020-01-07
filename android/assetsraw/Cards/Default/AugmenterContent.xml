@@ -1,7 +1,7 @@
 <CardContent meta:X="0" meta:Y="0" GUID="914d44e4-9432-4bcd-90d7-afacb18424cd" xmlns:meta="Editor">
 	<Root meta:RefKey="Node">a5a64da8-a67c-41e3-99cc-dec01c13be2f</Root>
 	<Nodes>
-		<Node meta:X="204" meta:Y="0" GUID="a5a64da8-a67c-41e3-99cc-dec01c13be2f">
+		<Node meta:X="195" meta:Y="0" GUID="a5a64da8-a67c-41e3-99cc-dec01c13be2f">
 			<Line>
 				<MultilineString>You go to visit the augmenter. After a short wait in a queue you are ushered into a room with various glowing gems, each labelled with the effect it'll have on you.</MultilineString>
 			</Line>
@@ -9,6 +9,10 @@
 				<MultilineString>What would you like to buy?</MultilineString>
 			</Line>
 			<Shop>
+				<Shopkeep meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_heroes/lord_b</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Shopkeep>
 				<Items>
 					<Statistics>
 						<Cost>75</Cost>

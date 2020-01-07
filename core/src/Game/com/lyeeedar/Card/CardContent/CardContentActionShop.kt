@@ -3,9 +3,11 @@ package com.lyeeedar.Card.CardContent
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
+import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
+import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.exp4j.Helpers.evaluate
@@ -13,36 +15,40 @@ import com.lyeeedar.Board.Mote
 import com.lyeeedar.Card.Card
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.*
+import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Statistic
-import com.lyeeedar.UI.CardWidget
-import com.lyeeedar.UI.Seperator
-import com.lyeeedar.UI.SpriteWidget
-import com.lyeeedar.UI.addClickListener
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.FastEnumMap
-import com.lyeeedar.Util.Statics
-import com.lyeeedar.Util.XmlData
+import com.lyeeedar.UI.*
+import com.lyeeedar.Util.*
 
 class CardContentActionShop : AbstractCardContentAction()
 {
+	lateinit var merchant: Sprite
+	val counter = AssetManager.loadSprite("Oryx/Custom/terrain/table", drawActualSize = true)
+	val counter_papers = AssetManager.loadSprite("Oryx/Custom/terrain/table_papers", drawActualSize = true)
+	val counter_large = AssetManager.loadSprite("Oryx/uf_split/uf_terrain/table", drawActualSize = true)
+	val counter_large_sold = AssetManager.loadSprite("Oryx/Custom/terrain/table_large_sold", drawActualSize = true)
+
 	lateinit var costMultiplier: String
-	val wares = Array<ShopWares>()
+	val wares = Array<ShopWare>()
 
 	override fun parse(xmlData: XmlData)
 	{
+		merchant = AssetManager.loadSprite(xmlData.getChildByName("ShopKeep")!!)
 		costMultiplier = xmlData.get("CostMultiplier", "1")!!.toLowerCase()
 
 		val itemsEl = xmlData.getChildByName("Items")!!
 		for (itemEl in itemsEl.children)
 		{
-			wares.add(ShopWares.load(itemEl))
+			wares.add(ShopWare.load(itemEl))
 		}
 	}
 
 	var shopActive = false
 	var doAdvance = false
 	var resolved = false
+	val itemsToBuy = Array2D<ShopWare?>(4, 3) { x,y -> null }
+	val purchasesTable = Table()
 	override fun advance(CardContent: CardContent, CardContentScreen: CardScreen): Boolean
 	{
 		if (doAdvance)
@@ -56,103 +62,174 @@ class CardContentActionShop : AbstractCardContentAction()
 		{
 			shopActive = true
 
-			CardContentScreen.buttonTable.clear()
+			CardContentScreen.contentTable.clear()
 
-			val waresTable = Table()
+			CardContentScreen.contentTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion("Oryx/uf_split/uf_terrain/floor_extra_15"))).tint(Color(0.4f, 0.4f, 0.4f, 1f))
 
-			val costMultiplier = this.costMultiplier.evaluate(Global.getVariableMap())
-			val priceReductionMultiplier = 1.0f - Global.player.getStat(Statistic.PRICEREDUCTION)
+			val merchantTable = Table()
+			val wallTable = Table()
+			wallTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion("Oryx/uf_split/uf_terrain/wall_stone_14")))
+
+			val merchantRow = Table()
+			merchantRow.add(SpriteWidget(merchant, 48f, 48f)).size(48f).expandX().center()
+			val counterRow = Table()
+			for (i in 0 until 4)
+			{
+				if (i == 1)
+				{
+					counterRow.add(SpriteWidget(counter_papers, 48f, 48f)).size(48f)
+				}
+				else
+				{
+					counterRow.add(SpriteWidget(counter, 48f, 48f)).size(48f)
+				}
+			}
+
+			merchantTable.add(wallTable).height(48f).growX()
+			merchantTable.row()
+			merchantTable.add(merchantRow).growX()
+			merchantTable.row()
+			merchantTable.add(counterRow).growX()
+
+			var x = 0
+			var y = 0
 
 			for (i in 0 until wares.size)
 			{
-				val currentWare = wares[i]
+				val ware = wares[i]
 
 				if (!resolved)
 				{
-					currentWare.resolve(this)
+					ware.resolve(this)
 				}
 
-				if (currentWare.isValid())
+				if (ware.isValid())
 				{
-					val card = currentWare.getCard()
-					card.setFacing(true, false)
+					itemsToBuy[x, y] = ware
 
-					val cost = (currentWare.cost.toFloat() * costMultiplier * priceReductionMultiplier).toInt()
-
-					if (Global.player.gold >= cost)
+					x++
+					if (x == 4)
 					{
-						card.pickFuns.clear()
-						card.addPick("Buy ($cost)") {
-							Global.player.gold -= cost
+						x = 0
+						y++
 
-							currentWare.reward()
-							CardScreen.instance.updateEquipment()
-
-							val sprite = AssetManager.loadSprite("Oryx/Custom/items/card")
-
-							val src = card.localToStageCoordinates(Vector2(card.width / 2f, card.height / 2f))
-
-							val dstTable = CardScreen.instance.playerSlot
-							val dst = dstTable.localToStageCoordinates(Vector2())
-
-							Mote(src, dst, sprite, 32f, {
-							}, 0.75f)
-
-							// Rebuild the ui
-							shopActive = false
-							advance(CardContent, CardContentScreen)
+						if (y == 4)
+						{
+							throw RuntimeException("Too many shop wares!")
 						}
 					}
-
-					val cardHeight = (Statics.resolution.y.toFloat() * 0.7f) * 0.3f
-					val cardWidth = card.getWidthFromHeight(cardHeight)
-					card.setSize(cardWidth, cardHeight)
-
-					val table = Table()
-					table.add(card).size(cardWidth, cardHeight).expand()
-					table.row()
-
-					val costLabel = Label("$cost", Statics.skin)
-					if (cost > Global.player.gold)
-					{
-						costLabel.color = Color.DARK_GRAY
-					}
-
-					table.add(costLabel).expandX().center()
-
-					waresTable.add(table).pad(5f)
 				}
 			}
 
 			resolved = true
 
-			val scrollPane = ScrollPane(waresTable, Statics.skin)
-			scrollPane.setFadeScrollBars(false)
-			scrollPane.setScrollingDisabled(false, true)
-			scrollPane.setForceScroll(true, false)
+			CardContentScreen.contentTable.add(merchantTable).growX().top()
+			CardContentScreen.contentTable.row()
+			CardContentScreen.contentTable.add(purchasesTable).grow().padTop(20f).padBottom(20f)
+			CardContentScreen.contentTable.row()
 
-			val leaveButton = TextButton("Leave", Statics.skin)
+			val leaveButton = TextButton("Leave Shop", Statics.skin)
 			leaveButton.addClickListener {
 				doAdvance = true
-				CardContentScreen.buttonTable.clear()
+				CardContentScreen.contentTable.clear()
 				shopActive = false
 				CardContentScreen.advanceContent()
 			}
+			CardContentScreen.contentTable.add(leaveButton).expandX().center().pad(10f)
 
-			val topTable = Table()
-			topTable.add(Label("Gold: " + Global.player.gold, Statics.skin))
-			topTable.add(leaveButton).expandX().right().pad(10f)
-
-			CardContentScreen.buttonTable.add(topTable).growX()
-			CardContentScreen.buttonTable.row()
-
-			CardContentScreen.buttonTable.add(Seperator(Statics.skin)).growX()
-			CardContentScreen.buttonTable.row()
-
-			CardContentScreen.buttonTable.add(scrollPane).grow()
+			fillPurchasesTable()
 		}
 
 		return false
+	}
+
+	fun fillPurchasesTable()
+	{
+		val costMultiplier = this.costMultiplier.evaluate(Global.getVariableMap())
+		val priceReductionMultiplier = 1.0f - Global.player.getStat(Statistic.PRICEREDUCTION)
+
+		purchasesTable.clear()
+
+		for (y in 0 until itemsToBuy.height)
+		{
+			for (x in 0 until itemsToBuy.width)
+			{
+				val purchaseStack = Stack()
+
+				val ware = itemsToBuy[x, y]
+				if (ware == null)
+				{
+					purchaseStack.addTable(SpriteWidget(counter_large_sold, 48f, 48f)).size(48f).expand().bottom()
+					purchaseStack.addTable(Table()).size(48f).padBottom(40f).expand().bottom()
+				}
+				else
+				{
+					val cost = (ware.cost.toFloat() * costMultiplier * priceReductionMultiplier).toInt()
+
+					purchaseStack.addTable(SpriteWidget(counter_large, 48f, 48f)).size(48f).expand().bottom()
+					purchaseStack.addTable(ware.wareTable(48f)).size(48f).expand().bottom().padBottom(40f)
+
+					val costTable = Table()
+					costTable.background = TextureRegionDrawable(AssetManager.loadTextureRegion("white")).tint(Color(0f, 0f, 0f, 0.6f))
+
+					val costLabel = Label(cost.prettyPrint(), Statics.skin)
+					if (cost > Global.player.gold)
+					{
+						costLabel.setColor(0.85f, 0f, 0f, 1f)
+					}
+
+					costTable.add(SpriteWidget(AssetManager.loadSprite("Oryx/Custom/items/coin_gold_pile"), 16f, 16f))
+					costTable.add(costLabel)
+
+					purchaseStack.addTable(costTable).expand().bottom().padBottom(20f)
+
+					purchaseStack.addClickListener {
+						val card = ware.getCard()
+						card.frontTable.clear()
+						card.setFacing(faceup = true, animate = false)
+						card.setPosition(purchaseStack.x + purchaseStack.width / 2f, purchaseStack.y + purchaseStack.height)
+						card.setSize(48f, 48f)
+
+						if (Global.player.gold >= ware.cost)
+						{
+							card.pickFuns.clear()
+							card.addPick("Buy ($cost)") {
+								Global.player.gold -= cost
+
+								ware.reward()
+								CardScreen.instance.updateEquipment()
+
+								val sprite = AssetManager.loadSprite("Oryx/Custom/items/card")
+
+								val src = card.localToStageCoordinates(Vector2(card.width / 2f, card.height / 2f))
+
+								val dstTable = CardScreen.instance.playerSlot
+								val dst = dstTable.localToStageCoordinates(Vector2())
+
+								Mote(src, dst, sprite, 32f, {
+								}, 0.75f)
+
+								// Rebuild the ui
+								itemsToBuy[x, y] = null
+								fillPurchasesTable()
+							}
+						}
+
+						card.collapseFun = {
+							card.remove()
+						}
+
+						Statics.stage.addActor(card)
+
+						card.focus()
+					}
+				}
+
+				purchasesTable.add(purchaseStack).expand()
+			}
+
+			purchasesTable.row()
+		}
 	}
 
 	override fun resolve(nodeMap: ObjectMap<String, CardContentNode>)
@@ -161,7 +238,7 @@ class CardContentActionShop : AbstractCardContentAction()
 	}
 }
 
-abstract class ShopWares
+abstract class ShopWare
 {
 	var cost: Int = 1
 	var onPurchaseDefine: Define? = null
@@ -171,12 +248,13 @@ abstract class ShopWares
 	abstract fun parse(xmlData: XmlData)
 	abstract fun getCard(): CardWidget
 	abstract fun reward()
+	abstract fun wareTable(size: Float): Table
 
 	companion object
 	{
-		fun load(xmlData: XmlData): ShopWares
+		fun load(xmlData: XmlData): ShopWare
 		{
-			val ware: ShopWares = when(xmlData.name.toUpperCase())
+			val ware: ShopWare = when(xmlData.name.toUpperCase())
 			{
 				"EQUIPMENT" -> EquipmentWare()
 				"QUEST" -> QuestWare()
@@ -217,9 +295,9 @@ class Define
 	}
 }
 
-class EquipmentWare : ShopWares()
+class EquipmentWare : ShopWare()
 {
-	var fromDeck = true
+	var fromDeck = false
 	lateinit var type: EquipmentReward.EquipmentRewardType
 	lateinit var equipmentPath: String
 
@@ -286,9 +364,13 @@ class EquipmentWare : ShopWares()
 
 	override fun parse(xmlData: XmlData)
 	{
-		fromDeck = xmlData.getBoolean("FromDeck", true)
-		type = EquipmentReward.EquipmentRewardType.valueOf(xmlData.get("Type", "Any")!!.toUpperCase())
 		equipmentPath = xmlData.get("Equipment", "")!!
+
+		if (equipmentPath.isBlank())
+		{
+			fromDeck = xmlData.getBoolean("FromDeck", true)
+			type = EquipmentReward.EquipmentRewardType.valueOf(xmlData.get("Type", "Any")!!.toUpperCase())
+		}
 	}
 
 	override fun getCard(): CardWidget
@@ -300,9 +382,28 @@ class EquipmentWare : ShopWares()
 	{
 		Global.player.equipment[equipment!!.slot] = equipment
 	}
+
+	override fun wareTable(size: Float): Table
+	{
+		val equipmentStack = Stack()
+		val tileBack = SpriteWidget(AssetManager.loadSprite("GUI/textured_back"), size, size)
+		equipmentStack.add(tileBack)
+
+		equipmentStack.add(
+			SpriteWidget(AssetManager.loadSprite("GUI/background_stars"), size, size)
+				.tint(Color(1f, 1f, 1f, 0.5f)))
+
+		equipmentStack.add(SpriteWidget(AssetManager.loadSprite("GUI/PortraitFrameBorder"), size, size))
+		val tileFront = SpriteWidget(equipment!!.icon.copy(), size, size)
+		equipmentStack.add(tileFront)
+
+		val table = Table()
+		table.add(equipmentStack).grow()
+		return table
+	}
 }
 
-class QuestWare : ShopWares()
+class QuestWare : ShopWare()
 {
 	lateinit var questPath: String
 	lateinit var quest: Quest
@@ -332,9 +433,28 @@ class QuestWare : ShopWares()
 		Global.deck.quests.add(quest)
 		Global.deck.newquests.add(quest)
 	}
+
+	override fun wareTable(size: Float): Table
+	{
+		val equipmentStack = Stack()
+		val tileBack = SpriteWidget(AssetManager.loadSprite("GUI/textured_back"), size, size)
+		equipmentStack.add(tileBack)
+
+		equipmentStack.add(
+			SpriteWidget(AssetManager.loadSprite("GUI/background_stars"), size, size)
+				.tint(Color(1f, 1f, 1f, 1f)))
+
+		val tileFront = SpriteWidget(AssetManager.loadSprite("Oryx/uf_split/uf_items/book_latch"), size, size)
+		equipmentStack.add(tileFront)
+		equipmentStack.add(SpriteWidget(AssetManager.loadSprite("GUI/PortraitFrameBorder"), size, size))
+
+		val table = Table()
+		table.add(equipmentStack).grow()
+		return table
+	}
 }
 
-class CardWare : ShopWares()
+class CardWare : ShopWare()
 {
 	lateinit var cardPath: String
 	lateinit var card: Card
@@ -364,9 +484,28 @@ class CardWare : ShopWares()
 		Global.deck.encounters.add(card)
 		Global.deck.newencounters.add(card)
 	}
+
+	override fun wareTable(size: Float): Table
+	{
+		val equipmentStack = Stack()
+		val tileBack = SpriteWidget(AssetManager.loadSprite("GUI/textured_back"), size, size)
+		equipmentStack.add(tileBack)
+
+		equipmentStack.add(
+			SpriteWidget(AssetManager.loadSprite("GUI/background_stars"), size, size)
+				.tint(Color(1f, 1f, 1f, 1f)))
+
+		val tileFront = SpriteWidget(AssetManager.loadSprite("Oryx/Custom/items/card"), size, size)
+		equipmentStack.add(tileFront)
+		equipmentStack.add(SpriteWidget(AssetManager.loadSprite("GUI/PortraitFrameBorder"), size, size))
+
+		val table = Table()
+		table.add(equipmentStack).grow()
+		return table
+	}
 }
 
-class CharacterWare : ShopWares()
+class CharacterWare : ShopWare()
 {
 	lateinit var path: String
 	lateinit var character: Character
@@ -396,9 +535,28 @@ class CharacterWare : ShopWares()
 		Global.deck.characters.add(character)
 		Global.deck.newcharacters.add(character)
 	}
+
+	override fun wareTable(size: Float): Table
+	{
+		val equipmentStack = Stack()
+		val tileBack = SpriteWidget(AssetManager.loadSprite("GUI/textured_back"), size, size)
+		equipmentStack.add(tileBack)
+
+		equipmentStack.add(
+			SpriteWidget(AssetManager.loadSprite("GUI/background_stars"), size, size)
+				.tint(Color(1f, 1f, 1f, 1f)))
+
+		val tileFront = SpriteWidget(Sprite(character.sprite.textures[0]), size, size)
+		equipmentStack.add(tileFront)
+		equipmentStack.add(SpriteWidget(AssetManager.loadSprite("GUI/PortraitFrameBorder"), size, size))
+
+		val table = Table()
+		table.add(equipmentStack).grow()
+		return table
+	}
 }
 
-class StatisticWare : ShopWares()
+class StatisticWare : ShopWare()
 {
 	val statistics = FastEnumMap<Statistic, Float>(Statistic::class.java)
 
@@ -483,9 +641,27 @@ class StatisticWare : ShopWares()
 		}
 	}
 
+	override fun wareTable(size: Float): Table
+	{
+		val equipmentStack = Stack()
+		val tileBack = SpriteWidget(AssetManager.loadSprite("GUI/textured_back"), size, size)
+		equipmentStack.add(tileBack)
+
+		equipmentStack.add(
+			SpriteWidget(AssetManager.loadSprite("GUI/background_stars"), size, size)
+				.tint(Color(1f, 1f, 1f, 0.5f)))
+
+		val tileFront = SpriteWidget(Statistic.Values.first { statistics[it] != 0f }.icon.copy(), size, size)
+		equipmentStack.add(tileFront)
+		equipmentStack.add(SpriteWidget(AssetManager.loadSprite("GUI/PortraitFrameBorder"), size, size))
+
+		val table = Table()
+		table.add(equipmentStack).grow()
+		return table
+	}
 }
 
-class BuffWare : ShopWares()
+class BuffWare : ShopWare()
 {
 	lateinit var buff: Buff
 
@@ -510,5 +686,24 @@ class BuffWare : ShopWares()
 	override fun reward()
 	{
 		Global.player.buffs.add(buff.copy())
+	}
+
+	override fun wareTable(size: Float): Table
+	{
+		val equipmentStack = Stack()
+		val tileBack = SpriteWidget(AssetManager.loadSprite("GUI/textured_back"), size, size)
+		equipmentStack.add(tileBack)
+
+		equipmentStack.add(
+			SpriteWidget(AssetManager.loadSprite("GUI/background_stars"), size, size)
+				.tint(Color(1f, 1f, 1f, 1f)))
+
+		val tileFront = SpriteWidget(buff.icon.copy(), size, size)
+		equipmentStack.add(tileFront)
+		equipmentStack.add(SpriteWidget(AssetManager.loadSprite("GUI/PortraitFrameBorder"), size, size))
+
+		val table = Table()
+		table.add(equipmentStack).grow()
+		return table
 	}
 }
