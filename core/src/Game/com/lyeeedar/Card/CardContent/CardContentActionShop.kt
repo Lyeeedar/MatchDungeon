@@ -297,7 +297,6 @@ class Define
 
 class EquipmentWare : ShopWare()
 {
-	var fromDeck = false
 	lateinit var type: EquipmentReward.EquipmentRewardType
 	lateinit var equipmentPath: String
 
@@ -307,7 +306,7 @@ class EquipmentWare : ShopWare()
 
 	override fun resolve(shop: CardContentActionShop)
 	{
-		if (fromDeck)
+		if (equipmentPath.isBlank())
 		{
 			val types = Array<EquipmentSlot>()
 
@@ -368,7 +367,6 @@ class EquipmentWare : ShopWare()
 
 		if (equipmentPath.isBlank())
 		{
-			fromDeck = xmlData.getBoolean("FromDeck", true)
 			type = EquipmentReward.EquipmentRewardType.valueOf(xmlData.get("Type", "Any")!!.toUpperCase())
 		}
 	}
