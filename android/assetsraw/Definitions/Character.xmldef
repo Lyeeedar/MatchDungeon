@@ -36,5 +36,6 @@
 		<Data Name="Haste" meta:RefKey="Number" />
 		<Data Name="ChaoticNature" Min="0" Max="1" meta:RefKey="Number" />
 		<Data Name="Luck" Min="-1" Max="1" meta:RefKey="Number" />
+		<Data Name="VampiricStrikes" Min="0" Max="1" meta:RefKey="Number" />
 	</Definition>
 </Definitions>

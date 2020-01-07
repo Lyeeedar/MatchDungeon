@@ -8,6 +8,6 @@
 	<Statistics meta:RefKey="Statistics">
 		<Health>1</Health>
 		<MatchDamage>0.5</MatchDamage>
-		<Aegis>0.2</Aegis>
+		<Aegis>2</Aegis>
 	</Statistics>
 </MainHand>

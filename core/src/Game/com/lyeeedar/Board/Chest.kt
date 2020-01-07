@@ -34,8 +34,8 @@ class Chest(val spawnOrbs: Boolean = true, val theme: Theme)
 			if (coinsOnBoard >= 7) return grid.level.spawnOrb()
 
 			var chosenSpacing = 3
-			val turnsCondition = grid.level.defeatConditions.firstOrNull { it is CompletionConditionTurns }
-			if (turnsCondition != null && turnsCondition is CompletionConditionTurns)
+			val turnsCondition = grid.level.defeatConditions.filterIsInstance<CompletionConditionTurns>().firstOrNull()
+			if (turnsCondition != null)
 			{
 				if (turnsCondition.turnCount < turnsCondition.maxTurnCount / 4)
 				{

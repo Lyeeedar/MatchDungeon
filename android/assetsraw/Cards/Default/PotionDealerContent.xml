@@ -55,7 +55,7 @@
 							</Icon>
 							<Statistics meta:RefKey="Statistics">
 								<Health>1</Health>
-								<Aegis>0.3</Aegis>
+								<Aegis>3</Aegis>
 							</Statistics>
 							<Duration>6</Duration>
 						</Buff>

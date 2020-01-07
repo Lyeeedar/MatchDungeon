@@ -80,7 +80,8 @@ enum class Statistic private constructor(val niceName: String, val min: Float, v
 	WEAKNESSAURA("Weakness Aura", 0f, Float.MAX_VALUE, "The value to subtract from enemy life as they spawn", AssetManager.loadSprite("Oryx/uf_split/uf_items/crystal_dragon")),
 	NECROTICAURA("Necrotic Aura", 0f, Float.MAX_VALUE, "The amount of health you gain each time you kill an enemy", AssetManager.loadSprite("Oryx/uf_split/uf_items/skull_large_closed")),
 	BUFFDURATION("Buff Duration", 0f, Float.MAX_VALUE, "The multiplier to increase buff duration by", AssetManager.loadSprite("Oryx/uf_split/uf_items/necklace_mystic")),
-	LUCK("Luck", -1f, 1f, "Affects your chance of gaining rewards", AssetManager.loadSprite("Oryx/uf_split/uf_items/gem_tourmaline"));
+	LUCK("Luck", -1f, 1f, "Affects your chance of gaining rewards", AssetManager.loadSprite("Oryx/uf_split/uf_items/gem_tourmaline")),
+	VAMPIRICSTRIKES("Vampiric Strikes", 0f, 1f, "You regain a portion of the damage you deal as health", AssetManager.loadSprite("Oryx/uf_split/uf_items/weapon_magic_sword_hellfire"));
 
 	companion object
 	{

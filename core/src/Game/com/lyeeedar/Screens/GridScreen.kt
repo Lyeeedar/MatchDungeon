@@ -68,9 +68,9 @@ class GridScreen(): AbstractScreen()
 
 			debugConsole.register("setturns", "", fun(args, console): Boolean
 			{
-				val condition = level.defeatConditions.filter { it is CompletionConditionTurns }.firstOrNull()
+				val condition = level.defeatConditions.filterIsInstance<CompletionConditionTurns>().firstOrNull()
 
-				if (condition == null || condition !is CompletionConditionTurns)
+				if (condition == null)
 				{
 					console.error("No turns defeat condition!")
 					return false
@@ -85,9 +85,9 @@ class GridScreen(): AbstractScreen()
 
 			debugConsole.register("suicide", "", fun(args, console): Boolean
 			{
-				val die = level.defeatConditions.filter { it is CompletionConditionDie }.firstOrNull()
+				val die = level.defeatConditions.filterIsInstance<CompletionConditionDie>().firstOrNull()
 
-				if (die == null || die !is CompletionConditionDie)
+				if (die == null)
 				{
 					console.error("No die defeat condition!")
 					return false

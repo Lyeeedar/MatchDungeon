@@ -1107,7 +1107,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 						val necroticAura = Global.player.getStat(Statistic.NECROTICAURA)
 						if (necroticAura != 0f)
 						{
-							val die = level.defeatConditions.firstOrNull { it is CompletionConditionDie } as? CompletionConditionDie
+							val die = level.defeatConditions.filterIsInstance<CompletionConditionDie>().firstOrNull()
 							if (die != null)
 							{
 								die.fractionalHp += necroticAura
@@ -1837,6 +1837,16 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		hit.renderDelay = delay
 		tile.effects.add(hit)
 		onDamaged(damageable)
+
+		if (damageable is Monster)
+		{
+			val vampiric = Global.player.getStat(Statistic.VAMPIRICSTRIKES, withChoaticNature = true)
+			val die = level.defeatConditions.filterIsInstance<CompletionConditionDie>().firstOrNull()
+			if (die != null)
+			{
+				die.fractionalHp += targetDam * vampiric
+			}
+		}
 	}
 
 	// ----------------------------------------------------------------------

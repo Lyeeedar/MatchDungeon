@@ -37,7 +37,7 @@
 							<MatchDamage>1</MatchDamage>
 							<AbilityDamage>1</AbilityDamage>
 							<Pierce>1</Pierce>
-							<Aegis>0.1</Aegis>
+							<Aegis>1</Aegis>
 							<PowerGain>5</PowerGain>
 							<Luck>0.2</Luck>
 						</Statistics>

@@ -8,6 +8,6 @@
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
 		<Health>3</Health>
-		<Aegis>0.1</Aegis>
+		<Aegis>1</Aegis>
 	</Statistics>
 </Body>

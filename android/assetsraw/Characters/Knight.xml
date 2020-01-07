@@ -8,7 +8,7 @@
 	<Statistics meta:RefKey="Statistics">
 		<Health>9</Health>
 		<Pierce>1</Pierce>
-		<Counter>0.1</Counter>
+		<Counter>1</Counter>
 	</Statistics>
 	<StartingEquipment>
 		<Body>Characters/Equipment/Fullplate</Body>

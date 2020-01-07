@@ -21,7 +21,7 @@
 						<DrawActualSize>true</DrawActualSize>
 					</Icon>
 					<Statistics meta:RefKey="Statistics">
-						<Reflect>1</Reflect>
+						<Reflect>10</Reflect>
 					</Statistics>
 					<Duration>4</Duration>
 				</Buff>

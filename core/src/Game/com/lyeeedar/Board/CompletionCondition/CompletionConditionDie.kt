@@ -59,7 +59,30 @@ class CompletionConditionDie : AbstractCompletionCondition()
 			// calculate block and counter
 			fun tryBlock(chance: Float): Boolean
 			{
-				return chance > 0f && Random.random.nextFloat() < chance
+				val blockChance = 0.2f
+
+				var remaining = chance
+				while (remaining > 0)
+				{
+					if (remaining < 1f)
+					{
+						if (Random.random.nextFloat() < blockChance * remaining)
+						{
+							return true
+						}
+					}
+					else
+					{
+						if (Random.random.nextFloat() < blockChance)
+						{
+							return true
+						}
+					}
+
+					remaining -= 1f
+				}
+
+				return false
 			}
 
 			var blocked = false
