@@ -4,11 +4,7 @@ import com.badlogic.gdx.Game
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.backends.headless.HeadlessApplication
 import com.badlogic.gdx.graphics.GL20
-import com.lyeeedar.ResourceProcessors.AtlasCreator
-import com.lyeeedar.ResourceProcessors.TextureCompressor
-import com.lyeeedar.ResourceProcessors.XmlCompressor
-import com.lyeeedar.ResourceProcessors.XmlLoadTester
-import com.lyeeedar.ResourceProcessors.OryxExtractor
+import com.lyeeedar.ResourceProcessors.*
 import org.mockito.Mockito
 
 object CompilerRunner
@@ -22,11 +18,35 @@ object CompilerRunner
 			Gdx.gl20 = Mockito.mock(GL20::class.java)
 			Gdx.app = HeadlessApplication(Mockito.mock(Game::class.java))
 
-			OryxExtractor()
-			AtlasCreator()
-			TextureCompressor()
-			XmlCompressor()
-			XmlLoadTester.test()
+			val start = System.currentTimeMillis()
+
+			val funcs = com.badlogic.gdx.utils.Array<Pair<String, ()->Any>>()
+			funcs.add(Pair("Oryx", { OryxExtractor() }))
+			funcs.add(Pair("Atlas", { AtlasCreator() }))
+			funcs.add(Pair("Texture", { TextureCompressor() }))
+			funcs.add(Pair("Xml", { XmlCompressor() }))
+			funcs.add(Pair("Test", { XmlLoadTester.test() }))
+
+			val timings = com.badlogic.gdx.utils.Array<Pair<String, Long>>()
+			for (func in funcs)
+			{
+				val start = System.currentTimeMillis()
+				func.second.invoke()
+				val end = System.currentTimeMillis()
+				timings.add(Pair(func.first, end - start))
+			}
+
+			val end = System.currentTimeMillis()
+
+			val diff = end - start
+			val seconds = diff / 1000
+
+			println("Compilation complete in $seconds seconds")
+
+			for (timing in timings)
+			{
+				println("Completed ${timing.first} in ${timing.second/1000} seconds")
+			}
 		}
 		catch (ex: Exception)
 		{

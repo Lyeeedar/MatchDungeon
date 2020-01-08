@@ -15,6 +15,8 @@ import javax.swing.JOptionPane
 
 class MainGame : Game()
 {
+	val debugScreenOverride: ScreenEnum? = ScreenEnum.TESTCARDLOOK
+
 	enum class ScreenEnum
 	{
 		GRID,
@@ -23,6 +25,7 @@ class MainGame : Game()
 		DECK,
 		QUESTSELECTION,
 		PARTICLEEDITOR,
+		TESTCARDLOOK,
 		INVALID
 	}
 
@@ -69,10 +72,15 @@ class MainGame : Game()
 			Thread.currentThread().uncaughtExceptionHandler = handler
 		}
 
-		if (Statics.PARTICLE_EDITOR)
+		if (debugScreenOverride == ScreenEnum.PARTICLEEDITOR)
 		{
 			screens.put(ScreenEnum.PARTICLEEDITOR, ParticleEditorScreen())
 			switchScreen(ScreenEnum.PARTICLEEDITOR)
+		}
+		else if (debugScreenOverride == ScreenEnum.TESTCARDLOOK)
+		{
+			screens.put(ScreenEnum.TESTCARDLOOK, TestCardLookScreen())
+			switchScreen(ScreenEnum.TESTCARDLOOK)
 		}
 		else
 		{
