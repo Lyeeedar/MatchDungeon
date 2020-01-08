@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lyeeedar.MatchDungeon"
-    android:versionCode="0415"
-    android:versionName="0.4.15" >
+    android:versionCode="0416"
+    android:versionName="0.4.16" >
 
     <application
         android:allowBackup="true"
