@@ -592,8 +592,8 @@ class StatisticWare : ShopWare()
 			val stat = modifiedStats[0].first
 			val value = modifiedStats[0].second
 
-			t1 = CardWidget.createFrontTable(stat.niceName, stat.icon.copy(), value.toString())
-			t2 = CardWidget.createFrontTable(stat.niceName, stat.icon.copy(), value.toString())
+			t1 = CardWidget.createFrontTable(stat.niceName, stat.icon.copy(), AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, value.toString())
+			t2 = CardWidget.createFrontTable(stat.niceName, stat.icon.copy(), AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, value.toString())
 		}
 		else
 		{

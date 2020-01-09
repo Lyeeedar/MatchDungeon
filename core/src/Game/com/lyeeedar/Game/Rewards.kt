@@ -2,7 +2,6 @@ package com.lyeeedar.Game
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.exp4j.Helpers.evaluate
@@ -85,7 +84,7 @@ class StatisticsReward : AbstractReward()
 			val statVal = statsTable[stat]
 			if (statVal != 0f)
 			{
-				val table = CardWidget.createFrontTable(stat.niceName, stat.icon.copy(), statVal.toString())
+				val table = CardWidget.createFrontTable(stat.niceName, stat.icon.copy(), AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, statVal.toString())
 				Global.player.statistics[stat] = (Global.player.statistics[stat] ?: 0f) + statVal
 
 				val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, null)
@@ -285,9 +284,6 @@ class MoneyReward : AbstractReward()
 	{
 		val output = Array<CardWidget>()
 
-		val table = CardWidget.createFrontTable("Gold", AssetManager.loadSprite("Oryx/Custom/items/coin_gold_pile"))
-		table.row()
-
 		val amount = amountEqn.evaluate(Global.getVariableMap()).toInt()
 		val bonus = (Global.player.getStat(Statistic.BONUSGOLD) * amount).toInt()
 
@@ -297,9 +293,7 @@ class MoneyReward : AbstractReward()
 			amountStr += "+$bonus"
 		}
 
-		val amountLbl = Label(amountStr, Statics.skin, "cardrewardtitle")
-		table.add(amountLbl).expandX().center().padTop(10f)
-		table.row()
+		val table = CardWidget.createFrontTable("Gold", AssetManager.loadSprite("Oryx/Custom/items/coin_gold_pile"), AssetManager.loadTextureRegion("GUI/MoneyCardback")!!, amountStr)
 
 		val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("GUI/MoneyCardback")!!, null)
 		card.addPick("Take") {
