@@ -6,7 +6,7 @@ import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
-import com.lyeeedar.MainGame
+import com.lyeeedar.ScreenEnum
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Screens.DeckScreen
 import com.lyeeedar.Screens.QuestScreen
@@ -64,11 +64,11 @@ class Save
 			val currentScreen = Statics.game.currentScreenEnum
 			output.writeInt(currentScreen.ordinal)
 
-			if (currentScreen == MainGame.ScreenEnum.QUESTSELECTION)
+			if (currentScreen == ScreenEnum.QUESTSELECTION)
 			{
 
 			}
-			else if (currentScreen == MainGame.ScreenEnum.DECK)
+			else if (currentScreen == ScreenEnum.DECK)
 			{
 
 			}
@@ -77,7 +77,7 @@ class Save
 				val questScreen = Statics.game.getTypedScreen<QuestScreen>()!!
 				questScreen.currentQuest.save(output)
 
-				if (currentScreen == MainGame.ScreenEnum.QUEST)
+				if (currentScreen == ScreenEnum.QUEST)
 				{
 
 				}
@@ -118,7 +118,7 @@ class Save
 				val cardFlags = GameStateFlags.load(kryo, input)
 				val settings = Settings.load(kryo, input)
 
-				val currentScreen = MainGame.ScreenEnum.values()[input.readInt()]
+				val currentScreen = ScreenEnum.values()[input.readInt()]
 
 				// If successful set data to active objects
 				Global.deck = deck
@@ -128,13 +128,13 @@ class Save
 				Global.cardflags = cardFlags
 				Statics.settings = settings
 
-				if (currentScreen == MainGame.ScreenEnum.QUESTSELECTION)
+				if (currentScreen == ScreenEnum.QUESTSELECTION)
 				{
 					val screen = Statics.game.getTypedScreen<QuestSelectionScreen>()!!
 					screen.setup()
 					screen.swapTo()
 				}
-				else if (currentScreen == MainGame.ScreenEnum.DECK)
+				else if (currentScreen == ScreenEnum.DECK)
 				{
 					val screen = Statics.game.getTypedScreen<DeckScreen>()!!
 					screen.setup()
@@ -148,7 +148,7 @@ class Save
 					val questScreen = Statics.game.getTypedScreen<QuestScreen>()!!
 					questScreen.setup(currentQuest)
 
-					if (currentScreen == MainGame.ScreenEnum.QUEST)
+					if (currentScreen == ScreenEnum.QUEST)
 					{
 
 					}
@@ -166,7 +166,7 @@ class Save
 					}
 
 					// try swapping to the desired screen
-					val screens = arrayOf(MainGame.ScreenEnum.GRID, MainGame.ScreenEnum.CARD, MainGame.ScreenEnum.QUEST, MainGame.ScreenEnum.QUESTSELECTION)
+					val screens = arrayOf(ScreenEnum.GRID, ScreenEnum.CARD, ScreenEnum.QUEST, ScreenEnum.QUESTSELECTION)
 					val current = screens.indexOf(currentScreen)
 
 					for (i in current until screens.size)

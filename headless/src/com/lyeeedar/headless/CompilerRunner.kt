@@ -52,7 +52,7 @@ object CompilerRunner
 		{
 			println("Compiling failed!")
 			System.err.println(ex.toString())
-			throw RuntimeException("Compiling failed")
+			throw ex
 		}
 		finally {
 			Gdx.app.exit()
