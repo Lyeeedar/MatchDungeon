@@ -236,7 +236,7 @@ class GridWidget(val grid: Grid) : Widget()
 		val yp = this.y + (this.height / 2f) - ((grid.height * tileSize) / 2f)
 		renderY = yp
 
-		renderer.begin(Gdx.app.graphics.deltaTime * GridScreen.instance.timeMultiplier, xp, yp, Colour(0.8f, 0.8f, 0.8f, 1f))
+		renderer.begin(Gdx.app.graphics.deltaTime * GridScreen.instance.timeMultiplier, xp, yp, Colour(1f, 1f, 1f, 1f))
 
 		if (grid.activeAbility == null)
 		{
