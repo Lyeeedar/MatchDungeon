@@ -13,6 +13,7 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.CardWidget
+import com.lyeeedar.UI.FrontTableSimple
 import com.lyeeedar.Util.*
 
 enum class Chance private constructor(val chance: Float, val uiString: String, val colour: Colour)
@@ -293,7 +294,7 @@ class MoneyReward : AbstractReward()
 			amountStr += "+$bonus"
 		}
 
-		val table = CardWidget.createFrontTable("Gold", AssetManager.loadSprite("Oryx/Custom/items/coin_gold_pile"), AssetManager.loadTextureRegion("GUI/MoneyCardback")!!, amountStr)
+		val table = CardWidget.createFrontTable(FrontTableSimple("Gold", AssetManager.loadSprite("Oryx/Custom/items/coin_gold_pile"), AssetManager.loadSprite("GUI/MoneyCardback"), amountStr))
 
 		val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("GUI/MoneyCardback")!!, null)
 		card.addPick("Take") {

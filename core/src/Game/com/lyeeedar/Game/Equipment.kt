@@ -14,6 +14,7 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.*
+import ktx.collections.gdxArrayOf
 
 class Equipment(val path: String)
 {
@@ -28,7 +29,16 @@ class Equipment(val path: String)
 
 	fun getCard(other: Equipment?, showAsPlus: Boolean): CardWidget
 	{
-		val card = CardWidget(CardWidget.createFrontTable(name, icon.copy()), createTable(other, showAsPlus), AssetManager.loadTextureRegion("GUI/EquipmentCardback")!!, this)
+		val card = CardWidget(
+			CardWidget.createFrontTable(
+				FrontTableSimple(name, icon.copy(), AssetManager.loadSprite("GUI/EquipmentCardback"))),
+			CardWidget.createFrontTable(
+				FrontTableComplex(name,
+								  createTable(other, showAsPlus),
+								  AssetManager.loadSprite("GUI/EquipmentCardback"),
+								  gdxArrayOf( Pair(icon.copy(), null)))),
+			AssetManager.loadTextureRegion("GUI/EquipmentCardback")!!,
+			this)
 		return card
 	}
 
