@@ -30,9 +30,10 @@ class Equipment(val path: String)
 	{
 		val card = CardWidget(
 			CardWidget.createFrontTable(
-				FrontTableSimple(name, icon.copy(), AssetManager.loadSprite("GUI/EquipmentCardback"))),
+				FrontTableSimple(name, "Equipment", icon.copy(), AssetManager.loadSprite("GUI/EquipmentCardback"))),
 			CardWidget.createFrontTable(
 				FrontTableComplex(name,
+								  "Equipment",
 								  createTable(other, showAsPlus),
 								  AssetManager.loadSprite("GUI/EquipmentCardback"),
 								  gdxArrayOf( Pair(icon.copy(), null)))),

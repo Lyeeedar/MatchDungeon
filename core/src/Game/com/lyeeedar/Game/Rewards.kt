@@ -294,7 +294,7 @@ class MoneyReward : AbstractReward()
 			amountStr += "+$bonus"
 		}
 
-		val table = CardWidget.createFrontTable(FrontTableSimple("Gold", AssetManager.loadSprite("Oryx/Custom/items/coin_gold_pile"), AssetManager.loadSprite("GUI/MoneyCardback"), amountStr))
+		val table = CardWidget.createFrontTable(FrontTableSimple("Gold", "Gold", AssetManager.loadSprite("Oryx/Custom/items/coin_gold_pile"), AssetManager.loadSprite("GUI/MoneyCardback"), amountStr))
 
 		val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("GUI/MoneyCardback")!!, null)
 		card.addPick("Take") {
