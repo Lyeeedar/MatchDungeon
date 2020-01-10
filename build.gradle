@@ -65,7 +65,7 @@ project(":headless") {
         api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         api "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
         api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-        api "org.mockito:mockito-all:1.9.+"
+        api "org.mockito:mockito-all:1.10.19"
         api 'com.auth0:java-jwt:3.9.0'
         api 'com.google.api-client:google-api-client:1.30.7'
         api 'com.google.apis:google-api-services-androidpublisher:v3-rev20191113-1.30.3'

@@ -47,7 +47,7 @@ class TestCardLookScreen : AbstractScreen()
 		cards.add(card.current.getCard())
 
 		val equipment = Equipment.load("Equipment/Other/ShearScimitar")
-		cards.add(equipment.getCard(null, true))
+		cards.add(equipment.getCard(null, true).addPick("Sell (500 gold)", {}).addPick("Buy", {}))
 
 		val character = Character.load("Wizard")
 		cards.add(character.getCard())

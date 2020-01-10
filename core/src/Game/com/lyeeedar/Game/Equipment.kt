@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.Label
-import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
@@ -47,14 +46,9 @@ class Equipment(val path: String)
 		val table = Table()
 		table.defaults().growX()
 
-		val titleStack = Stack()
-		val iconTable = Table()
-		iconTable.add(SpriteWidget(icon, 64f, 64f)).expandX().right().pad(5f)
-		titleStack.add(iconTable)
-		titleStack.add(Label(name, Statics.skin, "cardtitle"))
-
-		table.add(titleStack).growX()
+		table.add(Table()).grow()
 		table.row()
+
 		val descLabel = Label(description, Statics.skin, "card")
 		descLabel.setWrap(true)
 		table.add(descLabel)
@@ -62,7 +56,7 @@ class Equipment(val path: String)
 
 		if (statistics.any { it != 0f } || (other != null && other.statistics.any{ it != 0f }))
 		{
-			table.add(Seperator(Statics.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f)
+			table.add(Seperator(Statics.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f).expandY()
 			table.row()
 
 			table.add(Label("Statistics", Statics.skin, "cardtitle"))
@@ -87,7 +81,7 @@ class Equipment(val path: String)
 
 		if (ability != null || (other?.ability != null))
 		{
-			table.add(Seperator(Statics.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f)
+			table.add(Seperator(Statics.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f).expandY()
 			table.row()
 
 			table.add(Label("Ability", Statics.skin, "cardtitle"))
