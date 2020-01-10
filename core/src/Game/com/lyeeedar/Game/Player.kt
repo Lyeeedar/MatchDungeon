@@ -106,19 +106,10 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 		return output
 	}
 
-	fun createTable(): Table
+	fun getCard(): CardWidget
 	{
 		val table = Table()
 		table.defaults().growX()
-
-		val titleStack = Stack()
-		val iconTable = Table()
-		iconTable.add(SpriteWidget(baseCharacter.sprite.copy(), 64f, 64f)).left().pad(5f)
-		titleStack.add(iconTable)
-		titleStack.add(Label(baseCharacter.name, Statics.skin, "cardtitle"))
-
-		table.add(titleStack).growX()
-		table.row()
 
 		val descLabel = Label(baseCharacter.description, Statics.skin, "card")
 		descLabel.setWrap(true)
@@ -178,7 +169,12 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 				}
 			}
 
-			FullscreenTable.createCard(statisticsTable, statisticsButton.localToStageCoordinates(Vector2()))
+			FullscreenTable.createCard(
+					"Statistics",
+					"Player",
+					AssetManager.getTextureRegion("GUI/CharacterCardback")!!,
+					statisticsTable,
+					statisticsButton.localToStageCoordinates(Vector2()))
 		}
 
 		table.add(statisticsButton).growX().pad(10f)
@@ -217,7 +213,12 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 					}
 				}
 
-				FullscreenTable.createCard(buffsTable, buffsButton.localToStageCoordinates(Vector2()))
+				FullscreenTable.createCard(
+						"Buffs",
+						"Player",
+						AssetManager.getTextureRegion("GUI/CharacterCardback")!!,
+						buffsTable,
+						buffsButton.localToStageCoordinates(Vector2()))
 			}
 
 			table.add(buffsButton).growX().pad(10f)
@@ -260,9 +261,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 					val infoButton = Button(Statics.skin, "infocard")
 					infoButton.setSize(24f, 24f)
 					infoButton.addClickListener {
-						val t = equipment.createTable(null, false)
-
-						FullscreenTable.createCard(t, infoButton.localToStageCoordinates(Vector2(12f, 12f)))
+						FullscreenTable.createCard(equipment.getCard(null, false), infoButton.localToStageCoordinates(Vector2(12f, 12f)))
 					}
 					equipTable.add(infoButton).size(24f).pad(0f, 12f, 0f, 12f).expandX().right()
 
@@ -273,7 +272,12 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 				}
 			}
 
-			FullscreenTable.createCard(equipmentTable, equipmentButton.localToStageCoordinates(Vector2()))
+			FullscreenTable.createCard(
+					"Equipment",
+					"Player",
+					AssetManager.getTextureRegion("GUI/CharacterCardback")!!,
+					equipmentTable,
+					equipmentButton.localToStageCoordinates(Vector2()))
 		}
 
 		table.add(equipmentButton).growX().pad(10f)
@@ -282,7 +286,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 		table.add(Seperator(Statics.skin, "horizontalcard"))
 		table.row()
 
-		return table
+		return CardWidget.createCard(baseCharacter.name, "Player", Sprite(baseCharacter.sprite.textures[0]), AssetManager.loadTextureRegion("GUI/CharacterCardback")!!)
 	}
 
 	fun save(kryo: Kryo, output: Output)

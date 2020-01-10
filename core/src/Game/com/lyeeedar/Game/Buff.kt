@@ -31,8 +31,7 @@ class Buff(val xml: XmlData)
 
 	fun getCard(): CardWidget
 	{
-		val card = CardWidget(CardWidget.createFrontTable(name, icon.copy()), createTable(), AssetManager.loadTextureRegion("GUI/BuffCardback")!!, this)
-		return card
+		return CardWidget.createCard(name, "Buff", icon.copy(), createTable(), AssetManager.loadTextureRegion("GUI/BuffCardback")!!, this)
 	}
 
 	fun getCardSmall(isBuff: Boolean): CardWidget

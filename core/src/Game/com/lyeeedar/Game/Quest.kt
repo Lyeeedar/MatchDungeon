@@ -156,12 +156,6 @@ class Quest(val path: String)
 		val table = Table()
 		wrapperStack.add(table)
 
-		val title = Label(title, Statics.skin, if (detail) "cardtitle" else "cardrewardtitle")
-		title.setWrap(true)
-		title.setAlignment(Align.center)
-		table.add(title).expandX().center().padTop(10f).width(Value.percentWidth(1f, table))
-		table.row()
-
 		val rewardsTable = Table()
 		table.add(rewardsTable).growX().center()
 		table.row()
@@ -248,6 +242,51 @@ class Quest(val path: String)
 	fun getCard(): CardWidget
 	{
 		return CardWidget(createTable(false), createTable(true), AssetManager.loadTextureRegion("GUI/QuestCardback")!!, this)
+
+		val rewards = Array<Pair<Sprite, String?>>()
+		if (bronzeRewards.size > 0)
+		{
+			if (!gotBronze)
+			{
+				rewards.add(Pair(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_copper"), "Can gain a bronze level reward."))
+			}
+			else
+			{
+				rewards.add(Pair(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_copper", colour = Colour.DARK_GRAY), "Bronze reward already acquired."))
+			}
+		}
+
+		if (silverRewards.size > 0)
+		{
+			if (!gotSilver)
+			{
+				rewards.add(Pair(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_silver"), "Can gain a silver level reward."))
+			}
+			else
+			{
+				rewards.add(Pair(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_silver", colour = Colour.DARK_GRAY), "Silver reward already acquired."))
+			}
+		}
+
+		if (goldRewards.size > 0)
+		{
+			if (!gotSilver)
+			{
+				rewards.add(Pair(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_gold"), "Can gain a gold level reward."))
+			}
+			else
+			{
+				rewards.add(Pair(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_gold", colour = Colour.DARK_GRAY), "Gold reward already acquired."))
+			}
+		}
+
+		return CardWidget.createCard(
+				title,
+				"Quest",
+				AssetManager.loadSprite("GUI/QuestCardback"),
+				createTable(true),
+				AssetManager.loadTextureRegion("GUI/QuestCardback")!!,
+				descriptors = rewards)
 	}
 
 	fun run()

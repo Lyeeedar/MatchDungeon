@@ -80,9 +80,7 @@ class Character(val path: String)
 				val infoButton = Button(Statics.skin, "infocard")
 				infoButton.setSize(24f, 24f)
 				infoButton.addClickListener {
-					val t = equipment.createTable(null, false)
-
-					FullscreenTable.createCard(t, infoButton.localToStageCoordinates(Vector2(12f, 12f)))
+					FullscreenTable.createCard(equipment.getCard(null, false), infoButton.localToStageCoordinates(Vector2(12f, 12f)))
 				}
 				equipTable.add(infoButton).size(24f).pad(0f, 12f, 0f, 12f).expandX().right()
 

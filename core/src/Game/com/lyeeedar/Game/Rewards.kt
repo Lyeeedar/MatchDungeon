@@ -85,10 +85,9 @@ class StatisticsReward : AbstractReward()
 			val statVal = statsTable[stat]
 			if (statVal != 0f)
 			{
-				val table = CardWidget.createFrontTable(stat.niceName, stat.icon.copy(), AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, statVal.toString())
 				Global.player.statistics[stat] = (Global.player.statistics[stat] ?: 0f) + statVal
 
-				val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, null)
+				val card = CardWidget.createCard(stat.niceName, "Statistic", stat.icon.copy(), table, AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, topText = statVal.toString())
 				card.canZoom = false
 				card.addPick("Take") {
 

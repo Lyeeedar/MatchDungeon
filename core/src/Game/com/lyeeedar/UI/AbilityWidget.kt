@@ -43,9 +43,7 @@ class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val gr
 		val infoButton = Button(Statics.skin, "info")
 		infoButton.setSize(16f, 16f)
 		infoButton.addClickListener {
-			val t = ability.createTable()
-
-			FullscreenTable.createCard(t, infoButton.localToStageCoordinates(Vector2()))
+			FullscreenTable.createCard(ability.getCard(), infoButton.localToStageCoordinates(Vector2()))
 		}
 		val infoButtonTable = Table()
 		infoButtonTable.add(infoButton).size(16f).expand().top().right().pad(5f)

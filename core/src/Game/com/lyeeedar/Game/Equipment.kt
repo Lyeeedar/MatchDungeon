@@ -28,18 +28,7 @@ class Equipment(val path: String)
 
 	fun getCard(other: Equipment?, showAsPlus: Boolean): CardWidget
 	{
-		val card = CardWidget(
-			CardWidget.createFrontTable(
-				FrontTableSimple(name, "Equipment", icon.copy(), AssetManager.loadSprite("GUI/EquipmentCardback"))),
-			CardWidget.createFrontTable(
-				FrontTableComplex(name,
-								  "Equipment",
-								  createTable(other, showAsPlus),
-								  AssetManager.loadSprite("GUI/EquipmentCardback"),
-								  gdxArrayOf( Pair(icon.copy(), null)))),
-			AssetManager.loadTextureRegion("GUI/EquipmentCardback")!!,
-			this)
-		return card
+		return CardWidget.createCard(name, "Equipment", icon.copy(), createTable(other, showAsPlus), AssetManager.loadTextureRegion("GUI/EquipmentCardback")!!, this)
 	}
 
 	fun createTable(other: Equipment?, showAsPlus: Boolean): Table
@@ -101,9 +90,7 @@ class Equipment(val path: String)
 				val infoButton = Button(Statics.skin, "infocard")
 				infoButton.setSize(24f, 24f)
 				infoButton.addClickListener {
-					val t = other.ability!!.createTable()
-
-					FullscreenTable.createCard(t, infoButton.localToStageCoordinates(Vector2()))
+					FullscreenTable.createCard(other.ability!!.getCard(), infoButton.localToStageCoordinates(Vector2()))
 				}
 				abilityTable.add(infoButton).size(24f).expandX().right().pad(0f, 10f, 0f, 0f)
 
@@ -120,9 +107,7 @@ class Equipment(val path: String)
 				val infoButton = Button(Statics.skin, "infocard")
 				infoButton.setSize(24f, 24f)
 				infoButton.addClickListener {
-					val t = ability!!.createTable()
-
-					FullscreenTable.createCard(t, infoButton.localToStageCoordinates(Vector2()))
+					FullscreenTable.createCard(ability!!.getCard(), infoButton.localToStageCoordinates(Vector2()))
 				}
 				abilityTable.add(infoButton).size(24f).expandX().right().pad(0f, 10f, 0f, 0f)
 

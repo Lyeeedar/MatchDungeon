@@ -76,9 +76,7 @@ class QuestScreen : AbstractScreen()
 		statsTable.add(equipmentTable).growX()
 
 		statsTable.addClickListener {
-			val table = Global.player.createTable()
-
-			FullscreenTable.createCard(table, statsTable.localToStageCoordinates(Vector2()))
+			FullscreenTable.createCard(Global.player.getCard(), statsTable.localToStageCoordinates(Vector2()))
 		}
 
 		questProgressWidget = QuestProgressWidget()

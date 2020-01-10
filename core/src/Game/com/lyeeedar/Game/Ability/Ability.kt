@@ -51,18 +51,15 @@ class Ability
 
 	val selectedTargets = Array<Tile>()
 
+	fun getCard(): CardWidget
+	{
+		return CardWidget.createCard(name, "Ability", AssetManager.loadTextureRegion("GUI/AbilityCardBack")!!, createTable(), createTable())
+	}
+	
 	fun createTable(): Table
 	{
 		val table = Table()
 		table.defaults().pad(5f)
-
-		val titleStack = Stack()
-		val iconTable = Table()
-		titleStack.add(iconTable)
-		titleStack.add(Label(name, Statics.skin, "cardtitle"))
-
-		table.add(titleStack).growX()
-		table.row()
 
 		val descLabel = Label(description, Statics.skin, "card")
 		descLabel.setWrap(true)

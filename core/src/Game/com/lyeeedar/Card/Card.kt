@@ -117,7 +117,14 @@ class CardNode
 	fun getCard(): CardWidget
 	{
 		val colour = if (isQuestCard) Colour(1f, 0.8f, 0.6f, 1f) else Colour.WHITE
-		return CardWidget(createTable(false), createTable(true), AssetManager.loadTextureRegion("GUI/CardCardback")!!, this, colour)
+		return CardWidget.createCard(
+				name,
+				"Card",
+				AssetManager.loadTextureRegion("GUI/CardCardback")!!,
+				createTable(false),
+				createTable(true),
+				this,
+				colour)
 	}
 
 	fun createTable(detail: Boolean): Table
@@ -130,11 +137,8 @@ class CardNode
 		val table = Table()
 		wrapperStack.add(table)
 
-		val title = Label(name, Statics.skin, if (detail) "cardtitle" else "cardrewardtitle")
-		title.setWrap(true)
-		title.setAlignment(Align.center)
-		table.add(title).expandX().center().padTop(10f).width(Value.percentWidth(1f, table))
-		table.row()
+		table.add(Table()).grow()
+		table.row();
 
 		if (parent.characterRestriction != null)
 		{
@@ -251,6 +255,9 @@ class CardNode
 			stack.addTapToolTip("Completing this encounter will cause it to advance.")
 			table.add(stack).expandX().center().pad(5f).padBottom(32f)
 		}
+
+		table.add(Table()).grow()
+		table.row();
 
 		if (!hasBeenPlayed && !isQuestCard)
 		{
