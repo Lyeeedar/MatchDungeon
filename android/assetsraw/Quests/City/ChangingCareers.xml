@@ -1,6 +1,9 @@
 <Quest meta:X="0" meta:Y="0" GUID="52a7b6f4-7f02-4f1a-bce2-d9745b9b0518" xmlns:meta="Editor" meta:GraphCommentData="d74ba28b-33b4-4bbf-a0a2-84a9b3cf4948$Start$$51,51,51,255%f60eac7c-f567-4e27-967e-debf3abe4407$Branch$$112,199,88,255%c3c020a2-9a28-42ab-9e47-778297078a13$Wizard$$203,53,252,255%9e0344c5-5f90-479e-aa5b-faf7f95ff6de$Alchemist$$199,156,13,255%b58932ec-9b94-4de2-ac68-55594aed21c2$Complete$$222,235,4,255%a07e5911-882c-472b-894f-8a44fe885130$Knight$$99,57,57,255">
 	<Title>Changing Careers</Title>
 	<Description>The city holds many opportunities for a new start, for those that seek them out.</Description>
+	<Icon meta:RefKey="Sprite">
+		<Name>Quest/ChangingCareers</Name>
+	</Icon>
 	<Theme>City</Theme>
 	<BronzeRewards meta:RefKey="Rewards" />
 	<SilverRewards meta:RefKey="Rewards">

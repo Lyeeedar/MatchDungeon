@@ -1,10 +1,9 @@
 package com.lyeeedar
 
 import com.lyeeedar.Screens.*
-import com.lyeeedar.Util.Statics
 import java.util.*
 
-val DEBUG_SCREEN_OVERRIDE: ScreenEnum? = if (Statics.debug) ScreenEnum.TESTCARDLOOK else null
+val DEBUG_SCREEN_OVERRIDE: ScreenEnum? = null
 
 enum class ScreenEnum
 {

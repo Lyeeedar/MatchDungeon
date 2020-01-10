@@ -15,9 +15,7 @@ import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.SpawnWeight
 import com.lyeeedar.UI.CardWidget
-import com.lyeeedar.UI.FrontTableComplex
 import com.lyeeedar.UI.SpriteWidget
-import com.lyeeedar.UI.addTapToolTip
 import com.lyeeedar.Util.*
 import ktx.collections.set
 import ktx.collections.toGdxArray
@@ -59,6 +57,7 @@ class Quest(val path: String)
 
 	val title: String
 	val description: String
+	val icon: Sprite
 
 	init
 	{
@@ -67,6 +66,7 @@ class Quest(val path: String)
 
 		title = xml.get("Title", "")!!
 		description = xml.get("Description", "")!!
+		icon = AssetManager.loadSprite(xml.getChildByName("Icon")!!)
 
 		themeName = xml.get("Theme")
 		theme = Theme.Companion.load("Themes/$themeName")
@@ -155,69 +155,8 @@ class Quest(val path: String)
 		val table = Table()
 		wrapperStack.add(table)
 
-		val rewardsTable = Table()
-		table.add(rewardsTable).growX().center()
+		table.add(SpriteWidget(icon.copy(), 100f, 100f)).grow()
 		table.row()
-
-		if (bronzeRewards.size > 0)
-		{
-			if (!gotBronze)
-			{
-				val icon = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/coin_copper")!!
-				val widget = SpriteWidget(Sprite(icon), 64f, 64f)
-				widget.addTapToolTip("Can gain a bronze level reward.")
-				rewardsTable.add(widget).expandX().center().pad(10f)
-			}
-			else
-			{
-				val icon = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/coin_copper")!!
-				val sprite = Sprite(icon)
-				sprite.colour = Colour.DARK_GRAY
-				val widget = SpriteWidget(sprite, 64f, 64f)
-				widget.addTapToolTip("Bronze reward already acquired.")
-				rewardsTable.add(widget).expandX().center().pad(10f)
-			}
-		}
-
-		if (silverRewards.size > 0)
-		{
-			if (!gotSilver)
-			{
-				val icon = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/coin_silver")!!
-				val widget = SpriteWidget(Sprite(icon), 64f, 64f)
-				widget.addTapToolTip("Can gain a silver level reward.")
-				rewardsTable.add(widget).expandX().center().pad(10f)
-			}
-			else
-			{
-				val icon = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/coin_silver")!!
-				val sprite = Sprite(icon)
-				sprite.colour = Colour.DARK_GRAY
-				val widget = SpriteWidget(sprite, 64f, 64f)
-				widget.addTapToolTip("Silver reward already acquired.")
-				rewardsTable.add(widget).expandX().center().pad(10f)
-			}
-		}
-
-		if (goldRewards.size > 0)
-		{
-			if (!gotGold)
-			{
-				val icon = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/coin_gold")!!
-				val widget = SpriteWidget(Sprite(icon), 64f, 64f)
-				widget.addTapToolTip("Can gain a gold level reward.")
-				rewardsTable.add(widget).expandX().center().pad(10f)
-			}
-			else
-			{
-				val icon = AssetManager.loadTextureRegion("Oryx/uf_split/uf_items/coin_gold")!!
-				val sprite = Sprite(icon)
-				sprite.colour = Colour.DARK_GRAY
-				val widget = SpriteWidget(sprite, 64f, 64f)
-				widget.addTapToolTip("Gold reward already acquired.")
-				rewardsTable.add(widget).expandX().center().pad(10f)
-			}
-		}
 
 		if (detail)
 		{
@@ -277,9 +216,7 @@ class Quest(val path: String)
 			}
 		}
 
-		val desc = FrontTableComplex(title, "Quest", createTable(true), AssetManager.loadSprite("GUI/QuestCardback"), rewards)
-
-		return CardWidget.createCard(desc, this)
+		return CardWidget.createCard(title, "Quest", AssetManager.loadSprite("GUI/QuestCardback"), createTable(false), createTable(true), this, descriptors = rewards)
 	}
 
 	fun run()

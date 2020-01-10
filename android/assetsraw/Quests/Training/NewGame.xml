@@ -1,4 +1,7 @@
-<Quest meta:X="94.664718627929688" meta:Y="-36.513534545898438" GUID="a8fd54e6-a78d-422d-b61e-64f948bc51d3" xmlns:meta="Editor">
+<Quest meta:X="0" meta:Y="0" GUID="a8fd54e6-a78d-422d-b61e-64f948bc51d3" xmlns:meta="Editor">
+	<Icon meta:RefKey="Sprite">
+		<Name>white</Name>
+	</Icon>
 	<Theme>TrainingGround</Theme>
 	<QuestCards>
 		<Card>TheBasics</Card>
@@ -16,11 +19,8 @@
 	<GoldRewards meta:RefKey="Rewards" />
 	<Root meta:RefKey="QuestNode">2c75e90c-5dce-429f-b8ee-5cac829573a1</Root>
 	<Nodes>
-		<CompleteQuest meta:X="1862.9822998046875" meta:Y="80.947380065917969" GUID="9ea86772-b56f-4d14-b8ff-aa6237afccbf">
-			<State>Failure</State>
-		</CompleteQuest>
-		<CompleteQuest meta:X="1030.7897776423338" meta:Y="38.533527933194591" GUID="564aca00-e89a-43ff-83da-216a3acaa66a" />
-		<QuestNode meta:X="468.84767024698789" meta:Y="-46.529335294483133" GUID="2c75e90c-5dce-429f-b8ee-5cac829573a1">
+		<CompleteQuest meta:X="936.12507629394531" meta:Y="75.047061920166016" GUID="564aca00-e89a-43ff-83da-216a3acaa66a" />
+		<QuestNode meta:X="374.18293762207031" meta:Y="-10.015800476074219" GUID="2c75e90c-5dce-429f-b8ee-5cac829573a1">
 			<Type>Deck</Type>
 			<AllowDeckCards>false</AllowDeckCards>
 			<AllowQuestCards>true</AllowQuestCards>

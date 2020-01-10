@@ -1,5 +1,8 @@
 <Quest meta:X="0" meta:Y="0" GUID="c8cde3d0-d6d0-49d2-86f8-9c88abbceae4" xmlns:meta="Editor">
 	<Title>NEW GAME</Title>
+	<Icon meta:RefKey="Sprite">
+		<Name>white</Name>
+	</Icon>
 	<Theme>Farm</Theme>
 	<BronzeRewards meta:RefKey="Rewards" />
 	<SilverRewards meta:RefKey="Rewards" />

@@ -1,6 +1,9 @@
 <Quest meta:X="0" meta:Y="0" GUID="ded5d2d4-10d7-4388-ad06-72e15da3dd0b" xmlns:meta="Editor" meta:GraphCommentData="51d3c237-032b-4485-9599-1ec36c60d75e$Treasure Room 1$$209,171,0,255%8c565d5a-5ed2-4d54-9b6b-6a37fb1d1b0b$Treasure Room 2$$192,194,0,255%f22f6a3e-5c24-4783-aa6b-52b13a2eb508$Treasure Room 3$$219,180,8,255%d648dc27-5003-4164-bcdc-af770b998118$Ending$$233,247,1,255">
 	<Title>Treasure Hunt</Title>
 	<Description>Tales of forgotten treasures left deep within an ancient ruin have drawn you to this place. Explore and take everything you can find!</Description>
+	<Icon meta:RefKey="Sprite">
+		<Name>Quest/TreasureHunt</Name>
+	</Icon>
 	<Theme>Dungeon</Theme>
 	<BronzeRewards meta:RefKey="Rewards">
 		<Quest>
