@@ -87,7 +87,7 @@ class StatisticsReward : AbstractReward()
 			{
 				Global.player.statistics[stat] = (Global.player.statistics[stat] ?: 0f) + statVal
 
-				val card = CardWidget.createCard(stat.niceName, "Statistic", stat.icon.copy(), table, AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, topText = statVal.toString())
+				val card = CardWidget.createCard(stat.niceName, "Statistic", stat.icon.copy(), Table(), AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, topText = statVal.toString())
 				card.canZoom = false
 				card.addPick("Take") {
 
@@ -547,7 +547,7 @@ class ItemReward : AbstractReward()
 
 			flags.flags.put(key, value.evaluate(Global.getVariableMap()))
 
-			val table = CardWidget.createFrontTable(name, icon.copy())
+			val table = CardWidget.createFrontTable(FrontTableSimple(name, "Item", icon.copy()))
 
 			val cardWidget = CardWidget(table, Table(), AssetManager.loadTextureRegion("GUI/ItemCardback")!!, null)
 			cardWidget.canZoom = false

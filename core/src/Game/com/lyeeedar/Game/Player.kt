@@ -12,6 +12,7 @@ import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.Card.Card
 import com.lyeeedar.EquipmentSlot
+import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
@@ -124,9 +125,6 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 		statisticsButton.addClickListener {
 			val statisticsTable = Table()
 
-			statisticsTable.add(Label("Statistics", Statics.skin, "cardtitle"))
-			statisticsTable.row()
-
 			var bright = true
 			for (stat in Statistic.Values)
 			{
@@ -172,7 +170,6 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 			FullscreenTable.createCard(
 					"Statistics",
 					"Player",
-					AssetManager.getTextureRegion("GUI/CharacterCardback")!!,
 					statisticsTable,
 					statisticsButton.localToStageCoordinates(Vector2()))
 		}
@@ -188,9 +185,6 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 			val buffsButton = TextButton("Buffs", Statics.skin)
 			buffsButton.addClickListener {
 				val buffsTable = Table()
-
-				buffsTable.add(Label("Buffs", Statics.skin, "cardtitle"))
-				buffsTable.row()
 
 				val bufftable = Table()
 				buffsTable.add(bufftable).grow()
@@ -216,7 +210,6 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 				FullscreenTable.createCard(
 						"Buffs",
 						"Player",
-						AssetManager.getTextureRegion("GUI/CharacterCardback")!!,
 						buffsTable,
 						buffsButton.localToStageCoordinates(Vector2()))
 			}
@@ -231,9 +224,6 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 		val equipmentButton = TextButton("Equipment", Statics.skin)
 		equipmentButton.addClickListener {
 			val equipmentTable = Table()
-
-			equipmentTable.add(Label("Equipment", Statics.skin, "cardtitle"))
-			equipmentTable.row()
 
 			val emptySlot = AssetManager.loadSprite("Icons/Empty")
 
@@ -275,7 +265,6 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 			FullscreenTable.createCard(
 					"Equipment",
 					"Player",
-					AssetManager.getTextureRegion("GUI/CharacterCardback")!!,
 					equipmentTable,
 					equipmentButton.localToStageCoordinates(Vector2()))
 		}
@@ -286,7 +275,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 		table.add(Seperator(Statics.skin, "horizontalcard"))
 		table.row()
 
-		return CardWidget.createCard(baseCharacter.name, "Player", Sprite(baseCharacter.sprite.textures[0]), AssetManager.loadTextureRegion("GUI/CharacterCardback")!!)
+		return CardWidget.createCard(baseCharacter.name, "Player", Sprite(baseCharacter.sprite.textures[0]), table, AssetManager.loadTextureRegion("GUI/CharacterCardback")!!)
 	}
 
 	fun save(kryo: Kryo, output: Output)

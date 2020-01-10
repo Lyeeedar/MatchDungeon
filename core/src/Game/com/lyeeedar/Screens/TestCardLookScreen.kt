@@ -55,7 +55,7 @@ class TestCardLookScreen : AbstractScreen()
 		val player = Player(character, PlayerDeck())
 		Global.player = player
 		Global.deck = GlobalDeck()
-		cards.add(CardWidget(Table(), player.createTable(), AssetManager.loadTextureRegion("white")!!))
+		cards.add(player.getCard())
 
 		val moneyReward = MoneyReward()
 		moneyReward.amountEqn = "589"

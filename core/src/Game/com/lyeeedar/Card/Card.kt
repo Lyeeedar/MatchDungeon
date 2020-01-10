@@ -6,8 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.scenes.scene2d.ui.Value
-import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.esotericsoftware.kryo.io.Input
@@ -119,8 +117,8 @@ class CardNode
 		val colour = if (isQuestCard) Colour(1f, 0.8f, 0.6f, 1f) else Colour.WHITE
 		return CardWidget.createCard(
 				name,
-				"Card",
-				AssetManager.loadTextureRegion("GUI/CardCardback")!!,
+				"Encounter",
+				AssetManager.loadSprite("GUI/CardCardback"),
 				createTable(false),
 				createTable(true),
 				this,

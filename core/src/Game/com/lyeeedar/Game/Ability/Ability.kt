@@ -3,7 +3,6 @@ package com.lyeeedar.Game.Ability
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
-import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectFloatMap
@@ -18,6 +17,7 @@ import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Statistic
+import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.PowerBar
 import com.lyeeedar.UI.Seperator
@@ -53,9 +53,9 @@ class Ability
 
 	fun getCard(): CardWidget
 	{
-		return CardWidget.createCard(name, "Ability", AssetManager.loadTextureRegion("GUI/AbilityCardBack")!!, createTable(), createTable())
+		return CardWidget.createCard(name, "Ability", AssetManager.loadSprite("GUI/AbilityCardback"), createTable(), createTable())
 	}
-	
+
 	fun createTable(): Table
 	{
 		val table = Table()

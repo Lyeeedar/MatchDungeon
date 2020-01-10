@@ -3,8 +3,6 @@ package com.lyeeedar.Game
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.scenes.scene2d.ui.Value
-import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.badlogic.gdx.utils.ObjectSet
@@ -17,6 +15,7 @@ import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.SpawnWeight
 import com.lyeeedar.UI.CardWidget
+import com.lyeeedar.UI.FrontTableComplex
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.addTapToolTip
 import com.lyeeedar.Util.*
@@ -241,8 +240,6 @@ class Quest(val path: String)
 
 	fun getCard(): CardWidget
 	{
-		return CardWidget(createTable(false), createTable(true), AssetManager.loadTextureRegion("GUI/QuestCardback")!!, this)
-
 		val rewards = Array<Pair<Sprite, String?>>()
 		if (bronzeRewards.size > 0)
 		{
@@ -280,13 +277,9 @@ class Quest(val path: String)
 			}
 		}
 
-		return CardWidget.createCard(
-				title,
-				"Quest",
-				AssetManager.loadSprite("GUI/QuestCardback"),
-				createTable(true),
-				AssetManager.loadTextureRegion("GUI/QuestCardback")!!,
-				descriptors = rewards)
+		val desc = FrontTableComplex(title, "Quest", createTable(true), AssetManager.loadSprite("GUI/QuestCardback"), rewards)
+
+		return CardWidget.createCard(desc, this)
 	}
 
 	fun run()
