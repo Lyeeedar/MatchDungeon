@@ -12,6 +12,7 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.*
+import ktx.collections.gdxArrayOf
 
 class Character(val path: String)
 {
@@ -28,20 +29,15 @@ class Character(val path: String)
 		val table = Table()
 		table.defaults().growX()
 
-		val titleStack = Stack()
-		val iconTable = Table()
-		iconTable.add(SpriteWidget(Sprite(sprite.textures[0]), 48f, 48f)).expandX().right().pad(5f).padRight(25f)
-		titleStack.add(iconTable)
-		titleStack.add(Label(name, Statics.skin, "cardtitle"))
-
-		table.add(titleStack).growX()
+		table.add(Table()).grow()
 		table.row()
+
 		val descLabel = Label(description, Statics.skin, "card")
 		descLabel.setWrap(true)
 		table.add(descLabel)
 		table.row()
 
-		table.add(Seperator(Statics.skin, "horizontalcard"))
+		table.add(Seperator(Statics.skin, "horizontalcard")).expand().pad(3f, 0f, 3f, 0f)
 		table.row()
 
 		table.add(Label("Statistics", Statics.skin, "cardtitle"))
@@ -50,7 +46,7 @@ class Character(val path: String)
 		table.add(Statistic.createTable(baseStatistics, Statistic.Companion.DisplayType.FLAT)).growX()
 		table.row()
 
-		table.add(Seperator(Statics.skin, "horizontalcard"))
+		table.add(Seperator(Statics.skin, "horizontalcard")).expand().pad(3f, 0f, 3f, 0f)
 		table.row()
 
 		table.add(Label("Equipment", Statics.skin, "cardtitle"))
@@ -91,7 +87,20 @@ class Character(val path: String)
 			}
 		}
 
-		return CardWidget(CardWidget.createFrontTable(name, Sprite(sprite.textures[0])), table, AssetManager.loadTextureRegion("GUI/CharacterCardback")!!, this)
+		table.add(Table()).grow()
+		table.row()
+
+		return CardWidget(
+			CardWidget.createFrontTable(
+				FrontTableSimple(name, "Character", Sprite(sprite.textures[0]), AssetManager.loadSprite("GUI/CharacterCardback"))),
+			CardWidget.createFrontTable(
+				FrontTableComplex(name,
+								  "Character",
+								  table,
+								  AssetManager.loadSprite("GUI/CharacterCardback"),
+								  gdxArrayOf( Pair(Sprite(sprite.textures[0]), null)))),
+			AssetManager.loadTextureRegion("GUI/CharacterCardback")!!,
+			this)
 	}
 
 	fun parse(xmlData: XmlData)
