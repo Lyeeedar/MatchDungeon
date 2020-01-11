@@ -14,6 +14,7 @@ import com.lyeeedar.Board.*
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionTime
 import com.lyeeedar.Game.Ability.Effect
 import com.lyeeedar.Game.Ability.Targetter
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.SortedRenderer
 import com.lyeeedar.Renderables.Sprite.Sprite
@@ -228,19 +229,21 @@ class GridWidget(val grid: Grid) : Widget()
 	}
 
 	var renderY = 0f
-	override fun draw(batch: Batch?, parentAlpha: Float)
+	override fun draw(batch: Batch, parentAlpha: Float)
 	{
-		batch!!.end()
+		batch.end()
 
 		val xp = this.x + (this.width / 2f) - ((grid.width * tileSize) / 2f)
 		val yp = this.y + (this.height / 2f) - ((grid.height * tileSize) / 2f)
 		renderY = yp
 
-		renderer.begin(Gdx.app.graphics.deltaTime * GridScreen.instance.timeMultiplier, xp, yp, Colour(1f, 1f, 1f, 1f))
+		val delta = if (Global.resolveInstantly) 10f else Gdx.app.graphics.deltaTime * GridScreen.instance.timeMultiplier
+
+		renderer.begin(delta, xp, yp, Colour(1f, 1f, 1f, 1f))
 
 		if (grid.activeAbility == null)
 		{
-			batch!!.color = Color.WHITE
+			batch.color = Color.WHITE
 		}
 
 		for (x in 0 until grid.width)

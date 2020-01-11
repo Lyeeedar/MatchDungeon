@@ -23,6 +23,8 @@ class Global
 {
 	companion object
 	{
+		var resolveInstantly = false
+
 		lateinit var player: Player
 		var globalflags = GameStateFlags()
 		var questflags = GameStateFlags()

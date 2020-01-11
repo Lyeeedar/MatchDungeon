@@ -1,17 +1,27 @@
 package com.lyeeedar.Board
 
-import com.lyeeedar.Renderables.Sprite.Sprite
+import com.badlogic.ashley.core.Entity
+import com.lyeeedar.Components.*
+import com.lyeeedar.Renderables.Renderable
 
-class Sinkable : Swappable
+fun getSinkable(renderable: Renderable): Entity
 {
-	override val canMove: Boolean
-		get() = !sealed
+	val archetype = EntityArchetypeComponent.obtain().set(EntityArchetype.SINKABLE)
 
-	constructor(sprite: Sprite, theme: Theme)
-		: super(theme)
-	{
-		this.sprite = sprite
-	}
+	val position = PositionComponent.obtain()
 
+	val renderable = RenderableComponent.obtain().set(renderable)
 
+	val sinkable = SinkableComponent.obtain()
+
+	val swappable = SwappableComponent.obtain()
+
+	val entity = EntityPool.obtain()
+	entity.add(archetype)
+	entity.add(position)
+	entity.add(renderable)
+	entity.add(sinkable)
+	entity.add(swappable)
+
+	return entity
 }

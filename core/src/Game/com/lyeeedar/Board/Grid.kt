@@ -10,6 +10,8 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionCustomOrb
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
+import com.lyeeedar.Components.damageable
+import com.lyeeedar.Components.posOrNull
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Global
@@ -119,14 +121,15 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 			for (tile in grid)
 			{
-				// process creatures
-				val damageable = tile.damageable
-				if (damageable != null)
+				if (tile.contents != null)
 				{
-					if (damageable !is Creature || damageable.tiles[0, 0] == tile)
+					val damageableComponent = tile.contents!!.damageable()
+					val positionComponent = tile.contents!!.pos()
+
+					if (damageableComponent != null && positionComponent.tiles[0, 0] == tile)
 					{
-						damageable.damSources.clear()
-						damageable.remainingReduction = damageable.damageReduction
+						damageableComponent.damSources.clear()
+						damageableComponent.remainingReduction = damageable.damageReduction
 					}
 				}
 			}
@@ -741,6 +744,8 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	// ----------------------------------------------------------------------
 	private fun makeAnimations(): Boolean
 	{
+		if (Global.resolveInstantly) return true
+
 		var doneAnimation = true
 
 		for (x in 0 until width)
@@ -1160,6 +1165,8 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	// ----------------------------------------------------------------------
 	private fun displayMatchMessage(point: Point)
 	{
+		if (Global.resolveInstantly) return
+
 		data class MessageData(val text: String, val colour: Colour, val size: Float)
 		val message = when(matchCount)
 		{
@@ -1431,7 +1438,13 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 					val delay = grid[x, y].taxiDist(Point.ZERO).toFloat() * 0.1f
 
-					Future.call(
+					if (Global.resolveInstantly)
+					{
+						oldmatchable.desc = newmatchable.desc
+					}
+					else
+					{
+						Future.call(
 							{
 								val sprite = refillSprite.copy()
 
@@ -1439,6 +1452,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 								grid[x, y].effects.add(sprite)
 							}, delay + 0.2f)
+					}
 
 				}
 			}
@@ -1950,6 +1964,27 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		if (x >= 0 && y >= 0 && x < width && y < height) return grid[x, y]
 		else return null
 	}
+
+	// ----------------------------------------------------------------------
+	inline fun getTileClamped(point: Point) = getTile(MathUtils.clamp(point.x, 0, width-1), MathUtils.clamp(point.y, 0, height-1))!!
+
+	// ----------------------------------------------------------------------
+	inline fun getTile(point: Point) = getTile(point.x, point.y)
+
+	// ----------------------------------------------------------------------
+	inline fun getTile(point: Point, ox:Int, oy:Int) = getTile(point.x + ox, point.y + oy)
+
+	// ----------------------------------------------------------------------
+	inline fun getTile(point: Point, o: Point) = getTile(point.x + o.x, point.y + o.y)
+
+	// ----------------------------------------------------------------------
+	inline fun getTile(x: Int, y: Int, dir: Direction) = getTile(x + dir.x, y + dir.y)
+
+	// ----------------------------------------------------------------------
+	inline fun getTile(point: Point, dir: Direction) = getTile(point.x + dir.x, point.y + dir.y)
+
+	// ----------------------------------------------------------------------
+	fun getTile(x: Int, y: Int): Tile? = grid[x, y, null]
 }
 
 data class Match(val p1: Point, val p2: Point, var used: Boolean = false)

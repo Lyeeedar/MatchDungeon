@@ -1,8 +1,10 @@
 package com.lyeeedar.Board
 
+import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
+import com.lyeeedar.Components.*
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.AssetManager
@@ -13,40 +15,51 @@ import ktx.collections.set
  * Created by Philip on 04-Jul-16.
  */
 
-class Orb(desc: OrbDesc, theme: Theme): Matchable(theme)
+fun createOrb(desc: OrbDesc, theme: Theme): Entity
 {
-	override var desc: OrbDesc = OrbDesc()
+	val matchable = MatchableComponent.obtain()
+	matchable.desc = desc
+
+	val swappable = SwappableComponent.obtain()
+
+	val renderable = RenderableComponent.obtain()
+	renderable.set(desc.sprite.copy())
+
+	val position = PositionComponent.obtain()
+
+	val archetype = EntityArchetypeComponent.obtain().set(EntityArchetype.ORB)
+
+	val entity = EntityPool.obtain()
+	entity.add(matchable)
+	entity.add(swappable)
+	entity.add(renderable)
+	entity.add(position)
+	entity.add(archetype)
+
+	return entity
+}
+
+class OrbDesc()
+{
+	constructor(sprite: Sprite, death: ParticleEffect, key: Int, name: String, isNamed: Boolean) : this()
+	{
+		this.sprite = sprite
+		this.death = death
+		this.name = name
+		this.key = key
+		this.isNamed = isNamed
+	}
+
+	var sprite: Sprite = AssetManager.loadSprite("white")
+	var death: ParticleEffect = AssetManager.loadParticleEffect("Death").getParticleEffect()
+	var key: Int = -1
+	var isNamed: Boolean = false
+	var name: String = ""
 		set(value)
 		{
 			field = value
-			sprite = desc.sprite.copy()
-			sprite.colour = desc.sprite.colour
+			key = value.hashCode()
 		}
-
-	init
-	{
-		this.desc = desc
-	}
-
-	override val canMatch: Boolean
-		get() = true
-
-	override var markedForDeletion: Boolean = false
-	override var deletionEffectDelay: Float = 0f
-	var skipPowerOrb = false
-
-	override val canMove: Boolean
-		get() = !sealed
-
-	override fun toString(): String
-	{
-		return desc.key.toString()
-	}
-
-	fun setAttributes(orb: Orb)
-	{
-		sealCount = orb.sealCount
-	}
 
 	companion object
 	{
@@ -140,27 +153,4 @@ class Orb(desc: OrbDesc, theme: Theme): Matchable(theme)
 			}
 		}
 	}
-}
-
-class OrbDesc()
-{
-	constructor(sprite: Sprite, death: ParticleEffect, key: Int, name: String, isNamed: Boolean) : this()
-	{
-		this.sprite = sprite
-		this.death = death
-		this.name = name
-		this.key = key
-		this.isNamed = isNamed
-	}
-
-	var sprite: Sprite = AssetManager.loadSprite("white")
-	var death: ParticleEffect = AssetManager.loadParticleEffect("Death").getParticleEffect()
-	var key: Int = -1
-	var isNamed: Boolean = false
-	var name: String = ""
-		set(value)
-		{
-			field = value
-			key = value.hashCode()
-		}
 }
