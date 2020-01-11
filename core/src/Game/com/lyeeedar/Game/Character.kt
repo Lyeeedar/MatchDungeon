@@ -12,7 +12,6 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.*
-import ktx.collections.gdxArrayOf
 
 class Character(val path: String)
 {
@@ -90,17 +89,7 @@ class Character(val path: String)
 		table.add(Table()).grow()
 		table.row()
 
-		return CardWidget(
-			CardWidget.createFrontTable(
-				FrontTableSimple(name, "Character", Sprite(sprite.textures[0]), AssetManager.loadSprite("GUI/CharacterCardback"))),
-			CardWidget.createFrontTable(
-				FrontTableComplex(name,
-								  "Character",
-								  table,
-								  AssetManager.loadSprite("GUI/CharacterCardback"),
-								  gdxArrayOf( Pair(Sprite(sprite.textures[0]), null)))),
-			AssetManager.loadTextureRegion("GUI/CharacterCardback")!!,
-			this)
+		return CardWidget.Companion.createCard(name, "Character", Sprite(sprite.textures[0]), table, AssetManager.loadTextureRegion("GUI/CharacterCardback")!!, this)
 	}
 
 	fun parse(xmlData: XmlData)

@@ -12,12 +12,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.badlogic.gdx.utils.Array
-import com.lyeeedar.*
 import com.lyeeedar.Board.Mote
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.Card.CardNode
+import com.lyeeedar.Direction
+import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.*
+import com.lyeeedar.ScreenEnum
+import com.lyeeedar.Statistic
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.*
 import ktx.actors.then
@@ -389,12 +392,11 @@ class QuestScreen : AbstractScreen()
 
 		stage.addActor(greyOutTable)
 
+		val text = if (currentQuest.state == Quest.QuestState.FAILURE) "Quest Failed!" else "Quest Completed!\n${currentQuest.state.toString().toLowerCase().capitalize()}"
 		val table = Table()
-
-		val text = if (currentQuest.state == Quest.QuestState.FAILURE) "Quest Failed!" else "Quest Completed!\n${currentQuest.state}"
 		table.add(Label(text, Statics.skin, "cardtitle"))
 
-		val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("blank")!!, null)
+		val card = CardWidget(CardWidget.createFrontTable(FrontTableComplex("Complete", "Quest", table)), Table(), AssetManager.loadTextureRegion("blank")!!, null)
 		card.canZoom = false
 		card.setFacing(true, false)
 		card.addPick("") {

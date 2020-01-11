@@ -9,6 +9,7 @@ import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.CardWidget
+import com.lyeeedar.UI.FrontTableSimple
 import com.lyeeedar.UI.Seperator
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.Util.AssetManager
@@ -36,15 +37,12 @@ class Buff(val xml: XmlData)
 
 	fun getCardSmall(isBuff: Boolean): CardWidget
 	{
-		val basicTable = Table()
-
 		val icon = if (isBuff)
 			AssetManager.loadSprite("GUI/Buff")
 		else
 			AssetManager.loadSprite("GUI/Debuff")
 
-		basicTable.add(SpriteWidget(icon, 64f, 64f)).grow()
-		basicTable.row()
+		val basicTable = CardWidget.createFrontTable(FrontTableSimple(name, "Buff", icon))
 
 		val card = CardWidget(basicTable, createTable(), icon.currentTexture, this)
 		return card

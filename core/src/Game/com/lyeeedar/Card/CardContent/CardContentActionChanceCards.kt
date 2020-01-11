@@ -15,7 +15,7 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.CardWidget
-import com.lyeeedar.UI.SpriteWidget
+import com.lyeeedar.UI.FrontTableSimple
 import com.lyeeedar.UI.lambda
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Future
@@ -24,12 +24,14 @@ import com.lyeeedar.Util.XmlData
 import ktx.actors.then
 import ktx.collections.toGdxArray
 
-enum class CardChance
+enum class CardChance private constructor(val niceName: String)
 {
-	GREATPOSITIVE,
-	POSITIVE,
-	NEGATIVE,
-	GREATNEGATIVE
+	GREATPOSITIVE("Blessedly Lucky"),
+	POSITIVE("Lucky"),
+	NEGATIVE("Unlucky"),
+	GREATNEGATIVE("Cursedly Unlucky")
+
+
 }
 
 class CardContentActionChanceCards : AbstractCardContentAction()
@@ -102,17 +104,13 @@ class CardContentActionChanceCards : AbstractCardContentAction()
 				CardChance.GREATNEGATIVE -> AssetManager.loadTextureRegion("GUI/GreatNegativeChance")!!
 			}
 
-			val frontTable = Table()
-			frontTable.add(SpriteWidget(Sprite(cardFront), 64f, 64f)).grow()
+			val frontTable = CardWidget.createFrontTable(FrontTableSimple(chance.niceName, "Chance", Sprite(cardFront), Sprite(chanceCardback)))
 
-			val frontDetailTable = Table()
-			frontDetailTable.add(SpriteWidget(Sprite(cardFront), 64f, 64f)).grow()
-
-			val widget = CardWidget(frontTable, frontDetailTable, chanceCardback, chance)
+			val widget = CardWidget(frontTable, Table(), chanceCardback, chance)
 			cards.add(widget)
 			widget.clickable = false
 			widget.canZoom = false
-			widget.addPick("click", {
+			widget.addPick("click") {
 				for (card in cards)
 				{
 					if (card != widget)
@@ -140,7 +138,7 @@ class CardContentActionChanceCards : AbstractCardContentAction()
 								CardContentScreen.advanceContent()
 							}, 1f)
 
-			})
+			}
 			CardContentScreen.stage.addActor(widget)
 		}
 

@@ -117,9 +117,9 @@ class DeckScreen : AbstractScreen()
 		mainTable.row()
 
 		val deckCard = CardWidget(Table(), Table(), AssetManager.loadTextureRegion("GUI/CardCardback")!!, null)
-		deckCard.addPick("", {
+		deckCard.addPick("") {
 			createEncounterScreen()
-		})
+		}
 		deckCard.canZoom = false
 		deckCard.canPickFaceDown = true
 		deckCard.height = cardHeight
@@ -183,9 +183,9 @@ class DeckScreen : AbstractScreen()
 		mainTable.row()
 
 		val equipCard = CardWidget(Table(), Table(), AssetManager.loadTextureRegion("GUI/EquipmentCardback")!!, null)
-		equipCard.addPick("", {
+		equipCard.addPick("") {
 			createEquipmentScreen()
-		})
+		}
 		equipCard.canZoom = false
 		equipCard.canPickFaceDown = true
 		equipCard.height = cardHeight
