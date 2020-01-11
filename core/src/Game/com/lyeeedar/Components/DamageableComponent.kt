@@ -4,6 +4,8 @@ import com.badlogic.ashley.core.ComponentMapper
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.ObjectSet
 import com.badlogic.gdx.utils.Pool
+import com.lyeeedar.Renderables.Particle.ParticleEffect
+import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.ciel
@@ -66,6 +68,10 @@ class DamageableComponent : AbstractComponent()
 
 	val damSources = ObjectSet<Any?>()
 
+	var deathEffect: ParticleEffect = AssetManager.loadParticleEffect("death").getParticleEffect()
+
+	var isCreature = false
+
 	var obtained: Boolean = false
 	companion object
 	{
@@ -82,7 +88,7 @@ class DamageableComponent : AbstractComponent()
 
 		@JvmStatic fun obtain(): DamageableComponent
 		{
-			val obj = DamageableComponent.pool.obtain()
+			val obj = pool.obtain()
 
 			if (obj.obtained) throw RuntimeException()
 			obj.reset()
@@ -91,7 +97,7 @@ class DamageableComponent : AbstractComponent()
 			return obj
 		}
 	}
-	override fun free() { if (obtained) { DamageableComponent.pool.free(this); obtained = false } }
+	override fun free() { if (obtained) { pool.free(this); obtained = false } }
 
 	override fun parse(xml: XmlData, entity: Entity, parentPath: String)
 	{
@@ -108,5 +114,7 @@ class DamageableComponent : AbstractComponent()
 		tookDamage = false
 		maxhp = 1
 		damSources.clear()
+		deathEffect = AssetManager.loadParticleEffect("death").getParticleEffect()
+		isCreature = false
 	}
 }

@@ -21,7 +21,7 @@ class OrbSpawnerComponent : AbstractComponent()
 
 	var spacingCounter = 0
 
-	var spawn: ((grid: Grid, entity: Entity)->Entity?)? = null
+	lateinit var spawn: ((grid: Grid, entity: Entity)->Entity?)
 
 	var obtained: Boolean = false
 	companion object
@@ -57,7 +57,6 @@ class OrbSpawnerComponent : AbstractComponent()
 
 	override fun reset()
 	{
-		spawn = null
 		numToSpawn = 0
 		spacingCounter = 0
 	}

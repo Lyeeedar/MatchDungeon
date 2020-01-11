@@ -27,43 +27,20 @@ enum class MonsterEffectType
 	DEBUFF
 }
 
-class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, Any>, desc: OrbDesc, theme: Theme) : Matchable(theme)
+class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, Any>)
 {
-	override var desc: OrbDesc = OrbDesc()
-		set(value)
-		{
-			field = value
-			sprite.colour = desc.sprite.colour
-		}
-	val actualSprite: Sprite
-
-	override val canMatch: Boolean
-		get() = true
-
-	override var markedForDeletion: Boolean = false
-	override var deletionEffectDelay: Float = 0f
-
-	override val canMove: Boolean
-		get() = !sealed
+	val actualSprite: Sprite = when (effect)
+	{
+		MonsterEffectType.ATTACK -> AssetManager.loadSprite("Oryx/Custom/items/skull_small", drawActualSize = true)
+		MonsterEffectType.BIGATTACK -> AssetManager.loadSprite("Oryx/Custom/items/skull_large", drawActualSize = true)
+		MonsterEffectType.HEAL -> AssetManager.loadSprite("Oryx/Custom/items/heart", drawActualSize = true)
+		MonsterEffectType.SUMMON -> AssetManager.loadSprite("Oryx/Custom/items/egg", drawActualSize = true)
+		MonsterEffectType.DEBUFF -> AssetManager.loadSprite("Oryx/Custom/items/Debuff", drawActualSize = true)
+		else -> throw Exception("Unhandled monster effect type '$effect'!")
+	}
 
 	var timer: Int = -1
 	var delayDisplay: Float = 0f
-
-	init
-	{
-		actualSprite = when (effect)
-		{
-			MonsterEffectType.ATTACK -> AssetManager.loadSprite("Oryx/Custom/items/skull_small", drawActualSize = true)
-			MonsterEffectType.BIGATTACK -> AssetManager.loadSprite("Oryx/Custom/items/skull_large", drawActualSize = true)
-			MonsterEffectType.HEAL -> AssetManager.loadSprite("Oryx/Custom/items/heart", drawActualSize = true)
-			MonsterEffectType.SUMMON -> AssetManager.loadSprite("Oryx/Custom/items/egg", drawActualSize = true)
-			MonsterEffectType.DEBUFF -> AssetManager.loadSprite("Oryx/Custom/items/Debuff", drawActualSize = true)
-			else -> throw Exception("Unhandled monster effect type '$effect'!")
-		}
-		sprite = desc.sprite.copy()
-
-		this.desc = desc
-	}
 
 	fun apply(grid: Grid, tile: Tile)
 	{
