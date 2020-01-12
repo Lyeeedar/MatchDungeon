@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Family
 import com.badlogic.gdx.math.Interpolation
 import com.lyeeedar.Board.GridUpdate.*
 import com.lyeeedar.Board.Spreader
+import com.lyeeedar.Board.addSpecial
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.Ability
@@ -45,6 +46,7 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 	val sink = SinkUpdateStep()
 	val detonate = DetonateUpdateStep()
 	val updateGrid = UpdateGridUpdateStep()
+	val updateGridState = UpdateGridStateUpdateStep()
 	val cleanup = OnTurnCleanupUpdateStep()
 
 	val updateSteps: Array<AbstractUpdateStep>
@@ -83,6 +85,7 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 			match,
 			sink,
 			detonate,
+			updateGridState,
 			updateGrid,
 			cleanup)
 	}
@@ -258,17 +261,10 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 
 		if (oldSpecial != null || newSpecial != null)
 		{
-			val merged = newSpecial?.merge(oldSwap) ?: oldSpecial?.merge(newSwap)
+			val merged = newSpecial?.merge(oldEntity) ?: oldSpecial?.merge(newEntity)
 			if (merged != null)
 			{
-				var specialHolder = newEntity.special()
-				if (specialHolder == null)
-				{
-					specialHolder = SpecialComponent.obtain()
-					newEntity.add(specialHolder)
-				}
-
-				specialHolder.special = merged
+				addSpecial(newEntity, merged)
 
 				val sprite = oldEntity.renderable().renderable.copy()
 				sprite.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile, true)), Interpolation.linear)
@@ -405,12 +401,13 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 		{
 			for (y in 0 until grid.height)
 			{
-				val special = grid.grid[x, y].contents?.special() ?: continue
+				val contents = grid.grid[x, y].contents ?: continue
+				val special = contents.special() ?: continue
 				for (dir in Direction.CardinalValues)
 				{
 					val tile = grid.tile(x + dir.x, y + dir.y) ?: continue
 					val tileSpecial = tile.contents?.special() ?: continue
-					if (special.special.merge(tileSpecial.special) != null)
+					if (special.special.merge(tile.contents!!) != null || tileSpecial.special.merge(contents) != null)
 					{
 						return Pair(Point(x, y), Point(x + dir.x, y + dir.y))
 					}

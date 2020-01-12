@@ -248,7 +248,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 			// pop all borders
 			for (t in borderTiles)
 			{
-				handleMatch(t)
+				handleMatch(grid, t)
 			}
 		}
 
@@ -281,7 +281,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 			{
 				val sprite = contents.renderable().renderable
 
-				val special = getSpecial(grid, tile.associatedMatches[0]!!.length(), tile.associatedMatches[1]!!.length(), Direction.CENTER, matchable.desc) ?: continue
+				val special = getSpecial(grid, tile.associatedMatches[0]!!.length(), tile.associatedMatches[1]!!.length(), Direction.CENTER) ?: continue
 
 				spawnSpecial(contents, special)
 
@@ -327,33 +327,33 @@ class MatchUpdateStep : AbstractUpdateStep()
 	}
 
 	// ----------------------------------------------------------------------
-	private fun handleMatch(tile: Tile)
+	private fun handleMatch(grid: Grid, tile: Tile)
 	{
-		if (t.friendly != null)
+		if (tile.contents?.healable() != null)
 		{
-			val friendly = t.friendly!!
+			val friendly = tile.contents!!.healable()!!
 			if (friendly.hp < friendly.maxhp)
 			{
-				t.friendly!!.hp++
+				friendly.hp++
 				val healSprite = AssetManager.loadParticleEffect("Heal").getParticleEffect()
 				healSprite.colour = Colour.GREEN
-				t.effects.add(healSprite)
+				tile.effects.add(healSprite)
 			}
 		}
-		else if (t.damageable != null)
+		else if (tile.contents?.damageable() != null)
 		{
-			damage(t, t.damageable!!, 0f, this, level.player.getStat(Statistic.MATCHDAMAGE), level.player.getStat(Statistic.PIERCE))
+			grid.damage(tile, tile.contents!!, 0f, this, grid.level.player.getStat(Statistic.MATCHDAMAGE), grid.level.player.getStat(Statistic.PIERCE))
 		}
 
-		if (t.spreader != null)
+		if (tile.spreader != null)
 		{
-			val spreader = t.spreader!!
+			val spreader = tile.spreader!!
 
-			t.spreader = null
+			tile.spreader = null
 
-			poppedSpreaders.add(spreader.nameKey)
+			grid.poppedSpreaders.add(spreader.nameKey)
 
-			t.effects.add(hitEffect.copy())
+			tile.effects.add(grid.hitEffect.copy())
 		}
 	}
 
@@ -363,35 +363,42 @@ class MatchUpdateStep : AbstractUpdateStep()
 		val specialComponent = contents.special()
 		if (specialComponent != null)
 		{
-			specialComponent.special = specialComponent.special.merge(special) ?: special.merge(specialComponent.special) ?: special
+			val tempEntity = EntityPool.obtain()
+			tempEntity.add(SpecialComponent.obtain().set(special))
+
+			val newSpecial = specialComponent.special.merge(tempEntity) ?: special.merge(contents) ?: special
 			specialComponent.special.armed = true
 
+			addSpecial(contents, newSpecial)
+
 			contents.add(MarkedForDeletionComponent.obtain())
+
+			tempEntity.free()
 		}
 		else
 		{
-			contents.add(SpecialComponent.obtain().set(special))
+			addSpecial(contents, special)
 		}
 	}
 
 	// ----------------------------------------------------------------------
-	private fun getSpecial(grid: Grid, count1: Int, count2: Int, dir: Direction, desc: OrbDesc): Special?
+	private fun getSpecial(grid: Grid, count1: Int, count2: Int, dir: Direction): Special?
 	{
 		if (count1 >= 5 || count2 >= 5)
 		{
-			return Match5(desc, grid.level.theme)
+			return Match5()
 		}
 		else if (count1 > 0 && count2 > 0)
 		{
-			return DualMatch(desc, grid.level.theme)
+			return DualMatch()
 		}
 		else if (dir.y != 0 && count1 == 4)
 		{
-			return Vertical4(desc, grid.level.theme)
+			return Vertical4()
 		}
 		else if (dir.x != 0 && count1 == 4)
 		{
-			return Horizontal4(desc, grid.level.theme)
+			return Horizontal4()
 		}
 
 		return null

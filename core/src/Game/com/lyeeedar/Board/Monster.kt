@@ -95,21 +95,6 @@ class Monster(val desc: MonsterDesc, val difficulty: Int) : Creature(desc.hp, de
 		{
 			atkCooldown = Int.MAX_VALUE
 		}
-
-		val weaknessAura = Global.player.getStat(Statistic.WEAKNESSAURA)
-		if (weaknessAura > 0)
-		{
-			queuedTileActions.add(DelayedAction(
-					{
-						hp -= weaknessAura
-
-						val effect = AssetManager.loadParticleEffect("Weakness").getParticleEffect()
-						effect.size[0] = size
-						effect.size[1] = size
-
-						tiles[0, 0].effects.add(effect)
-					}, 0.5f))
-		}
 	}
 
 	override fun onTurn(grid: Grid)

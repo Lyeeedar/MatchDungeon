@@ -10,6 +10,8 @@ import com.lyeeedar.Util.XmlData
 fun Entity.orbSpawner(): OrbSpawnerComponent? = OrbSpawnerComponent.mapper.get(this)
 class OrbSpawnerComponent : AbstractComponent()
 {
+	var canSpawnSinkables = true
+
 	val numToSpawnChanged = Event1Arg<Int>()
 
 	var numToSpawn = 0
@@ -59,5 +61,6 @@ class OrbSpawnerComponent : AbstractComponent()
 	{
 		numToSpawn = 0
 		spacingCounter = 0
+		canSpawnSinkables = true
 	}
 }

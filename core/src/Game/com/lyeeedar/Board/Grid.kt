@@ -3,6 +3,7 @@ package com.lyeeedar.Board
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.MathUtils
+import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionCustomOrb
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
@@ -44,7 +45,14 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	var gainedBonusPower = false
 	val poppedSpreaders = ObjectSet<String>()
 
-
+	// ----------------------------------------------------------------------
+	// Grid state
+	val monsterTiles = Array<Tile>()
+	val friendlyTiles = Array<Tile>()
+	val sinkableTiles = Array<Tile>()
+	val breakableTiles = Array<Tile>()
+	val sinkPathTiles = Array<Tile>()
+	val popableTiles = Array<Tile>()
 
 	// ----------------------------------------------------------------------
 	init

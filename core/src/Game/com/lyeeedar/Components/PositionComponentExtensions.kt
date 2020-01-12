@@ -112,7 +112,7 @@ fun PositionComponent.removeFromTile(entity: Entity)
 	}
 }
 
-fun PositionComponent.addToTile(entity: Entity)
+fun PositionComponent.addToTile(entity: Entity, delay: Float = 0f)
 {
 	val t = tile!!
 	for (x in 0 until size)
@@ -120,6 +120,21 @@ fun PositionComponent.addToTile(entity: Entity)
 		for (y in 0 until size)
 		{
 			val tile = t.grid.getTile(t, x, y) ?: continue
+
+			val existing = tile.contents
+			if (existing != null && existing != entity)
+			{
+				val matchable = existing.matchable()
+				if (matchable != null)
+				{
+					val sprite = matchable.desc.death.copy()
+					sprite.renderDelay = delay
+					sprite.colour = existing.renderable().renderable.colour
+
+					tile.effects.add(sprite)
+				}
+			}
+
 			tile.contents = entity
 		}
 	}

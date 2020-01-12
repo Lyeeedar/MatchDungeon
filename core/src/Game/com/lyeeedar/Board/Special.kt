@@ -1,11 +1,14 @@
 package com.lyeeedar.Board
 
+import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.ObjectSet
+import com.lyeeedar.Components.*
 import com.lyeeedar.Renderables.Animation.*
 import com.lyeeedar.Renderables.HSLColour
 import com.lyeeedar.Renderables.Light
+import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
 import com.lyeeedar.Util.*
 import java.util.*
@@ -17,15 +20,46 @@ import java.util.*
 val beamMoveSpeed = 0.1f
 val lightTemplate = Light(Colour.WHITE, brightness = 0.3f, range = 2f)
 
-abstract class Special(orbDesc: OrbDesc, theme: Theme)
+fun addSpecial(entity: Entity, special: Special): Entity
+{
+	var holder = entity.special()
+	if (holder == null)
+	{
+		holder = SpecialComponent.obtain()
+		entity.add(holder)
+	}
+	holder.special = special
+
+	val renderable = special.sprite.copy()
+	renderable.light = lightTemplate.copy()
+	renderable.tintLight = true
+	renderable.colour = entity.matchable()!!.desc.sprite.colour
+
+	if (special is GemSpecial)
+	{
+
+	}
+	else
+	{
+		renderable.colourAnimation = BlinkAnimation.obtain().set(renderable.colour, 0.1f, 2.5f, false)
+	}
+
+	entity.renderable().renderable = renderable
+
+	return entity
+}
+
+abstract class Special()
 {
 	var armed = false
 
+	lateinit var sprite: Sprite
+
 	val uniqueID = UUID.randomUUID().toString()
 
-	abstract fun merge(other: Swappable): Special?
+	abstract fun merge(other: Entity): Special?
 	abstract fun apply(point: Point, grid: Grid)
-	abstract fun copy(orbDesc: OrbDesc): Special
+	abstract fun copy(): Special
 
 	companion object
 	{
@@ -190,21 +224,17 @@ abstract class Special(orbDesc: OrbDesc, theme: Theme)
 	}
 }
 
-abstract class BeamSpecial(orbDesc: OrbDesc, theme: Theme) : Special(orbDesc, theme)
+abstract class BeamSpecial() : Special()
 
-abstract class HorizontalBeamSpecial(orbDesc: OrbDesc, theme: Theme) : BeamSpecial(orbDesc, theme)
+abstract class HorizontalBeamSpecial() : BeamSpecial()
 
-abstract class VerticalBeamSpecial(orbDesc: OrbDesc, theme: Theme) : BeamSpecial(orbDesc, theme)
+abstract class VerticalBeamSpecial() : BeamSpecial()
 
-class HoriVert4(orbDesc: OrbDesc, theme: Theme) : HorizontalBeamSpecial(orbDesc, theme)
+class Cross() : BeamSpecial()
 {
 	init
 	{
 		sprite = AssetManager.loadSprite("Oryx/Custom/items/orb_hori_vert", drawActualSize = true)
-		sprite.colour = orbDesc.sprite.colour
-		sprite.colourAnimation = BlinkAnimation.obtain().set(sprite.colour, 0.1f, 2.5f, false)
-		sprite.light = lightTemplate.copy()
-		sprite.tintLight = true
 	}
 
 	override fun apply(point: Point, grid: Grid)
@@ -213,26 +243,22 @@ class HoriVert4(orbDesc: OrbDesc, theme: Theme) : HorizontalBeamSpecial(orbDesc,
 		popRow(this, sprite.colour, point.x, point.y, grid)
 	}
 
-	override fun merge(other: Swappable): Special?
+	override fun merge(other: Entity): Special?
 	{
 		return null
 	}
 
-	override fun copy(orbDesc: OrbDesc): Special
+	override fun copy(): Special
 	{
-		return HoriVert4(orbDesc, theme)
+		return HoriVert4()
 	}
 }
 
-class Horizontal4(orbDesc: OrbDesc, theme: Theme) : HorizontalBeamSpecial(orbDesc, theme)
+class Horizontal4() : HorizontalBeamSpecial()
 {
 	init
 	{
 		sprite = AssetManager.loadSprite("Oryx/Custom/items/orb_vert", drawActualSize = true)
-		sprite.colour = orbDesc.sprite.colour
-		sprite.colourAnimation = BlinkAnimation.obtain().set(sprite.colour, 0.1f, 2.5f, false)
-		sprite.light = lightTemplate.copy()
-		sprite.tintLight = true
 	}
 
 	override fun apply(point: Point, grid: Grid)
@@ -240,23 +266,28 @@ class Horizontal4(orbDesc: OrbDesc, theme: Theme) : HorizontalBeamSpecial(orbDes
 		popColumn(this, sprite.colour, point.x, point.y, grid)
 	}
 
-	override fun merge(other: Swappable): Special?
+	override fun merge(other: Entity): Special?
 	{
-		if (other is Horizontal4 || other is Vertical4)
+		val otherSpecial = other.special()?.special
+
+		if (otherSpecial is Horizontal4 || otherSpecial is Vertical4)
 		{
 			val desc = OrbDesc()
 			desc.death = desc.death.copy()
 			desc.sprite = desc.sprite.copy()
-			desc.sprite.colour = mix(sprite.colour, other.sprite.colour)
+			desc.sprite.colour = mix(sprite.colour, other.matchable()!!.desc.colour)
 			desc.name = "Merged"
 
-			return HoriVert4(desc, theme)
+			val newOrb = createOrb(desc)
+			addSpecial(newOrb, Cross())
+
+			return newOrb
 		}
 
 		return null
 	}
 
-	override fun copy(orbDesc: OrbDesc): Special
+	override fun copy(): Special
 	{
 		return Horizontal4(orbDesc, theme)
 	}

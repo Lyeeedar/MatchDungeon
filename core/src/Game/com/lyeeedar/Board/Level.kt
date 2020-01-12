@@ -8,10 +8,7 @@ import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Board.CompletionCondition.AbstractCompletionCondition
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionCustomOrb
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionSink
-import com.lyeeedar.Components.MonsterEffectComponent
-import com.lyeeedar.Components.matchable
-import com.lyeeedar.Components.monsterEffect
-import com.lyeeedar.Components.renderable
+import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Buff
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Game.Player
@@ -69,13 +66,13 @@ class Level(val loadPath: String)
 
 		if (toSpawn == "Changer")
 		{
-			val orb = createOrb(OrbDesc.getRandomOrb(this), theme)
+			val orb = createOrb(OrbDesc.getRandomOrb(this))
 			orb.matchable()!!.isChanger = true
 			return orb
 		}
 		else if (toSpawn == "Attack")
 		{
-			val orb = createOrb(OrbDesc.getRandomOrb(this), theme)
+			val orb = createOrb(OrbDesc.getRandomOrb(this))
 			val monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap())
 			monsterEffect.timer = 7
 			addMonsterEffect(orb, monsterEffect)
@@ -87,7 +84,7 @@ class Level(val loadPath: String)
 			val data = ObjectMap<String, Any>()
 			data["FACTION"] = factions.random()
 
-			val orb = createOrb(OrbDesc.getRandomOrb(this), theme)
+			val orb = createOrb(OrbDesc.getRandomOrb(this))
 			val monsterEffect = MonsterEffect(MonsterEffectType.SUMMON, data)
 			monsterEffect.timer = 7
 			addMonsterEffect(orb, monsterEffect)
@@ -96,11 +93,11 @@ class Level(val loadPath: String)
 		}
 		else if (toSpawn == "Orb")
 		{
-			return createOrb(OrbDesc.getRandomOrb(this), theme)
+			return createOrb(OrbDesc.getRandomOrb(this))
 		}
 		else
 		{
-			return createOrb(OrbDesc.getNamedOrb(toSpawn), theme)
+			return createOrb(OrbDesc.getNamedOrb(toSpawn))
 		}
 	}
 
@@ -168,22 +165,19 @@ class Level(val loadPath: String)
 			{
 				tile.canHaveOrb = true
 				tile.groundSprite = theme.floor.copy()
-				tile.block = Block(theme)
-				tile.block!!.maxhp = blockStrength
+				tile.contents = createBlock(theme, blockStrength)
 			}
 			else if (char == '$')
 			{
-				tile.chest = Chest(true, theme)
+				tile.contents = createChest(true, theme)
 				tile.canHaveOrb = false
 				tile.groundSprite = theme.floor.copy()
-				tile.chest!!.attachHandlers(grid)
 			}
 			else if (char == '£')
 			{
-				tile.chest = Chest(false, theme)
+				tile.contents = createChest(false, theme)
 				tile.canHaveOrb = false
 				tile.groundSprite = theme.floor.copy()
-				tile.chest!!.attachHandlers(grid)
 			}
 			else if (char == '!')
 			{
@@ -219,18 +213,25 @@ class Level(val loadPath: String)
 
 				if (symbol.block != null)
 				{
-					tile.block = Block(theme)
+					val contents = createBlock(theme, symbol.block.hp)
+					tile.contents = contents
 
 					if (symbol.block.sprite != null)
 					{
-						tile.block!!.sprite = symbol.block.sprite.copy()
+						contents.renderable().renderable = symbol.block.sprite.copy()
 					}
 
-					tile.block!!.maxhp = symbol.block.hp
-					tile.block!!.alwaysShowHP = symbol.block.alwaysShowHP
-					for (effect in symbol.block.onTurnEffects)
+					contents.damageable()!!.alwaysShowHP = symbol.block.alwaysShowHP
+
+					if (symbol.block.onTurnEffects.size > 0)
 					{
-						tile.block!!.onTurnEffects.add(effect.copy())
+						val onTurnEffectComponent = OnTurnEffectComponent.obtain()
+						for (effect in symbol.block.onTurnEffects)
+						{
+							onTurnEffectComponent.onTurnEffects.add(effect.copy())
+						}
+
+						contents.add(onTurnEffectComponent)
 					}
 				}
 
@@ -289,9 +290,8 @@ class Level(val loadPath: String)
 
 				if (symbol.isChest)
 				{
-					tile.chest = Chest(true, theme)
+					tile.contents = createChest(true, theme)
 					tile.groundSprite = theme.floor.copy()
-					tile.chest!!.attachHandlers(grid)
 
 					tile.canHaveOrb = false
 					tile.isPit = false
@@ -427,8 +427,9 @@ class Level(val loadPath: String)
 							difficulty += 3
 						}
 
-						val monster = Monster(monsterDesc, difficulty)
-						monster.size = size
+						val monster = createMonster(monsterDesc, difficulty)
+						monster.pos().size = size
+						monster.pos().tile = grid.grid[x, y]
 
 						for (ix in 0 until size)
 						{
@@ -439,8 +440,7 @@ class Level(val loadPath: String)
 
 								val tile = grid.grid[gx, gy]
 
-								tile.monster = monster
-								monster.tiles[ix, iy] = tile
+								tile.contents = monster
 
 								monsterGrid[gx, gy]!!.used = true
 							}
@@ -454,23 +454,32 @@ class Level(val loadPath: String)
 
 		fun modifyOrbs(tile: Tile, char: Char)
 		{
-			val swappable = tile.swappable
+			var swappable = tile.contents?.swappable()
+			val matchable = tile.contents?.matchable()
 
 			if (char == '|')
 			{
-				var orb = swappable as? Orb
-				if (orb == null) orb = Orb(Orb.getRandomOrb(this), theme)
-				tile.special = Horizontal4(orb.desc, theme)
+				if (matchable == null)
+				{
+					tile.contents = createOrb(OrbDesc.getRandomOrb(this))
+				}
+				addSpecial(tile.contents!!, Horizontal4())
 			}
 			else if (char == '-')
 			{
-				var orb = swappable as? Orb
-				if (orb == null) orb = Orb(Orb.getRandomOrb(this), theme)
-				tile.special = Vertical4(orb.desc, theme)
+				if (matchable == null)
+				{
+					tile.contents = createOrb(OrbDesc.getRandomOrb(this))
+				}
+				addSpecial(tile.contents!!, Vertical4())
 			}
 			else if (char == '@')
 			{
-				swappable!!.sealCount = sealStrength
+				if (swappable == null)
+				{
+					tile.contents = createOrb(OrbDesc.getRandomOrb(this))
+				}
+				tile.contents!!.swappable()!!.sealCount = sealStrength
 			}
 			else if (symbolMap.containsKey(char.toInt()))
 			{
@@ -479,8 +488,7 @@ class Level(val loadPath: String)
 				{
 					val sprite = if (symbol.sinkableDesc.usePlayer) Global.player.baseCharacter.sprite.copy() else symbol.sinkableDesc.sprite!!.copy()
 
-					val sinkable = Sinkable(sprite, theme)
-					tile.sinkable = sinkable
+					tile.contents = createSinkable(sprite)
 				}
 
 				if (symbol.extends != ' ')
@@ -488,51 +496,62 @@ class Level(val loadPath: String)
 					modifyOrbs(tile, symbol.extends)
 				}
 
-				if (symbol.seal > 0)
+				if (symbol.seal > 0 && swappable != null)
 				{
-					swappable!!.sealCount = symbol.seal
+					swappable.sealCount = symbol.seal
 				}
 
 				if (symbol.attack > 0)
 				{
-					val orb = swappable as? Matchable
-					val desc = orb?.desc ?: Orb.getRandomOrb(this)
+					if (matchable == null)
+					{
+						tile.contents = createOrb(OrbDesc.getRandomOrb(this), theme)
+					}
 
-					val monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap(), desc, theme)
+					val monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap())
 					monsterEffect.timer = symbol.attack
 
-					tile.monsterEffect = monsterEffect
+					addMonsterEffect(tile.contents!!, monsterEffect)
 				}
 
-				var orb = swappable as? Orb
-				if (orb == null) orb = Orb(Orb.getRandomOrb(this), theme)
+				swappable = tile.contents?.swappable()
+				if (swappable == null)
+				{
+					tile.contents = createOrb(OrbDesc.getRandomOrb(this), theme)
+				}
 
 				val special = when (symbol.special)
 				{
-					"3x3" -> DualMatch(orb.desc, theme)
-					"4x4" -> DoubleDualMatch(orb.desc, theme)
-					"V4" -> Vertical4(orb.desc, theme)
-					"3V4" -> DualVert(orb.desc, theme)
-					"H4" -> Horizontal4(orb.desc, theme)
-					"3H4" -> DualHori(orb.desc, theme)
-					"5" -> Match5(orb.desc, theme)
-					"All" -> Match5Dual(orb.desc, theme)
+					"3x3" -> DualMatch()
+					"4x4" -> DoubleDualMatch()
+					"V4" -> Vertical4()
+					"3V4" -> DualVert()
+					"H4" -> Horizontal4()
+					"3H4" -> DualHori()
+					"5" -> Match5()
+					"All" -> Match5Dual()
 					else -> null
 				}
 
 				if (special != null)
 				{
-					tile.special = special
+					addSpecial(tile.contents!!, special)
 				}
 
 				if (symbol.container != null && tile.contents != null)
 				{
-					tile.container = Container(symbol.container.sprite.copy(), symbol.container.hp, tile.contents!!)
-					tile.container!!.alwaysShowHP = symbol.container.alwaysShowHP
+					tile.contents = createContainer(symbol.container.sprite, symbol.container.hp, tile.contents!!)
+					tile.contents!!.damageable()!!.alwaysShowHP = symbol.container.alwaysShowHP
 
-					for (effect in symbol.container.onTurnEffects)
+					if (symbol.container.onTurnEffects.size > 0)
 					{
-						tile.container!!.onTurnEffects.add(effect.copy())
+						val onTurnEffectComponent = OnTurnEffectComponent.obtain()
+						for (effect in symbol.container.onTurnEffects)
+						{
+							onTurnEffectComponent.onTurnEffects.add(effect.copy())
+						}
+
+						tile.contents!!.add(onTurnEffectComponent)
 					}
 				}
 			}
@@ -555,9 +574,12 @@ class Level(val loadPath: String)
 			{
 				val numToSink = (victory as? CompletionConditionSink)!!.count
 
-				val existingCount = grid.grid.filter { it.sinkable != null || it.container?.contents is Sinkable }.count()
+				val existingCount = grid.grid.filter { it.contents?.sinkable() != null || it.contents?.container()?.containedEntity?.sinkable() != null }.count()
 
-				val chests = grid.grid.filter { it.chest != null || it.container?.contents is Chest }.map { it.chest ?: it.container!!.contents as Chest }.toList().toGdxArray()
+				val chests = grid.grid
+					.filter { it.contents?.orbSpawner()?.canSpawnSinkables == true || it.contents?.container()?.containedEntity?.orbSpawner()?.canSpawnSinkables == true }
+					.map { it.contents?.orbSpawner() ?: it.contents?.container()?.containedEntity?.orbSpawner()!! }
+					.toList().toGdxArray()
 
 				val totalToSpawn = numToSink - existingCount
 				if (totalToSpawn > 0)

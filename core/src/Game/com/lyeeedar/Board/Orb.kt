@@ -15,10 +15,9 @@ import ktx.collections.set
  * Created by Philip on 04-Jul-16.
  */
 
-fun createOrb(desc: OrbDesc, theme: Theme): Entity
+fun createOrb(desc: OrbDesc): Entity
 {
 	val matchable = MatchableComponent.obtain()
-	matchable.desc = desc
 
 	val swappable = SwappableComponent.obtain()
 
@@ -35,6 +34,8 @@ fun createOrb(desc: OrbDesc, theme: Theme): Entity
 	entity.add(renderable)
 	entity.add(position)
 	entity.add(archetype)
+
+	matchable.setDesc(desc, entity)
 
 	return entity
 }
