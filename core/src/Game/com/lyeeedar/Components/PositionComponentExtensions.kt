@@ -88,7 +88,9 @@ fun PositionComponent.isValidTile(t: Tile, entity: Entity): Boolean
 		for (y in 0 until size)
 		{
 			val tile = t.grid.getTile(t, x, y)
-			if (tile == null || (tile.contents != null && tile.contents != entity) || !tile.canHaveOrb)
+			if (tile == null || !tile.canHaveOrb ||
+				(tile.contents != null && tile.contents != entity) ||
+				(tile.contents != null && !tile.contents!!.isBasicOrb()))
 			{
 				return false
 			}

@@ -3,10 +3,7 @@ package com.lyeeedar.Board
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.ObjectMap
-import com.lyeeedar.Components.MonsterEffectComponent
-import com.lyeeedar.Components.matchable
-import com.lyeeedar.Components.monsterEffect
-import com.lyeeedar.Components.renderable
+import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Buff
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.BumpAnimation
@@ -35,9 +32,6 @@ enum class MonsterEffectType
 fun addMonsterEffect(entity: Entity, monsterEffect: MonsterEffect): Entity
 {
 	entity.add(MonsterEffectComponent.obtain().set(monsterEffect))
-	entity.renderable().renderable = entity.monsterEffect()!!.monsterEffect.actualSprite
-	entity.renderable().renderable.colour = entity.matchable()!!.desc.sprite.colour
-
 	return entity
 }
 
@@ -55,6 +49,7 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 
 	var timer: Int = -1
 	var delayDisplay: Float = 0f
+	var addedSprite = false
 
 	fun apply(grid: Grid, tile: Tile)
 	{
@@ -88,30 +83,33 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 	{
 		val heal = data["AMOUNT", "1"].toString().toFloat()
 
-		for (tile in grid.grid)
+		for (tile in grid.monsterTiles)
 		{
-			val monster = tile.monster ?: continue
+			val entity = tile.contents
+			val monster = entity?.damageable() ?: continue
 			monster.hp += heal
 			monster.hp = min(monster.hp, monster.maxhp.toFloat())
 
-			val diff = monster.tiles[0, 0].getPosDiff(srcTile)
-			diff[0].y *= -1
-			monster.sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
+			val monsterTile = entity.pos().tile!!
 
-			val dst = monster.tiles[0, 0].euclideanDist(srcTile)
+			val diff = monsterTile.getPosDiff(srcTile)
+			diff[0].y *= -1
+			entity.renderable().renderable.animation = BumpAnimation.obtain().set(0.2f, diff)
+
+			val dst = entity.pos().tile!!.euclideanDist(srcTile)
 			val animDuration = 0.4f + dst * 0.025f
 			val attackSprite = actualSprite.copy()
 			attackSprite.drawActualSize = false
 			attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
 			attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
-			monster.tiles[0, 0].effects.add(attackSprite)
+			monsterTile.effects.add(attackSprite)
 
 			val sprite = AssetManager.loadSprite("EffectSprites/Heal/Heal", 0.1f, Colour(0f,1f,0f,1f))
-			sprite.size[0] = monster.size
-			sprite.size[1] = monster.size
+			sprite.size[0] = entity.pos().size
+			sprite.size[1] = entity.pos().size
 			sprite.renderDelay = animDuration
 
-			monster.tiles[0, 0].effects.add(sprite)
+			monsterTile.effects.add(sprite)
 		}
 	}
 
@@ -135,15 +133,15 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 			}
 
 			val name = data["NAME", null]?.toString() ?: ""
-			desc = if (name.isBlank()) faction.get(1) else faction.get(name)
+			desc = if (name.isBlank()) faction.get(1) else (faction.get(name) ?: faction.get(1))!!
 		}
 
 		val difficulty = data["DIFFICULTY", "0"].toString().toInt()
 
-		val summoned = Monster(desc!!, difficulty)
-		summoned.isSummon = data["ISSUMMON", "false"].toString().toBoolean()
+		val summoned = desc.getEntity(difficulty, data["ISSUMMON", "false"].toString().toBoolean())
 
-		summoned.setTile(tile, grid)
+		summoned.pos().tile = tile
+		summoned.pos().addToTile(summoned)
 
 		val spawnEffect = data["SPAWNEFFECT", null] as? ParticleEffect
 		if (spawnEffect != null)

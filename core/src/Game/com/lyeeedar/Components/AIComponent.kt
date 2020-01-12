@@ -3,11 +3,19 @@ package com.lyeeedar.Components
 import com.badlogic.ashley.core.ComponentMapper
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.Pool
+import com.lyeeedar.Board.Grid
 import com.lyeeedar.Util.XmlData
+
+abstract class AbstractGridAI
+{
+	abstract fun onTurn(entity: Entity, grid: Grid)
+}
 
 fun Entity.ai(): AIComponent? = AIComponent.mapper.get(this)
 class AIComponent : AbstractComponent()
 {
+	lateinit var ai: AbstractGridAI
+
 	var obtained: Boolean = false
 	companion object
 	{

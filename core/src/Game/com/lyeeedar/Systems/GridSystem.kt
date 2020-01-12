@@ -137,7 +137,7 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 		val monsterEffect = entity.monsterEffect()
 		if (renderable != null && monsterEffect != null)
 		{
-			if (monsterEffect.monsterEffect.delayDisplay > 0)
+			if (!monsterEffect.monsterEffect.addedSprite)
 			{
 				monsterEffect.monsterEffect.delayDisplay -= deltaTime
 
@@ -152,6 +152,8 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 					}
 
 					renderable.renderable = newSprite
+
+					monsterEffect.monsterEffect.addedSprite = true
 				}
 			}
 		}

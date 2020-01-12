@@ -37,7 +37,7 @@ fun addSpecial(entity: Entity, special: Special): Entity
 
 	if (special is GemSpecial)
 	{
-
+		renderable.colourAnimation = ChromaticAnimation.obtain().set(15f)
 	}
 	else
 	{
@@ -250,7 +250,7 @@ class Cross() : BeamSpecial()
 
 	override fun copy(): Special
 	{
-		return HoriVert4()
+		return Cross()
 	}
 }
 
@@ -272,16 +272,7 @@ class Horizontal4() : HorizontalBeamSpecial()
 
 		if (otherSpecial is Horizontal4 || otherSpecial is Vertical4)
 		{
-			val desc = OrbDesc()
-			desc.death = desc.death.copy()
-			desc.sprite = desc.sprite.copy()
-			desc.sprite.colour = mix(sprite.colour, other.matchable()!!.desc.colour)
-			desc.name = "Merged"
-
-			val newOrb = createOrb(desc)
-			addSpecial(newOrb, Cross())
-
-			return newOrb
+			return Cross()
 		}
 
 		return null
@@ -289,19 +280,15 @@ class Horizontal4() : HorizontalBeamSpecial()
 
 	override fun copy(): Special
 	{
-		return Horizontal4(orbDesc, theme)
+		return Horizontal4()
 	}
 }
 
-class Vertical4(orbDesc: OrbDesc, theme: Theme) : VerticalBeamSpecial(orbDesc, theme)
+class Vertical4() : VerticalBeamSpecial()
 {
 	init
 	{
 		sprite = AssetManager.loadSprite("Oryx/Custom/items/orb_hori", drawActualSize = true)
-		sprite.colour = orbDesc.sprite.colour
-		sprite.colourAnimation = BlinkAnimation.obtain().set(sprite.colour, 0.1f, 2.5f, false)
-		sprite.light = lightTemplate.copy()
-		sprite.tintLight = true
 	}
 
 	override fun apply(point: Point, grid: Grid)
@@ -309,17 +296,12 @@ class Vertical4(orbDesc: OrbDesc, theme: Theme) : VerticalBeamSpecial(orbDesc, t
 		popRow(this, sprite.colour, point.x, point.y, grid)
 	}
 
-	override fun merge(other: Swappable): Special?
+	override fun merge(other: Entity): Special?
 	{
-		if (other is Horizontal4 || other is Vertical4)
+		val otherSpecial = other.special()?.special
+		if (otherSpecial is Horizontal4 || otherSpecial is Vertical4)
 		{
-			val desc = OrbDesc()
-			desc.death = desc.death.copy()
-			desc.sprite = desc.sprite.copy()
-			desc.sprite.colour = mix(sprite.colour, other.sprite.colour)
-			desc.name = "Merged"
-
-			return HoriVert4(desc, theme)
+			return Cross()
 		}
 
 		return null
@@ -327,21 +309,17 @@ class Vertical4(orbDesc: OrbDesc, theme: Theme) : VerticalBeamSpecial(orbDesc, t
 
 	override fun copy(orbDesc: OrbDesc): Special
 	{
-		return Vertical4(orbDesc, theme)
+		return Vertical4()
 	}
 }
 
-abstract class BombSpecial(orbDesc: OrbDesc, theme: Theme) : Special(orbDesc, theme)
+abstract class BombSpecial() : Special()
 
-class DoubleDualMatch(orbDesc: OrbDesc, theme: Theme) : BombSpecial(orbDesc, theme)
+class DoubleDualMatch() : BombSpecial()
 {
 	init
 	{
 		sprite = AssetManager.loadSprite("Oryx/Custom/items/orb_dual_dual", drawActualSize = true)
-		sprite.colour = orbDesc.sprite.colour
-		sprite.colourAnimation = BlinkAnimation.obtain().set(sprite.colour, 0.1f, 2.5f, false)
-		sprite.light = lightTemplate.copy()
-		sprite.tintLight = true
 	}
 
 	override fun apply(point: Point, grid: Grid)
@@ -381,26 +359,22 @@ class DoubleDualMatch(orbDesc: OrbDesc, theme: Theme) : BombSpecial(orbDesc, the
 		coreTile?.effects?.add(effect)
 	}
 
-	override fun merge(other: Swappable): Special?
+	override fun merge(other: Entity): Special?
 	{
 		return null
 	}
 
-	override fun copy(orbDesc: OrbDesc): Special
+	override fun copy(): Special
 	{
-		return DoubleDualMatch(orbDesc, theme)
+		return DoubleDualMatch()
 	}
 }
 
-class DualHori(orbDesc: OrbDesc, theme: Theme) : HorizontalBeamSpecial(orbDesc, theme)
+class DualHori() : HorizontalBeamSpecial()
 {
 	init
 	{
 		sprite = AssetManager.loadSprite("Oryx/Custom/items/orb_dual_vert", drawActualSize = true)
-		sprite.colour = orbDesc.sprite.colour
-		sprite.colourAnimation = BlinkAnimation.obtain().set(sprite.colour, 0.1f, 2.5f, false)
-		sprite.light = lightTemplate.copy()
-		sprite.tintLight = true
 	}
 
 	override fun apply(point: Point, grid: Grid)
@@ -410,26 +384,22 @@ class DualHori(orbDesc: OrbDesc, theme: Theme) : HorizontalBeamSpecial(orbDesc, 
 		popColumn(this, sprite.colour, point.x+1, point.y, grid)
 	}
 
-	override fun merge(other: Swappable): Special?
+	override fun merge(other: Entity): Special?
 	{
 		return null
 	}
 
-	override fun copy(orbDesc: OrbDesc): Special
+	override fun copy(): Special
 	{
-		return DualHori(orbDesc, theme)
+		return DualHori()
 	}
 }
 
-class DualVert(orbDesc: OrbDesc, theme: Theme) : VerticalBeamSpecial(orbDesc, theme)
+class DualVert() : VerticalBeamSpecial()
 {
 	init
 	{
 		sprite = AssetManager.loadSprite("Oryx/Custom/items/orb_dual_hori", drawActualSize = true)
-		sprite.colour = orbDesc.sprite.colour
-		sprite.colourAnimation = BlinkAnimation.obtain().set(sprite.colour, 0.1f, 2.5f, false)
-		sprite.light = lightTemplate.copy()
-		sprite.tintLight = true
 	}
 
 	override fun apply(point: Point, grid: Grid)
@@ -439,26 +409,22 @@ class DualVert(orbDesc: OrbDesc, theme: Theme) : VerticalBeamSpecial(orbDesc, th
 		popRow(this, sprite.colour, point.x, point.y+1, grid)
 	}
 
-	override fun merge(other: Swappable): Special?
+	override fun merge(other: Entity): Special?
 	{
 		return null
 	}
 
-	override fun copy(orbDesc: OrbDesc): Special
+	override fun copy(): Special
 	{
-		return DualVert(orbDesc, theme)
+		return DualVert()
 	}
 }
 
-class DualMatch(orbDesc: OrbDesc, theme: Theme) : BombSpecial(orbDesc, theme)
+class DualMatch() : BombSpecial()
 {
 	init
 	{
 		sprite = AssetManager.loadSprite("Oryx/Custom/items/orb_dual", drawActualSize = true)
-		sprite.colour = orbDesc.sprite.colour
-		sprite.colourAnimation = BlinkAnimation.obtain().set(sprite.colour, 0.1f, 2.5f, false)
-		sprite.light = lightTemplate.copy()
-		sprite.tintLight = true
 	}
 
 	override fun apply(point: Point, grid: Grid)
@@ -498,74 +464,62 @@ class DualMatch(orbDesc: OrbDesc, theme: Theme) : BombSpecial(orbDesc, theme)
 		coreTile?.effects?.add(effect)
 	}
 
-	override fun merge(other: Swappable): Special?
+	override fun merge(other: Entity): Special?
 	{
-		val desc = OrbDesc()
-		desc.death = desc.death.copy()
-		desc.sprite = desc.sprite.copy()
-		desc.sprite.colour = mix(sprite.colour, other.sprite.colour)
-		desc.name = "Merged"
-
-		if (other is DualMatch)
+		val otherSpecial = other.special()?.special
+		if (otherSpecial is DualMatch)
 		{
-			return DoubleDualMatch(desc, theme)
+			return DoubleDualMatch()
 		}
-		else if (other is Horizontal4)
+		else if (otherSpecial is Horizontal4)
 		{
-			return DualHori(desc, theme)
+			return DualHori()
 		}
-		else if (other is Vertical4)
+		else if (otherSpecial is Vertical4)
 		{
-			return DualVert(desc, theme)
+			return DualVert()
 		}
 
 		return null
 	}
 
-	override fun copy(orbDesc: OrbDesc): Special
+	override fun copy(): Special
 	{
-		return DualMatch(orbDesc, theme)
+		return DualMatch()
 	}
 }
 
-abstract class GemSpecial(orbDesc: OrbDesc, theme: Theme) : Special(orbDesc, theme)
+abstract class GemSpecial() : Special()
 {
 	var targetDesc: OrbDesc? = null
-
-	override var desc: OrbDesc = OrbDesc()
-
-	override val canMatch: Boolean
-		get() = false
 }
 
-class Match5(orbDesc: OrbDesc, theme: Theme) : GemSpecial(orbDesc, theme)
+class Match5() : GemSpecial()
 {
 	init
 	{
 		sprite = AssetManager.loadSprite("Oryx/Custom/items/gem", drawActualSize = true)
-		sprite.colourAnimation = ChromaticAnimation.obtain().set(15f)
-		sprite.light = lightTemplate.copy()
-		sprite.tintLight = true
 	}
 
-	override fun merge(other: Swappable): Special?
+	override fun merge(other: Entity): Special?
 	{
-		if (other is Special)
+		val otherSpecial = other.special()?.special
+
+		if (otherSpecial is Special)
 		{
-			if (other is GemSpecial)
+			if (otherSpecial is GemSpecial)
 			{
-				return Match5Dual(desc, theme)
+				return Match5Dual()
 			}
 			else
 			{
-				return Match5Spread(desc, theme, other)
+				return Match5Spread()
 			}
 		}
-		else if (other is Matchable)
+		else if (other.matchable() != null)
 		{
-			targetDesc = other.desc
-			sprite.colourAnimation = null
-			sprite.colour = targetDesc!!.sprite.colour.copy()
+			targetDesc = other.matchable()!!.desc
+			armed = true
 
 			return this
 		}
@@ -586,34 +540,44 @@ class Match5(orbDesc: OrbDesc, theme: Theme) : GemSpecial(orbDesc, theme)
 
 		grid.tile(point)?.effects?.add(effect)
 
-		for (tile in grid.grid)
+		fun isValidTarget(tile: Tile): Boolean
 		{
-			if (tile.matchable?.desc == targetDesc || tile.creature != null || (tile.damageable?.maxhp ?: 0) > 1)
+			val contents = tile.contents ?: return false
+
+			if (contents.matchable()?.desc?.key == targetDesc?.key) return true
+
+			if (contents.damageable() != null && contents.ai() != null) return true
+
+			if (contents.damageable() != null && contents.damageable()!!.maxhp > 1) return true
+
+			return false
+		}
+
+		for (tile in grid.grid.filter { isValidTarget(it) })
+		{
+			val dst = tile.dist(point)
+			val animDuration = 0.275f + dst * 0.05f
+
+			val diff = tile.getPosDiff(point)
+			diff[0].y *= -1
+
+			val s = AssetManager.loadSprite("Oryx/Custom/items/shard")
+			s.faceInMoveDirection = true
+			s.colour = Colour.random(s = 0.5f, l = 0.9f)
+			s.drawActualSize = true
+			s.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.5f)
+			s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.3f, false)
+			s.completionCallback = fun()
 			{
-				val dst = tile.dist(point)
-				val animDuration = 0.275f + dst * 0.05f
-
-				val diff = tile.getPosDiff(point)
-				diff[0].y *= -1
-
-				val s = AssetManager.loadSprite("Oryx/Custom/items/shard")
-				s.faceInMoveDirection = true
-				s.colour = Colour.random(s = 0.5f, l = 0.9f)
-				s.drawActualSize = true
-				s.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.5f)
-				s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.3f, false)
-				s.completionCallback = fun()
-				{
-					grid.pop(tile, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
-				}
-				tile.effects.add(s)
+				grid.pop(tile, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
 			}
+			tile.effects.add(s)
 		}
 	}
 
-	override fun copy(orbDesc: OrbDesc): Special
+	override fun copy(): Special
 	{
-		return Match5(orbDesc, theme)
+		return Match5()
 	}
 }
 

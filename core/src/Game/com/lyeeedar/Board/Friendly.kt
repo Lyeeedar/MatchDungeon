@@ -1,10 +1,13 @@
 package com.lyeeedar.Board
 
+import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
+import com.lyeeedar.Components.*
+import com.lyeeedar.Direction
 import com.lyeeedar.Renderables.Animation.BumpAnimation
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.Animation.LeapAnimation
@@ -13,102 +16,44 @@ import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.Util.*
+import ktx.collections.filter
 import ktx.collections.toGdxArray
 import ktx.math.minus
-
-class Friendly(val desc: FriendlyDesc) : Creature(desc.hp, desc.size, desc.sprite.copy(), desc.death.copy())
-{
-	val abilities: Array<FriendlyAbility> = Array()
-	var isSummon: Boolean = false
-
-	val sinkPathTiles = Array<Tile>()
-	val monsterTiles = Array<Tile>()
-	val blockTiles = Array<Tile>()
-	val attackTiles = Array<Tile>()
-	val namedOrbTiles = Array<Tile>()
-
-	init
-	{
-		damageReduction = desc.dr
-		abilities.addAll(desc.abilities.map { it.copy() }.toGdxArray())
-	}
-
-	override fun onTurn(grid: Grid)
-	{
-		sinkPathTiles.clear()
-		monsterTiles.clear()
-		blockTiles.clear()
-		attackTiles.clear()
-		namedOrbTiles.clear()
-
-		val sinkables = Array<Tile>()
-		for (tile in grid.grid)
-		{
-			if (tile.monster != null)
-			{
-				monsterTiles.add(tile)
-			}
-			else if (tile.block != null || tile.container != null)
-			{
-				blockTiles.add(tile)
-			}
-			else if (tile.monsterEffect != null)
-			{
-				attackTiles.add(tile)
-			}
-			else if (tile.sinkable != null)
-			{
-				sinkables.add(tile)
-			}
-			else if (tile.orb != null && Orb.isNamedOrb(tile.orb!!.desc))
-			{
-				namedOrbTiles.add(tile)
-			}
-		}
-
-		for (sinkableTile in sinkables)
-		{
-			for (y in sinkableTile.y until grid.height)
-			{
-				sinkPathTiles.add(grid.tile(sinkableTile.x, y))
-			}
-		}
-
-		for (ability in abilities.toGdxArray())
-		{
-			ability.cooldownTimer--
-			if (ability.cooldownTimer <= 0)
-			{
-				ability.cooldownTimer = ability.cooldownMin + MathUtils.random(ability.cooldownMax - ability.cooldownMin)
-				ability.activate(this, grid)
-			}
-		}
-
-		if (isSummon)
-		{
-			hp--
-		}
-	}
-
-	companion object
-	{
-		fun load(xml: XmlData, isSummon: Boolean): Friendly
-		{
-			val friendly = Friendly(FriendlyDesc.load(xml))
-			friendly.isSummon = isSummon
-			return friendly
-		}
-	}
-}
 
 class FriendlyDesc
 {
 	lateinit var sprite: Sprite
 	lateinit var death: ParticleEffect
 	var size: Int = 1
-	var hp: Int = 25
-	var dr: Int = 0
-	val abilities: Array<FriendlyAbility> = Array()
+	var hp: Int = 15
+	lateinit var ai: FriendlyAI
+
+	fun getEntity(isSummon: Boolean): Entity
+	{
+		val archetype = EntityArchetypeComponent.obtain().set(EntityArchetype.FRIENDLY)
+
+		val position = PositionComponent.obtain()
+		position.size = size
+
+		val renderable = RenderableComponent.obtain().set(sprite.copy())
+
+		val healable = HealableComponent.obtain()
+		healable.deathEffect = death.copy()
+		healable.maxhp = hp
+		healable.isSummon = isSummon
+
+		val ai = AIComponent.obtain()
+		ai.ai = this.ai.copy()
+
+		val entity = EntityPool.obtain()
+		entity.add(archetype)
+		entity.add(position)
+		entity.add(renderable)
+		entity.add(healable)
+		entity.add(ai)
+
+		return entity
+	}
 
 	companion object
 	{
@@ -121,20 +66,49 @@ class FriendlyDesc
 
 			desc.size = xml.getInt("Size", 1)
 			desc.hp = xml.getInt("HP", 10)
-			desc.dr = xml.getInt("DamageReduction", 0)
 
-			val abilitiesEl = xml.getChildByName("Abilities")
-			if (abilitiesEl != null)
-			{
-				for (i in 0 until abilitiesEl.childCount)
-				{
-					val el = abilitiesEl.getChild(i)
-					val ability = FriendlyAbility.load(el)
-					desc.abilities.add(ability)
-				}
-			}
+			val abilitiesEl = xml.getChildByName("Abilities")!!
+			desc.ai = FriendlyAI.load(abilitiesEl)
 
 			return desc
+		}
+	}
+}
+
+class FriendlyAI(val abilities: Array<FriendlyAbility>) : AbstractGridAI()
+{
+	override fun onTurn(entity: Entity, grid: Grid)
+	{
+		for (ability in abilities.toGdxArray())
+		{
+			ability.cooldownTimer--
+			if (ability.cooldownTimer <= 0)
+			{
+				ability.cooldownTimer = ability.cooldownMin + MathUtils.random(ability.cooldownMax - ability.cooldownMin)
+				ability.activate(entity, grid)
+			}
+		}
+	}
+
+	fun copy(): FriendlyAI
+	{
+		return FriendlyAI(abilities.map { it.copy() }.toGdxArray())
+	}
+
+	companion object
+	{
+		fun load(xml: XmlData): FriendlyAI
+		{
+			val abilities = Array<FriendlyAbility>()
+
+			for (i in 0 until xml.childCount)
+			{
+				val el = xml.getChild(i)
+				val ability = FriendlyAbility.load(el)
+				abilities.add(ability)
+			}
+
+			return FriendlyAI(abilities)
 		}
 	}
 }
@@ -147,7 +121,7 @@ abstract class FriendlyAbility
 
 	var range: Int = 1
 
-	abstract fun activate(friendly: Friendly, grid: Grid)
+	abstract fun activate(entity: Entity, grid: Grid)
 	abstract fun parse(xml: XmlData)
 	abstract fun copy(): FriendlyAbility
 
@@ -157,12 +131,11 @@ abstract class FriendlyAbility
 		{
 			val ability = when(xml.name)
 			{
-				"Attack" -> AttackAbility()
-				"Move" -> MoveAbility()
-				"Break" -> BreakAbility()
-				"Block" -> BlockAbility()
-				"Pop" -> PopAbility()
-				"Heal" -> HealAbility()
+				"Attack" -> FriendlyAttackAbility()
+				"Block" -> FriendlyBlockAbility()
+				"Pop" -> FriendlyPopAbility()
+				"Heal" -> FriendlyHealAbility()
+				"Move" -> FriendlyMoveAbility()
 				else -> throw NotImplementedError()
 			}
 
@@ -180,62 +153,58 @@ abstract class FriendlyAbility
 	}
 }
 
-class AttackAbility : FriendlyAbility()
+abstract class FriendlyPopTileAbility : FriendlyAbility()
 {
-	var targets: Int = 1
 	var damage: Float = 0f
 	var flightEffect: ParticleEffect? = null
 	var hitEffect: ParticleEffect? = null
 
-	override fun activate(friendly: Friendly, grid: Grid)
+	abstract fun getTargets(entity: Entity, grid: Grid): Array<Tile>
+
+	override fun activate(entity: Entity, grid: Grid)
 	{
-		val availableTargets = friendly.getBorderTiles(grid, range)
-		val validTargets = availableTargets.filter { it.monster != null }
+		val validTargets = getTargets(entity, grid).filter { entity.pos().position.taxiDist(it) <= range }
 
-		val chosen = validTargets.random(targets).toList().toGdxArray()
+		val tile = validTargets.random() ?: return
+		val srcTile = entity.pos().tile!!
 
-		for (tile in chosen)
+		var delay = 0f
+
+		val diff = tile.getPosDiff(srcTile)
+		diff[0].y *= -1
+		entity.renderable().renderable.animation = BumpAnimation.obtain().set(0.2f, diff)
+
+		if (flightEffect != null)
 		{
-			var delay = 0f
+			val dst = tile.euclideanDist(srcTile)
+			val animDuration = dst * 0.025f
 
-			val diff = tile.getPosDiff(friendly.tiles[0, 0])
-			diff[0].y *= -1
-			friendly.sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
+			val particle = flightEffect!!.copy()
+			particle.animation = MoveAnimation.obtain().set(animDuration, diff)
+			particle.killOnAnimComplete = true
 
-			if (flightEffect != null)
-			{
-				val dst = tile.euclideanDist(friendly.tiles[0, 0])
-				val animDuration = dst * 0.025f
+			particle.rotation = getRotation(srcTile, tile)
 
-				val particle = flightEffect!!.copy()
-				particle.animation = MoveAnimation.obtain().set(animDuration, diff)
-				particle.killOnAnimComplete = true
+			tile.effects.add(particle)
 
-				particle.rotation = getRotation(friendly.tiles[0, 0], tile)
-
-				tile.effects.add(particle)
-
-				delay += animDuration
-			}
-
-			if (hitEffect != null)
-			{
-				val particle = hitEffect!!.copy()
-				particle.renderDelay = delay
-
-				delay += particle.lifetime / 2f
-
-				tile.effects.add(particle)
-			}
-
-			grid.pop(tile, delay, bonusDam = damage, damSource = friendly)
+			delay += animDuration
 		}
+
+		if (hitEffect != null)
+		{
+			val particle = hitEffect!!.copy()
+			particle.renderDelay = delay
+
+			delay += particle.lifetime / 2f
+
+			tile.effects.add(particle)
+		}
+
+		grid.pop(tile, delay, bonusDam = damage, damSource = entity)
 	}
 
 	override fun parse(xml: XmlData)
 	{
-		range = xml.getInt("Range", 1)
-		targets = xml.getInt("Count", 1)
 		damage = xml.getFloat("Damage", 1f) - 1f
 
 		val flightEffectEl = xml.getChildByName("FlightEffect")
@@ -250,15 +219,22 @@ class AttackAbility : FriendlyAbility()
 			hitEffect = AssetManager.loadParticleEffect(hitEffectEl).getParticleEffect()
 		}
 	}
+}
+
+class FriendlyAttackAbility : FriendlyPopTileAbility()
+{
+	override fun getTargets(entity: Entity, grid: Grid): Array<Tile>
+	{
+		return grid.monsterTiles
+	}
 
 	override fun copy(): FriendlyAbility
 	{
-		val out = AttackAbility()
+		val out = FriendlyAttackAbility()
 		out.cooldownMin = cooldownMin
 		out.cooldownMax = cooldownMax
 		out.cooldownTimer = out.cooldownMin + MathUtils.random(out.cooldownMax - out.cooldownMin)
 		out.range = range
-		out.targets = targets
 		out.damage = damage
 		out.flightEffect = flightEffect
 		out.hitEffect = hitEffect
@@ -267,86 +243,20 @@ class AttackAbility : FriendlyAbility()
 	}
 }
 
-class BreakAbility : FriendlyAbility()
+class FriendlyBlockAbility : FriendlyPopTileAbility()
 {
-	var targets: Int = 1
-	var damage: Float = 0f
-	var flightEffect: ParticleEffect? = null
-	var hitEffect: ParticleEffect? = null
-
-	override fun activate(friendly: Friendly, grid: Grid)
+	override fun getTargets(entity: Entity, grid: Grid): Array<Tile>
 	{
-		val availableTargets = friendly.getBorderTiles(grid, range)
-		val validTargets = availableTargets.filter { it.block != null || it.container != null }
-
-		val chosen = validTargets.random(targets).toList().toGdxArray()
-
-		for (tile in chosen)
-		{
-			var delay = 0f
-
-			val diff = tile.getPosDiff(friendly.tiles[0, 0])
-			diff[0].y *= -1
-			friendly.sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
-
-			if (flightEffect != null)
-			{
-				val dst = tile.euclideanDist(friendly.tiles[0, 0])
-				val animDuration = dst * 0.025f
-
-				val particle = flightEffect!!.copy()
-				particle.animation = MoveAnimation.obtain().set(animDuration, diff)
-				particle.killOnAnimComplete = true
-
-				particle.rotation = getRotation(friendly.tiles[0, 0], tile)
-
-				tile.effects.add(particle)
-
-				delay += animDuration
-			}
-
-			if (hitEffect != null)
-			{
-				val particle = hitEffect!!.copy()
-				particle.renderDelay = delay
-
-				delay += particle.lifetime / 2f
-
-				tile.effects.add(particle)
-			}
-
-			grid.pop(tile, delay, bonusDam = damage, damSource = friendly)
-		}
-	}
-
-	override fun parse(xml: XmlData)
-	{
-		range = xml.getInt("Range", 1)
-		targets = xml.getInt("Count", 1)
-		damage = xml.getFloat("Damage", 1f) - 1f
-
-		val flightEffectEl = xml.getChildByName("FlightEffect")
-		if (flightEffectEl != null)
-		{
-			flightEffect = AssetManager.loadParticleEffect(flightEffectEl).getParticleEffect()
-		}
-
-		val hitEffectEl = xml.getChildByName("HitEffect")
-		if (hitEffectEl != null)
-		{
-			hitEffect = AssetManager.loadParticleEffect(hitEffectEl).getParticleEffect()
-		}
+		return grid.attackTiles
 	}
 
 	override fun copy(): FriendlyAbility
 	{
-		val out = BreakAbility()
+		val out = FriendlyBlockAbility()
 		out.cooldownMin = cooldownMin
 		out.cooldownMax = cooldownMax
 		out.cooldownTimer = out.cooldownMin + MathUtils.random(out.cooldownMax - out.cooldownMin)
 		out.range = range
-		out.targets = targets
-		out.damage = damage
 		out.flightEffect = flightEffect
 		out.hitEffect = hitEffect
 
@@ -354,83 +264,29 @@ class BreakAbility : FriendlyAbility()
 	}
 }
 
-class BlockAbility : FriendlyAbility()
+class FriendlyPopAbility : FriendlyPopTileAbility()
 {
-	var targets: Int = 1
-	var flightEffect: ParticleEffect? = null
-	var hitEffect: ParticleEffect? = null
+	val tmpArray = Array<Tile>()
 
-	override fun activate(friendly: Friendly, grid: Grid)
+	override fun getTargets(entity: Entity, grid: Grid): Array<Tile>
 	{
-		val availableTargets = friendly.getBorderTiles(grid, range)
-		val validTargets = availableTargets.filter { it.monsterEffect != null }
+		tmpArray.clear()
 
-		val chosen = validTargets.random(targets).toList().toGdxArray()
+		tmpArray.addAll(grid.sinkPathTiles)
+		tmpArray.addAll(grid.breakableTiles)
+		tmpArray.addAll(grid.attackTiles)
+		tmpArray.addAll(grid.namedOrbTiles)
 
-		for (tile in chosen)
-		{
-			var delay = 0f
-
-			val diff = tile.getPosDiff(friendly.tiles[0, 0])
-			diff[0].y *= -1
-			friendly.sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
-
-			if (flightEffect != null)
-			{
-				val dst = tile.euclideanDist(friendly.tiles[0, 0])
-				val animDuration = dst * 0.025f
-
-				val particle = flightEffect!!.copy()
-				particle.animation = MoveAnimation.obtain().set(animDuration, diff)
-				particle.killOnAnimComplete = true
-
-				particle.rotation = getRotation(friendly.tiles[0, 0], tile)
-
-				tile.effects.add(particle)
-
-				delay += animDuration
-			}
-
-			if (hitEffect != null)
-			{
-				val particle = hitEffect!!.copy()
-				particle.renderDelay = delay
-
-				delay += particle.lifetime / 2f
-
-				tile.effects.add(particle)
-			}
-
-			grid.pop(tile, delay)
-		}
-	}
-
-	override fun parse(xml: XmlData)
-	{
-		range = xml.getInt("Range", 1)
-		targets = xml.getInt("Count", 1)
-
-		val flightEffectEl = xml.getChildByName("FlightEffect")
-		if (flightEffectEl != null)
-		{
-			flightEffect = AssetManager.loadParticleEffect(flightEffectEl).getParticleEffect()
-		}
-
-		val hitEffectEl = xml.getChildByName("HitEffect")
-		if (hitEffectEl != null)
-		{
-			hitEffect = AssetManager.loadParticleEffect(hitEffectEl).getParticleEffect()
-		}
+		return tmpArray
 	}
 
 	override fun copy(): FriendlyAbility
 	{
-		val out = BlockAbility()
+		val out = FriendlyPopAbility()
 		out.cooldownMin = cooldownMin
 		out.cooldownMax = cooldownMax
 		out.cooldownTimer = out.cooldownMin + MathUtils.random(out.cooldownMax - out.cooldownMin)
 		out.range = range
-		out.targets = targets
 		out.flightEffect = flightEffect
 		out.hitEffect = hitEffect
 
@@ -438,121 +294,25 @@ class BlockAbility : FriendlyAbility()
 	}
 }
 
-class PopAbility : FriendlyAbility()
-{
-	var targets: Int = 1
-	var flightEffect: ParticleEffect? = null
-	var hitEffect: ParticleEffect? = null
-
-	override fun activate(friendly: Friendly, grid: Grid)
-	{
-		val availableTargets = friendly.getBorderTiles(grid, range).asGdxArray()
-
-		for (r in 0 until targets)
-		{
-			val validTargets = Array<Tile>()
-
-			for (target in availableTargets)
-			{
-				if (friendly.sinkPathTiles.contains(target) || friendly.namedOrbTiles.contains(target))
-				{
-					validTargets.add(target)
-				}
-			}
-
-			if (validTargets.size == 0)
-			{
-				validTargets.addAll(availableTargets)
-			}
-
-			val tile = validTargets.random()!!
-			availableTargets.removeValue(tile, true)
-
-			var delay = 0f
-
-			val diff = tile.getPosDiff(friendly.tiles[0, 0])
-			diff[0].y *= -1
-			friendly.sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
-
-			if (flightEffect != null)
-			{
-				val dst = tile.euclideanDist(friendly.tiles[0, 0])
-				val animDuration = dst * 0.025f
-
-				val particle = flightEffect!!.copy()
-				particle.animation = MoveAnimation.obtain().set(animDuration, diff)
-				particle.killOnAnimComplete = true
-
-				particle.rotation = getRotation(friendly.tiles[0, 0], tile)
-
-				tile.effects.add(particle)
-
-				delay += animDuration
-			}
-
-			if (hitEffect != null)
-			{
-				val particle = hitEffect!!.copy()
-				particle.renderDelay = delay
-
-				delay += particle.lifetime / 2f
-
-				tile.effects.add(particle)
-			}
-
-			grid.pop(tile, delay)
-		}
-	}
-
-	override fun parse(xml: XmlData)
-	{
-		range = xml.getInt("Range", 1)
-		targets = xml.getInt("Count", 1)
-
-		val flightEffectEl = xml.getChildByName("FlightEffect")
-		if (flightEffectEl != null)
-		{
-			flightEffect = AssetManager.loadParticleEffect(flightEffectEl).getParticleEffect()
-		}
-
-		val hitEffectEl = xml.getChildByName("HitEffect")
-		if (hitEffectEl != null)
-		{
-			hitEffect = AssetManager.loadParticleEffect(hitEffectEl).getParticleEffect()
-		}
-	}
-
-	override fun copy(): FriendlyAbility
-	{
-		val out = PopAbility()
-		out.cooldownMin = cooldownMin
-		out.cooldownMax = cooldownMax
-		out.cooldownTimer = out.cooldownMin + MathUtils.random(out.cooldownMax - out.cooldownMin)
-		out.range = range
-		out.targets = targets
-		out.flightEffect = flightEffect
-		out.hitEffect = hitEffect
-
-		return out
-	}
-}
-
-class HealAbility : FriendlyAbility()
+class FriendlyHealAbility : FriendlyAbility()
 {
 	val heartSprite = AssetManager.loadSprite("Oryx/Custom/items/heart")
 	var amount: Int = 1
 
-	override fun activate(friendly: Friendly, grid: Grid)
+	override fun activate(entity: Entity, grid: Grid)
 	{
-		for (tile in grid.grid)
+		val srcPos = entity.pos().tile!!
+
+		for (tile in grid.friendlyTiles)
 		{
-			val friendly = tile.friendly ?: continue
+			val friendly = tile.contents
+			val healable = friendly?.healable() ?: continue
 
-			val diff = tile.getPosDiff(friendly.tiles[0, 0])
+			val diff = tile.getPosDiff(srcPos)
 			diff[0].y *= -1
-			friendly.sprite.animation = BumpAnimation.obtain().set(0.2f, diff)
+			entity.renderable().renderable.animation = BumpAnimation.obtain().set(0.2f, diff)
 
-			val dst = tile.euclideanDist(friendly.tiles[0, 0])
+			val dst = tile.euclideanDist(srcPos)
 			var animDuration = dst * 0.025f
 
 			animDuration += 0.4f
@@ -568,7 +328,7 @@ class HealAbility : FriendlyAbility()
 			tile.effects.add(healEffect)
 
 
-			Future.call({ friendly.hp++ }, animDuration)
+			Future.call({ healable.hp++ }, animDuration)
 		}
 
 		for (condition in grid.level.defeatConditions)
@@ -578,7 +338,7 @@ class HealAbility : FriendlyAbility()
 				val sprite = heartSprite.copy()
 				val dst = condition.table.localToStageCoordinates(Vector2(Random.random() * condition.table.width, Random.random() * condition.table.height))
 				val moteDst = dst.cpy() - Vector2(GridWidget.instance.tileSize / 2f, GridWidget.instance.tileSize / 2f)
-				val src = GridWidget.instance.pointToScreenspace(friendly.tiles[0, 0])
+				val src = GridWidget.instance.pointToScreenspace(srcPos)
 
 				Mote(src, moteDst, sprite, GridWidget.instance.tileSize,
 					 {
@@ -596,7 +356,7 @@ class HealAbility : FriendlyAbility()
 
 	override fun copy(): FriendlyAbility
 	{
-		val out = HealAbility()
+		val out = FriendlyHealAbility()
 		out.cooldownMin = cooldownMin
 		out.cooldownMax = cooldownMax
 		out.cooldownTimer = out.cooldownMin + MathUtils.random(out.cooldownMax - out.cooldownMin)
@@ -607,253 +367,66 @@ class HealAbility : FriendlyAbility()
 	}
 }
 
-class MoveAbility : FriendlyAbility()
+class FriendlyMoveAbility : FriendlyAbility()
 {
-	override fun activate(friendly: Friendly, grid: Grid)
+	val tmpArray = Array<Tile>()
+
+	override fun activate(entity: Entity, grid: Grid)
 	{
-		// check if there are any targets in range, if so stay put
-		val srcTile = friendly.tiles[0, 0]
+		val srcPos = entity.pos().tile!!
+		var targetTile: Tile? = null
 
-		for (ability in friendly.abilities)
+		// move out of sinkable way
+		if (grid.sinkPathTiles.contains(srcPos) && grid.notSinkPathTiles.size > 0)
 		{
-			when (ability)
+			targetTile = grid.notSinkPathTiles.minBy { it.taxiDist(srcPos) }
+		}
+
+		// else move to closest target
+		if (targetTile == null)
+		{
+			tmpArray.clear()
+
+			val parentAI = entity.ai()?.ai as FriendlyAI
+			for (ability in parentAI.abilities)
 			{
-				is AttackAbility -> for (tile in friendly.monsterTiles)
+				if (ability is FriendlyPopTileAbility)
 				{
-					if (tile.dist(srcTile) <= ability.range)
+					val targets = ability.getTargets(entity, grid)
+
+					if (targets.any { it.taxiDist(srcPos) <= ability.range })
 					{
+						// we are close enough, return
 						return
 					}
-				}
-				is BreakAbility -> for (tile in friendly.blockTiles)
-				{
-					if (tile.dist(srcTile) <= ability.range)
-					{
-						return
-					}
-				}
-				is BlockAbility -> for (tile in friendly.attackTiles)
-				{
-					if (tile.dist(srcTile) <= ability.range)
-					{
-						return
-					}
-				}
-				is PopAbility ->
-				{
-					for (tile in friendly.sinkPathTiles)
-					{
-						if (tile.dist(srcTile) <= ability.range)
-						{
-							return
-						}
-					}
 
-					for (tile in friendly.namedOrbTiles)
-					{
-						if (tile.dist(srcTile) <= ability.range)
-						{
-							return
-						}
-					}
+					tmpArray.addAll(targets)
 				}
-				is MoveAbility ->
-				{
-
-				}
-				is HealAbility ->
-				{
-
-				}
-				else -> throw Exception("Unknown friendly ability type!")
 			}
+
+			targetTile = tmpArray.minBy { it.taxiDist(srcPos) }
 		}
 
-		// look within radius 2, if dest found move towards it, else widen search
-		var searchRadius = 2
-		val validTiles = Array<Tile>()
-
-		while (true)
-		{
-			var possibleToHaveValidTiles = false
-
-			for (ability in friendly.abilities)
-			{
-				when (ability)
-				{
-					is AttackAbility ->
-					{
-						if (friendly.monsterTiles.size > 0)
-						{
-							possibleToHaveValidTiles = true
-						}
-
-						for (tile in friendly.monsterTiles)
-						{
-							if (tile.dist(srcTile) <= searchRadius)
-							{
-								validTiles.add(tile)
-							}
-						}
-					}
-					is BreakAbility ->
-					{
-						if (friendly.blockTiles.size > 0)
-						{
-							possibleToHaveValidTiles = true
-						}
-
-						for (tile in friendly.blockTiles)
-						{
-							if (tile.dist(srcTile) <= searchRadius)
-							{
-								validTiles.add(tile)
-							}
-						}
-					}
-					is BlockAbility ->
-					{
-						if (friendly.attackTiles.size > 0)
-						{
-							possibleToHaveValidTiles = true
-						}
-
-						for (tile in friendly.attackTiles)
-						{
-							if (tile.dist(srcTile) <= searchRadius)
-							{
-								validTiles.add(tile)
-							}
-						}
-					}
-					is PopAbility ->
-					{
-						if (friendly.sinkPathTiles.size > 0 || friendly.namedOrbTiles.size > 0)
-						{
-							possibleToHaveValidTiles = true
-						}
-
-						for (tile in friendly.sinkPathTiles)
-						{
-							if (tile.dist(srcTile) <= searchRadius)
-							{
-								validTiles.add(tile)
-							}
-						}
-
-						for (tile in friendly.namedOrbTiles)
-						{
-							if (tile.dist(srcTile) <= searchRadius)
-							{
-								validTiles.add(tile)
-							}
-						}
-					}
-					is MoveAbility ->
-					{
-
-					}
-					is HealAbility ->
-					{
-
-					}
-					else -> throw Exception("Unknown friendly ability type!")
-				}
-			}
-
-			if (validTiles.size > 0)
-			{
-				break
-			}
-			else if (!possibleToHaveValidTiles)
-			{
-				break
-			}
-
-			searchRadius += 2
-		}
-
-		// if no valid tiles then move out of sinkables way, or randomly
-		if (validTiles.size == 0)
-		{
-			val borderTiles = friendly.getBorderTiles(grid).filter { !friendly.sinkPathTiles.contains(it) }.asGdxArray()
-
-			if (borderTiles.size > 0)
-			{
-				validTiles.addAll(borderTiles)
-			}
-		}
-		else
-		{
-			// Weight tiles based on if they are in the path of a sinkable or not
-			val tilesCopy = validTiles.toGdxArray()
-			validTiles.clear()
-			for (tile in tilesCopy)
-			{
-				if (!friendly.sinkPathTiles.contains(tile))
-				{
-					for (i in 0 until 3)
-					{
-						validTiles.add(tile)
-					}
-				}
-				else
-				{
-					validTiles.add(tile)
-				}
-			}
-		}
-
-		// if still no valid, then bail
-		if (validTiles.size == 0)
+		if (targetTile == null)
 		{
 			return
 		}
 
-		fun isValid(t: Tile): Boolean
+		val dir = Direction.getDirection(srcPos, targetTile)
+
+		val nextTile = grid.getTile(srcPos, dir)
+
+		if (nextTile != null && nextTile.canHaveOrb && nextTile.contents?.matchable() != null && nextTile.contents?.special() == null)
 		{
-			for (x in 0 until friendly.size)
-			{
-				for (y in 0 until friendly.size)
-				{
-					val tile = grid.tile(t.x + x, t.y + y) ?: return false
+			entity.pos().removeFromTile(entity)
+			entity.pos().tile = nextTile
+			entity.pos().addToTile(entity)
 
-					if (tile.orb == null && tile.friendly != friendly)
-					{
-						return false
-					}
+			val diff = nextTile.getPosDiff(srcPos)
+			diff[0].y *= -1
 
-					if (!tile.canHaveOrb)
-					{
-						return false
-					}
-				}
-			}
-
-			return true
+			entity.renderable().renderable.animation = MoveAnimation.obtain().set(0.25f, UnsmoothedPath(diff), Interpolation.linear)
 		}
-
-		// Remove invalid tiles
-		val validTargets = validTiles.filter(::isValid).asGdxArray()
-
-		if (validTargets.size == 0)
-		{
-			return
-		}
-
-		val chosen = validTargets.random()!!
-
-		val borderTiles = friendly.getBorderTiles(grid, 1).filter(::isValid)
-		val targetTile = borderTiles.minBy { it.dist(chosen) }!!
-
-		val start = friendly.tiles.first()
-		friendly.setTile(targetTile, grid)
-		val end = friendly.tiles.first()
-
-		val diff = end.getPosDiff(start)
-		diff[0].y *= -1
-
-		friendly.sprite.animation = MoveAnimation.obtain().set(0.25f, UnsmoothedPath(diff), Interpolation.linear)
 	}
 
 	override fun parse(xml: XmlData)
@@ -863,7 +436,7 @@ class MoveAbility : FriendlyAbility()
 
 	override fun copy(): FriendlyAbility
 	{
-		val out = MoveAbility()
+		val out = FriendlyMoveAbility()
 		out.cooldownMin = cooldownMin
 		out.cooldownMax = cooldownMax
 		out.cooldownTimer = out.cooldownMin + MathUtils.random(out.cooldownMax - out.cooldownMin)

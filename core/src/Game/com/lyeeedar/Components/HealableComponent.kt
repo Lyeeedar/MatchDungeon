@@ -3,6 +3,8 @@ package com.lyeeedar.Components
 import com.badlogic.ashley.core.ComponentMapper
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.Pool
+import com.lyeeedar.Renderables.Particle.ParticleEffect
+import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.ciel
@@ -49,6 +51,10 @@ class HealableComponent : AbstractComponent()
 			hp = value.toFloat()
 		}
 
+	var isSummon = false
+
+	var deathEffect: ParticleEffect = AssetManager.loadParticleEffect("death").getParticleEffect()
+
 	var obtained: Boolean = false
 	companion object
 	{
@@ -88,5 +94,7 @@ class HealableComponent : AbstractComponent()
 		lostHP = 0
 		tookDamage = false
 		maxhp = 1
+		isSummon = false
+		deathEffect = AssetManager.loadParticleEffect("death").getParticleEffect()
 	}
 }

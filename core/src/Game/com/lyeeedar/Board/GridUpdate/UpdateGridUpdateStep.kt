@@ -48,10 +48,14 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 			{
 				val tile = grid.grid[x, y]
 
+				val contents = tile.contents
+
 				val spreader = tile.spreader
-				val matchable = tile.contents?.matchable()
-				val ai = tile.contents?.ai()
-				val monsterEffect = tile.contents?.monsterEffect()
+				val matchable = contents?.matchable()
+				val ai = contents?.ai()
+				val monsterEffect = contents?.monsterEffect()
+				val damageable = contents?.damageable()
+				val healable = contents?.healable()
 
 				if (spreader != null)
 				{
@@ -61,7 +65,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 				{
 					matchableTiles.add(tile)
 				}
-				if (ai != null && tile == tile.contents!!.pos().tile)
+				if (ai != null && tile == contents.pos().tile)
 				{
 					aiTiles.add(tile)
 				}
@@ -69,19 +73,43 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 				{
 					monsterEffectTiles.add(tile)
 				}
+				if (damageable != null)
 
 				for (effect in tile.onTurnEffects)
 				{
 					effect.onTurn(grid, tile)
 				}
 
-				val onTurnEffect = tile.contents?.onTurnEffect()
+				val onTurnEffect = contents?.onTurnEffect()
 				if (onTurnEffect != null)
 				{
 					for (effect in onTurnEffect.onTurnEffects)
 					{
 						effect.onTurn(grid, tile)
 					}
+				}
+
+				if (damageable != null)
+				{
+					if (damageable.isSummon)
+					{
+						damageable.hp--
+					}
+
+					if (damageable.immuneCooldown > 0)
+					{
+						damageable.immuneCooldown--
+
+						if (damageable.immuneCooldown == 0)
+						{
+							damageable.immune = false
+						}
+					}
+				}
+
+				if (healable != null && healable.isSummon)
+				{
+					healable.hp--
 				}
 			}
 		}
@@ -93,7 +121,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 			{
 				processedAIs.add(ai)
 
-				ai.ai.onTurn(grid)
+				ai.ai.onTurn(tile.contents!!, grid)
 			}
 		}
 
@@ -236,8 +264,8 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 			{
 				if (matchable.isChanger)
 				{
-					matchable.desc = matchable.nextDesc!!
-					matchable.nextDesc = Orb.getRandomOrb(grid.level, matchable.desc)
+					matchable.setDesc(matchable.nextDesc!!, tile.contents!!)
+					matchable.nextDesc = OrbDesc.getRandomOrb(grid.level, matchable.desc)
 
 					val effect = AssetManager.loadSprite("EffectSprites/Heal/Heal", 0.05f, matchable.desc.sprite.colour)
 					tile.effects.add(effect)

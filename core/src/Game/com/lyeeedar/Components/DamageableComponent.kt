@@ -14,6 +14,7 @@ fun Entity.damageable(): DamageableComponent? = DamageableComponent.mapper.get(t
 class DamageableComponent : AbstractComponent()
 {
 	var immune = false
+	var immuneCooldown = 0
 
 	var damageReduction: Int = 0
 		set(value)
@@ -72,6 +73,7 @@ class DamageableComponent : AbstractComponent()
 
 	var isCreature = false
 	var alwaysShowHP = true
+	var isSummon = false
 
 	var obtained: Boolean = false
 	companion object
@@ -108,6 +110,7 @@ class DamageableComponent : AbstractComponent()
 	override fun reset()
 	{
 		immune = false
+		immuneCooldown = 0
 		damageReduction = 0
 		remainingReduction = 0
 		hp = 1f
@@ -118,5 +121,6 @@ class DamageableComponent : AbstractComponent()
 		deathEffect = AssetManager.loadParticleEffect("death").getParticleEffect()
 		isCreature = false
 		alwaysShowHP = true
+		isSummon = false
 	}
 }

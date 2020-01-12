@@ -1,6 +1,7 @@
 package com.lyeeedar.Board.GridUpdate
 
 import com.badlogic.gdx.utils.Array
+import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Board.Tile
 import com.lyeeedar.Components.*
 import com.lyeeedar.Systems.GridSystem
@@ -8,6 +9,7 @@ import com.lyeeedar.Systems.GridSystem
 class UpdateGridStateUpdateStep : AbstractUpdateStep()
 {
 	val chestTiles = Array<Tile>()
+	val sinkPathSet = ObjectSet<Tile>()
 
 	override fun doUpdate(gridSystem: GridSystem): Boolean
 	{
@@ -18,7 +20,10 @@ class UpdateGridStateUpdateStep : AbstractUpdateStep()
 		grid.sinkableTiles.clear()
 		grid.breakableTiles.clear()
 		grid.sinkPathTiles.clear()
-		grid.popableTiles.clear()
+		grid.notSinkPathTiles.clear()
+		grid.basicOrbTiles.clear()
+		grid.attackTiles.clear()
+		grid.namedOrbTiles.clear()
 
 		chestTiles.clear()
 
@@ -37,6 +42,7 @@ class UpdateGridStateUpdateStep : AbstractUpdateStep()
 				val matchable = contents.matchable()
 				val special = contents.special()
 				val orbSpawner = contents.orbSpawner()
+				val monsterEffect = contents.monsterEffect()
 
 				if (ai != null && damageable != null)
 				{
@@ -61,11 +67,22 @@ class UpdateGridStateUpdateStep : AbstractUpdateStep()
 				if (matchable != null && special == null)
 				{
 					// orb or suchlike, excluding specials
-					grid.popableTiles.add(tile)
+					if (matchable.desc.isNamed)
+					{
+						grid.namedOrbTiles.add(tile)
+					}
+					else
+					{
+						grid.basicOrbTiles.add(tile)
+					}
 				}
 				if (orbSpawner != null && orbSpawner.numToSpawn > 0)
 				{
 					chestTiles.add(tile)
+				}
+				if (monsterEffect != null)
+				{
+					grid.attackTiles.add(tile)
 				}
 			}
 		}
@@ -86,6 +103,16 @@ class UpdateGridStateUpdateStep : AbstractUpdateStep()
 				{
 					grid.sinkPathTiles.add(tile)
 				}
+			}
+		}
+
+		sinkPathSet.clear()
+		sinkPathSet.addAll(grid.sinkPathTiles)
+		for (tile in grid.grid)
+		{
+			if (!sinkPathSet.contains(tile))
+			{
+				grid.notSinkPathTiles.add(tile)
 			}
 		}
 

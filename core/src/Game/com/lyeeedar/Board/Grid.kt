@@ -52,7 +52,10 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	val sinkableTiles = Array<Tile>()
 	val breakableTiles = Array<Tile>()
 	val sinkPathTiles = Array<Tile>()
-	val popableTiles = Array<Tile>()
+	val notSinkPathTiles = Array<Tile>()
+	val basicOrbTiles = Array<Tile>()
+	val attackTiles = Array<Tile>()
+	val namedOrbTiles = Array<Tile>()
 
 	// ----------------------------------------------------------------------
 	init
