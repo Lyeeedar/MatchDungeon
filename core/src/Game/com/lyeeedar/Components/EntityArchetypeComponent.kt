@@ -14,8 +14,9 @@ enum class EntityArchetype private constructor(val letter: Char)
 	MONSTER('!'),
 	ORB('o'),
 	SINKABLE('c'),
-	SPECIAL('s'),
-	SPREADER('@')
+	SPECIAL('B'),
+	SPREADER('@'),
+	CUSTOM('&')
 }
 
 fun Entity.archetype(): EntityArchetypeComponent? = EntityArchetypeComponent.mapper.get(this)

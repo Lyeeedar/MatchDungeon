@@ -1,6 +1,7 @@
 package com.lyeeedar.Board
 
-import com.badlogic.gdx.utils.Array
+import com.badlogic.ashley.core.Entity
+import com.lyeeedar.Components.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.tryGet
 
@@ -8,12 +9,24 @@ import com.lyeeedar.Util.tryGet
  * Created by Philip on 08-Jul-16.
  */
 
-class Block(val theme: Theme) : Damageable(), IHasTurnEffect
+fun createBlock(theme: Theme, hp: Int): Entity
 {
-	override var sprite = theme.blockSprites.tryGet(0).copy()
-	var alwaysShowHP: Boolean = false
+	val archetype = EntityArchetypeComponent.obtain().set(EntityArchetype.BLOCK)
 
-	val death = AssetManager.loadParticleEffect("Hit").getParticleEffect()
+	val position = PositionComponent.obtain()
 
-	override val onTurnEffects: Array<TurnEffect> = Array()
+	val renderable = RenderableComponent.obtain().set(theme.blockSprites.tryGet(0).copy())
+
+	val damageableComponent = DamageableComponent.obtain()
+	damageableComponent.deathEffect = AssetManager.loadParticleEffect("Hit").getParticleEffect()
+	damageableComponent.alwaysShowHP = false
+	damageableComponent.maxhp = hp
+
+	val entity = EntityPool.obtain()
+	entity.add(archetype)
+	entity.add(position)
+	entity.add(renderable)
+	entity.add(damageableComponent)
+
+	return entity
 }

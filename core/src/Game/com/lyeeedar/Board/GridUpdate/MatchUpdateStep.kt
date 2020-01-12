@@ -47,7 +47,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 	}
 
 	// ----------------------------------------------------------------------
-	private fun findMatches(grid: Grid) : Array<Match>
+	fun findMatches(grid: Grid) : Array<Match>
 	{
 		val matches = Array<Match>(false, 16)
 
@@ -83,7 +83,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 	}
 
 	// ----------------------------------------------------------------------
-	private fun findMatches(grid: Grid, length: Int, exact: Boolean = false) : Array<Match>
+	fun findMatches(grid: Grid, length: Int, exact: Boolean = false) : Array<Match>
 	{
 		val matches = Array<Match>()
 

@@ -17,37 +17,9 @@ import java.util.*
 val beamMoveSpeed = 0.1f
 val lightTemplate = Light(Colour.WHITE, brightness = 0.3f, range = 2f)
 
-abstract class Special(orbDesc: OrbDesc, theme: Theme) : Matchable(theme)
+abstract class Special(orbDesc: OrbDesc, theme: Theme)
 {
 	var armed = false
-
-	override val canMove: Boolean
-		get() = !armed
-
-	override val canMatch: Boolean
-		get() = !armed
-
-	override var deletionEffectDelay: Float = 0f
-
-	override var markedForDeletion: Boolean = false
-
-	override var desc: OrbDesc = orbDesc
-		set(value)
-		{
-			if (this !is GemSpecial)
-			{
-				if (value.key != -1)
-				{
-					field = value
-					sprite.colour = desc.sprite.colour
-					sprite.colourAnimation = BlinkAnimation.obtain().set(sprite.colour, 0.1f, 2.5f, false)
-				}
-			}
-			else
-			{
-				field = value
-			}
-		}
 
 	val uniqueID = UUID.randomUUID().toString()
 

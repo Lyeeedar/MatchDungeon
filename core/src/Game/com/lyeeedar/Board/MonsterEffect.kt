@@ -1,7 +1,12 @@
 package com.lyeeedar.Board
 
+import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.ObjectMap
+import com.lyeeedar.Components.MonsterEffectComponent
+import com.lyeeedar.Components.matchable
+import com.lyeeedar.Components.monsterEffect
+import com.lyeeedar.Components.renderable
 import com.lyeeedar.Game.Buff
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.BumpAnimation
@@ -25,6 +30,15 @@ enum class MonsterEffectType
 	HEAL,
 	SUMMON,
 	DEBUFF
+}
+
+fun addMonsterEffect(entity: Entity, monsterEffect: MonsterEffect): Entity
+{
+	entity.add(MonsterEffectComponent.obtain().set(monsterEffect))
+	entity.renderable().renderable = entity.monsterEffect()!!.monsterEffect.actualSprite
+	entity.renderable().renderable.colour = entity.matchable()!!.desc.sprite.colour
+
+	return entity
 }
 
 class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, Any>)

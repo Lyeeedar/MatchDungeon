@@ -4,12 +4,8 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.Family
 import com.badlogic.gdx.math.Interpolation
 import com.lyeeedar.Board.GridUpdate.*
-import com.lyeeedar.Board.Special
 import com.lyeeedar.Board.Spreader
-import com.lyeeedar.Components.PositionComponent
-import com.lyeeedar.Components.matchable
-import com.lyeeedar.Components.monsterEffect
-import com.lyeeedar.Components.renderableOrNull
+import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Renderables.Animation.BumpAnimation
@@ -51,7 +47,7 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 	val updateGrid = UpdateGridUpdateStep()
 	val cleanup = OnTurnCleanupUpdateStep()
 
-	val updateSteps: kotlin.Array<AbstractUpdateStep>
+	val updateSteps: Array<AbstractUpdateStep>
 
 	// ----------------------------------------------------------------------
 	var activeAbility: Ability? = null
@@ -61,7 +57,7 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 
 			if (value == null)
 			{
-				for (tile in grid)
+				for (tile in grid!!.grid)
 				{
 					tile.isSelected = false
 				}
@@ -72,8 +68,8 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 
 				if (value.targets == 0)
 				{
-					value.activate(this)
-					beginTurn()
+					value.activate(grid!!)
+					inTurn = true
 					field = null
 				}
 			}
@@ -208,7 +204,7 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 
 		if (!grid.level.completed && FullscreenMessage.instance == null)
 		{
-			if (activeAbility == null) matchHint = grid.findValidMove()
+			if (activeAbility == null) matchHint = findValidMove()
 			if (activeAbility == null && matchHint == null)
 			{
 				noValidMoves = true
@@ -227,7 +223,7 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 					if (swapSuccess) inTurn = true
 				}
 
-				if (Tutorial.current == null) onTime(delta)
+				if (Tutorial.current == null) grid.onTime(delta)
 			}
 		}
 	}
@@ -246,11 +242,14 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 
 		if (oldTile.spreader?.effect == Spreader.SpreaderEffect.SEAL || newTile.spreader?.effect == Spreader.SpreaderEffect.SEAL) return false
 
-		val oldSwap = oldTile.swappable ?: return false
-		val newSwap = newTile.swappable ?: return false
+		val oldEntity = oldTile.contents ?: return false
+		val newEntity = newTile.contents ?: return false
 
-		val oldSpecial = oldSwap as? Special
-		val newSpecial = newSwap as? Special
+		val oldSwap = oldEntity.swappable() ?: return false
+		val newSwap = newEntity.swappable() ?: return false
+
+		val oldSpecial = oldEntity.special()?.special
+		val newSpecial = newEntity.special()?.special
 
 		if (!oldSwap.canMove || !newSwap.canMove) return false
 
@@ -262,42 +261,49 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 			val merged = newSpecial?.merge(oldSwap) ?: oldSpecial?.merge(newSwap)
 			if (merged != null)
 			{
-				newTile.special = merged
+				var specialHolder = newEntity.special()
+				if (specialHolder == null)
+				{
+					specialHolder = SpecialComponent.obtain()
+					newEntity.add(specialHolder)
+				}
 
-				val sprite = oldSwap.sprite.copy()
+				specialHolder.special = merged
+
+				val sprite = oldEntity.renderable().renderable.copy()
 				sprite.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile, true)), Interpolation.linear)
 				newTile.effects.add(sprite)
 
-				oldTile.swappable = null
+				oldTile.contents = null
 
 				merged.armed = true
-				merged.markedForDeletion = true
+				newEntity.add(MarkedForDeletionComponent.obtain())
 
 				return false
 			}
 		}
 
-		oldTile.swappable = newSwap
-		newTile.swappable = oldSwap
+		oldTile.contents = newEntity
+		newTile.contents = oldEntity
 
-		val matches = findMatches()
+		val matches = match.findMatches(grid)
 		for (match in matches) match.free()
 		if (matches.size == 0)
 		{
-			oldTile.swappable = oldSwap
-			newTile.swappable = newSwap
+			oldTile.contents = oldEntity
+			newTile.contents = newEntity
 
-			var dir = Direction.Companion.getDirection(oldTile, newTile)
+			var dir = Direction.getDirection(oldTile, newTile)
 			if (dir.y != 0) dir = dir.opposite
-			oldSwap.sprite.animation = BumpAnimation.obtain().set(animSpeed, dir)
+			oldEntity.renderable().renderable.animation = BumpAnimation.obtain().set(animSpeed, dir)
 			return false
 		}
 		else
 		{
-			lastSwapped = newTile
+			grid.lastSwapped = newTile
 
-			oldSwap.sprite.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile)).invertY(), Interpolation.linear)
-			newSwap.sprite.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(oldTile.getPosDiff(newTile)).invertY(), Interpolation.linear)
+			oldEntity.renderable().renderable.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile)).invertY(), Interpolation.linear)
+			newEntity.renderable().renderable.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(oldTile.getPosDiff(newTile)).invertY(), Interpolation.linear)
 			return true
 		}
 	}
@@ -305,25 +311,28 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 	// ----------------------------------------------------------------------
 	private fun findValidMove() : Pair<Point, Point>?
 	{
+		val grid = grid!!
+
 		// find all 2 matches
-		val matches = findMatches(2)
+		val matches = match.findMatches(grid, 2)
 
 		for (match in matches)
 		{
 			// check the 3 tiles around each end to see if it contains one of the correct colours
 			val dir = match.direction()
-			val key = grid[match.p1].matchable!!.desc.key
+			val key = grid.grid[match.p1].contents!!.matchable()!!.desc.key
 
 			fun checkSurrounding(point: Point, dir: Direction, key: Int): Pair<Point, Point>?
 			{
-				val targetTile = tile(point)
-				if (targetTile?.swappable == null || !targetTile.swappable!!.canMove) return null
+				val targetTile = grid.tile(point)
+				if (targetTile?.contents?.swappable()?.canMove != true) return null
 
 				fun canMatch(point: Point): Boolean
 				{
-					val tile = tile(point) ?: return false
-					val matchable = tile.matchable ?: return false
-					if (!matchable.canMove) return false
+					val tile = grid.tile(point) ?: return false
+					val swappable = tile.contents?.swappable() ?: return false
+					val matchable = tile.contents?.matchable() ?: return false
+					if (!swappable.canMove) return false
 					return matchable.desc.key == key
 				}
 
@@ -357,20 +366,21 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 
 		fun getTileKey(x: Int, y: Int, dir: Direction): Int
 		{
-			val tile = tile(x + dir.x, y + dir.y) ?: return -1
-			val matchable = tile.matchable ?: return -1
-			if (!matchable.canMove) return -1
+			val tile = grid.tile(x + dir.x, y + dir.y) ?: return -1
+			val swappable = tile.contents?.swappable() ?: return -1
+			val matchable = tile.contents?.matchable() ?: return -1
+			if (!swappable.canMove) return -1
 
 			return matchable.desc.key
 		}
 
 		// check diamond pattern
-		for (x in 0 until width)
+		for (x in 0 until grid.width)
 		{
-			for (y in 0 until height)
+			for (y in 0 until grid.height)
 			{
-				val tile = tile(x, y) ?: continue
-				val swappable = tile.swappable ?: continue
+				val tile = grid.tile(x, y) ?: continue
+				val swappable = tile.contents?.swappable() ?: continue
 				if (!swappable.canMove) continue
 
 				for (dir in Direction.CardinalValues)
@@ -391,16 +401,16 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 		}
 
 		// check for special merges
-		for (x in 0 until width)
+		for (x in 0 until grid.width)
 		{
-			for (y in 0 until height)
+			for (y in 0 until grid.height)
 			{
-				val special = grid[x, y].special ?: continue
-
+				val special = grid.grid[x, y].contents?.special() ?: continue
 				for (dir in Direction.CardinalValues)
 				{
-					val tile = tile(x + dir.x, y + dir.y) ?: continue
-					if (tile.special != null)
+					val tile = grid.tile(x + dir.x, y + dir.y) ?: continue
+					val tileSpecial = tile.contents?.special() ?: continue
+					if (special.special.merge(tileSpecial.special) != null)
 					{
 						return Pair(Point(x, y), Point(x + dir.x, y + dir.y))
 					}

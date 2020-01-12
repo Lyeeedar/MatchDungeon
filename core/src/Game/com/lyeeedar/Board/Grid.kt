@@ -262,13 +262,15 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		{
 			for (y in 0 until height)
 			{
-				if (grid[x, y].canHaveOrb && grid[x, y].block == null && grid[x, y].container == null && grid[x, y].creature == null)
+				val tile = grid[x, y]
+				if (tile.canHaveOrb && tile.contents?.damageable() == null && tile.contents?.healable() == null)
 				{
-					val toSpawn = if (orbOnly) Orb(Orb.getRandomOrb(level), level.theme) else level.spawnOrb()
+					val toSpawn = if (orbOnly) createOrb(OrbDesc.getRandomOrb(level), level.theme) else level.spawnOrb()
 
-					if (toSpawn is Orb)
+					val toSpawnMatchable = toSpawn.matchable()
+					if (toSpawnMatchable != null)
 					{
-						val valid = Orb.getValidOrbs(level)
+						val valid = OrbDesc.getValidOrbs(level)
 
 						if (!orbOnly)
 						{
@@ -278,40 +280,41 @@ class Grid(val width: Int, val height: Int, val level: Level)
 								{
 									if (Random.random.nextFloat() < v.orbChance)
 									{
-										valid.add(Orb.getNamedOrb(v.targetOrbName))
+										valid.add(OrbDesc.getNamedOrb(v.targetOrbName))
 									}
 								}
 							}
 						}
 
-						val l1 = tile(x - 1, y)
-						val l2 = tile(x - 2, y)
-						val u1 = tile(x, y - 1)
-						val u2 = tile(x, y - 2)
+						val l1 = tile(x - 1, y)?.contents?.matchable()?.desc
+						val l2 = tile(x - 2, y)?.contents?.matchable()?.desc
+						val u1 = tile(x, y - 1)?.contents?.matchable()?.desc
+						val u2 = tile(x, y - 2)?.contents?.matchable()?.desc
 
-						if (l1?.orb != null && l2?.orb != null && l1.orb?.desc?.key == l2.orb?.desc?.key)
+						if (l1?.key == l2?.key)
 						{
-							valid.removeValue(l1.orb!!.desc, true)
+							valid.removeValue(l1, true)
 						}
-						if (u1?.orb != null && u2?.orb != null && u1.orb?.desc?.key == u2.orb?.desc?.key)
+						if (u1?.key == u2?.key)
 						{
-							valid.removeValue(u1.orb!!.desc, true)
+							valid.removeValue(u1, true)
 						}
 
-						toSpawn.desc = valid.random()
-						if (toSpawn.isChanger) toSpawn.nextDesc = Orb.getRandomOrb(level, toSpawn.desc)
+						toSpawnMatchable.desc = valid.random()
+						if (toSpawnMatchable.isChanger) toSpawnMatchable.nextDesc = OrbDesc.getRandomOrb(level, toSpawnMatchable.desc)
 					}
 
 					grid[x, y].contents = toSpawn
-					grid[x, y].swappable?.grid = this
 				}
 			}
 		}
 	}
 
 	// ----------------------------------------------------------------------
-	fun damage(tile: Tile, damageable: Damageable, delay: Float, damSource: Any? = null, bonusDam: Float = 0f, pierce: Float = 0f)
+	fun damage(tile: Tile, damageableEntity: Entity, delay: Float, damSource: Any? = null, bonusDam: Float = 0f, pierce: Float = 0f)
 	{
+		val damageable = damageableEntity.damageable()!!
+
 		var targetDam = if (!damageable.damSources.contains(damSource)) 1f + bonusDam else 1f
 		var damReduction = damageable.remainingReduction.toFloat()
 
@@ -339,9 +342,9 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		val hit = hitEffect.copy()
 		hit.renderDelay = delay
 		tile.effects.add(hit)
-		onDamaged(damageable)
+		onDamaged(damageableEntity)
 
-		if (damageable is Monster)
+		if (damageable.isCreature)
 		{
 			val vampiric = Global.player.getStat(Statistic.VAMPIRICSTRIKES, withChoaticNature = true)
 			val die = level.defeatConditions.filterIsInstance<CompletionConditionDie>().firstOrNull()
@@ -384,12 +387,12 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			tile.effects.add(hit)
 		}
 
-		if (tile.friendly != null)
+		if (tile.contents?.healable() != null)
 		{
-			val friendly = tile.friendly!!
+			val friendly = tile.contents!!.healable()!!
 			if (friendly.hp < friendly.maxhp)
 			{
-				tile.friendly!!.hp++
+				friendly.hp++
 				val healSprite = AssetManager.loadParticleEffect("Heal").getParticleEffect()
 				healSprite.colour = Colour.GREEN
 				tile.effects.add(healSprite)
@@ -397,29 +400,30 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 			return
 		}
-		else if (tile.damageable != null)
+		else if (tile.contents?.damageable() != null)
 		{
-			damage(tile, tile.damageable!!, delay, damSource, bonusDam, pierce)
+			damage(tile, tile.contents!!, delay, damSource, bonusDam, pierce)
 			return
 		}
 
-		val matchable = tile.matchable ?: return
-		if (matchable.markedForDeletion) return // already completed, dont do it again
+		val contents = tile.contents
+		val swappable = contents?.swappable() ?: return
+		if (contents.hasComponent(MarkedForDeletionComponent::class.java)) return // already completed, dont do it again
 
-		if (matchable.sealed)
+		if (swappable.sealed)
 		{
-			matchable.sealCount--
+			swappable.sealCount--
 			val hit = hitEffect.copy()
 			hit.renderDelay = delay
 			tile.effects.add(hit)
 			return
 		}
 
-		if (matchable is Special)
+		if (contents.special() != null)
 		{
-			if (matchable.canMatch)
+			if (!swappable.sealed)
 			{
-				matchable.armed = true
+				contents.special()!!.special.armed = true
 			}
 			else
 			{
@@ -427,21 +431,23 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			}
 		}
 
-		matchable.markedForDeletion = true
-		matchable.deletionEffectDelay = delay
+		val markedForDeletionComponent = MarkedForDeletionComponent.obtain()
+		markedForDeletionComponent.deletionEffectDelay = delay
+		contents.add(markedForDeletionComponent)
 
-		if (matchable is Orb)
+		val matchable = contents.matchable()
+		if (matchable != null)
 		{
 			matchable.skipPowerOrb = skipPowerOrb
-			matchable.sprite.visible = false
+			contents.renderable().renderable.visible = false
+
+			val sprite = matchable.desc.death.copy()
+			sprite.colour = contents.renderable().renderable.colour
+			sprite.renderDelay = delay
+			sprite.isShortened = true
+
+			tile.effects.add(sprite)
 		}
-
-		val sprite = matchable.desc.death.copy()
-		sprite.colour = matchable.sprite.colour
-		sprite.renderDelay = delay
-		sprite.isShortened = true
-
-		tile.effects.add(sprite)
 	}
 
 	// ----------------------------------------------------------------------

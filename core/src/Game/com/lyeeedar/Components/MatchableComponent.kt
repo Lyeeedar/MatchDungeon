@@ -9,7 +9,19 @@ import com.lyeeedar.Util.XmlData
 fun Entity.matchable(): MatchableComponent? = MatchableComponent.mapper.get(this)
 class MatchableComponent : AbstractComponent()
 {
-	lateinit var desc: OrbDesc
+	var desc: OrbDesc = OrbDesc()
+		private set(value)
+		{
+			field = value
+		}
+
+	fun setDesc(desc: OrbDesc, entity: Entity)
+	{
+		this.desc = desc
+		entity.renderable().renderable = desc.sprite.copy()
+		entity.renderable().renderable.colour = desc.sprite.colour
+	}
+
 	var canMatch: Boolean = true
 	var markedForDeletion: Boolean = false
 	var deletionEffectDelay: Float = 0f

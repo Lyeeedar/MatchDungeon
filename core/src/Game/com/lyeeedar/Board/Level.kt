@@ -1,5 +1,6 @@
 package com.lyeeedar.Board
 
+import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.IntMap
 import com.badlogic.gdx.utils.ObjectMap
@@ -7,6 +8,10 @@ import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Board.CompletionCondition.AbstractCompletionCondition
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionCustomOrb
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionSink
+import com.lyeeedar.Components.MonsterEffectComponent
+import com.lyeeedar.Components.matchable
+import com.lyeeedar.Components.monsterEffect
+import com.lyeeedar.Components.renderable
 import com.lyeeedar.Game.Buff
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Game.Player
@@ -58,22 +63,23 @@ class Level(val loadPath: String)
 	lateinit var victoryAction: () -> Unit
 	lateinit var defeatAction: () -> Unit
 
-	fun spawnOrb(): Swappable
+	fun spawnOrb(): Entity
 	{
 		val toSpawn = spawnList.random()
 
 		if (toSpawn == "Changer")
 		{
-			val orb = Orb(Orb.getRandomOrb(this), theme)
-			orb.isChanger = true
+			val orb = createOrb(OrbDesc.getRandomOrb(this), theme)
+			orb.matchable()!!.isChanger = true
 			return orb
 		}
 		else if (toSpawn == "Attack")
 		{
-			val orb = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap(), Orb.getRandomOrb (this), theme)
-			orb.sprite = orb.actualSprite
-			orb.sprite.colour = orb.desc.sprite.colour
-			orb.timer = 7
+			val orb = createOrb(OrbDesc.getRandomOrb(this), theme)
+			val monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap())
+			monsterEffect.timer = 7
+			addMonsterEffect(orb, monsterEffect)
+
 			return orb
 		}
 		else if (toSpawn == "Summon")
@@ -81,19 +87,20 @@ class Level(val loadPath: String)
 			val data = ObjectMap<String, Any>()
 			data["FACTION"] = factions.random()
 
-			val orb = MonsterEffect(MonsterEffectType.SUMMON, data, Orb.getRandomOrb (this), theme)
-			orb.sprite = orb.actualSprite
-			orb.sprite.colour = orb.desc.sprite.colour
-			orb.timer = 7
+			val orb = createOrb(OrbDesc.getRandomOrb(this), theme)
+			val monsterEffect = MonsterEffect(MonsterEffectType.SUMMON, data)
+			monsterEffect.timer = 7
+			addMonsterEffect(orb, monsterEffect)
+
 			return orb
 		}
 		else if (toSpawn == "Orb")
 		{
-			return Orb(Orb.getRandomOrb(this), theme)
+			return createOrb(OrbDesc.getRandomOrb(this), theme)
 		}
 		else
 		{
-			return Orb(Orb.getNamedOrb(toSpawn), theme)
+			return createOrb(OrbDesc.getNamedOrb(toSpawn), theme)
 		}
 	}
 
