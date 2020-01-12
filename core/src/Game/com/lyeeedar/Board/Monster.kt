@@ -22,6 +22,16 @@ import ktx.collections.addAll
 import ktx.collections.set
 import ktx.collections.toGdxArray
 
+fun Entity.isMonster(): Boolean
+{
+	if (this.hasComponent(DamageableComponent::class.java) && this.ai()?.ai is MonsterAI)
+	{
+		return true
+	}
+
+	return false
+}
+
 class MonsterDesc
 {
 	lateinit var name: String
@@ -88,7 +98,7 @@ class MonsterDesc
 		{
 			val desc = MonsterDesc()
 
-			desc.name = xml.get("Name", "")!!
+			desc.name = xml.get("Name")
 
 			desc.sprite = AssetManager.loadSprite(xml.getChildByName("Sprite")!!)
 			desc.death = AssetManager.loadParticleEffect(xml.getChildByName("Death")!!).getParticleEffect()

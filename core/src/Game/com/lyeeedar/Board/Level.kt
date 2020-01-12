@@ -284,8 +284,8 @@ class Level(val loadPath: String)
 
 				if (symbol.friendlyDesc != null)
 				{
-					val friendly = Friendly(symbol.friendlyDesc)
-					friendly.setTile(tile, grid)
+					val friendly = symbol.friendlyDesc.getEntity(false)
+					friendly.pos().setTile(friendly, tile)
 				}
 
 				if (symbol.isChest)
@@ -427,7 +427,7 @@ class Level(val loadPath: String)
 							difficulty += 3
 						}
 
-						val monster = createMonster(monsterDesc, difficulty)
+						val monster = monsterDesc.getEntity(difficulty, false)
 						monster.pos().size = size
 						monster.pos().tile = grid.grid[x, y]
 
@@ -505,7 +505,7 @@ class Level(val loadPath: String)
 				{
 					if (matchable == null)
 					{
-						tile.contents = createOrb(OrbDesc.getRandomOrb(this), theme)
+						tile.contents = createOrb(OrbDesc.getRandomOrb(this))
 					}
 
 					val monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap())
@@ -517,7 +517,7 @@ class Level(val loadPath: String)
 				swappable = tile.contents?.swappable()
 				if (swappable == null)
 				{
-					tile.contents = createOrb(OrbDesc.getRandomOrb(this), theme)
+					tile.contents = createOrb(OrbDesc.getRandomOrb(this))
 				}
 
 				val special = when (symbol.special)

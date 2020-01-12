@@ -6,8 +6,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Mote
+import com.lyeeedar.Components.healable
+import com.lyeeedar.Components.pos
+import com.lyeeedar.Components.renderable
+import com.lyeeedar.Components.tile
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
+import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.GridWidget
@@ -35,23 +40,23 @@ class CompletionConditionDie : AbstractCompletionCondition()
 		maxHP = grid.level.player.getStat(Statistic.HEALTH).toInt()
 		hp = maxHP
 
-		grid.onAttacked += fun(c): Boolean {
+		grid.onAttacked += fun(entity): Boolean {
 
-			val sprite = c.sprite.copy()
+			val sprite = entity.renderable().renderable.copy() as Sprite
 			val dst = table.localToStageCoordinates(Vector2(Random.random() * table.width, Random.random() * table.height))
 			val moteDst = dst.cpy() - Vector2(GridWidget.instance.tileSize / 2f, GridWidget.instance.tileSize / 2f)
-			val src = GridWidget.instance.pointToScreenspace(c)
+			val src = GridWidget.instance.pointToScreenspace(entity.pos().tile!!)
 
 			// attack all friendlies
-			for (tile in grid.grid)
+			for (tile in grid.friendlyTiles)
 			{
-				val friendly = tile.friendly ?: continue
-				val sprite = c.sprite.copy()
+				val friendly = tile.contents!!.healable() ?: continue
+				val sprite = entity.renderable().renderable.copy() as Sprite
 				val dst = GridWidget.instance.pointToScreenspace(tile)
 
 				Mote(src, dst, sprite, GridWidget.instance.tileSize,
 					 {
-						grid.damage(tile, friendly, 0f, friendly)
+						grid.damage(tile, tile.contents!!, 0f, friendly)
 
 					 }, animSpeed = 0.35f, leap = true)
 			}
@@ -138,7 +143,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 					 if (countered)
 					 {
 						 val src = dst
-						 val target = grid.grid.filter { it.monster != null }.random()
+						 val target = grid.monsterTiles.random()
 						 if (target != null)
 						 {
 							 val dst = GridScreen.instance.grid!!.pointToScreenspace(target)
@@ -149,8 +154,6 @@ class CompletionConditionDie : AbstractCompletionCondition()
 						 }
 					 }
 				 }, animSpeed = 0.35f, leap = true)
-
-
 
 			return false
 		}

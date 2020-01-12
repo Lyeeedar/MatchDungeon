@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.ObjectFloatMap
 import com.badlogic.gdx.utils.ObjectMap
 import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Board.*
+import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Buff
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Screens.GridScreen
@@ -25,8 +26,7 @@ class Effect(val type: Type)
 		SUMMON,
 		SPREADER,
 		SUPERCHARGE,
-		BUFF,
-		TEST
+		BUFF
 	}
 
 	lateinit var apply: (tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>) -> Unit
@@ -55,24 +55,25 @@ class Effect(val type: Type)
 
 			Type.CONVERT -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>)
 			{
-				val orb = tile.orb ?: return
+				val contents = tile.contents
+				val matchable = contents?.matchable() ?: return
 
 				val convertTo = data["CONVERTTO"]?.toString() ?: "Random"
-				tile.orb = when(convertTo)
+				val newDesc = when(convertTo)
 				{
-					"RANDOM" -> Orb(Orb.getRandomOrb(grid.level), grid.level.theme)
-					"SAME" -> Orb(originalTargets[0].orb!!.desc, grid.level.theme)
-					else -> Orb(Orb.getOrb(convertTo), grid.level.theme)
+					"RANDOM" -> OrbDesc.getRandomOrb(grid.level)
+					"SAME" -> originalTargets[0].contents!!.matchable()!!.desc
+					else -> OrbDesc.getOrb(convertTo)
 				}
-				tile.orb!!.grid = grid
 
-				tile.orb!!.setAttributes(orb)
+				matchable.setDesc(newDesc, contents)
 			}
 
 			Type.SUMMON ->  fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>)
 			{
-				val friendly = Friendly.load(data["SUMMON"] as XmlData, data["DEGENSUMMON", "true"].toString().toBoolean())
-				friendly.setTile(tile, grid)
+				val desc = FriendlyDesc.load(data["SUMMON"] as XmlData)
+				val friendly = desc.getEntity(data["DEGENSUMMON", "true"].toString().toBoolean())
+				friendly.pos().setTile(friendly, tile)
 			}
 
 			Type.SPREADER -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>)
@@ -84,13 +85,21 @@ class Effect(val type: Type)
 
 			Type.SUPERCHARGE -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>)
 			{
-				val special = tile.special ?: return
+				val contents = tile.contents
+				val special = contents?.special() ?: return
 
-				val mergeSpecial = DualMatch(special.desc, grid.level.theme)
+				val specialEntity = EntityPool.obtain()
+				val specialHolder = SpecialComponent.obtain().set(DualMatch())
+				specialEntity.add(specialHolder)
 
-				tile.special = special.merge(mergeSpecial) ?: mergeSpecial.merge(special) ?: special
-				tile.special!!.armed = true
-				tile.special!!.markedForDeletion = true
+				val merged = special.special.merge(specialEntity) ?: specialHolder.special.merge(contents) ?: special.special
+				merged.armed = true
+
+				addSpecial(contents, merged)
+
+				contents.add(MarkedForDeletionComponent.obtain())
+
+				specialEntity.free()
 			}
 
 			Type.BUFF -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>)
@@ -110,8 +119,6 @@ class Effect(val type: Type)
 
 				GridScreen.instance.updateBuffTable()
 			}
-
-			Type.TEST ->  fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>) { val orb = tile.orb ?: return; tile.special = Match5(orb.desc, grid.level.theme) }
 		}
 	}
 
@@ -161,8 +168,6 @@ class Effect(val type: Type)
 			Type.BUFF -> {
 				throw Exception("Shouldnt ever hit this")
 			}
-
-			Type.TEST -> "TEST"
 		}
 	}
 }

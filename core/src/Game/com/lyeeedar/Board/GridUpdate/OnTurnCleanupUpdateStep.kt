@@ -1,6 +1,5 @@
 package com.lyeeedar.Board.GridUpdate
 
-import com.lyeeedar.Board.Grid
 import com.lyeeedar.Components.damageable
 import com.lyeeedar.Components.pos
 import com.lyeeedar.Components.tile
@@ -13,7 +12,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 {
 	override fun doUpdate(gridSystem: GridSystem): Boolean
 	{
-		gridSystem.animSpeedMultiplier = 1f
+		gridSystem.grid!!.animSpeedMultiplier = 1f
 
 		return true
 	}
@@ -59,10 +58,10 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 
 		grid.gainedBonusPower = false
 		grid.poppedSpreaders.clear()
-		grid.noMatchTimer = 0f
+		grid.animSpeedMultiplier = 1f
+		grid.matchCount = 0
 
-		gridSystem.animSpeedMultiplier = 1f
+		gridSystem.noMatchTimer = 0f
 		gridSystem.inTurn = false
-		gridSystem.matchCount = 0
 	}
 }

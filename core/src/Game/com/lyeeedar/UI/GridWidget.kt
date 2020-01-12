@@ -19,6 +19,7 @@ import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.SortedRenderer
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Screens.GridScreen
+import com.lyeeedar.Systems.GridSystem
 import com.lyeeedar.Util.*
 import ktx.collections.toGdxArray
 
@@ -26,8 +27,10 @@ import ktx.collections.toGdxArray
  * Created by Philip on 05-Jul-16.
  */
 
-class GridWidget(val grid: Grid) : Widget()
+class GridWidget(val gridSystem: GridSystem) : Widget()
 {
+	val grid = gridSystem.grid!!
+
 	var tileSize = 32f
 		set(value)
 		{
@@ -80,14 +83,14 @@ class GridWidget(val grid: Grid) : Widget()
 				val sx = (xp / tileSize).toInt()
 				val sy = (grid.height-1) - (yp / tileSize).toInt()
 
-				grid.select(Point(sx, sy))
+				gridSystem.select(Point(sx, sy))
 
 				return true
 			}
 
 			override fun touchUp(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int)
 			{
-				grid.clearDrag()
+				gridSystem.clearDrag()
 
 				super.touchUp(event, x, y, pointer, button)
 			}
@@ -102,9 +105,9 @@ class GridWidget(val grid: Grid) : Widget()
 
 				val point = Point(sx, sy)
 
-				if (point != grid.dragStart)
+				if (point != gridSystem.dragStart)
 				{
-					grid.dragEnd(point)
+					gridSystem.dragEnd(point)
 				}
 			}
 
@@ -241,7 +244,7 @@ class GridWidget(val grid: Grid) : Widget()
 
 		renderer.begin(delta, xp, yp, Colour(1f, 1f, 1f, 1f))
 
-		if (grid.activeAbility == null)
+		if (gridSystem.activeAbility == null)
 		{
 			batch.color = Color.WHITE
 		}
@@ -264,46 +267,46 @@ class GridWidget(val grid: Grid) : Widget()
 				var blockColour = Colour.WHITE
 				var monsterColour = Colour.WHITE
 
-				if (grid.activeAbility != null)
+				if (gridSystem.activeAbility != null)
 				{
-					if (grid.activeAbility!!.effect.type != Effect.Type.BUFF && grid.activeAbility!!.targetter.isValid (tile, grid.activeAbility!!.data))
+					if (gridSystem.activeAbility!!.effect.type != Effect.Type.BUFF && gridSystem.activeAbility!!.targetter.isValid (tile, gridSystem.activeAbility!!.data))
 					{
-						if (grid.activeAbility!!.targetter.type == Targetter.Type.ORB)
+						if (gridSystem.activeAbility!!.targetter.type == Targetter.Type.ORB)
 						{
 							tileColour = Colour.DARK_GRAY
 							orbColour = Colour.WHITE
 							blockColour = Colour.DARK_GRAY
 							monsterColour = Colour.DARK_GRAY
 						}
-						else if (grid.activeAbility!!.targetter.type == Targetter.Type.BLOCK)
+						else if (gridSystem.activeAbility!!.targetter.type == Targetter.Type.BLOCK)
 						{
 							tileColour = Colour.DARK_GRAY
 							orbColour = Colour.DARK_GRAY
 							blockColour = Colour.WHITE
 							monsterColour = Colour.DARK_GRAY
 						}
-						else if (grid.activeAbility!!.targetter.type == Targetter.Type.EMPTY)
+						else if (gridSystem.activeAbility!!.targetter.type == Targetter.Type.EMPTY)
 						{
 							tileColour = Colour.WHITE
 							orbColour = Colour.DARK_GRAY
 							blockColour = Colour.DARK_GRAY
 							monsterColour = Colour.DARK_GRAY
 						}
-						else if (grid.activeAbility!!.targetter.type == Targetter.Type.MONSTER)
+						else if (gridSystem.activeAbility!!.targetter.type == Targetter.Type.MONSTER)
 						{
 							tileColour = Colour.DARK_GRAY
 							orbColour = Colour.DARK_GRAY
 							blockColour = Colour.DARK_GRAY
 							monsterColour = Colour.WHITE
 						}
-						else if (grid.activeAbility!!.targetter.type == Targetter.Type.ATTACK)
+						else if (gridSystem.activeAbility!!.targetter.type == Targetter.Type.ATTACK)
 						{
 							tileColour = Colour.DARK_GRAY
 							orbColour = Colour.WHITE
 							blockColour = Colour.DARK_GRAY
 							monsterColour = Colour.DARK_GRAY
 						}
-						else if (grid.activeAbility!!.targetter.type == Targetter.Type.TILE)
+						else if (gridSystem.activeAbility!!.targetter.type == Targetter.Type.TILE)
 						{
 							val col = if (tile.canHaveOrb) Colour.WHITE else Colour.DARK_GRAY
 
@@ -312,7 +315,7 @@ class GridWidget(val grid: Grid) : Widget()
 							blockColour = col
 							monsterColour = col
 						}
-						else if (grid.activeAbility!!.targetter.type == Targetter.Type.SEALED)
+						else if (gridSystem.activeAbility!!.targetter.type == Targetter.Type.SEALED)
 						{
 							tileColour = Colour.DARK_GRAY
 							orbColour = if (swappable != null && swappable.sealed) Colour.WHITE else Colour.DARK_GRAY
@@ -384,7 +387,7 @@ class GridWidget(val grid: Grid) : Widget()
 				{
 					renderer.queueSprite(grid.level.theme.plate, xi, yi, TILE, tileHeight, tileColour)
 
-					if ( !grid.inTurn )
+					if ( !gridSystem.inTurn )
 					{
 						val tutorial = Tutorial("Plate")
 						tutorial.addPopup("This is a plate. Match on top of this to break it.", getRect(tile))
@@ -398,7 +401,7 @@ class GridWidget(val grid: Grid) : Widget()
 				{
 					renderer.queueSprite(chest.sprite, xi, yi, TILE, tileHeight, tileColour)
 
-					if (chest.numToSpawn > 0 && !grid.inTurn && !Statics.settings.get("Chest", false))
+					if (chest.numToSpawn > 0 && !gridSystem.inTurn && !Statics.settings.get("Chest", false))
 					{
 						val tutorial = Tutorial("Chest")
 						tutorial.addPopup("This is a chest. Match in the tiles beneath this to spawn coins. When there are no more coins to spawn, it will appear empty.", getRect(tile))
@@ -440,7 +443,7 @@ class GridWidget(val grid: Grid) : Widget()
 					{
 						renderer.queueSprite(swappable.sealSprite, xi, yi, ORB, 2, orbColour)
 
-						if (!Statics.settings.get("Seal", false) && !grid.inTurn )
+						if (!Statics.settings.get("Seal", false) && !gridSystem.inTurn )
 						{
 							val tutorial = Tutorial("Seal")
 							tutorial.addPopup("This orb has been sealed. It won't move until the seal is broken. To break the seal use the orb in a match.", getRect(swappable))
@@ -511,7 +514,7 @@ class GridWidget(val grid: Grid) : Widget()
 							currentPoint.rotate(degreesStep)
 						}
 
-						if (!Statics.settings.get("Attack", false) && !grid.inTurn )
+						if (!Statics.settings.get("Attack", false) && !gridSystem.inTurn )
 						{
 							val tutorial = Tutorial("Attack")
 							tutorial.addPopup("This is an attack. The pips surrounding the skull indicate the turns remaining until it activates.", getRect(swappable))
@@ -522,7 +525,7 @@ class GridWidget(val grid: Grid) : Widget()
 
 					if (swappable is Sinkable)
 					{
-						if (!Statics.settings.get("Sinkable", false) && !grid.inTurn )
+						if (!Statics.settings.get("Sinkable", false) && !gridSystem.inTurn )
 						{
 							val tutorial = Tutorial("Sinkable")
 							tutorial.addPopup("This is a sinkable item. If you move it to the bottom of the board you will successfully sink it.", getRect(tile, true))
@@ -561,7 +564,7 @@ class GridWidget(val grid: Grid) : Widget()
 							x += size
 						}
 
-						if (!Statics.settings.get("MonsterStages", false) && !grid.inTurn)
+						if (!Statics.settings.get("MonsterStages", false) && !gridSystem.inTurn)
 						{
 							val tutorial = Tutorial("MonsterStages")
 							val tiles: com.badlogic.gdx.utils.Array<Point> = monster.tiles.toList().toGdxArray()
@@ -570,7 +573,7 @@ class GridWidget(val grid: Grid) : Widget()
 						}
 					}
 
-					if (!Statics.settings.get("Monster", false) && !grid.inTurn )
+					if (!Statics.settings.get("Monster", false) && !gridSystem.inTurn )
 					{
 						val tutorial = Tutorial("Monster")
 						val tiles: com.badlogic.gdx.utils.Array<Point> = monster.tiles.toList().toGdxArray()
@@ -578,7 +581,7 @@ class GridWidget(val grid: Grid) : Widget()
 						tutorial.show()
 					}
 
-					if (monster.damageReduction > 0 && !grid.inTurn  && !Statics.settings.get("DR", false))
+					if (monster.damageReduction > 0 && !gridSystem.inTurn  && !Statics.settings.get("DR", false))
 					{
 						val tutorial = Tutorial("DR")
 						val tiles: com.badlogic.gdx.utils.Array<Point> = monster.tiles.toList().toGdxArray()
@@ -597,7 +600,7 @@ class GridWidget(val grid: Grid) : Widget()
 					val fullHp = if (friendly.isSummon) hp_full_summon else hp_full_friendly
 					drawHPBar(friendly.size.toFloat(), friendly.hp, friendly.lostHP, friendly.remainingReduction, friendly.maxhp, friendly.damageReduction, friendly.immune, xi, yi, fullHp)
 
-					if (!Statics.settings.get("Friendly", false) && !grid.inTurn )
+					if (!Statics.settings.get("Friendly", false) && !gridSystem.inTurn )
 					{
 						val tutorial = Tutorial("Friendly")
 						val tiles: com.badlogic.gdx.utils.Array<Point> = friendly.tiles.toList().toGdxArray()
@@ -616,7 +619,7 @@ class GridWidget(val grid: Grid) : Widget()
 						drawHPBar(1f, block.hp, block.lostHP, block.remainingReduction, block.maxhp, block.damageReduction, block.immune, xi, yi, hp_neutral)
 					}
 
-					if (!Statics.settings.get("Block", false) && !grid.inTurn )
+					if (!Statics.settings.get("Block", false) && !gridSystem.inTurn )
 					{
 						val tutorial = Tutorial("Block")
 						tutorial.addPopup("This is a block. Match in the tiles surrounding it to break it.", getRect(tile, true))
@@ -656,7 +659,7 @@ class GridWidget(val grid: Grid) : Widget()
 						level.queueParticle(spreader.particleEffect!!, xi, yi, SPREADER, 1, orbColour)
 					}
 
-					if (!Statics.settings.get("Spreader", false) && !grid.inTurn )
+					if (!Statics.settings.get("Spreader", false) && !gridSystem.inTurn )
 					{
 						val tutorial = Tutorial("Spreader")
 						tutorial.addPopup("This is a spreading field. Match in the tiles surrounding it to remove it and stop it spreading this turn.", getRect(tile))
@@ -670,9 +673,9 @@ class GridWidget(val grid: Grid) : Widget()
 				}
 
 				val waitTime = if (grid.level.defeatConditions.any{ it is CompletionConditionTime }) 3f else 8f
-				if (grid.noMatchTimer > waitTime && grid.matchHint != null)
+				if (gridSystem.noMatchTimer > waitTime && gridSystem.matchHint != null)
 				{
-					if (tile == grid.matchHint!!.first || tile == grid.matchHint!!.second)
+					if (tile == gridSystem.matchHint!!.first || tile == gridSystem.matchHint!!.second)
 					{
 						renderer.queueSprite(border, xi, yi, ORB, 0)
 					}

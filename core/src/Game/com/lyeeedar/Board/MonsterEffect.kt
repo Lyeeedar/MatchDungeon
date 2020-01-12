@@ -55,8 +55,8 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 	{
 		when(effect)
 		{
-			MonsterEffectType.ATTACK -> applyAttack(grid)
-			MonsterEffectType.BIGATTACK -> applyBigAttack(grid)
+			MonsterEffectType.ATTACK -> applyAttack(grid, tile.contents!!)
+			MonsterEffectType.BIGATTACK -> applyBigAttack(grid, tile.contents!!)
 			MonsterEffectType.HEAL -> applyHeal(grid, tile)
 			MonsterEffectType.SUMMON -> applySummon(grid, tile)
 			MonsterEffectType.DEBUFF -> applyDebuff(grid, tile)
@@ -64,18 +64,18 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 		}
 	}
 
-	fun applyAttack(grid: Grid)
+	fun applyAttack(grid: Grid, entity: Entity)
 	{
-		grid.onAttacked(this)
+		grid.onAttacked(entity)
 	}
 
-	fun applyBigAttack(grid: Grid)
+	fun applyBigAttack(grid: Grid, entity: Entity)
 	{
 		val dam = data["DAMAGE"].toString().toInt()
 
 		for (i in 0 until dam)
 		{
-			grid.onAttacked(this)
+			grid.onAttacked(entity)
 		}
 	}
 

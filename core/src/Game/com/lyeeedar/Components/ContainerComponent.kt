@@ -3,7 +3,22 @@ package com.lyeeedar.Components
 import com.badlogic.ashley.core.ComponentMapper
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.Pool
+import com.lyeeedar.Board.Tile
 import com.lyeeedar.Util.XmlData
+
+fun Tile.getContentsOrContainer(check: (entity: Entity)->Boolean): Entity?
+{
+	if (contents == null) return null
+
+	if (check(contents!!)) return contents
+
+	if (contents!!.container() != null && check(contents!!.container()!!.containedEntity!!))
+	{
+		return contents!!.container()!!.containedEntity!!
+	}
+
+	return null
+}
 
 fun Entity.container(): ContainerComponent? = ContainerComponent.mapper.get(this)
 class ContainerComponent : AbstractComponent()

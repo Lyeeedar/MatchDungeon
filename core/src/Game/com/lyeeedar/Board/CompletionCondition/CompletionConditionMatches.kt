@@ -1,5 +1,6 @@
 package com.lyeeedar.Board.CompletionCondition
 
+import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
@@ -7,8 +8,8 @@ import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.IntIntMap
 import com.badlogic.gdx.utils.IntMap
 import com.lyeeedar.Board.Grid
-import com.lyeeedar.Board.Matchable
-import com.lyeeedar.Board.Orb
+import com.lyeeedar.Board.OrbDesc
+import com.lyeeedar.Components.matchable
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
@@ -78,7 +79,7 @@ class CompletionConditionMatches(): AbstractCompletionCondition()
 		for (entry in entries)
 		{
 			val valid = Array<Int>()
-			for (orb in Orb.getValidOrbs(grid.level)) if (!toBeMatched.containsKey(orb.key)) valid.add(orb.key)
+			for (orb in OrbDesc.getValidOrbs(grid.level)) if (!toBeMatched.containsKey(orb.key)) valid.add(orb.key)
 
 			if (valid.size > 0)
 			{
@@ -86,12 +87,13 @@ class CompletionConditionMatches(): AbstractCompletionCondition()
 			}
 		}
 
-		grid.onPop += fun(orb: Matchable, delay: Float) : Boolean {
-			if (toBeMatched.containsKey(orb.desc.key))
+		grid.onPop += fun(orb: Entity, delay: Float) : Boolean {
+			val matchable = orb.matchable()!!
+			if (toBeMatched.containsKey(matchable.desc.key))
 			{
-				var count = toBeMatched[orb.desc.key]
+				var count = toBeMatched[matchable.desc.key]
 				if (count > 0) count--
-				toBeMatched[orb.desc.key] = count
+				toBeMatched[matchable.desc.key] = count
 
 				rebuildWidget()
 			}
@@ -101,7 +103,7 @@ class CompletionConditionMatches(): AbstractCompletionCondition()
 
 		for (entry in toBeMatched.entries())
 		{
-			sprites.put(entry.key, Orb.getOrb(entry.key).sprite)
+			sprites.put(entry.key, OrbDesc.getOrb(entry.key).sprite)
 		}
 
 		Future.call(

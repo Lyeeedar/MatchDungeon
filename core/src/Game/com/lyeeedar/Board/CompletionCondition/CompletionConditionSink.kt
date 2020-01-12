@@ -5,7 +5,11 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.ObjectMap
-import com.lyeeedar.Board.*
+import com.lyeeedar.Board.Grid
+import com.lyeeedar.Board.Mote
+import com.lyeeedar.Board.Tile
+import com.lyeeedar.Board.createSinkable
+import com.lyeeedar.Components.*
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.SpriteWidget
@@ -13,10 +17,6 @@ import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
 import ktx.collections.set
 import ktx.collections.toGdxArray
-
-/**
- * Created by Philip on 22-Jul-16.
- */
 
 class CompletionConditionSink() : AbstractCompletionCondition()
 {
@@ -34,12 +34,12 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 		this.grid = grid
 		grid.onSunk += {
 
-			val sprite = it.sprite.copy()
+			val sprite = it.renderable().renderable.copy() as Sprite
 			val dst = table.localToStageCoordinates(Vector2(table.width / 2f, table.height / 2f))
-			val src = GridWidget.instance.pointToScreenspace(it)
+			val src = GridWidget.instance.pointToScreenspace(it.pos().tile!!)
 
 			Mote(src, dst, sprite, GridWidget.instance.tileSize, {
-				sinkableMap[it.sprite.fileName].count = max(0, sinkableMap[it.sprite.fileName].count-1)
+				sinkableMap[sprite.fileName].count = max(0, sinkableMap[sprite.fileName].count-1)
 				rebuildWidget()
 			})
 
@@ -67,17 +67,17 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 
 		for (tile in grid.grid)
 		{
-			val sinkable = tile.sinkable ?: tile.container?.contents as? Sinkable ?: continue
+			val sinkable = tile.getContentsOrContainer { it.sinkable() != null } ?: continue
 
 			val data: SinkableData
-			if (sinkableMap.containsKey(sinkable.sprite.fileName))
+			if (sinkableMap.containsKey(sinkable.sprite()!!.fileName))
 			{
-				data = sinkableMap[sinkable.sprite.fileName]
+				data = sinkableMap[sinkable.sprite()!!.fileName]
 			}
 			else
 			{
-				data = SinkableData(sinkable.sprite, 0)
-				sinkableMap[sinkable.sprite.fileName] = data
+				data = SinkableData(sinkable.sprite()!!, 0)
+				sinkableMap[sinkable.sprite()!!.fileName] = data
 			}
 
 			data.count++
@@ -89,21 +89,26 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 			// Check if level has chests and make up the rest with coins
 			val coins = count - total
 
-			if (grid.grid.any { it.chest != null || it.container?.contents is Chest })
+			if (grid.grid.any { it.getContentsOrContainer { it.orbSpawner()?.canSpawnSinkables == true } != null })
 			{
 				// no need to do anything fancy, the chests will spawn them
 			}
 			else
 			{
 				// add coins to the grid randomly
-				val valid = grid.grid.filter { it.x > 2 && it.x < grid.grid.width-2 && it.y > 2 && it.y < grid.grid.height-2 && it.canHaveOrb && it.orb != null }.toSet().toGdxArray()
+				val valid = grid.grid.filter {
+					it.x > 2 && it.x < grid.grid.width-2 && it.y > 2 && it.y < grid.grid.height-2 &&
+					it.canHaveOrb &&
+					it.contents!!.isBasicOrb()
+				}.toSet().toGdxArray()
+
 				for (i in 0 until coins)
 				{
 					var chosen: Tile? = null
 					while (valid.size > 0)
 					{
 						chosen = valid.removeRandom(Random.random)
-						if (chosen.orb != null)
+						if (chosen.contents?.isBasicOrb() == true)
 						{
 							break
 						}
@@ -111,7 +116,7 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 
 					if (chosen != null)
 					{
-						chosen.sinkable = Sinkable(grid.level.theme.coin.copy(), grid.level.theme)
+						chosen.contents = createSinkable(grid.level.theme.coin.copy())
 					}
 				}
 			}
@@ -170,13 +175,10 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 		var sprite = grid.level.theme.coin.copy()
 
 		// check if any sinkables exist in the level already, use their sprite instead if they do
-		for (tile in grid.grid)
+		for (tile in grid.sinkableTiles)
 		{
-			if (tile.sinkable != null || tile.container?.contents is Sinkable)
-			{
-				val sinkable = tile.sinkable ?: tile.container!!.contents as Sinkable
-				sprite = sinkable.sprite.copy()
-			}
+			val sinkable = tile.getContentsOrContainer { it.sinkable() != null }
+			sprite = sinkable!!.sprite()!!.copy()
 		}
 
 		table.add(Label("Move $count ", Statics.skin))

@@ -38,6 +38,8 @@ fun addSpecial(entity: Entity, special: Special): Entity
 	if (special is GemSpecial)
 	{
 		renderable.colourAnimation = ChromaticAnimation.obtain().set(15f)
+
+		entity.remove(MatchableComponent::class.java)
 	}
 	else
 	{
@@ -307,7 +309,7 @@ class Vertical4() : VerticalBeamSpecial()
 		return null
 	}
 
-	override fun copy(orbDesc: OrbDesc): Special
+	override fun copy(): Special
 	{
 		return Vertical4()
 	}
@@ -513,7 +515,10 @@ class Match5() : GemSpecial()
 			}
 			else
 			{
-				return Match5Spread()
+				val newSpecial = Match5Spread(otherSpecial)
+				newSpecial.targetDesc = other.matchable()!!.desc
+				newSpecial.armed = true
+				return newSpecial
 			}
 		}
 		else if (other.matchable() != null)
@@ -581,51 +586,40 @@ class Match5() : GemSpecial()
 	}
 }
 
-class Match5Spread(orbDesc: OrbDesc, theme: Theme, val special: Special) : GemSpecial(orbDesc, theme)
+class Match5Spread(val special: Special) : GemSpecial()
 {
 	init
 	{
 		if (special is HorizontalBeamSpecial)
 		{
 			sprite = AssetManager.loadSprite("Oryx/Custom/items/gem_vert", drawActualSize = true)
-			sprite.colourAnimation = ChromaticAnimation.obtain().set(15f)
 		}
 		else if (special is VerticalBeamSpecial)
 		{
 			sprite = AssetManager.loadSprite("Oryx/Custom/items/gem_hori", drawActualSize = true)
-			sprite.colourAnimation = ChromaticAnimation.obtain().set(15f)
 		}
 		else if (special is BombSpecial)
 		{
 			sprite = AssetManager.loadSprite("Oryx/Custom/items/gem_dual", drawActualSize = true)
-			sprite.colourAnimation = ChromaticAnimation.obtain().set(15f)
 		}
 		else
 		{
 			sprite = AssetManager.loadSprite("Oryx/Custom/items/gem", drawActualSize = true)
-			sprite.colourAnimation = ChromaticAnimation.obtain().set(15f)
 		}
-
-		targetDesc = special.desc
-		sprite.colourAnimation = null
-		sprite.colour = targetDesc!!.sprite.colour
-
-		sprite.light = lightTemplate.copy()
-		sprite.tintLight = true
 	}
 
-	override fun merge(other: Swappable): Special?
+	override fun merge(other: Entity): Special?
 	{
-		if (other is Special)
+		val otherSpecial = other.special()?.special
+
+		if (otherSpecial is GemSpecial)
 		{
-			if (other is GemSpecial)
-			{
-				return Match5Dual(desc, theme)
-			}
+			return Match5Dual()
 		}
-		else if (other is Matchable)
+		else if (other.matchable() != null)
 		{
-			targetDesc = other.desc
+			targetDesc = other.matchable()!!.desc
+			armed = true
 
 			return this
 		}
@@ -645,7 +639,9 @@ class Match5Spread(orbDesc: OrbDesc, theme: Theme, val special: Special) : GemSp
 
 		for (tile in grid.grid)
 		{
-			if (tile.matchable?.desc == targetDesc)
+			val contents = tile.contents ?: continue
+
+			if (contents.matchable()?.desc == targetDesc)
 			{
 				val dst = tile.dist(point)
 				val animDuration = 0.275f + dst * 0.05f
@@ -660,26 +656,35 @@ class Match5Spread(orbDesc: OrbDesc, theme: Theme, val special: Special) : GemSp
 				s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.0f, false)
 				s.completionCallback = fun()
 				{
-					if (tile.matchable == null)
+					if (contents.matchable() != null)
 					{
+						val newSpecial =
+							if (contents.special() == null)
+								special.copy()
+							else
+							{
+								val specialHolder = EntityPool.obtain()
+								val specialComponent = SpecialComponent.obtain().set(special)
+								specialHolder.add(specialComponent)
 
-					}
-					else if (tile.special == null)
-					{
-						tile.special = special.copy(targetDesc!!)
-					}
-					else
-					{
-						val newspecial = tile.special!!.merge(special) ?: special.merge(tile.special!!) ?: special
-						tile.special = newspecial
-						newspecial.armed = true
+								val merged = contents.special()!!.special.merge(specialHolder) ?: special.merge(contents) ?: special
+
+								specialHolder.free()
+
+								merged
+							}
+
+						addSpecial(contents, newSpecial)
+						newSpecial.armed = true
 					}
 
 					grid.pop(tile, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
 				}
 				tile.effects.add(s)
 			}
-			else if (tile.creature != null || (tile.damageable?.maxhp ?: 0) > 1)
+			else if (
+				(contents.damageable() != null && contents.ai() != null) ||
+				(contents.damageable() != null && contents.damageable()!!.maxhp > 1))
 			{
 				val dst = tile.dist(point)
 				val animDuration = 0.275f + dst * 0.05f
@@ -702,34 +707,22 @@ class Match5Spread(orbDesc: OrbDesc, theme: Theme, val special: Special) : GemSp
 		}
 	}
 
-	override fun copy(orbDesc: OrbDesc): Special
+	override fun copy(): Special
 	{
-		return Match5Spread(orbDesc, theme, special)
+		return Match5Spread(special)
 	}
 }
 
-class Match5Dual(orbDesc: OrbDesc, theme: Theme) : GemSpecial(orbDesc, theme)
+class Match5Dual() : GemSpecial()
 {
 	init
 	{
 		sprite = AssetManager.loadSprite("Oryx/Custom/items/gem_gem", drawActualSize = true)
-		sprite.colourAnimation = ChromaticAnimation.obtain().set(15f)
-		sprite.light = lightTemplate.copy()
-		sprite.tintLight = true
 	}
 
-	override fun merge(other: Swappable): Special?
+	override fun merge(other: Entity): Special?
 	{
-		if (other is Matchable)
-		{
-			return this
-		}
-		else if (other is Special)
-		{
-			return this
-		}
-
-		return null
+		return this
 	}
 
 	override fun apply(point: Point, grid: Grid)
@@ -767,8 +760,8 @@ class Match5Dual(orbDesc: OrbDesc, theme: Theme) : GemSpecial(orbDesc, theme)
 		}
 	}
 
-	override fun copy(orbDesc: OrbDesc): Special
+	override fun copy(): Special
 	{
-		return Match5Dual(orbDesc, theme)
+		return Match5Dual()
 	}
 }

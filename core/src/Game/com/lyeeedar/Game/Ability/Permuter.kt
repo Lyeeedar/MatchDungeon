@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Tile
+import com.lyeeedar.Components.matchable
 import com.lyeeedar.Direction
 import com.lyeeedar.Util.random
 
@@ -34,8 +35,10 @@ class Permuter(val type: Type)
 		permute = when(type)
 		{
 			Type.SINGLE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?) = sequenceOf(tile)
-			Type.ALLOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?) = grid.grid.filter{ val key = data["TYPE"]?.hashCode() ?: tile.orb!!.desc.key; it.orb?.desc?.key == key }
-			Type.NOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> { val type = data["TYPE"].hashCode(); val count = data["COUNT"].toString().toInt(); return grid.grid.filter{ it.orb?.desc?.key == type }.random(count) }
+
+			Type.ALLOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?) = grid.grid.filter{ val key = data["TYPE"]?.hashCode() ?: tile.contents!!.matchable()!!.desc.key; it.contents?.matchable()?.desc?.key == key }
+
+			Type.NOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> { val type = data["TYPE"].hashCode(); val count = data["COUNT"].toString().toInt(); return grid.grid.filter{ it.contents?.matchable()?.desc?.key == type }.random(count) }
 
 			Type.COLUMN -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> {
 				val range = data["RANGE", "9999999"]!!.toString().toInt()
@@ -60,8 +63,8 @@ class Permuter(val type: Type)
 
 				if (ability != null && selectedTargets.size > 0 && ability.effect.type == Effect.Type.CONVERT)
 				{
-					val selectedType = selectedTargets[0].orb!!.desc
-					return grid.grid.filter{ it.orb != null && it.orb!!.desc != selectedType }.random(count)
+					val selectedType = selectedTargets[0].contents!!.matchable()!!.desc
+					return grid.grid.filter{ it.contents?.matchable() != null && it.contents!!.matchable()!!.desc != selectedType }.random(count)
 				}
 
 				return grid.grid.filter{ ability?.targetter?.isValid?.invoke(it, data) ?: it.canHaveOrb }.random(count)

@@ -1,12 +1,14 @@
 package com.lyeeedar.Board.CompletionCondition
 
+import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
-import com.lyeeedar.Board.Block
+import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Board.Grid
+import com.lyeeedar.Components.*
+import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
@@ -16,7 +18,7 @@ class CompletionConditionBreak : AbstractCompletionCondition()
 {
 	val tick = AssetManager.loadSprite("Oryx/uf_split/uf_interface/uf_interface_680", colour = Colour(Color.FOREST))
 
-	var blocks = Array<Block>()
+	var blocks = ObjectSet<Entity>()
 	var blockMap = ObjectMap<String, Int>()
 
 	val table = Table()
@@ -25,13 +27,13 @@ class CompletionConditionBreak : AbstractCompletionCondition()
 	{
 		for (tile in grid.grid)
 		{
-			if (tile.block != null || tile.container?.contents is Block)
+			if (tile.contents?.archetype()?.archetype == EntityArchetype.BLOCK)
 			{
-				val block = tile.block ?: tile.container!!.contents as Block
-				if (!blocks.contains(block, true))
-				{
-					blocks.add(block)
-				}
+				blocks.add(tile.contents!!)
+			}
+			else if (tile.contents?.container()?.containedEntity?.archetype()?.archetype == EntityArchetype.BLOCK)
+			{
+				blocks.add(tile.contents!!.container()!!.containedEntity!!)
 			}
 		}
 
@@ -48,7 +50,7 @@ class CompletionConditionBreak : AbstractCompletionCondition()
 				}, 0.5f)
 	}
 
-	override fun isCompleted(): Boolean = blocks.filter { it.hp > 0 }.count() == 0
+	override fun isCompleted(): Boolean = blocks.filter { it.damageable()!!.hp > 0 }.count() == 0
 
 	override fun parse(xml: XmlData)
 	{
@@ -69,17 +71,19 @@ class CompletionConditionBreak : AbstractCompletionCondition()
 
 		for (block in blocks)
 		{
-			if (!blockMap.containsKey(block.sprite.fileName))
+			val sprite = block.renderable().renderable as Sprite
+
+			if (!blockMap.containsKey(sprite.fileName))
 			{
-				blockMap[block.sprite.fileName] = 0
+				blockMap[sprite.fileName] = 0
 			}
 
-			var count = blockMap[block.sprite.fileName]
-			if (block.hp > 0)
+			var count = blockMap[sprite.fileName]
+			if (block.damageable()!!.hp > 0)
 			{
 				count++
 			}
-			blockMap[block.sprite.fileName] = count
+			blockMap[sprite.fileName] = count
 		}
 
 		var row = Table()

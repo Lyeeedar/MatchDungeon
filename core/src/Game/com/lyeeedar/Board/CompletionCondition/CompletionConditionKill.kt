@@ -1,13 +1,19 @@
 package com.lyeeedar.Board.CompletionCondition
 
+import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
+import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Board.Grid
-import com.lyeeedar.Board.Monster
-import com.lyeeedar.Board.MonsterDesc
+import com.lyeeedar.Board.MonsterAI
+import com.lyeeedar.Board.isMonster
+import com.lyeeedar.Components.ai
+import com.lyeeedar.Components.container
+import com.lyeeedar.Components.damageable
+import com.lyeeedar.Components.renderable
+import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
@@ -21,8 +27,9 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 
 	val tick = AssetManager.loadSprite("Oryx/uf_split/uf_interface/uf_interface_680", colour = Colour(Color.FOREST))
 
-	var monsters = Array<Monster>()
-	var monsterMap = ObjectMap<MonsterDesc, Int>()
+	val monsters = ObjectSet<Entity>()
+	val monsterCountMap = ObjectMap<String, Int>()
+	val monsterSpriteMap = ObjectMap<String, Sprite>()
 
 	val table = Table()
 
@@ -50,7 +57,7 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 				}, 0.5f)
 	}
 
-	override fun isCompleted(): Boolean = monsters.filter { it.hp > 0 }.count() == 0
+	override fun isCompleted(): Boolean = monsters.filter { it.damageable()!!.hp > 0 }.count() == 0
 
 	override fun parse(xml: XmlData)
 	{
@@ -73,49 +80,62 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 		monsters.clear()
 		for (tile in grid.grid)
 		{
-			val monster = tile.monster ?: tile.container?.contents as? Monster
-			if (monster != null)
+			val contents = tile.contents ?: continue
+
+			var monsterEntity: Entity? = null
+			if (contents.isMonster())
 			{
-				if (all || monster.desc.name == named)
+				monsterEntity = contents
+			}
+			else if (contents.container()?.containedEntity?.isMonster() == true)
+			{
+				monsterEntity = contents.container()!!.containedEntity!!
+			}
+
+			if (monsterEntity != null)
+			{
+				val name = (monsterEntity.ai()!!.ai as MonsterAI).desc.name
+				if (all || name == named)
 				{
-					if (!monsters.contains(monster, true))
-					{
-						monsters.add(monster)
-					}
+					monsters.add(monsterEntity)
 				}
 			}
 		}
 
 		table.clear()
 
-		for (monster in monsterMap.keys().toList())
+		for (monster in monsterCountMap.keys().toList())
 		{
-			monsterMap[monster] = 0
+			monsterCountMap[monster] = 0
 		}
 
 		for (monster in monsters)
 		{
-			val desc = monster.desc.originalDesc ?: monster.desc
+			val ai = monster.ai()!!.ai as MonsterAI
 
-			if (!monsterMap.containsKey(desc))
+			val desc = ai.desc.originalDesc ?: ai.desc
+
+			if (!monsterCountMap.containsKey(desc.name))
 			{
-				monsterMap[desc] = 0
+				monsterCountMap[desc.name] = 0
 			}
 
-			var count = monsterMap[desc]
-			if (monster.hp > 0)
+			var count = monsterCountMap[desc.name]
+			if (monster.damageable()!!.hp > 0)
 			{
 				count++
 			}
-			monsterMap[desc] = count
+			monsterCountMap[desc.name] = count
+
+			monsterSpriteMap[desc.name] = monster.renderable().renderable as Sprite
 		}
 
 		var row = Table()
 		var counter = 0
 
-		for (monster in monsterMap)
+		for (monster in monsterCountMap)
 		{
-			val sprite = monster.key.sprite.copy()
+			val sprite = monsterSpriteMap[monster.key].copy()
 			val count = monster.value
 
 			row.add(SpriteWidget(sprite, 24f, 24f)).padLeft(5f)

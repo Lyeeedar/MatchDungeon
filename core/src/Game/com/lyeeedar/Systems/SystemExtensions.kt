@@ -34,4 +34,3 @@ var Engine.grid: Grid?
 	}
 
 fun Engine.gridSystem() = this.getSystem(GridSystem::class.java)
-fun Engine.render() = this.getSystem(RenderSystem::class.java)

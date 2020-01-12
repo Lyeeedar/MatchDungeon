@@ -1,11 +1,12 @@
 package com.lyeeedar.Board.CompletionCondition
 
+import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.lyeeedar.Board.Grid
-import com.lyeeedar.Board.Matchable
-import com.lyeeedar.Board.Orb
+import com.lyeeedar.Board.OrbDesc
+import com.lyeeedar.Components.matchable
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
@@ -22,9 +23,9 @@ class CompletionConditionCustomOrb : AbstractCompletionCondition()
 
 	override fun attachHandlers(grid: Grid)
 	{
-		grid.onPop += fun(orb: Matchable, delay: Float) : Boolean {
+		grid.onPop += fun(orb: Entity, delay: Float) : Boolean {
 
-			if (orb.desc.name == targetOrbName)
+			if (orb.matchable()?.desc?.name == targetOrbName)
 			{
 				if (matchCount > 0) matchCount--
 				rebuildWidget()
@@ -64,7 +65,7 @@ class CompletionConditionCustomOrb : AbstractCompletionCondition()
 	{
 		table.clear()
 
-		val targetDesc = Orb.getNamedOrb(targetOrbName)
+		val targetDesc = OrbDesc.getNamedOrb(targetOrbName)
 		val sprite = targetDesc.sprite
 
 		table.add(SpriteWidget(sprite, 24f, 24f)).padLeft(5f)
@@ -85,7 +86,7 @@ class CompletionConditionCustomOrb : AbstractCompletionCondition()
 
 		table.add(Label("Match", Statics.skin))
 
-		val targetDesc = Orb.getNamedOrb(targetOrbName)
+		val targetDesc = OrbDesc.getNamedOrb(targetOrbName)
 		val sprite = targetDesc.sprite
 
 		table.add(SpriteWidget(sprite, 24f, 24f)).padLeft(5f)

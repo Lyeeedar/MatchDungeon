@@ -9,6 +9,7 @@ import com.lyeeedar.Board.addSpecial
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.Ability
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.BumpAnimation
 import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.UI.FullscreenMessage
@@ -20,7 +21,6 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 {
 	// ----------------------------------------------------------------------
 	var inTurn = true
-	var matchCount = 0
 
 	// ----------------------------------------------------------------------
 	var noMatchTimer = 0f
@@ -32,13 +32,6 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 	// ----------------------------------------------------------------------
 	var dragStart: Point = Point.MINUS_ONE
 	var toSwap: Pair<Point, Point>? = null
-
-	// ----------------------------------------------------------------------
-	val defaultAnimSpeed = 0.15f
-	val animSpeedUpMultiplier = 0.975f
-	var animSpeedMultiplier = 1f
-	val animSpeed: Float
-		get() = defaultAnimSpeed * animSpeedMultiplier
 
 	// ----------------------------------------------------------------------
 	val cascade = CascadeUpdateStep()
@@ -88,6 +81,60 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 			updateGridState,
 			updateGrid,
 			cleanup)
+	}
+
+	// ----------------------------------------------------------------------
+	fun activateAbility()
+	{
+		activeAbility!!.activate(grid!!)
+		activeAbility = null
+
+		inTurn = true
+	}
+
+	// ----------------------------------------------------------------------
+	fun select(newSelection: Point)
+	{
+		val grid = grid!!
+
+		if (grid.hasAnim() || grid.level.completed) return
+
+		if (activeAbility != null)
+		{
+			val newTile = grid.tile(newSelection) ?: return
+			if (!activeAbility!!.targetter.isValid(newTile, activeAbility!!.data)) return
+
+			if (newTile.isSelected)
+			{
+				newTile.isSelected = false
+				activeAbility!!.selectedTargets.removeValue(newTile, true)
+			}
+			else if (activeAbility!!.selectedTargets.size < activeAbility!!.targets)
+			{
+				newTile.isSelected = true
+				activeAbility!!.selectedTargets.add(newTile)
+			}
+		}
+		else
+		{
+			dragStart = newSelection
+		}
+	}
+
+	// ----------------------------------------------------------------------
+	fun dragEnd(selection: Point)
+	{
+		if (selection != dragStart && dragStart.dist(selection) == 1)
+		{
+			toSwap = Pair(dragStart, selection)
+			dragStart = Point.MINUS_ONE
+		}
+	}
+
+	// ----------------------------------------------------------------------
+	fun clearDrag()
+	{
+		dragStart = Point.MINUS_ONE
 	}
 
 	// ----------------------------------------------------------------------
@@ -164,6 +211,8 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 	private fun updateGrid(delta: Float)
 	{
 		val grid = grid!!
+
+		grid.level.update(delta)
 
 		if (!grid.hasAnim())
 		{
@@ -269,7 +318,7 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 				addSpecial(newEntity, merged)
 
 				val sprite = oldEntity.renderable().renderable.copy()
-				sprite.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile, true)), Interpolation.linear)
+				sprite.animation = MoveAnimation.obtain().set(grid.animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile, true)), Interpolation.linear)
 				newTile.effects.add(sprite)
 
 				oldTile.contents = null
@@ -293,15 +342,15 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 
 			var dir = Direction.getDirection(oldTile, newTile)
 			if (dir.y != 0) dir = dir.opposite
-			oldEntity.renderable().renderable.animation = BumpAnimation.obtain().set(animSpeed, dir)
+			oldEntity.renderable().renderable.animation = BumpAnimation.obtain().set(grid.animSpeed, dir)
 			return false
 		}
 		else
 		{
 			grid.lastSwapped = newTile
 
-			oldEntity.renderable().renderable.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile)).invertY(), Interpolation.linear)
-			newEntity.renderable().renderable.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(oldTile.getPosDiff(newTile)).invertY(), Interpolation.linear)
+			oldEntity.renderable().renderable.animation = MoveAnimation.obtain().set(grid.animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile)).invertY(), Interpolation.linear)
+			newEntity.renderable().renderable.animation = MoveAnimation.obtain().set(grid.animSpeed, UnsmoothedPath(oldTile.getPosDiff(newTile)).invertY(), Interpolation.linear)
 			return true
 		}
 	}
@@ -426,5 +475,12 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 	override fun onTurn()
 	{
 
+	}
+
+	// ----------------------------------------------------------------------
+	companion object
+	{
+		val instance: GridSystem
+			get() = Global.engine.gridSystem()
 	}
 }

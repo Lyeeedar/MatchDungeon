@@ -1,7 +1,6 @@
 package com.lyeeedar.Board
 
 import com.badlogic.ashley.core.Entity
-import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectSet
@@ -9,19 +8,27 @@ import com.lyeeedar.Board.CompletionCondition.CompletionConditionCustomOrb
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
-import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Global
-import com.lyeeedar.Renderables.Animation.*
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Statistic
-import com.lyeeedar.UI.*
+import com.lyeeedar.UI.GridWidget
+import com.lyeeedar.UI.PowerBar
 import com.lyeeedar.Util.*
 
 class Grid(val width: Int, val height: Int, val level: Level)
 {
 	// ----------------------------------------------------------------------
-	val grid: Array2D<Tile> = Array2D(width, height ){ x, y -> Tile(x, y) }
-	val spawnCount: Array2D<Int> = Array2D<Int>(width, height+1){ x, y -> 0 }
+	val grid: Array2D<Tile> = Array2D(width, height ){ x, y -> Tile(x, y, this) }
+	val spawnCount: Array2D<Int> = Array2D(width, height + 1){ _, _ -> 0 }
+
+	// ----------------------------------------------------------------------
+	val defaultAnimSpeed = 0.15f
+	val animSpeedUpMultiplier = 0.975f
+	var animSpeedMultiplier = 1f
+	val animSpeed: Float
+		get() = defaultAnimSpeed * animSpeedMultiplier
+
+	var matchCount = 0
 
 	// ----------------------------------------------------------------------
 	val refillSprite = AssetManager.loadSprite("EffectSprites/Heal/Heal", 0.1f)
@@ -36,7 +43,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	val onSunk = Event1Arg<Entity>()
 	val onDamaged = Event1Arg<Entity>()
 	val onSpawn = Event1Arg<Entity>()
-	val onAttacked = Event1Arg<MonsterEffect>()
+	val onAttacked = Event1Arg<Entity>()
 
 	// ----------------------------------------------------------------------
 	val hitEffect = AssetManager.loadParticleEffect("Hit").getParticleEffect()
@@ -65,7 +72,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			val matchable = entity.matchable() ?: return false
 			if (!matchable.skipPowerOrb)
 			{
-				val pos = GridWidget.instance.pointToScreenspace(entity)
+				val pos = GridWidget.instance.pointToScreenspace(entity.pos().tile!!)
 				val dst = PowerBar.instance.getOrbDest()
 				val sprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/crystal_sky")
 
@@ -89,58 +96,6 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 			return false
 		}
-	}
-
-	// ----------------------------------------------------------------------
-	fun activateAbility()
-	{
-		activeAbility!!.activate(level.grid)
-		activeAbility = null
-
-		beginTurn()
-	}
-
-	// ----------------------------------------------------------------------
-	fun select(newSelection: Point)
-	{
-		if (hasAnim() || level.completed) return
-
-		if (activeAbility != null)
-		{
-			val newTile = tile(newSelection) ?: return
-			if (!activeAbility!!.targetter.isValid(newTile, activeAbility!!.data)) return
-
-			if (newTile.isSelected)
-			{
-				newTile.isSelected = false
-				activeAbility!!.selectedTargets.removeValue(newTile, true)
-			}
-			else if (activeAbility!!.selectedTargets.size < activeAbility!!.targets)
-			{
-				newTile.isSelected = true
-				activeAbility!!.selectedTargets.add(newTile)
-			}
-		}
-		else
-		{
-			dragStart = newSelection
-		}
-	}
-
-	// ----------------------------------------------------------------------
-	fun dragEnd(selection: Point)
-	{
-		if (selection != dragStart && dragStart.dist(selection) == 1)
-		{
-			toSwap = Pair(dragStart, selection)
-			dragStart = Point.MINUS_ONE
-		}
-	}
-
-	// ----------------------------------------------------------------------
-	fun clearDrag()
-	{
-		dragStart = Point.MINUS_ONE
 	}
 
 	// ----------------------------------------------------------------------
@@ -215,9 +170,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	// ----------------------------------------------------------------------
 	fun refill()
 	{
-		noValidMoves = false
-
-		val tempgrid: Array2D<Tile> = Array2D(width, height ){ x, y -> Tile(x, y) }
+		val tempgrid: Array2D<Tile> = Array2D(width, height ){ x, y -> Tile(x, y, this) }
 		for (x in 0 until width)
 		{
 			for (y in 0 until height)
@@ -232,22 +185,22 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		{
 			for (y in 0 until height)
 			{
-				val oldorb = tempgrid[x, y].swappable
-				if (oldorb == null || oldorb !is Matchable || oldorb.desc.isNamed)
+				val oldcontents = tempgrid[x, y].contents
+				if (oldcontents?.matchable() == null || oldcontents.matchable()!!.desc.isNamed)
 				{
 					grid[x, y].contents = tempgrid[x, y].contents
 				}
-				else if (grid[x, y].matchable != null)
+				else if (oldcontents.matchable() != null)
 				{
-					val newmatchable = grid[x, y].matchable!!
+					val newmatchable = grid[x, y].contents!!.matchable()!!
 					grid[x, y].contents = tempgrid[x, y].contents
-					val oldmatchable = grid[x, y].matchable!!
+					val oldmatchable = grid[x, y].contents!!.matchable()!!
 
 					val delay = grid[x, y].taxiDist(Point.ZERO).toFloat() * 0.1f
 
 					if (Global.resolveInstantly)
 					{
-						oldmatchable.desc = newmatchable.desc
+						oldmatchable.setDesc(newmatchable.desc, oldcontents)
 					}
 					else
 					{
@@ -255,7 +208,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 							{
 								val sprite = refillSprite.copy()
 
-								oldmatchable.desc = newmatchable.desc
+								oldmatchable.setDesc(newmatchable.desc, oldcontents)
 
 								grid[x, y].effects.add(sprite)
 							}, delay + 0.2f)
@@ -276,7 +229,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				val tile = grid[x, y]
 				if (tile.canHaveOrb && tile.contents?.damageable() == null && tile.contents?.healable() == null)
 				{
-					val toSpawn = if (orbOnly) createOrb(OrbDesc.getRandomOrb(level), level.theme) else level.spawnOrb()
+					val toSpawn = if (orbOnly) createOrb(OrbDesc.getRandomOrb(level)) else level.spawnOrb()
 
 					val toSpawnMatchable = toSpawn.matchable()
 					if (toSpawnMatchable != null)
@@ -311,7 +264,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 							valid.removeValue(u1, true)
 						}
 
-						toSpawnMatchable.desc = valid.random()
+						toSpawnMatchable.setDesc(valid.random(), toSpawn)
 						if (toSpawnMatchable.isChanger) toSpawnMatchable.nextDesc = OrbDesc.getRandomOrb(level, toSpawnMatchable.desc)
 					}
 
@@ -354,6 +307,11 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		hit.renderDelay = delay
 		tile.effects.add(hit)
 		onDamaged(damageableEntity)
+
+		if (damageable.hp <= 0)
+		{
+			damageableEntity.add(MarkedForDeletionComponent.obtain().set(delay))
+		}
 
 		if (damageable.isCreature)
 		{
@@ -442,9 +400,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			}
 		}
 
-		val markedForDeletionComponent = MarkedForDeletionComponent.obtain()
-		markedForDeletionComponent.deletionEffectDelay = delay
-		contents.add(markedForDeletionComponent)
+		contents.add(MarkedForDeletionComponent.obtain().set(delay))
 
 		val matchable = contents.matchable()
 		if (matchable != null)

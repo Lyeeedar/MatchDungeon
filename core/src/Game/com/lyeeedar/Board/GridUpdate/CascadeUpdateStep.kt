@@ -305,7 +305,7 @@ class CascadeUpdateStep : AbstractUpdateStep()
 							pullIn(diagR!!)
 						}
 
-						lookingForOrb = 2
+						lookingForOrb = SearchState.PLACED
 					}
 
 

@@ -7,10 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectFloatMap
 import com.badlogic.gdx.utils.ObjectMap
-import com.lyeeedar.Board.DelayedAction
-import com.lyeeedar.Board.Grid
-import com.lyeeedar.Board.Spreader
-import com.lyeeedar.Board.Tile
+import com.lyeeedar.Board.*
+import com.lyeeedar.Components.damageable
 import com.lyeeedar.Game.Buff
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.MoveAnimation
@@ -46,7 +44,7 @@ class Ability
 	var targets = 1
 	var targetter: Targetter = Targetter(Targetter.Type.ORB)
 	var permuter: Permuter = Permuter(Permuter.Type.SINGLE)
-	var effect: Effect = Effect(Effect.Type.TEST)
+	var effect: Effect = Effect(Effect.Type.POP)
 	val data = ObjectMap<String, Any>()
 
 	val selectedTargets = Array<Tile>()
@@ -154,7 +152,7 @@ class Ability
 
 		if (effect.type == Effect.Type.BUFF)
 		{
-			effect.apply(Tile(0, 0), grid, 0f, data, Array(), ObjectFloatMap())
+			effect.apply(Tile(0, 0, grid), grid, 0f, data, Array(), ObjectFloatMap())
 			return
 		}
 
@@ -232,9 +230,9 @@ class Ability
 		{
 			variables[stat.toString().toUpperCase()] = Global.player.getStat(stat, true)
 		}
-		val monsters = finalTargets.mapNotNull { it.monster }.toGdxArray()
+		val monsters = finalTargets.filter { it.contents?.isMonster() == true }.map { it.contents!! }.toGdxArray()
 		variables["MONSTERCOUNT"] = monsters.size.toFloat()
-		variables["MONSTERHP"] = monsters.map { it.hp }.sum()
+		variables["MONSTERHP"] = monsters.map { it.damageable()!!.hp }.sum()
 		variables["TILECOUNT"] = finalTargets.filter { it.canHaveOrb }.size.toFloat()
 
 		val originalTargets = selectedTargets.toGdxArray()

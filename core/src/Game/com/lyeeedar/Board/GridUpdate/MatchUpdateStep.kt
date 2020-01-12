@@ -313,7 +313,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 				{
 					val sprite = contents.renderable().renderable
 
-					val special = getSpecial(grid, match.length(), 0, match.direction(), matchable.desc) ?: continue
+					val special = getSpecial(grid, match.length(), 0, match.direction()) ?: continue
 
 					spawnSpecial(contents, special)
 
@@ -405,7 +405,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 	}
 
 	// ----------------------------------------------------------------------
-	private fun displayMatchMessage(grid: Grid, point: Point)
+	fun displayMatchMessage(grid: Grid, point: Point)
 	{
 		if (Global.resolveInstantly) return
 

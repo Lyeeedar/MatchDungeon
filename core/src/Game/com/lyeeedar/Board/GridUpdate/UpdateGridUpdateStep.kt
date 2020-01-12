@@ -207,7 +207,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 					val damageable = tile.contents?.damageable()
 					if (damageable != null)
 					{
-						grid.damage(tile, damageable, 0f, spreader.nameKey, spreader.damage)
+						grid.damage(tile, tile.contents!!, 0f, spreader.nameKey, spreader.damage)
 					}
 				}
 				else if (spreader.effect == Spreader.SpreaderEffect.ATTACK)

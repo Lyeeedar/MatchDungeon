@@ -142,6 +142,12 @@ fun PositionComponent.addToTile(entity: Entity, delay: Float = 0f)
 	}
 }
 
+fun PositionComponent.setTile(entity: Entity, tile: Tile)
+{
+	this.tile = tile
+	addToTile(entity)
+}
+
 fun PositionComponent.doMove(t: Tile, entity: Entity)
 {
 	removeFromTile(entity)

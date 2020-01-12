@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.Family
 import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
-import com.lyeeedar.Board.Monster
+import com.lyeeedar.Board.MonsterAI
 import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.AlphaAnimation
@@ -81,16 +81,20 @@ class DeletionSystem : AbstractSystem(Family.all(MarkedForDeletionComponent::cla
 					}
 				}
 
-				val rootDesc = creature.desc.originalDesc ?: creature.desc
-				if (rootDesc.stages.size > 0)
+				val monsterAI = entity.ai()?.ai as? MonsterAI
+				if (monsterAI != null)
 				{
-					val currentStage = if (creature.desc.originalDesc == null) -1 else rootDesc.stages.indexOf(creature.desc)
-
-					if (currentStage < rootDesc.stages.size - 1)
+					val rootDesc = monsterAI.desc.originalDesc ?: monsterAI.desc
+					if (rootDesc.stages.size > 0)
 					{
-						val nextDesc = rootDesc.stages[currentStage + 1]
-						val monster = Monster(nextDesc, creature.difficulty)
-						monster.setTile(tile, this)
+						val currentStage = if (monsterAI.desc.originalDesc == null) -1 else rootDesc.stages.indexOf(monsterAI.desc)
+
+						if (currentStage < rootDesc.stages.size - 1)
+						{
+							val nextDesc = rootDesc.stages[currentStage + 1]
+							val monster = nextDesc.getEntity(monsterAI.difficulty, false)
+							monster.pos().setTile(monster, tile)
+						}
 					}
 				}
 			}

@@ -1,7 +1,6 @@
 package com.lyeeedar.Board.GridUpdate
 
 import com.badlogic.gdx.utils.Array
-import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Tile
 import com.lyeeedar.Components.special
 import com.lyeeedar.Systems.GridSystem
@@ -9,8 +8,10 @@ import com.lyeeedar.Systems.GridSystem
 class DetonateUpdateStep : AbstractUpdateStep()
 {
 	// ----------------------------------------------------------------------
-	private fun detonate(grid: Grid): Boolean
+	private fun detonate(gridSystem: GridSystem): Boolean
 	{
+		val grid = gridSystem.grid!!
+
 		var complete = true
 
 		val tilesToDetonate = Array<Tile>()
@@ -53,7 +54,7 @@ class DetonateUpdateStep : AbstractUpdateStep()
 			grid.animSpeedMultiplier *= grid.animSpeedUpMultiplier
 
 			val point = tilesToDetonate.random()
-			grid.displayMatchMessage(point!!)
+			gridSystem.match.displayMatchMessage(grid, point!!)
 		}
 
 		return complete
@@ -62,7 +63,7 @@ class DetonateUpdateStep : AbstractUpdateStep()
 	// ----------------------------------------------------------------------
 	override fun doUpdate(gridSystem: GridSystem): Boolean
 	{
-		return detonate(gridSystem.grid!!)
+		return detonate(gridSystem)
 	}
 
 	// ----------------------------------------------------------------------
