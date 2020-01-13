@@ -76,7 +76,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 	// ----------------------------------------------------------------------
 	var noMatchTimer = 0f
-	var matchHint: Pair<Point, Point>? = null
+	var matchHint: ValidMove? = null
 
 	// ----------------------------------------------------------------------
 	var noValidMoves = false
@@ -286,6 +286,8 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				}
 			}
 		}
+
+		inTurn = true
 	}
 
 	// ----------------------------------------------------------------------
@@ -429,7 +431,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 		for (step in updateSteps)
 		{
-			step.doUpdateRealTile(this, deltaTime)
+			step.doUpdateRealTime(this, deltaTime)
 		}
 
 		if (!hasAnim())
@@ -481,7 +483,6 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	{
 		if (FullscreenMessage.instance == null)
 		{
-			if (activeAbility == null) matchHint = findValidMove()
 			if (activeAbility == null && matchHint == null)
 			{
 				noValidMoves = true
@@ -580,120 +581,6 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			newEntity.renderable().renderable.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(oldTile.getPosDiff(newTile)).invertY(), Interpolation.linear)
 			return true
 		}
-	}
-
-	// ----------------------------------------------------------------------
-	private fun findValidMove() : Pair<Point, Point>?
-	{
-		// find all 2 matches
-		val matches = match.findMatches(this, 2)
-
-		for (match in matches)
-		{
-			// check the 3 tiles around each end to see if it contains one of the correct colours
-			val dir = match.direction()
-			val key = grid[match.p1].contents!!.matchable()!!.desc.key
-
-			fun checkSurrounding(point: Point, dir: Direction, key: Int): Pair<Point, Point>?
-			{
-				val targetTile = tile(point)
-				if (targetTile?.contents?.swappable()?.canMove != true) return null
-
-				fun canMatch(point: Point): Boolean
-				{
-					val tile = tile(point) ?: return false
-					val swappable = tile.contents?.swappable() ?: return false
-					val matchable = tile.contents?.matchable() ?: return false
-					if (!swappable.canMove) return false
-					return matchable.desc.key == key
-				}
-
-				// check + dir
-				if (canMatch(point + dir)) return Pair(point, point+dir)
-				if (canMatch(point + dir.cardinalClockwise)) return Pair(point, point+dir.cardinalClockwise)
-				if (canMatch(point + dir.cardinalAnticlockwise)) return Pair(point, point+dir.cardinalAnticlockwise)
-
-				return null
-			}
-
-			// the one before first is at first-dir
-			val beforeFirst = match.p1 + dir.opposite
-			val beforeFirstPair = checkSurrounding(beforeFirst, dir.opposite, key)
-			if (beforeFirstPair != null)
-			{
-				for (match in matches) match.free()
-				return beforeFirstPair
-			}
-
-			val afterSecond = match.p2 + dir
-			val afterSecondPair = checkSurrounding(afterSecond, dir, key)
-			if (afterSecondPair != null)
-			{
-				for (match in matches) match.free()
-				return afterSecondPair
-			}
-		}
-
-		for (match in matches) match.free()
-
-		fun getTileKey(x: Int, y: Int, dir: Direction): Int
-		{
-			val tile = tile(x + dir.x, y + dir.y) ?: return -1
-			val swappable = tile.contents?.swappable() ?: return -1
-			val matchable = tile.contents?.matchable() ?: return -1
-			if (!swappable.canMove) return -1
-
-			return matchable.desc.key
-		}
-
-		// check diamond pattern
-		for (x in 0 until width)
-		{
-			for (y in 0 until height)
-			{
-				val tile = tile(x, y) ?: continue
-				val swappable = tile.contents?.swappable() ?: continue
-				if (!swappable.canMove) continue
-
-				for (dir in Direction.CardinalValues)
-				{
-					val key = getTileKey(x, y, dir)
-					if (key != -1)
-					{
-						val k1 = getTileKey(x, y, dir.cardinalClockwise)
-						val k2 = getTileKey(x, y, dir.cardinalAnticlockwise)
-
-						if (key == k1 && key == k2)
-						{
-							return Pair(Point(x, y), Point(x + dir.x, y + dir.y))
-						}
-					}
-				}
-			}
-		}
-
-		// check for special merges
-		for (x in 0 until width)
-		{
-			for (y in 0 until height)
-			{
-				val contents = grid[x, y].contents ?: continue
-				val special = contents.special() ?: continue
-				for (dir in Direction.CardinalValues)
-				{
-					val tile = tile(x + dir.x, y + dir.y) ?: continue
-					val tileSpecial = tile.contents?.special() ?: continue
-					if (special.special.merge(tile.contents!!) != null || tileSpecial.special.merge(contents) != null)
-					{
-						return Pair(Point(x, y), Point(x + dir.x, y + dir.y))
-					}
-				}
-			}
-		}
-
-		// else no valid
-
-		return null
 	}
 
 	// ----------------------------------------------------------------------

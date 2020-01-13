@@ -60,7 +60,7 @@ class DetonateUpdateStep : AbstractUpdateStep()
 		return complete
 	}
 
-	override fun doUpdateRealTile(grid: Grid, deltaTime: Float)
+	override fun doUpdateRealTime(grid: Grid, deltaTime: Float)
 	{
 
 	}

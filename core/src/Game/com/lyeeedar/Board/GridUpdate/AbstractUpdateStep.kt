@@ -4,7 +4,7 @@ import com.lyeeedar.Board.Grid
 
 abstract class AbstractUpdateStep
 {
-	abstract fun doUpdateRealTile(grid: Grid, deltaTime: Float)
+	abstract fun doUpdateRealTime(grid: Grid, deltaTime: Float)
 
 	abstract fun doUpdate(grid: Grid): Boolean
 

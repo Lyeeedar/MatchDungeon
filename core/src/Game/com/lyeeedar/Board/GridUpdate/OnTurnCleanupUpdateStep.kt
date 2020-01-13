@@ -1,19 +1,24 @@
 package com.lyeeedar.Board.GridUpdate
 
 import com.badlogic.ashley.core.Entity
-import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
+import com.badlogic.gdx.utils.Array
+import com.lyeeedar.Board.CompletionCondition.*
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.MonsterAI
 import com.lyeeedar.Components.*
+import com.lyeeedar.Direction
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.AlphaAnimation
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Statistic
+import com.lyeeedar.Util.Point
+import ktx.collections.gdxArrayOf
 import ktx.collections.toGdxArray
 
 class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 {
-	override fun doUpdateRealTile(grid: Grid, deltaTime: Float)
+	// ---------------------------------------------------------------------
+	override fun doUpdateRealTime(grid: Grid, deltaTime: Float)
 	{
 		for (x in 0 until grid.width)
 		{
@@ -30,6 +35,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 		}
 	}
 
+	// ---------------------------------------------------------------------
 	private fun processDeletion(entity: Entity, grid: Grid, deltaTime: Float)
 	{
 		var doRemove = true
@@ -144,6 +150,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 		}
 	}
 
+	// ---------------------------------------------------------------------
 	override fun doUpdate(grid: Grid): Boolean
 	{
 		grid.animSpeedMultiplier = 1f
@@ -151,6 +158,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 		return true
 	}
 
+	// ---------------------------------------------------------------------
 	override fun doTurn(grid: Grid)
 	{
 		for (tile in grid.grid)
@@ -194,5 +202,223 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 		grid.matchCount = 0
 		grid.noMatchTimer = 0f
 		grid.inTurn = false
+		grid.matchHint = findBestMove(grid)
+	}
+
+	// ---------------------------------------------------------------------
+	fun findBestMove(grid: Grid): ValidMove?
+	{
+		val validMoves = findValidMoves(grid)
+		if (validMoves.size == 0) return null
+
+		// blocks
+		if (grid.level.victoryConditions.any{ it is CompletionConditionBreak || it is CompletionConditionSink })
+		{
+			for (swap in validMoves)
+			{
+				for (point in swap.points)
+				{
+					if (grid.breakableTiles.any{ it.taxiDist(point) <= 1 })
+					{
+						return swap
+					}
+				}
+			}
+		}
+
+		// sinkables
+		if (grid.level.victoryConditions.any{ it is CompletionConditionSink })
+		{
+			for (swap in validMoves)
+			{
+				for (point in swap.points)
+				{
+					if (grid.sinkPathTiles.any{ it == point })
+					{
+						return swap
+					}
+				}
+			}
+		}
+
+		// monsters
+		if (grid.level.victoryConditions.any{ it is CompletionConditionKill })
+		{
+			for (swap in validMoves)
+			{
+				for (point in swap.points)
+				{
+					if (grid.monsterTiles.any{ it.taxiDist(point) <= 1 })
+					{
+						return swap
+					}
+				}
+			}
+		}
+
+		// attacks
+		for (swap in validMoves)
+		{
+			for (point in swap.points)
+			{
+				if (grid.attackTiles.any{ it == point })
+				{
+					return swap
+				}
+			}
+		}
+
+		// matchables
+		if (grid.level.victoryConditions.any{ it is CompletionConditionMatches || it is CompletionConditionCustomOrb })
+		{
+			for (swap in validMoves)
+			{
+				for (point in swap.points)
+				{
+					val tile = grid.tile(point) ?: continue
+					val contents = tile.contents ?: continue
+					val matchable = contents.matchable() ?: continue
+
+					val matches = grid.level.victoryConditions.filterIsInstance<CompletionConditionMatches>().firstOrNull()
+					if (matches != null)
+					{
+						for (match in matches.toBeMatched)
+						{
+							if (match.value > 0 && matchable.desc.key == match.key)
+							{
+								return swap
+							}
+						}
+					}
+
+					val custom = grid.level.victoryConditions.filterIsInstance<CompletionConditionCustomOrb>().firstOrNull()
+					if (custom != null)
+					{
+						if (matchable.desc.name == custom.targetOrbName)
+						{
+							return swap
+						}
+					}
+				}
+			}
+		}
+
+		// random
+		return validMoves.random()
+	}
+
+	// ----------------------------------------------------------------------
+	private fun findValidMoves(grid: Grid) : Array<ValidMove>
+	{
+		val validMoves = Array<ValidMove>()
+
+		// find all 2 matches
+		val matches = grid.match.findMatches(grid, 2)
+
+		fun getTileKey(point: Point, direction: Direction): Int
+		{
+			val tile = grid.getTile(point, direction) ?: return -1
+			val swappable = tile.contents?.swappable() ?: return -1
+			val matchable = tile.contents?.matchable() ?: return -1
+			if (!swappable.canMove) return -1
+
+			return matchable.desc.key
+		}
+
+		for (match in matches)
+		{
+			// check the 3 tiles around each end to see if it contains one of the correct colours
+			val dir = match.direction()
+			val key = grid.grid[match.p1].contents!!.matchable()!!.desc.key
+
+			fun checkSurrounding(point: Point, dir: Direction, key: Int): Pair<Point, Point>?
+			{
+				val targetTile = grid.tile(point)
+				if (targetTile?.contents?.swappable()?.canMove != true) return null
+
+				// check + dir
+				if (getTileKey(point, dir) == key) return Pair(point, point+dir)
+				if (getTileKey(point, dir.cardinalClockwise) == key) return Pair(point, point+dir.cardinalClockwise)
+				if (getTileKey(point, dir.cardinalAnticlockwise) == key) return Pair(point, point+dir.cardinalAnticlockwise)
+
+				return null
+			}
+
+			// the one before first is at first-dir
+			val beforeFirst = match.p1 + dir.opposite
+			val beforeFirstPair = checkSurrounding(beforeFirst, dir.opposite, key)
+			if (beforeFirstPair != null)
+			{
+				val validMove = ValidMove(beforeFirstPair.first, beforeFirstPair.second, gdxArrayOf(beforeFirst, match.p1, match.p2))
+				validMoves.add(validMove)
+			}
+
+			val afterSecond = match.p2 + dir
+			val afterSecondPair = checkSurrounding(afterSecond, dir, key)
+			if (afterSecondPair != null)
+			{
+				val validMove = ValidMove(afterSecondPair.first, afterSecondPair.second, gdxArrayOf(afterSecond, match.p1, match.p2))
+				validMoves.add(validMove)
+			}
+		}
+
+		for (match in matches) match.free()
+
+		// check diamond pattern
+		for (x in 0 until grid.width)
+		{
+			for (y in 0 until grid.height)
+			{
+				val tile = grid.tile(x, y) ?: continue
+				val swappable = tile.contents?.swappable() ?: continue
+				if (!swappable.canMove) continue
+
+				for (dir in Direction.CardinalValues)
+				{
+					val key = getTileKey(tile, dir)
+					if (key != -1)
+					{
+						val k1 = getTileKey(tile, dir.cardinalClockwise)
+						val k2 = getTileKey(tile, dir.cardinalAnticlockwise)
+
+						if (key == k1 && key == k2)
+						{
+							val p1 = Point(x, y)
+							val p2 = tile + dir.cardinalClockwise
+							val p3 = tile + dir.cardinalAnticlockwise
+							val validMove = ValidMove(p1, p1 + dir, gdxArrayOf(p1, p2, p3))
+							validMoves.add(validMove)
+						}
+					}
+				}
+			}
+		}
+
+		// check for special merges
+		for (x in 0 until grid.width)
+		{
+			for (y in 0 until grid.height)
+			{
+				val contents = grid.grid[x, y].contents ?: continue
+				val special = contents.special() ?: continue
+				for (dir in Direction.CardinalValues)
+				{
+					val tile = grid.tile(x + dir.x, y + dir.y) ?: continue
+					val tileSpecial = tile.contents?.special() ?: continue
+					if (special.special.merge(tile.contents!!) != null || tileSpecial.special.merge(contents) != null)
+					{
+						val p1 = Point(x, y)
+						val p2 = Point(x + dir.x, y + dir.y)
+
+						val validMove = ValidMove(p1, p2, gdxArrayOf(p1, p2))
+						validMoves.add(validMove)
+					}
+				}
+			}
+		}
+
+		return validMoves
 	}
 }
+
+class ValidMove(val swapStart: Point, val swapEnd: Point, val points: Array<Point>)

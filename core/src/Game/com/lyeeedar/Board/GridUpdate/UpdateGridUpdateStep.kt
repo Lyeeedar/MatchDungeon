@@ -22,7 +22,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 		return true
 	}
 
-	override fun doUpdateRealTile(grid: Grid, deltaTime: Float)
+	override fun doUpdateRealTime(grid: Grid, deltaTime: Float)
 	{
 		for (x in 0 until grid.width)
 		{
