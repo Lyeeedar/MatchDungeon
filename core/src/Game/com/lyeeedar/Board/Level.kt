@@ -105,8 +105,6 @@ class Level(val loadPath: String)
 
 	fun create(questTheme: Theme, player: Player, victoryAction: () -> Unit, defeatAction: () -> Unit)
 	{
-		Global.engine.removeAllEntities()
-
 		this.questTheme = questTheme
 
 		if (spawnList.size == 0)
@@ -545,8 +543,6 @@ class Level(val loadPath: String)
 
 				if (tile.contents != null)
 				{
-					Global.engine.addEntity(tile.contents!!)
-
 					tile.contents!!.pos().setTile(tile.contents!!, tile)
 				}
 			}

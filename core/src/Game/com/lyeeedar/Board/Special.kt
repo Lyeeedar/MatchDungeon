@@ -51,6 +51,27 @@ fun addSpecial(entity: Entity, special: Special): Entity
 	return entity
 }
 
+fun tryMergeSpecial(special: Special, entity: Entity): Special
+{
+	val otherSpecial = entity.special()
+	if (otherSpecial != null)
+	{
+		val tempEntity = EntityPool.obtain()
+		tempEntity.add(SpecialComponent.obtain().set(special))
+
+		val newSpecial = otherSpecial.special.merge(tempEntity) ?: special.merge(entity) ?: special
+		newSpecial.armed = true
+
+		tempEntity.free()
+
+		return newSpecial
+	}
+	else
+	{
+		return special
+	}
+}
+
 abstract class Special()
 {
 	var armed = false

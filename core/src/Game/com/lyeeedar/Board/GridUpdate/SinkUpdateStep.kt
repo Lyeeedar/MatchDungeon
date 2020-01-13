@@ -4,7 +4,6 @@ import com.lyeeedar.Board.Grid
 import com.lyeeedar.Components.pos
 import com.lyeeedar.Components.removeFromTile
 import com.lyeeedar.Components.sinkable
-import com.lyeeedar.Systems.GridSystem
 
 class SinkUpdateStep : AbstractUpdateStep()
 {
@@ -40,14 +39,19 @@ class SinkUpdateStep : AbstractUpdateStep()
 		return complete
 	}
 
-	// ----------------------------------------------------------------------
-	override fun doUpdate(gridSystem: GridSystem): Boolean
+	override fun doUpdateRealTile(grid: Grid, deltaTime: Float)
 	{
-		return sink(gridSystem.grid!!)
+
 	}
 
 	// ----------------------------------------------------------------------
-	override fun doTurn(gridSystem: GridSystem)
+	override fun doUpdate(grid: Grid): Boolean
+	{
+		return sink(grid)
+	}
+
+	// ----------------------------------------------------------------------
+	override fun doTurn(grid: Grid)
 	{
 
 	}

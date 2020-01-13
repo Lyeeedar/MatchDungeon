@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Widget
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionTime
+import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.MonsterAI
 import com.lyeeedar.Board.OrbDesc
 import com.lyeeedar.Components.*
@@ -20,7 +21,6 @@ import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.SortedRenderer
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Screens.GridScreen
-import com.lyeeedar.Systems.GridSystem
 import com.lyeeedar.Util.*
 import ktx.collections.toGdxArray
 
@@ -28,10 +28,8 @@ import ktx.collections.toGdxArray
  * Created by Philip on 05-Jul-16.
  */
 
-class GridWidget(val gridSystem: GridSystem) : Widget()
+class GridWidget(val grid: Grid) : Widget()
 {
-	val grid = gridSystem.grid!!
-
 	var tileSize = 32f
 		set(value)
 		{
@@ -84,14 +82,14 @@ class GridWidget(val gridSystem: GridSystem) : Widget()
 				val sx = (xp / tileSize).toInt()
 				val sy = (grid.height-1) - (yp / tileSize).toInt()
 
-				gridSystem.select(Point(sx, sy))
+				grid.select(Point(sx, sy))
 
 				return true
 			}
 
 			override fun touchUp(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int)
 			{
-				gridSystem.clearDrag()
+				grid.clearDrag()
 
 				super.touchUp(event, x, y, pointer, button)
 			}
@@ -106,9 +104,9 @@ class GridWidget(val gridSystem: GridSystem) : Widget()
 
 				val point = Point(sx, sy)
 
-				if (point != gridSystem.dragStart)
+				if (point != grid.dragStart)
 				{
-					gridSystem.dragEnd(point)
+					grid.dragEnd(point)
 				}
 			}
 
@@ -251,7 +249,7 @@ class GridWidget(val gridSystem: GridSystem) : Widget()
 
 		renderer.begin(delta, xp, yp, Colour(1f, 1f, 1f, 1f))
 
-		if (gridSystem.activeAbility == null)
+		if (grid.activeAbility == null)
 		{
 			batch.color = Color.WHITE
 		}
@@ -265,9 +263,9 @@ class GridWidget(val gridSystem: GridSystem) : Widget()
 
 				var tileColour = Colour.WHITE
 
-				if (gridSystem.activeAbility != null)
+				if (grid.activeAbility != null)
 				{
-					val isValidTarget = gridSystem.activeAbility!!.targetter.isValid(tile, gridSystem.activeAbility!!.data)
+					val isValidTarget = grid.activeAbility!!.targetter.isValid(tile, grid.activeAbility!!.data)
 					if (!isValidTarget)
 					{
 						tileColour = Colour.DARK_GRAY
@@ -329,7 +327,7 @@ class GridWidget(val gridSystem: GridSystem) : Widget()
 				{
 					renderer.queueSprite(grid.level.theme.plate, xi, yi, TILE, tileHeight, tileColour)
 
-					if ( !gridSystem.inTurn )
+					if ( !grid.inTurn )
 					{
 						val tutorial = Tutorial("Plate")
 						tutorial.addPopup("This is a plate. Match on top of this to break it.", getRect(tile))
@@ -523,7 +521,7 @@ class GridWidget(val gridSystem: GridSystem) : Widget()
 					}
 
 					val tutorialComponent = contents.tutorial()
-					if (tutorialComponent != null && !gridSystem.inTurn)
+					if (tutorialComponent != null && !grid.inTurn)
 					{
 						val tutorial = tutorialComponent.displayTutorial?.invoke(grid, contents, this)
 						if (tutorial != null)
@@ -554,7 +552,7 @@ class GridWidget(val gridSystem: GridSystem) : Widget()
 						level.queueParticle(spreader.particleEffect!!, xi, yi, SPREADER, 1, tileColour)
 					}
 
-					if (!Statics.settings.get("Spreader", false) && !gridSystem.inTurn )
+					if (!Statics.settings.get("Spreader", false) && !grid.inTurn )
 					{
 						val tutorial = Tutorial("Spreader")
 						tutorial.addPopup("This is a spreading field. Match in the tiles surrounding it to remove it and stop it spreading this turn.", getRect(tile))
@@ -568,9 +566,9 @@ class GridWidget(val gridSystem: GridSystem) : Widget()
 				}
 
 				val waitTime = if (grid.level.defeatConditions.any{ it is CompletionConditionTime }) 3f else 8f
-				if (gridSystem.noMatchTimer > waitTime && gridSystem.matchHint != null)
+				if (grid.noMatchTimer > waitTime && grid.matchHint != null)
 				{
-					if (tile == gridSystem.matchHint!!.first || tile == gridSystem.matchHint!!.second)
+					if (tile == grid.matchHint!!.first || tile == grid.matchHint!!.second)
 					{
 						renderer.queueSprite(border, xi, yi, ORB, 0)
 					}

@@ -1,5 +1,6 @@
 package com.lyeeedar.Board.GridUpdate
 
+import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.badlogic.gdx.utils.ObjectSet
@@ -10,16 +11,61 @@ import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.Animation.LeapAnimation
 import com.lyeeedar.Statistic
-import com.lyeeedar.Systems.GridSystem
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Random
 import com.lyeeedar.Util.random
 
 class UpdateGridUpdateStep : AbstractUpdateStep()
 {
-	override fun doUpdate(gridSystem: GridSystem): Boolean
+	override fun doUpdate(grid: Grid): Boolean
 	{
 		return true
+	}
+
+	override fun doUpdateRealTile(grid: Grid, deltaTime: Float)
+	{
+		for (x in 0 until grid.width)
+		{
+			for (y in 0 until grid.height)
+			{
+				val tile = grid.grid[x, y]
+				val contents = tile.contents ?: continue
+
+				if (tile == contents.pos().tile)
+				{
+					processEntityRealTime(contents, grid, deltaTime)
+				}
+			}
+		}
+	}
+
+	private fun processEntityRealTime(entity: Entity, grid: Grid, deltaTime: Float)
+	{
+		val renderable = entity.renderableOrNull()
+
+		val monsterEffect = entity.monsterEffect()
+		if (renderable != null && monsterEffect != null)
+		{
+			if (!monsterEffect.monsterEffect.addedSprite)
+			{
+				monsterEffect.monsterEffect.delayDisplay -= deltaTime
+
+				if (monsterEffect.monsterEffect.delayDisplay <= 0)
+				{
+					val newSprite = monsterEffect.monsterEffect.actualSprite.copy()
+
+					val matchable = entity.matchable()
+					if (matchable != null)
+					{
+						newSprite.colour = matchable.desc.sprite.colour
+					}
+
+					renderable.renderable = newSprite
+
+					monsterEffect.monsterEffect.addedSprite = true
+				}
+			}
+		}
 	}
 
 	val processedAIs = ObjectSet<AIComponent>()
@@ -30,10 +76,8 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 	val matchableTiles = Array<Tile>()
 	val monsterEffectTiles = Array<Tile>()
 
-	override fun doTurn(gridSystem: GridSystem)
+	override fun doTurn(grid: Grid)
 	{
-		val grid = gridSystem.grid!!
-
 		processedAIs.clear()
 		processedSpreaders.clear()
 
@@ -56,6 +100,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 				val monsterEffect = contents?.monsterEffect()
 				val damageable = contents?.damageable()
 				val healable = contents?.healable()
+				val special = contents?.special()
 
 				if (spreader != null)
 				{
@@ -72,6 +117,13 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 				if (monsterEffect != null)
 				{
 					monsterEffectTiles.add(tile)
+				}
+				if (special != null)
+				{
+					if (special.special.armed && !contents.isMarkedForDeletion())
+					{
+						contents.add(MarkedForDeletionComponent.obtain())
+					}
 				}
 
 				if (damageable != null)

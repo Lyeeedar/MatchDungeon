@@ -1,6 +1,5 @@
 package com.lyeeedar.Game
 
-import com.badlogic.ashley.core.Engine
 import com.badlogic.gdx.utils.ObjectFloatMap
 import com.esotericsoftware.kryo.Kryo
 import com.esotericsoftware.kryo.io.Input
@@ -11,7 +10,6 @@ import com.lyeeedar.Screens.DeckScreen
 import com.lyeeedar.Screens.QuestScreen
 import com.lyeeedar.Screens.QuestSelectionScreen
 import com.lyeeedar.Statistic
-import com.lyeeedar.Systems.createEngine
 import com.lyeeedar.Util.Settings
 import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.filename
@@ -26,8 +24,6 @@ class Global
 	companion object
 	{
 		var resolveInstantly = false
-
-		val engine: Engine by lazy { createEngine() }
 
 		lateinit var player: Player
 		var globalflags = GameStateFlags()

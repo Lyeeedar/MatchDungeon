@@ -1,6 +1,5 @@
 package com.lyeeedar.Board.GridUpdate
 
-import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
@@ -15,7 +14,6 @@ import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Renderable
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
-import com.lyeeedar.Systems.GridSystem
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.lambda
 import com.lyeeedar.UI.shake
@@ -282,8 +280,11 @@ class MatchUpdateStep : AbstractUpdateStep()
 				val sprite = contents.renderable().renderable
 
 				val special = getSpecial(grid, tile.associatedMatches[0]!!.length(), tile.associatedMatches[1]!!.length(), Direction.CENTER) ?: continue
+				val merged = tryMergeSpecial(special, contents)
 
-				spawnSpecial(contents, special)
+				val orb = createOrb(contents.matchable()!!.desc)
+				addSpecial(orb, merged)
+				orb.pos().setTile(orb, tile)
 
 				tile.associatedMatches[0]!!.used = true
 				tile.associatedMatches[1]!!.used = true
@@ -314,8 +315,11 @@ class MatchUpdateStep : AbstractUpdateStep()
 					val sprite = contents.renderable().renderable
 
 					val special = getSpecial(grid, match.length(), 0, match.direction()) ?: continue
+					val merged = tryMergeSpecial(special, contents)
 
-					spawnSpecial(contents, special)
+					val orb = createOrb(contents.matchable()!!.desc)
+					addSpecial(orb, merged)
+					orb.pos().setTile(orb, tile)
 
 					for (point in match.points())
 					{
@@ -354,30 +358,6 @@ class MatchUpdateStep : AbstractUpdateStep()
 			grid.poppedSpreaders.add(spreader.nameKey)
 
 			tile.effects.add(grid.hitEffect.copy())
-		}
-	}
-
-	// ----------------------------------------------------------------------
-	private fun spawnSpecial(contents: Entity, special: Special)
-	{
-		val specialComponent = contents.special()
-		if (specialComponent != null)
-		{
-			val tempEntity = EntityPool.obtain()
-			tempEntity.add(SpecialComponent.obtain().set(special))
-
-			val newSpecial = specialComponent.special.merge(tempEntity) ?: special.merge(contents) ?: special
-			specialComponent.special.armed = true
-
-			addSpecial(contents, newSpecial)
-
-			contents.add(MarkedForDeletionComponent.obtain())
-
-			tempEntity.free()
-		}
-		else
-		{
-			addSpecial(contents, special)
 		}
 	}
 
@@ -457,13 +437,18 @@ class MatchUpdateStep : AbstractUpdateStep()
 	val messageList = Array<Label>()
 
 	// ----------------------------------------------------------------------
-	override fun doUpdate(gridSystem: GridSystem): Boolean
+	override fun doUpdate(grid: Grid): Boolean
 	{
-		return match(gridSystem.grid!!)
+		return match(grid)
 	}
 
 	// ----------------------------------------------------------------------
-	override fun doTurn(gridSystem: GridSystem)
+	override fun doTurn(grid: Grid)
+	{
+
+	}
+
+	override fun doUpdateRealTile(grid: Grid, deltaTime: Float)
 	{
 
 	}

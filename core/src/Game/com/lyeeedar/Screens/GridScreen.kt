@@ -15,8 +15,6 @@ import com.lyeeedar.Game.Global
 import com.lyeeedar.Game.Player
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
-import com.lyeeedar.Systems.GridSystem
-import com.lyeeedar.Systems.grid
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Statics
@@ -161,9 +159,8 @@ class GridScreen(): AbstractScreen()
 
 		//this.player = player
 		this.level = level
-		Global.engine.grid = level.grid
 
-		val gridWidget = GridWidget(GridSystem.instance)
+		val gridWidget = GridWidget(level.grid)
 		grid = gridWidget
 
 		Global.player.isInBerserkRange = false
@@ -205,7 +202,7 @@ class GridScreen(): AbstractScreen()
 			{
 				ability != null ->
 				{
-					val widget = AbilityWidget(equip, 64f, 64f, level.grid, GridSystem.instance)
+					val widget = AbilityWidget(equip, 64f, 64f, level.grid)
 					abilityTable.add(widget).expand()
 
 					if (ability.resetUsagesPerLevel)
@@ -240,7 +237,7 @@ class GridScreen(): AbstractScreen()
 		refreshButton = TextButton("No Valid Moves. Shuffle Grid?", Statics.skin)
 		refreshButton!!.isVisible = false
 		refreshButton!!.addClickListener {
-			if (GridSystem.instance.activeAbility == null && GridSystem.instance.noValidMoves)
+			if (level.grid.activeAbility == null && level.grid.noValidMoves)
 			{
 				level.grid.refill()
 				powerBar.power = 0
@@ -262,9 +259,9 @@ class GridScreen(): AbstractScreen()
 		launchButton = TextButton("Launch", Statics.skin)
 		launchButton!!.isVisible = false
 		launchButton!!.addClickListener {
-			if (GridSystem.instance.activeAbility != null && GridSystem.instance.activeAbility!!.selectedTargets.size > 0)
+			if (level.grid.activeAbility != null && level.grid.activeAbility!!.selectedTargets.size > 0)
 			{
-				GridSystem.instance.activateAbility()
+				level.grid.activateAbility()
 			}
 		}
 		powerBarStack.add(launchButton)
@@ -276,7 +273,7 @@ class GridScreen(): AbstractScreen()
 			{
 				Mote.clear()
 
-				for (label in GridSystem.instance.match.messageList)
+				for (label in level.grid.match.messageList)
 				{
 					label.remove()
 				}
@@ -431,11 +428,11 @@ class GridScreen(): AbstractScreen()
 	// ----------------------------------------------------------------------
 	override fun doRender(delta: Float)
 	{
-		Global.engine.update(delta)
+		level.grid.update(delta)
 
-		val ability = GridSystem.instance.activeAbility
+		val ability = level.grid.activeAbility
 
-		val canShowButtons = if (ability == null && !GridSystem.instance.inTurn && (GridSystem.instance.noValidMoves || PowerBar.instance.power == PowerBar.instance.maxPower)) !level.grid.hasAnim() else false
+		val canShowButtons = if (ability == null && !level.grid.inTurn && (level.grid.noValidMoves || PowerBar.instance.power == PowerBar.instance.maxPower)) !level.grid.hasAnim() else false
 
 		if (level.isVictory)
 		{
@@ -470,7 +467,7 @@ class GridScreen(): AbstractScreen()
 			launchButton!!.touchable = if (ability.selectedTargets.size == 0) Touchable.disabled else Touchable.enabled
 			launchButton!!.setText("Activate (" + ability.selectedTargets.size + "/" + ability.targets + ")")
 		}
-		else if (GridSystem.instance.noValidMoves && canShowButtons)
+		else if (level.grid.noValidMoves && canShowButtons)
 		{
 			PowerBar.instance.isVisible = false
 			launchButton!!.isVisible = false

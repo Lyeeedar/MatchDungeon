@@ -1,11 +1,13 @@
 package com.lyeeedar.Board.GridUpdate
 
-import com.lyeeedar.Systems.GridSystem
+import com.lyeeedar.Board.Grid
 
 abstract class AbstractUpdateStep
 {
-	abstract fun doUpdate(gridSystem: GridSystem): Boolean
+	abstract fun doUpdateRealTile(grid: Grid, deltaTime: Float)
+
+	abstract fun doUpdate(grid: Grid): Boolean
 
 	var wasRunThisTurn = false
-	abstract fun doTurn(gridSystem: GridSystem)
+	abstract fun doTurn(grid: Grid)
 }

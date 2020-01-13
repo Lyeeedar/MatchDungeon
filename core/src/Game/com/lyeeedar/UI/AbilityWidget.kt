@@ -14,11 +14,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Game.Equipment
-import com.lyeeedar.Systems.GridSystem
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Statics
 
-class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val grid: Grid, val gridSystem: GridSystem) : Table()
+class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val grid: Grid) : Table()
 {
 	val empty = AssetManager.loadSprite("GUI/power_empty")
 	val full = AssetManager.loadSprite("GUI/power_full")
@@ -70,14 +69,14 @@ class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val gr
 			{
 				if (PowerBar.instance.pips >= ability.cost && ability.hasValidTargets(grid))
 				{
-					if (gridSystem.activeAbility == ability)
+					if (grid.activeAbility == ability)
 					{
-						gridSystem.activeAbility = null
+						grid.activeAbility = null
 						ability.selectedTargets.clear()
 					}
 					else
 					{
-						gridSystem.activeAbility = ability
+						grid.activeAbility = ability
 					}
 				}
 			}
@@ -106,7 +105,7 @@ class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val gr
 
 	override fun draw(batch: Batch?, parentAlpha: Float)
 	{
-		if (gridSystem.activeAbility == ability)
+		if (grid.activeAbility == ability)
 		{
 			widget.color = Color.GOLD
 

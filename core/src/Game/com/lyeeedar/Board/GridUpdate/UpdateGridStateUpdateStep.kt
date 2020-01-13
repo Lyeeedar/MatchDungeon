@@ -2,19 +2,21 @@ package com.lyeeedar.Board.GridUpdate
 
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectSet
+import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Tile
 import com.lyeeedar.Components.*
-import com.lyeeedar.Systems.GridSystem
 
 class UpdateGridStateUpdateStep : AbstractUpdateStep()
 {
 	val chestTiles = Array<Tile>()
 	val sinkPathSet = ObjectSet<Tile>()
-
-	override fun doUpdate(gridSystem: GridSystem): Boolean
+	override fun doUpdateRealTile(grid: Grid, deltaTime: Float)
 	{
-		val grid = gridSystem.grid!!
 
+	}
+
+	override fun doUpdate(grid: Grid): Boolean
+	{
 		grid.monsterTiles.clear()
 		grid.friendlyTiles.clear()
 		grid.sinkableTiles.clear()
@@ -119,7 +121,7 @@ class UpdateGridStateUpdateStep : AbstractUpdateStep()
 		return true
 	}
 
-	override fun doTurn(gridSystem: GridSystem)
+	override fun doTurn(grid: Grid)
 	{
 
 	}

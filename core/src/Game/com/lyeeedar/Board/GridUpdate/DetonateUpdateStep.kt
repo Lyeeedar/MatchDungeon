@@ -1,17 +1,16 @@
 package com.lyeeedar.Board.GridUpdate
 
 import com.badlogic.gdx.utils.Array
+import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Tile
+import com.lyeeedar.Components.MarkedForDeletionComponent
 import com.lyeeedar.Components.special
-import com.lyeeedar.Systems.GridSystem
 
 class DetonateUpdateStep : AbstractUpdateStep()
 {
 	// ----------------------------------------------------------------------
-	private fun detonate(gridSystem: GridSystem): Boolean
+	private fun detonate(grid: Grid): Boolean
 	{
-		val grid = gridSystem.grid!!
-
 		var complete = true
 
 		val tilesToDetonate = Array<Tile>()
@@ -45,6 +44,7 @@ class DetonateUpdateStep : AbstractUpdateStep()
 			special.special.apply(tile, grid)
 
 			contents.remove(special.javaClass)
+			contents.add(MarkedForDeletionComponent.obtain())
 			complete = false
 		}
 
@@ -54,20 +54,25 @@ class DetonateUpdateStep : AbstractUpdateStep()
 			grid.animSpeedMultiplier *= grid.animSpeedUpMultiplier
 
 			val point = tilesToDetonate.random()
-			gridSystem.match.displayMatchMessage(grid, point!!)
+			grid.match.displayMatchMessage(grid, point!!)
 		}
 
 		return complete
 	}
 
-	// ----------------------------------------------------------------------
-	override fun doUpdate(gridSystem: GridSystem): Boolean
+	override fun doUpdateRealTile(grid: Grid, deltaTime: Float)
 	{
-		return detonate(gridSystem)
+
 	}
 
 	// ----------------------------------------------------------------------
-	override fun doTurn(gridSystem: GridSystem)
+	override fun doUpdate(grid: Grid): Boolean
+	{
+		return detonate(grid)
+	}
+
+	// ----------------------------------------------------------------------
+	override fun doTurn(grid: Grid)
 	{
 
 	}

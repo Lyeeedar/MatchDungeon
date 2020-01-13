@@ -11,7 +11,6 @@ import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.Animation.MoveAnimation
-import com.lyeeedar.Systems.GridSystem
 import com.lyeeedar.Util.Point
 import com.lyeeedar.Util.UnsmoothedPath
 
@@ -366,14 +365,19 @@ class CascadeUpdateStep : AbstractUpdateStep()
 		return doneAnimation
 	}
 
-	// ----------------------------------------------------------------------
-	override fun doUpdate(gridSystem: GridSystem): Boolean
+	override fun doUpdateRealTile(grid: Grid, deltaTime: Float)
 	{
-		return cascade(gridSystem.grid!!)
+
 	}
 
 	// ----------------------------------------------------------------------
-	override fun doTurn(gridSystem: GridSystem)
+	override fun doUpdate(grid: Grid): Boolean
+	{
+		return cascade(grid)
+	}
+
+	// ----------------------------------------------------------------------
+	override fun doTurn(grid: Grid)
 	{
 
 	}

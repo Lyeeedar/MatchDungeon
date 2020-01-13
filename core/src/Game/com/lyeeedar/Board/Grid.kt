@@ -1,18 +1,25 @@
 package com.lyeeedar.Board
 
 import com.badlogic.ashley.core.Entity
+import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionCustomOrb
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
+import com.lyeeedar.Board.GridUpdate.*
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
+import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Global
+import com.lyeeedar.Renderables.Animation.BumpAnimation
+import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Statistic
+import com.lyeeedar.UI.FullscreenMessage
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.PowerBar
+import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
 
 class Grid(val width: Int, val height: Int, val level: Level)
@@ -65,8 +72,70 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	val namedOrbTiles = Array<Tile>()
 
 	// ----------------------------------------------------------------------
+	var inTurn = true
+
+	// ----------------------------------------------------------------------
+	var noMatchTimer = 0f
+	var matchHint: Pair<Point, Point>? = null
+
+	// ----------------------------------------------------------------------
+	var noValidMoves = false
+
+	// ----------------------------------------------------------------------
+	var dragStart: Point = Point.MINUS_ONE
+	var toSwap: Pair<Point, Point>? = null
+
+	// ----------------------------------------------------------------------
+	val cascade = CascadeUpdateStep()
+	val match = MatchUpdateStep()
+	val sink = SinkUpdateStep()
+	val detonate = DetonateUpdateStep()
+	val updateGrid = UpdateGridUpdateStep()
+	val updateGridState = UpdateGridStateUpdateStep()
+	val cleanup = OnTurnCleanupUpdateStep()
+
+	val updateSteps: kotlin.Array<AbstractUpdateStep>
+
+	// ----------------------------------------------------------------------
+	var activeAbility: Ability? = null
+		set(value)
+		{
+			if (level.isVictory || level.isDefeat) return
+
+			field = value
+
+			if (value == null)
+			{
+				for (tile in grid)
+				{
+					tile.isSelected = false
+				}
+			}
+			else
+			{
+				dragStart = Point.MINUS_ONE
+
+				if (value.targets == 0)
+				{
+					value.activate(this)
+					inTurn = true
+					field = null
+				}
+			}
+		}
+
+	// ----------------------------------------------------------------------
 	init
 	{
+		updateSteps = arrayOf(
+			cascade,
+			match,
+			sink,
+			detonate,
+			updateGridState,
+			updateGrid,
+			cleanup)
+
 		onPop += fun (entity: Entity, delay: Float) : Boolean {
 
 			val matchable = entity.matchable() ?: return false
@@ -275,6 +344,359 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	}
 
 	// ----------------------------------------------------------------------
+	fun activateAbility()
+	{
+		if (level.isVictory || level.isDefeat) return
+
+		activeAbility!!.activate(this)
+		activeAbility = null
+
+		inTurn = true
+	}
+
+	// ----------------------------------------------------------------------
+	fun select(newSelection: Point)
+	{
+		if (hasAnim() || level.isVictory || level.isDefeat) return
+
+		if (activeAbility != null)
+		{
+			val newTile = tile(newSelection) ?: return
+			if (!activeAbility!!.targetter.isValid(newTile, activeAbility!!.data)) return
+
+			if (newTile.isSelected)
+			{
+				newTile.isSelected = false
+				activeAbility!!.selectedTargets.removeValue(newTile, true)
+			}
+			else if (activeAbility!!.selectedTargets.size < activeAbility!!.targets)
+			{
+				newTile.isSelected = true
+				activeAbility!!.selectedTargets.add(newTile)
+			}
+		}
+		else
+		{
+			dragStart = newSelection
+		}
+	}
+
+	// ----------------------------------------------------------------------
+	fun dragEnd(selection: Point)
+	{
+		if (level.isVictory || level.isDefeat) return
+
+		if (selection != dragStart && dragStart.dist(selection) == 1)
+		{
+			toSwap = Pair(dragStart, selection)
+			dragStart = Point.MINUS_ONE
+		}
+	}
+
+	// ----------------------------------------------------------------------
+	fun clearDrag()
+	{
+		dragStart = Point.MINUS_ONE
+	}
+
+	// ----------------------------------------------------------------------
+	fun update(deltaTime: Float)
+	{
+		// process tiles
+		for (x in 0 until width)
+		{
+			for (y in 0 until height)
+			{
+				val tile = grid[x, y]
+
+				if (tile.delayedActions.size > 0)
+				{
+					val itr = tile.delayedActions.iterator()
+					while (itr.hasNext())
+					{
+						val action = itr.next()
+						action.delay -= deltaTime
+
+						if (action.delay <= 0)
+						{
+							action.function.invoke()
+							itr.remove()
+						}
+					}
+				}
+			}
+		}
+
+		for (step in updateSteps)
+		{
+			step.doUpdateRealTile(this, deltaTime)
+		}
+
+		if (!hasAnim())
+		{
+			for (step in updateSteps)
+			{
+				val completed = step.doUpdate(this)
+				if (!completed)
+				{
+					return
+				}
+			}
+
+			if (inTurn)
+			{
+				for (step in updateSteps)
+				{
+					if (!step.wasRunThisTurn)
+					{
+						step.wasRunThisTurn = true
+						step.doTurn(this)
+						return
+					}
+				}
+
+				onTurn()
+
+				for (step in updateSteps)
+				{
+					step.wasRunThisTurn = false
+				}
+			}
+			else
+			{
+				if (level.isVictory || level.isDefeat)
+				{
+					level.complete()
+				}
+				else
+				{
+					updatePlayerInput(deltaTime)
+				}
+			}
+		}
+	}
+
+	// ----------------------------------------------------------------------
+	fun updatePlayerInput(delta: Float)
+	{
+		if (FullscreenMessage.instance == null)
+		{
+			if (activeAbility == null) matchHint = findValidMove()
+			if (activeAbility == null && matchHint == null)
+			{
+				noValidMoves = true
+			}
+			else
+			{
+				noValidMoves = false
+
+				if (activeAbility != null) noMatchTimer = 0f
+				else noMatchTimer += delta
+
+				// handle input
+				if (toSwap != null)
+				{
+					val swapSuccess = swap()
+					if (swapSuccess) inTurn = true
+				}
+
+				if (Tutorial.current == null) onTime(delta)
+			}
+		}
+	}
+
+	// ----------------------------------------------------------------------
+	private fun swap(): Boolean
+	{
+		val oldTile = tile(toSwap!!.first)
+		val newTile = tile(toSwap!!.second)
+
+		toSwap = null
+
+		if (oldTile == null || newTile == null) return false
+
+		if (oldTile.spreader?.effect == Spreader.SpreaderEffect.SEAL || newTile.spreader?.effect == Spreader.SpreaderEffect.SEAL) return false
+
+		val oldEntity = oldTile.contents ?: return false
+		val newEntity = newTile.contents ?: return false
+
+		val oldSwap = oldEntity.swappable() ?: return false
+		val newSwap = newEntity.swappable() ?: return false
+
+		val oldSpecial = oldEntity.special()?.special
+		val newSpecial = newEntity.special()?.special
+
+		if (!oldSwap.canMove || !newSwap.canMove) return false
+
+		oldSwap.cascadeCount = -1
+		newSwap.cascadeCount = -1
+
+		if (oldSpecial != null || newSpecial != null)
+		{
+			val merged = newSpecial?.merge(oldEntity) ?: oldSpecial?.merge(newEntity)
+			if (merged != null)
+			{
+				addSpecial(newEntity, merged)
+
+				val sprite = oldEntity.renderable().renderable.copy()
+				sprite.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile, true)), Interpolation.linear)
+				newTile.effects.add(sprite)
+
+				oldTile.contents = null
+
+				merged.armed = true
+				newEntity.add(MarkedForDeletionComponent.obtain())
+
+				return false
+			}
+		}
+
+		oldTile.contents = newEntity
+		newTile.contents = oldEntity
+
+		oldEntity.pos().tile = newTile
+		newEntity.pos().tile = oldTile
+
+		val matches = match.findMatches(this)
+		for (match in matches) match.free()
+		if (matches.size == 0)
+		{
+			oldTile.contents = oldEntity
+			newTile.contents = newEntity
+
+			oldEntity.pos().tile = oldTile
+			newEntity.pos().tile = newTile
+
+			var dir = Direction.getDirection(oldTile, newTile)
+			if (dir.y != 0) dir = dir.opposite
+			oldEntity.renderable().renderable.animation = BumpAnimation.obtain().set(animSpeed, dir)
+			return false
+		}
+		else
+		{
+			lastSwapped = newTile
+
+			oldEntity.renderable().renderable.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile)).invertY(), Interpolation.linear)
+			newEntity.renderable().renderable.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(oldTile.getPosDiff(newTile)).invertY(), Interpolation.linear)
+			return true
+		}
+	}
+
+	// ----------------------------------------------------------------------
+	private fun findValidMove() : Pair<Point, Point>?
+	{
+		// find all 2 matches
+		val matches = match.findMatches(this, 2)
+
+		for (match in matches)
+		{
+			// check the 3 tiles around each end to see if it contains one of the correct colours
+			val dir = match.direction()
+			val key = grid[match.p1].contents!!.matchable()!!.desc.key
+
+			fun checkSurrounding(point: Point, dir: Direction, key: Int): Pair<Point, Point>?
+			{
+				val targetTile = tile(point)
+				if (targetTile?.contents?.swappable()?.canMove != true) return null
+
+				fun canMatch(point: Point): Boolean
+				{
+					val tile = tile(point) ?: return false
+					val swappable = tile.contents?.swappable() ?: return false
+					val matchable = tile.contents?.matchable() ?: return false
+					if (!swappable.canMove) return false
+					return matchable.desc.key == key
+				}
+
+				// check + dir
+				if (canMatch(point + dir)) return Pair(point, point+dir)
+				if (canMatch(point + dir.cardinalClockwise)) return Pair(point, point+dir.cardinalClockwise)
+				if (canMatch(point + dir.cardinalAnticlockwise)) return Pair(point, point+dir.cardinalAnticlockwise)
+
+				return null
+			}
+
+			// the one before first is at first-dir
+			val beforeFirst = match.p1 + dir.opposite
+			val beforeFirstPair = checkSurrounding(beforeFirst, dir.opposite, key)
+			if (beforeFirstPair != null)
+			{
+				for (match in matches) match.free()
+				return beforeFirstPair
+			}
+
+			val afterSecond = match.p2 + dir
+			val afterSecondPair = checkSurrounding(afterSecond, dir, key)
+			if (afterSecondPair != null)
+			{
+				for (match in matches) match.free()
+				return afterSecondPair
+			}
+		}
+
+		for (match in matches) match.free()
+
+		fun getTileKey(x: Int, y: Int, dir: Direction): Int
+		{
+			val tile = tile(x + dir.x, y + dir.y) ?: return -1
+			val swappable = tile.contents?.swappable() ?: return -1
+			val matchable = tile.contents?.matchable() ?: return -1
+			if (!swappable.canMove) return -1
+
+			return matchable.desc.key
+		}
+
+		// check diamond pattern
+		for (x in 0 until width)
+		{
+			for (y in 0 until height)
+			{
+				val tile = tile(x, y) ?: continue
+				val swappable = tile.contents?.swappable() ?: continue
+				if (!swappable.canMove) continue
+
+				for (dir in Direction.CardinalValues)
+				{
+					val key = getTileKey(x, y, dir)
+					if (key != -1)
+					{
+						val k1 = getTileKey(x, y, dir.cardinalClockwise)
+						val k2 = getTileKey(x, y, dir.cardinalAnticlockwise)
+
+						if (key == k1 && key == k2)
+						{
+							return Pair(Point(x, y), Point(x + dir.x, y + dir.y))
+						}
+					}
+				}
+			}
+		}
+
+		// check for special merges
+		for (x in 0 until width)
+		{
+			for (y in 0 until height)
+			{
+				val contents = grid[x, y].contents ?: continue
+				val special = contents.special() ?: continue
+				for (dir in Direction.CardinalValues)
+				{
+					val tile = tile(x + dir.x, y + dir.y) ?: continue
+					val tileSpecial = tile.contents?.special() ?: continue
+					if (special.special.merge(tile.contents!!) != null || tileSpecial.special.merge(contents) != null)
+					{
+						return Pair(Point(x, y), Point(x + dir.x, y + dir.y))
+					}
+				}
+			}
+		}
+
+		// else no valid
+
+		return null
+	}
+
+	// ----------------------------------------------------------------------
 	fun damage(tile: Tile, damageableEntity: Entity, delay: Float, damSource: Any? = null, bonusDam: Float = 0f, pierce: Float = 0f)
 	{
 		val damageable = damageableEntity.damageable()!!
@@ -406,7 +828,6 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		if (matchable != null)
 		{
 			matchable.skipPowerOrb = skipPowerOrb
-			contents.renderable().renderable.visible = false
 
 			val sprite = matchable.desc.death.copy()
 			sprite.colour = contents.renderable().renderable.colour
