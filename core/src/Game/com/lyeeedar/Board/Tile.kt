@@ -14,7 +14,7 @@ import com.lyeeedar.Util.Point
  * Created by Philip on 04-Jul-16.
  */
 
-class Tile(x: Int, y: Int, val grid: Grid) : Point(x, y), IHasTurnEffect
+class Tile(x: Int, y: Int, val grid: Grid) : Point(x, y)
 {
 	var groundSprite: SpriteWrapper? = null
 	var wallSprite: SpriteWrapper? = null
@@ -52,8 +52,6 @@ class Tile(x: Int, y: Int, val grid: Grid) : Point(x, y), IHasTurnEffect
 	}
 
 	val associatedMatches = kotlin.Array<Match?>(2) {e -> null}
-
-	override val onTurnEffects: Array<TurnEffect> = Array()
 
 	override fun toString(): String
 	{

@@ -13,10 +13,8 @@ import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.UI.GridWidget
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Colour
-import com.lyeeedar.Util.Random
-import com.lyeeedar.Util.XmlData
+import com.lyeeedar.UI.Tutorial
+import com.lyeeedar.Util.*
 import ktx.math.minus
 import kotlin.math.min
 
@@ -32,6 +30,21 @@ enum class MonsterEffectType
 fun addMonsterEffect(entity: Entity, monsterEffect: MonsterEffect): Entity
 {
 	entity.add(MonsterEffectComponent.obtain().set(monsterEffect))
+
+	val tutorialComponent = TutorialComponent.obtain()
+	tutorialComponent.displayTutorial = fun (grid, entity, gridWidget): Tutorial? {
+		if (!Statics.settings.get("Attack", false) )
+		{
+			val tutorial = Tutorial("Attack")
+			tutorial.addPopup("This is an attack. The pips surrounding the skull indicate the turns remaining until it activates.", gridWidget.getRect(entity))
+			tutorial.addPopup("Match it like a normal orb to remove it from the board. If you fail to remove it then you will lose 1 hp", gridWidget.getRect(entity))
+			return tutorial
+		}
+
+		return null
+	}
+	entity.add(tutorialComponent)
+
 	return entity
 }
 

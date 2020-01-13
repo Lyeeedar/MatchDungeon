@@ -15,6 +15,7 @@ import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.GridWidget
+import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
 import ktx.collections.filter
 import ktx.collections.toGdxArray
@@ -45,12 +46,25 @@ class FriendlyDesc
 		val ai = AIComponent.obtain()
 		ai.ai = this.ai.copy()
 
+		val tutorialComponent = TutorialComponent.obtain()
+		tutorialComponent.displayTutorial = fun (grid, entity, gridWidget): Tutorial? {
+			if (!Statics.settings.get("Friendly", false) )
+			{
+				val tutorial = Tutorial("Friendly")
+				tutorial.addPopup("This is a friendly ally. Match in the surrounding tiles to replenish its health.", gridWidget.getRect(entity))
+				return tutorial
+			}
+
+			return null
+		}
+
 		val entity = EntityPool.obtain()
 		entity.add(archetype)
 		entity.add(position)
 		entity.add(renderable)
 		entity.add(healable)
 		entity.add(ai)
+		entity.add(tutorialComponent)
 
 		return entity
 	}

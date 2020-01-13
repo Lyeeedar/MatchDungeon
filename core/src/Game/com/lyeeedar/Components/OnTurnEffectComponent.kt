@@ -2,16 +2,12 @@ package com.lyeeedar.Components
 
 import com.badlogic.ashley.core.ComponentMapper
 import com.badlogic.ashley.core.Entity
-import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.Pool
-import com.lyeeedar.Board.TurnEffect
 import com.lyeeedar.Util.XmlData
 
 fun Entity.onTurnEffect(): OnTurnEffectComponent? = OnTurnEffectComponent.mapper.get(this)
 class OnTurnEffectComponent : AbstractComponent()
 {
-	val onTurnEffects: Array<TurnEffect> = Array()
-
 	var obtained: Boolean = false
 	companion object
 	{
@@ -46,6 +42,6 @@ class OnTurnEffectComponent : AbstractComponent()
 
 	override fun reset()
 	{
-		onTurnEffects.clear()
+
 	}
 }

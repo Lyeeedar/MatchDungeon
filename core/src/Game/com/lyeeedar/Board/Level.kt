@@ -53,9 +53,11 @@ class Level(val loadPath: String)
 
 	lateinit var grid: Grid
 	lateinit var player: Player
-	var completed = false
-	var completeFun: (() -> Unit)? = null
-	val onComplete = Event0Arg()
+
+	val isVictory: Boolean
+		get() = victoryConditions.all { it.isCompleted() }
+	val isDefeat: Boolean
+		get() = defeatConditions.any { it.isCompleted() }
 
 	lateinit var victoryAction: () -> Unit
 	lateinit var defeatAction: () -> Unit
@@ -103,6 +105,8 @@ class Level(val loadPath: String)
 
 	fun create(questTheme: Theme, player: Player, victoryAction: () -> Unit, defeatAction: () -> Unit)
 	{
+		Global.engine.removeAllEntities()
+
 		this.questTheme = questTheme
 
 		if (spawnList.size == 0)
@@ -222,25 +226,9 @@ class Level(val loadPath: String)
 					}
 
 					contents.damageable()!!.alwaysShowHP = symbol.block.alwaysShowHP
-
-					if (symbol.block.onTurnEffects.size > 0)
-					{
-						val onTurnEffectComponent = OnTurnEffectComponent.obtain()
-						for (effect in symbol.block.onTurnEffects)
-						{
-							onTurnEffectComponent.onTurnEffects.add(effect.copy())
-						}
-
-						contents.add(onTurnEffectComponent)
-					}
 				}
 
 				tile.plateStrength = symbol.plate
-
-				for (effect in symbol.onTurnEffects)
-				{
-					tile.onTurnEffects.add(effect.copy())
-				}
 
 				if (symbol.isMonster)
 				{
@@ -542,17 +530,6 @@ class Level(val loadPath: String)
 				{
 					tile.contents = createContainer(symbol.container.sprite, symbol.container.hp, tile.contents!!)
 					tile.contents!!.damageable()!!.alwaysShowHP = symbol.container.alwaysShowHP
-
-					if (symbol.container.onTurnEffects.size > 0)
-					{
-						val onTurnEffectComponent = OnTurnEffectComponent.obtain()
-						for (effect in symbol.container.onTurnEffects)
-						{
-							onTurnEffectComponent.onTurnEffects.add(effect.copy())
-						}
-
-						tile.contents!!.add(onTurnEffectComponent)
-					}
 				}
 			}
 		}
@@ -565,6 +542,13 @@ class Level(val loadPath: String)
 				val char = charGrid[x, y]
 
 				modifyOrbs(tile, char)
+
+				if (tile.contents != null)
+				{
+					Global.engine.addEntity(tile.contents!!)
+
+					tile.contents!!.pos().setTile(tile.contents!!, tile)
+				}
 			}
 		}
 
@@ -596,42 +580,21 @@ class Level(val loadPath: String)
 		victoryConditions.forEach{ it.attachHandlers(grid) }
 	}
 
-	fun update(delta: Float)
-	{
-		val done = grid.update(delta)
-
-		if (!completed && done)
-		{
-			if (victoryConditions.all { it.isCompleted() } || defeatConditions.any { it.isCompleted() })
-			{
-				completeFun = {complete()}
-				completed = true
-				onComplete()
-			}
-
-			if (completed && completeFun != null)
-			{
-				Future.call(completeFun!!, 0.5f, this)
-			}
-		}
-
-		if (completed && completeFun != null && (!done || Mote.motes.size > 0))
-		{
-			Future.call(completeFun!!, 0.5f, this)
-		}
-	}
-
 	fun complete()
 	{
-		completeFun = null
-		if (victoryConditions.all { it.isCompleted() })
+		if (isVictory)
 		{
 			victoryAction.invoke()
 		}
-		else if (defeatConditions.any { it.isCompleted() })
+		else if (isDefeat)
 		{
 			defeatAction.invoke()
 		}
+		else
+		{
+			throw RuntimeException("Tried to complete level when neither victory or defeat")
+		}
+
 		Global.player.levelbuffs.clear()
 		Global.player.leveldebuffs.clear()
 	}
@@ -680,9 +643,8 @@ class Level(val loadPath: String)
 						val blockSprite = if(blockSpriteEl != null) AssetManager.loadSprite(blockSpriteEl) else null
 						val blockHP = blockEl.getInt("Health", 1)
 						val showHP = blockEl.getBoolean("AlwaysShowHP", false)
-						val turnEffects = TurnEffect.loadFromElement(blockEl.getChildByName("TurnEffects"))
 
-						blockDesc = BlockDesc(blockSprite, blockHP, showHP, turnEffects)
+						blockDesc = BlockDesc(blockSprite, blockHP, showHP)
 					}
 
 					val plate = symbolEl.getInt("Plate", 0)
@@ -737,9 +699,8 @@ class Level(val loadPath: String)
 						val containerSprite = AssetManager.loadSprite(containerDescEl.getChildByName("Sprite")!!)
 						val hp = containerDescEl.getInt("Health", 1)
 						val alwaysShowHP = containerDescEl.getBoolean("AlwaysShowHP", false)
-						val turnEffects = TurnEffect.loadFromElement(containerDescEl.getChildByName("TurnEffects"))
 
-						containerDesc = ContainerDesc(containerSprite, hp, alwaysShowHP, turnEffects)
+						containerDesc = ContainerDesc(containerSprite, hp, alwaysShowHP)
 					}
 
 					var spreader: Spreader? = null
@@ -749,8 +710,6 @@ class Level(val loadPath: String)
 						spreader = Spreader.load(spreaderEl)
 					}
 
-					val turnEffects = TurnEffect.loadFromElement(symbolEl.getChildByName("TurnEffects"))
-
 					val type = SymbolType.valueOf(symbolEl.get("Type", "Floor")!!.toUpperCase())
 
 					symbolsMap[character.toInt()] = Symbol(
@@ -758,7 +717,6 @@ class Level(val loadPath: String)
 							usageCondition, fallbackChar,
 							nameKey,
 							sprite,
-							turnEffects,
 							blockDesc, plate, seal, attack,
 							friendlyDesc,
 							isMonster, factionMonster, monsterDesc,
@@ -848,9 +806,9 @@ class Level(val loadPath: String)
 
 data class SinkableDesc(val sprite: Sprite?, val usePlayer: Boolean)
 
-data class ContainerDesc(val sprite: Sprite, val hp: Int, val alwaysShowHP: Boolean, val onTurnEffects: Array<TurnEffect>)
+data class ContainerDesc(val sprite: Sprite, val hp: Int, val alwaysShowHP: Boolean)
 
-data class BlockDesc(val sprite: Sprite?, val hp: Int, val alwaysShowHP: Boolean, val onTurnEffects: Array<TurnEffect>)
+data class BlockDesc(val sprite: Sprite?, val hp: Int, val alwaysShowHP: Boolean)
 
 data class FactionMonster(val isBoss: Boolean, val difficultyModifier: Int)
 
@@ -865,7 +823,6 @@ data class Symbol(
 		val usageCondition: String, val fallbackChar: Char,
 		val nameKey: String?,
 		val sprite: SpriteWrapper?,
-		val onTurnEffects: Array<TurnEffect>,
 		val block: BlockDesc?, val plate: Int, val seal: Int, val attack: Int,
 		val friendlyDesc: FriendlyDesc?,
 		val isMonster: Boolean, val factionMonster: FactionMonster?, val monsterDesc: MonsterDesc?,

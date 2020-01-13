@@ -73,21 +73,6 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 				{
 					monsterEffectTiles.add(tile)
 				}
-				if (damageable != null)
-
-				for (effect in tile.onTurnEffects)
-				{
-					effect.onTurn(grid, tile)
-				}
-
-				val onTurnEffect = contents?.onTurnEffect()
-				if (onTurnEffect != null)
-				{
-					for (effect in onTurnEffect.onTurnEffects)
-					{
-						effect.onTurn(grid, tile)
-					}
-				}
 
 				if (damageable != null)
 				{

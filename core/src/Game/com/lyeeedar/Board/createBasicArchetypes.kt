@@ -4,7 +4,9 @@ import com.badlogic.ashley.core.Entity
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionTurns
 import com.lyeeedar.Components.*
 import com.lyeeedar.Renderables.Renderable
+import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.tryGet
 
 fun createBlock(theme: Theme, hp: Int): Entity
@@ -20,11 +22,25 @@ fun createBlock(theme: Theme, hp: Int): Entity
 	damageableComponent.alwaysShowHP = false
 	damageableComponent.maxhp = hp
 
+	val tutorialComponent = TutorialComponent.obtain()
+	tutorialComponent.displayTutorial = fun (grid, entity, gridWidget): Tutorial? {
+		if (!Statics.settings.get("Block", false) )
+		{
+			val tutorial = Tutorial("Block")
+			tutorial.addPopup("This is a block. Match in the tiles surrounding it to break it.", gridWidget.getRect(entity.pos().tile!!, true))
+
+			return tutorial
+		}
+
+		return null
+	}
+
 	val entity = EntityPool.obtain()
 	entity.add(archetype)
 	entity.add(position)
 	entity.add(renderable)
 	entity.add(damageableComponent)
+	entity.add(tutorialComponent)
 
 	return entity
 }
@@ -123,11 +139,25 @@ fun createChest(spawnOrbs: Boolean, theme: Theme): Entity
 		return false
 	}
 
+	val tutorialComponent = TutorialComponent.obtain()
+	tutorialComponent.displayTutorial = fun (grid, entity, gridWidget): Tutorial? {
+		if (spawner.numToSpawn > 0 && !Statics.settings.get("Chest", false))
+		{
+			val tutorial = Tutorial("Chest")
+			tutorial.addPopup("This is a chest. Match in the tiles beneath this to spawn coins. When there are no more coins to spawn, it will appear empty.", gridWidget.getRect(entity))
+			return tutorial
+		}
+
+		return null
+	}
+
+
 	val entity = EntityPool.obtain()
 	entity.add(archetype)
 	entity.add(position)
 	entity.add(renderable)
 	entity.add(spawner)
+	entity.add(tutorialComponent)
 
 	return entity
 }
@@ -144,12 +174,25 @@ fun createSinkable(renderable: Renderable): Entity
 
 	val swappable = SwappableComponent.obtain()
 
+	val tutorialComponent = TutorialComponent.obtain()
+	tutorialComponent.displayTutorial = fun (grid, entity, gridWidget): Tutorial? {
+		if (!Statics.settings.get("Sinkable", false) )
+		{
+			val tutorial = Tutorial("Sinkable")
+			tutorial.addPopup("This is a sinkable item. If you move it to the bottom of the board you will successfully sink it.", gridWidget.getRect(entity.pos().tile!!, true))
+			return tutorial
+		}
+
+		return null
+	}
+
 	val entity = EntityPool.obtain()
 	entity.add(archetype)
 	entity.add(position)
 	entity.add(renderable)
 	entity.add(sinkable)
 	entity.add(swappable)
+	entity.add(tutorialComponent)
 
 	return entity
 }

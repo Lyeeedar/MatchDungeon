@@ -1,5 +1,6 @@
 package com.lyeeedar.UI
 
+import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
@@ -10,10 +11,10 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Widget
-import com.lyeeedar.Board.*
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionTime
-import com.lyeeedar.Game.Ability.Effect
-import com.lyeeedar.Game.Ability.Targetter
+import com.lyeeedar.Board.MonsterAI
+import com.lyeeedar.Board.OrbDesc
+import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.SortedRenderer
@@ -166,6 +167,12 @@ class GridWidget(val gridSystem: GridSystem) : Widget()
 		return Rectangle(minx, miny, maxx - minx, maxy - miny)
 	}
 
+	fun getRect(entity: Entity): Rectangle
+	{
+		val tiles: com.badlogic.gdx.utils.Array<Point> = entity.pos().tiles.toList().toGdxArray()
+		return getRect(tiles)
+	}
+
 	fun pointToScreenspace(point: Point): Vector2
 	{
 		val xp = x + (width / 2f) - ((grid.width * tileSize) / 2f)
@@ -254,81 +261,16 @@ class GridWidget(val gridSystem: GridSystem) : Widget()
 			for (y in 0 until grid.height)
 			{
 				val tile = grid.grid[x, y]
-				val swappable = tile.swappable
-				val block = tile.block
-				val container = tile.container
-				val chest = tile.chest
-				val monster = tile.monster
-				val friendly = tile.friendly
 				val spreader  = tile.spreader
 
 				var tileColour = Colour.WHITE
-				var orbColour = Colour.WHITE
-				var blockColour = Colour.WHITE
-				var monsterColour = Colour.WHITE
 
 				if (gridSystem.activeAbility != null)
 				{
-					if (gridSystem.activeAbility!!.effect.type != Effect.Type.BUFF && gridSystem.activeAbility!!.targetter.isValid (tile, gridSystem.activeAbility!!.data))
-					{
-						if (gridSystem.activeAbility!!.targetter.type == Targetter.Type.ORB)
-						{
-							tileColour = Colour.DARK_GRAY
-							orbColour = Colour.WHITE
-							blockColour = Colour.DARK_GRAY
-							monsterColour = Colour.DARK_GRAY
-						}
-						else if (gridSystem.activeAbility!!.targetter.type == Targetter.Type.BLOCK)
-						{
-							tileColour = Colour.DARK_GRAY
-							orbColour = Colour.DARK_GRAY
-							blockColour = Colour.WHITE
-							monsterColour = Colour.DARK_GRAY
-						}
-						else if (gridSystem.activeAbility!!.targetter.type == Targetter.Type.EMPTY)
-						{
-							tileColour = Colour.WHITE
-							orbColour = Colour.DARK_GRAY
-							blockColour = Colour.DARK_GRAY
-							monsterColour = Colour.DARK_GRAY
-						}
-						else if (gridSystem.activeAbility!!.targetter.type == Targetter.Type.MONSTER)
-						{
-							tileColour = Colour.DARK_GRAY
-							orbColour = Colour.DARK_GRAY
-							blockColour = Colour.DARK_GRAY
-							monsterColour = Colour.WHITE
-						}
-						else if (gridSystem.activeAbility!!.targetter.type == Targetter.Type.ATTACK)
-						{
-							tileColour = Colour.DARK_GRAY
-							orbColour = Colour.WHITE
-							blockColour = Colour.DARK_GRAY
-							monsterColour = Colour.DARK_GRAY
-						}
-						else if (gridSystem.activeAbility!!.targetter.type == Targetter.Type.TILE)
-						{
-							val col = if (tile.canHaveOrb) Colour.WHITE else Colour.DARK_GRAY
-
-							tileColour = col
-							orbColour = col
-							blockColour = col
-							monsterColour = col
-						}
-						else if (gridSystem.activeAbility!!.targetter.type == Targetter.Type.SEALED)
-						{
-							tileColour = Colour.DARK_GRAY
-							orbColour = if (swappable != null && swappable.sealed) Colour.WHITE else Colour.DARK_GRAY
-							blockColour = Colour.DARK_GRAY
-							monsterColour = Colour.DARK_GRAY
-						}
-					}
-					else
+					val isValidTarget = gridSystem.activeAbility!!.targetter.isValid(tile, gridSystem.activeAbility!!.data)
+					if (!isValidTarget)
 					{
 						tileColour = Colour.DARK_GRAY
-						orbColour = Colour.DARK_GRAY
-						blockColour = Colour.DARK_GRAY
-						monsterColour = Colour.DARK_GRAY
 					}
 				}
 
@@ -397,18 +339,6 @@ class GridWidget(val gridSystem: GridSystem) : Widget()
 					tileHeight++
 				}
 
-				if (chest != null)
-				{
-					renderer.queueSprite(chest.sprite, xi, yi, TILE, tileHeight, tileColour)
-
-					if (chest.numToSpawn > 0 && !gridSystem.inTurn && !Statics.settings.get("Chest", false))
-					{
-						val tutorial = Tutorial("Chest")
-						tutorial.addPopup("This is a chest. Match in the tiles beneath this to spawn coins. When there are no more coins to spawn, it will appear empty.", getRect(tile))
-						tutorial.show()
-					}
-				}
-
 				for (effect in tile.effects)
 				{
 					if (effect is Sprite)
@@ -435,71 +365,148 @@ class GridWidget(val gridSystem: GridSystem) : Widget()
 					}
 				}
 
-				if (swappable != null)
+				val contents = tile.contents
+				if (contents != null && tile == contents.pos().tile)
 				{
-					renderer.queueSprite(swappable.sprite, xi, yi, ORB, 1, orbColour)
-
-					if (swappable.sealed)
+					if (contents.renderableOrNull() != null)
 					{
-						renderer.queueSprite(swappable.sealSprite, xi, yi, ORB, 2, orbColour)
+						contents.renderable().renderable.size[0] = contents.pos().size
+						contents.renderable().renderable.size[1] = contents.pos().size
 
-						if (!Statics.settings.get("Seal", false) && !gridSystem.inTurn )
+						renderer.queue(contents.renderable().renderable, xi, yi, ORB, 1, tileColour)
+					}
+
+					var maxY = 0f
+					val damageable = contents.damageable()
+					if (damageable != null)
+					{
+						maxY = drawHPBar(
+							contents.pos().size.toFloat(),
+							damageable.hp,
+							damageable.lostHP,
+							damageable.remainingReduction,
+							damageable.maxhp,
+							damageable.damageReduction,
+							damageable.immune,
+							xi,
+							yi,
+							hp_full)
+					}
+
+					val healable = contents.healable()
+					if (healable != null)
+					{
+						val fullHp = if (healable.isSummon) hp_full_summon else hp_full_friendly
+						maxY = drawHPBar(
+							contents.pos().size.toFloat(),
+							healable.hp,
+							healable.lostHP,
+							0,
+							healable.maxhp,
+							0,
+							healable.immune,
+							xi,
+							yi,
+							fullHp)
+					}
+
+					if (contents.ai()?.ai is MonsterAI)
+					{
+						val monsterAI = contents.ai()?.ai as? MonsterAI
+
+						if (monsterAI != null)
 						{
-							val tutorial = Tutorial("Seal")
-							tutorial.addPopup("This orb has been sealed. It won't move until the seal is broken. To break the seal use the orb in a match.", getRect(swappable))
-							tutorial.show()
+							val rootDesc = monsterAI.desc.originalDesc ?: monsterAI.desc
+							if (rootDesc.stages.size > 0)
+							{
+								val currentStage = if (monsterAI.desc.originalDesc == null) -1 else rootDesc.stages.indexOf(monsterAI.desc)
+								var x = xi
+								val y = maxY
+								val size = 0.15f
+
+								for (i in 0 until rootDesc.stages.size + 1)
+								{
+									val sprite = when
+									{
+										i < rootDesc.stages.size - currentStage -> stage_full
+										else -> stage_empty
+									}
+
+									renderer.queueSprite(sprite, x, y, ORB, 2, width = size, height = size)
+
+									x += size
+								}
+							}
 						}
 					}
 
-					if (swappable is Orb && swappable.isChanger)
+					val swappable = contents.swappable()
+					if (swappable != null)
 					{
-						if (swappable.sprite.visible && (swappable.sprite.showBeforeRender || swappable.sprite.renderDelay <= 0))
+						if (swappable.sealed)
 						{
-							val offset = swappable.sprite.animation?.renderOffset(false)
-
-							var xii = xi
-							var yii = yi
-
-							if (offset != null)
-							{
-								xii += offset[0]
-								yii += offset[1]
-							}
-
-							if (swappable.nextDesc == null)
-							{
-								swappable.nextDesc = Orb.getRandomOrb(grid.level, swappable.desc)
-							}
-
-							tempCol.set(orbColour).mul(swappable.nextDesc!!.sprite.colour)
-
-							var scaleX = swappable.sprite.baseScale[0]
-							var scaleY = swappable.sprite.baseScale[1]
-
-							val scale = swappable.sprite.animation?.renderScale()
-
-							if (scale != null)
-							{
-								scaleX *= scale[0]
-								scaleY *= scale[1]
-							}
-
-							renderer.queueSprite(changer, xii, yii, ORB, 2, tempCol, scaleX = scaleX, scaleY = scaleY)
+							renderer.queueSprite(grid.level.theme.sealSprites.tryGet(swappable.sealCount), xi, yi, ORB, 2, tileColour)
 						}
 					}
 
-					if (swappable is Special && swappable.sprite.renderDelay <= 0)
+					val matchable = contents.matchable()
+					if (matchable != null)
 					{
-						if (swappable.armed)
+						if (matchable.isChanger)
+						{
+							val sprite = contents.sprite()!!
+							if (sprite.visible && (sprite.showBeforeRender || sprite.renderDelay <= 0))
+							{
+								val offset = sprite.animation?.renderOffset(false)
+
+								var xii = xi
+								var yii = yi
+
+								if (offset != null)
+								{
+									xii += offset[0]
+									yii += offset[1]
+								}
+
+								if (matchable.nextDesc == null)
+								{
+									matchable.nextDesc = OrbDesc.getRandomOrb(grid.level)
+								}
+
+								tempCol.set(tileColour).mul(matchable.nextDesc!!.sprite.colour)
+
+								var scaleX = sprite.baseScale[0]
+								var scaleY = sprite.baseScale[1]
+
+								val scale = sprite.animation?.renderScale()
+
+								if (scale != null)
+								{
+									scaleX *= scale[0]
+									scaleY *= scale[1]
+								}
+
+								renderer.queueSprite(changer, xii, yii, ORB, 2, tempCol, scaleX = scaleX, scaleY = scaleY)
+							}
+						}
+					}
+
+					val special = contents.special()
+					if (special != null && contents.sprite()!!.renderDelay <= 0)
+					{
+						if (special.special.armed)
 						{
 							renderer.queueSprite(glow, xi, yi, ORB, 0)
 						}
 					}
 
-					if (swappable is MonsterEffect && swappable.sprite.renderDelay <= 0 && swappable.delayDisplay <= 0f)
+					val monsterEffect = contents.monsterEffect()
+					if (monsterEffect  != null && contents.sprite()!!.renderDelay <= 0 && monsterEffect.monsterEffect.delayDisplay <= 0f)
 					{
-						val cx = xi + (swappable.sprite.animation?.renderOffset(false)?.get(0) ?: 0f)
-						val cy = yi + 0.15f + (swappable.sprite.animation?.renderOffset(false)?.get(1) ?: 0f)
+						val sprite = contents.sprite()!!
+
+						val cx = xi + (sprite.animation?.renderOffset(false)?.get(0) ?: 0f)
+						val cy = yi + 0.15f + (sprite.animation?.renderOffset(false)?.get(1) ?: 0f)
 
 						val currentPoint = Vector2(0f, 0.4f)
 
@@ -507,134 +514,22 @@ class GridWidget(val gridSystem: GridSystem) : Widget()
 						val degreesStep = 360f / maxdots
 						for (i in 0 until maxdots)
 						{
-							val sprite = if (i < swappable.timer) atk_full else atk_empty
+							val sprite = if (i < monsterEffect.monsterEffect.timer) atk_full else atk_empty
 
-							renderer.queueSprite(sprite, cx + currentPoint.x, cy + currentPoint.y, ORB, 2, orbColour)
+							renderer.queueSprite(sprite, cx + currentPoint.x, cy + currentPoint.y, ORB, 2, tileColour)
 
 							currentPoint.rotate(degreesStep)
 						}
+					}
 
-						if (!Statics.settings.get("Attack", false) && !gridSystem.inTurn )
+					val tutorialComponent = contents.tutorial()
+					if (tutorialComponent != null && !gridSystem.inTurn)
+					{
+						val tutorial = tutorialComponent.displayTutorial?.invoke(grid, contents, this)
+						if (tutorial != null)
 						{
-							val tutorial = Tutorial("Attack")
-							tutorial.addPopup("This is an attack. The pips surrounding the skull indicate the turns remaining until it activates.", getRect(swappable))
-							tutorial.addPopup("Match it like a normal orb to remove it from the board. If you fail to remove it then you will lose 1 hp", getRect(swappable))
 							tutorial.show()
 						}
-					}
-
-					if (swappable is Sinkable)
-					{
-						if (!Statics.settings.get("Sinkable", false) && !gridSystem.inTurn )
-						{
-							val tutorial = Tutorial("Sinkable")
-							tutorial.addPopup("This is a sinkable item. If you move it to the bottom of the board you will successfully sink it.", getRect(tile, true))
-							tutorial.show()
-						}
-					}
-				}
-
-				if (monster != null && tile == monster.tiles[0, monster.size-1])
-				{
-					monster.sprite.size[0] = monster.size
-					monster.sprite.size[1] = monster.size
-					renderer.queueSprite(monster.sprite, xi, yi, ORB, 1, monsterColour)
-
-					// do hp bar
-					val maxY = drawHPBar(monster.size.toFloat(), monster.hp, monster.lostHP, monster.remainingReduction, monster.maxhp, monster.damageReduction, monster.immune, xi, yi, hp_full)
-
-					val rootDesc = monster.desc.originalDesc ?: monster.desc
-					if (rootDesc.stages.size > 0)
-					{
-						val currentStage = if (monster.desc.originalDesc == null) -1 else rootDesc.stages.indexOf(monster.desc)
-						var x = xi
-						val y = maxY
-						val size = 0.15f
-
-						for (i in 0 until rootDesc.stages.size+1)
-						{
-							val sprite = when
-							{
-								i < rootDesc.stages.size-currentStage -> stage_full
-								else -> stage_empty
-							}
-
-							renderer.queueSprite(sprite, x, y, ORB, 2, width = size, height = size)
-
-							x += size
-						}
-
-						if (!Statics.settings.get("MonsterStages", false) && !gridSystem.inTurn)
-						{
-							val tutorial = Tutorial("MonsterStages")
-							val tiles: com.badlogic.gdx.utils.Array<Point> = monster.tiles.toList().toGdxArray()
-							tutorial.addPopup("This enemy has multiple stages, indicated by the orbs above its hp bar. When its hp bar is empty it will mutate into a new creature, so watch out!", getRect(tiles))
-							tutorial.show()
-						}
-					}
-
-					if (!Statics.settings.get("Monster", false) && !gridSystem.inTurn )
-					{
-						val tutorial = Tutorial("Monster")
-						val tiles: com.badlogic.gdx.utils.Array<Point> = monster.tiles.toList().toGdxArray()
-						tutorial.addPopup("This is an enemy. The red bar beneath it is its remaining health. Match in the tiles surrounding it to damage it.", getRect(tiles))
-						tutorial.show()
-					}
-
-					if (monster.damageReduction > 0 && !gridSystem.inTurn  && !Statics.settings.get("DR", false))
-					{
-						val tutorial = Tutorial("DR")
-						val tiles: com.badlogic.gdx.utils.Array<Point> = monster.tiles.toList().toGdxArray()
-						tutorial.addPopup("This enemy has damage resistance, represented by the grey pips on its health bar. At the end of each turn it will replenish those pips, so focus on those big hits!", getRect(tiles))
-						tutorial.show()
-					}
-				}
-
-				if (friendly != null && tile == friendly.tiles[0, friendly.size-1])
-				{
-					friendly.sprite.size[0] = friendly.size
-					friendly.sprite.size[1] = friendly.size
-					renderer.queueSprite(friendly.sprite, xi, yi, ORB, 1, orbColour)
-
-					// do hp bar
-					val fullHp = if (friendly.isSummon) hp_full_summon else hp_full_friendly
-					drawHPBar(friendly.size.toFloat(), friendly.hp, friendly.lostHP, friendly.remainingReduction, friendly.maxhp, friendly.damageReduction, friendly.immune, xi, yi, fullHp)
-
-					if (!Statics.settings.get("Friendly", false) && !gridSystem.inTurn )
-					{
-						val tutorial = Tutorial("Friendly")
-						val tiles: com.badlogic.gdx.utils.Array<Point> = friendly.tiles.toList().toGdxArray()
-						tutorial.addPopup("This is a friendly ally. Match in the surrounding tiles to replenish its health.", getRect(tiles))
-						tutorial.show()
-					}
-				}
-
-				if (block != null)
-				{
-					renderer.queueSprite(block.sprite, xi, yi, ORB, 1, blockColour)
-
-					// do hp bar
-					if (block.hp < block.maxhp || block.alwaysShowHP)
-					{
-						drawHPBar(1f, block.hp, block.lostHP, block.remainingReduction, block.maxhp, block.damageReduction, block.immune, xi, yi, hp_neutral)
-					}
-
-					if (!Statics.settings.get("Block", false) && !gridSystem.inTurn )
-					{
-						val tutorial = Tutorial("Block")
-						tutorial.addPopup("This is a block. Match in the tiles surrounding it to break it.", getRect(tile, true))
-						tutorial.show()
-					}
-				}
-
-				if (container != null)
-				{
-					renderer.queueSprite(container.sprite, xi, yi, ORB, 1, blockColour)
-
-					// do hp bar
-					if (container.hp < container.maxhp || container.alwaysShowHP)
-					{
-						drawHPBar(1f, container.hp, container.lostHP, container.remainingReduction, container.maxhp, container.damageReduction, container.immune, xi, yi, hp_neutral)
 					}
 				}
 
@@ -646,17 +541,17 @@ class GridWidget(val gridSystem: GridSystem) : Widget()
 					{
 						if (spreader.spriteWrapper!!.sprite != null)
 						{
-							level.queueSprite(spreader.spriteWrapper!!.sprite!!, xi, yi, SPREADER, 0, orbColour)
+							level.queueSprite(spreader.spriteWrapper!!.sprite!!, xi, yi, SPREADER, 0, tileColour)
 						}
 						if (spreader.spriteWrapper!!.tilingSprite != null)
 						{
-							level.queueSprite(spreader.spriteWrapper!!.tilingSprite!!, xi, yi, SPREADER, 0, orbColour)
+							level.queueSprite(spreader.spriteWrapper!!.tilingSprite!!, xi, yi, SPREADER, 0, tileColour)
 						}
 					}
 
 					if (spreader.particleEffect != null)
 					{
-						level.queueParticle(spreader.particleEffect!!, xi, yi, SPREADER, 1, orbColour)
+						level.queueParticle(spreader.particleEffect!!, xi, yi, SPREADER, 1, tileColour)
 					}
 
 					if (!Statics.settings.get("Spreader", false) && !gridSystem.inTurn )

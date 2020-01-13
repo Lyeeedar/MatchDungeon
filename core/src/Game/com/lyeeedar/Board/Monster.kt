@@ -17,6 +17,7 @@ import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
+import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
 import ktx.collections.addAll
 import ktx.collections.set
@@ -43,7 +44,6 @@ class MonsterDesc
 	var size: Int = 1
 	var hp: Int = 10
 	var damageReduction: Int = 0
-	val onTurnEffects = Array<TurnEffect>()
 	val abilities = Array<AbstractMonsterAbility>()
 	val stages = Array<MonsterDesc>()
 
@@ -72,22 +72,39 @@ class MonsterDesc
 		val ai = AIComponent.obtain()
 		ai.ai = MonsterAI(this, difficulty)
 
+		val tutorialComponent = TutorialComponent.obtain()
+		tutorialComponent.displayTutorial = fun (grid, entity, gridWidget): Tutorial? {
+			if (damageable.damageReduction > 0  && !Statics.settings.get("DR", false))
+			{
+				val tutorial = Tutorial("DR")
+				tutorial.addPopup("This enemy has damage resistance, represented by the grey pips on its health bar. At the end of each turn it will replenish those pips, so focus on those big hits!", gridWidget.getRect(entity))
+				return tutorial
+			}
+
+			if (!Statics.settings.get("Monster", false) )
+			{
+				val tutorial = Tutorial("Monster")
+				tutorial.addPopup("This is an enemy. The red bar beneath it is its remaining health. Match in the tiles surrounding it to damage it.", gridWidget.getRect(entity))
+				return tutorial
+			}
+
+			if ((ai.ai as MonsterAI).desc.stages.size > 0 && !Statics.settings.get("MonsterStages", false))
+			{
+				val tutorial = Tutorial("MonsterStages")
+				tutorial.addPopup("This enemy has multiple stages, indicated by the orbs above its hp bar. When its hp bar is empty it will mutate into a new creature, so watch out!", gridWidget.getRect(entity))
+				return tutorial
+			}
+
+			return null
+		}
+
 		val entity = EntityPool.obtain()
 		entity.add(archetype)
 		entity.add(position)
 		entity.add(renderable)
 		entity.add(damageable)
 		entity.add(ai)
-
-		if (onTurnEffects.size > 0)
-		{
-			val onTurnEffectComponent = OnTurnEffectComponent.obtain()
-			for (effect in onTurnEffects)
-			{
-				onTurnEffectComponent.onTurnEffects.add(effect.copy())
-			}
-			entity.add(onTurnEffectComponent)
-		}
+		entity.add(tutorialComponent)
 
 		return entity
 	}
@@ -98,7 +115,7 @@ class MonsterDesc
 		{
 			val desc = MonsterDesc()
 
-			desc.name = xml.get("Name")
+			desc.name = xml.get("Name", xml.toString())!!
 
 			desc.sprite = AssetManager.loadSprite(xml.getChildByName("Sprite")!!)
 			desc.death = AssetManager.loadParticleEffect(xml.getChildByName("Death")!!).getParticleEffect()
@@ -115,15 +132,6 @@ class MonsterDesc
 			desc.hp = xml.getInt("HP", 10)
 
 			desc.damageReduction = xml.getInt("DamageReduction", 0)
-
-			val onTurnEffectsEl = xml.getChildByName("TurnEffects")
-			if (onTurnEffectsEl != null)
-			{
-				for (el in onTurnEffectsEl.children)
-				{
-					desc.onTurnEffects.add(TurnEffect.load(el))
-				}
-			}
 
 			val abilitiesEl = xml.getChildByName("Abilities")
 			if (abilitiesEl != null)

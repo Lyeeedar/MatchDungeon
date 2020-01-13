@@ -7,7 +7,9 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Components.*
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Sprite.Sprite
+import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.getXml
 import ktx.collections.set
 
@@ -28,12 +30,25 @@ fun createOrb(desc: OrbDesc): Entity
 
 	val archetype = EntityArchetypeComponent.obtain().set(EntityArchetype.ORB)
 
+	val tutorialComponent = TutorialComponent.obtain()
+	tutorialComponent.displayTutorial = fun (grid, entity, gridWidget): Tutorial? {
+		if (swappable.sealed && !Statics.settings.get("Seal", false) )
+		{
+			val tutorial = Tutorial("Seal")
+			tutorial.addPopup("This orb has been sealed. It won't move until the seal is broken. To break the seal use the orb in a match.", gridWidget.getRect(entity))
+			return tutorial
+		}
+
+		return null
+	}
+
 	val entity = EntityPool.obtain()
 	entity.add(matchable)
 	entity.add(swappable)
 	entity.add(renderable)
 	entity.add(position)
 	entity.add(archetype)
+	entity.add(tutorialComponent)
 
 	matchable.setDesc(desc, entity)
 

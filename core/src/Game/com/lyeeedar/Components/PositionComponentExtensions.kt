@@ -12,19 +12,25 @@ var PositionComponent.tile: Tile?
 		if (value != null) position = value
 	}
 
-fun PositionComponent.isOnTile(point: Point): Boolean
-{
-	val tile = this.tile ?: return false
-
-	for (x in 0 until size)
+val PositionComponent.tiles: Sequence<Tile>
+	get()
 	{
-		for (y in 0 until size)
-		{
-			val t = tile.grid.getTile(tile, x, y) ?: continue
-			if (t == point) return true
+		val tile = tile!!
+		return sequence {
+			for (x in 0 until size)
+			{
+				for (y in 0 until size)
+				{
+					val t = tile.grid.getTile(tile, x, y) ?: continue
+					yield(t)
+				}
+			}
 		}
 	}
-	return false
+
+fun PositionComponent.isOnTile(point: Point): Boolean
+{
+	return tiles.contains(point)
 }
 
 fun PositionComponent.getEdgeTiles(dir: Direction): com.badlogic.gdx.utils.Array<Tile>

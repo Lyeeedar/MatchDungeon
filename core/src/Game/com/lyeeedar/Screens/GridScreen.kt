@@ -16,6 +16,7 @@ import com.lyeeedar.Game.Player
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
 import com.lyeeedar.Systems.GridSystem
+import com.lyeeedar.Systems.grid
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Statics
@@ -160,8 +161,9 @@ class GridScreen(): AbstractScreen()
 
 		//this.player = player
 		this.level = level
+		Global.engine.grid = level.grid
 
-		val gridWidget = GridWidget(level.grid)
+		val gridWidget = GridWidget(GridSystem.instance)
 		grid = gridWidget
 
 		Global.player.isInBerserkRange = false
@@ -203,7 +205,7 @@ class GridScreen(): AbstractScreen()
 			{
 				ability != null ->
 				{
-					val widget = AbilityWidget(equip, 64f, 64f, level.grid)
+					val widget = AbilityWidget(equip, 64f, 64f, level.grid, GridSystem.instance)
 					abilityTable.add(widget).expand()
 
 					if (ability.resetUsagesPerLevel)
@@ -279,7 +281,6 @@ class GridScreen(): AbstractScreen()
 					label.remove()
 				}
 
-				level.completed = true
 				level.complete()
 			}
 		}
@@ -436,7 +437,7 @@ class GridScreen(): AbstractScreen()
 
 		val canShowButtons = if (ability == null && !GridSystem.instance.inTurn && (GridSystem.instance.noValidMoves || PowerBar.instance.power == PowerBar.instance.maxPower)) !level.grid.hasAnim() else false
 
-		if (level.victoryConditions.all { it.isCompleted() })
+		if (level.isVictory)
 		{
 			PowerBar.instance.isVisible = false
 			launchButton!!.isVisible = false

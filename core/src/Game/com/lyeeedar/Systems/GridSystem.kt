@@ -48,11 +48,14 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 	var activeAbility: Ability? = null
 		set(value)
 		{
+			val grid = grid!!
+			if (grid.level.isVictory || grid.level.isDefeat) return
+
 			field = value
 
 			if (value == null)
 			{
-				for (tile in grid!!.grid)
+				for (tile in grid.grid)
 				{
 					tile.isSelected = false
 				}
@@ -63,7 +66,7 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 
 				if (value.targets == 0)
 				{
-					value.activate(grid!!)
+					value.activate(grid)
 					inTurn = true
 					field = null
 				}
@@ -86,6 +89,9 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 	// ----------------------------------------------------------------------
 	fun activateAbility()
 	{
+		val grid = grid!!
+		if (grid.level.isVictory || grid.level.isDefeat) return
+
 		activeAbility!!.activate(grid!!)
 		activeAbility = null
 
@@ -97,7 +103,7 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 	{
 		val grid = grid!!
 
-		if (grid.hasAnim() || grid.level.completed) return
+		if (grid.hasAnim() || grid.level.isVictory || grid.level.isDefeat) return
 
 		if (activeAbility != null)
 		{
@@ -124,6 +130,9 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 	// ----------------------------------------------------------------------
 	fun dragEnd(selection: Point)
 	{
+		val grid = grid!!
+		if (grid.level.isVictory || grid.level.isDefeat) return
+
 		if (selection != dragStart && dragStart.dist(selection) == 1)
 		{
 			toSwap = Pair(dragStart, selection)
@@ -212,8 +221,6 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 	{
 		val grid = grid!!
 
-		grid.level.update(delta)
-
 		if (!grid.hasAnim())
 		{
 			for (step in updateSteps)
@@ -246,7 +253,14 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 			}
 			else
 			{
-				updatePlayerInput(delta)
+				if (grid.level.isVictory || grid.level.isDefeat)
+				{
+					grid.level.complete()
+				}
+				else
+				{
+					updatePlayerInput(delta)
+				}
 			}
 		}
 	}
@@ -256,7 +270,7 @@ class GridSystem : AbstractSystem(Family.all(PositionComponent::class.java).get(
 	{
 		val grid = grid!!
 
-		if (!grid.level.completed && FullscreenMessage.instance == null)
+		if (FullscreenMessage.instance == null)
 		{
 			if (activeAbility == null) matchHint = findValidMove()
 			if (activeAbility == null && matchHint == null)
