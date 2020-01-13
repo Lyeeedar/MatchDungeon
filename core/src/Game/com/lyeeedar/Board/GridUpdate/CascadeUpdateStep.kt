@@ -69,6 +69,122 @@ class CascadeUpdateStep : AbstractUpdateStep()
 	}
 
 	// ----------------------------------------------------------------------
+	private fun pullOrbDown(grid: Grid, x: Int, currentY: Int, emptyTile: Tile, cascadeCount: Int): Boolean
+	{
+		var didMove = false
+
+		// if gap found read up until solid / spawner
+		var found: Tile? = null
+
+		for (searchY in currentY downTo -1)
+		{
+			val stile = if (searchY >= 0) grid.grid[x, searchY] else null
+			if (stile == null)
+			{
+				found = emptyTile
+				break
+			}
+			else if (!stile.canHaveOrb && !stile.isPit)
+			{
+				break
+			}
+			else if (stile.spreader?.effect == Spreader.SpreaderEffect.SEAL)
+			{
+				break
+			}
+			else if (stile.contents != null)
+			{
+				val oentity = stile.contents!!
+
+				val swappable = oentity.swappable()
+				if (swappable != null && swappable.canMove)
+				{
+					found = stile
+					break
+				}
+
+				val spawner = oentity.orbSpawner()
+				if (spawner != null)
+				{
+					found = stile
+					break
+				}
+
+				if (swappable == null)
+				{
+					break
+				}
+			}
+		}
+
+		// pull solid / spawn new down
+		if (found != null)
+		{
+			var entity: Entity? = null
+
+			// we searched to the top, spawn a new orb at the top
+			if (found == emptyTile)
+			{
+				entity = grid.level.spawnOrb()
+
+				val swappable = entity.swappable()!!
+
+				swappable.movePoints.add(Point(x, -1))
+				swappable.spawnCount = grid.spawnCount[x, 0]
+
+				grid.spawnCount[x, 0]++
+
+				grid.onSpawn(entity)
+			}
+			// we found a spawner, spawn a new orb from it
+			else if (found.contents?.orbSpawner() != null)
+			{
+				val spawner = found.contents!!.orbSpawner()!!
+				val spawned = spawner.spawn(grid, found.contents!!)
+				if (spawned != null)
+				{
+					entity = spawned
+
+					val swappable = spawned.swappable()!!
+
+					swappable.movePoints.add(Point(x, found.y))
+					swappable.spawnCount = grid.spawnCount[x, found.y + 1]
+
+					grid.spawnCount[x, found.y + 1]++
+
+					grid.onSpawn(spawned)
+				}
+			}
+			// else pull the found entity (a swappable) down
+			else
+			{
+				entity = found.contents!!
+				entity.pos().removeFromTile(entity)
+
+				val swappable = entity.swappable()!!
+
+				if (swappable.movePoints.size == 0) swappable.movePoints.add(found)
+			}
+
+			// if we found an entity, then move it
+			if (entity != null)
+			{
+				entity.pos().tile = emptyTile
+				entity.pos().addToTile(entity)
+
+				val swappable = entity.swappable()!!
+
+				swappable.movePoints.add(emptyTile)
+				swappable.cascadeCount = cascadeCount
+
+				didMove = true
+			}
+		}
+
+		return didMove
+	}
+
+	// ----------------------------------------------------------------------
 	private fun cascadeColumn(grid: Grid, x: Int, cascadeCount: Int) : Boolean
 	{
 		var complete = true
@@ -81,109 +197,10 @@ class CascadeUpdateStep : AbstractUpdateStep()
 			// read up column, find first gap
 			if (tile.canHaveOrb && tile.contents == null)
 			{
-				// if gap found read up until solid / spawner
-				var found: Tile? = null
-
-				for (searchY in currentY downTo -1)
+				val didMove = pullOrbDown(grid, x, currentY, tile, cascadeCount)
+				if (didMove)
 				{
-					val stile = if (searchY >= 0) grid.grid[x, searchY] else null
-					if (stile == null)
-					{
-						found = tile
-						break
-					}
-					else if (!stile.canHaveOrb && !stile.isPit)
-					{
-						break
-					}
-					else if (stile.spreader?.effect == Spreader.SpreaderEffect.SEAL)
-					{
-						break
-					}
-					else if (stile.contents != null)
-					{
-						val oentity = stile.contents!!
-
-						val swappable = oentity.swappable()
-						if (swappable != null && swappable.canMove)
-						{
-							found = stile
-							break
-						}
-
-						val spawner = oentity.orbSpawner()
-						if (spawner != null)
-						{
-							found = stile
-							break
-						}
-
-						val damageable = oentity.damageable()
-						if (damageable != null)
-						{
-							break
-						}
-					}
-				}
-
-				// pull solid / spawn new down
-				if (found != null)
-				{
-					var entity: Entity? = null
-
-					if (found == tile)
-					{
-						entity = grid.level.spawnOrb()
-
-						val swappable = entity.swappable()!!
-
-						swappable.movePoints.add(Point(x, -1))
-						swappable.spawnCount = grid.spawnCount[x, 0]
-
-						grid.spawnCount[x, 0]++
-
-						grid.onSpawn(entity)
-					}
-					else if (found.contents?.orbSpawner() != null)
-					{
-						val spawner = found.contents!!.orbSpawner()!!
-						val spawned = spawner.spawn(grid, found.contents!!)
-						if (spawned != null)
-						{
-							entity = spawned
-
-							val swappable = spawned.swappable()!!
-
-							swappable.movePoints.add(Point(x, found.y))
-							swappable.spawnCount = grid.spawnCount[x, found.y + 1]
-
-							grid.spawnCount[x, found.y + 1]++
-
-							grid.onSpawn(spawned)
-						}
-					}
-					else
-					{
-						entity = found.contents!!
-						entity.pos().removeFromTile(entity)
-
-						val swappable = entity.swappable()!!
-
-						if (swappable.movePoints.size == 0) swappable.movePoints.add(found)
-					}
-
-					if (entity != null)
-					{
-						entity.pos().tile = tile
-						entity.pos().addToTile(entity)
-
-						val swappable = entity.swappable()!!
-
-						swappable.movePoints.add(tile)
-						swappable.cascadeCount = cascadeCount
-
-						complete = false
-					}
+					complete = false
 				}
 			}
 
@@ -195,9 +212,8 @@ class CascadeUpdateStep : AbstractUpdateStep()
 
 		if (complete)
 		{
-			currentY = 0
 			var lookingForOrb = SearchState.NOTLOOKING
-			while (currentY < grid.height)
+			for (currentY in 0 until grid.height)
 			{
 				val tile = grid.grid[x, currentY]
 
@@ -209,13 +225,13 @@ class CascadeUpdateStep : AbstractUpdateStep()
 						lookingForOrb = SearchState.LOOKING
 					}
 				}
-				// else if we reach a tile that cant have an orb, or one we cant move, stop looking
-				else if (!tile.canHaveOrb || lookingForOrb == SearchState.PLACED || (tile.contents != null && tile.contents?.swappable() == null))
+				// else if we reach a tile that cant have an orb,
+				else if (!tile.canHaveOrb)
 				{
 					lookingForOrb = SearchState.NOTLOOKING
 				}
-				// else if we find a swappable orb, stop looking
-				else if (tile.contents?.swappable() != null)
+				// else if we find a non empty tile, stop looking
+				else if (tile.contents != null)
 				{
 					lookingForOrb = SearchState.NOTLOOKING
 				}
@@ -265,14 +281,14 @@ class CascadeUpdateStep : AbstractUpdateStep()
 
 					if (diagLValid || diagRValid)
 					{
-						fun pullIn(tile: Tile)
+						fun pullIn(othertile: Tile)
 						{
-							val orb = tile.contents!!
+							val orb = othertile.contents!!
 							orb.pos().removeFromTile(orb)
 
 							val swappable = orb.swappable()!!
 
-							if (swappable.movePoints.size == 0) swappable.movePoints.add(tile)
+							if (swappable.movePoints.size == 0) swappable.movePoints.add(othertile)
 
 							orb.pos().tile = tile
 							orb.pos().addToTile(orb)
@@ -306,11 +322,7 @@ class CascadeUpdateStep : AbstractUpdateStep()
 
 						lookingForOrb = SearchState.PLACED
 					}
-
-
 				}
-
-				currentY++
 			}
 		}
 

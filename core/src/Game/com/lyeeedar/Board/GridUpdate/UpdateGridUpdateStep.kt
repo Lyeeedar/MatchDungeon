@@ -316,6 +316,11 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 			if (monsterEffect != null)
 			{
 				monsterEffect.monsterEffect.timer--
+
+				if (monsterEffect.monsterEffect.timer <= 0)
+				{
+					tile.contents!!.add(MarkedForDeletionComponent.obtain())
+				}
 			}
 		}
 	}

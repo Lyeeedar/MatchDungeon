@@ -494,7 +494,18 @@ class GridWidget(val grid: Grid) : Widget()
 					{
 						if (special.special.armed)
 						{
-							renderer.queueSprite(glow, xi, yi, ORB, 0)
+							val offset = contents.sprite()!!.animation?.renderOffset(false)
+
+							var xii = xi
+							var yii = yi
+
+							if (offset != null)
+							{
+								xii += offset[0]
+								yii += offset[1]
+							}
+
+							renderer.queueSprite(glow, xii, yii, ORB, 0)
 						}
 					}
 

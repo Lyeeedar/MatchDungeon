@@ -69,7 +69,7 @@ class DamageableComponent : AbstractComponent()
 
 	val damSources = ObjectSet<Any?>()
 
-	var deathEffect: ParticleEffect = AssetManager.loadParticleEffect("death").getParticleEffect()
+	var deathEffect: ParticleEffect = AssetManager.loadParticleEffect("Death").getParticleEffect()
 
 	var isCreature = false
 	var alwaysShowHP = true
@@ -118,7 +118,7 @@ class DamageableComponent : AbstractComponent()
 		tookDamage = false
 		maxhp = 1
 		damSources.clear()
-		deathEffect = AssetManager.loadParticleEffect("death").getParticleEffect()
+		deathEffect = AssetManager.loadParticleEffect("Death").getParticleEffect()
 		isCreature = false
 		alwaysShowHP = true
 		isSummon = false

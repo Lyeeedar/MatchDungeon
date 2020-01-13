@@ -836,6 +836,11 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 			tile.effects.add(sprite)
 		}
+
+		if (contents.monsterEffect() != null)
+		{
+			contents.remove(MonsterEffectComponent::class.java)
+		}
 	}
 
 	// ----------------------------------------------------------------------

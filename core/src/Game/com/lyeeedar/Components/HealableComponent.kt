@@ -53,7 +53,7 @@ class HealableComponent : AbstractComponent()
 
 	var isSummon = false
 
-	var deathEffect: ParticleEffect = AssetManager.loadParticleEffect("death").getParticleEffect()
+	var deathEffect: ParticleEffect = AssetManager.loadParticleEffect("Death").getParticleEffect()
 
 	var obtained: Boolean = false
 	companion object
@@ -95,6 +95,6 @@ class HealableComponent : AbstractComponent()
 		tookDamage = false
 		maxhp = 1
 		isSummon = false
-		deathEffect = AssetManager.loadParticleEffect("death").getParticleEffect()
+		deathEffect = AssetManager.loadParticleEffect("Death").getParticleEffect()
 	}
 }

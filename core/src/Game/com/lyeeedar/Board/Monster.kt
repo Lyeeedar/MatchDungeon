@@ -272,6 +272,7 @@ class MonsterAI(val desc: MonsterDesc, val difficulty: Int) : AbstractGridAI()
 				val dst = tile.euclideanDist(startTile)
 				val animDuration = 0.4f + tile.euclideanDist(startTile) * 0.025f
 				val attackSprite = monsterEffect.actualSprite.copy()
+				attackSprite.colour = tile.contents!!.renderable().renderable.colour
 				attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
 				attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
 				tile.effects.add(attackSprite)
@@ -317,7 +318,6 @@ abstract class AbstractMonsterAbility
 	var cooldownTimer: Int = 0
 	var cooldownMin: Int = 1
 	var cooldownMax: Int = 1
-	lateinit var target: Target
 	lateinit var targetRestriction: Targetter
 	var targetCount: Int = 1
 	lateinit var permuter: Permuter
@@ -332,7 +332,6 @@ abstract class AbstractMonsterAbility
 		ability.cooldownMax = cooldownMax
 		ability.cooldownTimer = ability.cooldownMin + MathUtils.random(ability.cooldownMax - ability.cooldownMin)
 		ability.usages = usages
-		ability.target = target
 		ability.targetRestriction = targetRestriction
 		ability.targetCount = targetCount
 		ability.permuter = permuter
@@ -663,7 +662,7 @@ class MonsterMonsterEffectAbility : AbstractMonsterAbility()
 			{
 				animDuration += 0.4f
 				val attackSprite = monsterEffect.actualSprite.copy()
-				attackSprite.colour = entity.renderable().renderable.colour
+				attackSprite.colour = contents.renderable().renderable.colour
 				attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
 				attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
 				tile.effects.add(attackSprite)
