@@ -741,11 +741,11 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			}
 		}
 
-		contents.add(MarkedForDeletionComponent.obtain().set(delay))
-
 		val matchable = contents.matchable()
 		if (matchable != null)
 		{
+			contents.add(MarkedForDeletionComponent.obtain().set(delay))
+
 			matchable.skipPowerOrb = skipPowerOrb
 
 			if (!Global.resolveInstantly)

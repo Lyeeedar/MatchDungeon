@@ -6,6 +6,8 @@ import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Board.CompletionCondition.*
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.MonsterAI
+import com.lyeeedar.Board.OrbDesc
+import com.lyeeedar.Board.Tile
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Global
@@ -225,38 +227,31 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 	}
 
 	// ---------------------------------------------------------------------
+	class MovePriority(val targetTiles: Array<Tile>, val direct: Boolean)
+
+	// ---------------------------------------------------------------------
 	fun findBestMove(grid: Grid): ValidMove?
 	{
 		val validMoves = findValidMoves(grid)
 		if (validMoves.size == 0) return null
 
+		val movePriorities = Array<MovePriority>()
+
 		// blocks
 		if (grid.level.victoryConditions.any{ it is CompletionConditionBreak || it is CompletionConditionSink })
 		{
-			for (swap in validMoves)
+			if (grid.breakableTiles.size > 0)
 			{
-				for (point in swap.points)
-				{
-					if (grid.breakableTiles.any{ it.taxiDist(point) <= 1 })
-					{
-						return swap
-					}
-				}
+				movePriorities.add(MovePriority(grid.breakableTiles, false))
 			}
 		}
 
 		// sinkables
 		if (grid.level.victoryConditions.any{ it is CompletionConditionSink })
 		{
-			for (swap in validMoves)
+			if (grid.sinkPathTiles.size > 0)
 			{
-				for (point in swap.points)
-				{
-					if (grid.sinkPathTiles.any{ it == point })
-					{
-						return swap
-					}
-				}
+				movePriorities.add(MovePriority(grid.sinkPathTiles, true))
 			}
 		}
 
@@ -266,16 +261,9 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 			val die = grid.level.defeatConditions.filterIsInstance<CompletionConditionDie>().firstOrNull()
 			if (die != null && die.hp < die.maxHP * 0.5f)
 			{
-				// attacks
-				for (swap in validMoves)
+				if (grid.attackTiles.size > 0)
 				{
-					for (point in swap.points)
-					{
-						if (grid.attackTiles.any{ it == point })
-						{
-							return swap
-						}
-					}
+					movePriorities.add(MovePriority(grid.attackTiles, true))
 				}
 			}
 		}
@@ -283,60 +271,120 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 		// monsters
 		if (grid.level.victoryConditions.any{ it is CompletionConditionKill })
 		{
-			for (swap in validMoves)
+			if (grid.monsterTiles.size > 0)
 			{
-				for (point in swap.points)
-				{
-					if (grid.monsterTiles.any{ it.taxiDist(point) <= 1 })
-					{
-						return swap
-					}
-				}
+				movePriorities.add(MovePriority(grid.monsterTiles, false))
 			}
 		}
 
 		// attacks
-		for (swap in validMoves)
+		if (grid.attackTiles.size > 0)
 		{
-			for (point in swap.points)
+			movePriorities.add(MovePriority(grid.attackTiles, true))
+		}
+
+		// attempt direct matches
+		for (priority in movePriorities)
+		{
+			// attempt to fulfill the requirements directly
+			var bestMove: ValidMove? = null
+			var bestCount = 0
+
+			for (move in validMoves)
 			{
-				if (grid.attackTiles.any{ it == point })
+				var count = 0
+				for (point in move.points)
 				{
-					return swap
+					val allowedDist = if (priority.direct) 0 else 1
+					if (priority.targetTiles.any { it.taxiDist(point) <= allowedDist })
+					{
+						count++
+					}
 				}
+
+				if (count > bestCount)
+				{
+					bestCount = count
+					bestMove = move
+				}
+			}
+
+			if (bestMove != null)
+			{
+				return bestMove
 			}
 		}
 
-		// matchables
+		// get a close enough match
+		var bestMove: ValidMove? = null
+		var bestDist = Int.MAX_VALUE
+		for (priority in movePriorities)
+		{
+			for (move in validMoves)
+			{
+				for (point in move.points)
+				{
+					val minDist = priority.targetTiles.map { it.taxiDist(point) }.min()!!
+					if (minDist < bestDist)
+					{
+						bestDist = minDist
+						bestMove = move
+					}
+				}
+			}
+		}
+		if (bestMove != null)
+		{
+			return bestMove
+		}
+
+		// try to match based on orb descs
 		if (grid.level.victoryConditions.any{ it is CompletionConditionMatches || it is CompletionConditionCustomOrb })
 		{
-			for (swap in validMoves)
-			{
-				for (point in swap.points)
-				{
-					val tile = grid.tile(point) ?: continue
-					val contents = tile.contents ?: continue
-					val matchable = contents.matchable() ?: continue
+			val keys = Array<Int>()
 
-					val matches = grid.level.victoryConditions.filterIsInstance<CompletionConditionMatches>().firstOrNull()
-					if (matches != null)
+			val matches = grid.level.victoryConditions.filterIsInstance<CompletionConditionMatches>().firstOrNull()
+			if (matches != null)
+			{
+				for (match in matches.toBeMatched)
+				{
+					if (match.value > 0)
 					{
-						for (match in matches.toBeMatched)
+						keys.add(match.key)
+					}
+				}
+			}
+
+			val custom = grid.level.victoryConditions.filterIsInstance<CompletionConditionCustomOrb>().firstOrNull()
+			if (custom != null)
+			{
+				if (!custom.isCompleted())
+				{
+					val key = OrbDesc.getNamedOrb(custom.targetOrbName).key
+					keys.add(key)
+				}
+			}
+
+			for (key in keys)
+			{
+				for (swap in validMoves)
+				{
+					var matchingCount = 0
+					for (point in swap.points)
+					{
+						val tile = grid.tile(point) ?: continue
+						val contents = tile.contents ?: continue
+						val matchable = contents.matchable() ?: continue
+
+						if (matchable.desc.key == key)
 						{
-							if (match.value > 0 && matchable.desc.key == match.key)
-							{
-								return swap
-							}
+							matchingCount++
 						}
 					}
 
-					val custom = grid.level.victoryConditions.filterIsInstance<CompletionConditionCustomOrb>().firstOrNull()
-					if (custom != null)
+					if (matchingCount >= 2)
 					{
-						if (matchable.desc.name == custom.targetOrbName)
-						{
-							return swap
-						}
+						return swap
 					}
 				}
 			}
