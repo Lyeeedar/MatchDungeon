@@ -1,5 +1,6 @@
 package com.lyeeedar.Board.GridUpdate
 
+import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
@@ -200,10 +201,16 @@ class MatchUpdateStep : AbstractUpdateStep()
 			tile.associatedMatches[1] = null
 		}
 
+		if (grid.DEBUG_matchDeleted) println("found ${matches.size} matches")
+
 		for (match in matches)
 		{
+			if (grid.DEBUG_matchDeleted) println("Match:")
+
 			for (point in match.points())
 			{
+				if (grid.DEBUG_matchDeleted) print("" + point.x + "," + point.y + "      ")
+
 				val tile = grid.grid[point]
 				if (tile.associatedMatches[0] == null)
 				{
@@ -214,10 +221,13 @@ class MatchUpdateStep : AbstractUpdateStep()
 					tile.associatedMatches[1] = match
 				}
 			}
+			if (grid.DEBUG_matchDeleted) println("")
 		}
 
 		val coreTiles = Array<Tile>()
 		val borderTiles = ObjectSet<Tile>()
+
+		val seenThisMatch = ObjectSet<Entity>()
 
 		// remove all orbs, activate all specials
 		for (match in matches)
@@ -227,7 +237,19 @@ class MatchUpdateStep : AbstractUpdateStep()
 
 			for (point in match.points())
 			{
-				coreTiles.add(grid.grid[point])
+				val tile = grid.grid[point]
+				coreTiles.add(tile)
+
+				if (tile.contents?.isMarkedForDeletion() == true && !seenThisMatch.contains(tile.contents))
+				{
+					println("Trying to match a deleted object")
+					grid.DEBUG_matchDeleted = true
+				}
+				if (tile.contents != null)
+				{
+					seenThisMatch.add(tile.contents)
+				}
+
 				grid.pop(point.x, point.y, 0f)
 			}
 
@@ -250,7 +272,9 @@ class MatchUpdateStep : AbstractUpdateStep()
 			}
 		}
 
-		fun clearMatchPoint(tile: Tile, point: Point, sprite: Renderable)
+
+		// figure out if we should spawn specials due to 4 / 5 / cross match
+		fun animateMerge(tile: Tile, point: Point, sprite: Renderable)
 		{
 			val sprite = sprite.copy()
 
@@ -291,12 +315,12 @@ class MatchUpdateStep : AbstractUpdateStep()
 
 				for (point in tile.associatedMatches[0]!!.points())
 				{
-					clearMatchPoint(tile, point, sprite)
+					animateMerge(tile, point, sprite)
 				}
 
 				for (point in tile.associatedMatches[1]!!.points())
 				{
-					clearMatchPoint(tile, point, sprite)
+					animateMerge(tile, point, sprite)
 				}
 			}
 		}
@@ -323,7 +347,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 
 					for (point in match.points())
 					{
-						clearMatchPoint(tile, point, sprite)
+						animateMerge(tile, point, sprite)
 					}
 				}
 			}
@@ -439,6 +463,8 @@ class MatchUpdateStep : AbstractUpdateStep()
 	// ----------------------------------------------------------------------
 	override fun doUpdate(grid: Grid): Boolean
 	{
+		if (grid.DEBUG_matchDeleted) println("Starting match")
+
 		return match(grid)
 	}
 

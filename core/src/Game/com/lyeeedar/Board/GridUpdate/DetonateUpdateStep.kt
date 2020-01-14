@@ -26,7 +26,7 @@ class DetonateUpdateStep : AbstractUpdateStep()
 				{
 					if (tile.spreader != null)
 					{
-						special.special.armed = false
+						special.special.setArmed(false, tile.contents!!)
 					}
 					else
 					{

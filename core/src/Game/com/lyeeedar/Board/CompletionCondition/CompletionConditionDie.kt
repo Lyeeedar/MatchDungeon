@@ -50,13 +50,16 @@ class CompletionConditionDie : AbstractCompletionCondition()
 			// attack all friendlies
 			for (tile in grid.friendlyTiles)
 			{
-				val friendly = tile.contents!!.healable() ?: continue
+				val friendly = tile.contents?.healable() ?: continue
 				val sprite = entity.renderable().renderable.copy() as Sprite
 				val dst = GridWidget.instance.pointToScreenspace(tile)
 
 				spawnMote(src, dst, sprite, GridWidget.instance.tileSize,
 					 {
-						grid.damage(tile, tile.contents!!, 0f, friendly)
+						 friendly.hp--
+
+						 val hit = grid.hitEffect.copy()
+						 tile.effects.add(hit)
 
 					 }, animSpeed = 0.35f, leap = true)
 			}

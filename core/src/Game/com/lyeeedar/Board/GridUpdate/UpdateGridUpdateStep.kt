@@ -8,10 +8,12 @@ import com.lyeeedar.Board.*
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Global
+import com.lyeeedar.Renderables.Animation.BlinkAnimation
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.Animation.LeapAnimation
 import com.lyeeedar.Statistic
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Colour
 import com.lyeeedar.Util.Random
 import com.lyeeedar.Util.random
 
@@ -34,6 +36,22 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 				if (tile == contents.pos().tile)
 				{
 					processEntityRealTime(contents, grid, deltaTime)
+				}
+
+				if (tile.delayedActions.size > 0)
+				{
+					val itr = tile.delayedActions.iterator()
+					while (itr.hasNext())
+					{
+						val action = itr.next()
+						action.delay -= deltaTime
+
+						if (action.delay <= 0)
+						{
+							action.function.invoke()
+							itr.remove()
+						}
+					}
 				}
 			}
 		}
@@ -64,6 +82,48 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 
 					monsterEffect.monsterEffect.addedSprite = true
 				}
+			}
+		}
+
+		val damageableComponent = entity.damageable()
+		if (damageableComponent != null && renderable != null)
+		{
+			if (damageableComponent.tookDamage)
+			{
+				damageableComponent.tookDamage = false
+
+				renderable.renderable.animation = BlinkAnimation.obtain().set(Colour.RED, renderable.renderable.colour, 0.15f, true)
+			}
+
+			if (damageableComponent.hp <= 0 && !entity.isMarkedForDeletion())
+			{
+				entity.add(MarkedForDeletionComponent.obtain())
+			}
+		}
+
+		val healableComponent = entity.healable()
+		if (healableComponent != null && renderable != null)
+		{
+			if (healableComponent.tookDamage)
+			{
+				healableComponent.tookDamage = false
+
+				renderable.renderable.animation = BlinkAnimation.obtain().set(Colour.RED, renderable.renderable.colour, 0.15f, true)
+			}
+
+			if (healableComponent.hp <= 0 && !entity.isMarkedForDeletion())
+			{
+				entity.add(MarkedForDeletionComponent.obtain())
+			}
+		}
+
+		val special = entity.special()
+		if (special != null)
+		{
+			if (special.special.needsArming)
+			{
+				special.special.needsArming = false
+				special.special.setArmed(true, entity)
 			}
 		}
 	}

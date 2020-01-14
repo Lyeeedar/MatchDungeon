@@ -33,7 +33,7 @@ fun addSpecial(entity: Entity, special: Special): Entity
 	val renderable = special.sprite.copy()
 	renderable.light = lightTemplate.copy()
 	renderable.tintLight = true
-	renderable.colour = entity.matchable()!!.desc.sprite.colour
+	renderable.colour = entity.matchable()?.desc?.sprite?.colour ?: Colour.WHITE
 
 	if (special is GemSpecial)
 	{
@@ -60,7 +60,6 @@ fun tryMergeSpecial(special: Special, entity: Entity): Special
 		tempEntity.add(SpecialComponent.obtain().set(special))
 
 		val newSpecial = otherSpecial.special.merge(tempEntity) ?: special.merge(entity) ?: special
-		newSpecial.armed = true
 
 		tempEntity.free()
 
@@ -74,7 +73,30 @@ fun tryMergeSpecial(special: Special, entity: Entity): Special
 
 abstract class Special()
 {
-	var armed = false
+	var needsArming = false
+	var armed: Boolean = false
+		private set(value)
+		{
+			field = value
+		}
+
+	fun setArmed(armed: Boolean, entity: Entity)
+	{
+		this.armed = armed
+
+		val swappable = entity.swappable()
+		if (swappable != null)
+		{
+			swappable.canMove = !armed
+		}
+
+		val matchable = entity.matchable()
+		if (matchable != null)
+		{
+			matchable.canMatch = !armed
+		}
+	}
+
 
 	lateinit var sprite: Sprite
 
@@ -538,14 +560,14 @@ class Match5() : GemSpecial()
 			{
 				val newSpecial = Match5Spread(otherSpecial)
 				newSpecial.targetDesc = other.matchable()!!.desc
-				newSpecial.armed = true
+				newSpecial.needsArming = true
 				return newSpecial
 			}
 		}
 		else if (other.matchable() != null)
 		{
 			targetDesc = other.matchable()!!.desc
-			armed = true
+			needsArming = true
 
 			return this
 		}
@@ -640,7 +662,7 @@ class Match5Spread(val special: Special) : GemSpecial()
 		else if (other.matchable() != null)
 		{
 			targetDesc = other.matchable()!!.desc
-			armed = true
+			needsArming = true
 
 			return this
 		}
@@ -696,7 +718,7 @@ class Match5Spread(val special: Special) : GemSpecial()
 							}
 
 						addSpecial(contents, newSpecial)
-						newSpecial.armed = true
+						newSpecial.setArmed(true, contents)
 					}
 
 					grid.pop(tile, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))

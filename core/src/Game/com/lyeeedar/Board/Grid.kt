@@ -73,13 +73,15 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 	// ----------------------------------------------------------------------
 	var inTurn = true
+	var isUpdating = false
 
 	// ----------------------------------------------------------------------
 	var noMatchTimer = 0f
 	var matchHint: ValidMove? = null
 
 	// ----------------------------------------------------------------------
-	var noValidMoves = false
+	val noValidMoves: Boolean
+		get() = matchHint == null && !inTurn && !isUpdating && activeAbility == null
 
 	// ----------------------------------------------------------------------
 	var dragStart: Point = Point.MINUS_ONE
@@ -95,6 +97,11 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	val cleanup = OnTurnCleanupUpdateStep()
 
 	val updateSteps: kotlin.Array<AbstractUpdateStep>
+
+	var currentStep: String = ""
+
+	var DEBUG_matchDeleted = false
+	var DEBUG_match = false
 
 	// ----------------------------------------------------------------------
 	var activeAbility: Ability? = null
@@ -271,22 +278,23 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		{
 			for (y in 0 until height)
 			{
-				val oldcontents = tempgrid[x, y].contents
-				if (oldcontents?.matchable() == null || oldcontents.matchable()!!.desc.isNamed)
-				{
-					grid[x, y].contents = tempgrid[x, y].contents
-				}
-				else if (oldcontents.matchable() != null)
-				{
-					val newmatchable = grid[x, y].contents!!.matchable()!!
-					grid[x, y].contents = tempgrid[x, y].contents
-					val oldmatchable = grid[x, y].contents!!.matchable()!!
+				val tile = grid[x, y]
+				val oldContents = tempgrid[x, y].contents
 
-					val delay = grid[x, y].taxiDist(Point.ZERO).toFloat() * 0.1f
+				if (oldContents?.matchable() == null)
+				{
+					tile.contents = oldContents
+				}
+				else if (oldContents.matchable() != null)
+				{
+					val newDesc = tile.contents!!.matchable()!!.desc
+					tile.contents = oldContents
+
+					val delay = tile.taxiDist(Point.ZERO).toFloat() * 0.1f
 
 					if (Global.resolveInstantly)
 					{
-						oldmatchable.setDesc(newmatchable.desc, oldcontents)
+						tile.contents!!.matchable()!!.setDesc(newDesc, tile.contents!!)
 					}
 					else
 					{
@@ -294,7 +302,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 							{
 								val sprite = refillSprite.copy()
 
-								oldmatchable.setDesc(newmatchable.desc, oldcontents)
+								tile.contents!!.matchable()!!.setDesc(newDesc, tile.contents!!)
 
 								grid[x, y].effects.add(sprite)
 							}, delay + 0.2f)
@@ -315,7 +323,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			for (y in 0 until height)
 			{
 				val tile = grid[x, y]
-				if (tile.canHaveOrb && tile.contents?.damageable() == null && tile.contents?.healable() == null)
+				if (tile.canHaveOrb && (tile.contents == null || tile.contents!!.matchable() != null))
 				{
 					val toSpawn = if (orbOnly) createOrb(OrbDesc.getRandomOrb(level)) else level.spawnOrb()
 
@@ -421,31 +429,6 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	// ----------------------------------------------------------------------
 	fun update(deltaTime: Float)
 	{
-		// process tiles
-		for (x in 0 until width)
-		{
-			for (y in 0 until height)
-			{
-				val tile = grid[x, y]
-
-				if (tile.delayedActions.size > 0)
-				{
-					val itr = tile.delayedActions.iterator()
-					while (itr.hasNext())
-					{
-						val action = itr.next()
-						action.delay -= deltaTime
-
-						if (action.delay <= 0)
-						{
-							action.function.invoke()
-							itr.remove()
-						}
-					}
-				}
-			}
-		}
-
 		for (step in updateSteps)
 		{
 			step.doUpdateRealTime(this, deltaTime)
@@ -455,9 +438,20 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		{
 			for (step in updateSteps)
 			{
+				if (Global.resolveInstantly)
+				{
+					currentStep = step.toString() + " doUpdate"
+
+					if (DEBUG_match)
+					{
+						System.err.println("Step: $currentStep")
+					}
+				}
+
 				val completed = step.doUpdate(this)
 				if (!completed)
 				{
+					isUpdating = true
 					return
 				}
 			}
@@ -468,9 +462,30 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				{
 					if (!step.wasRunThisTurn)
 					{
+						if (Global.resolveInstantly)
+						{
+							currentStep = step.toString() + " doTurn"
+
+							if (DEBUG_match)
+							{
+								System.err.println("Step: " + currentStep)
+							}
+						}
+
 						step.wasRunThisTurn = true
 						step.doTurn(this)
+
+						isUpdating = true
 						return
+					}
+				}
+
+				if (Global.resolveInstantly)
+				{
+					currentStep = "onTurn"
+					if (DEBUG_match)
+					{
+						System.err.println("Step: " + currentStep)
 					}
 				}
 
@@ -492,6 +507,16 @@ class Grid(val width: Int, val height: Int, val level: Level)
 					updatePlayerInput(deltaTime)
 				}
 			}
+
+			if (Global.resolveInstantly)
+			{
+				currentStep = "completed"
+				if (DEBUG_match)
+				{
+					println(currentStep)
+				}
+			}
+			isUpdating = false
 		}
 	}
 
@@ -500,26 +525,17 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	{
 		if (FullscreenMessage.instance == null)
 		{
-			if (activeAbility == null && matchHint == null)
+			if (activeAbility != null) noMatchTimer = 0f
+			else noMatchTimer += delta
+
+			// handle input
+			if (toSwap != null)
 			{
-				noValidMoves = true
+				val swapSuccess = swap()
+				if (swapSuccess) inTurn = true
 			}
-			else
-			{
-				noValidMoves = false
 
-				if (activeAbility != null) noMatchTimer = 0f
-				else noMatchTimer += delta
-
-				// handle input
-				if (toSwap != null)
-				{
-					val swapSuccess = swap()
-					if (swapSuccess) inTurn = true
-				}
-
-				if (Tutorial.current == null) onTime(delta)
-			}
+			if (Tutorial.current == null && !noValidMoves) onTime(delta)
 		}
 	}
 
@@ -533,7 +549,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 		if (oldTile == null || newTile == null) return false
 
-		if (oldTile.spreader?.effect == Spreader.SpreaderEffect.SEAL || newTile.spreader?.effect == Spreader.SpreaderEffect.SEAL) return false
+		if (oldTile.spreader != null || newTile.spreader != null) return false
 
 		val oldEntity = oldTile.contents ?: return false
 		val newEntity = newTile.contents ?: return false
@@ -562,7 +578,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 				oldTile.contents = null
 
-				merged.armed = true
+				merged.setArmed(true, newEntity)
 				newEntity.add(MarkedForDeletionComponent.obtain())
 
 				lastSwapped = newTile
@@ -728,7 +744,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		{
 			if (!swappable.sealed)
 			{
-				contents.special()!!.special.armed = true
+				contents.special()!!.special.setArmed(true, contents)
 			}
 			else
 			{

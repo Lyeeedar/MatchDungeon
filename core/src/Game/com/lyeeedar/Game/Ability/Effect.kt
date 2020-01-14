@@ -93,9 +93,9 @@ class Effect(val type: Type)
 				specialEntity.add(specialHolder)
 
 				val merged = special.special.merge(specialEntity) ?: specialHolder.special.merge(contents) ?: special.special
-				merged.armed = true
-
 				addSpecial(contents, merged)
+
+				merged.setArmed(true, contents)
 
 				contents.add(MarkedForDeletionComponent.obtain())
 

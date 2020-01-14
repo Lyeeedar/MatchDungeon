@@ -4,10 +4,10 @@ import com.badlogic.gdx.Game
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.backends.headless.HeadlessApplication
 import com.badlogic.gdx.graphics.GL20
-import com.lyeeedar.ResourceProcessors.*
+import com.lyeeedar.ResourceProcessors.XmlLoadTester
 import org.mockito.Mockito
 
-object CompilerRunner
+object AssetTester
 {
 	@JvmStatic fun main(arg: Array<String>)
 	{
@@ -21,10 +21,8 @@ object CompilerRunner
 			val start = System.currentTimeMillis()
 
 			val funcs = com.badlogic.gdx.utils.Array<Pair<String, ()->Any>>()
-			funcs.add(Pair("Oryx", { OryxExtractor() }))
-			funcs.add(Pair("Atlas", { AtlasCreator() }))
-			funcs.add(Pair("Texture", { TextureCompressor() }))
-			funcs.add(Pair("Xml", { XmlCompressor() }))
+			funcs.add(Pair("XmlLoadTest", { XmlLoadTester.test() }))
+			funcs.add(Pair("LevelSolve", { LevelSolver().attemptAllLevels() }))
 
 			val timings = com.badlogic.gdx.utils.Array<Pair<String, Long>>()
 			for (func in funcs)
@@ -40,7 +38,7 @@ object CompilerRunner
 			val diff = end - start
 			val seconds = diff / 1000
 
-			println("Compilation complete in $seconds seconds")
+			println("Testing complete in $seconds seconds")
 
 			for (timing in timings)
 			{
@@ -49,7 +47,7 @@ object CompilerRunner
 		}
 		catch (ex: Exception)
 		{
-			println("Compiling failed!")
+			println("Testing failed!")
 			System.err.println(ex.toString())
 			throw ex
 		}

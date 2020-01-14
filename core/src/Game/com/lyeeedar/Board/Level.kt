@@ -500,12 +500,6 @@ class Level(val loadPath: String)
 					addMonsterEffect(tile.contents!!, monsterEffect)
 				}
 
-				swappable = tile.contents?.swappable()
-				if (swappable == null)
-				{
-					tile.contents = createOrb(OrbDesc.getRandomOrb(this))
-				}
-
 				val special = when (symbol.special)
 				{
 					"3x3" -> DualMatch()
@@ -521,6 +515,17 @@ class Level(val loadPath: String)
 
 				if (special != null)
 				{
+					swappable = tile.contents?.swappable()
+					if (swappable == null)
+					{
+						if (tile.contents != null)
+						{
+							throw RuntimeException("Tried to place a special on a non swappable object '" + tile.contents!!.archetype()!!.archetype + "'")
+						}
+
+						tile.contents = createOrb(OrbDesc.getRandomOrb(this))
+					}
+
 					addSpecial(tile.contents!!, special)
 				}
 

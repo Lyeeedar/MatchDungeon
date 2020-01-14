@@ -2,10 +2,7 @@ package com.lyeeedar.Board
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.Array
-import com.lyeeedar.Components.DamageableComponent
-import com.lyeeedar.Components.SwappableComponent
-import com.lyeeedar.Components.archetype
-import com.lyeeedar.Components.hasComponent
+import com.lyeeedar.Components.*
 import com.lyeeedar.Renderables.Renderable
 import com.lyeeedar.Renderables.Sprite.SpriteWrapper
 import com.lyeeedar.Util.Point
@@ -23,7 +20,7 @@ class Tile(x: Int, y: Int, val grid: Grid) : Point(x, y)
 	var contents: Entity? = null
 		set(value)
 		{
-			if (Statics.debug && value != null && !canHaveOrb && (value.hasComponent(SwappableComponent::class.java) || value.hasComponent(DamageableComponent::class.java)))
+			if (Statics.debug && value != null && !canHaveOrb && (value.hasComponent(SwappableComponent::class.java) || value.hasComponent(AIComponent::class.java)))
 			{
 				val wall = wallSprite != null
 				throw RuntimeException("Tried to put something in tile ($x,$y) that should be empty. IsPit: $isPit, IsWall: $wall, Existing: $field, object: ${value.archetype()!!.archetype}")
@@ -56,6 +53,7 @@ class Tile(x: Int, y: Int, val grid: Grid) : Point(x, y)
 
 	override fun toString(): String
 	{
+		if (contents != null && contents!!.isBasicOrb()) return contents!!.matchable()!!.desc.name[0].toString()
 		if (spreader != null) return "s"
 		if (isPit) return "~"
 		if (!canHaveOrb) return "#"
