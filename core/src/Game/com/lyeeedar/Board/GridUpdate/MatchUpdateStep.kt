@@ -28,13 +28,6 @@ class MatchUpdateStep : AbstractUpdateStep()
 	private fun match(grid: Grid): Boolean
 	{
 		val matches = findMatches(grid.grid, 3)
-
-		grid.currentStep.appendln("Match: " + matches.size)
-		for (match in matches)
-		{
-			grid.currentStep.appendln(match.points().joinToString(",") { it.toString() })
-		}
-
 		clearMatches(grid, matches)
 		for (match in matches) match.free()
 

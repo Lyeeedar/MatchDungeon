@@ -86,7 +86,6 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	// ----------------------------------------------------------------------
 	var dragStart: Point = Point.MINUS_ONE
 	var toSwap: Pair<Point, Point>? = null
-	var shouldNotUpdate = false
 
 	// ----------------------------------------------------------------------
 	val cascade = CascadeUpdateStep()
@@ -98,8 +97,6 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	val cleanup = OnTurnCleanupUpdateStep()
 
 	val updateSteps: kotlin.Array<AbstractUpdateStep>
-
-	val currentStep = StringBuilder()
 
 	// ----------------------------------------------------------------------
 	var activeAbility: Ability? = null
@@ -439,56 +436,28 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 		if (!hasAnim())
 		{
-			currentStep.clear()
-			currentStep.appendln("begin update")
-
 			for (step in updateSteps)
 			{
-				if (Global.resolveInstantly)
-				{
-					currentStep.appendln("$step doUpdate")
-				}
-
 				val completed = step.doUpdate(this)
 				if (!completed)
 				{
-					currentStep.appendln("not complete")
-
-					if (shouldNotUpdate) throw RuntimeException("Updated when it shouldnt")
-
 					isUpdating = true
 					return
 				}
-
-				currentStep.appendln("completed")
 			}
 
 			if (inTurn)
 			{
-				if (shouldNotUpdate) throw RuntimeException("Updated when it shouldnt")
-
 				for (step in updateSteps)
 				{
 					if (!step.wasRunThisTurn)
 					{
-						if (Global.resolveInstantly)
-						{
-							currentStep.appendln("$step doTurn")
-						}
-
 						step.wasRunThisTurn = true
 						step.doTurn(this)
-
-						if (shouldNotUpdate) throw RuntimeException("Updated when it shouldnt")
 
 						isUpdating = true
 						return
 					}
-				}
-
-				if (Global.resolveInstantly)
-				{
-					currentStep.appendln("onTurn")
 				}
 
 				onTurn()
@@ -502,17 +471,11 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			{
 				if (level.isVictory || level.isDefeat)
 				{
-					if (Global.resolveInstantly)
-					{
-						currentStep.appendln("completed")
-					}
-
 					level.complete()
 				}
 				else
 				{
 					updatePlayerInput(deltaTime)
-					shouldNotUpdate = false
 				}
 			}
 			isUpdating = false
@@ -532,28 +495,9 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			{
 				val swapSuccess = swap()
 				if (swapSuccess) inTurn = true
-
-				if (Global.resolveInstantly)
-				{
-					currentStep.appendln("swapped")
-				}
-			}
-			else
-			{
-				if (Global.resolveInstantly)
-				{
-					currentStep.appendln("waiting for player input")
-				}
 			}
 
 			if (Tutorial.current == null && !noValidMoves) onTime(delta)
-		}
-		else
-		{
-			if (Global.resolveInstantly)
-			{
-				currentStep.appendln("fullscreen message")
-			}
 		}
 	}
 

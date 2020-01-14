@@ -33,6 +33,8 @@ class LevelSolver
 
 		val paths = XmlData.enumeratePaths("", "Level").toList()
 		var pathI = 0
+		var success = 0
+		var total = 0
 		for (path in paths)
 		{
 			pathI++
@@ -46,7 +48,7 @@ class LevelSolver
 			var i = 0
 			for (level in levels)
 			{
-				val character = Character.load("Wizard")
+				val character = Character.load("Adventurer")
 				val player = Player(character, PlayerDeck())
 				Global.player = player
 				Global.deck = GlobalDeck()
@@ -68,8 +70,14 @@ class LevelSolver
 				{
 					println("")
 					println("Solving level '$path' variant '$i'")
-					val vistory = solve(grid)
-					println("Level solved. Victory=$vistory")
+					val victory = solve(grid)
+					println("Level solved. Victory=$victory")
+
+					if (victory)
+					{
+						success++
+					}
+					total++
 				}
 				catch (ex: Exception)
 				{
@@ -81,6 +89,9 @@ class LevelSolver
 				i++
 			}
 		}
+
+		println("")
+		println("Successful: $success / $total")
 
 		Global.resolveInstantly = false
 	}
@@ -94,7 +105,6 @@ class LevelSolver
 		while (!grid.level.isVictory && !grid.level.isDefeat)
 		{
 			var updateCount = 0
-			var lastUpdateGridState: String = grid.grid.toString()
 			while (grid.inTurn || grid.isUpdating)
 			{
 				grid.update(1000f)
@@ -120,23 +130,12 @@ class LevelSolver
 
 				if (updateCount > 10 && updateCount.rem(20) == 0)
 				{
-					println("UpdateCount: $updateCount, CurrentStep: " + grid.currentStep)
+					println("UpdateCount: $updateCount")
 				}
 
 				if (updateCount > 1000)
 				{
-					throw RuntimeException("Turn got stuck in infinite update loop! CurrentStep: " + grid.currentStep)
-				}
-				if (updateCount > 100)
-				{
-					println("----------")
-					println(grid.currentStep)
-					println("Grid same: " + (grid.grid.toString() == lastUpdateGridState))
-					//println(grid.grid)
-					val matches = grid.match.findMatches(grid)
-					println(matches.size)
-
-					lastUpdateGridState = grid.grid.toString()
+					throw RuntimeException("Turn got stuck in infinite update loop!")
 				}
 			}
 
@@ -195,7 +194,6 @@ class LevelSolver
 
 			grid.dragStart = bestMove.swapStart
 			grid.dragEnd(bestMove.swapEnd)
-			grid.shouldNotUpdate = true
 		}
 
 		if (print)
@@ -222,7 +220,7 @@ class LevelSolver
 
 		if (!grid.inTurn && !(grid.level.isVictory || grid.level.isDefeat))
 		{
-			throw RuntimeException("Made a move ($move) but not in turn! Updating: " + grid.isUpdating + ",    current step: ${grid.currentStep}")
+			throw RuntimeException("Made a move ($move) but not in turn! Updating: " + grid.isUpdating)
 		}
 	}
 }
