@@ -86,6 +86,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 	// ----------------------------------------------------------------------
 	var dragStart: Point = Point.MINUS_ONE
 	var toSwap: Pair<Point, Point>? = null
+	var shouldNotUpdate = false
 
 	// ----------------------------------------------------------------------
 	val cascade = CascadeUpdateStep()
@@ -98,10 +99,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 	val updateSteps: kotlin.Array<AbstractUpdateStep>
 
-	var currentStep: String = ""
-
-	var DEBUG_matchDeleted = false
-	var DEBUG_match = false
+	val currentStep = StringBuilder()
 
 	// ----------------------------------------------------------------------
 	var activeAbility: Ability? = null
@@ -205,6 +203,11 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				{
 					hasAnim = true
 					break
+				}
+
+				if (Global.resolveInstantly)
+				{
+					tile.effects.clear()
 				}
 
 				for (effect in tile.effects)
@@ -436,44 +439,47 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 		if (!hasAnim())
 		{
+			currentStep.clear()
+			currentStep.appendln("begin update")
+
 			for (step in updateSteps)
 			{
 				if (Global.resolveInstantly)
 				{
-					currentStep = step.toString() + " doUpdate"
-
-					if (DEBUG_match)
-					{
-						System.err.println("Step: $currentStep")
-					}
+					currentStep.appendln("$step doUpdate")
 				}
 
 				val completed = step.doUpdate(this)
 				if (!completed)
 				{
+					currentStep.appendln("not complete")
+
+					if (shouldNotUpdate) throw RuntimeException("Updated when it shouldnt")
+
 					isUpdating = true
 					return
 				}
+
+				currentStep.appendln("completed")
 			}
 
 			if (inTurn)
 			{
+				if (shouldNotUpdate) throw RuntimeException("Updated when it shouldnt")
+
 				for (step in updateSteps)
 				{
 					if (!step.wasRunThisTurn)
 					{
 						if (Global.resolveInstantly)
 						{
-							currentStep = step.toString() + " doTurn"
-
-							if (DEBUG_match)
-							{
-								System.err.println("Step: " + currentStep)
-							}
+							currentStep.appendln("$step doTurn")
 						}
 
 						step.wasRunThisTurn = true
 						step.doTurn(this)
+
+						if (shouldNotUpdate) throw RuntimeException("Updated when it shouldnt")
 
 						isUpdating = true
 						return
@@ -482,11 +488,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 				if (Global.resolveInstantly)
 				{
-					currentStep = "onTurn"
-					if (DEBUG_match)
-					{
-						System.err.println("Step: " + currentStep)
-					}
+					currentStep.appendln("onTurn")
 				}
 
 				onTurn()
@@ -500,20 +502,17 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			{
 				if (level.isVictory || level.isDefeat)
 				{
+					if (Global.resolveInstantly)
+					{
+						currentStep.appendln("completed")
+					}
+
 					level.complete()
 				}
 				else
 				{
 					updatePlayerInput(deltaTime)
-				}
-			}
-
-			if (Global.resolveInstantly)
-			{
-				currentStep = "completed"
-				if (DEBUG_match)
-				{
-					println(currentStep)
+					shouldNotUpdate = false
 				}
 			}
 			isUpdating = false
@@ -533,9 +532,28 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			{
 				val swapSuccess = swap()
 				if (swapSuccess) inTurn = true
+
+				if (Global.resolveInstantly)
+				{
+					currentStep.appendln("swapped")
+				}
+			}
+			else
+			{
+				if (Global.resolveInstantly)
+				{
+					currentStep.appendln("waiting for player input")
+				}
 			}
 
 			if (Tutorial.current == null && !noValidMoves) onTime(delta)
+		}
+		else
+		{
+			if (Global.resolveInstantly)
+			{
+				currentStep.appendln("fullscreen message")
+			}
 		}
 	}
 
@@ -572,9 +590,12 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			{
 				addSpecial(newEntity, merged)
 
-				val sprite = oldEntity.renderable().renderable.copy()
-				sprite.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile, true)), Interpolation.linear)
-				newTile.effects.add(sprite)
+				if (!Global.resolveInstantly)
+				{
+					val sprite = oldEntity.renderable().renderable.copy()
+					sprite.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile, true)), Interpolation.linear)
+					newTile.effects.add(sprite)
+				}
 
 				oldTile.contents = null
 
@@ -604,9 +625,12 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			oldEntity.pos().tile = oldTile
 			newEntity.pos().tile = newTile
 
-			var dir = Direction.getDirection(oldTile, newTile)
-			if (dir.y != 0) dir = dir.opposite
-			oldEntity.renderable().renderable.animation = BumpAnimation.obtain().set(animSpeed, dir)
+			if (!Global.resolveInstantly)
+			{
+				var dir = Direction.getDirection(oldTile, newTile)
+				if (dir.y != 0) dir = dir.opposite
+				oldEntity.renderable().renderable.animation = BumpAnimation.obtain().set(animSpeed, dir)
+			}
 
 			if (Global.resolveInstantly)
 			{
@@ -620,8 +644,11 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			lastSwapped = newTile
 			matchHint = null
 
-			oldEntity.renderable().renderable.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile)).invertY(), Interpolation.linear)
-			newEntity.renderable().renderable.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(oldTile.getPosDiff(newTile)).invertY(), Interpolation.linear)
+			if (!Global.resolveInstantly)
+			{
+				oldEntity.renderable().renderable.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile)).invertY(), Interpolation.linear)
+				newEntity.renderable().renderable.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(oldTile.getPosDiff(newTile)).invertY(), Interpolation.linear)
+			}
 			return true
 		}
 	}
@@ -655,10 +682,14 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 		damageable.hp -= targetDam
 		if (damSource != null) damageable.damSources.add(damSource)
-		val hit = hitEffect.copy()
-		hit.renderDelay = delay
-		tile.effects.add(hit)
 		onDamaged(damageableEntity)
+
+		if (!Global.resolveInstantly)
+		{
+			val hit = hitEffect.copy()
+			hit.renderDelay = delay
+			tile.effects.add(hit)
+		}
 
 		if (damageable.hp <= 0)
 		{
@@ -690,22 +721,27 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		if (tile.hasPlate)
 		{
 			tile.plateStrength--
-			val hit = hitEffect.copy()
-			hit.renderDelay = delay
-			tile.effects.add(hit)
+
+			if (!Global.resolveInstantly)
+			{
+				val hit = hitEffect.copy()
+				hit.renderDelay = delay
+				tile.effects.add(hit)
+			}
 		}
 
 		if (tile.spreader != null && damSource !is Spreader)
 		{
 			val spreader = tile.spreader!!
-
 			poppedSpreaders.add(spreader.nameKey)
-
 			tile.spreader = null
 
-			val hit = hitEffect.copy()
-			hit.renderDelay = delay
-			tile.effects.add(hit)
+			if (!Global.resolveInstantly)
+			{
+				val hit = hitEffect.copy()
+				hit.renderDelay = delay
+				tile.effects.add(hit)
+			}
 		}
 
 		if (tile.contents?.healable() != null)
@@ -714,9 +750,13 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			if (friendly.hp < friendly.maxhp)
 			{
 				friendly.hp++
-				val healSprite = AssetManager.loadParticleEffect("Heal").getParticleEffect()
-				healSprite.colour = Colour.GREEN
-				tile.effects.add(healSprite)
+
+				if (!Global.resolveInstantly)
+				{
+					val healSprite = AssetManager.loadParticleEffect("Heal").getParticleEffect()
+					healSprite.colour = Colour.GREEN
+					tile.effects.add(healSprite)
+				}
 			}
 
 			return
@@ -734,9 +774,14 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		if (swappable.sealed)
 		{
 			swappable.sealCount--
-			val hit = hitEffect.copy()
-			hit.renderDelay = delay
-			tile.effects.add(hit)
+
+			if (!Global.resolveInstantly)
+			{
+				val hit = hitEffect.copy()
+				hit.renderDelay = delay
+				tile.effects.add(hit)
+			}
+
 			return
 		}
 
@@ -759,12 +804,15 @@ class Grid(val width: Int, val height: Int, val level: Level)
 		{
 			matchable.skipPowerOrb = skipPowerOrb
 
-			val sprite = matchable.desc.death.copy()
-			sprite.colour = contents.renderable().renderable.colour
-			sprite.renderDelay = delay
-			sprite.isShortened = true
+			if (!Global.resolveInstantly)
+			{
+				val sprite = matchable.desc.death.copy()
+				sprite.colour = contents.renderable().renderable.colour
+				sprite.renderDelay = delay
+				sprite.isShortened = true
 
-			tile.effects.add(sprite)
+				tile.effects.add(sprite)
+			}
 		}
 
 		if (contents.monsterEffect() != null)

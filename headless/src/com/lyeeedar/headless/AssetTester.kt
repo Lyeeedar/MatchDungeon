@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.backends.headless.HeadlessApplication
 import com.badlogic.gdx.graphics.GL20
+import com.lyeeedar.Board.GridUpdate.MatchUpdateStep
 import com.lyeeedar.ResourceProcessors.XmlLoadTester
 import org.mockito.Mockito
 
@@ -21,6 +22,9 @@ object AssetTester
 			val start = System.currentTimeMillis()
 
 			val funcs = com.badlogic.gdx.utils.Array<Pair<String, ()->Any>>()
+			funcs.add(Pair("CodeTest", {
+				MatchUpdateStep.test()
+			}))
 			funcs.add(Pair("XmlLoadTest", { XmlLoadTester.test() }))
 			funcs.add(Pair("LevelSolve", { LevelSolver().attemptAllLevels() }))
 

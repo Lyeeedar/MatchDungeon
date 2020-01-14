@@ -20,13 +20,21 @@ import com.lyeeedar.UI.lambda
 import com.lyeeedar.UI.shake
 import com.lyeeedar.Util.*
 import ktx.actors.then
+import ktx.collections.toGdxArray
 
 class MatchUpdateStep : AbstractUpdateStep()
 {
 	// ----------------------------------------------------------------------
 	private fun match(grid: Grid): Boolean
 	{
-		val matches = findMatches(grid, 3)
+		val matches = findMatches(grid.grid, 3)
+
+		grid.currentStep.appendln("Match: " + matches.size)
+		for (match in matches)
+		{
+			grid.currentStep.appendln(match.points().joinToString(",") { it.toString() })
+		}
+
 		clearMatches(grid, matches)
 		for (match in matches) match.free()
 
@@ -50,9 +58,9 @@ class MatchUpdateStep : AbstractUpdateStep()
 	{
 		val matches = Array<Match>(false, 16)
 
-		matches.addAll(findMatches(grid, 3))
-		matches.addAll(findMatches(grid, 4))
-		matches.addAll(findMatches(grid, 5))
+		matches.addAll(findMatches(grid.grid, 3))
+		matches.addAll(findMatches(grid.grid, 4))
+		matches.addAll(findMatches(grid.grid, 5))
 
 		// clear duplicates
 		var i = 0
@@ -82,7 +90,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 	}
 
 	// ----------------------------------------------------------------------
-	fun findMatches(grid: Grid, length: Int, exact: Boolean = false) : Array<Match>
+	fun findMatches(grid: Array2D<Tile>, length: Int, exact: Boolean = false) : Array<Match>
 	{
 		val matches = Array<Match>()
 
@@ -110,7 +118,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 
 			for (x in 0 until grid.width)
 			{
-				val tile = grid.grid[x, y]
+				val tile = grid[x, y]
 				val matchable = tile.contents?.matchable()
 
 				if (matchable == null || tile.spreader != null)
@@ -152,7 +160,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 
 			for (y in 0 until grid.height)
 			{
-				val tile = grid.grid[x, y]
+				val tile = grid[x, y]
 				val matchable = tile.contents?.matchable()
 
 				if (matchable == null || tile.spreader != null)
@@ -201,16 +209,10 @@ class MatchUpdateStep : AbstractUpdateStep()
 			tile.associatedMatches[1] = null
 		}
 
-		if (grid.DEBUG_matchDeleted) println("found ${matches.size} matches")
-
 		for (match in matches)
 		{
-			if (grid.DEBUG_matchDeleted) println("Match:")
-
 			for (point in match.points())
 			{
-				if (grid.DEBUG_matchDeleted) print("" + point.x + "," + point.y + "      ")
-
 				val tile = grid.grid[point]
 				if (tile.associatedMatches[0] == null)
 				{
@@ -221,7 +223,6 @@ class MatchUpdateStep : AbstractUpdateStep()
 					tile.associatedMatches[1] = match
 				}
 			}
-			if (grid.DEBUG_matchDeleted) println("")
 		}
 
 		val coreTiles = Array<Tile>()
@@ -240,10 +241,9 @@ class MatchUpdateStep : AbstractUpdateStep()
 				val tile = grid.grid[point]
 				coreTiles.add(tile)
 
-				if (tile.contents?.isMarkedForDeletion() == true && !seenThisMatch.contains(tile.contents))
+				if (Global.resolveInstantly && tile.contents?.isMarkedForDeletion() == true && !seenThisMatch.contains(tile.contents) && tile.contents?.special() == null)
 				{
-					println("Trying to match a deleted object")
-					grid.DEBUG_matchDeleted = true
+					throw RuntimeException("Trying to match a deleted object")
 				}
 				if (tile.contents != null)
 				{
@@ -276,19 +276,19 @@ class MatchUpdateStep : AbstractUpdateStep()
 		// figure out if we should spawn specials due to 4 / 5 / cross match
 		fun animateMerge(tile: Tile, point: Point, sprite: Renderable)
 		{
-			val sprite = sprite.copy()
-
-			if (sprite is Sprite)
-			{
-				sprite.drawActualSize = false
-			}
-
 			if (!Global.resolveInstantly)
 			{
-				sprite.animation = MoveAnimation.obtain().set(grid.animSpeed, UnsmoothedPath(tile.getPosDiff(point)).invertY(), Interpolation.linear)
-			}
+				val sprite = sprite.copy()
 
-			tile.effects.add(sprite)
+				if (sprite is Sprite)
+				{
+					sprite.drawActualSize = false
+				}
+
+				sprite.animation = MoveAnimation.obtain().set(grid.animSpeed, UnsmoothedPath(tile.getPosDiff(point)).invertY(), Interpolation.linear)
+
+				tile.effects.add(sprite)
+			}
 		}
 
 		// for each tile with 2 matches spawn the relevant special, and mark the matches as used, if cross point is used then spawn in a neighbouring tile that isnt specialed
@@ -363,9 +363,13 @@ class MatchUpdateStep : AbstractUpdateStep()
 			if (friendly.hp < friendly.maxhp)
 			{
 				friendly.hp++
-				val healSprite = AssetManager.loadParticleEffect("Heal").getParticleEffect()
-				healSprite.colour = Colour.GREEN
-				tile.effects.add(healSprite)
+
+				if (!Global.resolveInstantly)
+				{
+					val healSprite = AssetManager.loadParticleEffect("Heal").getParticleEffect()
+					healSprite.colour = Colour.GREEN
+					tile.effects.add(healSprite)
+				}
 			}
 		}
 		else if (tile.contents?.damageable() != null)
@@ -376,12 +380,13 @@ class MatchUpdateStep : AbstractUpdateStep()
 		if (tile.spreader != null)
 		{
 			val spreader = tile.spreader!!
-
 			tile.spreader = null
-
 			grid.poppedSpreaders.add(spreader.nameKey)
 
-			tile.effects.add(grid.hitEffect.copy())
+			if (!Global.resolveInstantly)
+			{
+				tile.effects.add(grid.hitEffect.copy())
+			}
 		}
 	}
 
@@ -463,8 +468,6 @@ class MatchUpdateStep : AbstractUpdateStep()
 	// ----------------------------------------------------------------------
 	override fun doUpdate(grid: Grid): Boolean
 	{
-		if (grid.DEBUG_matchDeleted) println("Starting match")
-
 		return match(grid)
 	}
 
@@ -474,8 +477,83 @@ class MatchUpdateStep : AbstractUpdateStep()
 
 	}
 
+	// ----------------------------------------------------------------------
 	override fun doUpdateRealTime(grid: Grid, deltaTime: Float)
 	{
 
+	}
+
+	// ----------------------------------------------------------------------
+	companion object
+	{
+		fun test()
+		{
+			doTest(
+				arrayOf(
+					charArrayOf('A', 'A', 'A', 'B', 'C'),
+					charArrayOf('C', 'C', 'F', 'H', 'C'),
+					charArrayOf('R', 'R', 'S', 'D', 'C'),
+					charArrayOf('Y', 'R', 'P', 'Q', 'S'),
+					charArrayOf('A', 'G', 'H', 'D', 'T')
+					   ),
+				arrayOf(
+					arrayOf(Point(0, 0), Point(1, 0), Point(2, 0)),
+					arrayOf(Point(4, 0), Point(4, 1), Point(4, 2)),
+					arrayOf(Point(0, 1), Point(1, 1)),
+					arrayOf(Point(0, 2), Point(1, 2)),
+					arrayOf(Point(1, 2), Point(1, 3))
+					   )
+				  )
+		}
+
+		private fun doTest(gridTemplate: kotlin.Array<CharArray>, expectedMatches: kotlin.Array<kotlin.Array<Point>>)
+		{
+			val width = gridTemplate[0].size
+			val height = gridTemplate.size
+
+			val tempGrid = Grid(width, height, Level(""))
+			val grid = Array2D<Tile>(width, height) { x,y -> Tile(x, y, tempGrid) }
+
+			for (x in 0 until grid.width)
+			{
+				for (y in 0 until grid.height)
+				{
+					val tile = grid[x, y]
+
+					val desc = OrbDesc()
+					desc.key = gridTemplate[y][x].hashCode()
+
+					tile.contents = createOrb(desc)
+				}
+			}
+
+			val matcher = MatchUpdateStep()
+			val matches = matcher.findMatches(grid, 2)
+
+			if (matches.size != expectedMatches.size)
+			{
+				throw RuntimeException("Didnt get the expected number of matches!")
+			}
+
+			for (expected in expectedMatches)
+			{
+				var found = false
+				for (match in matches)
+				{
+					val matchPoints = match.points().toGdxArray()
+					if (matchPoints.size == expected.size && expected.all { matchPoints.contains(it) })
+					{
+						matches.removeValue(match, true)
+						found = true
+						break
+					}
+				}
+
+				if (!found)
+				{
+					throw java.lang.RuntimeException("Failed to find match in returned matches!")
+				}
+			}
+		}
 	}
 }

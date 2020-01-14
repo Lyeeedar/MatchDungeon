@@ -66,10 +66,12 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 
 	fun apply(grid: Grid, tile: Tile)
 	{
+		val contents = tile.contents ?: return
+
 		when(effect)
 		{
-			MonsterEffectType.ATTACK -> applyAttack(grid, tile.contents!!)
-			MonsterEffectType.BIGATTACK -> applyBigAttack(grid, tile.contents!!)
+			MonsterEffectType.ATTACK -> applyAttack(grid, contents)
+			MonsterEffectType.BIGATTACK -> applyBigAttack(grid, contents)
 			MonsterEffectType.HEAL -> applyHeal(grid, tile)
 			MonsterEffectType.SUMMON -> applySummon(grid, tile)
 			MonsterEffectType.DEBUFF -> applyDebuff(grid, tile)

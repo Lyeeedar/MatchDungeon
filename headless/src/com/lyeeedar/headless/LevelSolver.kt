@@ -32,12 +32,14 @@ class LevelSolver
 		val gridScreen = GridScreen()
 
 		val paths = XmlData.enumeratePaths("", "Level").toList()
+		var pathI = 0
 		for (path in paths)
 		{
-			if (path.contains("CombatTraining"))
-			{
-				var i = 0
-			}
+			pathI++
+			println("")
+			println("-----------------------------------------------------------------------------")
+			println("    $pathI / ${paths.size}")
+			println("")
 
 			val levels = Level.load(path)
 
@@ -64,6 +66,7 @@ class LevelSolver
 
 				try
 				{
+					println("")
 					println("Solving level '$path' variant '$i'")
 					val vistory = solve(grid)
 					println("Level solved. Victory=$vistory")
@@ -90,11 +93,8 @@ class LevelSolver
 		var moveCount = 0
 		while (!grid.level.isVictory && !grid.level.isDefeat)
 		{
-			moveCount++
-
-			makeMove(grid, moveCount > 200)
-
 			var updateCount = 0
+			var lastUpdateGridState: String = grid.grid.toString()
 			while (grid.inTurn || grid.isUpdating)
 			{
 				grid.update(1000f)
@@ -129,17 +129,16 @@ class LevelSolver
 				}
 				if (updateCount > 100)
 				{
-					if (!grid.DEBUG_match)
-					{
-						println("ENABLE DEBUG")
-					}
-
-					grid.DEBUG_match = true
-					grid.DEBUG_matchDeleted = true
+					println("----------")
 					println(grid.currentStep)
+					println("Grid same: " + (grid.grid.toString() == lastUpdateGridState))
+					//println(grid.grid)
+					val matches = grid.match.findMatches(grid)
+					println(matches.size)
+
+					lastUpdateGridState = grid.grid.toString()
 				}
 			}
-			grid.DEBUG_match = false
 
 			if (moveCount > 10 && moveCount.rem(20) == 0)
 			{
@@ -150,6 +149,9 @@ class LevelSolver
 			{
 				throw RuntimeException("Level took over 1000 moves, something is wrong")
 			}
+
+			moveCount++
+			makeMove(grid, moveCount > 200)
 		}
 		println("MoveCount: $moveCount")
 
@@ -176,13 +178,12 @@ class LevelSolver
 
 		var move = ""
 
-		while (grid.isUpdating)
+		if (grid.isUpdating || grid.inTurn)
 		{
-			grid.update(1000f)
-			Future.update(1000f)
+			throw RuntimeException("Grid was still updating when entering make move. Updating ${grid.isUpdating}. InTurn ${grid.inTurn}")
 		}
 
-		val bestMove = grid.matchHint
+		val bestMove = grid.cleanup.findBestMove(grid)
 		if (bestMove == null)
 		{
 			grid.refill()
@@ -194,6 +195,7 @@ class LevelSolver
 
 			grid.dragStart = bestMove.swapStart
 			grid.dragEnd(bestMove.swapEnd)
+			grid.shouldNotUpdate = true
 		}
 
 		if (print)
@@ -218,9 +220,9 @@ class LevelSolver
 			}
 		}
 
-		if (!grid.inTurn)
+		if (!grid.inTurn && !(grid.level.isVictory || grid.level.isDefeat))
 		{
-			throw RuntimeException("Made a move ($move) but not in turn! Updating: " + grid.isUpdating)
+			throw RuntimeException("Made a move ($move) but not in turn! Updating: " + grid.isUpdating + ",    current step: ${grid.currentStep}")
 		}
 	}
 }

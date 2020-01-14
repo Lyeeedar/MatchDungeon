@@ -58,16 +58,11 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 
 			if (markedForDeletion.deletionEffectDelay > 0)
 			{
-				if (grid.DEBUG_matchDeleted)
-				{
-					println("Not deleting object due to deletion effect delay")
-				}
 				return
 			}
 		}
 
 		var doRemove = true
-		var reason = "other"
 
 		val pos = entity.posOrNull()
 		val renderable = entity.renderableOrNull()
@@ -126,7 +121,6 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 		{
 			if (special.special.armed)
 			{
-				reason = "has armed special"
 				doRemove = false
 			}
 		}
@@ -140,7 +134,6 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 			}
 			else
 			{
-				reason = "has monster effect animation"
 				doRemove = false
 			}
 		}
@@ -163,7 +156,6 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 			}
 			else
 			{
-				reason = "has animation"
 				doRemove = false
 			}
 		}
@@ -172,10 +164,6 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 		{
 			pos?.removeFromTile(entity)
 			entity.free()
-		}
-		else
-		{
-			println("Not deleting object ${entity.archetype()!!.archetype} due to $reason reason")
 		}
 	}
 
@@ -355,7 +343,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 		}
 
 		// random
-		return validMoves.minBy { it.swapStart.y }
+		return validMoves.maxBy { it.swapStart.y }
 	}
 
 	// ----------------------------------------------------------------------
@@ -364,7 +352,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 		val validMoves = Array<ValidMove>()
 
 		// find all 2 matches
-		val matches = grid.match.findMatches(grid, 2)
+		val matches = grid.match.findMatches(grid.grid, 2)
 
 		fun getTileKey(point: Point, direction: Direction): Int
 		{

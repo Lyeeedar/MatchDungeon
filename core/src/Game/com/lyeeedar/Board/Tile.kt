@@ -8,10 +8,6 @@ import com.lyeeedar.Renderables.Sprite.SpriteWrapper
 import com.lyeeedar.Util.Point
 import com.lyeeedar.Util.Statics
 
-/**
- * Created by Philip on 04-Jul-16.
- */
-
 class Tile(x: Int, y: Int, val grid: Grid) : Point(x, y)
 {
 	var groundSprite: SpriteWrapper? = null

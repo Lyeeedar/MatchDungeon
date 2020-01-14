@@ -64,7 +64,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 		val monsterEffect = entity.monsterEffect()
 		if (renderable != null && monsterEffect != null)
 		{
-			if (!monsterEffect.monsterEffect.addedSprite)
+			if (!monsterEffect.monsterEffect.addedSprite && !Global.resolveInstantly)
 			{
 				monsterEffect.monsterEffect.delayDisplay -= deltaTime
 
@@ -88,7 +88,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 		val damageableComponent = entity.damageable()
 		if (damageableComponent != null && renderable != null)
 		{
-			if (damageableComponent.tookDamage)
+			if (damageableComponent.tookDamage && !Global.resolveInstantly)
 			{
 				damageableComponent.tookDamage = false
 
@@ -104,7 +104,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 		val healableComponent = entity.healable()
 		if (healableComponent != null && renderable != null)
 		{
-			if (healableComponent.tookDamage)
+			if (healableComponent.tookDamage && !Global.resolveInstantly)
 			{
 				healableComponent.tookDamage = false
 
@@ -261,12 +261,12 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 
 							val newspreader = spreader.copy()
 
-							if (newspreader.particleEffect != null)
+							if (newspreader.particleEffect != null && !Global.resolveInstantly)
 							{
 								newspreader.particleEffect!!.animation = ExpandAnimation.obtain().set(grid.animSpeed)
 							}
 
-							if (newspreader.spriteWrapper != null)
+							if (newspreader.spriteWrapper != null && !Global.resolveInstantly)
 							{
 								if (newspreader.spriteWrapper!!.sprite != null)
 								{
@@ -337,17 +337,20 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 						val diff = attackedTile.getPosDiff(tile)
 						diff[0].y *= -1
 
-						val dst = attackedTile.euclideanDist(tile)
-						val animDuration = 0.4f + attackedTile.euclideanDist(tile) * 0.025f
-						val attackSprite = attack.actualSprite.copy()
-						attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
-						attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
-						tile.effects.add(attackSprite)
-
-						if (spreader.attackEffect != null)
+						if (!Global.resolveInstantly)
 						{
-							val effect = spreader.attackEffect!!.copy()
-							tile.effects.add(effect)
+							val dst = attackedTile.euclideanDist(tile)
+							val animDuration = 0.4f + attackedTile.euclideanDist(tile) * 0.025f
+							val attackSprite = attack.actualSprite.copy()
+							attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
+							attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
+							tile.effects.add(attackSprite)
+
+							if (spreader.attackEffect != null)
+							{
+								val effect = spreader.attackEffect!!.copy()
+								tile.effects.add(effect)
+							}
 						}
 					}
 				}
@@ -364,8 +367,11 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 					matchable.setDesc(matchable.nextDesc!!, tile.contents!!)
 					matchable.nextDesc = OrbDesc.getRandomOrb(grid.level, matchable.desc)
 
-					val effect = AssetManager.loadSprite("EffectSprites/Heal/Heal", 0.05f, matchable.desc.sprite.colour)
-					tile.effects.add(effect)
+					if (!Global.resolveInstantly)
+					{
+						val effect = AssetManager.loadSprite("EffectSprites/Heal/Heal", 0.05f, matchable.desc.sprite.colour)
+						tile.effects.add(effect)
+					}
 				}
 			}
 		}
