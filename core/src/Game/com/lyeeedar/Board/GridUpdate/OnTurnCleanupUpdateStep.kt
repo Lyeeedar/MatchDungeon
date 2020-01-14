@@ -15,6 +15,7 @@ import com.lyeeedar.Renderables.Animation.AlphaAnimation
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.Util.Point
+import com.lyeeedar.Util.randomize
 import ktx.collections.gdxArrayOf
 import ktx.collections.toGdxArray
 
@@ -44,7 +45,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 			}
 		}
 
-		if (grid.noValidMoves || (!grid.inTurn && !grid.isUpdating))
+		if (grid.noValidMoves)
 		{
 			grid.matchHint = findBestMove(grid)
 		}
@@ -224,6 +225,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 		grid.matchCount = 0
 		grid.noMatchTimer = 0f
 		grid.inTurn = false
+		grid.matchHint = findBestMove(grid)
 	}
 
 	// ---------------------------------------------------------------------
@@ -243,6 +245,23 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 			if (grid.breakableTiles.size > 0)
 			{
 				movePriorities.add(MovePriority(grid.breakableTiles, false))
+			}
+		}
+
+		// spreaders
+		val spreaderTiles = grid.grid.filter { it.spreader != null }.toList().toGdxArray()
+		if (spreaderTiles.size > 0)
+		{
+			movePriorities.add(MovePriority(spreaderTiles, false))
+		}
+
+		// plates
+		if (grid.level.victoryConditions.any { it is CompletionConditionPlate })
+		{
+			val plateTiles = grid.grid.filter { it.hasPlate }.toList().toGdxArray()
+			if (plateTiles.size > 0)
+			{
+				movePriorities.add(MovePriority(plateTiles, true))
 			}
 		}
 
@@ -290,7 +309,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 			var bestMove: ValidMove? = null
 			var bestCount = 0
 
-			for (move in validMoves)
+			for (move in validMoves.randomize())
 			{
 				var count = 0
 				for (point in move.points)
@@ -320,7 +339,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 		var bestDist = Int.MAX_VALUE
 		for (priority in movePriorities)
 		{
-			for (move in validMoves)
+			for (move in validMoves.randomize())
 			{
 				for (point in move.points)
 				{
@@ -367,7 +386,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 
 			for (key in keys)
 			{
-				for (swap in validMoves)
+				for (swap in validMoves.randomize())
 				{
 					var matchingCount = 0
 					for (point in swap.points)

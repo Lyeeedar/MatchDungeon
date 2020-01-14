@@ -84,7 +84,7 @@ class CascadeUpdateStep : AbstractUpdateStep()
 				found = emptyTile
 				break
 			}
-			else if (!stile.canHaveOrb && !stile.isPit)
+			else if (!stile.canHaveOrb && !stile.isPit && stile.contents == null)
 			{
 				break
 			}
@@ -377,6 +377,7 @@ class CascadeUpdateStep : AbstractUpdateStep()
 		return doneAnimation
 	}
 
+	// ----------------------------------------------------------------------
 	override fun doUpdateRealTime(grid: Grid, deltaTime: Float)
 	{
 
