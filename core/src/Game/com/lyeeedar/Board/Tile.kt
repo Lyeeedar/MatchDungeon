@@ -9,6 +9,7 @@ import com.lyeeedar.Components.hasComponent
 import com.lyeeedar.Renderables.Renderable
 import com.lyeeedar.Renderables.Sprite.SpriteWrapper
 import com.lyeeedar.Util.Point
+import com.lyeeedar.Util.Statics
 
 /**
  * Created by Philip on 04-Jul-16.
@@ -22,10 +23,10 @@ class Tile(x: Int, y: Int, val grid: Grid) : Point(x, y)
 	var contents: Entity? = null
 		set(value)
 		{
-			if (value != null && !canHaveOrb && (value.hasComponent(SwappableComponent::class.java) || value.hasComponent(DamageableComponent::class.java)))
+			if (Statics.debug && value != null && !canHaveOrb && (value.hasComponent(SwappableComponent::class.java) || value.hasComponent(DamageableComponent::class.java)))
 			{
-				System.err.print("Tried to put something in tile that should be empty. IsPit: $isPit, Existing: $field, object: $value")
-				return
+				val wall = wallSprite != null
+				throw RuntimeException("Tried to put something in tile ($x,$y) that should be empty. IsPit: $isPit, IsWall: $wall, Existing: $field, object: ${value.archetype()!!.archetype}")
 			}
 			field = value
 		}

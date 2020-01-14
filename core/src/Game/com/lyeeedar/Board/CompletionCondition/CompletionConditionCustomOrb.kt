@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.OrbDesc
 import com.lyeeedar.Components.matchable
+import com.lyeeedar.Game.Global
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
@@ -34,12 +35,15 @@ class CompletionConditionCustomOrb : AbstractCompletionCondition()
 			return false
 		}
 
-		Future.call(
+		if (!Global.resolveInstantly)
+		{
+			Future.call(
 				{
 					val tutorial = Tutorial("CustomOrbComplete")
 					tutorial.addPopup("This is the count you need to match to win.", table)
 					tutorial.show()
 				}, 0.5f)
+		}
 	}
 
 	override fun isCompleted(): Boolean

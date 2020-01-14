@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.lyeeedar.Board.Grid
-import com.lyeeedar.Board.Mote
+import com.lyeeedar.Board.spawnMote
 import com.lyeeedar.Components.healable
 import com.lyeeedar.Components.pos
 import com.lyeeedar.Components.renderable
@@ -54,7 +54,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 				val sprite = entity.renderable().renderable.copy() as Sprite
 				val dst = GridWidget.instance.pointToScreenspace(tile)
 
-				Mote(src, dst, sprite, GridWidget.instance.tileSize,
+				spawnMote(src, dst, sprite, GridWidget.instance.tileSize,
 					 {
 						grid.damage(tile, tile.contents!!, 0f, friendly)
 
@@ -112,32 +112,38 @@ class CompletionConditionDie : AbstractCompletionCondition()
 			}
 
 			// animate player attack
-			Mote(src, moteDst, sprite, GridWidget.instance.tileSize,
+			spawnMote(src, moteDst, sprite, GridWidget.instance.tileSize,
 				 {
 					 if (blocked)
 					 {
-						 val pos = dst
+						 if (!Global.resolveInstantly)
+						 {
+							 val pos = dst
 
-						 val sprite = AssetManager.loadParticleEffect("Block")
-						 val actor = ParticleEffectActor(sprite.getParticleEffect())
-						 actor.setSize(48f, 48f)
-						 actor.setPosition(pos.x, pos.y)
-						 Statics.stage.addActor(actor)
+							 val sprite = AssetManager.loadParticleEffect("Block")
+							 val actor = ParticleEffectActor(sprite.getParticleEffect())
+							 actor.setSize(48f, 48f)
+							 actor.setPosition(pos.x, pos.y)
+							 Statics.stage.addActor(actor)
+						 }
 					 }
 					 else
 					 {
 						 if (hp > 0) hp--
 
-						 val pos = dst
+						 if (!Global.resolveInstantly)
+						 {
+							 val pos = dst
 
-						 val sprite = AssetManager.loadParticleEffect("Hit")
-						 val actor = ParticleEffectActor(sprite.getParticleEffect())
-						 actor.setSize(48f, 48f)
-						 actor.setPosition(pos.x, pos.y)
-						 Statics.stage.addActor(actor)
+							 val sprite = AssetManager.loadParticleEffect("Hit")
+							 val actor = ParticleEffectActor(sprite.getParticleEffect())
+							 actor.setSize(48f, 48f)
+							 actor.setPosition(pos.x, pos.y)
+							 Statics.stage.addActor(actor)
 
-						 hpLabel.setText("$hp/$maxHP")
-						 updateBlink()
+							 hpLabel.setText("$hp/$maxHP")
+							 updateBlink()
+						 }
 					 }
 
 					 if (countered)
@@ -147,7 +153,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 						 if (target != null)
 						 {
 							 val dst = GridScreen.instance.grid!!.pointToScreenspace(target)
-							 Mote(src, dst, sprite, GridWidget.instance.tileSize,
+							 spawnMote(src, dst, sprite, GridWidget.instance.tileSize,
 								  {
 									  grid.pop(target, 0f, Global.player, Global.player.getStat(Statistic.MATCHDAMAGE), Global.player.getStat(Statistic.PIERCE))
 								  }, animSpeed = 0.35f, leap = true)
@@ -169,25 +175,28 @@ class CompletionConditionDie : AbstractCompletionCondition()
 			false
 		}
 
-		Future.call(
+		if (!Global.resolveInstantly)
+		{
+			Future.call(
 				{
 					val tutorial = Tutorial("Die")
 					tutorial.addPopup("This is your remaining health. Attacks will reduce it, and when it reaches 0 you will fail the level.", hpLabel)
 					tutorial.show()
 				}, 0.5f)
 
-		if (!Statics.release)
-		{
-			Future.call({
-							GridScreen.instance.debugConsole.reregister("god", "", fun(args, console): Boolean
-							{
+			if (!Statics.release)
+			{
+				Future.call({
+								GridScreen.instance.debugConsole.reregister("god", "", fun(args, console): Boolean
+								{
 
-								godMode = !godMode
-								console.write("God Mode: $godMode")
+									godMode = !godMode
+									console.write("God Mode: $godMode")
 
-								return true
-							})
-						}, 1f)
+									return true
+								})
+							}, 1f)
+			}
 		}
 	}
 

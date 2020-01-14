@@ -36,11 +36,6 @@
 						<Cooldown>2,4</Cooldown>
 						<Count>1</Count>
 					</Pop>
-					<Break>
-						<Cooldown>1,2</Cooldown>
-						<Count>1</Count>
-						<Damage>1</Damage>
-					</Break>
 				</Abilities>
 			</Friendly>
 			<IsMonster>false</IsMonster>

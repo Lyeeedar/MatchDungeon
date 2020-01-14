@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Tile
+import com.lyeeedar.Game.Global
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.Future
@@ -34,12 +35,15 @@ class CompletionConditionPlate : AbstractCompletionCondition()
 			return false
 		}
 
-		Future.call(
+		if (!Global.resolveInstantly)
+		{
+			Future.call(
 				{
 					val tutorial = Tutorial("PlateComplete")
 					tutorial.addPopup("This is the count of plates you need to get to break to win.", table)
 					tutorial.show()
 				}, 0.5f)
+		}
 	}
 
 	override fun isCompleted(): Boolean = remaining == 0

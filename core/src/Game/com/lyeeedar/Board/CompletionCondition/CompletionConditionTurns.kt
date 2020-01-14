@@ -68,12 +68,15 @@ class CompletionConditionTurns(): AbstractCompletionCondition()
 					false
 				}
 
-		Future.call(
+		if (!Global.resolveInstantly)
+		{
+			Future.call(
 				{
 					val tutorial = Tutorial("Turns")
 					tutorial.addPopup("This is your remaining turn count. When it reaches 0 you will fail the level.", label)
 					tutorial.show()
 				}, 0.5f)
+		}
 	}
 
 	override fun isCompleted(): Boolean = turnCount <= 0

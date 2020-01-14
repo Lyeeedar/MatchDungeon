@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Components.*
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
@@ -42,12 +43,15 @@ class CompletionConditionBreak : AbstractCompletionCondition()
 			return false
 		}
 
-		Future.call(
+		if (!Global.resolveInstantly)
+		{
+			Future.call(
 				{
 					val tutorial = Tutorial("BlockComplete")
 					tutorial.addPopup("This is the count of blocks you need to break to win.", table)
 					tutorial.show()
 				}, 0.5f)
+		}
 	}
 
 	override fun isCompleted(): Boolean = blocks.filter { it.damageable()!!.hp > 0 }.count() == 0

@@ -194,7 +194,10 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 			}
 		}
 
-		GridScreen.instance.updateBuffTable()
+		if (!Global.resolveInstantly)
+		{
+			GridScreen.instance.updateBuffTable()
+		}
 
 		grid.gainedBonusPower = false
 		grid.poppedSpreaders.clear()
@@ -236,6 +239,26 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 					if (grid.sinkPathTiles.any{ it == point })
 					{
 						return swap
+					}
+				}
+			}
+		}
+
+		// if under half health, prioritise clearing attacks
+		if (grid.level.defeatConditions.any{ it is CompletionConditionDie })
+		{
+			val die = grid.level.defeatConditions.filterIsInstance<CompletionConditionDie>().firstOrNull()
+			if (die != null && die.hp < die.maxHP * 0.5f)
+			{
+				// attacks
+				for (swap in validMoves)
+				{
+					for (point in swap.points)
+					{
+						if (grid.attackTiles.any{ it == point })
+						{
+							return swap
+						}
 					}
 				}
 			}
@@ -304,7 +327,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 		}
 
 		// random
-		return validMoves.random()
+		return validMoves.minBy { it.swapStart.y }
 	}
 
 	// ----------------------------------------------------------------------

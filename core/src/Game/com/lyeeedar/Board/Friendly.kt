@@ -354,7 +354,7 @@ class FriendlyHealAbility : FriendlyAbility()
 				val moteDst = dst.cpy() - Vector2(GridWidget.instance.tileSize / 2f, GridWidget.instance.tileSize / 2f)
 				val src = GridWidget.instance.pointToScreenspace(srcPos)
 
-				Mote(src, moteDst, sprite, GridWidget.instance.tileSize,
+				spawnMote(src, moteDst, sprite, GridWidget.instance.tileSize,
 					 {
 						 condition.fractionalHp += 1f
 						 condition.updateFractionalHp()

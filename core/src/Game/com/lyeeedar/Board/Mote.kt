@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Bezier
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.Animation.LeapAnimation
 import com.lyeeedar.Renderables.Animation.MoveAnimation
@@ -41,7 +42,6 @@ class Mote(src: Vector2, dst: Vector2, sprite: Sprite, spriteSize: Float, comple
 		completionFunc = { completionFun?.invoke(); motes.removeValue(this, true) }
 	}
 
-
 	companion object
 	{
 		val motes = com.badlogic.gdx.utils.Array<Mote>(false, 16)
@@ -54,5 +54,17 @@ class Mote(src: Vector2, dst: Vector2, sprite: Sprite, spriteSize: Float, comple
 			}
 			motes.clear()
 		}
+	}
+}
+
+fun spawnMote(src: Vector2, dst: Vector2, sprite: Sprite, spriteSize: Float, completionFun: (() -> Unit)? = null, animSpeed: Float = 1.5f, leap: Boolean = false)
+{
+	if (Global.resolveInstantly)
+	{
+		completionFun?.invoke()
+	}
+	else
+	{
+		Mote(src, dst, sprite, spriteSize, completionFun, animSpeed, leap)
 	}
 }

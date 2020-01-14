@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.IntMap
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.OrbDesc
 import com.lyeeedar.Components.matchable
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
@@ -106,12 +107,15 @@ class CompletionConditionMatches(): AbstractCompletionCondition()
 			sprites.put(entry.key, OrbDesc.getOrb(entry.key).sprite)
 		}
 
-		Future.call(
+		if (!Global.resolveInstantly)
+		{
+			Future.call(
 				{
 					val tutorial = Tutorial("MatchComplete")
 					tutorial.addPopup("This is the count of orbs of each colour you need to match to win.", table)
 					tutorial.show()
 				}, 0.5f)
+		}
 	}
 
 	override fun isCompleted(): Boolean

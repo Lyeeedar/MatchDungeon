@@ -354,9 +354,9 @@ abstract class AbstractMonsterAbility
 			usages--
 		}
 
-		if (!Statics.release)
+		if (!Statics.release && !Global.resolveInstantly)
 		{
-			println("Monster trying to use ability '${this.javaClass}'")
+			println("Monster trying to use ability '${this.javaClass.name.split(".Monster")[1].replace("Ability", "")}'")
 		}
 
 		val monsterTile = entity.pos().tile!!

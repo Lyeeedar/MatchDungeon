@@ -175,7 +175,7 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 		val moteDst = dst.cpy() - Vector2(GridWidget.instance.tileSize / 2f, GridWidget.instance.tileSize / 2f)
 		val src = GridWidget.instance.pointToScreenspace(tile)
 
-		Mote(src, moteDst, sprite, GridWidget.instance.tileSize,
+		spawnMote(src, moteDst, sprite, GridWidget.instance.tileSize,
 			 {
 				 Global.player.leveldebuffs.add(buff)
 				 GridScreen.instance.updateBuffTable()

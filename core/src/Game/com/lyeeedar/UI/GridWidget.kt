@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.InputEvent
@@ -58,9 +57,7 @@ class GridWidget(val grid: Grid) : Widget()
 	val ORB = SPREADER+1
 	val EFFECT = ORB+1
 
-	val renderer = SortedRenderer(tileSize, grid.width.toFloat(), grid.height.toFloat(), EFFECT+1, true)
-
-	val shapeRenderer = ShapeRenderer()
+	val renderer: SortedRenderer by lazy{ SortedRenderer(tileSize, grid.width.toFloat(), grid.height.toFloat(), EFFECT+1, true) }
 
 	val tempCol = Colour()
 
@@ -579,7 +576,7 @@ class GridWidget(val grid: Grid) : Widget()
 				val waitTime = if (grid.level.defeatConditions.any{ it is CompletionConditionTime }) 3f else 8f
 				if (grid.noMatchTimer > waitTime && grid.matchHint != null)
 				{
-					if (tile == grid.matchHint!!.first || tile == grid.matchHint!!.second)
+					if (tile == grid.matchHint!!.swapStart || tile == grid.matchHint!!.swapEnd)
 					{
 						renderer.queueSprite(border, xi, yi, ORB, 0)
 					}

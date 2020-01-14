@@ -6,10 +6,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Board.Grid
-import com.lyeeedar.Board.Mote
 import com.lyeeedar.Board.Tile
 import com.lyeeedar.Board.createSinkable
+import com.lyeeedar.Board.spawnMote
 import com.lyeeedar.Components.*
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.SpriteWidget
@@ -38,7 +39,7 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 			val dst = table.localToStageCoordinates(Vector2(table.width / 2f, table.height / 2f))
 			val src = GridWidget.instance.pointToScreenspace(it.pos().tile!!)
 
-			Mote(src, dst, sprite, GridWidget.instance.tileSize, {
+			spawnMote(src, dst, sprite, GridWidget.instance.tileSize, {
 				sinkableMap[sprite.fileName].count = max(0, sinkableMap[sprite.fileName].count-1)
 				rebuildWidget()
 			})
@@ -46,12 +47,15 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 			false
 		}
 
-		Future.call(
+		if (!Global.resolveInstantly)
+		{
+			Future.call(
 				{
 					val tutorial = Tutorial("Sink")
 					tutorial.addPopup("This is the count of items you need to get to the bottom of the board to win. If you can't see them on the board then they'll be in chests, inside blocks or in enemies.", table)
 					tutorial.show()
 				}, 0.5f)
+		}
 	}
 
 	override fun isCompleted(): Boolean = sinkableMap.all { it.value.count == 0 }

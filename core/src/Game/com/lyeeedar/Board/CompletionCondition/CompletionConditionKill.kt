@@ -13,6 +13,7 @@ import com.lyeeedar.Components.ai
 import com.lyeeedar.Components.container
 import com.lyeeedar.Components.damageable
 import com.lyeeedar.Components.renderable
+import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
@@ -49,12 +50,17 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 			return false
 		}
 
-		Future.call(
+		if (!Global.resolveInstantly)
+		{
+			Future.call(
 				{
 					val tutorial = Tutorial("KillComplete")
 					tutorial.addPopup("This is the count of enemies you need to kill to win.", table)
 					tutorial.show()
 				}, 0.5f)
+		}
+
+		rebuildWidget()
 	}
 
 	override fun isCompleted(): Boolean = monsters.filter { it.damageable()!!.hp > 0 }.count() == 0

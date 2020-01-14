@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.exp4j.Helpers.evaluate
-import com.lyeeedar.Board.Mote
+import com.lyeeedar.Board.spawnMote
 import com.lyeeedar.Card.Card
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.*
@@ -206,7 +206,7 @@ class CardContentActionShop : AbstractCardContentAction()
 								val dstTable = CardScreen.instance.playerSlot
 								val dst = dstTable.localToStageCoordinates(Vector2())
 
-								Mote(src, dst, sprite, 32f, {
+								spawnMote(src, dst, sprite, 32f, {
 								}, 0.75f)
 
 								// Rebuild the ui

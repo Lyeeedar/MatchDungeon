@@ -26,6 +26,7 @@ object CompilerRunner
 			funcs.add(Pair("Texture", { TextureCompressor() }))
 			funcs.add(Pair("Xml", { XmlCompressor() }))
 			funcs.add(Pair("Test", { XmlLoadTester.test() }))
+			funcs.add(Pair("Solve", { LevelSolver().attemptAllLevels() }))
 
 			val timings = com.badlogic.gdx.utils.Array<Pair<String, Long>>()
 			for (func in funcs)

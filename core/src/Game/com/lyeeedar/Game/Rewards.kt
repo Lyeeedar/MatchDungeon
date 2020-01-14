@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.exp4j.Helpers.evaluate
-import com.lyeeedar.Board.Mote
+import com.lyeeedar.Board.spawnMote
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.Storage
 import com.lyeeedar.EquipmentSlot
@@ -98,7 +98,7 @@ class StatisticsReward : AbstractReward()
 					val dstTable = CardScreen.instance.playerSlot
 					val dst = dstTable.localToStageCoordinates(Vector2())
 
-					Mote(src, dst, sprite, 64f, {
+					spawnMote(src, dst, sprite, 64f, {
 
 					}, 0.75f)
 				}
@@ -150,7 +150,7 @@ class CardReward : AbstractReward()
 				val dstTable = CardScreen.instance.playerSlot
 				val dst = dstTable.localToStageCoordinates(Vector2())
 
-				Mote(src, dst, sprite, 64f, {
+				spawnMote(src, dst, sprite, 64f, {
 				}, 0.75f)
 			}
 
@@ -201,7 +201,7 @@ class QuestReward : AbstractReward()
 				val dstTable = CardScreen.instance.playerSlot
 				val dst = dstTable.localToStageCoordinates(Vector2())
 
-				Mote(src, dst, sprite, 64f, {
+				spawnMote(src, dst, sprite, 64f, {
 				}, 0.75f)
 			}
 
@@ -254,7 +254,7 @@ class CharacterReward : AbstractReward()
 				val dstTable = CardScreen.instance.playerSlot
 				val dst = dstTable.localToStageCoordinates(Vector2())
 
-				Mote(src, dst, sprite, 64f, {
+				spawnMote(src, dst, sprite, 64f, {
 				}, 0.75f)
 			}
 
@@ -307,7 +307,7 @@ class MoneyReward : AbstractReward()
 			val dstTable = CardScreen.instance.playerSlot
 			val dst = dstTable.localToStageCoordinates(Vector2())
 
-			Mote(src, dst, sprite, 64f, {
+			spawnMote(src, dst, sprite, 64f, {
 				CardScreen.instance.updateEquipment()
 			}, 0.75f)
 		}
@@ -360,7 +360,7 @@ class BuffReward : AbstractReward()
 			val dstTable = CardScreen.instance.playerSlot
 			val dst = dstTable.localToStageCoordinates(Vector2())
 
-			Mote(src, dst, sprite, 64f, {
+			spawnMote(src, dst, sprite, 64f, {
 			}, 0.75f)
 		}
 		card.canZoom = false
@@ -484,7 +484,7 @@ class EquipmentReward : AbstractReward()
 			val dstTable = CardScreen.instance.getSlot(equipment.slot)
 			val dst = dstTable.localToStageCoordinates(Vector2())
 
-			Mote(src, dst, sprite, 64f, {
+			spawnMote(src, dst, sprite, 64f, {
 				CardScreen.instance.updateEquipment()
 			}, 0.75f)
 		}
@@ -500,7 +500,7 @@ class EquipmentReward : AbstractReward()
 			val dstTable = CardScreen.instance.playerSlot
 			val dst = dstTable.localToStageCoordinates(Vector2())
 
-			Mote(src, dst, sprite, 64f, {
+			spawnMote(src, dst, sprite, 64f, {
 				CardScreen.instance.updateEquipment()
 			}, 0.75f)
 		}
@@ -559,7 +559,7 @@ class ItemReward : AbstractReward()
 				val dstTable = CardScreen.instance.playerSlot
 				val dst = dstTable.localToStageCoordinates(Vector2())
 
-				Mote(src, dst, sprite, 64f, {
+				spawnMote(src, dst, sprite, 64f, {
 				}, 0.75f)
 			}
 

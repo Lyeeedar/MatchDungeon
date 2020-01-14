@@ -541,7 +541,7 @@ class Level(val loadPath: String)
 
 				modifyOrbs(tile, char)
 
-				if (tile.contents != null)
+				if (tile.contents != null && (tile.contents!!.pos().tile == null || tile.contents!!.pos().tile == tile))
 				{
 					tile.contents!!.pos().setTile(tile.contents!!, tile)
 				}

@@ -141,14 +141,9 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			val matchable = entity.matchable() ?: return false
 			if (!matchable.skipPowerOrb)
 			{
-				val pos = GridWidget.instance.pointToScreenspace(entity.pos().tile!!)
-				val dst = PowerBar.instance.getOrbDest()
-				val sprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/crystal_sky")
-
-				if (dst != null)
+				if (Global.resolveInstantly)
 				{
-					Future.call({ Mote(pos, dst, sprite.copy(), 32f, { PowerBar.instance.power++ }) }, delay)
-
+					PowerBar.instance.power++
 					if (!gainedBonusPower)
 					{
 						gainedBonusPower = true
@@ -156,8 +151,30 @@ class Grid(val width: Int, val height: Int, val level: Level)
 						val gain = level.player.getStat(Statistic.POWERGAIN).toInt()
 						for (i in 0 until gain)
 						{
-							val dst = PowerBar.instance.getOrbDest() ?: break
-							Future.call({ Mote(pos, dst, sprite.copy(), 32f, { PowerBar.instance.power++ }) }, delay)
+							PowerBar.instance.power++
+						}
+					}
+				}
+				else
+				{
+					val pos = GridWidget.instance.pointToScreenspace(entity.pos().tile!!)
+					val dst = PowerBar.instance.getOrbDest()
+					val sprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/crystal_sky")
+
+					if (dst != null)
+					{
+						Future.call({ spawnMote(pos, dst, sprite.copy(), 32f, { PowerBar.instance.power++ }) }, delay)
+
+						if (!gainedBonusPower)
+						{
+							gainedBonusPower = true
+
+							val gain = level.player.getStat(Statistic.POWERGAIN).toInt()
+							for (i in 0 until gain)
+							{
+								val dst = PowerBar.instance.getOrbDest() ?: break
+								Future.call({ spawnMote(pos, dst, sprite.copy(), 32f, { PowerBar.instance.power++ }) }, delay)
+							}
 						}
 					}
 				}
@@ -548,7 +565,10 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				merged.armed = true
 				newEntity.add(MarkedForDeletionComponent.obtain())
 
-				return false
+				lastSwapped = newTile
+				matchHint = null
+
+				return true
 			}
 		}
 
@@ -571,11 +591,18 @@ class Grid(val width: Int, val height: Int, val level: Level)
 			var dir = Direction.getDirection(oldTile, newTile)
 			if (dir.y != 0) dir = dir.opposite
 			oldEntity.renderable().renderable.animation = BumpAnimation.obtain().set(animSpeed, dir)
+
+			if (Global.resolveInstantly)
+			{
+				throw RuntimeException("Swap was not valid!")
+			}
+
 			return false
 		}
 		else
 		{
 			lastSwapped = newTile
+			matchHint = null
 
 			oldEntity.renderable().renderable.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile)).invertY(), Interpolation.linear)
 			newEntity.renderable().renderable.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(oldTile.getPosDiff(newTile)).invertY(), Interpolation.linear)

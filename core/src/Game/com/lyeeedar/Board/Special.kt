@@ -556,7 +556,7 @@ class Match5() : GemSpecial()
 	override fun apply(point: Point, grid: Grid)
 	{
 		sprite.colourAnimation = null
-		sprite.colour = targetDesc!!.sprite.colour.copy()
+		sprite.colour = (targetDesc ?: OrbDesc.getValidOrbs(grid.level).random()).sprite.colour.copy()
 
 		val effect = AssetManager.loadParticleEffect("SpecialExplosion").getParticleEffect()
 		effect.size[0] = 2
