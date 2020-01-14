@@ -46,6 +46,7 @@ jobs:
         ./gradlew :desktop:build
         ./gradlew :android:assembleDebug
         ./gradlew :headless:compileResources
+        ./gradlew :headless:testResources
       if: steps.commit.outputs.status == 'Success'
 
     - name: Push changes

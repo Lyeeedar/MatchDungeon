@@ -36,6 +36,7 @@ class Save
 
 		fun save()
 		{
+			if (Global.resolveInstantly) return
 			if (doingLoad) return
 
 			val outputFile = Gdx.files.local("save.dat")

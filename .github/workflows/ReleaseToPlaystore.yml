@@ -44,6 +44,7 @@ jobs:
       working-directory: MatchDungeon
       run: |
         ./gradlew :headless:compileResources
+        ./gradlew :headless:testResources
         ./gradlew :android:build
         ./gradlew :android:bundleRelease
       if: steps.hasChanges.outputs.status != 'false'

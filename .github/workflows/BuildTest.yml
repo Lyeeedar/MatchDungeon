@@ -8,32 +8,36 @@ jobs:
     - uses: actions/checkout@master
       with:
         path: Game
-    
+
     - name: Checkout submodules
       working-directory: Game
       run: |
         git submodule sync --recursive
         git submodule update --init --force --recursive --rebase -j 8
-  
+
     - name: Checkout private
       uses: actions/checkout@master
       with:
         repository: Lyeeedar/PrivateStuff
         token: ${{ secrets.PRIVATESTUFF_ACCESS_TOKEN }}
         path: PrivateStuff
-  
+
     - name: Make gradlew executable
       working-directory: Game
       run: chmod +x ./gradlew
-      
+
     - name: Build Desktop
       working-directory: Game
       run: ./gradlew :desktop:build
-      
+
     - name: Build Android
       working-directory: Game
       run: ./gradlew :android:assembleDebug
-    
+
     - name: Build Resources
       working-directory: Game
       run: ./gradlew :headless:compileResources
+
+    - name: Run Tests
+      working-directory: Game
+      run: ./gradlew :headless:testResources
