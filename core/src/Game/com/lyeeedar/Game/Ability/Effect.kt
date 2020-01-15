@@ -117,7 +117,10 @@ class Effect(val type: Type)
 					Global.player.levelbuffs.add(buff)
 				}
 
-				GridScreen.instance.updateBuffTable()
+				if (!Global.resolveInstantly)
+				{
+					GridScreen.instance.updateBuffTable()
+				}
 			}
 		}
 	}

@@ -38,7 +38,7 @@ class Permuter(val type: Type)
 
 			Type.ALLOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?) = grid.grid.filter{ val key = data["TYPE"]?.hashCode() ?: tile.contents!!.matchable()!!.desc.key; it.contents?.matchable()?.desc?.key == key }
 
-			Type.NOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> { val type = data["TYPE"].hashCode(); val count = data["COUNT"].toString().toInt(); return grid.grid.filter{ it.contents?.matchable()?.desc?.key == type }.random(count) }
+			Type.NOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> { val type = data["TYPE"].hashCode(); val count = data["COUNT"].toString().toInt(); return grid.grid.filter{ it.contents?.matchable()?.desc?.key == type }.random(count, grid.ran) }
 
 			Type.COLUMN -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> {
 				val range = data["RANGE", "9999999"]!!.toString().toInt()
@@ -64,10 +64,10 @@ class Permuter(val type: Type)
 				if (ability != null && selectedTargets.size > 0 && ability.effect.type == Effect.Type.CONVERT)
 				{
 					val selectedType = selectedTargets[0].contents!!.matchable()!!.desc
-					return grid.grid.filter{ it.contents?.matchable() != null && it.contents!!.matchable()!!.desc != selectedType }.random(count)
+					return grid.grid.filter{ it.contents?.matchable() != null && it.contents!!.matchable()!!.desc != selectedType }.random(count, grid.ran)
 				}
 
-				return grid.grid.filter{ ability?.targetter?.isValid?.invoke(it, data) ?: it.canHaveOrb }.random(count)
+				return grid.grid.filter{ ability?.targetter?.isValid?.invoke(it, data) ?: it.canHaveOrb }.random(count, grid.ran)
 			}
 
 			Type.CONE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> {

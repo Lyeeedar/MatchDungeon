@@ -193,13 +193,13 @@ class Ability
 					val chosenCount = (finalTargets.size.toFloat() * coverage).ciel()
 					while (finalTargets.size > chosenCount)
 					{
-						finalTargets.removeRandom(Random.random)
+						finalTargets.removeRandom(grid.ran)
 					}
 				}
 			}
 
 			var delay = 0f
-			if (flightEffect != null)
+			if (flightEffect != null && !Global.resolveInstantly)
 			{
 				val fs = flightEffect!!.copy()
 				fs.killOnAnimComplete = true
@@ -244,7 +244,7 @@ class Ability
 			target.delayedActions.add(DelayedAction(
 					{
 						var delay = 0.0f
-						if (hitEffect != null)
+						if (hitEffect != null && !Global.resolveInstantly)
 						{
 							val hs = hitEffect!!.copy()
 							hs.renderDelay = delay + 0.1f * dst

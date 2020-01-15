@@ -21,11 +21,15 @@ import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.PowerBar
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
+import ktx.collections.toGdxArray
 
 class Grid(val width: Int, val height: Int, val level: Level, val seed: Long)
 {
 	// ----------------------------------------------------------------------
 	val ran = Random.obtainTS(seed)
+
+	// ----------------------------------------------------------------------
+	val history = Array<HistoryMove>()
 
 	// ----------------------------------------------------------------------
 	val grid: Array2D<Tile> = Array2D(width, height ){ x, y -> Tile(x, y, this) }
@@ -266,6 +270,8 @@ class Grid(val width: Int, val height: Int, val level: Level, val seed: Long)
 	// ----------------------------------------------------------------------
 	fun refill()
 	{
+		history.add(HistoryMove(true))
+
 		val tempgrid: Array2D<Tile> = Array2D(width, height ){ x, y -> Tile(x, y, this) }
 		for (x in 0 until width)
 		{
@@ -377,6 +383,8 @@ class Grid(val width: Int, val height: Int, val level: Level, val seed: Long)
 	fun activateAbility()
 	{
 		if (level.isVictory || level.isDefeat) return
+
+		history.add(HistoryMove(activeAbility!!, activeAbility!!.selectedTargets.toGdxArray()))
 
 		activeAbility!!.activate(this)
 		activeAbility = null
@@ -552,6 +560,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val seed: Long)
 				lastSwapped = newTile
 				matchHint = null
 
+				history.add(HistoryMove(Pair(oldTile, newTile)))
 				return true
 			}
 		}
@@ -596,6 +605,8 @@ class Grid(val width: Int, val height: Int, val level: Level, val seed: Long)
 				oldEntity.renderable().renderable.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile)).invertY(), Interpolation.linear)
 				newEntity.renderable().renderable.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(oldTile.getPosDiff(newTile)).invertY(), Interpolation.linear)
 			}
+
+			history.add(HistoryMove(Pair(oldTile, newTile)))
 			return true
 		}
 	}
@@ -800,14 +811,26 @@ class Grid(val width: Int, val height: Int, val level: Level, val seed: Long)
 	fun getTile(x: Int, y: Int): Tile? = grid[x, y, null]
 }
 
-data class Match(val p1: Point, val p2: Point, var used: Boolean = false)
+class HistoryMove
 {
-	fun length() = p1.dist(p2) + 1
-	fun points() = p1.rangeTo(p2)
-	fun direction() = Direction.getDirection(p1, p2)
-	fun free()
+	var swap: Pair<Point, Point>? = null
+	var refill = false
+	var ability: Ability? = null
+	var abilityTargets: Array<Point>? = null
+
+	constructor(swap: Pair<Point, Point>)
 	{
-		p1.free()
-		p2.free()
+		this.swap = swap
+	}
+
+	constructor(refill: Boolean)
+	{
+		this.refill = refill
+	}
+
+	constructor(ability: Ability, targets: Array<Point>)
+	{
+		this.ability = ability
+		this.abilityTargets = targets
 	}
 }
