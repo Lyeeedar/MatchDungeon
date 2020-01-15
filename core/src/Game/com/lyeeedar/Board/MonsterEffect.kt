@@ -180,7 +180,11 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 		spawnMote(src, moteDst, sprite, GridWidget.instance.tileSize,
 			 {
 				 Global.player.leveldebuffs.add(buff)
-				 GridScreen.instance.updateBuffTable()
+
+				 if (!Global.resolveInstantly)
+				 {
+					 GridScreen.instance.updateBuffTable()
+				 }
 			 }, animSpeed = 0.35f, leap = true)
 
 	}
