@@ -18,7 +18,6 @@ class MatchableComponent : AbstractComponent()
 	fun setDesc(desc: OrbDesc, entity: Entity)
 	{
 		this.desc = desc
-		entity.renderable().renderable = desc.sprite.copy()
 		entity.renderable().renderable.colour = desc.sprite.colour
 	}
 

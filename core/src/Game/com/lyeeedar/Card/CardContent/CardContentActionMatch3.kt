@@ -35,8 +35,8 @@ class CardContentActionMatch3 : AbstractCardContentAction()
 			level = Level.load(cardContent.path.directory() + "/" + levelFile).random()
 			level!!.create(CardContentScreen.currentQuest.currentTheme, Global.player,
 						   {
-							   if (cardContent.CardContentStack.size > 0) cardContent.CardContentStack.last().index++
 							   level = null
+							   cardContent.CardContentStack.last().index++
 
 							   if (successNode != null)
 							   {
@@ -50,8 +50,8 @@ class CardContentActionMatch3 : AbstractCardContentAction()
 							   CardContentScreen.advanceContent()
 						   },
 						   {
-							   if (cardContent.CardContentStack.size > 0) cardContent.CardContentStack.last().index++
 							   level = null
+							   cardContent.CardContentStack.last().index++
 
 							   if (failureNode != null)
 							   {

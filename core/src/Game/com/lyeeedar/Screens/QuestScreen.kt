@@ -91,15 +91,19 @@ class QuestScreen : AbstractScreen()
 		val statsAndAbandon = Table()
 		statsAndAbandon.add(statsTable).expand().left()
 
-		val abandonQuestButton = TextButton("Abandon Quest", Statics.skin)
-		abandonQuestButton.addClickListener {
-			MessageBox(
-				"Abandon Quest",
-				"Are you sure you want to abandon the quest and return to the quest selection screen? You will lose any progress made, but keep any rewards you have earned.",
-				Pair("Continue Quest", {}),
-				Pair("Abandon Quest", { currentQuest.state = Quest.QuestState.FAILURE; completeQuest() }))
+
+		if (Statics.settings.get("CompletedIntro", false))
+		{
+			val abandonQuestButton = TextButton("Abandon Quest", Statics.skin)
+			abandonQuestButton.addClickListener {
+				MessageBox(
+					"Abandon Quest",
+					"Are you sure you want to abandon the quest and return to the quest selection screen? You will lose any progress made, but keep any rewards you have earned.",
+					Pair("Continue Quest", {}),
+					Pair("Abandon Quest", { currentQuest.state = Quest.QuestState.FAILURE; completeQuest() }))
+			}
+			statsAndAbandon.add(abandonQuestButton).expand().right().bottom()
 		}
-		statsAndAbandon.add(abandonQuestButton).expand().right().bottom()
 
 		nonCard.add(statsAndAbandon).growX().pad(10f)
 		nonCard.row()
@@ -428,15 +432,23 @@ class QuestScreen : AbstractScreen()
 	fun updateRewards()
 	{
 		val doGoldReward = fun() {
-			val gold = currentQuest.goldRewards.filter { it.isValid() }.flatMap{ it.reward() }.toGdxArray()
-			if (currentQuest.state.ordinal >= Quest.QuestState.GOLD.ordinal && !currentQuest.gotGold && gold.size > 0)
+			if (currentQuest.state.ordinal >= Quest.QuestState.GOLD.ordinal && !currentQuest.gotGold)
 			{
-				for (card in gold)
-				{
-					card.canZoom = false
-				}
+				val gold = currentQuest.goldRewards.filter { it.isValid() }.flatMap{ it.reward() }.toGdxArray()
 
-				CardWidget.displayLoot(gold, CardWidget.Companion.LootAnimation.COIN_GOLD) {
+				if (gold.size > 0)
+				{
+					for (card in gold)
+					{
+						card.canZoom = false
+					}
+
+					CardWidget.displayLoot(gold, CardWidget.Companion.LootAnimation.COIN_GOLD) {
+						needsAdvance = true
+					}
+				}
+				else
+				{
 					needsAdvance = true
 				}
 			}
@@ -447,15 +459,23 @@ class QuestScreen : AbstractScreen()
 		}
 
 		val doSilverReward = fun() {
-			val silver = currentQuest.silverRewards.filter { it.isValid() }.flatMap{ it.reward() }.toGdxArray()
-			if (currentQuest.state.ordinal >= Quest.QuestState.SILVER.ordinal && !currentQuest.gotSilver && silver.size > 0)
+			if (currentQuest.state.ordinal >= Quest.QuestState.SILVER.ordinal && !currentQuest.gotSilver)
 			{
-				for (card in silver)
-				{
-					card.canZoom = false
-				}
+				val silver = currentQuest.silverRewards.filter { it.isValid() }.flatMap{ it.reward() }.toGdxArray()
 
-				CardWidget.displayLoot(silver, CardWidget.Companion.LootAnimation.COIN_SILVER) {
+				if (silver.size > 0)
+				{
+					for (card in silver)
+					{
+						card.canZoom = false
+					}
+
+					CardWidget.displayLoot(silver, CardWidget.Companion.LootAnimation.COIN_SILVER) {
+						doGoldReward()
+					}
+				}
+				else
+				{
 					doGoldReward()
 				}
 			}
@@ -466,15 +486,23 @@ class QuestScreen : AbstractScreen()
 		}
 
 		val doBronzeReward = fun() {
-			val bronze = currentQuest.bronzeRewards.filter { it.isValid() }.flatMap{ it.reward() }.toGdxArray()
-			if (currentQuest.state.ordinal >= Quest.QuestState.BRONZE.ordinal && !currentQuest.gotBronze && bronze.size > 0)
+			if (currentQuest.state.ordinal >= Quest.QuestState.BRONZE.ordinal && !currentQuest.gotBronze)
 			{
-				for (card in bronze)
-				{
-					card.canZoom = false
-				}
+				val bronze = currentQuest.bronzeRewards.filter { it.isValid() }.flatMap{ it.reward() }.toGdxArray()
 
-				CardWidget.displayLoot(bronze, CardWidget.Companion.LootAnimation.COIN_BRONZE) {
+				if (bronze.size > 0)
+				{
+					for (card in bronze)
+					{
+						card.canZoom = false
+					}
+
+					CardWidget.displayLoot(bronze, CardWidget.Companion.LootAnimation.COIN_BRONZE) {
+						doSilverReward()
+					}
+				}
+				else
+				{
 					doSilverReward()
 				}
 			}

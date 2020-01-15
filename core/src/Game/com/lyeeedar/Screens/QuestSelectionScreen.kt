@@ -207,6 +207,8 @@ class QuestSelectionScreen : AbstractScreen()
 		mainTable.row()
 
 		updateQuestsTable()
+
+		Statics.settings.set("CompletedIntro", true)
 	}
 
 	fun updateQuestsTable()
@@ -274,7 +276,7 @@ class QuestSelectionScreen : AbstractScreen()
 		for (quest in themeMap[currentTheme])
 		{
 			val card = quest.getCard()
-			card.addPick("Embark", {
+			card.addPick("Embark") {
 				val screen = Statics.game.getTypedScreen<QuestScreen>()!!
 				quest.resetCards()
 				quest.current = quest.root
@@ -284,11 +286,11 @@ class QuestSelectionScreen : AbstractScreen()
 				Global.questflags = GameStateFlags()
 				screen.setup(quest)
 				screen.swapTo()
-			})
+			}
 			card.setSize(cardWidth, cardHeight)
-			card.setFacing(true, false)
+			card.setFacing(faceup = true, animate = false)
 
-			scrollTable.add(card).width(cardWidth).height(cardHeight).expandX().center()
+			scrollTable.add(card).width(cardWidth).height(cardHeight).expandX().center().pad(15f)
 			scrollTable.row()
 		}
 	}

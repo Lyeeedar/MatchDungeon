@@ -1,9 +1,21 @@
 package com.lyeeedar.Board
 
+import com.badlogic.gdx.utils.ObjectMap
+import com.badlogic.gdx.utils.ObjectSet
+import com.lyeeedar.Components.MonsterEffectComponent
+import com.lyeeedar.Components.damageable
+import com.lyeeedar.Components.isBasicOrb
+import com.lyeeedar.Direction
+import com.lyeeedar.Game.Global
+import com.lyeeedar.Renderables.Animation.ExpandAnimation
+import com.lyeeedar.Renderables.Animation.LeapAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Sprite.SpriteWrapper
+import com.lyeeedar.Statistic
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Random
 import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.random
 
 class Spreader
 {
@@ -54,6 +66,136 @@ class Spreader
 		out.attackNumPips = attackNumPips
 
 		return out
+	}
+
+	fun spread(grid: Grid, tile: Tile)
+	{
+		// do spreading
+		if (!grid.poppedSpreaders.contains(nameKey))
+		{
+			// spread
+
+			// get borders tiles
+			val border = ObjectSet<Tile>()
+			for (t in grid.grid)
+			{
+				if (t.spreader != null && t.spreader!!.nameKey == nameKey)
+				{
+					for (dir in Direction.CardinalValues)
+					{
+						val nt = grid.tile(t + dir) ?: continue
+
+						if (nt.spreader == null && nt.canHaveOrb)
+						{
+							border.add(nt)
+						}
+					}
+				}
+			}
+
+			// select random
+			if (border.size > 0)
+			{
+				val chosenTile = border.asSequence().random()!!
+
+				val newspreader = copy()
+
+				if (newspreader.particleEffect != null && !Global.resolveInstantly)
+				{
+					newspreader.particleEffect!!.animation = ExpandAnimation.obtain().set(grid.animSpeed)
+				}
+
+				if (newspreader.spriteWrapper != null && !Global.resolveInstantly)
+				{
+					if (newspreader.spriteWrapper!!.sprite != null)
+					{
+						newspreader.spriteWrapper!!.sprite!!.animation = ExpandAnimation.obtain().set(grid.animSpeed)
+					}
+
+					if (newspreader.spriteWrapper!!.tilingSprite != null)
+					{
+						newspreader.spriteWrapper!!.tilingSprite!!.animation = ExpandAnimation.obtain().set(grid.animSpeed)
+					}
+				}
+
+				chosenTile.spreader = newspreader
+			}
+		}
+	}
+
+	fun onTurn(grid: Grid, tile: Tile)
+	{
+		if (fadeOut > 0)
+		{
+			fadeOut--
+			if (fadeOut == 0)
+			{
+				tile.spreader = null
+			}
+		}
+
+		// do on turn effects
+		if (effect == SpreaderEffect.POP)
+		{
+			grid.pop(tile, 0f, this, damage, 0f, true)
+		}
+		else if (effect == SpreaderEffect.DAMAGE)
+		{
+			val damageable = tile.contents?.damageable()
+			if (damageable != null)
+			{
+				grid.damage(tile, tile.contents!!, 0f, nameKey, damage)
+			}
+		}
+		else if (effect == SpreaderEffect.ATTACK)
+		{
+			if (attackCooldown <= 0)
+			{
+				attackCooldown = attackCooldownMin + ((attackCooldownMax - attackCooldownMin) * Random.random()).toInt()
+				attackCooldown += (attackCooldown * Global.player.getStat(Statistic.HASTE, true)).toInt()
+			}
+
+			attackCooldown--
+			if (attackCooldown <= 0)
+			{
+				val attackedTile: Tile
+				if (tile.contents?.isBasicOrb() == true)
+				{
+					attackedTile = tile
+				}
+				else
+				{
+					attackedTile = grid.grid.filter { it.contents?.isBasicOrb() == true }.minBy { it.dist(tile) } ?: return
+				}
+
+				val target = attackedTile.contents!!
+
+				val attack = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap())
+				target.add(MonsterEffectComponent.obtain().set(attack))
+
+				attack.timer = attackNumPips + (Global.player.getStat(Statistic.HASTE) * attackNumPips).toInt()
+				val diff = attackedTile.getPosDiff(tile)
+				diff[0].y *= -1
+
+				if (!Global.resolveInstantly)
+				{
+					val dst = attackedTile.euclideanDist(tile)
+					val animDuration = 0.4f + attackedTile.euclideanDist(tile) * 0.025f
+					val attackSprite = attack.actualSprite.copy()
+					attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
+					attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
+					attackedTile.effects.add(attackSprite)
+
+					if (attackEffect != null)
+					{
+						val effect = attackEffect!!.copy()
+						tile.effects.add(effect)
+					}
+
+					attack.delayDisplay = animDuration
+				}
+			}
+		}
 	}
 
 	companion object
