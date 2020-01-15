@@ -1,8 +1,8 @@
 <Level xmlns:meta="Editor">
 	<Grid>
 		<Rows>
-			<Line>......#..</Line>
-			<Line>......###</Line>
+			<Line>......##.</Line>
+			<Line>.......##</Line>
 			<Line>#..C$C...</Line>
 			<Line>#.F......</Line>
 			<Line>#.......#</Line>

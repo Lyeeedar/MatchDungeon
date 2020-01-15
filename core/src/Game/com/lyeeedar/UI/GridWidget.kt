@@ -220,7 +220,8 @@ class GridWidget(val grid: Grid) : Widget()
 			val y = if (i < pipsPerLine && lines > 1) yi+0.25f else yi+0.1f
 			val x = if (i >= pipsPerLine && lines > 1) xi+(i-pipsPerLine)*spacePerPip else xi+i*spacePerPip
 
-			renderer.queueSprite(sprite, x, y, ORB, 2, width = solid, height = 0.15f)
+			val sortY = if (hp == maxHp) null else y.toInt()-2
+			renderer.queueSprite(sprite, x, y, EFFECT, 2, width = solid, height = 0.15f, sortY = sortY)
 		}
 
 		if (lines > 1)

@@ -764,7 +764,6 @@ class MonsterBlockAbility : AbstractMonsterAbility()
 		for (tile in targets)
 		{
 			val block = createBlock(grid.level.theme, strength)
-			tile.contents = block
 
 			val diff = tile.getPosDiff(monsterSrc)
 			diff[0].y *= -1
@@ -777,6 +776,8 @@ class MonsterBlockAbility : AbstractMonsterAbility()
 			tile.effects.add(attackSprite)
 
 			block.renderable().renderable.renderDelay = animDuration
+			block.pos().tile = tile
+			block.pos().addToTile(block, animDuration)
 		}
 	}
 

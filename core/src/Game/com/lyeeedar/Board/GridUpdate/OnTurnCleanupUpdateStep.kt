@@ -40,7 +40,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 
 				if (contents.isMarkedForDeletion())
 				{
-					processDeletion(contents, grid, deltaTime)
+					processDeletion(contents, grid, tile, deltaTime)
 				}
 			}
 		}
@@ -52,7 +52,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 	}
 
 	// ---------------------------------------------------------------------
-	private fun processDeletion(entity: Entity, grid: Grid, deltaTime: Float)
+	private fun processDeletion(entity: Entity, grid: Grid, tile: Tile, deltaTime: Float)
 	{
 		val markedForDeletion = entity.markedForDeletion()!!
 		if (markedForDeletion.deletionEffectDelay > 0)
@@ -167,6 +167,11 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 		{
 			pos?.removeFromTile(entity)
 			entity.free()
+
+			if (tile.contents == entity)
+			{
+				tile.contents = null
+			}
 		}
 	}
 
