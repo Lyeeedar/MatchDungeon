@@ -97,6 +97,11 @@ abstract class Special()
 		}
 	}
 
+	fun setNeedsArming(): Special
+	{
+		needsArming = true
+		return this
+	}
 
 	lateinit var sprite: Sprite
 
@@ -317,7 +322,7 @@ class Horizontal4() : HorizontalBeamSpecial()
 
 		if (otherSpecial is Horizontal4 || otherSpecial is Vertical4)
 		{
-			return Cross()
+			return Cross().setNeedsArming()
 		}
 
 		return null
@@ -346,7 +351,7 @@ class Vertical4() : VerticalBeamSpecial()
 		val otherSpecial = other.special()?.special
 		if (otherSpecial is Horizontal4 || otherSpecial is Vertical4)
 		{
-			return Cross()
+			return Cross().setNeedsArming()
 		}
 
 		return null
@@ -514,15 +519,15 @@ class DualMatch() : BombSpecial()
 		val otherSpecial = other.special()?.special
 		if (otherSpecial is DualMatch)
 		{
-			return DoubleDualMatch()
+			return DoubleDualMatch().setNeedsArming()
 		}
 		else if (otherSpecial is Horizontal4)
 		{
-			return DualHori()
+			return DualHori().setNeedsArming()
 		}
 		else if (otherSpecial is Vertical4)
 		{
-			return DualVert()
+			return DualVert().setNeedsArming()
 		}
 
 		return null
@@ -554,7 +559,7 @@ class Match5() : GemSpecial()
 		{
 			if (otherSpecial is GemSpecial)
 			{
-				return Match5Dual()
+				return Match5Dual().setNeedsArming()
 			}
 			else
 			{
@@ -657,7 +662,7 @@ class Match5Spread(val special: Special) : GemSpecial()
 
 		if (otherSpecial is GemSpecial)
 		{
-			return Match5Dual()
+			return Match5Dual().setNeedsArming()
 		}
 		else if (other.matchable() != null)
 		{

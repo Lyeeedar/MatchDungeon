@@ -110,7 +110,7 @@ class CascadeUpdateStep : AbstractUpdateStep()
 					break
 				}
 
-				if (swappable == null)
+				if (swappable == null || !swappable.canMove)
 				{
 					break
 				}

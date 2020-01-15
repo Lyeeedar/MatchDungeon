@@ -281,11 +281,11 @@ class Grid(val width: Int, val height: Int, val level: Level)
 				val tile = grid[x, y]
 				val oldContents = tempgrid[x, y].contents
 
-				if (oldContents?.matchable() == null)
+				if (oldContents?.isBasicOrb() != true)
 				{
 					tile.contents = oldContents
 				}
-				else if (oldContents.matchable() != null)
+				else
 				{
 					val newDesc = tile.contents!!.matchable()!!.desc
 					tile.contents = oldContents
@@ -731,7 +731,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 
 		if (contents.special() != null)
 		{
-			if (!swappable.sealed)
+			if (!swappable.sealed && contents.special()!!.special !is GemSpecial)
 			{
 				contents.special()!!.special.setArmed(true, contents)
 			}
