@@ -64,7 +64,7 @@ class Level(val loadPath: String)
 
 	fun spawnOrb(): Entity
 	{
-		val toSpawn = spawnList.random()
+		val toSpawn = spawnList.random(grid.ran)
 
 		if (toSpawn == "Changer")
 		{
@@ -84,7 +84,7 @@ class Level(val loadPath: String)
 		else if (toSpawn == "Summon")
 		{
 			val data = ObjectMap<String, Any>()
-			data["FACTION"] = factions.random()
+			data["FACTION"] = factions.random(grid.ran)
 
 			val orb = createOrb(OrbDesc.getRandomOrb(this))
 			val monsterEffect = MonsterEffect(MonsterEffectType.SUMMON, data)
@@ -139,7 +139,7 @@ class Level(val loadPath: String)
 		this.victoryAction = victoryAction
 		this.defeatAction = defeatAction
 
-		grid = Grid(charGrid.xSize, charGrid.ySize, this)
+		grid = Grid(charGrid.xSize, charGrid.ySize, this, Random.random.nextLong())
 
 		var hasMonster = false
 
@@ -270,7 +270,7 @@ class Level(val loadPath: String)
 
 				if (symbol.friendlyDesc != null)
 				{
-					val friendly = symbol.friendlyDesc.getEntity(false)
+					val friendly = symbol.friendlyDesc.getEntity(false, grid)
 					friendly.pos().setTile(friendly, tile)
 				}
 
@@ -307,7 +307,7 @@ class Level(val loadPath: String)
 			}
 		}
 
-		val chosenFactionName = factions.random()
+		val chosenFactionName = factions.random(grid.ran)
 		if (chosenFactionName.isBlank())
 		{
 			if (customMonster != null)
@@ -322,7 +322,7 @@ class Level(val loadPath: String)
 
 		if (chosenFaction == null)
 		{
-			chosenFaction = Faction.load(theme.factions.random())
+			chosenFaction = Faction.load(theme.factions.random(grid.ran))
 		}
 
 		if (hasMonster)
@@ -405,7 +405,7 @@ class Level(val loadPath: String)
 						}
 
 						// Spawn monster for found size
-						val monsterDesc = monsterMarker.monsterDesc ?: if (monsterMarker.isBoss) chosenFaction!!.getBoss(size) else chosenFaction!!.get(size)
+						val monsterDesc = monsterMarker.monsterDesc ?: if (monsterMarker.isBoss) chosenFaction!!.getBoss(size, grid) else chosenFaction!!.get(size, grid)
 
 						var difficulty = monsterMarker.difficulty
 						if (monsterDesc.size < size)
@@ -413,7 +413,7 @@ class Level(val loadPath: String)
 							difficulty += 3
 						}
 
-						val monster = monsterDesc.getEntity(difficulty, false)
+						val monster = monsterDesc.getEntity(difficulty, false, grid)
 						monster.pos().size = size
 						monster.pos().tile = grid.grid[x, y]
 
@@ -571,7 +571,7 @@ class Level(val loadPath: String)
 				{
 					for (i in 0 until totalToSpawn)
 					{
-						chests.random()!!.numToSpawn++
+						chests.random(grid.ran).numToSpawn++
 					}
 				}
 			}
@@ -788,7 +788,7 @@ class Level(val loadPath: String)
 
 				if (xml.get("Theme", null) != null)
 				{
-					level.levelTheme = Theme.Companion.load("Themes/" + xml.get("Theme"))
+					level.levelTheme = Theme.load("Themes/" + xml.get("Theme"))
 				}
 
 				val customMonsterDesc = xml.getChildByName("CustomMonster")

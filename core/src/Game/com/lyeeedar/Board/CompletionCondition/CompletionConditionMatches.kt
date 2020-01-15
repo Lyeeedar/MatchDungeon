@@ -84,7 +84,7 @@ class CompletionConditionMatches(): AbstractCompletionCondition()
 
 			if (valid.size > 0)
 			{
-				toBeMatched[valid.random()] = entry.value
+				toBeMatched[valid.random(grid.ran)] = entry.value
 			}
 		}
 

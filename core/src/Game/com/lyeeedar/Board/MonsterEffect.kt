@@ -148,12 +148,12 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 			}
 
 			val name = data["NAME", null]?.toString() ?: ""
-			desc = if (name.isBlank()) faction.get(1) else (faction.get(name) ?: faction.get(1))!!
+			desc = if (name.isBlank()) faction.get(1, grid) else (faction.get(name) ?: faction.get(1, grid))!!
 		}
 
 		val difficulty = data["DIFFICULTY", "0"].toString().toInt()
 
-		val summoned = desc.getEntity(difficulty, data["ISSUMMON", "false"].toString().toBoolean())
+		val summoned = desc.getEntity(difficulty, data["ISSUMMON", "false"].toString().toBoolean(), grid)
 
 		summoned.pos().tile = tile
 		summoned.pos().addToTile(summoned)

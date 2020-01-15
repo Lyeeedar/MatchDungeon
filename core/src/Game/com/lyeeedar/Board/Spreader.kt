@@ -13,7 +13,6 @@ import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Sprite.SpriteWrapper
 import com.lyeeedar.Statistic
 import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Random
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.random
 
@@ -96,7 +95,7 @@ class Spreader
 			// select random
 			if (border.size > 0)
 			{
-				val chosenTile = border.asSequence().random()!!
+				val chosenTile = border.asSequence().random(grid.ran)!!
 
 				val newspreader = copy()
 
@@ -151,7 +150,7 @@ class Spreader
 		{
 			if (attackCooldown <= 0)
 			{
-				attackCooldown = attackCooldownMin + ((attackCooldownMax - attackCooldownMin) * Random.random()).toInt()
+				attackCooldown = attackCooldownMin + grid.ran.nextInt(attackCooldownMax - attackCooldownMin)
 				attackCooldown += (attackCooldown * Global.player.getStat(Statistic.HASTE, true)).toInt()
 			}
 

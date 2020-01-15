@@ -2,7 +2,6 @@ package com.lyeeedar.Board
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Interpolation
-import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
@@ -29,7 +28,7 @@ class FriendlyDesc
 	var hp: Int = 15
 	lateinit var ai: FriendlyAI
 
-	fun getEntity(isSummon: Boolean): Entity
+	fun getEntity(isSummon: Boolean, grid: Grid): Entity
 	{
 		val archetype = EntityArchetypeComponent.obtain().set(EntityArchetype.FRIENDLY)
 
@@ -44,7 +43,7 @@ class FriendlyDesc
 		healable.isSummon = isSummon
 
 		val ai = AIComponent.obtain()
-		ai.ai = this.ai.copy()
+		ai.ai = this.ai.copy(grid)
 
 		val tutorialComponent = TutorialComponent.obtain()
 		tutorialComponent.displayTutorial = fun (grid, entity, gridWidget): Tutorial? {
@@ -98,15 +97,15 @@ class FriendlyAI(val abilities: Array<FriendlyAbility>) : AbstractGridAI()
 			ability.cooldownTimer--
 			if (ability.cooldownTimer <= 0)
 			{
-				ability.cooldownTimer = ability.cooldownMin + MathUtils.random(ability.cooldownMax - ability.cooldownMin)
+				ability.cooldownTimer = ability.cooldownMin + grid.ran.nextInt(ability.cooldownMax - ability.cooldownMin)
 				ability.activate(entity, grid)
 			}
 		}
 	}
 
-	fun copy(): FriendlyAI
+	fun copy(grid: Grid): FriendlyAI
 	{
-		return FriendlyAI(abilities.map { it.copy() }.toGdxArray())
+		return FriendlyAI(abilities.map { it.copy(grid) }.toGdxArray())
 	}
 
 	companion object
@@ -137,7 +136,16 @@ abstract class FriendlyAbility
 
 	abstract fun activate(entity: Entity, grid: Grid)
 	abstract fun parse(xml: XmlData)
-	abstract fun copy(): FriendlyAbility
+	fun copy(grid: Grid): FriendlyAbility
+	{
+		val ability = doCopy()
+		ability.cooldownMin = cooldownMin
+		ability.cooldownMax = cooldownMax
+		ability.cooldownTimer = cooldownMin + grid.ran.nextInt(cooldownMax - cooldownMin)
+		ability.range = range
+		return doCopy()
+	}
+	abstract fun doCopy(): FriendlyAbility
 
 	companion object
 	{
@@ -156,7 +164,7 @@ abstract class FriendlyAbility
 			val cooldown = xml.get("Cooldown").split(",")
 			ability.cooldownMin = cooldown[0].toInt()
 			ability.cooldownMax = cooldown[1].toInt()
-			ability.cooldownTimer = ability.cooldownMin + MathUtils.random(ability.cooldownMax - ability.cooldownMin)
+			ability.cooldownTimer = ability.cooldownMin + (ability.cooldownMax - ability.cooldownMin) / 2
 
 			ability.range = xml.getInt("Range", 1)
 
@@ -179,7 +187,7 @@ abstract class FriendlyPopTileAbility : FriendlyAbility()
 	{
 		val validTargets = getTargets(entity, grid).filter { entity.pos().position.taxiDist(it) <= range }
 
-		val tile = validTargets.random() ?: return
+		val tile = validTargets.randomOrNull(grid.ran) ?: return
 		val srcTile = entity.pos().tile!!
 
 		var delay = 0f
@@ -242,13 +250,9 @@ class FriendlyAttackAbility : FriendlyPopTileAbility()
 		return grid.monsterTiles
 	}
 
-	override fun copy(): FriendlyAbility
+	override fun doCopy(): FriendlyAbility
 	{
 		val out = FriendlyAttackAbility()
-		out.cooldownMin = cooldownMin
-		out.cooldownMax = cooldownMax
-		out.cooldownTimer = out.cooldownMin + MathUtils.random(out.cooldownMax - out.cooldownMin)
-		out.range = range
 		out.damage = damage
 		out.flightEffect = flightEffect
 		out.hitEffect = hitEffect
@@ -264,13 +268,9 @@ class FriendlyBlockAbility : FriendlyPopTileAbility()
 		return grid.attackTiles
 	}
 
-	override fun copy(): FriendlyAbility
+	override fun doCopy(): FriendlyAbility
 	{
 		val out = FriendlyBlockAbility()
-		out.cooldownMin = cooldownMin
-		out.cooldownMax = cooldownMax
-		out.cooldownTimer = out.cooldownMin + MathUtils.random(out.cooldownMax - out.cooldownMin)
-		out.range = range
 		out.flightEffect = flightEffect
 		out.hitEffect = hitEffect
 
@@ -294,13 +294,9 @@ class FriendlyPopAbility : FriendlyPopTileAbility()
 		return tmpArray
 	}
 
-	override fun copy(): FriendlyAbility
+	override fun doCopy(): FriendlyAbility
 	{
 		val out = FriendlyPopAbility()
-		out.cooldownMin = cooldownMin
-		out.cooldownMax = cooldownMax
-		out.cooldownTimer = out.cooldownMin + MathUtils.random(out.cooldownMax - out.cooldownMin)
-		out.range = range
 		out.flightEffect = flightEffect
 		out.hitEffect = hitEffect
 
@@ -368,13 +364,9 @@ class FriendlyHealAbility : FriendlyAbility()
 		amount = xml.getInt("Amount", 1)
 	}
 
-	override fun copy(): FriendlyAbility
+	override fun doCopy(): FriendlyAbility
 	{
 		val out = FriendlyHealAbility()
-		out.cooldownMin = cooldownMin
-		out.cooldownMax = cooldownMax
-		out.cooldownTimer = out.cooldownMin + MathUtils.random(out.cooldownMax - out.cooldownMin)
-		out.range = range
 		out.amount = amount
 
 		return out
@@ -448,13 +440,9 @@ class FriendlyMoveAbility : FriendlyAbility()
 
 	}
 
-	override fun copy(): FriendlyAbility
+	override fun doCopy(): FriendlyAbility
 	{
 		val out = FriendlyMoveAbility()
-		out.cooldownMin = cooldownMin
-		out.cooldownMax = cooldownMax
-		out.cooldownTimer = out.cooldownMin + MathUtils.random(out.cooldownMax - out.cooldownMin)
-
 		return out
 	}
 }

@@ -111,7 +111,7 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 					var chosen: Tile? = null
 					while (valid.size > 0)
 					{
-						chosen = valid.removeRandom(Random.random)
+						chosen = valid.removeRandom(grid.ran)
 						if (chosen.contents?.isBasicOrb() == true)
 						{
 							break

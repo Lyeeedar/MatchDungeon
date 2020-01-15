@@ -103,7 +103,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 						if (currentStage < rootDesc.stages.size - 1)
 						{
 							val nextDesc = rootDesc.stages[currentStage + 1]
-							val monster = nextDesc.getEntity(monsterAI.difficulty, false)
+							val monster = nextDesc.getEntity(monsterAI.difficulty, false, grid)
 							monster.pos().setTile(monster, tile)
 						}
 					}

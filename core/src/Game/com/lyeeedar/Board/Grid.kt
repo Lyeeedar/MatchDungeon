@@ -22,8 +22,11 @@ import com.lyeeedar.UI.PowerBar
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
 
-class Grid(val width: Int, val height: Int, val level: Level)
+class Grid(val width: Int, val height: Int, val level: Level, val seed: Long)
 {
+	// ----------------------------------------------------------------------
+	val ran = Random.obtainTS(seed)
+
 	// ----------------------------------------------------------------------
 	val grid: Array2D<Tile> = Array2D(width, height ){ x, y -> Tile(x, y, this) }
 	val spawnCount: Array2D<Int> = Array2D(width, height + 1){ _, _ -> 0 }
@@ -338,7 +341,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 							{
 								if (v is CompletionConditionCustomOrb)
 								{
-									if (Random.random.nextFloat() < v.orbChance)
+									if (ran.nextFloat() < v.orbChance)
 									{
 										valid.add(OrbDesc.getNamedOrb(v.targetOrbName))
 									}
@@ -360,7 +363,7 @@ class Grid(val width: Int, val height: Int, val level: Level)
 							valid.removeValue(u1, true)
 						}
 
-						toSpawnMatchable.setDesc(valid.random(), toSpawn)
+						toSpawnMatchable.setDesc(valid.random(ran), toSpawn)
 						if (toSpawnMatchable.isChanger) toSpawnMatchable.nextDesc = OrbDesc.getRandomOrb(level, toSpawnMatchable.desc)
 					}
 

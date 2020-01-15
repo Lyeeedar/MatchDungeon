@@ -504,7 +504,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 			val width = gridTemplate[0].size
 			val height = gridTemplate.size
 
-			val tempGrid = Grid(width, height, Level(""))
+			val tempGrid = Grid(width, height, Level(""), 1)
 			val grid = Array2D<Tile>(width, height) { x,y -> Tile(x, y, tempGrid) }
 
 			for (x in 0 until grid.width)

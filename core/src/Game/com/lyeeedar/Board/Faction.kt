@@ -3,12 +3,8 @@ package com.lyeeedar.Board
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.IntMap
 import com.badlogic.gdx.utils.ObjectMap
-import com.lyeeedar.Renderables.Particle.ParticleEffect
-import com.lyeeedar.Renderables.Sprite.Sprite
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Point
-import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.getXml
+import com.lyeeedar.Util.random
 import ktx.collections.set
 
 /**
@@ -20,16 +16,16 @@ class Faction
 	val sizeMap = IntMap<Array<MonsterDesc>>()
 	val bossSizeMap = IntMap<Array<MonsterDesc>>()
 
-	fun get(size: Int) : MonsterDesc
+	fun get(size: Int, grid: Grid) : MonsterDesc
 	{
 		var s = size
 		while (s > 0)
 		{
-			if (sizeMap.containsKey(s)) return sizeMap[s].random()
+			if (sizeMap.containsKey(s)) return sizeMap[s].asSequence().random(grid.ran)!!
 			s--
 		}
 
-		return sizeMap.values().first().random()
+		return sizeMap.values().first().random(grid.ran)
 	}
 
 	fun get(name: String): MonsterDesc?
@@ -45,16 +41,16 @@ class Faction
 		return null
 	}
 
-	fun getBoss(size: Int) : MonsterDesc
+	fun getBoss(size: Int, grid: Grid) : MonsterDesc
 	{
 		var s = size
 		while (s > 0)
 		{
-			if (bossSizeMap.containsKey(s)) return bossSizeMap[s].random()
+			if (bossSizeMap.containsKey(s)) return bossSizeMap[s].asSequence().random(grid.ran)!!
 			s--
 		}
 
-		return bossSizeMap.values().first().random()
+		return bossSizeMap.values().first().random(grid.ran)
 	}
 
 	fun getBoss(name: String): MonsterDesc?

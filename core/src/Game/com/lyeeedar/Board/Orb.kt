@@ -1,7 +1,6 @@
 package com.lyeeedar.Board
 
 import com.badlogic.ashley.core.Entity
-import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Components.*
@@ -93,14 +92,14 @@ class OrbDesc()
 			{
 				while (true)
 				{
-					val index = MathUtils.random(level.orbs - 1)
+					val index = level.grid.ran.nextInt(level.orbs - 1)
 					if (validOrbs[index] == toIgnore) continue
 					return validOrbs[index]
 				}
 			}
 			else
 			{
-				val index = MathUtils.random(level.orbs - 1)
+				val index = level.grid.ran.nextInt(level.orbs - 1)
 				return validOrbs[index]
 			}
 		}

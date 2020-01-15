@@ -2,7 +2,6 @@ package com.lyeeedar.Board
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Interpolation
-import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Components.*
@@ -49,7 +48,7 @@ class MonsterDesc
 
 	var originalDesc: MonsterDesc? = null
 
-	fun getEntity(difficulty: Int, isSummon: Boolean): Entity
+	fun getEntity(difficulty: Int, isSummon: Boolean, grid: Grid): Entity
 	{
 		val archetype = EntityArchetypeComponent.obtain().set(EntityArchetype.MONSTER)
 
@@ -70,7 +69,7 @@ class MonsterDesc
 		}
 
 		val ai = AIComponent.obtain()
-		ai.ai = MonsterAI(this, difficulty)
+		ai.ai = MonsterAI(this, difficulty, grid)
 
 		val tutorialComponent = TutorialComponent.obtain()
 		tutorialComponent.displayTutorial = fun (grid, entity, gridWidget): Tutorial? {
@@ -122,7 +121,7 @@ class MonsterDesc
 
 			desc.attackNumPips = xml.getInt("AttackNumPips")
 
-			val atkCooldown = xml.get("AttackCooldown").split(',');
+			val atkCooldown = xml.get("AttackCooldown").split(',')
 			desc.attackCooldown = Point(atkCooldown[0].toInt(), atkCooldown[1].toInt())
 
 			desc.attackDamage = xml.getInt("AttackDamage", 1)
@@ -161,7 +160,7 @@ class MonsterDesc
 	}
 }
 
-class MonsterAI(val desc: MonsterDesc, val difficulty: Int) : AbstractGridAI()
+class MonsterAI(val desc: MonsterDesc, val difficulty: Int, grid: Grid) : AbstractGridAI()
 {
 	val abilities = Array<AbstractMonsterAbility>()
 
@@ -179,7 +178,7 @@ class MonsterAI(val desc: MonsterDesc, val difficulty: Int) : AbstractGridAI()
 		attackNumPips = desc.attackNumPips
 		attackCooldown = desc.attackCooldown.copy()
 
-		abilities.addAll(desc.abilities.map{ it.copy() }.toGdxArray())
+		abilities.addAll(desc.abilities.map{ it.copy(grid) }.toGdxArray())
 
 		if (difficulty >= 1)
 		{
@@ -214,7 +213,7 @@ class MonsterAI(val desc: MonsterDesc, val difficulty: Int) : AbstractGridAI()
 			var max = desc.attackCooldown.max
 			max += (Global.player.getStat(Statistic.HASTE) * max).toInt()
 
-			atkCooldown = (MathUtils.random() * max).toInt()
+			atkCooldown = (grid.ran.nextFloat() * max).toInt()
 		}
 		else
 		{
@@ -245,10 +244,10 @@ class MonsterAI(val desc: MonsterDesc, val difficulty: Int) : AbstractGridAI()
 			var max = attackCooldown.max
 			max += (Global.player.getStat(Statistic.HASTE) * max).toInt()
 
-			atkCooldown = min + MathUtils.random(max - min)
+			atkCooldown = min + grid.ran.nextInt(max - min)
 
 			// do attack
-			val tile = grid.grid.filter { validAttack(grid, it) }.random()
+			val tile = grid.grid.filter { validAttack(grid, it) }.random(grid.ran)
 
 			if (tile?.contents != null)
 			{
@@ -292,7 +291,7 @@ class MonsterAI(val desc: MonsterDesc, val difficulty: Int) : AbstractGridAI()
 				var max = ability.cooldownMax
 				max += (Global.player.getStat(Statistic.HASTE) * max).toInt()
 
-				ability.cooldownTimer = min + MathUtils.random(max - min)
+				ability.cooldownTimer = min + grid.ran.nextInt(max - min)
 				ability.activate(entity, grid)
 			}
 		}
@@ -325,12 +324,12 @@ abstract class AbstractMonsterAbility
 
 	val data = ObjectMap<String, Any>()
 
-	fun copy(): AbstractMonsterAbility
+	fun copy(grid: Grid): AbstractMonsterAbility
 	{
 		val ability = doCopy()
 		ability.cooldownMin = cooldownMin
 		ability.cooldownMax = cooldownMax
-		ability.cooldownTimer = ability.cooldownMin + MathUtils.random(ability.cooldownMax - ability.cooldownMin)
+		ability.cooldownTimer = cooldownMin + grid.ran.nextInt(cooldownMax - cooldownMin)
 		ability.usages = usages
 		ability.targetRestriction = targetRestriction
 		ability.targetCount = targetCount
@@ -375,7 +374,7 @@ abstract class AbstractMonsterAbility
 			validTargets = validTargets.filter { validAttack(grid, it) }
 		}
 
-		val chosen = validTargets.asSequence().random(targetCount).toList().toGdxArray()
+		val chosen = validTargets.asSequence().random(targetCount, grid.ran).toList().toGdxArray()
 
 		val finalTargets = Array<Tile>()
 
@@ -397,7 +396,7 @@ abstract class AbstractMonsterAbility
 			val chosenCount = (finalTargets.size.toFloat() * coverage).ciel()
 			while (finalTargets.size > chosenCount)
 			{
-				finalTargets.removeRandom(Random.random)
+				finalTargets.removeRandom(grid.ran)
 			}
 		}
 
@@ -435,7 +434,7 @@ abstract class AbstractMonsterAbility
 			val cooldown = xml.get("Cooldown").split(",")
 			ability.cooldownMin = cooldown[0].toInt()
 			ability.cooldownMax = cooldown[1].toInt()
-			ability.cooldownTimer = ability.cooldownMin + MathUtils.random(ability.cooldownMax - ability.cooldownMin)
+			ability.cooldownTimer = ability.cooldownMin + (ability.cooldownMax - ability.cooldownMin) / 2
 
 			ability.usages = xml.getInt("Usages", -1)
 
@@ -469,7 +468,7 @@ class MonsterMoveAbility : AbstractMonsterAbility()
 
 	override fun activate(entity: Entity, grid: Grid, targets: Array<Tile>)
 	{
-		val target = targets.filter{ entity.pos().isValidTile(it, entity) }.asSequence().random()
+		val target = targets.filter{ entity.pos().isValidTile(it, entity) }.asSequence().random(grid.ran)
 
 		entity.renderable().renderable.animation = null
 
@@ -820,12 +819,12 @@ class MonsterSummonAbility : AbstractMonsterAbility()
 				}
 
 				val name = data["NAME", null]?.toString() ?: ""
-				desc = if (name.isBlank()) faction.get(1) else (faction.get(name) ?: faction.get(1))!!
+				desc = if (name.isBlank()) faction.get(1, grid) else (faction.get(name) ?: faction.get(1, grid))
 			}
 
 			val difficulty = data["DIFFICULTY", "0"].toString().toInt()
 
-			val summoned = desc.getEntity(difficulty, data["ISSUMMON", "false"].toString().toBoolean())
+			val summoned = desc!!.getEntity(difficulty, data["ISSUMMON", "false"].toString().toBoolean(), grid)
 
 			summoned.pos().tile = tile
 			summoned.pos().addToTile(summoned)

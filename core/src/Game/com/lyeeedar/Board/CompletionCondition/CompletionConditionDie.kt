@@ -74,14 +74,14 @@ class CompletionConditionDie : AbstractCompletionCondition()
 				{
 					if (remaining < 1f)
 					{
-						if (Random.random.nextFloat() < blockChance * remaining)
+						if (grid.ran.nextFloat() < blockChance * remaining)
 						{
 							return true
 						}
 					}
 					else
 					{
-						if (Random.random.nextFloat() < blockChance)
+						if (grid.ran.nextFloat() < blockChance)
 						{
 							return true
 						}

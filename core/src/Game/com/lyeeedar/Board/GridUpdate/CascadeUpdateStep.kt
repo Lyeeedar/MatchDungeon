@@ -2,7 +2,6 @@ package com.lyeeedar.Board.GridUpdate
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Interpolation
-import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Spreader
@@ -302,7 +301,7 @@ class CascadeUpdateStep : AbstractUpdateStep()
 						// if found one, pull in and set to 2
 						if (diagLValid && diagRValid)
 						{
-							if (MathUtils.randomBoolean())
+							if (grid.ran.nextBoolean())
 							{
 								pullIn(diagL!!)
 							}
