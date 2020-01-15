@@ -2,6 +2,7 @@ package com.lyeeedar.Board
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.Array
+import com.lyeeedar.Board.GridUpdate.Match
 import com.lyeeedar.Components.*
 import com.lyeeedar.Renderables.Renderable
 import com.lyeeedar.Renderables.Sprite.SpriteWrapper
@@ -45,7 +46,7 @@ class Tile(x: Int, y: Int, val grid: Grid) : Point(x, y)
 		delayedActions.add(DelayedAction(function, delay))
 	}
 
-	val associatedMatches = kotlin.Array<Match?>(2) {e -> null}
+	val associatedMatches = kotlin.Array<Match?>(2) { e -> null}
 
 	override fun toString(): String
 	{

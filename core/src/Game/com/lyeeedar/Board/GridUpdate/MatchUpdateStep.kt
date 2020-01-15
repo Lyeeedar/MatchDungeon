@@ -550,3 +550,15 @@ class MatchUpdateStep : AbstractUpdateStep()
 		}
 	}
 }
+
+data class Match(val p1: Point, val p2: Point, var used: Boolean = false)
+{
+	fun length() = p1.dist(p2) + 1
+	fun points() = p1.rangeTo(p2)
+	fun direction() = Direction.getDirection(p1, p2)
+	fun free()
+	{
+		p1.free()
+		p2.free()
+	}
+}

@@ -103,7 +103,7 @@ class Level(val loadPath: String)
 		}
 	}
 
-	fun create(questTheme: Theme, player: Player, victoryAction: () -> Unit, defeatAction: () -> Unit)
+	fun create(questTheme: Theme, player: Player, victoryAction: () -> Unit, defeatAction: () -> Unit, seed: Long)
 	{
 		this.questTheme = questTheme
 
@@ -139,7 +139,7 @@ class Level(val loadPath: String)
 		this.victoryAction = victoryAction
 		this.defeatAction = defeatAction
 
-		grid = Grid(charGrid.xSize, charGrid.ySize, this, Random.random.nextLong())
+		grid = Grid(charGrid.xSize, charGrid.ySize, this, seed)
 
 		var hasMonster = false
 

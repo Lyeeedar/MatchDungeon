@@ -10,7 +10,6 @@ import com.badlogic.gdx.utils.IntMap
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.OrbDesc
 import com.lyeeedar.Components.matchable
-import com.lyeeedar.Direction
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.SpriteWidget
@@ -161,17 +160,5 @@ class CompletionConditionMatches(): AbstractCompletionCondition()
 		}
 
 		return table
-	}
-}
-
-data class Match(val p1: Point, val p2: Point, var used: Boolean = false)
-{
-	fun length() = p1.dist(p2) + 1
-	fun points() = p1.rangeTo(p2)
-	fun direction() = Direction.getDirection(p1, p2)
-	fun free()
-	{
-		p1.free()
-		p2.free()
 	}
 }

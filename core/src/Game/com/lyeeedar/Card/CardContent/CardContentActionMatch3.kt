@@ -6,6 +6,7 @@ import com.lyeeedar.Game.Global
 import com.lyeeedar.ScreenEnum
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Screens.GridScreen
+import com.lyeeedar.Util.Random
 import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.directory
@@ -63,7 +64,7 @@ class CardContentActionMatch3 : AbstractCardContentAction()
 
 							   Statics.game.switchScreen(ScreenEnum.CARD)
 							   CardContentScreen.advanceContent()
-						   })
+						   }, Random.random.nextLong())
 			val screen = Statics.game.getScreen(ScreenEnum.GRID) as GridScreen
 			screen.updateLevel(level!!, Global.player)
 			Statics.game.switchScreen(screen)
