@@ -12,6 +12,7 @@ import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.Card.Card
 import com.lyeeedar.EquipmentSlot
+import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.*
@@ -314,6 +315,23 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 		{
 			output.writeInt(equip.path.hashCode())
 		}
+	}
+
+	fun getAbilityIndex(ability: Ability): Int
+	{
+		var i = 0
+		for (slot in EquipmentSlot.Values)
+		{
+			val equip = equipment[slot] ?: continue
+			if (equip.ability == ability)
+			{
+				return i
+			}
+
+			i++
+		}
+
+		return -1
 	}
 
 	companion object

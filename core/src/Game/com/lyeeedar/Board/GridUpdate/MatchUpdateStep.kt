@@ -10,7 +10,10 @@ import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Board.*
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
+import com.lyeeedar.Game.Character
 import com.lyeeedar.Game.Global
+import com.lyeeedar.Game.Player
+import com.lyeeedar.Game.PlayerDeck
 import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Renderable
 import com.lyeeedar.Renderables.Sprite.Sprite
@@ -504,7 +507,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 			val width = gridTemplate[0].size
 			val height = gridTemplate.size
 
-			val tempGrid = Grid(width, height, Level(""), 1)
+			val tempGrid = Grid(width, height, Level(""), Replay("", "", 0, 1, Player(Character(""), PlayerDeck())))
 			val grid = Array2D<Tile>(width, height) { x,y -> Tile(x, y, tempGrid) }
 
 			for (x in 0 until grid.width)

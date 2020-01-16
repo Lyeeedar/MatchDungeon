@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectSet
+import com.kryo.serialize
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionCustomOrb
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
 import com.lyeeedar.Board.GridUpdate.*
@@ -12,6 +13,7 @@ import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Global
+import com.lyeeedar.Game.Player
 import com.lyeeedar.Renderables.Animation.BumpAnimation
 import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
@@ -23,13 +25,10 @@ import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
 import ktx.collections.toGdxArray
 
-class Grid(val width: Int, val height: Int, val level: Level, val seed: Long)
+class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay)
 {
 	// ----------------------------------------------------------------------
-	val ran = Random.obtainTS(seed)
-
-	// ----------------------------------------------------------------------
-	val history = Array<HistoryMove>()
+	val ran = Random.obtainTS(replay.seed)
 
 	// ----------------------------------------------------------------------
 	val grid: Array2D<Tile> = Array2D(width, height ){ x, y -> Tile(x, y, this) }
@@ -270,7 +269,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val seed: Long)
 	// ----------------------------------------------------------------------
 	fun refill()
 	{
-		history.add(HistoryMove(true))
+		replay.moves.add(HistoryMove(true, grid.toString()))
 
 		val tempgrid: Array2D<Tile> = Array2D(width, height ){ x, y -> Tile(x, y, this) }
 		for (x in 0 until width)
@@ -384,7 +383,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val seed: Long)
 	{
 		if (level.isVictory || level.isDefeat) return
 
-		history.add(HistoryMove(activeAbility!!, activeAbility!!.selectedTargets.toGdxArray()))
+		replay.moves.add(HistoryMove(Global.player.getAbilityIndex(activeAbility!!), activeAbility!!.selectedTargets.map{ it.copy() }.toGdxArray(), grid.toString()))
 
 		activeAbility!!.activate(this)
 		activeAbility = null
@@ -515,6 +514,9 @@ class Grid(val width: Int, val height: Int, val level: Level, val seed: Long)
 	// ----------------------------------------------------------------------
 	private fun swap(): Boolean
 	{
+		val gridSnapshot = grid.toString()
+		val historySwap = Pair(toSwap!!.first.copy(), toSwap!!.second.copy())
+
 		val oldTile = tile(toSwap!!.first)
 		val newTile = tile(toSwap!!.second)
 
@@ -560,7 +562,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val seed: Long)
 				lastSwapped = newTile
 				matchHint = null
 
-				history.add(HistoryMove(Pair(oldTile, newTile)))
+				replay.moves.add(HistoryMove(historySwap, gridSnapshot))
 				return true
 			}
 		}
@@ -606,7 +608,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val seed: Long)
 				newEntity.renderable().renderable.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(oldTile.getPosDiff(newTile)).invertY(), Interpolation.linear)
 			}
 
-			history.add(HistoryMove(Pair(oldTile, newTile)))
+			replay.moves.add(HistoryMove(historySwap, gridSnapshot))
 			return true
 		}
 	}
@@ -815,22 +817,36 @@ class HistoryMove
 {
 	var swap: Pair<Point, Point>? = null
 	var refill = false
-	var ability: Ability? = null
+	var abilityIndex: Int? = null
 	var abilityTargets: Array<Point>? = null
+	val levelSnapshot: String
 
-	constructor(swap: Pair<Point, Point>)
+	constructor(swap: Pair<Point, Point>, levelSnapshot: String)
 	{
 		this.swap = swap
+		this.levelSnapshot = levelSnapshot
 	}
 
-	constructor(refill: Boolean)
+	constructor(refill: Boolean, levelSnapshot: String)
 	{
 		this.refill = refill
+		this.levelSnapshot = levelSnapshot
 	}
 
-	constructor(ability: Ability, targets: Array<Point>)
+	constructor(abilityIndex: Int, targets: Array<Point>, levelSnapshot: String)
 	{
-		this.ability = ability
+		this.abilityIndex = abilityIndex
 		this.abilityTargets = targets
+		this.levelSnapshot = levelSnapshot
 	}
+}
+
+class Replay(val questTheme: String, val levelPath: String, val variant: Int, val seed: Long, player: Player)
+{
+	val player: ByteArray = serialize(player)
+	val globalflags: ByteArray = serialize(Global.globalflags)
+	val questflags: ByteArray = serialize(Global.questflags)
+	val cardflags: ByteArray = serialize(Global.cardflags)
+
+	val moves = Array<HistoryMove>()
 }

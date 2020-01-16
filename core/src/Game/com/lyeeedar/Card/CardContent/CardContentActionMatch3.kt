@@ -33,7 +33,9 @@ class CardContentActionMatch3 : AbstractCardContentAction()
 	{
 		if (level == null)
 		{
-			level = Level.load(cardContent.path.directory() + "/" + levelFile).random()
+			val levels = Level.load(cardContent.path.directory() + "/" + levelFile)
+			val chosenLevelIndex = Random.random.nextInt(levels.size)
+			level = levels[chosenLevelIndex]
 			level!!.create(CardContentScreen.currentQuest.currentTheme, Global.player,
 						   {
 							   level = null
@@ -64,7 +66,7 @@ class CardContentActionMatch3 : AbstractCardContentAction()
 
 							   Statics.game.switchScreen(ScreenEnum.CARD)
 							   CardContentScreen.advanceContent()
-						   }, Random.random.nextLong())
+						   }, Random.random.nextLong(), chosenLevelIndex)
 			val screen = Statics.game.getScreen(ScreenEnum.GRID) as GridScreen
 			screen.updateLevel(level!!, Global.player)
 			Statics.game.switchScreen(screen)

@@ -103,7 +103,7 @@ class Level(val loadPath: String)
 		}
 	}
 
-	fun create(questTheme: Theme, player: Player, victoryAction: () -> Unit, defeatAction: () -> Unit, seed: Long)
+	fun create(questTheme: Theme, player: Player, victoryAction: () -> Unit, defeatAction: () -> Unit, seed: Long, variant: Int)
 	{
 		this.questTheme = questTheme
 
@@ -139,7 +139,9 @@ class Level(val loadPath: String)
 		this.victoryAction = victoryAction
 		this.defeatAction = defeatAction
 
-		grid = Grid(charGrid.xSize, charGrid.ySize, this, seed)
+		val replay = Replay(questTheme.path, loadPath, variant, seed, player)
+
+		grid = Grid(charGrid.xSize, charGrid.ySize, this, replay)
 
 		var hasMonster = false
 
@@ -207,7 +209,7 @@ class Level(val loadPath: String)
 					loadTile(tile, '.')
 				}
 
-				if (symbol.usageCondition.evaluate(Global.getVariableMap()) == 0f)
+				if (symbol.usageCondition.evaluate(Global.getVariableMap(), grid.ran.nextLong()) == 0f)
 				{
 					loadTile(tile, symbol.fallbackChar)
 					return

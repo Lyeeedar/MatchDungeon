@@ -1,15 +1,14 @@
 package com.lyeeedar.headless
 
-import com.lyeeedar.Board.Grid
-import com.lyeeedar.Board.Level
-import com.lyeeedar.Board.Mote
-import com.lyeeedar.Board.Theme
+import com.badlogic.gdx.utils.Array
+import com.lyeeedar.Board.*
 import com.lyeeedar.Components.renderable
 import com.lyeeedar.Game.*
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.PowerBar
 import com.lyeeedar.Util.Future
+import com.lyeeedar.Util.Random
 import com.lyeeedar.Util.XmlData
 
 class LevelSolver
@@ -44,33 +43,37 @@ class LevelSolver
 			println("")
 
 			val levels = Level.load(path)
+			val resolveLevels = Level.load(path)
 
-			var i = 0
-			for (level in levels)
+			for (i in 0 until levels.size)
 			{
-				val character = Character.load("Adventurer")
-				val player = Player(character, PlayerDeck())
-				Global.player = player
-				Global.deck = GlobalDeck()
-
-				level.create(theme, player, {}, {})
-
-				for (cond in level.victoryConditions)
+				val seed = Random.random.nextLong()
+				fun createLevel(level: Level)
 				{
-					cond.createTable(level.grid)
-				}
-				for (cond in level.defeatConditions)
-				{
-					cond.createTable(level.grid)
+					val character = Character.load("Adventurer")
+					val player = Player(character, PlayerDeck())
+					Global.player = player
+					Global.deck = GlobalDeck()
+
+					level.create(theme, player, {}, {}, seed, i)
+
+					for (cond in level.victoryConditions)
+					{
+						cond.createTable(level.grid)
+					}
+					for (cond in level.defeatConditions)
+					{
+						cond.createTable(level.grid)
+					}
 				}
 
-				val grid = level.grid
+				createLevel(levels[i])
 
 				try
 				{
 					println("")
 					println("Solving level '$path' variant '$i'")
-					val victory = solve(grid)
+					val victory = solve(levels[i].grid)
 					println("Level solved. Victory=$victory")
 
 					if (victory)
@@ -86,7 +89,26 @@ class LevelSolver
 					throw ex
 				}
 
-				i++
+				createLevel(resolveLevels[i])
+
+				try
+				{
+					println("")
+					println("Resolving level '$path' variant '$i'")
+					val victory = resolve(resolveLevels[i].grid, levels[i].grid.replay.moves)
+					println("Level solved. Victory=$victory")
+
+					if (levels[i].grid.grid.toString() != resolveLevels[i].grid.grid.toString())
+					{
+						throw RuntimeException("History didnt give the same result!")
+					}
+				}
+				catch (ex: Exception)
+				{
+					println("Resolving level '$path' variant '$i' crashed!")
+
+					throw ex
+				}
 			}
 		}
 
@@ -98,46 +120,23 @@ class LevelSolver
 
 	fun solve(grid: Grid): Boolean
 	{
+		return solveLevel(grid, fun (moveCount: Int) { makeMove(grid, moveCount > 200)})
+	}
+
+	fun resolve(grid: Grid, moves: Array<HistoryMove>): Boolean
+	{
+		return solveLevel(grid, fun (moveCount: Int) { makeMove(grid, moves[moveCount]) })
+	}
+
+	fun solveLevel(grid: Grid, moveFunc: (Int)->Unit): Boolean
+	{
 		val powerBar = PowerBar()
 		val gridWidget = GridWidget(grid)
 
 		var moveCount = 0
 		while (!grid.level.isVictory && !grid.level.isDefeat)
 		{
-			var updateCount = 0
-			while (grid.inTurn || grid.isUpdating)
-			{
-				grid.update(1000f)
-				Future.update(1000f)
-
-				for (tile in grid.grid)
-				{
-					tile.effects.clear()
-
-					tile.contents?.renderable()?.renderable?.animation = null
-				}
-
-				Mote.clear()
-
-				for (label in grid.match.messageList)
-				{
-					label.remove()
-				}
-
-				if (grid.hasAnim()) throw RuntimeException("Grid still has anim")
-
-				updateCount++
-
-				if (updateCount > 10 && updateCount.rem(20) == 0)
-				{
-					println("UpdateCount: $updateCount")
-				}
-
-				if (updateCount > 1000)
-				{
-					throw RuntimeException("Turn got stuck in infinite update loop!")
-				}
-			}
+			completeTurn(grid)
 
 			if (moveCount > 10 && moveCount.rem(20) == 0)
 			{
@@ -149,8 +148,11 @@ class LevelSolver
 				throw RuntimeException("Level took over 1000 moves, something is wrong")
 			}
 
-			moveCount++
-			makeMove(grid, moveCount > 200)
+			if (!grid.level.isVictory && !grid.level.isDefeat)
+			{
+				moveFunc(moveCount)
+				moveCount++
+			}
 		}
 		println("MoveCount: $moveCount")
 
@@ -167,33 +169,74 @@ class LevelSolver
 		return grid.level.isVictory
 	}
 
+	fun completeTurn(grid: Grid)
+	{
+		var updateCount = 0
+		while (grid.inTurn || grid.isUpdating)
+		{
+			grid.update(1000f)
+			Future.update(1000f)
+
+			for (tile in grid.grid)
+			{
+				tile.effects.clear()
+
+				tile.contents?.renderable()?.renderable?.animation = null
+			}
+
+			Mote.clear()
+
+			for (label in grid.match.messageList)
+			{
+				label.remove()
+			}
+
+			if (grid.hasAnim()) throw RuntimeException("Grid still has anim")
+
+			updateCount++
+
+			if (updateCount > 10 && updateCount.rem(20) == 0)
+			{
+				println("UpdateCount: $updateCount")
+			}
+
+			if (updateCount > 1000)
+			{
+				throw RuntimeException("Turn got stuck in infinite update loop!")
+			}
+		}
+	}
+
 	fun makeMove(grid: Grid, print: Boolean)
 	{
+		var move = ""
+		val historyMove: HistoryMove
 		if (PowerBar.instance.power == PowerBar.instance.maxPower)
 		{
-			grid.refill()
-			return
-		}
-
-		var move = ""
-
-		if (grid.isUpdating || grid.inTurn)
-		{
-			throw RuntimeException("Grid was still updating when entering make move. Updating ${grid.isUpdating}. InTurn ${grid.inTurn}")
-		}
-
-		val bestMove = grid.cleanup.findBestMove(grid)
-		if (bestMove == null)
-		{
-			grid.refill()
+			historyMove = HistoryMove(true, grid.grid.toString())
+			PowerBar.instance.power = 0
 			move = "refill"
 		}
 		else
 		{
-			move = bestMove.name
+			if (grid.isUpdating || grid.inTurn)
+			{
+				throw RuntimeException("Grid was still updating when entering make move. Updating ${grid.isUpdating}. InTurn ${grid.inTurn}")
+			}
 
-			grid.dragStart = bestMove.swapStart
-			grid.dragEnd(bestMove.swapEnd)
+			val bestMove = grid.cleanup.findBestMove(grid)
+			if (bestMove == null)
+			{
+				historyMove = HistoryMove(true, grid.grid.toString())
+				PowerBar.instance.power = 0
+				move = "refill"
+			}
+			else
+			{
+				move = bestMove.name
+
+				historyMove = HistoryMove(Pair(bestMove.swapStart, bestMove.swapEnd), grid.grid.toString())
+			}
 		}
 
 		if (print)
@@ -201,26 +244,52 @@ class LevelSolver
 			println("Making move $move")
 		}
 
-		try
+		makeMove(grid, historyMove)
+	}
+
+	fun makeMove(grid: Grid, historyMove: HistoryMove)
+	{
+		val levelState = grid.grid.toString()
+		if (levelState != historyMove.levelSnapshot)
 		{
-			grid.update(1000f)
-			Future.update(1000f)
-		}
-		catch (ex: java.lang.RuntimeException)
-		{
-			if (ex.message?.contains("Swap") == true)
-			{
-				throw RuntimeException("Swap $move was not a valid swap!")
-			}
-			else
-			{
-				throw ex
-			}
+			throw RuntimeException("History move doesnt match grid state!")
 		}
 
-		if (!grid.inTurn && !(grid.level.isVictory || grid.level.isDefeat))
+		if (historyMove.refill)
 		{
-			throw RuntimeException("Made a move ($move) but not in turn! Updating: " + grid.isUpdating)
+			grid.refill()
+			return
+		}
+		else if (historyMove.swap != null)
+		{
+			grid.dragStart = historyMove.swap!!.first
+			grid.dragEnd(historyMove.swap!!.second)
+
+			try
+			{
+				grid.update(1000f)
+				Future.update(1000f)
+			}
+			catch (ex: java.lang.RuntimeException)
+			{
+				if (ex.message?.contains("Swap") == true)
+				{
+					throw RuntimeException("Swap was not a valid swap!")
+				}
+				else
+				{
+					throw ex
+				}
+			}
+
+			if (!grid.inTurn && !(grid.level.isVictory || grid.level.isDefeat))
+			{
+				throw RuntimeException("Made a move but not in turn! Updating: " + grid.isUpdating)
+			}
+		}
+		else
+		{
+			throw RuntimeException("Abilities not supported by level solver!")
 		}
 	}
 }

@@ -37,7 +37,7 @@ class Effect(val type: Type)
 		{
 			Type.POP -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>)
 			{
-				val dam = data["DAMAGE", "0"].toString().evaluate(variables)
+				val dam = data["DAMAGE", "0"].toString().evaluate(variables, grid.ran.nextLong())
 
 				val bonusDam: Float
 				if (data["DAMAGE", "0"].toString().length == 1)
