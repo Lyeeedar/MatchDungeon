@@ -79,7 +79,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 	val namedOrbTiles = Array<Tile>()
 
 	// ----------------------------------------------------------------------
-	var inTurn = true
+	var inTurn = false
 	var isUpdating = false
 
 	// ----------------------------------------------------------------------
@@ -559,7 +559,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 				oldTile.contents = null
 
 				merged.setArmed(true, newEntity)
-				newEntity.add(MarkedForDeletionComponent.obtain())
+				newEntity.add(MarkedForDeletionComponent.obtain("swap merged"))
 
 				lastSwapped = newTile
 				matchHint = null
@@ -619,7 +619,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 	// ----------------------------------------------------------------------
 	fun damage(tile: Tile, damageableEntity: Entity, delay: Float, damSource: Any? = null, bonusDam: Float = 0f, pierce: Float = 0f)
 	{
-		var logString = "damage tile(${tile.x},${tile.y}) with bonusDam($bonusDam) hitting entity($damageableEntity)"
+		var logString = "damage (${tile.x},${tile.y}) with bonusDam($bonusDam) hitting entity(${damageableEntity.niceName()})"
 
 		if (damageableEntity.isMarkedForDeletion())
 		{
@@ -654,6 +654,8 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 			logString += " blocked by DR"
 		}
 
+		logString += " dealing($targetDam) to hp(${damageable.hp})"
+
 		damageable.hp -= targetDam
 		if (damSource != null) damageable.damSources.add(damSource)
 		onDamaged(damageableEntity)
@@ -667,9 +669,13 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 
 		if (damageable.hp <= 0)
 		{
-			damageableEntity.add(MarkedForDeletionComponent.obtain().set(delay))
+			damageableEntity.add(MarkedForDeletionComponent.obtain("killed").set(delay))
 
 			logString += " killing entity"
+		}
+		else
+		{
+			logString += " remaining hp(${damageable.hp})"
 		}
 
 		if (damageableEntity.isMonster())
@@ -778,7 +784,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 		val matchable = contents.matchable()
 		if (matchable != null)
 		{
-			contents.add(MarkedForDeletionComponent.obtain().set(delay))
+			contents.add(MarkedForDeletionComponent.obtain("popped").set(delay))
 
 			matchable.skipPowerOrb = skipPowerOrb
 
@@ -899,5 +905,25 @@ class Replay()
 	fun logAction(action: String)
 	{
 		moves.last().gridActionLog.add(action)
+	}
+
+	override fun toString(): String
+	{
+		val builder = StringBuilder()
+		for (i in 0 until moves.size)
+		{
+			val move = moves[i]
+
+			builder.appendln("Move $i:")
+			builder.appendln(move.levelSnapshot)
+			builder.appendln("\n")
+			for (item in move.gridActionLog)
+			{
+				builder.appendln(item)
+			}
+			builder.appendln("\n")
+		}
+
+		return builder.toString()
 	}
 }

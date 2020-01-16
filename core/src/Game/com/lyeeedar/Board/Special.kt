@@ -110,6 +110,7 @@ abstract class Special()
 	abstract fun merge(other: Entity): Special?
 	abstract fun apply(point: Point, grid: Grid)
 	abstract fun copy(): Special
+	abstract fun getChar(): Char
 
 	companion object
 	{
@@ -277,8 +278,14 @@ abstract class Special()
 abstract class BeamSpecial() : Special()
 
 abstract class HorizontalBeamSpecial() : BeamSpecial()
+{
+	override fun getChar(): Char = '|'
+}
 
 abstract class VerticalBeamSpecial() : BeamSpecial()
+{
+	override fun getChar(): Char = '-'
+}
 
 class Cross() : BeamSpecial()
 {
@@ -302,6 +309,8 @@ class Cross() : BeamSpecial()
 	{
 		return Cross()
 	}
+
+	override fun getChar(): Char = '+'
 }
 
 class Horizontal4() : HorizontalBeamSpecial()
@@ -364,6 +373,9 @@ class Vertical4() : VerticalBeamSpecial()
 }
 
 abstract class BombSpecial() : Special()
+{
+	override fun getChar(): Char = '*'
+}
 
 class DoubleDualMatch() : BombSpecial()
 {
@@ -542,6 +554,8 @@ class DualMatch() : BombSpecial()
 abstract class GemSpecial() : Special()
 {
 	var targetDesc: OrbDesc? = null
+
+	override fun getChar(): Char = '@'
 }
 
 class Match5() : GemSpecial()

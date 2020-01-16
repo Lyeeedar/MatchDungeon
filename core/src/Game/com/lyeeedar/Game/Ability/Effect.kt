@@ -97,7 +97,7 @@ class Effect(val type: Type)
 
 				merged.setArmed(true, contents)
 
-				contents.add(MarkedForDeletionComponent.obtain())
+				contents.add(MarkedForDeletionComponent.obtain("merged"))
 
 				specialEntity.free()
 			}

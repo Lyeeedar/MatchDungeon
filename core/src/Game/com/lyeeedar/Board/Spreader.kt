@@ -95,7 +95,7 @@ class Spreader
 			// select random
 			if (border.size > 0)
 			{
-				val chosenTile = border.asSequence().random(grid.ran)!!
+				val chosenTile = border.asSequence().sortedBy { it.toShortString() }.random(grid.ran)!!
 
 				val newspreader = copy()
 

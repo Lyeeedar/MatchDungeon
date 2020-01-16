@@ -51,5 +51,8 @@
 	</AllowedVictories>
 	<AllowedDefeats>
 		<Condition meta:RefKey="Die" />
+		<Condition meta:RefKey="Turns">
+			<Turns>60</Turns>
+		</Condition>
 	</AllowedDefeats>
 </Level>

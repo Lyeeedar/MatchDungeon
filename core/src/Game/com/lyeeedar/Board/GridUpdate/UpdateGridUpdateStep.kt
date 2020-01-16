@@ -92,7 +92,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 
 			if (damageableComponent.hp <= 0 && !entity.isMarkedForDeletion())
 			{
-				entity.add(MarkedForDeletionComponent.obtain())
+				entity.add(MarkedForDeletionComponent.obtain("died"))
 			}
 		}
 
@@ -108,7 +108,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 
 			if (healableComponent.hp <= 0 && !entity.isMarkedForDeletion())
 			{
-				entity.add(MarkedForDeletionComponent.obtain())
+				entity.add(MarkedForDeletionComponent.obtain("died"))
 			}
 		}
 
@@ -177,7 +177,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 				{
 					if (special.special.armed && !contents.isMarkedForDeletion())
 					{
-						contents.add(MarkedForDeletionComponent.obtain())
+						contents.add(MarkedForDeletionComponent.obtain("armed"))
 					}
 				}
 
@@ -261,7 +261,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 
 				if (monsterEffect.monsterEffect.timer <= 0)
 				{
-					tile.contents!!.add(MarkedForDeletionComponent.obtain())
+					tile.contents!!.add(MarkedForDeletionComponent.obtain("timer expired"))
 				}
 			}
 		}

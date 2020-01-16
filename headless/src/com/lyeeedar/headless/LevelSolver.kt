@@ -60,6 +60,9 @@ class LevelSolver
 
 		println("Replaying level ${replay.levelPath} variant ${replay.variant}")
 
+		Global.globalflags = deserialize(replay.globalflags) as GameStateFlags
+		Global.questflags = deserialize(replay.questflags) as GameStateFlags
+		Global.cardflags = deserialize(replay.cardflags) as GameStateFlags
 		Global.deck = deserialize(replay.globalDeck) as GlobalDeck
 		Global.player = deserialize(replay.player) as Player
 
@@ -181,6 +184,14 @@ class LevelSolver
 				catch (ex: Exception)
 				{
 					println("Resolving level '$path' variant '$i' crashed!")
+
+					fun dumpReplayToDisk(replay: Replay, path: String)
+					{
+						File(path).writeText(replay.toString())
+					}
+
+					dumpReplayToDisk(levels[i].grid.replay, "original_solve.txt")
+					dumpReplayToDisk(resolveLevels[i].grid.replay, "resolve.txt")
 
 					throw ex
 				}

@@ -46,7 +46,7 @@ class DetonateUpdateStep : AbstractUpdateStep()
 			special.special.apply(tile, grid)
 
 			contents.remove(special.javaClass)
-			contents.add(MarkedForDeletionComponent.obtain())
+			contents.add(MarkedForDeletionComponent.obtain("detonated"))
 			complete = false
 		}
 

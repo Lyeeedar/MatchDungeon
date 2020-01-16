@@ -29,6 +29,11 @@ enum class MonsterEffectType
 
 fun addMonsterEffect(entity: Entity, monsterEffect: MonsterEffect): Entity
 {
+	if (entity.matchable() == null)
+	{
+		throw RuntimeException("Entity does not have matchable!")
+	}
+
 	entity.add(MonsterEffectComponent.obtain().set(monsterEffect))
 
 	val tutorialComponent = TutorialComponent.obtain()

@@ -247,7 +247,7 @@ class MonsterAI(val desc: MonsterDesc, val difficulty: Int, grid: Grid) : Abstra
 			atkCooldown = min + grid.ran.nextInt(max - min)
 
 			// do attack
-			val tile = grid.grid.filter { validAttack(grid, it) }.random(grid.ran)
+			val tile = grid.basicOrbTiles.filter { validAttack(grid, it) }.randomOrNull(grid.ran)
 
 			if (tile?.contents != null)
 			{
@@ -264,7 +264,7 @@ class MonsterAI(val desc: MonsterDesc, val difficulty: Int, grid: Grid) : Abstra
 
 				addMonsterEffect(tile.contents!!, monsterEffect)
 
-				grid.replay.logAction("Monster $this attacking (${tile.toShortString()})")
+				grid.replay.logAction("Monster ${entity.niceName()} attacking (${tile.toShortString()})")
 
 				if (!Global.resolveInstantly)
 				{
@@ -306,6 +306,7 @@ class MonsterAI(val desc: MonsterDesc, val difficulty: Int, grid: Grid) : Abstra
 fun validAttack(grid: Grid, tile: Tile): Boolean
 {
 	if (tile.spreader != null) return false
+	if (tile.contents?.matchable() != null) return false
 
 	// dont allow attacks in choke points
 	for (dir in Direction.CardinalValues)

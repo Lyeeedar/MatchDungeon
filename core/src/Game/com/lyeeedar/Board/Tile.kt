@@ -59,12 +59,7 @@ class Tile(x: Int, y: Int, val grid: Grid) : Point(x, y)
 		if (contents != null && contents!!.special() != null)
 		{
 			val special = contents!!.special()!!.special
-			if (special is GemSpecial) return "@"
-			if (special is Cross) return "+"
-			if (special is HorizontalBeamSpecial) return "|"
-			if (special is VerticalBeamSpecial) return "-"
-			if (special is BombSpecial) return "*"
-			throw RuntimeException("Unhandled special type! " + special.javaClass)
+			return special.getChar().toString()
 		}
 		if (spreader != null) return "s"
 		if (isPit) return "~"

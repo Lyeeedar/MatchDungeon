@@ -20,6 +20,16 @@ import ktx.collections.filter
 import ktx.collections.toGdxArray
 import ktx.math.minus
 
+fun Entity.isFriendly(): Boolean
+{
+	if (this.hasComponent(HealableComponent::class.java) && this.ai()?.ai is FriendlyAI)
+	{
+		return true
+	}
+
+	return false
+}
+
 class FriendlyDesc
 {
 	lateinit var sprite: Sprite

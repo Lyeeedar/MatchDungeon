@@ -79,7 +79,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 
 			if (entity.isMonster())
 			{
-				var logAction = "deleting monster $entity at (${tile.toShortString()})"
+				var logAction = "deleting monster ${entity.niceName()} at (${tile.toShortString()}) because (${entity.markedForDeletion()!!.reason})"
 
 				val necroticAura = Global.player.getStat(Statistic.NECROTICAURA)
 				if (necroticAura != 0f)
