@@ -306,7 +306,7 @@ class MonsterAI(val desc: MonsterDesc, val difficulty: Int, grid: Grid) : Abstra
 fun validAttack(grid: Grid, tile: Tile): Boolean
 {
 	if (tile.spreader != null) return false
-	if (tile.contents?.matchable() != null) return false
+	if (tile.contents?.matchable() == null) return false
 
 	// dont allow attacks in choke points
 	for (dir in Direction.CardinalValues)

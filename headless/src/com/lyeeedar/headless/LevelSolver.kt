@@ -261,7 +261,17 @@ class LevelSolver
 			}
 			else if (moveCount < 5)
 			{
-				throw RuntimeException("Level completed in under 5 moves. This seems suspicious!")
+				// check if it may be a valid level
+				val hasDetonations = grid.replay.moves.any { it.gridActionLog.any { it.contains("detonating") } }
+
+				if (moveCount < 3 || !hasDetonations)
+				{
+					throw RuntimeException("Level completed in under 5 moves. This seems suspicious!")
+				}
+				else
+				{
+					System.err.println("Level took less than 5 turns but its probably alright")
+				}
 			}
 		}
 

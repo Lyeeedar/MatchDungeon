@@ -22,7 +22,7 @@ fun Entity.niceName(): String
 	val id = toString().split("Entity").last()
 	val archetype = this.archetype()?.archetype?.toString() ?: "unknown"
 
-	var name = "$id@$archetype"
+	var name = "$archetype$id"
 
 	if (this.nameOrNull() != null)
 	{
