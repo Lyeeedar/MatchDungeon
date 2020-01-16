@@ -565,6 +565,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 				matchHint = null
 
 				replay.moves.add(HistoryMove(historySwapStart, historySwapEnd, gridSnapshot))
+				replay.logAction("Merging to form special $merged")
 				return true
 			}
 		}
@@ -618,6 +619,15 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 	// ----------------------------------------------------------------------
 	fun damage(tile: Tile, damageableEntity: Entity, delay: Float, damSource: Any? = null, bonusDam: Float = 0f, pierce: Float = 0f)
 	{
+		var logString = "damage tile(${tile.x},${tile.y}) with bonusDam($bonusDam) hitting entity($damageableEntity)"
+
+		if (damageableEntity.isMarkedForDeletion())
+		{
+			logString += " but entity already marked for deletion"
+			replay.logAction(logString)
+			return
+		}
+
 		val damageable = damageableEntity.damageable()!!
 
 		var targetDam = if (!damageable.damSources.contains(damSource)) 1f + bonusDam else 1f
@@ -640,6 +650,8 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 		{
 			targetDam = 0f
 			damageable.remainingReduction = damReduction.ciel()
+
+			logString += " blocked by DR"
 		}
 
 		damageable.hp -= targetDam
@@ -656,9 +668,11 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 		if (damageable.hp <= 0)
 		{
 			damageableEntity.add(MarkedForDeletionComponent.obtain().set(delay))
+
+			logString += " killing entity"
 		}
 
-		if (damageable.isCreature)
+		if (damageableEntity.isMonster())
 		{
 			val vampiric = Global.player.getStat(Statistic.VAMPIRICSTRIKES, withChoaticNature = true)
 			val die = level.defeatConditions.filterIsInstance<CompletionConditionDie>().firstOrNull()
@@ -667,6 +681,8 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 				die.fractionalHp += targetDam * vampiric
 			}
 		}
+
+		replay.logAction(logString)
 	}
 
 	// ----------------------------------------------------------------------
@@ -824,17 +840,23 @@ class HistoryMove()
 	var abilityTargets: Array<Point>? = null
 	var levelSnapshot: String = ""
 
+	val gridActionLog = Array<String>()
+
 	constructor(swapStart: Point, swapEnd: Point, levelSnapshot: String) : this()
 	{
 		this.swapStart = swapStart
 		this.swapEnd = swapEnd
 		this.levelSnapshot = levelSnapshot
+
+		gridActionLog.add("swapping (${swapStart.x},${swapStart.y}) with (${swapEnd.x},${swapEnd.y})")
 	}
 
 	constructor(refill: Boolean, levelSnapshot: String) : this()
 	{
 		this.refill = refill
 		this.levelSnapshot = levelSnapshot
+
+		gridActionLog.add("refilling grid")
 	}
 
 	constructor(abilityIndex: Int, targets: Array<Point>, levelSnapshot: String) : this()
@@ -842,6 +864,8 @@ class HistoryMove()
 		this.abilityIndex = abilityIndex
 		this.abilityTargets = targets
 		this.levelSnapshot = levelSnapshot
+
+		gridActionLog.add("using ability $abilityIndex on " + targets.joinToString(" ") { "(${it.x},${it.y})" })
 	}
 }
 
@@ -870,5 +894,10 @@ class Replay()
 		this.globalflags = serialize(Global.globalflags)
 		this.questflags = serialize(Global.questflags)
 		this.cardflags = serialize(Global.cardflags)
+	}
+
+	fun logAction(action: String)
+	{
+		moves.last().gridActionLog.add(action)
 	}
 }

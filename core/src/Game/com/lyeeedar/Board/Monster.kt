@@ -264,19 +264,24 @@ class MonsterAI(val desc: MonsterDesc, val difficulty: Int, grid: Grid) : Abstra
 
 				addMonsterEffect(tile.contents!!, monsterEffect)
 
-				val diff = tile.getPosDiff(startTile)
-				diff[0].y *= -1
-				entity.renderable().renderable.animation = BumpAnimation.obtain().set(0.2f, diff)
+				grid.replay.logAction("Monster $this attacking (${tile.toShortString()})")
 
-				val dst = tile.euclideanDist(startTile)
-				val animDuration = 0.4f + tile.euclideanDist(startTile) * 0.025f
-				val attackSprite = monsterEffect.actualSprite.copy()
-				attackSprite.colour = tile.contents!!.renderable().renderable.colour
-				attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
-				attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
-				tile.effects.add(attackSprite)
+				if (!Global.resolveInstantly)
+				{
+					val diff = tile.getPosDiff(startTile)
+					diff[0].y *= -1
+					entity.renderable().renderable.animation = BumpAnimation.obtain().set(0.2f, diff)
 
-				monsterEffect.delayDisplay = animDuration
+					val dst = tile.euclideanDist(startTile)
+					val animDuration = 0.4f + tile.euclideanDist(startTile) * 0.025f
+					val attackSprite = monsterEffect.actualSprite.copy()
+					attackSprite.colour = tile.contents!!.renderable().renderable.colour
+					attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
+					attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
+					tile.effects.add(attackSprite)
+
+					monsterEffect.delayDisplay = animDuration
+				}
 			}
 		}
 
@@ -400,12 +405,14 @@ abstract class AbstractMonsterAbility
 			}
 		}
 
-		if (finalTargets.size > 0)
+		if (finalTargets.size > 0 && !Global.resolveInstantly)
 		{
 			val diff = finalTargets[0].getPosDiff(entity.pos().tile!!)
 			diff[0].y *= -1
 			entity.renderable().renderable.animation = BumpAnimation.obtain().set(0.2f, diff)
 		}
+
+		grid.replay.logAction("Activating monster ability $this on targets " + finalTargets.joinToString(" ") { "(${it.toShortString()})" })
 
 		activate(entity, grid, finalTargets)
 	}

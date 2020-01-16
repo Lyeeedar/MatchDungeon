@@ -71,7 +71,6 @@ class DamageableComponent : AbstractComponent()
 
 	var deathEffect: ParticleEffect = AssetManager.loadParticleEffect("Death").getParticleEffect()
 
-	var isCreature = false
 	var alwaysShowHP = true
 	var isSummon = false
 
@@ -119,7 +118,6 @@ class DamageableComponent : AbstractComponent()
 		maxhp = 1
 		damSources.clear()
 		deathEffect = AssetManager.loadParticleEffect("Death").getParticleEffect()
-		isCreature = false
 		alwaysShowHP = true
 		isSummon = false
 	}

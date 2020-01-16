@@ -32,6 +32,8 @@ class SinkUpdateStep : AbstractUpdateStep()
 
 				grid.onSunk(contents)
 
+				grid.replay.logAction("Sinking sinkable at (${tile.toShortString()})")
+
 				complete = false
 			}
 		}

@@ -345,7 +345,7 @@ class LevelSolver
 		val levelState = grid.grid.toString()
 		if (levelState != historyMove.levelSnapshot)
 		{
-			throw RuntimeException("History move doesnt match grid state!")
+			throw RuntimeException("History move doesnt match grid state!\nLevel:\n$levelState\n\nHistory:\n${historyMove.levelSnapshot}")
 		}
 
 		if (historyMove.refill)

@@ -3,11 +3,8 @@ package com.lyeeedar.Board.GridUpdate
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectSet
+import com.lyeeedar.Board.*
 import com.lyeeedar.Board.CompletionCondition.*
-import com.lyeeedar.Board.Grid
-import com.lyeeedar.Board.MonsterAI
-import com.lyeeedar.Board.OrbDesc
-import com.lyeeedar.Board.Tile
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Global
@@ -80,8 +77,10 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 
 			tile.effects.add(death)
 
-			if (damageableComponent.isCreature)
+			if (entity.isMonster())
 			{
+				var logAction = "deleting monster $entity at (${tile.toShortString()})"
+
 				val necroticAura = Global.player.getStat(Statistic.NECROTICAURA)
 				if (necroticAura != 0f)
 				{
@@ -105,9 +104,13 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 							val nextDesc = rootDesc.stages[currentStage + 1]
 							val monster = nextDesc.getEntity(monsterAI.difficulty, false, grid)
 							monster.pos().setTile(monster, tile)
+
+							logAction += " spawning next monster stage"
 						}
 					}
 				}
+
+				grid.replay.logAction(logAction)
 			}
 		}
 

@@ -77,6 +77,8 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 			MonsterEffectType.DEBUFF -> applyDebuff(grid, tile)
 			else -> throw Exception("Unhandled monster effect type '$effect'!")
 		}
+
+		grid.replay.logAction("Activating monster effect $effect at (${tile.toShortString()})")
 	}
 
 	fun applyAttack(grid: Grid, entity: Entity)

@@ -118,6 +118,8 @@ class Spreader
 				}
 
 				chosenTile.spreader = newspreader
+
+				grid.replay.logAction("spreader $nameKey spreading to (${chosenTile.toShortString()})")
 			}
 		}
 	}
@@ -171,13 +173,15 @@ class Spreader
 
 				val attack = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap())
 				target.add(MonsterEffectComponent.obtain().set(attack))
-
 				attack.timer = attackNumPips + (Global.player.getStat(Statistic.HASTE) * attackNumPips).toInt()
-				val diff = attackedTile.getPosDiff(tile)
-				diff[0].y *= -1
+
+				grid.replay.logAction("spreader $nameKey attacking from (${tile.toShortString()}) to (${attackedTile.toShortString()})")
 
 				if (!Global.resolveInstantly)
 				{
+					val diff = attackedTile.getPosDiff(tile)
+					diff[0].y *= -1
+
 					val dst = attackedTile.euclideanDist(tile)
 					val animDuration = 0.4f + attackedTile.euclideanDist(tile) * 0.025f
 					val attackSprite = attack.actualSprite.copy()
