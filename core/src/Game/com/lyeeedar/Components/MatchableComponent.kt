@@ -26,7 +26,17 @@ class MatchableComponent : AbstractComponent()
 	var deletionEffectDelay: Float = 0f
 
 	var isChanger: Boolean = false
+		private set(value)
+		{
+			field = value
+		}
 	var nextDesc: OrbDesc? = null
+
+	fun setIsChanger(nextDesc: OrbDesc)
+	{
+		isChanger = true
+		this.nextDesc = nextDesc
+	}
 
 	var skipPowerOrb = false
 

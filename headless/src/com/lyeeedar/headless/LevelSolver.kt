@@ -99,7 +99,7 @@ class LevelSolver
 
 		Global.resolveInstantly = true
 
-		val theme = Theme.load("Themes/City")
+		val themes = XmlData.enumeratePaths("", "Theme").toList()
 		val gridScreen = GridScreen()
 
 		val paths = XmlData.enumeratePaths("", "Level").toList()
@@ -119,10 +119,11 @@ class LevelSolver
 
 			for (i in 0 until levels.size)
 			{
+				val theme = Theme.load(themes.random())
 				val seed = Random.random.nextLong()
 				fun createLevel(level: Level)
 				{
-					val character = Character.load("Adventurer")
+					val character = Character.load("Peasant")
 					val player = Player(character, PlayerDeck())
 					Global.player = player
 					Global.deck = GlobalDeck()
@@ -263,14 +264,16 @@ class LevelSolver
 			{
 				// check if it may be a valid level
 				val hasDetonations = grid.replay.moves.any { it.gridActionLog.any { it.contains("detonating") } }
+				val hasSinking = grid.replay.moves.any { it.gridActionLog.any { it.contains("Sinking") } }
+				val damageCount = grid.replay.moves.sumBy { it.gridActionLog.filter { it.contains("damage") }.count() }
 
-				if (moveCount < 3 || !hasDetonations)
+				if (hasDetonations || hasSinking || damageCount > 3)
 				{
-					throw RuntimeException("Level completed in under 5 moves. This seems suspicious!")
+					System.err.println("Level took less than 5 turns but its probably alright")
 				}
 				else
 				{
-					System.err.println("Level took less than 5 turns but its probably alright")
+					throw RuntimeException("Level completed in under 5 moves. This seems suspicious!")
 				}
 			}
 		}

@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.IntMap
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Util.getXml
 import com.lyeeedar.Util.random
+import com.lyeeedar.Util.randomOrNull
 import ktx.collections.set
 
 /**
@@ -50,7 +51,7 @@ class Faction
 			s--
 		}
 
-		return bossSizeMap.values().first().random(grid.ran)
+		return bossSizeMap.values().firstOrNull()?.randomOrNull(grid.ran) ?: get(size, grid)
 	}
 
 	fun getBoss(name: String): MonsterDesc?
