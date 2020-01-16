@@ -516,7 +516,8 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 	private fun swap(): Boolean
 	{
 		val gridSnapshot = grid.toString()
-		val historySwap = Pair(toSwap!!.first.copy(), toSwap!!.second.copy())
+		val historySwapStart = toSwap!!.first.copy()
+		val historySwapEnd = toSwap!!.second.copy()
 
 		val oldTile = tile(toSwap!!.first)
 		val newTile = tile(toSwap!!.second)
@@ -563,7 +564,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 				lastSwapped = newTile
 				matchHint = null
 
-				replay.moves.add(HistoryMove(historySwap, gridSnapshot))
+				replay.moves.add(HistoryMove(historySwapStart, historySwapEnd, gridSnapshot))
 				return true
 			}
 		}
@@ -609,7 +610,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 				newEntity.renderable().renderable.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(oldTile.getPosDiff(newTile)).invertY(), Interpolation.linear)
 			}
 
-			replay.moves.add(HistoryMove(historySwap, gridSnapshot))
+			replay.moves.add(HistoryMove(historySwapStart, historySwapEnd, gridSnapshot))
 			return true
 		}
 	}
@@ -814,27 +815,29 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 	fun getTile(x: Int, y: Int): Tile? = grid[x, y, null]
 }
 
-class HistoryMove
+class HistoryMove()
 {
-	var swap: Pair<Point, Point>? = null
+	var swapStart: Point? = null
+	var swapEnd: Point? = null
 	var refill = false
 	var abilityIndex: Int? = null
 	var abilityTargets: Array<Point>? = null
-	val levelSnapshot: String
+	var levelSnapshot: String = ""
 
-	constructor(swap: Pair<Point, Point>, levelSnapshot: String)
+	constructor(swapStart: Point, swapEnd: Point, levelSnapshot: String) : this()
 	{
-		this.swap = swap
+		this.swapStart = swapStart
+		this.swapEnd = swapEnd
 		this.levelSnapshot = levelSnapshot
 	}
 
-	constructor(refill: Boolean, levelSnapshot: String)
+	constructor(refill: Boolean, levelSnapshot: String) : this()
 	{
 		this.refill = refill
 		this.levelSnapshot = levelSnapshot
 	}
 
-	constructor(abilityIndex: Int, targets: Array<Point>, levelSnapshot: String)
+	constructor(abilityIndex: Int, targets: Array<Point>, levelSnapshot: String) : this()
 	{
 		this.abilityIndex = abilityIndex
 		this.abilityTargets = targets

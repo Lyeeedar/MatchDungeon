@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Array
 import com.kryo.deserialize
 import com.kryo.serialize
 import com.lyeeedar.Board.*
+import com.lyeeedar.Board.CompletionCondition.CompletionConditionTime
 import com.lyeeedar.Components.renderable
 import com.lyeeedar.Game.*
 import com.lyeeedar.Screens.GridScreen
@@ -57,6 +58,8 @@ class LevelSolver
 		val file = File("crashedLevelReplay")
 		val replay = deserialize(file.readBytes()) as Replay
 
+		println("Replaying level ${replay.levelPath} variant ${replay.variant}")
+
 		Global.deck = deserialize(replay.globalDeck) as GlobalDeck
 		Global.player = deserialize(replay.player) as Player
 
@@ -74,7 +77,7 @@ class LevelSolver
 			cond.createTable(level.grid)
 		}
 
-		resolve(level.grid, replay.moves)
+		resolve(level.grid, replay.moves, true)
 
 		Global.resolveInstantly = false
 	}
@@ -195,9 +198,20 @@ class LevelSolver
 		return solveLevel(grid, fun (moveCount: Int) { makeMove(grid, moveCount > 200)})
 	}
 
-	fun resolve(grid: Grid, moves: Array<HistoryMove>): Boolean
+	fun resolve(grid: Grid, moves: Array<HistoryMove>, print: Boolean = false): Boolean
 	{
-		return solveLevel(grid, fun (moveCount: Int) { makeMove(grid, moves[moveCount]) })
+		return solveLevel(grid, fun (moveCount: Int) {
+			if (print)
+			{
+				println("Move: $moveCount")
+				println("")
+				println(grid.grid.toString())
+				println("")
+				println("")
+			}
+
+			makeMove(grid, moves[moveCount])
+		})
 	}
 
 	fun solveLevel(grid: Grid, moveFunc: (Int)->Unit): Boolean
@@ -228,13 +242,16 @@ class LevelSolver
 		}
 		println("MoveCount: $moveCount")
 
-		if (moveCount == 0)
+		if (grid.level.isVictory || !grid.level.defeatConditions.any { it is CompletionConditionTime })
 		{
-			throw RuntimeException("Level completed without making any moves!")
-		}
-		else if (moveCount < 5)
-		{
-			throw RuntimeException("Level completed in under 5 moves. This seems suspicious!")
+			if (moveCount == 0)
+			{
+				throw RuntimeException("Level completed without making any moves!")
+			}
+			else if (moveCount < 5)
+			{
+				throw RuntimeException("Level completed in under 5 moves. This seems suspicious!")
+			}
 		}
 
 		if (grid.level.isDefeat)
@@ -311,7 +328,7 @@ class LevelSolver
 			{
 				move = bestMove.name
 
-				historyMove = HistoryMove(Pair(bestMove.swapStart, bestMove.swapEnd), grid.grid.toString())
+				historyMove = HistoryMove(bestMove.swapStart, bestMove.swapEnd, grid.grid.toString())
 			}
 		}
 
@@ -336,10 +353,10 @@ class LevelSolver
 			grid.refill()
 			return
 		}
-		else if (historyMove.swap != null)
+		else if (historyMove.swapStart != null)
 		{
-			grid.dragStart = historyMove.swap!!.first
-			grid.dragEnd(historyMove.swap!!.second)
+			grid.dragStart = historyMove.swapStart!!
+			grid.dragEnd(historyMove.swapEnd!!)
 
 			try
 			{

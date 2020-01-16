@@ -51,6 +51,21 @@ class Tile(x: Int, y: Int, val grid: Grid) : Point(x, y)
 	override fun toString(): String
 	{
 		if (contents != null && contents!!.isBasicOrb()) return contents!!.matchable()!!.desc.name[0].toString()
+		if (contents != null && contents!!.orbSpawner() != null)
+		{
+			if (contents!!.orbSpawner()!!.numToSpawn > 0 ) return "£"
+			else return "$"
+		}
+		if (contents != null && contents!!.special() != null)
+		{
+			val special = contents!!.special()!!.special
+			if (special is GemSpecial) return "@"
+			if (special is Cross) return "+"
+			if (special is HorizontalBeamSpecial) return "|"
+			if (special is VerticalBeamSpecial) return "-"
+			if (special is BombSpecial) return "*"
+			throw RuntimeException("Unhandled special type! " + special.javaClass)
+		}
 		if (spreader != null) return "s"
 		if (isPit) return "~"
 		if (!canHaveOrb) return "#"
