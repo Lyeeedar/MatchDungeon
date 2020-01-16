@@ -13,6 +13,7 @@ import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.Ability
 import com.lyeeedar.Game.Global
+import com.lyeeedar.Game.GlobalDeck
 import com.lyeeedar.Game.Player
 import com.lyeeedar.Renderables.Animation.BumpAnimation
 import com.lyeeedar.Renderables.Animation.MoveAnimation
@@ -841,12 +842,30 @@ class HistoryMove
 	}
 }
 
-class Replay(val questTheme: String, val levelPath: String, val variant: Int, val seed: Long, player: Player)
+class Replay()
 {
-	val player: ByteArray = serialize(player)
-	val globalflags: ByteArray = serialize(Global.globalflags)
-	val questflags: ByteArray = serialize(Global.questflags)
-	val cardflags: ByteArray = serialize(Global.cardflags)
+	lateinit var questTheme: String
+	lateinit var levelPath: String
+	var variant: Int = -1
+	var seed: Long = -1
+	lateinit var globalDeck: ByteArray
+	lateinit var player: ByteArray
+	lateinit var globalflags: ByteArray
+	lateinit var questflags: ByteArray
+	lateinit var cardflags: ByteArray
 
 	val moves = Array<HistoryMove>()
+
+	constructor(questTheme: String, levelPath: String, variant: Int, seed: Long, player: Player, deck: GlobalDeck) : this()
+	{
+		this.questTheme = questTheme
+		this.levelPath = levelPath
+		this.variant = variant
+		this.seed = seed
+		this.globalDeck = serialize(deck)
+		this.player = serialize(player)
+		this.globalflags = serialize(Global.globalflags)
+		this.questflags = serialize(Global.questflags)
+		this.cardflags = serialize(Global.cardflags)
+	}
 }

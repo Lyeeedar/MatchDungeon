@@ -1,6 +1,12 @@
 package com.lyeeedar.headless
 
+import com.badlogic.gdx.Game
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.backends.headless.HeadlessApplication
+import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.utils.Array
+import com.kryo.deserialize
+import com.kryo.serialize
 import com.lyeeedar.Board.*
 import com.lyeeedar.Components.renderable
 import com.lyeeedar.Game.*
@@ -10,9 +16,69 @@ import com.lyeeedar.UI.PowerBar
 import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.Random
 import com.lyeeedar.Util.XmlData
+import org.mockito.Mockito
+import java.io.File
+
+object CrashedLevelReplayer
+{
+	@JvmStatic fun main(arg: kotlin.Array<String>)
+	{
+		Gdx.gl = Mockito.mock(GL20::class.java)
+		Gdx.gl20 = Mockito.mock(GL20::class.java)
+		Gdx.app = HeadlessApplication(Mockito.mock(Game::class.java))
+
+		try
+		{
+			LevelSolver().replayCrashedLevel()
+		}
+		finally
+		{
+			Gdx.app.exit()
+		}
+	}
+}
 
 class LevelSolver
 {
+	fun replayCrashedLevel()
+	{
+		Global.resolveInstantly = true
+
+		println("")
+		println("")
+		println("-------------------------------------------------------------------------")
+		println("")
+		println("#####      Crashed Level Replay      #######")
+		println("")
+		println("-------------------------------------------------------------------------")
+		println("")
+		println("")
+
+		val file = File("crashedLevelReplay")
+		val replay = deserialize(file.readBytes()) as Replay
+
+		Global.deck = deserialize(replay.globalDeck) as GlobalDeck
+		Global.player = deserialize(replay.player) as Player
+
+		val theme = Theme.load(replay.questTheme)
+		val levels = Level.load(replay.levelPath)
+		val level = levels[replay.variant]
+		level.create(theme, Global.player, {}, {}, replay.seed, replay.variant)
+
+		for (cond in level.victoryConditions)
+		{
+			cond.createTable(level.grid)
+		}
+		for (cond in level.defeatConditions)
+		{
+			cond.createTable(level.grid)
+		}
+
+		resolve(level.grid, replay.moves)
+
+		Global.resolveInstantly = false
+	}
+
 	fun attemptAllLevels()
 	{
 		println("")
@@ -54,6 +120,8 @@ class LevelSolver
 					val player = Player(character, PlayerDeck())
 					Global.player = player
 					Global.deck = GlobalDeck()
+					Global.deck.chosenCharacter = character
+					Global.deck.characters.add(character)
 
 					level.create(theme, player, {}, {}, seed, i)
 
@@ -85,6 +153,10 @@ class LevelSolver
 				catch (ex: Exception)
 				{
 					println("Solving level '$path' variant '$i' crashed!")
+
+					val replay = serialize(levels[i].grid.replay)
+					val file = File("crashedLevelReplay")
+					file.writeBytes(replay)
 
 					throw ex
 				}
@@ -159,6 +231,10 @@ class LevelSolver
 		if (moveCount == 0)
 		{
 			throw RuntimeException("Level completed without making any moves!")
+		}
+		else if (moveCount < 5)
+		{
+			throw RuntimeException("Level completed in under 5 moves. This seems suspicious!")
 		}
 
 		if (grid.level.isDefeat)

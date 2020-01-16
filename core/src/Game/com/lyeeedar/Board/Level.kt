@@ -139,7 +139,7 @@ class Level(val loadPath: String)
 		this.victoryAction = victoryAction
 		this.defeatAction = defeatAction
 
-		val replay = Replay(questTheme.path, loadPath, variant, seed, player)
+		val replay = Replay(questTheme.path, loadPath, variant, seed, player, Global.deck)
 
 		grid = Grid(charGrid.xSize, charGrid.ySize, this, replay)
 
