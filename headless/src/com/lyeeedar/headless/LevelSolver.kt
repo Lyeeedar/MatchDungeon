@@ -20,6 +20,7 @@ import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.filename
 import org.mockito.Mockito
 import java.io.File
+import java.util.concurrent.TimeUnit
 import java.util.zip.GZIPInputStream
 import java.util.zip.GZIPOutputStream
 
@@ -204,9 +205,13 @@ class LevelSolver
 				val diffSeconds = (currentTime - lastTime) / 1000f
 				val levelsASecond = printInterval / diffSeconds
 
-				lastTime = currentTime
-
 				println("Done: $totalI, crashed: $crashCount, Levels/Second: $levelsASecond")
+
+				System.gc()
+				TimeUnit.SECONDS.sleep(2)
+				System.gc()
+
+				lastTime = System.currentTimeMillis()
 			}
 
 			totalI++
