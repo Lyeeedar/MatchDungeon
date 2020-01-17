@@ -68,13 +68,13 @@ class Level(val loadPath: String)
 
 		if (toSpawn == "Changer")
 		{
-			val orb = createOrb(OrbDesc.getRandomOrb(this))
+			val orb = EntityArchetypeCreator.createOrb(OrbDesc.getRandomOrb(this))
 			orb.matchable()!!.setIsChanger(OrbDesc.getRandomOrb(this, orb.matchable()!!.desc))
 			return orb
 		}
 		else if (toSpawn == "Attack")
 		{
-			val orb = createOrb(OrbDesc.getRandomOrb(this))
+			val orb = EntityArchetypeCreator.createOrb(OrbDesc.getRandomOrb(this))
 			val monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap())
 			monsterEffect.timer = 7
 			addMonsterEffect(orb, monsterEffect)
@@ -86,7 +86,7 @@ class Level(val loadPath: String)
 			val data = ObjectMap<String, Any>()
 			data["FACTION"] = factions.random(grid.ran)
 
-			val orb = createOrb(OrbDesc.getRandomOrb(this))
+			val orb = EntityArchetypeCreator.createOrb(OrbDesc.getRandomOrb(this))
 			val monsterEffect = MonsterEffect(MonsterEffectType.SUMMON, data)
 			monsterEffect.timer = 7
 			addMonsterEffect(orb, monsterEffect)
@@ -95,11 +95,11 @@ class Level(val loadPath: String)
 		}
 		else if (toSpawn == "Orb")
 		{
-			return createOrb(OrbDesc.getRandomOrb(this))
+			return EntityArchetypeCreator.createOrb(OrbDesc.getRandomOrb(this))
 		}
 		else
 		{
-			return createOrb(OrbDesc.getNamedOrb(toSpawn))
+			return EntityArchetypeCreator.createOrb(OrbDesc.getNamedOrb(toSpawn))
 		}
 	}
 
@@ -169,17 +169,17 @@ class Level(val loadPath: String)
 			{
 				tile.canHaveOrb = true
 				tile.groundSprite = theme.floor.copy()
-				tile.contents = createBlock(theme, blockStrength)
+				tile.contents = EntityArchetypeCreator.createBlock(theme, blockStrength)
 			}
 			else if (char == '$')
 			{
-				tile.contents = createChest(true, theme)
+				tile.contents = EntityArchetypeCreator.createChest(true, theme)
 				tile.canHaveOrb = false
 				tile.groundSprite = theme.floor.copy()
 			}
 			else if (char == '£')
 			{
-				tile.contents = createChest(false, theme)
+				tile.contents = EntityArchetypeCreator.createChest(false, theme)
 				tile.canHaveOrb = false
 				tile.groundSprite = theme.floor.copy()
 			}
@@ -217,7 +217,7 @@ class Level(val loadPath: String)
 
 				if (symbol.block != null)
 				{
-					val contents = createBlock(theme, symbol.block.hp)
+					val contents = EntityArchetypeCreator.createBlock(theme, symbol.block.hp)
 					tile.contents = contents
 
 					if (symbol.block.sprite != null)
@@ -278,7 +278,7 @@ class Level(val loadPath: String)
 
 				if (symbol.isChest)
 				{
-					tile.contents = createChest(true, theme)
+					tile.contents = EntityArchetypeCreator.createChest(true, theme)
 					tile.groundSprite = theme.floor.copy()
 
 					tile.canHaveOrb = false
@@ -449,7 +449,7 @@ class Level(val loadPath: String)
 			{
 				if (matchable == null)
 				{
-					tile.contents = createOrb(OrbDesc.getRandomOrb(this))
+					tile.contents = EntityArchetypeCreator.createOrb(OrbDesc.getRandomOrb(this))
 				}
 				addSpecial(tile.contents!!, Horizontal4())
 			}
@@ -457,7 +457,7 @@ class Level(val loadPath: String)
 			{
 				if (matchable == null)
 				{
-					tile.contents = createOrb(OrbDesc.getRandomOrb(this))
+					tile.contents = EntityArchetypeCreator.createOrb(OrbDesc.getRandomOrb(this))
 				}
 				addSpecial(tile.contents!!, Vertical4())
 			}
@@ -465,7 +465,7 @@ class Level(val loadPath: String)
 			{
 				if (swappable == null)
 				{
-					tile.contents = createOrb(OrbDesc.getRandomOrb(this))
+					tile.contents = EntityArchetypeCreator.createOrb(OrbDesc.getRandomOrb(this))
 				}
 				tile.contents!!.swappable()!!.sealCount = sealStrength
 			}
@@ -476,7 +476,7 @@ class Level(val loadPath: String)
 				{
 					val sprite = if (symbol.sinkableDesc.usePlayer) Global.player.baseCharacter.sprite.copy() else symbol.sinkableDesc.sprite!!.copy()
 
-					tile.contents = createSinkable(sprite)
+					tile.contents = EntityArchetypeCreator.createSinkable(sprite)
 				}
 
 				if (symbol.extends != ' ')
@@ -493,7 +493,7 @@ class Level(val loadPath: String)
 				{
 					if (matchable == null)
 					{
-						tile.contents = createOrb(OrbDesc.getRandomOrb(this))
+						tile.contents = EntityArchetypeCreator.createOrb(OrbDesc.getRandomOrb(this))
 					}
 
 					val monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap())
@@ -525,7 +525,7 @@ class Level(val loadPath: String)
 							throw RuntimeException("Tried to place a special on a non swappable object '" + tile.contents!!.archetype()!!.archetype + "'")
 						}
 
-						tile.contents = createOrb(OrbDesc.getRandomOrb(this))
+						tile.contents = EntityArchetypeCreator.createOrb(OrbDesc.getRandomOrb(this))
 					}
 
 					addSpecial(tile.contents!!, special)
@@ -533,7 +533,7 @@ class Level(val loadPath: String)
 
 				if (symbol.container != null && tile.contents != null)
 				{
-					tile.contents = createContainer(symbol.container.sprite, symbol.container.hp, tile.contents!!)
+					tile.contents = EntityArchetypeCreator.createContainer(symbol.container.sprite, symbol.container.hp, tile.contents!!)
 					tile.contents!!.damageable()!!.alwaysShowHP = symbol.container.alwaysShowHP
 				}
 			}

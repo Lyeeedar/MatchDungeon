@@ -46,7 +46,7 @@ class EntityArchetypeComponent : AbstractComponent()
 
 		@JvmStatic fun obtain(): EntityArchetypeComponent
 		{
-			val obj = EntityArchetypeComponent.pool.obtain()
+			val obj = pool.obtain()
 
 			if (obj.obtained) throw RuntimeException()
 			obj.reset()
@@ -55,7 +55,7 @@ class EntityArchetypeComponent : AbstractComponent()
 			return obj
 		}
 	}
-	override fun free() { if (obtained) { EntityArchetypeComponent.pool.free(this); obtained = false } }
+	override fun free() { if (obtained) { pool.free(this); obtained = false } }
 
 	override fun parse(xml: XmlData, entity: Entity, parentPath: String)
 	{

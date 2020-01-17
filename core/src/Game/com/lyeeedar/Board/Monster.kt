@@ -770,7 +770,7 @@ class MonsterBlockAbility : AbstractMonsterAbility()
 
 		for (tile in targets)
 		{
-			val block = createBlock(grid.level.theme, strength)
+			val block = EntityArchetypeCreator.createBlock(grid.level.theme, strength)
 
 			val diff = tile.getPosDiff(monsterSrc)
 			diff[0].y *= -1

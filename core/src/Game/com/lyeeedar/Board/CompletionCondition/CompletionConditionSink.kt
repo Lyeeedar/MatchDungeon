@@ -5,9 +5,9 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.ObjectMap
+import com.lyeeedar.Board.EntityArchetypeCreator
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Tile
-import com.lyeeedar.Board.createSinkable
 import com.lyeeedar.Board.spawnMote
 import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Global
@@ -120,7 +120,7 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 
 					if (chosen != null)
 					{
-						chosen.contents = createSinkable(grid.level.theme.coin.copy())
+						chosen.contents = EntityArchetypeCreator.createSinkable(grid.level.theme.coin.copy())
 					}
 				}
 			}

@@ -301,7 +301,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 
 				grid.replay.logAction("Spawning special $merged at (${tile.toShortString()})")
 
-				val orb = createOrb(contents.matchable()!!.desc)
+				val orb = EntityArchetypeCreator.createOrb(contents.matchable()!!.desc)
 				addSpecial(orb, merged)
 				orb.pos().setTile(orb, tile)
 
@@ -338,7 +338,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 
 					grid.replay.logAction("Spawning special $merged at (${tile.toShortString()})")
 
-					val orb = createOrb(contents.matchable()!!.desc)
+					val orb = EntityArchetypeCreator.createOrb(contents.matchable()!!.desc)
 					addSpecial(orb, merged)
 					orb.pos().setTile(orb, tile)
 
@@ -524,7 +524,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 					val desc = OrbDesc()
 					desc.key = gridTemplate[y][x].hashCode()
 
-					tile.contents = createOrb(desc)
+					tile.contents = EntityArchetypeCreator.createOrb(desc)
 				}
 			}
 

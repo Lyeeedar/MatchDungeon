@@ -334,7 +334,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 				val tile = grid[x, y]
 				if (tile.canHaveOrb && (tile.contents == null || tile.contents!!.matchable() != null))
 				{
-					val toSpawn = if (orbOnly) createOrb(OrbDesc.getRandomOrb(level)) else level.spawnOrb()
+					val toSpawn = if (orbOnly) EntityArchetypeCreator.createOrb(OrbDesc.getRandomOrb(level)) else level.spawnOrb()
 
 					val toSpawnMatchable = toSpawn.matchable()
 					if (toSpawnMatchable != null)
@@ -843,6 +843,8 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 		{
 			tile.contents?.free()
 		}
+
+		EntityPool.flushFreedEntities()
 	}
 }
 
