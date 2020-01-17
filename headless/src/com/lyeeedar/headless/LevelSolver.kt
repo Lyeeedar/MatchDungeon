@@ -303,6 +303,7 @@ class LevelSolver
 
 					throw ex
 				}
+				val levelGrid = levels[i].grid.grid.toString()
 
 				createLevel(resolveLevels[i])
 
@@ -313,7 +314,7 @@ class LevelSolver
 					val victory = resolve(resolveLevels[i].grid, levels[i].grid.replay.moves)
 					println("Level solved. Victory=$victory")
 
-					if (levels[i].grid.grid.toString() != resolveLevels[i].grid.grid.toString())
+					if (levelGrid != resolveLevels[i].grid.grid.toString())
 					{
 						throw RuntimeException("History didnt give the same result!")
 					}
