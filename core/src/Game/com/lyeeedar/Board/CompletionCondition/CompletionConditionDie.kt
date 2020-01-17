@@ -155,7 +155,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 						 val target = grid.monsterTiles.random()
 						 if (target != null)
 						 {
-							 val dst = GridScreen.instance.grid!!.pointToScreenspace(target)
+							 val dst = if (Global.resolveInstantly) Vector2() else GridScreen.instance.grid!!.pointToScreenspace(target)
 							 spawnMote(src, dst, sprite, GridWidget.instance.tileSize,
 								  {
 									  grid.pop(target, 0f, Global.player, Global.player.getStat(Statistic.MATCHDAMAGE), Global.player.getStat(Statistic.PIERCE))
@@ -205,6 +205,8 @@ class CompletionConditionDie : AbstractCompletionCondition()
 
 	fun updateBlink()
 	{
+		if (Global.resolveInstantly) return
+
 		if (hp <= maxHP * 0.25f)
 		{
 			if (blinkTable.children.size == 0)
@@ -230,14 +232,17 @@ class CompletionConditionDie : AbstractCompletionCondition()
 			fractionalHp -= 1f
 			hp += 1
 
-			val pos = hpLabel.localToStageCoordinates(Vector2(hpLabel.width/2f, hpLabel.height/2f))
+			if (!Global.resolveInstantly)
+			{
+				val pos = hpLabel.localToStageCoordinates(Vector2(hpLabel.width / 2f, hpLabel.height / 2f))
 
-			val healSprite = AssetManager.loadParticleEffect("Heal")
-			healSprite.colour = Colour.GREEN
-			val actor = ParticleEffectActor(healSprite.getParticleEffect())
-			actor.setSize(48f, 48f)
-			actor.setPosition(pos.x, pos.y)
-			Statics.stage.addActor(actor)
+				val healSprite = AssetManager.loadParticleEffect("Heal")
+				healSprite.colour = Colour.GREEN
+				val actor = ParticleEffectActor(healSprite.getParticleEffect())
+				actor.setSize(48f, 48f)
+				actor.setPosition(pos.x, pos.y)
+				Statics.stage.addActor(actor)
+			}
 
 			if (hp > maxHP)
 			{
@@ -251,15 +256,18 @@ class CompletionConditionDie : AbstractCompletionCondition()
 		// do degen
 		if (Global.player.getStat(Statistic.REGENERATION) < 0f)
 		{
-			val pos = hpLabel.localToStageCoordinates(Vector2(hpLabel.width/2f, hpLabel.height/2f))
+			if (!Global.resolveInstantly)
+			{
+				val pos = hpLabel.localToStageCoordinates(Vector2(hpLabel.width / 2f, hpLabel.height / 2f))
 
-			val healSprite = AssetManager.loadParticleEffect("Heal")
-			healSprite.colour = Colour.RED
-			healSprite.flipY = true
-			val actor = ParticleEffectActor(healSprite.getParticleEffect())
-			actor.setSize(48f, 48f)
-			actor.setPosition(pos.x, pos.y)
-			Statics.stage.addActor(actor)
+				val healSprite = AssetManager.loadParticleEffect("Heal")
+				healSprite.colour = Colour.RED
+				healSprite.flipY = true
+				val actor = ParticleEffectActor(healSprite.getParticleEffect())
+				actor.setSize(48f, 48f)
+				actor.setPosition(pos.x, pos.y)
+				Statics.stage.addActor(actor)
+			}
 		}
 
 		while (fractionalHp < -1f)

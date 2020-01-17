@@ -835,6 +835,15 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 
 	// ----------------------------------------------------------------------
 	fun getTile(x: Int, y: Int): Tile? = grid[x, y, null]
+
+	// ----------------------------------------------------------------------
+	fun dispose()
+	{
+		for (tile in grid)
+		{
+			tile.contents?.free()
+		}
+	}
 }
 
 class HistoryMove()

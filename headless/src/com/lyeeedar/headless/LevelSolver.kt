@@ -17,8 +17,11 @@ import com.lyeeedar.UI.PowerBar
 import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.Random
 import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.filename
 import org.mockito.Mockito
 import java.io.File
+import java.util.zip.GZIPInputStream
+import java.util.zip.GZIPOutputStream
 
 object CrashedLevelReplayer
 {
@@ -39,8 +42,29 @@ object CrashedLevelReplayer
 	}
 }
 
+object BruteForceLevelTester
+{
+	@JvmStatic fun main(arg: kotlin.Array<String>)
+	{
+		Gdx.gl = Mockito.mock(GL20::class.java)
+		Gdx.gl20 = Mockito.mock(GL20::class.java)
+		Gdx.app = HeadlessApplication(Mockito.mock(Game::class.java))
+
+		try
+		{
+			LevelSolver().bruteForceLevelTester()
+		}
+		finally
+		{
+			Gdx.app.exit()
+		}
+	}
+}
+
 class LevelSolver
 {
+	var disableOutput = false
+
 	fun replayCrashedLevel()
 	{
 		Global.resolveInstantly = true
@@ -55,8 +79,11 @@ class LevelSolver
 		println("")
 		println("")
 
-		val file = File("crashedLevelReplay")
-		val replay = deserialize(file.readBytes()) as Replay
+		val file = Gdx.files.local("crashedLevelReplay")
+
+		val bytes = GZIPInputStream(file.read()).readBytes()
+
+		val replay = deserialize(bytes) as Replay
 
 		println("Replaying level ${replay.levelPath} variant ${replay.variant}")
 
@@ -83,6 +110,107 @@ class LevelSolver
 		resolve(level.grid, replay.moves, true)
 
 		Global.resolveInstantly = false
+	}
+
+	fun bruteForceLevelTester()
+	{
+		println("")
+		println("")
+		println("-------------------------------------------------------------------------")
+		println("")
+		println("#####      Brute Force Level Tester      #######")
+		println("")
+		println("-------------------------------------------------------------------------")
+		println("")
+		println("")
+
+		Global.resolveInstantly = true
+		disableOutput = true
+
+		val themes = XmlData.enumeratePaths("", "Theme").toList()
+		val characters = XmlData.enumeratePaths("", "Character").toList()
+
+		val gridScreen = GridScreen()
+
+		var totalI = 0
+		var crashCount = 0
+
+		val paths = XmlData.enumeratePaths("", "Level").toList()
+		var pathI = 0
+
+		var lastTime = System.currentTimeMillis()
+		while(true)
+		{
+			val path = paths[pathI]
+
+			val levels = Level.load(path)
+			for (i in 0 until levels.size)
+			{
+				val level = levels[i]
+
+				val theme = Theme.load(themes.random())
+				val seed = Random.random.nextLong()
+
+				val character = Character.load(characters.random().replace("Characters/", ""))
+				val player = Player(character, PlayerDeck())
+				Global.player = player
+				Global.deck = GlobalDeck()
+				Global.deck.chosenCharacter = character
+				Global.deck.characters.add(character)
+
+				level.create(theme, player, {}, {}, seed, i)
+
+				for (cond in level.victoryConditions)
+				{
+					cond.createTable(level.grid)
+				}
+				for (cond in level.defeatConditions)
+				{
+					cond.createTable(level.grid)
+				}
+
+				try
+				{
+					solve(level.grid)
+				}
+				catch (ex: Exception)
+				{
+					val firstExceptionLine = ex.toString().split('\n').first()
+ 					val exceptionFolder = firstExceptionLine.toCharArray().filter { it.isLetter() }.joinToString("")
+					val filename = path.filename(false)
+
+					val replay = serialize(level.grid.replay)
+					val file = Gdx.files.local("$exceptionFolder/${filename}_${i}_$crashCount")
+					file.parent().mkdirs()
+
+					val output = GZIPOutputStream(file.write(false))
+					output.write(replay)
+					output.close()
+
+					crashCount++
+				}
+			}
+
+			pathI++
+			if (pathI == paths.size)
+			{
+				pathI = 0
+			}
+
+			val printInterval = 20
+			if (pathI.rem(printInterval) == 0)
+			{
+				val currentTime = System.currentTimeMillis()
+				val diffSeconds = (currentTime - lastTime) / 1000f
+				val levelsASecond = printInterval / diffSeconds
+
+				lastTime = currentTime
+
+				println("Done: $totalI, crashed: $crashCount, Levels/Second: $levelsASecond")
+			}
+
+			totalI++
+		}
 	}
 
 	fun attemptAllLevels()
@@ -162,8 +290,11 @@ class LevelSolver
 					println("Solving level '$path' variant '$i' crashed!")
 
 					val replay = serialize(levels[i].grid.replay)
-					val file = File("crashedLevelReplay")
-					file.writeBytes(replay)
+					val file = Gdx.files.local("crashedLevelReplay")
+
+					val output = GZIPOutputStream(file.write(false))
+					output.write(replay)
+					output.close()
 
 					throw ex
 				}
@@ -236,7 +367,7 @@ class LevelSolver
 		{
 			completeTurn(grid)
 
-			if (moveCount > 10 && moveCount.rem(20) == 0)
+			if (moveCount > 10 && moveCount.rem(20) == 0 && !disableOutput)
 			{
 				println("MoveCount: $moveCount")
 			}
@@ -252,7 +383,7 @@ class LevelSolver
 				moveCount++
 			}
 		}
-		println("MoveCount: $moveCount")
+		if (!disableOutput) println("MoveCount: $moveCount")
 
 		if (grid.level.isVictory || !grid.level.defeatConditions.any { it is CompletionConditionTime })
 		{
@@ -269,7 +400,7 @@ class LevelSolver
 
 				if (hasDetonations || hasSinking || damageCount > 3)
 				{
-					System.err.println("Level took less than 5 turns but its probably alright")
+					if (!disableOutput) System.err.println("Level took less than 5 turns but its probably alright")
 				}
 				else
 				{
@@ -278,10 +409,12 @@ class LevelSolver
 			}
 		}
 
-		if (grid.level.isDefeat)
+		if (grid.level.isDefeat && !disableOutput)
 		{
 			println("Defeat reason: " + grid.level.defeatConditions.first{ it.isCompleted() }.javaClass.typeName.split("CompletionCondition").last())
 		}
+
+		grid.dispose()
 
 		return grid.level.isVictory
 	}
@@ -312,7 +445,7 @@ class LevelSolver
 
 			updateCount++
 
-			if (updateCount > 10 && updateCount.rem(20) == 0)
+			if (updateCount > 10 && updateCount.rem(20) == 0 && !disableOutput)
 			{
 				println("UpdateCount: $updateCount")
 			}
@@ -356,7 +489,7 @@ class LevelSolver
 			}
 		}
 
-		if (print)
+		if (print && !disableOutput)
 		{
 			println("Making move $move")
 		}

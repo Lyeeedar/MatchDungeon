@@ -24,6 +24,13 @@ task replayCrashedLevel(dependsOn: classes, type: JavaExec) {
     workingDir =  new File("../android/assets")
 }
 
+task bruteForceTestLevels(dependsOn: classes, type: JavaExec) {
+    main = "com.lyeeedar.headless.BruteForceLevelTester"
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+    workingDir =  new File("../android/assets")
+}
+
 task releaseAndroidToPlaystore(dependsOn: classes, type: JavaExec) {
     main = "com.lyeeedar.headless.AndroidRelease"
     classpath = sourceSets.main.runtimeClasspath
