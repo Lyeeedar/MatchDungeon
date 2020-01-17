@@ -600,6 +600,8 @@ class Level(val loadPath: String)
 
 		Global.player.levelbuffs.clear()
 		Global.player.leveldebuffs.clear()
+
+		grid.dispose()
 	}
 
 	fun copy(): Level

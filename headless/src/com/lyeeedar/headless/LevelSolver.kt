@@ -419,8 +419,6 @@ class LevelSolver
 			println("Defeat reason: " + grid.level.defeatConditions.first{ it.isCompleted() }.javaClass.typeName.split("CompletionCondition").last())
 		}
 
-		grid.dispose()
-
 		return grid.level.isVictory
 	}
 

@@ -46,6 +46,8 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 		{
 			grid.matchHint = findBestMove(grid)
 		}
+
+		EntityPool.flushFreedEntities()
 	}
 
 	// ---------------------------------------------------------------------
