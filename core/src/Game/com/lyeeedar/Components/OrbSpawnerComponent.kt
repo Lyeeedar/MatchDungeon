@@ -62,5 +62,6 @@ class OrbSpawnerComponent : AbstractComponent()
 		numToSpawn = 0
 		spacingCounter = 0
 		canSpawnSinkables = true
+		numToSpawnChanged.clear()
 	}
 }
