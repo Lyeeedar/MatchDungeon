@@ -25,21 +25,32 @@
 -dontwarn com.badlogic.gdx.backends.android.AndroidFragmentApplication
 -dontwarn com.badlogic.gdx.utils.GdxBuild
 -dontwarn com.badlogic.gdx.physics.box2d.utils.Box2DBuild
--dontwarn com.badlogic.gdx.jnigen.BuildTarget*
--dontwarn com.badlogic.gdx.graphics.g2d.freetype.FreetypeBuild
+-dontwarn com.badlogic.gdx.jnigen.**
+-dontwarn java.awt.**
+-dontwarn javax.**
+-dontwarn com.badlogic.gdx.tools.**
+-dontwarn com.badlogic.gdx.backends.lwjgl.**
+-dontwarn org.lwjgl.**
+-dontwarn sun.misc.Unsafe
+-dontwarn sun.nio.ch.DirectBuffer
+-dontwarn sun.misc.Cleaner
+-dontwarn java.beans.**
+-dontwarn com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets
+-dontwarn kotlinx.coroutines.**
 
--keep class com.badlogic.gdx.controllers.android.AndroidControllers
+-keep class kotlin.** { *; }
+-keep class kotlin.Metadata { *; }
+-dontwarn kotlin.**
+-keepclassmembers class **$WhenMappings {
+    <fields>;
+}
+-keepclassmembers class kotlin.Metadata {
+    public <methods>;
+}
+-assumenosideeffects class kotlin.jvm.internal.Intrinsics {
+    static void checkParameterIsNotNull(java.lang.Object, java.lang.String);
+}
 
 -keepclassmembers class com.badlogic.gdx.backends.android.AndroidInput* {
    <init>(com.badlogic.gdx.Application, android.content.Context, java.lang.Object, com.badlogic.gdx.backends.android.AndroidApplicationConfiguration);
-}
-
--keepclassmembers class com.badlogic.gdx.physics.box2d.World {
-   boolean contactFilter(long, long);
-   void    beginContact(long);
-   void    endContact(long);
-   void    preSolve(long, long);
-   void    postSolve(long, long);
-   boolean reportFixture(long);
-   float   reportRayFixture(long, float, float, float, float, float);
 }
