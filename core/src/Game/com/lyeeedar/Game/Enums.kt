@@ -73,15 +73,15 @@ enum class Statistic private constructor(val niceName: String, val min: Float, v
 	REGENERATION("Regeneration", 0f, Float.MAX_VALUE, "The amount of health you regenerate each turn", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/heart_green_full")),
 	BERSERK("Berserk", 0f, Float.MAX_VALUE, "When below half health this is the amount MatchDamage, AbilityDamage and PowerGain is increased", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/skull_small_blood")),
 	PRICEREDUCTION("Price Reduction", 0f, Float.MAX_VALUE, "The percentage reduction in price of items from a shop", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/coin_copper")),
-	AEGIS("Aegis", 0f, 1f, "The chance to block the damage from an attack as it hits", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/shield_iron_buckler")),
-	COUNTER("Counter", 0f, 1f, "When taking damage from an attack, the chance to hit back at a random enemy", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/armor_wild_chest")),
-	REFLECT("Reflect", 0f, 1f, "The chance to block the damage from an attack, then hit back at a random enemy", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/armor_mystic_chest")),
-	CHAOTICNATURE("Chaotic Nature", 0f, 1f, "The percentage increase or decrease to randomly apply to each statistic. Changes whenever you complete an encounter", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/necklace_dark")),
+	AEGIS("Aegis", 0f, Float.MAX_VALUE, "The chance to block the damage from an attack as it hits", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/shield_iron_buckler")),
+	COUNTER("Counter", 0f, Float.MAX_VALUE, "When taking damage from an attack, the chance to hit back at a random enemy", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/armor_wild_chest")),
+	REFLECT("Reflect", 0f, Float.MAX_VALUE, "The chance to block the damage from an attack, then hit back at a random enemy", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/armor_mystic_chest")),
+	CHAOTICNATURE("Chaotic Nature", 0f, Float.MAX_VALUE, "The percentage increase or decrease to randomly apply to each statistic. Changes whenever you complete an encounter", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/necklace_dark")),
 	WEAKNESSAURA("Weakness Aura", 0f, Float.MAX_VALUE, "The value to subtract from enemy life as they spawn", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/crystal_dragon")),
 	NECROTICAURA("Necrotic Aura", 0f, Float.MAX_VALUE, "The amount of health you gain each time you kill an enemy", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/skull_large_closed")),
 	BUFFDURATION("Buff Duration", 0f, Float.MAX_VALUE, "The multiplier to increase buff duration by", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/necklace_mystic")),
 	LUCK("Luck", -1f, 1f, "Affects your chance of gaining rewards", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/gem_tourmaline")),
-	VAMPIRICSTRIKES("Vampiric Strikes", 0f, 1f, "You regain a portion of the damage you deal as health", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/weapon_magic_sword_hellfire"));
+	VAMPIRICSTRIKES("Vampiric Strikes", 0f, Float.MAX_VALUE, "You regain a portion of the damage you deal as health", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/weapon_magic_sword_hellfire"));
 
 	companion object
 	{
