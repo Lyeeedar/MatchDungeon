@@ -50,14 +50,14 @@ class OrbDesc()
 			{
 				while (true)
 				{
-					val index = level.grid.ran.nextInt(level.orbs - 1)
+					val index = level.grid.ran.nextInt(level.orbs)
 					if (validOrbs[index] == toIgnore) continue
 					return validOrbs[index]
 				}
 			}
 			else
 			{
-				val index = level.grid.ran.nextInt(level.orbs - 1)
+				val index = level.grid.ran.nextInt(level.orbs)
 				return validOrbs[index]
 			}
 		}
