@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Game.AbstractReward
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.UI.CardWidget
+import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
 import ktx.collections.toGdxArray
 
@@ -30,6 +31,11 @@ class CardContentActionRewards : AbstractCardContentAction()
 			displayingRewards = true
 
 			val chosenRewards = rewards.filter { it.chance.evaluate() }.flatMap { it.reward() }.toGdxArray()
+
+			for (reward in chosenRewards)
+			{
+				Statics.crashReporter.logDebug("Granting reward $reward")
+			}
 
 			CardWidget.displayLoot(chosenRewards, CardWidget.Companion.LootAnimation.CHEST) {
 				awaitingAdvance = true

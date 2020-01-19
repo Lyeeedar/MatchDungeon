@@ -1,6 +1,7 @@
 package com.lyeeedar
 
 import com.lyeeedar.Screens.*
+import com.lyeeedar.Util.Statics
 import java.util.*
 
 val DEBUG_SCREEN_OVERRIDE: ScreenEnum? = null
@@ -21,7 +22,11 @@ fun registerDebugScreens(): HashMap<ScreenEnum, AbstractScreen>
 {
 	val screens = HashMap<ScreenEnum, AbstractScreen>()
 
-	screens[ScreenEnum.PARTICLEEDITOR] = ParticleEditorScreen()
+	if (!Statics.android)
+	{
+		screens[ScreenEnum.PARTICLEEDITOR] = ParticleEditorScreen()
+	}
+
 	screens[ScreenEnum.TESTCARDLOOK] = TestCardLookScreen()
 
 	return screens

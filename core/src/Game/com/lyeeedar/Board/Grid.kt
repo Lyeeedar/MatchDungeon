@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectSet
+import com.kryo.deserialize
 import com.kryo.serialize
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionCustomOrb
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionDie
@@ -25,6 +26,12 @@ import com.lyeeedar.UI.PowerBar
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
 import ktx.collections.toGdxArray
+import org.apache.commons.codec.binary.Base64.decodeBase64
+import org.apache.commons.codec.binary.Base64.encodeBase64String
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import java.util.zip.GZIPInputStream
+import java.util.zip.GZIPOutputStream
 
 class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay)
 {
@@ -270,7 +277,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 	// ----------------------------------------------------------------------
 	fun refill()
 	{
-		replay.moves.add(HistoryMove(true, grid.toString()))
+		replay.addMove(HistoryMove(true, grid.toString()))
 
 		val tempgrid: Array2D<Tile> = Array2D(width, height ){ x, y -> Tile(x, y, this) }
 		for (x in 0 until width)
@@ -384,12 +391,14 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 	{
 		if (level.isVictory || level.isDefeat) return
 
-		replay.moves.add(HistoryMove(Global.player.getAbilityIndex(activeAbility!!), activeAbility!!.selectedTargets.map{ it.copy() }.toGdxArray(), grid.toString()))
+		replay.addMove(HistoryMove(Global.player.getAbilityIndex(activeAbility!!), activeAbility!!.selectedTargets.map{ it.copy() }.toGdxArray(), grid.toString()))
 
 		activeAbility!!.activate(this)
 		activeAbility = null
 
 		inTurn = true
+
+		throw java.lang.RuntimeException("Test crash")
 	}
 
 	// ----------------------------------------------------------------------
@@ -564,7 +573,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 				lastSwapped = newTile
 				matchHint = null
 
-				replay.moves.add(HistoryMove(historySwapStart, historySwapEnd, gridSnapshot))
+				replay.addMove(HistoryMove(historySwapStart, historySwapEnd, gridSnapshot))
 				replay.logAction("Merging to form special $merged")
 				return true
 			}
@@ -611,7 +620,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 				newEntity.renderable().renderable.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(oldTile.getPosDiff(newTile)).invertY(), Interpolation.linear)
 			}
 
-			replay.moves.add(HistoryMove(historySwapStart, historySwapEnd, gridSnapshot))
+			replay.addMove(HistoryMove(historySwapStart, historySwapEnd, gridSnapshot))
 			return true
 		}
 	}
@@ -864,16 +873,12 @@ class HistoryMove()
 		this.swapStart = swapStart
 		this.swapEnd = swapEnd
 		this.levelSnapshot = levelSnapshot
-
-		gridActionLog.add("swapping (${swapStart.x},${swapStart.y}) with (${swapEnd.x},${swapEnd.y})")
 	}
 
 	constructor(refill: Boolean, levelSnapshot: String) : this()
 	{
 		this.refill = refill
 		this.levelSnapshot = levelSnapshot
-
-		gridActionLog.add("refilling grid")
 	}
 
 	constructor(abilityIndex: Int, targets: Array<Point>, levelSnapshot: String) : this()
@@ -881,8 +886,26 @@ class HistoryMove()
 		this.abilityIndex = abilityIndex
 		this.abilityTargets = targets
 		this.levelSnapshot = levelSnapshot
+	}
 
-		gridActionLog.add("using ability $abilityIndex on " + targets.joinToString(" ") { "(${it.x},${it.y})" })
+	override fun toString(): String
+	{
+		if (swapStart != null)
+		{
+			return "swapping (${swapStart!!.toShortString()}) with (${swapEnd!!.toShortString()})"
+		}
+		else if (refill)
+		{
+			return "refilling grid"
+		}
+		else if (abilityIndex != null)
+		{
+			return "using ability $abilityIndex on " + abilityTargets!!.joinToString(" ") { "(${it.toShortString()})" }
+		}
+		else
+		{
+			return "Unknown move"
+		}
 	}
 }
 
@@ -915,7 +938,44 @@ class Replay()
 
 	fun logAction(action: String)
 	{
+		Statics.crashReporter.logDebug("Logging action: $action")
+
 		moves.last().gridActionLog.add(action)
+
+		uploadCrashData()
+	}
+
+	fun addMove(move: HistoryMove)
+	{
+		Statics.crashReporter.logDebug("Making move: $move")
+
+		moves.add(move)
+
+		uploadCrashData()
+	}
+
+	fun compress(): ByteArray
+	{
+		val rawBytes = serialize(this)
+
+		val outStream = ByteArrayOutputStream(rawBytes.size)
+		val compressionStream = GZIPOutputStream(outStream)
+
+		compressionStream.write(rawBytes)
+		compressionStream.close()
+		outStream.close()
+
+		val compressedBytes = outStream.toByteArray()
+
+		return compressedBytes
+	}
+
+	fun compressToString(): String
+	{
+		val bytes = compress()
+		val asString = encodeBase64String(bytes)
+
+		return asString
 	}
 
 	override fun toString(): String
@@ -928,6 +988,7 @@ class Replay()
 			builder.appendln("Move $i:")
 			builder.appendln(move.levelSnapshot)
 			builder.appendln("\n")
+			builder.appendln(move.toString())
 			for (item in move.gridActionLog)
 			{
 				builder.appendln(item)
@@ -936,5 +997,36 @@ class Replay()
 		}
 
 		return builder.toString()
+	}
+
+	fun uploadCrashData()
+	{
+		val asString = compressToString()
+		val chunked = asString.chunked(900)
+
+		Statics.crashReporter.setCustomKey("CrashDataNumParts", chunked.size)
+		for (i in chunked.indices)
+		{
+			Statics.crashReporter.setCustomKey("CrashDataPart$i", chunked[i])
+		}
+	}
+
+	companion object
+	{
+		fun loadFromBytes(compressedBytes: ByteArray): Replay
+		{
+			val inputByteWriter = ByteArrayInputStream(compressedBytes)
+			val decompressionStream = GZIPInputStream(inputByteWriter)
+			val rawBytes = decompressionStream.readBytes()
+			val replay = deserialize(rawBytes) as Replay
+
+			return replay
+		}
+
+		fun loadFromString(string: String): Replay
+		{
+			val bytes = decodeBase64(string)
+			return loadFromBytes(bytes)
+		}
 	}
 }

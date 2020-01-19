@@ -23,6 +23,7 @@ class AndroidLauncher : AndroidApplication()
 		config.disableAudio = false
 
 		Statics.android = true
+		Statics.crashReporter = AndroidCrashReporter()
 		Statics.game = MainGame()
 
 		initialize(Statics.game, config)

@@ -41,7 +41,7 @@ class DetonateUpdateStep : AbstractUpdateStep()
 			val contents = tile.contents!!
 			val special = contents.special()!!
 
-			grid.replay.moves.last().gridActionLog.add("detonating special ${special.special} at (${tile.x},${tile.y})")
+			grid.replay.logAction("detonating special ${special.special} at (${tile.x},${tile.y})")
 
 			special.special.apply(tile, grid)
 

@@ -18,7 +18,7 @@ android {
     }
     defaultConfig {
         applicationId "com.lyeeedar.MatchDungeon"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 28
         multiDexEnabled true
         ndk.abiFilters 'armeabi-v7a','arm64-v8a','x86','x86_64'

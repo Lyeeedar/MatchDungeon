@@ -6,7 +6,6 @@ import com.badlogic.gdx.backends.headless.HeadlessApplication
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.utils.Array
 import com.kryo.deserialize
-import com.kryo.serialize
 import com.lyeeedar.Board.*
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionTime
 import com.lyeeedar.Components.renderable
@@ -21,8 +20,6 @@ import com.lyeeedar.Util.filename
 import org.mockito.Mockito
 import java.io.File
 import java.util.concurrent.TimeUnit
-import java.util.zip.GZIPInputStream
-import java.util.zip.GZIPOutputStream
 
 object CrashedLevelReplayer
 {
@@ -81,10 +78,7 @@ class LevelSolver
 		println("")
 
 		val file = Gdx.files.local("crashedLevelReplay")
-
-		val bytes = GZIPInputStream(file.read()).readBytes()
-
-		val replay = deserialize(bytes) as Replay
+		val replay = Replay.loadFromString(file.readString())
 
 		println("Replaying level ${replay.levelPath} variant ${replay.variant}")
 
@@ -180,13 +174,9 @@ class LevelSolver
  					val exceptionFolder = firstExceptionLine.toCharArray().filter { it.isLetter() }.joinToString("")
 					val filename = path.filename(false)
 
-					val replay = serialize(level.grid.replay)
 					val file = Gdx.files.local("$exceptionFolder/${filename}_${i}_$crashCount")
 					file.parent().mkdirs()
-
-					val output = GZIPOutputStream(file.write(false))
-					output.write(replay)
-					output.close()
+					file.writeString(level.grid.replay.compressToString(), false)
 
 					crashCount++
 				}
@@ -294,12 +284,8 @@ class LevelSolver
 				{
 					println("Solving level '$path' variant '$i' crashed!")
 
-					val replay = serialize(levels[i].grid.replay)
 					val file = Gdx.files.local("crashedLevelReplay")
-
-					val output = GZIPOutputStream(file.write(false))
-					output.write(replay)
-					output.close()
+					file.writeString(levels[i].grid.replay.compressToString(), false)
 
 					throw ex
 				}
@@ -344,7 +330,9 @@ class LevelSolver
 
 	fun solve(grid: Grid): Boolean
 	{
-		return solveLevel(grid, fun (moveCount: Int) { makeMove(grid, moveCount > 200)})
+		return solveLevel(grid, fun (moveCount: Int) {
+			makeMove(grid, moveCount > 200)
+		})
 	}
 
 	fun resolve(grid: Grid, moves: Array<HistoryMove>, print: Boolean = false): Boolean

@@ -39,6 +39,8 @@ class Save
 			if (Global.resolveInstantly) return
 			if (doingLoad) return
 
+			Statics.crashReporter.logDebug("Saving")
+
 			val outputFile = Gdx.files.local("save.dat")
 
 			val output: Output

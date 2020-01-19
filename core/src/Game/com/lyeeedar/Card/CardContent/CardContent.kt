@@ -6,9 +6,9 @@ import com.esotericsoftware.kryo.Kryo
 import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.Screens.CardScreen
+import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.getXml
-import ktx.collections.isEmpty
 import ktx.collections.set
 
 class CardContent(val path: String)
@@ -47,6 +47,7 @@ class CardContent(val path: String)
 
 			val action = current.node.actions[current.index]
 
+			Statics.crashReporter.logDebug("Attempting to advance $action")
 			val advance = action.advance(this, CardContentScreen)
 			if (advance)
 			{
