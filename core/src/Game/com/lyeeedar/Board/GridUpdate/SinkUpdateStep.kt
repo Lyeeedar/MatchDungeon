@@ -4,12 +4,16 @@ import com.lyeeedar.Board.Grid
 import com.lyeeedar.Components.pos
 import com.lyeeedar.Components.removeFromTile
 import com.lyeeedar.Components.sinkable
+import com.lyeeedar.Util.Statics
 
 class SinkUpdateStep : AbstractUpdateStep()
 {
 	// ----------------------------------------------------------------------
 	fun sink(grid: Grid): Boolean
 	{
+		val trace = Statics.crashReporter.getTrace("Sink")
+		trace.start()
+
 		var complete = true
 
 		for (x in 0 until grid.width)
@@ -37,6 +41,8 @@ class SinkUpdateStep : AbstractUpdateStep()
 				complete = false
 			}
 		}
+
+		trace.stop()
 
 		return complete
 	}

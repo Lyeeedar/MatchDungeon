@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Tile
 import com.lyeeedar.Components.*
+import com.lyeeedar.Util.Statics
 
 class UpdateGridStateUpdateStep : AbstractUpdateStep()
 {
@@ -17,6 +18,9 @@ class UpdateGridStateUpdateStep : AbstractUpdateStep()
 
 	override fun doUpdate(grid: Grid): Boolean
 	{
+		val trace = Statics.crashReporter.getTrace("UpdateState")
+		trace.start()
+
 		grid.monsterTiles.clear()
 		grid.friendlyTiles.clear()
 		grid.sinkableTiles.clear()
@@ -117,6 +121,8 @@ class UpdateGridStateUpdateStep : AbstractUpdateStep()
 				grid.notSinkPathTiles.add(tile)
 			}
 		}
+
+		trace.stop()
 
 		return true
 	}

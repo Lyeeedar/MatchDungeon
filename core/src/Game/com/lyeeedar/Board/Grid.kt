@@ -446,6 +446,9 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 	// ----------------------------------------------------------------------
 	fun update(deltaTime: Float)
 	{
+		val gridUpdateTrace = Statics.crashReporter.getTrace("GridUpdate")
+		gridUpdateTrace.start()
+
 		for (step in updateSteps)
 		{
 			step.doUpdateRealTime(this, deltaTime)
@@ -497,6 +500,8 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 			}
 			isUpdating = false
 		}
+
+		gridUpdateTrace.stop()
 	}
 
 	// ----------------------------------------------------------------------

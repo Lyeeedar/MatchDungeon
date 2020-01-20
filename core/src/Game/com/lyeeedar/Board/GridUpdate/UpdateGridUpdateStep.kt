@@ -11,6 +11,7 @@ import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.BlinkAnimation
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
+import com.lyeeedar.Util.Statics
 
 class UpdateGridUpdateStep : AbstractUpdateStep()
 {
@@ -21,6 +22,9 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 
 	override fun doUpdateRealTime(grid: Grid, deltaTime: Float)
 	{
+		val trace = Statics.crashReporter.getTrace("UpdateGridRealTime")
+		trace.start()
+
 		grid.delayedActions.addAll(grid.queuedActions)
 		grid.queuedActions.clear()
 		grid.delayedActions.sort()
@@ -61,6 +65,8 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 				}
 			}
 		}
+
+		trace.stop()
 	}
 
 	private fun processEntityRealTime(entity: Entity, grid: Grid, deltaTime: Float)
@@ -144,6 +150,9 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 
 	override fun doTurn(grid: Grid)
 	{
+		val trace = Statics.crashReporter.getTrace("UpdateGridTurn")
+		trace.start()
+
 		processedAIs.clear()
 		processedSpreaders.clear()
 
@@ -276,5 +285,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 				}
 			}
 		}
+
+		trace.stop()
 	}
 }

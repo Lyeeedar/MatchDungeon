@@ -237,6 +237,9 @@ class GridWidget(val grid: Grid) : Widget()
 	var renderY = 0f
 	override fun draw(batch: Batch, parentAlpha: Float)
 	{
+		val trace = Statics.crashReporter.getTrace("GridWidgetRender")
+		trace.start()
+
 		batch.end()
 
 		val xp = this.x + (this.width / 2f) - ((grid.width * tileSize) / 2f)
@@ -588,6 +591,8 @@ class GridWidget(val grid: Grid) : Widget()
 		renderer.end(batch)
 
 		batch.begin()
+
+		trace.stop()
 	}
 
 	companion object

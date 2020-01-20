@@ -12,6 +12,7 @@ import com.lyeeedar.Renderables.Animation.AlphaAnimation
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.Util.Point
+import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.randomize
 import ktx.collections.gdxArrayOf
 import ktx.collections.toGdxArray
@@ -23,6 +24,9 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 	// ---------------------------------------------------------------------
 	override fun doUpdateRealTime(grid: Grid, deltaTime: Float)
 	{
+		val trace = Statics.crashReporter.getTrace("CleanUpRealTime")
+		trace.start()
+
 		deletedEntities.clear()
 
 		for (x in 0 until grid.width)
@@ -48,6 +52,8 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 		}
 
 		EntityPool.flushFreedEntities()
+
+		trace.stop()
 	}
 
 	// ---------------------------------------------------------------------
@@ -191,6 +197,9 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 	// ---------------------------------------------------------------------
 	override fun doTurn(grid: Grid)
 	{
+		val trace = Statics.crashReporter.getTrace("Cleanup")
+		trace.start()
+
 		for (tile in grid.grid)
 		{
 			if (tile.contents != null)
@@ -236,6 +245,8 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 		grid.noMatchTimer = 0f
 		grid.inTurn = false
 		grid.matchHint = findBestMove(grid)
+
+		trace.stop()
 	}
 
 	// ---------------------------------------------------------------------
@@ -244,8 +255,15 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 	// ---------------------------------------------------------------------
 	fun findBestMove(grid: Grid): ValidMove?
 	{
+		val trace = Statics.crashReporter.getTrace("FindBestMove")
+		trace.start()
+
 		val validMoves = findValidMoves(grid)
-		if (validMoves.size == 0) return null
+		if (validMoves.size == 0)
+		{
+			trace.stop()
+			return null
+		}
 
 		val movePriorities = Array<MovePriority>()
 
@@ -418,6 +436,8 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 				}
 			}
 		}
+
+		trace.stop()
 
 		// random
 		return validMoves.maxBy { it.swapStart.y }

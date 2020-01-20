@@ -27,6 +27,9 @@ class MatchUpdateStep : AbstractUpdateStep()
 	// ----------------------------------------------------------------------
 	private fun match(grid: Grid): Boolean
 	{
+		val trace = Statics.crashReporter.getTrace("Match")
+		trace.start()
+
 		val matches = findMatches(grid.grid, 3)
 		clearMatches(grid, matches)
 		for (match in matches) match.free()
@@ -42,6 +45,8 @@ class MatchUpdateStep : AbstractUpdateStep()
 			val point = chosen.points().asSequence().random()
 			displayMatchMessage(grid, point!!)
 		}
+
+		trace.stop()
 
 		return matches.size == 0
 	}

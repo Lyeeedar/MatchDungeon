@@ -5,12 +5,16 @@ import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Tile
 import com.lyeeedar.Components.MarkedForDeletionComponent
 import com.lyeeedar.Components.special
+import com.lyeeedar.Util.Statics
 
 class DetonateUpdateStep : AbstractUpdateStep()
 {
 	// ----------------------------------------------------------------------
 	private fun detonate(grid: Grid): Boolean
 	{
+		val trace = Statics.crashReporter.getTrace("Detonate")
+		trace.start()
+
 		var complete = true
 
 		val tilesToDetonate = Array<Tile>()
@@ -58,6 +62,8 @@ class DetonateUpdateStep : AbstractUpdateStep()
 			val point = tilesToDetonate.random()
 			grid.match.displayMatchMessage(grid, point!!)
 		}
+
+		trace.stop()
 
 		return complete
 	}

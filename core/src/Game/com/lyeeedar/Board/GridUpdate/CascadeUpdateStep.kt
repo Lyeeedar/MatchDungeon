@@ -11,6 +11,7 @@ import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
 import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Util.Point
+import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.UnsmoothedPath
 
 class CascadeUpdateStep : AbstractUpdateStep()
@@ -26,6 +27,9 @@ class CascadeUpdateStep : AbstractUpdateStep()
 	// ----------------------------------------------------------------------
 	private fun cascade(grid: Grid): Boolean
 	{
+		val trace = Statics.crashReporter.getTrace("Cascade")
+		trace.start()
+
 		for (x in 0 until grid.width) for (y in 0 until grid.height)
 		{
 			grid.spawnCount[x, y] = 0
@@ -63,6 +67,8 @@ class CascadeUpdateStep : AbstractUpdateStep()
 		}
 
 		cascadeComplete = makeAnimations(grid)
+
+		trace.stop()
 
 		return cascadeComplete
 	}
