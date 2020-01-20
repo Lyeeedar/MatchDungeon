@@ -195,7 +195,7 @@ class CardContentActionShop : AbstractCardContentAction()
 						{
 							card.pickFuns.clear()
 							card.addPick("Buy ($cost)") {
-								Statics.crashReporter.logDebug("Purchasing ware $ware")
+								Statics.logger.logDebug("Purchasing ware $ware")
 
 								Global.player.gold -= cost
 

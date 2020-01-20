@@ -279,7 +279,7 @@ class QuestSelectionScreen : AbstractScreen()
 		{
 			val card = quest.getCard()
 			card.addPick("Embark") {
-				Statics.crashReporter.logDebug("Embarking on quest ${quest.title}")
+				Statics.logger.logDebug("Embarking on quest ${quest.title}")
 
 				val screen = Statics.game.getTypedScreen<QuestScreen>()!!
 				quest.resetCards()

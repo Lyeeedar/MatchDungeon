@@ -22,7 +22,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 
 	override fun doUpdateRealTime(grid: Grid, deltaTime: Float)
 	{
-		val trace = Statics.crashReporter.getTrace("UpdateGridRealTime")
+		val trace = Statics.performanceTracer.getTrace("UpdateGridRealTime")
 		trace.start()
 
 		grid.delayedActions.addAll(grid.queuedActions)
@@ -150,7 +150,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 
 	override fun doTurn(grid: Grid)
 	{
-		val trace = Statics.crashReporter.getTrace("UpdateGridTurn")
+		val trace = Statics.performanceTracer.getTrace("UpdateGridTurn")
 		trace.start()
 
 		processedAIs.clear()

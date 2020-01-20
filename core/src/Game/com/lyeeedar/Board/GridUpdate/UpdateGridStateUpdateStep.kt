@@ -18,7 +18,7 @@ class UpdateGridStateUpdateStep : AbstractUpdateStep()
 
 	override fun doUpdate(grid: Grid): Boolean
 	{
-		val trace = Statics.crashReporter.getTrace("UpdateState")
+		val trace = Statics.performanceTracer.getTrace("UpdateState")
 		trace.start()
 
 		grid.monsterTiles.clear()

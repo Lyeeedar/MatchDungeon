@@ -446,7 +446,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 	// ----------------------------------------------------------------------
 	fun update(deltaTime: Float)
 	{
-		val gridUpdateTrace = Statics.crashReporter.getTrace("GridUpdate")
+		val gridUpdateTrace = Statics.performanceTracer.getTrace("GridUpdate")
 		gridUpdateTrace.start()
 
 		for (step in updateSteps)
@@ -940,7 +940,7 @@ class Replay()
 
 	fun logAction(action: String)
 	{
-		Statics.crashReporter.logDebug("Logging action: $action")
+		Statics.logger.logDebug("Logging action: $action")
 
 		moves.last().gridActionLog.add(action)
 
@@ -949,7 +949,7 @@ class Replay()
 
 	fun addMove(move: HistoryMove)
 	{
-		Statics.crashReporter.logDebug("Making move: $move")
+		Statics.logger.logDebug("Making move: $move")
 
 		moves.add(move)
 

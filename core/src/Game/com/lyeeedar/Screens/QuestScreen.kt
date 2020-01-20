@@ -601,7 +601,7 @@ class QuestScreen : AbstractScreen()
 			val sequence = delay(delay) then lambda {
 				val card = chosenQuestCard!!.data as Card
 
-				Statics.crashReporter.logDebug("Choosing card ${card.current.name}")
+				Statics.logger.logDebug("Choosing card ${card.current.name}")
 
 				val cardScreen = CardScreen.instance
 				cardScreen.setup(card, currentQuest)

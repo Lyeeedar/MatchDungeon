@@ -27,7 +27,7 @@ class CascadeUpdateStep : AbstractUpdateStep()
 	// ----------------------------------------------------------------------
 	private fun cascade(grid: Grid): Boolean
 	{
-		val trace = Statics.crashReporter.getTrace("Cascade")
+		val trace = Statics.performanceTracer.getTrace("Cascade")
 		trace.start()
 
 		for (x in 0 until grid.width) for (y in 0 until grid.height)

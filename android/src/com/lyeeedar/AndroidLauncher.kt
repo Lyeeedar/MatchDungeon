@@ -24,6 +24,8 @@ class AndroidLauncher : AndroidApplication()
 
 		Statics.android = true
 		Statics.crashReporter = AndroidCrashReporter()
+		Statics.logger = AndroidLogger()
+		Statics.performanceTracer = AndroidPerformanceTracer()
 		Statics.game = MainGame()
 
 		initialize(Statics.game, config)

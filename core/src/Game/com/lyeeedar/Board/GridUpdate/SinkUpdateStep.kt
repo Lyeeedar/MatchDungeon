@@ -11,7 +11,7 @@ class SinkUpdateStep : AbstractUpdateStep()
 	// ----------------------------------------------------------------------
 	fun sink(grid: Grid): Boolean
 	{
-		val trace = Statics.crashReporter.getTrace("Sink")
+		val trace = Statics.performanceTracer.getTrace("Sink")
 		trace.start()
 
 		var complete = true

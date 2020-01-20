@@ -24,7 +24,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 	// ---------------------------------------------------------------------
 	override fun doUpdateRealTime(grid: Grid, deltaTime: Float)
 	{
-		val trace = Statics.crashReporter.getTrace("CleanUpRealTime")
+		val trace = Statics.performanceTracer.getTrace("CleanUpRealTime")
 		trace.start()
 
 		deletedEntities.clear()
@@ -197,7 +197,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 	// ---------------------------------------------------------------------
 	override fun doTurn(grid: Grid)
 	{
-		val trace = Statics.crashReporter.getTrace("Cleanup")
+		val trace = Statics.performanceTracer.getTrace("Cleanup")
 		trace.start()
 
 		for (tile in grid.grid)
@@ -255,7 +255,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 	// ---------------------------------------------------------------------
 	fun findBestMove(grid: Grid): ValidMove?
 	{
-		val trace = Statics.crashReporter.getTrace("FindBestMove")
+		val trace = Statics.performanceTracer.getTrace("FindBestMove")
 		trace.start()
 
 		val validMoves = findValidMoves(grid)

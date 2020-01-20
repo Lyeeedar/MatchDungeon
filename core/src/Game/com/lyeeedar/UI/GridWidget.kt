@@ -237,7 +237,7 @@ class GridWidget(val grid: Grid) : Widget()
 	var renderY = 0f
 	override fun draw(batch: Batch, parentAlpha: Float)
 	{
-		val trace = Statics.crashReporter.getTrace("GridWidgetRender")
+		val trace = Statics.performanceTracer.getTrace("GridWidgetRender")
 		trace.start()
 
 		batch.end()

@@ -27,7 +27,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 	// ----------------------------------------------------------------------
 	private fun match(grid: Grid): Boolean
 	{
-		val trace = Statics.crashReporter.getTrace("Match")
+		val trace = Statics.performanceTracer.getTrace("Match")
 		trace.start()
 
 		val matches = findMatches(grid.grid, 3)

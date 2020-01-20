@@ -47,7 +47,7 @@ class CardContent(val path: String)
 
 			val action = current.node.actions[current.index]
 
-			Statics.crashReporter.logDebug("Attempting to advance $action")
+			Statics.logger.logDebug("Attempting to advance $action")
 			val advance = action.advance(this, CardContentScreen)
 			if (advance)
 			{

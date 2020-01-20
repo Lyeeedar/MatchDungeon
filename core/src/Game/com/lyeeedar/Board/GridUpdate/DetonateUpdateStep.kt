@@ -12,7 +12,7 @@ class DetonateUpdateStep : AbstractUpdateStep()
 	// ----------------------------------------------------------------------
 	private fun detonate(grid: Grid): Boolean
 	{
-		val trace = Statics.crashReporter.getTrace("Detonate")
+		val trace = Statics.performanceTracer.getTrace("Detonate")
 		trace.start()
 
 		var complete = true
