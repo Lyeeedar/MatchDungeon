@@ -1,0 +1,46 @@
+package com.lyeeedar
+
+import android.os.Bundle
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.lyeeedar.Util.IAnalytics
+
+class AndroidAnalytics(val firebaseAnalytics: FirebaseAnalytics) : IAnalytics
+{
+	override fun appOpen()
+	{
+		firebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, Bundle())
+	}
+
+	override fun levelStart(levelName: Long)
+	{
+		val bundle = Bundle()
+		bundle.putLong(FirebaseAnalytics.Param.LEVEL_NAME, levelName)
+		firebaseAnalytics.logEvent(FirebaseAnalytics.Event.LEVEL_START, bundle)
+	}
+
+	override fun levelEnd(levelName: Long, success: String)
+	{
+		val bundle = Bundle()
+		bundle.putLong(FirebaseAnalytics.Param.LEVEL_NAME, levelName)
+		bundle.putString(FirebaseAnalytics.Param.SUCCESS, success)
+		firebaseAnalytics.logEvent(FirebaseAnalytics.Event.LEVEL_END, bundle)
+	}
+
+	override fun selectContent(type: String, id: String)
+	{
+		val bundle = Bundle()
+		bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, type)
+		bundle.putString(FirebaseAnalytics.Param.ITEM_ID, id)
+		firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+	}
+
+	override fun tutorialBegin()
+	{
+		firebaseAnalytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_BEGIN, Bundle())
+	}
+
+	override fun tutorialEnd()
+	{
+		firebaseAnalytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_COMPLETE, Bundle())
+	}
+}

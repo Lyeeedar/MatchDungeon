@@ -210,6 +210,10 @@ class QuestSelectionScreen : AbstractScreen()
 
 		updateQuestsTable()
 
+		if (!Statics.settings.get("CompletedIntro", false))
+		{
+			Statics.analytics.tutorialEnd()
+		}
 		Statics.settings.set("CompletedIntro", true)
 	}
 

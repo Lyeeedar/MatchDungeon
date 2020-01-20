@@ -58,6 +58,8 @@ class Global
 			Statics.game.getTypedScreen<QuestSelectionScreen>()?.setup()
 
 			QuestScreen.instance.swapTo()
+
+			Statics.analytics.tutorialBegin()
 		}
 
 		fun getVariableMap(): ObjectFloatMap<String>
