@@ -13,6 +13,7 @@ import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.expandVariables
 import ktx.actors.then
+import java.util.*
 
 class CardContentActionChoice : AbstractCardContentAction()
 {
@@ -67,7 +68,7 @@ class CardContentActionChoice : AbstractCardContentAction()
 		for (el in choicesEl.children())
 		{
 			val text = el.get("Text")
-			val condition = el.get("Condition", "1")!!.toLowerCase()
+			val condition = el.get("Condition", "1")!!.toLowerCase(Locale.ENGLISH)
 			val key = el.get("Node", "")!!
 
 			choices.add(Choice(text, condition, key))

@@ -7,6 +7,7 @@ import com.lyeeedar.Game.Global
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.Util.XmlData
+import java.util.*
 import kotlin.math.max
 
 class CardContentActionSpend : AbstractCardContentAction()
@@ -17,7 +18,7 @@ class CardContentActionSpend : AbstractCardContentAction()
 	override fun parse(xmlData: XmlData)
 	{
 		key = xmlData.get("Key")
-		countEqn = xmlData.get("Count").toLowerCase()
+		countEqn = xmlData.get("Count").toLowerCase(Locale.ENGLISH)
 	}
 
 	override fun advance(CardContent: CardContent, CardContentScreen: CardScreen): Boolean
@@ -29,15 +30,15 @@ class CardContentActionSpend : AbstractCardContentAction()
 			Global.player.gold = max(0, Global.player.gold - count.toInt())
 		}
 
-		if (EquipmentSlot.Values.map { it.toString() }.contains(key.toUpperCase()))
+		if (EquipmentSlot.Values.map { it.toString() }.contains(key.toUpperCase(Locale.ENGLISH)))
 		{
-			val slot = EquipmentSlot.valueOf(key.toUpperCase())
+			val slot = EquipmentSlot.valueOf(key.toUpperCase(Locale.ENGLISH))
 			Global.player.equipment[slot] = null
 		}
 
-		if (Statistic.Values.map { it.toString() }.contains(key.toUpperCase()))
+		if (Statistic.Values.map { it.toString() }.contains(key.toUpperCase(Locale.ENGLISH)))
 		{
-			val slot = Statistic.valueOf(key.toUpperCase())
+			val slot = Statistic.valueOf(key.toUpperCase(Locale.ENGLISH))
 			Global.player.statistics[slot] = max(0f, (Global.player.statistics[slot] ?: 0f) - count)
 		}
 

@@ -20,6 +20,7 @@ import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.*
+import java.util.*
 
 class CardContentActionShop : AbstractCardContentAction()
 {
@@ -35,7 +36,7 @@ class CardContentActionShop : AbstractCardContentAction()
 	override fun parse(xmlData: XmlData)
 	{
 		merchant = AssetManager.loadSprite(xmlData.getChildByName("ShopKeep")!!)
-		costMultiplier = xmlData.get("CostMultiplier", "1")!!.toLowerCase()
+		costMultiplier = xmlData.get("CostMultiplier", "1")!!.toLowerCase(Locale.ENGLISH)
 
 		val itemsEl = xmlData.getChildByName("Items")!!
 		for (itemEl in itemsEl.children)
@@ -256,7 +257,7 @@ abstract class ShopWare
 	{
 		fun load(xmlData: XmlData): ShopWare
 		{
-			val ware: ShopWare = when(xmlData.name.toUpperCase())
+			val ware: ShopWare = when(xmlData.name.toUpperCase(Locale.ENGLISH))
 			{
 				"EQUIPMENT" -> EquipmentWare()
 				"QUEST" -> QuestWare()
@@ -264,7 +265,7 @@ abstract class ShopWare
 				"CHARACTER" -> CharacterWare()
 				"STATISTICS" -> StatisticWare()
 				"BUFF" -> BuffWare()
-				else -> throw Exception("Unknown ware type '" + xmlData.name.toUpperCase() + "'!")
+				else -> throw Exception("Unknown ware type '" + xmlData.name.toUpperCase(Locale.ENGLISH) + "'!")
 			}
 
 			ware.cost = xmlData.getInt("Cost", 1)
@@ -369,7 +370,7 @@ class EquipmentWare : ShopWare()
 
 		if (equipmentPath.isBlank())
 		{
-			type = EquipmentReward.EquipmentRewardType.valueOf(xmlData.get("Type", "Any")!!.toUpperCase())
+			type = EquipmentReward.EquipmentRewardType.valueOf(xmlData.get("Type", "Any")!!.toUpperCase(Locale.ENGLISH))
 		}
 	}
 

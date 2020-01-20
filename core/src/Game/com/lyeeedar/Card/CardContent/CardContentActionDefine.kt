@@ -5,6 +5,7 @@ import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Util.XmlData
+import java.util.*
 
 enum class Storage
 {
@@ -21,9 +22,9 @@ class CardContentActionDefine : AbstractCardContentAction()
 
 	override fun parse(xmlData: XmlData)
 	{
-		key = xmlData.get("Key").toLowerCase()
-		value = xmlData.get("Value").toLowerCase()
-		storage = Storage.valueOf(xmlData.get("Storage").toUpperCase())
+		key = xmlData.get("Key").toLowerCase(Locale.ENGLISH)
+		value = xmlData.get("Value").toLowerCase(Locale.ENGLISH)
+		storage = Storage.valueOf(xmlData.get("Storage").toUpperCase(Locale.ENGLISH))
 	}
 
 	override fun advance(CardContent: CardContent, CardContentScreen: CardScreen): Boolean

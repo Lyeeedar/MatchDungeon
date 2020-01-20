@@ -15,6 +15,7 @@ import com.lyeeedar.Statistic
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.random
+import java.util.*
 
 class Spreader
 {
@@ -221,7 +222,7 @@ class Spreader
 				spreader.particleEffect = AssetManager.loadParticleEffect(particleEl).getParticleEffect()
 			}
 
-			spreader.effect = SpreaderEffect.valueOf(xmlData.get("Effect", "seal")!!.toUpperCase())
+			spreader.effect = SpreaderEffect.valueOf(xmlData.get("Effect", "seal")!!.toUpperCase(Locale.ENGLISH))
 
 			spreader.damage = xmlData.getFloat("Damage", 0f)
 

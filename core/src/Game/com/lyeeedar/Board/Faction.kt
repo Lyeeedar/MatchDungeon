@@ -7,6 +7,7 @@ import com.lyeeedar.Util.getXml
 import com.lyeeedar.Util.random
 import com.lyeeedar.Util.randomOrNull
 import ktx.collections.set
+import java.util.*
 
 /**
  * Created by Philip on 01-Aug-16.
@@ -35,7 +36,7 @@ class Faction
 		{
 			for (monster in size.value)
 			{
-				if (monster.name.toUpperCase() == name.toUpperCase()) return monster
+				if (monster.name.toUpperCase(Locale.ENGLISH) == name.toUpperCase(Locale.ENGLISH)) return monster
 			}
 		}
 
@@ -73,9 +74,9 @@ class Faction
 
 		fun load(path: String): Faction
 		{
-			if (loadedFactions.containsKey(path.toLowerCase()))
+			if (loadedFactions.containsKey(path.toLowerCase(Locale.ENGLISH)))
 			{
-				return loadedFactions[path.toLowerCase()]
+				return loadedFactions[path.toLowerCase(Locale.ENGLISH)]
 			}
 
 			val xml = getXml("Factions/$path")
@@ -113,7 +114,7 @@ class Faction
 				}
 			}
 
-			loadedFactions[path.toLowerCase().replace(".xml", "")] = faction
+			loadedFactions[path.toLowerCase(Locale.ENGLISH).replace(".xml", "")] = faction
 
 			return faction
 		}

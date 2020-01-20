@@ -12,6 +12,7 @@ import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.neaten
+import java.util.*
 
 /**
  * Created by Philip on 21-Jul-16.
@@ -154,7 +155,7 @@ class Effect(val type: Type)
 				}
 			}
 
-			Type.CONVERT -> { val t = data["CONVERTTO"]?.toString()?.toLowerCase()?.capitalize() ?: "Random"; "convert $them to $t." }
+			Type.CONVERT -> { val t = data["CONVERTTO"]?.toString()?.toLowerCase(Locale.ENGLISH)?.capitalize() ?: "Random"; "convert $them to $t." }
 
 			Type.SUMMON ->
 			{

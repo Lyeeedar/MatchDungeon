@@ -3,6 +3,7 @@ package com.lyeeedar.Card.CardContent
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Util.XmlData
+import java.util.*
 
 abstract class AbstractCardContentAction
 {
@@ -14,7 +15,7 @@ abstract class AbstractCardContentAction
 	{
 		fun load(xmlData: XmlData): AbstractCardContentAction
 		{
-			val refKey = xmlData.name.toUpperCase()
+			val refKey = xmlData.name.toUpperCase(Locale.ENGLISH)
 			val action = when(refKey)
 			{
 				"LINE" -> CardContentActionLine()

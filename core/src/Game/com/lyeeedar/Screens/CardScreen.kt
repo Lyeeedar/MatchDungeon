@@ -24,6 +24,7 @@ import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
 import ktx.actors.then
 import ktx.collections.toGdxArray
+import java.util.*
 
 class CardScreen : AbstractScreen()
 {
@@ -168,10 +169,10 @@ class CardScreen : AbstractScreen()
 			debugConsole.register("Equip", "", fun(args, console): Boolean
 			{
 				val equipmentName = args[0]
-				var equipment = Global.deck.equipment.firstOrNull { it.path.toLowerCase().endsWith(equipmentName.toLowerCase()) || it.name.toLowerCase() == equipmentName.toLowerCase() }
+				var equipment = Global.deck.equipment.firstOrNull { it.path.toLowerCase(Locale.ENGLISH).endsWith(equipmentName.toLowerCase(Locale.ENGLISH)) || it.name.toLowerCase(Locale.ENGLISH) == equipmentName.toLowerCase(Locale.ENGLISH) }
 				if (equipment == null)
 				{
-					val equipmentPath = XmlData.existingPaths!!.firstOrNull { it.toLowerCase().endsWith(equipmentName.toLowerCase() + ".xml") }
+					val equipmentPath = XmlData.existingPaths!!.firstOrNull { it.toLowerCase(Locale.ENGLISH).endsWith(equipmentName.toLowerCase(Locale.ENGLISH) + ".xml") }
 					if (equipmentPath != null)
 					{
 						equipment = Equipment.Companion.load(equipmentPath)

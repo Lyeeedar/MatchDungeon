@@ -13,7 +13,7 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.*
-import ktx.collections.gdxArrayOf
+import java.util.*
 
 class Equipment(val path: String)
 {
@@ -137,7 +137,7 @@ class Equipment(val path: String)
 			ability = Ability.load(abilityEl)
 		}
 
-		slot = EquipmentSlot.valueOf(xml.name.toUpperCase())
+		slot = EquipmentSlot.valueOf(xml.name.toUpperCase(Locale.ENGLISH))
 	}
 
 	fun copy(): Equipment = load(path)

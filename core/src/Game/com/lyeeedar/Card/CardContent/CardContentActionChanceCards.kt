@@ -23,6 +23,7 @@ import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
 import ktx.actors.then
 import ktx.collections.toGdxArray
+import java.util.*
 
 enum class CardChance private constructor(val niceName: String)
 {
@@ -54,7 +55,7 @@ class CardContentActionChanceCards : AbstractCardContentAction()
 		val chancesEl = xmlData.getChildByName("ChanceCards")!!
 		for (el in chancesEl.children())
 		{
-			chances.add(CardChance.valueOf(el.text.toUpperCase()))
+			chances.add(CardChance.valueOf(el.text.toUpperCase(Locale.ENGLISH)))
 		}
 
 		if (chances.size != 4)
@@ -67,7 +68,7 @@ class CardContentActionChanceCards : AbstractCardContentAction()
 		val nodesEl = xmlData.getChildByName("Nodes")!!
 		for (el in nodesEl.children())
 		{
-			val chance = CardChance.valueOf(el.get("Chance").toUpperCase())
+			val chance = CardChance.valueOf(el.get("Chance").toUpperCase(Locale.ENGLISH))
 			var key = el.get("Node", null)
 			var hasNode = true
 

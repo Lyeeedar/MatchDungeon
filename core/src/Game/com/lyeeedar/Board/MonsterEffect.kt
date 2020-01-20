@@ -15,7 +15,9 @@ import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
+import com.lyeeedar.Util.Random
 import ktx.math.minus
+import java.util.*
 import kotlin.math.min
 
 enum class MonsterEffectType
@@ -140,12 +142,12 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 		var desc = data["MONSTERDESC", null] as? MonsterDesc
 		if (desc == null)
 		{
-			val factionName = data["FACTION", null]?.toString()?.toUpperCase()
+			val factionName = data["FACTION", null]?.toString()?.toUpperCase(Locale.ENGLISH)
 
 			val faction: Faction
 			if (!factionName.isNullOrBlank())
 			{
-				val factionPath = XmlData.enumeratePaths("Factions", "Faction").first { it.toUpperCase().endsWith("$factionName.XML") }.split("Factions/")[1]
+				val factionPath = XmlData.enumeratePaths("Factions", "Faction").first { it.toUpperCase(Locale.ENGLISH).endsWith("$factionName.XML") }.split("Factions/")[1]
 
 				faction = Faction.load(factionPath)
 			}

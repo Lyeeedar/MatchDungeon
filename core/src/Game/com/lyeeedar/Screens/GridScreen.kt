@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.*
+import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.lyeeedar.Board.*
@@ -19,6 +20,7 @@ import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.random
+import java.util.*
 
 /**
  * Created by Philip on 20-Mar-16.
@@ -368,7 +370,7 @@ class GridScreen(): AbstractScreen()
 				val statVal = if (stat == Statistic.PIERCE) berserk * 0.5f else berserk
 
 				val statTable = Table()
-				statTable.add(Label(stat.toString().toLowerCase().capitalize() + ": ", Statics.skin, "card")).expandX().left()
+				statTable.add(Label(stat.toString().toLowerCase(Locale.ENGLISH).capitalize() + ": ", Statics.skin, "card")).expandX().left()
 				statTable.add(Label(statVal.toString(), Statics.skin, "card"))
 				statTable.addTapToolTip(stat.tooltip)
 

@@ -3,6 +3,7 @@ package com.lyeeedar.Screens
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.*
+import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.badlogic.gdx.utils.Array
@@ -14,6 +15,7 @@ import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.UI.addClickListener
 import com.lyeeedar.Util.*
 import ktx.collections.set
+import java.util.*
 
 class QuestSelectionScreen : AbstractScreen()
 {
@@ -34,7 +36,7 @@ class QuestSelectionScreen : AbstractScreen()
 					return false
 				}
 
-				val questPath = XmlData.enumeratePaths("Quests", "Quest").firstOrNull { it.toLowerCase().contains(args[0].toLowerCase()) }
+				val questPath = XmlData.enumeratePaths("Quests", "Quest").firstOrNull { it.toLowerCase(Locale.ENGLISH).contains(args[0].toLowerCase(Locale.ENGLISH)) }
 				if (questPath == null)
 				{
 					console.error("Could not ind quest!")
@@ -278,7 +280,7 @@ class QuestSelectionScreen : AbstractScreen()
 			val card = quest.getCard()
 			card.addPick("Embark") {
 				Statics.crashReporter.logDebug("Embarking on quest ${quest.title}")
-				
+
 				val screen = Statics.game.getTypedScreen<QuestScreen>()!!
 				quest.resetCards()
 				quest.current = quest.root

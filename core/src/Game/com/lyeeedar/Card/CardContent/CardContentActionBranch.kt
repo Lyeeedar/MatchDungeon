@@ -7,6 +7,7 @@ import com.lyeeedar.Game.Global
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.round
+import java.util.*
 
 class CardContentActionBranch : AbstractCardContentAction()
 {
@@ -35,7 +36,7 @@ class CardContentActionBranch : AbstractCardContentAction()
 	{
 		for (el in xml.children())
 		{
-			val condition = el.get("Condition", "1")!!.toLowerCase()
+			val condition = el.get("Condition", "1")!!.toLowerCase(Locale.ENGLISH)
 			var key = el.get("Node", null)
 			var hasNode = true
 

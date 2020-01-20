@@ -21,6 +21,7 @@ import com.lyeeedar.Util.*
 import ktx.collections.addAll
 import ktx.collections.set
 import ktx.collections.toGdxArray
+import java.util.*
 
 fun Entity.isMonster(): Boolean
 {
@@ -426,7 +427,7 @@ abstract class AbstractMonsterAbility
 	{
 		fun load(xml: XmlData) : AbstractMonsterAbility
 		{
-			val ability = when (xml.get("Effect", "Attack")!!.toUpperCase())
+			val ability = when (xml.get("Effect", "Attack")!!.toUpperCase(Locale.ENGLISH))
 			{
 				"MOVE", "DASH" -> MonsterMoveAbility()
 				"ATTACK", "SEALEDATTACK", "HEAL", "DELAYEDSUMMON", "DEBUFF" -> MonsterMonsterEffectAbility()
@@ -448,8 +449,8 @@ abstract class AbstractMonsterAbility
 
 			ability.targetCount = xml.getInt("Count", 1)
 
-			ability.targetRestriction = Targetter(Targetter.Type.valueOf(xml.get("TargetRestriction", "Orb")!!.toUpperCase()))
-			ability.permuter = Permuter(Permuter.Type.valueOf(xml.get("Permuter", "Single")!!.toUpperCase()))
+			ability.targetRestriction = Targetter(Targetter.Type.valueOf(xml.get("TargetRestriction", "Orb")!!.toUpperCase(Locale.ENGLISH)))
+			ability.permuter = Permuter(Permuter.Type.valueOf(xml.get("Permuter", "Single")!!.toUpperCase(Locale.ENGLISH)))
 
 			val dEl = xml.getChildByName("Data")
 			if (dEl != null)
@@ -501,7 +502,7 @@ class MonsterMoveAbility : AbstractMonsterAbility()
 			}
 			else if (data.containsKey("MOVETYPE"))
 			{
-				val moveTypeStr = data["MOVETYPE"].toString().toUpperCase()
+				val moveTypeStr = data["MOVETYPE"].toString().toUpperCase(Locale.ENGLISH)
 				moveType = when(moveTypeStr)
 				{
 					"BASIC" -> MoveType.BASIC
@@ -717,7 +718,7 @@ class MonsterMonsterEffectAbility : AbstractMonsterAbility()
 
 	override fun parse(xml: XmlData)
 	{
-		effect = EffectType.valueOf(xml.get("Effect", "Attack")!!.toUpperCase())
+		effect = EffectType.valueOf(xml.get("Effect", "Attack")!!.toUpperCase(Locale.ENGLISH))
 	}
 
 	override fun doCopy(): AbstractMonsterAbility
@@ -816,7 +817,7 @@ class MonsterSummonAbility : AbstractMonsterAbility()
 				if (!factionName.isNullOrBlank())
 				{
 					val factionPath = XmlData.enumeratePaths("Factions", "Faction")
-						.first { it.toUpperCase().endsWith("${factionName.toUpperCase()}.XML") }
+						.first { it.toUpperCase(Locale.ENGLISH).endsWith("${factionName.toUpperCase(Locale.ENGLISH)}.XML") }
 						.split("Factions/")[1]
 
 					faction = Faction.load(factionPath)

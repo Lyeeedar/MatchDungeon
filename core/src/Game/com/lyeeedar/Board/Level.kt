@@ -17,6 +17,7 @@ import com.lyeeedar.Renderables.Sprite.SpriteWrapper
 import com.lyeeedar.Util.*
 import ktx.collections.set
 import ktx.collections.toGdxArray
+import java.util.*
 
 /**
  * Created by Philip on 13-Jul-16.
@@ -290,7 +291,7 @@ class Level(val loadPath: String)
 					tile.spreader = symbol.spreader.copy()
 				}
 
-				tile.nameKey = symbol.nameKey?.toUpperCase()
+				tile.nameKey = symbol.nameKey?.toUpperCase(Locale.ENGLISH)
 			}
 			else
 			{
@@ -628,7 +629,7 @@ class Level(val loadPath: String)
 					val character = symbolEl.get("Character")[0]
 					val extends = symbolEl.get("Extends", " ")!!.firstOrNull() ?: ' '
 
-					val usageCondition = symbolEl.get("UsageCondition", "1")!!.toLowerCase()
+					val usageCondition = symbolEl.get("UsageCondition", "1")!!.toLowerCase(Locale.ENGLISH)
 					val fallbackChar = symbolEl.get("FallbackCharacter", ".")!!.firstOrNull() ?: '.'
 
 					val nameKey = symbolEl.get("NameKey", null)
@@ -715,7 +716,7 @@ class Level(val loadPath: String)
 						spreader = Spreader.load(spreaderEl)
 					}
 
-					val type = SymbolType.valueOf(symbolEl.get("Type", "Floor")!!.toUpperCase())
+					val type = SymbolType.valueOf(symbolEl.get("Type", "Floor")!!.toUpperCase(Locale.ENGLISH))
 
 					symbolsMap[character.toInt()] = Symbol(
 							character, extends,
@@ -847,28 +848,28 @@ fun loadDataBlock(xmlData: XmlData): ObjectMap<String, Any>
 		if (el.name == "Spreader")
 		{
 			val spreader = Spreader.load(el)
-			data[el.name.toUpperCase()] = spreader
+			data[el.name.toUpperCase(Locale.ENGLISH)] = spreader
 		}
 		else if (el.name == "Debuff")
 		{
 			val buff = Buff.load(el)
-			data[el.name.toUpperCase()] = buff
+			data[el.name.toUpperCase(Locale.ENGLISH)] = buff
 		}
 		else if (el.name == "MonsterDesc")
 		{
-			data[el.name.toUpperCase()] = MonsterDesc.load(el)
+			data[el.name.toUpperCase(Locale.ENGLISH)] = MonsterDesc.load(el)
 		}
 		else if (el.name.contains("Effect"))
 		{
-			data[el.name.toUpperCase()] = AssetManager.loadParticleEffect(el)
+			data[el.name.toUpperCase(Locale.ENGLISH)] = AssetManager.loadParticleEffect(el)
 		}
 		else if (el.name == "Sprite")
 		{
-			data[el.name.toUpperCase()] = AssetManager.loadSprite(el)
+			data[el.name.toUpperCase(Locale.ENGLISH)] = AssetManager.loadSprite(el)
 		}
 		else
 		{
-			data[el.name.toUpperCase()] = el.text.toUpperCase()
+			data[el.name.toUpperCase(Locale.ENGLISH)] = el.text.toUpperCase(Locale.ENGLISH)
 		}
 	}
 

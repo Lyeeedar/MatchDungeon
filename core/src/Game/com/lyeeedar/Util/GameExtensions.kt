@@ -1,6 +1,7 @@
 package com.lyeeedar.Util
 
 import com.lyeeedar.Game.Global
+import java.util.*
 
 fun String.expandVariables(): String
 {
@@ -20,7 +21,7 @@ fun String.expandVariables(): String
 		{
 			if (isVar)
 			{
-				val clean = word.replace("}", "").toLowerCase()
+				val clean = word.replace("}", "").toLowerCase(Locale.ENGLISH)
 				val variable = variables[clean, 0.0f]
 
 				if (variable.toInt().toFloat() == variable)

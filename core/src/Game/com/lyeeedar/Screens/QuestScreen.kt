@@ -23,8 +23,10 @@ import com.lyeeedar.ScreenEnum
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.*
+import com.lyeeedar.Util.Random
 import ktx.actors.then
 import ktx.collections.toGdxArray
+import java.util.*
 
 class QuestScreen : AbstractScreen()
 {
@@ -132,10 +134,10 @@ class QuestScreen : AbstractScreen()
 					return false
 				}
 
-				var card = Global.deck.encounters.backingArray.firstOrNull { it.current.name.toLowerCase() == args[0].toLowerCase() }
+				var card = Global.deck.encounters.backingArray.firstOrNull { it.current.name.toLowerCase(Locale.ENGLISH) == args[0].toLowerCase(Locale.ENGLISH) }
 				if (card == null)
 				{
-					val cardPath = XmlData.existingPaths!!.firstOrNull { it.toLowerCase().endsWith(args[0].toLowerCase() + ".xml") }
+					val cardPath = XmlData.existingPaths!!.firstOrNull { it.toLowerCase(Locale.ENGLISH).endsWith(args[0].toLowerCase(Locale.ENGLISH) + ".xml") }
 					if (cardPath == null)
 					{
 						console.error("Invalid card name!")
@@ -171,22 +173,22 @@ class QuestScreen : AbstractScreen()
 
 			debugConsole.register("CompleteQuest", "", fun(args, console): Boolean
 			{
-				if (args[0].toLowerCase() == "gold")
+				if (args[0].toLowerCase(Locale.ENGLISH) == "gold")
 				{
 					currentQuest.state = Quest.QuestState.GOLD
 					completeQuest()
 				}
-				else if (args[0].toLowerCase() == "silver")
+				else if (args[0].toLowerCase(Locale.ENGLISH) == "silver")
 				{
 					currentQuest.state = Quest.QuestState.SILVER
 					completeQuest()
 				}
-				else if (args[0].toLowerCase() == "bronze")
+				else if (args[0].toLowerCase(Locale.ENGLISH) == "bronze")
 				{
 					currentQuest.state = Quest.QuestState.BRONZE
 					completeQuest()
 				}
-				else if (args[0].toLowerCase() == "fail")
+				else if (args[0].toLowerCase(Locale.ENGLISH) == "fail")
 				{
 					currentQuest.state = Quest.QuestState.FAILURE
 					completeQuest()
@@ -221,10 +223,10 @@ class QuestScreen : AbstractScreen()
 			debugConsole.register("Equip", "", fun(args, console): Boolean
 			{
 				val equipmentName = args[0]
-				var equipment = Global.deck.equipment.firstOrNull { it.path.toLowerCase().endsWith(equipmentName.toLowerCase()) || it.name.toLowerCase() == equipmentName.toLowerCase() }
+				var equipment = Global.deck.equipment.firstOrNull { it.path.toLowerCase(Locale.ENGLISH).endsWith(equipmentName.toLowerCase(Locale.ENGLISH)) || it.name.toLowerCase(Locale.ENGLISH) == equipmentName.toLowerCase(Locale.ENGLISH) }
 				if (equipment == null)
 				{
-					val equipmentPath = XmlData.existingPaths!!.firstOrNull { it.toLowerCase().endsWith(equipmentName.toLowerCase() + ".xml") }
+					val equipmentPath = XmlData.existingPaths!!.firstOrNull { it.toLowerCase(Locale.ENGLISH).endsWith(equipmentName.toLowerCase(Locale.ENGLISH) + ".xml") }
 					if (equipmentPath != null)
 					{
 						equipment = Equipment.Companion.load(equipmentPath)
@@ -396,7 +398,7 @@ class QuestScreen : AbstractScreen()
 
 		stage.addActor(greyOutTable)
 
-		val text = if (currentQuest.state == Quest.QuestState.FAILURE) "Quest Failed!" else "Quest Completed!\n${currentQuest.state.toString().toLowerCase().capitalize()}"
+		val text = if (currentQuest.state == Quest.QuestState.FAILURE) "Quest Failed!" else "Quest Completed!\n${currentQuest.state.toString().toLowerCase(Locale.ENGLISH).capitalize()}"
 		val table = Table()
 		table.add(Label(text, Statics.skin, "cardtitle"))
 

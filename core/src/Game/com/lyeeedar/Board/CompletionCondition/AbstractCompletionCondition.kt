@@ -3,6 +3,7 @@ package com.lyeeedar.Board.CompletionCondition
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Util.XmlData
+import java.util.*
 
 abstract class AbstractCompletionCondition
 {
@@ -24,7 +25,7 @@ abstract class AbstractCompletionCondition
 
 		private fun get(name: String): AbstractCompletionCondition
 		{
-			val uname = name.toUpperCase()
+			val uname = name.toUpperCase(Locale.ENGLISH)
 			val instance = when(uname)
 			{
 				"NONE" -> CompletionConditionNone()

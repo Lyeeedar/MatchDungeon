@@ -9,6 +9,7 @@ import com.lyeeedar.Game.Character
 import com.lyeeedar.Game.Equipment
 import com.lyeeedar.Game.Quest
 import com.lyeeedar.Util.XmlData
+import java.util.*
 
 class GameXmlLoadTester
 {
@@ -16,7 +17,7 @@ class GameXmlLoadTester
 	{
 		fun testLoad(xml: XmlData, path: String)
 		{
-			when (xml.name.toUpperCase())
+			when (xml.name.toUpperCase(Locale.ENGLISH))
 			{
 				"QUEST" -> Quest.load(path.split("Quests/")[1])
 				"CARD" -> Card.load(path)

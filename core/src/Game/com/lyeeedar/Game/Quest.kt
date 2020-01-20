@@ -17,8 +17,10 @@ import com.lyeeedar.SpawnWeight
 import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.Util.*
+import com.lyeeedar.Util.Random
 import ktx.collections.set
 import ktx.collections.toGdxArray
+import java.util.*
 
 class Quest(val path: String)
 {
@@ -417,7 +419,7 @@ abstract class AbstractQuestNode(val quest: Quest, val guid: String)
 		{
 			val guid = xmlData.getAttribute("GUID")
 
-			val node = when (xmlData.name.toUpperCase())
+			val node = when (xmlData.name.toUpperCase(Locale.ENGLISH))
 			{
 				"QUESTNODE" -> QuestNode(quest, guid)
 				"BRANCH" -> Branch(quest, guid)
@@ -564,7 +566,7 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 
 	override fun parse(xmlData: XmlData)
 	{
-		type = QuestNodeType.valueOf(xmlData.get("Type").toUpperCase())
+		type = QuestNodeType.valueOf(xmlData.get("Type").toUpperCase(Locale.ENGLISH))
 		isShop = xmlData.getBoolean("IsShop", false)
 
 		if (type == QuestNodeType.FIXED)
@@ -626,7 +628,7 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 		{
 			for (custom in customNodes)
 			{
-				if (custom.key!!.toUpperCase() == key.toUpperCase())
+				if (custom.key!!.toUpperCase(Locale.ENGLISH) == key.toUpperCase(Locale.ENGLISH))
 				{
 					return custom.node
 				}
@@ -655,7 +657,7 @@ class Branch(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 	{
 		for (el in xmlData.children())
 		{
-			val cond = el.get("Condition").toLowerCase()
+			val cond = el.get("Condition").toLowerCase(Locale.ENGLISH)
 			val guid = el.get("Node")
 
 			branches.add(BranchWrapper(guid, cond))
@@ -700,7 +702,7 @@ class CompleteQuest(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 
 	override fun parse(xmlData: XmlData)
 	{
-		state = Quest.QuestState.valueOf(xmlData.get("State", "Gold")!!.toUpperCase())
+		state = Quest.QuestState.valueOf(xmlData.get("State", "Gold")!!.toUpperCase(Locale.ENGLISH))
 	}
 
 	override fun resolve(nodeMap: ObjectMap<String, AbstractQuestNode>)
@@ -746,8 +748,8 @@ class Define(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 
 	override fun parse(xmlData: XmlData)
 	{
-		key = xmlData.get("Key").toLowerCase()
-		value = xmlData.get("Value").toLowerCase()
+		key = xmlData.get("Key").toLowerCase(Locale.ENGLISH)
+		value = xmlData.get("Value").toLowerCase(Locale.ENGLISH)
 		isGlobal = xmlData.getBoolean("IsGlobal", false)
 
 		val nextID = xmlData.get("Next")

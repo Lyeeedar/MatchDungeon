@@ -22,6 +22,7 @@ import com.lyeeedar.UI.Seperator
 import com.lyeeedar.Util.*
 import ktx.collections.set
 import ktx.collections.toGdxArray
+import java.util.*
 
 /**
  * Created by Philip on 20-Jul-16.
@@ -99,7 +100,7 @@ class Ability
 		}
 		else
 		{
-			var effectDesc = "Target $targets " + targetter.type.toString().toLowerCase().capitalize().pluralize(targets)
+			var effectDesc = "Target $targets " + targetter.type.toString().toLowerCase(Locale.ENGLISH).capitalize().pluralize(targets)
 
 			if (permuter.type != Permuter.Type.SINGLE)
 			{
@@ -228,7 +229,7 @@ class Ability
 		val variables = ObjectFloatMap<String>()
 		for (stat in Statistic.Values)
 		{
-			variables[stat.toString().toUpperCase()] = Global.player.getStat(stat, true)
+			variables[stat.toString().toUpperCase(Locale.ENGLISH)] = Global.player.getStat(stat, true)
 		}
 		val monsters = finalTargets.filter { it.contents?.isMonster() == true }.map { it.contents!! }.toGdxArray()
 		variables["MONSTERCOUNT"] = monsters.size.toFloat()
@@ -326,7 +327,7 @@ class Ability
 		resetUsagesPerLevel = dataEl.getBoolean("ResetUsagesPerLevel", false)
 
 		val effectDesc = dataEl.get("Effect")
-		val split = effectDesc.toUpperCase().split(",")
+		val split = effectDesc.toUpperCase(Locale.ENGLISH).split(",")
 
 		targets = split[0].toInt()
 		targetter = Targetter(Targetter.Type.valueOf(split[1]))
@@ -341,21 +342,21 @@ class Ability
 				if (el.name == "Spreader")
 				{
 					val spreader = Spreader.load(el)
-					data[el.name.toUpperCase()] = spreader
+					data[el.name.toUpperCase(Locale.ENGLISH)] = spreader
 
 				}
 				else if (el.name == "Buff")
 				{
 					val buff = Buff.load(el)
-					data[el.name.toUpperCase()] = buff
+					data[el.name.toUpperCase(Locale.ENGLISH)] = buff
 				}
 				else if (el.name == "Summon")
 				{
-					data[el.name.toUpperCase()] = el
+					data[el.name.toUpperCase(Locale.ENGLISH)] = el
 				}
 				else
 				{
-					data[el.name.toUpperCase()] = el.text.toUpperCase()
+					data[el.name.toUpperCase(Locale.ENGLISH)] = el.text.toUpperCase(Locale.ENGLISH)
 				}
 			}
 		}

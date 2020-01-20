@@ -23,6 +23,7 @@ import com.lyeeedar.UI.addTapToolTip
 import com.lyeeedar.Util.*
 import ktx.collections.set
 import ktx.collections.toGdxArray
+import java.util.*
 
 class Card(val path: String, val characterRestriction: String?, val nodes: Array<CardNode>, val root: CardNode)
 {
@@ -286,7 +287,7 @@ class CardNode
 		name = name.replace(":", ":\n")
 
 		description = xmlData.get("Description")
-		spawnWeight = SpawnWeight.valueOf(xmlData.get("SpawnWeighting", "Any")!!.toUpperCase())
+		spawnWeight = SpawnWeight.valueOf(xmlData.get("SpawnWeighting", "Any")!!.toUpperCase(Locale.ENGLISH))
 		isShop = xmlData.getBoolean("IsShop", false)
 		hiddenRewards = xmlData.getBoolean("HiddenRewards", false)
 		content = xmlData.get("Content")

@@ -15,6 +15,8 @@ import com.lyeeedar.Statistic
 import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.UI.FrontTableSimple
 import com.lyeeedar.Util.*
+import com.lyeeedar.Util.Random
+import java.util.*
 
 enum class Chance private constructor(val chance: Float, val uiString: String, val colour: Colour)
 {
@@ -40,7 +42,7 @@ abstract class AbstractReward
 	{
 		fun load(xmlData: XmlData): AbstractReward
 		{
-			val reward: AbstractReward = when (xmlData.name.toUpperCase())
+			val reward: AbstractReward = when (xmlData.name.toUpperCase(Locale.ENGLISH))
 			{
 				"CARD" -> CardReward()
 				"MONEY" -> MoneyReward()
@@ -53,7 +55,7 @@ abstract class AbstractReward
 				else -> throw RuntimeException("Invalid reward type: " + xmlData.name)
 			}
 
-			reward.chance = Chance.valueOf(xmlData.get("Chance", "Always")!!.toUpperCase())
+			reward.chance = Chance.valueOf(xmlData.get("Chance", "Always")!!.toUpperCase(Locale.ENGLISH))
 
 			reward.parse(xmlData)
 			return reward
@@ -275,7 +277,7 @@ class MoneyReward : AbstractReward()
 
 	override fun parse(xmlData: XmlData)
 	{
-		amountEqn = xmlData.get("Count").toLowerCase()
+		amountEqn = xmlData.get("Count").toLowerCase(Locale.ENGLISH)
 	}
 
 	override fun cardIcon(): TextureRegion = AssetManager.loadTextureRegion("GUI/MoneyCardback")!!
@@ -397,7 +399,7 @@ class EquipmentReward : AbstractReward()
 	override fun parse(xmlData: XmlData)
 	{
 		fromDeck = xmlData.getBoolean("FromDeck", false)
-		rewardType = EquipmentRewardType.valueOf(xmlData.get("Type", "Any")!!.toUpperCase())
+		rewardType = EquipmentRewardType.valueOf(xmlData.get("Type", "Any")!!.toUpperCase(Locale.ENGLISH))
 
 		unlock = xmlData.getBoolean("Unlock", false)
 		equipmentPath = xmlData.get("Equipment", "")!!
@@ -524,9 +526,9 @@ class ItemReward : AbstractReward()
 		name = xmlData.get("Name")
 		icon = AssetManager.loadSprite(xmlData.getChildByName("Icon")!!)
 
-		key = xmlData.get("Key").toLowerCase()
-		value = xmlData.get("Value").toLowerCase()
-		storage = Storage.valueOf(xmlData.get("Storage").toUpperCase())
+		key = xmlData.get("Key").toLowerCase(Locale.ENGLISH)
+		value = xmlData.get("Value").toLowerCase(Locale.ENGLISH)
+		storage = Storage.valueOf(xmlData.get("Storage").toUpperCase(Locale.ENGLISH))
 	}
 
 	override fun isValid(): Boolean = true

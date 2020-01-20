@@ -14,6 +14,7 @@ import com.lyeeedar.Util.Settings
 import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.filename
 import ktx.collections.addAll
+import java.util.*
 
 /**
  * Created by Philip on 04-Jul-16.
@@ -70,12 +71,12 @@ class Global
 
 			for (stat in Statistic.Values)
 			{
-				output.put(stat.toString().toLowerCase(), player.getStat(stat))
+				output.put(stat.toString().toLowerCase(Locale.ENGLISH), player.getStat(stat))
 			}
 
 			for (slot in EquipmentSlot.Values)
 			{
-				output.put(slot.toString().toLowerCase(), if(player.equipment[slot] != null) 1f else 0f)
+				output.put(slot.toString().toLowerCase(Locale.ENGLISH), if(player.equipment[slot] != null) 1f else 0f)
 			}
 
 			for (quest in deck.quests)
@@ -84,7 +85,7 @@ class Global
 				output.put("Unlocked$theme", 1f)
 			}
 
-			output.put(player.baseCharacter.name.toLowerCase(), 1f)
+			output.put(player.baseCharacter.name.toLowerCase(Locale.ENGLISH), 1f)
 
 			return output
 		}

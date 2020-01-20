@@ -3,6 +3,7 @@ package com.lyeeedar.Card.CardContent
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.Util.XmlData
+import java.util.*
 
 class CardContentActionMarkCompleted : AbstractCardContentAction()
 {
@@ -11,7 +12,7 @@ class CardContentActionMarkCompleted : AbstractCardContentAction()
 
 	override fun parse(xmlData: XmlData)
 	{
-		state = CardContent.CardContentState.valueOf(xmlData.get("State", "Success")!!.toUpperCase())
+		state = CardContent.CardContentState.valueOf(xmlData.get("State", "Success")!!.toUpperCase(Locale.ENGLISH))
 		key = xmlData.get("Key", null)
 	}
 
