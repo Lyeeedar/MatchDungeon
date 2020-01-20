@@ -285,7 +285,7 @@ class QuestSelectionScreen : AbstractScreen()
 			card.addPick("Embark") {
 				Statics.logger.logDebug("Embarking on quest ${quest.title}")
 
-				val bundle = Statics.analytics.getBundle()
+				val bundle = Statics.analytics.getParamBundle()
 				bundle.setString("quest_name", quest.title)
 				Statics.analytics.customEvent("start_quest", bundle)
 

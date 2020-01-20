@@ -103,12 +103,12 @@ class QuestScreen : AbstractScreen()
 					"Abandon Quest",
 					"Are you sure you want to abandon the quest and return to the quest selection screen? You will lose any progress made, but keep any rewards you have earned.",
 					Pair("Continue Quest", {
-						val bundle = Statics.analytics.getBundle()
+						val bundle = Statics.analytics.getParamBundle()
 						bundle.setString("choice", "Continue")
 						Statics.analytics.customEvent("abandon_quest", bundle)
 					}),
 					Pair("Abandon Quest", {
-						val bundle = Statics.analytics.getBundle()
+						val bundle = Statics.analytics.getParamBundle()
 						bundle.setString("choice", "Abandon")
 						Statics.analytics.customEvent("abandon_quest", bundle)
 
@@ -409,7 +409,7 @@ class QuestScreen : AbstractScreen()
 
 		stage.addActor(greyOutTable)
 
-		val bundle = Statics.analytics.getBundle()
+		val bundle = Statics.analytics.getParamBundle()
 		bundle.setString("state", currentQuest.state.toString())
 		bundle.setString("quest_name", currentQuest.title)
 		Statics.analytics.customEvent("complete_quest", bundle)

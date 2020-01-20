@@ -304,7 +304,7 @@ class DeckScreen : AbstractScreen()
 					{
 						didEdit = true
 
-						val bundle = Statics.analytics.getBundle()
+						val bundle = Statics.analytics.getParamBundle()
 						Statics.analytics.customEvent("editted_deck", bundle)
 					}
 				}
@@ -388,7 +388,7 @@ class DeckScreen : AbstractScreen()
 				{
 					didEdit = true
 
-					val bundle = Statics.analytics.getBundle()
+					val bundle = Statics.analytics.getParamBundle()
 					Statics.analytics.customEvent("editted_deck", bundle)
 				}
 			}
@@ -462,7 +462,7 @@ class DeckScreen : AbstractScreen()
 					{
 						didEdit = true
 
-						val bundle = Statics.analytics.getBundle()
+						val bundle = Statics.analytics.getParamBundle()
 						Statics.analytics.customEvent("editted_deck", bundle)
 					}
 				}
@@ -563,7 +563,7 @@ class DeckScreen : AbstractScreen()
 				{
 					didEdit = true
 
-					val bundle = Statics.analytics.getBundle()
+					val bundle = Statics.analytics.getParamBundle()
 					Statics.analytics.customEvent("editted_deck", bundle)
 				}
 			}
@@ -622,7 +622,7 @@ class DeckScreen : AbstractScreen()
 					{
 						didEdit = true
 
-						val bundle = Statics.analytics.getBundle()
+						val bundle = Statics.analytics.getParamBundle()
 						Statics.analytics.customEvent("editted_deck", bundle)
 					}
 				}
