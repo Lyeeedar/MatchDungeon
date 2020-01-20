@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "96637000144",
+    "firebase_url": "https://match-dungeon-1a944.firebaseio.com",
+    "project_id": "match-dungeon-1a944",
+    "storage_bucket": "match-dungeon-1a944.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:96637000144:android:eedf79f64e5383171b41d5",
+        "android_client_info": {
+          "package_name": "com.lyeeedar.MatchDungeon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "96637000144-tkv3e5crbt3jvvncael8aedn8jg6mgvv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lyeeedar.MatchDungeon",
+            "certificate_hash": "c727c6fd84061e1ef8f79ef6a2312ccce65a1301"
+          }
+        },
+        {
+          "client_id": "96637000144-nboj988fuke6inqdlf6v994l04uic0bk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5HmNO1fNLuTTtixqzyc_QB17IobxYV-Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "96637000144-nboj988fuke6inqdlf6v994l04uic0bk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
