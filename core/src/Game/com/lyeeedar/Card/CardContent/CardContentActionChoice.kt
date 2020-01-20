@@ -41,6 +41,8 @@ class CardContentActionChoice : AbstractCardContentAction()
 
 				val seq = Actions.alpha(0f) then Actions.delay(delay) then Actions.fadeIn(0.3f) then lambda {
 					response.addClickListener {
+						Statics.logger.logDebug("Selected choice '${choice.text}'")
+
 						responsesTable.clear()
 						CardContent.CardContentStack.last().index++
 						built = false

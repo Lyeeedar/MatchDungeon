@@ -3,8 +3,9 @@ package com.lyeeedar
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.lyeeedar.Util.IAnalytics
+import com.lyeeedar.Util.IBundle
 
-class AndroidAnalytics(val firebaseAnalytics: FirebaseAnalytics) : IAnalytics
+class AndroidAnalytics(val firebaseAnalytics: FirebaseAnalytics) : IAnalytics<AndroidBundle>
 {
 	override fun appOpen()
 	{
@@ -43,4 +44,34 @@ class AndroidAnalytics(val firebaseAnalytics: FirebaseAnalytics) : IAnalytics
 	{
 		firebaseAnalytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_COMPLETE, Bundle())
 	}
+
+	override fun getParamBundle(): AndroidBundle
+	{
+		return AndroidBundle(Bundle())
+	}
+
+	override fun customEvent(name: String, paramBundle: AndroidBundle)
+	{
+
+		firebaseAnalytics.logEvent(name, paramBundle.bundle)
+	}
+}
+
+class AndroidBundle(val bundle: Bundle) : IBundle
+{
+	override fun setString(key: String, value: String)
+	{
+		bundle.putString(key, value)
+	}
+
+	override fun setInt(key: String, value: Int)
+	{
+		bundle.putInt(key, value)
+	}
+
+	override fun setBool(key: String, value: Boolean)
+	{
+		bundle.putBoolean(key, value)
+	}
+
 }

@@ -98,11 +98,22 @@ class QuestScreen : AbstractScreen()
 		{
 			val abandonQuestButton = TextButton("Abandon Quest", Statics.skin)
 			abandonQuestButton.addClickListener {
+
 				MessageBox(
 					"Abandon Quest",
 					"Are you sure you want to abandon the quest and return to the quest selection screen? You will lose any progress made, but keep any rewards you have earned.",
-					Pair("Continue Quest", {}),
-					Pair("Abandon Quest", { currentQuest.state = Quest.QuestState.FAILURE; completeQuest() }))
+					Pair("Continue Quest", {
+						val bundle = Statics.analytics.getBundle()
+						bundle.setString("choice", "Continue")
+						Statics.analytics.customEvent("abandon_quest", bundle)
+					}),
+					Pair("Abandon Quest", {
+						val bundle = Statics.analytics.getBundle()
+						bundle.setString("choice", "Abandon")
+						Statics.analytics.customEvent("abandon_quest", bundle)
+
+						currentQuest.state = Quest.QuestState.FAILURE; completeQuest()
+					}))
 			}
 			statsAndAbandon.add(abandonQuestButton).expand().right().bottom()
 		}
@@ -397,6 +408,11 @@ class QuestScreen : AbstractScreen()
 		chosenQuestCard = null
 
 		stage.addActor(greyOutTable)
+
+		val bundle = Statics.analytics.getBundle()
+		bundle.setString("state", currentQuest.state.toString())
+		bundle.setString("quest_name", currentQuest.title)
+		Statics.analytics.customEvent("complete_quest", bundle)
 
 		val text = if (currentQuest.state == Quest.QuestState.FAILURE) "Quest Failed!" else "Quest Completed!\n${currentQuest.state.toString().toLowerCase(Locale.ENGLISH).capitalize()}"
 		val table = Table()

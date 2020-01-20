@@ -38,6 +38,10 @@ class CardContentActionMatch3 : AbstractCardContentAction()
 			level = levels[chosenLevelIndex]
 			level!!.create(CardContentScreen.currentQuest.currentTheme, Global.player,
 						   {
+							   val levelName = "${level!!.loadPath}_${level!!.grid.replay.variant}_${level!!.grid.replay.seed}"
+							   Statics.analytics.levelEnd(levelName.hashCode().toLong(), "Completed")
+							   Statics.logger.logDebug("Level: $levelName Completed")
+
 							   level = null
 							   cardContent.CardContentStack.last().index++
 
@@ -53,6 +57,10 @@ class CardContentActionMatch3 : AbstractCardContentAction()
 							   CardContentScreen.advanceContent()
 						   },
 						   {
+							   val levelName = "${level!!.loadPath}_${level!!.grid.replay.variant}_${level!!.grid.replay.seed}"
+							   Statics.analytics.levelEnd(levelName.hashCode().toLong(), "Failed")
+							   Statics.logger.logDebug("Level: $levelName Failed")
+
 							   level = null
 							   cardContent.CardContentStack.last().index++
 
@@ -70,6 +78,8 @@ class CardContentActionMatch3 : AbstractCardContentAction()
 			val screen = Statics.game.getScreen(ScreenEnum.GRID) as GridScreen
 			screen.updateLevel(level!!, Global.player)
 			Statics.game.switchScreen(screen)
+
+			Statics.analytics.levelStart("${level!!.loadPath}_${level!!.grid.replay.variant}_${level!!.grid.replay.seed}".hashCode().toLong())
 		}
 
 		return false

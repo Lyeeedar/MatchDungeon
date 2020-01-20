@@ -25,6 +25,7 @@ class DeckScreen : AbstractScreen()
 
 	}
 
+	var didEdit = false
 	fun setup()
 	{
 		if (!created)
@@ -32,6 +33,8 @@ class DeckScreen : AbstractScreen()
 			baseCreate()
 			created = true
 		}
+
+		didEdit = false
 
 		createMainScreen()
 	}
@@ -293,10 +296,18 @@ class DeckScreen : AbstractScreen()
 			{
 				val card = char.getCard()
 				card.setSize(cardWidth, cardHeight)
-				card.addPick("Select", {
+				card.addPick("Select") {
 					Global.deck.chosenCharacter = char
 					createCharacterScreen()
-				})
+
+					if (!didEdit)
+					{
+						didEdit = true
+
+						val bundle = Statics.analytics.getBundle()
+						Statics.analytics.customEvent("editted_deck", bundle)
+					}
+				}
 				card.setFacing(true, false)
 				scrollTable.add(card).width(cardWidth).height(cardHeight).expandX().center().pad(5f)
 				scrollTable.row()
@@ -369,10 +380,18 @@ class DeckScreen : AbstractScreen()
 			}
 
 			card.setSize(cardWidth, cardHeight)
-			card.addPick("Remove", {
+			card.addPick("Remove") {
 				Global.deck.playerDeck.encounters.removeValue(enc, true)
 				createEncounterScreen()
-			})
+
+				if (!didEdit)
+				{
+					didEdit = true
+
+					val bundle = Statics.analytics.getBundle()
+					Statics.analytics.customEvent("editted_deck", bundle)
+				}
+			}
 			card.setFacing(true, false)
 
 			if (enc.current.isShop)
@@ -435,10 +454,18 @@ class DeckScreen : AbstractScreen()
 				}
 
 				card.setSize(cardWidth, cardHeight)
-				card.addPick("Add", {
+				card.addPick("Add") {
 					Global.deck.playerDeck.encounters.add(enc)
 					createEncounterScreen()
-				})
+
+					if (!didEdit)
+					{
+						didEdit = true
+
+						val bundle = Statics.analytics.getBundle()
+						Statics.analytics.customEvent("editted_deck", bundle)
+					}
+				}
 				card.setFacing(true, false)
 
 				if (enc.current.isShop)
@@ -528,10 +555,18 @@ class DeckScreen : AbstractScreen()
 		{
 			val card = equip.getCard(null, false)
 			card.setSize(cardWidth, cardHeight)
-			card.addPick("Remove", {
+			card.addPick("Remove") {
 				Global.deck.playerDeck.equipment.removeValue(equip, true)
 				createEquipmentScreen()
-			})
+
+				if (!didEdit)
+				{
+					didEdit = true
+
+					val bundle = Statics.analytics.getBundle()
+					Statics.analytics.customEvent("editted_deck", bundle)
+				}
+			}
 			card.setFacing(true, false)
 
 			var array = groupedDeckEquipment[equip.slot]
@@ -579,10 +614,18 @@ class DeckScreen : AbstractScreen()
 			{
 				val card = equip.getCard(null, false)
 				card.setSize(cardWidth, cardHeight)
-				card.addPick("Add", {
+				card.addPick("Add") {
 					Global.deck.playerDeck.equipment.add(equip)
 					createEquipmentScreen()
-				})
+
+					if (!didEdit)
+					{
+						didEdit = true
+
+						val bundle = Statics.analytics.getBundle()
+						Statics.analytics.customEvent("editted_deck", bundle)
+					}
+				}
 				card.setFacing(true, false)
 
 				var array = groupedUnusedEquipment[equip.slot]
