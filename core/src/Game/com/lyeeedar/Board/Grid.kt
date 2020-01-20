@@ -113,6 +113,10 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 	val updateSteps: kotlin.Array<AbstractUpdateStep>
 
 	// ----------------------------------------------------------------------
+	val queuedActions = Array<DelayedAction>(false, 16)
+	val delayedActions = Array<DelayedAction>(false, 16)
+
+	// ----------------------------------------------------------------------
 	var activeAbility: Ability? = null
 		set(value)
 		{
@@ -179,7 +183,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 
 					if (dst != null)
 					{
-						Future.call({ spawnMote(pos, dst, sprite.copy(), 32f, { PowerBar.instance.power++ }) }, delay)
+						Future.call({ spawnMote(pos, dst, sprite.copy(), 32f, {PowerBar.instance.power++}) }, delay)
 
 						if (!gainedBonusPower)
 						{
@@ -189,7 +193,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 							for (i in 0 until gain)
 							{
 								val dst = PowerBar.instance.getOrbDest() ?: break
-								Future.call({ spawnMote(pos, dst, sprite.copy(), 32f, { PowerBar.instance.power++ }) }, delay)
+								Future.call({ spawnMote(pos, dst, sprite.copy(), 32f, {PowerBar.instance.power++}) }, delay)
 							}
 						}
 					}
@@ -203,18 +207,17 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 	// ----------------------------------------------------------------------
 	fun hasAnim(): Boolean
 	{
+		if (delayedActions.size > 0)
+		{
+			return true
+		}
+
 		var hasAnim = false
 		for (x in 0 until width)
 		{
 			for (y in 0 until height)
 			{
 				val tile = grid[x, y]
-
-				if (tile.delayedActions.size > 0)
-				{
-					hasAnim = true
-					break
-				}
 
 				if (Global.resolveInstantly)
 				{
@@ -308,22 +311,16 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 
 					val delay = tile.taxiDist(Point.ZERO).toFloat() * 0.1f
 
-					if (Global.resolveInstantly)
-					{
-						tile.contents!!.matchable()!!.setDesc(newDesc, tile.contents!!)
-					}
-					else
-					{
-						Future.call(
+					tile.addDelayedAction(
+						{ tile ->
+							tile.contents!!.matchable()!!.setDesc(newDesc, tile.contents!!)
+
+							if (!Global.resolveInstantly)
 							{
 								val sprite = refillSprite.copy()
-
-								tile.contents!!.matchable()!!.setDesc(newDesc, tile.contents!!)
-
 								grid[x, y].effects.add(sprite)
-							}, delay + 0.2f)
-					}
-
+							}
+						}, delay + 0.2f)
 				}
 			}
 		}
@@ -489,7 +486,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 			}
 			else
 			{
-				if (level.isVictory || level.isDefeat)
+				if ((level.isVictory || level.isDefeat) && noMatchTimer > 0.5f)
 				{
 					level.complete()
 				}
@@ -1002,7 +999,7 @@ class Replay()
 	fun uploadCrashData()
 	{
 		val asString = compressToString()
-		val chunked = asString.chunked(900)
+		val chunked = asString.chunked(1023)
 
 		Statics.crashReporter.setCustomKey("CrashDataNumParts", chunked.size)
 		for (i in chunked.indices)

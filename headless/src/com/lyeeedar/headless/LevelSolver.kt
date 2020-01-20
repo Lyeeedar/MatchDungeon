@@ -19,7 +19,6 @@ import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.filename
 import org.mockito.Mockito
 import java.io.File
-import java.util.concurrent.TimeUnit
 
 object CrashedLevelReplayer
 {
@@ -196,10 +195,6 @@ class LevelSolver
 				val levelsASecond = printInterval / diffSeconds
 
 				println("Done: $totalI, crashed: $crashCount, Levels/Second: $levelsASecond")
-
-				System.gc()
-				TimeUnit.SECONDS.sleep(2)
-				System.gc()
 
 				lastTime = System.currentTimeMillis()
 			}
@@ -414,7 +409,8 @@ class LevelSolver
 	fun completeTurn(grid: Grid)
 	{
 		var updateCount = 0
-		while (grid.inTurn || grid.isUpdating)
+		var completeCount = 0
+		while (completeCount < 3)
 		{
 			grid.update(1000f)
 			Future.update(1000f)
@@ -433,7 +429,7 @@ class LevelSolver
 				label.remove()
 			}
 
-			if (grid.hasAnim()) throw RuntimeException("Grid still has anim")
+			if (grid.delayedActions.size == 0 && grid.hasAnim()) throw RuntimeException("Grid still has anim")
 
 			updateCount++
 
@@ -445,6 +441,15 @@ class LevelSolver
 			if (updateCount > 1000)
 			{
 				throw RuntimeException("Turn got stuck in infinite update loop!")
+			}
+
+			if (grid.inTurn || grid.isUpdating || grid.delayedActions.size > 0)
+			{
+				completeCount = 0
+			}
+			else
+			{
+				completeCount++
 			}
 		}
 	}
@@ -461,7 +466,7 @@ class LevelSolver
 		}
 		else
 		{
-			if (grid.isUpdating || grid.inTurn)
+			if (grid.isUpdating || grid.inTurn || grid.delayedActions.size > 0)
 			{
 				throw RuntimeException("Grid was still updating when entering make move. Updating ${grid.isUpdating}. InTurn ${grid.inTurn}")
 			}
@@ -491,6 +496,11 @@ class LevelSolver
 
 	fun makeMove(grid: Grid, historyMove: HistoryMove)
 	{
+		if (grid.inTurn || grid.isUpdating || grid.delayedActions.size > 0)
+		{
+			throw Exception("Grid not completed!")
+		}
+
 		val levelState = grid.grid.toString()
 		if (levelState != historyMove.levelSnapshot)
 		{
@@ -500,6 +510,12 @@ class LevelSolver
 		if (historyMove.refill)
 		{
 			grid.refill()
+
+			if (grid.isUpdating)
+			{
+				throw Exception("Grid not completed!")
+			}
+
 			return
 		}
 		else if (historyMove.swapStart != null)
@@ -507,10 +523,26 @@ class LevelSolver
 			grid.dragStart = historyMove.swapStart!!
 			grid.dragEnd(historyMove.swapEnd!!)
 
+			if (grid.isUpdating || grid.delayedActions.size > 0)
+			{
+				throw Exception("Grid not completed!")
+			}
+
 			try
 			{
 				grid.update(1000f)
+
+				if (grid.isUpdating || grid.delayedActions.size > 0)
+				{
+					throw RuntimeException("Grid started updating!")
+				}
+
 				Future.update(1000f)
+
+				if (grid.isUpdating || grid.delayedActions.size > 0)
+				{
+					throw RuntimeException("Grid started updating!")
+				}
 			}
 			catch (ex: java.lang.RuntimeException)
 			{

@@ -21,6 +21,33 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 
 	override fun doUpdateRealTime(grid: Grid, deltaTime: Float)
 	{
+		grid.delayedActions.addAll(grid.queuedActions)
+		grid.queuedActions.clear()
+		grid.delayedActions.sort()
+
+		for (i in 0 until grid.delayedActions.size)
+		{
+			val action = grid.delayedActions[i]
+
+			action.delay -= deltaTime
+			if (action.delay <= 0)
+			{
+				action.function.invoke(action.target)
+			}
+		}
+
+		val itr = grid.delayedActions.iterator()
+		while(itr.hasNext())
+		{
+			val action = itr.next()
+
+			if (action.delay <= 0)
+			{
+				itr.remove()
+				action.free()
+			}
+		}
+
 		for (x in 0 until grid.width)
 		{
 			for (y in 0 until grid.height)
@@ -31,22 +58,6 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 				if (tile == contents.pos().tile)
 				{
 					processEntityRealTime(contents, grid, deltaTime)
-				}
-
-				if (tile.delayedActions.size > 0)
-				{
-					val itr = tile.delayedActions.iterator()
-					while (itr.hasNext())
-					{
-						val action = itr.next()
-						action.delay -= deltaTime
-
-						if (action.delay <= 0)
-						{
-							action.function.invoke()
-							itr.remove()
-						}
-					}
 				}
 			}
 		}

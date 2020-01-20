@@ -39,10 +39,12 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 			val dst = table.localToStageCoordinates(Vector2(table.width / 2f, table.height / 2f))
 			val src = GridWidget.instance.pointToScreenspace(it.pos().tile!!)
 
-			spawnMote(src, dst, sprite, GridWidget.instance.tileSize, {
-				sinkableMap[sprite.fileName].count = max(0, sinkableMap[sprite.fileName].count-1)
-				rebuildWidget()
-			})
+			spawnMote(src, dst, sprite, GridWidget.instance.tileSize, {}, 0.6f)
+			it.pos().tile!!.addDelayedAction(
+				{
+					sinkableMap[sprite.fileName].count = max(0, sinkableMap[sprite.fileName].count-1)
+					rebuildWidget()
+				}, 0.6f)
 
 			false
 		}

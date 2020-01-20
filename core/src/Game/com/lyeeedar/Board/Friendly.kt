@@ -347,8 +347,10 @@ class FriendlyHealAbility : FriendlyAbility()
 			healEffect.renderDelay = animDuration
 			tile.effects.add(healEffect)
 
-
-			Future.call({ healable.hp++ }, animDuration)
+			tile.addDelayedAction(
+				{
+					healable.hp++
+				}, animDuration )
 		}
 
 		for (condition in grid.level.defeatConditions)
@@ -360,11 +362,12 @@ class FriendlyHealAbility : FriendlyAbility()
 				val moteDst = dst.cpy() - Vector2(GridWidget.instance.tileSize / 2f, GridWidget.instance.tileSize / 2f)
 				val src = GridWidget.instance.pointToScreenspace(srcPos)
 
-				spawnMote(src, moteDst, sprite, GridWidget.instance.tileSize,
-					 {
-						 condition.fractionalHp += 1f
-						 condition.updateFractionalHp()
-					 }, animSpeed = 0.35f, leap = true)
+				spawnMote(src, moteDst, sprite, GridWidget.instance.tileSize, {}, animSpeed = 0.35f, leap = true)
+				srcPos.addDelayedAction(
+					{
+						condition.fractionalHp += 1f
+						condition.updateFractionalHp()
+					}, 0.35f)
 			}
 		}
 	}

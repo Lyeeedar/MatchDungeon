@@ -39,11 +39,10 @@ class Tile(x: Int, y: Int, val grid: Grid) : Point(x, y)
 	var nameKey: String? = null
 
 	val effects: Array<Renderable> = Array()
-	val delayedActions: Array<DelayedAction> = Array()
 
-	fun addDelayedAction(function: () -> Unit, delay: Float)
+	fun addDelayedAction(function: (tile: Tile) -> Unit, delay: Float)
 	{
-		delayedActions.add(DelayedAction(function, delay))
+		grid.queuedActions.add(DelayedAction.obtain().set(function, delay, this))
 	}
 
 	val associatedMatches = kotlin.Array<Match?>(2) { e -> null}
@@ -69,5 +68,3 @@ class Tile(x: Int, y: Int, val grid: Grid) : Point(x, y)
 		return " "
 	}
 }
-
-class DelayedAction(val function: () -> Unit, var delay: Float)

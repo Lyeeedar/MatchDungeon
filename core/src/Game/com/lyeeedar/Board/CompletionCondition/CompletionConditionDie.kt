@@ -54,14 +54,19 @@ class CompletionConditionDie : AbstractCompletionCondition()
 				val sprite = entity.renderable().renderable.copy() as Sprite
 				val dst = GridWidget.instance.pointToScreenspace(tile)
 
-				spawnMote(src, dst, sprite, GridWidget.instance.tileSize,
-					 {
-						 friendly.hp--
+				val duration = 0.35f
+				spawnMote(src, dst, sprite, GridWidget.instance.tileSize, {}, animSpeed = duration, leap = true)
 
-						 val hit = grid.hitEffect.copy()
-						 tile.effects.add(hit)
-
-					 }, animSpeed = 0.35f, leap = true)
+				tile.addDelayedAction(
+					{ tile ->
+						val friendly = tile.contents?.healable()
+						if (friendly != null)
+						{
+							friendly.hp--
+						}
+						val hit = grid.hitEffect.copy()
+						tile.effects.add(hit)
+					}, duration)
 			}
 
 			// calculate block and counter
@@ -115,54 +120,57 @@ class CompletionConditionDie : AbstractCompletionCondition()
 			}
 
 			// animate player attack
-			spawnMote(src, moteDst, sprite, GridWidget.instance.tileSize,
-				 {
-					 if (blocked)
-					 {
-						 if (!Global.resolveInstantly)
-						 {
-							 val pos = dst
+			spawnMote(src, moteDst, sprite, GridWidget.instance.tileSize, {}, animSpeed = 0.35f, leap = true)
 
-							 val sprite = AssetManager.loadParticleEffect("Block")
-							 val actor = ParticleEffectActor(sprite.getParticleEffect())
-							 actor.setSize(48f, 48f)
-							 actor.setPosition(pos.x, pos.y)
-							 Statics.stage.addActor(actor)
-						 }
-					 }
-					 else
-					 {
-						 if (hp > 0) hp--
+			entity.pos().tile!!.addDelayedAction(
+				{
+					if (blocked)
+					{
+						if (!Global.resolveInstantly)
+						{
+							val pos = dst
 
-						 if (!Global.resolveInstantly)
-						 {
-							 val pos = dst
+							val sprite = AssetManager.loadParticleEffect("Block")
+							val actor = ParticleEffectActor(sprite.getParticleEffect())
+							actor.setSize(48f, 48f)
+							actor.setPosition(pos.x, pos.y)
+							Statics.stage.addActor(actor)
+						}
+					}
+					else
+					{
+						if (hp > 0) hp--
 
-							 val sprite = AssetManager.loadParticleEffect("Hit")
-							 val actor = ParticleEffectActor(sprite.getParticleEffect())
-							 actor.setSize(48f, 48f)
-							 actor.setPosition(pos.x, pos.y)
-							 Statics.stage.addActor(actor)
+						if (!Global.resolveInstantly)
+						{
+							val pos = dst
 
-							 hpLabel.setText("$hp/$maxHP")
-							 updateBlink()
-						 }
-					 }
+							val sprite = AssetManager.loadParticleEffect("Hit")
+							val actor = ParticleEffectActor(sprite.getParticleEffect())
+							actor.setSize(48f, 48f)
+							actor.setPosition(pos.x, pos.y)
+							Statics.stage.addActor(actor)
 
-					 if (countered)
-					 {
-						 val src = dst
-						 val target = grid.monsterTiles.random()
-						 if (target != null)
-						 {
-							 val dst = if (Global.resolveInstantly) Vector2() else GridScreen.instance.grid!!.pointToScreenspace(target)
-							 spawnMote(src, dst, sprite, GridWidget.instance.tileSize,
-								  {
-									  grid.pop(target, 0f, Global.player, Global.player.getStat(Statistic.MATCHDAMAGE), Global.player.getStat(Statistic.PIERCE))
-								  }, animSpeed = 0.35f, leap = true)
-						 }
-					 }
-				 }, animSpeed = 0.35f, leap = true)
+							hpLabel.setText("$hp/$maxHP")
+							updateBlink()
+						}
+					}
+
+					if (countered)
+					{
+						val src = dst
+						val target = grid.monsterTiles.random()
+						if (target != null)
+						{
+							val dst = if (Global.resolveInstantly) Vector2() else GridScreen.instance.grid!!.pointToScreenspace(target)
+							spawnMote(src, dst, sprite, GridWidget.instance.tileSize, {}, animSpeed = 0.35f, leap = true)
+							target.addDelayedAction(
+								{ target ->
+									grid.pop(target, 0f, Global.player, Global.player.getStat(Statistic.MATCHDAMAGE), Global.player.getStat(Statistic.PIERCE))
+								}, 0.35f)
+						}
+					}
+				}, 0.35f)
 
 			return false
 		}

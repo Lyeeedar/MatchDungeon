@@ -186,15 +186,16 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 		val moteDst = dst.cpy() - Vector2(GridWidget.instance.tileSize / 2f, GridWidget.instance.tileSize / 2f)
 		val src = GridWidget.instance.pointToScreenspace(tile)
 
-		spawnMote(src, moteDst, sprite, GridWidget.instance.tileSize,
-			 {
-				 Global.player.leveldebuffs.add(buff)
+		spawnMote(src, moteDst, sprite, GridWidget.instance.tileSize, {}, animSpeed = 0.35f, leap = true)
+		tile.addDelayedAction(
+			{
+				Global.player.leveldebuffs.add(buff)
 
-				 if (!Global.resolveInstantly)
-				 {
-					 GridScreen.instance.updateBuffTable()
-				 }
-			 }, animSpeed = 0.35f, leap = true)
+				if (!Global.resolveInstantly)
+				{
+					GridScreen.instance.updateBuffTable()
+				}
+			}, 0.35f)
 
 	}
 }

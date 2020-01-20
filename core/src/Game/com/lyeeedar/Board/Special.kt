@@ -146,26 +146,23 @@ abstract class Special()
 
 				val dist = p1.dst(p2)
 
-				val hitSet = ObjectSet<Tile>()
-
 				val effect = AssetManager.loadParticleEffect("SpecialBeam").getParticleEffect()
 				effect.colour = modifyColour(colour)
 				effect.killOnAnimComplete = true
 				effect.animation = MoveAnimation.obtain().set(dist * beamMoveSpeed * grid.animSpeedMultiplier, arrayOf(p1, p2), Interpolation.linear)
 				effect.rotation = getRotation(p1, p2)
-				effect.collisionFun = fun(cx: Int, pcy: Int)
-				{
-					val cy = (grid.height-1) - pcy
-					val tile = grid.tile(cx, cy)
-					val min = min(y, sy)
-					val max = max(y, sy)
-					if (tile != null && cx == x && cy in min..max && !hitSet.contains(tile))
-					{
-						hitSet.add(tile)
-						grid.pop(cx, cy, 0f, special.uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
-					}
-				}
 				grid.grid[x, y].effects.add(effect)
+
+				for (hy in min(y, sy)..max(y, sy))
+				{
+					val dist = Vector2(x.toFloat(), sy.toFloat()).dst(Vector2(x.toFloat(), hy.toFloat()))
+					val duration = dist * beamMoveSpeed * grid.animSpeedMultiplier
+
+					grid.grid[x, hy].addDelayedAction(
+						{ tile ->
+							grid.pop(tile, 0f, special.uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
+						}, duration)
+				}
 			}
 
 			var launchedUp = false
@@ -215,31 +212,27 @@ abstract class Special()
 
 				val dist = p1.dst(p2)
 
-				val hitSet = ObjectSet<Tile>()
-
 				val effect = AssetManager.loadParticleEffect("SpecialBeam").getParticleEffect()
 				effect.colour = modifyColour(colour)
 				effect.killOnAnimComplete = true
 				effect.animation = MoveAnimation.obtain().set(dist * beamMoveSpeed * grid.animSpeedMultiplier, arrayOf(p1, p2), Interpolation.linear)
 				effect.rotation = getRotation(p1, p2)
-				effect.collisionFun = fun(cx: Int, pcy: Int)
-				{
-					val cy = (grid.height-1) - pcy
-					val tile = grid.tile(cx, cy)
-					val min = min(x, sx)
-					val max = max(x, sx)
-					if (tile != null && cy == y && cx in min..max && !hitSet.contains(tile))
-					{
-						hitSet.add(tile)
-						grid.pop(cx, cy, 0f, special.uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
-					}
-
-				}
 				grid.grid[x, y].effects.add(effect)
+
+				for (hx in min(x, sx)..max(x, sx))
+				{
+					val dist = Vector2(sx.toFloat(), y.toFloat()).dst(Vector2(hx.toFloat(), y.toFloat()))
+					val duration = dist * beamMoveSpeed * grid.animSpeedMultiplier
+
+					grid.grid[hx, y].addDelayedAction(
+						{ tile ->
+							grid.pop(tile, 0f, special.uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
+						}, duration)
+				}
 			}
 
 			var launchedRight = false
-			for (x in sx+1..grid.width-1)
+			for (x in sx+1 until grid.width)
 			{
 				val tile = grid.grid[x, y]
 				if (!tile.canHaveOrb && !tile.isPit)
@@ -386,39 +379,26 @@ class DoubleDualMatch() : BombSpecial()
 
 	override fun apply(point: Point, grid: Grid)
 	{
-		val coreTile = grid.tile(point)
-
-		val hitSet = ObjectSet<Tile>()
+		val coreTile = grid.tile(point)!!
 
 		val effect = AssetManager.loadParticleEffect("SpecialExplosion").getParticleEffect()
 		effect.colour = modifyColour(sprite.colour)
 		effect.size[0] = 4
 		effect.size[1] = 4
 		effect.isCentered = true
-		effect.collisionFun = fun(cx: Int, pcy: Int)
-		{
 
-			val cy = (grid.height-1) - pcy
-			val tile = grid.tile(cx, cy)
-			if (tile != null && !hitSet.contains(tile) && tile.dist(point) < 4)
+		coreTile.addDelayedAction(
 			{
-				hitSet.add(tile)
-				grid.pop(cx, cy, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
-			}
-		}
+				for (tile in grid.grid)
+				{
+					if (tile.dist(point) < 4)
+					{
+						grid.pop(tile.x, tile.y, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
+					}
+				}
+			}, 0.075f)
 
-		Future.call({
-						for (tile in grid.grid)
-						{
-							if (!hitSet.contains(tile) && tile.dist(point) < 4)
-							{
-								hitSet.add(tile)
-								grid.pop(tile.x, tile.y, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
-							}
-						}
-					}, 0.1f)
-
-		coreTile?.effects?.add(effect)
+		coreTile.effects.add(effect)
 	}
 
 	override fun merge(other: Entity): Special?
@@ -491,39 +471,26 @@ class DualMatch() : BombSpecial()
 
 	override fun apply(point: Point, grid: Grid)
 	{
-		val coreTile = grid.tile(point)
-
-		val hitSet = ObjectSet<Tile>()
+		val coreTile = grid.tile(point)!!
 
 		val effect = AssetManager.loadParticleEffect("SpecialExplosion").getParticleEffect()
 		effect.colour = modifyColour(sprite.colour)
 		effect.size[0] = 3
 		effect.size[1] = 3
 		effect.isCentered = true
-		effect.collisionFun = fun(cx: Int, pcy: Int)
-		{
 
-			val cy = (grid.height-1) - pcy
-			val tile = grid.tile(cx, cy)
-			if (tile != null && !hitSet.contains(tile) && tile.dist(point) < 3)
+		coreTile.addDelayedAction(
 			{
-				hitSet.add(tile)
-				grid.pop(cx, cy, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
-			}
-		}
+				for (tile in grid.grid)
+				{
+					if (tile.dist(point) < 3)
+					{
+						grid.pop(tile.x, tile.y, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
+					}
+				}
+			}, 0.075f)
 
-		Future.call({
-						for (tile in grid.grid)
-						{
-							if (!hitSet.contains(tile) && tile.dist(point) < 3)
-							{
-								hitSet.add(tile)
-								grid.pop(tile.x, tile.y, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1)
-							}
-						}
-					}, 0.1f)
-
-		coreTile?.effects?.add(effect)
+		coreTile.effects.add(effect)
 	}
 
 	override fun merge(other: Entity): Special?
@@ -620,6 +587,7 @@ class Match5() : GemSpecial()
 			return false
 		}
 
+		val hitSet = ObjectSet<Tile>()
 		for (tile in grid.grid.filter { isValidTarget(it) })
 		{
 			val dst = tile.dist(point)
@@ -634,11 +602,12 @@ class Match5() : GemSpecial()
 			s.drawActualSize = true
 			s.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.5f)
 			s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.3f, false)
-			s.completionCallback = fun()
-			{
-				grid.pop(tile, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
-			}
 			tile.effects.add(s)
+
+			tile.addDelayedAction(
+				{ tile ->
+					grid.pop(tile, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
+				}, animDuration)
 		}
 	}
 
@@ -716,33 +685,34 @@ class Match5Spread(val special: Special) : GemSpecial()
 				s.faceInMoveDirection = true
 				s.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.5f)
 				s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.0f, false)
-				s.completionCallback = fun()
-				{
-					if (contents.matchable() != null)
-					{
-						val newSpecial =
-							if (contents.special() == null)
-								special.copy()
-							else
-							{
-								val specialHolder = EntityPool.obtain()
-								val specialComponent = SpecialComponent.obtain().set(special)
-								specialHolder.add(specialComponent)
-
-								val merged = contents.special()!!.special.merge(specialHolder) ?: special.merge(contents) ?: special
-
-								specialHolder.free()
-
-								merged
-							}
-
-						addSpecial(contents, newSpecial)
-						newSpecial.setArmed(true, contents)
-					}
-
-					grid.pop(tile, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
-				}
 				tile.effects.add(s)
+
+				tile.addDelayedAction(
+					{ tile ->
+						if (contents.matchable() != null)
+						{
+							val newSpecial =
+								if (contents.special() == null)
+									special.copy()
+								else
+								{
+									val specialHolder = EntityPool.obtain()
+									val specialComponent = SpecialComponent.obtain().set(special)
+									specialHolder.add(specialComponent)
+
+									val merged = contents.special()!!.special.merge(specialHolder) ?: special.merge(contents) ?: special
+
+									specialHolder.free()
+
+									merged
+								}
+
+							addSpecial(contents, newSpecial)
+							newSpecial.setArmed(true, contents)
+						}
+
+						grid.pop(tile, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
+					}, animDuration)
 			}
 			else if (
 				(contents.damageable() != null && contents.ai() != null) ||
@@ -760,11 +730,12 @@ class Match5Spread(val special: Special) : GemSpecial()
 				s.drawActualSize = true
 				s.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.5f)
 				s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.3f, false)
-				s.completionCallback = fun()
-				{
-					grid.pop(tile, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
-				}
 				tile.effects.add(s)
+
+				tile.addDelayedAction(
+					{ tile ->
+						grid.pop(tile, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
+					}, animDuration)
 			}
 		}
 	}
@@ -814,11 +785,12 @@ class Match5Dual() : GemSpecial()
 			s.drawActualSize = true
 			s.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.5f)
 			s.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.3f, false)
-			s.completionCallback = fun()
-			{
-				grid.pop(tile, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
-			}
 			tile.effects.add(s)
+
+			tile.addDelayedAction(
+				{ tile ->
+					grid.pop(tile, 0f, uniqueID, grid.level.player.getStat(Statistic.ABILITYDAMAGE) + grid.level.player.getStat(Statistic.MATCHDAMAGE) + 1, grid.level.player.getStat(Statistic.PIERCE))
+				}, animDuration)
 		}
 	}
 
