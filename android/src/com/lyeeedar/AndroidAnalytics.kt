@@ -5,7 +5,7 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.lyeeedar.Util.IAnalytics
 import com.lyeeedar.Util.IBundle
 
-class AndroidAnalytics(val firebaseAnalytics: FirebaseAnalytics) : IAnalytics<AndroidBundle>
+class AndroidAnalytics(val firebaseAnalytics: FirebaseAnalytics) : IAnalytics
 {
 	override fun appOpen()
 	{
@@ -45,15 +45,15 @@ class AndroidAnalytics(val firebaseAnalytics: FirebaseAnalytics) : IAnalytics<An
 		firebaseAnalytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_COMPLETE, Bundle())
 	}
 
-	override fun getParamBundle(): AndroidBundle
+	override fun getParamBundle(): IBundle
 	{
 		return AndroidBundle(Bundle())
 	}
 
-	override fun customEvent(name: String, paramBundle: AndroidBundle)
+	override fun customEvent(name: String, paramBundle: IBundle)
 	{
-
-		firebaseAnalytics.logEvent(name, paramBundle.bundle)
+		val bundle = paramBundle as AndroidBundle
+		firebaseAnalytics.logEvent(name, bundle.bundle)
 	}
 }
 
