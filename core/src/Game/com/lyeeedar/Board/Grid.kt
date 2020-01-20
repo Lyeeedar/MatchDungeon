@@ -394,8 +394,6 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 		activeAbility = null
 
 		inTurn = true
-
-		throw java.lang.RuntimeException("Test crash")
 	}
 
 	// ----------------------------------------------------------------------
