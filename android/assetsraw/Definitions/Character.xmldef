@@ -10,6 +10,9 @@
 			<Data Name="MainHand" StripExtension="True" ResourceType="MainHand" meta:RefKey="File" />
 			<Data Name="OffHand" StripExtension="True" ResourceType="OffHand" meta:RefKey="File" />
 		</Data>
+		<Data Name="Cards" meta:RefKey="Collection">
+			<Data Name="Card" StripExtension="True" ResourceType="Card" meta:RefKey="File" />
+		</Data>
 	</Definition>
 	<Definition Name="Statistics" IsGlobal="True" meta:RefKey="StructDef">
 		<!--Health-->

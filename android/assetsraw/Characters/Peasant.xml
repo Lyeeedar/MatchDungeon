@@ -7,13 +7,11 @@
 	</Sprite>
 	<Statistics meta:RefKey="Statistics">
 		<Health>5</Health>
-		<MatchDamage>0</MatchDamage>
-		<AbilityDamage>0</AbilityDamage>
-		<PowerGain>0</PowerGain>
-		<BonusGold>0</BonusGold>
-		<BonusTime>0</BonusTime>
 	</Statistics>
 	<StartingEquipment>
 		<MainHand>Equipment/Peasant/Pitchfork</MainHand>
 	</StartingEquipment>
+	<Cards>
+		<Card>Cards/Peasant/GoblinScourge</Card>
+	</Cards>
 </Character>

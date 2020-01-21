@@ -42,32 +42,13 @@ class DeckScreen : AbstractScreen()
 	val encounterDeckSize = 30
 	val equipmentDeckSize = 20
 
-	fun isDeckInvalid(): Boolean = containsRestrictedCard() || containsTooManyEncounters() || containsTooFewEncounters() || containsTooManyEquipment() || containsTooFewEquipment()
+	fun isDeckInvalid(): Boolean = containsTooManyEncounters() || containsTooFewEncounters() || containsTooManyEquipment() || containsTooFewEquipment()
 
 	fun containsTooManyEncounters() = Global.deck.playerDeck.encounters.size > encounterDeckSize
 	fun containsTooFewEncounters() = Global.deck.playerDeck.encounters.size < encounterDeckSize
 
 	fun containsTooManyEquipment() = Global.deck.playerDeck.equipment.size > equipmentDeckSize
 	fun containsTooFewEquipment() = Global.deck.playerDeck.equipment.size < equipmentDeckSize
-
-	fun containsRestrictedCard(): Boolean = restrictedCards().size > 0
-
-	fun restrictedCards(): com.badlogic.gdx.utils.Array<Card>
-	{
-		val output = com.badlogic.gdx.utils.Array<Card>()
-		for (card in Global.deck.playerDeck.encounters)
-		{
-			if (card.characterRestriction != null)
-			{
-				if (Global.deck.chosenCharacter.name != card.characterRestriction)
-				{
-					output.add(card)
-				}
-			}
-		}
-
-		return output
-	}
 
 	fun createMainScreen()
 	{
@@ -146,16 +127,6 @@ class DeckScreen : AbstractScreen()
 
 		encountersDetails.add(Label(Global.deck.playerDeck.encounters.size.toString() + " / $encounterDeckSize", Statics.skin))
 		encountersDetails.row()
-
-		for (card in restrictedCards())
-		{
-			val label = Label("Deck contains card '" + card.current.name + "' which is restricted to the character '" + card.characterRestriction + "'!", Statics.skin)
-			label.setWrap(true)
-			label.color = Color.RED
-
-			encountersDetails.add(label).growX()
-			encountersDetails.row()
-		}
 
 		if (containsTooManyEncounters())
 		{
@@ -343,15 +314,6 @@ class DeckScreen : AbstractScreen()
 		mainTable.add(Label(Global.deck.playerDeck.encounters.size.toString() + " / $encounterDeckSize", Statics.skin))
 		mainTable.row()
 
-		for (card in restrictedCards())
-		{
-			val label = Label("Deck contains card '" + card.current.name + "' which is restricted to the character '" + card.characterRestriction + "'!", Statics.skin)
-			label.color = Color.RED
-
-			mainTable.add(label)
-			mainTable.row()
-		}
-
 		mainTable.add(Seperator(Statics.skin)).growX().pad(2f)
 		mainTable.row()
 
@@ -374,10 +336,6 @@ class DeckScreen : AbstractScreen()
 		for (enc in Global.deck.playerDeck.encounters)
 		{
 			val card = enc.current.getCard()
-			if (enc.characterRestriction != null && Global.deck.chosenCharacter.name != enc.characterRestriction)
-			{
-				card.color = Color.RED
-			}
 
 			card.setSize(cardWidth, cardHeight)
 			card.addPick("Remove") {
@@ -448,10 +406,6 @@ class DeckScreen : AbstractScreen()
 			if (!used.contains(enc))
 			{
 				val card = enc.current.getCard()
-				if (enc.characterRestriction != null && Global.deck.chosenCharacter.name != enc.characterRestriction)
-				{
-					card.color = Color.RED
-				}
 
 				card.setSize(cardWidth, cardHeight)
 				card.addPick("Add") {

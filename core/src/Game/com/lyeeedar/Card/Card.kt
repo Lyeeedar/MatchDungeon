@@ -14,7 +14,6 @@ import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.Card.CardContent.CardContentActionRewards
 import com.lyeeedar.Game.AbstractReward
 import com.lyeeedar.Game.Chance
-import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.SpawnWeight
 import com.lyeeedar.UI.CardWidget
@@ -25,7 +24,7 @@ import ktx.collections.set
 import ktx.collections.toGdxArray
 import java.util.*
 
-class Card(val path: String, val characterRestriction: String?, val nodes: Array<CardNode>, val root: CardNode)
+class Card(val path: String, val nodes: Array<CardNode>, val root: CardNode)
 {
 	var current: CardNode = root
 
@@ -56,8 +55,6 @@ class Card(val path: String, val characterRestriction: String?, val nodes: Array
 
 			val nodeMap = ObjectMap<String, CardNode>()
 
-			val restriction = xml.get("CharacterRestriction", null)
-
 			val rootNode = xml.get("Root")
 			val nodesEl = xml.getChildByName("Nodes")!!
 			for (nodeEl in nodesEl.children())
@@ -73,7 +70,7 @@ class Card(val path: String, val characterRestriction: String?, val nodes: Array
 				node.resolve(nodeMap)
 			}
 
-			val card = Card(path, restriction, nodeMap.values().toGdxArray(), nodeMap[rootNode])
+			val card = Card(path, nodeMap.values().toGdxArray(), nodeMap[rootNode])
 			return card
 		}
 
@@ -137,15 +134,7 @@ class CardNode
 		wrapperStack.add(table)
 
 		table.add(Table()).grow()
-		table.row();
-
-		if (parent.characterRestriction != null)
-		{
-			val restriction = Label("Restricted: " + parent.characterRestriction, Statics.skin)
-			restriction.color = if (Global.deck.chosenCharacter.name == parent.characterRestriction) Color.GREEN else Color.RED
-			table.add(restriction)
-			table.row()
-		}
+		table.row()
 
 		val rewardsTable = Table()
 		table.add(rewardsTable).growX()

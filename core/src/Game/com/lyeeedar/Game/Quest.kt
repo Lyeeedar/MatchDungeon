@@ -473,33 +473,42 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 
 			val pool = Array<Card>()
 			val shops = Array<Card>()
-			if (allowDeckCards)
+
+			fun addCardToPool(card: Card, weight: Int)
 			{
-				for (card in Global.player.deck.encounters)
+				for (iw in 0 until weight)
 				{
-					val weight = if (card.characterRestriction != null) 3 else 1
+					val pool = if (card.current.isShop) shops else pool
 
-					for (iw in 0 until weight)
+					val playedWeight = if (card.current.hasBeenPlayed) 1 else 3
+					for (w in 0 until playedWeight)
 					{
-						val pool = if (card.current.isShop) shops else pool
-
-						val playedWeight = if (card.current.hasBeenPlayed) 1 else 2
-						for (w in 0 until playedWeight)
+						if (card.current.spawnWeight.subWeights.contains(spawnWeight))
 						{
-							if (card.current.spawnWeight.subWeights.contains(spawnWeight))
-							{
-								// make it 4x more likely
-								for (i in 0 until 4)
-								{
-									pool.add(card)
-								}
-							}
-							else
+							// make it 8x more likely
+							for (i in 0 until 8)
 							{
 								pool.add(card)
 							}
 						}
+						else
+						{
+							pool.add(card)
+						}
 					}
+				}
+			}
+
+			if (allowDeckCards)
+			{
+				for (card in Global.player.deck.encounters)
+				{
+					addCardToPool(card, 1)
+				}
+
+				for (card in Global.player.baseCharacter.cards)
+				{
+					addCardToPool(card, 6)
 				}
 			}
 			if (allowQuestCards)
@@ -508,20 +517,7 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 				{
 					card.current.isQuestCard = true
 
-					val pool = if (card.current.isShop) shops else pool
-
-					if (card.current.spawnWeight.subWeights.contains(spawnWeight))
-					{
-						// make it 3x more likely
-						for (i in 0 until 3)
-						{
-							pool.add(card)
-						}
-					}
-					else
-					{
-						pool.add(card)
-					}
+					addCardToPool(card, 1)
 				}
 			}
 			if (allowThemeCards)
@@ -530,20 +526,7 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 				{
 					card.current.isQuestCard = true
 
-					val pool = if (card.current.isShop) shops else pool
-
-					if (card.current.spawnWeight.subWeights.contains(spawnWeight))
-					{
-						// make it 3x more likely
-						for (i in 0 until 3)
-						{
-							pool.add(card)
-						}
-					}
-					else
-					{
-						pool.add(card)
-					}
+					addCardToPool(card, 1)
 				}
 			}
 

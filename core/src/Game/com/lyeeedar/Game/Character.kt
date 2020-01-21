@@ -5,8 +5,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.utils.Array
 import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
+import com.lyeeedar.Card.Card
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
@@ -20,6 +22,7 @@ class Character(val path: String)
 	lateinit var sprite: Sprite
 	val baseStatistics = FastEnumMap<Statistic, Float>(Statistic::class.java)
 	val equipment = FastEnumMap<EquipmentSlot, Equipment>(EquipmentSlot::class.java)
+	val cards = Array<Card>()
 
 	val emptySlot = AssetManager.loadSprite("Icons/Empty")
 
@@ -108,11 +111,27 @@ class Character(val path: String)
 				equipment[equip.slot] = equip
 			}
 		}
+
+		val cardsEl = xmlData.getChildByName("Cards")
+		if (cardsEl != null)
+		{
+			for (el in cardsEl.children())
+			{
+				val card = Card.load(el.text)
+				cards.add(card)
+			}
+		}
 	}
 
 	fun save(output: Output)
 	{
 		output.writeString(path)
+
+		output.writeInt(cards.size)
+		for (card in cards)
+		{
+			card.save(output)
+		}
 	}
 
 	companion object
@@ -130,7 +149,18 @@ class Character(val path: String)
 		fun load(input: Input): Character
 		{
 			val path = input.readString()
-			return load(path)
+
+			val character = load(path)
+			character.cards.clear()
+
+			val numCards = input.readInt()
+			for (i in 0 until numCards)
+			{
+				val card = Card.load(input)
+				character.cards.add(card)
+			}
+
+			return character
 		}
 	}
 }

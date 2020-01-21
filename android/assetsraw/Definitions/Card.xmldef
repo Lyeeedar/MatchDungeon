@@ -1,6 +1,5 @@
 <Definitions Colour="247,229,183" Icon="Sprites/Icons/CardIcon.png" xmlns:meta="Editor">
 	<Definition Name="Card" FlattenData="True" meta:RefKey="GraphStruct">
-		<Data Name="CharacterRestriction" BasePath="Characters" StripExtension="True" ResourceType="Character" meta:RefKey="File" />
 		<Data Name="Root" Keys="CardNode" meta:RefKey="GraphReference" />
 	</Definition>
 	<Definition Name="CardNode" meta:RefKey="GraphStructDef">

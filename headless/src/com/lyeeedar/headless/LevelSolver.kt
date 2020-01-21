@@ -422,7 +422,7 @@ class LevelSolver
 				tile.effects.clear()
 
 				tile.contents?.renderable()?.renderable?.animation = null
-				
+
 				tile.contents?.markedForDeletion()?.deletionEffectDelay = 0f
 			}
 
