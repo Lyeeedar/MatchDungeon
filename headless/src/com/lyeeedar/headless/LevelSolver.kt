@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Array
 import com.kryo.deserialize
 import com.lyeeedar.Board.*
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionTime
+import com.lyeeedar.Components.markedForDeletion
 import com.lyeeedar.Components.renderable
 import com.lyeeedar.Game.*
 import com.lyeeedar.Screens.GridScreen
@@ -421,6 +422,8 @@ class LevelSolver
 				tile.effects.clear()
 
 				tile.contents?.renderable()?.renderable?.animation = null
+				
+				tile.contents?.markedForDeletion()?.deletionEffectDelay = 0f
 			}
 
 			Mote.clear()
