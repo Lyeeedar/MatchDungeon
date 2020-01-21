@@ -434,7 +434,16 @@ class GridScreen(): AbstractScreen()
 
 		val ability = level.grid.activeAbility
 
-		val canShowButtons = if (ability == null && !level.grid.inTurn && (level.grid.noValidMoves || PowerBar.instance.power == PowerBar.instance.maxPower)) !level.grid.hasAnim() else false
+		val canShowButtons =
+			if (
+				ability == null &&
+				!level.grid.inTurn &&
+				!level.grid.isUpdating &&
+				(level.grid.noValidMoves || PowerBar.instance.power == PowerBar.instance.maxPower)
+			)
+				!level.grid.isUpdateBlocked()
+			else
+				false
 
 		if (level.isVictory)
 		{

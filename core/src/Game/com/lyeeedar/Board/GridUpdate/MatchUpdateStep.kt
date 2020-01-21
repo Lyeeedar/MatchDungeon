@@ -31,13 +31,11 @@ class MatchUpdateStep : AbstractUpdateStep()
 		trace.start()
 
 		val matches = findMatches(grid.grid, 3)
-		clearMatches(grid, matches)
-		for (match in matches) match.free()
-
-		grid.lastSwapped = Point.MINUS_ONE
-
 		if (matches.size > 0)
 		{
+			clearMatches(grid, matches)
+			for (match in matches) match.free()
+
 			grid.matchCount++
 			grid.animSpeedMultiplier *= grid.animSpeedUpMultiplier
 
@@ -46,13 +44,15 @@ class MatchUpdateStep : AbstractUpdateStep()
 			displayMatchMessage(grid, point!!)
 		}
 
+		grid.lastSwapped = Point.MINUS_ONE
+
 		trace.stop()
 
 		return matches.size == 0
 	}
 
 	// ----------------------------------------------------------------------
-	fun findMatches(grid: Grid) : Array<Match>
+	fun findAllMatches(grid: Grid) : Array<Match>
 	{
 		val matches = Array<Match>(false, 16)
 
@@ -88,9 +88,10 @@ class MatchUpdateStep : AbstractUpdateStep()
 	}
 
 	// ----------------------------------------------------------------------
+	val matches = Array<Match>()
 	fun findMatches(grid: Array2D<Tile>, length: Int, exact: Boolean = false) : Array<Match>
 	{
-		val matches = Array<Match>()
+		matches.clear()
 
 		fun addMatch(p1: Point, p2: Point)
 		{

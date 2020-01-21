@@ -9,6 +9,7 @@ import com.lyeeedar.Board.Tile
 import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.BlinkAnimation
+import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Colour
 import com.lyeeedar.Util.Statics
@@ -25,38 +26,95 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 		val trace = Statics.performanceTracer.getTrace("UpdateGridRealTime")
 		trace.start()
 
-		grid.delayedActions.addAll(grid.queuedActions)
-		grid.queuedActions.clear()
-		grid.delayedActions.sort()
-
-		for (i in 0 until grid.delayedActions.size)
+		if (grid.queuedActions.size > 0)
 		{
-			val action = grid.delayedActions[i]
-
-			action.delay -= deltaTime
-			if (action.delay <= 0)
+			for (action in grid.queuedActions)
 			{
-				action.function.invoke(action.target)
+				if (grid.delayedActions.size == 0)
+				{
+					grid.delayedActions.add(action)
+				}
+				else if (action.delay <= grid.delayedActions.first.delay)
+				{
+					grid.delayedActions.addFirst(action)
+				}
+				else if (action.delay >= grid.delayedActions.last.delay)
+				{
+					grid.delayedActions.addLast(action)
+				}
+				else
+				{
+					val mid = (grid.delayedActions.first.delay + grid.delayedActions.last.delay) * 0.5f
+					if (action.delay <= mid)
+					{
+						grid.delayedActions.addFirst(action)
+					}
+					else
+					{
+						grid.delayedActions.addLast(action)
+					}
+				}
+			}
+			grid.queuedActions.clear()
+		}
+		if (grid.delayedActions.size > 0)
+		{
+			val itr = grid.delayedActions.iterator()
+			while (itr.hasNext())
+			{
+				val action = itr.next()
+
+				action.delay -= deltaTime
+				if (action.delay <= 0)
+				{
+					action.function.invoke(action.target)
+					itr.remove()
+
+					action.free()
+				}
 			}
 		}
 
-		val itr = grid.delayedActions.iterator()
-		while(itr.hasNext())
-		{
-			val action = itr.next()
-
-			if (action.delay <= 0)
-			{
-				itr.remove()
-				action.free()
-			}
-		}
-
+		grid.hasAnim = false
 		for (x in 0 until grid.width)
 		{
 			for (y in 0 until grid.height)
 			{
 				val tile = grid.grid[x, y]
+
+				if (!grid.hasAnim)
+				{
+					for (effect in tile.effects)
+					{
+						if (effect is ParticleEffect)
+						{
+							if (effect.isShortened)
+							{
+								if (effect.time < effect.lifetime * 0.5f)
+								{
+									grid.hasAnim = true
+									break
+								}
+							}
+							else if (effect.blocked())
+							{
+								grid.hasAnim = true
+								break
+							}
+							else if (effect.animation != null)
+							{
+								grid.hasAnim = true
+								break
+							}
+						}
+						else
+						{
+							grid.hasAnim = true
+							break
+						}
+					}
+				}
+
 				val contents = tile.contents ?: continue
 
 				if (tile == contents.pos().tile)
@@ -136,6 +194,15 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 			{
 				special.special.needsArming = false
 				special.special.setArmed(true, entity)
+			}
+		}
+
+		if (!grid.hasAnim)
+		{
+			val swappable = entity.swappable()
+			if (swappable != null && renderable?.renderable?.animation != null)
+			{
+				grid.hasAnim = true
 			}
 		}
 	}

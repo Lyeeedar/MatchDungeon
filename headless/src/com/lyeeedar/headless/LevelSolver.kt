@@ -429,7 +429,7 @@ class LevelSolver
 				label.remove()
 			}
 
-			if (grid.delayedActions.size == 0 && grid.hasAnim()) throw RuntimeException("Grid still has anim")
+			if (grid.hasAnim) throw RuntimeException("Grid still has anim")
 
 			updateCount++
 

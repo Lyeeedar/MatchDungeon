@@ -18,18 +18,19 @@ import com.lyeeedar.Game.GlobalDeck
 import com.lyeeedar.Game.Player
 import com.lyeeedar.Renderables.Animation.BumpAnimation
 import com.lyeeedar.Renderables.Animation.MoveAnimation
-import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.FullscreenMessage
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.PowerBar
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
+import com.lyeeedar.Util.Random
 import ktx.collections.toGdxArray
 import org.apache.commons.codec.binary.Base64.decodeBase64
 import org.apache.commons.codec.binary.Base64.encodeBase64String
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
+import java.util.*
 import java.util.zip.GZIPInputStream
 import java.util.zip.GZIPOutputStream
 
@@ -112,9 +113,11 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 
 	val updateSteps: kotlin.Array<AbstractUpdateStep>
 
+	var hasAnim: Boolean = false
+
 	// ----------------------------------------------------------------------
 	val queuedActions = Array<DelayedAction>(false, 16)
-	val delayedActions = Array<DelayedAction>(false, 16)
+	val delayedActions = ArrayDeque<DelayedAction>()
 
 	// ----------------------------------------------------------------------
 	var activeAbility: Ability? = null
@@ -205,76 +208,18 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 	}
 
 	// ----------------------------------------------------------------------
-	fun hasAnim(): Boolean
+	fun isUpdateBlocked(): Boolean
 	{
 		if (delayedActions.size > 0)
 		{
 			return true
 		}
-
-		var hasAnim = false
-		for (x in 0 until width)
+		else if (hasAnim)
 		{
-			for (y in 0 until height)
-			{
-				val tile = grid[x, y]
-
-				if (Global.resolveInstantly)
-				{
-					tile.effects.clear()
-				}
-
-				for (effect in tile.effects)
-				{
-					if (effect is ParticleEffect)
-					{
-						if (effect.isShortened)
-						{
-							if (effect.time < effect.lifetime * 0.5f)
-							{
-								hasAnim = true
-								break
-							}
-						}
-						else if (effect.blocked())
-						{
-							hasAnim = true
-							break
-						}
-						else if (effect.animation != null)
-						{
-							hasAnim = true
-							break
-						}
-					}
-					else
-					{
-						hasAnim = true
-						break
-					}
-				}
-
-				val swappable = tile.contents?.swappable()
-				val renderable = tile.contents?.renderableOrNull()
-				if (swappable != null && renderable?.renderable?.animation != null)
-				{
-					hasAnim = true
-					break
-				}
-
-				if (hasAnim)
-				{
-					break
-				}
-			}
-
-			if (hasAnim)
-			{
-				break
-			}
+			return true
 		}
 
-		return hasAnim
+		return false
 	}
 
 	// ----------------------------------------------------------------------
@@ -399,7 +344,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 	// ----------------------------------------------------------------------
 	fun select(newSelection: Point)
 	{
-		if (hasAnim() || level.isVictory || level.isDefeat) return
+		if (isUpdateBlocked() || isUpdating || inTurn || level.isVictory || level.isDefeat) return
 
 		if (activeAbility != null)
 		{
@@ -426,7 +371,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 	// ----------------------------------------------------------------------
 	fun dragEnd(selection: Point)
 	{
-		if (level.isVictory || level.isDefeat) return
+		if (isUpdateBlocked() || isUpdating || inTurn || level.isVictory || level.isDefeat) return
 
 		if (selection != dragStart && dragStart.dist(selection) == 1)
 		{
@@ -452,7 +397,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 			step.doUpdateRealTime(this, deltaTime)
 		}
 
-		if (!hasAnim())
+		if (!isUpdateBlocked())
 		{
 			for (step in updateSteps)
 			{
@@ -585,7 +530,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 		oldEntity.pos().tile = newTile
 		newEntity.pos().tile = oldTile
 
-		val matches = match.findMatches(this)
+		val matches = match.findAllMatches(this)
 		for (match in matches) match.free()
 		if (matches.size == 0)
 		{
