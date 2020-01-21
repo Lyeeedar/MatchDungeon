@@ -26,6 +26,7 @@ object AssetTester
 				MatchUpdateStep.test()
 			}))
 			funcs.add(Pair("XmlLoadTest", { XmlLoadTester.test() }))
+			funcs.add(Pair("CardContentValidator", { CardContentValidator() }))
 			funcs.add(Pair("LevelSolve", { LevelSolver().attemptAllLevels() }))
 
 			val timings = com.badlogic.gdx.utils.Array<Pair<String, Long>>()
