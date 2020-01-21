@@ -379,17 +379,20 @@ class GridWidget(val grid: Grid) : Widget()
 					val damageable = contents.damageable()
 					if (damageable != null)
 					{
-						maxY = drawHPBar(
-							contents.pos().size.toFloat(),
-							damageable.hp,
-							damageable.lostHP,
-							damageable.remainingReduction,
-							damageable.maxhp,
-							damageable.damageReduction,
-							damageable.immune,
-							xi,
-							yi,
-							hp_full)
+						if (damageable.alwaysShowHP || damageable.hp < damageable.maxhp)
+						{
+							maxY = drawHPBar(
+								contents.pos().size.toFloat(),
+								damageable.hp,
+								damageable.lostHP,
+								damageable.remainingReduction,
+								damageable.maxhp,
+								damageable.damageReduction,
+								damageable.immune,
+								xi,
+								yi,
+								hp_full)
+						}
 					}
 
 					val healable = contents.healable()

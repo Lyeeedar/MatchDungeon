@@ -63,6 +63,7 @@ class MonsterDesc
 		damageable.maxhp = hp + (hp.toFloat() * (difficulty.toFloat() / 7f)).ciel()
 		damageable.isSummon = isSummon
 		damageable.damageReduction = damageReduction
+		damageable.alwaysShowHP = true
 
 		if (difficulty >= 3)
 		{
