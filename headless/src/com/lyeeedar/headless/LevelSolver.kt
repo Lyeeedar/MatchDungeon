@@ -406,14 +406,15 @@ class LevelSolver
 		return grid.level.isVictory
 	}
 
+	val updateRate = 1f / 30f // 30fps
 	fun completeTurn(grid: Grid)
 	{
 		var updateCount = 0
 		var completeCount = 0
 		while (completeCount < 3)
 		{
-			grid.update(1000f)
-			Future.update(1000f)
+			grid.update(updateRate)
+			Future.update(updateRate)
 
 			for (tile in grid.grid)
 			{
@@ -428,14 +429,10 @@ class LevelSolver
 			{
 				label.remove()
 			}
-			
-			grid.update(1000f)
-
-			if (grid.hasAnim) throw RuntimeException("Grid still has anim")
 
 			updateCount++
 
-			if (updateCount > 10 && updateCount.rem(20) == 0 && !disableOutput)
+			if (updateCount > 10 && updateCount.rem(100) == 0 && !disableOutput)
 			{
 				println("UpdateCount: $updateCount")
 			}
@@ -445,7 +442,7 @@ class LevelSolver
 				throw RuntimeException("Turn got stuck in infinite update loop!")
 			}
 
-			if (grid.inTurn || grid.isUpdating || grid.delayedActions.size > 0)
+			if (grid.inTurn || grid.isUpdating || grid.delayedActions.size > 0 || grid.hasAnim)
 			{
 				completeCount = 0
 			}
@@ -532,14 +529,7 @@ class LevelSolver
 
 			try
 			{
-				grid.update(1000f)
-
-				if (grid.isUpdating || grid.delayedActions.size > 0)
-				{
-					throw RuntimeException("Grid started updating!")
-				}
-
-				Future.update(1000f)
+				grid.update(0f)
 
 				if (grid.isUpdating || grid.delayedActions.size > 0)
 				{
