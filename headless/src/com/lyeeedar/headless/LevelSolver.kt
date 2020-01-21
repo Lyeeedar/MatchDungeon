@@ -428,6 +428,8 @@ class LevelSolver
 			{
 				label.remove()
 			}
+			
+			grid.update(1000f)
 
 			if (grid.hasAnim) throw RuntimeException("Grid still has anim")
 
