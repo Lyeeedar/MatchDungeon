@@ -12,6 +12,7 @@ import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Board.Theme
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
+import com.lyeeedar.Card.CardSource
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.SpawnWeight
 import com.lyeeedar.UI.CardWidget
@@ -463,7 +464,7 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 		if (type == QuestNodeType.FIXED)
 		{
 			val card = Card.load(("Quests/" + quest.path).directory() + "/" + fixedEventString)
-			card.current.isQuestCard = true
+			card.current.cardSource = CardSource.QUEST
 			card.current.hiddenRewards = true
 			output.add(card)
 		}
@@ -503,11 +504,13 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 			{
 				for (card in Global.player.deck.encounters)
 				{
+					card.current.cardSource = CardSource.DECK
 					addCardToPool(card, 1)
 				}
 
 				for (card in Global.player.baseCharacter.cards)
 				{
+					card.current.cardSource = CardSource.CHARACTER
 					addCardToPool(card, 6)
 				}
 			}
@@ -515,8 +518,7 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 			{
 				for (card in quest.questCards)
 				{
-					card.current.isQuestCard = true
-
+					card.current.cardSource = CardSource.QUEST
 					addCardToPool(card, 1)
 				}
 			}
@@ -524,8 +526,7 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 			{
 				for (card in quest.themeCards)
 				{
-					card.current.isQuestCard = true
-
+					card.current.cardSource = CardSource.LOCATION
 					addCardToPool(card, 1)
 				}
 			}

@@ -20,6 +20,7 @@ import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.addTapToolTip
 import com.lyeeedar.Util.*
+import ktx.collections.gdxArrayOf
 import ktx.collections.set
 import ktx.collections.toGdxArray
 import java.util.*
@@ -92,6 +93,14 @@ class Card(val path: String, val nodes: Array<CardNode>, val root: CardNode)
 	}
 }
 
+enum class CardSource private constructor(val icon: Sprite, val text: String, val colourTint: Colour)
+{
+	DECK(AssetManager.loadSprite("GUI/CardCardback"), "This encounter came from the encounter deck", Colour.WHITE),
+	CHARACTER(AssetManager.loadSprite("GUI/CharacterCardback"), "This encounter came from the current character", Colour(0.9f, 1f, 0.9f, 1f)),
+	QUEST(AssetManager.loadSprite("GUI/QuestCardback"), "This encounter came from the current quest", Colour(1f, 0.9f, 0.9f, 1f)),
+	LOCATION(AssetManager.loadGrayscaleSprite("Oryx/Custom/terrain/flag_complete_4"), "This encounter came from the current quest location", Colour(0.9f, 0.9f, 1f, 1f))
+}
+
 class CardNode
 {
 	lateinit var parent: Card
@@ -106,13 +115,14 @@ class CardNode
 	lateinit var content: String
 
 	var hasBeenPlayed = false
-	var isQuestCard = false
+	var cardSource = CardSource.DECK
 
 	var nextNode: CardNodeWrapper? = null
 
 	fun getCard(): CardWidget
 	{
-		val colour = if (isQuestCard) Colour(1f, 0.8f, 0.6f, 1f) else Colour.WHITE
+		val colour = cardSource.colourTint
+		val descriptors: Array<Pair<Sprite, String?>> = gdxArrayOf(Pair(cardSource.icon, cardSource.text))
 		return CardWidget.createCard(
 				name,
 				"Encounter",
@@ -120,7 +130,8 @@ class CardNode
 				createTable(false),
 				createTable(true),
 				this,
-				colour)
+				colour,
+				descriptors = descriptors)
 	}
 
 	fun createTable(detail: Boolean): Table
@@ -245,9 +256,9 @@ class CardNode
 		}
 
 		table.add(Table()).grow()
-		table.row();
+		table.row()
 
-		if (!hasBeenPlayed && !isQuestCard)
+		if (!hasBeenPlayed && (cardSource == CardSource.DECK || cardSource == CardSource.CHARACTER))
 		{
 			val newTable = Table()
 			val newLabel = Label("New", Statics.skin)
