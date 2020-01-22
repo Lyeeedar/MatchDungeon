@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>As you wander down the alley you come across a group of man standing around, hassling a young woman.</MultilineString>
+				<MultilineString>AssaultLadyContent.Node.[0] Line.Line.MultilineString:11290e71-e3d4-46c4-8282-bc7a7cbc80ff</MultilineString>
 			</Line>
 			<Match3>
 				<Level>AssaultLadyContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>The men knock you unconscious. You wake up some time later, your wallet completely empty and the group gone.</MultilineString>
+				<MultilineString>AssaultLadyContent.Node.[0] Line.Line.MultilineString:b045c09f-cc3c-43d1-a75f-5447360ccebb</MultilineString>
 			</Line>
 			<Spend>
 				<Key>Money</Key>
@@ -25,7 +25,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>The lady thanks you profusely before quickly hurrying off.</MultilineString>
+				<MultilineString>AssaultLadyContent.Node.[0] Line.Line.MultilineString:7b05d3a9-a598-4495-85ed-fcdfd0790e34</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Success</State>

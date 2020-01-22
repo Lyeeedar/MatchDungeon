@@ -3,13 +3,13 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You wander down the alley. A man steps out of the dark and gestures to you.</MultilineString>
+				<MultilineString>DrugDealerBadContent.Node.[0] Line.Line.MultilineString:b9a9d4dd-062c-46be-88af-80db6141b816</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Oy mate, wanna by somefin to get your mind extra speedy? Just fifty gold."</MultilineString>
+				<MultilineString>DrugDealerBadContent.Node.[1] Line.Line.MultilineString:d68c7b87-b3ba-4d44-b078-05e422318bda</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"How about 25?" You respond.</MultilineString>
+				<MultilineString>DrugDealerBadContent.Node.[2] Line.Line.MultilineString:b42a0abf-c671-4812-8644-00ae0bbd829d</MultilineString>
 			</Line>
 			<Match3>
 				<Level>DrugDealerBadContentLevel</Level>
@@ -19,7 +19,7 @@
 		</Node>
 		<Node meta:X="441" meta:Y="212" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>"Nah mate I don't do discounts. It'll be 50."</MultilineString>
+				<MultilineString>DrugDealerBadContent.Node.[0] Line.Line.MultilineString:2a85842a-56af-4f54-ac98-8e8e654fcec6</MultilineString>
 			</Line>
 			<Define>
 				<Key>Cost</Key>
@@ -30,7 +30,7 @@
 		</Node>
 		<Node meta:X="447" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>"Sure mate, I can see you're a nice fella. 25, just for ya."</MultilineString>
+				<MultilineString>DrugDealerBadContent.Node.[0] Line.Line.MultilineString:a3d89906-e29a-4432-b939-2f4fc49ea313</MultilineString>
 			</Line>
 			<Define>
 				<Key>Cost</Key>
@@ -41,22 +41,22 @@
 		</Node>
 		<Node meta:X="837" meta:Y="120" GUID="f6c0d1f2-f8a5-4ccd-a5e0-fef01bbcbfc8">
 			<Line>
-				<MultilineString>Would you like to buy it?</MultilineString>
+				<MultilineString>DrugDealerBadContent.Node.[0] Line.Line.MultilineString:7cd826fc-5501-4a81-b4c5-f38188428cc2</MultilineString>
 			</Line>
 			<Choice>
 				<Choices>
 					<Choice>
-						<Text>Buy it ({Cost})</Text>
+						<Text>DrugDealerBadContent.Node.[1] Choice.Choice.Choices.[0] Choice.Choice.Text:2304d505-4e93-48e8-aeae-16376fb06802</Text>
 						<Condition>Money &gt;= Cost</Condition>
 						<Node meta:RefKey="Node">a5d31a69-eb0c-483b-b387-3d51532f1616</Node>
 					</Choice>
 					<Choice>
-						<Text>Don't buy it</Text>
+						<Text>DrugDealerBadContent.Node.[1] Choice.Choice.Choices.[1] Choice.Choice.Text:89447faa-a0f0-4b83-b275-cdf38d890153</Text>
 						<Condition>Money &gt;= Cost</Condition>
 						<Node meta:RefKey="Node">90570280-6d8c-44e6-b4f2-9c3debdf7146</Node>
 					</Choice>
 					<Choice>
-						<Text>I can't afford that.</Text>
+						<Text>DrugDealerBadContent.Node.[1] Choice.Choice.Choices.[2] Choice.Choice.Text:d6b94a68-e34e-4234-9273-eb5a6e0d4f31</Text>
 						<Condition>Money &lt; Cost</Condition>
 						<Node meta:RefKey="Node">90570280-6d8c-44e6-b4f2-9c3debdf7146</Node>
 					</Choice>
@@ -65,7 +65,7 @@
 		</Node>
 		<Node meta:X="1169" meta:Y="327" GUID="90570280-6d8c-44e6-b4f2-9c3debdf7146">
 			<Line>
-				<MultilineString>"Piss off then mate."</MultilineString>
+				<MultilineString>DrugDealerBadContent.Node.[0] Line.Line.MultilineString:e1634842-6dc3-4c6a-99f3-2e923c003cd8</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -73,14 +73,14 @@
 		</Node>
 		<Node meta:X="1179" meta:Y="120" GUID="a5d31a69-eb0c-483b-b387-3d51532f1616">
 			<Line>
-				<MultilineString>"Here you go. Enjoy!"</MultilineString>
+				<MultilineString>DrugDealerBadContent.Node.[0] Line.Line.MultilineString:7cb40236-108c-41a3-b1f7-b66bb946007c</MultilineString>
 			</Line>
 			<Spend>
 				<Key>Money</Key>
 				<Count>Cost</Count>
 			</Spend>
 			<Line>
-				<MultilineString>As you take the drug you start to feel really angry.</MultilineString>
+				<MultilineString>DrugDealerBadContent.Node.[2] Line.Line.MultilineString:99cbe245-c120-4f4a-80a0-77fc819fa075</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Buff>

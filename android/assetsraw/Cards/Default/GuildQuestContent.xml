@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>The adventurers guild posts all sorts of quests. Taking them on makes face a variety of challenges.</MultilineString>
+				<MultilineString>GuildQuestContent.Node.[0] Line.Line.MultilineString:ad277ef2-815c-476a-b03a-188c1199ad84</MultilineString>
 			</Line>
 			<Match3>
 				<Level>GuildQuestContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>You fail to complete the quest.</MultilineString>
+				<MultilineString>GuildQuestContent.Node.[0] Line.Line.MultilineString:6b599cc1-fe6e-4c41-9e4e-2b89e72d6f90</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You complete the quest.</MultilineString>
+				<MultilineString>GuildQuestContent.Node.[0] Line.Line.MultilineString:38c36901-d07b-473d-88fd-d4c539164b0c</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

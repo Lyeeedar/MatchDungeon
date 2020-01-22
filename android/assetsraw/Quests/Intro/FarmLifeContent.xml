@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="639" meta:Y="0" GUID="557a5d42-729b-4f65-aec0-e353174bd6f2">
 			<Line>
-				<MultilineString>You wake up in the morning, still groggy from sleep. Your bed is oh so very inviting.</MultilineString>
+				<MultilineString>FarmLifeContent.Node.[0] Line.Line.MultilineString:084b1cec-4300-4914-8698-d9de7f0e6bfa</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You know you should get up and begin on the days work, but maybe you could sneak in a little more sleep.</MultilineString>
+				<MultilineString>FarmLifeContent.Node.[1] Line.Line.MultilineString:94a58309-5cb9-4975-b748-20277145c50b</MultilineString>
 			</Line>
 			<Match3>
 				<Level>FarmLifeLevel</Level>
@@ -16,7 +16,7 @@
 		</Node>
 		<Node meta:X="924" meta:Y="198" GUID="e8a56e16-d8c5-45d6-a4c3-0737d17a711f">
 			<Line>
-				<MultilineString>You roll over and go back to sleep. The day can wait.</MultilineString>
+				<MultilineString>FarmLifeContent.Node.[0] Line.Line.MultilineString:c6d061ee-fc21-46eb-bfef-c69d208b6722</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -24,7 +24,7 @@
 		</Node>
 		<Node meta:X="916" meta:Y="0" GUID="5cb73d5d-6f08-4643-a2c2-386648ceb16b">
 			<Line>
-				<MultilineString>You force yourself to get up. You really should face the day.</MultilineString>
+				<MultilineString>FarmLifeContent.Node.[0] Line.Line.MultilineString:2731766e-3f34-4869-8ef4-3d5830da5a30</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Success</State>
@@ -32,16 +32,16 @@
 		</Node>
 		<Node meta:X="150" meta:Y="0" GUID="19fe8d84-b639-475e-9e4f-c9146798af72">
 			<Line>
-				<MultilineString>Play introduction?</MultilineString>
+				<MultilineString>FarmLifeContent.Node.[0] Line.Line.MultilineString:0472c021-8045-4e8a-942c-e4c7fbf3e36f</MultilineString>
 			</Line>
 			<Choice>
 				<Choices>
 					<Choice>
-						<Text>Play Introduction</Text>
+						<Text>FarmLifeContent.Node.[1] Choice.Choice.Choices.[0] Choice.Choice.Text:1ff4247d-2da3-4a05-998c-bc52f164768f</Text>
 						<Node meta:RefKey="Node">557a5d42-729b-4f65-aec0-e353174bd6f2</Node>
 					</Choice>
 					<Choice>
-						<Text>Skip Introduction</Text>
+						<Text>FarmLifeContent.Node.[1] Choice.Choice.Choices.[1] Choice.Choice.Text:eb2ffad9-61e2-46c2-9a79-b13c21a55352</Text>
 						<Node meta:RefKey="Node">5bfddb91-dbd5-4ec7-bff5-3f106c1e106b</Node>
 					</Choice>
 				</Choices>
@@ -55,16 +55,16 @@
 		</Node>
 		<Node meta:X="375" meta:Y="135" GUID="5bfddb91-dbd5-4ec7-bff5-3f106c1e106b">
 			<Line>
-				<MultilineString>Are you sure you want to skip the introduction?</MultilineString>
+				<MultilineString>FarmLifeContent.Node.[0] Line.Line.MultilineString:2902e2a8-d5ff-4824-bdee-1bc10f002e53</MultilineString>
 			</Line>
 			<Choice>
 				<Choices>
 					<Choice>
-						<Text>Play the introduction.</Text>
+						<Text>FarmLifeContent.Node.[1] Choice.Choice.Choices.[0] Choice.Choice.Text:238dc9b1-9e5d-494d-8f52-a3f01c8f13fa</Text>
 						<Node meta:RefKey="Node">557a5d42-729b-4f65-aec0-e353174bd6f2</Node>
 					</Choice>
 					<Choice>
-						<Text>Skip introduction.</Text>
+						<Text>FarmLifeContent.Node.[1] Choice.Choice.Choices.[1] Choice.Choice.Text:e031e1cd-65aa-4a84-8309-cda9e7d45ec8</Text>
 						<Node meta:RefKey="Node">6898caba-4ea8-4c83-af87-36f8ed81e209</Node>
 					</Choice>
 				</Choices>

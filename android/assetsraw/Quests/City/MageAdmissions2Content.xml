@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>After a long wait the second round of admissions begins. You are finally led into another room, infront of the same panel of instructors.</MultilineString>
+				<MultilineString>MageAdmissions2Content.Node.[0] Line.Line.MultilineString:e97fd8fd-da87-4fcb-be71-9d5f1d5ccc6f</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Congratulations on passing the first round of the admissions. Now we'd like to see how you handle a more powerful spell."</MultilineString>
+				<MultilineString>MageAdmissions2Content.Node.[1] Line.Line.MultilineString:2d9ae36b-f5e2-4c11-af89-53be52344101</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Equipment>
@@ -15,7 +15,7 @@
 				</Equipment>
 			</Rewards>
 			<Line>
-				<MultilineString>"Please use it to destroy the wisps."</MultilineString>
+				<MultilineString>MageAdmissions2Content.Node.[3] Line.Line.MultilineString:e38749f5-d0ce-417f-ba2e-29a7272cbcce</MultilineString>
 			</Line>
 			<Match3>
 				<Level>MageAdmissions2ContentLevel</Level>
@@ -25,7 +25,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>You fail the admission and are gently escorted from the building. Better luck next time.</MultilineString>
+				<MultilineString>MageAdmissions2Content.Node.[0] Line.Line.MultilineString:a04e108b-adca-4311-9b7d-ab9b1023fedd</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -33,7 +33,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You pass the second round! You are ushered into a third hall with only a few others.</MultilineString>
+				<MultilineString>MageAdmissions2Content.Node.[0] Line.Line.MultilineString:3b875d3d-48d7-40db-bb94-37a73952348f</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Success</State>

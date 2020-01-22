@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="020d5fcf-2aef-4bd9-8825-a30f6dba1d4f">
 			<Line>
-				<MultilineString>You catch a gleam of something out of the corner of your eye. On further investigation it's coming from beneath a mound of debris.</MultilineString>
+				<MultilineString>DiamondInTheRoughContent.Node.[0] Line.Line.MultilineString:6a1b51d4-6488-44af-aa53-2897f4d810d1</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>If you can dig it out it may be worth something, so get digging!</MultilineString>
+				<MultilineString>DiamondInTheRoughContent.Node.[1] Line.Line.MultilineString:0bd31436-904e-4473-8e9f-e1d59758a318</MultilineString>
 			</Line>
 			<Match3>
 				<Level>DiamondInTheRoughContentLevel</Level>
@@ -16,7 +16,7 @@
 		</Node>
 		<Node meta:X="469" meta:Y="222" GUID="186b87f8-b4d3-4b76-83cf-bed434bc5d79">
 			<Line>
-				<MultilineString>What a shame, it was some worthless junk all along.</MultilineString>
+				<MultilineString>DiamondInTheRoughContent.Node.[0] Line.Line.MultilineString:3eda8a8e-51e3-401b-bb27-77e8f9a17feb</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -24,7 +24,7 @@
 		</Node>
 		<Node meta:X="478" meta:Y="-1" GUID="81246f23-5b2a-4af2-a789-ed8ebfa6399d">
 			<Line>
-				<MultilineString>What a fancy gemstone you've found! That will sell very nicely.</MultilineString>
+				<MultilineString>DiamondInTheRoughContent.Node.[0] Line.Line.MultilineString:5456f6c2-ed38-4bc5-835e-809d19460dbf</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

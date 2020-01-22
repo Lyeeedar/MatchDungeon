@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You head out of town, looking for groups of creatures you can turn into lovely experience. After a good hour of walking you stumble across a pack.</MultilineString>
+				<MultilineString>GrindingMobsContent.Node.[0] Line.Line.MultilineString:edc7fcb8-1ea0-443e-b0d4-eb20d0c37d23</MultilineString>
 			</Line>
 			<Match3>
 				<Level>GrindingMobsContentLevel</Level>
@@ -13,15 +13,15 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>The monsters prove too much for you so you flee.</MultilineString>
+				<MultilineString>GrindingMobsContent.Node.[0] Line.Line.MultilineString:5172f9d9-7b9b-455c-bd90-3ed73d81a109</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
 			</MarkComplete>
 		</Node>
-		<Node meta:X="457.22334455667789" meta:Y="-145.08978675645341" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
+		<Node meta:X="457.22335815429688" meta:Y="-145.08978271484375" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>As the monsters fall you feel yourself getting stronger.</MultilineString>
+				<MultilineString>GrindingMobsContent.Node.[0] Line.Line.MultilineString:b378be4e-d03d-482e-b4aa-a9f034e90b2d</MultilineString>
 			</Line>
 			<Define>
 				<Key>Reward</Key>
@@ -50,58 +50,38 @@
 				<State>Success</State>
 			</MarkComplete>
 		</Node>
-		<Node meta:X="749.22334455667783" meta:Y="-145.08978675645341" GUID="d3bc1142-31fc-4a27-8495-048acd78dbc6">
+		<Node meta:X="749.22332763671875" meta:Y="-145.08978271484375" GUID="d3bc1142-31fc-4a27-8495-048acd78dbc6">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
 						<Health>2</Health>
-						<MatchDamage>0</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>
 		</Node>
-		<Node meta:X="748.10101010101" meta:Y="-73.260381593714925" GUID="e7665f84-70ab-4319-82d7-c60455ed6cfc">
+		<Node meta:X="748.10101318359375" meta:Y="-73.260383605957031" GUID="e7665f84-70ab-4319-82d7-c60455ed6cfc">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
 						<MatchDamage>1</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>
 		</Node>
-		<Node meta:X="745.85634118967448" meta:Y="3.0583613916947172" GUID="c89195ce-1508-4feb-950c-4c3cfd4ff763">
+		<Node meta:X="745.8563232421875" meta:Y="3.058361291885376" GUID="c89195ce-1508-4feb-950c-4c3cfd4ff763">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
-						<MatchDamage>0</MatchDamage>
 						<AbilityDamage>1</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>
 		</Node>
-		<Node meta:X="745.85634118967448" meta:Y="76.010101010100982" GUID="05af080e-4a1b-4e84-b39a-db74e89b88d9">
+		<Node meta:X="745.8563232421875" meta:Y="76.010101318359375" GUID="05af080e-4a1b-4e84-b39a-db74e89b88d9">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
-						<MatchDamage>0</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
 						<PowerGain>3</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>

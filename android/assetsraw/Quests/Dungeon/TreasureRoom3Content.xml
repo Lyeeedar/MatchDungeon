@@ -3,13 +3,13 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="e1b33c9f-255d-4739-baa1-6ec4ef743494">
 			<Line>
-				<MultilineString>You finally enter an unlooted treasure room. Rows and rows of chests are laid out, but around them swarm a multitude of rats.</MultilineString>
+				<MultilineString>TreasureRoom3Content.Node.[0] Line.Line.MultilineString:e4e3a9be-8166-428e-a624-23bbaf5de48b</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>As you step forward the swarm spots you and lets out a chilling cry. In the distance you can hear the sound of many scampering feet.</MultilineString>
+				<MultilineString>TreasureRoom3Content.Node.[1] Line.Line.MultilineString:c9e1fc65-7873-40f8-a0a7-3b6d2f81d5e1</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>Quick, grab what treasure you can before the rest of the horde arrives!</MultilineString>
+				<MultilineString>TreasureRoom3Content.Node.[2] Line.Line.MultilineString:6c07c9b8-27d9-4933-a46f-3019361d9e68</MultilineString>
 			</Line>
 			<Match3>
 				<Level>TreasureRoom3ContentLevel</Level>
@@ -19,7 +19,7 @@
 		</Node>
 		<Node meta:X="500" meta:Y="0" GUID="23edc937-a196-4e14-9033-6d847b954efe">
 			<Line>
-				<MultilineString>Pack full of treasures you turn and sprint away, leaving the horrifying sounds of the rat swarm behind.</MultilineString>
+				<MultilineString>TreasureRoom3Content.Node.[0] Line.Line.MultilineString:2d66c250-8ff1-4712-9114-78098c14c3b2</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Success</State>
@@ -27,7 +27,7 @@
 		</Node>
 		<Node meta:X="501" meta:Y="166" GUID="62fb30f9-7e28-4330-912d-e6686428171d">
 			<Line>
-				<MultilineString>Suddenly the horde of rats bursts into the room, knocking chests everywhere. You turn to run but to no avail, the horde swarms over you and everything goes dark.</MultilineString>
+				<MultilineString>TreasureRoom3Content.Node.[0] Line.Line.MultilineString:220d7e5b-13eb-4e40-826a-7f0489895dd8</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>

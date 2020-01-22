@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You enter a corridor filled with huge webs. As you move along the sound of something large and flesh being dragged along the floor startles you. Something is moving along the webs towards you.</MultilineString>
+				<MultilineString>WebAmbushContent.Node.[0] Line.Line.MultilineString:d5d3479e-a0e2-44f7-9398-5d8d118d648f</MultilineString>
 			</Line>
 			<Match3>
 				<Level>WebAmbushContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>The creatures plunge something into your chest and your muscles seize up. They grab you and bundle you up into a cocoon of webs and sting you up to the ceiling. Your conciousness fades to black.</MultilineString>
+				<MultilineString>WebAmbushContent.Node.[0] Line.Line.MultilineString:88a795f0-78b2-4add-9800-73505716ea38</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You slay the final beast and the corridor is quiet once again.</MultilineString>
+				<MultilineString>WebAmbushContent.Node.[0] Line.Line.MultilineString:d0e29cc0-65f3-4201-8d92-ffe1730beb48</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>

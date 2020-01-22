@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You find a large raw gemstone on your travels, and with a bit of work you could turn it into something marvelous.</MultilineString>
+				<MultilineString>JewelryWorkContent.Node.[0] Line.Line.MultilineString:d89efd76-228c-4748-b3a8-a7802a228ca4</MultilineString>
 			</Line>
 			<Match3>
 				<Level>JewelryWorkContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>You mess up and destroy the gem, leaving you with nothing but worthless dust.</MultilineString>
+				<MultilineString>JewelryWorkContent.Node.[0] Line.Line.MultilineString:9bf5caf6-c461-41c2-b3aa-72453d0f14b7</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You carve the gem into something beautiful.</MultilineString>
+				<MultilineString>JewelryWorkContent.Node.[0] Line.Line.MultilineString:a71ef2d7-bb91-496e-bd9a-ff3870823758</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

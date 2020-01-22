@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You come across a larger, fiercer monster. It's probably a rare creature so you should KILL IT. It may drop some nice loot.</MultilineString>
+				<MultilineString>ShowdownContent.Node.[0] Line.Line.MultilineString:5857fdc4-e261-4328-be6d-8310914c53b2</MultilineString>
 			</Line>
 			<Match3>
 				<Level>ShowdownContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>The creature crushes you, and you limp away as fast as you can.</MultilineString>
+				<MultilineString>ShowdownContent.Node.[0] Line.Line.MultilineString:cf94b9f6-28f7-4b30-b05d-470bee28b2d3</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>The creature collapses dead at your feet.</MultilineString>
+				<MultilineString>ShowdownContent.Node.[0] Line.Line.MultilineString:4fe83e1d-29a7-4d21-8b35-8940517ff3f2</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

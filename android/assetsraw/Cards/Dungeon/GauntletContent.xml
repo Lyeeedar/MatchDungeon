@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="d0fdd8bd-598d-454c-83f7-d56a875e8c0f">
 			<Line>
-				<MultilineString>At the far end of the room you can spot a treasure. Monsters line the walls to either side. You are going to have to be fast to get it out before they overwealm you.</MultilineString>
+				<MultilineString>GauntletContent.Node.[0] Line.Line.MultilineString:d5e8d456-daa6-40c1-92c2-576496a015ba</MultilineString>
 			</Line>
 			<Match3>
 				<Level>GauntletContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="455" meta:Y="143" GUID="3364ffaf-b629-4cb2-b1bf-4cede6aed8f9">
 			<Line>
-				<MultilineString>The monsters are too much, you are forced to flee.</MultilineString>
+				<MultilineString>GauntletContent.Node.[0] Line.Line.MultilineString:dce19127-ac50-4e77-81ff-453df210999f</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="481" meta:Y="-42" GUID="a9cc5561-6da9-4027-9a66-5e5e948fcd2a">
 			<Line>
-				<MultilineString>You are in and out like lightning.</MultilineString>
+				<MultilineString>GauntletContent.Node.[0] Line.Line.MultilineString:995762a8-8261-46d8-8c12-db30d364ddec</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Equipment>

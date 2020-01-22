@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="c334c60c-fd06-406d-bbfb-c70d8f9588a7">
 			<Line>
-				<MultilineString>You enter a large room. Sitting in the middle is a huge rat, wearing a glowing crown. Its eyes shine with a bestial intelligence as it stares at you.</MultilineString>
+				<MultilineString>RatKingBattleContent.Node.[0] Line.Line.MultilineString:075a219e-927d-471f-8388-47852f8b2877</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>This is the rat you have been sent here to slay.</MultilineString>
+				<MultilineString>RatKingBattleContent.Node.[1] Line.Line.MultilineString:e0794f51-f489-4da0-9b5b-33b2a8d8aa5d</MultilineString>
 			</Line>
 			<Match3>
 				<Level>RatKingBattleContentLevel</Level>
@@ -16,7 +16,7 @@
 		</Node>
 		<Node meta:X="431" meta:Y="176" GUID="65d49dc0-4549-4f4a-b8cc-c9e5d7bb180a">
 			<Line>
-				<MultilineString>The rat is too strong, you are forced to flee.</MultilineString>
+				<MultilineString>RatKingBattleContent.Node.[0] Line.Line.MultilineString:483c6b25-38f0-4b94-b541-2433ed2edfcf</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -24,7 +24,7 @@
 		</Node>
 		<Node meta:X="479" meta:Y="0" GUID="206c2daa-dc08-47c8-8f4a-fdbe3337498d">
 			<Line>
-				<MultilineString>You slay the rat! Its enormous body collapses down, the glimmering crown rolling from its head. From within its body a powerful soul emerges and coalesces in you hands into a large crystal.</MultilineString>
+				<MultilineString>RatKingBattleContent.Node.[0] Line.Line.MultilineString:b9862d10-3368-48fe-8190-b149f5e0471e</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Item>
@@ -39,7 +39,7 @@
 				</Item>
 			</Rewards>
 			<Line>
-				<MultilineString>You gather the crown and a large piece of its tail as proof of your victory and leave.</MultilineString>
+				<MultilineString>RatKingBattleContent.Node.[2] Line.Line.MultilineString:7ef24dac-fef1-4d96-bcf1-1fdc11b35cdb</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Success</State>

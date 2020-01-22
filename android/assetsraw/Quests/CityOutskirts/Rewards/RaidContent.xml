@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="a5176c50-4edb-4994-ba4f-c8ae6bb52ca9">
 			<Line>
-				<MultilineString>You meet up with Grayheart, but he's alone.</MultilineString>
+				<MultilineString>RaidContent.Node.[0] Line.Line.MultilineString:b3b28bfe-c080-45ef-837f-25e1268ff916</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Just us this time friend. Lets do this."</MultilineString>
+				<MultilineString>RaidContent.Node.[1] Line.Line.MultilineString:03931b27-6b42-4598-b299-741d00b8cc78</MultilineString>
 			</Line>
 			<Match3>
 				<Level>RaidContentLevel</Level>
@@ -16,7 +16,7 @@
 		</Node>
 		<Node meta:X="464" meta:Y="183" GUID="3f5afb11-df14-4273-8ef9-cd606011073e">
 			<Line>
-				<MultilineString>You just barely drag yourself and Grayheart out of there.</MultilineString>
+				<MultilineString>RaidContent.Node.[0] Line.Line.MultilineString:ceef04e0-127b-4ea7-bda8-1d33e5360da6</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -24,7 +24,7 @@
 		</Node>
 		<Node meta:X="480" meta:Y="0" GUID="3bbccab5-63e5-4aa7-b004-cbd3cc9e8240">
 			<Line>
-				<MultilineString>You stand triumphant over the fallen boss.</MultilineString>
+				<MultilineString>RaidContent.Node.[0] Line.Line.MultilineString:33998d3f-5a1d-4f94-ba7b-75525b7cd307</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

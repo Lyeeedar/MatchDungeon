@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="140acba3-75ab-4bdb-b407-4bff57971497">
 			<Line>
-				<MultilineString>You trundle your cart of produce over to the large market and set up your stall.</MultilineString>
+				<MultilineString>FarmersMarketContent.Node.[0] Line.Line.MultilineString:13e2c637-5ee6-4652-a22e-330362c9d44a</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You soon get some attention, people wandering over to inspect your goods. Can you make some sales?</MultilineString>
+				<MultilineString>FarmersMarketContent.Node.[1] Line.Line.MultilineString:bc36fd9e-f74f-4066-a365-28dd8bbc1ebd</MultilineString>
 			</Line>
 			<Match3>
 				<Level>FarmersMarketLevel</Level>
@@ -16,7 +16,7 @@
 		</Node>
 		<Node meta:X="437" meta:Y="196" GUID="ffaad5e3-c6df-43ca-8639-dee8f75af92c">
 			<Line>
-				<MultilineString>Today just wasn't all that successful. Maybe tomorrow will bring better profits.</MultilineString>
+				<MultilineString>FarmersMarketContent.Node.[0] Line.Line.MultilineString:fc486436-bcfb-421a-9d72-6e04b3355c5d</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -24,7 +24,7 @@
 		</Node>
 		<Node meta:X="479" meta:Y="0" GUID="4c292775-c571-499d-934e-0a7c36fee381">
 			<Line>
-				<MultilineString>You completely sell out! With pockets full of gold and an empty cart you happily return home.</MultilineString>
+				<MultilineString>FarmersMarketContent.Node.[0] Line.Line.MultilineString:1fd9dab4-029b-4cf4-afa1-fad476bc2724</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

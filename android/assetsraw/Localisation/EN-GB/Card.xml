@@ -1,5 +1,5 @@
 <Localisation Language="EN-GB" xmlns:meta="Editor">
-	<Text ID="AngrySwarm.CardNode.Description:e3e956a1-4602-48b2-bdf2-c2e488bbe548" Translated="true">A group of larger rats springs out of a side corridor onto you</Text>
+	<Text ID="AngrySwarm.CardNode.Description:e3e956a1-4602-48b2-bdf2-c2e488bbe548" Translated="true">A group of larger rats springs out of a side corridor onto you.</Text>
 	<Text ID="AngrySwarm.CardNode.Name:1d6b8eb9-86ee-4b02-af4e-a7f492a8bfd4" Translated="true">Angry Swarm</Text>
 	<Text ID="AssaultLady.CardNode.Description:6f0451fc-5e1e-4049-a27d-a161d4e7990b" Translated="true">The alleyways of the city offer many opportunities, for those willing to explore them.</Text>
 	<Text ID="AssaultLady.CardNode.Name:07ba24f6-8962-4c09-920a-a9bbceda2b35" Translated="true">Alleyways</Text>
@@ -21,21 +21,21 @@
 	<Text ID="BlockedDrop.CardNode.Name:567c13ef-c1ce-4c21-8b75-adfd5ffd6d52" Translated="true">Blocked Drop</Text>
 	<Text ID="BlockedPassage.CardNode.Description:93290d66-9dc0-4276-a58f-3df2f9a7122a" Translated="true">The passage ahead has collapsed, you'll have to dig through.</Text>
 	<Text ID="BlockedPassage.CardNode.Name:a4c51f75-16b5-43d1-9533-9a7a6479bfdf" Translated="true">Blocked Passage</Text>
-	<Text ID="Breakout.CardNode.Description:9f3b0023-01eb-4099-80e2-969a85f75dbf" Translated="true">Some treasure sits balanced at the end of a precarious pile of things. It'll be all yours if you can break it out.</Text>
+	<Text ID="Breakout.CardNode.Description:9f3b0023-01eb-4099-80e2-969a85f75dbf" Translated="true">Some treasure sits balanced at the end of a precarious pile of debris. It'll be all yours if you can break it out.</Text>
 	<Text ID="Breakout.CardNode.Name:31dc34c7-17c1-4bca-acef-c70ab7033bb2" Translated="true">Breakout</Text>
 	<Text ID="BreakThrough.CardNode.Description:1bf2d8fa-6876-4afb-93a2-7caf8e4aac93" Translated="true">The way is shut. It can be opened only by those who can smash. Get smashing.</Text>
 	<Text ID="BreakThrough.CardNode.Name:fee2659d-81f0-43eb-8a5f-7373fc5728e2" Translated="true">Break Through</Text>
-	<Text ID="BrewingTest.CardNode.Description:dae3ab4f-0e2d-4f09-b533-fd33f6428669" Translated="true">To join you alchemists guild you have to take 3 examinations. The final test is to make 3 potions with your gathered herbs.</Text>
+	<Text ID="BrewingTest.CardNode.Description:dae3ab4f-0e2d-4f09-b533-fd33f6428669" Translated="true">To join you alchemists guild you have to take three examinations. The final test is to make three potions with your gathered herbs.</Text>
 	<Text ID="BrewingTest.CardNode.Name:c5002acb-fd3f-4005-81e7-106ae6ee48e9" Translated="true">Alchemy Guild 3:Brewing Test</Text>
 	<Text ID="BuriedTreasure.CardNode.Description:70ed46f1-4145-4898-a58a-658765177eaf" Translated="true">You never know what you may find if you have a dig around.</Text>
 	<Text ID="BuriedTreasure.CardNode.Name:f8372892-6010-44c1-a5ad-6f0987e6eb2e" Translated="true">Buried Treasure</Text>
-	<Text ID="CareerChoices.CardNode.Description:a5b0869d-373d-401e-b8a7-9c0344ee2aeb" Translated="true">The city is filled with opportunities for those willing to seize them</Text>
+	<Text ID="CareerChoices.CardNode.Description:a5b0869d-373d-401e-b8a7-9c0344ee2aeb" Translated="true">The city is filled with opportunities for those willing to seize them.</Text>
 	<Text ID="CareerChoices.CardNode.Name:c1923e31-2b4f-4d3d-83ad-f61871d9a06e" Translated="true">Career Choices</Text>
 	<Text ID="ChainReaction.CardNode.Description:67db1dd1-386b-4624-8cca-b1bf9e52368d" Translated="true">You come across a room filled with crumbling pillars. In the distance you can see some treasure.</Text>
 	<Text ID="ChainReaction.CardNode.Name:d6952419-1800-412c-a226-ba056cec7cb5" Translated="true">Chain Reaction</Text>
 	<Text ID="ChokePoint.CardNode.Description:35d74cca-8558-44ab-a535-2a5211511c7d" Translated="true">Monsters block the way forward. The only option is to smash through.</Text>
 	<Text ID="ChokePoint.CardNode.Name:91f072a3-42de-4531-bea1-0ed560a32c8d" Translated="true">Choke Point</Text>
-	<Text ID="Cleanup.CardNode.Description:fe10331c-a0bc-4ef3-8762-1e9e9f32a6d6" Translated="true">Your barn is filled with old, rotting, leftover crates. Smash them up to clean some space.</Text>
+	<Text ID="Cleanup.CardNode.Description:fe10331c-a0bc-4ef3-8762-1e9e9f32a6d6" Translated="true">Your barn is filled with old rotting crates. Smash them up to clean some space.</Text>
 	<Text ID="Cleanup.CardNode.Name:8530e3b4-9378-4fe1-a061-5f9ea31fdf8b" Translated="true">Cleanup</Text>
 	<Text ID="CoinToss.CardNode.Description:665f7aad-586b-4532-b31a-dd921ac6bb88" Translated="true">The alleyways of the city offer many opportunities, for those willing to explore them.</Text>
 	<Text ID="CoinToss.CardNode.Name:2132ce44-9488-4bc7-95cb-dc43d28a21fd" Translated="true">Alleyways</Text>
@@ -97,7 +97,7 @@
 	<Text ID="GatheringHerbs3.CardNode.Name:312c06b8-2151-4aa7-9c19-b1cbaff72127" Translated="true">Gathering Herbs</Text>
 	<Text ID="Gauntlet.CardNode.Description:7222d861-2f07-45e1-bd44-3fc35e4778fa" Translated="true">Some treasure lies at the end of the room. The only issue is the monsters lining each side of it. Time to run the gauntlet!</Text>
 	<Text ID="Gauntlet.CardNode.Name:e5ef59e6-030b-4b2b-8370-3dc467ff45ea" Translated="true">Gauntlet</Text>
-	<Text ID="GemHoard.CardNode.Description:560ce040-edba-4d79-97ea-5bcaceb0deac" Translated="true">You come across a vault of gems, glittering in the torchlight. The only problem are the hulking golems stalking around.</Text>
+	<Text ID="GemHoard.CardNode.Description:560ce040-edba-4d79-97ea-5bcaceb0deac" Translated="true">You come across a vault of gems, glittering in the torchlight. The only problem is the hulking golems stalking around.</Text>
 	<Text ID="GemHoard.CardNode.Name:4f3c8a4a-69ee-4a61-b67d-950a2d1dd883" Translated="true">Gem Hoard</Text>
 	<Text ID="GoblinScourge.CardNode.Description:02a17d04-296c-49e4-a8ec-27605529fc82" Translated="true">Your peaceful farm life is shattered by the chittering cries of goblins smashing their way into your house.</Text>
 	<Text ID="GoblinScourge.CardNode.Description:1a4beb9d-cfa7-4217-9530-34e03b0492f4" Translated="true">You arrive at the village only to find it in flames. Quick, rescue anyone you can!</Text>
@@ -137,13 +137,13 @@
 	<Text ID="HordeMode.CardNode.Name:6e742ca6-8d8c-40a0-9199-1650f834b344" Translated="true">Horde Mode</Text>
 	<Text ID="JewelryWork.CardNode.Description:8a75bf9b-a6cd-49e7-a0dc-9712ca7e34c5" Translated="true">You find a large raw gemstone on your travels, and with a bit of work you could turn it into something marvelous.</Text>
 	<Text ID="JewelryWork.CardNode.Name:cee60cf8-9699-4116-899b-2bad17124c8a" Translated="true">Jewelry Work</Text>
-	<Text ID="LockedChest.CardNode.Description:cbd750f8-6cf5-46eb-afd1-4c6fb60f7779" Translated="true">You stumble across a chest, still locked. If you can break it open you may be able to grab some loot.</Text>
+	<Text ID="LockedChest.CardNode.Description:cbd750f8-6cf5-46eb-afd1-4c6fb60f7779" Translated="true">You stumble across a locked chest. If you can break it open you may be able to grab some loot.</Text>
 	<Text ID="LockedChest.CardNode.Name:be105678-fdd1-445f-a97b-c133f498f641" Translated="true">Locked Chest</Text>
 	<Text ID="MageAdmissions1.CardNode.Description:a2f919b3-2eac-4714-aebe-b617103793b7" Translated="true">You arrive at the mage academy and wait in a long queue to enter the admissions exams.</Text>
 	<Text ID="MageAdmissions1.CardNode.Name:a7f8f912-152f-4729-90e4-05d3e283fb9a" Translated="true">Mage Academy 1:Admissions 1</Text>
 	<Text ID="MageAdmissions2.CardNode.Description:3a43d2fb-be2d-486d-bae8-5e13c8f690af" Translated="true">After a long wait the second round of admissions begins.</Text>
 	<Text ID="MageAdmissions2.CardNode.Name:1625b520-caa9-43be-9b41-cf7ed98663f4" Translated="true">Mage Academy 2:Admissions 2</Text>
-	<Text ID="MageAdmissions3.CardNode.Description:30f228c0-461e-4507-a649-db53934d38bf" Translated="true">You have manage to get to the final round of the admissions. Just 1 more to go and you'll be an official mage!</Text>
+	<Text ID="MageAdmissions3.CardNode.Description:30f228c0-461e-4507-a649-db53934d38bf" Translated="true">You have manage to get to the final round of the admissions. Just one more to go and you'll be an official mage!</Text>
 	<Text ID="MageAdmissions3.CardNode.Name:f4a1cf76-380a-472b-8f1b-4954768415f4" Translated="true">Mage Admissions 3:Admissions 3</Text>
 	<Text ID="Meditation.CardNode.Description:9930fb36-2e5c-40c6-9763-6f4041f9408b" Translated="true">Focus your mind through meditation. Only then can your prepare for whatever happens.</Text>
 	<Text ID="Meditation.CardNode.Name:6f4c1739-fed2-4992-9cf4-1e53b0212002" Translated="true">Meditation</Text>
@@ -155,7 +155,7 @@
 	<Text ID="Mugging.CardNode.Name:ca0d58ec-0e7b-4586-888f-e3c61c3b3ade" Translated="true">Alleyways</Text>
 	<Text ID="NamedMonsterHunt.CardNode.Description:12d71678-089b-44db-ad3b-d99a0ca7942b" Translated="true">You get a quest to hunt and slay a named creature, a beast more formidable and ferocious than your average foe.</Text>
 	<Text ID="NamedMonsterHunt.CardNode.Name:9afafb39-4c15-4f9e-adb6-990d517ddda0" Translated="true">Named Monster Hunt</Text>
-	<Text ID="NestDestruction.CardNode.Description:8f4064c4-ea95-4a09-9ffc-d3f7acdf9bd6" Translated="true">You come across a nest writhing with rat bodies. This is a perfect chance to thin the hordes numbers.</Text>
+	<Text ID="NestDestruction.CardNode.Description:8f4064c4-ea95-4a09-9ffc-d3f7acdf9bd6" Translated="true">You come across a nest writhing with rat bodies. This is a perfect chance to thin the horde's numbers.</Text>
 	<Text ID="NestDestruction.CardNode.Name:76377f9f-3857-498f-833a-44c5c48979e0" Translated="true">Writhing Nest</Text>
 	<Text ID="ParttimeArtificing.CardNode.Description:21498675-3a72-42b3-9156-10714451d5b4" Translated="true">There's always need for an artificer, so anyone willing to do the work can make good money.</Text>
 	<Text ID="ParttimeArtificing.CardNode.Name:66aa8240-f6da-44d3-98ea-47320a0deb97" Translated="true">Parttime Artificing</Text>
@@ -187,9 +187,9 @@
 	<Text ID="Showdown.CardNode.Name:8a0163d0-5817-4540-9e65-254831d31e43" Translated="true">Showdown</Text>
 	<Text ID="SkippingStones.CardNode.Description:abbb49ba-779c-4b35-8222-cfbb2d5f07a1" Translated="true">Some water lies between you and shiny loot. If you do this just right the treasure will skip straight into your hands.</Text>
 	<Text ID="SkippingStones.CardNode.Name:ccb55f02-d966-40b1-b36c-3f94c21e922d" Translated="true">Skipping Stones</Text>
-	<Text ID="StickyAmbush.CardNode.Description:4ca84122-ea42-4356-bb36-0b9348fc9dbb" Translated="true">As you proceed along the corridor suddenly a sound makes you jump to one side.</Text>
+	<Text ID="StickyAmbush.CardNode.Description:4ca84122-ea42-4356-bb36-0b9348fc9dbb" Translated="true">As you proceed along the corridor a sound makes you jump to one side.</Text>
 	<Text ID="StickyAmbush.CardNode.Name:1a1a16b2-ea60-4b56-926a-ba64cb528865" Translated="true">Sticky Ambush</Text>
-	<Text ID="StreetVendor.CardNode.Description:9daccb1a-7bdb-403b-949e-713b484b8fac" Translated="true">Before you left on your adventure you wandered through the market. A vendor called out to you.</Text>
+	<Text ID="StreetVendor.CardNode.Description:9daccb1a-7bdb-403b-949e-713b484b8fac" Translated="true">Before you embarked on your adventure you wandered through the market. A vendor called out to you.</Text>
 	<Text ID="StreetVendor.CardNode.Name:ec8cc141-b040-4666-8dc3-1d10ed49d3e4" Translated="true">Street Vendor</Text>
 	<Text ID="TemplePrayers.CardNode.Description:cd1ea190-536c-4a4b-b416-7dcc005c8930" Translated="true">Sometimes the gods listen to the prayers of the faithful. Were the gods attentive to you?</Text>
 	<Text ID="TemplePrayers.CardNode.Name:b459ce78-34b1-4c27-9483-0b6f06645a7a" Translated="true">Temple Prayers</Text>
@@ -225,6 +225,6 @@
 	<Text ID="WeaponCase.CardNode.Name:6e663857-fe64-4c64-98ff-0f2e0eef578c" Translated="true">Weapon Case</Text>
 	<Text ID="WebAmbush.CardNode.Description:36554220-d30d-4f27-b125-1d98e5691340" Translated="true">You enter a corridor filled with huge webs.</Text>
 	<Text ID="WebAmbush.CardNode.Name:01d57b3f-9da0-4083-aff9-3fc838c7a0a3" Translated="true">Web Ambush</Text>
-	<Text ID="WrittenTest.CardNode.Description:7c9a4289-970e-4054-9e0f-c5f12195c1ce" Translated="true">To join you alchemists guild you have to take 3 examinations. The first is a written paper.</Text>
+	<Text ID="WrittenTest.CardNode.Description:7c9a4289-970e-4054-9e0f-c5f12195c1ce" Translated="true">To join you alchemists guild you have to take three examinations. The first is a written paper.</Text>
 	<Text ID="WrittenTest.CardNode.Name:97597419-7414-4413-b6a4-b1c8df0282fa" Translated="true">Alchemy Guild 1:Written Test</Text>
 </Localisation>

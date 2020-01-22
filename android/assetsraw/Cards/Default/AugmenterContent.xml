@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="195" meta:Y="0" GUID="a5a64da8-a67c-41e3-99cc-dec01c13be2f">
 			<Line>
-				<MultilineString>You go to visit the augmenter. After a short wait in a queue you are ushered into a room with various glowing gems, each labelled with the effect it'll have on you.</MultilineString>
+				<MultilineString>AugmenterContent.Node.[0] Line.Line.MultilineString:12654ce6-6519-42da-94cd-7c824d87e713</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>What would you like to buy?</MultilineString>
+				<MultilineString>AugmenterContent.Node.[1] Line.Line.MultilineString:82158a0a-0032-4c0f-ade7-2bad37de0fbe</MultilineString>
 			</Line>
 			<Shop>
 				<Shopkeep meta:RefKey="Sprite">
@@ -41,7 +41,7 @@
 				</Items>
 			</Shop>
 			<Line>
-				<MultilineString>"Come back again!"</MultilineString>
+				<MultilineString>AugmenterContent.Node.[3] Line.Line.MultilineString:de50cd7b-ca86-44d1-8868-cb9e6e1e9234</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Success</State>

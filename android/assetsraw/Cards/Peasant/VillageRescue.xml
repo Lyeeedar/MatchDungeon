@@ -3,13 +3,13 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="3d7d5554-2d5e-4faa-ac1b-0e101708d04e">
 			<Line>
-				<MultilineString>You quickly rush over to the village, only to find it in flames. Thick clouds of smoke boil away from the sheets of fire engulfing each house.</MultilineString>
+				<MultilineString>VillageRescue.Node.[0] Line.Line.MultilineString:04c25c2d-f4f0-475f-83e0-2587aa75775b</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You hear a faint cry over the crackling of the blaze. "Please help! Anybody!"</MultilineString>
+				<MultilineString>VillageRescue.Node.[1] Line.Line.MultilineString:83584d74-cbe8-48ed-9e14-fcc0d33d41f8</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>There's some people still alive in there! If you want to save them, you'll have to break them out fast.</MultilineString>
+				<MultilineString>VillageRescue.Node.[2] Line.Line.MultilineString:305c58eb-7b57-4a9b-a1d9-10ee151b18f8</MultilineString>
 			</Line>
 			<Match3>
 				<Level>VillageRescueLevel</Level>
@@ -19,7 +19,7 @@
 		</Node>
 		<Node meta:X="426" meta:Y="237" GUID="97aeea80-7a64-4b78-b132-d1a51f4bbecc">
 			<Line>
-				<MultilineString>Suddenly the house groans and begins to collapse. You just barely manage to escape with your life.</MultilineString>
+				<MultilineString>VillageRescue.Node.[0] Line.Line.MultilineString:6e2f5c23-eedb-481d-b0fb-68947f9c9959</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -27,10 +27,10 @@
 		</Node>
 		<Node meta:X="482" meta:Y="0" GUID="fe145018-63a1-4aa0-8976-4c48e6ead32e">
 			<Line>
-				<MultilineString>You manage to pull the small family out from the house, moments before it collapses.</MultilineString>
+				<MultilineString>VillageRescue.Node.[0] Line.Line.MultilineString:a9186c3a-e577-40f3-9407-95b7a8faea4b</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Thank you, thank you so much. Here, take this, as thanks for saving our lives." The woman presses a small gem into your hands, then stumbles away.</MultilineString>
+				<MultilineString>VillageRescue.Node.[1] Line.Line.MultilineString:0cb0dbb2-0704-4e54-bc16-ab02505d7588</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

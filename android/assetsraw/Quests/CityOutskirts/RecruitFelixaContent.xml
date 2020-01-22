@@ -3,16 +3,16 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="8efd2569-702f-4e2c-9724-4042faab0d32">
 			<Line>
-				<MultilineString>You find Felixa crouched over a large treasure chest, trying to pry it open. She doesn't seem to be having much luck.</MultilineString>
+				<MultilineString>RecruitFelixaContent.Node.[0] Line.Line.MultilineString:3a4a4546-9e52-4647-9844-0291adcc066b</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Graaaa! Why doesn't the damned key work!"</MultilineString>
+				<MultilineString>RecruitFelixaContent.Node.[1] Line.Line.MultilineString:9fe3e228-2f62-43c9-9ba1-7eb93a2b8b4d</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>She stand up and throws the key at the floor, before turning and spotting you. You introduce yourself and say that Grayheart recruited you. </MultilineString>
+				<MultilineString>RecruitFelixaContent.Node.[2] Line.Line.MultilineString:9b554478-7942-409c-ac65-626fbbd02fc3</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"I'll come with you if we can get the treasure out of this bloody chest. Come here, help me pry it open."</MultilineString>
+				<MultilineString>RecruitFelixaContent.Node.[3] Line.Line.MultilineString:d569c2bd-eb88-47b8-a0e7-a6bb844e7386</MultilineString>
 			</Line>
 			<Match3>
 				<Level>RecruitFelixaContentLevel</Level>
@@ -20,9 +20,9 @@
 				<Failure meta:RefKey="Node">06af8b93-e905-4fd6-b39a-3b42b8662572</Failure>
 			</Match3>
 		</Node>
-		<Node meta:X="499.08204071137038" meta:Y="243.59876323034067" GUID="06af8b93-e905-4fd6-b39a-3b42b8662572">
+		<Node meta:X="499.08203125" meta:Y="243.59877014160156" GUID="06af8b93-e905-4fd6-b39a-3b42b8662572">
 			<Line>
-				<MultilineString>"Dammit! Look I'm not leaving until I've gotten into this chest. You go on without me, I'll be here a while."</MultilineString>
+				<MultilineString>RecruitFelixaContent.Node.[0] Line.Line.MultilineString:8aa2fac3-e3fc-42f3-8a49-e4e76d3f9c0e</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -30,7 +30,7 @@
 		</Node>
 		<Node meta:X="497" meta:Y="0" GUID="bb1aa628-e332-4a45-8e27-ee94fe2bfdea">
 			<Line>
-				<MultilineString>"Victory! So much gold! Here, you can have a little, for your help. Now lets go get the others."</MultilineString>
+				<MultilineString>RecruitFelixaContent.Node.[0] Line.Line.MultilineString:4353bc88-7d78-44fd-be2f-05936530ec9e</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

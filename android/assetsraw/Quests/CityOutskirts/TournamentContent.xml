@@ -3,13 +3,13 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You enter the tournament with a feeling of confidence swelling within you. Looking around at the others in your division you feel you have a great shot at winning.</MultilineString>
+				<MultilineString>TournamentContent.Node.[0] Line.Line.MultilineString:9af9d310-ee17-41bf-88f0-3f8ad18bac37</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>The cheers of the crowd washes over you as you enter the arena.</MultilineString>
+				<MultilineString>TournamentContent.Node.[1] Line.Line.MultilineString:72cc7ef2-f8bc-4d81-a9bc-bfbc9ab44255</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>Opposite you a wild looking man also enters, glowering in your direction.</MultilineString>
+				<MultilineString>TournamentContent.Node.[2] Line.Line.MultilineString:e338a2b0-f704-4dbf-b1b1-51b96ca9baf6</MultilineString>
 			</Line>
 			<Match3>
 				<Level>TournamentContentLevel</Level>
@@ -19,21 +19,21 @@
 		</Node>
 		<Node meta:X="438" meta:Y="275" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>Knocked out in the first round you slink away dejected.</MultilineString>
+				<MultilineString>TournamentContent.Node.[0] Line.Line.MultilineString:625a00bf-4e4c-4a6f-81d9-3788ffef9d8f</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
 			</MarkComplete>
 		</Node>
-		<Node meta:X="444.62825788751712" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
+		<Node meta:X="444.62826538085938" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You emerge victorious from the first round and head back into the waiting area to prepare for your next match.</MultilineString>
+				<MultilineString>TournamentContent.Node.[0] Line.Line.MultilineString:d8b9399c-d56f-4708-b209-3268f95802d6</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>Not long after you are ushered back to the arena. This time the crowd cheers out even louder, and you can hear some people shouting your name.</MultilineString>
+				<MultilineString>TournamentContent.Node.[1] Line.Line.MultilineString:1afd05d0-3160-4ab7-a7fc-3e681cb4975d</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>Opposite you a dapper looking man in a feathered hat bows theatrically to you then raises a rapier. On Garde!</MultilineString>
+				<MultilineString>TournamentContent.Node.[2] Line.Line.MultilineString:f6ae1654-ebb9-4114-8bc2-ee9f55a89613</MultilineString>
 			</Line>
 			<Match3>
 				<Level>TournamentContentLevel2</Level>
@@ -43,7 +43,7 @@
 		</Node>
 		<Node meta:X="699" meta:Y="213" GUID="0e73547e-b79a-4082-a7c8-32831f4092bf">
 			<Line>
-				<MultilineString>The man triumphs over you, knocking you out of the tournament. You leave, but not completely empty handed. Some merchants come to you with work proposals searching nearby ruins.</MultilineString>
+				<MultilineString>TournamentContent.Node.[0] Line.Line.MultilineString:fb88fea7-b0da-4769-be4b-49d65955dd75</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Custom</State>
@@ -52,13 +52,13 @@
 		</Node>
 		<Node meta:X="723" meta:Y="-25" GUID="ceb78f30-ea9e-43ec-99f8-cfaa93cdc718">
 			<Line>
-				<MultilineString>With the cries of adoring fans echoing in your ears you leave the arena, hands quivering with excitement. You are in the final!</MultilineString>
+				<MultilineString>TournamentContent.Node.[0] Line.Line.MultilineString:f705db51-3d2f-48fb-87d2-24f3bbe0a0ea</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>Before you know it you are entering the arena again. This time the crowd is deafening. Rolling chants of your name clash against waves of of people chanting another.</MultilineString>
+				<MultilineString>TournamentContent.Node.[1] Line.Line.MultilineString:10eb5c54-fce8-4edd-949f-23a75ca96b72</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>Opposite you stands a man dressed in the garb of an alchemist. Strange potions are strapped all across his waist, and he peers at you through a large ornate monacle.</MultilineString>
+				<MultilineString>TournamentContent.Node.[2] Line.Line.MultilineString:d33b1831-fea1-459d-95db-cdd3e527883e</MultilineString>
 			</Line>
 			<Match3>
 				<Level>TournamentContentLevel3</Level>
@@ -66,12 +66,12 @@
 				<Failure meta:RefKey="Node">c728e54f-a4b1-43d8-8c0f-f65631742998</Failure>
 			</Match3>
 		</Node>
-		<Node meta:X="976.11522633744858" meta:Y="141.7434842249657" GUID="c728e54f-a4b1-43d8-8c0f-f65631742998">
+		<Node meta:X="976.115234375" meta:Y="141.74348449707031" GUID="c728e54f-a4b1-43d8-8c0f-f65631742998">
 			<Line>
-				<MultilineString>His potions finally overwealm you and you collapse. The man walks over to you and thanks you for the match, then pours an antidote over you.</MultilineString>
+				<MultilineString>TournamentContent.Node.[0] Line.Line.MultilineString:21194cbf-61a0-4739-a54d-28e212258af7</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>Despite having lost the buzz around you is incredible, with a great many people wanting to hire you to explore and loot all sorts of locations.</MultilineString>
+				<MultilineString>TournamentContent.Node.[1] Line.Line.MultilineString:6e0260fd-4a6f-45a1-9023-84a9504791a2</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Custom</State>
@@ -80,10 +80,10 @@
 		</Node>
 		<Node meta:X="990" meta:Y="-18" GUID="d61ab9c5-094e-4d9f-a762-3a883da4cdb1">
 			<Line>
-				<MultilineString>Despite all the alchemists tricks you finally beat him down. Cheers erupt all around you as the crowd rushes down to carry you aloft.</MultilineString>
+				<MultilineString>TournamentContent.Node.[0] Line.Line.MultilineString:b7bc2624-c24f-43d5-b516-1657fe5835a8</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>Soon after you are swamped with requests for audiences from nobles and powerful merchants alike. Your future looks golden.</MultilineString>
+				<MultilineString>TournamentContent.Node.[1] Line.Line.MultilineString:97c7097f-3bc8-4e75-bf2f-d036d8c680ef</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Custom</State>

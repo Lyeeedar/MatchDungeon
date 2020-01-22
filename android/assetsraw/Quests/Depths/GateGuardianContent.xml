@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>Before the gate to the depths stands a hulking creature wielding a pair of blades. If you want to go down you'll have to defeat it.</MultilineString>
+				<MultilineString>GateGuardianContent.Node.[0] Line.Line.MultilineString:3c5bc8f4-bd52-4e17-8506-ddf4c73d58dd</MultilineString>
 			</Line>
 			<Match3>
 				<Level>GateGuardianContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>You barely escape with your life. You'll have to return when you are stronger.</MultilineString>
+				<MultilineString>GateGuardianContent.Node.[0] Line.Line.MultilineString:eac914d6-cceb-475b-955e-3c0752d7866e</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,10 +21,10 @@
 		</Node>
 		<Node meta:X="442" meta:Y="-85" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>The creature finally falls. From beneath its loincloth rolls a large key, you take it and unlock the ancient padlock sealing the gate. You can now descend.</MultilineString>
+				<MultilineString>GateGuardianContent.Node.[0] Line.Line.MultilineString:1ccdecc2-b3da-4618-8949-75cabc395533</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>To the side of the gate you find a large sword propped against the wall.</MultilineString>
+				<MultilineString>GateGuardianContent.Node.[1] Line.Line.MultilineString:bfb356dc-5a23-4a0e-b717-c4812c54e36b</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Equipment>
@@ -33,7 +33,7 @@
 				</Equipment>
 			</Rewards>
 			<Line>
-				<MultilineString>As you pick it up you get a strange urge to take off your pants.</MultilineString>
+				<MultilineString>GateGuardianContent.Node.[3] Line.Line.MultilineString:143e7648-46fa-410a-939c-65dcc9ff1d50</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Equipment>

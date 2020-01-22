@@ -9,6 +9,7 @@ import com.lyeeedar.Game.Global
 import com.lyeeedar.Screens.CardScreen
 import com.lyeeedar.UI.addClickListener
 import com.lyeeedar.UI.lambda
+import com.lyeeedar.Util.Localisation
 import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.expandVariables
@@ -69,7 +70,7 @@ class CardContentActionChoice : AbstractCardContentAction()
 		val choicesEl = xml.getChildByName("Choices")!!
 		for (el in choicesEl.children())
 		{
-			val text = el.get("Text")
+			val text = Localisation.getText(el.get ("Text"), "CardContent")
 			val condition = el.get("Condition", "1")!!.toLowerCase(Locale.ENGLISH)
 			val key = el.get("Node", "")!!
 

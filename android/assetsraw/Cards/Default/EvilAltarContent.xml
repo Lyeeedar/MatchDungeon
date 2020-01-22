@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="873fd824-f256-4a68-a5f6-158a427fdd0b">
 			<Line>
-				<MultilineString>An evil altar stands up ahead. You approach and kneel before it, offering up a prayer to the gods. You feel the corruption in this place try to resist you.</MultilineString>
+				<MultilineString>EvilAltarContent.Node.[0] Line.Line.MultilineString:e7717c41-cc0b-4152-9191-937873355abc</MultilineString>
 			</Line>
 			<Match3>
 				<Level>EvilAltarContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="453" meta:Y="179" GUID="a5b784ce-184f-4e8e-9af0-4995dbf2d480">
 			<Line>
-				<MultilineString>Either your gods weren't listening, or your prayers were just too weak, but the evil emerged victorious. You slink away dejected.</MultilineString>
+				<MultilineString>EvilAltarContent.Node.[0] Line.Line.MultilineString:8b9552c0-ee26-4c6a-ae9b-5f7fb5542d4d</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,21 +21,14 @@
 		</Node>
 		<Node meta:X="478" meta:Y="-1" GUID="e61e4f4d-860b-438c-a210-03a3b8d9014d">
 			<Line>
-				<MultilineString>The gods hear your prayers and the corruption is expelled from the altar. You feel a whisper in your mind, a sense of gratitude, and a surge of power.</MultilineString>
+				<MultilineString>EvilAltarContent.Node.[0] Line.Line.MultilineString:37342d3a-f1a6-4486-9c43-c1f69705c88f</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
-					<Health>2</Health>
-					<MatchDamage>0</MatchDamage>
-					<AbilityDamage>1</AbilityDamage>
-					<PowerGain>2</PowerGain>
 					<Statistics meta:RefKey="Statistics">
 						<Health>2</Health>
-						<MatchDamage>0</MatchDamage>
 						<AbilityDamage>1</AbilityDamage>
 						<PowerGain>2</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>

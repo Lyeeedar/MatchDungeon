@@ -3,19 +3,19 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="861e95be-cca7-433e-b9ab-ab59fc2fbad9">
 			<Line>
-				<MultilineString>You wander down the alleyway. Suddenly a noise sounds behind you, you spin around only to find yourself surrounded by mean looking men.</MultilineString>
+				<MultilineString>MuggingContent.Node.[0] Line.Line.MultilineString:c2c61597-98ae-4415-af6a-a674bcdf4f73</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Hand us yer money, or I'll stick a 'ole in ya."</MultilineString>
+				<MultilineString>MuggingContent.Node.[1] Line.Line.MultilineString:9ab54550-91fd-4302-9289-734cbb64ddbb</MultilineString>
 			</Line>
 			<Choice>
 				<Choices>
 					<Choice>
-						<Text>Fight</Text>
+						<Text>MuggingContent.Node.[2] Choice.Choice.Choices.[0] Choice.Choice.Text:677ea4ba-5ec6-4374-b726-ab017cf38463</Text>
 						<Node meta:RefKey="Node">5a201a33-165a-47a0-b483-8c85072c8168</Node>
 					</Choice>
 					<Choice>
-						<Text>Hand over money</Text>
+						<Text>MuggingContent.Node.[2] Choice.Choice.Choices.[1] Choice.Choice.Text:a08fed3e-d7b5-4d64-af2f-35ca0e1b8d40</Text>
 						<Node meta:RefKey="Node">fbe63c34-afe9-4016-9883-1fea1956f8e4</Node>
 					</Choice>
 				</Choices>
@@ -23,14 +23,14 @@
 		</Node>
 		<Node meta:X="919" meta:Y="337" GUID="04c442e9-e50c-4637-8165-e05021acb5af">
 			<Line>
-				<MultilineString>You hand over your money to the group.</MultilineString>
+				<MultilineString>MuggingContent.Node.[0] Line.Line.MultilineString:15893192-a926-43cf-b619-62d590618226</MultilineString>
 			</Line>
 			<Spend>
 				<Key>Money</Key>
 				<Count>Loss</Count>
 			</Spend>
 			<Line>
-				<MultilineString>"Nice doin business with ya."</MultilineString>
+				<MultilineString>MuggingContent.Node.[2] Line.Line.MultilineString:2edc8df3-051a-49c3-9bfe-01d36bec5602</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -45,7 +45,7 @@
 		</Node>
 		<Node meta:X="688" meta:Y="136" GUID="7e824be6-266b-469b-a3a6-a304af99893a">
 			<Line>
-				<MultilineString>"Now give us yer money!"</MultilineString>
+				<MultilineString>MuggingContent.Node.[0] Line.Line.MultilineString:299e114e-8201-49fa-98c6-a070c8ec1750</MultilineString>
 			</Line>
 			<Define>
 				<Key>Loss</Key>
@@ -56,7 +56,7 @@
 		</Node>
 		<Node meta:X="456" meta:Y="205.33332824707031" GUID="fbe63c34-afe9-4016-9883-1fea1956f8e4">
 			<Line>
-				<MultilineString>"Fer bein such a good sport I'll leave yer a bit."</MultilineString>
+				<MultilineString>MuggingContent.Node.[0] Line.Line.MultilineString:acd6d229-2ddf-46ec-ab58-aa8524e1284d</MultilineString>
 			</Line>
 			<Define>
 				<Key>Loss</Key>
@@ -67,7 +67,7 @@
 		</Node>
 		<Node meta:X="814" meta:Y="-73" GUID="1796a5a3-eea0-4138-9779-255bbd9300c6">
 			<Line>
-				<MultilineString>The thieves lie dead at your feet. You take the opportunity to repossess their stolen goods.</MultilineString>
+				<MultilineString>MuggingContent.Node.[0] Line.Line.MultilineString:d5390a93-c60c-4602-ae38-43654c6bbaf9</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

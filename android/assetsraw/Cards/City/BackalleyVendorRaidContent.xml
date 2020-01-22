@@ -3,16 +3,16 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>As you wander down the alley you come across a stall set into the wall. The shady man behind it gestures you over, revealing a large collection of items.</MultilineString>
+				<MultilineString>BackalleyVendorRaidContent.Node.[0] Line.Line.MultilineString:ecadb11e-cab1-4d3b-82ad-1fe472a4a536</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Find something that interests you friend? I've got great prices for those who don't ask too many questions about where the items came from."</MultilineString>
+				<MultilineString>BackalleyVendorRaidContent.Node.[1] Line.Line.MultilineString:f3b4809c-bcbd-4df6-ada8-98fa25c03d37</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>Just as you start browsing the items the clanking of boots of the ground sounds from the entrance to the alley.</MultilineString>
+				<MultilineString>BackalleyVendorRaidContent.Node.[2] Line.Line.MultilineString:e35f63b1-8cc2-449b-b704-2ff0b1aee882</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Its the fuzz! Run!"</MultilineString>
+				<MultilineString>BackalleyVendorRaidContent.Node.[3] Line.Line.MultilineString:df9aa46a-ded6-4fc7-8df2-ca1eb84d484a</MultilineString>
 			</Line>
 			<Match3>
 				<Level>BackalleyVendorRaidContentLevel</Level>
@@ -22,7 +22,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>You stumble and the guards catch you. Saveral hours of questioning later they release you, but not before confiscating most of your money as 'evidence'.</MultilineString>
+				<MultilineString>BackalleyVendorRaidContent.Node.[0] Line.Line.MultilineString:13273882-5728-4ab8-937f-6909186a7345</MultilineString>
 			</Line>
 			<Spend>
 				<Key>Money</Key>
@@ -34,7 +34,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You manage to outrun the guards.</MultilineString>
+				<MultilineString>BackalleyVendorRaidContent.Node.[0] Line.Line.MultilineString:7534568c-48b2-497e-81d7-fdc113e32269</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>

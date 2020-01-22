@@ -3,13 +3,13 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7ac6ae82-63ca-4605-83bb-000b0c835a8f">
 			<Line>
-				<MultilineString>Just ahead of you stands a lone altar. It's surface is marked by bloodstain, and dark sigils are further into its sides.</MultilineString>
+				<MultilineString>CorruptingAltarContent.Node.[0] Line.Line.MultilineString:8ff835b2-fb12-4538-8c0a-15c578ddf92d</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>Around it an evil mist lurks, and within the mist move monsters, distorted and empowered by the evil energy.</MultilineString>
+				<MultilineString>CorruptingAltarContent.Node.[1] Line.Line.MultilineString:8a7c7d53-decc-44a4-b9fc-832afbb18929</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>Destroy the altar to stop its corruption spreading!</MultilineString>
+				<MultilineString>CorruptingAltarContent.Node.[2] Line.Line.MultilineString:c4c06d66-60ca-437c-848a-e3de4303cba5</MultilineString>
 			</Line>
 			<Match3>
 				<Level>CorruptingAltarContentLevel</Level>
@@ -19,7 +19,7 @@
 		</Node>
 		<Node meta:X="426" meta:Y="216" GUID="479bcb1e-ffc3-4e67-85ed-440cdafc93ec">
 			<Line>
-				<MultilineString>The monsters are too much and you are forced to flee.</MultilineString>
+				<MultilineString>CorruptingAltarContent.Node.[0] Line.Line.MultilineString:b8692945-2e15-4121-9af2-c61eb77d4aab</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -27,21 +27,15 @@
 		</Node>
 		<Node meta:X="478" meta:Y="0" GUID="1e11b9e0-0d0c-4d86-b91e-91904677e634">
 			<Line>
-				<MultilineString>The moment the altar is destroyed the mist vanishes. The monsters around you collapse still to the ground, drained husks of their former selves.</MultilineString>
+				<MultilineString>CorruptingAltarContent.Node.[0] Line.Line.MultilineString:fe28c709-e9bb-4c0b-9170-4443e2be937c</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
-					<Health>2</Health>
-					<MatchDamage>1</MatchDamage>
-					<AbilityDamage>1</AbilityDamage>
-					<PowerGain>3</PowerGain>
 					<Statistics meta:RefKey="Statistics">
 						<Health>2</Health>
 						<MatchDamage>1</MatchDamage>
 						<AbilityDamage>1</AbilityDamage>
 						<PowerGain>3</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>

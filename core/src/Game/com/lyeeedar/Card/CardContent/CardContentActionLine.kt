@@ -2,6 +2,7 @@ package com.lyeeedar.Card.CardContent
 
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Screens.CardScreen
+import com.lyeeedar.Util.Localisation
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.expandVariables
 
@@ -11,7 +12,7 @@ class CardContentActionLine : AbstractCardContentAction()
 
 	override fun parse(xmlData: XmlData)
 	{
-		text = xmlData.get("MultilineString")
+		text = Localisation.getText(xmlData.get("MultilineString"), "CardContent")
 	}
 
 	override fun advance(CardContent: CardContent, CardContentScreen: CardScreen): Boolean

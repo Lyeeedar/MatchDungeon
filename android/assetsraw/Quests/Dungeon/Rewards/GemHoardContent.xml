@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="e06a48d6-8e2d-419e-b92b-ba69a0abafb9">
 			<Line>
-				<MultilineString>You come across a vault, filled with glimmering gemstones.</MultilineString>
+				<MultilineString>GemHoardContent.Node.[0] Line.Line.MultilineString:c4f6ca7b-f61b-4f35-81f9-d21fa59aef62</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>Around the vault stalk several hulking golems, their stone feet crunching through the remains of adventurers who failed to loot this place in the past.</MultilineString>
+				<MultilineString>GemHoardContent.Node.[1] Line.Line.MultilineString:fa8d23ed-563c-412a-bba7-feef4bbd29d4</MultilineString>
 			</Line>
 			<Match3>
 				<Level>GemHoardContentLevel</Level>
@@ -16,7 +16,7 @@
 		</Node>
 		<Node meta:X="441" meta:Y="230" GUID="392b6d4a-6196-43d2-bb20-b61c713f94c9">
 			<Line>
-				<MultilineString>You flee, barely escaping with your life.</MultilineString>
+				<MultilineString>GemHoardContent.Node.[0] Line.Line.MultilineString:4c54e6ac-1104-4f7e-a0eb-a8adbeb2d93b</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -24,7 +24,7 @@
 		</Node>
 		<Node meta:X="480" meta:Y="0" GUID="55b738a5-27c4-4054-953e-57cbcee17763">
 			<Line>
-				<MultilineString>You escape with armfuls of gemstones.</MultilineString>
+				<MultilineString>GemHoardContent.Node.[0] Line.Line.MultilineString:0bb89dcf-0593-4ca8-a38d-1098fea95b76</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

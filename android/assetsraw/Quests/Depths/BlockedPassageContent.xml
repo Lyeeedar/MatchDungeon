@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>The passage ahead seems to have collapsed, with pillars and boulders blocking your advance. You'll have to work hard to unblock it if you want to go on.</MultilineString>
+				<MultilineString>BlockedPassageContent.Node.[0] Line.Line.MultilineString:d1becf44-aec2-4f65-8ea3-dcbf2297091d</MultilineString>
 			</Line>
 			<Match3>
 				<Level>BlockedPassageContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>There is just too much rubble to shift. You eventually give up and return to the surface.</MultilineString>
+				<MultilineString>BlockedPassageContent.Node.[0] Line.Line.MultilineString:821b7f7c-bd8e-441d-bf7e-351711c3a459</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You finally clear enough of the rubble to crawl through. Luckily the passage beyond is clear of obstructions.</MultilineString>
+				<MultilineString>BlockedPassageContent.Node.[0] Line.Line.MultilineString:d15ff7e2-c0cb-4b45-ae26-4966a72373db</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>

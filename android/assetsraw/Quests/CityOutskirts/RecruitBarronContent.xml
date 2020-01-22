@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="2bccef5c-0721-4d78-a51a-f8faaba6a58e">
 			<Line>
-				<MultilineString>You find barron in the forest, facing down a swarm of enemies.</MultilineString>
+				<MultilineString>RecruitBarronContent.Node.[0] Line.Line.MultilineString:1a32a0d8-3ab5-4d80-a606-c769531eafe3</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Come at me beasts! I, Barron, Will not let you prevail! Have at you!"</MultilineString>
+				<MultilineString>RecruitBarronContent.Node.[1] Line.Line.MultilineString:d1a59607-b68a-4249-a82f-d56e8b687623</MultilineString>
 			</Line>
 			<Match3>
 				<Level>RecruitBarronContentLevel</Level>
@@ -16,7 +16,7 @@
 		</Node>
 		<Node meta:X="451" meta:Y="217" GUID="05e7ddb9-bb19-447d-8c7e-05d37fb66b88">
 			<Line>
-				<MultilineString>You just about manage to drag Barron away before the monsters finish him off. He's badly injured though.</MultilineString>
+				<MultilineString>RecruitBarronContent.Node.[0] Line.Line.MultilineString:34f46c61-4ed3-4f5e-8f0e-b3f89c204c23</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -24,10 +24,10 @@
 		</Node>
 		<Node meta:X="479" meta:Y="0" GUID="19a5732a-8018-4f15-83f2-a8c0eaf1206c">
 			<Line>
-				<MultilineString>Together you defeat the enemies.</MultilineString>
+				<MultilineString>RecruitBarronContent.Node.[0] Line.Line.MultilineString:9b767992-366e-4f67-962f-68517ae7ff48</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Well met me dear fellow. Quite the fighter aren't you! Come, let us depart this place."</MultilineString>
+				<MultilineString>RecruitBarronContent.Node.[1] Line.Line.MultilineString:a581b144-b281-416e-aaaf-f622710ceb46</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>

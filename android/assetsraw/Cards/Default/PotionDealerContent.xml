@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="94be5c97-c544-4208-b08c-62f0cadc656e">
 			<Line>
-				<MultilineString>You visit an alchemist looking for some potions. As you enter the shop he smiles at you and gestures at the potions displayed.</MultilineString>
+				<MultilineString>PotionDealerContent.Node.[0] Line.Line.MultilineString:bd821057-1eb1-45da-945b-0f3e76c97c30</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"See anything you like?"</MultilineString>
+				<MultilineString>PotionDealerContent.Node.[1] Line.Line.MultilineString:5ba9a8df-4aa3-4863-8758-b7b54437d961</MultilineString>
 			</Line>
 			<Shop>
 				<Shopkeep meta:RefKey="Sprite">
@@ -55,7 +55,7 @@
 							</Icon>
 							<Statistics meta:RefKey="Statistics">
 								<Health>1</Health>
-								<Aegis>3</Aegis>
+								<Aegis>1</Aegis>
 							</Statistics>
 							<Duration>6</Duration>
 						</Buff>

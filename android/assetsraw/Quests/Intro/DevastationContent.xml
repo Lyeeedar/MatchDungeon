@@ -3,25 +3,25 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="5e796cc6-61bf-48dd-9ddf-6db7a7f50cb6">
 			<Line>
-				<MultilineString>You wake late at night to the acrid smell of smoke. You rush outside, ready to combat the flames, only to find that the blaze isn't on your farm at all. Instead the entire sky above the town is glowing red from a massive inferno.</MultilineString>
+				<MultilineString>DevastationContent.Node.[0] Line.Line.MultilineString:352a65f3-9af0-4ce3-81ab-12f7182ae442</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You quickly dress and rush to the town.</MultilineString>
+				<MultilineString>DevastationContent.Node.[1] Line.Line.MultilineString:cdf7a155-7fd3-4649-bbb2-ee40969cdec8</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You arrive to find the entire place in flames. Bodies are littered all over the ground, cut apart by cruel blades. A small number of goblin corpses are mingled in with the townsfolk.</MultilineString>
+				<MultilineString>DevastationContent.Node.[2] Line.Line.MultilineString:11d104ea-1eda-48dc-8ec7-59d1aeb87eb2</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You grab a fallen blade and rush into the town, trying to save anyone you can.</MultilineString>
+				<MultilineString>DevastationContent.Node.[3] Line.Line.MultilineString:4a812e20-4015-421e-a63b-66a974ef8c95</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>Alas it is too late. The town is pillaged, ravaged. The survivors pack their things and travel north, to the great city of Gladsheim.</MultilineString>
+				<MultilineString>DevastationContent.Node.[4] Line.Line.MultilineString:2a21afb2-997a-48a1-90dc-de6617e82345</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You join them, spirits low. You cannot farm anymore, the distance to transport your goods is far too high. Instead you have to make your fortune adventuring, risking your life looting forgotten ruins in the search of treasures.</MultilineString>
+				<MultilineString>DevastationContent.Node.[5] Line.Line.MultilineString:9aa6c396-35e7-46f3-bbfc-5861118767e0</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>And maybe one day, you can get revenge for the atrocity.</MultilineString>
+				<MultilineString>DevastationContent.Node.[6] Line.Line.MultilineString:52aafb6a-589a-4f08-9874-8050d0774341</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Success</State>

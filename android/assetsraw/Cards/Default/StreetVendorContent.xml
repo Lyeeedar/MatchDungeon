@@ -3,13 +3,13 @@
 	<Nodes>
 		<Node meta:X="765" meta:Y="-300" GUID="958ebc38-0723-4687-ac5f-d9fd72d0983e">
 			<Line>
-				<MultilineString>You wander through the market, the crowds jolting you this way and that.</MultilineString>
+				<MultilineString>StreetVendorContent.Node.[0] Line.Line.MultilineString:900f534b-468b-4107-88a4-88aafc1a7ea9</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>Suddenly a voice calls out to you. "Adventurer! Come here, my goods will surely interest you!"</MultilineString>
+				<MultilineString>StreetVendorContent.Node.[1] Line.Line.MultilineString:03d40d38-526b-4059-be4c-dbcf025667a4</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You wander over to find a stall covered in all manner of equipment. The vendor sat behind the table smiles at you and gestures around him.</MultilineString>
+				<MultilineString>StreetVendorContent.Node.[2] Line.Line.MultilineString:cead4d14-98fa-47d6-b353-923acdcc6cc2</MultilineString>
 			</Line>
 			<Define>
 				<Key>StreetVendorVisited</Key>
@@ -29,7 +29,7 @@
 				</Branch>
 			</Branch>
 			<Line>
-				<MultilineString>"I have equipment for all occasions. What strikes your fancy?"</MultilineString>
+				<MultilineString>StreetVendorContent.Node.[1] Line.Line.MultilineString:ab4ef3b8-5890-46f1-b0b6-1a9b5139bd87</MultilineString>
 			</Line>
 			<Shop>
 				<Shopkeep meta:RefKey="Sprite">
@@ -76,7 +76,7 @@
 				</Items>
 			</Shop>
 			<Line>
-				<MultilineString>"Come back another time, I may have something new for sale."</MultilineString>
+				<MultilineString>StreetVendorContent.Node.[3] Line.Line.MultilineString:ca445f4c-670f-4d93-8410-0d75d47d54ff</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Success</State>
@@ -84,16 +84,16 @@
 		</Node>
 		<Node meta:X="765" meta:Y="-75" GUID="d8771763-298c-4109-b306-f3fdc6fc26cc">
 			<Line>
-				<MultilineString>You wander over to the street vendors stall, glancing over the wide variety of equipment arrayed before you.</MultilineString>
+				<MultilineString>StreetVendorContent.Node.[0] Line.Line.MultilineString:badd4a75-733a-46c1-8d3d-f1ee593235cc</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>The vendor sat behind the table smiles at you and gestures around him.</MultilineString>
+				<MultilineString>StreetVendorContent.Node.[1] Line.Line.MultilineString:be4adbf0-1510-437e-90ba-626530fcace9</MultilineString>
 			</Line>
 		</Node>
 		<Node meta:X="450" meta:Y="60" GUID="842c50bc-b0d0-4109-bdf6-9316fbb8d95e">
 			<Node meta:RefKey="Node">d8771763-298c-4109-b306-f3fdc6fc26cc</Node>
 			<Line>
-				<MultilineString>"Welcome back friend! As you are one of my best customers, I have some more special items for you. Take a look."</MultilineString>
+				<MultilineString>StreetVendorContent.Node.[1] Line.Line.MultilineString:e205663b-dcdb-4689-ac7c-df349bed22bc</MultilineString>
 			</Line>
 			<Shop>
 				<Shopkeep meta:RefKey="Sprite">
@@ -167,7 +167,7 @@
 				</Items>
 			</Shop>
 			<Line>
-				<MultilineString>"Come back another time, I may have something new for sale."</MultilineString>
+				<MultilineString>StreetVendorContent.Node.[3] Line.Line.MultilineString:dd578d79-4af7-4f61-ae27-4af8fdba837a</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Success</State>

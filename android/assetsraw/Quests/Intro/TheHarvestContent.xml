@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="52ff64a3-258f-425b-bd77-a697b6410b5c">
 			<Line>
-				<MultilineString>Fields of crops lie waiting for you to harvest and store them, ready for sale during the next market fair.</MultilineString>
+				<MultilineString>TheHarvestContent.Node.[0] Line.Line.MultilineString:b695ba8b-8904-4d4e-84fd-9f8e03c0ef92</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You must be quick however, as every day that passes allows wildlife more time to ravage the ripe vegetables.</MultilineString>
+				<MultilineString>TheHarvestContent.Node.[1] Line.Line.MultilineString:d5d5c960-ddb3-4ee8-a00e-6a1de959f119</MultilineString>
 			</Line>
 			<Match3>
 				<Level>TheHarvestLevel</Level>
@@ -16,7 +16,7 @@
 		</Node>
 		<Node meta:X="458" meta:Y="216" GUID="c8dcf4fb-2551-4447-848b-74e5e68606ff">
 			<Line>
-				<MultilineString>More crops remain to be gathered. Your work is not yet done.</MultilineString>
+				<MultilineString>TheHarvestContent.Node.[0] Line.Line.MultilineString:40d6f769-fe9c-4cb7-8bb3-fa80e2f43b14</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -24,7 +24,7 @@
 		</Node>
 		<Node meta:X="482" meta:Y="0" GUID="0f3bed00-6168-44ff-9ccd-dbc8d063460a">
 			<Line>
-				<MultilineString>The harvest is complete, and your barn is full to bursting with newly gathered crops. Just some picking, brining and preserving and you will be ready for the fair.</MultilineString>
+				<MultilineString>TheHarvestContent.Node.[0] Line.Line.MultilineString:08fa3be3-9d7b-402d-b543-059acfc9a316</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Success</State>

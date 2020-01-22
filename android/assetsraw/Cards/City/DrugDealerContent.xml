@@ -3,13 +3,13 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You wander down the alley. A man steps out of the dark and gestures to you.</MultilineString>
+				<MultilineString>DrugDealerContent.Node.[0] Line.Line.MultilineString:3c8fee33-5fec-40e6-9e53-c8a4b90ee83f</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Oy mate, wanna by somefin to get your mind extra speedy? Just fifty gold."</MultilineString>
+				<MultilineString>DrugDealerContent.Node.[1] Line.Line.MultilineString:1dd5c198-9f2a-4e4f-a7c3-706083e27200</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"How about 25?" You respond.</MultilineString>
+				<MultilineString>DrugDealerContent.Node.[2] Line.Line.MultilineString:47a51ad2-5618-4f3b-ba0f-b0c976cd2d61</MultilineString>
 			</Line>
 			<Match3>
 				<Level>DrugDealerContentLevel</Level>
@@ -19,7 +19,7 @@
 		</Node>
 		<Node meta:X="441" meta:Y="212" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>"Nah mate I don't do discounts. It'll be 50."</MultilineString>
+				<MultilineString>DrugDealerContent.Node.[0] Line.Line.MultilineString:937c9c60-5de8-4915-ab4d-84d4d8e29c05</MultilineString>
 			</Line>
 			<Define>
 				<Key>Cost</Key>
@@ -30,7 +30,7 @@
 		</Node>
 		<Node meta:X="447" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>"Sure mate, I can see you're a nice fella. 25, just for ya."</MultilineString>
+				<MultilineString>DrugDealerContent.Node.[0] Line.Line.MultilineString:cc9bf5eb-051e-4461-bda3-790e52d7b0bb</MultilineString>
 			</Line>
 			<Define>
 				<Key>Cost</Key>
@@ -41,22 +41,22 @@
 		</Node>
 		<Node meta:X="837" meta:Y="120" GUID="f6c0d1f2-f8a5-4ccd-a5e0-fef01bbcbfc8">
 			<Line>
-				<MultilineString>Would you like to buy it?</MultilineString>
+				<MultilineString>DrugDealerContent.Node.[0] Line.Line.MultilineString:4135ffec-d066-472d-9195-f683fadc6763</MultilineString>
 			</Line>
 			<Choice>
 				<Choices>
 					<Choice>
-						<Text>Buy it ({Cost})</Text>
+						<Text>DrugDealerContent.Node.[1] Choice.Choice.Choices.[0] Choice.Choice.Text:41ab1efa-8e76-4a43-86c6-d2123400d197</Text>
 						<Condition>Money &gt;= Cost</Condition>
 						<Node meta:RefKey="Node">a5d31a69-eb0c-483b-b387-3d51532f1616</Node>
 					</Choice>
 					<Choice>
-						<Text>Don't buy it</Text>
+						<Text>DrugDealerContent.Node.[1] Choice.Choice.Choices.[1] Choice.Choice.Text:bf8daeb8-2caa-4dba-87ab-d52aa5eb88f1</Text>
 						<Condition>Money &gt;= Cost</Condition>
 						<Node meta:RefKey="Node">90570280-6d8c-44e6-b4f2-9c3debdf7146</Node>
 					</Choice>
 					<Choice>
-						<Text>I can't afford that.</Text>
+						<Text>DrugDealerContent.Node.[1] Choice.Choice.Choices.[2] Choice.Choice.Text:81fb7824-6d5e-458f-8973-c2378a0b8fd4</Text>
 						<Condition>Money &lt; Cost</Condition>
 						<Node meta:RefKey="Node">90570280-6d8c-44e6-b4f2-9c3debdf7146</Node>
 					</Choice>
@@ -65,7 +65,7 @@
 		</Node>
 		<Node meta:X="1169" meta:Y="327" GUID="90570280-6d8c-44e6-b4f2-9c3debdf7146">
 			<Line>
-				<MultilineString>"Piss off then mate."</MultilineString>
+				<MultilineString>DrugDealerContent.Node.[0] Line.Line.MultilineString:5a4dd9c3-b971-46f2-9f80-053c5282eb2c</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -73,14 +73,14 @@
 		</Node>
 		<Node meta:X="1179" meta:Y="120" GUID="a5d31a69-eb0c-483b-b387-3d51532f1616">
 			<Line>
-				<MultilineString>"Here you go. Enjoy!"</MultilineString>
+				<MultilineString>DrugDealerContent.Node.[0] Line.Line.MultilineString:74331c2d-a685-4878-a2dd-69e5aea445d0</MultilineString>
 			</Line>
 			<Spend>
 				<Key>Money</Key>
 				<Count>Cost</Count>
 			</Spend>
 			<Line>
-				<MultilineString>As you take the drug you feel quick.</MultilineString>
+				<MultilineString>DrugDealerContent.Node.[2] Line.Line.MultilineString:8d58a079-64f5-4263-8371-b0ab48aea8d4</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Buff>

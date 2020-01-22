@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>One of the most common (and most annoying) quests for an adventurer is the fetch quest. A sequence of people get you to take a random assortment of items to one another. At least it pays well.</MultilineString>
+				<MultilineString>FetchQuestContent.Node.[0] Line.Line.MultilineString:377254ef-8d82-41ef-9f3a-59f035d9c6cd</MultilineString>
 			</Line>
 			<Match3>
 				<Level>FetchQuestContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>You forget where you are supposed to take the final item and give up.</MultilineString>
+				<MultilineString>FetchQuestContent.Node.[0] Line.Line.MultilineString:49e97d1b-7be1-4a55-b8f8-0971500bde69</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You complete the chain of pass the parcel and get a neat reward.</MultilineString>
+				<MultilineString>FetchQuestContent.Node.[0] Line.Line.MultilineString:13a65b01-5828-43b1-ad0e-fb0f85b1a45a</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Equipment>

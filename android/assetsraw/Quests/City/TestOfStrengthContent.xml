@@ -3,13 +3,13 @@
 	<Nodes>
 		<Node meta:X="203" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You arrive at the chapterhouse of the Order of the Sun, and are greeted by an imposing man in brilliantly painted plate armour.</MultilineString>
+				<MultilineString>TestOfStrengthContent.Node.[0] Line.Line.MultilineString:fc378ef7-8fc8-4907-955e-410b52ad6fc9</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Welcome young hopefuls to the Order of the Sun! Here we will test your mettle, to see if you have what it takes to join our illustrious chapter. I will administer the trial of strength."</MultilineString>
+				<MultilineString>TestOfStrengthContent.Node.[1] Line.Line.MultilineString:5787e899-2a80-46ff-974e-ea430e9ac6f5</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Come, spar with me, show me what you can do."</MultilineString>
+				<MultilineString>TestOfStrengthContent.Node.[2] Line.Line.MultilineString:ec87b5d4-2bff-4524-81fc-6aa48dc23870</MultilineString>
 			</Line>
 			<Match3>
 				<Level>TestOfStrengthContentLevel</Level>
@@ -19,7 +19,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>Sadly you don't quite have what it takes to join the order.</MultilineString>
+				<MultilineString>TestOfStrengthContent.Node.[0] Line.Line.MultilineString:bdf2c40f-a3f1-4b8b-b8a1-881c62ad8844</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -27,7 +27,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>"Very good! You have impressed me. You pass the first round. Head to this location and introduce yourself to the knight-captain there and we will administer the next test."</MultilineString>
+				<MultilineString>TestOfStrengthContent.Node.[0] Line.Line.MultilineString:85a55335-92af-4b1e-97c0-17b0528ee65a</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>

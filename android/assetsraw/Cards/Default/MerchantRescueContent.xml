@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You stumble across a merchant surrounded by monsters. He looks to be on his last legs,. you'd best save him.</MultilineString>
+				<MultilineString>MerchantRescueContent.Node.[0] Line.Line.MultilineString:cb0381ad-02e1-4f86-b807-cf5ee7cd1738</MultilineString>
 			</Line>
 			<Match3>
 				<Level>MerchantRescueContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>You don't save him in time and the monsters finish him off.</MultilineString>
+				<MultilineString>MerchantRescueContent.Node.[0] Line.Line.MultilineString:5f458c90-824b-4904-84aa-47a546e20669</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,16 +21,16 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>"Thank you so much for saving me! As a reward i was wondering if you'd like this piece of equipment I found, or this potion?"</MultilineString>
+				<MultilineString>MerchantRescueContent.Node.[0] Line.Line.MultilineString:ffb6cac7-08e2-4e6b-a53d-96143bb3e9ba</MultilineString>
 			</Line>
 			<Choice>
 				<Choices>
 					<Choice>
-						<Text>I'll have the equipment</Text>
+						<Text>MerchantRescueContent.Node.[1] Choice.Choice.Choices.[0] Choice.Choice.Text:8132eb16-b067-4bb2-b892-0cc8ee8ff9f0</Text>
 						<Node meta:RefKey="Node">a9063f78-6dd1-49fb-b0e1-dab5b590dd68</Node>
 					</Choice>
 					<Choice>
-						<Text>I'll have the potion</Text>
+						<Text>MerchantRescueContent.Node.[1] Choice.Choice.Choices.[1] Choice.Choice.Text:ceeec1f0-cb25-4a84-a296-c47592e59a33</Text>
 						<Node meta:RefKey="Node">da5a01f9-10c3-49bd-9a09-a3dbae0d979a</Node>
 					</Choice>
 				</Choices>

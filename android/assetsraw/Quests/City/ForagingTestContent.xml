@@ -3,13 +3,13 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>To join you alchemists guild you have to take 3 examinations. The second is to test your skill at identifying wild herbs, to see if you can reliably source the materials you will need.</MultilineString>
+				<MultilineString>ForagingTestContent.Node.[0] Line.Line.MultilineString:b19e429d-e4a5-4048-b0e7-be79c253602e</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You arrive at the test site along with a group of other applicants. The alchemist in charge steps forward to greet you all.</MultilineString>
+				<MultilineString>ForagingTestContent.Node.[1] Line.Line.MultilineString:b0468daa-1748-446a-b0fd-2a69006260c5</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Welcome aspiring alchemists. The task here is to gather the ripe buds of the Vitalis Luminaris plant. As you well know only the mature buds have alchemical properties, so check the vibrance of the plant before you bring it back. You have 1 hour."</MultilineString>
+				<MultilineString>ForagingTestContent.Node.[2] Line.Line.MultilineString:40a9cfee-fc55-48c3-aec6-5cb88c81a6d6</MultilineString>
 			</Line>
 			<Match3>
 				<Level>ForagingTestContentLevel</Level>
@@ -19,7 +19,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>You fail the test. You won't become an alchemist this time.</MultilineString>
+				<MultilineString>ForagingTestContent.Node.[0] Line.Line.MultilineString:7f33070b-e150-4f55-9c4e-a8149ca13790</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -27,10 +27,10 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You pass the test! The alchemist places the buds within a container, and seals it with a personal stamp.</MultilineString>
+				<MultilineString>ForagingTestContent.Node.[0] Line.Line.MultilineString:2b6177d3-42a7-4636-855c-9afcbe0f215d</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"There you go. Take that container back to the guild and you'll be admitted to the final test. Good luck."</MultilineString>
+				<MultilineString>ForagingTestContent.Node.[1] Line.Line.MultilineString:f41588ae-4a87-4da1-b92d-84c57f4722f3</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>

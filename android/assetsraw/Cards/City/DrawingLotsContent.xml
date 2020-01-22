@@ -3,28 +3,28 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>As you wander down the alley you come across a stall set into the wall. A lady dressed in gaudy clothing stands behind it gesturing to a small group of onlookers.</MultilineString>
+				<MultilineString>DrawingLotsContent.Node.[0] Line.Line.MultilineString:1ab485f2-f74a-49fd-8354-7a7d7a5bede5</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Come on up and try your luck! Do the gods smile on you? Is lady luck your friend? It's a mere 100 gold to try it, and you can win 300!"</MultilineString>
+				<MultilineString>DrawingLotsContent.Node.[1] Line.Line.MultilineString:69f3e5f2-b910-4cdb-9c9a-7583fd51f4bc</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Who is brave enough to try? How about you stranger?"</MultilineString>
+				<MultilineString>DrawingLotsContent.Node.[2] Line.Line.MultilineString:834f75b4-9a91-4750-b240-c23461b64403</MultilineString>
 			</Line>
 			<Choice>
 				<Choices>
 					<Choice>
-						<Text>I'll give it a try (100)</Text>
+						<Text>DrawingLotsContent.Node.[3] Choice.Choice.Choices.[0] Choice.Choice.Text:eb0a4f21-7bfe-45bb-807a-277a01ac90b8</Text>
 						<Condition>Money&gt;=100</Condition>
 						<Node meta:RefKey="Node">3e7778cf-c873-4c77-99d4-4171d3a2c784</Node>
 					</Choice>
 					<Choice>
-						<Text>I'm sorry I don't have 100gold</Text>
+						<Text>DrawingLotsContent.Node.[3] Choice.Choice.Choices.[1] Choice.Choice.Text:670ccf73-eff0-4d0e-b479-8165b2e0f36d</Text>
 						<Condition>Money&lt;100</Condition>
 						<Node meta:RefKey="Node">e5ff6f20-f0e8-4829-951a-995a678e840f</Node>
 					</Choice>
 					<Choice>
-						<Text>No thank you</Text>
+						<Text>DrawingLotsContent.Node.[3] Choice.Choice.Choices.[2] Choice.Choice.Text:7989e1ab-cda2-4b63-b972-10458908afb7</Text>
 						<Node meta:RefKey="Node">e5ff6f20-f0e8-4829-951a-995a678e840f</Node>
 					</Choice>
 				</Choices>
@@ -32,10 +32,10 @@
 		</Node>
 		<Node meta:X="890" meta:Y="170" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>It's a blank paper.</MultilineString>
+				<MultilineString>DrawingLotsContent.Node.[0] Line.Line.MultilineString:fa858485-4b97-4adf-9c63-77899f3f57bf</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Ahh such a shame, better luck next time!"</MultilineString>
+				<MultilineString>DrawingLotsContent.Node.[1] Line.Line.MultilineString:2b4a1fe1-9c16-4a47-956f-f78b2d61fa2f</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -43,10 +43,10 @@
 		</Node>
 		<Node meta:X="889" meta:Y="-22" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>It's a piece of paper with 'Luck' written on it!</MultilineString>
+				<MultilineString>DrawingLotsContent.Node.[0] Line.Line.MultilineString:6c9da798-96e8-43ed-9a4a-134ff704de9f</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"We have a winner! Congratulations friend!"</MultilineString>
+				<MultilineString>DrawingLotsContent.Node.[1] Line.Line.MultilineString:83717024-ecad-4a5b-94f1-2ac7f981a7c6</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>
@@ -59,10 +59,10 @@
 		</Node>
 		<Node meta:X="601" meta:Y="314" GUID="e5ff6f20-f0e8-4829-951a-995a678e840f">
 			<Line>
-				<MultilineString>"Someone else then, how about you."</MultilineString>
+				<MultilineString>DrawingLotsContent.Node.[0] Line.Line.MultilineString:e5f24644-1876-4d54-8dc2-3cbc6901953a</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>The crowd ignore you.</MultilineString>
+				<MultilineString>DrawingLotsContent.Node.[1] Line.Line.MultilineString:4d21b9a3-1449-4784-9918-85c9f67f3f12</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -74,10 +74,10 @@
 				<Count>100</Count>
 			</Spend>
 			<Line>
-				<MultilineString>"Step right up then, and draw from this box."</MultilineString>
+				<MultilineString>DrawingLotsContent.Node.[1] Line.Line.MultilineString:5365b3e6-9f5b-438c-83c7-a61d6824176f</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You step up and reach into the box. Various papers brush your fingers and you pick out one at random...</MultilineString>
+				<MultilineString>DrawingLotsContent.Node.[2] Line.Line.MultilineString:5050367a-cc1f-4ef1-ac5a-a1cf174d200b</MultilineString>
 			</Line>
 			<ChanceCards>
 				<ChanceCards>

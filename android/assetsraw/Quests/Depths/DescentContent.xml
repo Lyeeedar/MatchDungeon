@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You open the gate and enter a long, steep passageway that descends into darkness. As you walk down it the slope gets steeper until you are climbing down, attempting not to fall and slide to your death.</MultilineString>
+				<MultilineString>DescentContent.Node.[0] Line.Line.MultilineString:8796dd83-eb54-4803-b26a-8486c7a53859</MultilineString>
 			</Line>
 			<Match3>
 				<Level>DescentContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>You nerve gives out and you retreat back to the light.</MultilineString>
+				<MultilineString>DescentContent.Node.[0] Line.Line.MultilineString:ceb9f96f-7c18-4644-8b5b-6d08abad3557</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You finally reach the bottom, dank dark tunnels stretching off to either side of you.</MultilineString>
+				<MultilineString>DescentContent.Node.[0] Line.Line.MultilineString:4866d54e-7c35-4220-89de-db9daeea6014</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Success</State>

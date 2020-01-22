@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>As you wander down the alley you come across a group of man standing around, hassling a man.</MultilineString>
+				<MultilineString>AssaultMerchantContent.Node.[0] Line.Line.MultilineString:2d716db1-84bb-4e7b-9741-139dba3a947d</MultilineString>
 			</Line>
 			<Match3>
 				<Level>AssaultMerchantContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>The men knock you unconscious. You wake up some time later, your wallet completely empty and the group gone.</MultilineString>
+				<MultilineString>AssaultMerchantContent.Node.[0] Line.Line.MultilineString:825accfe-4247-4b26-a122-9d15b9184785</MultilineString>
 			</Line>
 			<Spend>
 				<Key>Money</Key>
@@ -25,7 +25,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>The man comes up to you and thanks you profusely. He introduces himself as a merchant and presses a large bag of coins into your hands, insisting you deserve it for saving him.</MultilineString>
+				<MultilineString>AssaultMerchantContent.Node.[0] Line.Line.MultilineString:b868b5d4-e1d3-481a-9e8d-37d4f396813a</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

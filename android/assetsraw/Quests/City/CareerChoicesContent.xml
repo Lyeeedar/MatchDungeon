@@ -3,49 +3,49 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7b40d31c-a270-425f-8e7b-d80524a34e94">
 			<Line>
-				<MultilineString>The city is filled with opportunities for those willing to seize them. As you are walking around you hear people talked about all sorts of things.</MultilineString>
+				<MultilineString>CareerChoicesContent.Node.[0] Line.Line.MultilineString:3b202ec2-8908-4d8a-9747-f2c8bb1462b1</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Did you hear? The university is holding admissions for aspiring mages today?"</MultilineString>
+				<MultilineString>CareerChoicesContent.Node.[1] Line.Line.MultilineString:393ce90e-4bb7-427d-a364-ac9e12558ddc</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Wow what a coincidence, so is the Order of the Golden Sun. They are putting the initiates through trials."</MultilineString>
+				<MultilineString>CareerChoicesContent.Node.[2] Line.Line.MultilineString:c94c2e20-a7ad-4a0b-9d39-7f1cefe4287c</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Oh and the alchemists guild is currently running their entrance exams."</MultilineString>
+				<MultilineString>CareerChoicesContent.Node.[3] Line.Line.MultilineString:9ebc1ecc-d529-4824-ba24-7790786869cc</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>What would you like to check out?</MultilineString>
+				<MultilineString>CareerChoicesContent.Node.[4] Line.Line.MultilineString:65e2f552-f381-4bae-ad54-763b12099259</MultilineString>
 			</Line>
 			<Choice>
 				<Choices>
 					<Choice>
-						<Text>Check out the Magic University</Text>
+						<Text>CareerChoicesContent.Node.[5] Choice.Choice.Choices.[0] Choice.Choice.Text:670d4ff6-8a98-40c2-8e59-1a1477e2aa91</Text>
 						<Condition>AcquiredWizard == 0</Condition>
 						<Node meta:RefKey="Node">99494c0a-8d44-4798-a1ec-a905695a69af</Node>
 					</Choice>
 					<Choice>
-						<Text>Check out the Magic University (Completed)</Text>
+						<Text>CareerChoicesContent.Node.[5] Choice.Choice.Choices.[1] Choice.Choice.Text:6bd290d5-6696-4bda-96cf-e75a4f57e221</Text>
 						<Condition>AcquiredWizard == 1</Condition>
 						<Node meta:RefKey="Node">99494c0a-8d44-4798-a1ec-a905695a69af</Node>
 					</Choice>
 					<Choice>
-						<Text>Check out the Order of the Golden Sun</Text>
+						<Text>CareerChoicesContent.Node.[5] Choice.Choice.Choices.[2] Choice.Choice.Text:9fa20c53-0c46-4cda-bf8a-97bcd14f71d3</Text>
 						<Condition>AcquiredKnight == 0</Condition>
 						<Node meta:RefKey="Node">cd85ef23-575f-4a08-99bb-2a49635c91fc</Node>
 					</Choice>
 					<Choice>
-						<Text>Check out the Order of the Golden Sun (Completed)</Text>
+						<Text>CareerChoicesContent.Node.[5] Choice.Choice.Choices.[3] Choice.Choice.Text:1331868e-0f38-4f58-878e-f851829078d3</Text>
 						<Condition>AcquiredKnight == 1</Condition>
 						<Node meta:RefKey="Node">cd85ef23-575f-4a08-99bb-2a49635c91fc</Node>
 					</Choice>
 					<Choice>
-						<Text>Check out the Alchemists Guild</Text>
+						<Text>CareerChoicesContent.Node.[5] Choice.Choice.Choices.[4] Choice.Choice.Text:405cf25a-8f62-470f-a443-6701b067cf26</Text>
 						<Condition>AcquiredAlchemist == 0</Condition>
 						<Node meta:RefKey="Node">35935377-463d-4a4a-8577-6aba33875f43</Node>
 					</Choice>
 					<Choice>
-						<Text>Check out the Alchemists Guild (Completed)</Text>
+						<Text>CareerChoicesContent.Node.[5] Choice.Choice.Choices.[5] Choice.Choice.Text:02c0904b-e5c9-4fb1-8d28-bc4403b12301</Text>
 						<Condition>AcquiredAlchemist == 1</Condition>
 						<Node meta:RefKey="Node">35935377-463d-4a4a-8577-6aba33875f43</Node>
 					</Choice>
@@ -54,7 +54,7 @@
 		</Node>
 		<Node meta:X="747" meta:Y="0" GUID="99494c0a-8d44-4798-a1ec-a905695a69af">
 			<Line>
-				<MultilineString>You head towards the Magic University.</MultilineString>
+				<MultilineString>CareerChoicesContent.Node.[0] Line.Line.MultilineString:3478ffbf-8856-4cf6-8e29-67fedf4bc435</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Custom</State>
@@ -63,7 +63,7 @@
 		</Node>
 		<Node meta:X="749" meta:Y="129" GUID="cd85ef23-575f-4a08-99bb-2a49635c91fc">
 			<Line>
-				<MultilineString>You head towards the Order of the Golden Sun</MultilineString>
+				<MultilineString>CareerChoicesContent.Node.[0] Line.Line.MultilineString:9bb20532-1b72-42fa-b252-519a494d019a</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Custom</State>
@@ -72,7 +72,7 @@
 		</Node>
 		<Node meta:X="745" meta:Y="265" GUID="35935377-463d-4a4a-8577-6aba33875f43">
 			<Line>
-				<MultilineString>You head towards the Alchemists Guild</MultilineString>
+				<MultilineString>CareerChoicesContent.Node.[0] Line.Line.MultilineString:5929e42a-39f0-4c07-ace5-b2782bb12c0e</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Custom</State>

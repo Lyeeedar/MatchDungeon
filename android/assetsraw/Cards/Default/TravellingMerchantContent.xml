@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="44779816-1501-4c0a-84c5-e9e541262df7">
 			<Line>
-				<MultilineString>The merchant spots you approaching and drops his bag to the ground and turns to face you, arms outstretched in greeting.</MultilineString>
+				<MultilineString>TravellingMerchantContent.Node.[0] Line.Line.MultilineString:9c1bbd89-96aa-4bf6-a674-3d093b977630</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Welcome adventurer to the stall of Ab-kulash, merchant extraordinaire! Take a look at my wares, I'm sure something will strike your fancy." </MultilineString>
+				<MultilineString>TravellingMerchantContent.Node.[1] Line.Line.MultilineString:8b5a7b8a-87d5-4c2b-9b31-913761b85599</MultilineString>
 			</Line>
 			<Shop>
 				<Shopkeep meta:RefKey="Sprite">
@@ -14,16 +14,28 @@
 					<DrawActualSize>true</DrawActualSize>
 				</Shopkeep>
 				<Items>
-					<Equipment />
-					<Equipment />
-					<Equipment />
-					<Equipment />
-					<Equipment />
-					<Equipment />
+					<Equipment>
+						<FromDeck>true</FromDeck>
+					</Equipment>
+					<Equipment>
+						<FromDeck>true</FromDeck>
+					</Equipment>
+					<Equipment>
+						<FromDeck>true</FromDeck>
+					</Equipment>
+					<Equipment>
+						<FromDeck>true</FromDeck>
+					</Equipment>
+					<Equipment>
+						<FromDeck>true</FromDeck>
+					</Equipment>
+					<Equipment>
+						<FromDeck>true</FromDeck>
+					</Equipment>
 				</Items>
 			</Shop>
 			<Line>
-				<MultilineString>"Please come by again!"</MultilineString>
+				<MultilineString>TravellingMerchantContent.Node.[3] Line.Line.MultilineString:e9b02685-fc31-44fa-86a9-0444e3c19db0</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Success</State>

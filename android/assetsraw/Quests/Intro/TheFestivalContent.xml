@@ -3,22 +3,22 @@
 	<Nodes>
 		<Node meta:X="203" meta:Y="2" GUID="4e738aa2-b95d-4969-9e2c-ac63dc9ec039">
 			<Line>
-				<MultilineString>You wander through the brighly coloured stalls, pockets weighed down with money. On all sides people call out to you, looking to sell all sorts of wares.</MultilineString>
+				<MultilineString>TheFestivalContent.Node.[0] Line.Line.MultilineString:7867efeb-5d76-4e72-b647-89f21b42dba1</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You finally arrive in the town square. All sorts of games are being run here, but the one that grabs your attention the most is the bare handed fighting tournament in the middle.</MultilineString>
+				<MultilineString>TheFestivalContent.Node.[1] Line.Line.MultilineString:0901f81b-01bd-4b82-9ee9-202211057019</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Any challengers!" The announcer calls out as the latest contender gets carried out of the ring. "Anyone think they have what it takes to defeat Rodney the Red, current champion of the fair!"</MultilineString>
+				<MultilineString>TheFestivalContent.Node.[2] Line.Line.MultilineString:a4b76555-98b1-41c8-be21-406a1fe5a020</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>To one side a group of men are taking bets on the outcome of the matches. You decide you could make some good money if you win.</MultilineString>
+				<MultilineString>TheFestivalContent.Node.[3] Line.Line.MultilineString:98fe3bac-bc53-412c-ad8f-4b138d16eac5</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You put down a sum of coins and step up to the ring.</MultilineString>
+				<MultilineString>TheFestivalContent.Node.[4] Line.Line.MultilineString:4e86ff71-d847-463a-8840-8874ba57e7af</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Oh a new contender steps forth! Lets see if he can fare any better!"</MultilineString>
+				<MultilineString>TheFestivalContent.Node.[5] Line.Line.MultilineString:9722289d-450d-415a-87c0-306100fa9d72</MultilineString>
 			</Line>
 			<Match3>
 				<Level>TheFestivalContentLevel</Level>
@@ -28,7 +28,7 @@
 		</Node>
 		<Node meta:X="463" meta:Y="299" GUID="49d3281f-4d92-479a-9022-b805afefe5d5">
 			<Line>
-				<MultilineString>"Another win for Rodney!"</MultilineString>
+				<MultilineString>TheFestivalContent.Node.[0] Line.Line.MultilineString:4170260f-fd97-4dfb-8687-468ebd454118</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -36,10 +36,10 @@
 		</Node>
 		<Node meta:X="482" meta:Y="0" GUID="496eb4f7-0da2-4f27-b9de-16ac31b37bd5">
 			<Line>
-				<MultilineString>"We have a new champion! Leave the arena now and rest, you've earned it."</MultilineString>
+				<MultilineString>TheFestivalContent.Node.[0] Line.Line.MultilineString:d03f8e46-bdf9-41c8-9143-00deb7deb181</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You take your winnings and head home, humming happily to yourself.</MultilineString>
+				<MultilineString>TheFestivalContent.Node.[1] Line.Line.MultilineString:3044c1a7-f7d3-4ccb-b9ea-a92da01fc62c</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

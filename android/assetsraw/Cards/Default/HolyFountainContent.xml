@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="373da4e9-1205-4dae-a360-8b02c4c145b8">
 			<Line>
-				<MultilineString>You approach the swarm of monsters, carefully drawing your weapon.</MultilineString>
+				<MultilineString>HolyFountainContent.Node.[0] Line.Line.MultilineString:6205a4ec-f17e-4ce6-a670-ea6689140434</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>Suddenly a twig cracks beneath your foot. The monsters whip their heads around towards you. Time to fight!</MultilineString>
+				<MultilineString>HolyFountainContent.Node.[1] Line.Line.MultilineString:3c87e91d-0faf-49fa-85d2-95ea41c24ac0</MultilineString>
 			</Line>
 			<Match3>
 				<Level>HolyFountainContentLevel</Level>
@@ -16,7 +16,7 @@
 		</Node>
 		<Node meta:X="454" meta:Y="394" GUID="7fb39e26-b6e9-4d68-9163-58efce27c27b">
 			<Line>
-				<MultilineString>The monsters are too strong. You beat a hasty retreat.</MultilineString>
+				<MultilineString>HolyFountainContent.Node.[0] Line.Line.MultilineString:ed36b93e-6c71-440f-b411-05f3e9ab1f10</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -24,10 +24,10 @@
 		</Node>
 		<Node meta:X="503" meta:Y="-153" GUID="8b318fe7-9eac-404c-b962-6e0f9c9a128d">
 			<Line>
-				<MultilineString>The monsters lie slain at your feet. You stroll over to the water, its radiance filling you with energy and joy.</MultilineString>
+				<MultilineString>HolyFountainContent.Node.[0] Line.Line.MultilineString:dbbbb3ad-5885-4d22-8127-1b91979f3852</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You take a deep swig from the pool, feeling the holy blessings infuse you.</MultilineString>
+				<MultilineString>HolyFountainContent.Node.[1] Line.Line.MultilineString:6ebf0140-6508-4bf2-b5ac-5fe6c0fa6047</MultilineString>
 			</Line>
 			<Branch>
 				<Branch>
@@ -53,17 +53,8 @@
 		<Node meta:X="764" meta:Y="94" GUID="69e3831c-3f5c-4e09-9657-4590ed9debc8">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
-					<Health>2</Health>
-					<MatchDamage>0</MatchDamage>
-					<AbilityDamage>0</AbilityDamage>
-					<PowerGain>0</PowerGain>
 					<Statistics meta:RefKey="Statistics">
 						<Health>2</Health>
-						<MatchDamage>0</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>
@@ -71,17 +62,8 @@
 		<Node meta:X="763" meta:Y="-43" GUID="d1d6aad1-acb4-488b-b7a6-6df87dde64b5">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
-					<Health>0</Health>
-					<MatchDamage>0</MatchDamage>
-					<AbilityDamage>1</AbilityDamage>
-					<PowerGain>0</PowerGain>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
-						<MatchDamage>0</MatchDamage>
 						<AbilityDamage>1</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>
@@ -89,17 +71,8 @@
 		<Node meta:X="762" meta:Y="26" GUID="a1e38695-277c-4cc9-aa44-159fc6adbd04">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
-					<Health>0</Health>
-					<MatchDamage>0</MatchDamage>
-					<AbilityDamage>0</AbilityDamage>
-					<PowerGain>2</PowerGain>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
-						<MatchDamage>0</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
 						<PowerGain>2</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>
@@ -107,17 +80,8 @@
 		<Node meta:X="765" meta:Y="-116" GUID="c6328817-81fe-4ae2-ade4-fe26ac9fbd38">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
-					<Health>0</Health>
-					<MatchDamage>0.5</MatchDamage>
-					<AbilityDamage>0</AbilityDamage>
-					<PowerGain>0</PowerGain>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
 						<MatchDamage>0.5</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>

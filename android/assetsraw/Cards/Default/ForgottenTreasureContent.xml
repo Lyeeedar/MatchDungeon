@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="83173b27-e63d-47e2-be49-b37c0b406cf7">
 			<Line>
-				<MultilineString>As you explore a stash of treasure catches your eye. You head over to investigate it.</MultilineString>
+				<MultilineString>ForgottenTreasureContent.Node.[0] Line.Line.MultilineString:42806510-e1bf-4a68-a411-195d504afeee</MultilineString>
 			</Line>
 			<Match3>
 				<Level>ForgottenTreasureContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="457" meta:Y="180" GUID="39ccf006-2d41-4eec-a635-f34bbbdbd409">
 			<Line>
-				<MultilineString>It wasn't treasure at all! Just worthless junk.</MultilineString>
+				<MultilineString>ForgottenTreasureContent.Node.[0] Line.Line.MultilineString:802c790c-27d1-4f9c-81e7-83be0262fd7f</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="477" meta:Y="-29" GUID="c4a3ac5b-a0e5-4151-a44a-06bbdf2b922d">
 			<Line>
-				<MultilineString>You rummage through the stash, finally coming away with something valuable.</MultilineString>
+				<MultilineString>ForgottenTreasureContent.Node.[0] Line.Line.MultilineString:974a3234-5420-4f54-a43f-ae61ff73300e</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

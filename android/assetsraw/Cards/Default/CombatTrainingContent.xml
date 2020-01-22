@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="f1c33ba0-d914-4b79-8947-9fe885b56e28">
 			<Line>
-				<MultilineString>Combat is an integral part of an adventurers lifestyle, so to be successful you have to be very good at it.</MultilineString>
+				<MultilineString>CombatTrainingContent.Node.[0] Line.Line.MultilineString:166d05fa-36b4-4594-86ea-c268210c4cc5</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You've been training at the guild practise field for a while, diligently striking the training dummies.</MultilineString>
+				<MultilineString>CombatTrainingContent.Node.[1] Line.Line.MultilineString:c72b7e22-50e3-48a0-972f-cb0aa803cc0d</MultilineString>
 			</Line>
 			<Match3>
 				<Level>CombatTrainingContentLevel</Level>
@@ -16,7 +16,7 @@
 		</Node>
 		<Node meta:X="448" meta:Y="190" GUID="7843ffa3-44df-4bac-9b20-e528cf63fc33">
 			<Line>
-				<MultilineString>Sadly you still haven't mastered the art of combat. You still have much training ahead.</MultilineString>
+				<MultilineString>CombatTrainingContent.Node.[0] Line.Line.MultilineString:a650a4d0-6679-4847-8f20-ed0419251edc</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -24,17 +24,12 @@
 		</Node>
 		<Node meta:X="482" meta:Y="0" GUID="2ce5fd75-5953-438d-b44e-30ead73b5010">
 			<Line>
-				<MultilineString>The training has paid off, you feel ready to fight anything now.</MultilineString>
+				<MultilineString>CombatTrainingContent.Node.[0] Line.Line.MultilineString:cfa2df23-f0f8-493c-863d-0f57ac266812</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
 						<MatchDamage>1</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>

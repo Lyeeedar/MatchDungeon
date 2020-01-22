@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="23aba7cf-51ab-45cc-b91e-cfc85321b66f">
 			<Line>
-				<MultilineString>You come across a large case on the ground, the exact shape of a weapon. The only issue is it is locked down tight. If you can break it open, you can claim the weapon inside.</MultilineString>
+				<MultilineString>WeaponCaseContent.Node.[0] Line.Line.MultilineString:15ef03e2-38ae-4714-a0a0-12a8181932b6</MultilineString>
 			</Line>
 			<Match3>
 				<Level>WeaponCaseContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="447" meta:Y="227" GUID="6639ec93-1811-46b4-a0f8-da1d4846e3aa">
 			<Line>
-				<MultilineString>Your final blow breaks the case and the weapon together. It's useless to you now.</MultilineString>
+				<MultilineString>WeaponCaseContent.Node.[0] Line.Line.MultilineString:d7b95e8a-fa21-4e7e-80d0-f90aa37d6fe3</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="480" meta:Y="0" GUID="f2207443-a76f-4c75-b09d-96ad6efca6df">
 			<Line>
-				<MultilineString>The case springs open and you take your prize.</MultilineString>
+				<MultilineString>WeaponCaseContent.Node.[0] Line.Line.MultilineString:5c024d2b-dd2f-4728-a259-dda170a66b08</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Equipment>

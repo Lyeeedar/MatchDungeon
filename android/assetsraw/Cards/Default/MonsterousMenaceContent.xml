@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="b9761242-e33c-482a-bb42-33c3cc9f27e4">
 			<Line>
-				<MultilineString>Just beyond you spot of group of giant monsters, the fallen bodies of unfortunate past adventurers littering the ground around them.</MultilineString>
+				<MultilineString>MonsterousMenaceContent.Node.[0] Line.Line.MultilineString:9cfe15df-62c9-4bf2-aadf-7d80841b1a55</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>If you can defeat the monsters, that treasure will be yours.</MultilineString>
+				<MultilineString>MonsterousMenaceContent.Node.[1] Line.Line.MultilineString:33c78b27-6510-465f-a556-f9dcca2eaadc</MultilineString>
 			</Line>
 			<Match3>
 				<Level>MonsterousMenaceContentLevel</Level>
@@ -16,7 +16,7 @@
 		</Node>
 		<Node meta:X="453" meta:Y="179" GUID="5d4d1fec-f147-45ec-8de7-6152b332776f">
 			<Line>
-				<MultilineString>The monsters prove to much for you and you are forced to flee for your life.</MultilineString>
+				<MultilineString>MonsterousMenaceContent.Node.[0] Line.Line.MultilineString:01a020f5-7612-4dda-afb3-b78f4c6789c6</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -24,7 +24,7 @@
 		</Node>
 		<Node meta:X="479" meta:Y="0" GUID="df78261e-de5b-48df-b652-ce6d52b03905">
 			<Line>
-				<MultilineString>You slay the beasts, and proceed to loot the bodies before you.</MultilineString>
+				<MultilineString>MonsterousMenaceContent.Node.[0] Line.Line.MultilineString:04971a26-35a0-4dbb-a9ea-5319b5822185</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

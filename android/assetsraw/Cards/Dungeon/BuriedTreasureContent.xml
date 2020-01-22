@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="b29585a1-0893-4e80-a0ec-c1e3cab3b6bd">
 			<Line>
-				<MultilineString>A glint attracts your attention as you explore. Just a bit of digging and you may unearth something valuable!</MultilineString>
+				<MultilineString>BuriedTreasureContent.Node.[0] Line.Line.MultilineString:4f330963-301c-44ed-8bbd-ef6593ba77eb</MultilineString>
 			</Line>
 			<Match3>
 				<Level>BuriedTreasureContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="477" meta:Y="189" GUID="691c2fa5-94d4-473d-8a1a-cab739f7890d">
 			<Line>
-				<MultilineString>You finally give up on searching for the soource of the glint. It must have been a trick of the light.</MultilineString>
+				<MultilineString>BuriedTreasureContent.Node.[0] Line.Line.MultilineString:fc641cc0-e157-4e5d-bfb0-97361219e2e3</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="507" meta:Y="-27" GUID="874210b3-bb84-4b2e-bac9-0774c15e1d22">
 			<Line>
-				<MultilineString>Your persistence is rewarded as you pull the item from the mess, polishing it off.</MultilineString>
+				<MultilineString>BuriedTreasureContent.Node.[0] Line.Line.MultilineString:14064eb8-d30d-416a-b0a2-e246a6c16db2</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

@@ -3,13 +3,13 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You arrive at the mage academy and wait in a long queue to enter the admissions exams. After a good hour of queueing you finally enter a large hall.</MultilineString>
+				<MultilineString>MageAdmissions1Content.Node.[0] Line.Line.MultilineString:b4336cbb-7726-4214-aeb4-2f7854f19f71</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>A panel of 4 instructors greet you.</MultilineString>
+				<MultilineString>MageAdmissions1Content.Node.[1] Line.Line.MultilineString:8a5593c5-0939-4b3e-a73a-9e7692c32ba9</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Welcome young mage hopeful. We thank you for coming to the first stage of the admissions exam. Here is a spellbook, we would like to see you use it to destroy these 4 wisps."</MultilineString>
+				<MultilineString>MageAdmissions1Content.Node.[2] Line.Line.MultilineString:2e858133-3207-45e0-95c9-34b0c827550a</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Equipment>
@@ -18,7 +18,7 @@
 				</Equipment>
 			</Rewards>
 			<Line>
-				<MultilineString>"Good luck!"</MultilineString>
+				<MultilineString>MageAdmissions1Content.Node.[4] Line.Line.MultilineString:bfa9944e-315d-40da-9e08-7f04175e267d</MultilineString>
 			</Line>
 			<Match3>
 				<Level>MageAdmissions1ContentLevel</Level>
@@ -28,7 +28,7 @@
 		</Node>
 		<Node meta:X="447" meta:Y="264" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>You fail the admission and are gently escorted from the building. Better luck next time.</MultilineString>
+				<MultilineString>MageAdmissions1Content.Node.[0] Line.Line.MultilineString:5efe9bfa-dec1-4ac5-9798-c50f568bb3d5</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -36,7 +36,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="15" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You pass the first round! You are ushered into a second hall packed with other hopefuls.</MultilineString>
+				<MultilineString>MageAdmissions1Content.Node.[0] Line.Line.MultilineString:b82a826f-4898-425e-ad86-24e9b233f2d1</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Success</State>

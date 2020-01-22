@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="8fb76921-2ab6-44d7-9d50-1250dd03d566">
 			<Line>
-				<MultilineString>A pile of treasure sits balanced just out of reach. A bit of smashing and it can be yours!</MultilineString>
+				<MultilineString>BreakoutContent.Node.[0] Line.Line.MultilineString:6f5e6df1-cda4-4f36-bded-a95b53576fc4</MultilineString>
 			</Line>
 			<Match3>
 				<Level>BreakoutContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="481" meta:Y="194" GUID="ae9ad688-87ef-4dd4-9cf8-9664cd746598">
 			<Line>
-				<MultilineString>You smash the treasure too. Oops.</MultilineString>
+				<MultilineString>BreakoutContent.Node.[0] Line.Line.MultilineString:031ca4ce-707e-443a-b879-36c33e62fc10</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="499" meta:Y="-38" GUID="36ea5625-4a87-4b6e-917f-d68a5e7b888b">
 			<Line>
-				<MultilineString>The treasure falls straight into your hands.</MultilineString>
+				<MultilineString>BreakoutContent.Node.[0] Line.Line.MultilineString:aeec8ae1-b661-48db-adde-7aae2b94360e</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

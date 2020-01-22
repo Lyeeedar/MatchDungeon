@@ -1,16 +1,16 @@
-<CardContent meta:X="-319" meta:Y="-58" GUID="66e443d0-9028-4749-875a-5f805717c774" xmlns:meta="Editor">
+<CardContent meta:X="0" meta:Y="0" GUID="66e443d0-9028-4749-875a-5f805717c774" xmlns:meta="Editor">
 	<Root meta:RefKey="Node">5b2aedda-65b7-4e20-bcde-9bf795d10542</Root>
 	<Nodes>
-		<Node meta:X="440.40261840820312" meta:Y="39.358245849609375" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
+		<Node meta:X="759.40261840820313" meta:Y="97.358245849609375" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Match3>
 				<Level>TrackingContentLevel</Level>
 				<Success meta:RefKey="Node">8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f</Success>
 				<Failure meta:RefKey="Node">91e41773-f187-46c6-906d-f87d59996682</Failure>
 			</Match3>
 		</Node>
-		<Node meta:X="683.40264892578125" meta:Y="200.35824584960938" GUID="91e41773-f187-46c6-906d-f87d59996682">
+		<Node meta:X="1002.4026489257813" meta:Y="258.35824584960938" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>Night starts to fall with the lair nowhere in sight. You begin to setup camp, you'll have to continue tomorrow.</MultilineString>
+				<MultilineString>TrackingContent.Node.[0] Line.Line.MultilineString:6ce61ae7-e1f7-455e-8cd7-6ec9c1afa0a0</MultilineString>
 			</Line>
 			<Define>
 				<Key>GoblinScourge4Seen</Key>
@@ -21,9 +21,9 @@
 				<State>Failure</State>
 			</MarkComplete>
 		</Node>
-		<Node meta:X="682.40264892578125" meta:Y="15.358244895935059" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
+		<Node meta:X="1001.4026489257813" meta:Y="73.358244895935059" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>Finally the stench of rotting and burning flesh asails your nose. The remains of creatures are impaled on spikes around a large cave entrance. This must be the goblins lair.</MultilineString>
+				<MultilineString>TrackingContent.Node.[0] Line.Line.MultilineString:b1999389-a223-489b-b4f1-a8bbef7e6ae1</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
@@ -36,7 +36,7 @@
 				<State>Success</State>
 			</MarkComplete>
 		</Node>
-		<Node meta:X="-143" meta:Y="-51.666667938232422" GUID="5b2aedda-65b7-4e20-bcde-9bf795d10542">
+		<Node meta:X="176" meta:Y="6.3333320617675781" GUID="5b2aedda-65b7-4e20-bcde-9bf795d10542">
 			<Branch>
 				<Branch>
 					<Condition>GoblinScourge4Seen</Condition>
@@ -48,18 +48,18 @@
 				</Branch>
 			</Branch>
 		</Node>
-		<Node meta:X="148.41824340820313" meta:Y="85.125434875488281" GUID="c4398737-12bb-48de-a0bf-eccc8d36eead">
+		<Node meta:X="467.41824340820313" meta:Y="143.12543487548828" GUID="c4398737-12bb-48de-a0bf-eccc8d36eead">
 			<Line>
-				<MultilineString>The village lies in ruins, most of the population dead. The fields are ruined for miles around, burnt down or festering with dead bodies.</MultilineString>
+				<MultilineString>TrackingContent.Node.[0] Line.Line.MultilineString:2bc79587-bb50-4aec-8c20-328a0f2f09e1</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>In your heart seeths a murderous rage. You fidn the tracks of the goblin raiders and begin to follow them back to their lair.</MultilineString>
+				<MultilineString>TrackingContent.Node.[1] Line.Line.MultilineString:50d0ba7b-d1a8-4067-b3c8-e966fdae3a10</MultilineString>
 			</Line>
 			<Node meta:RefKey="Node">7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17</Node>
 		</Node>
-		<Node meta:X="154" meta:Y="-51.666667938232422" GUID="5befdd46-577e-47a4-ba57-367c24edb68e">
+		<Node meta:X="473" meta:Y="6.3333320617675781" GUID="5befdd46-577e-47a4-ba57-367c24edb68e">
 			<Line>
-				<MultilineString>You break camp and continue following the tracks.</MultilineString>
+				<MultilineString>TrackingContent.Node.[0] Line.Line.MultilineString:75f986a8-b5ca-409f-8399-39f0164cde75</MultilineString>
 			</Line>
 			<Node meta:RefKey="Node">7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17</Node>
 		</Node>

@@ -42,6 +42,7 @@ class Localiser
 	val translate: Translate
 
 	val languages = arrayOf("EN-US", "DE")
+	val translatedText = ObjectMap<String, String>()
 
 	init
 	{
@@ -125,6 +126,8 @@ class Localiser
 						languageEntry.translatedHash = englishHash
 					}
 
+					translatedText["$language@@@$english"] = languageEntry.text
+
 					outputXml += "\t<Text ID=\"${id}\" TranslateType=\"${languageEntry.translateType}\" TranslatedHash=\"${languageEntry.translatedHash}\">${languageEntry.text}</Text>\n"
 				}
 
@@ -144,6 +147,20 @@ class Localiser
 		if (language == "EN-US")
 		{
 			return text
+		}
+
+		val key = "$language@@@$text"
+		if (translatedText.containsKey(key))
+		{
+			val text = translatedText[key]
+			println("Loading translation from cache")
+
+			return text
+		}
+
+		if (text.contains("{"))
+		{
+			throw NotImplementedError()
 		}
 
 		println("Translating '${text}' for language $language")

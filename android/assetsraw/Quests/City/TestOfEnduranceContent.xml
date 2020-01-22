@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You arrive at the location specified to find a massive cliff before you. The knight-captain overseeing the place greets you.</MultilineString>
+				<MultilineString>TestOfEnduranceContent.Node.[0] Line.Line.MultilineString:7e87e128-7da4-48da-b833-b2a10a1680bf</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Welcome to the second trial. Here you will demonstrate that you have the ability to continue, no matter the odds."</MultilineString>
+				<MultilineString>TestOfEnduranceContent.Node.[1] Line.Line.MultilineString:022ece4c-af75-41d9-b66c-653535d0b4fc</MultilineString>
 			</Line>
 			<Match3>
 				<Level>TestOfEnduranceContentLevel</Level>
@@ -16,7 +16,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>Sadly you don't quite have what it takes to join the order.</MultilineString>
+				<MultilineString>TestOfEnduranceContent.Node.[0] Line.Line.MultilineString:141b5c66-2c29-4815-828a-7bc6e780ada1</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -24,7 +24,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>"Very impressive, you have proven that you have both strength and endurance. Return to the chapterhouse and prove you have wisdom aswell."</MultilineString>
+				<MultilineString>TestOfEnduranceContent.Node.[0] Line.Line.MultilineString:d7b80822-6a53-41e2-9697-f599bbabc599</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>

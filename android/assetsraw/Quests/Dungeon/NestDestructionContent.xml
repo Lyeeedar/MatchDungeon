@@ -3,13 +3,13 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="146b7263-ab25-4958-a73a-80649bd9bfc8">
 			<Line>
-				<MultilineString>As you enter the room the vile sounds of tiny nails on stone and matted fur rubbing on fur asails your ears.</MultilineString>
+				<MultilineString>NestDestructionContent.Node.[0] Line.Line.MultilineString:53a8ecc2-5331-4f1c-97ca-6714cbe307cb</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>In the corner, surrounded by pillars, sits a writhing nest of rats. A multitude of the foul creatures clambering over one another.</MultilineString>
+				<MultilineString>NestDestructionContent.Node.[1] Line.Line.MultilineString:0c9cfdd9-948f-4d1c-8d1d-dd3b2f992ff6</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>If you can destroy this nest, it will surely deal a blow to the swarm.</MultilineString>
+				<MultilineString>NestDestructionContent.Node.[2] Line.Line.MultilineString:875d8722-03af-4844-ac49-e95cd53182ba</MultilineString>
 			</Line>
 			<Match3>
 				<Level>NestDestructionContentLevel</Level>
@@ -19,7 +19,7 @@
 		</Node>
 		<Node meta:X="457" meta:Y="64" GUID="6dd82a76-0d6a-4e88-91a8-27284518787c">
 			<Line>
-				<MultilineString>Finally the nest is still, rat corpses littering the room. A job well done.</MultilineString>
+				<MultilineString>NestDestructionContent.Node.[0] Line.Line.MultilineString:f6a8173c-4967-4fa7-a426-cea2554c2792</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Success</State>
@@ -27,7 +27,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="196" GUID="92604f41-5827-4bdc-b489-58293ba4cdba">
 			<Line>
-				<MultilineString>The rats overwealm you and you have to flee for your life.</MultilineString>
+				<MultilineString>NestDestructionContent.Node.[0] Line.Line.MultilineString:6909d1a3-a299-4e91-8601-4075d4fa0f93</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>

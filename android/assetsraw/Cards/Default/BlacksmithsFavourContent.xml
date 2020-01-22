@@ -3,13 +3,13 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="8203bacf-d41f-4274-8504-1cfce80c3d1d">
 			<Line>
-				<MultilineString>You enter the blacksmiths shop, having dropped off your weapon to be repaired a few days ago. It should now be ready to collect.</MultilineString>
+				<MultilineString>BlacksmithsFavourContent.Node.[0] Line.Line.MultilineString:58376a8f-bb23-4c16-b26e-50c1fa878382</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>A gruff voice calls out towards you as you enter.</MultilineString>
+				<MultilineString>BlacksmithsFavourContent.Node.[1] Line.Line.MultilineString:8aea358d-0805-467d-a0b1-619a613ea5ad</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Hoy! Over here! It sure took you long enough to arrive." The blacksmith says, brandishing your weapon. "Here, all complete as you ordered." </MultilineString>
+				<MultilineString>BlacksmithsFavourContent.Node.[2] Line.Line.MultilineString:2f79b31f-5355-436f-ab0e-cfc98b9af333</MultilineString>
 			</Line>
 			<Match3>
 				<Level>BlacksmithsFavourContentLevel</Level>
@@ -19,7 +19,7 @@
 		</Node>
 		<Node meta:X="456" meta:Y="236" GUID="4ad70355-b274-4df0-bf95-dc0a1f1890a0">
 			<Line>
-				<MultilineString>"Sadly the weapon is flawed, there's only so much I could do.", I'd advise you buy another.</MultilineString>
+				<MultilineString>BlacksmithsFavourContent.Node.[0] Line.Line.MultilineString:f7b36e86-3cba-4086-a9d1-207841df7596</MultilineString>
 			</Line>
 			<Branch>
 				<Branch>
@@ -33,16 +33,16 @@
 		</Node>
 		<Node meta:X="734" meta:Y="236" GUID="a7699288-5921-4402-a3a5-224a55548d43">
 			<Line>
-				<MultilineString>"It'd be 200 gold for a brand spanking new replacement for what you have there. What do you say?"</MultilineString>
+				<MultilineString>BlacksmithsFavourContent.Node.[0] Line.Line.MultilineString:2dd9a847-2569-415c-8eab-27de2aa225f9</MultilineString>
 			</Line>
 			<Choice>
 				<Choices>
 					<Choice>
-						<Text>Sure, here's the money.</Text>
+						<Text>BlacksmithsFavourContent.Node.[1] Choice.Choice.Choices.[0] Choice.Choice.Text:89f81acb-7790-4dac-9b6f-66cf30d09a27</Text>
 						<Node meta:RefKey="Node">a9aa1a0a-0ab9-4027-8593-d52146a28544</Node>
 					</Choice>
 					<Choice>
-						<Text>No thank you, I'll stick with what I've got.</Text>
+						<Text>BlacksmithsFavourContent.Node.[1] Choice.Choice.Choices.[1] Choice.Choice.Text:c8e83b48-d3b2-4f90-ad26-85f391ba981e</Text>
 						<Node meta:RefKey="Node">4f64914a-873a-4e11-9e7c-fe7d04371366</Node>
 					</Choice>
 				</Choices>
@@ -50,7 +50,7 @@
 		</Node>
 		<Node meta:X="690" meta:Y="514" GUID="397764a2-de55-450c-bbc5-74e6d7888c1a">
 			<Line>
-				<MultilineString>Sadly you are too poor to afford a replacement. Hopefully your weapon lasts!</MultilineString>
+				<MultilineString>BlacksmithsFavourContent.Node.[0] Line.Line.MultilineString:01e9f2b6-6c27-4830-b382-9e20d8677c7f</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -58,7 +58,7 @@
 		</Node>
 		<Node meta:X="1114" meta:Y="443" GUID="4f64914a-873a-4e11-9e7c-fe7d04371366">
 			<Line>
-				<MultilineString>"Your funeral."</MultilineString>
+				<MultilineString>BlacksmithsFavourContent.Node.[0] Line.Line.MultilineString:fba62e8e-f01a-44ba-8ccf-bb2487b147ad</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -66,7 +66,7 @@
 		</Node>
 		<Node meta:X="1140" meta:Y="184" GUID="a9aa1a0a-0ab9-4027-8593-d52146a28544">
 			<Line>
-				<MultilineString>"A pleasure doing business with yah."</MultilineString>
+				<MultilineString>BlacksmithsFavourContent.Node.[0] Line.Line.MultilineString:d4423a8a-9e97-4178-be51-d4e508f4a937</MultilineString>
 			</Line>
 			<Spend>
 				<Key>Gold</Key>

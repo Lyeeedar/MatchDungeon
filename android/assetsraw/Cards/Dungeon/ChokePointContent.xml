@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="61a1a1b3-b954-4e51-b494-1bbd5b914b66">
 			<Line>
-				<MultilineString>The way ahead is blocked by a group of monsters. Your only option is to smash on through. You draw your weapon and attack!</MultilineString>
+				<MultilineString>ChokePointContent.Node.[0] Line.Line.MultilineString:241dadb6-3389-422f-b799-e02c6c871a1a</MultilineString>
 			</Line>
 			<Match3>
 				<Level>ChokePointContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="459" meta:Y="182" GUID="217c86a9-2a4d-475a-90b6-0a187bb02592">
 			<Line>
-				<MultilineString>The enemies are too strong, you are forced to turn back.</MultilineString>
+				<MultilineString>ChokePointContent.Node.[0] Line.Line.MultilineString:b93fe468-23e1-4887-87be-b4bc4be5b9d8</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="462" meta:Y="-113" GUID="aa32a485-f39e-485e-8e82-43f5c421964b">
 			<Line>
-				<MultilineString>You stand victorious over your fallen foes. A small pile of money catches your eye to one side.</MultilineString>
+				<MultilineString>ChokePointContent.Node.[0] Line.Line.MultilineString:2497adb6-4eec-4844-868e-b0228bccbf05</MultilineString>
 			</Line>
 			<Branch>
 				<Branch>

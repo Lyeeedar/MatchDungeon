@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You enter what looks like a giant cocoon. Webs cover every surface, and in the center lurks a vast, vile creature. The beast turns to you, madness in the females eyes, and with liquid fire dripping from its toothed maw.</MultilineString>
+				<MultilineString>VileWitchContent.Node.[0] Line.Line.MultilineString:5322e435-6688-429a-9bdf-274ee3404ba9</MultilineString>
 			</Line>
 			<Match3>
 				<Level>VileWitchContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>The maw opens and spews flames all over you. Your lungs burn out long before you stop try to scream.</MultilineString>
+				<MultilineString>VileWitchContent.Node.[0] Line.Line.MultilineString:9d854952-e928-47e5-b776-cde9ed3b0685</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>The vile witch falls dead, and from within her a poweful soul flows out, coalesing into a crystal in your hand.</MultilineString>
+				<MultilineString>VileWitchContent.Node.[0] Line.Line.MultilineString:7bb90ba3-d471-41b3-9d5f-45cdff1252ac</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Item>

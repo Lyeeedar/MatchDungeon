@@ -3,27 +3,27 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="4e078468-5e39-45cd-a723-6a9e1f0ed5bd">
 			<Line>
-				<MultilineString>You reach a crossroads, where do you want to go next?</MultilineString>
+				<MultilineString>PartyBranchContent.Node.[0] Line.Line.MultilineString:44daf75b-b7d1-47ee-b785-dbccb2bab387</MultilineString>
 			</Line>
 			<Choice>
 				<Choices>
 					<Choice>
-						<Text>Find Felixa the Thief</Text>
+						<Text>PartyBranchContent.Node.[1] Choice.Choice.Choices.[0] Choice.Choice.Text:e524afa7-2a92-4620-ae76-3f909c756a78</Text>
 						<Condition>DoneFelixa==0</Condition>
 						<Node meta:RefKey="Node">9175be83-3cdf-468b-aae5-9a848c634a9c</Node>
 					</Choice>
 					<Choice>
-						<Text>Find Barron the Guardian</Text>
+						<Text>PartyBranchContent.Node.[1] Choice.Choice.Choices.[1] Choice.Choice.Text:a8efd299-1b7f-4a3e-893c-7ae8ed4a9e86</Text>
 						<Condition>DoneBarron==0</Condition>
 						<Node meta:RefKey="Node">835ab83f-3cd1-4963-a5d8-ce7cd1b7696c</Node>
 					</Choice>
 					<Choice>
-						<Text>Find Ruffletop the Cleric</Text>
+						<Text>PartyBranchContent.Node.[1] Choice.Choice.Choices.[2] Choice.Choice.Text:ac98deb7-7bae-4fac-a8c4-fc50826d1b0d</Text>
 						<Condition>DoneRuffletop==0</Condition>
 						<Node meta:RefKey="Node">73a3cb02-ee9f-4c47-a4c3-1b2ba925e35d</Node>
 					</Choice>
 					<Choice>
-						<Text>Go take on the Boss</Text>
+						<Text>PartyBranchContent.Node.[1] Choice.Choice.Choices.[3] Choice.Choice.Text:1e1a68cd-4fce-4f7d-8901-ecd6950a33fa</Text>
 						<Condition>DoneFelixa &amp;&amp; DoneBarron &amp;&amp; DoneRuffletop</Condition>
 						<Node meta:RefKey="Node">bd4213c7-216d-4e05-8c12-cf3e1409aa9a</Node>
 					</Choice>
@@ -37,35 +37,35 @@
 				<Storage>Quest</Storage>
 			</Define>
 			<Line>
-				<MultilineString>You head towards some old ruins that Felixa is apparently in.</MultilineString>
+				<MultilineString>PartyBranchContent.Node.[1] Line.Line.MultilineString:4233c04b-75ed-429c-8955-3ef95a3802b5</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Custom</State>
 				<Key>Felixa</Key>
 			</MarkComplete>
 		</Node>
-		<Node meta:X="777" meta:Y="-40.666666666666686" GUID="835ab83f-3cd1-4963-a5d8-ce7cd1b7696c">
+		<Node meta:X="777" meta:Y="-40.666667938232422" GUID="835ab83f-3cd1-4963-a5d8-ce7cd1b7696c">
 			<Define>
 				<Key>DoneBarron</Key>
 				<Value>1</Value>
 				<Storage>Quest</Storage>
 			</Define>
 			<Line>
-				<MultilineString>You head towards the forest that Barron is apparently in.</MultilineString>
+				<MultilineString>PartyBranchContent.Node.[1] Line.Line.MultilineString:c7fb8dcf-1d51-453f-b8a0-7d6fe33a0be5</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Custom</State>
 				<Key>Barron</Key>
 			</MarkComplete>
 		</Node>
-		<Node meta:X="778" meta:Y="88.333333333333314" GUID="73a3cb02-ee9f-4c47-a4c3-1b2ba925e35d">
+		<Node meta:X="778" meta:Y="88.333335876464844" GUID="73a3cb02-ee9f-4c47-a4c3-1b2ba925e35d">
 			<Define>
 				<Key>DoneRuffletop</Key>
 				<Value>1</Value>
 				<Storage>Quest</Storage>
 			</Define>
 			<Line>
-				<MultilineString>You head into a small village where Ruffletop apparently is.</MultilineString>
+				<MultilineString>PartyBranchContent.Node.[1] Line.Line.MultilineString:19970a25-c487-4005-9574-9882653468c6</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Custom</State>
@@ -74,7 +74,7 @@
 		</Node>
 		<Node meta:X="777" meta:Y="263" GUID="bd4213c7-216d-4e05-8c12-cf3e1409aa9a">
 			<Line>
-				<MultilineString>You head off to meet up with Grayheart. He waves at you and runs over.</MultilineString>
+				<MultilineString>PartyBranchContent.Node.[0] Line.Line.MultilineString:e3c2b06a-8252-479d-a3a0-2f37dadab61f</MultilineString>
 			</Line>
 			<Branch>
 				<Branch>
@@ -91,7 +91,7 @@
 				</Branch>
 			</Branch>
 			<Line>
-				<MultilineString>As a party you head into the lair of the beast.</MultilineString>
+				<MultilineString>PartyBranchContent.Node.[2] Line.Line.MultilineString:c83b3349-97f0-4074-9fda-c64d2d7f6777</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Custom</State>
@@ -100,17 +100,17 @@
 		</Node>
 		<Node meta:X="1045" meta:Y="263" GUID="7704f79f-24be-4efd-8ad0-15eff8be2596">
 			<Line>
-				<MultilineString>"You got everyone! Excellent, this is going to be a breeze. Lets go!"</MultilineString>
+				<MultilineString>PartyBranchContent.Node.[0] Line.Line.MultilineString:e8c3ee8d-87f1-4ec3-afa8-f540d997332f</MultilineString>
 			</Line>
 		</Node>
 		<Node meta:X="1040" meta:Y="344" GUID="04063941-206e-45de-8333-6d0b37de8627">
 			<Line>
-				<MultilineString>"None of them agreed to come? Thats unfortunate. Well looks like its just us then. Lets go."</MultilineString>
+				<MultilineString>PartyBranchContent.Node.[0] Line.Line.MultilineString:52a45553-8767-4b97-b3b6-7cae73b41a0e</MultilineString>
 			</Line>
 		</Node>
 		<Node meta:X="1037" meta:Y="429" GUID="f27f2418-f0f3-49f0-a25a-861af1448932">
 			<Line>
-				<MultilineString>"At least some of them are coming along. Lets go kill this boss."</MultilineString>
+				<MultilineString>PartyBranchContent.Node.[0] Line.Line.MultilineString:dd184540-164a-4174-b9ed-4e46eed14fe0</MultilineString>
 			</Line>
 		</Node>
 	</Nodes>

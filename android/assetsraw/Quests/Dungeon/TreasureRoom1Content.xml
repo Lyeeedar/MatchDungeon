@@ -3,13 +3,13 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="40ec3958-ecdd-4479-b2cb-00216fd909c0">
 			<Line>
-				<MultilineString>You stumble across an unlooted treasure room. Amidst piles of creates the inviting tops of chests peak out at you, beckoning you in.</MultilineString>
+				<MultilineString>TreasureRoom1Content.Node.[0] Line.Line.MultilineString:89317fbc-0af2-497e-8de0-943c848bb04c</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>As you enter the room however the floor creaks and groans, and a part of the far corner collapses, taking a chest with it.</MultilineString>
+				<MultilineString>TreasureRoom1Content.Node.[1] Line.Line.MultilineString:72cb5ade-52cf-457e-9769-82cf6eebd462</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You'll have to move fast if you want to salvage anything before room comes down.</MultilineString>
+				<MultilineString>TreasureRoom1Content.Node.[2] Line.Line.MultilineString:892d17c5-8741-49d7-a3c0-8894814527b6</MultilineString>
 			</Line>
 			<Match3>
 				<Level>TreasureRoom1ContentLevel</Level>
@@ -17,9 +17,9 @@
 				<Failure meta:RefKey="Node">2ad24a71-57dd-4089-acef-ab4056c21c7e</Failure>
 			</Match3>
 		</Node>
-		<Node meta:X="495.18181818181819" meta:Y="212.1212121212121" GUID="2ad24a71-57dd-4089-acef-ab4056c21c7e">
+		<Node meta:X="495.18182373046875" meta:Y="212.1212158203125" GUID="2ad24a71-57dd-4089-acef-ab4056c21c7e">
 			<Line>
-				<MultilineString>The ground gives way before you can grab much and you have to jump back out of the room. The treasures drop down into the blackness below.</MultilineString>
+				<MultilineString>TreasureRoom1Content.Node.[0] Line.Line.MultilineString:40545c95-0c99-44e4-9a36-a31f6243b826</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -27,7 +27,7 @@
 		</Node>
 		<Node meta:X="477" meta:Y="0" GUID="760f7d9b-36cb-451d-a768-da9355b999c2">
 			<Line>
-				<MultilineString>You manage to escape with armfuls of treasure, just in before the ground collapses, taking the empty chests down into the dark.</MultilineString>
+				<MultilineString>TreasureRoom1Content.Node.[0] Line.Line.MultilineString:94fd793b-4435-471e-9785-4d175c4c2e9a</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

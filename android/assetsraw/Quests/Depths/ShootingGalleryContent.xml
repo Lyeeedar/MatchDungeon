@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You enter a room dominated by a long bridge. Skeleton mages stand on platforms all long the sides of this room. It's going to be difficult to traverse whilst dodging their attacks.</MultilineString>
+				<MultilineString>ShootingGalleryContent.Node.[0] Line.Line.MultilineString:f99660e9-1cfb-468c-a3fc-08c6899218a2</MultilineString>
 			</Line>
 			<Match3>
 				<Level>ShootingGalleryContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>One of the attacks sends you stumbling right off the edge of the bridge, and you plundge to your death far below.</MultilineString>
+				<MultilineString>ShootingGalleryContent.Node.[0] Line.Line.MultilineString:e220fd41-712c-4176-a218-af10a5c4aa09</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You finally reach a door at the far end of the corridor, ducking away from the attacks.</MultilineString>
+				<MultilineString>ShootingGalleryContent.Node.[0] Line.Line.MultilineString:5dce3b83-cfb0-41e8-94f7-d911d7febbe4</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>

@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="40ec3958-ecdd-4479-b2cb-00216fd909c0">
 			<Line>
-				<MultilineString>You stumble across an unlooted treasure room.</MultilineString>
+				<MultilineString>TreasureRoomContent.Node.[0] Line.Line.MultilineString:1de06f46-f234-4a99-bfeb-1761cb916840</MultilineString>
 			</Line>
 			<Match3>
 				<Level>TreasureRoomContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="495.18182373046875" meta:Y="212.1212158203125" GUID="2ad24a71-57dd-4089-acef-ab4056c21c7e">
 			<Line>
-				<MultilineString>You find nothing but worthless junk.</MultilineString>
+				<MultilineString>TreasureRoomContent.Node.[0] Line.Line.MultilineString:dcc7e644-eb87-448c-ae72-79e21cdbeb2f</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="477" meta:Y="0" GUID="760f7d9b-36cb-451d-a768-da9355b999c2">
 			<Line>
-				<MultilineString>You manage to escape with armfuls of treasure.</MultilineString>
+				<MultilineString>TreasureRoomContent.Node.[0] Line.Line.MultilineString:43007e3c-078a-494b-bc8a-6bec91c7fb52</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

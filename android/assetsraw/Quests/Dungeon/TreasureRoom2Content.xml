@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="e585b7db-8fd6-40a2-9670-8c600ab2cfed">
 			<Line>
-				<MultilineString>You stumble across another unlooted treasure room. The room is partially flooded from some deep source below, but the chests are still visible on the other side.</MultilineString>
+				<MultilineString>TreasureRoom2Content.Node.[0] Line.Line.MultilineString:fd27669e-8f6d-48f7-a92a-57cbc3ac55c0</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>It is going to take some finesse to extract them without falling into the water.</MultilineString>
+				<MultilineString>TreasureRoom2Content.Node.[1] Line.Line.MultilineString:b7e421b6-89b9-4840-80d6-2b359d06749d</MultilineString>
 			</Line>
 			<Match3>
 				<Level>TreasureRoom2ContentLevel</Level>
@@ -16,7 +16,7 @@
 		</Node>
 		<Node meta:X="429" meta:Y="196" GUID="5448f946-ebbc-4f55-98bb-8bfab3d9ba67">
 			<Line>
-				<MultilineString>You slip and drop all the treasure into the water, nearly going under yourself. The sparkly goods disappear down into the depths. You don't risk going in after them.</MultilineString>
+				<MultilineString>TreasureRoom2Content.Node.[0] Line.Line.MultilineString:bdf8bc23-26ab-40f4-b859-2bb922312350</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -24,7 +24,7 @@
 		</Node>
 		<Node meta:X="482" meta:Y="0" GUID="02acd133-1f12-442c-bcaf-19464cb1d7d4">
 			<Line>
-				<MultilineString>You manage to return safely with your loot.</MultilineString>
+				<MultilineString>TreasureRoom2Content.Node.[0] Line.Line.MultilineString:1beef6af-ffc2-410b-93a0-3250929388a5</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="df405f4c-c9b7-4614-9c79-4d2da2070e7e">
 			<Line>
-				<MultilineString>Between you and some sweet sweet treasure lies a pool of water. You are going to have to use finesse to extract the loot without losing it to the depths.</MultilineString>
+				<MultilineString>SkippingStonesContent.Node.[0] Line.Line.MultilineString:aca2ef16-b0eb-4ec4-910d-f7d374cd2e5e</MultilineString>
 			</Line>
 			<Match3>
 				<Level>SkippingStonesContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="497" meta:Y="152" GUID="9fe5effd-a6d8-4c14-83b7-6295ef9891d9">
 			<Line>
-				<MultilineString>The treasure slips into the water and out of sight, never to be seen again.</MultilineString>
+				<MultilineString>SkippingStonesContent.Node.[0] Line.Line.MultilineString:05abcb92-7b44-471e-a3a2-7d505d1b2bd9</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="504" meta:Y="-81" GUID="aa6fde79-90cc-4401-a44e-29a4a0223e0c">
 			<Line>
-				<MultilineString>The treasure skips neatly into your hands.</MultilineString>
+				<MultilineString>SkippingStonesContent.Node.[0] Line.Line.MultilineString:7c0ca1bc-f334-4d8e-93f3-62fe6f34d214</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

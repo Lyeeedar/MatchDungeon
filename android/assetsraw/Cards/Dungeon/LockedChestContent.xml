@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="e8470777-c365-4a2a-9333-a325e627ad49">
 			<Line>
-				<MultilineString>You stumble across a chest. It still seems to be locked down tight. With a bit of effort you should be able to break it open.</MultilineString>
+				<MultilineString>LockedChestContent.Node.[0] Line.Line.MultilineString:312a14de-db23-488d-909b-78cc56b5f96e</MultilineString>
 			</Line>
 			<Match3>
 				<Level>LockedChestContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="421" meta:Y="153" GUID="8f3392ef-4bda-4d98-bd63-a2e89577a0aa">
 			<Line>
-				<MultilineString>With a final smash you destory the chest. Unfortunately you also destroy all its contents.</MultilineString>
+				<MultilineString>LockedChestContent.Node.[0] Line.Line.MultilineString:b87087a9-463a-4f9e-a9d8-1d355ce771fe</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="476" meta:Y="0" GUID="f14c5551-ecec-4122-bf8a-3ddc58d57d15">
 			<Line>
-				<MultilineString>You finally smash to lid apart and reach inside.</MultilineString>
+				<MultilineString>LockedChestContent.Node.[0] Line.Line.MultilineString:6aae3824-11e5-4538-9a74-7c47f5e72288</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

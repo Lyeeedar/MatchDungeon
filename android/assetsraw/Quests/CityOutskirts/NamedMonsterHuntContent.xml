@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You get a quest to hunt and slay a named creature, a beast more formidable and ferocious than your average foe.</MultilineString>
+				<MultilineString>NamedMonsterHuntContent.Node.[0] Line.Line.MultilineString:27fc5ba9-64b0-4c7c-8e98-f60d503e53f4</MultilineString>
 			</Line>
 			<Match3>
 				<Level>NamedMonsterHuntContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>You flee with your dignity in tatters.</MultilineString>
+				<MultilineString>NamedMonsterHuntContent.Node.[0] Line.Line.MultilineString:1e5ca37f-cc1d-4888-8145-e427e46a2c0f</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You take the creatures head as proof of your victory.</MultilineString>
+				<MultilineString>NamedMonsterHuntContent.Node.[0] Line.Line.MultilineString:189ccac9-7aca-42ee-b6b4-f1993e417ceb</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>
@@ -29,12 +29,7 @@
 				</Money>
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
-						<MatchDamage>0</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
 						<PowerGain>3</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>

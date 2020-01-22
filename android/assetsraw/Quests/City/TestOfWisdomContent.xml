@@ -3,16 +3,16 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You arrive back at the chapterhouse. There you are greeted by the first knight, and ushered inside. He hands you a blindfold and asks you to put it on. You are then guided gently through the building.</MultilineString>
+				<MultilineString>TestOfWisdomContent.Node.[0] Line.Line.MultilineString:24ee2644-627b-4564-be1f-46f201873303</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>Eventually an unrecognised voice tells you to remove the blindfold.</MultilineString>
+				<MultilineString>TestOfWisdomContent.Node.[1] Line.Line.MultilineString:cba897ed-fc34-4181-bac9-4a18271d06ec</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You are standing on a platform, surrounded by a long drop. A series of platforms leads to a door at the other side of the room, with large gaps between. At the door the knight-captain stands, grinning.</MultilineString>
+				<MultilineString>TestOfWisdomContent.Node.[2] Line.Line.MultilineString:a40e401e-fdcb-4447-b5a9-6bdc14f3d887</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Your final trial is to test if you can persist and overcome dangerous situations. Do you have the wisdom to prevail? Show us!"</MultilineString>
+				<MultilineString>TestOfWisdomContent.Node.[3] Line.Line.MultilineString:059cc87d-48fd-4ac5-8f12-e56684e9c65a</MultilineString>
 			</Line>
 			<Match3>
 				<Level>TestOfWisdomContentLevel</Level>
@@ -22,7 +22,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>Sadly you don't quite have what it takes to join the order.</MultilineString>
+				<MultilineString>TestOfWisdomContent.Node.[0] Line.Line.MultilineString:e30f57c1-4680-4ebf-bdc0-ac7095763c1c</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -30,10 +30,10 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You finally make it to the door, where the knight-captain pulls you into a giant hug.</MultilineString>
+				<MultilineString>TestOfWisdomContent.Node.[0] Line.Line.MultilineString:fee03dd9-3760-40f0-91a1-f79031c07865</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Welcome to the chapter! I know you will do us proud."</MultilineString>
+				<MultilineString>TestOfWisdomContent.Node.[1] Line.Line.MultilineString:9ffd1a78-7436-4ff2-afdf-e087877f5314</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Character>

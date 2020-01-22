@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>The best way to try out new armour is in combat. The blacksmith is offering one of his latest creations to anyone who volunteers. You show up and are handed a piece of gear and told to take on the 3 burly men standing in the courtyard. En Garde.</MultilineString>
+				<MultilineString>FieldTestingContent.Node.[0] Line.Line.MultilineString:df873f40-335b-46e3-b1fc-5a4bf33dd382</MultilineString>
 			</Line>
 			<Match3>
 				<Level>FieldTestingContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>You get thoroughly beaten up and the blacksmith retrieves his item, grumbling about needing to make adjustments.</MultilineString>
+				<MultilineString>FieldTestingContent.Node.[0] Line.Line.MultilineString:820912a8-cae7-47b0-8da3-64c27f90114b</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>The gear works great, and you soundly thrash your opponents. The blacksmith lets you keep the item, thanking for for trying it out.</MultilineString>
+				<MultilineString>FieldTestingContent.Node.[0] Line.Line.MultilineString:9041a39c-fb45-4a57-84f0-831cb017dfa1</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Equipment>

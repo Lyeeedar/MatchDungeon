@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="3b065e88-cd39-43a8-8e25-16d5d23b7893">
 			<Line>
-				<MultilineString>Your barn is filled with old, rotting crates. They are useless for anything, but maybe you can burn them. Smash them all to pieces.</MultilineString>
+				<MultilineString>CleanupContent.Node.[0] Line.Line.MultilineString:b1e0dd4e-e3de-464e-9642-9682c72983ad</MultilineString>
 			</Line>
 			<Match3>
 				<Level>CleanupContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="430" meta:Y="146" GUID="40026140-a9f7-4cc6-9d71-0cc44087c3a6">
 			<Line>
-				<MultilineString>The day turns into evening which turns in to night, but there are still crates left. You'll finish the work tomorrow.</MultilineString>
+				<MultilineString>CleanupContent.Node.[0] Line.Line.MultilineString:0c7e29ce-b14a-46c6-9dc5-e2fda0d89c77</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="482" meta:Y="0" GUID="9b1b0a17-44ec-49f6-a009-b33046eac007">
 			<Line>
-				<MultilineString>Your barn is finally clear, the old crates now firewood and stacked neatly in a corner. You go to bed pleased.</MultilineString>
+				<MultilineString>CleanupContent.Node.[0] Line.Line.MultilineString:e75fd6b9-05be-4077-a686-120792e69af4</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Success</State>

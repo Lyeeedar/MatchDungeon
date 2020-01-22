@@ -3,13 +3,13 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>To join you alchemists guild you have to take 3 examinations. The first is a written paper, to test your theoretical knowledge of a variety of alchemy related subjects.</MultilineString>
+				<MultilineString>WrittenTestContent.Node.[0] Line.Line.MultilineString:6130e595-9b4b-4265-9ae0-80701672d0eb</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You are sat down in a large hall, along with many other aspiring alchemists. A stack of papers is placed in front of you, along with a quill and ink.</MultilineString>
+				<MultilineString>WrittenTestContent.Node.[1] Line.Line.MultilineString:3a391f62-dc69-43f1-9c16-af659387f998</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"This test will prove you have the knowledge foundation to succeed as an alchemist. Anything less than 90% will be considered a failure. Good luck, you may begin."</MultilineString>
+				<MultilineString>WrittenTestContent.Node.[2] Line.Line.MultilineString:9d6b65db-23bd-4681-b24b-bf08b1cabcd5</MultilineString>
 			</Line>
 			<Match3>
 				<Level>WrittenTestContentLevel</Level>
@@ -19,7 +19,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>You fail the test. You won't become an alchemist this time.</MultilineString>
+				<MultilineString>WrittenTestContent.Node.[0] Line.Line.MultilineString:b029ee5b-3afb-405a-8b38-83db6c55f1fc</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -27,7 +27,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You pass the test! The examiner gives you a slip of paper with the location of the next test on it.</MultilineString>
+				<MultilineString>WrittenTestContent.Node.[0] Line.Line.MultilineString:bc8d1e6d-234b-476f-821f-f32a449ba446</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>

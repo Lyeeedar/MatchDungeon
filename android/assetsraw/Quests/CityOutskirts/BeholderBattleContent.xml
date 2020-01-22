@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="203" meta:Y="-1" GUID="aa5db3b7-4f37-4bc8-8e80-389ad71b0abe">
 			<Line>
-				<MultilineString>You finally make your way to the heart of the cave. In the chamber beyond the vast tentacled mass of the loathsome beholder floats menacingly.</MultilineString>
+				<MultilineString>BeholderBattleContent.Node.[0] Line.Line.MultilineString:60d404b2-7911-4cc7-bb8e-9fae47cd240e</MultilineString>
 			</Line>
 			<Branch>
 				<Branch>
@@ -16,7 +16,7 @@
 				</Branch>
 			</Branch>
 			<Line>
-				<MultilineString>With that he draws his blade and charges. The battle is on!</MultilineString>
+				<MultilineString>BeholderBattleContent.Node.[2] Line.Line.MultilineString:102f7316-8e3e-4a99-a353-82f594abaceb</MultilineString>
 			</Line>
 			<Match3>
 				<Level>BeholderBattleContentLevel</Level>
@@ -26,17 +26,17 @@
 		</Node>
 		<Node meta:X="477" meta:Y="34" GUID="1faa0004-7a2b-4d89-81ad-dd9f51090f86">
 			<Line>
-				<MultilineString>Grayheart looks at the party and nods his head, indicating to the creature. Each person nods their head in turn, including you.</MultilineString>
+				<MultilineString>BeholderBattleContent.Node.[0] Line.Line.MultilineString:22480631-9190-467a-9cf6-4be9854e53b6</MultilineString>
 			</Line>
 		</Node>
 		<Node meta:X="477" meta:Y="116" GUID="50b09d89-ceb3-4a6a-a6a8-924c5fae997e">
 			<Line>
-				<MultilineString>Grayheart looks at you and nods his head, indicating to the creature. You nod back.</MultilineString>
+				<MultilineString>BeholderBattleContent.Node.[0] Line.Line.MultilineString:269f29b4-0a52-4e0d-8abf-0ec9501d331d</MultilineString>
 			</Line>
 		</Node>
 		<Node meta:X="467" meta:Y="291" GUID="ec27bca5-5385-42b8-bcd0-87e359b95156">
 			<Line>
-				<MultilineString>The beast is too strong, and you barely manage to get everyone out alive.</MultilineString>
+				<MultilineString>BeholderBattleContent.Node.[0] Line.Line.MultilineString:3d31fd99-38c2-4d87-b3f8-beebc4771f6c</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -44,10 +44,10 @@
 		</Node>
 		<Node meta:X="698" meta:Y="203" GUID="38a72ade-225a-4000-a66f-89d04291b454">
 			<Line>
-				<MultilineString>The beast falls, you are triumphant! Grayheart walks over and excitedly shakes your hand.</MultilineString>
+				<MultilineString>BeholderBattleContent.Node.[0] Line.Line.MultilineString:8553db70-739b-48f0-99a7-2f69920cb3fb</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Thank you so much friend! Without you I would never have been able to pull this off.</MultilineString>
+				<MultilineString>BeholderBattleContent.Node.[1] Line.Line.MultilineString:d71e0587-9d3c-49af-adcf-ee778427eb4c</MultilineString>
 			</Line>
 			<Branch>
 				<Branch>
@@ -68,7 +68,7 @@
 				</Branch>
 			</Branch>
 			<Line>
-				<MultilineString>Grayheart cuts out the core of the beast and hands it to you. "I think you've earned this."</MultilineString>
+				<MultilineString>BeholderBattleContent.Node.[5] Line.Line.MultilineString:1aec595d-baf4-4b3b-ba45-c2e768b1fa0c</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Item>
@@ -88,17 +88,17 @@
 		</Node>
 		<Node meta:X="975" meta:Y="203" GUID="282149ed-e50c-4d27-9094-71afc241c403">
 			<Line>
-				<MultilineString>Barron also claps you on the shoulder. "Indeed, you were most spectacular."</MultilineString>
+				<MultilineString>BeholderBattleContent.Node.[0] Line.Line.MultilineString:5d571422-08f0-4335-a4b3-b2cb071a5778</MultilineString>
 			</Line>
 		</Node>
 		<Node meta:X="967" meta:Y="362" GUID="791c4cc4-7899-41bf-9b61-1640568fe0be">
 			<Line>
-				<MultilineString>Felixa smiles at you and starts to dig around the creatures body. "The value of this thing is far more than that treasure, I'm glad you dragged me out here."</MultilineString>
+				<MultilineString>BeholderBattleContent.Node.[0] Line.Line.MultilineString:42ce3d10-2a33-42d2-9e03-3066b42362fc</MultilineString>
 			</Line>
 		</Node>
 		<Node meta:X="959" meta:Y="459" GUID="f08c2918-db0c-43a9-bf3c-f3d239ade3cb">
 			<Line>
-				<MultilineString>Ruffletop flicks his hair back. "Well this will make quite the tale to the ladies. The dashing cleric taking down the terrible beast. With a little help from his sidekicks of course."</MultilineString>
+				<MultilineString>BeholderBattleContent.Node.[0] Line.Line.MultilineString:13608ba1-ad7d-4f8b-ad8a-4a82b988d4da</MultilineString>
 			</Line>
 		</Node>
 	</Nodes>

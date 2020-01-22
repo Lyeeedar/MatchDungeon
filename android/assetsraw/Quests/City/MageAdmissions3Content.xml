@@ -3,16 +3,16 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>After a short wait the instructors walk into the hall infront of all the remaining applicants.</MultilineString>
+				<MultilineString>MageAdmissions3Content.Node.[0] Line.Line.MultilineString:d974c210-702a-4c9c-bcfc-a603526445ff</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"For the final challenge we want to find the best of you all."</MultilineString>
+				<MultilineString>MageAdmissions3Content.Node.[1] Line.Line.MultilineString:3faf83b7-f1b1-4d70-b3df-1b076b69bfdb</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"And to do that you are going to duel. Last remaining victors of each group are through."</MultilineString>
+				<MultilineString>MageAdmissions3Content.Node.[2] Line.Line.MultilineString:1964bf8f-93e0-4902-8cbd-98b2b22f9e6e</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Good luck, and may the best candidate prevail!"</MultilineString>
+				<MultilineString>MageAdmissions3Content.Node.[3] Line.Line.MultilineString:c0a63d6f-076f-431a-a4cd-44f2c3638bae</MultilineString>
 			</Line>
 			<Match3>
 				<Level>MageAdmissions3ContentLevel</Level>
@@ -22,7 +22,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>You fail at the last hurdle. Better luck next time!</MultilineString>
+				<MultilineString>MageAdmissions3Content.Node.[0] Line.Line.MultilineString:8bc9eeca-f787-4bac-bdf7-1c37f089dfa6</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -30,7 +30,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You pass and are officially granted access to the academy. From this day forward you are an official mage!</MultilineString>
+				<MultilineString>MageAdmissions3Content.Node.[0] Line.Line.MultilineString:4d63f220-a8a6-42e0-b61d-b0d4700f86ff</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Character>

@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>It is well know that large donations to the temple also equal large favours from the gods. You head to the cities largest temple and begin to pray (and pay) for their attention.</MultilineString>
+				<MultilineString>FavourOfTheGodsContent.Node.[0] Line.Line.MultilineString:1deda88b-34c2-45fc-b5e0-cd87e74ac869</MultilineString>
 			</Line>
 			<Match3>
 				<Level>FavourOfTheGodsContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>The gods seem to be ignoring you, but they don't turn down your money.</MultilineString>
+				<MultilineString>FavourOfTheGodsContent.Node.[0] Line.Line.MultilineString:cec4a04c-96db-4d2e-aee6-101a16fe25d0</MultilineString>
 			</Line>
 			<Spend>
 				<Key>Money</Key>
@@ -25,7 +25,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>The gods smile on you for your donation.</MultilineString>
+				<MultilineString>FavourOfTheGodsContent.Node.[0] Line.Line.MultilineString:36da077e-64db-4925-ba31-eb19bf618002</MultilineString>
 			</Line>
 			<Spend>
 				<Key>Money</Key>

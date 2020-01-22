@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="9be15f0d-d37d-4558-a981-644bb273c530">
 			<Line>
-				<MultilineString>The way ahead is entirely blocked up. Your only option is to smash on through.</MultilineString>
+				<MultilineString>BreakThroughContent.Node.[0] Line.Line.MultilineString:8f73fafa-d5b6-46a2-965c-4e817a158391</MultilineString>
 			</Line>
 			<Match3>
 				<Level>BreakThroughContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="492" meta:Y="150" GUID="d89a32f8-d9d8-427f-ad73-ad2b0353d11b">
 			<Line>
-				<MultilineString>You are really bad at smashing aren't you. Better luck next time.</MultilineString>
+				<MultilineString>BreakThroughContent.Node.[0] Line.Line.MultilineString:49484ec3-7365-4a46-8772-19775fe5fa64</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,21 +21,12 @@
 		</Node>
 		<Node meta:X="498" meta:Y="-36" GUID="0699f025-6f3b-4570-8167-4412cc07b294">
 			<Line>
-				<MultilineString>You feel a bit stronger after that.</MultilineString>
+				<MultilineString>BreakThroughContent.Node.[0] Line.Line.MultilineString:94bf6c8b-4b06-4b78-b4ef-1104df22f0cd</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
-					<Health>0</Health>
-					<MatchDamage>0.5</MatchDamage>
-					<AbilityDamage>0</AbilityDamage>
-					<PowerGain>0</PowerGain>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
 						<MatchDamage>0.5</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>

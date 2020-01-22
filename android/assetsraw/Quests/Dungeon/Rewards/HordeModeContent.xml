@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="ba9a5748-2dce-40d6-91f7-6e9ec7b018d4">
 			<Line>
-				<MultilineString>You enter an open area and suddenly find yourself surrounded by a swarm of enemies.</MultilineString>
+				<MultilineString>HordeModeContent.Node.[0] Line.Line.MultilineString:ec1518fb-94f1-4181-81e1-bdd3a0b503bf</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You'll need to fight for your life to escape the encirclement!</MultilineString>
+				<MultilineString>HordeModeContent.Node.[1] Line.Line.MultilineString:1ae63e38-fa43-40c8-ae72-dc10373c2905</MultilineString>
 			</Line>
 			<Match3>
 				<Level>HordeModeContentLevel</Level>
@@ -16,7 +16,7 @@
 		</Node>
 		<Node meta:X="475" meta:Y="201" GUID="2c60b45b-dc4f-4376-bf07-d6b337f2e983">
 			<Line>
-				<MultilineString>You barely escape, but with great cost.</MultilineString>
+				<MultilineString>HordeModeContent.Node.[0] Line.Line.MultilineString:955220dc-85a0-4421-90f8-a4e1858a4946</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -24,13 +24,13 @@
 		</Node>
 		<Node meta:X="480" meta:Y="0" GUID="7a28d5e9-b665-44ff-9238-c29822f54049">
 			<Line>
-				<MultilineString>You repel the swarm.</MultilineString>
+				<MultilineString>HordeModeContent.Node.[0] Line.Line.MultilineString:cbfcfeeb-c617-445a-9b4a-2eaa55d061f0</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
 						<Berserk>2</Berserk>
-						<Counter>2</Counter>
+						<Counter>1</Counter>
 						<WeaknessAura>1</WeaknessAura>
 					</Statistics>
 				</Statistics>

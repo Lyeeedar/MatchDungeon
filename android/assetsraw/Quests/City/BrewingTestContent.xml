@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>To join you alchemists guild you have to take 3 examinations. The final test is to make 3 potions with your gathered herbs.</MultilineString>
+				<MultilineString>BrewingTestContent.Node.[0] Line.Line.MultilineString:9da97772-ef7a-4b79-afa7-5b98a1884105</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Vitalis Luminaris is a curious plant that can have a variety of effects depending on how its prepared. I want you to make 3 potions with that buds you gathered, showing off all the 3 effects. Just be careful of the dangerous fumes it produces. Good luck."</MultilineString>
+				<MultilineString>BrewingTestContent.Node.[1] Line.Line.MultilineString:b687c285-485f-430d-93ac-77c71a091423</MultilineString>
 			</Line>
 			<Match3>
 				<Level>BrewingTestContentLevel</Level>
@@ -16,7 +16,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>You fail the test. You won't become an alchemist this time.</MultilineString>
+				<MultilineString>BrewingTestContent.Node.[0] Line.Line.MultilineString:18d5682f-b2f1-43ec-a41c-235a6d1db241</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -24,10 +24,10 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You pass the test! The examiner walks over and shakes your hand.</MultilineString>
+				<MultilineString>BrewingTestContent.Node.[0] Line.Line.MultilineString:4942fafa-103b-45a9-80ce-e7eac2e55355</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Very well done, an impressive performance! Here is your guild badge and certificate, you are now officially an alchemist."</MultilineString>
+				<MultilineString>BrewingTestContent.Node.[1] Line.Line.MultilineString:ce29f2db-d51a-454b-9624-3b58207915ca</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Character>

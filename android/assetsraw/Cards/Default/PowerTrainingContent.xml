@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>The effect of your abilities are limited by the power you can put into them. Throughout the ages the most common form of power training has been breaking boulders.</MultilineString>
+				<MultilineString>PowerTrainingContent.Node.[0] Line.Line.MultilineString:6581ac68-a8c2-4a4b-9f67-521dd5782af6</MultilineString>
 			</Line>
 			<Match3>
 				<Level>PowerTrainingContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>The rock is too hard, you fail to break it.</MultilineString>
+				<MultilineString>PowerTrainingContent.Node.[0] Line.Line.MultilineString:1683736b-a57c-43c7-a802-a894f39b5185</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,17 +21,12 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>As the rock shatters you feel invigorated.</MultilineString>
+				<MultilineString>PowerTrainingContent.Node.[0] Line.Line.MultilineString:442fed29-8d39-429a-b70c-9a7cf6a5e55e</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
-						<MatchDamage>0</MatchDamage>
 						<AbilityDamage>2</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>

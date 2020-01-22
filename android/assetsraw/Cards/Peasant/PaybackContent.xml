@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You see the goblins have erected a small town of tents in the cavern. The construction seems flimsy, so if you can knock them down you should be able to trap many goblins within.</MultilineString>
+				<MultilineString>PaybackContent.Node.[0] Line.Line.MultilineString:de20726c-b946-421f-ad54-16eb2918ef5b</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You light a torch, and prepare to attack!</MultilineString>
+				<MultilineString>PaybackContent.Node.[1] Line.Line.MultilineString:0dc16ee7-671d-4a33-babc-2274f0f5becb</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Equipment>
@@ -22,7 +22,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>The goblin defenders are too much and you have to flee.</MultilineString>
+				<MultilineString>PaybackContent.Node.[0] Line.Line.MultilineString:18321103-f050-4d79-b9be-d2e2beb3fedc</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -30,7 +30,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>The goblin village lies in ruins around you. Now they know part of the the pain you feel.</MultilineString>
+				<MultilineString>PaybackContent.Node.[0] Line.Line.MultilineString:00a39636-8e39-4f5f-8b94-05ed5a51a41a</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Success</State>

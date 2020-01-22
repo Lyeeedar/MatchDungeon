@@ -3,48 +3,48 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="edbedf37-be97-4910-98d2-60e7fc7dfc47">
 			<Line>
-				<MultilineString>In the backallys of the city many gambling rings operate. Anyone can join in, assuming that have the cash for a buy in.</MultilineString>
+				<MultilineString>BackalleyGamblingContent.Node.[0] Line.Line.MultilineString:404b5618-a067-43fc-8dfd-8a94e7c870a8</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You approach the on of these rings, determined to make great money. A large imposing bouncer stops you at the door.</MultilineString>
+				<MultilineString>BackalleyGamblingContent.Node.[1] Line.Line.MultilineString:e0346b31-62d9-4790-9323-b73c01d78966</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Buy in first. What level you goin for?"</MultilineString>
+				<MultilineString>BackalleyGamblingContent.Node.[2] Line.Line.MultilineString:241e82f8-5bd8-4755-90b9-2ebd03ffaba4</MultilineString>
 			</Line>
 			<Choice>
 				<Choices>
 					<Choice>
-						<Text>VIP (250)</Text>
+						<Text>BackalleyGamblingContent.Node.[3] Choice.Choice.Choices.[0] Choice.Choice.Text:f1346859-f793-402b-a629-5faba02a75ea</Text>
 						<Condition>Money &gt;= 250</Condition>
 						<Node meta:RefKey="Node">5335c311-fb81-46f3-afbd-b8626983984c</Node>
 					</Choice>
 					<Choice>
-						<Text>VIP (250) (Not enough money)</Text>
+						<Text>BackalleyGamblingContent.Node.[3] Choice.Choice.Choices.[1] Choice.Choice.Text:1550b202-69a6-4a79-b447-34fba5ced31b</Text>
 						<Condition>Money&lt;250</Condition>
 						<Node meta:RefKey="Node">edbedf37-be97-4910-98d2-60e7fc7dfc47</Node>
 					</Choice>
 					<Choice>
-						<Text>High (150)</Text>
+						<Text>BackalleyGamblingContent.Node.[3] Choice.Choice.Choices.[2] Choice.Choice.Text:1dcab49a-bebc-4688-85a1-eb4203b327ee</Text>
 						<Condition>Money&gt;=150</Condition>
 						<Node meta:RefKey="Node">5003e087-a81b-4da4-adce-e2e80b7d98f1</Node>
 					</Choice>
 					<Choice>
-						<Text>High (150) (Not enough money)</Text>
+						<Text>BackalleyGamblingContent.Node.[3] Choice.Choice.Choices.[3] Choice.Choice.Text:e6b103ab-8bbf-4286-8b27-5786447cb026</Text>
 						<Condition>Money&lt;150</Condition>
 						<Node meta:RefKey="Node">edbedf37-be97-4910-98d2-60e7fc7dfc47</Node>
 					</Choice>
 					<Choice>
-						<Text>Normal (75)</Text>
+						<Text>BackalleyGamblingContent.Node.[3] Choice.Choice.Choices.[4] Choice.Choice.Text:3269056f-3fe8-4a42-b62a-18b8df8a16a8</Text>
 						<Condition>Money&gt;=75</Condition>
 						<Node meta:RefKey="Node">78d79c9b-e7dd-4245-ad2c-d96eeb58226a</Node>
 					</Choice>
 					<Choice>
-						<Text>Normal (75) (Not enough money)</Text>
+						<Text>BackalleyGamblingContent.Node.[3] Choice.Choice.Choices.[5] Choice.Choice.Text:40bc4928-a1a5-45c0-b9a0-5e4ce2af6a0b</Text>
 						<Condition>Money&lt;75</Condition>
 						<Node meta:RefKey="Node">edbedf37-be97-4910-98d2-60e7fc7dfc47</Node>
 					</Choice>
 					<Choice>
-						<Text>Actually I think I'm in the wrong place.</Text>
+						<Text>BackalleyGamblingContent.Node.[3] Choice.Choice.Choices.[6] Choice.Choice.Text:bb5f76de-9d48-49ff-b8b3-457f1f3a44b6</Text>
 						<Node meta:RefKey="Node">e4bb286f-dc79-4443-9ea3-eb03bb3d2755</Node>
 					</Choice>
 				</Choices>
@@ -52,7 +52,7 @@
 		</Node>
 		<Node meta:X="579" meta:Y="421" GUID="e4bb286f-dc79-4443-9ea3-eb03bb3d2755">
 			<Line>
-				<MultilineString>"Scram then."</MultilineString>
+				<MultilineString>BackalleyGamblingContent.Node.[0] Line.Line.MultilineString:04addd8c-ddfd-4ed2-acb8-455c7d0af6b1</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -84,33 +84,33 @@
 		</Node>
 		<Node meta:X="951" meta:Y="41" GUID="007427da-d4df-425b-817f-fd8017851887">
 			<Line>
-				<MultilineString>The bouncer holds out his hand and you hand over the money.</MultilineString>
+				<MultilineString>BackalleyGamblingContent.Node.[0] Line.Line.MultilineString:922f588f-4eb3-4d1c-8f54-7fe84e4c7a35</MultilineString>
 			</Line>
 			<Spend>
 				<Key>Money</Key>
 				<Count>GambledAmount</Count>
 			</Spend>
 			<Line>
-				<MultilineString>"Right this way sir." The bouncer directs you inside, handing you a chip to represent what you paid him.</MultilineString>
+				<MultilineString>BackalleyGamblingContent.Node.[2] Line.Line.MultilineString:343c0038-be65-40f0-b075-e0c27b3c5918</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>Inside theres multiple games running, crowded around with lots of people all excited.</MultilineString>
+				<MultilineString>BackalleyGamblingContent.Node.[3] Line.Line.MultilineString:8673f89b-433c-4e4d-907d-753177f6654f</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>What game do you want to play?</MultilineString>
+				<MultilineString>BackalleyGamblingContent.Node.[4] Line.Line.MultilineString:dfc99387-e7b0-4db8-9c07-9e6fa97aeabf</MultilineString>
 			</Line>
 			<Choice>
 				<Choices>
 					<Choice>
-						<Text>Spinning Jester (Low Risk, Low Reward)</Text>
+						<Text>BackalleyGamblingContent.Node.[5] Choice.Choice.Choices.[0] Choice.Choice.Text:30f4ffbb-f2e7-41ce-bfe9-f0004e62c017</Text>
 						<Node meta:RefKey="Node">8b3edcb8-ff23-4729-b260-96609294c135</Node>
 					</Choice>
 					<Choice>
-						<Text>Bleeding Cassocks (Medium Risk, Medium Reward)</Text>
+						<Text>BackalleyGamblingContent.Node.[5] Choice.Choice.Choices.[1] Choice.Choice.Text:aa70f2ef-6b14-40e7-ba11-35520cd7b964</Text>
 						<Node meta:RefKey="Node">7b554fba-3587-4704-841b-1a7e2fac9731</Node>
 					</Choice>
 					<Choice>
-						<Text>Blind Mans Hand (High Risk, High Reward)</Text>
+						<Text>BackalleyGamblingContent.Node.[5] Choice.Choice.Choices.[2] Choice.Choice.Text:24a47e99-1d01-40a8-9cd2-a628468be168</Text>
 						<Node meta:RefKey="Node">39e29bde-2681-4628-8af0-0f4b16a2fc06</Node>
 					</Choice>
 				</Choices>
@@ -118,7 +118,7 @@
 		</Node>
 		<Node meta:X="1398" meta:Y="-28" GUID="8b3edcb8-ff23-4729-b260-96609294c135">
 			<Line>
-				<MultilineString>You head over to the game of Spinning Jester. After watching for a little while you think you understand the rules, and step forward to play.</MultilineString>
+				<MultilineString>BackalleyGamblingContent.Node.[0] Line.Line.MultilineString:b4c98a8c-bd9b-473d-937d-1a118992cd64</MultilineString>
 			</Line>
 			<ChanceCards>
 				<ChanceCards>
@@ -142,7 +142,7 @@
 		</Node>
 		<Node meta:X="1387" meta:Y="190" GUID="7b554fba-3587-4704-841b-1a7e2fac9731">
 			<Line>
-				<MultilineString>You decide to try out Bleeding Cassocks. This game seems pretty complicated, but you think you can manage it.</MultilineString>
+				<MultilineString>BackalleyGamblingContent.Node.[0] Line.Line.MultilineString:69e25618-41bb-487e-9f33-679f310a7643</MultilineString>
 			</Line>
 			<ChanceCards>
 				<ChanceCards>
@@ -170,7 +170,7 @@
 		</Node>
 		<Node meta:X="1382" meta:Y="426" GUID="39e29bde-2681-4628-8af0-0f4b16a2fc06">
 			<Line>
-				<MultilineString>You wander over to the game of Blind Mans Hand. It seems to be pure luck, but you're feeling lucky.</MultilineString>
+				<MultilineString>BackalleyGamblingContent.Node.[0] Line.Line.MultilineString:ff5f715f-29ce-4979-a799-5bf9a5ea9202</MultilineString>
 			</Line>
 			<ChanceCards>
 				<ChanceCards>
@@ -198,7 +198,7 @@
 		</Node>
 		<Node meta:X="1769" meta:Y="-28" GUID="7e3d78f8-e575-48b0-8828-426e4974e1af">
 			<Line>
-				<MultilineString>You win the game! You make a great amount of money.</MultilineString>
+				<MultilineString>BackalleyGamblingContent.Node.[0] Line.Line.MultilineString:a78f61ff-5b7c-4947-9694-fb0501d126b5</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>
@@ -211,7 +211,7 @@
 		</Node>
 		<Node meta:X="1769" meta:Y="135.33332824707031" GUID="bc6d460c-5637-4196-a46c-885c5ffd6319">
 			<Line>
-				<MultilineString>Sadly you lose, you leave with nothing.</MultilineString>
+				<MultilineString>BackalleyGamblingContent.Node.[0] Line.Line.MultilineString:75b58de7-aafc-4af9-b285-240d21c1ce9a</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -219,7 +219,7 @@
 		</Node>
 		<Node meta:X="1769" meta:Y="421" GUID="391f04c4-e677-4141-bbfe-b849d5edd254">
 			<Line>
-				<MultilineString>You lose spectacularly. Your luck must be dire.</MultilineString>
+				<MultilineString>BackalleyGamblingContent.Node.[0] Line.Line.MultilineString:7f5244fe-8eb4-48c2-881d-a1b6513e547d</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Buff>
@@ -243,7 +243,7 @@
 		</Node>
 		<Node meta:X="1769" meta:Y="266" GUID="95b4e87c-4fbc-4381-b365-a754a7fc48fe">
 			<Line>
-				<MultilineString>You win spectacularly! Lady Luck must be smiling on you.</MultilineString>
+				<MultilineString>BackalleyGamblingContent.Node.[0] Line.Line.MultilineString:61297eb4-c158-465d-87f2-b833eff49950</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="76f2a880-e1f3-47c9-9d2e-3d467c5b9c84">
 			<Line>
-				<MultilineString>You spot a pile of gear, lying discarded in a corner. Some of it may still be usable.</MultilineString>
+				<MultilineString>DiscardedGearContent.Node.[0] Line.Line.MultilineString:1a79a30c-ecff-466b-9b10-a6600c305eb2</MultilineString>
 			</Line>
 			<Match3>
 				<Level>DiscardedGearContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="454" meta:Y="169" GUID="d5c3b476-df5b-4da7-b084-e6505baaf6d3">
 			<Line>
-				<MultilineString>It's all rusted and useless.</MultilineString>
+				<MultilineString>DiscardedGearContent.Node.[0] Line.Line.MultilineString:6245c13f-3b7f-4358-9cb4-2a2249fad6c6</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="481" meta:Y="0" GUID="fb68d943-b8ec-4fd8-a10f-57638e7d828b">
 			<Line>
-				<MultilineString>You manage to salvage something usable from the pile.</MultilineString>
+				<MultilineString>DiscardedGearContent.Node.[0] Line.Line.MultilineString:aafead95-a6a4-406a-983e-7b5dcc7afb1b</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Equipment>

@@ -1,12 +1,12 @@
-<CardContent meta:X="1" meta:Y="1" GUID="310caee3-26bb-47e5-aaf5-afddc199cae0" xmlns:meta="Editor">
+<CardContent meta:X="0" meta:Y="0" GUID="310caee3-26bb-47e5-aaf5-afddc199cae0" xmlns:meta="Editor">
 	<Root meta:RefKey="Node">fdb32f32-c676-4d2b-8d0f-c504ccfc32ee</Root>
 	<Nodes>
-		<Node meta:X="205" meta:Y="1" GUID="fdb32f32-c676-4d2b-8d0f-c504ccfc32ee">
+		<Node meta:X="204" meta:Y="0" GUID="fdb32f32-c676-4d2b-8d0f-c504ccfc32ee">
 			<Line>
-				<MultilineString>At the center of the village stands a goblin shaman, surrounded by a mound of corpses. It gestures with its hand to direct the goblins to undamaged houses, shouting in its harsh language.</MultilineString>
+				<MultilineString>GoblinShaman.Node.[0] Line.Line.MultilineString:91fdaf40-0227-4459-8a9b-5c0d6adf506b</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>This beast seems to be the leader of the group that destroyed your village. Now is the time to get your revenge. You draw your weapon and attack!</MultilineString>
+				<MultilineString>GoblinShaman.Node.[1] Line.Line.MultilineString:a14da888-bbe3-4f80-afea-bf550718524b</MultilineString>
 			</Line>
 			<Match3>
 				<Level>GoblinShamanLevel</Level>
@@ -14,17 +14,17 @@
 				<Failure meta:RefKey="Node">a38c3363-b5e6-4abf-927f-3912e9df8bd9</Failure>
 			</Match3>
 		</Node>
-		<Node meta:X="481" meta:Y="180" GUID="a38c3363-b5e6-4abf-927f-3912e9df8bd9">
+		<Node meta:X="480" meta:Y="179" GUID="a38c3363-b5e6-4abf-927f-3912e9df8bd9">
 			<Line>
-				<MultilineString>You strength fades, the sheer numbers slowly overwealming you. Finally you miss a block and a sword takes you in the neck, sending you tumbling down into oblivion.</MultilineString>
+				<MultilineString>GoblinShaman.Node.[0] Line.Line.MultilineString:0ed2c109-935c-45f0-ba40-a4c502580e71</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
 			</MarkComplete>
 		</Node>
-		<Node meta:X="481" meta:Y="1" GUID="7524a503-2da9-4e5b-89b4-62dfc0840720">
+		<Node meta:X="480" meta:Y="0" GUID="7524a503-2da9-4e5b-89b4-62dfc0840720">
 			<Line>
-				<MultilineString>You stand victorious over the bodies of the goblins, the raiding group finally defeated. The shamans staff glimmers in the muck and you take it as spoils.</MultilineString>
+				<MultilineString>GoblinShaman.Node.[0] Line.Line.MultilineString:64280f87-dbdd-40db-9743-506faffdbe28</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Equipment>
@@ -33,7 +33,7 @@
 				</Equipment>
 			</Rewards>
 			<Line>
-				<MultilineString>Together with the rest of the survivors you eventually head towards the nearest city, Gladsheim, to seek out a new life.</MultilineString>
+				<MultilineString>GoblinShaman.Node.[2] Line.Line.MultilineString:b12b5fce-6749-44a2-bb77-b1c55552ac5b</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Success</State>

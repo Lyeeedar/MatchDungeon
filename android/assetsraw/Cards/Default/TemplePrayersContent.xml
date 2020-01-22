@@ -3,20 +3,20 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="2b5a5cea-1af6-445e-a11b-b8fd7a8a54d7">
 			<Line>
-				<MultilineString>Before embarking on the quest you knelt before the altar in the great cathedral and prayed. What did you pray for?</MultilineString>
+				<MultilineString>TemplePrayersContent.Node.[0] Line.Line.MultilineString:114a5d39-f802-4bb6-bad5-cc71e8ce0cb5</MultilineString>
 			</Line>
 			<Choice>
 				<Choices>
 					<Choice>
-						<Text>Strength</Text>
+						<Text>TemplePrayersContent.Node.[1] Choice.Choice.Choices.[0] Choice.Choice.Text:352013d1-12aa-4129-b74a-710652c43abe</Text>
 						<Node meta:RefKey="Node">4410d017-678e-494c-af3f-ca308f96ac30</Node>
 					</Choice>
 					<Choice>
-						<Text>Protection</Text>
+						<Text>TemplePrayersContent.Node.[1] Choice.Choice.Choices.[1] Choice.Choice.Text:736447ca-8382-4cf4-8085-7198cfc54161</Text>
 						<Node meta:RefKey="Node">764e515a-9b4f-40fa-ae78-d79447dc7179</Node>
 					</Choice>
 					<Choice>
-						<Text>Power</Text>
+						<Text>TemplePrayersContent.Node.[1] Choice.Choice.Choices.[2] Choice.Choice.Text:698e382e-c197-404a-9f02-9dccce63821d</Text>
 						<Node meta:RefKey="Node">21d0d3c3-907c-4cbb-9e49-45527fea452f</Node>
 					</Choice>
 				</Choices>
@@ -50,7 +50,7 @@
 		</Node>
 		<Node meta:X="457" meta:Y="428" GUID="bd54cf2e-eb63-415a-ad93-37e7db3f2f41">
 			<Line>
-				<MultilineString>It doesn't seem the gods were listening.</MultilineString>
+				<MultilineString>TemplePrayersContent.Node.[0] Line.Line.MultilineString:647bd12c-beb9-42ae-a9fe-4f174a66ff77</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -58,7 +58,7 @@
 		</Node>
 		<Node meta:X="520" meta:Y="133" GUID="d952e43f-aacc-40fd-9260-b56b29412468">
 			<Line>
-				<MultilineString>The gods granted your prayer.</MultilineString>
+				<MultilineString>TemplePrayersContent.Node.[0] Line.Line.MultilineString:d91d8ae4-c38c-4286-9f95-174b63f3da32</MultilineString>
 			</Line>
 			<Branch>
 				<Branch>
@@ -82,12 +82,7 @@
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
 						<MatchDamage>0.5</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>
@@ -97,11 +92,6 @@
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
 						<Health>2</Health>
-						<MatchDamage>0</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>
@@ -110,12 +100,7 @@
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
-						<MatchDamage>0</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
 						<PowerGain>2</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>

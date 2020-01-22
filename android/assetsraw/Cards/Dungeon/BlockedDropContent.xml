@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="08d65bbf-c938-4e80-b4ce-94e6e7896bd3">
 			<Line>
-				<MultilineString>You find a lovely pile of treasure, just waiting to be claimed. The only issue is the way out is blocked. Time to smash your way free.</MultilineString>
+				<MultilineString>BlockedDropContent.Node.[0] Line.Line.MultilineString:e406c4cb-3feb-4a2b-9588-af23d3a414d6</MultilineString>
 			</Line>
 			<Match3>
 				<Level>BlockedDropContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="449" meta:Y="216" GUID="d272c1e0-28ec-4e5f-9575-c5e96eec2687">
 			<Line>
-				<MultilineString>You entirely forgot to check the treasure. It's actually worthless junk! Disgusted you toss it away and leave.</MultilineString>
+				<MultilineString>BlockedDropContent.Node.[0] Line.Line.MultilineString:0886c230-7d41-4d58-9527-c0524be7657e</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="478" meta:Y="0" GUID="feb3bce5-4c6f-4b1c-9b17-8fe81de9638a">
 			<Line>
-				<MultilineString>You smash your way out and eagerly examine your loot.</MultilineString>
+				<MultilineString>BlockedDropContent.Node.[0] Line.Line.MultilineString:dcf02076-6fa8-4883-8bcd-bffe5b14959b</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

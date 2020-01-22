@@ -6,7 +6,7 @@
 	<Definition Name="Node" meta:RefKey="GraphCollectionDef">
 		<!--Text-->
 		<Data Name="Line" TextColour="241,88,247" meta:RefKey="Struct">
-			<Data Name="MultilineString" meta:RefKey="MultilineString" />
+			<Data Name="MultilineString" NeedsLocalisation="True" LocalisationFile="CardContent" meta:RefKey="MultilineString" />
 		</Data>
 		<!--Branches-->
 		<Data Name="Branch" TextColour="192,207,109" meta:RefKey="Collection">
@@ -18,7 +18,7 @@
 		<Data Name="Choice" TextColour="82,204,95" meta:RefKey="Struct">
 			<Data Name="Choices" meta:RefKey="Collection">
 				<Data Name="Choice" Description="{Text} ({Condition})" meta:RefKey="Struct">
-					<Data Name="Text" NeedsLocalisation="True" LocalisationFile="Card" meta:RefKey="String" />
+					<Data Name="Text" NeedsLocalisation="True" LocalisationFile="CardContent" meta:RefKey="String" />
 					<Data Name="Condition" Default="1" meta:RefKey="String" />
 					<Data Name="Node" Keys="Node" UseParentDescription="True" meta:RefKey="GraphReference" />
 				</Data>

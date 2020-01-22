@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>As you proceed along the corridor suddenly a sound makes you jump to one side. A large shape barely misses you as it drops from the ceiling.</MultilineString>
+				<MultilineString>StickyAmbushContent.Node.[0] Line.Line.MultilineString:0ec91481-8cc2-4301-8bd2-d69a5f2f09da</MultilineString>
 			</Line>
 			<Match3>
 				<Level>StickyAmbushContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="408" meta:Y="272" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>The slimy creatures overwealm you and slowly choke to death as they cover your face.</MultilineString>
+				<MultilineString>StickyAmbushContent.Node.[0] Line.Line.MultilineString:2f8d24c7-2b1e-4446-9bb3-ba1d90c7007e</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,40 +21,40 @@
 		</Node>
 		<Node meta:X="478" meta:Y="-90" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>Just beyond the slowly dissolving remains of the slimes is a split in the corridor. There are 3 tunnels ahead of you.</MultilineString>
+				<MultilineString>StickyAmbushContent.Node.[0] Line.Line.MultilineString:3cb88fe8-d6ea-4887-ba0f-5f24093e66fe</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>Which tunnel would you like to take?</MultilineString>
+				<MultilineString>StickyAmbushContent.Node.[1] Line.Line.MultilineString:cfd10edd-a7b6-412d-a9be-fc31282c1199</MultilineString>
 			</Line>
 			<Choice>
 				<Choices>
 					<Choice>
-						<Text>Left Tunnel</Text>
+						<Text>StickyAmbushContent.Node.[2] Choice.Choice.Choices.[0] Choice.Choice.Text:32bd80c1-3b94-47c4-af26-e6bb6bdef86f</Text>
 						<Condition>DepthsExploredLeft == 0</Condition>
 						<Node meta:RefKey="Node">c6ec7836-68f3-45ae-ab68-d27db89d041e</Node>
 					</Choice>
 					<Choice>
-						<Text>Left Tunnel (Explored)</Text>
+						<Text>StickyAmbushContent.Node.[2] Choice.Choice.Choices.[1] Choice.Choice.Text:9dbec042-ef1d-4389-b62f-ba366e187dc0</Text>
 						<Condition>DepthsExploredLeft == 1</Condition>
 						<Node meta:RefKey="Node">c6ec7836-68f3-45ae-ab68-d27db89d041e</Node>
 					</Choice>
 					<Choice>
-						<Text>Middle Tunnel</Text>
+						<Text>StickyAmbushContent.Node.[2] Choice.Choice.Choices.[2] Choice.Choice.Text:42d5ad5a-fde1-45a8-baba-16d4c4110959</Text>
 						<Condition>DepthsExploredMiddle == 0</Condition>
 						<Node meta:RefKey="Node">d9623e52-3a7e-4b5b-9edd-f968ff5846eb</Node>
 					</Choice>
 					<Choice>
-						<Text>Middle Tunnel (Explored)</Text>
+						<Text>StickyAmbushContent.Node.[2] Choice.Choice.Choices.[3] Choice.Choice.Text:1dad764c-c077-4aa7-be8e-7732f9284ace</Text>
 						<Condition>DepthsExploredMiddle == 1</Condition>
 						<Node meta:RefKey="Node">d9623e52-3a7e-4b5b-9edd-f968ff5846eb</Node>
 					</Choice>
 					<Choice>
-						<Text>Right Tunnel</Text>
+						<Text>StickyAmbushContent.Node.[2] Choice.Choice.Choices.[4] Choice.Choice.Text:54859058-5310-4d1d-981b-60375e364b6d</Text>
 						<Condition>DepthsExploredRight == 0</Condition>
 						<Node meta:RefKey="Node">18ee473d-ec01-4047-870e-5fcf5cad2e70</Node>
 					</Choice>
 					<Choice>
-						<Text>Right Tunnel (Explored)</Text>
+						<Text>StickyAmbushContent.Node.[2] Choice.Choice.Choices.[5] Choice.Choice.Text:2c8e47d3-89a9-47f1-a2bb-07ea0ad7e0f0</Text>
 						<Condition>DepthsExploredRight == 1</Condition>
 						<Node meta:RefKey="Node">18ee473d-ec01-4047-870e-5fcf5cad2e70</Node>
 					</Choice>
@@ -63,7 +63,7 @@
 		</Node>
 		<Node meta:X="1032" meta:Y="-223" GUID="c6ec7836-68f3-45ae-ab68-d27db89d041e">
 			<Line>
-				<MultilineString>You head down the left tunnel.</MultilineString>
+				<MultilineString>StickyAmbushContent.Node.[0] Line.Line.MultilineString:308d2f1d-3de1-4bce-8e76-036ef6183f2e</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Custom</State>
@@ -72,7 +72,7 @@
 		</Node>
 		<Node meta:X="1065" meta:Y="52" GUID="d9623e52-3a7e-4b5b-9edd-f968ff5846eb">
 			<Line>
-				<MultilineString>You head down the middle tunnel.</MultilineString>
+				<MultilineString>StickyAmbushContent.Node.[0] Line.Line.MultilineString:5bdbaa73-d94f-4d21-8ad3-c4d4b4f70722</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Custom</State>
@@ -81,7 +81,7 @@
 		</Node>
 		<Node meta:X="981" meta:Y="317" GUID="18ee473d-ec01-4047-870e-5fcf5cad2e70">
 			<Line>
-				<MultilineString>You head down the right tunnel.</MultilineString>
+				<MultilineString>StickyAmbushContent.Node.[0] Line.Line.MultilineString:3b52941a-1c83-4607-b203-f0b9d38a1cc0</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Custom</State>

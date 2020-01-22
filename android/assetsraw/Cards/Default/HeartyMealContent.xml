@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="cf5ee94d-e0ab-4bcb-b269-bd06b0d9141b">
 			<Line>
-				<MultilineString>You sit down to eat a hearty meal. Good food leads to good energy. And with good energy you can get a good adventure.</MultilineString>
+				<MultilineString>HeartyMealContent.Node.[0] Line.Line.MultilineString:0d9ed65f-9fc3-4572-b075-b289969104f8</MultilineString>
 			</Line>
 			<Match3>
 				<Level>HeartyMealContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="433" meta:Y="156" GUID="c54a0cb8-634f-40fe-89b7-85a2b1b3a5d6">
 			<Line>
-				<MultilineString>The food was not filling enough. You still feel hungry.</MultilineString>
+				<MultilineString>HeartyMealContent.Node.[0] Line.Line.MultilineString:416bf28c-dcdf-4c37-9c61-06e19496cbb3</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="482" meta:Y="0" GUID="39134cff-be50-4f84-a1b2-e9833e1bd85d">
 			<Line>
-				<MultilineString>The food was delicious. You feel new energy infusing through your body.</MultilineString>
+				<MultilineString>HeartyMealContent.Node.[0] Line.Line.MultilineString:3919c336-13c1-46a8-a6c2-ff5f47e5ef72</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Buff>

@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="205" meta:Y="1" GUID="dc013345-62f5-4e94-bbb4-a383ec7e93ef">
 			<Line>
-				<MultilineString>You come across an ancient room filled with crumbling pillars. In the far corner a pile of treasure sits balanced atop a ledge.</MultilineString>
+				<MultilineString>ChainReactionContent.Node.[0] Line.Line.MultilineString:6e688fa8-ed0d-4b1e-8df0-4b85e4f98393</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>The pillars are too damaged to climb safely, but if they are knocked down in the right way you can topple them all to get the treasure.</MultilineString>
+				<MultilineString>ChainReactionContent.Node.[1] Line.Line.MultilineString:e193ca5c-d162-4773-a3c1-9399acded667</MultilineString>
 			</Line>
 			<Match3>
 				<Level>ChainReactionContentLevel</Level>
@@ -16,7 +16,7 @@
 		</Node>
 		<Node meta:X="471" meta:Y="186" GUID="0543eaf1-42d2-420e-bc44-b4bd649f50b4">
 			<Line>
-				<MultilineString>The pillars collapse on top of the treasure, burying it in a huge heap of rubble.</MultilineString>
+				<MultilineString>ChainReactionContent.Node.[0] Line.Line.MultilineString:7e2fb62f-ce1d-4aeb-90bf-1d3d19851ced</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -24,7 +24,7 @@
 		</Node>
 		<Node meta:X="481" meta:Y="1" GUID="c4296296-7e44-42f5-bdba-889810b43451">
 			<Line>
-				<MultilineString>Each pillar falls to knock the next pillar down, all across the room. Finally the treasure falls at your feet.</MultilineString>
+				<MultilineString>ChainReactionContent.Node.[0] Line.Line.MultilineString:76ba3cff-367d-4442-8dc6-aa49f628c2bf</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Money>

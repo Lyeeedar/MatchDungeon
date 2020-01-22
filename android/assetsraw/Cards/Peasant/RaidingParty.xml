@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="201" meta:Y="-1" GUID="588fc20b-8b70-493d-9943-ba5694862074">
 			<Line>
-				<MultilineString>You awaken to the chittering cries of goblins, followed by a splintering crack as the break their way into your home.</MultilineString>
+				<MultilineString>RaidingParty.Node.[0] Line.Line.MultilineString:6c1454a6-3b05-4cc0-a4c8-eb912784ba25</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You charge downstairs, snatching some household items along the way to help defend yourself.</MultilineString>
+				<MultilineString>RaidingParty.Node.[1] Line.Line.MultilineString:723bb7e6-d072-4e8e-97f4-9736c13eecee</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Equipment>
@@ -23,7 +23,7 @@
 				</Equipment>
 			</Rewards>
 			<Line>
-				<MultilineString>You face down a small group of the greenskins as they brandish weapons and leer at you. Fight for your life!</MultilineString>
+				<MultilineString>RaidingParty.Node.[3] Line.Line.MultilineString:3e7151e0-109a-44c5-9f9f-add2a8495633</MultilineString>
 			</Line>
 			<Match3>
 				<Level>RaidingPartyLevel</Level>
@@ -33,7 +33,7 @@
 		</Node>
 		<Node meta:X="496" meta:Y="230" GUID="85257c02-5740-411f-8eca-de3d0c019b40">
 			<Line>
-				<MultilineString>You fall under the onslaught, a multitude of wounds bringing you to the ground.</MultilineString>
+				<MultilineString>RaidingParty.Node.[0] Line.Line.MultilineString:6529a994-60bd-4f62-9aa7-2cf3ee8b28f7</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -41,10 +41,10 @@
 		</Node>
 		<Node meta:X="502" meta:Y="0" GUID="c3c6e4b7-81d3-41b9-869a-50f1b8ad1dce">
 			<Line>
-				<MultilineString>The last goblin falls dead at your feet and you breath a sigh of relief, your muscles burning from exhaustion.</MultilineString>
+				<MultilineString>RaidingParty.Node.[0] Line.Line.MultilineString:a52dd198-9591-4967-80ed-8356dbbf2e40</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>You look out the window and see a firey red glow in the distance. The village is burning!</MultilineString>
+				<MultilineString>RaidingParty.Node.[1] Line.Line.MultilineString:0c912234-90c0-4eba-ad79-b46eb1892335</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Success</State>

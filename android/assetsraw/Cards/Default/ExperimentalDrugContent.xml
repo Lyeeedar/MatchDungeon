@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You find an advertisement asking for volunteers to try a new drug. You decide to try and go along. What could it hurt?</MultilineString>
+				<MultilineString>ExperimentalDrugContent.Node.[0] Line.Line.MultilineString:58d6e146-16b1-4e3e-96cb-ff363dbb5aed</MultilineString>
 			</Line>
 			<Match3>
 				<Level>ExperimentalDrugContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>The drug seems to do nothing. The alchemist looks disappointed.</MultilineString>
+				<MultilineString>ExperimentalDrugContent.Node.[0] Line.Line.MultilineString:9275f3a7-3069-40d3-ae46-ed0385db7547</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>As you down the drug it burns in your veins. You drop to your knees, a greenish tint colouring your skin, rage filling your mind. The alchemist looks pleased.</MultilineString>
+				<MultilineString>ExperimentalDrugContent.Node.[0] Line.Line.MultilineString:ee654108-56e9-41e3-9d36-88100a3f9b85</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>

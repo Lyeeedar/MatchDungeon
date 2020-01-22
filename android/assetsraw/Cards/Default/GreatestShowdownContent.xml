@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>A pack of monsters surrounds another that exudes an aura of deadliness. This will be a tough fight.</MultilineString>
+				<MultilineString>GreatestShowdownContent.Node.[0] Line.Line.MultilineString:6a82c474-c21c-4468-b87b-71aefecdd507</MultilineString>
 			</Line>
 			<Match3>
 				<Level>GreatestShowdownContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>You are forced to flee, they are way too strong.</MultilineString>
+				<MultilineString>GreatestShowdownContent.Node.[0] Line.Line.MultilineString:be0627d0-4649-4503-a163-7b9c85fd4693</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You prevail against the odds. You are a champion!</MultilineString>
+				<MultilineString>GreatestShowdownContent.Node.[0] Line.Line.MultilineString:4cac5724-486f-4003-a1dd-975d8bd2a29c</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Buff>

@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You enter a large cavern and are stunned by a wall of intense heat. The entire place is blazing hot, fumes burning in your lungs. A huge elemental stalks around a raised platform, the rock where t treads molten beneath its feet.</MultilineString>
+				<MultilineString>UnendingFlameContent.Node.[0] Line.Line.MultilineString:7873ec6e-4cc5-40d2-9446-14748fa839b2</MultilineString>
 			</Line>
 			<Match3>
 				<Level>UnendingFlameContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>You are struck from the platform and tumble down into the lava. You manage half a gurgling shriek before you immolate.</MultilineString>
+				<MultilineString>UnendingFlameContent.Node.[0] Line.Line.MultilineString:0cbdda08-156a-44a5-9e18-73f12c231b7e</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>The elemental collapses, its heat finally extinguished. From its body a powerful soul emerges and coalesces into your hand as a beautiful crystal.</MultilineString>
+				<MultilineString>UnendingFlameContent.Node.[0] Line.Line.MultilineString:fed058f7-3999-4721-b0aa-a3dff59535ed</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Item>

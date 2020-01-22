@@ -3,13 +3,13 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="926dfa1f-edac-4a1c-bc5b-82303ba5ed4e">
 			<Line>
-				<MultilineString>As you approach the ruin you find it to be surrounded by large rats.</MultilineString>
+				<MultilineString>RatEncounterContent.Node.[0] Line.Line.MultilineString:c1f9ffee-aadf-4dd7-a708-7510562648f8</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>They are just milling around, some of them chewing on what looks to be the remains of a previous adventurer.</MultilineString>
+				<MultilineString>RatEncounterContent.Node.[1] Line.Line.MultilineString:f78ad64b-79fd-46bd-a3aa-c1e5bd3376eb</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>If you want to get inside, you are going to need to kill them.</MultilineString>
+				<MultilineString>RatEncounterContent.Node.[2] Line.Line.MultilineString:7ea4ffd5-d8c0-4123-8bb2-cac51eb4174b</MultilineString>
 			</Line>
 			<Match3>
 				<Level>RatEncounterContentLevel</Level>
@@ -19,7 +19,7 @@
 		</Node>
 		<Node meta:X="447" meta:Y="259" GUID="f2eafcf5-2f5b-4ad2-898c-419392133252">
 			<Line>
-				<MultilineString>The rat swarm overpowers you and you fall, becoming the creatures next meal.</MultilineString>
+				<MultilineString>RatEncounterContent.Node.[0] Line.Line.MultilineString:e17dfc7c-d419-4750-aaf0-7b979cabe855</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -27,7 +27,7 @@
 		</Node>
 		<Node meta:X="481" meta:Y="0" GUID="c4d07bb4-aef4-4260-9091-7232f6c3b9f5">
 			<Line>
-				<MultilineString>The last rat lies broken at your feet. You take a second to check the adventurer, a gimmer from his equipment catching your eye.</MultilineString>
+				<MultilineString>RatEncounterContent.Node.[0] Line.Line.MultilineString:68361e44-1203-44d3-a2b6-0f146ca9db19</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Equipment>

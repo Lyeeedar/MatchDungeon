@@ -3,35 +3,35 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="6168e679-3729-4fa0-a310-a4aa7c4dd366">
 			<Line>
-				<MultilineString>Where do you go to grind levels?</MultilineString>
+				<MultilineString>GrindingLevelsContent.Node.[0] Line.Line.MultilineString:7e41cdb9-ff16-4564-ba8e-7a85abdf007b</MultilineString>
 			</Line>
 			<Choice>
 				<Choices>
 					<Choice>
-						<Text>To the city outskirts (easy)</Text>
+						<Text>GrindingLevelsContent.Node.[1] Choice.Choice.Choices.[0] Choice.Choice.Text:7e2cb749-1966-49a1-949c-dfda5fe44ba4</Text>
 						<Node meta:RefKey="Node">163595b9-9532-48c2-b6fd-8aa4a648e40e</Node>
 					</Choice>
 					<Choice>
-						<Text>Deep into the forest (medium)</Text>
+						<Text>GrindingLevelsContent.Node.[1] Choice.Choice.Choices.[1] Choice.Choice.Text:2ca941f6-521c-4638-9756-b6052cf0a468</Text>
 						<Condition>UnlockedForest</Condition>
 						<Node meta:RefKey="Node">22495a9c-7bc1-4235-97f3-0c53cbad5750</Node>
 					</Choice>
 					<Choice>
-						<Text>Deep into the forest (Locked)</Text>
+						<Text>GrindingLevelsContent.Node.[1] Choice.Choice.Choices.[2] Choice.Choice.Text:ffccfaef-20d5-419e-a97d-a6b20cbba3b1</Text>
 						<Condition>UnlockedForest == 0</Condition>
 						<Node meta:RefKey="Node">6168e679-3729-4fa0-a310-a4aa7c4dd366</Node>
 					</Choice>
 					<Choice>
-						<Text>Head to the volcano (Locked)</Text>
+						<Text>GrindingLevelsContent.Node.[1] Choice.Choice.Choices.[3] Choice.Choice.Text:46285cff-127a-43b4-bd70-79be280ba594</Text>
 						<Condition>UnlockedVolcano == 0</Condition>
 						<Node meta:RefKey="Node">6168e679-3729-4fa0-a310-a4aa7c4dd366</Node>
 					</Choice>
 				</Choices>
 			</Choice>
 		</Node>
-		<Node meta:X="621.831298828125" meta:Y="-399.33828735351562" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="163595b9-9532-48c2-b6fd-8aa4a648e40e">
+		<Node meta:X="621.831298828125" meta:Y="-399.33828735351563" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="163595b9-9532-48c2-b6fd-8aa4a648e40e">
 			<Line>
-				<MultilineString>You head out of the city to join the other newbies in killing the surrounding wildlife.</MultilineString>
+				<MultilineString>GrindingLevelsContent.Node.[0] Line.Line.MultilineString:2c549313-e0c8-4510-887d-57b666d7f6f2</MultilineString>
 			</Line>
 			<Match3>
 				<Level>GrindingLevelContentEasy</Level>
@@ -41,7 +41,7 @@
 		</Node>
 		<Node meta:X="1550.93701171875" meta:Y="38.771896362304688" GUID="b3ec1c35-3fe5-49b6-ba13-c4f1f28d71ee">
 			<Line>
-				<MultilineString>The monsters prove too much and you have to flee.</MultilineString>
+				<MultilineString>GrindingLevelsContent.Node.[0] Line.Line.MultilineString:913b087c-0a13-4e46-870b-da40ff2df5ed</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -49,27 +49,27 @@
 		</Node>
 		<Node meta:X="844.4556884765625" meta:Y="-393.69491577148438" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="f19626a1-5d33-4cb5-a491-a0b3fae25eb0">
 			<Line>
-				<MultilineString>As you slay the final monster a wash of strength runs through you.</MultilineString>
+				<MultilineString>GrindingLevelsContent.Node.[0] Line.Line.MultilineString:91ffe67a-3e8f-4f1f-b145-f07fa8df6914</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>What stat do you want to improve?</MultilineString>
+				<MultilineString>GrindingLevelsContent.Node.[1] Line.Line.MultilineString:1ae8851f-d90d-4367-97ea-722bf0e6131d</MultilineString>
 			</Line>
 			<Choice>
 				<Choices>
 					<Choice>
-						<Text>Health</Text>
+						<Text>GrindingLevelsContent.Node.[2] Choice.Choice.Choices.[0] Choice.Choice.Text:67c556f3-e08b-4584-bdb8-7a1a1ac36a6b</Text>
 						<Node meta:RefKey="Node">e743a4ac-c682-4ef6-9aee-6ff21dca7e45</Node>
 					</Choice>
 					<Choice>
-						<Text>Match Damage</Text>
+						<Text>GrindingLevelsContent.Node.[2] Choice.Choice.Choices.[1] Choice.Choice.Text:4db84bb6-80b4-4b6b-9610-28e8c8c4b7dc</Text>
 						<Node meta:RefKey="Node">1a506b06-040c-47b8-90cd-98ec00873c8c</Node>
 					</Choice>
 					<Choice>
-						<Text>Ability Damage</Text>
+						<Text>GrindingLevelsContent.Node.[2] Choice.Choice.Choices.[2] Choice.Choice.Text:08aa251d-0515-4976-a174-7c03bc9e5aec</Text>
 						<Node meta:RefKey="Node">6ca9d79f-d4a5-493b-9860-dc03808171f4</Node>
 					</Choice>
 					<Choice>
-						<Text>Power Gain</Text>
+						<Text>GrindingLevelsContent.Node.[2] Choice.Choice.Choices.[3] Choice.Choice.Text:d7856b02-b04d-461d-bbad-d443b0901cef</Text>
 						<Node meta:RefKey="Node">8b5b8105-bb23-441e-a8d0-fd1f50a25d0e</Node>
 					</Choice>
 				</Choices>
@@ -87,7 +87,7 @@
 				</Statistics>
 			</Rewards>
 		</Node>
-		<Node meta:X="1133.517822265625" meta:Y="-324.65469360351562" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="1a506b06-040c-47b8-90cd-98ec00873c8c">
+		<Node meta:X="1133.517822265625" meta:Y="-324.65469360351563" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="1a506b06-040c-47b8-90cd-98ec00873c8c">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">
@@ -116,7 +116,7 @@
 		</Node>
 		<Node meta:X="622.57452392578125" meta:Y="-60.135074615478516" meta:Comment="df747cf2-3922-49a1-932b-6cbaee99d275" GUID="22495a9c-7bc1-4235-97f3-0c53cbad5750">
 			<Line>
-				<MultilineString>You delve deep into the creepy forest, looking for a clearing filled with monsters.</MultilineString>
+				<MultilineString>GrindingLevelsContent.Node.[0] Line.Line.MultilineString:6b5851c6-b88a-4a26-81fa-803db207d7d0</MultilineString>
 			</Line>
 			<Match3>
 				<Level>GrindingLevelContentMedium</Level>
@@ -126,31 +126,31 @@
 		</Node>
 		<Node meta:X="861.47216796875" meta:Y="-56.299839019775391" meta:Comment="df747cf2-3922-49a1-932b-6cbaee99d275" GUID="f2e2dfe7-43ba-43b1-a7f5-2facc39060fa">
 			<Line>
-				<MultilineString>As you slay the final monster a wash of strength runs through you.</MultilineString>
+				<MultilineString>GrindingLevelsContent.Node.[0] Line.Line.MultilineString:262d1e2d-9b04-4f9a-863b-cab9daa4d9be</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>What stat do you want to improve?</MultilineString>
+				<MultilineString>GrindingLevelsContent.Node.[1] Line.Line.MultilineString:7c6ecf22-52a0-4651-b4fc-0ec21a6e19e9</MultilineString>
 			</Line>
 			<Choice>
 				<Choices>
 					<Choice>
-						<Text>Health</Text>
+						<Text>GrindingLevelsContent.Node.[2] Choice.Choice.Choices.[0] Choice.Choice.Text:42320674-39b1-4bf3-bb66-51f36538d0a9</Text>
 						<Node meta:RefKey="Node">6f95d6bb-3ede-4c78-8264-3d5b4d8182dd</Node>
 					</Choice>
 					<Choice>
-						<Text>Match Damage</Text>
+						<Text>GrindingLevelsContent.Node.[2] Choice.Choice.Choices.[1] Choice.Choice.Text:da4248c9-f054-4a12-869c-f0bd9978de34</Text>
 						<Node meta:RefKey="Node">7c21e46e-ab38-4753-941c-cc3fe5f9d1e8</Node>
 					</Choice>
 					<Choice>
-						<Text>Ability Damage</Text>
+						<Text>GrindingLevelsContent.Node.[2] Choice.Choice.Choices.[2] Choice.Choice.Text:b9661e1d-6486-45d9-8437-900d6ba2c223</Text>
 						<Node meta:RefKey="Node">46eef5a8-ce12-4579-8ffb-6a1b2bc88003</Node>
 					</Choice>
 					<Choice>
-						<Text>Power Gain</Text>
+						<Text>GrindingLevelsContent.Node.[2] Choice.Choice.Choices.[3] Choice.Choice.Text:b1b20a1d-4e2f-4164-bf19-9b7ff354c95a</Text>
 						<Node meta:RefKey="Node">c4ba644a-12f9-41a5-a89e-adafa496a393</Node>
 					</Choice>
 					<Choice>
-						<Text>Regeneration</Text>
+						<Text>GrindingLevelsContent.Node.[2] Choice.Choice.Choices.[4] Choice.Choice.Text:421f1a6b-37a3-49fc-ab00-8aa72350c4a4</Text>
 						<Node meta:RefKey="Node">bdb19f4d-c17e-4b99-a686-57e27bb44fce</Node>
 					</Choice>
 				</Choices>

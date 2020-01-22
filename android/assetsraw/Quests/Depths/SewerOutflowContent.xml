@@ -3,7 +3,7 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>You arrive at the crux of the ancient sewer network, a vast room filled with mold and water. As you enter the room something large moves, drawn to the sound of your feet and the flickering of your torch.</MultilineString>
+				<MultilineString>SewerOutflowContent.Node.[0] Line.Line.MultilineString:a3676844-e3cb-4d4b-a112-841dde03da5d</MultilineString>
 			</Line>
 			<Match3>
 				<Level>SewerOutflowContentLevel</Level>
@@ -13,7 +13,7 @@
 		</Node>
 		<Node meta:X="444" meta:Y="164" GUID="91e41773-f187-46c6-906d-f87d59996682">
 			<Line>
-				<MultilineString>The beast crushes you, you broken body being consumed by its foul maw.</MultilineString>
+				<MultilineString>SewerOutflowContent.Node.[0] Line.Line.MultilineString:8eb3e107-6858-46c7-a3e5-58b607846b65</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -21,7 +21,7 @@
 		</Node>
 		<Node meta:X="446" meta:Y="-25" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
-				<MultilineString>You slay the creature, overcoming you disgust at it foul, mutated body. From within a powerful soul flows out, coalescing into a solid crystal in your hands. Someone may be able to do something with this.</MultilineString>
+				<MultilineString>SewerOutflowContent.Node.[0] Line.Line.MultilineString:c7e79df4-595b-4ae2-9615-c88365f1b849</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Item>

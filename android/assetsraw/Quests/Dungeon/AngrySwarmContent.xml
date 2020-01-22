@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="a00375d2-271e-4d14-9755-980bf37583bd">
 			<Line>
-				<MultilineString>As you are walking down a corridor a quick skittering sound alerts you to something coming your way.</MultilineString>
+				<MultilineString>AngrySwarmContent.Node.[0] Line.Line.MultilineString:ce11b1e2-754e-415f-8f1e-a076ee707b56</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>Suddenly a pack of large, vicious rats springs out at you.</MultilineString>
+				<MultilineString>AngrySwarmContent.Node.[1] Line.Line.MultilineString:7e4b7edb-3bca-4a5b-a40b-b12cb88c5df7</MultilineString>
 			</Line>
 			<Match3>
 				<Level>AngrySwarmContentLevel</Level>
@@ -16,7 +16,7 @@
 		</Node>
 		<Node meta:X="439" meta:Y="199" GUID="f13f7a12-49df-4d42-8cd2-ae495fc4535e">
 			<Line>
-				<MultilineString>The rats bring you down, their teeth ripping your life away.</MultilineString>
+				<MultilineString>AngrySwarmContent.Node.[0] Line.Line.MultilineString:bf81b2f3-e7ac-49bc-a7c8-15980fe5e22f</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Failure</State>
@@ -24,40 +24,25 @@
 		</Node>
 		<Node meta:X="476" meta:Y="0" GUID="abc741de-6c49-4129-ab5e-6dc19568f80d">
 			<Line>
-				<MultilineString>You manage to bring them all down.</MultilineString>
+				<MultilineString>AngrySwarmContent.Node.[0] Line.Line.MultilineString:ebb0bfb1-a5c8-4004-a401-e022380fe592</MultilineString>
 			</Line>
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Chance>Medium</Chance>
 					<Statistics meta:RefKey="Statistics">
 						<Health>2</Health>
-						<MatchDamage>0</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 				<Statistics>
 					<Chance>Medium</Chance>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
 						<MatchDamage>0.5</MatchDamage>
-						<AbilityDamage>0</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 				<Statistics>
 					<Chance>Medium</Chance>
 					<Statistics meta:RefKey="Statistics">
-						<Health>0</Health>
-						<MatchDamage>0</MatchDamage>
 						<AbilityDamage>1</AbilityDamage>
-						<PowerGain>0</PowerGain>
-						<BonusGold>0</BonusGold>
-						<BonusTime>0</BonusTime>
 					</Statistics>
 				</Statistics>
 			</Rewards>

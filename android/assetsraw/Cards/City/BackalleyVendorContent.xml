@@ -3,10 +3,10 @@
 	<Nodes>
 		<Node meta:X="204" meta:Y="0" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Line>
-				<MultilineString>As you wander down the alley you come across a stall set into the wall. The shady man behind it gestures you over, revealing a large collection of items.</MultilineString>
+				<MultilineString>BackalleyVendorContent.Node.[0] Line.Line.MultilineString:d8aed54b-98a6-4dd7-a7d4-369d76f6082c</MultilineString>
 			</Line>
 			<Line>
-				<MultilineString>"Find something that interests you friend? I've got great prices for those who don't ask too many questions about where the items came from."</MultilineString>
+				<MultilineString>BackalleyVendorContent.Node.[1] Line.Line.MultilineString:9b1a6e27-548e-4f93-8e5b-4d1fbfcff4a0</MultilineString>
 			</Line>
 			<Shop>
 				<Shopkeep meta:RefKey="Sprite">
@@ -15,17 +15,31 @@
 				</Shopkeep>
 				<CostMultiplier>0.6</CostMultiplier>
 				<Items>
-					<Equipment />
-					<Equipment />
-					<Equipment />
-					<Equipment />
-					<Equipment />
-					<Equipment />
-					<Equipment />
+					<Equipment>
+						<FromDeck>true</FromDeck>
+					</Equipment>
+					<Equipment>
+						<FromDeck>true</FromDeck>
+					</Equipment>
+					<Equipment>
+						<FromDeck>true</FromDeck>
+					</Equipment>
+					<Equipment>
+						<FromDeck>true</FromDeck>
+					</Equipment>
+					<Equipment>
+						<FromDeck>true</FromDeck>
+					</Equipment>
+					<Equipment>
+						<FromDeck>true</FromDeck>
+					</Equipment>
+					<Equipment>
+						<FromDeck>true</FromDeck>
+					</Equipment>
 				</Items>
 			</Shop>
 			<Line>
-				<MultilineString>"Nice to do business with ya. If anything happens to come into your possession that may have belonged to someone else, then come see me. I'll take it off your hands."</MultilineString>
+				<MultilineString>BackalleyVendorContent.Node.[3] Line.Line.MultilineString:ceca99da-768b-4934-a2b9-336bbdc6c73b</MultilineString>
 			</Line>
 			<MarkComplete>
 				<State>Success</State>
