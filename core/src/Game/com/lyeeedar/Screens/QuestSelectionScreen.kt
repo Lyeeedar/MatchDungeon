@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
+import com.lyeeedar.Game.COMPLETED_INTRO
 import com.lyeeedar.Game.GameStateFlags
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Game.Quest
@@ -209,12 +210,6 @@ class QuestSelectionScreen : AbstractScreen()
 		mainTable.row()
 
 		updateQuestsTable()
-
-		if (!Statics.settings.get("CompletedIntro", false))
-		{
-			Statics.analytics.tutorialEnd()
-		}
-		Statics.settings.set("CompletedIntro", true)
 	}
 
 	fun updateQuestsTable()
@@ -312,11 +307,17 @@ class QuestSelectionScreen : AbstractScreen()
 		super.show()
 
 		val tutorial = Tutorial("QuestSelection")
-		tutorial.addDelay(1f)
+		tutorial.addDelay(0.5f)
 		tutorial.addPopup("This is the quest selection screen.", Any())
 		tutorial.addPopup("You can pick a quest from those you have unlocked here. Just tap the card you want, then tap 'embark'.", scrollTable)
 		tutorial.addPopup("You can edit your deck of cards here. This will allow you to customise your quest experience.", editButton)
 		tutorial.show()
+
+		if (!Statics.settings.get(COMPLETED_INTRO, false))
+		{
+			Statics.analytics.tutorialEnd()
+		}
+		Statics.settings.set(COMPLETED_INTRO, true)
 	}
 
 	override fun doRender(delta: Float)

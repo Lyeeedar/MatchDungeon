@@ -1,7 +1,7 @@
-<CardContent meta:X="-222.77835611663636" meta:Y="2.0820407113704333" GUID="2e75113f-f7ab-4674-a8cd-1bbbc79542a5" xmlns:meta="Editor">
+<CardContent meta:X="0" meta:Y="0" GUID="2e75113f-f7ab-4674-a8cd-1bbbc79542a5" xmlns:meta="Editor">
 	<Root meta:RefKey="Node">19fe8d84-b639-475e-9e4f-c9146798af72</Root>
 	<Nodes>
-		<Node meta:X="204" meta:Y="0" GUID="557a5d42-729b-4f65-aec0-e353174bd6f2">
+		<Node meta:X="639" meta:Y="0" GUID="557a5d42-729b-4f65-aec0-e353174bd6f2">
 			<Line>
 				<MultilineString>You wake up in the morning, still groggy from sleep. Your bed is oh so very inviting.</MultilineString>
 			</Line>
@@ -14,7 +14,7 @@
 				<Failure meta:RefKey="Node">e8a56e16-d8c5-45d6-a4c3-0737d17a711f</Failure>
 			</Match3>
 		</Node>
-		<Node meta:X="489" meta:Y="198" GUID="e8a56e16-d8c5-45d6-a4c3-0737d17a711f">
+		<Node meta:X="924" meta:Y="198" GUID="e8a56e16-d8c5-45d6-a4c3-0737d17a711f">
 			<Line>
 				<MultilineString>You roll over and go back to sleep. The day can wait.</MultilineString>
 			</Line>
@@ -22,7 +22,7 @@
 				<State>Failure</State>
 			</MarkComplete>
 		</Node>
-		<Node meta:X="481" meta:Y="0" GUID="5cb73d5d-6f08-4643-a2c2-386648ceb16b">
+		<Node meta:X="916" meta:Y="0" GUID="5cb73d5d-6f08-4643-a2c2-386648ceb16b">
 			<Line>
 				<MultilineString>You force yourself to get up. You really should face the day.</MultilineString>
 			</Line>
@@ -30,28 +30,45 @@
 				<State>Success</State>
 			</MarkComplete>
 		</Node>
-		<Node meta:X="-58.309425686662976" meta:Y="15.436197801589593" GUID="19fe8d84-b639-475e-9e4f-c9146798af72">
+		<Node meta:X="150" meta:Y="0" GUID="19fe8d84-b639-475e-9e4f-c9146798af72">
 			<Line>
 				<MultilineString>Play introduction?</MultilineString>
 			</Line>
 			<Choice>
 				<Choices>
 					<Choice>
-						<Text>Yes</Text>
+						<Text>Play Introduction</Text>
 						<Node meta:RefKey="Node">557a5d42-729b-4f65-aec0-e353174bd6f2</Node>
 					</Choice>
 					<Choice>
-						<Text>No</Text>
-						<Node meta:RefKey="Node">6898caba-4ea8-4c83-af87-36f8ed81e209</Node>
+						<Text>Skip Introduction</Text>
+						<Node meta:RefKey="Node">5bfddb91-dbd5-4ec7-bff5-3f106c1e106b</Node>
 					</Choice>
 				</Choices>
 			</Choice>
 		</Node>
-		<Node meta:X="170.57969223364432" meta:Y="261.81101531375748" GUID="6898caba-4ea8-4c83-af87-36f8ed81e209">
+		<Node meta:X="615" meta:Y="465" GUID="6898caba-4ea8-4c83-af87-36f8ed81e209">
 			<MarkComplete>
 				<State>Custom</State>
 				<Key>Skip</Key>
 			</MarkComplete>
+		</Node>
+		<Node meta:X="375" meta:Y="135" GUID="5bfddb91-dbd5-4ec7-bff5-3f106c1e106b">
+			<Line>
+				<MultilineString>Are you sure you want to skip the introduction?</MultilineString>
+			</Line>
+			<Choice>
+				<Choices>
+					<Choice>
+						<Text>Play the introduction.</Text>
+						<Node meta:RefKey="Node">557a5d42-729b-4f65-aec0-e353174bd6f2</Node>
+					</Choice>
+					<Choice>
+						<Text>Skip introduction.</Text>
+						<Node meta:RefKey="Node">6898caba-4ea8-4c83-af87-36f8ed81e209</Node>
+					</Choice>
+				</Choices>
+			</Choice>
 		</Node>
 	</Nodes>
 </CardContent>

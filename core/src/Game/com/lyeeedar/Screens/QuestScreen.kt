@@ -94,7 +94,7 @@ class QuestScreen : AbstractScreen()
 		statsAndAbandon.add(statsTable).expand().left()
 
 
-		if (Statics.settings.get("CompletedIntro", false))
+		if (Statics.settings.get(COMPLETED_INTRO, false))
 		{
 			val abandonQuestButton = TextButton("Abandon Quest", Statics.skin)
 			abandonQuestButton.addClickListener {

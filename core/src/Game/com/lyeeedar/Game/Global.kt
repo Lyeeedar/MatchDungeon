@@ -145,8 +145,7 @@ class GlobalDeck
 			equipment.add(equip)
 		}
 
-		characters.add(Character.load("Peasant"))
-		chosenCharacter = characters.first()
+		chosenCharacter = Character.load("Peasant")
 
 		playerDeck.equipment.addAll(equipment)
 		playerDeck.encounters.addAll(encounters)
@@ -317,7 +316,14 @@ class GlobalDeck
 			}
 
 			val chosenCharacterHash = input.readInt()
-			deck.chosenCharacter = deck.characters.uniqueMap[chosenCharacterHash]
+			if (deck.characters.size == 0)
+			{
+				deck.chosenCharacter = Character.load("Peasant")
+			}
+			else
+			{
+				deck.chosenCharacter = deck.characters.uniqueMap[chosenCharacterHash]
+			}
 
 			deck.hasNewCharacters = input.readBoolean()
 			deck.hasNewEncounters = input.readBoolean()
@@ -355,3 +361,4 @@ class GameStateFlags
 	}
 }
 
+const val COMPLETED_INTRO = "completed_intro"
