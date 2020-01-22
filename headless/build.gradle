@@ -37,3 +37,10 @@ task releaseAndroidToPlaystore(dependsOn: classes, type: JavaExec) {
     standardInput = System.in
     workingDir =  new File("../")
 }
+
+task autoLocalise(dependsOn: classes, type: JavaExec) {
+    main = "com.lyeeedar.headless.AutoLocaliser"
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+    workingDir =  new File("../android/assets")
+}
