@@ -2,9 +2,9 @@
 	<Root meta:RefKey="CardNode">1dfc0c79-7789-4a5c-838c-01b04f50b09d</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="1dfc0c79-7789-4a5c-838c-01b04f50b09d">
-			<Name>Breakout</Name>
-			<Description>Some treasure sits balanced at the end of a precarious pile of things. It'll be all yours if you can break it out.</Description>
-			<Rarity>Bronze</Rarity>
+			<Name>Breakout.CardNode.Name:31dc34c7-17c1-4bca-acef-c70ab7033bb2</Name>
+			<Description>Breakout.CardNode.Description:9f3b0023-01eb-4099-80e2-969a85f75dbf</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>BreakoutContent</Content>
 		</CardNode>
 	</Nodes>

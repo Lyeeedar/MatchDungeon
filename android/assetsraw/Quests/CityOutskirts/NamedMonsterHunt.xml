@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Named Monster Hunt</Name>
-			<Description>You get a quest to hunt and slay a named creature, a beast more formidable and ferocious than your average foe.</Description>
+			<Name>NamedMonsterHunt.CardNode.Name:9afafb39-4c15-4f9e-adb6-990d517ddda0</Name>
+			<Description>NamedMonsterHunt.CardNode.Description:12d71678-089b-44db-ad3b-d99a0ca7942b</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>NamedMonsterHuntContent</Content>
 		</CardNode>

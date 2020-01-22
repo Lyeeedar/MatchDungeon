@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">b3a89d2c-d95d-474b-b2c8-8ccede8e5581</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="b3a89d2c-d95d-474b-b2c8-8ccede8e5581">
-			<Name>Evil Altar</Name>
-			<Description>An evil altar sits up ahead. With vigorous prayer you can cleanse it of its corruption.</Description>
+			<Name>EvilAltar.CardNode.Name:f8bc62b5-47a6-448c-b6f1-87f590a6d3b4</Name>
+			<Description>EvilAltar.CardNode.Description:3e064189-1873-4d77-bd4b-538bbfe0f113</Description>
 			<SpawnWeighting>Middle</SpawnWeighting>
 			<Content>EvilAltarContent</Content>
 		</CardNode>

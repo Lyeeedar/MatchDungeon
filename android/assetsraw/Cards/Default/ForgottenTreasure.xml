@@ -2,9 +2,9 @@
 	<Root meta:RefKey="CardNode">722c2748-8c0c-41b0-96d2-795fe63e1e75</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="722c2748-8c0c-41b0-96d2-795fe63e1e75">
-			<Name>Forgotten Treasure</Name>
-			<Description>You stumble across a forgotten stash of treasure. It's yours for the taking!</Description>
-			<Rarity>Bronze</Rarity>
+			<Name>ForgottenTreasure.CardNode.Name:45ada08c-0403-4ba1-a998-abeb222628bc</Name>
+			<Description>ForgottenTreasure.CardNode.Description:1bacfb84-71b9-4df8-81bb-fb198d4276b6</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>ForgottenTreasureContent</Content>
 		</CardNode>
 	</Nodes>

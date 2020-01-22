@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">5a32b3d4-23bc-4971-b586-ca2813693e5c</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="5a32b3d4-23bc-4971-b586-ca2813693e5c">
-			<Name>Combat Training</Name>
-			<Description>To survive as an adventurer you must be proficient at combat. Have you trained enough?</Description>
+			<Name>CombatTraining.CardNode.Name:b78dd978-2898-4dd3-a55b-0a647f6bce1a</Name>
+			<Description>CombatTraining.CardNode.Description:3e19a24b-b0d9-4d73-b064-09ed11fa5f65</Description>
 			<SpawnWeighting>Start</SpawnWeighting>
 			<Content>CombatTrainingContent</Content>
 		</CardNode>

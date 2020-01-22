@@ -1,38 +1,37 @@
-<Card meta:X="-81" meta:Y="-8" GUID="a2361de1-fa39-4522-baa1-07b6765f22b4" xmlns:meta="Editor">
-	<CharacterRestriction>Peasant</CharacterRestriction>
+<Card meta:X="0" meta:Y="0" GUID="a2361de1-fa39-4522-baa1-07b6765f22b4" xmlns:meta="Editor">
 	<Root meta:RefKey="CardNode">b5b4cf07-d46e-4574-95e2-58cf7c7a0b9e</Root>
 	<Nodes>
-		<CardNode meta:X="179.31297302246094" meta:Y="-5.0805263519287109" GUID="b5b4cf07-d46e-4574-95e2-58cf7c7a0b9e">
-			<Name>Goblin Scourge 1:Raiding Party</Name>
-			<Description>Your peaceful farm life is shattered by the chittering cries of goblins smashing their way into your house.</Description>
+		<CardNode meta:X="260.31298828125" meta:Y="2.9194736480712891" GUID="b5b4cf07-d46e-4574-95e2-58cf7c7a0b9e">
+			<Name>GoblinScourge.CardNode.Name:00f0f3ca-6c85-4fba-a15e-5db463043100</Name>
+			<Description>GoblinScourge.CardNode.Description:b349906e-cc10-4e54-97d8-af9d0330cd2f</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>RaidingParty</Content>
 			<Next meta:RefKey="CardNode">4b7fe158-3c51-4449-b7cd-d8dd55169ec2</Next>
 		</CardNode>
-		<CardNode meta:X="492.31298828125" meta:Y="-4.0805263519287109" GUID="4b7fe158-3c51-4449-b7cd-d8dd55169ec2">
-			<Name>Goblin Scourge 2:Village Rescue</Name>
-			<Description>You arrive at the village only to find it in flames. Quick, rescue anyone you can!</Description>
+		<CardNode meta:X="573.31298828125" meta:Y="3.9194736480712891" GUID="4b7fe158-3c51-4449-b7cd-d8dd55169ec2">
+			<Name>GoblinScourge.CardNode.Name:0da26b7b-0001-4cc2-823e-aec3d575e8b9</Name>
+			<Description>GoblinScourge.CardNode.Description:4141caeb-07c4-4b3f-9a2a-ac74eb9ef05c</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>VillageRescue</Content>
 			<Next meta:RefKey="CardNode">c520ba0d-4247-46cb-a51c-800fcb097a9c</Next>
 		</CardNode>
-		<CardNode meta:X="802.31298828125" meta:Y="-5.0805263519287109" GUID="c520ba0d-4247-46cb-a51c-800fcb097a9c">
-			<Name>Goblin Scourge 3:Goblin Shaman</Name>
-			<Description>At the center of the village stands a savage goblin shaman, the small beast directing the goblin hoard. Take your revenge on him.</Description>
+		<CardNode meta:X="883.31298828125" meta:Y="2.9194736480712891" GUID="c520ba0d-4247-46cb-a51c-800fcb097a9c">
+			<Name>GoblinScourge.CardNode.Name:94297232-fced-4c92-94ca-83ecd6dcf58f</Name>
+			<Description>GoblinScourge.CardNode.Description:f75fb60c-287d-4394-a80d-b0ba84f9c6b3</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>GoblinShaman</Content>
 			<Next meta:RefKey="CardNode">bd399de9-85e1-434d-833b-7927948c4e47</Next>
 		</CardNode>
-		<CardNode meta:X="1115.31298828125" meta:Y="-5.0805263519287109" GUID="bd399de9-85e1-434d-833b-7927948c4e47">
-			<Name>Goblin Scourge 4:Tracking</Name>
-			<Description>The goblins have fled, leaving the village in ruins. You decide to track them back to their lair.</Description>
+		<CardNode meta:X="1196.31298828125" meta:Y="2.9194736480712891" GUID="bd399de9-85e1-434d-833b-7927948c4e47">
+			<Name>GoblinScourge.CardNode.Name:a31668e1-dd01-4f08-ab8b-1497fb42b2dc</Name>
+			<Description>GoblinScourge.CardNode.Description:3297ae9a-0a30-4b95-9ef3-15f388adf6d1</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>TrackingContent</Content>
 			<Next meta:RefKey="CardNode">6e34ff8e-e6c5-4665-8259-d1633e65f661</Next>
 		</CardNode>
-		<CardNode meta:X="1434" meta:Y="-3.6666667461395264" GUID="6e34ff8e-e6c5-4665-8259-d1633e65f661">
-			<Name>Goblin Scourge 5:Payback</Name>
-			<Description>You see the goblins have erected a small town of tents in the cavern. It would be a shame if someone destroyed it all.</Description>
+		<CardNode meta:X="1515" meta:Y="4.3333330154418945" GUID="6e34ff8e-e6c5-4665-8259-d1633e65f661">
+			<Name>GoblinScourge.CardNode.Name:cef07994-e73d-4a16-a329-808cfe604130</Name>
+			<Description>GoblinScourge.CardNode.Description:21f65652-50d2-4e72-9a99-c09fb0a23f92</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>PaybackContent</Content>
 		</CardNode>

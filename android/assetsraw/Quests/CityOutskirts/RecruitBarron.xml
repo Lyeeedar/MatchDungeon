@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">51527c4f-faeb-46ec-8e7f-3702be290034</Root>
 	<Nodes>
 		<CardNode meta:X="263" meta:Y="0" GUID="51527c4f-faeb-46ec-8e7f-3702be290034">
-			<Name>Recruit Barron</Name>
-			<Description>You find Barron facing down a hoard of enemies...</Description>
+			<Name>RecruitBarron.CardNode.Name:6e7ed624-ef01-4f71-b15a-8cf046993462</Name>
+			<Description>RecruitBarron.CardNode.Description:f20ada2f-28da-4ad0-b528-c9614997df90</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>RecruitBarronContent</Content>
 		</CardNode>

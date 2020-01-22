@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Alchemy Guild 2:Forgaging Test</Name>
-			<Description>To join you alchemists guild you have to take 3 examinations. The second is to test your skill at identifying wild herbs.</Description>
+			<Name>ForagingTest.CardNode.Name:37549f88-778e-44b1-bf95-0a30f6067232</Name>
+			<Description>ForagingTest.CardNode.Description:96fca8b0-b1fc-46b8-84dc-331d0a48f586</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>ForagingTestContent</Content>
 		</CardNode>

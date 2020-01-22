@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Tournament</Name>
-			<Description>The annual adventurers tournament is the place for a budding explorer to showcase their talents.</Description>
+			<Name>Tournament.CardNode.Name:9c5ca78b-7bac-4977-8a7b-c31de828cb11</Name>
+			<Description>Tournament.CardNode.Description:3671b743-c4a2-4e4c-b943-f9ba3b63c8c5</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>TournamentContent</Content>
 		</CardNode>

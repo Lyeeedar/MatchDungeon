@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">6657676c-9573-4f82-b23c-241cbdf6857c</Root>
 	<Nodes>
 		<CardNode meta:X="279" meta:Y="-12" GUID="6657676c-9573-4f82-b23c-241cbdf6857c">
-			<Name>Crossroads</Name>
-			<Description>Where to go next...</Description>
+			<Name>PartyBranch.CardNode.Name:9eee12a4-4fbd-42d0-bf32-3fcefaa5671e</Name>
+			<Description>PartyBranch.CardNode.Description:363880ba-6c20-44c2-9863-3ff22e21d6f4</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>PartyBranchContent</Content>
 		</CardNode>

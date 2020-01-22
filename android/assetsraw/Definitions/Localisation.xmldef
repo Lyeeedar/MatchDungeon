@@ -1,0 +1,10 @@
+<Definitions Colour="252,236,193" Icon="Sprites/Oryx/Custom/items/paper.png" xmlns:meta="Editor">
+	<Definition Name="Localisation" meta:RefKey="Collection">
+		<Data Name="Text" HasAttributes="True" meta:RefKey="String">
+			<Attributes meta:RefKey="Attributes">
+				<Attribute Name="ID" meta:RefKey="String" />
+				<Attribute Name="Translated" meta:RefKey="Boolean" />
+			</Attributes>
+		</Data>
+	</Definition>
+</Definitions>

@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">38074b4a-fd89-4c48-81b2-7a57b08ba89c</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="38074b4a-fd89-4c48-81b2-7a57b08ba89c">
-			<Name>Monsterous Menace</Name>
-			<Description>A group of giant creatures lurks beyond, the remains of dead adventurers littered around them.</Description>
+			<Name>MonsterousMenace.CardNode.Name:346b7fad-7446-45a1-bf83-27f0ee75354b</Name>
+			<Description>MonsterousMenace.CardNode.Description:8989c2c3-7809-4f82-a586-2078dc48d6e7</Description>
 			<SpawnWeighting>End</SpawnWeighting>
 			<Content>MonsterousMenaceContent</Content>
 		</CardNode>

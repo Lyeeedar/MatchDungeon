@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Experimental Drug</Name>
-			<Description>You find an advertisement asking for volunteers to try a new drug.</Description>
+			<Name>ExperimentalDrug.CardNode.Name:52d6eeb6-dee6-42de-9894-17be681e466b</Name>
+			<Description>ExperimentalDrug.CardNode.Description:da99181f-80e0-4aca-a8ea-186821074761</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>ExperimentalDrugContent</Content>
 		</CardNode>

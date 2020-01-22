@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">e913b369-9ea8-41b5-8ffc-1852709b2ca6</Root>
 	<Nodes>
 		<CardNode meta:X="263" meta:Y="0" GUID="e913b369-9ea8-41b5-8ffc-1852709b2ca6">
-			<Name>Recruit Ruffletop</Name>
-			<Description>You find Ruffletop in the tavern, chatting to a young lady...</Description>
+			<Name>RecruitRuffletop.CardNode.Name:166f1ef8-a79f-4eed-bc64-716670f4f2b9</Name>
+			<Description>RecruitRuffletop.CardNode.Description:84dcec3a-3eef-48e1-a9d0-369744a807bf</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>RecruitRuffletopContent</Content>
 		</CardNode>

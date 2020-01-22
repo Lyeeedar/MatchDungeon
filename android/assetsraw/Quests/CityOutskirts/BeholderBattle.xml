@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">8c49b357-5f3b-40d0-b140-cb495ab9c282</Root>
 	<Nodes>
 		<CardNode meta:X="263" meta:Y="0" GUID="8c49b357-5f3b-40d0-b140-cb495ab9c282">
-			<Name>Boss Battle</Name>
-			<Description>You finally make your way to the heart of the cave. There the party prepares for a tough battle.</Description>
+			<Name>BeholderBattle.CardNode.Name:a834634d-fb9b-496e-9065-02fa2f62e4ad</Name>
+			<Description>BeholderBattle.CardNode.Description:93e35379-f311-4977-ac9d-8bcff126d742</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>BeholderBattleContent</Content>
 		</CardNode>

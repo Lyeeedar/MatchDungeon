@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">f8e114aa-2944-411f-b177-ab538fbb3fe9</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="f8e114aa-2944-411f-b177-ab538fbb3fe9">
-			<Name>Locked Chest</Name>
-			<Description>You stumble across a chest, still locked. If you can break it open you may be able to grab some loot.</Description>
+			<Name>LockedChest.CardNode.Name:be105678-fdd1-445f-a97b-c133f498f641</Name>
+			<Description>LockedChest.CardNode.Description:cbd750f8-6cf5-46eb-afd1-4c6fb60f7779</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>LockedChestContent</Content>
 		</CardNode>

@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">68161b5c-dbd2-4c08-bb1c-51f692a14a8d</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="68161b5c-dbd2-4c08-bb1c-51f692a14a8d">
-			<Name>Rat King</Name>
-			<Description>You finally come across the boss, an enormous rat wearing a glowing crown.</Description>
+			<Name>RatKingBattle.CardNode.Name:c560f13b-c645-49f8-aba1-d6a69416f6ef</Name>
+			<Description>RatKingBattle.CardNode.Description:f355553a-363a-469a-9f88-49707d9a58b3</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>RatKingBattleContent</Content>
 		</CardNode>

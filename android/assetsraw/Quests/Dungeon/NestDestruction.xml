@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">d9a5d800-4c48-416c-97cf-9d97de33dc6b</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="1" GUID="d9a5d800-4c48-416c-97cf-9d97de33dc6b">
-			<Name>Writhing Nest</Name>
-			<Description>You come across a nest writhing with rat bodies. This is a perfect chance to thin the hordes numbers.</Description>
+			<Name>NestDestruction.CardNode.Name:76377f9f-3857-498f-833a-44c5c48979e0</Name>
+			<Description>NestDestruction.CardNode.Description:8f4064c4-ea95-4a09-9ffc-d3f7acdf9bd6</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>NestDestructionContent</Content>
 		</CardNode>

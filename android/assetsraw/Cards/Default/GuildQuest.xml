@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Guild Quest</Name>
-			<Description>The adventurers guild posts all sorts of quests.</Description>
+			<Name>GuildQuest.CardNode.Name:26cce429-c238-4fc5-bd71-2de8e1d26e7c</Name>
+			<Description>GuildQuest.CardNode.Description:e61089de-6b1c-4aa0-af44-16dcff4dc969</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>GuildQuestContent</Content>
 		</CardNode>

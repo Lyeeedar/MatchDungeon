@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">d2b3e896-001f-4ac9-91b6-50cd237770b9</Root>
 	<Nodes>
 		<CardNode meta:X="263" meta:Y="0" GUID="d2b3e896-001f-4ac9-91b6-50cd237770b9">
-			<Name>Raid</Name>
-			<Description>Grayheart invites you on another boss raid.</Description>
+			<Name>Raid.CardNode.Name:e11bd967-00b8-4cad-9c7d-24433a28867d</Name>
+			<Description>Raid.CardNode.Description:9a482fa9-805e-49d8-962e-f5d389b75dee</Description>
 			<SpawnWeighting>MiddleEnd</SpawnWeighting>
 			<Content>RaidContent</Content>
 		</CardNode>

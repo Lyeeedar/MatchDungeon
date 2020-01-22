@@ -3,8 +3,8 @@
 		<Data Name="Root" Keys="CardNode" meta:RefKey="GraphReference" />
 	</Definition>
 	<Definition Name="CardNode" meta:RefKey="GraphStructDef">
-		<Data Name="Name" SkipIfDefault="False" meta:RefKey="String" />
-		<Data Name="Description" MaxLength="250" SkipIfDefault="False" meta:RefKey="String" />
+		<Data Name="Name" NeedsLocalisation="True" LocalisationFile="Card" SkipIfDefault="False" meta:RefKey="String" />
+		<Data Name="Description" MaxLength="250" NeedsLocalisation="True" LocalisationFile="Card" SkipIfDefault="False" meta:RefKey="String" />
 		<Data Name="SpawnWeighting" EnumValues="Any,Start,StartMiddle,Middle,MiddleEnd,End" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="IsShop" meta:RefKey="Boolean" />
 		<Data Name="HiddenRewards" meta:RefKey="Boolean" />

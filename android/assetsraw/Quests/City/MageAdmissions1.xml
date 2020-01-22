@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Mage Academy 1:Admissions 1</Name>
-			<Description>You arrive at the mage academy and wait in a long queue to enter the admissions exams.</Description>
+			<Name>MageAdmissions1.CardNode.Name:a7f8f912-152f-4729-90e4-05d3e283fb9a</Name>
+			<Description>MageAdmissions1.CardNode.Description:a2f919b3-2eac-4714-aebe-b617103793b7</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>MageAdmissions1Content</Content>
 		</CardNode>

@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">50d5f400-24df-4190-a333-6fe004ca8a5d</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="50d5f400-24df-4190-a333-6fe004ca8a5d">
-			<Name>Travelling Merchant</Name>
-			<Description>You stumble across a travelling merchant, burdened by a multitude of goods.</Description>
+			<Name>TravellingMerchant.CardNode.Name:93a6eca7-4bd1-475e-bab0-bf31f5cebdab</Name>
+			<Description>TravellingMerchant.CardNode.Description:c0b5f321-17d2-4a97-9281-42a3a192d4d9</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<IsShop>true</IsShop>
 			<Content>TravellingMerchantContent</Content>

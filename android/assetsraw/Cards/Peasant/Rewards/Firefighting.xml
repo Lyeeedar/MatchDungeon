@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">13893db2-1b88-4a90-9a20-7d387df2af6a</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="13893db2-1b88-4a90-9a20-7d387df2af6a">
-			<Name>Firefighting</Name>
-			<Description>As you walk through the city you come across a blazing building. Some shouts indicate there are still people trapped inside.</Description>
+			<Name>Firefighting.CardNode.Name:b5f70356-8609-4f48-aab0-95bb29d05a84</Name>
+			<Description>Firefighting.CardNode.Description:b92d5157-05c1-41f0-99b6-1d59d9134091</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>FirefightingContent</Content>
 		</CardNode>

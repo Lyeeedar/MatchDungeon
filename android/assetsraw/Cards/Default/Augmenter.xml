@@ -1,9 +1,9 @@
-<Card meta:X="-1" meta:Y="0" GUID="3b2169cd-2f17-43b6-b434-b2180e6c404d" xmlns:meta="Editor">
+<Card meta:X="0" meta:Y="0" GUID="3b2169cd-2f17-43b6-b434-b2180e6c404d" xmlns:meta="Editor">
 	<Root meta:RefKey="CardNode">ebe8512c-e450-4d06-87f8-8502632e8073</Root>
 	<Nodes>
-		<CardNode meta:X="262" meta:Y="0" GUID="ebe8512c-e450-4d06-87f8-8502632e8073">
-			<Name>Augmenter</Name>
-			<Description>There is a man who can enchant your very body, for a price.</Description>
+		<CardNode meta:X="263" meta:Y="0" GUID="ebe8512c-e450-4d06-87f8-8502632e8073">
+			<Name>Augmenter.CardNode.Name:685b20d0-9f24-4734-9cef-0419abb715bf</Name>
+			<Description>Augmenter.CardNode.Description:dbbe2ef7-18f8-4fcb-93f1-5fd7cbecd10f</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<IsShop>true</IsShop>
 			<Content>AugmenterContent</Content>

@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abc93984-1977-4b49-ab5c-2c995a65646a</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abc93984-1977-4b49-ab5c-2c995a65646a">
-			<Name>Frantic Search</Name>
-			<Description>You stumble across a room filled with locked chests. In the distance you can hear the sound of approaching monsters. Loot before they arrive!</Description>
+			<Name>FranticSearch.CardNode.Name:d689e648-ad78-4075-be4d-d4117d599bfe</Name>
+			<Description>FranticSearch.CardNode.Description:b1bdac5e-7958-42b8-942f-f77e1ed4ab1d</Description>
 			<SpawnWeighting>MiddleEnd</SpawnWeighting>
 			<Content>FranticSearchContent</Content>
 		</CardNode>

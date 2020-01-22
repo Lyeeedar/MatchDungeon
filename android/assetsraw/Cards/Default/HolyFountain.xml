@@ -2,9 +2,9 @@
 	<Root meta:RefKey="CardNode">f7d02d6a-62e7-45b2-aadb-c8d3ff9ff0f8</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="f7d02d6a-62e7-45b2-aadb-c8d3ff9ff0f8">
-			<Name>Holy Fountain</Name>
-			<Description>You stumble across a fountain, filled with water that glows with a holy light. The only issue is the swarm of monsters surrounding it.</Description>
-			<Rarity>Bronze</Rarity>
+			<Name>HolyFountain.CardNode.Name:4854438c-d093-4129-9575-780af7e099bb</Name>
+			<Description>HolyFountain.CardNode.Description:a666e3b7-672f-4af8-8eb0-1f9933f88e56</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>HolyFountainContent</Content>
 		</CardNode>
 	</Nodes>

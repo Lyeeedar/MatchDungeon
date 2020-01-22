@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>The Vile Witch</Name>
-			<Description>You enter what looks like a giant cocoon. Webs cover every surface, and in the center lurks a vast, vile creature.</Description>
+			<Name>VileWitch.CardNode.Name:59c2038a-901f-4f32-a67e-bd05959db837</Name>
+			<Description>VileWitch.CardNode.Description:844c93ba-2f43-435d-91a0-0b2a5d6fb781</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>VileWitchContent</Content>
 		</CardNode>

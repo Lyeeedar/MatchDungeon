@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">3a94c1e7-874f-47d6-9a7e-ea78c90f0768</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="3a94c1e7-874f-47d6-9a7e-ea78c90f0768">
-			<Name>Temple Prayers</Name>
-			<Description>Sometimes the gods listen to the prayers of the faithful. Were the gods attentive to you?</Description>
+			<Name>TemplePrayers.CardNode.Name:b459ce78-34b1-4c27-9483-0b6f06645a7a</Name>
+			<Description>TemplePrayers.CardNode.Description:cd1ea190-536c-4a4b-b416-7dcc005c8930</Description>
 			<SpawnWeighting>Start</SpawnWeighting>
 			<Content>TemplePrayersContent</Content>
 		</CardNode>

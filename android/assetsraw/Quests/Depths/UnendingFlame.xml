@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Unending Flame</Name>
-			<Description>Heat blazes from a giant elemental filling one side of this cavern.</Description>
+			<Name>UnendingFlame.CardNode.Name:545ceba2-3ced-4fd8-9fe6-ecb7429d39c3</Name>
+			<Description>UnendingFlame.CardNode.Description:644e3691-c437-4c26-a442-487987d653e4</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>UnendingFlameContent</Content>
 		</CardNode>

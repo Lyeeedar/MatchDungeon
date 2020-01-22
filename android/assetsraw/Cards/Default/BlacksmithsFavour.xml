@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">933cebad-b0d6-4335-bc1b-1618488eb94e</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="933cebad-b0d6-4335-bc1b-1618488eb94e">
-			<Name>Blacksmiths Favour</Name>
-			<Description>Perfect Preperation is what preserves prosperity. Did you do yours before departing?</Description>
+			<Name>BlacksmithsFavour.CardNode.Name:689ba3dd-ac55-4dcc-83be-a8d17ad49159</Name>
+			<Description>BlacksmithsFavour.CardNode.Description:294d411d-be3b-4107-b202-5b04bc99fcce</Description>
 			<SpawnWeighting>Start</SpawnWeighting>
 			<Content>BlacksmithsFavourContent</Content>
 		</CardNode>

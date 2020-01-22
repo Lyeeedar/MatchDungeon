@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">234881e7-8da2-4b45-b248-cba18953993a</Root>
 	<Nodes>
 		<CardNode meta:X="263" meta:Y="0" GUID="234881e7-8da2-4b45-b248-cba18953993a">
-			<Name>Horde Mode</Name>
-			<Description>You are surrounded by a vast swarm of monsters. Do your best to survive the onslaught!</Description>
+			<Name>HordeMode.CardNode.Name:6e742ca6-8d8c-40a0-9199-1650f834b344</Name>
+			<Description>HordeMode.CardNode.Description:9026b2a8-0515-43e4-8514-d27c60953f6f</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>HordeModeContent</Content>
 		</CardNode>

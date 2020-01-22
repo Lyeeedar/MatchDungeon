@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Blocked Passage</Name>
-			<Description>The passage ahead has collapsed, you'll have to dig through.</Description>
+			<Name>BlockedPassage.CardNode.Name:a4c51f75-16b5-43d1-9533-9a7a6479bfdf</Name>
+			<Description>BlockedPassage.CardNode.Description:93290d66-9dc0-4276-a58f-3df2f9a7122a</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>BlockedPassageContent</Content>
 		</CardNode>

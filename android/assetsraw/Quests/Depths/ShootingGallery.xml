@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Shooting Gallery</Name>
-			<Description>You enter a room dominated by a long bridge. Skeleton mages stand on platforms all long the sides of this room.</Description>
+			<Name>ShootingGallery.CardNode.Name:fc6080dc-31df-428e-93a3-aa29a19bb2a8</Name>
+			<Description>ShootingGallery.CardNode.Description:d22751bd-3d88-4f39-bdae-45c58137c99c</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>ShootingGalleryContent</Content>
 		</CardNode>

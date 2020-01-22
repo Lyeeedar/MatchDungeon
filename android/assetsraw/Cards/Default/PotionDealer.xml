@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">dfe1fbb4-b2fc-4008-ad6c-df1151abb567</Root>
 	<Nodes>
 		<CardNode meta:X="263" meta:Y="0" GUID="dfe1fbb4-b2fc-4008-ad6c-df1151abb567">
-			<Name>Potion Dealer</Name>
-			<Description>You visit an alchemist to buy some potions to enhance your body temporarily.</Description>
+			<Name>PotionDealer.CardNode.Name:74ccb023-0750-418b-9ee3-dcb67d9795f3</Name>
+			<Description>PotionDealer.CardNode.Description:199a3e75-70ea-4a1a-802a-ca53b03f0376</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<IsShop>true</IsShop>
 			<Content>PotionDealerContent</Content>

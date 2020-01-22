@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">758e4151-8efc-4abf-be0c-a419ce9cc313</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="758e4151-8efc-4abf-be0c-a419ce9cc313">
-			<Name>Diamond in the Rough</Name>
-			<Description>Something gleams beneath a mound of debris. Dig it out, it may be worth something.</Description>
+			<Name>DiamondInTheRough.CardNode.Name:00f45994-92dc-4356-ac0d-15e21d6f522c</Name>
+			<Description>DiamondInTheRough.CardNode.Description:7507adc3-a067-407e-8113-0d6ad4ec2371</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>DiamondInTheRoughContent</Content>
 		</CardNode>

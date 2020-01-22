@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Fetch Quest</Name>
-			<Description>One of the most common (and most annoying) quests for an adventurer is the fetch quest.</Description>
+			<Name>FetchQuest.CardNode.Name:bec18691-280d-487d-9eeb-1121d502b970</Name>
+			<Description>FetchQuest.CardNode.Description:0a935a0f-8e8b-44be-a8ff-4f90baa39157</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>FetchQuestContent</Content>
 		</CardNode>

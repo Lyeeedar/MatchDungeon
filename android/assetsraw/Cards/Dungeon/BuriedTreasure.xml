@@ -2,9 +2,9 @@
 	<Root meta:RefKey="CardNode">9e7510bc-dbdd-41f5-8124-60e870b59b60</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="9e7510bc-dbdd-41f5-8124-60e870b59b60">
-			<Name>Buried Treasure</Name>
-			<Description>You never know what you may find if you have a dig around.</Description>
-			<Rarity>Bronze</Rarity>
+			<Name>BuriedTreasure.CardNode.Name:f8372892-6010-44c1-a5ad-6f0987e6eb2e</Name>
+			<Description>BuriedTreasure.CardNode.Description:70ed46f1-4145-4898-a58a-658765177eaf</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>BuriedTreasureContent</Content>
 		</CardNode>
 	</Nodes>

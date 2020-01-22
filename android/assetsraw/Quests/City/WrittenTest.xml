@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Alchemy Guild 1:Written Test</Name>
-			<Description>To join you alchemists guild you have to take 3 examinations. The first is a written paper.</Description>
+			<Name>WrittenTest.CardNode.Name:97597419-7414-4413-b6a4-b1c8df0282fa</Name>
+			<Description>WrittenTest.CardNode.Description:7c9a4289-970e-4054-9e0f-c5f12195c1ce</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>WrittenTestContent</Content>
 		</CardNode>

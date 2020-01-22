@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">e7e04dd5-19d0-4408-8633-bf5ccb0a96db</Root>
 	<Nodes>
 		<CardNode meta:X="263" meta:Y="0" GUID="e7e04dd5-19d0-4408-8633-bf5ccb0a96db">
-			<Name>Career Choices</Name>
-			<Description>The city is filled with opportunities for those willing to seize them</Description>
+			<Name>CareerChoices.CardNode.Name:c1923e31-2b4f-4d3d-83ad-f61871d9a06e</Name>
+			<Description>CareerChoices.CardNode.Description:a5b0869d-373d-401e-b8a7-9c0344ee2aeb</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>CareerChoicesContent</Content>
 		</CardNode>

@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Meditation</Name>
-			<Description>Focus your mind through meditation. Only then can your prepare for whatever happens.</Description>
+			<Name>Meditation.CardNode.Name:6f4c1739-fed2-4992-9cf4-1e53b0212002</Name>
+			<Description>Meditation.CardNode.Description:9930fb36-2e5c-40c6-9763-6f4041f9408b</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>MeditationContent</Content>
 		</CardNode>

@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Favour of the Gods</Name>
-			<Description>It is well know that large donations to the temple also equal large favours from the gods.</Description>
+			<Name>FavourOfTheGods.CardNode.Name:62701986-e96d-44da-8a88-817183eb586e</Name>
+			<Description>FavourOfTheGods.CardNode.Description:e4679be4-a652-41d4-8a39-e690e8d2e711</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>FavourOfTheGodsContent</Content>
 		</CardNode>

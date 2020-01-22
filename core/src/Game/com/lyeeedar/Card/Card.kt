@@ -283,10 +283,10 @@ class CardNode
 	{
 		guid = xmlData.getAttribute("GUID")
 
-		name = xmlData.get("Name")
+		name = Localisation.getText(xmlData.get("Name"), "Card")
 		name = name.replace(":", ":\n")
 
-		description = xmlData.get("Description")
+		description = Localisation.getText(xmlData.get("Description"), "Card")
 		spawnWeight = SpawnWeight.valueOf(xmlData.get("SpawnWeighting", "Any")!!.toUpperCase(Locale.ENGLISH))
 		isShop = xmlData.getBoolean("IsShop", false)
 		hiddenRewards = xmlData.getBoolean("HiddenRewards", false)

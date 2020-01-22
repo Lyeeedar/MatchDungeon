@@ -2,9 +2,9 @@
 	<Root meta:RefKey="CardNode">801d9468-ed3f-4f37-97d4-d6af47e1efbe</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="801d9468-ed3f-4f37-97d4-d6af47e1efbe">
-			<Name>Skipping Stones</Name>
-			<Description>Some water lies between you and shiny loot. If you do this just right the treasure will skip straight into your hands.</Description>
-			<Rarity>Bronze</Rarity>
+			<Name>SkippingStones.CardNode.Name:ccb55f02-d966-40b1-b36c-3f94c21e922d</Name>
+			<Description>SkippingStones.CardNode.Description:abbb49ba-779c-4b35-8222-cfbb2d5f07a1</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>SkippingStonesContent</Content>
 		</CardNode>
 	</Nodes>

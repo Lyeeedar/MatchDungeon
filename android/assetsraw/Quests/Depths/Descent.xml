@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Descent</Name>
-			<Description>With the gate open you can finally descend into the depths.</Description>
+			<Name>Descent.CardNode.Name:6d7c787c-cd96-47c9-829a-b9cc63088c1d</Name>
+			<Description>Descent.CardNode.Description:fda5dc52-1fba-4c2f-b8eb-201cd3def908</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>DescentContent</Content>
 		</CardNode>

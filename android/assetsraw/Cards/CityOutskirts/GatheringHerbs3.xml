@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Gathering Herbs</Name>
-			<Description>People often give quests for gathering potion herbs. These can prove a great source of income for the aspiring adventurer.</Description>
+			<Name>GatheringHerbs3.CardNode.Name:312c06b8-2151-4aa7-9c19-b1cbaff72127</Name>
+			<Description>GatheringHerbs3.CardNode.Description:4510bedf-0c2d-4a0c-b26a-40aa4df4c64e</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>GatheringHerbsContent</Content>
 		</CardNode>

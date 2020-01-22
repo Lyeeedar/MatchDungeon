@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">6dfafff5-df2e-45f1-aeb4-5d9c30f0110d</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="6dfafff5-df2e-45f1-aeb4-5d9c30f0110d">
-			<Name>Weapon Case</Name>
-			<Description>You find a locked case, the exact shape of a weapon. If you can break it open you can claim a nice reward.</Description>
+			<Name>WeaponCase.CardNode.Name:6e663857-fe64-4c64-98ff-0f2e0eef578c</Name>
+			<Description>WeaponCase.CardNode.Description:14ea6401-84f0-4e8f-a425-b8e1c2fda6ad</Description>
 			<SpawnWeighting>StartMiddle</SpawnWeighting>
 			<Content>WeaponCaseContent</Content>
 		</CardNode>

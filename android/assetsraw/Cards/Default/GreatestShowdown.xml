@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="203" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Greatest Showdown</Name>
-			<Description>A pack of monsters surrounds another that exudes an aura of deadliness. This will be a tough fight.</Description>
+			<Name>GreatestShowdown.CardNode.Name:91924315-5f3b-4726-92c8-ebd0df85da41</Name>
+			<Description>GreatestShowdown.CardNode.Description:a2a34168-5a56-4189-97ce-10951cfe3825</Description>
 			<SpawnWeighting>MiddleEnd</SpawnWeighting>
 			<Content>GreatestShowdownContent</Content>
 		</CardNode>

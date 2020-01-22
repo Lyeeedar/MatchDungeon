@@ -134,14 +134,14 @@ class Save
 				if (currentScreen == ScreenEnum.QUESTSELECTION)
 				{
 					val screen = Statics.game.getTypedScreen<QuestSelectionScreen>()!!
-					screen.setup()
 					screen.swapTo()
+					screen.setup()
 				}
 				else if (currentScreen == ScreenEnum.DECK)
 				{
 					val screen = Statics.game.getTypedScreen<DeckScreen>()!!
-					screen.setup()
 					screen.swapTo()
+					screen.setup()
 				}
 				else
 				{

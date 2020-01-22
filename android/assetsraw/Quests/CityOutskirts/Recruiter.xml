@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">38f2b46e-5bd2-45e4-af30-a090f9abf7de</Root>
 	<Nodes>
 		<CardNode meta:X="263" meta:Y="0" GUID="38f2b46e-5bd2-45e4-af30-a090f9abf7de">
-			<Name>Recruiter</Name>
-			<Description>Just as you leave the city a man attracts your attention...</Description>
+			<Name>Recruiter.CardNode.Name:c7229ff6-e239-4d72-947f-48a3691e7c72</Name>
+			<Description>Recruiter.CardNode.Description:82ba379b-a19c-43bb-b0fc-33b78e91398c</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>RecruiterContent</Content>
 		</CardNode>

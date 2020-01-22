@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">c75314ce-d1f0-44fa-be54-bd8ee754ca7f</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="c75314ce-d1f0-44fa-be54-bd8ee754ca7f">
-			<Name>The Festival</Name>
-			<Description>Having sold out of produce you decide to enjoy the rest of the festival.</Description>
+			<Name>TheFestival.CardNode.Name:eb1a5793-bec0-48da-ab8f-32986fb372fa</Name>
+			<Description>TheFestival.CardNode.Description:5b87eff3-658f-4bfb-b365-6d229aeb7457</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>TheFestivalContent</Content>
 		</CardNode>

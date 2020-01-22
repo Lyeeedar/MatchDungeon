@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Order of the Sun 1:Trial of Strength</Name>
-			<Description>To become a knight of the Order of the Sun you have to pass a series of trials.</Description>
+			<Name>TestOfStrength.CardNode.Name:3cc3db80-9140-4406-8693-782822c916c3</Name>
+			<Description>TestOfStrength.CardNode.Description:c87380ba-3f32-4c31-9344-2c525b4b1b14</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>TestOfStrengthContent</Content>
 		</CardNode>

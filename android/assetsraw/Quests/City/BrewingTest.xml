@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Alchemy Guild 3:Brewing Test</Name>
-			<Description>To join you alchemists guild you have to take 3 examinations. The final test is to make 3 potions with your gathered herbs.</Description>
+			<Name>BrewingTest.CardNode.Name:c5002acb-fd3f-4005-81e7-106ae6ee48e9</Name>
+			<Description>BrewingTest.CardNode.Description:dae3ab4f-0e2d-4f09-b533-fd33f6428669</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>BrewingTestContent</Content>
 		</CardNode>

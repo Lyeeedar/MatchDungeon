@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">e812d10c-8572-469b-846b-261c2a928ce4</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="e812d10c-8572-469b-846b-261c2a928ce4">
-			<Name>Endurance Training</Name>
-			<Description>To improve your endurance you've been eating well and exercising vigorously. Did it pay off?</Description>
+			<Name>EnduranceTraining.CardNode.Name:f30938c9-ccdb-4193-9538-ad04bc735d04</Name>
+			<Description>EnduranceTraining.CardNode.Description:787e1384-2c05-40c4-a710-db67f0f55234</Description>
 			<SpawnWeighting>Start</SpawnWeighting>
 			<Content>EnduranceTrainingContent</Content>
 		</CardNode>

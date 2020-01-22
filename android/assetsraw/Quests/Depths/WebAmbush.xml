@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Web Ambush</Name>
-			<Description>You enter a corridor filled with huge webs.</Description>
+			<Name>WebAmbush.CardNode.Name:01d57b3f-9da0-4083-aff9-3fc838c7a0a3</Name>
+			<Description>WebAmbush.CardNode.Description:36554220-d30d-4f27-b125-1d98e5691340</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>WebAmbushContent</Content>
 		</CardNode>

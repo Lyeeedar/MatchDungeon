@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Mage Admissions 3:Admissions 3</Name>
-			<Description>You have manage to get to the final round of the admissions. Just 1 more to go and you'll be an official mage!</Description>
+			<Name>MageAdmissions3.CardNode.Name:f4a1cf76-380a-472b-8f1b-4954768415f4</Name>
+			<Description>MageAdmissions3.CardNode.Description:30f228c0-461e-4507-a649-db53934d38bf</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>MageAdmissions3Content</Content>
 		</CardNode>

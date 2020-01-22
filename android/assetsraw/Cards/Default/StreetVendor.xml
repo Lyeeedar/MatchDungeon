@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">a696b12a-368e-484a-be8c-a629e5786514</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="a696b12a-368e-484a-be8c-a629e5786514">
-			<Name>Street Vendor</Name>
-			<Description>Before you left on your adventure you wandered through the market. A vendor called out to you.</Description>
+			<Name>StreetVendor.CardNode.Name:ec8cc141-b040-4666-8dc3-1d10ed49d3e4</Name>
+			<Description>StreetVendor.CardNode.Description:9daccb1a-7bdb-403b-949e-713b484b8fac</Description>
 			<SpawnWeighting>MiddleEnd</SpawnWeighting>
 			<IsShop>true</IsShop>
 			<Content>StreetVendorContent</Content>

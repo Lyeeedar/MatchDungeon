@@ -2,9 +2,9 @@
 	<Root meta:RefKey="CardNode">39798a5e-3e3d-4463-bf1f-04b8d21189ce</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="39798a5e-3e3d-4463-bf1f-04b8d21189ce">
-			<Name>Choke Point</Name>
-			<Description>Monsters block the way forward. The only option is to smash through.</Description>
-			<Rarity>Bronze</Rarity>
+			<Name>ChokePoint.CardNode.Name:91f072a3-42de-4531-bea1-0ed560a32c8d</Name>
+			<Description>ChokePoint.CardNode.Description:35d74cca-8558-44ab-a535-2a5211511c7d</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>ChokePointContent</Content>
 		</CardNode>
 	</Nodes>

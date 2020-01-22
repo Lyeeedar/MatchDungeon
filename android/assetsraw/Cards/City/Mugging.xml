@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">7dab10a5-6329-4c16-94f4-ae70f18048cc</Root>
 	<Nodes>
 		<CardNode meta:X="205" meta:Y="0" GUID="7dab10a5-6329-4c16-94f4-ae70f18048cc">
-			<Name>Alleyways</Name>
-			<Description>The alleyways of the city offer many opportunities, for those willing to explore them.</Description>
+			<Name>Mugging.CardNode.Name:ca0d58ec-0e7b-4586-888f-e3c61c3b3ade</Name>
+			<Description>Mugging.CardNode.Description:01f26787-fbcd-48e8-b3f6-7c3c05edbf09</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<HiddenRewards>true</HiddenRewards>
 			<Content>MuggingContent</Content>

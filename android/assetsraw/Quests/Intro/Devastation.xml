@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">30eabe57-9ffe-4b49-9a11-4e2e2b185ae2</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="30eabe57-9ffe-4b49-9a11-4e2e2b185ae2">
-			<Name>Devastation</Name>
-			<Description>You wake up and everything changes...</Description>
+			<Name>Devastation.CardNode.Name:6258415b-7819-4f4a-967f-937f79c17989</Name>
+			<Description>Devastation.CardNode.Description:19e35c1f-a23d-4035-a5f1-4bc4cf2e09a1</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>DevastationContent</Content>
 		</CardNode>

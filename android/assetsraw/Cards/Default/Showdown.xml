@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Showdown</Name>
-			<Description>You come across a larger, fiercer monster. It's probably a rare creature so you should KILL IT.</Description>
+			<Name>Showdown.CardNode.Name:8a0163d0-5817-4540-9e65-254831d31e43</Name>
+			<Description>Showdown.CardNode.Description:ccffff5e-5626-4d3c-9958-dd230022285f</Description>
 			<SpawnWeighting>MiddleEnd</SpawnWeighting>
 			<Content>ShowdownContent</Content>
 		</CardNode>

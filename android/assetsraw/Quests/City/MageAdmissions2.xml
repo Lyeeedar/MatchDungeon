@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Mage Academy 2:Admissions 2</Name>
-			<Description>After a long wait the second round of admissions begins.</Description>
+			<Name>MageAdmissions2.CardNode.Name:1625b520-caa9-43be-9b41-cf7ed98663f4</Name>
+			<Description>MageAdmissions2.CardNode.Description:3a43d2fb-be2d-486d-bae8-5e13c8f690af</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>MageAdmissions2Content</Content>
 		</CardNode>

@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Parttime Artificing</Name>
-			<Description>There's always need for an artificer, so anyone willing to do the work can make good money.</Description>
+			<Name>ParttimeArtificing.CardNode.Name:66aa8240-f6da-44d3-98ea-47320a0deb97</Name>
+			<Description>ParttimeArtificing.CardNode.Description:21498675-3a72-42b3-9156-10714451d5b4</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>ParttimeArtificingContent</Content>
 		</CardNode>

@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">d4ba8d6c-9909-4117-b929-29a470bb41f0</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="d4ba8d6c-9909-4117-b929-29a470bb41f0">
-			<Name>Cultivation Training</Name>
-			<Description>By channeling the energy within you can empower yourself with abilities. Have you trained enough?</Description>
+			<Name>CultivationTraining.CardNode.Name:605099e1-1311-4892-8b41-5e4fe29525a9</Name>
+			<Description>CultivationTraining.CardNode.Description:9f7df3f3-0b20-4140-a07c-35230269e20b</Description>
 			<SpawnWeighting>Start</SpawnWeighting>
 			<Content>CultivationTrainingContent</Content>
 		</CardNode>

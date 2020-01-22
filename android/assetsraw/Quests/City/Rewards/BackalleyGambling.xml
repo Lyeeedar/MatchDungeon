@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">ba9dc2f2-73f6-467e-bfea-b25d38173da5</Root>
 	<Nodes>
 		<CardNode meta:X="263" meta:Y="0" GUID="ba9dc2f2-73f6-467e-bfea-b25d38173da5">
-			<Name>Backalley Gambling</Name>
-			<Description>In the backalleys of the city many gambling rings operate.</Description>
+			<Name>BackalleyGambling.CardNode.Name:ab37fe2e-c26f-4ab7-aa7b-56d9f38bd7e8</Name>
+			<Description>BackalleyGambling.CardNode.Description:39303222-2ab6-4dac-987f-57448dece3ac</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>BackalleyGamblingContent</Content>
 		</CardNode>

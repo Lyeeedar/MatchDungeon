@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">20abb50d-11c4-4ba3-b742-69e347bab83c</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="20abb50d-11c4-4ba3-b742-69e347bab83c">
-			<Name>Discarded Equipment</Name>
-			<Description>You spot a pile of equipment discarded in a corner. Something may still be usable.</Description>
+			<Name>DiscardedGear.CardNode.Name:4ed53c65-8056-4027-a5d3-0c95527388b1</Name>
+			<Description>DiscardedGear.CardNode.Description:f5680368-8bd9-4f37-a529-1cf7a60c4214</Description>
 			<SpawnWeighting>Middle</SpawnWeighting>
 			<Content>DiscardedGearContent</Content>
 		</CardNode>

@@ -2,9 +2,9 @@
 	<Root meta:RefKey="CardNode">54349237-97d7-410a-855a-8f3eac654709</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="54349237-97d7-410a-855a-8f3eac654709">
-			<Name>Blocked Drop</Name>
-			<Description>You find some treasure that you can loot. The only catch is the way out is blocked.</Description>
-			<Rarity>Bronze</Rarity>
+			<Name>BlockedDrop.CardNode.Name:567c13ef-c1ce-4c21-8b75-adfd5ffd6d52</Name>
+			<Description>BlockedDrop.CardNode.Description:fbe7e8a9-c72d-4cf6-b389-add654f0ade2</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>BlockedDropContent</Content>
 		</CardNode>
 	</Nodes>

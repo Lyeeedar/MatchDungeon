@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Jewelry Work</Name>
-			<Description>You find a large raw gemstone on your travels, and with a bit of work you could turn it into something marvelous.</Description>
+			<Name>JewelryWork.CardNode.Name:cee60cf8-9699-4116-899b-2bad17124c8a</Name>
+			<Description>JewelryWork.CardNode.Description:8a75bf9b-a6cd-49e7-a0dc-9712ca7e34c5</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>JewelryWorkContent</Content>
 		</CardNode>

@@ -1,10 +1,10 @@
-<Card meta:X="1" meta:Y="1" GUID="66f4e0e4-75c6-4a7f-8221-5ec92a48a5d6" xmlns:meta="Editor">
+<Card meta:X="0" meta:Y="0" GUID="66f4e0e4-75c6-4a7f-8221-5ec92a48a5d6" xmlns:meta="Editor">
 	<Root meta:RefKey="CardNode">7900ee29-cc0e-4ebe-bf9b-dfc99e968d07</Root>
 	<Nodes>
-		<CardNode meta:X="205" meta:Y="1" GUID="7900ee29-cc0e-4ebe-bf9b-dfc99e968d07">
-			<Name>Break Through</Name>
-			<Description>The way is shut. It can be opened only by those who can smash. Get smashing.</Description>
-			<Rarity>Bronze</Rarity>
+		<CardNode meta:X="204" meta:Y="0" GUID="7900ee29-cc0e-4ebe-bf9b-dfc99e968d07">
+			<Name>BreakThrough.CardNode.Name:fee2659d-81f0-43eb-8a5f-7373fc5728e2</Name>
+			<Description>BreakThrough.CardNode.Description:1bf2d8fa-6876-4afb-93a2-7caf8e4aac93</Description>
+			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>BreakThroughContent</Content>
 		</CardNode>
 	</Nodes>

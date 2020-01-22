@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Grinding Mobs</Name>
-			<Description>One of the best ways to level up is slaughting vast swathes of mostly defenseless creatures.</Description>
+			<Name>GrindingMobs2.CardNode.Name:340ff050-69ba-475d-8e21-15eac00e6a31</Name>
+			<Description>GrindingMobs2.CardNode.Description:d4848fdb-86bb-427e-af4f-ddcdd16934ff</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>GrindingMobsContent</Content>
 		</CardNode>

@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Sticky Ambush</Name>
-			<Description>As you proceed along the corridor suddenly a sound makes you jump to one side.</Description>
+			<Name>StickyAmbush.CardNode.Name:1a1a16b2-ea60-4b56-926a-ba64cb528865</Name>
+			<Description>StickyAmbush.CardNode.Description:4ca84122-ea42-4356-bb36-0b9348fc9dbb</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>StickyAmbushContent</Content>
 		</CardNode>

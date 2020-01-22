@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">793539a0-4db2-4722-8d73-3a54846da3a7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="793539a0-4db2-4722-8d73-3a54846da3a7">
-			<Name>Hearty Meal</Name>
-			<Description>It's never worthwhile to adventure on an empty stomach.</Description>
+			<Name>HeartyMeal.CardNode.Name:5e3d1700-6a75-4a28-a694-c3ef7baca4c7</Name>
+			<Description>HeartyMeal.CardNode.Description:f413e837-e3b5-44e6-b69f-9b59e00df2b1</Description>
 			<SpawnWeighting>Start</SpawnWeighting>
 			<Content>HeartyMealContent</Content>
 		</CardNode>

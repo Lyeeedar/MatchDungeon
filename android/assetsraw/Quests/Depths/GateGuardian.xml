@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Gate Guardian</Name>
-			<Description>Before the gate to the depths stands a hulking creature wielding a pair of blades. If you want to go down you'll have to defeat it.</Description>
+			<Name>GateGuardian.CardNode.Name:c9db38c7-c66b-4bd1-a8da-b39e7a27c1bc</Name>
+			<Description>GateGuardian.CardNode.Description:43a7ed5a-de10-4dd2-97c9-b6aee41c0408</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>GateGuardianContent</Content>
 		</CardNode>

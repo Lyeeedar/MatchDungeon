@@ -1,9 +1,9 @@
-<Card meta:X="0" meta:Y="2" GUID="9b5dbbde-83e1-4d81-9df4-56bb2d53eebf" xmlns:meta="Editor">
+<Card meta:X="0" meta:Y="0" GUID="9b5dbbde-83e1-4d81-9df4-56bb2d53eebf" xmlns:meta="Editor">
 	<Root meta:RefKey="CardNode">db5fd6cf-c49e-4ed1-ac57-92f853581dc2</Root>
 	<Nodes>
-		<CardNode meta:X="163.66666666666669" meta:Y="-17.666666666666686" GUID="db5fd6cf-c49e-4ed1-ac57-92f853581dc2">
-			<Name>Farm Life</Name>
-			<Description>Life on a farm is tough. Waking at the crack of dawn and working until sun sets. It breeds hard people, strong willed and strong armed.</Description>
+		<CardNode meta:X="163.66667175292969" meta:Y="-19.666666030883789" GUID="db5fd6cf-c49e-4ed1-ac57-92f853581dc2">
+			<Name>FarmLife.CardNode.Name:52fac329-b10f-4552-b3c9-101654f39714</Name>
+			<Description>FarmLife.CardNode.Description:6f8a5488-959e-4f6e-94ab-0f4e77a584ca</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>FarmLifeContent</Content>
 		</CardNode>

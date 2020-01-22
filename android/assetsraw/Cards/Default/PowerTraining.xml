@@ -2,8 +2,8 @@
 	<Root meta:RefKey="CardNode">abea4b18-0178-43d6-9ed1-9fa09a63bad7</Root>
 	<Nodes>
 		<CardNode meta:X="204" meta:Y="0" GUID="abea4b18-0178-43d6-9ed1-9fa09a63bad7">
-			<Name>Power Training</Name>
-			<Description>By learning to utilise your full strength you can greatly enhance the power of your abilities.</Description>
+			<Name>PowerTraining.CardNode.Name:e9f31335-0626-4cc2-b296-9b6fb088c19f</Name>
+			<Description>PowerTraining.CardNode.Description:74ee570f-8c3d-4247-8024-9db41b629066</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>PowerTrainingContent</Content>
 		</CardNode>

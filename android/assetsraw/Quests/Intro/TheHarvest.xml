@@ -1,9 +1,9 @@
 <Card meta:X="0" meta:Y="0" GUID="17e34af4-f18c-43b6-8c2f-5a87677f5165" xmlns:meta="Editor">
 	<Root meta:RefKey="CardNode">7798639e-ff45-425a-bd05-3fba31cac367</Root>
 	<Nodes>
-		<CardNode meta:X="199.66666666666669" meta:Y="7.3333333333333144" GUID="7798639e-ff45-425a-bd05-3fba31cac367">
-			<Name>The Harvest</Name>
-			<Description>Harvest time is always the most exhausting time of the year, and the culmination of all the efforts you have put in to this point. Don't mess it up!</Description>
+		<CardNode meta:X="199.66667175292969" meta:Y="7.3333334922790527" GUID="7798639e-ff45-425a-bd05-3fba31cac367">
+			<Name>TheHarvest.CardNode.Name:c390665f-46a3-4f70-a77d-66fd9b873679</Name>
+			<Description>TheHarvest.CardNode.Description:f0836620-5c59-40d9-8101-8cf483a1bd0b</Description>
 			<SpawnWeighting>Any</SpawnWeighting>
 			<Content>TheHarvestContent</Content>
 		</CardNode>
