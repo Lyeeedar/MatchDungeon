@@ -1,0 +1,10 @@
+goin:going
+fella:fellow
+fuzz:guards
+nah:no
+ole:old
+oy:hello
+hey:hello
+doin:doing
+bein:being
+somefin:something

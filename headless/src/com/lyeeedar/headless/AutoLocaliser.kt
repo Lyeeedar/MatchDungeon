@@ -14,10 +14,14 @@ import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.children
 import com.lyeeedar.Util.getRawXml
 import com.lyeeedar.Util.getXml
+import ktx.collections.addAll
 import ktx.collections.set
+import ktx.collections.toGdxArray
 import org.mockito.Mockito
 import java.io.File
 import java.io.FileInputStream
+import java.util.*
+
 
 class LocEntry(val id: String, var text: String, var translateType: String, var translatedHash: Int)
 
@@ -47,6 +51,16 @@ class Localiser
 	val languages = arrayOf("EN-US", "DE")
 	val translatedText = ObjectMap<String, String>()
 
+	val dictionary = ObjectSet<String>()
+	val slang = ObjectMap<String, String>()
+	val gameNames = Array<String>()
+
+	val apostraphedWords = arrayOf("you'", "it'", "we'", "won'", "can'")
+	val pluralisers = arrayOf("s", "'s", "ies", "es")
+	val yers = arrayOf("y", "ly", "ily", "ingly")
+	val eers = arrayOf("en", "ed", "er")
+	val others = arrayOf("ing", "n't", "ion", "able", "ish")
+
 	init
 	{
 		println("")
@@ -64,6 +78,22 @@ class Localiser
 		translate = translateOptions.service
 		println("Translate service started")
 
+		dictionary.addAll(File("../assetsraw/Localisation/Dictionaries/GeneralDictionary.txt").readLines())
+		dictionary.addAll(File("../assetsraw/Localisation/Dictionaries/GameDictionary.txt").readLines())
+		gameNames.addAll(File("../assetsraw/Localisation/Dictionaries/GameNameList.txt").readLines())
+
+		for (slangRaw in File("../assetsraw/Localisation/Dictionaries/SlangDictionary.txt").readLines())
+		{
+			val split = slangRaw.split(':')
+			val slangWord = split[0]
+			val actualWord = split[1]
+
+			slang[slangWord] = actualWord
+			dictionary.add(slangWord)
+		}
+
+		println("Dictionaries loaded")
+
 		val allIds = ObjectSet<String>()
 		for (xml in XmlData.getExistingPaths())
 		{
@@ -76,9 +106,9 @@ class Localiser
 				}
 			}
 		}
+		println("ID's found")
 
 		val englishLocFolder = File("../assetsraw/Localisation/EN-GB")
-
 		for (file in englishLocFolder.listFiles()!!)
 		{
 			println("-----------------------------------------------------")
@@ -87,6 +117,7 @@ class Localiser
 			val english = Array<LocEntry>()
 
 			var unusedLines = ""
+			var missingWords = ObjectSet<String>()
 
 			val englishFile = getRawXml(file.path)
 			for (el in englishFile.children())
@@ -96,15 +127,44 @@ class Localiser
 				val hashCode = text.hashCode()
 				english.add(LocEntry(id, text, "", hashCode))
 
+				try
+				{
+					spellCheck(text, "ID: $id\nText: $text\nFile: ${file.path}")
+				}
+				catch (ex: Exception)
+				{
+					val message = ex.message ?: ""
+					if (message.contains("Unknown word"))
+					{
+						val word = message.split('\n')[1].replace("Word: ", "")
+						missingWords.add(word)
+
+						System.err.println(message)
+					}
+					else
+					{
+						throw ex
+					}
+				}
+
 				if (!allIds.contains(id))
 				{
 					unusedLines += id + "\n"
 				}
 			}
 
+			if (missingWords.size > 0)
+			{
+				var joined = ""
+				for (word in missingWords)
+				{
+					joined += "$word\n"
+				}
+				throw RuntimeException("The following words were missing:\n$joined")
+			}
 			if (!unusedLines.isBlank())
 			{
-				throw RuntimeException("Loc file ${file} contained unreferences lines:\n$unusedLines")
+				throw RuntimeException("Loc file $file contained unreferences lines:\n$unusedLines")
 			}
 
 			for (language in languages)
@@ -232,5 +292,136 @@ class Localiser
 		println("")
 
 		return translation.translatedText
+	}
+
+	fun spellCheck(text: String, context: String)
+	{
+		val isTitle = !(text.contains('.') || text.contains(','))
+
+		if (!isTitle && text.last().isLetterOrDigit())
+		{
+			throw RuntimeException("Text did not end in a full stop!\n$context")
+		}
+
+		val sentences = text.split('.', ':', '?', '!', '"').map { it.trim() }.filter { it.isNotEmpty() }.toGdxArray()
+		for (sentence in sentences)
+		{
+			val sentenceContext = "Sentence: $sentence\n$context"
+
+			if (sentence[0].isLetter() && !sentence[0].isUpperCase())
+			{
+				throw RuntimeException("Sentence did not start with an uppercase letter.\n$sentenceContext")
+			}
+
+			var sentenceSimple = sentence
+			for (name in gameNames)
+			{
+				sentenceSimple = sentenceSimple.replace(name, "---")
+			}
+
+			val words = sentenceSimple.split(' ')
+			var firstWord = true
+			outer@ for (word in words)
+			{
+				if (word == "---") continue
+
+				var lowerWord = word.toLowerCase(Locale.ENGLISH).filter { it.isLetterOrDigit() || it == '\'' }
+
+				if (lowerWord.startsWith('\''))
+				{
+					lowerWord = lowerWord.substring(1)
+				}
+				if (lowerWord.endsWith('\''))
+				{
+					lowerWord = lowerWord.substring(0, lowerWord.length-1)
+				}
+
+				val wordContext = "Word: $lowerWord\n$sentenceContext"
+
+				if (lowerWord == "i" || lowerWord.startsWith("i'"))
+				{
+					if (!word.filter { it.isLetterOrDigit() }[0].isUpperCase())
+					{
+						throw RuntimeException("$word not uppercase\n$wordContext")
+					}
+				}
+				else if (!firstWord && !isTitle && word[0].isLetter() && word[0].isUpperCase() && dictionary.contains(lowerWord) && !word.all { it.isUpperCase() })
+				{
+					throw RuntimeException("Word capitalised when it shouldnt be\n$wordContext")
+				}
+				else if (!dictionary.contains(lowerWord))
+				{
+					if (apostraphedWords.any { lowerWord.startsWith(it) })
+					{
+						continue
+					}
+					for (suffix in pluralisers)
+					{
+						if (lowerWord.endsWith(suffix))
+						{
+							val root = lowerWord.substring(0, lowerWord.length-suffix.length)
+
+							if (dictionary.contains(root) || dictionary.contains(root + "y") || dictionary.contains(root + "e"))
+							{
+								continue@outer
+							}
+						}
+					}
+					for (suffix in yers)
+					{
+						if (lowerWord.endsWith(suffix))
+						{
+							val root = lowerWord.substring(0, lowerWord.length-suffix.length)
+
+							if (dictionary.contains(root) || dictionary.contains(root + "e"))
+							{
+								continue@outer
+							}
+						}
+					}
+					for (suffix in eers)
+					{
+						if (lowerWord.endsWith(suffix))
+						{
+							if (dictionary.contains(lowerWord.substring(0, lowerWord.length-1)))
+							{
+								continue@outer
+							}
+							if (dictionary.contains(lowerWord.substring(0, lowerWord.length-2)))
+							{
+								continue@outer
+							}
+						}
+					}
+					for (suffix in others)
+					{
+						if (lowerWord.endsWith(suffix))
+						{
+							val root = lowerWord.substring(0, lowerWord.length-suffix.length)
+
+							if (dictionary.contains(root) || dictionary.contains(root + "e"))
+							{
+								continue@outer
+							}
+						}
+					}
+
+					if (lowerWord.toIntOrNull() != null)
+					{
+						val asNum = lowerWord.toInt()
+						if (!isTitle && asNum < 10)
+						{
+							throw RuntimeException("Low number as digits in a sentence\n$wordContext")
+						}
+
+						continue
+					}
+
+					throw RuntimeException("Unknown word\n$wordContext")
+				}
+
+				firstWord = false
+			}
+		}
 	}
 }

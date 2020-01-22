@@ -15,7 +15,7 @@
 	<Text ID="BackalleyVendorRaid.CardNode.Name:e735a007-8340-4f5b-bc1d-e4153881a4e2" TranslateType="Auto" TranslatedHash="2092581593">Alleyways</Text>
 	<Text ID="BeholderBattle.CardNode.Description:93e35379-f311-4977-ac9d-8bcff126d742" TranslateType="Auto" TranslatedHash="1546377151">Sie machen schließlich den Weg zum Herzen der Höhle. Es bereitet die Partei für einen harten Kampf.</Text>
 	<Text ID="BeholderBattle.CardNode.Name:a834634d-fb9b-496e-9065-02fa2f62e4ad" TranslateType="Auto" TranslatedHash="-1498952501">Chefkampf</Text>
-	<Text ID="BlacksmithsFavour.CardNode.Description:294d411d-be3b-4107-b202-5b04bc99fcce" TranslateType="Auto" TranslatedHash="-1411334241">Perfekte Preperation ist, was Wohlstand bewahrt. Hast du dein vor der Abreise?</Text>
+	<Text ID="BlacksmithsFavour.CardNode.Description:294d411d-be3b-4107-b202-5b04bc99fcce" TranslateType="Auto" TranslatedHash="-288986241">Perfekte Vorbereitung ist, was Wohlstand bewahrt. Hast du dein vor der Abreise?</Text>
 	<Text ID="BlacksmithsFavour.CardNode.Name:689ba3dd-ac55-4dcc-83be-a8d17ad49159" TranslateType="Auto" TranslatedHash="-2090243518">Hufschmiede Favor</Text>
 	<Text ID="BlockedDrop.CardNode.Description:fbe7e8a9-c72d-4cf6-b389-add654f0ade2" TranslateType="Auto" TranslatedHash="961066401">Sie finden einen Schatz, dass Sie plündern können. Der einzige Haken ist der Ausweg blockiert ist.</Text>
 	<Text ID="BlockedDrop.CardNode.Name:567c13ef-c1ce-4c21-8b75-adfd5ffd6d52" TranslateType="Auto" TranslatedHash="85088483">blockierte Tropfen</Text>
@@ -81,8 +81,8 @@
 	<Text ID="FieldTesting.CardNode.Name:6cc84baf-bebc-4600-bd3d-a105e0f342cf" TranslateType="Auto" TranslatedHash="574069930">Felduntersuchungen</Text>
 	<Text ID="Firefighting.CardNode.Description:b92d5157-05c1-41f0-99b6-1d59d9134091" TranslateType="Auto" TranslatedHash="-717040863">Wie Sie durch die Stadt zu Fuß kommen Sie über ein flammendes Gebäude. Einige Rufe zeigen gibt es immer noch Menschen gefangen innen.</Text>
 	<Text ID="Firefighting.CardNode.Name:b5f70356-8609-4f48-aab0-95bb29d05a84" TranslateType="Auto" TranslatedHash="1072556584">Feuer bekämpfen</Text>
-	<Text ID="ForagingTest.CardNode.Description:96fca8b0-b1fc-46b8-84dc-331d0a48f586" TranslateType="Auto" TranslatedHash="1390037423">Beitreten Sie Alchemisten Gilde Sie haben drei Prüfungen zu nehmen. Die zweite ist Ihre Fähigkeit zu identifizieren, Wildkräuter zu testen.</Text>
-	<Text ID="ForagingTest.CardNode.Name:37549f88-778e-44b1-bf95-0a30f6067232" TranslateType="Auto" TranslatedHash="1243822792">Alchemy Guild 2: Forgaging-Test</Text>
+	<Text ID="ForagingTest.CardNode.Description:96fca8b0-b1fc-46b8-84dc-331d0a48f586" TranslateType="Auto" TranslatedHash="414301658">Beitreten Sie Alchemisten Gilde Sie haben drei Prüfungen zu nehmen. Die zweite ist Ihre Fähigkeit zu identifizieren, Wildkräuter zu testen.</Text>
+	<Text ID="ForagingTest.CardNode.Name:37549f88-778e-44b1-bf95-0a30f6067232" TranslateType="Auto" TranslatedHash="-2105338837">Alchemy Guild 2: Nahrungssuche-Test</Text>
 	<Text ID="ForgottenTreasure.CardNode.Description:1bacfb84-71b9-4df8-81bb-fb198d4276b6" TranslateType="Auto" TranslatedHash="-1889421690">Sie stolpern über eine vergessene Versteck des Schatzes. Es ist Ihnen für die Aufnahme!</Text>
 	<Text ID="ForgottenTreasure.CardNode.Name:45ada08c-0403-4ba1-a998-abeb222628bc" TranslateType="Auto" TranslatedHash="1735817781">vergessene Schatz</Text>
 	<Text ID="FranticSearch.CardNode.Description:b1bdac5e-7958-42b8-942f-f77e1ed4ab1d" TranslateType="Auto" TranslatedHash="160173839">Sie stolpern über ein Zimmer mit verschlossenen Truhen gefüllt. In der Ferne kann man den Klang der Annäherung an Monster hören. Plündern, bevor sie ankommen!</Text>
@@ -113,11 +113,11 @@
 	<Text ID="GreatestShowdown.CardNode.Name:91924315-5f3b-4726-92c8-ebd0df85da41" TranslateType="Auto" TranslatedHash="56749446">Greatest Show-down</Text>
 	<Text ID="GrindingLevels.CardNode.Description:96d214a3-4c73-45c9-be06-e4ffcdc80e24" TranslateType="Auto" TranslatedHash="730475564">Slaughtering Haufen von Monstern ist eine gute Möglichkeit, um stärker zu werden.</Text>
 	<Text ID="GrindingLevels.CardNode.Name:945b71ed-1570-4ff9-93c7-eb4a528078f9" TranslateType="Auto" TranslatedHash="-1553654399">Schleifebenen</Text>
-	<Text ID="GrindingMobs.CardNode.Description:6a22eeac-cf21-40fe-9124-56108aa484f6" TranslateType="Auto" TranslatedHash="433412717">Eine der besten Möglichkeiten, um Stufe nach oben ist slaughting große Teile der meist schutzlos Kreaturen.</Text>
+	<Text ID="GrindingMobs.CardNode.Description:6a22eeac-cf21-40fe-9124-56108aa484f6" TranslateType="Auto" TranslatedHash="555298272">Eine der besten Möglichkeiten zum Level schlachtet große Teile der meist schutzlos Kreaturen.</Text>
 	<Text ID="GrindingMobs.CardNode.Name:9ced4755-cc7a-4dbc-92aa-cf213bae1de2" TranslateType="Auto" TranslatedHash="-1887609339">Schleifen Mobs</Text>
-	<Text ID="GrindingMobs2.CardNode.Description:d4848fdb-86bb-427e-af4f-ddcdd16934ff" TranslateType="Auto" TranslatedHash="433412717">Eine der besten Möglichkeiten, um Stufe nach oben ist slaughting große Teile der meist schutzlos Kreaturen.</Text>
+	<Text ID="GrindingMobs2.CardNode.Description:d4848fdb-86bb-427e-af4f-ddcdd16934ff" TranslateType="Auto" TranslatedHash="555298272">Eine der besten Möglichkeiten zum Level schlachtet große Teile der meist schutzlos Kreaturen.</Text>
 	<Text ID="GrindingMobs2.CardNode.Name:340ff050-69ba-475d-8e21-15eac00e6a31" TranslateType="Auto" TranslatedHash="-1887609339">Schleifen Mobs</Text>
-	<Text ID="GrindingMobs3.CardNode.Description:8f161f3a-11b7-4c76-8391-662594266faf" TranslateType="Auto" TranslatedHash="433412717">Eine der besten Möglichkeiten, um Stufe nach oben ist slaughting große Teile der meist schutzlos Kreaturen.</Text>
+	<Text ID="GrindingMobs3.CardNode.Description:8f161f3a-11b7-4c76-8391-662594266faf" TranslateType="Auto" TranslatedHash="555298272">Eine der besten Möglichkeiten zum Level schlachtet große Teile der meist schutzlos Kreaturen.</Text>
 	<Text ID="GrindingMobs3.CardNode.Name:9e2b78b4-2741-47b8-982c-b8d4bf15430e" TranslateType="Auto" TranslatedHash="-1887609339">Schleifen Mobs</Text>
 	<Text ID="GuildQuest.CardNode.Description:e61089de-6b1c-4aa0-af44-16dcff4dc969" TranslateType="Auto" TranslatedHash="97711894">Die Abenteurer Gilde Beiträge alle möglichen Aufgaben.</Text>
 	<Text ID="GuildQuest.CardNode.Name:26cce429-c238-4fc5-bd71-2de8e1d26e7c" TranslateType="Auto" TranslatedHash="2034572853">Guild Quest-</Text>

@@ -21,7 +21,7 @@
 	<Text ID="BackalleyGamblingContent.Node.[0] Line.Line.MultilineString:922f588f-4eb3-4d1c-8f54-7fe84e4c7a35">The bouncer holds out his hand and you hand over the money.</Text>
 	<Text ID="BackalleyGamblingContent.Node.[0] Line.Line.MultilineString:a78f61ff-5b7c-4947-9694-fb0501d126b5">You win the game! You make a great amount of money.</Text>
 	<Text ID="BackalleyGamblingContent.Node.[0] Line.Line.MultilineString:b4c98a8c-bd9b-473d-937d-1a118992cd64">You head over to the game of Spinning Jester. After watching for a little while you think you understand the rules, and step forward to play.</Text>
-	<Text ID="BackalleyGamblingContent.Node.[0] Line.Line.MultilineString:ff5f715f-29ce-4979-a799-5bf9a5ea9202">You wander over to the game of Blind Mans Hand. It seems to be pure luck, but you're feeling lucky.</Text>
+	<Text ID="BackalleyGamblingContent.Node.[0] Line.Line.MultilineString:ff5f715f-29ce-4979-a799-5bf9a5ea9202">You wander over to the game of Blind Man's Hand. It seems to be pure luck, but you're feeling lucky.</Text>
 	<Text ID="BackalleyGamblingContent.Node.[1] Line.Line.MultilineString:e0346b31-62d9-4790-9323-b73c01d78966">You approach the on of these rings, determined to make great money. A large imposing bouncer stops you at the door.</Text>
 	<Text ID="BackalleyGamblingContent.Node.[2] Line.Line.MultilineString:241e82f8-5bd8-4755-90b9-2ebd03ffaba4">"Buy in first. What level you goin for?"</Text>
 	<Text ID="BackalleyGamblingContent.Node.[2] Line.Line.MultilineString:343c0038-be65-40f0-b075-e0c27b3c5918">"Right this way sir." The bouncer directs you inside, handing you a chip to represent what you paid him.</Text>
@@ -34,13 +34,13 @@
 	<Text ID="BackalleyGamblingContent.Node.[3] Choice.Choice.Choices.[6] Choice.Choice.Text:bb5f76de-9d48-49ff-b8b3-457f1f3a44b6">Actually I think I'm in the wrong place.</Text>
 	<Text ID="BackalleyGamblingContent.Node.[3] Line.Line.MultilineString:8673f89b-433c-4e4d-907d-753177f6654f">Inside theres multiple games running, crowded with people with excitement lighting up their faces.</Text>
 	<Text ID="BackalleyGamblingContent.Node.[4] Line.Line.MultilineString:dfc99387-e7b0-4db8-9c07-9e6fa97aeabf">What game do you want to play?</Text>
-	<Text ID="BackalleyGamblingContent.Node.[5] Choice.Choice.Choices.[0] Choice.Choice.Text:30f4ffbb-f2e7-41ce-bfe9-f0004e62c017">Spinning Jester (Low Risk, Low Reward)</Text>
-	<Text ID="BackalleyGamblingContent.Node.[5] Choice.Choice.Choices.[1] Choice.Choice.Text:aa70f2ef-6b14-40e7-ba11-35520cd7b964">Bleeding Cassocks (Medium Risk, Medium Reward)</Text>
-	<Text ID="BackalleyGamblingContent.Node.[5] Choice.Choice.Choices.[2] Choice.Choice.Text:24a47e99-1d01-40a8-9cd2-a628468be168">Blind Mans Hand (High Risk, High Reward)</Text>
+	<Text ID="BackalleyGamblingContent.Node.[5] Choice.Choice.Choices.[0] Choice.Choice.Text:30f4ffbb-f2e7-41ce-bfe9-f0004e62c017">Spinning Jester (Low risk, low reward)</Text>
+	<Text ID="BackalleyGamblingContent.Node.[5] Choice.Choice.Choices.[1] Choice.Choice.Text:aa70f2ef-6b14-40e7-ba11-35520cd7b964">Bleeding Cassocks (Medium risk, medium reward)</Text>
+	<Text ID="BackalleyGamblingContent.Node.[5] Choice.Choice.Choices.[2] Choice.Choice.Text:24a47e99-1d01-40a8-9cd2-a628468be168">Blind Man's Hand (High risk, high reward)</Text>
 	<Text ID="BackalleyVendorContent.Node.[0] Line.Line.MultilineString:d8aed54b-98a6-4dd7-a7d4-369d76f6082c">As you wander down the alley you come across a stall set into the wall. The shady man behind it gestures you over, revealing a large collection of items.</Text>
 	<Text ID="BackalleyVendorContent.Node.[1] Line.Line.MultilineString:9b1a6e27-548e-4f93-8e5b-4d1fbfcff4a0">"Find something that interests you friend? I've got great prices for those who don't ask too many questions about where the items came from."</Text>
 	<Text ID="BackalleyVendorContent.Node.[3] Line.Line.MultilineString:ceca99da-768b-4934-a2b9-336bbdc6c73b">"Nice to do business with ya. If anything happens to come into your possession that may have belonged to someone else then come see me. I'll take it off your hands."</Text>
-	<Text ID="BackalleyVendorRaidContent.Node.[0] Line.Line.MultilineString:13273882-5728-4ab8-937f-6909186a7345">You stumble and the guards catch you. Saveral hours of questioning later they release you, but not before confiscating most of your money as 'evidence'.</Text>
+	<Text ID="BackalleyVendorRaidContent.Node.[0] Line.Line.MultilineString:13273882-5728-4ab8-937f-6909186a7345">You stumble and the guards catch you. Several hours of questioning later they release you, but not before confiscating most of your money as 'evidence'.</Text>
 	<Text ID="BackalleyVendorRaidContent.Node.[0] Line.Line.MultilineString:7534568c-48b2-497e-81d7-fdc113e32269">You manage to outrun the guards.</Text>
 	<Text ID="BackalleyVendorRaidContent.Node.[0] Line.Line.MultilineString:ecadb11e-cab1-4d3b-82ad-1fe472a4a536">As you wander down the alley you come across a stall set into the wall. The shady man behind it gestures you over, revealing a large collection of items.</Text>
 	<Text ID="BackalleyVendorRaidContent.Node.[1] Line.Line.MultilineString:f3b4809c-bcbd-4df6-ada8-98fa25c03d37">"Find something that interests you friend? I've got great prices for those who don't ask too many questions."</Text>
@@ -86,13 +86,13 @@
 	<Text ID="BrewingTestContent.Node.[1] Line.Line.MultilineString:ce29f2db-d51a-454b-9624-3b58207915ca">"Very well done, an impressive performance! Here is your guild badge and certificate, you are now officially an alchemist."</Text>
 	<Text ID="BuriedTreasureContent.Node.[0] Line.Line.MultilineString:14064eb8-d30d-416a-b0a2-e246a6c16db2">Your persistence is rewarded as you pull the item from the mess, polishing it off.</Text>
 	<Text ID="BuriedTreasureContent.Node.[0] Line.Line.MultilineString:4f330963-301c-44ed-8bbd-ef6593ba77eb">A glint attracts your attention as you explore. Just a bit of digging and you may unearth something valuable!</Text>
-	<Text ID="BuriedTreasureContent.Node.[0] Line.Line.MultilineString:fc641cc0-e157-4e5d-bfb0-97361219e2e3">You finally give up on searching for the soource of the glint. It must have been a trick of the light.</Text>
+	<Text ID="BuriedTreasureContent.Node.[0] Line.Line.MultilineString:fc641cc0-e157-4e5d-bfb0-97361219e2e3">You finally give up on searching for the source of the glint. It must have been a trick of the light.</Text>
 	<Text ID="CareerChoicesContent.Node.[0] Line.Line.MultilineString:3478ffbf-8856-4cf6-8e29-67fedf4bc435">You head towards the Magic University.</Text>
 	<Text ID="CareerChoicesContent.Node.[0] Line.Line.MultilineString:3b202ec2-8908-4d8a-9747-f2c8bb1462b1">The city is filled with opportunities for those willing to seize them. As you are walking around you hear people talked about all sorts of things.</Text>
 	<Text ID="CareerChoicesContent.Node.[0] Line.Line.MultilineString:5929e42a-39f0-4c07-ace5-b2782bb12c0e">You head towards the Alchemists Guild</Text>
 	<Text ID="CareerChoicesContent.Node.[0] Line.Line.MultilineString:9bb20532-1b72-42fa-b252-519a494d019a">You head towards the Order of the Golden Sun</Text>
 	<Text ID="CareerChoicesContent.Node.[1] Line.Line.MultilineString:393ce90e-4bb7-427d-a364-ac9e12558ddc">"Did you hear? The university is holding admissions for aspiring mages today."</Text>
-	<Text ID="CareerChoicesContent.Node.[2] Line.Line.MultilineString:c94c2e20-a7ad-4a0b-9d39-7f1cefe4287c">"Wow what a coincidence, so is the Order of the Golden Sun. They are putting the initiates through trials."</Text>
+	<Text ID="CareerChoicesContent.Node.[2] Line.Line.MultilineString:c94c2e20-a7ad-4a0b-9d39-7f1cefe4287c">"Wow, what a coincidence, so is the Order of the Golden Sun. They are putting the initiates through trials."</Text>
 	<Text ID="CareerChoicesContent.Node.[3] Line.Line.MultilineString:9ebc1ecc-d529-4824-ba24-7790786869cc">"I just remembered, the alchemists guild is currently running their entrance exams as well."</Text>
 	<Text ID="CareerChoicesContent.Node.[4] Line.Line.MultilineString:65e2f552-f381-4bae-ad54-763b12099259">What would you like to check out?</Text>
 	<Text ID="CareerChoicesContent.Node.[5] Choice.Choice.Choices.[0] Choice.Choice.Text:670d4ff6-8a98-40c2-8e59-1a1477e2aa91">Check out the Magic University</Text>
@@ -136,7 +136,7 @@
 	<Text ID="CorruptingAltarContent.Node.[2] Line.Line.MultilineString:c4c06d66-60ca-437c-848a-e3de4303cba5">Destroy the altar to stop its corruption spreading!</Text>
 	<Text ID="CultivationTrainingContent.Node.[0] Line.Line.MultilineString:2d06c0f8-dc85-4d26-9c9a-bbc710e43a83">Your training pays off. You can channel your inner forces with much greater ease.</Text>
 	<Text ID="CultivationTrainingContent.Node.[0] Line.Line.MultilineString:bc6cf929-eac0-41c5-aaf3-d4d8db781cd6">You see no results for your efforts.</Text>
-	<Text ID="CultivationTrainingContent.Node.[0] Line.Line.MultilineString:dcd53ab1-7ed1-4607-b3ce-c9faaba8c8f7">Within your body is a seething mass of energy. With sufficient training you can channel this power to utalise powerful abilities.</Text>
+	<Text ID="CultivationTrainingContent.Node.[0] Line.Line.MultilineString:dcd53ab1-7ed1-4607-b3ce-c9faaba8c8f7">Within your body is a seething mass of energy. With sufficient training you can channel this power to utilise powerful abilities.</Text>
 	<Text ID="DescentContent.Node.[0] Line.Line.MultilineString:4866d54e-7c35-4220-89de-db9daeea6014">You finally reach the bottom, dank dark tunnels stretching off to either side of you.</Text>
 	<Text ID="DescentContent.Node.[0] Line.Line.MultilineString:8796dd83-eb54-4803-b26a-8486c7a53859">You open the gate and enter a long, steep passageway that descends into darkness. As you walk down it the slope gets steeper until you are climbing down, attempting not to fall and slide to your death.</Text>
 	<Text ID="DescentContent.Node.[0] Line.Line.MultilineString:ceb9f96f-7c18-4644-8b5b-6d08abad3557">You nerve gives out and you retreat back to the light.</Text>
@@ -393,7 +393,7 @@
 	<Text ID="RaidingParty.Node.[1] Line.Line.MultilineString:0c912234-90c0-4eba-ad79-b46eb1892335">You look out the window and see a firey red glow in the distance. The village is burning!</Text>
 	<Text ID="RaidingParty.Node.[1] Line.Line.MultilineString:723bb7e6-d072-4e8e-97f4-9736c13eecee">You charge downstairs, snatching some household items along the way to help defend yourself.</Text>
 	<Text ID="RaidingParty.Node.[3] Line.Line.MultilineString:3e7151e0-109a-44c5-9f9f-add2a8495633">You face down a small group of the greenskins as they brandish weapons and leer at you. Fight for your life!</Text>
-	<Text ID="RatEncounterContent.Node.[0] Line.Line.MultilineString:68361e44-1203-44d3-a2b6-0f146ca9db19">The last rat lies broken at your feet. You take a second to check the adventurer, a gimmer from his equipment catching your eye.</Text>
+	<Text ID="RatEncounterContent.Node.[0] Line.Line.MultilineString:68361e44-1203-44d3-a2b6-0f146ca9db19">The last rat lies broken at your feet. You take a second to check the adventurer, a glimmer from his equipment catching your eye.</Text>
 	<Text ID="RatEncounterContent.Node.[0] Line.Line.MultilineString:c1f9ffee-aadf-4dd7-a708-7510562648f8">As you approach the ruin you find it to be surrounded by large rats.</Text>
 	<Text ID="RatEncounterContent.Node.[0] Line.Line.MultilineString:e17dfc7c-d419-4750-aaf0-7b979cabe855">The rat swarm overpowers you and you fall, becoming the creatures next meal.</Text>
 	<Text ID="RatEncounterContent.Node.[1] Line.Line.MultilineString:f78ad64b-79fd-46bd-a3aa-c1e5bd3376eb">They are just milling around, some of them chewing on what looks to be the remains of a previous adventurer.</Text>
@@ -407,7 +407,7 @@
 	<Text ID="RecruitBarronContent.Node.[0] Line.Line.MultilineString:34f46c61-4ed3-4f5e-8f0e-b3f89c204c23">You just about manage to drag Barron away before the monsters finish him off. He's badly injured though.</Text>
 	<Text ID="RecruitBarronContent.Node.[0] Line.Line.MultilineString:9b767992-366e-4f67-962f-68517ae7ff48">Together you defeat the enemies.</Text>
 	<Text ID="RecruitBarronContent.Node.[1] Line.Line.MultilineString:a581b144-b281-416e-aaaf-f622710ceb46">"Well met me dear fellow. Quite the fighter aren't you! Come, let us depart this place."</Text>
-	<Text ID="RecruitBarronContent.Node.[1] Line.Line.MultilineString:d1a59607-b68a-4249-a82f-d56e8b687623">"Come at me beasts! I, Barron, Will not let you prevail! Have at you!"</Text>
+	<Text ID="RecruitBarronContent.Node.[1] Line.Line.MultilineString:d1a59607-b68a-4249-a82f-d56e8b687623">"Come at me beasts! I, Barron, will not let you prevail! Have at you!"</Text>
 	<Text ID="RecruiterContent.Node.[0] Line.Line.MultilineString:959965a0-98dc-433a-bdfa-989cd68e3574">Just as you leave the city a man attracts your attention.</Text>
 	<Text ID="RecruiterContent.Node.[1] Line.Line.MultilineString:262adbbd-9114-426e-b4f1-28ce506ea129">"Recruiting members for a raid on local boss! Need 1 attacker! Apply soon!"</Text>
 	<Text ID="RecruiterContent.Node.[2] Line.Line.MultilineString:33d196c8-9e95-4015-955e-b63abcdc7e39">You wander over to see what the fuss is about. As you approach the man smiles and waves to you.</Text>
@@ -421,7 +421,7 @@
 	<Text ID="RecruitFelixaContent.Node.[1] Line.Line.MultilineString:9fe3e228-2f62-43c9-9ba1-7eb93a2b8b4d">"Graaaa! Why doesn't the damned key work!"</Text>
 	<Text ID="RecruitFelixaContent.Node.[2] Line.Line.MultilineString:9b554478-7942-409c-ac65-626fbbd02fc3">She stand up and throws the key at the floor, before turning and spotting you. You introduce yourself and say that Grayheart recruited you. </Text>
 	<Text ID="RecruitFelixaContent.Node.[3] Line.Line.MultilineString:d569c2bd-eb88-47b8-a0e7-a6bb844e7386">"I'll come with you if we can get the treasure out of this bloody chest. Come here, help me pry it open."</Text>
-	<Text ID="RecruitRuffletopContent.Node.[0] Line.Line.MultilineString:0c875baf-25ff-47d8-a723-35ed4665cf5c">The girl seems totally smitten, and after a long kiss with Ruffletop agrees on a late night rendevous with him.</Text>
+	<Text ID="RecruitRuffletopContent.Node.[0] Line.Line.MultilineString:0c875baf-25ff-47d8-a723-35ed4665cf5c">The girl seems totally smitten, and after a long kiss with Ruffletop agrees on a late night rendezvous with him.</Text>
 	<Text ID="RecruitRuffletopContent.Node.[0] Line.Line.MultilineString:de9a3f1a-a8fb-4bd8-bcd6-3cf001561d90">The girl doesn't seem impressed and make some excuse to leave. Ruffletop glares at you and hurries after her.</Text>
 	<Text ID="RecruitRuffletopContent.Node.[0] Line.Line.MultilineString:fa4f8fad-f6e5-421c-b5f0-9a69a8d006e9">You find Ruffletop in the tavern, chatting to a young lady. He seem to be trying hard to impress her. You walk over to introduce yourself anyway. Ruffletop quickly pulls you to one side.</Text>
 	<Text ID="RecruitRuffletopContent.Node.[1] Line.Line.MultilineString:368e70f3-73f4-4b5e-8b1c-69632bbde0da">"Alright, lets go take down this beast, I have an appointment to attend."</Text>
@@ -484,7 +484,7 @@
 	<Text ID="TestOfWisdomContent.Node.[2] Line.Line.MultilineString:a40e401e-fdcb-4447-b5a9-6bdc14f3d887">You are standing on a platform, surrounded by a long drop. A series of platforms leads to a door at the other side of the room, with large gaps between. At the door the knight-captain stands, grinning.</Text>
 	<Text ID="TestOfWisdomContent.Node.[3] Line.Line.MultilineString:059cc87d-48fd-4ac5-8f12-e56684e9c65a">"Your final trial is to test if you can persist and overcome dangerous situations. Do you have the wisdom to prevail? Show us!"</Text>
 	<Text ID="TheFestivalContent.Node.[0] Line.Line.MultilineString:4170260f-fd97-4dfb-8687-468ebd454118">"Another win for Rodney!"</Text>
-	<Text ID="TheFestivalContent.Node.[0] Line.Line.MultilineString:7867efeb-5d76-4e72-b647-89f21b42dba1">You wander through the brighly coloured stalls, pockets weighed down with money. On all sides people call out to you, looking to sell all sorts of wares.</Text>
+	<Text ID="TheFestivalContent.Node.[0] Line.Line.MultilineString:7867efeb-5d76-4e72-b647-89f21b42dba1">You wander through the brightly coloured stalls, pockets weighed down with money. On all sides people call out to you, looking to sell all sorts of wares.</Text>
 	<Text ID="TheFestivalContent.Node.[0] Line.Line.MultilineString:d03f8e46-bdf9-41c8-9143-00deb7deb181">"We have a new champion! Leave the arena now and rest, you've earned it."</Text>
 	<Text ID="TheFestivalContent.Node.[1] Line.Line.MultilineString:0901f81b-01bd-4b82-9ee9-202211057019">You finally arrive in the town square. All sorts of games are being run here, but the one that grabs your attention the most is the bare handed fighting tournament in the middle.</Text>
 	<Text ID="TheFestivalContent.Node.[1] Line.Line.MultilineString:3044c1a7-f7d3-4ccb-b9ea-a92da01fc62c">You take your winnings and head home, humming happily to yourself.</Text>
@@ -496,7 +496,7 @@
 	<Text ID="TheHarvestContent.Node.[0] Line.Line.MultilineString:40d6f769-fe9c-4cb7-8bb3-fa80e2f43b14">More crops remain to be gathered. Your work is not yet done.</Text>
 	<Text ID="TheHarvestContent.Node.[0] Line.Line.MultilineString:b695ba8b-8904-4d4e-84fd-9f8e03c0ef92">Fields of crops lie waiting for you to harvest and store them, ready for sale during the next market fair.</Text>
 	<Text ID="TheHarvestContent.Node.[1] Line.Line.MultilineString:d5d5c960-ddb3-4ee8-a00e-6a1de959f119">You must be quick however, as every day that passes allows wildlife more time to ravage the ripe vegetables.</Text>
-	<Text ID="TournamentContent.Node.[0] Line.Line.MultilineString:21194cbf-61a0-4739-a54d-28e212258af7">His potions finally overwealm you and you collapse. The man walks over to you and thanks you for the match, then pours an antidote over you.</Text>
+	<Text ID="TournamentContent.Node.[0] Line.Line.MultilineString:21194cbf-61a0-4739-a54d-28e212258af7">His potions finally overwhelm you and you collapse. The man walks over to you and thanks you for the match, then pours an antidote over you.</Text>
 	<Text ID="TournamentContent.Node.[0] Line.Line.MultilineString:625a00bf-4e4c-4a6f-81d9-3788ffef9d8f">Knocked out in the first round you slink away dejected.</Text>
 	<Text ID="TournamentContent.Node.[0] Line.Line.MultilineString:9af9d310-ee17-41bf-88f0-3f8ad18bac37">You enter the tournament with a feeling of confidence swelling within you. Looking around at the others in your division you feel you have a great shot at winning.</Text>
 	<Text ID="TournamentContent.Node.[0] Line.Line.MultilineString:b7bc2624-c24f-43d5-b516-1657fe5835a8">Despite all the alchemists tricks you finally beat him down. Cheers erupt all around you as the crowd rushes down to carry you aloft.</Text>
