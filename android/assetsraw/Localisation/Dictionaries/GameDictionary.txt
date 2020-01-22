@@ -396,3 +396,5 @@ antidote
 hug
 monacle
 immolate
+extraordinaire
+coalesce

@@ -35,7 +35,7 @@ object AutoLocaliser
 
 		try
 		{
-			Localiser()
+			Localiser().autoLocalise()
 		}
 		finally
 		{
@@ -46,7 +46,7 @@ object AutoLocaliser
 
 class Localiser
 {
-	val translate: Translate
+	lateinit var translate: Translate
 
 	val languages = arrayOf("EN-US", "DE")
 	val translatedText = ObjectMap<String, String>()
@@ -63,21 +63,6 @@ class Localiser
 
 	init
 	{
-		println("")
-		println("")
-		println("-------------------------------------------------------------------------")
-		println("")
-		println("#####      Auto Localiser      #######")
-		println("")
-		println("-------------------------------------------------------------------------")
-		println("")
-		println("")
-
-		val credentials = GoogleCredentials.fromStream(FileInputStream("../../../PrivateStuff/google-translate-d52258605bea.json"))
-		val translateOptions = TranslateOptions.newBuilder().setCredentials(credentials).build()
-		translate = translateOptions.service
-		println("Translate service started")
-
 		dictionary.addAll(File("../assetsraw/Localisation/Dictionaries/GeneralDictionary.txt").readLines())
 		dictionary.addAll(File("../assetsraw/Localisation/Dictionaries/GameDictionary.txt").readLines())
 		gameNames.addAll(File("../assetsraw/Localisation/Dictionaries/GameNameList.txt").readLines())
@@ -93,20 +78,26 @@ class Localiser
 		}
 
 		println("Dictionaries loaded")
+	}
 
-		val allIds = ObjectSet<String>()
-		for (xml in XmlData.getExistingPaths())
-		{
-			val xml = getXml(xml)
-			for (el in xml.descendants())
-			{
-				if (el.childCount == 0)
-				{
-					allIds.add(el.text)
-				}
-			}
-		}
-		println("ID's found")
+	fun autoLocalise()
+	{
+		validateEnglish()
+
+		println("")
+		println("")
+		println("-------------------------------------------------------------------------")
+		println("")
+		println("#####      Auto Localiser      #######")
+		println("")
+		println("-------------------------------------------------------------------------")
+		println("")
+		println("")
+
+		val credentials = GoogleCredentials.fromStream(FileInputStream("../../../PrivateStuff/google-translate-d52258605bea.json"))
+		val translateOptions = TranslateOptions.newBuilder().setCredentials(credentials).build()
+		translate = translateOptions.service
+		println("Translate service started")
 
 		val englishLocFolder = File("../assetsraw/Localisation/EN-GB")
 		for (file in englishLocFolder.listFiles()!!)
@@ -116,9 +107,6 @@ class Localiser
 
 			val english = Array<LocEntry>()
 
-			var unusedLines = ""
-			var missingWords = ObjectSet<String>()
-
 			val englishFile = getRawXml(file.path)
 			for (el in englishFile.children())
 			{
@@ -126,45 +114,6 @@ class Localiser
 				val text = el.text
 				val hashCode = text.hashCode()
 				english.add(LocEntry(id, text, "", hashCode))
-
-				try
-				{
-					spellCheck(text, "ID: $id\nText: $text\nFile: ${file.path}")
-				}
-				catch (ex: Exception)
-				{
-					val message = ex.message ?: ""
-					if (message.contains("Unknown word"))
-					{
-						val word = message.split('\n')[1].replace("Word: ", "")
-						missingWords.add(word)
-
-						System.err.println(message)
-					}
-					else
-					{
-						throw ex
-					}
-				}
-
-				if (!allIds.contains(id))
-				{
-					unusedLines += id + "\n"
-				}
-			}
-
-			if (missingWords.size > 0)
-			{
-				var joined = ""
-				for (word in missingWords)
-				{
-					joined += "$word\n"
-				}
-				throw RuntimeException("The following words were missing:\n$joined")
-			}
-			if (!unusedLines.isBlank())
-			{
-				throw RuntimeException("Loc file $file contained unreferences lines:\n$unusedLines")
 			}
 
 			for (language in languages)
@@ -292,6 +241,122 @@ class Localiser
 		println("")
 
 		return translation.translatedText
+	}
+
+	fun validateEnglish()
+	{
+		println("")
+		println("")
+		println("-------------------------------------------------------------------------")
+		println("")
+		println("#####      Localisation Validator      #######")
+		println("")
+		println("-------------------------------------------------------------------------")
+		println("")
+		println("")
+
+		val allIds = ObjectSet<String>()
+		for (xml in XmlData.getExistingPaths())
+		{
+			val xml = getXml(xml)
+			for (el in xml.descendants())
+			{
+				if (el.childCount == 0)
+				{
+					allIds.add(el.text)
+				}
+			}
+		}
+
+		fun parseCodeFilesRecursive(dir: File)
+		{
+			val contents = dir.listFiles() ?: return
+
+			for (file in contents)
+			{
+				if (file.isDirectory)
+				{
+					parseCodeFilesRecursive(file)
+				}
+				else
+				{
+					val contents = file.readText()
+					val regex = Regex("Localisation.getText\\(\".*?\"")
+
+					val occurances = regex.findAll(contents)
+
+					for (occurance in occurances)
+					{
+						var id = occurance.value
+						id = id.replace("Localisation.getText(\"", "")
+						id = id.replace("\"", "")
+
+						allIds.add(id)
+					}
+				}
+			}
+		}
+		parseCodeFilesRecursive(File("../../core/src").absoluteFile)
+
+		println("ID's found")
+
+		val englishLocFolder = File("../assetsraw/Localisation/EN-GB")
+		for (file in englishLocFolder.listFiles()!!)
+		{
+			println("-----------------------------------------------------")
+			println("Processing file ${file.name}")
+
+			var unusedLines = ""
+			val missingWords = ObjectSet<String>()
+
+			val englishFile = getRawXml(file.path)
+			for (el in englishFile.children())
+			{
+				val id = el.getAttribute("ID")
+				val text = el.text
+
+				try
+				{
+					spellCheck(text, "ID: $id\nText: $text\nFile: ${file.path}")
+				}
+				catch (ex: Exception)
+				{
+					val message = ex.message ?: ""
+					if (message.contains("Unknown word"))
+					{
+						val word = message.split('\n')[1].replace("Word: ", "")
+						missingWords.add(word)
+
+						System.err.println(message)
+					}
+					else
+					{
+						throw ex
+					}
+				}
+
+				if (!allIds.contains(id))
+				{
+					unusedLines += id + "\n"
+				}
+			}
+
+			if (missingWords.size > 0)
+			{
+				var joined = ""
+				for (word in missingWords)
+				{
+					joined += "$word\n"
+				}
+				throw RuntimeException("The following words were missing:\n$joined")
+			}
+			if (!unusedLines.isBlank())
+			{
+				throw RuntimeException("Loc file $file contained unreferences lines:\n$unusedLines")
+			}
+		}
+
+		println("Validated English")
 	}
 
 	fun spellCheck(text: String, context: String)
