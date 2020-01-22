@@ -6,11 +6,14 @@ import com.badlogic.gdx.backends.headless.HeadlessApplication
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
+import com.badlogic.gdx.utils.ObjectSet
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.cloud.translate.Translate
 import com.google.cloud.translate.TranslateOptions
+import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.children
 import com.lyeeedar.Util.getRawXml
+import com.lyeeedar.Util.getXml
 import ktx.collections.set
 import org.mockito.Mockito
 import java.io.File
@@ -61,6 +64,19 @@ class Localiser
 		translate = translateOptions.service
 		println("Translate service started")
 
+		val allIds = ObjectSet<String>()
+		for (xml in XmlData.getExistingPaths())
+		{
+			val xml = getXml(xml)
+			for (el in xml.descendants())
+			{
+				if (el.childCount == 0)
+				{
+					allIds.add(el.text)
+				}
+			}
+		}
+
 		val englishLocFolder = File("../assetsraw/Localisation/EN-GB")
 
 		for (file in englishLocFolder.listFiles()!!)
@@ -70,10 +86,25 @@ class Localiser
 
 			val english = Array<LocEntry>()
 
+			var unusedLines = ""
+
 			val englishFile = getRawXml(file.path)
 			for (el in englishFile.children())
 			{
-				english.add(LocEntry(el.getAttribute("ID"), el.text, "", el.text.hashCode()))
+				val id = el.getAttribute("ID")
+				val text = el.text
+				val hashCode = text.hashCode()
+				english.add(LocEntry(id, text, "", hashCode))
+
+				if (!allIds.contains(id))
+				{
+					unusedLines += id + "\n"
+				}
+			}
+
+			if (!unusedLines.isBlank())
+			{
+				throw RuntimeException("Loc file ${file} contained unreferences lines:\n$unusedLines")
 			}
 
 			for (language in languages)
@@ -121,7 +152,7 @@ class Localiser
 
 					if (languageEntry.translatedHash != englishHash)
 					{
-						languageEntry.text = translateText(language, english)
+						languageEntry.text = translateText(english, language)
 						languageEntry.translateType = "Auto"
 						languageEntry.translatedHash = englishHash
 					}
@@ -142,7 +173,7 @@ class Localiser
 		println("Localisation complete")
 	}
 
-	fun translateText(language: String, text: String): String
+	fun translateText(text: String, language: String): String
 	{
 		if (language == "EN-US")
 		{
@@ -160,9 +191,34 @@ class Localiser
 
 		if (text.contains("{"))
 		{
-			throw NotImplementedError()
-		}
+			val splitText = text.split('{', '}')
 
+			var translatedText = ""
+			var isSentence = text[0] != '{'
+			for (chunk in splitText)
+			{
+				if (isSentence)
+				{
+					translatedText += doTranslate(chunk, language)
+				}
+				else
+				{
+					translatedText += "{$chunk}"
+				}
+
+				isSentence = !isSentence
+			}
+
+			return translatedText
+		}
+		else
+		{
+			return doTranslate(text, language)
+		}
+	}
+
+	fun doTranslate(text: String, language: String): String
+	{
 		println("Translating '${text}' for language $language")
 
 		// do google translate
