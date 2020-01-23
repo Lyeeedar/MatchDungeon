@@ -3,7 +3,8 @@
 		<Data Name="Text" HasAttributes="True" meta:RefKey="String">
 			<Attributes meta:RefKey="Attributes">
 				<Attribute Name="ID" meta:RefKey="String" />
-				<Attribute Name="Translated" meta:RefKey="Boolean" />
+				<Attribute Name="TranslateType" EnumValues="None,Auto,Manual" Default="None" meta:RefKey="Enum" />
+				<Attribute Name="TranslatedHash" meta:RefKey="String" />
 			</Attributes>
 		</Data>
 	</Definition>
