@@ -96,18 +96,18 @@ class QuestScreen : AbstractScreen()
 
 		if (Statics.settings.get(COMPLETED_INTRO, false))
 		{
-			val abandonQuestButton = TextButton("Abandon Quest", Statics.skin)
+			val abandonQuestButton = TextButton(Localisation.getText("questscreen.abandonquest", "UI"), Statics.skin)
 			abandonQuestButton.addClickListener {
 
 				MessageBox(
-					"Abandon Quest",
-					"Are you sure you want to abandon the quest and return to the quest selection screen? You will lose any progress made, but keep any rewards you have earned.",
-					Pair("Continue Quest", {
+					Localisation.getText("questscreen.abandonquest", "UI"),
+					Localisation.getText("questscreen.abandonquest.popuptext", "UI"),
+					Pair(Localisation.getText("questscreen.abandonquest.continue", "UI"), {
 						val bundle = Statics.analytics.getParamBundle()
 						bundle.setString("choice", "Continue")
 						Statics.analytics.customEvent("abandon_quest", bundle)
 					}),
-					Pair("Abandon Quest", {
+					Pair(Localisation.getText("questscreen.abandonquest.abandon", "UI"), {
 						val bundle = Statics.analytics.getParamBundle()
 						bundle.setString("choice", "Abandon")
 						Statics.analytics.customEvent("abandon_quest", bundle)
@@ -341,7 +341,7 @@ class QuestScreen : AbstractScreen()
 			val widget = card.current.getCard()
 			widget.data = card
 
-			widget.addPick("Choose") {
+			widget.addPick(Localisation.getText("questscreen.choose", "UI")) {
 				chosenQuestCard = it
 
 				for (w in cardWidgets)
@@ -393,7 +393,7 @@ class QuestScreen : AbstractScreen()
 		createFun(EquipmentSlot.MAINHAND, mainhandSlot)
 		createFun(EquipmentSlot.OFFHAND, offhandSlot)
 
-		goldLabel.setText("Gold: " + Global.player.gold)
+		goldLabel.setText(Localisation.getText("gold", "UI") + ": " + Global.player.gold)
 	}
 
 	fun completeQuest()
@@ -414,11 +414,24 @@ class QuestScreen : AbstractScreen()
 		bundle.setString("quest_name", currentQuest.title)
 		Statics.analytics.customEvent("complete_quest", bundle)
 
-		val text = if (currentQuest.state == Quest.QuestState.FAILURE) "Quest Failed!" else "Quest Completed!\n${currentQuest.state.toString().toLowerCase(Locale.ENGLISH).capitalize()}"
+		val text =
+			if (currentQuest.state == Quest.QuestState.FAILURE)
+				Localisation.getText("questscreen.questfailed", "UI")
+			else
+				Localisation.getText("questscreen.questcompleted", "UI") + "\n" + Localisation.getText(currentQuest.state.toString().toLowerCase(Locale.ENGLISH), "UI")
 		val table = Table()
 		table.add(Label(text, Statics.skin, "cardtitle"))
 
-		val card = CardWidget(CardWidget.createFrontTable(FrontTableComplex("Complete", "Quest", table)), Table(), AssetManager.loadTextureRegion("blank")!!, null)
+		val card = CardWidget(
+			CardWidget.createFrontTable(
+				FrontTableComplex(
+					Localisation.getText("complete", "UI"),
+					Localisation.getText("quest", "UI"),
+					table)),
+			Table(),
+			AssetManager.loadTextureRegion("blank")!!,
+			null)
+
 		card.canZoom = false
 		card.setFacing(true, false)
 		card.addPick("") {
@@ -439,10 +452,10 @@ class QuestScreen : AbstractScreen()
 
 		val tutorial = Tutorial("QuestScreen")
 		tutorial.addDelay(1f)
-		tutorial.addPopup("This is the quest screen.", Any())
-		tutorial.addPopup("Here you can choose what you want to encounter next. Tap a card to view more details about it, and to select it.", cardsTable)
-		tutorial.addPopup("Tap here to see your current character information, including statistics and equipment.", statsTable)
-		tutorial.addPopup("Here you can see your current gold. You can use this to buy equipment in shops, or during encounters.", goldLabel)
+		tutorial.addPopup(Localisation.getText("questscreen.tutorial.1", "UI"), Any())
+		tutorial.addPopup(Localisation.getText("questscreen.tutorial.2", "UI"), cardsTable)
+		tutorial.addPopup(Localisation.getText("questscreen.tutorial.3", "UI"), statsTable)
+		tutorial.addPopup(Localisation.getText("questscreen.tutorial.4", "UI"), goldLabel)
 		tutorial.show()
 	}
 

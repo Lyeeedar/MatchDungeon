@@ -13,10 +13,7 @@ import com.lyeeedar.Game.Global
 import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.UI.Seperator
 import com.lyeeedar.UI.addClickListener
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.FastEnumMap
-import com.lyeeedar.Util.Statics
-import com.lyeeedar.Util.neaten
+import com.lyeeedar.Util.*
 
 class DeckScreen : AbstractScreen()
 {
@@ -56,7 +53,7 @@ class DeckScreen : AbstractScreen()
 
 		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion("Oryx/uf_split/uf_terrain/floor_wood_1"))).tint(Color(0.5f, 0.5f, 0.5f, 1f))
 
-		mainTable.add(Label("Character", Statics.skin, "title")).expandX().center().padTop(20f)
+		mainTable.add(Label(Localisation.getText("character", "UI"), Statics.skin, "title")).expandX().center().padTop(20f)
 		mainTable.row()
 		mainTable.add(Seperator(Statics.skin)).growX()
 		mainTable.row()
@@ -65,9 +62,9 @@ class DeckScreen : AbstractScreen()
 		val cardWidth = Statics.resolution.x.toFloat() * 0.8f
 
 		val charCard = Global.player.baseCharacter.getCard()
-		charCard.addPick("", {
+		charCard.addPick("") {
 			createCharacterScreen()
-		})
+		}
 		charCard.canZoom = false
 		charCard.canPickFaceDown = true
 
@@ -80,7 +77,7 @@ class DeckScreen : AbstractScreen()
 		if (Global.deck.hasNewCharacters)
 		{
 			val newTable = Table()
-			val newLabel = Label("New", Statics.skin)
+			val newLabel = Label(Localisation.getText("new", "UI"), Statics.skin)
 			newTable.add(newLabel).expand().top().pad(3f)
 
 			charStack.add(newTable)
@@ -95,7 +92,7 @@ class DeckScreen : AbstractScreen()
 
 		mainTable.row()
 
-		mainTable.add(Label("Encounters", Statics.skin, "title")).expandX().center()
+		mainTable.add(Label(Localisation.getText("encounter", "UI"), Statics.skin, "title")).expandX().center()
 		mainTable.row()
 		mainTable.add(Seperator(Statics.skin)).growX()
 		mainTable.row()
@@ -114,7 +111,7 @@ class DeckScreen : AbstractScreen()
 		if (Global.deck.hasNewEncounters)
 		{
 			val newTable = Table()
-			val newLabel = Label("New", Statics.skin)
+			val newLabel = Label(Localisation.getText("new", "UI"), Statics.skin)
 			newTable.add(newLabel).expand().top().pad(3f)
 
 			cardStack.add(newTable)
@@ -130,7 +127,7 @@ class DeckScreen : AbstractScreen()
 
 		if (containsTooManyEncounters())
 		{
-			val label = Label("Deck contains too many encounters.", Statics.skin)
+			val label = Label(Localisation.getText("deckscreen.toomanyencounters", "UI"), Statics.skin)
 			label.setWrap(true)
 			label.color = Color.RED
 
@@ -140,7 +137,7 @@ class DeckScreen : AbstractScreen()
 
 		if (containsTooFewEncounters())
 		{
-			val label = Label("Deck contains too few encounters.", Statics.skin)
+			val label = Label(Localisation.getText("deckscreen.toofewencounters", "UI"), Statics.skin)
 			label.setWrap(true)
 			label.color = Color.RED
 
@@ -151,7 +148,7 @@ class DeckScreen : AbstractScreen()
 		mainTable.add(encountersTable).growX().center().height(cardHeight)
 		mainTable.row()
 
-		mainTable.add(Label("Equipment", Statics.skin, "title")).expandX().center()
+		mainTable.add(Label(Localisation.getText("equipment", "UI"), Statics.skin, "title")).expandX().center()
 		mainTable.row()
 		mainTable.add(Seperator(Statics.skin)).growX()
 		mainTable.row()
@@ -170,7 +167,7 @@ class DeckScreen : AbstractScreen()
 		if (Global.deck.hasNewEquipment)
 		{
 			val newTable = Table()
-			val newLabel = Label("New", Statics.skin)
+			val newLabel = Label(Localisation.getText("new", "UI"), Statics.skin)
 			newTable.add(newLabel).expand().top().pad(3f)
 
 			equipStack.add(newTable)
@@ -186,7 +183,7 @@ class DeckScreen : AbstractScreen()
 
 		if (containsTooManyEquipment())
 		{
-			val label = Label("Deck contains too many.", Statics.skin)
+			val label = Label(Localisation.getText("deckscreen.toomuchequipment", "UI"), Statics.skin)
 			label.setWrap(true)
 			label.color = Color.RED
 
@@ -196,7 +193,7 @@ class DeckScreen : AbstractScreen()
 
 		if (containsTooFewEquipment())
 		{
-			val label = Label("Deck contains too few equipment.", Statics.skin)
+			val label = Label(Localisation.getText("deckscreen.toofewequipment", "UI"), Statics.skin)
 			label.setWrap(true)
 			label.color = Color.RED
 
@@ -209,14 +206,14 @@ class DeckScreen : AbstractScreen()
 
 		if (isDeckInvalid())
 		{
-			val returnButton = TextButton("Return", Statics.skin)
+			val returnButton = TextButton(Localisation.getText("deckscreen.return", "UI"), Statics.skin)
 			returnButton.color = Color.DARK_GRAY
 			mainTable.add(returnButton).expandX().right().pad(10f).expandY().bottom()
 			mainTable.row()
 		}
 		else
 		{
-			val returnButton = TextButton("Return", Statics.skin)
+			val returnButton = TextButton(Localisation.getText("deckscreen.return", "UI"), Statics.skin)
 			returnButton.addClickListener {
 
 				val screen = Statics.game.getTypedScreen<QuestSelectionScreen>()!!
@@ -239,7 +236,7 @@ class DeckScreen : AbstractScreen()
 		val cardHeight = (Statics.resolution.y.toFloat() * 0.7f) * 0.3f
 		val cardWidth = Statics.resolution.x.toFloat() * 0.8f
 
-		val title = Label("Character Selection", Statics.skin, "title")
+		val title = Label(Localisation.getText("deckscreen.characterselection", "UI"), Statics.skin, "title")
 		mainTable.add(title).expandX().center().pad(20f)
 		mainTable.row()
 
@@ -247,7 +244,7 @@ class DeckScreen : AbstractScreen()
 		mainTable.add(bodyTable).grow()
 		mainTable.row()
 
-		val leftCard = Global.deck.chosenCharacter!!.getCard()
+		val leftCard = Global.deck.chosenCharacter.getCard()
 		leftCard.setSize(cardWidth, cardHeight)
 		leftCard.setFacing(true, false)
 		bodyTable.add(leftCard).grow().center().height(cardHeight).pad(10f).uniform()
@@ -267,7 +264,7 @@ class DeckScreen : AbstractScreen()
 			{
 				val card = char.getCard()
 				card.setSize(cardWidth, cardHeight)
-				card.addPick("Select") {
+				card.addPick(Localisation.getText("deckscreen.pickcharacter", "UI")) {
 					Global.deck.chosenCharacter = char
 					createCharacterScreen()
 
@@ -285,7 +282,7 @@ class DeckScreen : AbstractScreen()
 			}
 		}
 
-		val returnButton = TextButton("Return", Statics.skin)
+		val returnButton = TextButton(Localisation.getText("deckscreen.return", "UI"), Statics.skin)
 		returnButton.addClickListener {
 			createMainScreen()
 		}
@@ -304,7 +301,7 @@ class DeckScreen : AbstractScreen()
 		val cardHeight = (Statics.resolution.y.toFloat() * 0.7f) * 0.3f
 		val cardWidth = Statics.resolution.x.toFloat() * 0.3f
 
-		val title = Label("Encounter Selection", Statics.skin, "title")
+		val title = Label(Localisation.getText("deckscreen.encounterselection", "UI"), Statics.skin, "title")
 		mainTable.add(title).expandX().center().pad(20f)
 		mainTable.row()
 
@@ -338,7 +335,7 @@ class DeckScreen : AbstractScreen()
 			val card = enc.current.getCard()
 
 			card.setSize(cardWidth, cardHeight)
-			card.addPick("Remove") {
+			card.addPick(Localisation.getText("deckscreen.remove", "UI")) {
 				Global.deck.playerDeck.encounters.removeValue(enc, true)
 				createEncounterScreen()
 
@@ -366,7 +363,7 @@ class DeckScreen : AbstractScreen()
 
 		if (deckShops.size > 0)
 		{
-			leftScrollTable.add(Label("Shops", Statics.skin, "title"))
+			leftScrollTable.add(Label(Localisation.getText("deckscreen.shops", "UI"), Statics.skin, "title"))
 			leftScrollTable.row()
 
 			for (card in deckShops)
@@ -378,7 +375,7 @@ class DeckScreen : AbstractScreen()
 
 		if (deckEncounters.size > 0)
 		{
-			leftScrollTable.add(Label("Encounters", Statics.skin, "title"))
+			leftScrollTable.add(Label(Localisation.getText("deckscreen.encounters", "UI"), Statics.skin, "title"))
 			leftScrollTable.row()
 
 			for (card in deckEncounters)
@@ -408,7 +405,7 @@ class DeckScreen : AbstractScreen()
 				val card = enc.current.getCard()
 
 				card.setSize(cardWidth, cardHeight)
-				card.addPick("Add") {
+				card.addPick(Localisation.getText("deckscreen.add", "UI")) {
 					Global.deck.playerDeck.encounters.add(enc)
 					createEncounterScreen()
 
@@ -435,7 +432,7 @@ class DeckScreen : AbstractScreen()
 
 		if (unusedShops.size > 0)
 		{
-			rightScrollTable.add(Label("Shops", Statics.skin, "title"))
+			rightScrollTable.add(Label(Localisation.getText("deckscreen.shops", "UI"), Statics.skin, "title"))
 			rightScrollTable.row()
 
 			for (card in unusedShops)
@@ -447,7 +444,7 @@ class DeckScreen : AbstractScreen()
 
 		if (unusedEncounters.size > 0)
 		{
-			rightScrollTable.add(Label("Encounters", Statics.skin, "title"))
+			rightScrollTable.add(Label(Localisation.getText("deckscreen.encounters", "UI"), Statics.skin, "title"))
 			rightScrollTable.row()
 
 			for (card in unusedEncounters)
@@ -457,7 +454,7 @@ class DeckScreen : AbstractScreen()
 			}
 		}
 
-		val returnButton = TextButton("Return", Statics.skin)
+		val returnButton = TextButton(Localisation.getText("deckscreen.return", "UI"), Statics.skin)
 		returnButton.addClickListener {
 			createMainScreen()
 		}
@@ -476,7 +473,7 @@ class DeckScreen : AbstractScreen()
 		val cardHeight = (Statics.resolution.y.toFloat() * 0.7f) * 0.3f
 		val cardWidth = Statics.resolution.x.toFloat() * 0.3f
 
-		val title = Label("Equipment Selection", Statics.skin, "title")
+		val title = Label(Localisation.getText("deckscreen.equipmentselection", "UI"), Statics.skin, "title")
 		mainTable.add(title).expandX().center().pad(20f)
 		mainTable.row()
 
@@ -509,7 +506,7 @@ class DeckScreen : AbstractScreen()
 		{
 			val card = equip.getCard(null, false)
 			card.setSize(cardWidth, cardHeight)
-			card.addPick("Remove") {
+			card.addPick(Localisation.getText("deckscreen.remove", "UI")) {
 				Global.deck.playerDeck.equipment.removeValue(equip, true)
 				createEquipmentScreen()
 
@@ -568,7 +565,7 @@ class DeckScreen : AbstractScreen()
 			{
 				val card = equip.getCard(null, false)
 				card.setSize(cardWidth, cardHeight)
-				card.addPick("Add") {
+				card.addPick(Localisation.getText("deckscreen.add", "UI")) {
 					Global.deck.playerDeck.equipment.add(equip)
 					createEquipmentScreen()
 
@@ -608,7 +605,7 @@ class DeckScreen : AbstractScreen()
 			}
 		}
 
-		val returnButton = TextButton("Return", Statics.skin)
+		val returnButton = TextButton(Localisation.getText("deckscreen.return", "UI"), Statics.skin)
 		returnButton.addClickListener {
 			createMainScreen()
 		}

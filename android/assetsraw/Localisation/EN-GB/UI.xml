@@ -1,8 +1,44 @@
 <Localisation Language="EN-GB" xmlns:meta="Editor">
 	<Text ID="new">New</Text>
+	<Text ID="complete">Complete</Text>
+	<Text ID="gold">Gold</Text>
+	<Text ID="silver">Silver</Text>
+	<Text ID="bronze">Bronze</Text>
+	<Text ID="quest">Quest</Text>
+	<Text ID="character">Character</Text>
+	<Text ID="equipment">Equipment</Text>
+	<Text ID="player">Player</Text>
+	<Text ID="encounter">Encounter</Text>
+
 	<Text ID="questselection.embark">Embark</Text>
 	<Text ID="questselection.editdeck">Edit Deck</Text>
 	<Text ID="questselection.tutorial.1">This is the quest selection screen.</Text>
 	<Text ID="questselection.tutorial.2">You can pick a quest from those you have unlocked here. Just tap the card you want, then tap 'embark'.</Text>
 	<Text ID="questselection.tutorial.3">You can edit your deck of cards here. This will allow you to customise your quest experience.</Text>
+
+	<Text ID="questscreen.abandonquest">Abandon Quest</Text>
+	<Text ID="questscreen.abandonquest.popuptext">Are you sure you want to abandon the quest and return to the quest selection screen? You will lose any progress made, but keep any rewards you have earned.</Text>
+	<Text ID="questscreen.abandonquest.continue">Continue Quest</Text>
+	<Text ID="questscreen.abandonquest.abandon">Abandon Quest</Text>
+	<Text ID="questscreen.choose">Choose</Text>
+	<Text ID="questscreen.questfailed">Quest Failed</Text>
+	<Text ID="questscreen.questcompleted">Quest Completed</Text>
+	<Text ID="questscreen.tutorial.1">This is the quest screen.</Text>
+	<Text ID="questscreen.tutorial.2">Here you can choose what you want to encounter next. Tap a card to view more details about it, and to select it.</Text>
+	<Text ID="questscreen.tutorial.3">Tap here to see your current character information, including statistics and equipment.</Text>
+	<Text ID="questscreen.tutorial.4">Here you can see your current gold. You can use this to buy equipment in shops, or during encounters.</Text>
+
+	<Text ID="deckscreen.toomanyencounters">Deck contains too many encounters.</Text>
+	<Text ID="deckscreen.toofewencounters">Deck contains too few encounters.</Text>
+	<Text ID="deckscreen.toomuchequipment">Deck contains too much equipment.</Text>
+	<Text ID="deckscreen.toofewequipment">Deck contains too few equipment.</Text>
+	<Text ID="deckscreen.return">Return</Text>
+	<Text ID="deckscreen.remove">Remove</Text>
+	<Text ID="deckscreen.add">Add</Text>
+	<Text ID="deckscreen.shops">Shops</Text>
+	<Text ID="deckscreen.encounters">Encounters</Text>
+	<Text ID="deckscreen.characterselection">Character Selection</Text>
+	<Text ID="deckscreen.pickcharacter">Select</Text>
+	<Text ID="deckscreen.encounterselection">Encounter Selection</Text>
+	<Text ID="deckscreen.equipmentselection">Equipment Selection</Text>
 </Localisation>
