@@ -109,4 +109,19 @@
 
 	<Text ID="plate.tutorial">This is a plate. Match on top of this to break it.</Text>
 	<Text ID="spreader.tutorial">This is a spreading field. Match in the tiles surrounding it to remove it and stop it spreading this turn.</Text>
+
+	<Text ID="card.containsshop">This encounter contains a shop.</Text>
+	<Text ID="card.unknownreward">Have an unknown chance to gain unknown rewards.</Text>
+	<Text ID="card.rewardchance">Have a {Chance} chance to gain {Reward} rewards.</Text>
+	<Text ID="card.willadvance">Completing this encounter will cause it to advance.</Text>
+
+	<Text ID="cardsource.deck">This encounter came from the encounter deck.</Text>
+	<Text ID="cardsource.character">This encounter came from the current character.</Text>
+	<Text ID="cardsource.quest">This encounter came from the current quest.</Text>
+	<Text ID="cardsource.location">This encounter came from the current quest location.</Text>
+	
+	<Text ID="cardchance.greatpositive">Blessedly Lucky</Text>
+	<Text ID="cardchance.positive">Lucky</Text>
+	<Text ID="cardchance.negative">Unlucky</Text>
+	<Text ID="cardchance.greatnegative">Cursedly Unlucky</Text>
 </Localisation>

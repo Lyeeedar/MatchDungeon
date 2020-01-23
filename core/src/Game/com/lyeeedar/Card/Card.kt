@@ -93,12 +93,24 @@ class Card(val path: String, val nodes: Array<CardNode>, val root: CardNode)
 	}
 }
 
-enum class CardSource private constructor(val icon: Sprite, val text: String, val colourTint: Colour)
+enum class CardSource private constructor(val icon: Sprite, val colourTint: Colour)
 {
-	DECK(AssetManager.loadSprite("GUI/CardCardback"), "This encounter came from the encounter deck", Colour.WHITE),
-	CHARACTER(AssetManager.loadSprite("GUI/CharacterCardback"), "This encounter came from the current character", Colour(0.9f, 1f, 0.9f, 1f)),
-	QUEST(AssetManager.loadSprite("GUI/QuestCardback"), "This encounter came from the current quest", Colour(1f, 0.9f, 0.9f, 1f)),
-	LOCATION(AssetManager.loadGrayscaleSprite("Oryx/Custom/terrain/flag_complete_4"), "This encounter came from the current quest location", Colour(0.9f, 0.9f, 1f, 1f))
+	DECK(AssetManager.loadSprite("GUI/CardCardback"), Colour.WHITE),
+	CHARACTER(AssetManager.loadSprite("GUI/CharacterCardback"), Colour(0.9f, 1f, 0.9f, 1f)),
+	QUEST(AssetManager.loadSprite("GUI/QuestCardback"), Colour(1f, 0.9f, 0.9f, 1f)),
+	LOCATION(AssetManager.loadGrayscaleSprite("Oryx/Custom/terrain/flag_complete_4"), Colour(0.9f, 0.9f, 1f, 1f));
+
+	val text: String
+		get()
+		{
+			return when(this)
+			{
+				DECK -> Localisation.getText("cardsource.deck", "UI")
+				CHARACTER -> Localisation.getText("cardsource.character", "UI")
+				QUEST -> Localisation.getText("cardsource.quest", "UI")
+				LOCATION -> Localisation.getText("cardsource.location", "UI")
+			}
+		}
 }
 
 class CardNode
@@ -125,7 +137,7 @@ class CardNode
 		val descriptors: Array<Pair<Sprite, String?>> = gdxArrayOf(Pair(cardSource.icon, cardSource.text))
 		return CardWidget.createCard(
 				Localisation.getText(nameID, "Card").replace(':', '\n'),
-				"Encounter",
+				Localisation.getText("encounter", "UI"),
 				AssetManager.loadSprite("GUI/CardCardback"),
 				createTable(false),
 				createTable(true),
@@ -162,7 +174,7 @@ class CardNode
 			stack.add(SpriteWidget(AssetManager.loadSprite("GUI/RewardChanceBorder", colour = Colour(Color.OLIVE)), 64f, 64f))
 			stack.add(widget)
 
-			stack.addTapToolTip("This encounter contains a shop.")
+			stack.addTapToolTip(Localisation.getText("card.containsshop", "UI"))
 			rewardsTable.add(stack).expandX().center().pad(10f)
 		}
 		else if (hiddenRewards)
@@ -176,7 +188,7 @@ class CardNode
 			stack.add(SpriteWidget(AssetManager.loadSprite("GUI/RewardChanceBorder", colour = Colour.DARK_GRAY), 64f, 64f))
 			stack.add(widget)
 
-			stack.addTapToolTip("Have an unknown chance to gain unknown rewards.")
+			stack.addTapToolTip(Localisation.getText("card.unknownreward", "UI"))
 			rewardsTable.add(stack).expandX().center().pad(10f)
 		}
 		else
@@ -208,8 +220,6 @@ class CardNode
 			{
 				val icon = reward.icon
 				val widget = SpriteWidget(Sprite(icon), 64f, 64f)
-				val name = reward.rewardClass.simpleName.toString().replace("Reward", "").capitalize()
-				val chance = reward.chance.uiString
 
 				val stack = Stack()
 				stack.touchable = Touchable.enabled
@@ -217,7 +227,11 @@ class CardNode
 				stack.add(SpriteWidget(AssetManager.loadSprite("GUI/RewardChanceBorder", colour = reward.chance.colour), 64f, 64f))
 				stack.add(widget)
 
-				stack.addTapToolTip("Have a $chance chance to gain $name rewards.")
+				var template = Localisation.getText("card.rewardchance", "UI")
+				template = template.replace("{Chance}", reward.chance.niceName)
+				template = template.replace("{Reward}", reward.niceName)
+
+				stack.addTapToolTip(template)
 				rewardsTable.add(stack).expandX().center().pad(10f)
 
 				if (needsrow)
@@ -251,7 +265,7 @@ class CardNode
 			//stack.add(SpriteWidget(AssetManager.loadSprite("GUI/RewardChanceBorder", colour = Chance.ALWAYS.colour), 64f, 64f))
 			stack.add(widget)
 
-			stack.addTapToolTip("Completing this encounter will cause it to advance.")
+			stack.addTapToolTip(Localisation.getText("card.willadvance", "UI"))
 			table.add(stack).expandX().center().pad(5f).padBottom(32f)
 		}
 
@@ -261,7 +275,7 @@ class CardNode
 		if (!hasBeenPlayed && (cardSource == CardSource.DECK || cardSource == CardSource.CHARACTER))
 		{
 			val newTable = Table()
-			val newLabel = Label("New", Statics.skin)
+			val newLabel = Label(Localisation.getText("new", "UI"), Statics.skin)
 			newTable.add(newLabel).expand().top().left().pad(3f)
 
 			wrapperStack.add(newTable)

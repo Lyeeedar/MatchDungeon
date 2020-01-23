@@ -17,22 +17,29 @@ import com.lyeeedar.Statistic
 import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.UI.FrontTableSimple
 import com.lyeeedar.UI.lambda
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Future
-import com.lyeeedar.Util.Statics
-import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.*
 import ktx.actors.then
 import ktx.collections.toGdxArray
 import java.util.*
 
-enum class CardChance private constructor(val niceName: String)
+enum class CardChance private constructor()
 {
-	GREATPOSITIVE("Blessedly Lucky"),
-	POSITIVE("Lucky"),
-	NEGATIVE("Unlucky"),
-	GREATNEGATIVE("Cursedly Unlucky")
+	GREATPOSITIVE,
+	POSITIVE,
+	NEGATIVE,
+	GREATNEGATIVE;
 
-
+	val niceName: String
+		get()
+		{
+			return when(this)
+			{
+				GREATPOSITIVE -> Localisation.getText("cardchance.greatpositive", "UI")
+				POSITIVE -> Localisation.getText("cardchance.positive", "UI")
+				NEGATIVE -> Localisation.getText("cardchance.negative", "UI")
+				GREATNEGATIVE -> Localisation.getText("cardchance.greatnegative", "UI")
+			}
+		}
 }
 
 class CardContentActionChanceCards : AbstractCardContentAction()

@@ -18,7 +18,7 @@ import com.lyeeedar.Util.*
 import com.lyeeedar.Util.Random
 import java.util.*
 
-enum class Chance private constructor(val chance: Float, val uiString: String, val colour: Colour)
+enum class Chance private constructor(val chance: Float, val niceName: String, val colour: Colour)
 {
 	VERYLOW(0.1f, "very low", Colour(124, 115, 98, 255)),
 	LOW(0.25f, "low", Colour(237, 154, 21, 255)),
