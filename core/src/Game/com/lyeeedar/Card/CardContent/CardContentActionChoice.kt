@@ -70,7 +70,7 @@ class CardContentActionChoice : AbstractCardContentAction()
 		val choicesEl = xml.getChildByName("Choices")!!
 		for (el in choicesEl.children())
 		{
-			val text = Localisation.getText(el.get ("Text"), "CardContent")
+			val text = Localisation.getText(el.get("Text"), "CardContent")
 			val condition = el.get("Condition", "1")!!.toLowerCase(Locale.ENGLISH)
 			val key = el.get("Node", "")!!
 
