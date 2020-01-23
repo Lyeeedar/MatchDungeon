@@ -16,7 +16,6 @@ import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.EquipmentSlot
 import com.lyeeedar.Game.*
-import com.lyeeedar.MainGame
 import com.lyeeedar.ScreenEnum
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
@@ -302,7 +301,7 @@ class CardScreen : AbstractScreen()
 
 			if (state == CardContent.CardContentState.INPROGRESS)
 			{
-				throw Exception("Failed to mark the content as complete! Offending content: " + currentCard.current.name)
+				throw Exception("Failed to mark the content as complete! Offending content: " + currentCard.current.nameID)
 			}
 
 			val currentQuestNode = currentQuest.current as QuestNode

@@ -107,8 +107,8 @@ class CardNode
 
 	lateinit var guid: String
 
-	lateinit var name: String
-	lateinit var description: String
+	lateinit var nameID: String
+	lateinit var descriptionID: String
 	lateinit var spawnWeight: SpawnWeight
 	var isShop = false
 	var hiddenRewards = false
@@ -124,7 +124,7 @@ class CardNode
 		val colour = cardSource.colourTint
 		val descriptors: Array<Pair<Sprite, String?>> = gdxArrayOf(Pair(cardSource.icon, cardSource.text))
 		return CardWidget.createCard(
-				name,
+				Localisation.getText(nameID, "Card").replace(':', '\n'),
 				"Encounter",
 				AssetManager.loadSprite("GUI/CardCardback"),
 				createTable(false),
@@ -234,7 +234,7 @@ class CardNode
 
 		if (detail)
 		{
-			val descLabel = Label(description, Statics.skin, "card")
+			val descLabel = Label(Localisation.getText(descriptionID, "Card"), Statics.skin, "card")
 			descLabel.setWrap(true)
 			table.add(descLabel).grow().pad(0f, 10f, 0f, 10f)
 			table.row()
@@ -273,8 +273,8 @@ class CardNode
 	fun fillWithDefaults()
 	{
 		guid = ""
-		name = ""
-		description = ""
+		nameID = ""
+		descriptionID = ""
 		spawnWeight = SpawnWeight.ANY
 		content = ""
 	}
@@ -283,10 +283,9 @@ class CardNode
 	{
 		guid = xmlData.getAttribute("GUID")
 
-		name = Localisation.getText(xmlData.get("Name"), "Card")
-		name = name.replace(":", ":\n")
+		nameID = xmlData.get("Name")
+		descriptionID = xmlData.get("Description")
 
-		description = Localisation.getText(xmlData.get("Description"), "Card")
 		spawnWeight = SpawnWeight.valueOf(xmlData.get("SpawnWeighting", "Any")!!.toUpperCase(Locale.ENGLISH))
 		isShop = xmlData.getBoolean("IsShop", false)
 		hiddenRewards = xmlData.getBoolean("HiddenRewards", false)
@@ -310,7 +309,7 @@ class CardNode
 
 	fun getContent(): CardContent
 	{
-		if (name == "" && description == "")
+		if (nameID == "" && descriptionID == "")
 		{
 			return CardContent.load(content)
 		}

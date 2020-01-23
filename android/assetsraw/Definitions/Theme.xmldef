@@ -1,5 +1,6 @@
 <Definitions Colour="114,182,240" Icon="Sprites/Oryx/uf_split/uf_terrain/crate.png" xmlns:meta="Editor">
 	<Definition Name="Theme" Nullable="False" meta:RefKey="Struct">
+		<Data Name="Name" NeedsLocalisation="True" LocalisationFile="Theme" meta:RefKey="String" />
 		<Data Name="Floor" Keys="SpriteWrapper" Nullable="False" meta:RefKey="Reference" />
 		<Data Name="Wall" Keys="SpriteWrapper" Nullable="False" meta:RefKey="Reference" />
 		<Data Name="Pit" Keys="SpriteWrapper" Nullable="False" meta:RefKey="Reference" />

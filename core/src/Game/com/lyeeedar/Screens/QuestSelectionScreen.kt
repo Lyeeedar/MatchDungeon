@@ -8,13 +8,17 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
+import com.lyeeedar.Board.Theme
 import com.lyeeedar.Game.COMPLETED_INTRO
 import com.lyeeedar.Game.GameStateFlags
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Game.Quest
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.UI.addClickListener
-import com.lyeeedar.Util.*
+import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Localisation
+import com.lyeeedar.Util.Statics
+import com.lyeeedar.Util.XmlData
 import ktx.collections.set
 import java.util.*
 
@@ -64,7 +68,7 @@ class QuestSelectionScreen : AbstractScreen()
 	val titleLabel = Label("", Statics.skin, "title")
 
 	val scrollTable = Table()
-	val editButton = TextButton("Edit Deck", Statics.skin)
+	val editButton = TextButton("", Statics.skin)
 
 	lateinit var leftButton: Button
 	lateinit var rightButton: Button
@@ -72,9 +76,9 @@ class QuestSelectionScreen : AbstractScreen()
 	lateinit var leftNewLabel: Label
 	lateinit var rightNewLabel: Label
 
-	val themeOrder = Array<String>()
-	val themeMap = ObjectMap<String, Array<Quest>>()
-	var currentTheme: String = ""
+	val themeOrder = Array<Theme>()
+	val themeMap = ObjectMap<Theme, Array<Quest>>()
+	var currentTheme: Theme? = null
 
 	fun setup()
 	{
@@ -83,6 +87,8 @@ class QuestSelectionScreen : AbstractScreen()
 			baseCreate()
 			created = true
 		}
+
+		editButton.setText(Localisation.getText("questselection.editdeck", "UI"))
 
 		mainTable.clear()
 		scrollTable.clear()
@@ -99,12 +105,12 @@ class QuestSelectionScreen : AbstractScreen()
 		}
 
 		val leftNew = Table()
-		leftNewLabel = Label("New", Statics.skin)
+		leftNewLabel = Label(Localisation.getText("new", "UI"), Statics.skin)
 		leftNewLabel.touchable = Touchable.disabled
 		leftNew.add(leftNewLabel).expand().left().top().pad(3f)
 
 		val rightNew = Table()
-		rightNewLabel = Label("New", Statics.skin)
+		rightNewLabel = Label(Localisation.getText("new", "UI"), Statics.skin)
 		rightNewLabel.touchable = Touchable.disabled
 		rightNew.add(rightNewLabel).expand().left().top().pad(3f)
 
@@ -129,17 +135,17 @@ class QuestSelectionScreen : AbstractScreen()
 
 		for (quest in Global.deck.quests)
 		{
-			val themeName = quest.theme.path.filename(false)
-			if (themeMap.containsKey(themeName))
+			val theme = quest.theme
+			if (themeMap.containsKey(theme))
 			{
-				themeMap[themeName].add(quest)
+				themeMap[theme].add(quest)
 			}
 			else
 			{
-				themeOrder.add(themeName)
+				themeOrder.add(theme)
 
 				val array = Array<Quest>()
-				themeMap[themeName] = array
+				themeMap[theme] = array
 
 				array.add(quest)
 			}
@@ -147,7 +153,7 @@ class QuestSelectionScreen : AbstractScreen()
 
 		if (!themeOrder.contains(currentTheme))
 		{
-			currentTheme = themeOrder.firstOrNull() ?: ""
+			currentTheme = themeOrder.firstOrNull()
 		}
 
 		val leftButtonTable = Table()
@@ -194,7 +200,7 @@ class QuestSelectionScreen : AbstractScreen()
 		if (Global.deck.hasNewEquipment || Global.deck.hasNewEncounters || Global.deck.hasNewCharacters)
 		{
 			val newTable = Table()
-			val newLabel = Label("New", Statics.skin)
+			val newLabel = Label(Localisation.getText("new", "UI"), Statics.skin)
 			newTable.add(newLabel).expand().left().top().pad(3f)
 
 			newLabel.touchable = Touchable.disabled
@@ -214,7 +220,7 @@ class QuestSelectionScreen : AbstractScreen()
 
 	fun updateQuestsTable()
 	{
-		if (currentTheme.isBlank()) { return }
+		val currentTheme = currentTheme ?: return
 
 		leftButton.color = Color.WHITE
 		rightButton.color = Color.WHITE
@@ -266,7 +272,7 @@ class QuestSelectionScreen : AbstractScreen()
 			}
 		}
 
-		titleLabel.setText(currentTheme.addSpaces())
+		titleLabel.setText(Localisation.getText(currentTheme.nameID, "Theme"))
 
 		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(themeMap[currentTheme].first().theme.backgroundTile))).tint(Color(0.5f, 0.5f, 0.5f, 1.0f))
 
@@ -277,7 +283,8 @@ class QuestSelectionScreen : AbstractScreen()
 		for (quest in themeMap[currentTheme])
 		{
 			val card = quest.getCard()
-			card.addPick("Embark") {
+			val embarkString = Localisation.getText("questselection.embark", "UI")
+			card.addPick(embarkString) {
 				Statics.logger.logDebug("Embarking on quest ${quest.title}")
 
 				val bundle = Statics.analytics.getParamBundle()
@@ -308,9 +315,9 @@ class QuestSelectionScreen : AbstractScreen()
 
 		val tutorial = Tutorial("QuestSelection")
 		tutorial.addDelay(0.5f)
-		tutorial.addPopup("This is the quest selection screen.", Any())
-		tutorial.addPopup("You can pick a quest from those you have unlocked here. Just tap the card you want, then tap 'embark'.", scrollTable)
-		tutorial.addPopup("You can edit your deck of cards here. This will allow you to customise your quest experience.", editButton)
+		tutorial.addPopup(Localisation.getText("questselection.tutorial.1", "UI"), Any())
+		tutorial.addPopup(Localisation.getText("questselection.tutorial.2", "UI"), scrollTable)
+		tutorial.addPopup(Localisation.getText("questselection.tutorial.3", "UI"), editButton)
 		tutorial.show()
 
 		if (!Statics.settings.get(COMPLETED_INTRO, false))

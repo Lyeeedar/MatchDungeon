@@ -1,0 +1,8 @@
+<Localisation Language="EN-GB" xmlns:meta="Editor">
+	<Text ID="new">New</Text>
+	<Text ID="questselection.embark">Embark</Text>
+	<Text ID="questselection.editdeck">Edit Deck</Text>
+	<Text ID="questselection.tutorial.1">This is the quest selection screen.</Text>
+	<Text ID="questselection.tutorial.2">You can pick a quest from those you have unlocked here. Just tap the card you want, then tap 'embark'.</Text>
+	<Text ID="questselection.tutorial.3">You can edit your deck of cards here. This will allow you to customise your quest experience.</Text>
+</Localisation>

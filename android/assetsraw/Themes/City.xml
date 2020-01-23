@@ -1,4 +1,5 @@
 <Theme xmlns:meta="Editor">
+	<Name>City.Theme.Name:3af60929-c316-419a-9e36-d016820fd66d</Name>
 	<Floor meta:RefKey="SpriteWrapper">
 		<Sprite meta:RefKey="Sprite">
 			<Name>Oryx/uf_split/uf_terrain/floor_extra_2</Name>

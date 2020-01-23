@@ -8,16 +8,16 @@ import com.lyeeedar.Util.expandVariables
 
 class CardContentActionLine : AbstractCardContentAction()
 {
-	lateinit var text: String
+	lateinit var textID: String
 
 	override fun parse(xmlData: XmlData)
 	{
-		text = Localisation.getText(xmlData.get("MultilineString"), "CardContent")
+		textID = xmlData.get("MultilineString")
 	}
 
 	override fun advance(CardContent: CardContent, CardContentScreen: CardScreen): Boolean
 	{
-		val expanded = text.expandVariables()
+		val expanded = Localisation.getText(textID, "CardContent").expandVariables()
 
 		val scrollingTextLabel = CardContentScreen.text
 		if (scrollingTextLabel.text.toString() == expanded)

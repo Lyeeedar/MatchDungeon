@@ -1,0 +1,8 @@
+<Localisation Language="DE" xmlns:meta="Editor">
+	<Text ID="new" TranslateType="Auto" TranslatedHash="78208">Neu</Text>
+	<Text ID="questselection.embark" TranslateType="Auto" TranslatedHash="2079091584">Begeben</Text>
+	<Text ID="questselection.editdeck" TranslateType="Auto" TranslatedHash="78334207">Bearbeiten Deck</Text>
+	<Text ID="questselection.tutorial.1" TranslateType="Auto" TranslatedHash="1811985389">Dies ist die Suche Auswahl-Bildschirm.</Text>
+	<Text ID="questselection.tutorial.2" TranslateType="Auto" TranslatedHash="1728073929">Sie können eine Suche von denen holen Sie hier freigeschaltet haben. Tippen Sie einfach auf die Karte, die Sie auf und dann auf ‚einschiffen‘ wollen.</Text>
+	<Text ID="questselection.tutorial.3" TranslateType="Auto" TranslatedHash="1167712375">Sie können Ihre Karten hier bearbeiten. Auf diese Weise können Sie Ihre Suche Erfahrung anzupassen.</Text>
+</Localisation>

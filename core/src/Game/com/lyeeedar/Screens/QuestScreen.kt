@@ -145,7 +145,7 @@ class QuestScreen : AbstractScreen()
 					return false
 				}
 
-				var card = Global.deck.encounters.backingArray.firstOrNull { it.current.name.toLowerCase(Locale.ENGLISH) == args[0].toLowerCase(Locale.ENGLISH) }
+				var card = Global.deck.encounters.backingArray.firstOrNull { it.current.nameID.toLowerCase(Locale.ENGLISH).startsWith(args[0].toLowerCase(Locale.ENGLISH)) }
 				if (card == null)
 				{
 					val cardPath = XmlData.existingPaths!!.firstOrNull { it.toLowerCase(Locale.ENGLISH).endsWith(args[0].toLowerCase(Locale.ENGLISH) + ".xml") }
@@ -617,7 +617,7 @@ class QuestScreen : AbstractScreen()
 			val sequence = delay(delay) then lambda {
 				val card = chosenQuestCard!!.data as Card
 
-				Statics.logger.logDebug("Choosing card ${card.current.name}")
+				Statics.logger.logDebug("Choosing card ${card.current.nameID}")
 
 				val cardScreen = CardScreen.instance
 				cardScreen.setup(card, currentQuest)

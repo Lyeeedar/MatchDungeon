@@ -1,0 +1,8 @@
+<Localisation Language="EN-US" xmlns:meta="Editor">
+	<Text ID="new" TranslateType="Auto" TranslatedHash="78208">New</Text>
+	<Text ID="questselection.embark" TranslateType="Auto" TranslatedHash="2079091584">Embark</Text>
+	<Text ID="questselection.editdeck" TranslateType="Auto" TranslatedHash="78334207">Edit Deck</Text>
+	<Text ID="questselection.tutorial.1" TranslateType="Auto" TranslatedHash="1811985389">This is the quest selection screen.</Text>
+	<Text ID="questselection.tutorial.2" TranslateType="Auto" TranslatedHash="1728073929">You can pick a quest from those you have unlocked here. Just tap the card you want, then tap 'embark'.</Text>
+	<Text ID="questselection.tutorial.3" TranslateType="Auto" TranslatedHash="1167712375">You can edit your deck of cards here. This will allow you to customise your quest experience.</Text>
+</Localisation>

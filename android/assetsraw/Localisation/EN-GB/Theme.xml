@@ -1,0 +1,10 @@
+<Localisation Language="EN-GB" xmlns:meta="Editor">
+	<Text ID="Cave.Theme.Name:992f3960-b7cc-4a83-9935-bf3532d28ca9">Cave</Text>
+	<Text ID="City.Theme.Name:3af60929-c316-419a-9e36-d016820fd66d">City</Text>
+	<Text ID="CityOutskirts.Theme.Name:93c3f959-8e24-4236-8331-fbd1a294fd6d">City Outskirts</Text>
+	<Text ID="Depths.Theme.Name:16ebf52c-3728-4bbe-b6d9-842ba3363815">Depths</Text>
+	<Text ID="Dungeon.Theme.Name:f38db8a9-5f37-4481-8d24-d55e39ff7081">Dungeon</Text>
+	<Text ID="Farm.Theme.Name:5f1e81c6-0271-4ef2-9206-82623cd65835">Farm</Text>
+	<Text ID="Forest.Theme.Name:40b46011-9d8b-4783-aba8-0ca84ca89fa4">Forest</Text>
+	<Text ID="TrainingGround.Theme.Name:73fe6cde-023d-4c9b-877d-a3d78615e527">Training Ground</Text>
+</Localisation>

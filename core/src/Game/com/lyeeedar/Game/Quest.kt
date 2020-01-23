@@ -72,7 +72,7 @@ class Quest(val path: String)
 		icon = AssetManager.loadSprite(xml.getChildByName("Icon")!!)
 
 		themeName = xml.get("Theme")
-		theme = Theme.Companion.load("Themes/$themeName")
+		theme = Theme.load("Themes/$themeName")
 		currentTheme = theme
 
 		resetCards()

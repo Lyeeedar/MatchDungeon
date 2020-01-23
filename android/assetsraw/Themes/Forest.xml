@@ -1,4 +1,5 @@
 <Theme xmlns:meta="Editor">
+	<Name>Forest.Theme.Name:40b46011-9d8b-4783-aba8-0ca84ca89fa4</Name>
 	<Floor meta:RefKey="SpriteWrapper">
 		<Sprite meta:RefKey="Sprite">
 			<Name>Oryx/uf_split/uf_terrain/ground_grass_1</Name>

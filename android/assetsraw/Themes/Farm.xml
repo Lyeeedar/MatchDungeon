@@ -1,4 +1,5 @@
 <Theme xmlns:meta="Editor">
+	<Name>Farm.Theme.Name:5f1e81c6-0271-4ef2-9206-82623cd65835</Name>
 	<Floor meta:RefKey="SpriteWrapper">
 		<Sprite meta:RefKey="Sprite">
 			<Name>Oryx/Custom/terrain/dirt_grassy</Name>

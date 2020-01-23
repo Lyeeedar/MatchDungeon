@@ -35,14 +35,15 @@ class CardContentActionChoice : AbstractCardContentAction()
 		{
 			if (choice.condition.evaluate(Global.getVariableMap()).toInt() != 0)
 			{
-				val response = TextButton(choice.text.expandVariables(), Statics.skin, "responseButton")
+				val text = Localisation.getText(choice.textID,"CardContent")
+				val response = TextButton(text.expandVariables(), Statics.skin, "responseButton")
 				response.label.setWrap(true)
 				responsesTable.add(response).growX().pad(5f, 0f, 5f, 0f).height(75f)
 				responsesTable.row()
 
 				val seq = Actions.alpha(0f) then Actions.delay(delay) then Actions.fadeIn(0.3f) then lambda {
 					response.addClickListener {
-						Statics.logger.logDebug("Selected choice '${choice.text}'")
+						Statics.logger.logDebug("Selected choice '${choice.textID}'")
 
 						responsesTable.clear()
 						CardContent.CardContentStack.last().index++
@@ -70,7 +71,7 @@ class CardContentActionChoice : AbstractCardContentAction()
 		val choicesEl = xml.getChildByName("Choices")!!
 		for (el in choicesEl.children())
 		{
-			val text = Localisation.getText(el.get("Text"), "CardContent")
+			val text = el.get("Text")
 			val condition = el.get("Condition", "1")!!.toLowerCase(Locale.ENGLISH)
 			val key = el.get("Node", "")!!
 
@@ -90,7 +91,7 @@ class CardContentActionChoice : AbstractCardContentAction()
 	}
 }
 
-data class Choice(val text: String, val condition: String, val key: String)
+data class Choice(val textID: String, val condition: String, val key: String)
 {
 	var node: CardContentNode? = null
 }

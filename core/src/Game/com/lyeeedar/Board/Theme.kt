@@ -1,13 +1,17 @@
 package com.lyeeedar.Board
 
 import com.badlogic.gdx.utils.Array
+import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Renderables.Sprite.SpriteWrapper
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.getXml
+import ktx.collections.set
 
 class Theme(val path: String)
 {
+	lateinit var nameID: String
+
 	lateinit var floor: SpriteWrapper
 	lateinit var wall: SpriteWrapper
 	lateinit var pit: SpriteWrapper
@@ -28,10 +32,19 @@ class Theme(val path: String)
 
 	companion object
 	{
+		val loadedThemes = ObjectMap<String, Theme>()
+
 		fun load(path: String): Theme
 		{
+			if (loadedThemes.containsKey(path))
+			{
+				return loadedThemes[path]
+			}
+
 			val xml = getXml(path)
 			val theme = Theme(path)
+
+			theme.nameID = xml.get("Name")
 
 			theme.floor = SpriteWrapper.load(xml.getChildByName("Floor")!!)
 			theme.wall = SpriteWrapper.load(xml.getChildByName("Wall")!!)
@@ -89,6 +102,8 @@ class Theme(val path: String)
 			}
 
 			theme.backgroundTile = xml.get("BackgroundTile")
+
+			loadedThemes[path] = theme
 
 			return theme
 		}
