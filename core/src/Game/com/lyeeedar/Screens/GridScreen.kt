@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.*
-import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable
 import com.lyeeedar.Board.*
@@ -18,9 +17,9 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Localisation
 import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.random
-import java.util.*
 
 /**
  * Created by Philip on 20-Mar-16.
@@ -55,7 +54,7 @@ class GridScreen(): AbstractScreen()
 	// ----------------------------------------------------------------------
 	override fun create()
 	{
-		if (!Statics.release)
+		if (Statics.debug)
 		{
 			debugConsole.register("complete", "") { args, console ->
 				level.victoryAction.invoke()
@@ -236,7 +235,7 @@ class GridScreen(): AbstractScreen()
 		val powerBarStack = Stack()
 		powerBarStack.add(powerBar)
 
-		refreshButton = TextButton("No Valid Moves. Shuffle Grid?", Statics.skin)
+		refreshButton = TextButton(Localisation.getText("gridscreen.novalidmoves", "UI"), Statics.skin)
 		refreshButton!!.isVisible = false
 		refreshButton!!.addClickListener {
 			if (level.grid.activeAbility == null && level.grid.noValidMoves)
@@ -247,7 +246,7 @@ class GridScreen(): AbstractScreen()
 		}
 		powerBarStack.add(refreshButton)
 
-		ultimateButton = TextButton("Full Power! Shuffle Grid?", Statics.skin)
+		ultimateButton = TextButton(Localisation.getText("gridscreen.fullpower", "UI"), Statics.skin)
 		ultimateButton!!.isVisible = false
 		ultimateButton!!.addClickListener {
 			if (powerBar.power == powerBar.maxPower)
@@ -258,7 +257,7 @@ class GridScreen(): AbstractScreen()
 		}
 		powerBarStack.add(ultimateButton)
 
-		launchButton = TextButton("Launch", Statics.skin)
+		launchButton = TextButton(Localisation.getText("gridscreen.launch", "UI"), Statics.skin)
 		launchButton!!.isVisible = false
 		launchButton!!.addClickListener {
 			if (level.grid.activeAbility != null && level.grid.activeAbility!!.selectedTargets.size > 0)
@@ -268,7 +267,7 @@ class GridScreen(): AbstractScreen()
 		}
 		powerBarStack.add(launchButton)
 
-		completeButton = TextButton("Level complete! Skip animations?", Statics.skin)
+		completeButton = TextButton(Localisation.getText("gridscreen.skipanimations", "UI"), Statics.skin)
 		completeButton!!.isVisible = false
 		completeButton!!.addClickListener {
 			if (level.victoryConditions.all { it.isCompleted() })
@@ -303,17 +302,17 @@ class GridScreen(): AbstractScreen()
 		mainTable.add(table).grow()
 
 		launchTutorial = Tutorial("AbilityButton")
-		launchTutorial.addPopup("Click activate to use your ability on the selected tiles.", launchButton!!)
+		launchTutorial.addPopup(Localisation.getText("gridscreen.launchtutorial", "UI"), launchButton!!)
 
 		val tutorial = Tutorial("GridScreen")
 		tutorial.addDelay(1f)
-		tutorial.addPopup("This is the match 3 board.", Rectangle(stage.width / 2f, stage.height / 2f, 0f, 0f))
-		tutorial.addPopup("These are your victory conditions", victoryTable)
-		tutorial.addPopup("These are your failure conditions", defeatTable)
-		tutorial.addPopup("These are your abilities, provided by your equipment.", abilityTable)
-		tutorial.addPopup("This is the power bar. You use the power collected here to use abilities, or when it is full you can discharge it all to shuffle the board.", powerBar)
-		tutorial.addPopup("This area contains the orbs you match. Make rows of 3 orbs of the same colour to match them.", gridWidget)
-		tutorial.addPopup("Make rows of 4 or 5 to spawn a special orb, which when matched has a special effect.", gridWidget)
+		tutorial.addPopup(Localisation.getText("gridscreen.launchtutorial.1", "UI"), Rectangle(stage.width / 2f, stage.height / 2f, 0f, 0f))
+		tutorial.addPopup(Localisation.getText("gridscreen.launchtutorial.2", "UI"), victoryTable)
+		tutorial.addPopup(Localisation.getText("gridscreen.launchtutorial.3", "UI"), defeatTable)
+		tutorial.addPopup(Localisation.getText("gridscreen.launchtutorial.4", "UI"), abilityTable)
+		tutorial.addPopup(Localisation.getText("gridscreen.launchtutorial.5", "UI"), powerBar)
+		tutorial.addPopup(Localisation.getText("gridscreen.launchtutorial.6", "UI"), gridWidget)
+		tutorial.addPopup(Localisation.getText("gridscreen.launchtutorial.7", "UI"), gridWidget)
 		tutorial.show()
 	}
 
@@ -346,7 +345,7 @@ class GridScreen(): AbstractScreen()
 			val iconTable = Table()
 			iconTable.add(SpriteWidget(icon, 64f, 64f)).expandX().right().pad(5f)
 			titleStack.add(iconTable)
-			titleStack.add(Label("Berserk", Statics.skin, "cardtitle"))
+			titleStack.add(Label(Localisation.getText("gridscreen.berserk", "UI"), Statics.skin, "cardtitle"))
 
 			table.add(titleStack).growX()
 			table.row()
@@ -357,7 +356,7 @@ class GridScreen(): AbstractScreen()
 			table.add(Seperator(Statics.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f)
 			table.row()
 
-			table.add(Label("Statistics", Statics.skin, "cardtitle"))
+			table.add(Label(Localisation.getText("statistics", "UI"), Statics.skin, "cardtitle"))
 			table.row()
 
 			for (stat in Statistic.Values)
@@ -370,7 +369,7 @@ class GridScreen(): AbstractScreen()
 				val statVal = if (stat == Statistic.PIERCE) berserk * 0.5f else berserk
 
 				val statTable = Table()
-				statTable.add(Label(stat.toString().toLowerCase(Locale.ENGLISH).capitalize() + ": ", Statics.skin, "card")).expandX().left()
+				statTable.add(Label(stat.niceName + ": ", Statics.skin, "card")).expandX().left()
 				statTable.add(Label(statVal.toString(), Statics.skin, "card"))
 				statTable.addTapToolTip(stat.tooltip)
 
@@ -384,7 +383,7 @@ class GridScreen(): AbstractScreen()
 				if (statVal > 0)
 				{
 					val diff = statVal
-					val diffLabel = Label("+" + diff.toString(), Statics.skin, "cardwhite")
+					val diffLabel = Label("+$diff", Statics.skin, "cardwhite")
 					diffLabel.color = Color.GREEN
 					statTable.add(diffLabel)
 				}
@@ -476,7 +475,7 @@ class GridScreen(): AbstractScreen()
 			launchButton!!.isVisible = true
 			launchButton!!.color = if (ability.selectedTargets.size == 0) Color.DARK_GRAY else Color.WHITE
 			launchButton!!.touchable = if (ability.selectedTargets.size == 0) Touchable.disabled else Touchable.enabled
-			launchButton!!.setText("Activate (" + ability.selectedTargets.size + "/" + ability.targets + ")")
+			launchButton!!.setText(Localisation.getText("gridscreen.activate", "UI") + " (" + ability.selectedTargets.size + "/" + ability.targets + ")")
 		}
 		else if (level.grid.noValidMoves && canShowButtons)
 		{

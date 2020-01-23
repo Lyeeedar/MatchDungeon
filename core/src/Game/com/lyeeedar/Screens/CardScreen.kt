@@ -19,6 +19,7 @@ import com.lyeeedar.Game.*
 import com.lyeeedar.ScreenEnum
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Localisation
 import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
 import ktx.actors.then
@@ -116,7 +117,7 @@ class CardScreen : AbstractScreen()
 		val skin = Statics.skin
 
 		text = ScrollingTextLabel("", skin)
-		goldLabel = NumberChangeLabel("Gold: ", Statics.skin)
+		goldLabel = NumberChangeLabel(Localisation.getText("gold", "UI") + ": ", Statics.skin)
 
 		headSlot.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/TileBackground"))
 		mainhandSlot.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/TileBackground"))
@@ -231,6 +232,7 @@ class CardScreen : AbstractScreen()
 		createFun(EquipmentSlot.MAINHAND, mainhandSlot)
 		createFun(EquipmentSlot.OFFHAND, offhandSlot)
 
+		goldLabel.text = Localisation.getText("gold", "UI") + ": "
 		goldLabel.value = Global.player.gold
 	}
 

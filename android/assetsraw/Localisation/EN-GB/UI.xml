@@ -9,6 +9,7 @@
 	<Text ID="equipment">Equipment</Text>
 	<Text ID="player">Player</Text>
 	<Text ID="encounter">Encounter</Text>
+	<Text ID="statistics">Statistics</Text>
 
 	<Text ID="questselection.embark">Embark</Text>
 	<Text ID="questselection.editdeck">Edit Deck</Text>
@@ -41,4 +42,19 @@
 	<Text ID="deckscreen.pickcharacter">Select</Text>
 	<Text ID="deckscreen.encounterselection">Encounter Selection</Text>
 	<Text ID="deckscreen.equipmentselection">Equipment Selection</Text>
+
+	<Text ID="gridscreen.novalidmoves">No valid moves. Shuffle grid?</Text>
+	<Text ID="gridscreen.fullpower">Full power! Shuffle grid?</Text>
+	<Text ID="gridscreen.launch">Launch</Text>
+	<Text ID="gridscreen.skipanimations">Level complete! Skip animations?</Text>
+	<Text ID="gridscreen.launchtutorial">Click activate to use your ability on the selected tiles.</Text>
+	<Text ID="gridscreen.tutorial.1">This is the board.</Text>
+	<Text ID="gridscreen.tutorial.2">These are your victory conditions.</Text>
+	<Text ID="gridscreen.tutorial.3">These are your failure conditions.</Text>
+	<Text ID="gridscreen.tutorial.4">These are your abilities, provided by your equipment.</Text>
+	<Text ID="gridscreen.tutorial.5">This is the power bar. You use the power collected here to use abilities, or when it is full you can discharge it all to shuffle the board.</Text>
+	<Text ID="gridscreen.tutorial.6">This area contains the orbs you match. Make rows of three or more orbs of the same colour to match them.</Text>
+	<Text ID="gridscreen.tutorial.7">Make rows of more than three to spawn a special orb, which when matched has a special effect.</Text>
+	<Text ID="gridscreen.berserk">Berserk</Text>
+	<Text ID="gridscreen.activate">Activate</Text>
 </Localisation>
