@@ -85,7 +85,7 @@
 			<Rewards meta:RefKey="Rewards">
 				<Buff>
 					<Buff meta:RefKey="Buff">
-						<Name>Jazzed</Name>
+						<Name>DrugDealerContent.Node.[3] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:c92021ab-97c1-40ee-babc-3dd3cf5882e9</Name>
 						<Icon meta:RefKey="Sprite">
 							<Name>Oryx/uf_split/uf_items/potion_red</Name>
 						</Icon>

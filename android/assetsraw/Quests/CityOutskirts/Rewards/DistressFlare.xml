@@ -1,6 +1,6 @@
 <OffHand xmlns:meta="Editor">
-	<Name>Distress Flare</Name>
-	<Description>A alchemical flare that can be shot into the air to signal that you need assistance. Another adventurer will surely come to you aid.</Description>
+	<Name>DistressFlare.OffHand.Name:14ddf26f-0701-4a11-9204-22a6e16e7107</Name>
+	<Description>DistressFlare.OffHand.Description:31d5a12e-7505-4f26-9961-f0fe6f58e4a5</Description>
 	<Cost>120</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/torch</Name>

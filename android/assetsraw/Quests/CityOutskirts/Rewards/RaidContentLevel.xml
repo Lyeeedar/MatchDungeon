@@ -65,7 +65,7 @@
 						<Effect>Debuff</Effect>
 						<Data>
 							<Debuff meta:RefKey="Buff">
-								<Name>Petrify</Name>
+								<Name>RaidContentLevel.Level.Symbols.[1] Symbol.Symbol.MonsterDesc (MonsterDesc).Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:aaf92c38-f4dc-47fc-bce4-98054123cb4d</Name>
 								<Icon meta:RefKey="Sprite">
 									<Name>Oryx/Custom/heroes/prisoner_idle_1</Name>
 									<DrawActualSize>true</DrawActualSize>

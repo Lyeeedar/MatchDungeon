@@ -50,7 +50,7 @@
 			<Rewards meta:RefKey="Rewards">
 				<Buff>
 					<Buff meta:RefKey="Buff">
-						<Name>Troll Potion</Name>
+						<Name>MerchantRescueContent.Node.[0] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:3d01048f-f954-4a4d-8be6-641fa55ad01c</Name>
 						<Icon meta:RefKey="Sprite">
 							<Name>Oryx/uf_split/uf_items/potion_green</Name>
 							<DrawActualSize>true</DrawActualSize>

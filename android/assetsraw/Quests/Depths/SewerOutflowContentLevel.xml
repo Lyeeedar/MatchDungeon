@@ -91,7 +91,7 @@
 						<Effect>Debuff</Effect>
 						<Data>
 							<Debuff meta:RefKey="Buff">
-								<Name>Slow</Name>
+								<Name>SewerOutflowContentLevel.Level.Symbols.[2] Symbol.Symbol.MonsterDesc (MonsterDesc).Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:ce0ffd64-b62c-4c7b-8457-1d9cd8beb35b</Name>
 								<Icon meta:RefKey="Sprite">
 									<Name>GUI/Debuff</Name>
 								</Icon>

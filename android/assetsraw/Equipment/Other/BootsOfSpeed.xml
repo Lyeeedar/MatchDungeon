@@ -1,6 +1,6 @@
 <Body xmlns:meta="Editor">
-	<Name>Boots of Speed</Name>
-	<Description>These boots make you move and react much faster. Everyone else seems to merely crawl along. </Description>
+	<Name>BootsOfSpeed.Body.Name:38dd697a-3353-4194-a48b-e5d98b65a082</Name>
+	<Description>BootsOfSpeed.Body.Description:acb7e66b-ab03-4076-8c4c-099d857f35e6</Description>
 	<Cost>250</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/armor_cloth_boot</Name>

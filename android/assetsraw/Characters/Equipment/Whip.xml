@@ -1,6 +1,6 @@
 <MainHand xmlns:meta="Editor">
-	<Name>Whip</Name>
-	<Description>A whip, in the hands of a skilled practitioner it can be a painful weapon.</Description>
+	<Name>Whip.MainHand.Name:e0359222-8205-4f6c-afdf-04753b3687fb</Name>
+	<Description>Whip.MainHand.Description:f3f0e387-35c5-4ae5-ab64-a9107cf62a7e</Description>
 	<Cost>100</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/Custom/items/whip</Name>

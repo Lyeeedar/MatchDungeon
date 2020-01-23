@@ -1,6 +1,6 @@
 <MainHand xmlns:meta="Editor">
-	<Name>Spell: Magic Missile</Name>
-	<Description>A spell that fires 3 energy bolts that home in on enemies.</Description>
+	<Name>SpellMagicMissile.MainHand.Name:baa3eec8-ac92-4732-af1d-3b66c50a786c</Name>
+	<Description>SpellMagicMissile.MainHand.Description:582aa627-40fc-4f91-807a-5076d4c6ff49</Description>
 	<Cost>200</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/book_red</Name>

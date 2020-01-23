@@ -1,22 +1,14 @@
 <MainHand xmlns:meta="Editor">
-	<Name>Sledgehammer</Name>
-	<Description>A heavy sledgehammer. Slow and heavy but allows you to smash almost anything.</Description>
+	<Name>Sledgehammer.MainHand.Name:5fea89a7-7abd-445a-bfbf-f89dbd090d0a</Name>
+	<Description>Sledgehammer.MainHand.Description:5abe52e7-cbfe-4a37-85c1-5060c4d2766d</Description>
 	<Cost>100</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/weapon_hammer_exotic1</Name>
 	</Icon>
-	<Statistics meta:RefKey="Statistics">
-		<Health>0</Health>
-		<MatchDamage>0</MatchDamage>
-		<AbilityDamage>0</AbilityDamage>
-		<PowerGain>0</PowerGain>
-	</Statistics>
+	<Statistics meta:RefKey="Statistics" />
 	<Ability>
 		<Name>Smash</Name>
 		<Description>Smash any one orb into pieces.</Description>
-		<Icon meta:RefKey="Sprite">
-			<Name>Oryx/uf_split/uf_items/weapon_hammer_exotic1</Name>
-		</Icon>
 		<EffectData>
 			<Cost>6</Cost>
 			<Effect>1,Orb,Single,Pop</Effect>

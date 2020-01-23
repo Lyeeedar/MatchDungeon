@@ -1,6 +1,6 @@
 <Character xmlns:meta="Editor">
-	<Name>Wizard</Name>
-	<Description>A powerful wizard, an expert at lobbing around spells.</Description>
+	<Name>Wizard.Character.Name:a3fc3f8a-6170-4f8c-a3fe-c1eb60c964ca</Name>
+	<Description>Wizard.Character.Description:a12ec383-d563-4467-9000-2a4fccbf59a8</Description>
 	<Sprite meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_heroes/witch</Name>
 		<DrawActualSize>true</DrawActualSize>

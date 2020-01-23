@@ -1,22 +1,16 @@
 <MainHand xmlns:meta="Editor">
-	<Name>Knife</Name>
-	<Description>A short knife, one of the most versatile tools. This one has been sharpened to have a wicked point.</Description>
+	<Name>Knife.MainHand.Name:745f1b9b-99bb-4e33-8f8c-775624130c7b</Name>
+	<Description>Knife.MainHand.Description:115980cc-bfaf-4781-bf5a-df3f583c514b</Description>
 	<Cost>100</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/weapon_sword</Name>
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
-		<Health>0</Health>
 		<MatchDamage>0.5</MatchDamage>
-		<AbilityDamage>0</AbilityDamage>
-		<PowerGain>0</PowerGain>
 	</Statistics>
 	<Ability>
 		<Name>Stab</Name>
 		<Description>Stab a foe with your knife</Description>
-		<Icon meta:RefKey="Sprite">
-			<Name>Oryx/uf_split/uf_items/weapon_sword</Name>
-		</Icon>
 		<EffectData>
 			<Cost>5</Cost>
 			<Effect>1,Monster,Single,Pop</Effect>

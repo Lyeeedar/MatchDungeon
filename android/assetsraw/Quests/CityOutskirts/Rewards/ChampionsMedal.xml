@@ -1,6 +1,6 @@
 <Head xmlns:meta="Editor">
-	<Name>Champions Medal</Name>
-	<Description>The medal awarded to winners of the new adventurers tournament. Enchanted with powerful magic. Merchants will give better prices to people wearing this.</Description>
+	<Name>ChampionsMedal.Head.Name:add40e0f-f1d7-4d65-a125-e9c8983d5321</Name>
+	<Description>ChampionsMedal.Head.Description:7dacc15d-fb41-48f9-b9fc-e3a6306d1c0d</Description>
 	<Cost>250</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/necklace_tourmaline</Name>

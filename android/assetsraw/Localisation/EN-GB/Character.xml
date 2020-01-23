@@ -1,0 +1,12 @@
+<Localisation Language="EN-GB" xmlns:meta="Editor">
+	<Text ID="Adventurer.Character.Description:0e681606-9eef-44bb-b295-067f66e90870">They make their living by risking their lives in ancient tombs or forgotten ruins. Treasure is their goal.</Text>
+	<Text ID="Adventurer.Character.Name:1e94d256-5384-45ce-b970-4cb68523f464">Adventurer</Text>
+	<Text ID="Alchemist.Character.Description:3031baea-7d06-4e02-9988-d17cadc883fa"></Text>
+	<Text ID="Alchemist.Character.Name:ec7de59f-b1c6-46aa-98e3-b0b77ba5d5a8">Alchemist</Text>
+	<Text ID="Knight.Character.Description:c33a0375-0fa8-468c-86a5-1b847d3775ac">A knight clad in tough armour and sporting a powerful resolve. A dangerous foe to anything that would disturb the peace.</Text>
+	<Text ID="Knight.Character.Name:5afdd307-409b-4b84-a21a-6895a90c169e">Knight</Text>
+	<Text ID="Peasant.Character.Description:08d0596e-d839-433c-aa63-14f5af01cf25">A simple peasant on an adventure. Are they a lost prince? The chosen one? Destined for greatness? Only one way to find out!</Text>
+	<Text ID="Peasant.Character.Name:5db66fd8-c139-4ae2-acb8-1efbce32bba1">Peasant</Text>
+	<Text ID="Wizard.Character.Description:a12ec383-d563-4467-9000-2a4fccbf59a8">A powerful wizard, an expert at lobbing around spells.</Text>
+	<Text ID="Wizard.Character.Name:a3fc3f8a-6170-4f8c-a3fe-c1eb60c964ca">Wizard</Text>
+</Localisation>

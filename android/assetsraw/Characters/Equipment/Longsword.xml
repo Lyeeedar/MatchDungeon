@@ -1,6 +1,6 @@
 <MainHand xmlns:meta="Editor">
-	<Name>Longsword</Name>
-	<Description>A long blade, kept sharp through careful maintenace and powerful enchantments.</Description>
+	<Name>Longsword.MainHand.Name:e556a8b7-2f44-4683-9425-3a7c03b789c3</Name>
+	<Description>Longsword.MainHand.Description:9d4db2a9-cac8-402f-a360-f90fa62b8d3b</Description>
 	<Cost>150</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/weapon_broadsword</Name>

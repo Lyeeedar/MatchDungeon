@@ -1,5 +1,5 @@
 <Quest meta:X="0" meta:Y="0" GUID="c8cde3d0-d6d0-49d2-86f8-9c88abbceae4" xmlns:meta="Editor">
-	<Title>NEW GAME</Title>
+	<Title>Intro.Quest.Title:8d29085f-33fd-4e80-81d2-0d23c8874186</Title>
 	<Icon meta:RefKey="Sprite">
 		<Name>white</Name>
 	</Icon>
@@ -16,7 +16,7 @@
 	</GoldRewards>
 	<Root meta:RefKey="QuestNode">7914f819-3cd5-4756-9d8b-6bace226cbc7</Root>
 	<Nodes>
-		<QuestNode meta:X="429.24697875976562" meta:Y="2" GUID="7914f819-3cd5-4756-9d8b-6bace226cbc7">
+		<QuestNode meta:X="429.24697875976563" meta:Y="2" GUID="7914f819-3cd5-4756-9d8b-6bace226cbc7">
 			<Type>Fixed</Type>
 			<FixedEvent>FarmLife</FixedEvent>
 			<Success meta:RefKey="QuestNode">32c7caae-8e6a-4814-835c-b519e4f7f645</Success>

@@ -1,6 +1,6 @@
 <MainHand xmlns:meta="Editor">
-	<Name>Bow</Name>
-	<Description>A bow and arrow. Great for shooting things.</Description>
+	<Name>Bow.MainHand.Name:20b62d4b-b525-476f-826a-d3e26ba21775</Name>
+	<Description>Bow.MainHand.Description:f8d82cf2-5c7e-4e4a-bddd-19d23dd9ed39</Description>
 	<Cost>100</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/weapon_longbow</Name>

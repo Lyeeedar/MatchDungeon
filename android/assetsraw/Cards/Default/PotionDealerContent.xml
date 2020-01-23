@@ -17,7 +17,7 @@
 					<Buff>
 						<Cost>150</Cost>
 						<Buff meta:RefKey="Buff">
-							<Name>Potion of Heartiness</Name>
+							<Name>PotionDealerContent.Node.[2] Shop.Shop.Items.[0] Buff.Buff.Buff (Buff).Name:e09edab3-4d73-483f-a1f2-73511ce244ee</Name>
 							<Icon meta:RefKey="Sprite">
 								<Name>Oryx/uf_split/uf_items/potion_red</Name>
 								<DrawActualSize>true</DrawActualSize>
@@ -32,7 +32,7 @@
 					<Buff>
 						<Cost>250</Cost>
 						<Buff meta:RefKey="Buff">
-							<Name>Potion of Strength</Name>
+							<Name>PotionDealerContent.Node.[2] Shop.Shop.Items.[1] Buff.Buff.Buff (Buff).Name:95529ac3-62bc-44f8-915d-f6f496386cd2</Name>
 							<Icon meta:RefKey="Sprite">
 								<Name>Oryx/uf_split/uf_items/potion_red</Name>
 								<DrawActualSize>true</DrawActualSize>
@@ -48,7 +48,7 @@
 					<Buff>
 						<Cost>200</Cost>
 						<Buff meta:RefKey="Buff">
-							<Name>Potion of Iron Skin</Name>
+							<Name>PotionDealerContent.Node.[2] Shop.Shop.Items.[2] Buff.Buff.Buff (Buff).Name:4b1ceee5-5fa1-42ec-82f5-01985028ff45</Name>
 							<Icon meta:RefKey="Sprite">
 								<Name>Oryx/uf_split/uf_items/potion_black</Name>
 								<DrawActualSize>true</DrawActualSize>
@@ -63,7 +63,7 @@
 					<Buff>
 						<Cost>100</Cost>
 						<Buff meta:RefKey="Buff">
-							<Name>Potion of Energy</Name>
+							<Name>PotionDealerContent.Node.[2] Shop.Shop.Items.[3] Buff.Buff.Buff (Buff).Name:fb6b16ed-9a3d-474f-868b-03539252982a</Name>
 							<Icon meta:RefKey="Sprite">
 								<Name>Oryx/uf_split/uf_items/potion_blue</Name>
 								<DrawActualSize>true</DrawActualSize>
@@ -77,7 +77,7 @@
 					<Buff>
 						<Cost>100</Cost>
 						<Buff meta:RefKey="Buff">
-							<Name>Potion of Fury</Name>
+							<Name>PotionDealerContent.Node.[2] Shop.Shop.Items.[4] Buff.Buff.Buff (Buff).Name:a47cd4d8-e355-4009-bc51-5ad220717953</Name>
 							<Icon meta:RefKey="Sprite">
 								<Name>Oryx/uf_split/uf_items/potion_red</Name>
 								<DrawActualSize>true</DrawActualSize>

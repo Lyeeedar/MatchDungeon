@@ -1,17 +1,13 @@
 <Body xmlns:meta="Editor">
-	<Name>Apprentice Robes</Name>
-	<Description>The robes of an apprentice mage. Ensorcelled to enhance the speed of spellcasting.</Description>
+	<Name>ApprenticeRobes.Body.Name:c09029e5-04a5-4890-ba3a-fa1449d472d7</Name>
+	<Description>ApprenticeRobes.Body.Description:51634e7b-b21c-4640-ba79-3291cf4d4eda</Description>
 	<Cost>100</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/cloak_leather</Name>
 		<Colour>184,174,204,255</Colour>
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
-		<Health>0</Health>
-		<MatchDamage>0</MatchDamage>
 		<AbilityDamage>1</AbilityDamage>
 		<PowerGain>3</PowerGain>
-		<BonusGold>0</BonusGold>
-		<BonusTime>0</BonusTime>
 	</Statistics>
 </Body>

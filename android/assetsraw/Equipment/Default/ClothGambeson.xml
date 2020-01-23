@@ -1,14 +1,11 @@
 <Body xmlns:meta="Editor">
-	<Name>Cloth Jambeson</Name>
-	<Description>A thick padded jacket, providing minimal protection.</Description>
+	<Name>ClothGambeson.Body.Name:7f6e5987-c849-4aa9-856a-e66b015f0ba5</Name>
+	<Description>ClothGambeson.Body.Description:a059da6d-1ddf-406d-9b75-20137ec7ebe2</Description>
 	<Cost>60</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/armor_leather_chest</Name>
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
 		<Health>2</Health>
-		<MatchDamage>0</MatchDamage>
-		<AbilityDamage>0</AbilityDamage>
-		<PowerGain>0</PowerGain>
 	</Statistics>
 </Body>

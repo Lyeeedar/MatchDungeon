@@ -1,6 +1,6 @@
 <Body xmlns:meta="Editor">
-	<Name>Warpaint</Name>
-	<Description>This paint drives you into a combat frenzy, lending great power to your attacks. However it doesn't provide any cover at all, you'll be completely exposed.</Description>
+	<Name>Warpaint.Body.Name:ac93b931-7164-4e77-8e40-a3e218fdfb7f</Name>
+	<Description>Warpaint.Body.Description:388b7c4a-813e-4768-be30-c75113e7e828</Description>
 	<Cost>170</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/potion_blue</Name>
@@ -11,7 +11,5 @@
 		<MatchDamage>2</MatchDamage>
 		<AbilityDamage>1</AbilityDamage>
 		<PowerGain>2</PowerGain>
-		<BonusGold>0</BonusGold>
-		<BonusTime>0</BonusTime>
 	</Statistics>
 </Body>

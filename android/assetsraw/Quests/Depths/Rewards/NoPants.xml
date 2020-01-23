@@ -1,6 +1,6 @@
 <Body xmlns:meta="Editor">
-	<Name>No Pants</Name>
-	<Description>Your lack of clothing aids your mobility to the point you can just roll away from any attack. It's not the most flattering look though.</Description>
+	<Name>NoPants.Body.Name:27e06576-9de2-46e8-827b-f02335928c88</Name>
+	<Description>NoPants.Body.Description:02c3d78e-c187-4828-97db-909f6ef034db</Description>
 	<Cost>50</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/armor_leather_leg</Name>
@@ -18,7 +18,7 @@
 			<Effect>1,Orb,Single,Buff</Effect>
 			<Data>
 				<Buff meta:RefKey="Buff">
-					<Name>Dodge</Name>
+					<Name>NoPants.Body.Ability.EffectData.Data.Buff (Buff).Name:f46302cf-e132-461b-a97b-d3ac8753f509</Name>
 					<Icon meta:RefKey="Sprite">
 						<Name>Oryx/uf_split/uf_skills/uf_skills_33</Name>
 					</Icon>

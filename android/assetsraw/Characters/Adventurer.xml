@@ -1,6 +1,6 @@
 <Character xmlns:meta="Editor">
-	<Name>Adventurer</Name>
-	<Description>They make their living by risking their lives in ancient tombs or forgotten ruins. Treasure is their goal.</Description>
+	<Name>Adventurer.Character.Name:1e94d256-5384-45ce-b970-4cb68523f464</Name>
+	<Description>Adventurer.Character.Description:0e681606-9eef-44bb-b295-067f66e90870</Description>
 	<Sprite meta:RefKey="Sprite">
 		<Name>Oryx/Custom/heroes/adventurer</Name>
 		<DrawActualSize>true</DrawActualSize>

@@ -1,7 +1,7 @@
 <CardContent meta:X="0" meta:Y="0" GUID="66e443d0-9028-4749-875a-5f805717c774" xmlns:meta="Editor">
 	<Root meta:RefKey="Node">5b2aedda-65b7-4e20-bcde-9bf795d10542</Root>
 	<Nodes>
-		<Node meta:X="759.40261840820313" meta:Y="97.358245849609375" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
+		<Node meta:X="759.402587890625" meta:Y="97.358245849609375" GUID="7dd3a564-a94d-4c63-9a0f-6ac84fbc9f17">
 			<Match3>
 				<Level>TrackingContentLevel</Level>
 				<Success meta:RefKey="Node">8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f</Success>
@@ -21,7 +21,7 @@
 				<State>Failure</State>
 			</MarkComplete>
 		</Node>
-		<Node meta:X="1001.4026489257813" meta:Y="73.358244895935059" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
+		<Node meta:X="1001.4026489257813" meta:Y="73.358245849609375" GUID="8f73b3c6-ad2e-4fea-ac9e-2e2d77a63b1f">
 			<Line>
 				<MultilineString>TrackingContent.Node.[0] Line.Line.MultilineString:b1999389-a223-489b-b4f1-a8bbef7e6ae1</MultilineString>
 			</Line>
@@ -48,7 +48,7 @@
 				</Branch>
 			</Branch>
 		</Node>
-		<Node meta:X="467.41824340820313" meta:Y="143.12543487548828" GUID="c4398737-12bb-48de-a0bf-eccc8d36eead">
+		<Node meta:X="467.41824340820313" meta:Y="143.12542724609375" GUID="c4398737-12bb-48de-a0bf-eccc8d36eead">
 			<Line>
 				<MultilineString>TrackingContent.Node.[0] Line.Line.MultilineString:2bc79587-bb50-4aec-8c20-328a0f2f09e1</MultilineString>
 			</Line>

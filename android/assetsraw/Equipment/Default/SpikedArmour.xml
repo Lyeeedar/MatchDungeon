@@ -1,17 +1,12 @@
 <Body xmlns:meta="Editor">
-	<Name>Spiked Armour</Name>
-	<Description>Armour covered in vicious spikes. You can swing your body to deliver cuts to your foe.</Description>
+	<Name>SpikedArmour.Body.Name:50da9d76-5581-4f6b-af5a-71988d34268e</Name>
+	<Description>SpikedArmour.Body.Description:9261b0c6-55c5-4b4c-ba9a-418dba1dfb39</Description>
 	<Cost>100</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/armor_wild_chest</Name>
 		<DrawActualSize>true</DrawActualSize>
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
-		<Health>0</Health>
 		<MatchDamage>0.5</MatchDamage>
-		<AbilityDamage>0</AbilityDamage>
-		<PowerGain>0</PowerGain>
-		<BonusGold>0</BonusGold>
-		<BonusTime>0</BonusTime>
 	</Statistics>
 </Body>

@@ -1,14 +1,11 @@
 <OffHand xmlns:meta="Editor">
-	<Name>Iron Gauntlets</Name>
-	<Description>Iron gauntlets, providing you with just a little more protection.</Description>
+	<Name>IronGauntlets.OffHand.Name:48f17a1a-d928-4d35-a38b-a9c0fcfa61ba</Name>
+	<Description>IronGauntlets.OffHand.Description:d7fc5cfc-9690-40fa-a038-421d9db3386d</Description>
 	<Cost>70</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/armor_plate_glove</Name>
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
 		<Health>3</Health>
-		<MatchDamage>0</MatchDamage>
-		<AbilityDamage>0</AbilityDamage>
-		<PowerGain>0</PowerGain>
 	</Statistics>
 </OffHand>

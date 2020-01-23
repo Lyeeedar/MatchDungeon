@@ -1,17 +1,13 @@
 <Head xmlns:meta="Editor">
-	<Name>Holy Amulet</Name>
-	<Description>An amulet infused with holy protection.</Description>
+	<Name>HolyAmulet.Head.Name:a7dbf169-4a4b-4e01-80f1-af3928903a8c</Name>
+	<Description>HolyAmulet.Head.Description:dcb63362-c937-4002-8215-57853b9c4dc9</Description>
 	<Cost>100</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/necklace_cross</Name>
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
 		<Health>2</Health>
-		<MatchDamage>0</MatchDamage>
-		<AbilityDamage>0</AbilityDamage>
 		<PowerGain>2</PowerGain>
-		<BonusGold>0</BonusGold>
-		<BonusTime>0</BonusTime>
 	</Statistics>
 	<Ability>
 		<Name>Divine Protection</Name>

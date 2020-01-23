@@ -26,7 +26,7 @@
 			<Rewards meta:RefKey="Rewards">
 				<Buff>
 					<Buff meta:RefKey="Buff">
-						<Name>Mark of the Champion</Name>
+						<Name>GreatestShowdownContent.Node.[1] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:afb6b62e-d04f-44fd-b4cb-a1be166c9c0c</Name>
 						<Icon meta:RefKey="Sprite">
 							<Name>Oryx/uf_split/uf_items/skull_small_gold</Name>
 							<DrawActualSize>true</DrawActualSize>

@@ -34,7 +34,7 @@
 			<Rewards meta:RefKey="Rewards">
 				<Buff>
 					<Buff meta:RefKey="Buff">
-						<Name>Favour of the Gods</Name>
+						<Name>FavourOfTheGodsContent.Node.[2] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:64fd6b84-ab2b-42b1-ac14-0b6c12964600</Name>
 						<Icon meta:RefKey="Sprite">
 							<Name>Oryx/uf_split/uf_items/weapon_cross</Name>
 							<DrawActualSize>true</DrawActualSize>

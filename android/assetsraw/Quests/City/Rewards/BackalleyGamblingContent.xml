@@ -224,7 +224,7 @@
 			<Rewards meta:RefKey="Rewards">
 				<Buff>
 					<Buff meta:RefKey="Buff">
-						<Name>Bad Luck</Name>
+						<Name>BackalleyGamblingContent.Node.[1] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:ddb1e956-cb9d-4c65-a8d5-f7f6748006ba</Name>
 						<Icon meta:RefKey="Sprite">
 							<Name>Oryx/uf_split/uf_items/coin_copper</Name>
 							<DrawActualSize>true</DrawActualSize>
@@ -251,7 +251,7 @@
 				</Money>
 				<Buff>
 					<Buff meta:RefKey="Buff">
-						<Name>Good Luck</Name>
+						<Name>BackalleyGamblingContent.Node.[1] Rewards.Rewards.[1] Buff.Buff.Buff (Buff).Name:3605db3b-5b17-4045-97c2-c38b44011dc4</Name>
 						<Icon meta:RefKey="Sprite">
 							<Name>Oryx/uf_split/uf_items/coin_silver</Name>
 							<DrawActualSize>true</DrawActualSize>

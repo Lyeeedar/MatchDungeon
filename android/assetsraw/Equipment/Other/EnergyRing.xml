@@ -1,18 +1,13 @@
 <OffHand xmlns:meta="Editor">
-	<Name>Energy Ring</Name>
-	<Description>A small ring, covered in sigils. Wearing it makes you feel unnatural energy run through you.</Description>
+	<Name>EnergyRing.OffHand.Name:4c1d9db5-45ee-4414-94b9-babe93f806a4</Name>
+	<Description>EnergyRing.OffHand.Description:f67faa5f-ff07-4f93-aecb-b9abf82bb04b</Description>
 	<Cost>200</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/ring_copper</Name>
 		<DrawActualSize>true</DrawActualSize>
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
-		<Health>0</Health>
-		<MatchDamage>0</MatchDamage>
-		<AbilityDamage>0</AbilityDamage>
 		<PowerGain>5</PowerGain>
-		<BonusGold>0</BonusGold>
-		<BonusTime>0</BonusTime>
 	</Statistics>
 	<Ability>
 		<Name>Energise</Name>

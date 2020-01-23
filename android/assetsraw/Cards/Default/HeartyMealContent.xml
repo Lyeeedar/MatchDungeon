@@ -26,7 +26,7 @@
 			<Rewards meta:RefKey="Rewards">
 				<Buff>
 					<Buff meta:RefKey="Buff">
-						<Name>Hearty Meal</Name>
+						<Name>HeartyMealContent.Node.[1] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:37266e65-ba65-411b-99c8-e6cc1f008259</Name>
 						<Icon meta:RefKey="Sprite">
 							<Name>Oryx/Custom/items/steak</Name>
 							<DrawActualSize>true</DrawActualSize>

@@ -1,6 +1,6 @@
 <Character xmlns:meta="Editor">
-	<Name>Alchemist</Name>
-	<Description></Description>
+	<Name>Alchemist.Character.Name:ec7de59f-b1c6-46aa-98e3-b0b77ba5d5a8</Name>
+	<Description>Alchemist.Character.Description:3031baea-7d06-4e02-9988-d17cadc883fa</Description>
 	<Sprite meta:RefKey="Sprite">
 		<Name>Oryx/Custom/heroes/alchemist</Name>
 		<DrawActualSize>true</DrawActualSize>

@@ -26,7 +26,7 @@
 			<Rewards meta:RefKey="Rewards">
 				<Buff>
 					<Buff meta:RefKey="Buff">
-						<Name>Focused</Name>
+						<Name>MeditationContent.Node.[1] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:a64a7271-a817-40e9-88dd-c929ab3b64d8</Name>
 						<Icon meta:RefKey="Sprite">
 							<Name>Oryx/uf_split/uf_items/skull_small_blood</Name>
 							<DrawActualSize>true</DrawActualSize>

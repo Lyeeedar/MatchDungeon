@@ -1,16 +1,12 @@
 <Body xmlns:meta="Editor">
-	<Name>Belt of Strength</Name>
-	<Description>A belt enchanted to enhance the damage of your attacks.</Description>
+	<Name>BeltOfStrength.Body.Name:64efd2ef-24cb-4fe3-987e-6a9c24d609d3</Name>
+	<Description>BeltOfStrength.Body.Description:5b514145-262e-4d03-9f1d-cfe8045b35e9</Description>
 	<Cost>110</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/necklace_ornate</Name>
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
-		<Health>0</Health>
 		<MatchDamage>0.5</MatchDamage>
 		<AbilityDamage>1</AbilityDamage>
-		<PowerGain>0</PowerGain>
-		<BonusGold>0</BonusGold>
-		<BonusTime>0</BonusTime>
 	</Statistics>
 </Body>

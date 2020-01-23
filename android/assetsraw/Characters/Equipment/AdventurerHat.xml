@@ -1,6 +1,6 @@
 <Head xmlns:meta="Editor">
-	<Name>Explorers Hat</Name>
-	<Description>The hat of an adventurer. Seems to give good luck with finding treasure.</Description>
+	<Name>AdventurerHat.Head.Name:badbee6d-394e-4d9a-b4b5-5990e63f8faf</Name>
+	<Description>AdventurerHat.Head.Description:ffa81d95-3e47-4095-b757-deb2c9fddadf</Description>
 	<Cost>100</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/Custom/items/explorers_hat</Name>

@@ -1,22 +1,16 @@
 <MainHand xmlns:meta="Editor">
-	<Name>Hammer</Name>
-	<Description>A hammer, great for smashing through anything blocking your way.</Description>
+	<Name>Hammer.MainHand.Name:9f8a1dec-473f-4faa-8967-3873a8344413</Name>
+	<Description>Hammer.MainHand.Description:2569a27c-43ae-4566-8895-8da984be6fc6</Description>
 	<Cost>100</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/weapon_hammer</Name>
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
-		<Health>0</Health>
-		<MatchDamage>0</MatchDamage>
-		<AbilityDamage>0</AbilityDamage>
 		<PowerGain>2</PowerGain>
 	</Statistics>
 	<Ability>
 		<Name>Break</Name>
 		<Description>Break any one blocking object</Description>
-		<Icon meta:RefKey="Sprite">
-			<Name>Oryx/uf_split/uf_items/weapon_hammer</Name>
-		</Icon>
 		<EffectData>
 			<Cost>2</Cost>
 			<Effect>1,Block,Single,Pop</Effect>

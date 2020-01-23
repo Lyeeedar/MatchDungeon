@@ -1,17 +1,12 @@
 <Head xmlns:meta="Editor">
-	<Name>Spiked Helmet</Name>
-	<Description>A spiked helmet. With this you can deliver a vicious headbutt.</Description>
+	<Name>SpikedHelmet.Head.Name:45d8db24-c173-4c52-93ff-bbcd8a0ee052</Name>
+	<Description>SpikedHelmet.Head.Description:a993de1f-7c5f-4b90-93e6-7adedadf5da1</Description>
 	<Cost>100</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/armor_wild_helm</Name>
 		<DrawActualSize>true</DrawActualSize>
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
-		<Health>0</Health>
 		<MatchDamage>0.5</MatchDamage>
-		<AbilityDamage>0</AbilityDamage>
-		<PowerGain>0</PowerGain>
-		<BonusGold>0</BonusGold>
-		<BonusTime>0</BonusTime>
 	</Statistics>
 </Head>

@@ -1,6 +1,6 @@
 <OffHand xmlns:meta="Editor">
-	<Name>Necroracia</Name>
-	<Description>A dark and powerful spell. Deals more damage depending on how many creatures are within its area of effect.</Description>
+	<Name>Necroracia.OffHand.Name:f96e222a-c2ac-461e-a965-e88cf09feeec</Name>
+	<Description>Necroracia.OffHand.Description:cfa0ee3e-ad48-4ced-94cd-68a3695a4889</Description>
 	<Cost>250</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/book_evil</Name>

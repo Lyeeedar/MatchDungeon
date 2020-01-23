@@ -1,16 +1,12 @@
 <Head xmlns:meta="Editor">
-	<Name>Power Amulet</Name>
-	<Description>An amulet thrumming with power. Enhances your abilities.</Description>
+	<Name>PowerAmulet.Head.Name:c275137b-8486-4add-bbfa-30fc1e7d1227</Name>
+	<Description>PowerAmulet.Head.Description:ba7db229-3932-4439-8336-ae0ba0a11059</Description>
 	<Cost>100</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/necklace_amethyst</Name>
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
-		<Health>0</Health>
-		<MatchDamage>0</MatchDamage>
 		<AbilityDamage>1</AbilityDamage>
 		<PowerGain>3</PowerGain>
-		<BonusGold>0</BonusGold>
-		<BonusTime>0</BonusTime>
 	</Statistics>
 </Head>

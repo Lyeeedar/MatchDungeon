@@ -1,6 +1,6 @@
 <Character xmlns:meta="Editor">
-	<Name>Peasant</Name>
-	<Description>A simple peasant on an adventure. Are they a lost prince? The chosen one? Destined for greatness? Only one way to find out!</Description>
+	<Name>Peasant.Character.Name:5db66fd8-c139-4ae2-acb8-1efbce32bba1</Name>
+	<Description>Peasant.Character.Description:08d0596e-d839-433c-aa63-14f5af01cf25</Description>
 	<Sprite meta:RefKey="Sprite">
 		<Name>Oryx/Custom/heroes/farmer_m</Name>
 		<DrawActualSize>true</DrawActualSize>

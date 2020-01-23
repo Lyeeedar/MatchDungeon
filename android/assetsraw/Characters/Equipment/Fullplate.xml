@@ -1,6 +1,6 @@
 <Body xmlns:meta="Editor">
-	<Name>Fullplate</Name>
-	<Description>A set of plate armour that provides excellent protection.</Description>
+	<Name>Fullplate.Body.Name:b193633c-3f54-42ed-bcb3-c13cdfe10d8c</Name>
+	<Description>Fullplate.Body.Description:9f3decb3-b822-4a09-8127-65aa18fc5b28</Description>
 	<Cost>150</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/armor_plate_chest</Name>

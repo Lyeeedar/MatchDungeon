@@ -1,6 +1,6 @@
 <Quest meta:X="0" meta:Y="0" GUID="15966115-f36d-476e-a6cb-ccdc80f608d1" xmlns:meta="Editor" meta:GraphCommentData="55149447-bdf4-4945-8c6e-fdc96443dcba$Introduction$$112,71,138,255%de4925e1-71d2-4527-adc2-d3bd1a2b69c5$Branch$$255,255,255,255%b41615ba-153f-4294-b9ba-7a6c3cfb742c$Felixa$$107,50,50,255%3fb62115-288d-4c35-8447-f3fec232854b$Barron$$19,17,89,255%8f10bd30-3e91-4ee5-bd76-b773379c5be3$Ruffletop$$13,74,29,255%c7c4eddd-df14-4772-b274-88a684b8a7af$Boss$$250,205,7,255">
-	<Title>Partying Up</Title>
-	<Description>All adventurers know that to take on the most dangerous locations you need a party.</Description>
+	<Title>PartyingUp.Quest.Title:2fc75c31-d618-445b-a51d-1e667f1d5289</Title>
+	<Description>PartyingUp.Quest.Description:7e23a035-e157-4da4-9164-39ffcc436a9b</Description>
 	<Icon meta:RefKey="Sprite">
 		<Name>Quest/PartyingUp</Name>
 	</Icon>
@@ -100,7 +100,7 @@
 			<Success meta:RefKey="QuestNode">5f60b25a-1a73-417a-997c-bdf5587d9283</Success>
 			<Failure meta:RefKey="QuestNode">5f60b25a-1a73-417a-997c-bdf5587d9283</Failure>
 		</QuestNode>
-		<QuestNode meta:X="2760.73779296875" meta:Y="-375.00332641601562" meta:Comment="b41615ba-153f-4294-b9ba-7a6c3cfb742c" GUID="5f60b25a-1a73-417a-997c-bdf5587d9283">
+		<QuestNode meta:X="2760.73779296875" meta:Y="-375.00332641601563" meta:Comment="b41615ba-153f-4294-b9ba-7a6c3cfb742c" GUID="5f60b25a-1a73-417a-997c-bdf5587d9283">
 			<Type>Deck</Type>
 			<IsShop>true</IsShop>
 			<AllowDeckCards>true</AllowDeckCards>
@@ -156,7 +156,7 @@
 			<Value>1</Value>
 			<Next meta:RefKey="Define">f3bb38ed-bdfd-498e-b325-7146588453c2</Next>
 		</Define>
-		<QuestNode meta:X="2276.478759765625" meta:Y="334.19400024414062" meta:Comment="8f10bd30-3e91-4ee5-bd76-b773379c5be3" GUID="bab33ca3-b3a4-4054-9617-b685d230908f">
+		<QuestNode meta:X="2276.478759765625" meta:Y="334.19400024414063" meta:Comment="8f10bd30-3e91-4ee5-bd76-b773379c5be3" GUID="bab33ca3-b3a4-4054-9617-b685d230908f">
 			<Type>Deck</Type>
 			<AllowDeckCards>true</AllowDeckCards>
 			<AllowQuestCards>true</AllowQuestCards>
@@ -256,7 +256,7 @@
 			<Theme>Cave</Theme>
 			<Next meta:RefKey="QuestNode">81bfe5c1-a0ba-4bee-9d1a-4318a474b5ee</Next>
 		</SetTheme>
-		<SetTheme meta:X="2110.356201171875" meta:Y="336.63211059570312" meta:Comment="8f10bd30-3e91-4ee5-bd76-b773379c5be3" GUID="7ea35837-e764-4389-b454-5c06dc0a6ec6">
+		<SetTheme meta:X="2110.356201171875" meta:Y="336.63211059570313" meta:Comment="8f10bd30-3e91-4ee5-bd76-b773379c5be3" GUID="7ea35837-e764-4389-b454-5c06dc0a6ec6">
 			<Theme>Farm</Theme>
 			<Next meta:RefKey="QuestNode">bab33ca3-b3a4-4054-9617-b685d230908f</Next>
 		</SetTheme>

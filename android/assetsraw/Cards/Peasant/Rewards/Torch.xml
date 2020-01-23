@@ -1,6 +1,6 @@
 <OffHand xmlns:meta="Editor">
-	<Name>Torch</Name>
-	<Description>A burning torch, great for lighting up places and setting fire to things.</Description>
+	<Name>Torch.OffHand.Name:cd454d91-fc3c-4062-bf3f-1f78c6f7118d</Name>
+	<Description>Torch.OffHand.Description:e653ee91-a5da-4299-b352-0c2fc66536ca</Description>
 	<Cost>150</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/torch_lit</Name>

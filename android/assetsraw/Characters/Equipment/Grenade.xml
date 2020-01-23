@@ -1,6 +1,6 @@
 <OffHand xmlns:meta="Editor">
-	<Name>Grenade</Name>
-	<Description>A powerful explosive packed into a hard ceramic shell. Detonates when thrown.</Description>
+	<Name>Grenade.OffHand.Name:c83794f9-87ca-4db4-bf0d-4dafca417911</Name>
+	<Description>Grenade.OffHand.Description:4aa430cd-651f-434d-9bbb-64cd1732087a</Description>
 	<Cost>100</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/flask_red</Name>

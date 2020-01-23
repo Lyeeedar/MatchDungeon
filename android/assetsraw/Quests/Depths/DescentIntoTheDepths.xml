@@ -1,6 +1,6 @@
 <Quest meta:X="0" meta:Y="0" GUID="673b5bd2-8d4b-4abc-b7a3-0b2e0c78ee90" xmlns:meta="Editor" meta:GraphCommentData="eeda5940-4a28-4d46-933f-b7e73bc7f1e3$Complete$$237,184,8,255%f3a4ab0a-78ad-42b8-b315-78b0eb17a531$Dungeon$$125,124,124,255%747ad511-c564-4c69-b485-865dc062a2bb$Capra$$105,72,5,255%2f947a90-54cc-47f8-9353-6359d9fd6fbf$Descent$$38,24,69,255%0d631a86-f04d-4aed-8541-a8150556b5a6$Filler$$105,110,150,255%73a9565a-af37-4ce1-b710-e9a85c747a73$Branch$$166,51,51,255%fafbe05d-9d17-4ebb-be66-5143ec951fa3$Left$$91,191,102,255%1369cb80-6593-401f-bdbb-c5815eb10b65$Middle$$142,184,63,255%a36934b4-30be-4562-bef7-48ead8c8f697$Right$$97,214,122,255">
-	<Title>Descent into the Depths</Title>
-	<Description>You discover a tunnel leading from the ancient ruin deep underground. It may be full of treasure.</Description>
+	<Title>DescentIntoTheDepths.Quest.Title:84afbcc1-b45d-4609-8748-e001effe9fad</Title>
+	<Description>DescentIntoTheDepths.Quest.Description:a5294fae-53df-402b-b723-438d6ef36f8c</Description>
 	<Icon meta:RefKey="Sprite">
 		<Name>Quest/DescentIntoTheDepths</Name>
 	</Icon>
@@ -39,7 +39,7 @@
 			<Success meta:RefKey="QuestNode">e2237341-1813-4456-b185-f5743b4938b9</Success>
 			<Failure meta:RefKey="QuestNode">e2237341-1813-4456-b185-f5743b4938b9</Failure>
 		</QuestNode>
-		<QuestNode meta:X="146.33285522460938" meta:Y="399.84158325195312" meta:Comment="747ad511-c564-4c69-b485-865dc062a2bb" GUID="e2237341-1813-4456-b185-f5743b4938b9">
+		<QuestNode meta:X="146.33285522460938" meta:Y="399.84158325195313" meta:Comment="747ad511-c564-4c69-b485-865dc062a2bb" GUID="e2237341-1813-4456-b185-f5743b4938b9">
 			<Type>Fixed</Type>
 			<FixedEvent>GateGuardian</FixedEvent>
 			<Success meta:RefKey="SetTheme">c13720bb-4038-421e-be85-2980aee2d387</Success>
@@ -57,7 +57,7 @@
 		<CompleteQuest meta:X="1020.0430908203125" meta:Y="598.6683349609375" meta:Comment="2f947a90-54cc-47f8-9353-6359d9fd6fbf" GUID="76681422-900b-4e91-8b38-118e09366d83">
 			<State>Failure</State>
 		</CompleteQuest>
-		<SetTheme meta:X="592.61676025390625" meta:Y="408.72427368164062" meta:Comment="2f947a90-54cc-47f8-9353-6359d9fd6fbf" GUID="c13720bb-4038-421e-be85-2980aee2d387">
+		<SetTheme meta:X="592.61676025390625" meta:Y="408.72427368164063" meta:Comment="2f947a90-54cc-47f8-9353-6359d9fd6fbf" GUID="c13720bb-4038-421e-be85-2980aee2d387">
 			<Theme>Depths</Theme>
 			<Next meta:RefKey="QuestNode">306b8776-743e-4f6d-9a8b-535d16331108</Next>
 		</SetTheme>

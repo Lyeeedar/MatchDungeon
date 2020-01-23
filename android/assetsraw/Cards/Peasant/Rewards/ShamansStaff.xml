@@ -1,6 +1,6 @@
 <MainHand xmlns:meta="Editor">
-	<Name>Shamans Staff</Name>
-	<Description>The staff of a goblin shaman.</Description>
+	<Name>ShamansStaff.MainHand.Name:0c49ccba-3fb7-46eb-879b-f866cbc35d91</Name>
+	<Description>ShamansStaff.MainHand.Description:63b43a9f-bb48-49a8-b79b-bd541daa9059</Description>
 	<Cost>170</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/weapon_staff_branch</Name>

@@ -1,6 +1,6 @@
 <MainHand xmlns:meta="Editor">
-	<Name>Spiked Shield</Name>
-	<Description>You know whats better than one shield? Two shields! The best defense is a great defense afterall.</Description>
+	<Name>SpikedShield.MainHand.Name:a898b62c-12b5-40ed-8104-2a87728860b7</Name>
+	<Description>SpikedShield.MainHand.Description:6d844de7-a737-4bbf-81a4-1c1937230020</Description>
 	<Cost>100</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/shield_iron_buckler</Name>
@@ -8,6 +8,6 @@
 	<Statistics meta:RefKey="Statistics">
 		<Health>1</Health>
 		<MatchDamage>0.5</MatchDamage>
-		<Aegis>2</Aegis>
+		<Aegis>1</Aegis>
 	</Statistics>
 </MainHand>

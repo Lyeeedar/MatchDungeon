@@ -1,6 +1,6 @@
 <Head xmlns:meta="Editor">
-	<Name>Fireshot Necklace</Name>
-	<Description>A necklace enchanted with the power fireshot.</Description>
+	<Name>FireshotNecklace.Head.Name:826b28fd-c792-466d-8a66-8ee93b0c49aa</Name>
+	<Description>FireshotNecklace.Head.Description:584cc69d-10f4-49db-a7de-480b04d46231</Description>
 	<Cost>100</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/necklace_ruby</Name>

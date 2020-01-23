@@ -1,6 +1,6 @@
 <Character xmlns:meta="Editor">
-	<Name>Knight</Name>
-	<Description>A knight clad in tough armour and sporting a powerful resolve. A dangerous foe to anything that would disturb the peace.</Description>
+	<Name>Knight.Character.Name:5afdd307-409b-4b84-a21a-6895a90c169e</Name>
+	<Description>Knight.Character.Description:c33a0375-0fa8-468c-86a5-1b847d3775ac</Description>
 	<Sprite meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_heroes/knight</Name>
 		<DrawActualSize>true</DrawActualSize>

@@ -1,17 +1,12 @@
 <Body xmlns:meta="Editor">
-	<Name>Breastplate</Name>
-	<Description>A single breastplate, offering high protection from just a single direction. Requires skill to use.</Description>
+	<Name>Breastplate.Body.Name:e15704b4-e53d-4033-abcb-f442e936b734</Name>
+	<Description>Breastplate.Body.Description:b1f655a9-64e1-4d0a-b065-19f51e3bda18</Description>
 	<Cost>100</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/armor_plate_chest</Name>
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
 		<Health>2</Health>
-		<MatchDamage>0</MatchDamage>
-		<AbilityDamage>0</AbilityDamage>
-		<PowerGain>0</PowerGain>
-		<BonusGold>0</BonusGold>
-		<BonusTime>0</BonusTime>
 	</Statistics>
 	<Ability>
 		<Name>Body Slam</Name>

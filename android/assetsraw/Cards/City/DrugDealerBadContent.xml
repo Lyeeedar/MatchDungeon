@@ -85,7 +85,7 @@
 			<Rewards meta:RefKey="Rewards">
 				<Buff>
 					<Buff meta:RefKey="Buff">
-						<Name>Frenzy</Name>
+						<Name>DrugDealerBadContent.Node.[3] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:e1101cac-f276-421f-bedb-4d9faebf08c6</Name>
 						<Icon meta:RefKey="Sprite">
 							<Name>Oryx/uf_split/uf_items/skull_large_closed</Name>
 							<Colour>255,13,13,255</Colour>

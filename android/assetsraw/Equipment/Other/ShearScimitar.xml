@@ -1,6 +1,6 @@
 <MainHand xmlns:meta="Editor">
-	<Name>Shear Scimitar</Name>
-	<Description>A scimitar, faintly glowing with a purple sheen. Its edge is unnaturally sharp.</Description>
+	<Name>ShearScimitar.MainHand.Name:da6bf1f3-cb19-4d8e-a4c9-04d150252c45</Name>
+	<Description>ShearScimitar.MainHand.Description:825c41a0-8579-455f-a6c6-275122d0134b</Description>
 	<Cost>220</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/weapon_falchion</Name>
@@ -8,12 +8,8 @@
 		<Colour>249,187,252,255</Colour>
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
-		<Health>0</Health>
 		<MatchDamage>2</MatchDamage>
 		<AbilityDamage>2</AbilityDamage>
-		<PowerGain>0</PowerGain>
-		<BonusGold>0</BonusGold>
-		<BonusTime>0</BonusTime>
 	</Statistics>
 	<Ability>
 		<Name>Thousand Cuts</Name>

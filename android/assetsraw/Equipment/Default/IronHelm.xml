@@ -1,14 +1,11 @@
 <Head xmlns:meta="Editor">
-	<Name>Iron Helm</Name>
-	<Description>An iron helmet. Tough enough to protect your head.</Description>
+	<Name>IronHelm.Head.Name:6e45f888-0ea1-4947-a6dc-ab277e7906f7</Name>
+	<Description>IronHelm.Head.Description:04832e1c-7ad2-4410-b75f-9937917d63ad</Description>
 	<Cost>70</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/armor_plate_helm</Name>
 	</Icon>
 	<Statistics meta:RefKey="Statistics">
 		<Health>3</Health>
-		<MatchDamage>0</MatchDamage>
-		<AbilityDamage>0</AbilityDamage>
-		<PowerGain>0</PowerGain>
 	</Statistics>
 </Head>

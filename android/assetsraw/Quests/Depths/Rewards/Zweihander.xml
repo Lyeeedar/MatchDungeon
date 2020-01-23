@@ -1,6 +1,6 @@
 <MainHand xmlns:meta="Editor">
-	<Name>Zweihander</Name>
-	<Description>A giant, heavy blade. Makes you slow but a single hit from this beast will ruin anyones day.</Description>
+	<Name>Zweihander.MainHand.Name:25be6bd3-7f57-4918-ade8-fb07d23e9b1d</Name>
+	<Description>Zweihander.MainHand.Description:9b07db39-cf75-41e9-a584-33ef4ed1982b</Description>
 	<Cost>200</Cost>
 	<Icon meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/weapon_lance</Name>
