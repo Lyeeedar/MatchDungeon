@@ -33,7 +33,7 @@ class Equipment(val path: String)
 
 	fun getCard(other: Equipment?, showAsPlus: Boolean): CardWidget
 	{
-		return CardWidget.createCard(name, "Equipment", icon.copy(), createTable(other, showAsPlus), AssetManager.loadTextureRegion("GUI/EquipmentCardback")!!, this)
+		return CardWidget.createCard(name, Localisation.getText("equipment", "UI"), icon.copy(), createTable(other, showAsPlus), AssetManager.loadTextureRegion("GUI/EquipmentCardback")!!, this)
 	}
 
 	fun createTable(other: Equipment?, showAsPlus: Boolean): Table
@@ -54,7 +54,7 @@ class Equipment(val path: String)
 			table.add(Seperator(Statics.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f).expandY()
 			table.row()
 
-			table.add(Label("Statistics", Statics.skin, "cardtitle"))
+			table.add(Label(Localisation.getText("statistics", "UI"), Statics.skin, "cardtitle"))
 			table.row()
 
 			if (other != null)
@@ -79,7 +79,7 @@ class Equipment(val path: String)
 			table.add(Seperator(Statics.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f).expandY()
 			table.row()
 
-			table.add(Label("Ability", Statics.skin, "cardtitle"))
+			table.add(Label(Localisation.getText("ability", "UI"), Statics.skin, "cardtitle"))
 			table.row()
 
 			if (other?.ability != null)

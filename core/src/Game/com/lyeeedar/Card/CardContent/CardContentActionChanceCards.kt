@@ -112,13 +112,13 @@ class CardContentActionChanceCards : AbstractCardContentAction()
 				CardChance.GREATNEGATIVE -> AssetManager.loadTextureRegion("GUI/GreatNegativeChance")!!
 			}
 
-			val frontTable = CardWidget.createFrontTable(FrontTableSimple(chance.niceName, "Chance", Sprite(cardFront), Sprite(chanceCardback)))
+			val frontTable = CardWidget.createFrontTable(FrontTableSimple(chance.niceName, Localisation.getText("chance", "UI"), Sprite(cardFront), Sprite(chanceCardback)))
 
 			val widget = CardWidget(frontTable, Table(), chanceCardback, chance)
 			cards.add(widget)
 			widget.clickable = false
 			widget.canZoom = false
-			widget.addPick("click") {
+			widget.addPick("") {
 				for (card in cards)
 				{
 					if (card != widget)

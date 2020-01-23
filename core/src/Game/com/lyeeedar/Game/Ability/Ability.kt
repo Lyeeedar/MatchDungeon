@@ -33,8 +33,13 @@ import java.util.*
 
 class Ability
 {
-	lateinit var name: String
-	lateinit var description: String
+	lateinit var nameID: String
+	lateinit var descriptionID: String
+
+	val name: String
+		get() = Localisation.getText(nameID, "Ability")
+	val description: String
+		get() = Localisation.getText(descriptionID, "Ability")
 
 	var hitEffect: ParticleEffect? = null
 	var flightEffect: ParticleEffect? = null
@@ -55,7 +60,7 @@ class Ability
 
 	fun getCard(): CardWidget
 	{
-		return CardWidget.createCard(name, "Ability", AssetManager.loadSprite("GUI/AbilityCardback"), createTable(), createTable())
+		return CardWidget.createCard(name, Localisation.getText("ability", "UI"), AssetManager.loadSprite("GUI/AbilityCardback"), createTable(), createTable())
 	}
 
 	fun createTable(): Table
@@ -84,7 +89,8 @@ class Ability
 				turns = "($turns + $bonus)"
 			}
 
-			val effectDesc = "For $turns turns gain buff:"
+			var effectDesc = Localisation.getText("ability.buff", "UI") + ":"
+			effectDesc = effectDesc.replace("{Turns}", turns)
 
 			val effectLabel = Label(effectDesc, Statics.skin, "card")
 			effectLabel.setWrap(true)
@@ -103,7 +109,7 @@ class Ability
 		}
 		else
 		{
-			var effectDesc = "Target $targets " + targetter.type.toString().toLowerCase(Locale.ENGLISH).capitalize().pluralize(targets)
+			var effectDesc = "Target $targets " + targetter.type.niceName.pluralize(targets)
 
 			if (permuter.type != Permuter.Type.SINGLE)
 			{
@@ -318,8 +324,8 @@ class Ability
 
 	fun parse(xml: XmlData)
 	{
-		name = xml.get("Name")
-		description = xml.get("Description")
+		nameID = xml.get("Name")
+		descriptionID = xml.get("Description")
 
 		val dataEl = xml.getChildByName("EffectData")!!
 

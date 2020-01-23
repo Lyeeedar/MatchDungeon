@@ -29,7 +29,7 @@ class Buff(val xml: XmlData)
 
 	fun getCard(): CardWidget
 	{
-		return CardWidget.createCard(Localisation.getText(nameID, "Buff"), "Buff", icon.copy(), createTable(), AssetManager.loadTextureRegion("GUI/BuffCardback")!!, this)
+		return CardWidget.createCard(Localisation.getText(nameID, "Buff"), Localisation.getText("buff", "UI"), icon.copy(), createTable(), AssetManager.loadTextureRegion("GUI/BuffCardback")!!, this)
 	}
 
 	fun getCardSmall(isBuff: Boolean): CardWidget
@@ -39,7 +39,7 @@ class Buff(val xml: XmlData)
 		else
 			AssetManager.loadSprite("GUI/Debuff")
 
-		val basicTable = CardWidget.createFrontTable(FrontTableSimple(Localisation.getText(nameID, "Buff"), "Buff", icon))
+		val basicTable = CardWidget.createFrontTable(FrontTableSimple(Localisation.getText(nameID, "Buff"), Localisation.getText("buff", "UI"), icon))
 
 		val card = CardWidget(basicTable, createTable(), icon.currentTexture, this)
 		return card
@@ -64,7 +64,7 @@ class Buff(val xml: XmlData)
 
 		if (showTurns)
 		{
-			table.add(Label("Remaining Duration: $remainingDuration", Statics.skin, "card")).pad(5f)
+			table.add(Label(Localisation.getText("buff.remainingduration", "UI") + ": $remainingDuration", Statics.skin, "card")).pad(5f)
 			table.row()
 		}
 
@@ -73,7 +73,7 @@ class Buff(val xml: XmlData)
 			table.add(Seperator(Statics.skin, "horizontalcard")).pad(10f, 0f, 10f, 0f)
 			table.row()
 
-			table.add(Label("Statistics", Statics.skin, "cardtitle"))
+			table.add(Label(Localisation.getText("statistics", "UI"), Statics.skin, "cardtitle"))
 			table.row()
 
 			table.add(Statistic.createTable(statistics, Statistic.Companion.DisplayType.MODIFIER)).growX()

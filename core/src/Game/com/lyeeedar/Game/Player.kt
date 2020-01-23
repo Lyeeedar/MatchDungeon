@@ -123,7 +123,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 		table.add(Seperator(Statics.skin, "horizontalcard"))
 		table.row()
 
-		val statisticsButton = TextButton("Statistics", Statics.skin)
+		val statisticsButton = TextButton(Localisation.getText("statistics", "UI"), Statics.skin)
 		statisticsButton.addClickListener {
 			val statisticsTable = Table()
 
@@ -145,15 +145,15 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 					statTable.add(Label("%.1f".format(statVal), Statics.skin, "card")).pad(5f)
 
 					val statSources = Array<Pair<String, Float>>()
-					statSources.add(Pair("Rewards", statistics[stat] ?: 0f))
-					statSources.add(Pair("Equipment", EquipmentSlot.Values.map { equipment[it]?.statistics?.get(stat) ?: 0f }.sum()))
-					statSources.add(Pair("Buffs", buffs.map { it.statistics[stat] ?: 0f }.sum()))
-					statSources.add(Pair("ChaoticNature", choaticNature[stat] ?: 0f))
-					statSources.add(Pair("LevelBuffs", levelbuffs.map { it.statistics[stat] ?: 0f }.sum()))
-					statSources.add(Pair("LevelDebuffs", leveldebuffs.map { it.statistics[stat] ?: 0f }.sum()))
+					statSources.add(Pair(Localisation.getText("rewards", "UI"), statistics[stat] ?: 0f))
+					statSources.add(Pair(Localisation.getText("equipment", "UI"), EquipmentSlot.Values.map { equipment[it]?.statistics?.get(stat) ?: 0f }.sum()))
+					statSources.add(Pair(Localisation.getText("buffs", "UI"), buffs.map { it.statistics[stat] ?: 0f }.sum()))
+					statSources.add(Pair(Localisation.getText("statistic.chaoticnature", "UI"), choaticNature[stat] ?: 0f))
+					statSources.add(Pair(Localisation.getText("levelbuffs", "UI"), levelbuffs.map { it.statistics[stat] ?: 0f }.sum()))
+					statSources.add(Pair(Localisation.getText("leveldebuffs", "UI"), leveldebuffs.map { it.statistics[stat] ?: 0f }.sum()))
 
 					val base = baseCharacter.baseStatistics[stat] ?: 0f
-					var eqn = "base(${base})"
+					var eqn = Localisation.getText("base", "UI") + "(${base})"
 					for (source in statSources)
 					{
 						if (source.second != 0f)
@@ -170,7 +170,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 			}
 
 			FullscreenTable.createCard(
-					"Statistics",
+					Localisation.getText("statistics", "UI"),
 					Localisation.getText("player", "UI"),
 					statisticsTable,
 					statisticsButton.localToStageCoordinates(Vector2()))
@@ -184,7 +184,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 
 		if (buffs.size > 0)
 		{
-			val buffsButton = TextButton("Buffs", Statics.skin)
+			val buffsButton = TextButton(Localisation.getText("buffs", "UI"), Statics.skin)
 			buffsButton.addClickListener {
 				val buffsTable = Table()
 
@@ -210,7 +210,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 				}
 
 				FullscreenTable.createCard(
-						"Buffs",
+					Localisation.getText("buffs", "UI"),
 						Localisation.getText("player", "UI"),
 						buffsTable,
 						buffsButton.localToStageCoordinates(Vector2()))
@@ -223,7 +223,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 			table.row()
 		}
 
-		val equipmentButton = TextButton("Equipment", Statics.skin)
+		val equipmentButton = TextButton(Localisation.getText("equipment", "UI"), Statics.skin)
 		equipmentButton.addClickListener {
 			val equipmentTable = Table()
 
@@ -239,7 +239,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 					equipmentTable.add(equipTable).growX().padBottom(2f)
 					equipmentTable.row()
 
-					equipTable.add(Label("None", Statics.skin,"card"))
+					equipTable.add(Label(Localisation.getText("none", "UI"), Statics.skin,"card"))
 					equipTable.add(SpriteWidget(emptySlot, 32f, 32f)).size(32f).expandX().right()
 				}
 				else
@@ -265,7 +265,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 			}
 
 			FullscreenTable.createCard(
-					"Equipment",
+				Localisation.getText("equipment", "UI"),
 					Localisation.getText("player", "UI"),
 					equipmentTable,
 					equipmentButton.localToStageCoordinates(Vector2()))

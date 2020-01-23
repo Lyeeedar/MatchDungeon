@@ -8,10 +8,7 @@ import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.addTapToolTip
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.FastEnumMap
-import com.lyeeedar.Util.Statics
-import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.*
 
 // ----------------------------------------------------------------------
 enum class Rarity
@@ -61,27 +58,81 @@ enum class SpawnWeight
 }
 
 // ----------------------------------------------------------------------
-enum class Statistic private constructor(val niceName: String, val min: Float, val max: Float, val tooltip: String, val icon: Sprite)
+enum class Statistic private constructor(val min: Float, val max: Float, val icon: Sprite)
 {
-	HEALTH("Health", 1f, Float.MAX_VALUE, "The number of attacks you can take before dieing", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/heart_red_full")),
-	MATCHDAMAGE("Match Damage", 0f, Float.MAX_VALUE, "The bonus damage you do the first time you match next to a damageable object each turn", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/weapon_broadsword")),
-	ABILITYDAMAGE("Ability Damage", 0f, Float.MAX_VALUE, "The bonus damage you do with specials and abilities", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/weapon_magic_staff_chaos")),
-	PIERCE("Pierce", 0f, Float.MAX_VALUE, "The amount of damage resistance you remove each time you hit something with damage resistance", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/weapon_spear")),
-	POWERGAIN("Power Gain", 0f, Float.MAX_VALUE, "The bonus power you gain the first time you gain power each turn", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/potion_blue")),
-	BONUSGOLD("Bonus Gold", -Float.MAX_VALUE, Float.MAX_VALUE, "The bonus multiplier you gain each time you gain gold", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/coin_gold")),
-	HASTE("Haste", -Float.MAX_VALUE, Float.MAX_VALUE, "How much faster you move. This increases turn count, delay between monster attacks and abilities, and buff durations", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/armor_cloth_boot")),
-	REGENERATION("Regeneration", 0f, Float.MAX_VALUE, "The amount of health you regenerate each turn", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/heart_green_full")),
-	BERSERK("Berserk", 0f, Float.MAX_VALUE, "When below half health this is the amount MatchDamage, AbilityDamage and PowerGain is increased", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/skull_small_blood")),
-	PRICEREDUCTION("Price Reduction", 0f, Float.MAX_VALUE, "The percentage reduction in price of items from a shop", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/coin_copper")),
-	AEGIS("Aegis", 0f, Float.MAX_VALUE, "The chance to block the damage from an attack as it hits", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/shield_iron_buckler")),
-	COUNTER("Counter", 0f, Float.MAX_VALUE, "When taking damage from an attack, the chance to hit back at a random enemy", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/armor_wild_chest")),
-	REFLECT("Reflect", 0f, Float.MAX_VALUE, "The chance to block the damage from an attack, then hit back at a random enemy", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/armor_mystic_chest")),
-	CHAOTICNATURE("Chaotic Nature", 0f, Float.MAX_VALUE, "The percentage increase or decrease to randomly apply to each statistic. Changes whenever you complete an encounter", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/necklace_dark")),
-	WEAKNESSAURA("Weakness Aura", 0f, Float.MAX_VALUE, "The value to subtract from enemy life as they spawn", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/crystal_dragon")),
-	NECROTICAURA("Necrotic Aura", 0f, Float.MAX_VALUE, "The amount of health you gain each time you kill an enemy", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/skull_large_closed")),
-	BUFFDURATION("Buff Duration", 0f, Float.MAX_VALUE, "The multiplier to increase buff duration by", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/necklace_mystic")),
-	LUCK("Luck", -1f, 1f, "Affects your chance of gaining rewards", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/gem_tourmaline")),
-	VAMPIRICSTRIKES("Vampiric Strikes", 0f, Float.MAX_VALUE, "You regain a portion of the damage you deal as health", AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/weapon_magic_sword_hellfire"));
+	HEALTH(1f, Float.MAX_VALUE, AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/heart_red_full")),
+	MATCHDAMAGE(0f, Float.MAX_VALUE, AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/weapon_broadsword")),
+	ABILITYDAMAGE(0f, Float.MAX_VALUE, AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/weapon_magic_staff_chaos")),
+	PIERCE(0f, Float.MAX_VALUE, AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/weapon_spear")),
+	POWERGAIN(0f, Float.MAX_VALUE, AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/potion_blue")),
+	BONUSGOLD(-Float.MAX_VALUE, Float.MAX_VALUE, AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/coin_gold")),
+	HASTE(-Float.MAX_VALUE, Float.MAX_VALUE, AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/armor_cloth_boot")),
+	REGENERATION(0f, Float.MAX_VALUE, AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/heart_green_full")),
+	BERSERK(0f, Float.MAX_VALUE, AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/skull_small_blood")),
+	PRICEREDUCTION(0f, Float.MAX_VALUE, AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/coin_copper")),
+	AEGIS(0f, Float.MAX_VALUE, AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/shield_iron_buckler")),
+	COUNTER(0f, Float.MAX_VALUE, AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/armor_wild_chest")),
+	REFLECT(0f, Float.MAX_VALUE, AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/armor_mystic_chest")),
+	CHAOTICNATURE(0f, Float.MAX_VALUE, AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/necklace_dark")),
+	WEAKNESSAURA(0f, Float.MAX_VALUE, AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/crystal_dragon")),
+	NECROTICAURA(0f, Float.MAX_VALUE, AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/skull_large_closed")),
+	BUFFDURATION(0f, Float.MAX_VALUE, AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/necklace_mystic")),
+	LUCK(-1f, 1f, AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/gem_tourmaline")),
+	VAMPIRICSTRIKES(0f, Float.MAX_VALUE, AssetManager.loadGrayscaleSprite("Oryx/uf_split/uf_items/weapon_magic_sword_hellfire"));
+
+	val niceName: String
+		get()
+		{
+			return when(this)
+			{
+				HEALTH -> Localisation.getText("statistic.health", "UI")
+				MATCHDAMAGE -> Localisation.getText("statistic.matchdamage", "UI")
+				ABILITYDAMAGE -> Localisation.getText("statistic.abilitydamage", "UI")
+				PIERCE -> Localisation.getText("statistic.pierce", "UI")
+				POWERGAIN -> Localisation.getText("statistic.powergain", "UI")
+				BONUSGOLD -> Localisation.getText("statistic.bonusgold", "UI")
+				HASTE -> Localisation.getText("statistic.haste", "UI")
+				REGENERATION -> Localisation.getText("statistic.regeneration", "UI")
+				BERSERK -> Localisation.getText("statistic.berserk", "UI")
+				PRICEREDUCTION -> Localisation.getText("statistic.pricereduction", "UI")
+				AEGIS -> Localisation.getText("statistic.aegis", "UI")
+				COUNTER -> Localisation.getText("statistic.counter", "UI")
+				REFLECT -> Localisation.getText("statistic.reflect", "UI")
+				CHAOTICNATURE -> Localisation.getText("statistic.chaoticnature", "UI")
+				WEAKNESSAURA -> Localisation.getText("statistic.weaknessaura", "UI")
+				NECROTICAURA -> Localisation.getText("statistic.necroticaura", "UI")
+				BUFFDURATION -> Localisation.getText("statistic.buffduration", "UI")
+				LUCK -> Localisation.getText("statistic.luck", "UI")
+				VAMPIRICSTRIKES -> Localisation.getText("statistic.vampiricstrikes", "UI")
+			}
+		}
+
+	val tooltip: String
+		get()
+		{
+			return when(this)
+			{
+				HEALTH -> Localisation.getText("statistic.health.description", "UI")
+				MATCHDAMAGE -> Localisation.getText("statistic.matchdamage.description", "UI")
+				ABILITYDAMAGE -> Localisation.getText("statistic.abilitydamage.description", "UI")
+				PIERCE -> Localisation.getText("statistic.pierce.description", "UI")
+				POWERGAIN -> Localisation.getText("statistic.powergain.description", "UI")
+				BONUSGOLD -> Localisation.getText("statistic.bonusgold.description", "UI")
+				HASTE -> Localisation.getText("statistic.haste.description", "UI")
+				REGENERATION -> Localisation.getText("statistic.regeneration.description", "UI")
+				BERSERK -> Localisation.getText("statistic.berserk.description", "UI")
+				PRICEREDUCTION -> Localisation.getText("statistic.pricereduction.description", "UI")
+				AEGIS -> Localisation.getText("statistic.aegis.description", "UI")
+				COUNTER -> Localisation.getText("statistic.counter.description", "UI")
+				REFLECT -> Localisation.getText("statistic.reflect.description", "UI")
+				CHAOTICNATURE -> Localisation.getText("statistic.chaoticnature.description", "UI")
+				WEAKNESSAURA -> Localisation.getText("statistic.weaknessaura.description", "UI")
+				NECROTICAURA -> Localisation.getText("statistic.necroticaura.description", "UI")
+				BUFFDURATION -> Localisation.getText("statistic.buffduration.description", "UI")
+				LUCK -> Localisation.getText("statistic.luck.description", "UI")
+				VAMPIRICSTRIKES -> Localisation.getText("statistic.vampiricstrikes.description", "UI")
+			}
+		}
 
 	companion object
 	{

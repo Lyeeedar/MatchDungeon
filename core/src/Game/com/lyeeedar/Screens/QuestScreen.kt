@@ -54,7 +54,7 @@ class QuestScreen : AbstractScreen()
 		greyOutTable.touchable = Touchable.enabled
 		greyOutTable.setFillParent(true)
 
-		goldLabel = Label("Gold: 0", Statics.skin)
+		goldLabel = Label(Localisation.getText("gold", "UI") + ": 0", Statics.skin)
 
 		headSlot.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/TileBackground"))
 		mainhandSlot.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/TileBackground"))

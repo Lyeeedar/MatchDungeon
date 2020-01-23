@@ -10,6 +10,20 @@
 	<Text ID="player">Player</Text>
 	<Text ID="encounter">Encounter</Text>
 	<Text ID="statistics">Statistics</Text>
+	<Text ID="statistic">Statistic</Text>
+	<Text ID="chance">Chance</Text>
+	<Text ID="buff">Buff</Text>
+	<Text ID="buffs">Buffs/Text>
+	<Text ID="none">None</Text>
+	<Text ID="ability">Ability</Text>
+	<Text ID="rewards">Rewards</Text>
+	<Text ID="levelbuffs">Level Buffs</Text>
+	<Text ID="leveldebuffs">Level Debuffs</Text>
+	<Text ID="base">Base</Text>
+	<Text ID="equip">Equip</Text>
+	<Text ID="sell">Sell</Text>
+	<Text ID="item">Item</Text>
+	<Text ID="take">Take</Text>
 
 	<Text ID="questselection.embark">Embark</Text>
 	<Text ID="questselection.editdeck">Edit Deck</Text>
@@ -124,4 +138,67 @@
 	<Text ID="cardchance.positive">Lucky</Text>
 	<Text ID="cardchance.negative">Unlucky</Text>
 	<Text ID="cardchance.greatnegative">Cursedly Unlucky</Text>
+
+	<Text ID="buff.remainingduration">Remaining Duration</Text>
+
+	<Text ID="statistic.health">Health</Text>
+	<Text ID="statistic.matchdamage">Match Damage</Text>
+	<Text ID="statistic.abilitydamage">Ability Damage</Text>
+	<Text ID="statistic.pierce">Pierce</Text>
+	<Text ID="statistic.powergain">Power Gain</Text>
+	<Text ID="statistic.bonusgold">Bonus Gold</Text>
+	<Text ID="statistic.haste">Haste</Text>
+	<Text ID="statistic.regeneration">Regeneration</Text>
+	<Text ID="statistic.berserk">Berserk</Text>
+	<Text ID="statistic.pricereduction">Price Reduction</Text>
+	<Text ID="statistic.aegis">Aegis</Text>
+	<Text ID="statistic.counter">Counter</Text>
+	<Text ID="statistic.reflect">Reflect</Text>
+	<Text ID="statistic.chaoticnature">Chaotic Nature</Text>
+	<Text ID="statistic.weaknessaura">Weakness Aura</Text>
+	<Text ID="statistic.necroticaura">Necrotic Aura</Text>
+	<Text ID="statistic.buffduration">Buff Duration</Text>
+	<Text ID="statistic.luck">Luck</Text>
+	<Text ID="statistic.vampiricstrikes">Vampiric Strikes</Text>
+
+	<Text ID="statistic.health.description">The number of attacks you can take before dieing.</Text>
+	<Text ID="statistic.matchdamage.description">The bonus damage you do the first time you match next to a damageable object each turn.</Text>
+	<Text ID="statistic.abilitydamage.description">The bonus damage you do with specials and abilities.</Text>
+	<Text ID="statistic.pierce.description">The amount of damage resistance you remove each time you hit something with damage resistance.</Text>
+	<Text ID="statistic.powergain.description">The bonus power you gain the first time you gain power each turn.</Text>
+	<Text ID="statistic.bonusgold.description">The bonus multiplier you gain each time you gain gold.</Text>
+	<Text ID="statistic.haste.description">How much faster you move. This increases turn count, delay between monster attacks and abilities, and buff durations.</Text>
+	<Text ID="statistic.regeneration.description">The amount of health you regenerate each turn.</Text>
+	<Text ID="statistic.berserk.description">When below half health this is the amount Match Damage, Ability Damage, and Power Gain is increased.</Text>
+	<Text ID="statistic.pricereduction.description">The percentage reduction in price of items from a shop.</Text>
+	<Text ID="statistic.aegis.description">The chance to block the damage from an attack as it hits.</Text>
+	<Text ID="statistic.counter.description">When taking damage from an attack, the chance to hit back at a random enemy.</Text>
+	<Text ID="statistic.reflect.description">The chance to block the damage from an attack, then hit back at a random enemy.</Text>
+	<Text ID="statistic.chaoticnature.description">The percentage increase or decrease to randomly apply to each statistic. Changes whenever you complete an encounter.</Text>
+	<Text ID="statistic.weaknessaura.description">The value to subtract from enemy life as they spawn.</Text>
+	<Text ID="statistic.necroticaura.description">The amount of health you gain each time you kill an enemy.</Text>
+	<Text ID="statistic.buffduration.description">The multiplier to increase buff duration by.</Text>
+	<Text ID="statistic.luck.description">Affects your chance of gaining rewards.</Text>
+	<Text ID="statistic.vampiricstrikes.description">You regain a portion of the damage you deal as health.</Text>
+
+	<Text ID="quest.bronzerewardavailable">Can gain a bronze level reward.</Text>
+	<Text ID="quest.bronzerewardacquired">Bronze reward already acquired.</Text>
+	<Text ID="quest.silverrewardavailable">Can gain a silver level reward.</Text>
+	<Text ID="quest.silverrewardacquired">Silver reward already acquired.</Text>
+	<Text ID="quest.goldrewardavailable">Can gain a gold level reward.</Text>
+	<Text ID="quest.goldrewardacquired">Gold reward already acquired.</Text>
+
+	<Text ID="chance.verylow">very low</Text>
+	<Text ID="chance.low">low</Text>
+	<Text ID="chance.medium">medium</Text>
+	<Text ID="chance.high">high</Text>
+	<Text ID="chance.certain">certain</Text>
+
+	<Text ID="ability.buff">For {Turns} turns gain buff</Text>
+
+	<Text ID="questprogress.currentencounter">The current encounter in the quest.</Text>
+	<Text ID="questprogress.shop">An encounter containing a shop.</Text>
+	<Text ID="questprogress.questencounter">A quest encounter.</Text>
+	<Text ID="questprogress.randomencounter">A random encounter.</Text>
+
 </Localisation>

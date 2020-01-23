@@ -47,7 +47,7 @@ class Character(val path: String)
 		table.add(Seperator(Statics.skin, "horizontalcard")).expand().pad(3f, 0f, 3f, 0f)
 		table.row()
 
-		table.add(Label("Statistics", Statics.skin, "cardtitle"))
+		table.add(Label(Localisation.getText("statistics", "UI"), Statics.skin, "cardtitle"))
 		table.row()
 
 		table.add(Statistic.createTable(baseStatistics, Statistic.Companion.DisplayType.FLAT)).growX()
@@ -56,7 +56,7 @@ class Character(val path: String)
 		table.add(Seperator(Statics.skin, "horizontalcard")).expand().pad(3f, 0f, 3f, 0f)
 		table.row()
 
-		table.add(Label("Equipment", Statics.skin, "cardtitle"))
+		table.add(Label(Localisation.getText("equipment", "UI"), Statics.skin, "cardtitle"))
 		table.row()
 
 		for (slot in EquipmentSlot.Values)
@@ -69,7 +69,7 @@ class Character(val path: String)
 				table.add(equipTable).growX().padBottom(2f)
 				table.row()
 
-				equipTable.add(Label("None", Statics.skin, "card"))
+				equipTable.add(Label(Localisation.getText("none", "UI"), Statics.skin, "card"))
 				equipTable.add(SpriteWidget(emptySlot, 32f, 32f)).size(32f).expandX().right()
 			}
 			else
@@ -97,7 +97,7 @@ class Character(val path: String)
 		table.add(Table()).grow()
 		table.row()
 
-		return CardWidget.Companion.createCard(name, "Character", Sprite(sprite.textures[0]), table, AssetManager.loadTextureRegion("GUI/CharacterCardback")!!, this)
+		return CardWidget.createCard(name, Localisation.getText("character", "UI"), Sprite(sprite.textures[0]), table, AssetManager.loadTextureRegion("GUI/CharacterCardback")!!, this)
 	}
 
 	fun parse(xmlData: XmlData)

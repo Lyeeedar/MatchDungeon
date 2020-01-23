@@ -18,13 +18,26 @@ import com.lyeeedar.Util.*
 import com.lyeeedar.Util.Random
 import java.util.*
 
-enum class Chance private constructor(val chance: Float, val niceName: String, val colour: Colour)
+enum class Chance private constructor(val chance: Float, val colour: Colour)
 {
-	VERYLOW(0.1f, "very low", Colour(124, 115, 98, 255)),
-	LOW(0.25f, "low", Colour(237, 154, 21, 255)),
-	MEDIUM(0.5f, "medium", Colour(200, 200, 200, 255)),
-	HIGH(0.75f, "high", Colour(255, 238, 163, 255)),
-	ALWAYS(1f, "certain", Colour(249, 209, 27, 255));
+	VERYLOW(0.1f, Colour(124, 115, 98, 255)),
+	LOW(0.25f, Colour(237, 154, 21, 255)),
+	MEDIUM(0.5f, Colour(200, 200, 200, 255)),
+	HIGH(0.75f, Colour(255, 238, 163, 255)),
+	ALWAYS(1f, Colour(249, 209, 27, 255));
+
+	val niceName: String
+		get()
+		{
+			return when(this)
+			{
+				VERYLOW -> Localisation.getText("chance.verylow", "UI")
+				LOW -> Localisation.getText("chance.low", "UI")
+				MEDIUM -> Localisation.getText("chance.medium", "UI")
+				HIGH -> Localisation.getText("chance.high", "UI")
+				ALWAYS -> Localisation.getText("chance.certain", "UI")
+			}
+		}
 
 	fun evaluate(): Boolean = Random.random() <= chance + Global.player.getStat(Statistic.LUCK)
 }
@@ -89,9 +102,9 @@ class StatisticsReward : AbstractReward()
 			{
 				Global.player.statistics[stat] = (Global.player.statistics[stat] ?: 0f) + statVal
 
-				val card = CardWidget.createCard(stat.niceName, "Statistic", stat.icon.copy(), Table(), AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, topText = statVal.toString())
+				val card = CardWidget.createCard(stat.niceName, Localisation.getText("statistic", "UI"), stat.icon.copy(), Table(), AssetManager.loadTextureRegion("GUI/StatisticsCardback")!!, topText = statVal.toString())
 				card.canZoom = false
-				card.addPick("Take") {
+				card.addPick("") {
 
 					val sprite = stat.icon.copy()
 
@@ -295,10 +308,10 @@ class MoneyReward : AbstractReward()
 			amountStr += "+$bonus"
 		}
 
-		val table = CardWidget.createFrontTable(FrontTableSimple("Gold", "Gold", AssetManager.loadSprite("Oryx/Custom/items/coin_gold_pile"), AssetManager.loadSprite("GUI/MoneyCardback"), amountStr))
+		val table = CardWidget.createFrontTable(FrontTableSimple(Localisation.getText("gold", "UI"), Localisation.getText("gold", "UI"), AssetManager.loadSprite("Oryx/Custom/items/coin_gold_pile"), AssetManager.loadSprite("GUI/MoneyCardback"), amountStr))
 
 		val card = CardWidget(table, Table(), AssetManager.loadTextureRegion("GUI/MoneyCardback")!!, null)
-		card.addPick("Take") {
+		card.addPick(Localisation.getText("take", "UI")) {
 
 			Global.player.gold += amount + bonus
 
@@ -476,7 +489,7 @@ class EquipmentReward : AbstractReward()
 		val equipped = Global.player.equipment[equipment.slot]
 
 		val card = equipment.getCard(equipped, true)
-		card.addPick("Equip") {
+		card.addPick(Localisation.getText("equip", "UI")) {
 			Global.player.equipment[equipment.slot] = equipment
 
 			val sprite = equipment.icon.copy()
@@ -492,7 +505,7 @@ class EquipmentReward : AbstractReward()
 		}
 
 		val sellAmount = equipment.cost / 4
-		card.addPick("Sell ($sellAmount)") {
+		card.addPick(Localisation.getText("sell", "UI") + " ($sellAmount)") {
 			Global.player.gold += sellAmount
 
 			val sprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_gold")
@@ -549,7 +562,7 @@ class ItemReward : AbstractReward()
 
 			flags.flags.put(key, value.evaluate(Global.getVariableMap()))
 
-			val table = CardWidget.createFrontTable(FrontTableSimple(name, "Item", icon.copy()))
+			val table = CardWidget.createFrontTable(FrontTableSimple(name, Localisation.getText("item", "UI"), icon.copy()))
 
 			val cardWidget = CardWidget(table, Table(), AssetManager.loadTextureRegion("GUI/ItemCardback")!!, null)
 			cardWidget.canZoom = false

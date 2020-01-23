@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Game.*
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Localisation
 import kotlin.math.min
 
 class QuestProgressWidget() : Widget()
@@ -34,10 +35,10 @@ class QuestProgressWidget() : Widget()
 				{
 					when
 					{
-						questPath[i] == quest.current -> "The current encounter in the quest".showTooltip(inputEvent, clickx, clicky)
-						questPath[i].isShop -> "An encounter containing a shop".showTooltip(inputEvent, clickx, clicky)
-						questPath[i].type == QuestNode.QuestNodeType.FIXED -> "A quest encounter".showTooltip(inputEvent, clickx, clicky)
-						else -> "A random encounter".showTooltip(inputEvent, clickx, clicky)
+						questPath[i] == quest.current -> Localisation.getText("questprogress.currentencounter", "UI").showTooltip(inputEvent, clickx, clicky)
+						questPath[i].isShop -> Localisation.getText("questprogress.shop", "UI").showTooltip(inputEvent, clickx, clicky)
+						questPath[i].type == QuestNode.QuestNodeType.FIXED -> Localisation.getText("questprogress.questencounter", "UI").showTooltip(inputEvent, clickx, clicky)
+						else -> Localisation.getText("questprogress.randomencounter", "UI").showTooltip(inputEvent, clickx, clicky)
 					}
 				}
 			}

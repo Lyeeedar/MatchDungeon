@@ -176,7 +176,7 @@ class Quest(val path: String)
 		if (!played)
 		{
 			val newTable = Table()
-			val newLabel = Label("New", Statics.skin)
+			val newLabel = Label(Localisation.getText("new", "UI"), Statics.skin)
 			newTable.add(newLabel).expand().top().left().pad(3f)
 
 			wrapperStack.add(newTable)
@@ -192,11 +192,11 @@ class Quest(val path: String)
 		{
 			if (!gotBronze)
 			{
-				rewards.add(Pair(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_copper"), "Can gain a bronze level reward."))
+				rewards.add(Pair(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_copper"), Localisation.getText("quest.bronzerewardavailable", "UI")))
 			}
 			else
 			{
-				rewards.add(Pair(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_copper", colour = Colour.DARK_GRAY), "Bronze reward already acquired."))
+				rewards.add(Pair(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_copper", colour = Colour.DARK_GRAY), Localisation.getText("quest.bronzerewardacquired", "UI")))
 			}
 		}
 
@@ -204,11 +204,11 @@ class Quest(val path: String)
 		{
 			if (!gotSilver)
 			{
-				rewards.add(Pair(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_silver"), "Can gain a silver level reward."))
+				rewards.add(Pair(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_silver"), Localisation.getText("quest.silverrewardavailable", "UI")))
 			}
 			else
 			{
-				rewards.add(Pair(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_silver", colour = Colour.DARK_GRAY), "Silver reward already acquired."))
+				rewards.add(Pair(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_silver", colour = Colour.DARK_GRAY), Localisation.getText("quest.silverrewardacquired", "UI")))
 			}
 		}
 
@@ -216,15 +216,15 @@ class Quest(val path: String)
 		{
 			if (!gotSilver)
 			{
-				rewards.add(Pair(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_gold"), "Can gain a gold level reward."))
+				rewards.add(Pair(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_gold"), Localisation.getText("quest.goldrewardavailable", "UI")))
 			}
 			else
 			{
-				rewards.add(Pair(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_gold", colour = Colour.DARK_GRAY), "Gold reward already acquired."))
+				rewards.add(Pair(AssetManager.loadSprite("Oryx/uf_split/uf_items/coin_gold", colour = Colour.DARK_GRAY), Localisation.getText("quest.goldrewardacquired", "UI")))
 			}
 		}
 
-		return CardWidget.createCard(title, "Quest", AssetManager.loadSprite("GUI/QuestCardback"), createTable(false), createTable(true), this, descriptors = rewards)
+		return CardWidget.createCard(title, Localisation.getText("quest", "UI"), AssetManager.loadSprite("GUI/QuestCardback"), createTable(false), createTable(true), this, descriptors = rewards)
 	}
 
 	fun run()
