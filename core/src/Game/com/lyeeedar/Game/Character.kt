@@ -17,14 +17,19 @@ import com.lyeeedar.Util.*
 
 class Character(val path: String)
 {
-	lateinit var name: String
-	lateinit var description: String
+	lateinit var nameID: String
+	lateinit var descriptionID: String
 	lateinit var sprite: Sprite
 	val baseStatistics = FastEnumMap<Statistic, Float>(Statistic::class.java)
 	val equipment = FastEnumMap<EquipmentSlot, Equipment>(EquipmentSlot::class.java)
 	val cards = Array<Card>()
 
 	val emptySlot = AssetManager.loadSprite("Icons/Empty")
+
+	val name: String
+		get() = Localisation.getText(nameID, "Character")
+	val description: String
+		get() = Localisation.getText(descriptionID, "Character")
 
 	fun getCard(): CardWidget
 	{
@@ -97,8 +102,8 @@ class Character(val path: String)
 
 	fun parse(xmlData: XmlData)
 	{
-		name = xmlData.get("Name")
-		description = xmlData.get("Description")
+		nameID = xmlData.get("Name")
+		descriptionID = xmlData.get("Description")
 		sprite = AssetManager.loadSprite(xmlData.getChildByName("Sprite")!!)
 		Statistic.parse(xmlData.getChildByName("Statistics")!!, baseStatistics)
 

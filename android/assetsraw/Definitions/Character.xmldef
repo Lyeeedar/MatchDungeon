@@ -1,7 +1,7 @@
 <Definitions Colour="176,242,196" Icon="Sprites/Oryx/Custom/heroes/farmer_f_1.png" xmlns:meta="Editor">
 	<Definition Name="Character" meta:RefKey="Struct">
-		<Data Name="Name" SkipIfDefault="False" meta:RefKey="String" />
-		<Data Name="Description" SkipIfDefault="False" meta:RefKey="String" />
+		<Data Name="Name" NeedsLocalisation="True" LocalisationFile="Character" SkipIfDefault="False" meta:RefKey="String" />
+		<Data Name="Description" NeedsLocalisation="True" LocalisationFile="Character" SkipIfDefault="False" meta:RefKey="String" />
 		<Data Name="Sprite" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="Statistics" Keys="Statistics" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="StartingEquipment" meta:RefKey="Struct">

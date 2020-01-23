@@ -12,14 +12,11 @@ import com.lyeeedar.UI.CardWidget
 import com.lyeeedar.UI.FrontTableSimple
 import com.lyeeedar.UI.Seperator
 import com.lyeeedar.UI.SpriteWidget
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.FastEnumMap
-import com.lyeeedar.Util.Statics
-import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.*
 
 class Buff(val xml: XmlData)
 {
-	var name: String = xml.get("Name")
+	var nameID: String = xml.get("Name")
 	var icon: Sprite = AssetManager.loadSprite(xml.getChildByName("Icon")!!)
 	val statistics = FastEnumMap<Statistic, Float>(Statistic::class.java)
 
@@ -32,7 +29,7 @@ class Buff(val xml: XmlData)
 
 	fun getCard(): CardWidget
 	{
-		return CardWidget.createCard(name, "Buff", icon.copy(), createTable(), AssetManager.loadTextureRegion("GUI/BuffCardback")!!, this)
+		return CardWidget.createCard(Localisation.getText(nameID, "Buff"), "Buff", icon.copy(), createTable(), AssetManager.loadTextureRegion("GUI/BuffCardback")!!, this)
 	}
 
 	fun getCardSmall(isBuff: Boolean): CardWidget
@@ -42,7 +39,7 @@ class Buff(val xml: XmlData)
 		else
 			AssetManager.loadSprite("GUI/Debuff")
 
-		val basicTable = CardWidget.createFrontTable(FrontTableSimple(name, "Buff", icon))
+		val basicTable = CardWidget.createFrontTable(FrontTableSimple(Localisation.getText(nameID, "Buff"), "Buff", icon))
 
 		val card = CardWidget(basicTable, createTable(), icon.currentTexture, this)
 		return card
@@ -57,7 +54,7 @@ class Buff(val xml: XmlData)
 		val iconTable = Table()
 		iconTable.add(SpriteWidget(icon, 64f, 64f)).expandX().right().pad(5f)
 		titleStack.add(iconTable)
-		titleStack.add(Label(name, Statics.skin, "cardtitle"))
+		titleStack.add(Label(Localisation.getText(nameID, "Buff"), Statics.skin, "cardtitle"))
 
 		table.add(titleStack).growX()
 		table.row()

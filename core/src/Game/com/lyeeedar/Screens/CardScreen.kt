@@ -169,7 +169,7 @@ class CardScreen : AbstractScreen()
 			debugConsole.register("Equip", "", fun(args, console): Boolean
 			{
 				val equipmentName = args[0]
-				var equipment = Global.deck.equipment.firstOrNull { it.path.toLowerCase(Locale.ENGLISH).endsWith(equipmentName.toLowerCase(Locale.ENGLISH)) || it.name.toLowerCase(Locale.ENGLISH) == equipmentName.toLowerCase(Locale.ENGLISH) }
+				var equipment = Global.deck.equipment.firstOrNull { it.path.toLowerCase(Locale.ENGLISH).endsWith(equipmentName.toLowerCase(Locale.ENGLISH)) || it.nameID.toLowerCase(Locale.ENGLISH).startsWith(equipmentName.toLowerCase(Locale.ENGLISH)) }
 				if (equipment == null)
 				{
 					val equipmentPath = XmlData.existingPaths!!.firstOrNull { it.toLowerCase(Locale.ENGLISH).endsWith(equipmentName.toLowerCase(Locale.ENGLISH) + ".xml") }

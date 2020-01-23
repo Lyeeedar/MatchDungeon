@@ -87,7 +87,7 @@ class Global
 				output.put("Unlocked$theme", 1f)
 			}
 
-			output.put(player.baseCharacter.name.toLowerCase(Locale.ENGLISH), 1f)
+			output.put(player.baseCharacter.path.filename(false).toLowerCase(Locale.ENGLISH), 1f)
 
 			return output
 		}

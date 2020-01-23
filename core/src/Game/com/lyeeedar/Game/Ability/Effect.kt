@@ -108,7 +108,7 @@ class Effect(val type: Type)
 				val buff = (data["BUFF"] as Buff).copy()
 				buff.remainingDuration += (Global.player.getStat(Statistic.BUFFDURATION, true) * buff.remainingDuration).toInt()
 
-				val existing = Global.player.levelbuffs.firstOrNull { it.name == buff.name }
+				val existing = Global.player.levelbuffs.firstOrNull { it.nameID == buff.nameID }
 				if (existing != null)
 				{
 					existing.remainingDuration += buff.remainingDuration

@@ -58,17 +58,22 @@ class Quest(val path: String)
 
 	var played = false
 
-	val title: String
-	val description: String
+	val titleID: String
+	val descriptionID: String
 	val icon: Sprite
+
+	val title: String
+		get() = Localisation.getText(titleID, "Quest")
+	val description: String
+		get() = Localisation.getText(descriptionID, "Quest")
 
 	init
 	{
 		val rawPath = "Quests/$path"
 		val xml = getXml(rawPath)
 
-		title = xml.get("Title", "")!!
-		description = xml.get("Description", "")!!
+		titleID = xml.get("Title", "")!!
+		descriptionID = xml.get("Description", "")!!
 		icon = AssetManager.loadSprite(xml.getChildByName("Icon")!!)
 
 		themeName = xml.get("Theme")

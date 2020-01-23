@@ -1,8 +1,8 @@
 <Definitions Colour="187,126,235" Icon="Sprites/Icons/QuestIcon.png" xmlns:meta="Editor">
 	<Definition Name="QuestNodeDefs" Keys="QuestNode,Branch,CompleteQuest,Define,SetTheme" meta:RefKey="ReferenceDef" />
 	<Definition Name="Quest" AllowCircularLinks="True" FlattenData="True" meta:RefKey="GraphStruct">
-		<Data Name="Title" meta:RefKey="String" />
-		<Data Name="Description" meta:RefKey="String" />
+		<Data Name="Title" NeedsLocalisation="True" LocalisationFile="Quest" meta:RefKey="String" />
+		<Data Name="Description" NeedsLocalisation="True" LocalisationFile="Quest" meta:RefKey="String" />
 		<Data Name="Icon" Keys="Sprite" Nullable="False" meta:RefKey="Reference" />
 		<Data Name="Theme" BasePath="Themes" StripExtension="True" ResourceType="Theme" meta:RefKey="File" />
 		<Data Name="QuestCards" meta:RefKey="Collection">

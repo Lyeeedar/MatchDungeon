@@ -17,12 +17,17 @@ import java.util.*
 
 class Equipment(val path: String)
 {
-	lateinit var name: String
-	lateinit var description: String
+	lateinit var nameID: String
+	lateinit var descriptionID: String
 	lateinit var icon: Sprite
 	var cost: Int = 0
 	val statistics = FastEnumMap<Statistic, Float>(Statistic::class.java)
 	var ability: Ability? = null
+
+	val name: String
+		get() = Localisation.getText(nameID, "Equipment")
+	val description: String
+		get() = Localisation.getText(descriptionID, "Equipment")
 
 	lateinit var slot: EquipmentSlot
 
@@ -124,8 +129,8 @@ class Equipment(val path: String)
 
 	fun parse(xml: XmlData)
 	{
-		name = xml.get("Name")
-		description = xml.get("Description")
+		nameID = xml.get("Name")
+		descriptionID = xml.get("Description")
 		cost = xml.getInt("Cost", 100)
 		icon = AssetManager.loadSprite(xml.getChildByName("Icon")!!)
 

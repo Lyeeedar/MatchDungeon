@@ -234,7 +234,7 @@ class QuestScreen : AbstractScreen()
 			debugConsole.register("Equip", "", fun(args, console): Boolean
 			{
 				val equipmentName = args[0]
-				var equipment = Global.deck.equipment.firstOrNull { it.path.toLowerCase(Locale.ENGLISH).endsWith(equipmentName.toLowerCase(Locale.ENGLISH)) || it.name.toLowerCase(Locale.ENGLISH) == equipmentName.toLowerCase(Locale.ENGLISH) }
+				var equipment = Global.deck.equipment.firstOrNull { it.path.toLowerCase(Locale.ENGLISH).endsWith(equipmentName.toLowerCase(Locale.ENGLISH)) || it.nameID.toLowerCase(Locale.ENGLISH).startsWith(equipmentName.toLowerCase(Locale.ENGLISH)) }
 				if (equipment == null)
 				{
 					val equipmentPath = XmlData.existingPaths!!.firstOrNull { it.toLowerCase(Locale.ENGLISH).endsWith(equipmentName.toLowerCase(Locale.ENGLISH) + ".xml") }
@@ -411,7 +411,7 @@ class QuestScreen : AbstractScreen()
 
 		val bundle = Statics.analytics.getParamBundle()
 		bundle.setString("state", currentQuest.state.toString())
-		bundle.setString("quest_name", currentQuest.title)
+		bundle.setString("quest_name", currentQuest.titleID)
 		Statics.analytics.customEvent("complete_quest", bundle)
 
 		val text =
