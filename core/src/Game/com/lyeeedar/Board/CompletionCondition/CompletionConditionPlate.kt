@@ -9,6 +9,7 @@ import com.lyeeedar.Game.Global
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.Future
+import com.lyeeedar.Util.Localisation
 import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
 import com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table
@@ -40,7 +41,7 @@ class CompletionConditionPlate : AbstractCompletionCondition()
 			Future.call(
 				{
 					val tutorial = Tutorial("PlateComplete")
-					tutorial.addPopup("This is the count of plates you need to get to break to win.", table)
+					tutorial.addPopup(Localisation.getText("completioncondition.plate.tutorial", "UI"), table)
 					tutorial.show()
 				}, 0.5f)
 		}
@@ -69,7 +70,7 @@ class CompletionConditionPlate : AbstractCompletionCondition()
 	{
 		val table = Table()
 
-		table.add(Label("Break $remaining ", Statics.skin))
+		table.add(Label(Localisation.getText("completioncondition.plate.description", "UI") + " $remaining ", Statics.skin))
 		table.add(SpriteWidget(grid.level.theme.plate.copy(), 24f, 24f))
 
 		return table

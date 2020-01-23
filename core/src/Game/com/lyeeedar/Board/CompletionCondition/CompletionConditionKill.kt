@@ -55,7 +55,7 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 			Future.call(
 				{
 					val tutorial = Tutorial("KillComplete")
-					tutorial.addPopup("This is the count of enemies you need to kill to win.", table)
+					tutorial.addPopup(Localisation.getText("completioncondition.kill.tutorial", "UI"), table)
 					tutorial.show()
 				}, 0.5f)
 		}
@@ -172,7 +172,7 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 	{
 		val table = Table()
 
-		table.add(Label("Defeat all enemies.", Statics.skin))
+		table.add(Label(Localisation.getText("completioncondition.kill.description", "UI"), Statics.skin))
 
 		return table
 	}

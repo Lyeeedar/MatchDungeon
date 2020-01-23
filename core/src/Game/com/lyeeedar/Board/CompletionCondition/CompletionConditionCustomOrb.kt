@@ -40,7 +40,7 @@ class CompletionConditionCustomOrb : AbstractCompletionCondition()
 			Future.call(
 				{
 					val tutorial = Tutorial("CustomOrbComplete")
-					tutorial.addPopup("This is the count you need to match to win.", table)
+					tutorial.addPopup(Localisation.getText("completioncondition.customorb.tutorial", "UI"), table)
 					tutorial.show()
 				}, 0.5f)
 		}
@@ -88,13 +88,13 @@ class CompletionConditionCustomOrb : AbstractCompletionCondition()
 	{
 		val table = Table()
 
-		table.add(Label("Match", Statics.skin))
+		table.add(Label(Localisation.getText("completioncondition.customorb.description", "UI"), Statics.skin))
 
 		val targetDesc = OrbDesc.getNamedOrb(targetOrbName)
 		val sprite = targetDesc.sprite
 
 		table.add(SpriteWidget(sprite, 24f, 24f)).padLeft(5f)
-		table.add(Label("x$matchCount", Statics.skin))
+		table.add(Label(" x $matchCount", Statics.skin))
 
 		return table
 	}

@@ -129,7 +129,7 @@ class CardContentActionShop : AbstractCardContentAction()
 			CardContentScreen.contentTable.add(purchasesTable).grow().padTop(20f).padBottom(20f)
 			CardContentScreen.contentTable.row()
 
-			val leaveButton = TextButton("Leave Shop", Statics.skin)
+			val leaveButton = TextButton(Localisation.getText("shop.leave", "UI"), Statics.skin)
 			leaveButton.addClickListener {
 				doAdvance = true
 				CardContentScreen.contentTable.clear()
@@ -194,7 +194,7 @@ class CardContentActionShop : AbstractCardContentAction()
 						if (Global.player.gold >= ware.cost)
 						{
 							card.pickFuns.clear()
-							card.addPick("Buy ($cost)") {
+							card.addPick(Localisation.getText("shop.buy", "UI") + " ($cost)") {
 								Statics.logger.logDebug("Purchasing ware $ware")
 
 								Global.player.gold -= cost

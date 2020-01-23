@@ -191,7 +191,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 			Future.call(
 				{
 					val tutorial = Tutorial("Die")
-					tutorial.addPopup("This is your remaining health. Attacks will reduce it, and when it reaches 0 you will fail the level.", hpLabel)
+					tutorial.addPopup(Localisation.getText("completioncondition.die.tutorial", "UI"), hpLabel)
 					tutorial.show()
 				}, 0.5f)
 
@@ -283,7 +283,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 			fractionalHp += 1f
 			hp -= 1
 
-			hpLabel.setText("$hp/$maxHP")
+			hpLabel.setText("$hp / $maxHP")
 			updateBlink()
 		}
 	}
@@ -314,7 +314,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 	{
 		val table = Table()
 
-		table.add(Label("Don't let your hp reach 0.", Statics.skin))
+		table.add(Label(Localisation.getText("completioncondition.die.description", "UI"), Statics.skin))
 
 		return table
 	}

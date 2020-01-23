@@ -54,7 +54,7 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 			Future.call(
 				{
 					val tutorial = Tutorial("Sink")
-					tutorial.addPopup("This is the count of items you need to get to the bottom of the board to win. If you can't see them on the board then they'll be in chests, inside blocks or in enemies.", table)
+					tutorial.addPopup(Localisation.getText("completioncondition.sink.tutorial", "UI"), table)
 					tutorial.show()
 				}, 0.5f)
 		}
@@ -187,9 +187,11 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 			sprite = sinkable!!.sprite()!!.copy()
 		}
 
-		table.add(Label("Move $count ", Statics.skin))
+		val text = Localisation.getText("completioncondition.sink.description", "UI")
+		val split = text.split("{Count}")
+		table.add(Label(split[0] + "$count", Statics.skin))
 		table.add(SpriteWidget(sprite, 24f, 24f))
-		table.add(Label(" to the bottom.", Statics.skin))
+		table.add(Label(split[1], Statics.skin))
 
 		return table
 	}

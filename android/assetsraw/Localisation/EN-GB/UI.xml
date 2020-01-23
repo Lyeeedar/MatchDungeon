@@ -57,4 +57,29 @@
 	<Text ID="gridscreen.tutorial.7">Make rows of more than three to spawn a special orb, which when matched has a special effect.</Text>
 	<Text ID="gridscreen.berserk">Berserk</Text>
 	<Text ID="gridscreen.activate">Activate</Text>
+
+	<Text ID="shop.leave">Leave Shop</Text>
+	<Text ID="shop.buy">Buy</Text>
+
+	<Text ID="completioncondition.break.tutorial">This is the count of blocks you need to break to win.</Text>
+	<Text ID="completioncondition.break.description">Break all blocks.</Text>
+	<Text ID="completioncondition.customorb.tutorial">This is the count you need to match to win.</Text>
+	<Text ID="completioncondition.customorb.description">Match</Text>
+	<Text ID="completioncondition.die.tutorial">This is your remaining health. Attacks will reduce it, and when it reaches 0 you will fail the level.</Text>
+	<Text ID="completioncondition.die.description">Don't let your hp reach 0.</Text>
+	<Text ID="completioncondition.kill.tutorial">This is the count of enemies you need to kill to win.</Text>
+	<Text ID="completioncondition.kill.description">Defeat all enemies.</Text>
+	<Text ID="completioncondition.match.tutorial">This is the count of orbs of each colour you need to match to win.</Text>
+	<Text ID="completioncondition.match.description">Match</Text>
+	<Text ID="completioncondition.plate.tutorial">This is the count of plates you need to get to break to win.</Text>
+	<Text ID="completioncondition.plate.description">Break</Text>
+	<Text ID="completioncondition.sink.tutorial">This is the count of items you need to get to the bottom of the board to win. If you can't see them on the board then they'll be in chests, inside blocks, or in enemies.</Text>
+	<Text ID="completioncondition.sink.description">Move {Count} to the bottom.</Text>
+	<Text ID="completioncondition.time.tutorial">This is your remaining time. When it reaches 0 you will fail the level. It will only decrease when the board isn't updating, so act fast!</Text>
+	<Text ID="completioncondition.time.description">Complete the level within {Time} seconds.</Text>
+	<Text ID="completioncondition.time.seconds">Seconds</Text>
+	<Text ID="completioncondition.turns.tutorial">This is your remaining turn count. When it reaches 0 you will fail the level.</Text>
+	<Text ID="completioncondition.turns.description">Complete the level within {Turns} turns.</Text>
+	<Text ID="completioncondition.turns.turns">Turns</Text>
+	<Text ID="completioncondition.turns.turn">Turn</Text>
 </Localisation>

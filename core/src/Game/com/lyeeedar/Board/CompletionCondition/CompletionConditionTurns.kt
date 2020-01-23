@@ -26,7 +26,7 @@ class CompletionConditionTurns(): AbstractCompletionCondition()
 
 	override fun createTable(grid: Grid): Table
 	{
-		label = Label("$turnCount\nTurns", Statics.skin)
+		label = Label("$turnCount\n" + Localisation.getText("completioncondition.turns.turns", "UI"), Statics.skin)
 		label.setAlignment(Align.center)
 
 		val stack = Stack()
@@ -54,7 +54,14 @@ class CompletionConditionTurns(): AbstractCompletionCondition()
 		grid.onTurn +=
 				{
 					turnCount--
-					label.setText("$turnCount\nTurns")
+
+					val turnStr =
+						if (turnCount == 1)
+							Localisation.getText("completioncondition.turns.turn", "UI")
+						else
+							Localisation.getText("completioncondition.turns.turns", "UI")
+
+					label.setText("$turnCount\n" + turnStr)
 
 					if (turnCount <= maxTurnCount * 0.25f && blinkTable.children.size == 0 && grid.level.defeatConditions.contains(this))
 					{
@@ -73,7 +80,7 @@ class CompletionConditionTurns(): AbstractCompletionCondition()
 			Future.call(
 				{
 					val tutorial = Tutorial("Turns")
-					tutorial.addPopup("This is your remaining turn count. When it reaches 0 you will fail the level.", label)
+					tutorial.addPopup(Localisation.getText("completioncondition.turns.tutorial", "UI"), label)
 					tutorial.show()
 				}, 0.5f)
 		}
@@ -85,7 +92,10 @@ class CompletionConditionTurns(): AbstractCompletionCondition()
 	{
 		val table = Table()
 
-		table.add(Label("Within $turnCount turns.", Statics.skin))
+		var text = Localisation.getText("completioncondition.turns.description", "UI")
+		text = text.replace("{Turns}", turnCount.toString())
+
+		table.add(Label(text, Statics.skin))
 
 		return table
 	}

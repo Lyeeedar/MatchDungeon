@@ -57,7 +57,7 @@ class CompletionConditionMatches(): AbstractCompletionCondition()
 			}
 			else
 			{
-				row.add(Label("$count", Statics.skin))
+				row.add(Label(" x $count", Statics.skin))
 			}
 
 			counter++
@@ -112,7 +112,7 @@ class CompletionConditionMatches(): AbstractCompletionCondition()
 			Future.call(
 				{
 					val tutorial = Tutorial("MatchComplete")
-					tutorial.addPopup("This is the count of orbs of each colour you need to match to win.", table)
+					tutorial.addPopup(Localisation.getText("completioncondition.match.tutorial", "UI"), table)
 					tutorial.show()
 				}, 0.5f)
 		}
@@ -135,7 +135,7 @@ class CompletionConditionMatches(): AbstractCompletionCondition()
 
 	override fun parse(xml: XmlData)
 	{
-		for (i in 0..xml.childCount-1)
+		for (i in 0 until xml.childCount)
 		{
 			val el = xml.getChild(i)
 			val count = el.text.toInt()
@@ -148,7 +148,7 @@ class CompletionConditionMatches(): AbstractCompletionCondition()
 	{
 		val table = Table()
 
-		table.add(Label("Match", Statics.skin))
+		table.add(Label(Localisation.getText("completioncondition.match.description", "UI"), Statics.skin))
 
 		for (entry in toBeMatched.entries())
 		{
@@ -156,7 +156,7 @@ class CompletionConditionMatches(): AbstractCompletionCondition()
 			val count = entry.value
 
 			table.add(SpriteWidget(sprite, 24f, 24f)).padLeft(5f)
-			table.add(Label("x$count", Statics.skin))
+			table.add(Label(" x $count", Statics.skin))
 		}
 
 		return table

@@ -27,7 +27,7 @@ class CompletionConditionTime(): AbstractCompletionCondition()
 	override fun createTable(grid: Grid): Table
 	{
 		val t = time.toInt()
-		label = Label("$t\nSeconds", Statics.skin)
+		label = Label("$t\n" + Localisation.getText("ompletioncondition.time.seconds", "UI"), Statics.skin)
 		label.setAlignment(Align.center)
 
 		val stack = Stack()
@@ -56,7 +56,7 @@ class CompletionConditionTime(): AbstractCompletionCondition()
 				{
 					time -= it
 					val t = time.toInt()
-					label.setText("$t\nSeconds")
+					label.setText("$t\n" + Localisation.getText("ompletioncondition.time.seconds", "UI"))
 
 					if (time <= maxTime * 0.25f && blinkTable.children.size == 0)
 					{
@@ -75,7 +75,7 @@ class CompletionConditionTime(): AbstractCompletionCondition()
 			Future.call(
 				{
 					val tutorial = Tutorial("Time")
-					tutorial.addPopup("This is your remaining time. When it reaches 0 you will fail the level. It will only decrease between animating a turn, so act fast!", label)
+					tutorial.addPopup(Localisation.getText("completioncondition.time.tutorial", "UI"), label)
 					tutorial.show()
 				}, 0.5f)
 		}
@@ -88,7 +88,10 @@ class CompletionConditionTime(): AbstractCompletionCondition()
 		val table = Table()
 
 		val t = time.toInt()
-		table.add(Label("Within $t seconds.", Statics.skin))
+		var text = Localisation.getText("completioncondition.time.description", "UI")
+		text = text.replace("{Time}", t.toString())
+
+		table.add(Label(text, Statics.skin))
 
 		return table
 	}
