@@ -414,6 +414,10 @@ class QuestScreen : AbstractScreen()
 		bundle.setString("quest_name", currentQuest.titleID)
 		Statics.analytics.customEvent("complete_quest", bundle)
 
+		// Comment to ensure they get picked up by the autolocaliser
+		// Localisation.getText("gold", "UI")
+		// Localisation.getText("silver", "UI")
+		// Localisation.getText("bronze", "UI")
 		val text =
 			if (currentQuest.state == Quest.QuestState.FAILURE)
 				Localisation.getText("questscreen.questfailed", "UI")

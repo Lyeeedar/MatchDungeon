@@ -27,7 +27,7 @@ class CompletionConditionTime(): AbstractCompletionCondition()
 	override fun createTable(grid: Grid): Table
 	{
 		val t = time.toInt()
-		label = Label("$t\n" + Localisation.getText("ompletioncondition.time.seconds", "UI"), Statics.skin)
+		label = Label("$t\n" + Localisation.getText("completioncondition.time.seconds", "UI"), Statics.skin)
 		label.setAlignment(Align.center)
 
 		val stack = Stack()
@@ -56,7 +56,7 @@ class CompletionConditionTime(): AbstractCompletionCondition()
 				{
 					time -= it
 					val t = time.toInt()
-					label.setText("$t\n" + Localisation.getText("ompletioncondition.time.seconds", "UI"))
+					label.setText("$t\n" + Localisation.getText("completioncondition.time.seconds", "UI"))
 
 					if (time <= maxTime * 0.25f && blinkTable.children.size == 0)
 					{

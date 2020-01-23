@@ -2,9 +2,9 @@
 	<Text ID="BackalleyGamblingContent.Node.[1] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:ddb1e956-cb9d-4c65-a8d5-f7f6748006ba">Bad Luck</Text>
 	<Text ID="BackalleyGamblingContent.Node.[1] Rewards.Rewards.[1] Buff.Buff.Buff (Buff).Name:3605db3b-5b17-4045-97c2-c38b44011dc4">Good Luck</Text>
 	<Text ID="BeholderBattleContentLevel.Level.Symbols.[1] Symbol.Symbol.MonsterDesc (MonsterDesc).Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:acd17dda-4089-4d1b-b4b6-4e51a396d7cd">Petrify</Text>
-	<Text ID="Bugs.Faction.Bosses.[0] MonsterDesc.MonsterDesc.Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:81e681e8-9d98-47cd-a8b3-305a1ba09d3c">Acid</Text>
-	<Text ID="Bugs.Faction.Monsters.[0] MonsterDesc.MonsterDesc.Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:0dd76c77-a9ec-420e-b7fa-cecb9ea17f8f">Weakness</Text>
-	<Text ID="Bugs.Faction.Monsters.[1] MonsterDesc.MonsterDesc.Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:ce83a3ca-66f3-4a37-abc4-e9cb4bfcd6c7">Weakness</Text>
+	<Text ID="Bugs.Faction.Bosses.[0] MonsterDesc.MonsterDesc.Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:cbeec1b6-7c21-4311-b4bf-fdbc991e3fb1">Acid</Text>
+	<Text ID="Bugs.Faction.Monsters.[0] MonsterDesc.MonsterDesc.Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:f1334d98-b89c-4a1a-a07b-e41f23aec86a">Weakness</Text>
+	<Text ID="Bugs.Faction.Monsters.[1] MonsterDesc.MonsterDesc.Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:7e918906-e783-4e72-9d26-b16b8bb00cac">Weakness</Text>
 	<Text ID="DrugDealerBadContent.Node.[3] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:e1101cac-f276-421f-bedb-4d9faebf08c6">Frenzy</Text>
 	<Text ID="DrugDealerContent.Node.[3] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:c92021ab-97c1-40ee-babc-3dd3cf5882e9">Jazzed</Text>
 	<Text ID="FavourOfTheGodsContent.Node.[2] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:64fd6b84-ab2b-42b1-ac14-0b6c12964600">Favour of the Gods</Text>

@@ -18,6 +18,7 @@ import com.lyeeedar.Statistic
 import com.lyeeedar.UI.*
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.FastEnumMap
+import com.lyeeedar.Util.Localisation
 import com.lyeeedar.Util.Statics
 
 class Player(val baseCharacter: Character, val deck: PlayerDeck)
@@ -170,7 +171,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 
 			FullscreenTable.createCard(
 					"Statistics",
-					"Player",
+					Localisation.getText("player", "UI"),
 					statisticsTable,
 					statisticsButton.localToStageCoordinates(Vector2()))
 		}
@@ -210,7 +211,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 
 				FullscreenTable.createCard(
 						"Buffs",
-						"Player",
+						Localisation.getText("player", "UI"),
 						buffsTable,
 						buffsButton.localToStageCoordinates(Vector2()))
 			}
@@ -265,7 +266,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 
 			FullscreenTable.createCard(
 					"Equipment",
-					"Player",
+					Localisation.getText("player", "UI"),
 					equipmentTable,
 					equipmentButton.localToStageCoordinates(Vector2()))
 		}
@@ -276,7 +277,7 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 		table.add(Seperator(Statics.skin, "horizontalcard"))
 		table.row()
 
-		return CardWidget.createCard(baseCharacter.name, "Player", Sprite(baseCharacter.sprite.textures[0]), table, AssetManager.loadTextureRegion("GUI/CharacterCardback")!!)
+		return CardWidget.createCard(baseCharacter.name, Localisation.getText("player", "UI"), Sprite(baseCharacter.sprite.textures[0]), table, AssetManager.loadTextureRegion("GUI/CharacterCardback")!!)
 	}
 
 	fun save(kryo: Kryo, output: Output)

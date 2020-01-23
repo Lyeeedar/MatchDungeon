@@ -26,7 +26,7 @@
 					<Effect>Debuff</Effect>
 					<Data>
 						<Debuff meta:RefKey="Buff">
-							<Name>Weakness</Name>
+							<Name>Bugs.Faction.Monsters.[0] MonsterDesc.MonsterDesc.Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:f1334d98-b89c-4a1a-a07b-e41f23aec86a</Name>
 							<Icon meta:RefKey="Sprite">
 								<Name>Oryx/uf_split/uf_items/heart_green_half</Name>
 								<DrawActualSize>true</DrawActualSize>
@@ -71,7 +71,7 @@
 					<Effect>Debuff</Effect>
 					<Data>
 						<Debuff meta:RefKey="Buff">
-							<Name>Weakness</Name>
+							<Name>Bugs.Faction.Monsters.[1] MonsterDesc.MonsterDesc.Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:7e918906-e783-4e72-9d26-b16b8bb00cac</Name>
 							<Icon meta:RefKey="Sprite">
 								<Name>Oryx/uf_split/uf_items/heart_green_half</Name>
 								<DrawActualSize>true</DrawActualSize>
@@ -116,7 +116,7 @@
 					<Effect>Debuff</Effect>
 					<Data>
 						<Debuff meta:RefKey="Buff">
-							<Name>Acid</Name>
+							<Name>Bugs.Faction.Bosses.[0] MonsterDesc.MonsterDesc.Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:cbeec1b6-7c21-4311-b4bf-fdbc991e3fb1</Name>
 							<Icon meta:RefKey="Sprite">
 								<Name>Oryx/uf_split/uf_items/heart_green_full</Name>
 								<DrawActualSize>true</DrawActualSize>

@@ -55,11 +55,11 @@ class Localiser
 	val slang = ObjectMap<String, String>()
 	val gameNames = Array<String>()
 
-	val apostraphedWords = arrayOf("you'", "it'", "we'", "won'", "can'")
+	val apostraphedWords = arrayOf("you'", "it'", "we'", "won'", "can'", "they'")
 	val pluralisers = arrayOf("s", "'s", "ies", "es")
 	val yers = arrayOf("y", "ly", "ily", "ingly")
 	val eers = arrayOf("en", "ed", "er")
-	val others = arrayOf("ing", "n't", "ion", "able", "ish")
+	val others = arrayOf("ing", "n't", "ion", "able", "ish", "ness")
 
 	init
 	{
@@ -318,6 +318,11 @@ class Localiser
 			for (el in englishFile.children())
 			{
 				val id = el.getAttribute("ID")
+
+				if (el.text == null)
+				{
+					throw RuntimeException("ID had no content!\nID: $id\nFile: ${file.path}")
+				}
 				val text = el.text
 
 				if (allFoundIds.contains(id))
@@ -493,7 +498,7 @@ class Localiser
 					if (lowerWord.toIntOrNull() != null)
 					{
 						val asNum = lowerWord.toInt()
-						if (!isTitle && asNum < 10)
+						if (!isTitle && asNum < 10 && asNum > 1)
 						{
 							throw RuntimeException("Low number as digits in a sentence\n$wordContext")
 						}
