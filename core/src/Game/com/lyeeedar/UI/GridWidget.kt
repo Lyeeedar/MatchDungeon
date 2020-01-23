@@ -331,7 +331,7 @@ class GridWidget(val grid: Grid) : Widget()
 					if ( !grid.inTurn )
 					{
 						val tutorial = Tutorial("Plate")
-						tutorial.addPopup("This is a plate. Match on top of this to break it.", getRect(tile))
+						tutorial.addPopup(Localisation.getText("plate.tutorial", "UI"), getRect(tile))
 						tutorial.show()
 					}
 
@@ -539,10 +539,7 @@ class GridWidget(val grid: Grid) : Widget()
 					if (tutorialComponent != null && !grid.inTurn)
 					{
 						val tutorial = tutorialComponent.displayTutorial?.invoke(grid, contents, this)
-						if (tutorial != null)
-						{
-							tutorial.show()
-						}
+						tutorial?.show()
 					}
 				}
 
@@ -570,7 +567,7 @@ class GridWidget(val grid: Grid) : Widget()
 					if (!Statics.settings.get("Spreader", false) && !grid.inTurn )
 					{
 						val tutorial = Tutorial("Spreader")
-						tutorial.addPopup("This is a spreading field. Match in the tiles surrounding it to remove it and stop it spreading this turn.", getRect(tile))
+						tutorial.addPopup(Localisation.getText("spreader.tutorial", "UI"), getRect(tile))
 						tutorial.show()
 					}
 				}

@@ -6,6 +6,7 @@ import com.lyeeedar.Components.*
 import com.lyeeedar.Renderables.Renderable
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.Localisation
 import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.tryGet
 
@@ -31,7 +32,7 @@ class EntityArchetypeCreator
 				if (!Statics.settings.get("Block", false) )
 				{
 					val tutorial = Tutorial("Block")
-					tutorial.addPopup("This is a block. Match in the tiles surrounding it to break it.", gridWidget.getRect(entity.pos().tile!!, true))
+					tutorial.addPopup(Localisation.getText("block.tutorial", "UI"), gridWidget.getRect(entity.pos().tile!!, true))
 
 					return tutorial
 				}
@@ -148,7 +149,7 @@ class EntityArchetypeCreator
 				if (spawner.numToSpawn > 0 && !Statics.settings.get("Chest", false))
 				{
 					val tutorial = Tutorial("Chest")
-					tutorial.addPopup("This is a chest. Match in the tiles beneath this to spawn coins. When there are no more coins to spawn, it will appear empty.", gridWidget.getRect(entity))
+					tutorial.addPopup(Localisation.getText("chest.tutorial", "UI"), gridWidget.getRect(entity))
 					return tutorial
 				}
 
@@ -183,7 +184,7 @@ class EntityArchetypeCreator
 				if (!Statics.settings.get("Sinkable", false) )
 				{
 					val tutorial = Tutorial("Sinkable")
-					tutorial.addPopup("This is a sinkable item. If you move it to the bottom of the board you will successfully sink it.", gridWidget.getRect(entity.pos().tile!!, true))
+					tutorial.addPopup(Localisation.getText("sinkable.tutorial", "UI"), gridWidget.getRect(entity.pos().tile!!, true))
 					return tutorial
 				}
 
@@ -219,7 +220,7 @@ class EntityArchetypeCreator
 				if (swappable.sealed && !Statics.settings.get("Seal", false) )
 				{
 					val tutorial = Tutorial("Seal")
-					tutorial.addPopup("This orb has been sealed. It won't move until the seal is broken. To break the seal use the orb in a match.", gridWidget.getRect(entity))
+					tutorial.addPopup(Localisation.getText("seal.tutorial", "UI"), gridWidget.getRect(entity))
 					return tutorial
 				}
 

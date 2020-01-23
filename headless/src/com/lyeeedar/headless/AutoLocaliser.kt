@@ -268,6 +268,8 @@ class Localiser
 			}
 		}
 
+		val allRequiredIds = ObjectSet<String>()
+
 		fun parseCodeFilesRecursive(dir: File)
 		{
 			val contents = dir.listFiles() ?: return
@@ -292,6 +294,7 @@ class Localiser
 						id = id.replace("\"", "")
 
 						allIds.add(id)
+						allRequiredIds.add(id)
 					}
 				}
 			}
@@ -299,6 +302,8 @@ class Localiser
 		parseCodeFilesRecursive(File("../../core/src").absoluteFile)
 
 		println("ID's found")
+
+		val allFoundIds = ObjectSet<String>()
 
 		val englishLocFolder = File("../assetsraw/Localisation/EN-GB")
 		for (file in englishLocFolder.listFiles()!!)
@@ -314,6 +319,12 @@ class Localiser
 			{
 				val id = el.getAttribute("ID")
 				val text = el.text
+
+				if (allFoundIds.contains(id))
+				{
+					throw RuntimeException("Duplicate id found!\nID: $id\nText: $text\nFile: ${file.path}")
+				}
+				allFoundIds.add(id)
 
 				try
 				{
@@ -353,6 +364,14 @@ class Localiser
 			if (!unusedLines.isBlank())
 			{
 				throw RuntimeException("Loc file $file contained unreferences lines:\n$unusedLines")
+			}
+		}
+
+		for (id in allRequiredIds)
+		{
+			if (!allFoundIds.contains(id))
+			{
+				throw RuntimeException("Required id $id not found!")
 			}
 		}
 

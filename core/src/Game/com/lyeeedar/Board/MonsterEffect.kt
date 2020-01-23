@@ -43,8 +43,8 @@ fun addMonsterEffect(entity: Entity, monsterEffect: MonsterEffect): Entity
 		if (!Statics.settings.get("Attack", false) )
 		{
 			val tutorial = Tutorial("Attack")
-			tutorial.addPopup("This is an attack. The pips surrounding the skull indicate the turns remaining until it activates.", gridWidget.getRect(entity))
-			tutorial.addPopup("Match it like a normal orb to remove it from the board. If you fail to remove it then you will lose 1 hp", gridWidget.getRect(entity))
+			tutorial.addPopup(Localisation.getText("monstereffect.tutorial.1", "UI"), gridWidget.getRect(entity))
+			tutorial.addPopup(Localisation.getText("monstereffect.tutorial.2", "UI"), gridWidget.getRect(entity))
 			return tutorial
 		}
 

@@ -424,14 +424,14 @@ class MatchUpdateStep : AbstractUpdateStep()
 		data class MessageData(val text: String, val colour: Colour, val size: Float)
 		val message = when(grid.matchCount)
 		{
-			4 -> MessageData("Impressive", Colour(0.8f, 0.9f, 1f, 1f), 1f)
-			7 -> MessageData("Amazing", Colour(0.8f, 1f, 0.9f, 1f), 1.3f)
-			10 -> MessageData("Spectacular", Colour(1f, 0.8f, 0.9f, 1f), 1.6f)
-			14 -> MessageData("Magical", Colour(0.2f, 0.82f, 1f, 1f), 1.9f)
-			18 -> MessageData("Legendary", Colour(1f, 0.81f, 0.5f, 1f), 2.2f)
-			22 -> MessageData("Mythical", Colour(0.8f, 0.5f, 0.95f, 1f), 2.5f)
-			26 -> MessageData("Divine", Colour(0.95f, 1f, 0.81f, 1f), 2.8f)
-			30 -> MessageData("Godlike", Colour(0.8f, 0.55f, 0.78f, 1f), 3.1f)
+			4 -> MessageData(Localisation.getText("matchmessage.1", "UI"), Colour(0.8f, 0.9f, 1f, 1f), 1f)
+			7 -> MessageData(Localisation.getText("matchmessage.2", "UI"), Colour(0.8f, 1f, 0.9f, 1f), 1.3f)
+			10 -> MessageData(Localisation.getText("matchmessage.3", "UI"), Colour(1f, 0.8f, 0.9f, 1f), 1.6f)
+			14 -> MessageData(Localisation.getText("matchmessage.4", "UI"), Colour(0.2f, 0.82f, 1f, 1f), 1.9f)
+			18 -> MessageData(Localisation.getText("matchmessage.5", "UI"), Colour(1f, 0.81f, 0.5f, 1f), 2.2f)
+			22 -> MessageData(Localisation.getText("matchmessage.6", "UI"), Colour(0.8f, 0.5f, 0.95f, 1f), 2.5f)
+			26 -> MessageData(Localisation.getText("matchmessage.7", "UI"), Colour(0.95f, 1f, 0.81f, 1f), 2.8f)
+			30 -> MessageData(Localisation.getText("matchmessage.8", "UI"), Colour(0.8f, 0.55f, 0.78f, 1f), 3.1f)
 			else -> null
 		}
 		val maxVal = 32f

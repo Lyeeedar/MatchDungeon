@@ -60,7 +60,7 @@ class FriendlyDesc
 			if (!Statics.settings.get("Friendly", false) )
 			{
 				val tutorial = Tutorial("Friendly")
-				tutorial.addPopup("This is a friendly ally. Match in the surrounding tiles to replenish its health.", gridWidget.getRect(entity))
+				tutorial.addPopup(Localisation.getText("friendly.tutorial", "UI"), gridWidget.getRect(entity))
 				return tutorial
 			}
 
