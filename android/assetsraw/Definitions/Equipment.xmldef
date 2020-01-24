@@ -7,8 +7,8 @@
 		<Data Name="Icon" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="Statistics" Keys="Statistics" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="Ability" meta:RefKey="Struct">
-			<Data Name="Name" meta:RefKey="String" />
-			<Data Name="Description" meta:RefKey="String" />
+			<Data Name="Name" NeedsLocalisation="True" LocalisationFile="Ability" meta:RefKey="String" />
+			<Data Name="Description" NeedsLocalisation="True" LocalisationFile="Ability" meta:RefKey="String" />
 			<Data Name="EffectData" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
 				<Data Name="Cost" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
 				<Data Name="Usages" Type="Int" Min="-1" Default="-1" meta:RefKey="Number" />

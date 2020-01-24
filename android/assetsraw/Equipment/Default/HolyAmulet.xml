@@ -10,8 +10,8 @@
 		<PowerGain>2</PowerGain>
 	</Statistics>
 	<Ability>
-		<Name>Divine Protection</Name>
-		<Description>Call on divine energies to block and attack.</Description>
+		<Name>HolyAmulet.Head.Ability.Name:13dc7914-166b-47e1-b9a0-25b6629a25e0</Name>
+		<Description>HolyAmulet.Head.Ability.Description:5caa4306-28a9-4613-a691-1554079b471f</Description>
 		<EffectData>
 			<Cost>5</Cost>
 			<Effect>1,Attack,Single,Pop</Effect>

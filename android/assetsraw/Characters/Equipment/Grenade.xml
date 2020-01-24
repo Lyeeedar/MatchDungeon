@@ -8,8 +8,8 @@
 	</Icon>
 	<Statistics meta:RefKey="Statistics" />
 	<Ability>
-		<Name>Throw Grenade</Name>
-		<Description>Throw the grenade at the target</Description>
+		<Name>Grenade.OffHand.Ability.Name:51f03565-b8a1-4022-9007-27097f9f0dff</Name>
+		<Description>Grenade.OffHand.Ability.Description:b95f7c9c-ca64-49f2-98ee-e361bb67347d</Description>
 		<EffectData>
 			<Cost>3</Cost>
 			<Usages>1</Usages>

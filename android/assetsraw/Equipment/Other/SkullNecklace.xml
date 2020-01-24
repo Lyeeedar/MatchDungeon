@@ -9,8 +9,8 @@
 		<AbilityDamage>1</AbilityDamage>
 	</Statistics>
 	<Ability>
-		<Name>Balefire</Name>
-		<Description>Fling balefire out at your enemies.</Description>
+		<Name>SkullNecklace.Head.Ability.Name:b7fcb91d-a7aa-4ef7-9e13-108d80c8d8a4</Name>
+		<Description>SkullNecklace.Head.Ability.Description:110e2fb5-f463-4d97-827b-e94f16cb6991</Description>
 		<EffectData>
 			<Cost>5</Cost>
 			<Effect>3,Monster,Single,Pop</Effect>

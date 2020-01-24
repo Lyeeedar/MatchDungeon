@@ -8,8 +8,8 @@
 	</Icon>
 	<Statistics meta:RefKey="Statistics" />
 	<Ability>
-		<Name>Necroracia</Name>
-		<Description>A dark and powerful spell. Deals more damage depending on how many creatures are within its area of effect.</Description>
+		<Name>Necroracia.OffHand.Ability.Name:f8f6753f-cd3e-455b-a3b0-9d0efd1ba211</Name>
+		<Description>Necroracia.OffHand.Ability.Description:0d71769f-7071-4b3d-8765-948254d5b5df</Description>
 		<EffectData>
 			<Cost>8</Cost>
 			<Effect>1,Monster,Diamond,Pop</Effect>

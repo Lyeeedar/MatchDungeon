@@ -7,8 +7,8 @@
 	</Icon>
 	<Statistics meta:RefKey="Statistics" />
 	<Ability>
-		<Name>Fireshot</Name>
-		<Description>Fire a bolt of flames at a foe.</Description>
+		<Name>FireshotNecklace.Head.Ability.Name:147466a9-7ef4-4c89-9500-b074a4042a67</Name>
+		<Description>FireshotNecklace.Head.Ability.Description:ac413c46-f35a-41a7-9dd4-cb36a8521a95</Description>
 		<EffectData>
 			<Cost>4</Cost>
 			<Effect>1,Monster,Single,Pop</Effect>

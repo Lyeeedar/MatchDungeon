@@ -7,8 +7,8 @@
 	</Icon>
 	<Statistics meta:RefKey="Statistics" />
 	<Ability>
-		<Name>Fireball</Name>
-		<Description>Fling a fireball at your target</Description>
+		<Name>FlawedFireballWand.MainHand.Ability.Name:99da1e48-dab7-4d0c-b85c-5a9162b3b175</Name>
+		<Description>FlawedFireballWand.MainHand.Ability.Description:715cce2c-adf3-48b5-a305-d0db8e541c20</Description>
 		<EffectData>
 			<Cost>9</Cost>
 			<Effect>1,Orb,Block,Pop</Effect>

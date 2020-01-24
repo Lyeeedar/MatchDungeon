@@ -11,8 +11,8 @@
 		<Pierce>1</Pierce>
 	</Statistics>
 	<Ability>
-		<Name>Chop</Name>
-		<Description>Chop a foe in two.</Description>
+		<Name>Longsword.MainHand.Ability.Name:1be71a30-2ce3-4013-a8ae-1875ca9bdee1</Name>
+		<Description>Longsword.MainHand.Ability.Description:a03ae051-7476-4530-9173-932bab3ac247</Description>
 		<EffectData>
 			<Cost>5</Cost>
 			<Effect>1,Monster,Single,Pop</Effect>

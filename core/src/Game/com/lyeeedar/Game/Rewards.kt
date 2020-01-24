@@ -50,6 +50,7 @@ abstract class AbstractReward
 	abstract fun reward(): Array<CardWidget>
 	abstract fun isValid(): Boolean
 	abstract fun cardIcon(): TextureRegion
+	abstract fun niceName(): String
 
 	companion object
 	{
@@ -124,6 +125,11 @@ class StatisticsReward : AbstractReward()
 
 		return output
 	}
+
+	override fun niceName(): String
+	{
+		return Localisation.getText("statistic", "UI")
+	}
 }
 
 class CardReward : AbstractReward()
@@ -176,6 +182,11 @@ class CardReward : AbstractReward()
 
 		return output
 	}
+
+	override fun niceName(): String
+	{
+		return Localisation.getText("card", "UI")
+	}
 }
 
 class QuestReward : AbstractReward()
@@ -226,6 +237,11 @@ class QuestReward : AbstractReward()
 		}
 
 		return output
+	}
+
+	override fun niceName(): String
+	{
+		return Localisation.getText("quest", "UI")
 	}
 }
 
@@ -280,6 +296,11 @@ class CharacterReward : AbstractReward()
 
 		return output
 	}
+
+	override fun niceName(): String
+	{
+		return Localisation.getText("character", "UI")
+	}
 }
 
 class MoneyReward : AbstractReward()
@@ -332,6 +353,11 @@ class MoneyReward : AbstractReward()
 
 		return output
 	}
+
+	override fun niceName(): String
+	{
+		return Localisation.getText("gold", "UI")
+	}
 }
 
 class BuffReward : AbstractReward()
@@ -383,6 +409,11 @@ class BuffReward : AbstractReward()
 		output.add(card)
 
 		return output
+	}
+
+	override fun niceName(): String
+	{
+		return Localisation.getText("buff", "UI")
 	}
 }
 
@@ -524,6 +555,11 @@ class EquipmentReward : AbstractReward()
 
 		return output
 	}
+
+	override fun niceName(): String
+	{
+		return Localisation.getText("equipment", "UI")
+	}
 }
 
 class ItemReward : AbstractReward()
@@ -584,5 +620,10 @@ class ItemReward : AbstractReward()
 		}
 
 		return output
+	}
+
+	override fun niceName(): String
+	{
+		return Localisation.getText("item", "UI")
 	}
 }

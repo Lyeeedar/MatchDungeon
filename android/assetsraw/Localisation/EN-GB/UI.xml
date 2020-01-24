@@ -194,11 +194,12 @@
 	<Text ID="chance.high">high</Text>
 	<Text ID="chance.certain">certain</Text>
 
-	<Text ID="ability.buff">For {Turns} turns gain buff</Text>
-
 	<Text ID="questprogress.currentencounter">The current encounter in the quest.</Text>
 	<Text ID="questprogress.shop">An encounter containing a shop.</Text>
 	<Text ID="questprogress.questencounter">A quest encounter.</Text>
 	<Text ID="questprogress.randomencounter">A random encounter.</Text>
 
+	<Text ID="ability.powercost">Power Cost</Text>
+	<Text ID="ability.usagesperencounter">Usages Per Encounter</Text>
+	<Text ID="ability.remainingusages">Remaining Usages</Text>
 </Localisation>

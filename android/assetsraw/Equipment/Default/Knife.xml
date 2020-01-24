@@ -9,8 +9,8 @@
 		<MatchDamage>0.5</MatchDamage>
 	</Statistics>
 	<Ability>
-		<Name>Stab</Name>
-		<Description>Stab a foe with your knife</Description>
+		<Name>Knife.MainHand.Ability.Name:a4d791c5-72ee-4173-a9f8-e14f7347fec6</Name>
+		<Description>Knife.MainHand.Ability.Description:06f483ec-40cc-4328-a5ef-bc62b348503e</Description>
 		<EffectData>
 			<Cost>5</Cost>
 			<Effect>1,Monster,Single,Pop</Effect>

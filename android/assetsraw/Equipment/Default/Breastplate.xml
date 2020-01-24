@@ -9,8 +9,8 @@
 		<Health>2</Health>
 	</Statistics>
 	<Ability>
-		<Name>Body Slam</Name>
-		<Description>Smash your body into an attack.</Description>
+		<Name>Breastplate.Body.Ability.Name:bd3e3415-b7ba-4730-b99b-51af5e7c9c74</Name>
+		<Description>Breastplate.Body.Ability.Description:6d68a13b-f863-4c1b-94e3-bf9f829d7ab6</Description>
 		<EffectData>
 			<Cost>4</Cost>
 			<Effect>1,Attack,Block,Pop</Effect>

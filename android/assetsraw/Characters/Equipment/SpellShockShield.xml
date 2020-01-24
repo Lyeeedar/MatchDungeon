@@ -8,8 +8,8 @@
 	</Icon>
 	<Statistics meta:RefKey="Statistics" />
 	<Ability>
-		<Name>Shock Shield</Name>
-		<Description>Block some attacks, and shock the attackers.</Description>
+		<Name>SpellShockShield.OffHand.Ability.Name:6ca7c696-33f9-4c16-8799-65bf59cf5787</Name>
+		<Description>SpellShockShield.OffHand.Ability.Description:05ece79b-5a72-4678-aea1-cb540b890117</Description>
 		<EffectData>
 			<Cost>7</Cost>
 			<Effect>1,Orb,Single,Buff</Effect>
@@ -21,10 +21,10 @@
 						<DrawActualSize>true</DrawActualSize>
 					</Icon>
 					<Statistics meta:RefKey="Statistics">
-						<Counter>1</Counter>
+						<Counter>100</Counter>
 						<Reflect>1</Reflect>
 					</Statistics>
-					<Duration>5</Duration>
+					<Duration>6</Duration>
 				</Buff>
 			</Data>
 		</EffectData>

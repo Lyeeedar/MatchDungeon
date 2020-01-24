@@ -195,7 +195,7 @@ class CardNode
 		{
 			val rawRewards = getPossibleRewards()
 
-			data class RewardData(val rewardClass: Class<AbstractReward>, val icon: TextureRegion, var chance: Chance)
+			data class RewardData(val rewardClass: Class<AbstractReward>, val icon: TextureRegion, var chance: Chance, val niceName: String)
 
 			val rewardData = Array<RewardData>()
 			for (reward in rawRewards)
@@ -210,7 +210,7 @@ class CardNode
 				}
 				else
 				{
-					rewardData.add(RewardData(reward.javaClass, reward.cardIcon(), reward.chance))
+					rewardData.add(RewardData(reward.javaClass, reward.cardIcon(), reward.chance, reward.niceName()))
 				}
 			}
 

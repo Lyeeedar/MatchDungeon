@@ -7,8 +7,8 @@
 	</Icon>
 	<Statistics meta:RefKey="Statistics" />
 	<Ability>
-		<Name>Stab</Name>
-		<Description>Stab a foe with your pitchfork</Description>
+		<Name>Pitchfork.MainHand.Ability.Name:a32a816e-cd99-4941-8ac5-824e41ed4136</Name>
+		<Description>Pitchfork.MainHand.Ability.Description:3cd903d4-509b-4444-bc15-8ccc6d12710e</Description>
 		<EffectData>
 			<Cost>7</Cost>
 			<Effect>1,Monster,Single,Pop</Effect>

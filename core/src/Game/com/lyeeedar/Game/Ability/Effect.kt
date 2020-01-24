@@ -11,8 +11,6 @@ import com.lyeeedar.Game.Global
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.neaten
-import java.util.*
 
 /**
  * Created by Philip on 21-Jul-16.
@@ -122,55 +120,6 @@ class Effect(val type: Type)
 				{
 					GridScreen.instance.updateBuffTable()
 				}
-			}
-		}
-	}
-
-	fun toString(data: ObjectMap<String, Any>, them: String, popAction: String, ability: Ability): String
-	{
-		return when(type)
-		{
-			Type.POP ->
-			{
-				val dam = data["DAMAGE", "0"].toString().evaluate(Global.getVariableMap())
-
-				val bonusDam: Float
-				if (data["DAMAGE", "0"].toString().length == 1)
-				{
-					// only add on ability dam if we havent used an equation
-					bonusDam = dam + Global.player.getStat(Statistic.ABILITYDAMAGE)
-				}
-				else
-				{
-					bonusDam = dam
-				}
-
-				if (ability.permuter.type == Permuter.Type.SINGLE && ability.targetter.type == Targetter.Type.ATTACK)
-				{
-					"$popAction $them"
-				}
-				else
-				{
-					"$popAction $them, dealing $dam damage."
-				}
-			}
-
-			Type.CONVERT -> { val t = data["CONVERTTO"]?.toString()?.toLowerCase(Locale.ENGLISH)?.capitalize() ?: "Random"; "convert $them to $t." }
-
-			Type.SUMMON ->
-			{
-				"summon " + data["SUMMONNAME"].toString().neaten() + "."
-			}
-
-			Type.SPREADER -> {
-				val spreader = data["SPREADER"] as Spreader
-				"create " + spreader.nameKey
-			}
-
-			Type.SUPERCHARGE -> "Supercharge"
-
-			Type.BUFF -> {
-				throw Exception("Shouldnt ever hit this")
 			}
 		}
 	}

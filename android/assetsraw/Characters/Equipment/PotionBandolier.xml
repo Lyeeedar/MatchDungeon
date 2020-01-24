@@ -12,8 +12,8 @@
 		<BuffDuration>0.2</BuffDuration>
 	</Statistics>
 	<Ability>
-		<Name>Drink Potion</Name>
-		<Description>Drink a potion to gain temporary strength.</Description>
+		<Name>PotionBandolier.Body.Ability.Name:3e7c8e24-b063-400f-bffb-6afbad122bf5</Name>
+		<Description>PotionBandolier.Body.Ability.Description:2fd203d3-9725-4f50-ab24-be75319e107f</Description>
 		<EffectData>
 			<Cost>3</Cost>
 			<Effect>1,Orb,Single,Buff</Effect>

@@ -27,9 +27,9 @@
 		<Data Name="BonusGold" meta:RefKey="Number" />
 		<Data Name="PriceReduction" Min="0" meta:RefKey="Number" />
 		<!--Defense-->
-		<Data Name="Aegis" Min="0" Max="1" meta:RefKey="Number" />
-		<Data Name="Counter" Min="0" Max="1" meta:RefKey="Number" />
-		<Data Name="Reflect" Min="0" Max="1" meta:RefKey="Number" />
+		<Data Name="Aegis" Min="0" meta:RefKey="Number" />
+		<Data Name="Counter" Min="0" meta:RefKey="Number" />
+		<Data Name="Reflect" Min="0" meta:RefKey="Number" />
 		<!--Aura-->
 		<Data Name="WeaknessAura" Min="0" meta:RefKey="Number" />
 		<Data Name="NecroticAura" Min="0" meta:RefKey="Number" />

@@ -12,8 +12,8 @@
 		<AbilityDamage>2</AbilityDamage>
 	</Statistics>
 	<Ability>
-		<Name>Thousand Cuts</Name>
-		<Description>Slash the target with your blade, slicing it to ribbons.</Description>
+		<Name>ShearScimitar.MainHand.Ability.Name:341e13ef-43ca-4468-b7d0-502fde1f53f7</Name>
+		<Description>ShearScimitar.MainHand.Ability.Description:02e90070-4df0-4af4-afd7-484f1a0465bf</Description>
 		<EffectData>
 			<Cost>5</Cost>
 			<Effect>1,Monster,Single,Pop</Effect>

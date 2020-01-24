@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectFloatMap
 import com.badlogic.gdx.utils.ObjectMap
+import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Spreader
 import com.lyeeedar.Board.Tile
@@ -38,8 +39,6 @@ class Ability
 
 	val name: String
 		get() = Localisation.getText(nameID, "Ability")
-	val description: String
-		get() = Localisation.getText(descriptionID, "Ability")
 
 	var hitEffect: ParticleEffect? = null
 	var flightEffect: ParticleEffect? = null
@@ -68,6 +67,37 @@ class Ability
 		val table = Table()
 		table.defaults().pad(5f)
 
+		var description = Localisation.getText(descriptionID, "Ability")
+
+		if (effect.type == Effect.Type.POP)
+		{
+			val dam = data["DAMAGE", "0"].toString().evaluate(Global.getVariableMap())
+			val bonusDam: Float
+			if (data["DAMAGE", "0"].toString().length == 1)
+			{
+				// only add on ability dam if we havent used an equation
+				bonusDam = dam + Global.player.getStat(Statistic.ABILITYDAMAGE)
+			}
+			else
+			{
+				bonusDam = dam
+			}
+			description = description.replace("{Damage}", bonusDam.toString())
+		}
+		else if (effect.type == Effect.Type.BUFF)
+		{
+			val buff = data["BUFF"] as Buff
+			var turns = buff.remainingDuration.toString()
+
+			if (Global.player.getStat(Statistic.BUFFDURATION, true) > 0f)
+			{
+				val bonus = (buff.remainingDuration.toFloat() * Global.player.getStat(Statistic.BUFFDURATION, true)).toInt()
+				turns = "($turns + $bonus)"
+			}
+
+			description = description.replace("{Turns}", turns)
+		}
+
 		val descLabel = Label(description, Statics.skin, "card")
 		descLabel.setWrap(true)
 
@@ -79,66 +109,30 @@ class Ability
 
 		if (effect.type == Effect.Type.BUFF)
 		{
-			val buff = data["BUFF"] as Buff
-
-			var turns = buff.remainingDuration.toString()
-
-			if (Global.player.getStat(Statistic.BUFFDURATION, true) > 0f)
-			{
-				val bonus = (buff.remainingDuration.toFloat() * Global.player.getStat(Statistic.BUFFDURATION, true)).toInt()
-				turns = "($turns + $bonus)"
-			}
-
-			var effectDesc = Localisation.getText("ability.buff", "UI") + ":"
-			effectDesc = effectDesc.replace("{Turns}", turns)
-
-			val effectLabel = Label(effectDesc, Statics.skin, "card")
-			effectLabel.setWrap(true)
-
-			table.add(effectLabel).growX()
-			table.row()
-
 			table.add(Seperator(Statics.skin)).growX()
 			table.row()
 
+			val buff = data["BUFF"] as Buff
 			table.add(buff.createTable(false)).growX()
 			table.row()
 
 			table.add(Seperator(Statics.skin)).growX()
 			table.row()
 		}
-		else
-		{
-			var effectDesc = "Target $targets " + targetter.type.niceName.pluralize(targets)
 
-			if (permuter.type != Permuter.Type.SINGLE)
-			{
-				effectDesc += " then " + permuter.toString(data)
-			}
-
-			val them = if (targets > 1 || permuter.type != Permuter.Type.SINGLE) "them" else "it"
-			effectDesc += " and " + effect.toString(data, them, targetter.popAction(), this)
-
-			val effectLabel = Label(effectDesc, Statics.skin, "card")
-			effectLabel.setWrap(true)
-
-			table.add(effectLabel).growX()
-			table.row()
-		}
-
-		table.add(Label("Cost: $cost", Statics.skin, "card")).growX()
+		table.add(Label(Localisation.getText("ability.powercost", "UI") + ": $cost", Statics.skin, "card")).growX()
 		table.row()
 
 		if (maxUsages > 0)
 		{
 			if (resetUsagesPerLevel)
 			{
-				table.add(Label("Usages Per Encounter: $maxUsages", Statics.skin, "card")).growX()
+				table.add(Label(Localisation.getText("ability.usagesperencounter", "UI") + ": $maxUsages", Statics.skin, "card")).growX()
 				table.row()
 			}
 			else
 			{
-				table.add(Label("Remaining Usages: $remainingUsages", Statics.skin, "card")).growX()
+				table.add(Label(Localisation.getText("ability.remainingusages", "UI") + ": $remainingUsages", Statics.skin, "card")).growX()
 				table.row()
 			}
 		}

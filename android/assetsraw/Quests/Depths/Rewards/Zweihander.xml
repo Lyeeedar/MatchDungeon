@@ -11,8 +11,8 @@
 		<Haste>-0.1</Haste>
 	</Statistics>
 	<Ability>
-		<Name>Smash</Name>
-		<Description>Smash a line of tiles into pieces.</Description>
+		<Name>Zweihander.MainHand.Ability.Name:a7863b11-7737-413c-9107-f58a9d960b3d</Name>
+		<Description>Zweihander.MainHand.Ability.Description:4262580d-d0aa-4210-86d9-0f7ec78327ce</Description>
 		<EffectData>
 			<Cost>6</Cost>
 			<Effect>1,Orb,Column,Pop</Effect>

@@ -11,8 +11,8 @@
 		<Pierce>1</Pierce>
 	</Statistics>
 	<Ability>
-		<Name>Shoot</Name>
-		<Description>Shoot an arrow at an enemy.</Description>
+		<Name>Bow.MainHand.Ability.Name:9f28629b-232a-47e3-bae4-ab76a190e47f</Name>
+		<Description>Bow.MainHand.Ability.Description:3c70cdf8-4214-419c-beda-4c44bbfbcab1</Description>
 		<EffectData>
 			<Cost>2</Cost>
 			<Usages>15</Usages>

@@ -8,8 +8,8 @@
 	</Icon>
 	<Statistics meta:RefKey="Statistics" />
 	<Ability>
-		<Name>Reflection</Name>
-		<Description>Reflect attacks for a brief time.</Description>
+		<Name>SpellReflect.OffHand.Ability.Name:6df417a3-50f3-4781-90da-febeb38d7df2</Name>
+		<Description>SpellReflect.OffHand.Ability.Description:093611b2-d0fa-4cd0-910a-8613fc5d6d23</Description>
 		<EffectData>
 			<Cost>6</Cost>
 			<Effect>1,Orb,Single,Buff</Effect>
@@ -21,7 +21,7 @@
 						<DrawActualSize>true</DrawActualSize>
 					</Icon>
 					<Statistics meta:RefKey="Statistics">
-						<Reflect>1</Reflect>
+						<Reflect>100</Reflect>
 					</Statistics>
 					<Duration>4</Duration>
 				</Buff>

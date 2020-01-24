@@ -11,8 +11,8 @@
 		<PowerGain>5</PowerGain>
 	</Statistics>
 	<Ability>
-		<Name>Overcharge</Name>
-		<Description>For a limited time boost the damage of your spells.</Description>
+		<Name>WizardsRobes.Body.Ability.Name:0be2e2b4-6f40-4411-a653-086b25d3ea83</Name>
+		<Description>WizardsRobes.Body.Ability.Description:1b03862e-5630-4578-9d4d-f9d76a2b2721</Description>
 		<EffectData>
 			<Cost>5</Cost>
 			<Effect>1,Orb,Single,Buff</Effect>

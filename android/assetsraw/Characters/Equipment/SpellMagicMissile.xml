@@ -8,8 +8,8 @@
 	</Icon>
 	<Statistics meta:RefKey="Statistics" />
 	<Ability>
-		<Name>Magic Missile</Name>
-		<Description>This spell fires 3 energy bolts that home in on random enemies.</Description>
+		<Name>SpellMagicMissile.MainHand.Ability.Name:1629d1e6-6426-4617-9ff2-a219523a3005</Name>
+		<Description>SpellMagicMissile.MainHand.Ability.Description:4e7e5019-b896-429b-bff2-bc14a0ed4bdd</Description>
 		<EffectData>
 			<Cost>4</Cost>
 			<Effect>0,Monster,Random,Pop</Effect>

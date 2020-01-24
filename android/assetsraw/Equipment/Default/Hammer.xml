@@ -9,13 +9,13 @@
 		<PowerGain>2</PowerGain>
 	</Statistics>
 	<Ability>
-		<Name>Break</Name>
-		<Description>Break any one blocking object</Description>
+		<Name>Hammer.MainHand.Ability.Name:df19caba-fdfc-4940-acfb-4f0fd55df04f</Name>
+		<Description>Hammer.MainHand.Ability.Description:aab9d8e3-d42e-42e6-9c17-858ab1de071f</Description>
 		<EffectData>
 			<Cost>2</Cost>
 			<Effect>1,Block,Single,Pop</Effect>
 			<Data>
-				<Damage>0</Damage>
+				<Damage>10</Damage>
 			</Data>
 			<HitEffect meta:RefKey="ParticleEffect">
 				<Name>Stomp</Name>

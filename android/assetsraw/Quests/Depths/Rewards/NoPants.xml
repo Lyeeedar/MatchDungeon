@@ -11,8 +11,8 @@
 		<Luck>0.05</Luck>
 	</Statistics>
 	<Ability>
-		<Name>Dodge Roll</Name>
-		<Description>Roll out of the way of any attack.</Description>
+		<Name>NoPants.Body.Ability.Name:0fdf7939-cbd5-413f-8557-18b9297154a1</Name>
+		<Description>NoPants.Body.Ability.Description:126b7e78-a2ae-4171-9c0f-c76a5a5ae417</Description>
 		<EffectData>
 			<Cost>2</Cost>
 			<Effect>1,Orb,Single,Buff</Effect>
@@ -23,7 +23,7 @@
 						<Name>Oryx/uf_split/uf_skills/uf_skills_33</Name>
 					</Icon>
 					<Statistics meta:RefKey="Statistics">
-						<Aegis>1</Aegis>
+						<Aegis>100</Aegis>
 					</Statistics>
 					<Duration>1</Duration>
 				</Buff>
