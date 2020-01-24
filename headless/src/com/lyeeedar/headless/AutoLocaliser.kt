@@ -202,20 +202,29 @@ class Localiser
 		{
 			val splitText = text.split('{', '}')
 
-			var translatedText = ""
+			var simplifiedText = ""
+			val variables = Array<String>()
+
 			var isSentence = text[0] != '{'
 			for (chunk in splitText)
 			{
 				if (isSentence)
 				{
-					translatedText += doTranslate(chunk, language)
+					simplifiedText += chunk
 				}
 				else
 				{
-					translatedText += "{$chunk}"
+					simplifiedText += "{${variables.size}}"
+					variables.add("{$chunk}")
 				}
 
 				isSentence = !isSentence
+			}
+
+			var translatedText = doTranslate(simplifiedText, language)
+			for (i in 0 until variables.size)
+			{
+				translatedText = translatedText.replace("{$i}", variables[i])
 			}
 
 			return translatedText
