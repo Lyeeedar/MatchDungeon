@@ -17,6 +17,13 @@ import com.lyeeedar.Util.getXml
 import ktx.collections.addAll
 import ktx.collections.set
 import ktx.collections.toGdxArray
+import org.languagetool.AnalyzedSentence
+import org.languagetool.JLanguageTool
+import org.languagetool.language.BritishEnglish
+import org.languagetool.rules.Rule
+import org.languagetool.rules.RuleMatch
+import org.languagetool.rules.patterns.PatternRule
+import org.languagetool.rules.spelling.SpellingCheckRule
 import org.mockito.Mockito
 import java.io.File
 import java.io.FileInputStream
@@ -54,6 +61,7 @@ class Localiser
 	val dictionary = ObjectSet<String>()
 	val slang = ObjectMap<String, String>()
 	val gameNames = Array<String>()
+	val gameWords = Array<String>()
 
 	val apostraphedWords = arrayOf("you'", "it'", "we'", "won'", "can'", "they'")
 	val pluralisers = arrayOf("s", "'s", "ies", "es")
@@ -66,6 +74,7 @@ class Localiser
 		dictionary.addAll(File("../assetsraw/Localisation/Dictionaries/GeneralDictionary.txt").readLines())
 		dictionary.addAll(File("../assetsraw/Localisation/Dictionaries/GameDictionary.txt").readLines())
 		gameNames.addAll(File("../assetsraw/Localisation/Dictionaries/GameNameList.txt").readLines())
+		gameWords.addAll(File("../assetsraw/Localisation/Dictionaries/GameWords.txt").readLines())
 
 		for (slangRaw in File("../assetsraw/Localisation/Dictionaries/SlangDictionary.txt").readLines())
 		{
@@ -182,14 +191,14 @@ class Localiser
 		println("Localisation complete")
 	}
 
-	fun translateText(text: String, language: String): String
+	fun translateText(rawText: String, language: String): String
 	{
 		if (language == "EN-US")
 		{
-			return text
+			return rawText
 		}
 
-		val key = "$language@@@$text"
+		val key = "$language@@@$rawText"
 		if (translatedText.containsKey(key))
 		{
 			val text = translatedText[key]
@@ -197,6 +206,8 @@ class Localiser
 
 			return text
 		}
+
+		val text = removeSlang(rawText)
 
 		if (text.contains("{"))
 		{
@@ -252,6 +263,31 @@ class Localiser
 		return translation.translatedText
 	}
 
+	lateinit var languageTool: JLanguageTool
+	fun initialiseLanguageAnalyser()
+	{
+		languageTool = JLanguageTool(BritishEnglish())
+		languageTool.addRule(DefinedNameRule(gameWords.filter { it[0].isUpperCase() }.toGdxArray()))
+		for (rule in languageTool.allActiveRules)
+		{
+			if (rule is SpellingCheckRule)
+			{
+				rule.addIgnoreTokens(gameWords.filter { it.split(' ').size == 1 }.toList())
+			}
+			else if (rule is PatternRule)
+			{
+				if (rule.message.startsWith("Use a smart opening quote here"))
+				{
+					languageTool.disableRule(rule.id)
+				}
+				else if (rule.message.startsWith("Use a smart closing quote here"))
+				{
+					languageTool.disableRule(rule.id)
+				}
+			}
+		}
+	}
+
 	fun validateEnglish()
 	{
 		println("")
@@ -263,6 +299,8 @@ class Localiser
 		println("-------------------------------------------------------------------------")
 		println("")
 		println("")
+
+		initialiseLanguageAnalyser()
 
 		val allIds = ObjectSet<String>()
 		for (xml in XmlData.getExistingPaths())
@@ -324,6 +362,7 @@ class Localiser
 			val missingWords = ObjectSet<String>()
 
 			val englishFile = getRawXml(file.path)
+			var i = 2
 			for (el in englishFile.children())
 			{
 				val id = el.getAttribute("ID")
@@ -342,7 +381,8 @@ class Localiser
 
 				try
 				{
-					spellCheck(text, "ID: $id\nText: $text\nFile: ${file.path}")
+					val context = "ID: $id\nText: $text\nFile: ${file.path}\nLine: $i"
+					doSentenceAnalysis(text, context)
 				}
 				catch (ex: Exception)
 				{
@@ -364,6 +404,8 @@ class Localiser
 				{
 					unusedLines += id + "\n"
 				}
+
+				i++
 			}
 
 			if (missingWords.size > 0)
@@ -523,4 +565,104 @@ class Localiser
 			}
 		}
 	}
+
+	fun removeSlang(rawText: String): String
+	{
+		val splitSentence = splitSentence(rawText)
+		for (i in 0 until splitSentence.size)
+		{
+			if (slang.containsKey(splitSentence[i]))
+			{
+				splitSentence[i] = slang[splitSentence[i]]
+			}
+		}
+		val text = splitSentence.joinToString("")
+		return text
+	}
+
+	fun doSentenceAnalysis(rawText: String, context: String)
+	{
+		if (rawText.all { it.isLetterOrDigit() || it == ' ' })
+		{
+			val words = rawText.split(' ')
+			if (words.all { it[0].isUpperCase() })
+			{
+				// this is a title
+				return
+			}
+		}
+
+		val text = removeSlang(rawText)
+
+		val matches = languageTool.check(text)
+
+		if (matches.size > 0)
+		{
+			System.err.println("########################################################\n")
+			System.err.println(context)
+			System.err.println("")
+
+			for (match in matches)
+			{
+				System.err.println(match.message + "\n" + match.suggestedReplacements)
+				System.err.println("\n-----------------------------------------------------\n")
+			}
+
+			throw RuntimeException("Check failed")
+		}
+	}
+
+	fun splitSentence(text: String): Array<String>
+	{
+		val output = Array<String>()
+		var currentChunk = ""
+		for (i in text.indices)
+		{
+			val currentChar = text[i]
+			if (currentChar.isLetterOrDigit())
+			{
+				currentChunk += currentChar
+			}
+			else
+			{
+				if (!currentChunk.isBlank()) output.add(currentChunk)
+				currentChunk = ""
+				output.add(currentChar.toString())
+			}
+		}
+		if (!currentChunk.isBlank()) output.add(currentChunk)
+
+		return output
+	}
+}
+
+class DefinedNameRule(val names: Array<String>) : Rule()
+{
+	override fun getId(): String
+	{
+		return "definedNameRule"
+	}
+
+	override fun match(sentence: AnalyzedSentence): kotlin.Array<RuleMatch>
+	{
+		val matches = Array<RuleMatch>()
+
+		for (name in names)
+		{
+			val lower = name.toLowerCase(Locale.ENGLISH)
+			if (sentence.text.contains(lower))
+			{
+				val start = sentence.text.indexOf(lower)
+				matches.add(RuleMatch(this, sentence, start, start + name.length, "Did you mean [$name]?"))
+			}
+		}
+
+		return matches.toArray(RuleMatch::class.java)
+	}
+
+	override fun getDescription(): String
+	{
+		return "Defined names must always appear with the same case"
+	}
+
 }

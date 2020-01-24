@@ -72,6 +72,7 @@ project(":headless") {
         api 'com.google.api-client:google-api-client:1.30.7'
         api 'com.google.apis:google-api-services-androidpublisher:v3-rev20191113-1.30.3'
         api 'com.google.cloud:google-cloud-translate:1.12.0'
+        api 'org.languagetool:language-en:4.8'
     }
 }
 

@@ -115,7 +115,7 @@
 	<Text ID="monster.dr.tutorial">This enemy has damage resistance, represented by the gray pips on its health bar. At the end of each turn it will replenish those pips, so focus on those big hits!</Text>
 	<Text ID="monster.stages.tutorial">This enemy has multiple stages, indicated by the orbs above its hp bar. When its hp bar is empty it will mutate into a new creature, so watch out!</Text>
 	<Text ID="monstereffect.tutorial.1">This is an attack. The pips surrounding the skull indicate the turns remaining until it activates.</Text>
-	<Text ID="monstereffect.tutorial.2">Match it like a normal orb to remove it from the board. If you fail to remove it then you will lose 1 hp.</Text>
+	<Text ID="monstereffect.tutorial.2">Match it like a normal orb to remove it from the board. If you fail to remove it then you will lose 1 health.</Text>
 
 	<Text ID="ability.tutorial.1">This is a usable ability, granted by your current equipment.</Text>
 	<Text ID="ability.tutorial.2">These pips show how much power you need to activate it.</Text>

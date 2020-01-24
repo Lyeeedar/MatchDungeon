@@ -7,11 +7,11 @@
 	<Text ID="EnergyRing.OffHand.Ability.Name:5b66833c-1a4d-46e1-96f1-a22acbfda08f">Energize</Text>
 	<Text ID="FireshotNecklace.Head.Ability.Description:ac413c46-f35a-41a7-9dd4-cb36a8521a95">Fire a bolt of flames at a foe, dealing {Damage} damage.</Text>
 	<Text ID="FireshotNecklace.Head.Ability.Name:147466a9-7ef4-4c89-9500-b074a4042a67">Fireshot</Text>
-	<Text ID="FlawedFireballWand.MainHand.Ability.Description:715cce2c-adf3-48b5-a305-d0db8e541c20">Fling a fireball at your target, destroying it an everything in a 1 tile radius around it, dealing {Damage} damage.</Text>
+	<Text ID="FlawedFireballWand.MainHand.Ability.Description:715cce2c-adf3-48b5-a305-d0db8e541c20">Fling a fireball at your target, destroying it and everything in a 1 tile radius around it, dealing {Damage} damage.</Text>
 	<Text ID="FlawedFireballWand.MainHand.Ability.Name:99da1e48-dab7-4d0c-b85c-5a9162b3b175">Fireball</Text>
 	<Text ID="Grenade.OffHand.Ability.Description:b95f7c9c-ca64-49f2-98ee-e361bb67347d">Throw the grenade at the target, destroying it and all tiles in a 3 tile radius, dealing {Damage} damage.</Text>
 	<Text ID="Grenade.OffHand.Ability.Name:51f03565-b8a1-4022-9007-27097f9f0dff">Throw Grenade</Text>
-	<Text ID="Hammer.MainHand.Ability.Description:aab9d8e3-d42e-42e6-9c17-858ab1de071f">Break any one blocking object.</Text>
+	<Text ID="Hammer.MainHand.Ability.Description:aab9d8e3-d42e-42e6-9c17-858ab1de071f">Break a single blocking object.</Text>
 	<Text ID="Hammer.MainHand.Ability.Name:df19caba-fdfc-4940-acfb-4f0fd55df04f">Break</Text>
 	<Text ID="HolyAmulet.Head.Ability.Description:5caa4306-28a9-4613-a691-1554079b471f">Call on divine energies to block a single attack.</Text>
 	<Text ID="HolyAmulet.Head.Ability.Name:13dc7914-166b-47e1-b9a0-25b6629a25e0">Divine Protection</Text>
@@ -39,7 +39,7 @@
 	<Text ID="SpellShockShield.OffHand.Ability.Name:6ca7c696-33f9-4c16-8799-65bf59cf5787">Shock Shield</Text>
 	<Text ID="Whip.MainHand.Ability.Description:ae6bf388-bb12-49fc-a08c-a49b1d4ad180">Whip an enemy, dealing {Damage} damage.</Text>
 	<Text ID="Whip.MainHand.Ability.Name:07650389-52d5-41a7-a137-b3d3a63db54e">Whip</Text>
-	<Text ID="WizardsRobes.Body.Ability.Description:1b03862e-5630-4578-9d4d-f9d76a2b2721">For {Turns} turns, boost the damage of your spells.</Text>
+	<Text ID="WizardsRobes.Body.Ability.Description:1b03862e-5630-4578-9d4d-f9d76a2b2721">For {Turns} turns, gain bonus damage for your spells.</Text>
 	<Text ID="WizardsRobes.Body.Ability.Name:0be2e2b4-6f40-4411-a653-086b25d3ea83">Overcharge</Text>
 	<Text ID="Zweihander.MainHand.Ability.Description:4262580d-d0aa-4210-86d9-0f7ec78327ce">Smash a tile and the one above and below it into pieces, dealing {Damage} damage.</Text>
 	<Text ID="Zweihander.MainHand.Ability.Name:a7863b11-7737-413c-9107-f58a9d960b3d">Smash</Text>
