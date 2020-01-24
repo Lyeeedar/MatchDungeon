@@ -15,7 +15,7 @@
 	<Text ID="BackalleyVendorRaid.CardNode.Name:e735a007-8340-4f5b-bc1d-e4153881a4e2">Alleyways</Text>
 	<Text ID="BeholderBattle.CardNode.Description:93e35379-f311-4977-ac9d-8bcff126d742">You finally make your way to the heart of the cave. There the party prepares for a tough battle.</Text>
 	<Text ID="BeholderBattle.CardNode.Name:a834634d-fb9b-496e-9065-02fa2f62e4ad">Boss Battle</Text>
-	<Text ID="BlacksmithsFavour.CardNode.Description:294d411d-be3b-4107-b202-5b04bc99fcce">Perfect preperation is what preserves prosperity. Did you do yours before departing?</Text>
+	<Text ID="BlacksmithsFavour.CardNode.Description:294d411d-be3b-4107-b202-5b04bc99fcce">Perfect preparation is what preserves prosperity. Did you do yours before departing?</Text>
 	<Text ID="BlacksmithsFavour.CardNode.Name:689ba3dd-ac55-4dcc-83be-a8d17ad49159">Blacksmiths Favour</Text>
 	<Text ID="BlockedDrop.CardNode.Description:fbe7e8a9-c72d-4cf6-b389-add654f0ade2">You find some treasure that you can loot. The only catch is the way out is blocked.</Text>
 	<Text ID="BlockedDrop.CardNode.Name:567c13ef-c1ce-4c21-8b75-adfd5ffd6d52">Blocked Drop</Text>
@@ -142,7 +142,7 @@
 	<Text ID="MerchantRescue.CardNode.Description:28a50d1d-ff97-49a2-8681-3e04c297730a">You stumble across a merchant surrounded by monsters.</Text>
 	<Text ID="MerchantRescue.CardNode.Name:26ad7a09-0ea3-44c0-bdcd-c2dfbbe46c16">Merchant Rescue</Text>
 	<Text ID="MonsterousMenace.CardNode.Description:8989c2c3-7809-4f82-a586-2078dc48d6e7">A group of giant creatures lurks beyond, the remains of dead adventurers littered around them.</Text>
-	<Text ID="MonsterousMenace.CardNode.Name:346b7fad-7446-45a1-bf83-27f0ee75354b">Monsterous Menace</Text>
+	<Text ID="MonsterousMenace.CardNode.Name:346b7fad-7446-45a1-bf83-27f0ee75354b">Monstrous Menace</Text>
 	<Text ID="Mugging.CardNode.Description:01f26787-fbcd-48e8-b3f6-7c3c05edbf09">The alleyways of the city offer many opportunities, for those willing to explore them.</Text>
 	<Text ID="Mugging.CardNode.Name:ca0d58ec-0e7b-4586-888f-e3c61c3b3ade">Alleyways</Text>
 	<Text ID="NamedMonsterHunt.CardNode.Description:12d71678-089b-44db-ad3b-d99a0ca7942b">You get a quest to hunt and slay a named creature, a beast more formidable and ferocious than your average foe.</Text>
@@ -150,12 +150,12 @@
 	<Text ID="NestDestruction.CardNode.Description:8f4064c4-ea95-4a09-9ffc-d3f7acdf9bd6">You come across a nest writhing with rat bodies. This is a perfect chance to thin the horde's numbers.</Text>
 	<Text ID="NestDestruction.CardNode.Name:76377f9f-3857-498f-833a-44c5c48979e0">Writhing Nest</Text>
 	<Text ID="ParttimeArtificing.CardNode.Description:21498675-3a72-42b3-9156-10714451d5b4">There's always need for an artificer, so anyone willing to do the work can make good money.</Text>
-	<Text ID="ParttimeArtificing.CardNode.Name:66aa8240-f6da-44d3-98ea-47320a0deb97">Parttime Artificing</Text>
+	<Text ID="ParttimeArtificing.CardNode.Name:66aa8240-f6da-44d3-98ea-47320a0deb97">Part-time Artificing</Text>
 	<Text ID="PartyBranch.CardNode.Description:363880ba-6c20-44c2-9863-3ff22e21d6f4">Where to go next...</Text>
 	<Text ID="PartyBranch.CardNode.Name:9eee12a4-4fbd-42d0-bf32-3fcefaa5671e">Crossroads</Text>
 	<Text ID="PotionDealer.CardNode.Description:199a3e75-70ea-4a1a-802a-ca53b03f0376">You visit an alchemist to buy some potions to enhance your body temporarily.</Text>
 	<Text ID="PotionDealer.CardNode.Name:74ccb023-0750-418b-9ee3-dcb67d9795f3">Potion Dealer</Text>
-	<Text ID="PowerTraining.CardNode.Description:74ee570f-8c3d-4247-8024-9db41b629066">By learning to utilise your full strength you can greatly enhance the power of your abilities.</Text>
+	<Text ID="PowerTraining.CardNode.Description:74ee570f-8c3d-4247-8024-9db41b629066">By learning to utilize your full strength you can greatly enhance the power of your abilities.</Text>
 	<Text ID="PowerTraining.CardNode.Name:e9f31335-0626-4cc2-b296-9b6fb088c19f">Power Training</Text>
 	<Text ID="Raid.CardNode.Description:9a482fa9-805e-49d8-962e-f5d389b75dee">Grayheart invites you on another boss raid.</Text>
 	<Text ID="Raid.CardNode.Name:e11bd967-00b8-4cad-9c7d-24433a28867d">Raid</Text>
@@ -197,8 +197,8 @@
 	<Text ID="TheHarvest.CardNode.Name:c390665f-46a3-4f70-a77d-66fd9b873679">The Harvest</Text>
 	<Text ID="Tournament.CardNode.Description:3671b743-c4a2-4e4c-b943-f9ba3b63c8c5">The annual adventurers tournament is the place for a budding explorer to showcase their talents.</Text>
 	<Text ID="Tournament.CardNode.Name:9c5ca78b-7bac-4977-8a7b-c31de828cb11">Tournament</Text>
-	<Text ID="TravellingMerchant.CardNode.Description:c0b5f321-17d2-4a97-9281-42a3a192d4d9">You stumble across a travelling merchant, burdened by a multitude of goods.</Text>
-	<Text ID="TravellingMerchant.CardNode.Name:93a6eca7-4bd1-475e-bab0-bf31f5cebdab">Travelling Merchant</Text>
+	<Text ID="TravellingMerchant.CardNode.Description:c0b5f321-17d2-4a97-9281-42a3a192d4d9">You stumble across a traveling merchant, burdened by a multitude of goods.</Text>
+	<Text ID="TravellingMerchant.CardNode.Name:93a6eca7-4bd1-475e-bab0-bf31f5cebdab">Traveling Merchant</Text>
 	<Text ID="TreasureRoom.CardNode.Description:dee5ec61-a361-4229-b0b2-ea58ba4a37bc">You find an unlooted treasure room.</Text>
 	<Text ID="TreasureRoom.CardNode.Name:ad9fd830-422e-45e9-bd3e-8cc9f1aca3ec">Treasure Room</Text>
 	<Text ID="TreasureRoom1.CardNode.Description:a9bd8cbf-7621-4065-86e9-0d8cf7518275">You find an unlooted treasure room.</Text>

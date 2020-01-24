@@ -1,10 +1,10 @@
 <Localisation Language="EN-GB" xmlns:meta="Editor">
 	<Text ID="Bow.MainHand.Ability.Description:3c70cdf8-4214-419c-beda-4c44bbfbcab1">Shoot an arrow at an enemy, dealing {Damage} damage.</Text>
 	<Text ID="Bow.MainHand.Ability.Name:9f28629b-232a-47e3-bae4-ab76a190e47f">Shoot</Text>
-	<Text ID="Breastplate.Body.Ability.Description:6d68a13b-f863-4c1b-94e3-bf9f829d7ab6">Smash your body into an attack, popping it and everything in a 1 tile radius around it, dealing {Damage}  damage.</Text>
+	<Text ID="Breastplate.Body.Ability.Description:6d68a13b-f863-4c1b-94e3-bf9f829d7ab6">Smash your body into an attack, popping it and everything in a 1 tile radius around it, dealing {Damage} damage.</Text>
 	<Text ID="Breastplate.Body.Ability.Name:bd3e3415-b7ba-4730-b99b-51af5e7c9c74">Body Slam</Text>
 	<Text ID="EnergyRing.OffHand.Ability.Description:bc8bfb4c-e28c-4834-80ef-493c6a0a2fd6">Channel the rings energies to manipulate events in your favour, converting 6 random orbs on the board to the same colour.</Text>
-	<Text ID="EnergyRing.OffHand.Ability.Name:5b66833c-1a4d-46e1-96f1-a22acbfda08f">Energise</Text>
+	<Text ID="EnergyRing.OffHand.Ability.Name:5b66833c-1a4d-46e1-96f1-a22acbfda08f">Energize</Text>
 	<Text ID="FireshotNecklace.Head.Ability.Description:ac413c46-f35a-41a7-9dd4-cb36a8521a95">Fire a bolt of flames at a foe, dealing {Damage} damage.</Text>
 	<Text ID="FireshotNecklace.Head.Ability.Name:147466a9-7ef4-4c89-9500-b074a4042a67">Fireshot</Text>
 	<Text ID="FlawedFireballWand.MainHand.Ability.Description:715cce2c-adf3-48b5-a305-d0db8e541c20">Fling a fireball at your target, destroying it an everything in a 1 tile radius around it, dealing {Damage} damage.</Text>

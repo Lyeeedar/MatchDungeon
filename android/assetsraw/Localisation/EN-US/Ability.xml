@@ -1,0 +1,46 @@
+<Localisation Language="EN-US" xmlns:meta="Editor">
+	<Text ID="Bow.MainHand.Ability.Description:3c70cdf8-4214-419c-beda-4c44bbfbcab1" TranslateType="Auto" TranslatedHash="1641933417">Shoot an arrow at an enemy, dealing {Damage} damage.</Text>
+	<Text ID="Bow.MainHand.Ability.Name:9f28629b-232a-47e3-bae4-ab76a190e47f" TranslateType="Auto" TranslatedHash="79860735">Shoot</Text>
+	<Text ID="Breastplate.Body.Ability.Description:6d68a13b-f863-4c1b-94e3-bf9f829d7ab6" TranslateType="Auto" TranslatedHash="1266998393">Smash your body into an attack, popping it and everything in a 1 tile radius around it, dealing {Damage} damage.</Text>
+	<Text ID="Breastplate.Body.Ability.Name:bd3e3415-b7ba-4730-b99b-51af5e7c9c74" TranslateType="Auto" TranslatedHash="-1097144317">Body Slam</Text>
+	<Text ID="EnergyRing.OffHand.Ability.Description:bc8bfb4c-e28c-4834-80ef-493c6a0a2fd6" TranslateType="Auto" TranslatedHash="-650717328">Channel the rings energies to manipulate events in your favour, converting 6 random orbs on the board to the same colour.</Text>
+	<Text ID="EnergyRing.OffHand.Ability.Name:5b66833c-1a4d-46e1-96f1-a22acbfda08f" TranslateType="Auto" TranslatedHash="1835984835">Energize</Text>
+	<Text ID="FireshotNecklace.Head.Ability.Description:ac413c46-f35a-41a7-9dd4-cb36a8521a95" TranslateType="Auto" TranslatedHash="1545676409">Fire a bolt of flames at a foe, dealing {Damage} damage.</Text>
+	<Text ID="FireshotNecklace.Head.Ability.Name:147466a9-7ef4-4c89-9500-b074a4042a67" TranslateType="Auto" TranslatedHash="-498193840">Fireshot</Text>
+	<Text ID="FlawedFireballWand.MainHand.Ability.Description:715cce2c-adf3-48b5-a305-d0db8e541c20" TranslateType="Auto" TranslatedHash="1828243181">Fling a fireball at your target, destroying it an everything in a 1 tile radius around it, dealing {Damage} damage.</Text>
+	<Text ID="FlawedFireballWand.MainHand.Ability.Name:99da1e48-dab7-4d0c-b85c-5a9162b3b175" TranslateType="Auto" TranslatedHash="-498707115">Fireball</Text>
+	<Text ID="Grenade.OffHand.Ability.Description:b95f7c9c-ca64-49f2-98ee-e361bb67347d" TranslateType="Auto" TranslatedHash="-111510765">Throw the grenade at the target, destroying it and all tiles in a 3 tile radius, dealing {Damage} damage.</Text>
+	<Text ID="Grenade.OffHand.Ability.Name:51f03565-b8a1-4022-9007-27097f9f0dff" TranslateType="Auto" TranslatedHash="-118238764">Throw Grenade</Text>
+	<Text ID="Hammer.MainHand.Ability.Description:aab9d8e3-d42e-42e6-9c17-858ab1de071f" TranslateType="Auto" TranslatedHash="2133406771">Break any one blocking object.</Text>
+	<Text ID="Hammer.MainHand.Ability.Name:df19caba-fdfc-4940-acfb-4f0fd55df04f" TranslateType="Auto" TranslatedHash="64448735">Break</Text>
+	<Text ID="HolyAmulet.Head.Ability.Description:5caa4306-28a9-4613-a691-1554079b471f" TranslateType="Auto" TranslatedHash="-1112057315">Call on divine energies to block a single attack.</Text>
+	<Text ID="HolyAmulet.Head.Ability.Name:13dc7914-166b-47e1-b9a0-25b6629a25e0" TranslateType="Auto" TranslatedHash="896269802">Divine Protection</Text>
+	<Text ID="Knife.MainHand.Ability.Description:06f483ec-40cc-4328-a5ef-bc62b348503e" TranslateType="Auto" TranslatedHash="931078593">Stab a foe with your knife, dealing {Damage} damage.</Text>
+	<Text ID="Knife.MainHand.Ability.Name:a4d791c5-72ee-4173-a9f8-e14f7347fec6" TranslateType="Auto" TranslatedHash="2587234">Stab</Text>
+	<Text ID="Longsword.MainHand.Ability.Description:a03ae051-7476-4530-9173-932bab3ac247" TranslateType="Auto" TranslatedHash="1874835166">Chop a foe in two, dealing {Damage} damage.</Text>
+	<Text ID="Longsword.MainHand.Ability.Name:1be71a30-2ce3-4013-a8ae-1875ca9bdee1" TranslateType="Auto" TranslatedHash="2099494">Chop</Text>
+	<Text ID="Necroracia.OffHand.Ability.Description:0d71769f-7071-4b3d-8765-948254d5b5df" TranslateType="Auto" TranslatedHash="462682541">A dark and powerful spell, striking 1 monster and all others with a 2 tile radius for base {Damage} damage. Deals more damage depending on how many creatures are within its area of effect.</Text>
+	<Text ID="Necroracia.OffHand.Ability.Name:f8f6753f-cd3e-455b-a3b0-9d0efd1ba211" TranslateType="Auto" TranslatedHash="1809382691">Necroracia</Text>
+	<Text ID="NoPants.Body.Ability.Description:126b7e78-a2ae-4171-9c0f-c76a5a5ae417" TranslateType="Auto" TranslatedHash="-1839963387">Roll out of the way of any attack, making you immune to damage for {Turns} turns.</Text>
+	<Text ID="NoPants.Body.Ability.Name:0fdf7939-cbd5-413f-8557-18b9297154a1" TranslateType="Auto" TranslatedHash="-1207376026">Dodge Roll</Text>
+	<Text ID="Pitchfork.MainHand.Ability.Description:3cd903d4-509b-4444-bc15-8ccc6d12710e" TranslateType="Auto" TranslatedHash="-1238296866">Stab a foe with your pitchfork, dealing {Damage} damage.</Text>
+	<Text ID="Pitchfork.MainHand.Ability.Name:a32a816e-cd99-4941-8ac5-824e41ed4136" TranslateType="Auto" TranslatedHash="2587234">Stab</Text>
+	<Text ID="PotionBandolier.Body.Ability.Description:2fd203d3-9725-4f50-ab24-be75319e107f" TranslateType="Auto" TranslatedHash="1225867038">Drink a potion to gain increased damage for {Turns} turns.</Text>
+	<Text ID="PotionBandolier.Body.Ability.Name:3e7c8e24-b063-400f-bffb-6afbad122bf5" TranslateType="Auto" TranslatedHash="-683016613">Drink Potion</Text>
+	<Text ID="ShearScimitar.MainHand.Ability.Description:02e90070-4df0-4af4-afd7-484f1a0465bf" TranslateType="Auto" TranslatedHash="-1045359376">Slash the target with your blade, slicing it to ribbons, dealing {Damage} damage.</Text>
+	<Text ID="ShearScimitar.MainHand.Ability.Name:341e13ef-43ca-4468-b7d0-502fde1f53f7" TranslateType="Auto" TranslatedHash="-160914829">Thousand Cuts</Text>
+	<Text ID="SkullNecklace.Head.Ability.Description:110e2fb5-f463-4d97-827b-e94f16cb6991" TranslateType="Auto" TranslatedHash="1925618108">Fling balefire out at 3 enemies, dealing {Damage} damage.</Text>
+	<Text ID="SkullNecklace.Head.Ability.Name:b7fcb91d-a7aa-4ef7-9e13-108d80c8d8a4" TranslateType="Auto" TranslatedHash="-1856723890">Balefire</Text>
+	<Text ID="SpellMagicMissile.MainHand.Ability.Description:4e7e5019-b896-429b-bff2-bc14a0ed4bdd" TranslateType="Auto" TranslatedHash="-974630217">This spell fires 3 energy bolts that home in on random enemies, dealing {Damage} damage.</Text>
+	<Text ID="SpellMagicMissile.MainHand.Ability.Name:1629d1e6-6426-4617-9ff2-a219523a3005" TranslateType="Auto" TranslatedHash="-1217425037">Magic Missile</Text>
+	<Text ID="SpellReflect.OffHand.Ability.Description:093611b2-d0fa-4cd0-910a-8613fc5d6d23" TranslateType="Auto" TranslatedHash="324385765">Reflect attacks for {Turns} turns.</Text>
+	<Text ID="SpellReflect.OffHand.Ability.Name:6df417a3-50f3-4781-90da-febeb38d7df2" TranslateType="Auto" TranslatedHash="627165259">Reflection</Text>
+	<Text ID="SpellShockShield.OffHand.Ability.Description:05ece79b-5a72-4678-aea1-cb540b890117" TranslateType="Auto" TranslatedHash="433855683">Block some attacks, and shock the attackers, for {Turns} turns.</Text>
+	<Text ID="SpellShockShield.OffHand.Ability.Name:6ca7c696-33f9-4c16-8799-65bf59cf5787" TranslateType="Auto" TranslatedHash="-649958681">Shock Shield</Text>
+	<Text ID="Whip.MainHand.Ability.Description:ae6bf388-bb12-49fc-a08c-a49b1d4ad180" TranslateType="Auto" TranslatedHash="135731373">Whip an enemy, dealing {Damage} damage.</Text>
+	<Text ID="Whip.MainHand.Ability.Name:07650389-52d5-41a7-a137-b3d3a63db54e" TranslateType="Auto" TranslatedHash="2695128">Whip</Text>
+	<Text ID="WizardsRobes.Body.Ability.Description:1b03862e-5630-4578-9d4d-f9d76a2b2721" TranslateType="Auto" TranslatedHash="-699309457">For {Turns} turns, boost the damage of your spells.</Text>
+	<Text ID="WizardsRobes.Body.Ability.Name:0be2e2b4-6f40-4411-a653-086b25d3ea83" TranslateType="Auto" TranslatedHash="-211202904">Overcharge</Text>
+	<Text ID="Zweihander.MainHand.Ability.Description:4262580d-d0aa-4210-86d9-0f7ec78327ce" TranslateType="Auto" TranslatedHash="-214500100">Smash a tile and the one above and below it into pieces, dealing {Damage} damage.</Text>
+	<Text ID="Zweihander.MainHand.Ability.Name:a7863b11-7737-413c-9107-f58a9d960b3d" TranslateType="Auto" TranslatedHash="79996348">Smash</Text>
+</Localisation>

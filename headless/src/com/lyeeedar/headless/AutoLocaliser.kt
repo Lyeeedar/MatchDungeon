@@ -340,7 +340,7 @@ class Localiser
 					val message = ex.message ?: ""
 					if (message.contains("Unknown word"))
 					{
-						val word = message.split('\n')[1].replace("Word: ", "")
+						val word = message.split('\n')[2].replace("Word: ", "")
 						missingWords.add(word)
 
 						System.err.println(message)
@@ -397,7 +397,7 @@ class Localiser
 		{
 			val sentenceContext = "Sentence: $sentence\n$context"
 
-			if (sentence[0].isLetter() && !sentence[0].isUpperCase())
+			if (!isTitle && (sentence[0].isLetter() && !sentence[0].isUpperCase()))
 			{
 				throw RuntimeException("Sentence did not start with an uppercase letter.\n$sentenceContext")
 			}
@@ -412,9 +412,10 @@ class Localiser
 			var firstWord = true
 			outer@ for (word in words)
 			{
-				if (word == "---") continue
+				var lowerWord = word.toLowerCase(Locale.ENGLISH).filter { it.isLetterOrDigit() || it == '\'' || it == '-' || it == '{' || it == '}' }
 
-				var lowerWord = word.toLowerCase(Locale.ENGLISH).filter { it.isLetterOrDigit() || it == '\'' }
+				if (lowerWord == "---") continue
+				if (lowerWord.startsWith("{") && lowerWord.endsWith("}")) continue
 
 				if (lowerWord.startsWith('\''))
 				{
@@ -425,7 +426,7 @@ class Localiser
 					lowerWord = lowerWord.substring(0, lowerWord.length-1)
 				}
 
-				val wordContext = "Word: $lowerWord\n$sentenceContext"
+				val wordContext = "RawWord: $word\nWord: $lowerWord\n$sentenceContext"
 
 				if (lowerWord == "i" || lowerWord.startsWith("i'"))
 				{
@@ -498,9 +499,9 @@ class Localiser
 					if (lowerWord.toIntOrNull() != null)
 					{
 						val asNum = lowerWord.toInt()
-						if (!isTitle && asNum < 10 && asNum > 1)
+						if (!isTitle && asNum < 10)
 						{
-							throw RuntimeException("Low number as digits in a sentence\n$wordContext")
+							System.err.println("Low number as digits in a sentence\n$wordContext")
 						}
 
 						continue

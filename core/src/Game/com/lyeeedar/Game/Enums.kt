@@ -120,7 +120,13 @@ enum class Statistic private constructor(val min: Float, val max: Float, val ico
 				BONUSGOLD -> Localisation.getText("statistic.bonusgold.description", "UI")
 				HASTE -> Localisation.getText("statistic.haste.description", "UI")
 				REGENERATION -> Localisation.getText("statistic.regeneration.description", "UI")
-				BERSERK -> Localisation.getText("statistic.berserk.description", "UI")
+				BERSERK -> {
+					var desc = Localisation.getText("statistic.berserk.description", "UI")
+					desc = desc.replace("{MatchDamage}", MATCHDAMAGE.niceName)
+					desc = desc.replace("{AbilityDamage}", ABILITYDAMAGE.niceName)
+					desc = desc.replace("{PowerGain}", POWERGAIN.niceName)
+					return desc
+				}
 				PRICEREDUCTION -> Localisation.getText("statistic.pricereduction.description", "UI")
 				AEGIS -> Localisation.getText("statistic.aegis.description", "UI")
 				COUNTER -> Localisation.getText("statistic.counter.description", "UI")

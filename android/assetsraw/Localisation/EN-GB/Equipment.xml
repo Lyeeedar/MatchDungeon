@@ -45,7 +45,7 @@
 	<Text ID="Knife.MainHand.Name:745f1b9b-99bb-4e33-8f8c-775624130c7b">Knife</Text>
 	<Text ID="LeatherArmour.Body.Description:6e601e6d-a9a6-4d8c-b27b-635e952f2c43">Hardened leather armour, flexible yet still offering protection.</Text>
 	<Text ID="LeatherArmour.Body.Name:a3a6a184-8182-462b-ad96-e4ebda4158c2">Leather Armour</Text>
-	<Text ID="Longsword.MainHand.Description:9d4db2a9-cac8-402f-a360-f90fa62b8d3b">A long blade, kept sharp through careful maintenace and powerful enchantments.</Text>
+	<Text ID="Longsword.MainHand.Description:9d4db2a9-cac8-402f-a360-f90fa62b8d3b">A long blade, kept sharp through careful maintenance and powerful enchantments.</Text>
 	<Text ID="Longsword.MainHand.Name:e556a8b7-2f44-4683-9425-3a7c03b789c3">Longsword</Text>
 	<Text ID="MidasGlove.OffHand.Description:7d7148ad-3eb4-479c-b440-ae77844138bb">A glove imbued with an enchantment that turns normal items into gold.</Text>
 	<Text ID="MidasGlove.OffHand.Name:6048660b-8f90-4dab-b633-57d53698ef49">Midas Glove</Text>
@@ -55,8 +55,8 @@
 	<Text ID="NoPants.Body.Name:27e06576-9de2-46e8-827b-f02335928c88">No Pants</Text>
 	<Text ID="Pitchfork.MainHand.Description:edfd341c-78c8-452a-a9d4-1480a17c9ddd">A pitchfork, normally used for moving hay. Serves as a useful weapon for any angry peasant.</Text>
 	<Text ID="Pitchfork.MainHand.Name:41ad7134-392b-4211-8fbe-ae6b61233877">Pitchfork</Text>
-	<Text ID="PotionBandolier.Body.Description:6c81cd7e-c1f7-4d56-b88d-6230d164f2b9">A bandolier of potions, filled with all kinds of elixirs.</Text>
-	<Text ID="PotionBandolier.Body.Name:26616667-e367-4e2b-b923-b9a5a04dd470">Potion Bandolier</Text>
+	<Text ID="PotionBandolier.Body.Description:6c81cd7e-c1f7-4d56-b88d-6230d164f2b9">A bandoleer of potions, filled with all kinds of elixirs.</Text>
+	<Text ID="PotionBandolier.Body.Name:26616667-e367-4e2b-b923-b9a5a04dd470">Potion Bandoleer</Text>
 	<Text ID="PowerAmulet.Head.Description:ba7db229-3932-4439-8336-ae0ba0a11059">An amulet thrumming with power. Enhances your abilities.</Text>
 	<Text ID="PowerAmulet.Head.Name:c275137b-8486-4add-bbfa-30fc1e7d1227">Power Amulet</Text>
 	<Text ID="RingOfRegeneration.OffHand.Description:966d48b6-2e24-42b3-90bd-99ac5b36dcb5">This little ring constantly heals your wounds, sealing cuts in mere seconds.</Text>
@@ -83,7 +83,7 @@
 	<Text ID="SpikedArmour.Body.Name:50da9d76-5581-4f6b-af5a-71988d34268e">Spiked Armour</Text>
 	<Text ID="SpikedHelmet.Head.Description:a993de1f-7c5f-4b90-93e6-7adedadf5da1">A spiked helmet. With this you can deliver a vicious headbutt.</Text>
 	<Text ID="SpikedHelmet.Head.Name:45d8db24-c173-4c52-93ff-bbcd8a0ee052">Spiked Helmet</Text>
-	<Text ID="SpikedShield.MainHand.Description:6d844de7-a737-4bbf-81a4-1c1937230020">You know whats better than one shield? Two shields! The best defense is a great defense afterall.</Text>
+	<Text ID="SpikedShield.MainHand.Description:6d844de7-a737-4bbf-81a4-1c1937230020">You know whats better than one shield? Two shields! The best defense is a great defense after-all.</Text>
 	<Text ID="SpikedShield.MainHand.Name:a898b62c-12b5-40ed-8104-2a87728860b7">Spiked Shield</Text>
 	<Text ID="Torch.OffHand.Description:e653ee91-a5da-4299-b352-0c2fc66536ca">A burning torch, great for lighting up places and setting fire to things.</Text>
 	<Text ID="Torch.OffHand.Name:cd454d91-fc3c-4062-bf3f-1f78c6f7118d">Torch</Text>

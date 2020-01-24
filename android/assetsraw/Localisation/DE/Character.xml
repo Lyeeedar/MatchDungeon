@@ -1,0 +1,12 @@
+<Localisation Language="DE" xmlns:meta="Editor">
+	<Text ID="Adventurer.Character.Description:0e681606-9eef-44bb-b295-067f66e90870" TranslateType="Auto" TranslatedHash="1469535156">Sie machen ihren Lebensunterhalt durch ihr Leben in alten Gräbern oder vergessenen Ruinen zu riskieren. Schatz ist ihr Ziel.</Text>
+	<Text ID="Adventurer.Character.Name:1e94d256-5384-45ce-b970-4cb68523f464" TranslateType="Auto" TranslatedHash="1951385474">Abenteurer</Text>
+	<Text ID="Alchemist.Character.Description:3031baea-7d06-4e02-9988-d17cadc883fa" TranslateType="Auto" TranslatedHash="1864120403">Ein Alchemist ist besessen mit Chemikalien mischen und zu sehen, was passiert. In der Regel mit explosiven Ergebnissen.</Text>
+	<Text ID="Alchemist.Character.Name:ec7de59f-b1c6-46aa-98e3-b0b77ba5d5a8" TranslateType="Auto" TranslatedHash="-1532857614">Alchimist</Text>
+	<Text ID="Knight.Character.Description:c33a0375-0fa8-468c-86a5-1b847d3775ac" TranslateType="Auto" TranslatedHash="1670864212">Ein Ritter gekleidet in harter Rüstung und eine mächtige Entschlossenheit zur Schau tragen. Ein gefährlicher Feind alles, was den Frieden stören würde.</Text>
+	<Text ID="Knight.Character.Name:5afdd307-409b-4b84-a21a-6895a90c169e" TranslateType="Auto" TranslatedHash="-2042963283">Ritter</Text>
+	<Text ID="Peasant.Character.Description:08d0596e-d839-433c-aa63-14f5af01cf25" TranslateType="Auto" TranslatedHash="-2067786948">Ein einfacher Bauer auf einem Abenteuer. Sind sie ein verlorener Prinz? Der Auserwählte? Bestimmend für die Größe? Nur ein Weg, um herauszufinden!</Text>
+	<Text ID="Peasant.Character.Name:5db66fd8-c139-4ae2-acb8-1efbce32bba1" TranslateType="Auto" TranslatedHash="970498944">Bauer</Text>
+	<Text ID="Wizard.Character.Description:a12ec383-d563-4467-9000-2a4fccbf59a8" TranslateType="Auto" TranslatedHash="1295046163">Ein mächtiger Zauberer, ein Experte bei dem Zauber lobbing um.</Text>
+	<Text ID="Wizard.Character.Name:a3fc3f8a-6170-4f8c-a3fe-c1eb60c964ca" TranslateType="Auto" TranslatedHash="-1703530101">Magier</Text>
+</Localisation>

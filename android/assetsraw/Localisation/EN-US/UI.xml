@@ -1,8 +1,185 @@
 <Localisation Language="EN-US" xmlns:meta="Editor">
 	<Text ID="new" TranslateType="Auto" TranslatedHash="78208">New</Text>
+	<Text ID="complete" TranslateType="Auto" TranslatedHash="-534801063">Complete</Text>
+	<Text ID="gold" TranslateType="Auto" TranslatedHash="2225280">Gold</Text>
+	<Text ID="silver" TranslateType="Auto" TranslatedHash="-1818443987">Silver</Text>
+	<Text ID="bronze" TranslateType="Auto" TranslatedHash="1998221754">Bronze</Text>
+	<Text ID="quest" TranslateType="Auto" TranslatedHash="78391490">Quest</Text>
+	<Text ID="character" TranslateType="Auto" TranslatedHash="-726803703">Character</Text>
+	<Text ID="equipment" TranslateType="Auto" TranslatedHash="-1214642834">Equipment</Text>
+	<Text ID="player" TranslateType="Auto" TranslatedHash="-1901885695">Player</Text>
+	<Text ID="encounter" TranslateType="Auto" TranslatedHash="-766867181">Encounter</Text>
+	<Text ID="statistics" TranslateType="Auto" TranslatedHash="1898876227">Statistics</Text>
+	<Text ID="statistic" TranslateType="Auto" TranslatedHash="-77293264">Statistic</Text>
+	<Text ID="chance" TranslateType="Auto" TranslatedHash="2017197908">Chance</Text>
+	<Text ID="buff" TranslateType="Auto" TranslatedHash="2081907">Buff</Text>
+	<Text ID="buffs" TranslateType="Auto" TranslatedHash="64539232">Buffs</Text>
+	<Text ID="none" TranslateType="Auto" TranslatedHash="2433880">None</Text>
+	<Text ID="ability" TranslateType="Auto" TranslatedHash="464145674">Ability</Text>
+	<Text ID="rewards" TranslateType="Auto" TranslatedHash="-1529663740">Rewards</Text>
+	<Text ID="levelbuffs" TranslateType="Auto" TranslatedHash="1943367332">Level Buffs</Text>
+	<Text ID="leveldebuffs" TranslateType="Auto" TranslatedHash="578916803">Level Debuffs</Text>
+	<Text ID="base" TranslateType="Auto" TranslatedHash="2063089">Base</Text>
+	<Text ID="equip" TranslateType="Auto" TranslatedHash="67205136">Equip</Text>
+	<Text ID="sell" TranslateType="Auto" TranslatedHash="2573170">Sell</Text>
+	<Text ID="item" TranslateType="Auto" TranslatedHash="2289459">Item</Text>
+	<Text ID="take" TranslateType="Auto" TranslatedHash="2599079">Take</Text>
 	<Text ID="questselection.embark" TranslateType="Auto" TranslatedHash="2079091584">Embark</Text>
 	<Text ID="questselection.editdeck" TranslateType="Auto" TranslatedHash="78334207">Edit Deck</Text>
 	<Text ID="questselection.tutorial.1" TranslateType="Auto" TranslatedHash="1811985389">This is the quest selection screen.</Text>
 	<Text ID="questselection.tutorial.2" TranslateType="Auto" TranslatedHash="1728073929">You can pick a quest from those you have unlocked here. Just tap the card you want, then tap 'embark'.</Text>
-	<Text ID="questselection.tutorial.3" TranslateType="Auto" TranslatedHash="1167712375">You can edit your deck of cards here. This will allow you to customise your quest experience.</Text>
+	<Text ID="questselection.tutorial.3" TranslateType="Auto" TranslatedHash="-487851138">You can edit your deck of cards here. This will allow you to customize your quest experience.</Text>
+	<Text ID="questscreen.abandonquest" TranslateType="Auto" TranslatedHash="-821113033">Abandon Quest</Text>
+	<Text ID="questscreen.abandonquest.popuptext" TranslateType="Auto" TranslatedHash="1885656698">Are you sure you want to abandon the quest and return to the quest selection screen? You will lose any progress made, but keep any rewards you have earned.</Text>
+	<Text ID="questscreen.abandonquest.continue" TranslateType="Auto" TranslatedHash="-916530135">Continue Quest</Text>
+	<Text ID="questscreen.abandonquest.abandon" TranslateType="Auto" TranslatedHash="-821113033">Abandon Quest</Text>
+	<Text ID="questscreen.choose" TranslateType="Auto" TranslatedHash="2017616439">Choose</Text>
+	<Text ID="questscreen.questfailed" TranslateType="Auto" TranslatedHash="-1556233861">Quest Failed</Text>
+	<Text ID="questscreen.questcompleted" TranslateType="Auto" TranslatedHash="1542117453">Quest Completed</Text>
+	<Text ID="questscreen.tutorial.1" TranslateType="Auto" TranslatedHash="-337009343">This is the quest screen.</Text>
+	<Text ID="questscreen.tutorial.2" TranslateType="Auto" TranslatedHash="-809625458">Here you can choose what you want to encounter next. Tap a card to view more details about it, and to select it.</Text>
+	<Text ID="questscreen.tutorial.3" TranslateType="Auto" TranslatedHash="1703591319">Tap here to see your current character information, including statistics and equipment.</Text>
+	<Text ID="questscreen.tutorial.4" TranslateType="Auto" TranslatedHash="-607053051">Here you can see your current gold. You can use this to buy equipment in shops, or during encounters.</Text>
+	<Text ID="deckscreen.toomanyencounters" TranslateType="Auto" TranslatedHash="-517794333">Deck contains too many encounters.</Text>
+	<Text ID="deckscreen.toofewencounters" TranslateType="Auto" TranslatedHash="266386352">Deck contains too few encounters.</Text>
+	<Text ID="deckscreen.toomuchequipment" TranslateType="Auto" TranslatedHash="-2055246851">Deck contains too much equipment.</Text>
+	<Text ID="deckscreen.toofewequipment" TranslateType="Auto" TranslatedHash="-1680286978">Deck contains too few equipment.</Text>
+	<Text ID="deckscreen.return" TranslateType="Auto" TranslatedHash="-1850529456">Return</Text>
+	<Text ID="deckscreen.remove" TranslateType="Auto" TranslatedHash="-1850743644">Remove</Text>
+	<Text ID="deckscreen.add" TranslateType="Auto" TranslatedHash="65665">Add</Text>
+	<Text ID="deckscreen.shops" TranslateType="Auto" TranslatedHash="79860765">Shops</Text>
+	<Text ID="deckscreen.encounters" TranslateType="Auto" TranslatedHash="1996921280">Encounters</Text>
+	<Text ID="deckscreen.characterselection" TranslateType="Auto" TranslatedHash="465246485">Character Selection</Text>
+	<Text ID="deckscreen.pickcharacter" TranslateType="Auto" TranslatedHash="-1822154468">Select</Text>
+	<Text ID="deckscreen.encounterselection" TranslateType="Auto" TranslatedHash="147145375">Encounter Selection</Text>
+	<Text ID="deckscreen.equipmentselection" TranslateType="Auto" TranslatedHash="-1959442118">Equipment Selection</Text>
+	<Text ID="gridscreen.novalidmoves" TranslateType="Auto" TranslatedHash="-1028843135">No valid moves. Shuffle grid?</Text>
+	<Text ID="gridscreen.fullpower" TranslateType="Auto" TranslatedHash="-992048865">Full power! Shuffle grid?</Text>
+	<Text ID="gridscreen.launch" TranslateType="Auto" TranslatedHash="-2025975853">Launch</Text>
+	<Text ID="gridscreen.skipanimations" TranslateType="Auto" TranslatedHash="-31592189">Level complete! Skip animations?</Text>
+	<Text ID="gridscreen.launchtutorial" TranslateType="Auto" TranslatedHash="1890174488">Click activate to use your ability on the selected tiles.</Text>
+	<Text ID="gridscreen.tutorial.1" TranslateType="Auto" TranslatedHash="2069300075">This is the board.</Text>
+	<Text ID="gridscreen.tutorial.2" TranslateType="Auto" TranslatedHash="1858446564">These are your victory conditions.</Text>
+	<Text ID="gridscreen.tutorial.3" TranslateType="Auto" TranslatedHash="-1075529636">These are your failure conditions.</Text>
+	<Text ID="gridscreen.tutorial.4" TranslateType="Auto" TranslatedHash="-323994935">These are your abilities, provided by your equipment.</Text>
+	<Text ID="gridscreen.tutorial.5" TranslateType="Auto" TranslatedHash="1846146489">This is the power bar. You use the power collected here to use abilities, or when it is full you can discharge it all to shuffle the board.</Text>
+	<Text ID="gridscreen.tutorial.6" TranslateType="Auto" TranslatedHash="2071848755">This area contains the orbs you match. Make rows of three or more orbs of the same colour to match them.</Text>
+	<Text ID="gridscreen.tutorial.7" TranslateType="Auto" TranslatedHash="1514171391">Make rows of more than three to spawn a special orb, which when matched has a special effect.</Text>
+	<Text ID="gridscreen.berserk" TranslateType="Auto" TranslatedHash="1446053114">Berserk</Text>
+	<Text ID="gridscreen.activate" TranslateType="Auto" TranslatedHash="-1591330541">Activate</Text>
+	<Text ID="shop.leave" TranslateType="Auto" TranslatedHash="1904371455">Leave Shop</Text>
+	<Text ID="shop.buy" TranslateType="Auto" TranslatedHash="67174">Buy</Text>
+	<Text ID="completioncondition.break.tutorial" TranslateType="Auto" TranslatedHash="-1435205483">This is the count of blocks you need to break to win.</Text>
+	<Text ID="completioncondition.break.description" TranslateType="Auto" TranslatedHash="-273447384">Break all blocks.</Text>
+	<Text ID="completioncondition.customorb.tutorial" TranslateType="Auto" TranslatedHash="-2062507188">This is the count you need to match to win.</Text>
+	<Text ID="completioncondition.customorb.description" TranslateType="Auto" TranslatedHash="74115493">Match</Text>
+	<Text ID="completioncondition.die.tutorial" TranslateType="Auto" TranslatedHash="992474406">This is your remaining health. Attacks will reduce it, and when it reaches 0 you will fail the level.</Text>
+	<Text ID="completioncondition.die.description" TranslateType="Auto" TranslatedHash="-1655858325">Don't let your hp reach 0.</Text>
+	<Text ID="completioncondition.kill.tutorial" TranslateType="Auto" TranslatedHash="220080640">This is the count of enemies you need to kill to win.</Text>
+	<Text ID="completioncondition.kill.description" TranslateType="Auto" TranslatedHash="1102195732">Defeat all enemies.</Text>
+	<Text ID="completioncondition.match.tutorial" TranslateType="Auto" TranslatedHash="2108284281">This is the count of orbs of each colour you need to match to win.</Text>
+	<Text ID="completioncondition.match.description" TranslateType="Auto" TranslatedHash="74115493">Match</Text>
+	<Text ID="completioncondition.plate.tutorial" TranslateType="Auto" TranslatedHash="-402683419">This is the count of plates you need to get to break to win.</Text>
+	<Text ID="completioncondition.plate.description" TranslateType="Auto" TranslatedHash="64448735">Break</Text>
+	<Text ID="completioncondition.sink.tutorial" TranslateType="Auto" TranslatedHash="-937495945">This is the count of items you need to get to the bottom of the board to win. If you can't see them on the board then they'll be in chests, inside blocks, or in enemies.</Text>
+	<Text ID="completioncondition.sink.description" TranslateType="Auto" TranslatedHash="1503192309">Move {Count} to the bottom.</Text>
+	<Text ID="completioncondition.time.tutorial" TranslateType="Auto" TranslatedHash="1035814962">This is your remaining time. When it reaches 0 you will fail the level. It will only decrease when the board isn't updating, so act fast!</Text>
+	<Text ID="completioncondition.time.description" TranslateType="Auto" TranslatedHash="-1565835433">Complete the level within {Time} seconds.</Text>
+	<Text ID="completioncondition.time.seconds" TranslateType="Auto" TranslatedHash="-660217249">Seconds</Text>
+	<Text ID="completioncondition.turns.tutorial" TranslateType="Auto" TranslatedHash="-1048521939">This is your remaining turn count. When it reaches 0 you will fail the level.</Text>
+	<Text ID="completioncondition.turns.description" TranslateType="Auto" TranslatedHash="-130062343">Complete the level within {Turns} turns.</Text>
+	<Text ID="completioncondition.turns.turns" TranslateType="Auto" TranslatedHash="81174390">Turns</Text>
+	<Text ID="completioncondition.turns.turn" TranslateType="Auto" TranslatedHash="2618525">Turn</Text>
+	<Text ID="matchmessage.1" TranslateType="Auto" TranslatedHash="2114088697">Impressive</Text>
+	<Text ID="matchmessage.2" TranslateType="Auto" TranslatedHash="772095037">Amazing</Text>
+	<Text ID="matchmessage.3" TranslateType="Auto" TranslatedHash="1960734051">Spectacular</Text>
+	<Text ID="matchmessage.4" TranslateType="Auto" TranslatedHash="-1801283976">Magical</Text>
+	<Text ID="matchmessage.5" TranslateType="Auto" TranslatedHash="-77594853">Legendary</Text>
+	<Text ID="matchmessage.6" TranslateType="Auto" TranslatedHash="191459333">Mythical</Text>
+	<Text ID="matchmessage.7" TranslateType="Auto" TranslatedHash="2047371727">Divine</Text>
+	<Text ID="matchmessage.8" TranslateType="Auto" TranslatedHash="1861761523">Godlike</Text>
+	<Text ID="block.tutorial" TranslateType="Auto" TranslatedHash="951808056">This is a block. Match in the tiles surrounding it to break it.</Text>
+	<Text ID="chest.tutorial" TranslateType="Auto" TranslatedHash="919882126">This is a chest. Match in the tiles beneath this to spawn coins. When there are no more coins to spawn, it will appear empty.</Text>
+	<Text ID="sinkable.tutorial" TranslateType="Auto" TranslatedHash="1644995118">This is a sinkable item. If you move it to the bottom of the board you will successfully sink it.</Text>
+	<Text ID="seal.tutorial" TranslateType="Auto" TranslatedHash="894558379">This orb has been sealed. It won't move until the seal is broken. To break the seal use the orb in a match.</Text>
+	<Text ID="friendly.tutorial" TranslateType="Auto" TranslatedHash="-1796118667">This is a friendly ally. Match in the surrounding tiles to replenish its health.</Text>
+	<Text ID="monster.tutorial" TranslateType="Auto" TranslatedHash="-1151180820">This is an enemy. The red bar beneath it is its remaining health. Match in the tiles surrounding it to damage it.</Text>
+	<Text ID="monster.dr.tutorial" TranslateType="Auto" TranslatedHash="494980389">This enemy has damage resistance, represented by the gray pips on its health bar. At the end of each turn it will replenish those pips, so focus on those big hits!</Text>
+	<Text ID="monster.stages.tutorial" TranslateType="Auto" TranslatedHash="1607045247">This enemy has multiple stages, indicated by the orbs above its hp bar. When its hp bar is empty it will mutate into a new creature, so watch out!</Text>
+	<Text ID="monstereffect.tutorial.1" TranslateType="Auto" TranslatedHash="-1817481407">This is an attack. The pips surrounding the skull indicate the turns remaining until it activates.</Text>
+	<Text ID="monstereffect.tutorial.2" TranslateType="Auto" TranslatedHash="-1820014191">Match it like a normal orb to remove it from the board. If you fail to remove it then you will lose 1 hp.</Text>
+	<Text ID="ability.tutorial.1" TranslateType="Auto" TranslatedHash="-726409319">This is a usable ability, granted by your current equipment.</Text>
+	<Text ID="ability.tutorial.2" TranslateType="Auto" TranslatedHash="1980738996">These pips show how much power you need to activate it.</Text>
+	<Text ID="ability.tutorial.3" TranslateType="Auto" TranslatedHash="-1937681662">When you have enough power you can tap this ability to begin to select targets for it. Note you won't be able to select it if there are no valid targets.</Text>
+	<Text ID="plate.tutorial" TranslateType="Auto" TranslatedHash="-378210030">This is a plate. Match on top of this to break it.</Text>
+	<Text ID="spreader.tutorial" TranslateType="Auto" TranslatedHash="-1730505209">This is a spreading field. Match in the tiles surrounding it to remove it and stop it spreading this turn.</Text>
+	<Text ID="card.containsshop" TranslateType="Auto" TranslatedHash="1437245543">This encounter contains a shop.</Text>
+	<Text ID="card.unknownreward" TranslateType="Auto" TranslatedHash="-1611710601">Have an unknown chance to gain unknown rewards.</Text>
+	<Text ID="card.rewardchance" TranslateType="Auto" TranslatedHash="2019625802">Have a {Chance} chance to gain {Reward} rewards.</Text>
+	<Text ID="card.willadvance" TranslateType="Auto" TranslatedHash="1411293308">Completing this encounter will cause it to advance.</Text>
+	<Text ID="cardsource.deck" TranslateType="Auto" TranslatedHash="-742094546">This encounter came from the encounter deck.</Text>
+	<Text ID="cardsource.character" TranslateType="Auto" TranslatedHash="746358198">This encounter came from the current character.</Text>
+	<Text ID="cardsource.quest" TranslateType="Auto" TranslatedHash="1028345757">This encounter came from the current quest.</Text>
+	<Text ID="cardsource.location" TranslateType="Auto" TranslatedHash="1588074602">This encounter came from the current quest location.</Text>
+	<Text ID="cardchance.greatpositive" TranslateType="Auto" TranslatedHash="1071925039">Blessedly Lucky</Text>
+	<Text ID="cardchance.positive" TranslateType="Auto" TranslatedHash="73771720">Lucky</Text>
+	<Text ID="cardchance.negative" TranslateType="Auto" TranslatedHash="1380932559">Unlucky</Text>
+	<Text ID="cardchance.greatnegative" TranslateType="Auto" TranslatedHash="2018086894">Cursedly Unlucky</Text>
+	<Text ID="buff.remainingduration" TranslateType="Auto" TranslatedHash="-2103642946">Remaining Duration</Text>
+	<Text ID="statistic.health" TranslateType="Auto" TranslatedHash="-2137395588">Health</Text>
+	<Text ID="statistic.matchdamage" TranslateType="Auto" TranslatedHash="212451946">Match Damage</Text>
+	<Text ID="statistic.abilitydamage" TranslateType="Auto" TranslatedHash="817607525">Ability Damage</Text>
+	<Text ID="statistic.pierce" TranslateType="Auto" TranslatedHash="-1904543896">Pierce</Text>
+	<Text ID="statistic.powergain" TranslateType="Auto" TranslatedHash="-1920082438">Power Gain</Text>
+	<Text ID="statistic.bonusgold" TranslateType="Auto" TranslatedHash="-625484799">Bonus Gold</Text>
+	<Text ID="statistic.haste" TranslateType="Auto" TranslatedHash="69497451">Haste</Text>
+	<Text ID="statistic.regeneration" TranslateType="Auto" TranslatedHash="1197090731">Regeneration</Text>
+	<Text ID="statistic.berserk" TranslateType="Auto" TranslatedHash="1446053114">Berserk</Text>
+	<Text ID="statistic.pricereduction" TranslateType="Auto" TranslatedHash="-1355802596">Price Reduction</Text>
+	<Text ID="statistic.aegis" TranslateType="Auto" TranslatedHash="63140109">Aegis</Text>
+	<Text ID="statistic.counter" TranslateType="Auto" TranslatedHash="-1672483364">Counter</Text>
+	<Text ID="statistic.reflect" TranslateType="Auto" TranslatedHash="-1545048419">Reflect</Text>
+	<Text ID="statistic.chaoticnature" TranslateType="Auto" TranslatedHash="1352370252">Chaotic Nature</Text>
+	<Text ID="statistic.weaknessaura" TranslateType="Auto" TranslatedHash="-675148524">Weakness Aura</Text>
+	<Text ID="statistic.necroticaura" TranslateType="Auto" TranslatedHash="-887323266">Necrotic Aura</Text>
+	<Text ID="statistic.buffduration" TranslateType="Auto" TranslatedHash="-1073275199">Buff Duration</Text>
+	<Text ID="statistic.luck" TranslateType="Auto" TranslatedHash="2379729">Luck</Text>
+	<Text ID="statistic.vampiricstrikes" TranslateType="Auto" TranslatedHash="1164249202">Vampiric Strikes</Text>
+	<Text ID="statistic.health.description" TranslateType="Auto" TranslatedHash="1739245245">The number of attacks you can take before dieing.</Text>
+	<Text ID="statistic.matchdamage.description" TranslateType="Auto" TranslatedHash="-937411760">The bonus damage you do the first time you match next to a damageable object each turn.</Text>
+	<Text ID="statistic.abilitydamage.description" TranslateType="Auto" TranslatedHash="-594150834">The bonus damage you do with specials and abilities.</Text>
+	<Text ID="statistic.pierce.description" TranslateType="Auto" TranslatedHash="1780413089">The amount of damage resistance you remove each time you hit something with damage resistance.</Text>
+	<Text ID="statistic.powergain.description" TranslateType="Auto" TranslatedHash="-1214613458">The bonus power you gain the first time you gain power each turn.</Text>
+	<Text ID="statistic.bonusgold.description" TranslateType="Auto" TranslatedHash="-502527789">The bonus multiplier you gain each time you gain gold.</Text>
+	<Text ID="statistic.haste.description" TranslateType="Auto" TranslatedHash="1107095817">How much faster you move. This increases turn count, delay between monster attacks and abilities, and buff durations.</Text>
+	<Text ID="statistic.regeneration.description" TranslateType="Auto" TranslatedHash="-1788362379">The amount of health you regenerate each turn.</Text>
+	<Text ID="statistic.berserk.description" TranslateType="Auto" TranslatedHash="-502193063">When below half health this is the amount {MatchDamage}, {AbilityDamage}, and {PowerGain} is increased.</Text>
+	<Text ID="statistic.pricereduction.description" TranslateType="Auto" TranslatedHash="1807591934">The percentage reduction in price of items from a shop.</Text>
+	<Text ID="statistic.aegis.description" TranslateType="Auto" TranslatedHash="-1340618061">The chance to block the damage from an attack as it hits.</Text>
+	<Text ID="statistic.counter.description" TranslateType="Auto" TranslatedHash="430655623">When taking damage from an attack, the chance to hit back at a random enemy.</Text>
+	<Text ID="statistic.reflect.description" TranslateType="Auto" TranslatedHash="1786020960">The chance to block the damage from an attack, then hit back at a random enemy.</Text>
+	<Text ID="statistic.chaoticnature.description" TranslateType="Auto" TranslatedHash="-391481612">The percentage increase or decrease to randomly apply to each statistic. Changes whenever you complete an encounter.</Text>
+	<Text ID="statistic.weaknessaura.description" TranslateType="Auto" TranslatedHash="1258719768">The value to subtract from enemy life as they spawn.</Text>
+	<Text ID="statistic.necroticaura.description" TranslateType="Auto" TranslatedHash="-1424424200">The amount of health you gain each time you kill an enemy.</Text>
+	<Text ID="statistic.buffduration.description" TranslateType="Auto" TranslatedHash="-806180849">The multiplier to increase buff duration by.</Text>
+	<Text ID="statistic.luck.description" TranslateType="Auto" TranslatedHash="551934223">Affects your chance of gaining rewards.</Text>
+	<Text ID="statistic.vampiricstrikes.description" TranslateType="Auto" TranslatedHash="147460025">You regain a portion of the damage you deal as health.</Text>
+	<Text ID="quest.bronzerewardavailable" TranslateType="Auto" TranslatedHash="1954364909">Can gain a bronze level reward.</Text>
+	<Text ID="quest.bronzerewardacquired" TranslateType="Auto" TranslatedHash="649613005">Bronze reward already acquired.</Text>
+	<Text ID="quest.silverrewardavailable" TranslateType="Auto" TranslatedHash="-502954464">Can gain a silver level reward.</Text>
+	<Text ID="quest.silverrewardacquired" TranslateType="Auto" TranslatedHash="-216598342">Silver reward already acquired.</Text>
+	<Text ID="quest.goldrewardavailable" TranslateType="Auto" TranslatedHash="-463531469">Can gain a gold level reward.</Text>
+	<Text ID="quest.goldrewardacquired" TranslateType="Auto" TranslatedHash="-841132345">Gold reward already acquired.</Text>
+	<Text ID="chance.verylow" TranslateType="Auto" TranslatedHash="-1981689494">very low</Text>
+	<Text ID="chance.low" TranslateType="Auto" TranslatedHash="107348">low</Text>
+	<Text ID="chance.medium" TranslateType="Auto" TranslatedHash="-1078030475">medium</Text>
+	<Text ID="chance.high" TranslateType="Auto" TranslatedHash="3202466">high</Text>
+	<Text ID="chance.certain" TranslateType="Auto" TranslatedHash="668929186">certain</Text>
+	<Text ID="questprogress.currentencounter" TranslateType="Auto" TranslatedHash="-1008577965">The current encounter in the quest.</Text>
+	<Text ID="questprogress.shop" TranslateType="Auto" TranslatedHash="-1818847513">An encounter containing a shop.</Text>
+	<Text ID="questprogress.questencounter" TranslateType="Auto" TranslatedHash="-73980584">A quest encounter.</Text>
+	<Text ID="questprogress.randomencounter" TranslateType="Auto" TranslatedHash="1402060473">A random encounter.</Text>
+	<Text ID="ability.powercost" TranslateType="Auto" TranslatedHash="-1920187832">Power Cost</Text>
+	<Text ID="ability.usagesperencounter" TranslateType="Auto" TranslatedHash="252976418">Usages Per Encounter</Text>
+	<Text ID="ability.remainingusages" TranslateType="Auto" TranslatedHash="1224056988">Remaining Usages</Text>
 </Localisation>

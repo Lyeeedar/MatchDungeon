@@ -13,7 +13,7 @@
 	<Text ID="statistic">Statistic</Text>
 	<Text ID="chance">Chance</Text>
 	<Text ID="buff">Buff</Text>
-	<Text ID="buffs">Buffs/Text>
+	<Text ID="buffs">Buffs</Text>
 	<Text ID="none">None</Text>
 	<Text ID="ability">Ability</Text>
 	<Text ID="rewards">Rewards</Text>
@@ -29,7 +29,7 @@
 	<Text ID="questselection.editdeck">Edit Deck</Text>
 	<Text ID="questselection.tutorial.1">This is the quest selection screen.</Text>
 	<Text ID="questselection.tutorial.2">You can pick a quest from those you have unlocked here. Just tap the card you want, then tap 'embark'.</Text>
-	<Text ID="questselection.tutorial.3">You can edit your deck of cards here. This will allow you to customise your quest experience.</Text>
+	<Text ID="questselection.tutorial.3">You can edit your deck of cards here. This will allow you to customize your quest experience.</Text>
 
 	<Text ID="questscreen.abandonquest">Abandon Quest</Text>
 	<Text ID="questscreen.abandonquest.popuptext">Are you sure you want to abandon the quest and return to the quest selection screen? You will lose any progress made, but keep any rewards you have earned.</Text>
@@ -112,7 +112,7 @@
 	<Text ID="seal.tutorial">This orb has been sealed. It won't move until the seal is broken. To break the seal use the orb in a match.</Text>
 	<Text ID="friendly.tutorial">This is a friendly ally. Match in the surrounding tiles to replenish its health.</Text>
 	<Text ID="monster.tutorial">This is an enemy. The red bar beneath it is its remaining health. Match in the tiles surrounding it to damage it.</Text>
-	<Text ID="monster.dr.tutorial">This enemy has damage resistance, represented by the grey pips on its health bar. At the end of each turn it will replenish those pips, so focus on those big hits!</Text>
+	<Text ID="monster.dr.tutorial">This enemy has damage resistance, represented by the gray pips on its health bar. At the end of each turn it will replenish those pips, so focus on those big hits!</Text>
 	<Text ID="monster.stages.tutorial">This enemy has multiple stages, indicated by the orbs above its hp bar. When its hp bar is empty it will mutate into a new creature, so watch out!</Text>
 	<Text ID="monstereffect.tutorial.1">This is an attack. The pips surrounding the skull indicate the turns remaining until it activates.</Text>
 	<Text ID="monstereffect.tutorial.2">Match it like a normal orb to remove it from the board. If you fail to remove it then you will lose 1 hp.</Text>
@@ -169,7 +169,7 @@
 	<Text ID="statistic.bonusgold.description">The bonus multiplier you gain each time you gain gold.</Text>
 	<Text ID="statistic.haste.description">How much faster you move. This increases turn count, delay between monster attacks and abilities, and buff durations.</Text>
 	<Text ID="statistic.regeneration.description">The amount of health you regenerate each turn.</Text>
-	<Text ID="statistic.berserk.description">When below half health this is the amount Match Damage, Ability Damage, and Power Gain is increased.</Text>
+	<Text ID="statistic.berserk.description">When below half health this is the amount {MatchDamage}, {AbilityDamage}, and {PowerGain} is increased.</Text>
 	<Text ID="statistic.pricereduction.description">The percentage reduction in price of items from a shop.</Text>
 	<Text ID="statistic.aegis.description">The chance to block the damage from an attack as it hits.</Text>
 	<Text ID="statistic.counter.description">When taking damage from an attack, the chance to hit back at a random enemy.</Text>

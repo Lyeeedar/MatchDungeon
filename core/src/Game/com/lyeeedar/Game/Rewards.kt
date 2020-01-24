@@ -185,7 +185,7 @@ class CardReward : AbstractReward()
 
 	override fun niceName(): String
 	{
-		return Localisation.getText("card", "UI")
+		return Localisation.getText("encounter", "UI")
 	}
 }
 
