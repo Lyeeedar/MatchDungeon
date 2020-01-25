@@ -41,9 +41,9 @@
 	<Text ID="questscreen.tutorial.3" TranslateType="Auto" TranslatedHash="1703591319">Tippen Sie hier, um Ihre aktuellen Zeicheninformationen, um zu sehen, einschließlich Statistiken und Ausrüstung.</Text>
 	<Text ID="questscreen.tutorial.4" TranslateType="Auto" TranslatedHash="-607053051">Hier können Sie Ihr aktuelles Gold sehen. Sie können diese Geräte in den Geschäften zu kaufen verwenden oder während der Begegnungen.</Text>
 	<Text ID="deckscreen.toomanyencounters" TranslateType="Auto" TranslatedHash="-517794333">Deck enthält zu viele Begegnungen.</Text>
-	<Text ID="deckscreen.toofewencounters" TranslateType="Auto" TranslatedHash="266386352">Deck enthält zu wenige Begegnungen.</Text>
+	<Text ID="deckscreen.toofewencounters" TranslateType="Auto" TranslatedHash="-1780972857">Deck enthält nicht genug Begegnungen.</Text>
 	<Text ID="deckscreen.toomuchequipment" TranslateType="Auto" TranslatedHash="-2055246851">Deck enthält zu viel Ausrüstung.</Text>
-	<Text ID="deckscreen.toofewequipment" TranslateType="Auto" TranslatedHash="-1680286978">Deck enthält zu wenig Ausrüstung.</Text>
+	<Text ID="deckscreen.toofewequipment" TranslateType="Auto" TranslatedHash="886068487">Deck enthält nicht genug Ausrüstung.</Text>
 	<Text ID="deckscreen.return" TranslateType="Auto" TranslatedHash="-1850529456">Rückkehr</Text>
 	<Text ID="deckscreen.remove" TranslateType="Auto" TranslatedHash="-1850743644">Entfernen</Text>
 	<Text ID="deckscreen.add" TranslateType="Auto" TranslatedHash="65665">Hinzufügen</Text>
@@ -74,7 +74,7 @@
 	<Text ID="completioncondition.customorb.tutorial" TranslateType="Auto" TranslatedHash="-2062507188">Dies ist die Anzahl Sie benötigen, um zu gewinnen anzupassen.</Text>
 	<Text ID="completioncondition.customorb.description" TranslateType="Auto" TranslatedHash="74115493">Spiel</Text>
 	<Text ID="completioncondition.die.tutorial" TranslateType="Auto" TranslatedHash="992474406">Das ist Ihre verbleibende Gesundheit. Angriffe wird es reduzieren, und wenn es 0 erreicht werden Sie das Niveau scheitern.</Text>
-	<Text ID="completioncondition.die.description" TranslateType="Auto" TranslatedHash="-1655858325">Sie nicht Ihre PS Reichweite 0 lassen.</Text>
+	<Text ID="completioncondition.die.description" TranslateType="Auto" TranslatedHash="-1433378665">Lassen Sie sich nicht Ihre Gesundheit 0 erreichen.</Text>
 	<Text ID="completioncondition.kill.tutorial" TranslateType="Auto" TranslatedHash="220080640">Dies ist die Anzahl der Feinde, die Sie brauchen, um zu gewinnen zu töten.</Text>
 	<Text ID="completioncondition.kill.description" TranslateType="Auto" TranslatedHash="1102195732">Besiegt alle Gegner.</Text>
 	<Text ID="completioncondition.match.tutorial" TranslateType="Auto" TranslatedHash="2108284281">Dies ist die Anzahl der Kugeln jeder Farbe, die Sie benötigen, um zu gewinnen anzupassen.</Text>
@@ -82,12 +82,12 @@
 	<Text ID="completioncondition.plate.tutorial" TranslateType="Auto" TranslatedHash="-402683419">Dies ist die Anzahl der Platten Sie brauchen, um zu gewinnen, zu brechen.</Text>
 	<Text ID="completioncondition.plate.description" TranslateType="Auto" TranslatedHash="64448735">Brechen</Text>
 	<Text ID="completioncondition.sink.tutorial" TranslateType="Auto" TranslatedHash="-937495945">Dies ist die Anzahl der Artikel, die Sie auf der Unterseite der Platine erhalten müssen, um zu gewinnen. Wenn Sie nicht sie auf dem Brett sehen dann werden sie in Kisten sein, innerhalb von Blöcken oder in Feinde.</Text>
-	<Text ID="completioncondition.sink.description" TranslateType="Auto" TranslatedHash="1503192309">Bewegung{Count}zum Boden.</Text>
-	<Text ID="completioncondition.time.tutorial" TranslateType="Auto" TranslatedHash="1035814962">Das ist Ihre verbleibende Zeit. Wenn es 0 erreicht werden Sie das Niveau scheitern. Es wird nur verringern, wenn die Platte nicht aktualisiert, so schnell handeln!</Text>
-	<Text ID="completioncondition.time.description" TranslateType="Auto" TranslatedHash="-1565835433">Füllen Sie die Ebene innerhalb{Time}Sekunden.</Text>
+	<Text ID="completioncondition.sink.description" TranslateType="Auto" TranslatedHash="1503192309">Verschieben {Count} nach unten.</Text>
+	<Text ID="completioncondition.time.tutorial" TranslateType="Auto" TranslatedHash="-264742714">Das ist Ihre verbleibende Zeit. Wenn es 0 erreicht, werden Sie das Niveau scheitern. Es wird nur verringern, wenn die Platte nicht aktualisiert, so schnell handeln!</Text>
+	<Text ID="completioncondition.time.description" TranslateType="Auto" TranslatedHash="-1565835433">Füllen Sie die Ebene innerhalb von {Time} Sekunden.</Text>
 	<Text ID="completioncondition.time.seconds" TranslateType="Auto" TranslatedHash="-660217249">Sekunden</Text>
-	<Text ID="completioncondition.turns.tutorial" TranslateType="Auto" TranslatedHash="-1048521939">Das ist Ihre verbleibende Umdrehungszahl. Wenn es 0 erreicht werden Sie das Niveau scheitern.</Text>
-	<Text ID="completioncondition.turns.description" TranslateType="Auto" TranslatedHash="-130062343">Füllen Sie die Ebene innerhalb{Turns}wendet sich.</Text>
+	<Text ID="completioncondition.turns.tutorial" TranslateType="Auto" TranslatedHash="1859800163">Das ist Ihre verbleibende Umdrehungszahl. Wenn es 0 erreicht, werden Sie das Niveau scheitern.</Text>
+	<Text ID="completioncondition.turns.description" TranslateType="Auto" TranslatedHash="-130062343">Füllen Sie die Ebene innerhalb von {Turns} Umdrehungen.</Text>
 	<Text ID="completioncondition.turns.turns" TranslateType="Auto" TranslatedHash="81174390">Wendet sich</Text>
 	<Text ID="completioncondition.turns.turn" TranslateType="Auto" TranslatedHash="2618525">Wende</Text>
 	<Text ID="matchmessage.1" TranslateType="Auto" TranslatedHash="2114088697">Beeindruckend</Text>
@@ -100,22 +100,22 @@
 	<Text ID="matchmessage.8" TranslateType="Auto" TranslatedHash="1861761523">gottähnlich</Text>
 	<Text ID="block.tutorial" TranslateType="Auto" TranslatedHash="951808056">Dies ist ein Block. Wer passt in den Fliesen umgibt, es zu brechen.</Text>
 	<Text ID="chest.tutorial" TranslateType="Auto" TranslatedHash="919882126">Dies ist eine Brust. Wer passt in den Fliesen unter dieser zu laichen Münzen. Wenn es nicht mehr Münzen zu laichen ist, wird es leer erscheinen.</Text>
-	<Text ID="sinkable.tutorial" TranslateType="Auto" TranslatedHash="1644995118">Dies ist ein versenkbare Element. Wenn Sie es an die Unterseite der Platine bewegen werden Sie erfolgreich versenken.</Text>
+	<Text ID="sinkable.tutorial" TranslateType="Auto" TranslatedHash="-856766742">Dies ist ein versenkbare Element. Wenn Sie es an die Unterseite der Platine zu bewegen, werden Sie erfolgreich versenken.</Text>
 	<Text ID="seal.tutorial" TranslateType="Auto" TranslatedHash="894558379">Diese Kugel hat versiegelt. Es wird sich nicht bewegen, bis das Siegel gebrochen ist. Zu brechen die Dichtung die Kugel in einem Spiel verwenden.</Text>
 	<Text ID="friendly.tutorial" TranslateType="Auto" TranslatedHash="-1796118667">Dies ist ein freundlicher Verbündeter. Wer passt in den umliegenden Fliesen seine Gesundheit wieder aufzufüllen.</Text>
 	<Text ID="monster.tutorial" TranslateType="Auto" TranslatedHash="-1151180820">Dies ist ein Feind. Der rote Balken unter ihm ist seine verbleibenden Gesundheit. Wer passt in den Fliesen umgebenden es zu beschädigen.</Text>
-	<Text ID="monster.dr.tutorial" TranslateType="Auto" TranslatedHash="494980389">Dieser Feind hat Schaden Widerstand, durch die grauen Pips auf seine Gesundheit Balken dargestellt. Am Ende jeder Runde wird es diese Kerne, so konzentrieren sich auf die großen Hits aufzufüllen!</Text>
-	<Text ID="monster.stages.tutorial" TranslateType="Auto" TranslatedHash="1607045247">Dieser Feind hat mehrere Stufen, die durch die Kugeln über seinen PS bar angegeben. Wenn seine PS-Bar ist leer in eine neue Kreatur mutieren wird, so watch out!</Text>
+	<Text ID="monster.dr.tutorial" TranslateType="Auto" TranslatedHash="843616929">Dieser Feind hat Schaden Widerstand, durch die grauen Pips auf seine Gesundheit Balken dargestellt. Am Ende jeder Runde wird es diese Kerne, so konzentrieren sich auf die großen Hits aufzufüllen!</Text>
+	<Text ID="monster.stages.tutorial" TranslateType="Auto" TranslatedHash="1340209179">Dieser Feind hat mehrere Stufen, die durch die Kugeln über seiner Gesundheitsleiste angezeigt. Wenn seine Gesundheit Bar leer ist, wird sie in eine neue Kreatur mutieren, so watch out!</Text>
 	<Text ID="monstereffect.tutorial.1" TranslateType="Auto" TranslatedHash="-1817481407">Dies ist ein Angriff. Die Kerne der Schädel umgibt, zeigt die Windungen verbleibt, bis es aktiviert.</Text>
-	<Text ID="monstereffect.tutorial.2" TranslateType="Auto" TranslatedHash="-1820014191">Wer passt es wie eine normale Kugel sie vom Brett zu entfernen. Wenn Sie nicht, es zu entfernen, dann werden Sie 1 hp verlieren.</Text>
+	<Text ID="monstereffect.tutorial.2" TranslateType="Auto" TranslatedHash="-1052459269">Wer passt es wie eine normale Kugel sie vom Brett zu entfernen. Wenn Sie es entfernen scheitern, dann werden Sie 1 Gesundheit verlieren.</Text>
 	<Text ID="ability.tutorial.1" TranslateType="Auto" TranslatedHash="-726409319">Dies ist eine brauchbare Möglichkeit, von Ihrem aktuellen Gerät erteilt hat.</Text>
 	<Text ID="ability.tutorial.2" TranslateType="Auto" TranslatedHash="1980738996">Diese Kerne zeigen, wie viel Macht sie aktiviert werden müssen.</Text>
-	<Text ID="ability.tutorial.3" TranslateType="Auto" TranslatedHash="-1937681662">Wenn Sie genug Kraft haben, können Sie diese Fähigkeit tippen zu beginnen für sie auszuwählen Ziele. Hinweis: Sie werden nicht in der Lage sein, es zu wählen, wenn es keine gültigen Ziele sind.</Text>
+	<Text ID="ability.tutorial.3" TranslateType="Auto" TranslatedHash="902052048">Wenn Sie genug Kraft haben, können Sie diese Fähigkeit tippen zu beginnen für sie auszuwählen Ziele. Beachten Sie, werden Sie nicht in der Lage sein, um es auszuwählen, wenn es keine gültigen Ziele sind.</Text>
 	<Text ID="plate.tutorial" TranslateType="Auto" TranslatedHash="-378210030">Dies ist eine Platte. Wer passt auf dieses, es zu brechen.</Text>
 	<Text ID="spreader.tutorial" TranslateType="Auto" TranslatedHash="-1730505209">Dies ist ein Streufeld. Wer passt in den Fliesen umgebenden es zu entfernen und stoppen es in diesem Zug zu verbreiten.</Text>
 	<Text ID="card.containsshop" TranslateType="Auto" TranslatedHash="1437245543">Diese Begegnung enthält ein Geschäft.</Text>
 	<Text ID="card.unknownreward" TranslateType="Auto" TranslatedHash="-1611710601">Haben sie eine unbekannte Chance unbekannt Belohnungen zu gewinnen.</Text>
-	<Text ID="card.rewardchance" TranslateType="Auto" TranslatedHash="2019625802">Haben eine{Chance}Chance zu gewinnen{Reward}Belohnung.</Text>
+	<Text ID="card.rewardchance" TranslateType="Auto" TranslatedHash="2019625802">Haben Sie einen {Chance} Chance zu gewinnen {Reward} Belohnungen.</Text>
 	<Text ID="card.willadvance" TranslateType="Auto" TranslatedHash="1411293308">Abschließen dieser Begegnung wird es dazu führen, zu fördern.</Text>
 	<Text ID="cardsource.deck" TranslateType="Auto" TranslatedHash="-742094546">Diese Begegnung kam aus dem Begegnungsdeck.</Text>
 	<Text ID="cardsource.character" TranslateType="Auto" TranslatedHash="746358198">Diese Begegnung kam aus dem aktuellen Charakter.</Text>
@@ -145,15 +145,15 @@
 	<Text ID="statistic.buffduration" TranslateType="Auto" TranslatedHash="-1073275199">Buff Dauer</Text>
 	<Text ID="statistic.luck" TranslateType="Auto" TranslatedHash="2379729">Glück</Text>
 	<Text ID="statistic.vampiricstrikes" TranslateType="Auto" TranslatedHash="1164249202">Vampiric Strikes</Text>
-	<Text ID="statistic.health.description" TranslateType="Auto" TranslatedHash="1739245245">Die Zahl der Angriffe kann man vor dieing nehmen.</Text>
+	<Text ID="statistic.health.description" TranslateType="Auto" TranslatedHash="1299227753">Die Zahl der Angriffe kann man vor dem Tod nehmen.</Text>
 	<Text ID="statistic.matchdamage.description" TranslateType="Auto" TranslatedHash="-937411760">Der Bonusschaden Sie das erste Mal zu tun, um Ihr Ergebnis neben ein beschädigende Objekt in jeder Runde.</Text>
 	<Text ID="statistic.abilitydamage.description" TranslateType="Auto" TranslatedHash="-594150834">Der Bonusschaden Sie tun mit Specials und Fähigkeiten.</Text>
 	<Text ID="statistic.pierce.description" TranslateType="Auto" TranslatedHash="1780413089">Die Höhe des Schadens Widerstand entfernen Sie jedes Mal, wenn Sie etwas mit Schaden Widerstand getroffen.</Text>
 	<Text ID="statistic.powergain.description" TranslateType="Auto" TranslatedHash="-1214613458">Die Bonus-Power gewinnen Sie das erste Mal Strom in jeder Runde gewinnen.</Text>
 	<Text ID="statistic.bonusgold.description" TranslateType="Auto" TranslatedHash="-502527789">Die Bonusmultiplikator Sie jedes Mal, wenn Sie Gold gewinnen gewinnen.</Text>
-	<Text ID="statistic.haste.description" TranslateType="Auto" TranslatedHash="1107095817">Wie viel schneller Sie sich bewegen. Dadurch erhöht sich drehen Zählung, Verzögerung zwischen Monster-Attacken und Fähigkeiten und Buff Dauer.</Text>
+	<Text ID="statistic.haste.description" TranslateType="Auto" TranslatedHash="504448476">Wie viel schneller Sie sich bewegen. Es erhöht die Umdrehungszahl, die Verzögerung zwischen Monster-Attacken und Fähigkeiten und Buff Dauer.</Text>
 	<Text ID="statistic.regeneration.description" TranslateType="Auto" TranslatedHash="-1788362379">Die Menge der Gesundheit regenerieren Sie in jeder Runde.</Text>
-	<Text ID="statistic.berserk.description" TranslateType="Auto" TranslatedHash="-502193063">Wenn weniger als die Hälfte der Gesundheit ist dies die Menge{MatchDamage}.{AbilityDamage}, und{PowerGain}erhöht.</Text>
+	<Text ID="statistic.berserk.description" TranslateType="Auto" TranslatedHash="-502193063">Wenn weniger als die Hälfte der Gesundheit dies die Menge {MatchDamage}, {AbilityDamage} und {PowerGain} erhöht.</Text>
 	<Text ID="statistic.pricereduction.description" TranslateType="Auto" TranslatedHash="1807591934">Die prozentuale Verringerung des Preises von Artikeln aus einem Geschäft.</Text>
 	<Text ID="statistic.aegis.description" TranslateType="Auto" TranslatedHash="-1340618061">Die Chance, den Schaden von einem Angriff zu blockieren, wie es trifft.</Text>
 	<Text ID="statistic.counter.description" TranslateType="Auto" TranslatedHash="430655623">Bei Schäden, die durch einen Angriff nehmen, um die Chance, trifft bei einem zufälligen Feind zurück.</Text>
@@ -177,8 +177,8 @@
 	<Text ID="chance.certain" TranslateType="Auto" TranslatedHash="668929186">sicher</Text>
 	<Text ID="questprogress.currentencounter" TranslateType="Auto" TranslatedHash="-1008577965">Die aktuelle Begegnung auf der Suche.</Text>
 	<Text ID="questprogress.shop" TranslateType="Auto" TranslatedHash="-1818847513">Eine Begegnung ein Geschäft enthält.</Text>
-	<Text ID="questprogress.questencounter" TranslateType="Auto" TranslatedHash="-73980584">Eine Suche Begegnung.</Text>
-	<Text ID="questprogress.randomencounter" TranslateType="Auto" TranslatedHash="1402060473">Eine zufällige Begegnung.</Text>
+	<Text ID="questprogress.questencounter" TranslateType="Auto" TranslatedHash="-1707370172">Eine feste Streben Begegnung.</Text>
+	<Text ID="questprogress.randomencounter" TranslateType="Auto" TranslatedHash="388430507">Eine zufällige Begegnung aus dem Deck.</Text>
 	<Text ID="ability.powercost" TranslateType="Auto" TranslatedHash="-1920187832">Kraftkosten</Text>
 	<Text ID="ability.usagesperencounter" TranslateType="Auto" TranslatedHash="252976418">Nutzungen pro Begegnung</Text>
 	<Text ID="ability.remainingusages" TranslateType="Auto" TranslatedHash="1224056988">verbleibende Nutzungen</Text>

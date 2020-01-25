@@ -10,7 +10,7 @@ Luminaris
 Necroracia
 Midas
 Hector
-Fireshot
+fireshot
 balefire
 golem
 golems
@@ -21,3 +21,11 @@ Alchemists Guild
 Order of the Golden Sun
 Order of the Sun
 Adventurers Guild
+spellbook
+greenskin
+greenskins
+ensorcelled
+spellcasting
+MatchDamage
+AbilityDamage
+PowerGain

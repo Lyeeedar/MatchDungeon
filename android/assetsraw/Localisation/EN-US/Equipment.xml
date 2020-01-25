@@ -5,7 +5,7 @@
 	<Text ID="ApprenticeFocus.OffHand.Name:c4a4d753-cf12-4144-bb33-98c76fb760c8" TranslateType="Auto" TranslatedHash="1739585385">Apprentice Focus</Text>
 	<Text ID="ApprenticeRobes.Body.Description:51634e7b-b21c-4640-ba79-3291cf4d4eda" TranslateType="Auto" TranslatedHash="-134085782">The robes of an apprentice mage. Ensorcelled to enhance the speed of spellcasting.</Text>
 	<Text ID="ApprenticeRobes.Body.Name:c09029e5-04a5-4890-ba3a-fa1449d472d7" TranslateType="Auto" TranslatedHash="1750666180">Apprentice Robes</Text>
-	<Text ID="BeltOfStrength.Body.Description:5b514145-262e-4d03-9f1d-cfe8045b35e9" TranslateType="Auto" TranslatedHash="-1559299152">A belt enchanted to enhance the damage of your attacks.</Text>
+	<Text ID="BeltOfStrength.Body.Description:5b514145-262e-4d03-9f1d-cfe8045b35e9" TranslateType="Auto" TranslatedHash="596087925">A belt enchanted to add bonus damage to your attacks.</Text>
 	<Text ID="BeltOfStrength.Body.Name:64efd2ef-24cb-4fe3-987e-6a9c24d609d3" TranslateType="Auto" TranslatedHash="-907348715">Belt of Strength</Text>
 	<Text ID="BootsOfSpeed.Body.Description:acb7e66b-ab03-4076-8c4c-099d857f35e6" TranslateType="Auto" TranslatedHash="-1425199598">These boots make you move and react much faster. Everyone else seems to merely crawl along.</Text>
 	<Text ID="BootsOfSpeed.Body.Name:38dd697a-3353-4194-a48b-e5d98b65a082" TranslateType="Auto" TranslatedHash="317744701">Boots of Speed</Text>
@@ -13,13 +13,13 @@
 	<Text ID="Bow.MainHand.Name:20b62d4b-b525-476f-826a-d3e26ba21775" TranslateType="Auto" TranslatedHash="66986">Bow</Text>
 	<Text ID="Breastplate.Body.Description:b1f655a9-64e1-4d0a-b065-19f51e3bda18" TranslateType="Auto" TranslatedHash="-1357688992">A single breastplate, offering high protection from just a single direction. Requires skill to use.</Text>
 	<Text ID="Breastplate.Body.Name:e15704b4-e53d-4033-abcb-f442e936b734" TranslateType="Auto" TranslatedHash="-1766333751">Breastplate</Text>
-	<Text ID="ChampionsMedal.Head.Description:7dacc15d-fb41-48f9-b9fc-e3a6306d1c0d" TranslateType="Auto" TranslatedHash="607470351">The medal awarded to winners of the new adventurers tournament. Enchanted with powerful magic. Merchants will give better prices to people wearing this.</Text>
+	<Text ID="ChampionsMedal.Head.Description:7dacc15d-fb41-48f9-b9fc-e3a6306d1c0d" TranslateType="Auto" TranslatedHash="130570831">The medal awarded to winners of the Adventurers Tournament. Enchanted with powerful magic. Merchants will give better prices to people wearing this.</Text>
 	<Text ID="ChampionsMedal.Head.Name:add40e0f-f1d7-4d65-a125-e9c8983d5321" TranslateType="Auto" TranslatedHash="769576001">Champions Medal</Text>
 	<Text ID="ClothGambeson.Body.Description:a059da6d-1ddf-406d-9b75-20137ec7ebe2" TranslateType="Auto" TranslatedHash="-2099956412">A thick padded jacket, providing minimal protection.</Text>
 	<Text ID="ClothGambeson.Body.Name:7f6e5987-c849-4aa9-856a-e66b015f0ba5" TranslateType="Auto" TranslatedHash="575035807">Cloth Jambeson</Text>
 	<Text ID="CrownOfHector.Head.Description:ebe13852-80ad-4d89-afb1-7456fa8693c1" TranslateType="Auto" TranslatedHash="-1366094041">A golden crown, inlaid with gems. Contains powerful enchantments that gives the wearer great strength.</Text>
 	<Text ID="CrownOfHector.Head.Name:78399ca1-a256-4ccd-bd09-28f78a67ba7f" TranslateType="Auto" TranslatedHash="1707973329">Crown of Hector</Text>
-	<Text ID="DistressFlare.OffHand.Description:31d5a12e-7505-4f26-9961-f0fe6f58e4a5" TranslateType="Auto" TranslatedHash="-788142473">A alchemical flare that can be shot into the air to signal that you need assistance. Another adventurer will surely come to you aid.</Text>
+	<Text ID="DistressFlare.OffHand.Description:31d5a12e-7505-4f26-9961-f0fe6f58e4a5" TranslateType="Auto" TranslatedHash="38087719">An alchemical flare that can be shot into the air to signal that you need assistance. Another adventurer will surely come to your aid.</Text>
 	<Text ID="DistressFlare.OffHand.Name:14ddf26f-0701-4a11-9204-22a6e16e7107" TranslateType="Auto" TranslatedHash="-1358592153">Distress Flare</Text>
 	<Text ID="EnergyRing.OffHand.Description:f67faa5f-ff07-4f93-aecb-b9abf82bb04b" TranslateType="Auto" TranslatedHash="1605670171">A small ring, covered in sigils. Wearing it makes you feel unnatural energy run through you.</Text>
 	<Text ID="EnergyRing.OffHand.Name:4c1d9db5-45ee-4414-94b9-babe93f806a4" TranslateType="Auto" TranslatedHash="-209807160">Energy Ring</Text>
@@ -83,16 +83,16 @@
 	<Text ID="SpikedArmour.Body.Name:50da9d76-5581-4f6b-af5a-71988d34268e" TranslateType="Auto" TranslatedHash="64257202">Spiked Armour</Text>
 	<Text ID="SpikedHelmet.Head.Description:a993de1f-7c5f-4b90-93e6-7adedadf5da1" TranslateType="Auto" TranslatedHash="-1285109510">A spiked helmet. With this you can deliver a vicious headbutt.</Text>
 	<Text ID="SpikedHelmet.Head.Name:45d8db24-c173-4c52-93ff-bbcd8a0ee052" TranslateType="Auto" TranslatedHash="252623279">Spiked Helmet</Text>
-	<Text ID="SpikedShield.MainHand.Description:6d844de7-a737-4bbf-81a4-1c1937230020" TranslateType="Auto" TranslatedHash="-1681735594">You know whats better than one shield? Two shields! The best defense is a great defense after-all.</Text>
+	<Text ID="SpikedShield.MainHand.Description:6d844de7-a737-4bbf-81a4-1c1937230020" TranslateType="Auto" TranslatedHash="1077835839">You know what's better than one shield? Two shields! The best defence is a great defence after-all.</Text>
 	<Text ID="SpikedShield.MainHand.Name:a898b62c-12b5-40ed-8104-2a87728860b7" TranslateType="Auto" TranslatedHash="570217643">Spiked Shield</Text>
 	<Text ID="Torch.OffHand.Description:e653ee91-a5da-4299-b352-0c2fc66536ca" TranslateType="Auto" TranslatedHash="1934583680">A burning torch, great for lighting up places and setting fire to things.</Text>
 	<Text ID="Torch.OffHand.Name:cd454d91-fc3c-4062-bf3f-1f78c6f7118d" TranslateType="Auto" TranslatedHash="80995292">Torch</Text>
-	<Text ID="Warpaint.Body.Description:388b7c4a-813e-4768-be30-c75113e7e828" TranslateType="Auto" TranslatedHash="-553799633">This paint drives you into a combat frenzy, lending great power to your attacks. However it doesn't provide any cover at all, you'll be completely exposed.</Text>
+	<Text ID="Warpaint.Body.Description:388b7c4a-813e-4768-be30-c75113e7e828" TranslateType="Auto" TranslatedHash="1444548223">This paint drives you into a combat frenzy, lending great power to your attacks. However, it doesn't provide any cover at all. You'll be completely exposed.</Text>
 	<Text ID="Warpaint.Body.Name:ac93b931-7164-4e77-8e40-a3e218fdfb7f" TranslateType="Auto" TranslatedHash="564339350">Warpaint</Text>
-	<Text ID="Whip.MainHand.Description:f3f0e387-35c5-4ae5-ab64-a9107cf62a7e" TranslateType="Auto" TranslatedHash="-745963367">A whip, in the hands of a skilled practitioner it can be a painful weapon.</Text>
+	<Text ID="Whip.MainHand.Description:f3f0e387-35c5-4ae5-ab64-a9107cf62a7e" TranslateType="Auto" TranslatedHash="-965446281">A whip. In the hands of a skilled practitioner it can be a painful weapon.</Text>
 	<Text ID="Whip.MainHand.Name:e0359222-8205-4f6c-afdf-04753b3687fb" TranslateType="Auto" TranslatedHash="2695128">Whip</Text>
 	<Text ID="WizardsRobes.Body.Description:32159260-fab8-4fc5-bbed-b80609f4307c" TranslateType="Auto" TranslatedHash="1963325931">The robes of a mage. Ensorcelled to enhance the speed and power of spellcasting.</Text>
 	<Text ID="WizardsRobes.Body.Name:ddf4cf25-2cf4-4364-82a2-16485ef75e83" TranslateType="Auto" TranslatedHash="1415788347">Wizards Robes</Text>
-	<Text ID="Zweihander.MainHand.Description:9b07db39-cf75-41e9-a584-33ef4ed1982b" TranslateType="Auto" TranslatedHash="-1168108789">A giant, heavy blade. Makes you slow but a single hit from this beast will ruin anyones day.</Text>
+	<Text ID="Zweihander.MainHand.Description:9b07db39-cf75-41e9-a584-33ef4ed1982b" TranslateType="Auto" TranslatedHash="1731051674">A giant, heavy blade. Makes you slow but a single hit from this beast will ruin anyone's day.</Text>
 	<Text ID="Zweihander.MainHand.Name:25be6bd3-7f57-4918-ade8-fb07d23e9b1d" TranslateType="Auto" TranslatedHash="854117725">Zweihander</Text>
 </Localisation>

@@ -58,22 +58,11 @@ class Localiser
 	val languages = arrayOf("EN-US", "DE")
 	val translatedText = ObjectMap<String, String>()
 
-	val dictionary = ObjectSet<String>()
 	val slang = ObjectMap<String, String>()
-	val gameNames = Array<String>()
 	val gameWords = Array<String>()
-
-	val apostraphedWords = arrayOf("you'", "it'", "we'", "won'", "can'", "they'")
-	val pluralisers = arrayOf("s", "'s", "ies", "es")
-	val yers = arrayOf("y", "ly", "ily", "ingly")
-	val eers = arrayOf("en", "ed", "er")
-	val others = arrayOf("ing", "n't", "ion", "able", "ish", "ness")
 
 	init
 	{
-		dictionary.addAll(File("../assetsraw/Localisation/Dictionaries/GeneralDictionary.txt").readLines())
-		dictionary.addAll(File("../assetsraw/Localisation/Dictionaries/GameDictionary.txt").readLines())
-		gameNames.addAll(File("../assetsraw/Localisation/Dictionaries/GameNameList.txt").readLines())
 		gameWords.addAll(File("../assetsraw/Localisation/Dictionaries/GameWords.txt").readLines())
 
 		for (slangRaw in File("../assetsraw/Localisation/Dictionaries/SlangDictionary.txt").readLines())
@@ -83,7 +72,6 @@ class Localiser
 			val actualWord = split[1]
 
 			slang[slangWord] = actualWord
-			dictionary.add(slangWord)
 		}
 
 		println("Dictionaries loaded")
@@ -285,6 +273,10 @@ class Localiser
 					languageTool.disableRule(rule.id)
 				}
 			}
+			else if (rule.id == "RUDE_SARCASTIC" || rule.id == "PROFANITY")
+			{
+				languageTool.disableRule(rule.id)
+			}
 		}
 	}
 
@@ -383,6 +375,30 @@ class Localiser
 				{
 					val context = "ID: $id\nText: $text\nFile: ${file.path}\nLine: $i"
 					doSentenceAnalysis(text, context)
+
+					val lastChar = text.last()
+					val endsInPunctuation = lastChar == '.' || lastChar == '?' || lastChar == '!' || lastChar == '"'
+					if (id.contains(".Title"))
+					{
+						if (endsInPunctuation)
+						{
+							throw RuntimeException("Title ends with a full stop!\n$context")
+						}
+					}
+					else if (id.contains(".Choice"))
+					{
+						if (endsInPunctuation)
+						{
+							throw RuntimeException("Choice ends with a full stop!\n$context")
+						}
+					}
+					else if (id.contains(".Description") || id.contains("Line"))
+					{
+						if (!endsInPunctuation)
+						{
+							throw RuntimeException("Sentence does not end with a full stop!\n$context")
+						}
+					}
 				}
 				catch (ex: Exception)
 				{
@@ -434,138 +450,6 @@ class Localiser
 		println("Validated English")
 	}
 
-	fun spellCheck(text: String, context: String)
-	{
-		val isTitle = !(text.contains('.') || text.contains(','))
-
-		if (!isTitle && text.last().isLetterOrDigit())
-		{
-			throw RuntimeException("Text did not end in a full stop!\n$context")
-		}
-
-		val sentences = text.split('.', ':', '?', '!', '"').map { it.trim() }.filter { it.isNotEmpty() }.toGdxArray()
-		for (sentence in sentences)
-		{
-			val sentenceContext = "Sentence: $sentence\n$context"
-
-			if (!isTitle && (sentence[0].isLetter() && !sentence[0].isUpperCase()))
-			{
-				throw RuntimeException("Sentence did not start with an uppercase letter.\n$sentenceContext")
-			}
-
-			var sentenceSimple = sentence
-			for (name in gameNames)
-			{
-				sentenceSimple = sentenceSimple.replace(name, "---")
-			}
-
-			val words = sentenceSimple.split(' ')
-			var firstWord = true
-			outer@ for (word in words)
-			{
-				var lowerWord = word.toLowerCase(Locale.ENGLISH).filter { it.isLetterOrDigit() || it == '\'' || it == '-' || it == '{' || it == '}' }
-
-				if (lowerWord == "---") continue
-				if (lowerWord.startsWith("{") && lowerWord.endsWith("}")) continue
-
-				if (lowerWord.startsWith('\''))
-				{
-					lowerWord = lowerWord.substring(1)
-				}
-				if (lowerWord.endsWith('\''))
-				{
-					lowerWord = lowerWord.substring(0, lowerWord.length-1)
-				}
-
-				val wordContext = "RawWord: $word\nWord: $lowerWord\n$sentenceContext"
-
-				if (lowerWord == "i" || lowerWord.startsWith("i'"))
-				{
-					if (!word.filter { it.isLetterOrDigit() }[0].isUpperCase())
-					{
-						throw RuntimeException("$word not uppercase\n$wordContext")
-					}
-				}
-				else if (!firstWord && !isTitle && word[0].isLetter() && word[0].isUpperCase() && dictionary.contains(lowerWord) && !word.all { it.isUpperCase() })
-				{
-					throw RuntimeException("Word capitalised when it shouldnt be\n$wordContext")
-				}
-				else if (!dictionary.contains(lowerWord))
-				{
-					if (apostraphedWords.any { lowerWord.startsWith(it) })
-					{
-						continue
-					}
-					for (suffix in pluralisers)
-					{
-						if (lowerWord.endsWith(suffix))
-						{
-							val root = lowerWord.substring(0, lowerWord.length-suffix.length)
-
-							if (dictionary.contains(root) || dictionary.contains(root + "y") || dictionary.contains(root + "e"))
-							{
-								continue@outer
-							}
-						}
-					}
-					for (suffix in yers)
-					{
-						if (lowerWord.endsWith(suffix))
-						{
-							val root = lowerWord.substring(0, lowerWord.length-suffix.length)
-
-							if (dictionary.contains(root) || dictionary.contains(root + "e"))
-							{
-								continue@outer
-							}
-						}
-					}
-					for (suffix in eers)
-					{
-						if (lowerWord.endsWith(suffix))
-						{
-							if (dictionary.contains(lowerWord.substring(0, lowerWord.length-1)))
-							{
-								continue@outer
-							}
-							if (dictionary.contains(lowerWord.substring(0, lowerWord.length-2)))
-							{
-								continue@outer
-							}
-						}
-					}
-					for (suffix in others)
-					{
-						if (lowerWord.endsWith(suffix))
-						{
-							val root = lowerWord.substring(0, lowerWord.length-suffix.length)
-
-							if (dictionary.contains(root) || dictionary.contains(root + "e"))
-							{
-								continue@outer
-							}
-						}
-					}
-
-					if (lowerWord.toIntOrNull() != null)
-					{
-						val asNum = lowerWord.toInt()
-						if (!isTitle && asNum < 10)
-						{
-							System.err.println("Low number as digits in a sentence\n$wordContext")
-						}
-
-						continue
-					}
-
-					throw RuntimeException("Unknown word\n$wordContext")
-				}
-
-				firstWord = false
-			}
-		}
-	}
-
 	fun removeSlang(rawText: String): String
 	{
 		val splitSentence = splitSentence(rawText)
@@ -590,6 +474,11 @@ class Localiser
 				// this is a title
 				return
 			}
+			else if (words.size < 4)
+			{
+				// this is a short thing
+				return
+			}
 		}
 
 		val text = removeSlang(rawText)
@@ -602,13 +491,25 @@ class Localiser
 			System.err.println(context)
 			System.err.println("")
 
+			var failed = false
 			for (match in matches)
 			{
-				System.err.println(match.message + "\n" + match.suggestedReplacements)
+				System.err.println(text.substring(match.fromPos, match.toPos))
+				System.err.println(match.message)
+				System.err.println(match.suggestedReplacements)
 				System.err.println("\n-----------------------------------------------------\n")
+
+				if (match.message.startsWith("Possible agreement error") && match.message.contains("(Some collective nouns can be treated as both singular and plural, so 'are' is not always incorrect.)"))
+				{
+					// lets ignore this one
+				}
+				else
+				{
+					failed = true
+				}
 			}
 
-			throw RuntimeException("Check failed")
+			if (failed) throw RuntimeException("Check failed")
 		}
 	}
 

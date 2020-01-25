@@ -5,7 +5,7 @@
 	<Text ID="ApprenticeFocus.OffHand.Name:c4a4d753-cf12-4144-bb33-98c76fb760c8" TranslateType="Auto" TranslatedHash="1739585385">Apprentice Fokus</Text>
 	<Text ID="ApprenticeRobes.Body.Description:51634e7b-b21c-4640-ba79-3291cf4d4eda" TranslateType="Auto" TranslatedHash="-134085782">Die Roben eines Lehrlings Magier. Verwunschene die Geschwindigkeit von Zaubern zu verbessern.</Text>
 	<Text ID="ApprenticeRobes.Body.Name:c09029e5-04a5-4890-ba3a-fa1449d472d7" TranslateType="Auto" TranslatedHash="1750666180">Apprentice Robes</Text>
-	<Text ID="BeltOfStrength.Body.Description:5b514145-262e-4d03-9f1d-cfe8045b35e9" TranslateType="Auto" TranslatedHash="-1559299152">Ein Gürtel verzaubert den Schaden von Angriffen zu verbessern.</Text>
+	<Text ID="BeltOfStrength.Body.Description:5b514145-262e-4d03-9f1d-cfe8045b35e9" TranslateType="Auto" TranslatedHash="596087925">Ein Gürtel verzauberte Bonusschaden auf Ihre Angriffe hinzuzufügen.</Text>
 	<Text ID="BeltOfStrength.Body.Name:64efd2ef-24cb-4fe3-987e-6a9c24d609d3" TranslateType="Auto" TranslatedHash="-907348715">Gürtel der Stärke</Text>
 	<Text ID="BootsOfSpeed.Body.Description:acb7e66b-ab03-4076-8c4c-099d857f35e6" TranslateType="Auto" TranslatedHash="-1425199598">Diese Stiefel machen Sie sich bewegen und reagieren viel schneller. Jeder scheint sonst nur zu kriechen entlang.</Text>
 	<Text ID="BootsOfSpeed.Body.Name:38dd697a-3353-4194-a48b-e5d98b65a082" TranslateType="Auto" TranslatedHash="317744701">Stiefel der Geschwindigkeit</Text>
@@ -13,13 +13,13 @@
 	<Text ID="Bow.MainHand.Name:20b62d4b-b525-476f-826a-d3e26ba21775" TranslateType="Auto" TranslatedHash="66986">Bogen</Text>
 	<Text ID="Breastplate.Body.Description:b1f655a9-64e1-4d0a-b065-19f51e3bda18" TranslateType="Auto" TranslatedHash="-1357688992">Ein einzelner Brustschildlein, hoher Schutz von nur einer einzigen Richtung an. Erfordert Geschick zu nutzen.</Text>
 	<Text ID="Breastplate.Body.Name:e15704b4-e53d-4033-abcb-f442e936b734" TranslateType="Auto" TranslatedHash="-1766333751">Brustplatte</Text>
-	<Text ID="ChampionsMedal.Head.Description:7dacc15d-fb41-48f9-b9fc-e3a6306d1c0d" TranslateType="Auto" TranslatedHash="607470351">Die Medaille ausgezeichnet an die Gewinner des neuen Abenteurern Turnier. Verzaubert mit mächtiger Magie. Händler werden bessere Preise zu Menschen geben diese zu tragen.</Text>
+	<Text ID="ChampionsMedal.Head.Description:7dacc15d-fb41-48f9-b9fc-e3a6306d1c0d" TranslateType="Auto" TranslatedHash="130570831">Die Medaille verliehen Gewinner des Adventurers Turnier. Verzaubert mit mächtiger Magie. Händler werden bessere Preise zu Menschen geben diese zu tragen.</Text>
 	<Text ID="ChampionsMedal.Head.Name:add40e0f-f1d7-4d65-a125-e9c8983d5321" TranslateType="Auto" TranslatedHash="769576001">Champions-Medaille</Text>
 	<Text ID="ClothGambeson.Body.Description:a059da6d-1ddf-406d-9b75-20137ec7ebe2" TranslateType="Auto" TranslatedHash="-2099956412">Eine dicke wattierte Jacke, Bereitstellen minimalen Schutz.</Text>
 	<Text ID="ClothGambeson.Body.Name:7f6e5987-c849-4aa9-856a-e66b015f0ba5" TranslateType="Auto" TranslatedHash="575035807">Tuch Jambeson</Text>
 	<Text ID="CrownOfHector.Head.Description:ebe13852-80ad-4d89-afb1-7456fa8693c1" TranslateType="Auto" TranslatedHash="-1366094041">Eine goldene Krone, mit eingelegten Edelsteinen. Enthält leistungsstarke Verzauberungen, die den Träger große Stärke verleiht.</Text>
 	<Text ID="CrownOfHector.Head.Name:78399ca1-a256-4ccd-bd09-28f78a67ba7f" TranslateType="Auto" TranslatedHash="1707973329">Krone von Hector</Text>
-	<Text ID="DistressFlare.OffHand.Description:31d5a12e-7505-4f26-9961-f0fe6f58e4a5" TranslateType="Auto" TranslatedHash="-788142473">Eine alchemistische Fackel, die in die Luft geschossen werden kann, um zu signalisieren, dass Sie Hilfe benötigen. Ein anderer Abenteurer wird sicherlich kommen zu Ihnen helfen.</Text>
+	<Text ID="DistressFlare.OffHand.Description:31d5a12e-7505-4f26-9961-f0fe6f58e4a5" TranslateType="Auto" TranslatedHash="38087719">Eine alchemistische Fackel, die in die Luft geschossen werden kann, um zu signalisieren, dass Sie Hilfe benötigen. Ein anderer Abenteurer kommt sicherlich zu Hilfe.</Text>
 	<Text ID="DistressFlare.OffHand.Name:14ddf26f-0701-4a11-9204-22a6e16e7107" TranslateType="Auto" TranslatedHash="-1358592153">Leuchtkugel</Text>
 	<Text ID="EnergyRing.OffHand.Description:f67faa5f-ff07-4f93-aecb-b9abf82bb04b" TranslateType="Auto" TranslatedHash="1605670171">Ein kleiner Ring, in sigils bedeckt. Das Tragen macht es Sie durch Sie unnatürliche Energie laufen fühlen.</Text>
 	<Text ID="EnergyRing.OffHand.Name:4c1d9db5-45ee-4414-94b9-babe93f806a4" TranslateType="Auto" TranslatedHash="-209807160">Energiering</Text>
@@ -83,16 +83,16 @@
 	<Text ID="SpikedArmour.Body.Name:50da9d76-5581-4f6b-af5a-71988d34268e" TranslateType="Auto" TranslatedHash="64257202">Spiked Rüstung</Text>
 	<Text ID="SpikedHelmet.Head.Description:a993de1f-7c5f-4b90-93e6-7adedadf5da1" TranslateType="Auto" TranslatedHash="-1285109510">Ein Pickelhaube. Mit diesem können Sie ein Teufelskopfstoß liefern.</Text>
 	<Text ID="SpikedHelmet.Head.Name:45d8db24-c173-4c52-93ff-bbcd8a0ee052" TranslateType="Auto" TranslatedHash="252623279">Pickelhaube</Text>
-	<Text ID="SpikedShield.MainHand.Description:6d844de7-a737-4bbf-81a4-1c1937230020" TranslateType="Auto" TranslatedHash="-1681735594">Sie wissen, was ist besser als ein Schild? Zwei Schilde! Die beste Verteidigung ist eine große Verteidigung nach-all.</Text>
+	<Text ID="SpikedShield.MainHand.Description:6d844de7-a737-4bbf-81a4-1c1937230020" TranslateType="Auto" TranslatedHash="1077835839">Sie wissen, was als ein Schild besser ist? Zwei Schilde! Die beste Verteidigung ist eine große Verteidigung nach-all.</Text>
 	<Text ID="SpikedShield.MainHand.Name:a898b62c-12b5-40ed-8104-2a87728860b7" TranslateType="Auto" TranslatedHash="570217643">Spiked Schild</Text>
 	<Text ID="Torch.OffHand.Description:e653ee91-a5da-4299-b352-0c2fc66536ca" TranslateType="Auto" TranslatedHash="1934583680">Eine brennende Fackel, ideal für Orte, Beleuchtung und in Brand gesteckt, um die Dinge.</Text>
 	<Text ID="Torch.OffHand.Name:cd454d91-fc3c-4062-bf3f-1f78c6f7118d" TranslateType="Auto" TranslatedHash="80995292">Fackel</Text>
-	<Text ID="Warpaint.Body.Description:388b7c4a-813e-4768-be30-c75113e7e828" TranslateType="Auto" TranslatedHash="-553799633">Diese Farbe treibt Sie in einen Kampfrausch, verleiht große Macht auf Ihre Angriffe. Aber es bietet keine Abdeckung überhaupt, werden Sie vollständig ausgesetzt.</Text>
+	<Text ID="Warpaint.Body.Description:388b7c4a-813e-4768-be30-c75113e7e828" TranslateType="Auto" TranslatedHash="1444548223">Diese Farbe treibt Sie in einen Kampfrausch, verleiht große Macht auf Ihre Angriffe. Jedoch bietet es keine Abdeckung überhaupt. Sie werden vollständig ausgesetzt werden.</Text>
 	<Text ID="Warpaint.Body.Name:ac93b931-7164-4e77-8e40-a3e218fdfb7f" TranslateType="Auto" TranslatedHash="564339350">Kriegsbemalung</Text>
-	<Text ID="Whip.MainHand.Description:f3f0e387-35c5-4ae5-ab64-a9107cf62a7e" TranslateType="Auto" TranslatedHash="-745963367">Eine Peitsche, in den Händen eines erfahrenen Praktikers kann es eine schmerzhafte Waffe sein.</Text>
+	<Text ID="Whip.MainHand.Description:f3f0e387-35c5-4ae5-ab64-a9107cf62a7e" TranslateType="Auto" TranslatedHash="-965446281">Eine Peitsche. In den Händen eines erfahrenen Praktikers kann es eine schmerzhafte Waffe sein.</Text>
 	<Text ID="Whip.MainHand.Name:e0359222-8205-4f6c-afdf-04753b3687fb" TranslateType="Auto" TranslatedHash="2695128">Peitsche</Text>
 	<Text ID="WizardsRobes.Body.Description:32159260-fab8-4fc5-bbed-b80609f4307c" TranslateType="Auto" TranslatedHash="1963325931">Die Roben eines Magiers. Verwunschene die Geschwindigkeit und Leistung von Zauber zu verbessern.</Text>
 	<Text ID="WizardsRobes.Body.Name:ddf4cf25-2cf4-4364-82a2-16485ef75e83" TranslateType="Auto" TranslatedHash="1415788347">Wizards Robes</Text>
-	<Text ID="Zweihander.MainHand.Description:9b07db39-cf75-41e9-a584-33ef4ed1982b" TranslateType="Auto" TranslatedHash="-1168108789">Eine riesige, schwere Klinge. Macht Sie verlangsamen, aber ein einziger Treffer von diesem Tier wird anyones Tag verderben.</Text>
+	<Text ID="Zweihander.MainHand.Description:9b07db39-cf75-41e9-a584-33ef4ed1982b" TranslateType="Auto" TranslatedHash="1731051674">Eine riesige, schwere Klinge. Machen Sie verlangsamen, aber ein einziger Treffer von diesem Tiere jedermann Tag ruinieren.</Text>
 	<Text ID="Zweihander.MainHand.Name:25be6bd3-7f57-4918-ade8-fb07d23e9b1d" TranslateType="Auto" TranslatedHash="854117725">Renaissance-Bidenhänder</Text>
 </Localisation>

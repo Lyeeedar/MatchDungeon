@@ -8,3 +8,8 @@ hey:hello
 doin:doing
 bein:being
 somefin:something
+wanna:want to
+yer:your
+fer:for
+gotten:got
+ya:you

@@ -44,9 +44,9 @@
 	<Text ID="questscreen.tutorial.4">Here you can see your current gold. You can use this to buy equipment in shops, or during encounters.</Text>
 
 	<Text ID="deckscreen.toomanyencounters">Deck contains too many encounters.</Text>
-	<Text ID="deckscreen.toofewencounters">Deck contains too few encounters.</Text>
+	<Text ID="deckscreen.toofewencounters">Deck does not contain enough encounters.</Text>
 	<Text ID="deckscreen.toomuchequipment">Deck contains too much equipment.</Text>
-	<Text ID="deckscreen.toofewequipment">Deck contains too few equipment.</Text>
+	<Text ID="deckscreen.toofewequipment">Deck does not contain enough equipment.</Text>
 	<Text ID="deckscreen.return">Return</Text>
 	<Text ID="deckscreen.remove">Remove</Text>
 	<Text ID="deckscreen.add">Add</Text>
@@ -80,7 +80,7 @@
 	<Text ID="completioncondition.customorb.tutorial">This is the count you need to match to win.</Text>
 	<Text ID="completioncondition.customorb.description">Match</Text>
 	<Text ID="completioncondition.die.tutorial">This is your remaining health. Attacks will reduce it, and when it reaches 0 you will fail the level.</Text>
-	<Text ID="completioncondition.die.description">Don't let your hp reach 0.</Text>
+	<Text ID="completioncondition.die.description">Don't let your health reach 0.</Text>
 	<Text ID="completioncondition.kill.tutorial">This is the count of enemies you need to kill to win.</Text>
 	<Text ID="completioncondition.kill.description">Defeat all enemies.</Text>
 	<Text ID="completioncondition.match.tutorial">This is the count of orbs of each colour you need to match to win.</Text>
@@ -89,10 +89,10 @@
 	<Text ID="completioncondition.plate.description">Break</Text>
 	<Text ID="completioncondition.sink.tutorial">This is the count of items you need to get to the bottom of the board to win. If you can't see them on the board then they'll be in chests, inside blocks, or in enemies.</Text>
 	<Text ID="completioncondition.sink.description">Move {Count} to the bottom.</Text>
-	<Text ID="completioncondition.time.tutorial">This is your remaining time. When it reaches 0 you will fail the level. It will only decrease when the board isn't updating, so act fast!</Text>
+	<Text ID="completioncondition.time.tutorial">This is your remaining time. When it reaches 0, you will fail the level. It will only decrease when the board isn't updating, so act fast!</Text>
 	<Text ID="completioncondition.time.description">Complete the level within {Time} seconds.</Text>
 	<Text ID="completioncondition.time.seconds">Seconds</Text>
-	<Text ID="completioncondition.turns.tutorial">This is your remaining turn count. When it reaches 0 you will fail the level.</Text>
+	<Text ID="completioncondition.turns.tutorial">This is your remaining turn count. When it reaches 0, you will fail the level.</Text>
 	<Text ID="completioncondition.turns.description">Complete the level within {Turns} turns.</Text>
 	<Text ID="completioncondition.turns.turns">Turns</Text>
 	<Text ID="completioncondition.turns.turn">Turn</Text>
@@ -108,18 +108,18 @@
 
 	<Text ID="block.tutorial">This is a block. Match in the tiles surrounding it to break it.</Text>
 	<Text ID="chest.tutorial">This is a chest. Match in the tiles beneath this to spawn coins. When there are no more coins to spawn, it will appear empty.</Text>
-	<Text ID="sinkable.tutorial">This is a sinkable item. If you move it to the bottom of the board you will successfully sink it.</Text>
+	<Text ID="sinkable.tutorial">This is a sinkable item. If you move it to the bottom of the board, you will successfully sink it.</Text>
 	<Text ID="seal.tutorial">This orb has been sealed. It won't move until the seal is broken. To break the seal use the orb in a match.</Text>
 	<Text ID="friendly.tutorial">This is a friendly ally. Match in the surrounding tiles to replenish its health.</Text>
 	<Text ID="monster.tutorial">This is an enemy. The red bar beneath it is its remaining health. Match in the tiles surrounding it to damage it.</Text>
-	<Text ID="monster.dr.tutorial">This enemy has damage resistance, represented by the gray pips on its health bar. At the end of each turn it will replenish those pips, so focus on those big hits!</Text>
-	<Text ID="monster.stages.tutorial">This enemy has multiple stages, indicated by the orbs above its hp bar. When its hp bar is empty it will mutate into a new creature, so watch out!</Text>
+	<Text ID="monster.dr.tutorial">This enemy has damage resistance, represented by the grey pips on its health bar. At the end of each turn it will replenish those pips, so focus on those big hits!</Text>
+	<Text ID="monster.stages.tutorial">This enemy has multiple stages, indicated by the orbs above its health bar. When its health bar is empty, it will mutate into a new creature, so watch out!</Text>
 	<Text ID="monstereffect.tutorial.1">This is an attack. The pips surrounding the skull indicate the turns remaining until it activates.</Text>
-	<Text ID="monstereffect.tutorial.2">Match it like a normal orb to remove it from the board. If you fail to remove it then you will lose 1 health.</Text>
+	<Text ID="monstereffect.tutorial.2">Match it like a normal orb to remove it from the board. If you fail to remove it, then you will lose 1 health.</Text>
 
 	<Text ID="ability.tutorial.1">This is a usable ability, granted by your current equipment.</Text>
 	<Text ID="ability.tutorial.2">These pips show how much power you need to activate it.</Text>
-	<Text ID="ability.tutorial.3">When you have enough power you can tap this ability to begin to select targets for it. Note you won't be able to select it if there are no valid targets.</Text>
+	<Text ID="ability.tutorial.3">When you have enough power, you can tap this ability to begin to select targets for it. Note, you won't be able to select it if there are no valid targets.</Text>
 
 	<Text ID="plate.tutorial">This is a plate. Match on top of this to break it.</Text>
 	<Text ID="spreader.tutorial">This is a spreading field. Match in the tiles surrounding it to remove it and stop it spreading this turn.</Text>
@@ -161,13 +161,13 @@
 	<Text ID="statistic.luck">Luck</Text>
 	<Text ID="statistic.vampiricstrikes">Vampiric Strikes</Text>
 
-	<Text ID="statistic.health.description">The number of attacks you can take before dieing.</Text>
+	<Text ID="statistic.health.description">The number of attacks you can take before death.</Text>
 	<Text ID="statistic.matchdamage.description">The bonus damage you do the first time you match next to a damageable object each turn.</Text>
 	<Text ID="statistic.abilitydamage.description">The bonus damage you do with specials and abilities.</Text>
 	<Text ID="statistic.pierce.description">The amount of damage resistance you remove each time you hit something with damage resistance.</Text>
 	<Text ID="statistic.powergain.description">The bonus power you gain the first time you gain power each turn.</Text>
 	<Text ID="statistic.bonusgold.description">The bonus multiplier you gain each time you gain gold.</Text>
-	<Text ID="statistic.haste.description">How much faster you move. This increases turn count, delay between monster attacks and abilities, and buff durations.</Text>
+	<Text ID="statistic.haste.description">How much faster you move. It increases turn count, delay between monster attacks and abilities, and buff durations.</Text>
 	<Text ID="statistic.regeneration.description">The amount of health you regenerate each turn.</Text>
 	<Text ID="statistic.berserk.description">When below half health this is the amount {MatchDamage}, {AbilityDamage}, and {PowerGain} is increased.</Text>
 	<Text ID="statistic.pricereduction.description">The percentage reduction in price of items from a shop.</Text>
@@ -196,8 +196,8 @@
 
 	<Text ID="questprogress.currentencounter">The current encounter in the quest.</Text>
 	<Text ID="questprogress.shop">An encounter containing a shop.</Text>
-	<Text ID="questprogress.questencounter">A quest encounter.</Text>
-	<Text ID="questprogress.randomencounter">A random encounter.</Text>
+	<Text ID="questprogress.questencounter">A fixed quest encounter.</Text>
+	<Text ID="questprogress.randomencounter">A random encounter from the deck.</Text>
 
 	<Text ID="ability.powercost">Power Cost</Text>
 	<Text ID="ability.usagesperencounter">Usages Per Encounter</Text>

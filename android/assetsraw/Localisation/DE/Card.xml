@@ -7,7 +7,7 @@
 	<Text ID="AssaultMerchant.CardNode.Name:9673906a-375c-4864-ad16-b5877bdf82d1" TranslateType="Auto" TranslatedHash="2092581593">Alleyways</Text>
 	<Text ID="Augmenter.CardNode.Description:dbbe2ef7-18f8-4fcb-93f1-5fd7cbecd10f" TranslateType="Auto" TranslatedHash="-420068986">Es gibt einen Mann, der Ihren Körper sehr, für einen Preis verzaubern kann.</Text>
 	<Text ID="Augmenter.CardNode.Name:685b20d0-9f24-4734-9cef-0419abb715bf" TranslateType="Auto" TranslatedHash="665766622">Augmenter</Text>
-	<Text ID="BackalleyGambling.CardNode.Description:39303222-2ab6-4dac-987f-57448dece3ac" TranslateType="Auto" TranslatedHash="1622514927">In dem backalleys der Stadt viele Glücksspielringe arbeiten.</Text>
+	<Text ID="BackalleyGambling.CardNode.Description:39303222-2ab6-4dac-987f-57448dece3ac" TranslateType="Auto" TranslatedHash="-1509894575">In den Seitengassen der Stadt viele Glücksspielringe arbeiten.</Text>
 	<Text ID="BackalleyGambling.CardNode.Name:ab37fe2e-c26f-4ab7-aa7b-56d9f38bd7e8" TranslateType="Auto" TranslatedHash="-752863497">backalley Gambling</Text>
 	<Text ID="BackalleyVendor.CardNode.Description:d2db73b3-9bc2-4991-8156-a922fbb103a8" TranslateType="Auto" TranslatedHash="-1057965803">Die Gassen der Stadt bieten viele Möglichkeiten, für diejenigen bereit, sie zu erkunden.</Text>
 	<Text ID="BackalleyVendor.CardNode.Name:f94aadb1-9b43-4063-b2ae-1c3fd1279375" TranslateType="Auto" TranslatedHash="2092581593">Alleyways</Text>
@@ -25,7 +25,7 @@
 	<Text ID="Breakout.CardNode.Name:31dc34c7-17c1-4bca-acef-c70ab7033bb2" TranslateType="Auto" TranslatedHash="141993487">Ausbrechen</Text>
 	<Text ID="BreakThrough.CardNode.Description:1bf2d8fa-6876-4afb-93a2-7caf8e4aac93" TranslateType="Auto" TranslatedHash="-916471379">Der Weg ist geschlossen. Es kann nur von denen geöffnet werden, die zerschlagen kann. Holen Sie Zerschlagung.</Text>
 	<Text ID="BreakThrough.CardNode.Name:fee2659d-81f0-43eb-8a5f-7373fc5728e2" TranslateType="Auto" TranslatedHash="1093654628">Durchbrechen</Text>
-	<Text ID="BrewingTest.CardNode.Description:dae3ab4f-0e2d-4f09-b533-fd33f6428669" TranslateType="Auto" TranslatedHash="-1933693852">Beitreten Sie Alchemisten Gilde Sie haben drei Prüfungen zu nehmen. Der letzte Test ist drei Tränken mit Ihren gesammelten Kräutern zu machen.</Text>
+	<Text ID="BrewingTest.CardNode.Description:dae3ab4f-0e2d-4f09-b533-fd33f6428669" TranslateType="Auto" TranslatedHash="1877055158">Um die Alchemisten Gilde beitreten haben Sie drei Prüfungen zu nehmen. Der letzte Test ist drei Tränken mit Ihren gesammelten Kräutern zu machen.</Text>
 	<Text ID="BrewingTest.CardNode.Name:c5002acb-fd3f-4005-81e7-106ae6ee48e9" TranslateType="Auto" TranslatedHash="-840227067">Alchemy Guild 3: Testbrühung</Text>
 	<Text ID="BuriedTreasure.CardNode.Description:70ed46f1-4145-4898-a58a-658765177eaf" TranslateType="Auto" TranslatedHash="1283170721">Man kann nie wissen, was Sie finden können, wenn Sie einen graben um sich zu haben.</Text>
 	<Text ID="BuriedTreasure.CardNode.Name:f8372892-6010-44c1-a5ad-6f0987e6eb2e" TranslateType="Auto" TranslatedHash="-856923898">Vergrabener Schatz</Text>
@@ -43,7 +43,7 @@
 	<Text ID="CombatTraining.CardNode.Name:b78dd978-2898-4dd3-a55b-0a647f6bce1a" TranslateType="Auto" TranslatedHash="-406218618">Kampftraining</Text>
 	<Text ID="CorruptingAltar.CardNode.Description:3d24de20-4134-48cf-8363-8b3876b266b3" TranslateType="Auto" TranslatedHash="-1966450806">Ein Altar steht eine kurze Strecke vor Ihnen, von einer süßlich umgeben, Energie korrumpiert. Monsters drängen sich um sie, verzerrt und ermächtigt. Zerstört den Altar vor der Korruption weiter ausbreiten kann!</Text>
 	<Text ID="CorruptingAltar.CardNode.Name:c930773f-e333-4124-a39e-211e1b7f6b4b" TranslateType="Auto" TranslatedHash="432629359">verderblicher Altar</Text>
-	<Text ID="CultivationTraining.CardNode.Description:9f7df3f3-0b20-4140-a07c-35230269e20b" TranslateType="Auto" TranslatedHash="1476123238">Durch die Kanalisierung der Energie innerhalb Sie sich mit Fähigkeiten stärken können. Haben Sie genug ausgebildet?</Text>
+	<Text ID="CultivationTraining.CardNode.Description:9f7df3f3-0b20-4140-a07c-35230269e20b" TranslateType="Auto" TranslatedHash="-1819054994">Durch die Kanalisierung der Energie innerhalb Sie sich mit Fähigkeiten stärken können. Haben Sie genug ausgebildet?</Text>
 	<Text ID="CultivationTraining.CardNode.Name:605099e1-1311-4892-8b41-5e4fe29525a9" TranslateType="Auto" TranslatedHash="942298572">Anbau Ausbildung</Text>
 	<Text ID="Descent.CardNode.Description:fda5dc52-1fba-4c2f-b8eb-201cd3def908" TranslateType="Auto" TranslatedHash="1678660381">Mit dem Tor öffnen Sie in die Tiefen schließlich absteigen können.</Text>
 	<Text ID="Descent.CardNode.Name:6d7c787c-cd96-47c9-829a-b9cc63088c1d" TranslateType="Auto" TranslatedHash="-1073460070">Abstammung</Text>
@@ -69,7 +69,7 @@
 	<Text ID="FarmersMarket.CardNode.Name:6651cd4b-6ab4-4d24-8711-7a5b26c3e637" TranslateType="Auto" TranslatedHash="739866924">Bauernmarkt</Text>
 	<Text ID="FarmLife.CardNode.Description:6f8a5488-959e-4f6e-94ab-0f4e77a584ca" TranslateType="Auto" TranslatedHash="1554205277">Das Leben auf dem Bauernhof ist hart. Aufwachen bei Tagesanbruch und arbeiten, bis Sonne untergeht. Er züchtet schwer, Menschen, willensstark und stark bewaffnet.</Text>
 	<Text ID="FarmLife.CardNode.Name:52fac329-b10f-4552-b3c9-101654f39714" TranslateType="Auto" TranslatedHash="829820070">Bauernhofleben</Text>
-	<Text ID="FavourOfTheGods.CardNode.Description:e4679be4-a652-41d4-8a39-e690e8d2e711" TranslateType="Auto" TranslatedHash="-957717598">Es ist gut zu wissen, dass große Spenden an den Tempel auch große Gefälligkeiten von den Göttern gleich.</Text>
+	<Text ID="FavourOfTheGods.CardNode.Description:e4679be4-a652-41d4-8a39-e690e8d2e711" TranslateType="Auto" TranslatedHash="1276858796">Es ist allgemein bekannt, dass große Spenden an den Tempel auch große Gefälligkeiten von den Göttern gleich.</Text>
 	<Text ID="FavourOfTheGods.CardNode.Name:62701986-e96d-44da-8a88-817183eb586e" TranslateType="Auto" TranslatedHash="1364473568">Gunst der Götter</Text>
 	<Text ID="FetchQuest.CardNode.Description:0a935a0f-8e8b-44be-a8ff-4f90baa39157" TranslateType="Auto" TranslatedHash="1203914454">Eines der am häufigsten (und ärgerlichsten) Quests für Abenteurer ist die Suche zu holen.</Text>
 	<Text ID="FetchQuest.CardNode.Name:bec18691-280d-487d-9eeb-1121d502b970" TranslateType="Auto" TranslatedHash="728266684">Fetch Suche</Text>
@@ -79,15 +79,15 @@
 	<Text ID="FetchQuest3.CardNode.Name:26aed7ab-19a7-4575-9f3b-2a5c7696dfea" TranslateType="Auto" TranslatedHash="728266684">Fetch Suche</Text>
 	<Text ID="FieldTesting.CardNode.Description:582f29d3-abfc-4710-8dbb-7dff12ac5155" TranslateType="Auto" TranslatedHash="1716926022">Der beste Weg, neue Rüstungen auszuprobieren ist im Kampf. Der Schmied bietet eine seiner neuesten Kreationen für jeden, der Freiwilligen.</Text>
 	<Text ID="FieldTesting.CardNode.Name:6cc84baf-bebc-4600-bd3d-a105e0f342cf" TranslateType="Auto" TranslatedHash="574069930">Felduntersuchungen</Text>
-	<Text ID="Firefighting.CardNode.Description:b92d5157-05c1-41f0-99b6-1d59d9134091" TranslateType="Auto" TranslatedHash="-717040863">Wie Sie durch die Stadt zu Fuß kommen Sie über ein flammendes Gebäude. Einige Rufe zeigen gibt es immer noch Menschen gefangen innen.</Text>
+	<Text ID="Firefighting.CardNode.Description:b92d5157-05c1-41f0-99b6-1d59d9134091" TranslateType="Auto" TranslatedHash="-699382349">Wie Sie durch die Stadt gehen, kommen Sie über ein flammendes Gebäude. Einige Rufe zeigen gibt es immer noch Menschen gefangen innen.</Text>
 	<Text ID="Firefighting.CardNode.Name:b5f70356-8609-4f48-aab0-95bb29d05a84" TranslateType="Auto" TranslatedHash="1072556584">Feuer bekämpfen</Text>
-	<Text ID="ForagingTest.CardNode.Description:96fca8b0-b1fc-46b8-84dc-331d0a48f586" TranslateType="Auto" TranslatedHash="414301658">Beitreten Sie Alchemisten Gilde Sie haben drei Prüfungen zu nehmen. Die zweite ist Ihre Fähigkeit zu identifizieren, Wildkräuter zu testen.</Text>
+	<Text ID="ForagingTest.CardNode.Description:96fca8b0-b1fc-46b8-84dc-331d0a48f586" TranslateType="Auto" TranslatedHash="1275055532">Um die Alchemisten Gilde beitreten haben Sie drei Prüfungen zu nehmen. Die zweite ist Ihre Fähigkeit zu identifizieren, Wildkräuter zu testen.</Text>
 	<Text ID="ForagingTest.CardNode.Name:37549f88-778e-44b1-bf95-0a30f6067232" TranslateType="Auto" TranslatedHash="-2105338837">Alchemy Guild 2: Nahrungssuche-Test</Text>
 	<Text ID="ForgottenTreasure.CardNode.Description:1bacfb84-71b9-4df8-81bb-fb198d4276b6" TranslateType="Auto" TranslatedHash="-1889421690">Sie stolpern über eine vergessene Versteck des Schatzes. Es ist Ihnen für die Aufnahme!</Text>
 	<Text ID="ForgottenTreasure.CardNode.Name:45ada08c-0403-4ba1-a998-abeb222628bc" TranslateType="Auto" TranslatedHash="1735817781">vergessene Schatz</Text>
 	<Text ID="FranticSearch.CardNode.Description:b1bdac5e-7958-42b8-942f-f77e1ed4ab1d" TranslateType="Auto" TranslatedHash="160173839">Sie stolpern über ein Zimmer mit verschlossenen Truhen gefüllt. In der Ferne kann man den Klang der Annäherung an Monster hören. Plündern, bevor sie ankommen!</Text>
 	<Text ID="FranticSearch.CardNode.Name:d689e648-ad78-4075-be4d-d4117d599bfe" TranslateType="Auto" TranslatedHash="-1155113869">Frantic Search</Text>
-	<Text ID="GateGuardian.CardNode.Description:43a7ed5a-de10-4dd2-97c9-b6aee41c0408" TranslateType="Auto" TranslatedHash="911433374">Vor dem Tor in die Tiefe steht eine massige Kreatur ein Paar Klinge schwingen. Wenn Sie gehen möchten, müssen Sie es besiegen müssen.</Text>
+	<Text ID="GateGuardian.CardNode.Description:43a7ed5a-de10-4dd2-97c9-b6aee41c0408" TranslateType="Auto" TranslatedHash="-412776329">Vor dem Tor in die Tiefe steht eine massige Kreatur ein Paar Klinge schwingen. Sie werden es besiegen, wenn Sie nach unten fortsetzen möchten.</Text>
 	<Text ID="GateGuardian.CardNode.Name:c9db38c7-c66b-4bd1-a8da-b39e7a27c1bc" TranslateType="Auto" TranslatedHash="444011846">Tor-Wächter</Text>
 	<Text ID="GatheringHerbs.CardNode.Description:610ec60e-0cbe-43fb-b855-51fd8405da4e" TranslateType="Auto" TranslatedHash="1374206007">Die Leute geben oft Quests für Trank Kräuter zu sammeln. Diese können eine große Einnahmequelle für die aufstrebenden Abenteurer beweisen.</Text>
 	<Text ID="GatheringHerbs.CardNode.Name:eb0a1875-3efa-4a9e-bece-cac6403f7a76" TranslateType="Auto" TranslatedHash="831708301">sammeln Kräuter</Text>
@@ -101,9 +101,9 @@
 	<Text ID="GemHoard.CardNode.Name:4f3c8a4a-69ee-4a61-b67d-950a2d1dd883" TranslateType="Auto" TranslatedHash="-610379877">Gem Hoard</Text>
 	<Text ID="GoblinScourge.CardNode.Description:21f65652-50d2-4e72-9a99-c09fb0a23f92" TranslateType="Auto" TranslatedHash="1061438945">Sie sehen die Goblins eine kleine Zeltstadt in der Höhle errichtet haben. Es wäre schade, wenn jemand alles zerstört.</Text>
 	<Text ID="GoblinScourge.CardNode.Description:3297ae9a-0a30-4b95-9ef3-15f388adf6d1" TranslateType="Auto" TranslatedHash="-518047284">Die Goblins sind geflohen, in Schutt und Asche, das Dorf zu verlassen. Sie entscheiden, sie zu ihrem Lager verfolgen zurück.</Text>
-	<Text ID="GoblinScourge.CardNode.Description:4141caeb-07c4-4b3f-9a2a-ac74eb9ef05c" TranslateType="Auto" TranslatedHash="-1097344890">Sie kommen nur in dem Dorf in Flammen zu finden. Schnell, Rettung jemand Sie können!</Text>
+	<Text ID="GoblinScourge.CardNode.Description:4141caeb-07c4-4b3f-9a2a-ac74eb9ef05c" TranslateType="Auto" TranslatedHash="-2102186284">Sie kommen nur in dem Dorf in Flammen zu finden. Schnell, Rettung jemand Sie können!</Text>
 	<Text ID="GoblinScourge.CardNode.Description:b349906e-cc10-4e54-97d8-af9d0330cd2f" TranslateType="Auto" TranslatedHash="880316366">Ihr ruhiges Leben auf dem Bauernhof wird durch den Chittering Schreit der Kobolde zerschmettert ihren Weg in Ihr Haus zertrümmert.</Text>
-	<Text ID="GoblinScourge.CardNode.Description:f75fb60c-287d-4394-a80d-b0ba84f9c6b3" TranslateType="Auto" TranslatedHash="901734526">Im Zentrum des Dorfes steht eine wilden Goblinschamanen, das kleine Tier Richten der Goblinhorde. Nehmen Sie Ihre Rache an ihm.</Text>
+	<Text ID="GoblinScourge.CardNode.Description:f75fb60c-287d-4394-a80d-b0ba84f9c6b3" TranslateType="Auto" TranslatedHash="118659844">Im Zentrum des Dorfes steht eine wilden Goblinschamanen, das kleine Tier Richten der Goblinhorde. Nehmen Sie Ihre Rache an ihm.</Text>
 	<Text ID="GoblinScourge.CardNode.Name:00f0f3ca-6c85-4fba-a15e-5db463043100" TranslateType="Auto" TranslatedHash="-999956346">Goblin Scourge 1: Raiding Partei</Text>
 	<Text ID="GoblinScourge.CardNode.Name:0da26b7b-0001-4cc2-823e-aec3d575e8b9" TranslateType="Auto" TranslatedHash="-412662082">Goblin Scourge 2: Dorf-Rettung</Text>
 	<Text ID="GoblinScourge.CardNode.Name:94297232-fced-4c92-94ca-83ecd6dcf58f" TranslateType="Auto" TranslatedHash="-524552703">Goblin Scourge 3: Goblinschamanen</Text>
@@ -113,13 +113,13 @@
 	<Text ID="GreatestShowdown.CardNode.Name:91924315-5f3b-4726-92c8-ebd0df85da41" TranslateType="Auto" TranslatedHash="56749446">Greatest Show-down</Text>
 	<Text ID="GrindingLevels.CardNode.Description:96d214a3-4c73-45c9-be06-e4ffcdc80e24" TranslateType="Auto" TranslatedHash="730475564">Slaughtering Haufen von Monstern ist eine gute Möglichkeit, um stärker zu werden.</Text>
 	<Text ID="GrindingLevels.CardNode.Name:945b71ed-1570-4ff9-93c7-eb4a528078f9" TranslateType="Auto" TranslatedHash="-1553654399">Schleifebenen</Text>
-	<Text ID="GrindingMobs.CardNode.Description:6a22eeac-cf21-40fe-9124-56108aa484f6" TranslateType="Auto" TranslatedHash="555298272">Eine der besten Möglichkeiten zum Level schlachtet große Teile der meist schutzlos Kreaturen.</Text>
+	<Text ID="GrindingMobs.CardNode.Description:6a22eeac-cf21-40fe-9124-56108aa484f6" TranslateType="Auto" TranslatedHash="377179600">Eine der besten Möglichkeiten zum Level schlachtet große Teile der meist schutzlos Kreaturen.</Text>
 	<Text ID="GrindingMobs.CardNode.Name:9ced4755-cc7a-4dbc-92aa-cf213bae1de2" TranslateType="Auto" TranslatedHash="-1887609339">Schleifen Mobs</Text>
-	<Text ID="GrindingMobs2.CardNode.Description:d4848fdb-86bb-427e-af4f-ddcdd16934ff" TranslateType="Auto" TranslatedHash="555298272">Eine der besten Möglichkeiten zum Level schlachtet große Teile der meist schutzlos Kreaturen.</Text>
+	<Text ID="GrindingMobs2.CardNode.Description:d4848fdb-86bb-427e-af4f-ddcdd16934ff" TranslateType="Auto" TranslatedHash="377179600">Eine der besten Möglichkeiten zum Level schlachtet große Teile der meist schutzlos Kreaturen.</Text>
 	<Text ID="GrindingMobs2.CardNode.Name:340ff050-69ba-475d-8e21-15eac00e6a31" TranslateType="Auto" TranslatedHash="-1887609339">Schleifen Mobs</Text>
-	<Text ID="GrindingMobs3.CardNode.Description:8f161f3a-11b7-4c76-8391-662594266faf" TranslateType="Auto" TranslatedHash="555298272">Eine der besten Möglichkeiten zum Level schlachtet große Teile der meist schutzlos Kreaturen.</Text>
+	<Text ID="GrindingMobs3.CardNode.Description:8f161f3a-11b7-4c76-8391-662594266faf" TranslateType="Auto" TranslatedHash="377179600">Eine der besten Möglichkeiten zum Level schlachtet große Teile der meist schutzlos Kreaturen.</Text>
 	<Text ID="GrindingMobs3.CardNode.Name:9e2b78b4-2741-47b8-982c-b8d4bf15430e" TranslateType="Auto" TranslatedHash="-1887609339">Schleifen Mobs</Text>
-	<Text ID="GuildQuest.CardNode.Description:e61089de-6b1c-4aa0-af44-16dcff4dc969" TranslateType="Auto" TranslatedHash="97711894">Die Abenteurer Gilde Beiträge alle möglichen Aufgaben.</Text>
+	<Text ID="GuildQuest.CardNode.Description:e61089de-6b1c-4aa0-af44-16dcff4dc969" TranslateType="Auto" TranslatedHash="-1573007530">Die Adventurers Guild Beiträge alle Arten von Aufgaben.</Text>
 	<Text ID="GuildQuest.CardNode.Name:26cce429-c238-4fc5-bd71-2de8e1d26e7c" TranslateType="Auto" TranslatedHash="2034572853">Guild Quest-</Text>
 	<Text ID="HeartyMeal.CardNode.Description:f413e837-e3b5-44e6-b69f-9b59e00df2b1" TranslateType="Auto" TranslatedHash="-1357745503">Es ist nie der Mühe wert zu Abenteuer auf nüchternen Magen.</Text>
 	<Text ID="HeartyMeal.CardNode.Name:5e3d1700-6a75-4a28-a694-c3ef7baca4c7" TranslateType="Auto" TranslatedHash="2050270928">Herzhafte Mahlzeit</Text>
@@ -127,15 +127,15 @@
 	<Text ID="HolyFountain.CardNode.Name:4854438c-d093-4129-9575-780af7e099bb" TranslateType="Auto" TranslatedHash="1609666112">Heilige Brunnen</Text>
 	<Text ID="HordeMode.CardNode.Description:9026b2a8-0515-43e4-8514-d27c60953f6f" TranslateType="Auto" TranslatedHash="-228766750">Sie sind von einem riesigen Schwarm von Monstern umgeben. Geben Sie Ihr Bestes, den Ansturm zu überleben!</Text>
 	<Text ID="HordeMode.CardNode.Name:6e742ca6-8d8c-40a0-9199-1650f834b344" TranslateType="Auto" TranslatedHash="-1731582089">Horde-Modus</Text>
-	<Text ID="JewelryWork.CardNode.Description:8a75bf9b-a6cd-49e7-a0dc-9712ca7e34c5" TranslateType="Auto" TranslatedHash="1922614660">Sie finden eine große Rohedelstein auf Reisen, und mit ein wenig Arbeit, die Sie es in etwas wunderbar machen könnte.</Text>
+	<Text ID="JewelryWork.CardNode.Description:8a75bf9b-a6cd-49e7-a0dc-9712ca7e34c5" TranslateType="Auto" TranslatedHash="-531432886">Sie finden eine große Rohedelstein auf Reisen, und mit ein wenig Arbeit, die Sie es in etwas wunderbar machen könnte.</Text>
 	<Text ID="JewelryWork.CardNode.Name:cee60cf8-9699-4116-899b-2bad17124c8a" TranslateType="Auto" TranslatedHash="916689895">Schmuck Arbeit</Text>
-	<Text ID="LockedChest.CardNode.Description:cbd750f8-6cf5-46eb-afd1-4c6fb60f7779" TranslateType="Auto" TranslatedHash="-539282938">Sie stolpern über eine verschlossene Truhe. Wenn Sie es brechen können offen können Sie in der Lage sein, einige Beute zu greifen.</Text>
+	<Text ID="LockedChest.CardNode.Description:cbd750f8-6cf5-46eb-afd1-4c6fb60f7779" TranslateType="Auto" TranslatedHash="-1284412822">Sie stolpern über eine verschlossene Truhe. Wenn Sie es aufbrechen können, können Sie in der Lage sein, einige Beute zu greifen.</Text>
 	<Text ID="LockedChest.CardNode.Name:be105678-fdd1-445f-a97b-c133f498f641" TranslateType="Auto" TranslatedHash="690594411">gesperrt Chest</Text>
 	<Text ID="MageAdmissions1.CardNode.Description:a2f919b3-2eac-4714-aebe-b617103793b7" TranslateType="Auto" TranslatedHash="-1550814975">Sie kommen an der Magier-Akademie und warten in einer langen Schlange, die Aufnahmeprüfungen einzugeben.</Text>
 	<Text ID="MageAdmissions1.CardNode.Name:a7f8f912-152f-4729-90e4-05d3e283fb9a" TranslateType="Auto" TranslatedHash="288473606">Mage Academy 1: 1 Admissions</Text>
-	<Text ID="MageAdmissions2.CardNode.Description:3a43d2fb-be2d-486d-bae8-5e13c8f690af" TranslateType="Auto" TranslatedHash="436147282">Nach langer Wartezeit beginnt die zweite Runde der Einweisungen.</Text>
+	<Text ID="MageAdmissions2.CardNode.Description:3a43d2fb-be2d-486d-bae8-5e13c8f690af" TranslateType="Auto" TranslatedHash="1132805074">Nach langer Wartezeit beginnt die zweite Runde der Einweisungen.</Text>
 	<Text ID="MageAdmissions2.CardNode.Name:1625b520-caa9-43be-9b41-cf7ed98663f4" TranslateType="Auto" TranslatedHash="-217085018">Mage Academy 2: Admissions 2</Text>
-	<Text ID="MageAdmissions3.CardNode.Description:30f228c0-461e-4507-a649-db53934d38bf" TranslateType="Auto" TranslatedHash="420340864">Sie müssen verwalten in der Finalrunde der Aufnahmen zu bekommen. Nur noch ein zu gehen, und Sie werden ein offizielles Magier sein!</Text>
+	<Text ID="MageAdmissions3.CardNode.Description:30f228c0-461e-4507-a649-db53934d38bf" TranslateType="Auto" TranslatedHash="1472234260">Sie haben es geschafft, in die Endrunde der Aufnahmen zu bekommen. Nur noch ein zu gehen, und Sie werden ein offizielles Magier sein!</Text>
 	<Text ID="MageAdmissions3.CardNode.Name:f4a1cf76-380a-472b-8f1b-4954768415f4" TranslateType="Auto" TranslatedHash="42012492">Mage Admissions 3: Admissions 3</Text>
 	<Text ID="Meditation.CardNode.Description:9930fb36-2e5c-40c6-9763-6f4041f9408b" TranslateType="Auto" TranslatedHash="-1593550255">Konzentrieren Sie Ihre Gedanken durch Meditation. Erst dann können Sie für Ihre Vorbereitung, was auch immer geschieht.</Text>
 	<Text ID="Meditation.CardNode.Name:6f4c1739-fed2-4992-9cf4-1e53b0212002" TranslateType="Auto" TranslatedHash="184158590">Meditation</Text>
@@ -149,7 +149,7 @@
 	<Text ID="NamedMonsterHunt.CardNode.Name:9afafb39-4c15-4f9e-adb6-990d517ddda0" TranslateType="Auto" TranslatedHash="632311296">Named Monster-Jagd</Text>
 	<Text ID="NestDestruction.CardNode.Description:8f4064c4-ea95-4a09-9ffc-d3f7acdf9bd6" TranslateType="Auto" TranslatedHash="1029824121">Sie kommen in ein Nest wand sich mit Rattenkörper. Dies ist eine perfekte Chance zu dünn, um die Zahlen der Horde.</Text>
 	<Text ID="NestDestruction.CardNode.Name:76377f9f-3857-498f-833a-44c5c48979e0" TranslateType="Auto" TranslatedHash="-2106033736">windend Nest</Text>
-	<Text ID="ParttimeArtificing.CardNode.Description:21498675-3a72-42b3-9156-10714451d5b4" TranslateType="Auto" TranslatedHash="-794654427">Es gibt immer eine artificer benötigen, so jemand bereit, um die Arbeit zu tun, kann gutes Geld verdienen.</Text>
+	<Text ID="ParttimeArtificing.CardNode.Description:21498675-3a72-42b3-9156-10714451d5b4" TranslateType="Auto" TranslatedHash="1896094276">Es gibt immer einen Bedarf an ein artificer, so jemand bereit, um die Arbeit zu tun, kann gutes Geld verdienen.</Text>
 	<Text ID="ParttimeArtificing.CardNode.Name:66aa8240-f6da-44d3-98ea-47320a0deb97" TranslateType="Auto" TranslatedHash="556391265">Teilzeit Artificing</Text>
 	<Text ID="PartyBranch.CardNode.Description:363880ba-6c20-44c2-9863-3ff22e21d6f4" TranslateType="Auto" TranslatedHash="-1193265521">Wohin weiter gehen ...</Text>
 	<Text ID="PartyBranch.CardNode.Name:9eee12a4-4fbd-42d0-bf32-3fcefaa5671e" TranslateType="Auto" TranslatedHash="-1904684749">Kreuzung</Text>
@@ -159,7 +159,7 @@
 	<Text ID="PowerTraining.CardNode.Name:e9f31335-0626-4cc2-b296-9b6fb088c19f" TranslateType="Auto" TranslatedHash="-216406571">Power Training</Text>
 	<Text ID="Raid.CardNode.Description:9a482fa9-805e-49d8-962e-f5d389b75dee" TranslateType="Auto" TranslatedHash="-831204357">Grayheart lädt Sie auf einem anderen Chef Razzia.</Text>
 	<Text ID="Raid.CardNode.Name:e11bd967-00b8-4cad-9c7d-24433a28867d" TranslateType="Auto" TranslatedHash="2539434">Überfall</Text>
-	<Text ID="RatEncounter.CardNode.Description:2ce1a196-b66e-49c1-a3ba-0bc89839eb8b" TranslateType="Auto" TranslatedHash="-839973277">Wie Sie die Ruine nähern finden Sie eine Vielzahl von Ratten um den Eingang Fräsen.</Text>
+	<Text ID="RatEncounter.CardNode.Description:2ce1a196-b66e-49c1-a3ba-0bc89839eb8b" TranslateType="Auto" TranslatedHash="1824865487">Wie Sie die Ruine nähern, Ihnen eine Vielzahl von Ratten um den Eingang Fräsen finden.</Text>
 	<Text ID="RatEncounter.CardNode.Name:08b3a86c-6604-4c84-983b-99253d514bd1" TranslateType="Auto" TranslatedHash="593586872">Ratte Encounter</Text>
 	<Text ID="RatKingBattle.CardNode.Description:f355553a-363a-469a-9f88-49707d9a58b3" TranslateType="Auto" TranslatedHash="-999985651">Sie kommen schließlich über den Chef, eine riesige Ratte eine glühende Krone trägt.</Text>
 	<Text ID="RatKingBattle.CardNode.Name:c560f13b-c645-49f8-aba1-d6a69416f6ef" TranslateType="Auto" TranslatedHash="422943474">Ratten-König</Text>
@@ -171,17 +171,17 @@
 	<Text ID="RecruitFelixa.CardNode.Name:5b0c0088-1883-4290-be8f-9ae3a9a4d5a0" TranslateType="Auto" TranslatedHash="1542315463">Recruit Felixa</Text>
 	<Text ID="RecruitRuffletop.CardNode.Description:84dcec3a-3eef-48e1-a9d0-369744a807bf" TranslateType="Auto" TranslatedHash="1141950217">Sie finden Ruffletop in der Taverne, eine junge Dame im Chat ...</Text>
 	<Text ID="RecruitRuffletop.CardNode.Name:166f1ef8-a79f-4eed-bc64-716670f4f2b9" TranslateType="Auto" TranslatedHash="333579831">Recruit Ruffletop</Text>
-	<Text ID="SewerOutflow.CardNode.Description:72c179a2-34db-47c1-808b-bd66f4b7b0bf" TranslateType="Auto" TranslatedHash="-559711572">Sie kommen am Kern des alten Kanalnetzes, ein riesiges Zimmer mit Schimmel und Wasser gefüllt.</Text>
+	<Text ID="SewerOutflow.CardNode.Description:72c179a2-34db-47c1-808b-bd66f4b7b0bf" TranslateType="Auto" TranslatedHash="-1126721649">Sie kommen am Kern des alten Kanalnetzes, ein riesiges Zimmer mit Schimmel und Wasser gefüllt.</Text>
 	<Text ID="SewerOutflow.CardNode.Name:06e4b6f7-8d28-454b-a833-794752ce0695" TranslateType="Auto" TranslatedHash="415174382">Sewer Outflow</Text>
 	<Text ID="ShootingGallery.CardNode.Description:d22751bd-3d88-4f39-bdae-45c58137c99c" TranslateType="Auto" TranslatedHash="1789127778">Sie geben einen durch eine lange Brücke dominiert Raum. Skeleton Magiern stehen auf Plattformen alle lange die Seiten dieses Raumes.</Text>
 	<Text ID="ShootingGallery.CardNode.Name:fc6080dc-31df-428e-93a3-aa29a19bb2a8" TranslateType="Auto" TranslatedHash="2121697173">Schießbude</Text>
 	<Text ID="Showdown.CardNode.Description:ccffff5e-5626-4d3c-9958-dd230022285f" TranslateType="Auto" TranslatedHash="-275714917">Sie kommen in einer größeren, schärferen Monster. Es ist wahrscheinlich eine seltene Kreatur so sollten Sie es töten.</Text>
 	<Text ID="Showdown.CardNode.Name:8a0163d0-5817-4540-9e65-254831d31e43" TranslateType="Auto" TranslatedHash="-273703617">Showdown</Text>
-	<Text ID="SkippingStones.CardNode.Description:abbb49ba-779c-4b35-8222-cfbb2d5f07a1" TranslateType="Auto" TranslatedHash="-1022374644">Ein Teil des Wassers liegt zwischen Ihnen und glänzende Beute. Wenn Sie dies tun genau das Richtige wird der Schatz direkt in die Hände überspringen.</Text>
+	<Text ID="SkippingStones.CardNode.Description:abbb49ba-779c-4b35-8222-cfbb2d5f07a1" TranslateType="Auto" TranslatedHash="829332248">Ein Teil des Wassers liegt zwischen Ihnen und glänzende Beute. Wenn Sie dies tun genau richtig, wird der Schatz direkt in die Hände überspringen.</Text>
 	<Text ID="SkippingStones.CardNode.Name:ccb55f02-d966-40b1-b36c-3f94c21e922d" TranslateType="Auto" TranslatedHash="-1015316419">Skipping Stone</Text>
-	<Text ID="StickyAmbush.CardNode.Description:4ca84122-ea42-4356-bb36-0b9348fc9dbb" TranslateType="Auto" TranslatedHash="-1343746629">Wie Sie auf dem Flur ein Sound gehen macht Sie auf eine Seite springen.</Text>
+	<Text ID="StickyAmbush.CardNode.Description:4ca84122-ea42-4356-bb36-0b9348fc9dbb" TranslateType="Auto" TranslatedHash="711846797">Wie Sie den Gang entlang gehen, macht ein Geräusch, das Sie auf eine Seite springen.</Text>
 	<Text ID="StickyAmbush.CardNode.Name:1a1a16b2-ea60-4b56-926a-ba64cb528865" TranslateType="Auto" TranslatedHash="2132242987">Sticky Ambush</Text>
-	<Text ID="StreetVendor.CardNode.Description:9daccb1a-7bdb-403b-949e-713b484b8fac" TranslateType="Auto" TranslatedHash="400052200">Bevor Sie auf Ihrem Abenteuer in Angriff genommen gewandert Sie durch den Markt. Ein Anbieter namens Ihnen aus.</Text>
+	<Text ID="StreetVendor.CardNode.Description:9daccb1a-7bdb-403b-949e-713b484b8fac" TranslateType="Auto" TranslatedHash="-1115473754">Bevor Sie auf Ihrem Abenteuer in Angriff genommen, wanderten sie den Markt durch. Ein Anbieter namens Ihnen aus.</Text>
 	<Text ID="StreetVendor.CardNode.Name:ec8cc141-b040-4666-8dc3-1d10ed49d3e4" TranslateType="Auto" TranslatedHash="1176395781">Straßenverkäufer</Text>
 	<Text ID="TemplePrayers.CardNode.Description:cd1ea190-536c-4a4b-b416-7dcc005c8930" TranslateType="Auto" TranslatedHash="1719499886">Manchmal hören die Götter auf die Gebete der Gläubigen. Wurden die Götter Sie aufmerksam durch?</Text>
 	<Text ID="TemplePrayers.CardNode.Name:b459ce78-34b1-4c27-9483-0b6f06645a7a" TranslateType="Auto" TranslatedHash="2069161113">Temple Prayers</Text>
@@ -195,10 +195,10 @@
 	<Text ID="TheFestival.CardNode.Name:eb1a5793-bec0-48da-ab8f-32986fb372fa" TranslateType="Auto" TranslatedHash="-34373497">Das Fest</Text>
 	<Text ID="TheHarvest.CardNode.Description:f0836620-5c59-40d9-8101-8cf483a1bd0b" TranslateType="Auto" TranslatedHash="-799700603">Erntezeit ist immer die anstrengendste Zeit des Jahres, und der Höhepunkt aller Anstrengungen, die Sie in diesem Punkt gesetzt haben. Do not mess it up!</Text>
 	<Text ID="TheHarvest.CardNode.Name:c390665f-46a3-4f70-a77d-66fd9b873679" TranslateType="Auto" TranslatedHash="550135418">Die Ernte</Text>
-	<Text ID="Tournament.CardNode.Description:3671b743-c4a2-4e4c-b943-f9ba3b63c8c5" TranslateType="Auto" TranslatedHash="869602605">Die jährliche Abenteurer Turnier ist der richtige Ort für einen angehenden Entdecker ihre Talente zu präsentieren.</Text>
+	<Text ID="Tournament.CardNode.Description:3671b743-c4a2-4e4c-b943-f9ba3b63c8c5" TranslateType="Auto" TranslatedHash="1422558445">Die jährliche Adventurers Turnier ist der richtige Ort für einen angehenden Entdecker ihre Talente zu präsentieren.</Text>
 	<Text ID="Tournament.CardNode.Name:9c5ca78b-7bac-4977-8a7b-c31de828cb11" TranslateType="Auto" TranslatedHash="997471753">Turnier</Text>
-	<Text ID="TravellingMerchant.CardNode.Description:c0b5f321-17d2-4a97-9281-42a3a192d4d9" TranslateType="Auto" TranslatedHash="1419812722">Sie stolpern über einen reisenden Händler, durch eine Vielzahl von Waren belastet.</Text>
-	<Text ID="TravellingMerchant.CardNode.Name:93a6eca7-4bd1-475e-bab0-bf31f5cebdab" TranslateType="Auto" TranslatedHash="-458581856">Reisen Händler</Text>
+	<Text ID="TravellingMerchant.CardNode.Description:c0b5f321-17d2-4a97-9281-42a3a192d4d9" TranslateType="Auto" TranslatedHash="277399260">Sie stolpern über einen reisenden Händler, durch eine Vielzahl von Waren belastet.</Text>
+	<Text ID="TravellingMerchant.CardNode.Name:93a6eca7-4bd1-475e-bab0-bf31f5cebdab" TranslateType="Auto" TranslatedHash="-992406056">Reisen Händler</Text>
 	<Text ID="TreasureRoom.CardNode.Description:dee5ec61-a361-4229-b0b2-ea58ba4a37bc" TranslateType="Auto" TranslatedHash="621041845">Sie finden einen unlooted Schatzkammer.</Text>
 	<Text ID="TreasureRoom.CardNode.Name:ad9fd830-422e-45e9-bd3e-8cc9f1aca3ec" TranslateType="Auto" TranslatedHash="1335445420">Schatzkammer</Text>
 	<Text ID="TreasureRoom1.CardNode.Description:a9bd8cbf-7621-4065-86e9-0d8cf7518275" TranslateType="Auto" TranslatedHash="621041845">Sie finden einen unlooted Schatzkammer.</Text>
@@ -209,14 +209,14 @@
 	<Text ID="TreasureRoom3.CardNode.Name:6638e836-6f32-4c24-8947-ea17db4a6eb0" TranslateType="Auto" TranslatedHash="1335445420">Schatzkammer</Text>
 	<Text ID="UnendingFlame.CardNode.Description:644e3691-c437-4c26-a442-487987d653e4" TranslateType="Auto" TranslatedHash="785903656">Wärme lodert aus einer riesigen elementaren Füllung der einer Seite dieser Höhle.</Text>
 	<Text ID="UnendingFlame.CardNode.Name:545ceba2-3ced-4fd8-9fe6-ecb7429d39c3" TranslateType="Auto" TranslatedHash="-518474733">Endlose Flamme</Text>
-	<Text ID="VileWitch.CardNode.Description:844c93ba-2f43-435d-91a0-0b2a5d6fb781" TranslateType="Auto" TranslatedHash="-2123335246">Sie geben, was wie ein riesiger Kokon aussieht. Webs deckt jede Oberfläche, und in der Mitte lauert eine riesige, abscheuliche Kreatur.</Text>
+	<Text ID="VileWitch.CardNode.Description:844c93ba-2f43-435d-91a0-0b2a5d6fb781" TranslateType="Auto" TranslatedHash="-2005013012">Sie geben, was wie ein riesiger Kokon aussieht. Webs deckt jede Oberfläche, und in der Mitte lauert eine riesige, abscheuliche Kreatur.</Text>
 	<Text ID="VileWitch.CardNode.Name:59c2038a-901f-4f32-a67e-bd05959db837" TranslateType="Auto" TranslatedHash="1976943938">Die Vile Witch</Text>
 	<Text ID="WallBreaker.CardNode.Description:c1ceaf4a-1ac0-4063-bde2-56a43ef64698" TranslateType="Auto" TranslatedHash="-1879702891">Sie entdecken einen Schatz in einem verschlossenen Raum. Die Rückwand des Raumes sieht allerdings schwach. Vielleicht können Sie Ihre eigene Tür machen.</Text>
 	<Text ID="WallBreaker.CardNode.Name:cd1f6c05-a720-45a4-a3af-3004b235a1b1" TranslateType="Auto" TranslatedHash="195547542">Wandbrecher</Text>
-	<Text ID="WeaponCase.CardNode.Description:14ea6401-84f0-4e8f-a425-b8e1c2fda6ad" TranslateType="Auto" TranslatedHash="-2122051948">Sie finden einen gesperrten Fall die genaue Form einer Waffe. Wenn Sie brechen können es öffnen können Sie eine schöne Belohnung beanspruchen.</Text>
+	<Text ID="WeaponCase.CardNode.Description:14ea6401-84f0-4e8f-a425-b8e1c2fda6ad" TranslateType="Auto" TranslatedHash="1359028640">Sie finden einen gesperrten Fall die genaue Form einer Waffe. Wenn Sie es offen brechen, können Sie eine schöne Belohnung beanspruchen.</Text>
 	<Text ID="WeaponCase.CardNode.Name:6e663857-fe64-4c64-98ff-0f2e0eef578c" TranslateType="Auto" TranslatedHash="1217377972">Waffenkoffer</Text>
 	<Text ID="WebAmbush.CardNode.Description:36554220-d30d-4f27-b125-1d98e5691340" TranslateType="Auto" TranslatedHash="-846775196">Sie geben einen Korridor mit riesigen Bahnen gefüllt.</Text>
 	<Text ID="WebAmbush.CardNode.Name:01d57b3f-9da0-4083-aff9-3fc838c7a0a3" TranslateType="Auto" TranslatedHash="1510549152">Web Ambush</Text>
-	<Text ID="WrittenTest.CardNode.Description:7c9a4289-970e-4054-9e0f-c5f12195c1ce" TranslateType="Auto" TranslatedHash="-1358294278">Beitreten Sie Alchemisten Gilde Sie haben drei Prüfungen zu nehmen. Die erste ist eine schriftliche Arbeit.</Text>
+	<Text ID="WrittenTest.CardNode.Description:7c9a4289-970e-4054-9e0f-c5f12195c1ce" TranslateType="Auto" TranslatedHash="-412795316">Um die Alchemisten Gilde beitreten haben Sie drei Prüfungen zu nehmen. Die erste ist eine schriftliche Arbeit.</Text>
 	<Text ID="WrittenTest.CardNode.Name:97597419-7414-4413-b6a4-b1c8df0282fa" TranslateType="Auto" TranslatedHash="1721852080">Alchemy Guild 1: Schriftlicher Test</Text>
 </Localisation>
