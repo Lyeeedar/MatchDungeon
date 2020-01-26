@@ -10,8 +10,8 @@
 		<MatchDamage>0.5</MatchDamage>
 	</Statistics>
 	<Ability>
-		<Name>Light Fire</Name>
-		<Description>Set an object on fire.</Description>
+		<Name>Torch.OffHand.Ability.Name:6a5edebf-dde1-47f3-8b66-10ed5b564553</Name>
+		<Description>Torch.OffHand.Ability.Description:0cd80c21-54cf-4bba-b89a-24a31cb72b01</Description>
 		<EffectData>
 			<Cost>3</Cost>
 			<Effect>1,Tile,Single,Spreader</Effect>

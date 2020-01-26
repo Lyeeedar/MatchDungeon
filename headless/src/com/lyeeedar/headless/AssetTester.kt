@@ -5,6 +5,8 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.backends.headless.HeadlessApplication
 import com.badlogic.gdx.graphics.GL20
 import com.lyeeedar.Board.GridUpdate.MatchUpdateStep
+import com.lyeeedar.Game.Global
+import com.lyeeedar.Game.GlobalDeck
 import com.lyeeedar.ResourceProcessors.XmlLoadTester
 import org.mockito.Mockito
 
@@ -18,6 +20,7 @@ object AssetTester
 			Gdx.gl = Mockito.mock(GL20::class.java)
 			Gdx.gl20 = Mockito.mock(GL20::class.java)
 			Gdx.app = HeadlessApplication(Mockito.mock(Game::class.java))
+			Global.deck = GlobalDeck()
 
 			val start = System.currentTimeMillis()
 

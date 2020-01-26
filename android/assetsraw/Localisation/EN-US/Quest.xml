@@ -3,6 +3,7 @@
 	<Text ID="ChangingCareers.Quest.Title:82a4b4d1-fba0-478d-a778-6e274761badf" TranslateType="Auto" TranslatedHash="-446191614">Changing Careers</Text>
 	<Text ID="DescentIntoTheDepths.Quest.Description:a5294fae-53df-402b-b723-438d6ef36f8c" TranslateType="Auto" TranslatedHash="-1376048267">You discover a tunnel leading from the ancient ruin deep underground. It may be full of treasure.</Text>
 	<Text ID="DescentIntoTheDepths.Quest.Title:84afbcc1-b45d-4609-8748-e001effe9fad" TranslateType="Auto" TranslatedHash="1277082361">Descent into the Depths</Text>
+	<Text ID="Intro.Quest.Description:580e5056-88ed-4bc0-8b9f-1b71eff862ae" TranslateType="Auto" TranslatedHash="-64333860">New game.</Text>
 	<Text ID="Intro.Quest.Title:8d29085f-33fd-4e80-81d2-0d23c8874186" TranslateType="Auto" TranslatedHash="2130933394">NEW GAME</Text>
 	<Text ID="LevellingUp.Quest.Description:5c572aa5-f45e-4970-890e-4692d66003ad" TranslateType="Auto" TranslatedHash="-1978157614">Before you can brave the wilds, you first have to grind out some levels. Kill the nearby wildlife and collect that experience!</Text>
 	<Text ID="LevellingUp.Quest.Title:a2e9f374-40ff-4788-9e2c-02c245d08fb0" TranslateType="Auto" TranslatedHash="-221521891">Leveling Up</Text>

@@ -11,8 +11,8 @@
 		<PowerGain>3</PowerGain>
 	</Statistics>
 	<Ability>
-		<Name>Summon Poison Cloud</Name>
-		<Description>Summon a poison cloud at the target location. This does damage every turn, but is dispersed if you match next to it.</Description>
+		<Name>ShamansStaff.MainHand.Ability.Name:be939452-1309-448d-ac88-b3fd91ebfa90</Name>
+		<Description>ShamansStaff.MainHand.Ability.Description:056dd23b-e250-40c8-be29-0f871eff61a3</Description>
 		<EffectData>
 			<Cost>6</Cost>
 			<Effect>1,Tile,Block,Spreader</Effect>

@@ -8,8 +8,8 @@
 	</Icon>
 	<Statistics meta:RefKey="Statistics" />
 	<Ability>
-		<Name>Shoot Flare</Name>
-		<Description>Shoots a flare to summon an allied adventurer to your aid.</Description>
+		<Name>DistressFlare.OffHand.Ability.Name:0fe35033-4121-4666-93d4-cf9f2450351e</Name>
+		<Description>DistressFlare.OffHand.Ability.Description:1f5b45f2-e122-4df2-bdd6-4b6a87270ecb</Description>
 		<EffectData>
 			<Cost>2</Cost>
 			<Usages>1</Usages>

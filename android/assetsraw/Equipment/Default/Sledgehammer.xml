@@ -7,8 +7,8 @@
 	</Icon>
 	<Statistics meta:RefKey="Statistics" />
 	<Ability>
-		<Name>Smash</Name>
-		<Description>Smash any one orb into pieces.</Description>
+		<Name>Sledgehammer.MainHand.Ability.Name:e0b20bc3-ba6f-4c7c-a9d7-e7b13e4766b9</Name>
+		<Description>Sledgehammer.MainHand.Ability.Description:99829214-9e01-4619-bacb-812ff9c077c3</Description>
 		<EffectData>
 			<Cost>6</Cost>
 			<Effect>1,Orb,Single,Pop</Effect>
