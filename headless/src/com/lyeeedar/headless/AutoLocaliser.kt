@@ -378,11 +378,11 @@ class Localiser
 
 					val lastChar = text.last()
 					val endsInPunctuation = lastChar == '.' || lastChar == '?' || lastChar == '!' || lastChar == '"'
-					if (id.contains(".Title"))
+					if (id.contains(".Title") || id.contains(".Name"))
 					{
 						if (endsInPunctuation)
 						{
-							throw RuntimeException("Title ends with a full stop!\n$context")
+							throw RuntimeException("Title/Name ends with a full stop!\n$context")
 						}
 					}
 					else if (id.contains(".Choice"))
