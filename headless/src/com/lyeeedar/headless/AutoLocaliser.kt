@@ -258,6 +258,7 @@ class Localiser
 	}
 
 	lateinit var languageTool: JLanguageTool
+	lateinit var languageToolMinimal: JLanguageTool
 	fun initialiseLanguageAnalyser()
 	{
 		languageTool = JLanguageTool(BritishEnglish())
@@ -282,6 +283,19 @@ class Localiser
 			else if (rule.id == "RUDE_SARCASTIC" || rule.id == "PROFANITY")
 			{
 				languageTool.disableRule(rule.id)
+			}
+		}
+
+		languageToolMinimal = JLanguageTool(BritishEnglish())
+		for (rule in languageToolMinimal.allActiveRules)
+		{
+			if (rule is SpellingCheckRule)
+			{
+				rule.addIgnoreTokens(gameWords.filter { it.split(' ').size == 1 }.toList())
+			}
+			else
+			{
+				languageToolMinimal.disableRule(rule.id)
 			}
 		}
 	}
@@ -472,24 +486,25 @@ class Localiser
 
 	fun doSentenceAnalysis(rawText: String, context: String)
 	{
+		var useMinimal = false
 		if (rawText.all { it.isLetterOrDigit() || it == ' ' })
 		{
 			val words = rawText.split(' ')
 			if (words.all { it[0].isUpperCase() })
 			{
 				// this is a title
-				return
+				useMinimal = true
 			}
 			else if (words.size < 4)
 			{
 				// this is a short thing
-				return
+				useMinimal = true
 			}
 		}
 
 		val text = removeSlang(rawText)
 
-		val matches = languageTool.check(text)
+		val matches = if (useMinimal) languageToolMinimal.check(text) else languageTool.check(text)
 
 		if (matches.size > 0)
 		{

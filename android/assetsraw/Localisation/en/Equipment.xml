@@ -16,7 +16,7 @@
 	<Text ID="ChampionsMedal.Head.Description:7dacc15d-fb41-48f9-b9fc-e3a6306d1c0d">The medal awarded to winners of the Adventurers Tournament. Enchanted with powerful magic. Merchants will give better prices to people wearing this.</Text>
 	<Text ID="ChampionsMedal.Head.Name:add40e0f-f1d7-4d65-a125-e9c8983d5321">Champions Medal</Text>
 	<Text ID="ClothGambeson.Body.Description:a059da6d-1ddf-406d-9b75-20137ec7ebe2">A thick padded jacket, providing minimal protection.</Text>
-	<Text ID="ClothGambeson.Body.Name:7f6e5987-c849-4aa9-856a-e66b015f0ba5">Cloth Jambeson</Text>
+	<Text ID="ClothGambeson.Body.Name:7f6e5987-c849-4aa9-856a-e66b015f0ba5">Cloth Gambeson</Text>
 	<Text ID="CrownOfHector.Head.Description:ebe13852-80ad-4d89-afb1-7456fa8693c1">A golden crown, inlaid with gems. Contains powerful enchantments that gives the wearer great strength.</Text>
 	<Text ID="CrownOfHector.Head.Name:78399ca1-a256-4ccd-bd09-28f78a67ba7f">Crown of Hector</Text>
 	<Text ID="DistressFlare.OffHand.Description:31d5a12e-7505-4f26-9961-f0fe6f58e4a5">An alchemical flare that can be shot into the air to signal that you need assistance. Another adventurer will surely come to your aid.</Text>
@@ -28,7 +28,7 @@
 	<Text ID="FlawedFireballWand.MainHand.Description:292fe5db-1f7d-4ee7-9ba2-4310f9bd1ed5">A wand of fireball with a flaw in it. It takes much more energy than usual to activate.</Text>
 	<Text ID="FlawedFireballWand.MainHand.Name:818d72bb-5150-4341-961a-ef9d5dd6ba1f">Flawed Fireball Wand</Text>
 	<Text ID="Fullplate.Body.Description:9f3decb3-b822-4a09-8127-65aa18fc5b28">A set of plate armour that provides excellent protection.</Text>
-	<Text ID="Fullplate.Body.Name:b193633c-3f54-42ed-bcb3-c13cdfe10d8c">Fullplate</Text>
+	<Text ID="Fullplate.Body.Name:b193633c-3f54-42ed-bcb3-c13cdfe10d8c">Full Plate</Text>
 	<Text ID="Grenade.OffHand.Description:4aa430cd-651f-434d-9bbb-64cd1732087a">A powerful explosive packed into a hard ceramic shell. Detonates when thrown.</Text>
 	<Text ID="Grenade.OffHand.Name:c83794f9-87ca-4db4-bf0d-4dafca417911">Grenade</Text>
 	<Text ID="Hammer.MainHand.Description:2569a27c-43ae-4566-8895-8da984be6fc6">A hammer, great for smashing through anything blocking your way.</Text>
@@ -94,5 +94,5 @@
 	<Text ID="WizardsRobes.Body.Description:32159260-fab8-4fc5-bbed-b80609f4307c">The robes of a mage. Ensorcelled to enhance the speed and power of spellcasting.</Text>
 	<Text ID="WizardsRobes.Body.Name:ddf4cf25-2cf4-4364-82a2-16485ef75e83">Wizards Robes</Text>
 	<Text ID="Zweihander.MainHand.Description:9b07db39-cf75-41e9-a584-33ef4ed1982b">A giant, heavy blade. Makes you slow but a single hit from this beast will ruin anyone's day.</Text>
-	<Text ID="Zweihander.MainHand.Name:25be6bd3-7f57-4918-ade8-fb07d23e9b1d">Zweihander</Text>
+	<Text ID="Zweihander.MainHand.Name:25be6bd3-7f57-4918-ade8-fb07d23e9b1d">Zweihänder</Text>
 </Localisation>

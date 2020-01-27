@@ -212,8 +212,8 @@
 	<Text ID="FarmLifeContent.Node.[0] Line.Line.MultilineString:2902e2a8-d5ff-4824-bdee-1bc10f002e53">Are you sure you want to skip the introduction?</Text>
 	<Text ID="FarmLifeContent.Node.[0] Line.Line.MultilineString:c6d061ee-fc21-46eb-bfef-c69d208b6722">You roll over and go back to sleep. The day can wait.</Text>
 	<Text ID="FarmLifeContent.Node.[1] Choice.Choice.Choices.[0] Choice.Choice.Text:1ff4247d-2da3-4a05-998c-bc52f164768f">Play Introduction</Text>
-	<Text ID="FarmLifeContent.Node.[1] Choice.Choice.Choices.[0] Choice.Choice.Text:238dc9b1-9e5d-494d-8f52-a3f01c8f13fa">Play the introduction</Text>
-	<Text ID="FarmLifeContent.Node.[1] Choice.Choice.Choices.[1] Choice.Choice.Text:e031e1cd-65aa-4a84-8309-cda9e7d45ec8">Skip introduction</Text>
+	<Text ID="FarmLifeContent.Node.[1] Choice.Choice.Choices.[0] Choice.Choice.Text:238dc9b1-9e5d-494d-8f52-a3f01c8f13fa">Play the Introduction</Text>
+	<Text ID="FarmLifeContent.Node.[1] Choice.Choice.Choices.[1] Choice.Choice.Text:e031e1cd-65aa-4a84-8309-cda9e7d45ec8">Skip Introduction</Text>
 	<Text ID="FarmLifeContent.Node.[1] Choice.Choice.Choices.[1] Choice.Choice.Text:eb2ffad9-61e2-46c2-9a79-b13c21a55352">Skip Introduction</Text>
 	<Text ID="FarmLifeContent.Node.[1] Line.Line.MultilineString:94a58309-5cb9-4975-b748-20277145c50b">You know you should get up and begin on the days work, but maybe you could sneak in a little more sleep.</Text>
 	<Text ID="FavourOfTheGodsContent.Node.[0] Line.Line.MultilineString:1deda88b-34c2-45fc-b5e0-cd87e74ac869">It is well known that large donations to the temple also equal large favours from the gods. You head to the city's largest temple and begin to pray (and pay) for their attention.</Text>

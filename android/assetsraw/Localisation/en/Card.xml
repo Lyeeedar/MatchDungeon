@@ -8,7 +8,7 @@
 	<Text ID="Augmenter.CardNode.Description:dbbe2ef7-18f8-4fcb-93f1-5fd7cbecd10f">There is a man who can enchant your very body, for a price.</Text>
 	<Text ID="Augmenter.CardNode.Name:685b20d0-9f24-4734-9cef-0419abb715bf">Augmenter</Text>
 	<Text ID="BackalleyGambling.CardNode.Description:39303222-2ab6-4dac-987f-57448dece3ac">In the back alleys of the city many gambling rings operate.</Text>
-	<Text ID="BackalleyGambling.CardNode.Name:ab37fe2e-c26f-4ab7-aa7b-56d9f38bd7e8">Backalley Gambling</Text>
+	<Text ID="BackalleyGambling.CardNode.Name:ab37fe2e-c26f-4ab7-aa7b-56d9f38bd7e8">Back Alley Gambling</Text>
 	<Text ID="BackalleyVendor.CardNode.Description:d2db73b3-9bc2-4991-8156-a922fbb103a8">The alleyways of the city offer many opportunities, for those willing to explore them.</Text>
 	<Text ID="BackalleyVendor.CardNode.Name:f94aadb1-9b43-4063-b2ae-1c3fd1279375">Alleyways</Text>
 	<Text ID="BackalleyVendorRaid.CardNode.Description:2218f9e3-3f4c-4c33-91d9-62f26dfab272">The alleyways of the city offer many opportunities, for those willing to explore them.</Text>
@@ -36,7 +36,7 @@
 	<Text ID="ChokePoint.CardNode.Description:35d74cca-8558-44ab-a535-2a5211511c7d">Monsters block the way forward. The only option is to smash through.</Text>
 	<Text ID="ChokePoint.CardNode.Name:91f072a3-42de-4531-bea1-0ed560a32c8d">Choke Point</Text>
 	<Text ID="Cleanup.CardNode.Description:fe10331c-a0bc-4ef3-8762-1e9e9f32a6d6">Your barn is filled with old rotting crates. Smash them up to clean some space.</Text>
-	<Text ID="Cleanup.CardNode.Name:8530e3b4-9378-4fe1-a061-5f9ea31fdf8b">Cleanup</Text>
+	<Text ID="Cleanup.CardNode.Name:8530e3b4-9378-4fe1-a061-5f9ea31fdf8b">Clean-up</Text>
 	<Text ID="CoinToss.CardNode.Description:665f7aad-586b-4532-b31a-dd921ac6bb88">The alleyways of the city offer many opportunities, for those willing to explore them.</Text>
 	<Text ID="CoinToss.CardNode.Name:2132ce44-9488-4bc7-95cb-dc43d28a21fd">Alleyways</Text>
 	<Text ID="CombatTraining.CardNode.Description:3e19a24b-b0d9-4d73-b064-09ed11fa5f65">To survive as an adventurer you must be proficient at combat. Have you trained enough?</Text>
@@ -128,7 +128,7 @@
 	<Text ID="HordeMode.CardNode.Description:9026b2a8-0515-43e4-8514-d27c60953f6f">You are surrounded by a vast swarm of monsters. Do your best to survive the onslaught!</Text>
 	<Text ID="HordeMode.CardNode.Name:6e742ca6-8d8c-40a0-9199-1650f834b344">Horde Mode</Text>
 	<Text ID="JewelryWork.CardNode.Description:8a75bf9b-a6cd-49e7-a0dc-9712ca7e34c5">You find a large raw gemstone on your travels, and with a bit of work you could turn it into something marvellous.</Text>
-	<Text ID="JewelryWork.CardNode.Name:cee60cf8-9699-4116-899b-2bad17124c8a">Jewelry Work</Text>
+	<Text ID="JewelryWork.CardNode.Name:cee60cf8-9699-4116-899b-2bad17124c8a">Jewellery Work</Text>
 	<Text ID="LockedChest.CardNode.Description:cbd750f8-6cf5-46eb-afd1-4c6fb60f7779">You stumble across a locked chest. If you can break it open, you may be able to grab some loot.</Text>
 	<Text ID="LockedChest.CardNode.Name:be105678-fdd1-445f-a97b-c133f498f641">Locked Chest</Text>
 	<Text ID="MageAdmissions1.CardNode.Description:a2f919b3-2eac-4714-aebe-b617103793b7">You arrive at the mage academy and wait in a long queue to enter the admissions exams.</Text>

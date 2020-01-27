@@ -29,3 +29,7 @@ spellcasting
 MatchDamage
 AbilityDamage
 PowerGain
+gambeson
+debuff
+debuffs
+vampiric
