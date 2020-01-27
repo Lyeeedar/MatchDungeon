@@ -127,7 +127,7 @@ class GameLoopTest(val completionCallback: ()->Unit)
 		println("Testing New Quest")
 		println("")
 
-		waitUntilVisibleAndClick("Leveling Up")
+		waitUntilVisibleAndClick("Levelling Up")
 		delay(1000)
 
 		waitUntilVisibleAndClick("Embark")
