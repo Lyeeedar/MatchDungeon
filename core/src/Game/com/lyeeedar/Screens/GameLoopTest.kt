@@ -14,7 +14,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
 
-class GameLoopTest
+class GameLoopTest(val completionCallback: ()->Unit)
 {
 	fun run()
 	{
@@ -35,6 +35,9 @@ class GameLoopTest
 			testNewQuest()
 			testGrid()
 			testCompleteCard()
+
+			delay(2000)
+			completionCallback()
 		}
 	}
 

@@ -6,6 +6,7 @@ import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
 import com.crashlytics.android.Crashlytics
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.lyeeedar.MatchDungeon.BuildConfig
+import com.lyeeedar.Screens.GameLoopTest
 import com.lyeeedar.Util.Statics
 import io.fabric.sdk.android.Fabric
 
@@ -34,5 +35,11 @@ class AndroidLauncher : AndroidApplication()
 
 		Statics.applicationChanger = AndroidApplicationChanger()
 		Statics.applicationChanger.updateApplication(Statics.applicationChanger.prefs)
+
+		val launchIntent = intent
+		if (launchIntent.action == "com.google.intent.action.TEST_LOOP")
+		{
+			GameLoopTest { finish() }.run()
+		}
 	}
 }
