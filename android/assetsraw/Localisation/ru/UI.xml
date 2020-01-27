@@ -1,0 +1,187 @@
+<Localisation Language="ru" xmlns:meta="Editor">
+	<Text ID="new" TranslateType="Auto" TranslatedHash="78208">новый</Text>
+	<Text ID="complete" TranslateType="Auto" TranslatedHash="-534801063">полный</Text>
+	<Text ID="gold" TranslateType="Auto" TranslatedHash="2225280">Золото</Text>
+	<Text ID="silver" TranslateType="Auto" TranslatedHash="-1818443987">Серебряный</Text>
+	<Text ID="bronze" TranslateType="Auto" TranslatedHash="1998221754">бронза</Text>
+	<Text ID="quest" TranslateType="Auto" TranslatedHash="78391490">поиск</Text>
+	<Text ID="character" TranslateType="Auto" TranslatedHash="-726803703">символ</Text>
+	<Text ID="equipment" TranslateType="Auto" TranslatedHash="-1214642834">Оборудование</Text>
+	<Text ID="player" TranslateType="Auto" TranslatedHash="-1901885695">игрок</Text>
+	<Text ID="encounter" TranslateType="Auto" TranslatedHash="-766867181">стычка</Text>
+	<Text ID="statistics" TranslateType="Auto" TranslatedHash="1898876227">Статистика</Text>
+	<Text ID="statistic" TranslateType="Auto" TranslatedHash="-77293264">статистика</Text>
+	<Text ID="chance" TranslateType="Auto" TranslatedHash="2017197908">шанс</Text>
+	<Text ID="buff" TranslateType="Auto" TranslatedHash="2081907">полировать</Text>
+	<Text ID="buffs" TranslateType="Auto" TranslatedHash="64539232">Баффы</Text>
+	<Text ID="none" TranslateType="Auto" TranslatedHash="2433880">Никто</Text>
+	<Text ID="ability" TranslateType="Auto" TranslatedHash="464145674">способность</Text>
+	<Text ID="rewards" TranslateType="Auto" TranslatedHash="-1529663740">Награды</Text>
+	<Text ID="levelbuffs" TranslateType="Auto" TranslatedHash="1943367332">Уровень Баффы</Text>
+	<Text ID="leveldebuffs" TranslateType="Auto" TranslatedHash="578916803">Уровень Debuffs</Text>
+	<Text ID="base" TranslateType="Auto" TranslatedHash="2063089">База</Text>
+	<Text ID="equip" TranslateType="Auto" TranslatedHash="67205136">оборудование</Text>
+	<Text ID="sell" TranslateType="Auto" TranslatedHash="2573170">Продам</Text>
+	<Text ID="item" TranslateType="Auto" TranslatedHash="2289459">Вещь</Text>
+	<Text ID="take" TranslateType="Auto" TranslatedHash="2599079">принимать</Text>
+	<Text ID="confirm" TranslateType="Auto" TranslatedHash="-1679196512">Подтверждение</Text>
+	<Text ID="questselection.embark" TranslateType="Auto" TranslatedHash="2079091584">Отправьтесь</Text>
+	<Text ID="questselection.editdeck" TranslateType="Auto" TranslatedHash="78334207">Редактировать Deck</Text>
+	<Text ID="questselection.tutorial.1" TranslateType="Auto" TranslatedHash="1811985389">Это экран выбора задания.</Text>
+	<Text ID="questselection.tutorial.2" TranslateType="Auto" TranslatedHash="1728073929">Вы можете выбрать квесты от тех, кого вы разблокированы здесь. Просто нажмите на карту, которую вы хотите, а затем нажмите «Отправляйтесь».</Text>
+	<Text ID="questselection.tutorial.3" TranslateType="Auto" TranslatedHash="-487851138">Вы можете редактировать свои колоды карт здесь. Это позволит вам настроить свой опыт поисков.</Text>
+	<Text ID="questscreen.abandonquest" TranslateType="Auto" TranslatedHash="-821113033">Abandon Quest</Text>
+	<Text ID="questscreen.abandonquest.popuptext" TranslateType="Auto" TranslatedHash="1885656698">Вы уверены, что Вы хотите отказаться от поиска и возврата к экрану выбора задания? Вы потеряете прогресс, но сохранить какую-либо награду вы заслужили.</Text>
+	<Text ID="questscreen.abandonquest.continue" TranslateType="Auto" TranslatedHash="-916530135">Продолжить Quest</Text>
+	<Text ID="questscreen.abandonquest.abandon" TranslateType="Auto" TranslatedHash="-821113033">Abandon Quest</Text>
+	<Text ID="questscreen.choose" TranslateType="Auto" TranslatedHash="2017616439">выбирать</Text>
+	<Text ID="questscreen.questfailed" TranslateType="Auto" TranslatedHash="-1556233861">Ошибка Quest</Text>
+	<Text ID="questscreen.questcompleted" TranslateType="Auto" TranslatedHash="1542117453">Задание завершено</Text>
+	<Text ID="questscreen.tutorial.1" TranslateType="Auto" TranslatedHash="-337009343">Это экран задания.</Text>
+	<Text ID="questscreen.tutorial.2" TranslateType="Auto" TranslatedHash="-809625458">Здесь вы можете выбрать то, что вы хотите встретить рядом. Нажмите на карту, чтобы посмотреть более подробную информацию о нем, и, чтобы выбрать его.</Text>
+	<Text ID="questscreen.tutorial.3" TranslateType="Auto" TranslatedHash="1703591319">Нажмите здесь, чтобы увидеть текущую информацию вашего персонажа, включая статистику и оборудование.</Text>
+	<Text ID="questscreen.tutorial.4" TranslateType="Auto" TranslatedHash="-607053051">Здесь вы можете увидеть текущее золото. Вы можете использовать это, чтобы купить оборудование в магазинах, или во время встреч.</Text>
+	<Text ID="deckscreen.toomanyencounters" TranslateType="Auto" TranslatedHash="-517794333">Колода содержит слишком много встреч.</Text>
+	<Text ID="deckscreen.toofewencounters" TranslateType="Auto" TranslatedHash="-1780972857">Колода не содержит достаточное количество встреч.</Text>
+	<Text ID="deckscreen.toomuchequipment" TranslateType="Auto" TranslatedHash="-2055246851">Колода содержит слишком много оборудования.</Text>
+	<Text ID="deckscreen.toofewequipment" TranslateType="Auto" TranslatedHash="886068487">Колода не содержит достаточное количество оборудования.</Text>
+	<Text ID="deckscreen.return" TranslateType="Auto" TranslatedHash="-1850529456">Возвращение</Text>
+	<Text ID="deckscreen.remove" TranslateType="Auto" TranslatedHash="-1850743644">удалять</Text>
+	<Text ID="deckscreen.add" TranslateType="Auto" TranslatedHash="65665">добавлять</Text>
+	<Text ID="deckscreen.shops" TranslateType="Auto" TranslatedHash="79860765">Магазины</Text>
+	<Text ID="deckscreen.encounters" TranslateType="Auto" TranslatedHash="1996921280">Столкновения</Text>
+	<Text ID="deckscreen.characterselection" TranslateType="Auto" TranslatedHash="465246485">Выбор персонажа</Text>
+	<Text ID="deckscreen.pickcharacter" TranslateType="Auto" TranslatedHash="-1822154468">Выбрать</Text>
+	<Text ID="deckscreen.encounterselection" TranslateType="Auto" TranslatedHash="147145375">Выбор Encounter</Text>
+	<Text ID="deckscreen.equipmentselection" TranslateType="Auto" TranslatedHash="-1959442118">Выбор оборудования</Text>
+	<Text ID="gridscreen.novalidmoves" TranslateType="Auto" TranslatedHash="-1028843135">Нет действительных ходов. Перемешать сетки?</Text>
+	<Text ID="gridscreen.fullpower" TranslateType="Auto" TranslatedHash="-992048865">Полная мощность! Перемешать сетки?</Text>
+	<Text ID="gridscreen.launch" TranslateType="Auto" TranslatedHash="-2025975853">запуск</Text>
+	<Text ID="gridscreen.skipanimations" TranslateType="Auto" TranslatedHash="-31592189">Уровень пройден! Пропустить анимацию?</Text>
+	<Text ID="gridscreen.launchtutorial" TranslateType="Auto" TranslatedHash="1890174488">Нажмите Активировать, чтобы использовать ваши способности на отдельных плиток.</Text>
+	<Text ID="gridscreen.tutorial.1" TranslateType="Auto" TranslatedHash="2069300075">Это доска.</Text>
+	<Text ID="gridscreen.tutorial.2" TranslateType="Auto" TranslatedHash="1858446564">Это ваши условия победы.</Text>
+	<Text ID="gridscreen.tutorial.3" TranslateType="Auto" TranslatedHash="-1075529636">Это ваши условия отказа.</Text>
+	<Text ID="gridscreen.tutorial.4" TranslateType="Auto" TranslatedHash="-323994935">Это ваши способности, предоставляемые ваше оборудование.</Text>
+	<Text ID="gridscreen.tutorial.5" TranslateType="Auto" TranslatedHash="1846146489">Это власть бар. Вы можете использовать силу, собранную здесь, чтобы использовать способности, или когда она полна вы можете выполнять все перетасовать доски.</Text>
+	<Text ID="gridscreen.tutorial.6" TranslateType="Auto" TranslatedHash="2071848755">Эта область содержит шары вы подходите. Внесите строки из трех или более шаров одного и того же цвета, чтобы соответствовать им.</Text>
+	<Text ID="gridscreen.tutorial.7" TranslateType="Auto" TranslatedHash="1514171391">Внесите ряды более трех, чтобы породить специальный шар, который при сопоставлении имеет особый эффект.</Text>
+	<Text ID="gridscreen.berserk" TranslateType="Auto" TranslatedHash="1446053114">неистовый</Text>
+	<Text ID="gridscreen.activate" TranslateType="Auto" TranslatedHash="-1591330541">Активировать</Text>
+	<Text ID="shop.leave" TranslateType="Auto" TranslatedHash="1904371455">Оставить магазин</Text>
+	<Text ID="shop.buy" TranslateType="Auto" TranslatedHash="67174">купить</Text>
+	<Text ID="completioncondition.break.tutorial" TranslateType="Auto" TranslatedHash="-1435205483">Это подсчет блоков, вам нужно сломать, чтобы выиграть.</Text>
+	<Text ID="completioncondition.break.description" TranslateType="Auto" TranslatedHash="-273447384">Перерыв все блоки.</Text>
+	<Text ID="completioncondition.customorb.tutorial" TranslateType="Auto" TranslatedHash="-2062507188">Это счетчик вам нужно соответствовать, чтобы выиграть.</Text>
+	<Text ID="completioncondition.customorb.description" TranslateType="Auto" TranslatedHash="74115493">Совпадение</Text>
+	<Text ID="completioncondition.die.tutorial" TranslateType="Auto" TranslatedHash="992474406">Это ваше здоровье остального. Приступы уменьшат его, и когда он достигает 0 вы проиграете уровень.</Text>
+	<Text ID="completioncondition.die.description" TranslateType="Auto" TranslatedHash="-1433378665">Не позволяйте вашему здоровью достигнет 0.</Text>
+	<Text ID="completioncondition.kill.tutorial" TranslateType="Auto" TranslatedHash="220080640">Это кол-во врагов, вам нужно убить, чтобы выиграть.</Text>
+	<Text ID="completioncondition.kill.description" TranslateType="Auto" TranslatedHash="1102195732">Поражение всех врагов.</Text>
+	<Text ID="completioncondition.match.tutorial" TranslateType="Auto" TranslatedHash="2108284281">Это подсчет шаров каждого цвета вы должны соответствовать, чтобы выиграть.</Text>
+	<Text ID="completioncondition.match.description" TranslateType="Auto" TranslatedHash="74115493">Совпадение</Text>
+	<Text ID="completioncondition.plate.tutorial" TranslateType="Auto" TranslatedHash="-402683419">Это граф пластин вам нужно, чтобы сломать, чтобы выиграть.</Text>
+	<Text ID="completioncondition.plate.description" TranslateType="Auto" TranslatedHash="64448735">Перемена</Text>
+	<Text ID="completioncondition.sink.tutorial" TranslateType="Auto" TranslatedHash="-937495945">Это подсчет элементов, которые необходимо, чтобы добраться до нижней части доски, чтобы выиграть. Если вы не можете увидеть их на доске, то они будут находиться в сундуках, внутри блоков, или врагов.</Text>
+	<Text ID="completioncondition.sink.description" TranslateType="Auto" TranslatedHash="1503192309">Перемещение {Count} до дна.</Text>
+	<Text ID="completioncondition.time.tutorial" TranslateType="Auto" TranslatedHash="-264742714">Это ваше оставшееся время. Когда она достигает 0, вы проиграете уровень. Это будет только уменьшаться, когда плата не обновляется, так что действовать быстро!</Text>
+	<Text ID="completioncondition.time.description" TranslateType="Auto" TranslatedHash="-1565835433">Завершить уровень в пределах {Time} секунд.</Text>
+	<Text ID="completioncondition.time.seconds" TranslateType="Auto" TranslatedHash="-660217249">секунд</Text>
+	<Text ID="completioncondition.turns.tutorial" TranslateType="Auto" TranslatedHash="1859800163">Это ваш оставшийся подсчет оборота. Когда она достигает 0, вы проиграете уровень.</Text>
+	<Text ID="completioncondition.turns.description" TranslateType="Auto" TranslatedHash="-130062343">Завершите уровень в {Turns} поворотами.</Text>
+	<Text ID="completioncondition.turns.turns" TranslateType="Auto" TranslatedHash="81174390">Повороты</Text>
+	<Text ID="completioncondition.turns.turn" TranslateType="Auto" TranslatedHash="2618525">Перемена</Text>
+	<Text ID="matchmessage.1" TranslateType="Auto" TranslatedHash="2114088697">впечатляющий</Text>
+	<Text ID="matchmessage.2" TranslateType="Auto" TranslatedHash="772095037">Удивительный</Text>
+	<Text ID="matchmessage.3" TranslateType="Auto" TranslatedHash="1960734051">Захватывающий</Text>
+	<Text ID="matchmessage.4" TranslateType="Auto" TranslatedHash="-1801283976">волшебный</Text>
+	<Text ID="matchmessage.5" TranslateType="Auto" TranslatedHash="-77594853">легендарный</Text>
+	<Text ID="matchmessage.6" TranslateType="Auto" TranslatedHash="191459333">мифический</Text>
+	<Text ID="matchmessage.7" TranslateType="Auto" TranslatedHash="2047371727">божественный</Text>
+	<Text ID="matchmessage.8" TranslateType="Auto" TranslatedHash="1861761523">богоподобный</Text>
+	<Text ID="block.tutorial" TranslateType="Auto" TranslatedHash="951808056">Это блок. Матч в плитках, окружающих его, чтобы разорвать его.</Text>
+	<Text ID="chest.tutorial" TranslateType="Auto" TranslatedHash="919882126">Это грудь. Матч в плитках под этим нереститься монет. Когда нет больше никаких монет на икру, она появится пустой.</Text>
+	<Text ID="sinkable.tutorial" TranslateType="Auto" TranslatedHash="-856766742">Это sinkable пункт. Если вы переместите его в нижней части доски, вы будете успешно потопить его.</Text>
+	<Text ID="seal.tutorial" TranslateType="Auto" TranslatedHash="894558379">Этот шар был запечатан. Он не будет двигаться, пока уплотнение не будет нарушено. Для того, чтобы сломать печать использовать шар в матче.</Text>
+	<Text ID="friendly.tutorial" TranslateType="Auto" TranslatedHash="-1796118667">Это дружественный союзник. Матч в окружающей плитке, чтобы пополнить свое здоровье.</Text>
+	<Text ID="monster.tutorial" TranslateType="Auto" TranslatedHash="-1151180820">Это враг. Красная полоска под ним является его оставшимся здоровьем. Матч в плитках, окружающих его, чтобы повредить его.</Text>
+	<Text ID="monster.dr.tutorial" TranslateType="Auto" TranslatedHash="843616929">Этот враг имеет сопротивление урона, представленное серые пипсы на его здоровье бара. В конце каждого хода она будет пополняться эти пипсов, поэтому сосредоточиться на тех больших хитов!</Text>
+	<Text ID="monster.stages.tutorial" TranslateType="Auto" TranslatedHash="1340209179">Этот враг имеет несколько этапов, показанных выше его здоровье бара шарах. Когда его здоровье бар пуст, он будет мутировать в новое существо, так что следите!</Text>
+	<Text ID="monstereffect.tutorial.1" TranslateType="Auto" TranslatedHash="-1817481407">Это нападение. В пипсов вокруг черепа указывают на витки, оставшееся до активации.</Text>
+	<Text ID="monstereffect.tutorial.2" TranslateType="Auto" TranslatedHash="-1052459269">Матч как обычный шар, чтобы удалить его с доски. Если вы не в состоянии удалить его, то вы потеряете 1 здоровье.</Text>
+	<Text ID="ability.tutorial.1" TranslateType="Auto" TranslatedHash="-726409319">Это полезная возможность, предоставленная ваше текущее оборудование.</Text>
+	<Text ID="ability.tutorial.2" TranslateType="Auto" TranslatedHash="1980738996">Эти пипсов показывают, сколько энергии вам нужно активировать его.</Text>
+	<Text ID="ability.tutorial.3" TranslateType="Auto" TranslatedHash="902052048">Если у вас есть достаточное количество энергии, вы можете нажать на эту способность, чтобы начать выбирать цели для него. Обратите внимание, вы не сможете выбрать его, если нет действительных целей.</Text>
+	<Text ID="plate.tutorial" TranslateType="Auto" TranslatedHash="-378210030">Это представляет собой пластину. Матч на вершине этого, чтобы разбить его.</Text>
+	<Text ID="spreader.tutorial" TranslateType="Auto" TranslatedHash="-1730505209">Это распространяется поле. Матч в плитках, окружающих его, чтобы удалить его и остановить его распространение в этот ход.</Text>
+	<Text ID="card.containsshop" TranslateType="Auto" TranslatedHash="1437245543">Эта встреча содержит магазин.</Text>
+	<Text ID="card.unknownreward" TranslateType="Auto" TranslatedHash="-1611710601">Есть неизвестный шанс получить неизвестные плоды.</Text>
+	<Text ID="card.rewardchance" TranslateType="Auto" TranslatedHash="2019625802">Есть {Chance} шанс получить {Reward} награды.</Text>
+	<Text ID="card.willadvance" TranslateType="Auto" TranslatedHash="1411293308">Завершение этой встречи заставит его двигаться вперед.</Text>
+	<Text ID="cardsource.deck" TranslateType="Auto" TranslatedHash="-742094546">Эта встреча пришла от столкновения палубы.</Text>
+	<Text ID="cardsource.character" TranslateType="Auto" TranslatedHash="746358198">Эта встреча пришла из текущего символа.</Text>
+	<Text ID="cardsource.quest" TranslateType="Auto" TranslatedHash="1028345757">Эта встреча пришла из текущего задания.</Text>
+	<Text ID="cardsource.location" TranslateType="Auto" TranslatedHash="1588074602">Эта встреча пришла из текущего местоположения квесты.</Text>
+	<Text ID="cardchance.greatpositive" TranslateType="Auto" TranslatedHash="1071925039">благословенно Лаки</Text>
+	<Text ID="cardchance.positive" TranslateType="Auto" TranslatedHash="73771720">Счастливый</Text>
+	<Text ID="cardchance.negative" TranslateType="Auto" TranslatedHash="1380932559">Несчастливый</Text>
+	<Text ID="cardchance.greatnegative" TranslateType="Auto" TranslatedHash="2018086894">мерзко Неудачный</Text>
+	<Text ID="buff.remainingduration" TranslateType="Auto" TranslatedHash="-2103642946">Оставаясь Продолжительность</Text>
+	<Text ID="statistic.health" TranslateType="Auto" TranslatedHash="-2137395588">Здоровье</Text>
+	<Text ID="statistic.matchdamage" TranslateType="Auto" TranslatedHash="212451946">матч Damage</Text>
+	<Text ID="statistic.abilitydamage" TranslateType="Auto" TranslatedHash="817607525">Возможность повреждения</Text>
+	<Text ID="statistic.pierce" TranslateType="Auto" TranslatedHash="-1904543896">проколоть</Text>
+	<Text ID="statistic.powergain" TranslateType="Auto" TranslatedHash="-1920082438">коэффициент усиления мощности</Text>
+	<Text ID="statistic.bonusgold" TranslateType="Auto" TranslatedHash="-625484799">Bonus Gold</Text>
+	<Text ID="statistic.haste" TranslateType="Auto" TranslatedHash="69497451">поспешность</Text>
+	<Text ID="statistic.regeneration" TranslateType="Auto" TranslatedHash="1197090731">перерождение</Text>
+	<Text ID="statistic.berserk" TranslateType="Auto" TranslatedHash="1446053114">неистовый</Text>
+	<Text ID="statistic.pricereduction" TranslateType="Auto" TranslatedHash="-1355802596">Уменьшение цены</Text>
+	<Text ID="statistic.aegis" TranslateType="Auto" TranslatedHash="63140109">эгида</Text>
+	<Text ID="statistic.counter" TranslateType="Auto" TranslatedHash="-1672483364">счетчик</Text>
+	<Text ID="statistic.reflect" TranslateType="Auto" TranslatedHash="-1545048419">отражать</Text>
+	<Text ID="statistic.chaoticnature" TranslateType="Auto" TranslatedHash="1352370252">хаотичность</Text>
+	<Text ID="statistic.weaknessaura" TranslateType="Auto" TranslatedHash="-675148524">Слабость Aura</Text>
+	<Text ID="statistic.necroticaura" TranslateType="Auto" TranslatedHash="-887323266">некротический Aura</Text>
+	<Text ID="statistic.buffduration" TranslateType="Auto" TranslatedHash="-1073275199">Buff Длительность</Text>
+	<Text ID="statistic.luck" TranslateType="Auto" TranslatedHash="2379729">везение</Text>
+	<Text ID="statistic.vampiricstrikes" TranslateType="Auto" TranslatedHash="1164249202">Вампир Забастовка</Text>
+	<Text ID="statistic.health.description" TranslateType="Auto" TranslatedHash="1299227753">Количество атак вы можете принять перед смертью.</Text>
+	<Text ID="statistic.matchdamage.description" TranslateType="Auto" TranslatedHash="-937411760">Урона вы делаете в первый раз, вы подходите рядом с повреждаемым объектом каждого хода.</Text>
+	<Text ID="statistic.abilitydamage.description" TranslateType="Auto" TranslatedHash="-594150834">Бонус урон вы с событием и способностями.</Text>
+	<Text ID="statistic.pierce.description" TranslateType="Auto" TranslatedHash="1780413089">Величина сопротивления повреждения удалить каждый раз, когда вы нажмете что-то с сопротивлением повреждения.</Text>
+	<Text ID="statistic.powergain.description" TranslateType="Auto" TranslatedHash="-1214613458">Бонус силы вы получаете в первый раз, вы получаете энергию, каждый поворот.</Text>
+	<Text ID="statistic.bonusgold.description" TranslateType="Auto" TranslatedHash="-502527789">Бонус мультипликатора вы получаете каждый раз, когда вы получаете золото.</Text>
+	<Text ID="statistic.haste.description" TranslateType="Auto" TranslatedHash="504448476">Насколько быстрее вы двигаетесь. Это увеличивает количество поворота, задержка между атаками и способностями монстров и бафов длительностей.</Text>
+	<Text ID="statistic.regeneration.description" TranslateType="Auto" TranslatedHash="-1788362379">Количество здоровья восстанавливает каждый ход.</Text>
+	<Text ID="statistic.berserk.description" TranslateType="Auto" TranslatedHash="-502193063">Когда ниже половины здоровья это количество {MatchDamage}, {AbilityDamage} и {PowerGain} увеличивается.</Text>
+	<Text ID="statistic.pricereduction.description" TranslateType="Auto" TranslatedHash="1807591934">Процентное снижение цены изделий из магазина.</Text>
+	<Text ID="statistic.aegis.description" TranslateType="Auto" TranslatedHash="-1340618061">Шанс блокировать урон от атаки, как он попадает.</Text>
+	<Text ID="statistic.counter.description" TranslateType="Auto" TranslatedHash="430655623">При получении урона от атаки, шанс нанести ответный удар по случайному противнику.</Text>
+	<Text ID="statistic.reflect.description" TranslateType="Auto" TranslatedHash="1786020960">Шанс блокировать урон от атаки, а затем нанести ответный удар по случайному противнику.</Text>
+	<Text ID="statistic.chaoticnature.description" TranslateType="Auto" TranslatedHash="-391481612">Процентное увеличение или уменьшение случайного образом применяется к каждой статистике. Изменения всякий раз, когда вы закончите встречу.</Text>
+	<Text ID="statistic.weaknessaura.description" TranslateType="Auto" TranslatedHash="1258719768">Значение вычесть из вражеской жизни, как они икру.</Text>
+	<Text ID="statistic.necroticaura.description" TranslateType="Auto" TranslatedHash="-1424424200">Количество здоровья вы получаете каждый раз, когда вы убиваете врага.</Text>
+	<Text ID="statistic.buffduration.description" TranslateType="Auto" TranslatedHash="-806180849">Множитель для увеличения длительности баффа с помощью.</Text>
+	<Text ID="statistic.luck.description" TranslateType="Auto" TranslatedHash="551934223">Влияет на ваш шанс получить награду.</Text>
+	<Text ID="statistic.vampiricstrikes.description" TranslateType="Auto" TranslatedHash="147460025">Вы восстановить часть ущерба, вы имеете дело, как здоровье.</Text>
+	<Text ID="quest.bronzerewardavailable" TranslateType="Auto" TranslatedHash="1954364909">Может получить награду бронзового уровня.</Text>
+	<Text ID="quest.bronzerewardacquired" TranslateType="Auto" TranslatedHash="649613005">награда Bronze уже приобрела.</Text>
+	<Text ID="quest.silverrewardavailable" TranslateType="Auto" TranslatedHash="-502954464">Может получить награду уровня серебра.</Text>
+	<Text ID="quest.silverrewardacquired" TranslateType="Auto" TranslatedHash="-216598342">награда Silver уже приобрела.</Text>
+	<Text ID="quest.goldrewardavailable" TranslateType="Auto" TranslatedHash="-463531469">Можно получить награду уровня золота.</Text>
+	<Text ID="quest.goldrewardacquired" TranslateType="Auto" TranslatedHash="-841132345">награда Gold уже приобрела.</Text>
+	<Text ID="chance.verylow" TranslateType="Auto" TranslatedHash="-1981689494">очень низкий</Text>
+	<Text ID="chance.low" TranslateType="Auto" TranslatedHash="107348">низкий</Text>
+	<Text ID="chance.medium" TranslateType="Auto" TranslatedHash="-1078030475">средний</Text>
+	<Text ID="chance.high" TranslateType="Auto" TranslatedHash="3202466">высоко</Text>
+	<Text ID="chance.certain" TranslateType="Auto" TranslatedHash="668929186">определенный</Text>
+	<Text ID="questprogress.currentencounter" TranslateType="Auto" TranslatedHash="-1008577965">В настоящее время встреча в поисках.</Text>
+	<Text ID="questprogress.shop" TranslateType="Auto" TranslatedHash="-1818847513">Встреча, содержащая магазин.</Text>
+	<Text ID="questprogress.questencounter" TranslateType="Auto" TranslatedHash="-1707370172">Фиксированные квесты встреча.</Text>
+	<Text ID="questprogress.randomencounter" TranslateType="Auto" TranslatedHash="388430507">Случайное столкновение с палубы.</Text>
+	<Text ID="ability.powercost" TranslateType="Auto" TranslatedHash="-1920187832">Мощность Стоимость</Text>
+	<Text ID="ability.usagesperencounter" TranslateType="Auto" TranslatedHash="252976418">Обычаи Per Encounter</Text>
+	<Text ID="ability.remainingusages" TranslateType="Auto" TranslatedHash="1224056988">Остающиеся Usages</Text>
+	<Text ID="languageselector.isautotranslated" TranslateType="Auto" TranslatedHash="243777939">Автоматический перевод</Text>
+</Localisation>

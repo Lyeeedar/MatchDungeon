@@ -11,6 +11,7 @@ import com.lyeeedar.UI.addClickListener
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Localisation
 import com.lyeeedar.Util.Statics
+import java.util.*
 
 class NewUserScreen : AbstractScreen()
 {
@@ -19,6 +20,9 @@ class NewUserScreen : AbstractScreen()
 
 	override fun create()
 	{
+		val systemLanguageCode = Locale.getDefault().language
+		languageSelector.selectedLanguage = languageSelector.languages.firstOrNull { it.code == systemLanguageCode } ?: languageSelector.languages[0]
+
 		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion("Oryx/uf_split/uf_terrain/floor_wood_1"))).tint(Color(0.5f, 0.5f, 0.5f, 1.0f))
 		val contentTable = Table()
 		contentTable.background = TextureRegionDrawable(AssetManager.loadTextureRegion("GUI/shadowborder"))

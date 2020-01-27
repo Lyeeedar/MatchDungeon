@@ -1,0 +1,27 @@
+<Localisation Language="ru" xmlns:meta="Editor">
+	<Text ID="BackalleyGamblingContent.Node.[1] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:ddb1e956-cb9d-4c65-a8d5-f7f6748006ba" TranslateType="Auto" TranslatedHash="2144723756">Невезение</Text>
+	<Text ID="BackalleyGamblingContent.Node.[1] Rewards.Rewards.[1] Buff.Buff.Buff (Buff).Name:3605db3b-5b17-4045-97c2-c38b44011dc4" TranslateType="Auto" TranslatedHash="-973288140">Удачи</Text>
+	<Text ID="BeholderBattleContentLevel.Level.Symbols.[1] Symbol.Symbol.MonsterDesc (MonsterDesc).Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:acd17dda-4089-4d1b-b4b6-4e51a396d7cd" TranslateType="Auto" TranslatedHash="988023497">окаменевать</Text>
+	<Text ID="Bugs.Faction.Bosses.[0] MonsterDesc.MonsterDesc.Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:cbeec1b6-7c21-4311-b4bf-fdbc991e3fb1" TranslateType="Auto" TranslatedHash="2034909">кислота</Text>
+	<Text ID="Bugs.Faction.Monsters.[0] MonsterDesc.MonsterDesc.Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:f1334d98-b89c-4a1a-a07b-e41f23aec86a" TranslateType="Auto" TranslatedHash="-671542801">Слабое место</Text>
+	<Text ID="Bugs.Faction.Monsters.[1] MonsterDesc.MonsterDesc.Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:7e918906-e783-4e72-9d26-b16b8bb00cac" TranslateType="Auto" TranslatedHash="-671542801">Слабое место</Text>
+	<Text ID="DrugDealerBadContent.Node.[3] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:e1101cac-f276-421f-bedb-4d9faebf08c6" TranslateType="Auto" TranslatedHash="2112440468">неистовство</Text>
+	<Text ID="DrugDealerContent.Node.[3] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:c92021ab-97c1-40ee-babc-3dd3cf5882e9" TranslateType="Auto" TranslatedHash="-2083073610">Jazzed</Text>
+	<Text ID="FavourOfTheGodsContent.Node.[2] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:64fd6b84-ab2b-42b1-ac14-0b6c12964600" TranslateType="Auto" TranslatedHash="1364473568">Покровительство Богов</Text>
+	<Text ID="GreatestShowdownContent.Node.[1] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:afb6b62e-d04f-44fd-b4cb-a1be166c9c0c" TranslateType="Auto" TranslatedHash="208759758">Знак чемпиона</Text>
+	<Text ID="HeartyMealContent.Node.[1] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:37266e65-ba65-411b-99c8-e6cc1f008259" TranslateType="Auto" TranslatedHash="2050270928">обильная трапеза</Text>
+	<Text ID="MeditationContent.Node.[1] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:a64a7271-a817-40e9-88dd-c929ab3b64d8" TranslateType="Auto" TranslatedHash="973611863">ориентированные</Text>
+	<Text ID="MerchantRescueContent.Node.[0] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:3d01048f-f954-4a4d-8be6-641fa55ad01c" TranslateType="Auto" TranslatedHash="1265977826">Troll зелье</Text>
+	<Text ID="NoPants.Body.Ability.EffectData.Data.Buff (Buff).Name:f46302cf-e132-461b-a97b-d3ac8753f509" TranslateType="Auto" TranslatedHash="66205623">изворачиваться</Text>
+	<Text ID="PotionBandolier.Body.Ability.EffectData.Data.Buff (Buff).Name:10d9bd75-0f7c-45f8-961c-892ad9d81f57" TranslateType="Auto" TranslatedHash="-503818040">Зелье Малой Силе</Text>
+	<Text ID="PotionDealerContent.Node.[2] Shop.Shop.Items.[0] Buff.Buff.Buff (Buff).Name:e09edab3-4d73-483f-a1f2-73511ce244ee" TranslateType="Auto" TranslatedHash="1612011542">Зелье сердечности</Text>
+	<Text ID="PotionDealerContent.Node.[2] Shop.Shop.Items.[1] Buff.Buff.Buff (Buff).Name:95529ac3-62bc-44f8-915d-f6f496386cd2" TranslateType="Auto" TranslatedHash="-1248127587">Зелье Силы</Text>
+	<Text ID="PotionDealerContent.Node.[2] Shop.Shop.Items.[2] Buff.Buff.Buff (Buff).Name:4b1ceee5-5fa1-42ec-82f5-01985028ff45" TranslateType="Auto" TranslatedHash="-810715111">Зелье Iron Skin</Text>
+	<Text ID="PotionDealerContent.Node.[2] Shop.Shop.Items.[3] Buff.Buff.Buff (Buff).Name:fb6b16ed-9a3d-474f-868b-03539252982a" TranslateType="Auto" TranslatedHash="1066835684">Зелье энергии</Text>
+	<Text ID="PotionDealerContent.Node.[2] Shop.Shop.Items.[4] Buff.Buff.Buff (Buff).Name:a47cd4d8-e355-4009-bc51-5ad220717953" TranslateType="Auto" TranslatedHash="-879298894">Зелье Fury</Text>
+	<Text ID="RaidContentLevel.Level.Symbols.[1] Symbol.Symbol.MonsterDesc (MonsterDesc).Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:aaf92c38-f4dc-47fc-bce4-98054123cb4d" TranslateType="Auto" TranslatedHash="988023497">окаменевать</Text>
+	<Text ID="SewerOutflowContentLevel.Level.Symbols.[2] Symbol.Symbol.MonsterDesc (MonsterDesc).Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:ce0ffd64-b62c-4c7b-8457-1d9cd8beb35b" TranslateType="Auto" TranslatedHash="2580001">Медленный</Text>
+	<Text ID="SpellReflect.OffHand.Ability.EffectData.Data.Buff (Buff).Name:ebc61418-8c18-46e7-b827-b60b1410b1e0" TranslateType="Auto" TranslatedHash="627165259">отражение</Text>
+	<Text ID="SpellShockShield.OffHand.Ability.EffectData.Data.Buff (Buff).Name:b602c3fe-15d4-4775-a03c-880fe1fd8ac4" TranslateType="Auto" TranslatedHash="-649958681">Shock Shield</Text>
+	<Text ID="WizardsRobes.Body.Ability.EffectData.Data.Buff (Buff).Name:8f6012da-70ba-4b77-9a1a-167683c0b67e" TranslateType="Auto" TranslatedHash="-211202904">перезарядка</Text>
+</Localisation>

@@ -1,0 +1,16 @@
+<Localisation Language="ru" xmlns:meta="Editor">
+	<Text ID="ChangingCareers.Quest.Description:d0dab7d9-bf1b-4f8b-8ce0-723a72d0fb74" TranslateType="Auto" TranslatedHash="-464361975">Город имеет много возможностей для нового старта, для тех, кто ищет их.</Text>
+	<Text ID="ChangingCareers.Quest.Title:82a4b4d1-fba0-478d-a778-6e274761badf" TranslateType="Auto" TranslatedHash="-446191614">Смена карьеры</Text>
+	<Text ID="DescentIntoTheDepths.Quest.Description:a5294fae-53df-402b-b723-438d6ef36f8c" TranslateType="Auto" TranslatedHash="-1376048267">Вы обнаружите туннель, ведущий от древних руин глубоко под землей. Это может быть полным сокровищ.</Text>
+	<Text ID="DescentIntoTheDepths.Quest.Title:84afbcc1-b45d-4609-8748-e001effe9fad" TranslateType="Auto" TranslatedHash="1277082361">Спуск в Глубины</Text>
+	<Text ID="Intro.Quest.Description:580e5056-88ed-4bc0-8b9f-1b71eff862ae" TranslateType="Auto" TranslatedHash="-64333860">Новая игра.</Text>
+	<Text ID="Intro.Quest.Title:8d29085f-33fd-4e80-81d2-0d23c8874186" TranslateType="Auto" TranslatedHash="2130933394">НОВАЯ ИГРА</Text>
+	<Text ID="LevellingUp.Quest.Description:5c572aa5-f45e-4970-890e-4692d66003ad" TranslateType="Auto" TranslatedHash="-1978157614">Перед тем, как храбрые дебри, сначала нужно вытачивать несколько уровней. Убейте близлежащие дикие животное и собирать этот опыт!</Text>
+	<Text ID="LevellingUp.Quest.Title:a2e9f374-40ff-4788-9e2c-02c245d08fb0" TranslateType="Auto" TranslatedHash="-221521891">Выравнивание</Text>
+	<Text ID="PartyingUp.Quest.Description:7e23a035-e157-4da4-9164-39ffcc436a9b" TranslateType="Auto" TranslatedHash="609020709">Все авантюристы знают, что взять на самых опасных местах, которые необходимо партию.</Text>
+	<Text ID="PartyingUp.Quest.Title:2fc75c31-d618-445b-a51d-1e667f1d5289" TranslateType="Auto" TranslatedHash="-368458241">Partying Up</Text>
+	<Text ID="RatKing.Quest.Description:d6f418df-8b25-49fe-9188-8db4c28a0903" TranslateType="Auto" TranslatedHash="1188578126">Вы получили награду умертвить особенно большую крысу, которая была терроризирует область.</Text>
+	<Text ID="RatKing.Quest.Title:8d6ed38b-fb48-4a5f-aa74-a333f51558c6" TranslateType="Auto" TranslatedHash="99614177">Крысиный король</Text>
+	<Text ID="TreasureHunt.Quest.Description:83cb551f-6bb0-4611-b128-716adad35bf0" TranslateType="Auto" TranslatedHash="-952950975">Рассказы о забытых сокровищах остались глубоко в древних руинах привлекли вас к этому месту. Исследовать и принять все, что вы можете найти!</Text>
+	<Text ID="TreasureHunt.Quest.Title:a4cd856c-1bd4-4d35-af4e-35a9def172cd" TranslateType="Auto" TranslatedHash="1335153252">Охота за сокровищами</Text>
+</Localisation>

@@ -1,0 +1,16 @@
+<Localisation Language="it" xmlns:meta="Editor">
+	<Text ID="ChangingCareers.Quest.Description:d0dab7d9-bf1b-4f8b-8ce0-723a72d0fb74" TranslateType="Auto" TranslatedHash="-464361975">La città possiede molte opportunità per un nuovo inizio, per coloro che li cercano.</Text>
+	<Text ID="ChangingCareers.Quest.Title:82a4b4d1-fba0-478d-a778-6e274761badf" TranslateType="Auto" TranslatedHash="-446191614">cambiare carriera</Text>
+	<Text ID="DescentIntoTheDepths.Quest.Description:a5294fae-53df-402b-b723-438d6ef36f8c" TranslateType="Auto" TranslatedHash="-1376048267">Si scopre un tunnel che porta dall&#39;antica rovina in profondità nel sottosuolo. Può essere pieno di tesori.</Text>
+	<Text ID="DescentIntoTheDepths.Quest.Title:84afbcc1-b45d-4609-8748-e001effe9fad" TranslateType="Auto" TranslatedHash="1277082361">Discesa nelle profondità</Text>
+	<Text ID="Intro.Quest.Description:580e5056-88ed-4bc0-8b9f-1b71eff862ae" TranslateType="Auto" TranslatedHash="-64333860">Nuovo gioco.</Text>
+	<Text ID="Intro.Quest.Title:8d29085f-33fd-4e80-81d2-0d23c8874186" TranslateType="Auto" TranslatedHash="2130933394">NUOVO GIOCO</Text>
+	<Text ID="LevellingUp.Quest.Description:5c572aa5-f45e-4970-890e-4692d66003ad" TranslateType="Auto" TranslatedHash="-1978157614">Prima di poter affrontare le terre selvagge, dovete prima di sfornare alcuni livelli. Uccidete la fauna selvatica nelle vicinanze e raccogliere questa esperienza!</Text>
+	<Text ID="LevellingUp.Quest.Title:a2e9f374-40ff-4788-9e2c-02c245d08fb0" TranslateType="Auto" TranslatedHash="-221521891">livellamento Up</Text>
+	<Text ID="PartyingUp.Quest.Description:7e23a035-e157-4da4-9164-39ffcc436a9b" TranslateType="Auto" TranslatedHash="609020709">Tutti sanno che gli avventurieri ad assumere il maggior numero di punti di pericolo è necessario un partito.</Text>
+	<Text ID="PartyingUp.Quest.Title:2fc75c31-d618-445b-a51d-1e667f1d5289" TranslateType="Auto" TranslatedHash="-368458241">Festeggiare Up</Text>
+	<Text ID="RatKing.Quest.Description:d6f418df-8b25-49fe-9188-8db4c28a0903" TranslateType="Auto" TranslatedHash="1188578126">Ti è stato dato una taglia di uccidere un grosso ratto in particolare che è stato terrorizzando l&#39;area.</Text>
+	<Text ID="RatKing.Quest.Title:8d6ed38b-fb48-4a5f-aa74-a333f51558c6" TranslateType="Auto" TranslatedHash="99614177">Il Re Rat</Text>
+	<Text ID="TreasureHunt.Quest.Description:83cb551f-6bb0-4611-b128-716adad35bf0" TranslateType="Auto" TranslatedHash="-952950975">I racconti di tesori dimenticati lasciati in profondità all&#39;interno di un antico rudere si hanno attirato in questo luogo. Esplorare e prendere tutto quello che si può trovare!</Text>
+	<Text ID="TreasureHunt.Quest.Title:a4cd856c-1bd4-4d35-af4e-35a9def172cd" TranslateType="Auto" TranslatedHash="1335153252">Caccia al tesoro</Text>
+</Localisation>
