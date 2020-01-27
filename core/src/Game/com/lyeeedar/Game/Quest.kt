@@ -536,12 +536,13 @@ class QuestNode(quest: Quest, guid: String) : AbstractQuestNode(quest, guid)
 				}
 			}
 
+			val ran = if (Statics.test) Random.obtainTS(0) else Random.random
 			val chosenPool = if (isShop) shops else pool
 			if (chosenPool.size > 0)
 			{
 				while (output.size < 4 && chosenPool.size > 0)
 				{
-					val picked = chosenPool.removeRandom(Random.random)
+					val picked = chosenPool.removeRandom(ran)
 					if (!output.contains(picked))
 					{
 						output.add(picked)

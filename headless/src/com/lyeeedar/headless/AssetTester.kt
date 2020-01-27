@@ -8,6 +8,7 @@ import com.lyeeedar.Board.GridUpdate.MatchUpdateStep
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Game.GlobalDeck
 import com.lyeeedar.ResourceProcessors.XmlLoadTester
+import com.lyeeedar.Util.Statics
 import org.mockito.Mockito
 
 object AssetTester
@@ -17,6 +18,7 @@ object AssetTester
 		println("##########################################################")
 		try
 		{
+			Statics.test = true
 			Gdx.gl = Mockito.mock(GL20::class.java)
 			Gdx.gl20 = Mockito.mock(GL20::class.java)
 			Gdx.app = HeadlessApplication(Mockito.mock(Game::class.java))

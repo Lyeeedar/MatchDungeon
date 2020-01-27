@@ -72,6 +72,9 @@ class CardScreen : AbstractScreen()
 			created = true
 		}
 
+		contentTable.name = "ContentTable"
+		buttonTable.name = "ButtonTable"
+
 		playerSlot.clear()
 		playerSlot.add(SpriteWidget(Global.player.baseCharacter.sprite, 32f, 32f)).grow()
 

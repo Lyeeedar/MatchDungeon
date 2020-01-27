@@ -336,10 +336,13 @@ class QuestScreen : AbstractScreen()
 		}
 
 		// create widgets
+		var i = 0
 		for (card in cards)
 		{
 			val widget = card.current.getCard()
 			widget.data = card
+			widget.name = "Card$i"
+			i++
 
 			widget.addPick(Localisation.getText("questscreen.choose", "UI")) {
 				chosenQuestCard = it
@@ -435,7 +438,7 @@ class QuestScreen : AbstractScreen()
 			Table(),
 			AssetManager.loadTextureRegion("blank")!!,
 			null)
-
+		card.name = "QuestComplete"
 		card.canZoom = false
 		card.setFacing(true, false)
 		card.addPick("") {

@@ -31,12 +31,15 @@ class CardContentActionChoice : AbstractCardContentAction()
 		responsesTable.center()
 
 		var delay = 0f
+		var i = 0
 		for (choice in choices)
 		{
 			if (choice.condition.evaluate(Global.getVariableMap()).toInt() != 0)
 			{
 				val text = Localisation.getText(choice.textID,"CardContent")
 				val response = TextButton(text.expandVariables(), Statics.skin, "responseButton")
+				response.name = "Choice$i"
+				i++
 				response.label.setWrap(true)
 				responsesTable.add(response).growX().pad(5f, 0f, 5f, 0f).height(75f)
 				responsesTable.row()

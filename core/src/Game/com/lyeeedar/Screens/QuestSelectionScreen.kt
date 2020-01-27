@@ -89,6 +89,7 @@ class QuestSelectionScreen : AbstractScreen()
 		}
 
 		editButton.setText(Localisation.getText("questselection.editdeck", "UI"))
+		editButton.name = "EditDeck"
 
 		mainTable.clear()
 		scrollTable.clear()
@@ -283,6 +284,7 @@ class QuestSelectionScreen : AbstractScreen()
 		for (quest in themeMap[currentTheme])
 		{
 			val card = quest.getCard()
+			card.name = quest.title
 			val embarkString = Localisation.getText("questselection.embark", "UI")
 			card.addPick(embarkString) {
 				Statics.logger.logDebug("Embarking on quest ${quest.title}")

@@ -65,6 +65,8 @@ class GridWidget(val grid: Grid) : Widget()
 
 	init
 	{
+		name = "GridWidget"
+
 		instance = this
 
 		touchable = Touchable.enabled

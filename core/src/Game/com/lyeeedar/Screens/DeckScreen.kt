@@ -62,6 +62,7 @@ class DeckScreen : AbstractScreen()
 		val cardWidth = Statics.resolution.x.toFloat() * 0.8f
 
 		val charCard = Global.player.baseCharacter.getCard()
+		charCard.name = "Character"
 		charCard.addPick("") {
 			createCharacterScreen()
 		}
@@ -98,6 +99,7 @@ class DeckScreen : AbstractScreen()
 		mainTable.row()
 
 		val deckCard = CardWidget(Table(), Table(), AssetManager.loadTextureRegion("GUI/CardCardback")!!, null)
+		deckCard.name = "Encounters"
 		deckCard.addPick("") {
 			createEncounterScreen()
 		}
@@ -154,6 +156,7 @@ class DeckScreen : AbstractScreen()
 		mainTable.row()
 
 		val equipCard = CardWidget(Table(), Table(), AssetManager.loadTextureRegion("GUI/EquipmentCardback")!!, null)
+		equipCard.name = "Equipment"
 		equipCard.addPick("") {
 			createEquipmentScreen()
 		}
@@ -207,6 +210,7 @@ class DeckScreen : AbstractScreen()
 		if (isDeckInvalid())
 		{
 			val returnButton = TextButton(Localisation.getText("deckscreen.return", "UI"), Statics.skin)
+			returnButton.name = "ReturnInvalid"
 			returnButton.color = Color.DARK_GRAY
 			mainTable.add(returnButton).expandX().right().pad(10f).expandY().bottom()
 			mainTable.row()
@@ -214,6 +218,7 @@ class DeckScreen : AbstractScreen()
 		else
 		{
 			val returnButton = TextButton(Localisation.getText("deckscreen.return", "UI"), Statics.skin)
+			returnButton.name = "Return"
 			returnButton.addClickListener {
 
 				val screen = Statics.game.getTypedScreen<QuestSelectionScreen>()!!
@@ -283,6 +288,7 @@ class DeckScreen : AbstractScreen()
 		}
 
 		val returnButton = TextButton(Localisation.getText("deckscreen.return", "UI"), Statics.skin)
+		returnButton.name = "Return"
 		returnButton.addClickListener {
 			createMainScreen()
 		}
@@ -455,6 +461,7 @@ class DeckScreen : AbstractScreen()
 		}
 
 		val returnButton = TextButton(Localisation.getText("deckscreen.return", "UI"), Statics.skin)
+		returnButton.name = "Return"
 		returnButton.addClickListener {
 			createMainScreen()
 		}
@@ -606,6 +613,7 @@ class DeckScreen : AbstractScreen()
 		}
 
 		val returnButton = TextButton(Localisation.getText("deckscreen.return", "UI"), Statics.skin)
+		returnButton.name = "Return"
 		returnButton.addClickListener {
 			createMainScreen()
 		}

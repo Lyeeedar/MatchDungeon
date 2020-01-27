@@ -20,6 +20,8 @@ class NewUserScreen : AbstractScreen()
 
 	override fun create()
 	{
+		confirmButton.name = "Confirm"
+
 		val systemLanguageCode = Locale.getDefault().language
 		languageSelector.selectedLanguage = languageSelector.languages.firstOrNull { it.code == systemLanguageCode } ?: languageSelector.languages[0]
 
