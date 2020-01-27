@@ -55,7 +55,7 @@ class Localiser
 {
 	lateinit var translate: Translate
 
-	val languages = arrayOf("EN-US", "DE")
+	val languages = Array<String>()
 	val translatedText = ObjectMap<String, String>()
 
 	val slang = ObjectMap<String, String>()
@@ -63,6 +63,17 @@ class Localiser
 
 	init
 	{
+		val languagesXml = getRawXml("../assetsraw/Localisation/Languages.xml")
+		for (el in languagesXml.children())
+		{
+			val code = el.get("Code")
+			if (code != "en")
+			{
+				languages.add(code)
+			}
+		}
+		println("Found languages " + languages.joinToString(", "))
+
 		gameWords.addAll(File("../assetsraw/Localisation/Dictionaries/GameWords.txt").readLines())
 
 		for (slangRaw in File("../assetsraw/Localisation/Dictionaries/SlangDictionary.txt").readLines())
@@ -181,11 +192,6 @@ class Localiser
 
 	fun translateText(rawText: String, language: String): String
 	{
-		if (language == "EN-US")
-		{
-			return rawText
-		}
-
 		val key = "$language@@@$rawText"
 		if (translatedText.containsKey(key))
 		{

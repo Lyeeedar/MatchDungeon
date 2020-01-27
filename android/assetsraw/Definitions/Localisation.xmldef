@@ -8,4 +8,12 @@
 			</Attributes>
 		</Data>
 	</Definition>
+	<Definition Name="Languages" meta:RefKey="Collection">
+		<Data Name="Language" meta:RefKey="Struct">
+			<Data Name="Code" meta:RefKey="String" />
+			<Data Name="Name" meta:RefKey="String" />
+			<Data Name="Icon" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+			<Data Name="IsAutoTranslated" meta:RefKey="Boolean" />
+		</Data>
+	</Definition>
 </Definitions>

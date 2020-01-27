@@ -1,0 +1,17 @@
+<Languages xmlns:meta="Editor">
+	<Language>
+		<Code>en</Code>
+		<Name>English</Name>
+		<Icon meta:RefKey="Sprite">
+			<Name>GUI/uk_flag</Name>
+		</Icon>
+	</Language>
+	<Language>
+		<Code>de</Code>
+		<Name>Deutsch</Name>
+		<Icon meta:RefKey="Sprite">
+			<Name>GUI/germany_flag</Name>
+		</Icon>
+		<IsAutoTranslated>true</IsAutoTranslated>
+	</Language>
+</Languages>
