@@ -107,7 +107,7 @@ class Localiser
 		translate = translateOptions.service
 		println("Translate service started")
 
-		val englishLocFolder = File("../assetsraw/Localisation/EN-GB")
+		val englishLocFolder = File("../assetsraw/Localisation/en")
 		for (file in englishLocFolder.listFiles()!!)
 		{
 			println("-----------------------------------------------------")
@@ -350,7 +350,7 @@ class Localiser
 
 		val allFoundIds = ObjectSet<String>()
 
-		val englishLocFolder = File("../assetsraw/Localisation/EN-GB")
+		val englishLocFolder = File("../assetsraw/Localisation/en")
 		for (file in englishLocFolder.listFiles()!!)
 		{
 			println("-----------------------------------------------------")

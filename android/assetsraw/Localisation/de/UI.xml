@@ -1,4 +1,4 @@
-<Localisation Language="DE" xmlns:meta="Editor">
+<Localisation Language="de" xmlns:meta="Editor">
 	<Text ID="new" TranslateType="Auto" TranslatedHash="78208">Neu</Text>
 	<Text ID="complete" TranslateType="Auto" TranslatedHash="-534801063">Komplett</Text>
 	<Text ID="gold" TranslateType="Auto" TranslatedHash="2225280">Gold</Text>
@@ -24,6 +24,7 @@
 	<Text ID="sell" TranslateType="Auto" TranslatedHash="2573170">Verkaufen</Text>
 	<Text ID="item" TranslateType="Auto" TranslatedHash="2289459">Artikel</Text>
 	<Text ID="take" TranslateType="Auto" TranslatedHash="2599079">Nehmen</Text>
+	<Text ID="confirm" TranslateType="Auto" TranslatedHash="-1679196512">Bestätigen</Text>
 	<Text ID="questselection.embark" TranslateType="Auto" TranslatedHash="2079091584">Begeben</Text>
 	<Text ID="questselection.editdeck" TranslateType="Auto" TranslatedHash="78334207">Bearbeiten Deck</Text>
 	<Text ID="questselection.tutorial.1" TranslateType="Auto" TranslatedHash="1811985389">Dies ist die Suche Auswahl-Bildschirm.</Text>
@@ -182,4 +183,5 @@
 	<Text ID="ability.powercost" TranslateType="Auto" TranslatedHash="-1920187832">Kraftkosten</Text>
 	<Text ID="ability.usagesperencounter" TranslateType="Auto" TranslatedHash="252976418">Nutzungen pro Begegnung</Text>
 	<Text ID="ability.remainingusages" TranslateType="Auto" TranslatedHash="1224056988">verbleibende Nutzungen</Text>
+	<Text ID="languageselector.isautotranslated" TranslateType="Auto" TranslatedHash="243777939">automatische Übersetzung</Text>
 </Localisation>

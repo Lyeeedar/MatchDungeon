@@ -24,6 +24,7 @@
 	<Text ID="sell">Sell</Text>
 	<Text ID="item">Item</Text>
 	<Text ID="take">Take</Text>
+	<Text ID="confirm">Confirm</Text>
 
 	<Text ID="questselection.embark">Embark</Text>
 	<Text ID="questselection.editdeck">Edit Deck</Text>
@@ -202,4 +203,6 @@
 	<Text ID="ability.powercost">Power Cost</Text>
 	<Text ID="ability.usagesperencounter">Usages Per Encounter</Text>
 	<Text ID="ability.remainingusages">Remaining Usages</Text>
+
+	<Text ID="languageselector.isautotranslated">Automatically translated</Text>
 </Localisation>

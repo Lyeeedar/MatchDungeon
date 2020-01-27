@@ -6,9 +6,7 @@ import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.Card.Card
 import com.lyeeedar.EquipmentSlot
-import com.lyeeedar.Screens.DeckScreen
-import com.lyeeedar.Screens.QuestScreen
-import com.lyeeedar.Screens.QuestSelectionScreen
+import com.lyeeedar.ScreenEnum
 import com.lyeeedar.Statistic
 import com.lyeeedar.Util.Settings
 import com.lyeeedar.Util.Statics
@@ -51,13 +49,7 @@ class Global
 
 			Statics.settings = Settings()
 
-			val quest = Quest.load("Intro/Intro")
-
-			Statics.game.getTypedScreen<QuestScreen>()?.setup(quest)
-			Statics.game.getTypedScreen<DeckScreen>()?.setup()
-			Statics.game.getTypedScreen<QuestSelectionScreen>()?.setup()
-
-			QuestScreen.instance.swapTo()
+			Statics.game.switchScreen(ScreenEnum.NEWUSER)
 
 			Statics.analytics.tutorialBegin()
 		}

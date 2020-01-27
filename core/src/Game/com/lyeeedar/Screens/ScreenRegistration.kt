@@ -8,6 +8,7 @@ val DEBUG_SCREEN_OVERRIDE: ScreenEnum? = null
 
 enum class ScreenEnum
 {
+	NEWUSER,
 	GRID,
 	QUEST,
 	CARD,
@@ -36,6 +37,7 @@ fun registerGameScreens(): HashMap<ScreenEnum, AbstractScreen>
 {
 	val screens = HashMap<ScreenEnum, AbstractScreen>()
 
+	screens[ScreenEnum.NEWUSER] = NewUserScreen()
 	screens[ScreenEnum.GRID] = GridScreen()
 	screens[ScreenEnum.QUEST] = QuestScreen()
 	screens[ScreenEnum.CARD] = CardScreen()

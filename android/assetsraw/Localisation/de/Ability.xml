@@ -1,4 +1,4 @@
-<Localisation Language="DE" xmlns:meta="Editor">
+<Localisation Language="de" xmlns:meta="Editor">
 	<Text ID="Bow.MainHand.Ability.Description:3c70cdf8-4214-419c-beda-4c44bbfbcab1" TranslateType="Auto" TranslatedHash="1641933417">Schießen ein Pfeil auf einen Gegner, den Umgang {Damage} Schaden.</Text>
 	<Text ID="Bow.MainHand.Ability.Name:9f28629b-232a-47e3-bae4-ab76a190e47f" TranslateType="Auto" TranslatedHash="79860735">Schießen</Text>
 	<Text ID="Breastplate.Body.Ability.Description:6d68a13b-f863-4c1b-94e3-bf9f829d7ab6" TranslateType="Auto" TranslatedHash="1266998393">Smash Ihren Körper in einen Angriff, sie und alles, was in einem 1-Fliesen Radius um es knallt, tut {Damage} Schaden.</Text>

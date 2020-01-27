@@ -7,10 +7,7 @@ import com.esotericsoftware.kryo.io.Output
 import com.lyeeedar.Card.Card
 import com.lyeeedar.Card.CardContent.CardContent
 import com.lyeeedar.ScreenEnum
-import com.lyeeedar.Screens.CardScreen
-import com.lyeeedar.Screens.DeckScreen
-import com.lyeeedar.Screens.QuestScreen
-import com.lyeeedar.Screens.QuestSelectionScreen
+import com.lyeeedar.Screens.*
 import com.lyeeedar.Util.Settings
 import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.registerGdxSerialisers
@@ -41,59 +38,78 @@ class Save
 
 			Statics.logger.logDebug("Saving")
 
-			val outputFile = Gdx.files.local("save.dat")
+			val outputTempFile = Gdx.files.local("save.dat.temp")
 
 			val output: Output
 			try
 			{
-				output = Output(GZIPOutputStream(outputFile.write(false)))
+				output = Output(GZIPOutputStream(outputTempFile.write(false)))
 			}
 			catch (e: Exception)
 			{
 				e.printStackTrace()
+				outputTempFile.delete()
 				return
 			}
 
 			// Obtain all data
 
-			// Save all data
-			Global.deck.save(output)
-			Global.player.save(kryo, output)
-			Global.globalflags.save(kryo, output)
-			Global.questflags.save(kryo, output)
-			Global.cardflags.save(kryo, output)
-			Statics.settings.save(kryo, output)
-
-			val currentScreen = Statics.game.currentScreenEnum
-			output.writeInt(currentScreen.ordinal)
-
-			if (currentScreen == ScreenEnum.QUESTSELECTION)
+			try
 			{
+				// Save all data
+				output.writeString(Statics.language)
+				Global.deck.save(output)
+				Global.player.save(kryo, output)
+				Global.globalflags.save(kryo, output)
+				Global.questflags.save(kryo, output)
+				Global.cardflags.save(kryo, output)
+				Statics.settings.save(kryo, output)
 
-			}
-			else if (currentScreen == ScreenEnum.DECK)
-			{
+				val currentScreen = Statics.game.currentScreenEnum
+				output.writeInt(currentScreen.ordinal)
 
-			}
-			else
-			{
-				val questScreen = Statics.game.getTypedScreen<QuestScreen>()!!
-				questScreen.currentQuest.save(output)
+				if (currentScreen == ScreenEnum.QUESTSELECTION)
+				{
 
-				if (currentScreen == ScreenEnum.QUEST)
+				}
+				else if (currentScreen == ScreenEnum.DECK)
+				{
+
+				}
+				else if (currentScreen == ScreenEnum.NEWUSER)
 				{
 
 				}
 				else
 				{
-					val cardScreen = Statics.game.getTypedScreen<CardScreen>()!!
-					output.writeString(cardScreen.currentCard.path)
+					val questScreen = Statics.game.getTypedScreen<QuestScreen>()!!
+					questScreen.currentQuest.save(output)
 
-					cardScreen.currentContent.save(kryo, output)
+					if (currentScreen == ScreenEnum.QUEST)
+					{
+
+					}
+					else
+					{
+						val cardScreen = Statics.game.getTypedScreen<CardScreen>()!!
+						output.writeString(cardScreen.currentCard.path)
+
+						cardScreen.currentContent.save(kryo, output)
+					}
 				}
-			}
 
-			output.close()
+				output.close()
+
+				val contents = outputTempFile.readBytes()
+				val outputFile = Gdx.files.local("save.dat")
+				outputFile.writeBytes(contents, false)
+				outputTempFile.delete()
+			}
+			catch (e: Exception)
+			{
+				outputTempFile.delete()
+				throw e
+			}
 		}
 
 		var doingLoad = false
@@ -114,6 +130,7 @@ class Save
 				input = Input(GZIPInputStream(saveFileHandle.read()))
 
 				// Load all data
+				val language = input.readString()
 				val deck = GlobalDeck.load(input)
 				val player = Player.load(kryo, input, deck)
 				val globalFlags = GameStateFlags.load(kryo, input)
@@ -124,6 +141,7 @@ class Save
 				val currentScreen = ScreenEnum.values()[input.readInt()]
 
 				// If successful set data to active objects
+				Statics.language = language
 				Global.deck = deck
 				Global.player = player
 				Global.globalflags = globalFlags
@@ -142,6 +160,11 @@ class Save
 					val screen = Statics.game.getTypedScreen<DeckScreen>()!!
 					screen.swapTo()
 					screen.setup()
+				}
+				else if (currentScreen == ScreenEnum.NEWUSER)
+				{
+					val screen = Statics.game.getTypedScreen<NewUserScreen>()!!
+					screen.swapTo()
 				}
 				else
 				{
