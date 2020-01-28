@@ -9,6 +9,7 @@ import com.lyeeedar.Game.Global
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.Statics
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -16,6 +17,8 @@ import java.util.*
 
 class GameLoopTest(val completionCallback: ()->Unit)
 {
+	val delay = 1000L
+
 	fun run()
 	{
 		Statics.test = true
@@ -25,9 +28,11 @@ class GameLoopTest(val completionCallback: ()->Unit)
 			{
 				delay(1000)
 			}
-			delay(1000)
+			delay(delay)
 
-			Future.call({ Global.newGame () }, 0f)
+			invokeOnMainThread {
+				Global.newGame ()
+			}
 
 			testLanguageSelection()
 			testCompleteQuest()
@@ -35,6 +40,10 @@ class GameLoopTest(val completionCallback: ()->Unit)
 			testNewQuest()
 			testGrid()
 			testCompleteCard()
+
+			println("###################################################################")
+			println("Test completed successfully")
+			println("###################################################################")
 
 			delay(2000)
 			completionCallback()
@@ -52,13 +61,13 @@ class GameLoopTest(val completionCallback: ()->Unit)
 
 		waitUntilActorVisible("languageWarning")
 
-		delay(1000)
+		delay(delay)
 		getActor("Language_en")!!.click()
 
-		delay(1000)
+		delay(delay)
 		getActor("Confirm")!!.click()
 
-		delay(1000)
+		delay(delay)
 		waitUntilActorVisible("Tutorial")
 		clickThroughTutorial()
 
@@ -76,17 +85,13 @@ class GameLoopTest(val completionCallback: ()->Unit)
 		waitUntilVisibleAndClick("Card0")
 		waitUntilVisibleAndClick("Choose")
 
-		waitUntilActorVisible("ContentTable")
 		clickThroughCardContent()
-
 		waitUntilVisibleAndClick("Choice1")
 
 		clickThroughCardContent()
 		waitUntilVisibleAndClick("Choice1")
 
 		waitUntilVisibleAndClick("QuestComplete")
-
-		waitUntilActorVisible("Reward0")
 		takeAllRewards()
 
 		waitUntilActorVisible("Tutorial")
@@ -128,16 +133,16 @@ class GameLoopTest(val completionCallback: ()->Unit)
 		println("")
 
 		waitUntilVisibleAndClick("Levelling Up")
-		delay(1000)
+		delay(delay)
 
 		waitUntilVisibleAndClick("Embark")
-		delay(1000)
+		delay(delay)
 
 		waitUntilVisibleAndClick("Card0")
-		delay(1000)
+		delay(delay)
 
 		waitUntilVisibleAndClick("Choose")
-		delay(1000)
+		delay(delay)
 
 		clickThroughCardContent(true)
 
@@ -169,15 +174,14 @@ class GameLoopTest(val completionCallback: ()->Unit)
 
 			clickThroughTutorial()
 
-			Future.call(
+			invokeOnMainThread {
+				val bestMove = grid.cleanup.findBestMove(grid)
+				if (bestMove != null)
 				{
-					val bestMove = grid.cleanup.findBestMove(grid)
-					if (bestMove != null)
-					{
-						grid.select(bestMove.swapStart)
-						grid.dragEnd(bestMove.swapEnd)
-					}
-				}, 0f)
+					grid.select(bestMove.swapStart)
+					grid.dragEnd(bestMove.swapEnd)
+				}
+			}
 
 			delay(500)
 		}
@@ -194,7 +198,7 @@ class GameLoopTest(val completionCallback: ()->Unit)
 		println("")
 
 		clickThroughCardContent()
-		delay(1000)
+		delay(delay)
 		takeAllRewards()
 
 		println("")
@@ -206,7 +210,7 @@ class GameLoopTest(val completionCallback: ()->Unit)
 	{
 		while (true)
 		{
-			delay(1000)
+			delay(delay)
 
 			val tutorial = getActor("Tutorial")
 
@@ -223,9 +227,11 @@ class GameLoopTest(val completionCallback: ()->Unit)
 
 	private suspend fun clickThroughCardContent(skipChoice: Boolean = false)
 	{
+		waitUntilActorVisible("ContentTable")
+
 		while (true)
 		{
-			delay(1000)
+			delay(delay)
 
 			val actor = getActor("ContentTable")
 
@@ -241,7 +247,7 @@ class GameLoopTest(val completionCallback: ()->Unit)
 					if (skipChoice)
 					{
 						waitUntilVisibleAndClick("Choice0")
-						delay(1000)
+						delay(delay)
 					}
 					else
 					{
@@ -256,10 +262,12 @@ class GameLoopTest(val completionCallback: ()->Unit)
 
 	private suspend fun takeAllRewards()
 	{
+		waitUntilActorVisible("Reward0")
+
 		var i = 0
 		while (true)
 		{
-			delay(1000)
+			delay(delay)
 			val actor = getActor("Reward$i") ?: break
 			actor.click()
 
@@ -270,11 +278,11 @@ class GameLoopTest(val completionCallback: ()->Unit)
 	private suspend fun waitUntilVisibleAndClick(name: String)
 	{
 		waitUntilActorVisible(name)
-		delay(1000)
+		delay(delay)
 		getActor(name)!!.click()
 	}
 
-	private fun waitUntilActorVisible(name: String)
+	private suspend fun waitUntilActorVisible(name: String)
 	{
 		val start = System.currentTimeMillis()
 		while (true)
@@ -294,15 +302,17 @@ class GameLoopTest(val completionCallback: ()->Unit)
 		}
 	}
 
-	private fun getActor(name: String): Actor?
+	private suspend fun getActor(name: String): Actor?
 	{
-		return getAllActors().firstOrNull { it.name?.toLowerCase(Locale.ENGLISH) == name.toLowerCase(Locale.ENGLISH) }
+		return invokeOnMainThreadAndReturn {
+			getAllActors().firstOrNull { it.name?.toLowerCase(Locale.ENGLISH) == name.toLowerCase(Locale.ENGLISH) }
+		}
 	}
 
 	private fun getAllActors(): Sequence<Actor>
 	{
 		return sequence {
-			for (actor in Statics.stage.actors.toArray())
+			for (actor in Statics.stage.actors)
 			{
 				if (actor == null) continue
 
@@ -321,7 +331,7 @@ class GameLoopTest(val completionCallback: ()->Unit)
 
 			if (actor is WidgetGroup)
 			{
-				for (child in actor.children.toArray())
+				for (child in actor.children)
 				{
 					if (child == null) continue
 
@@ -335,22 +345,46 @@ class GameLoopTest(val completionCallback: ()->Unit)
 	}
 }
 
-fun Actor.click()
+suspend fun Actor.click()
 {
+	invokeOnMainThread {
+		val stageCoords = this.localToStageCoordinates(Vector2(this.width / 2f, this.height / 2f))
+
+		val eventDown = InputEvent()
+		eventDown.stageX = stageCoords.x
+		eventDown.stageY = stageCoords.y
+		eventDown.type = InputEvent.Type.touchDown
+		this.fire(eventDown)
+
+		val eventUp = InputEvent()
+		eventUp.stageX = stageCoords.x
+		eventUp.stageY = stageCoords.y
+		eventUp.type = InputEvent.Type.touchUp
+		this.fire(eventUp)
+	}
+}
+
+suspend fun invokeOnMainThread(func: ()->Unit)
+{
+	val blocker = CompletableDeferred<Int>()
+
 	Future.call(
 		{
-			val stageCoords = this.localToStageCoordinates(Vector2(this.width / 2f, this.height / 2f))
-
-			val eventDown = InputEvent()
-			eventDown.stageX = stageCoords.x
-			eventDown.stageY = stageCoords.y
-			eventDown.type = InputEvent.Type.touchDown
-			this.fire(eventDown)
-
-			val eventUp = InputEvent()
-			eventUp.stageX = stageCoords.x
-			eventUp.stageY = stageCoords.y
-			eventUp.type = InputEvent.Type.touchUp
-			this.fire(eventUp)
+			func()
+			blocker.complete(0)
 		}, 0f)
+
+	blocker.await()
+}
+
+suspend fun <T> invokeOnMainThreadAndReturn(func: () -> T): T
+{
+	val blocker = CompletableDeferred<T>()
+
+	Future.call(
+		{
+			blocker.complete(func())
+		}, 0f)
+
+	return blocker.await()
 }
