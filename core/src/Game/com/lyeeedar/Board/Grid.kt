@@ -25,9 +25,8 @@ import com.lyeeedar.UI.PowerBar
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
 import com.lyeeedar.Util.Random
+import com.migcomponents.migbase64.Base64
 import ktx.collections.toGdxArray
-import org.apache.commons.codec.binary.Base64.decodeBase64
-import org.apache.commons.codec.binary.Base64.encodeBase64String
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.util.*
@@ -918,7 +917,7 @@ class Replay()
 	fun compressToString(): String
 	{
 		val bytes = compress()
-		val asString = encodeBase64String(bytes)
+		val asString = Base64.encodeToString(bytes, false)
 
 		return asString
 	}
@@ -970,7 +969,7 @@ class Replay()
 
 		fun loadFromString(string: String): Replay
 		{
-			val bytes = decodeBase64(string)
+			val bytes = Base64.decode(string)
 			return loadFromBytes(bytes)
 		}
 	}
