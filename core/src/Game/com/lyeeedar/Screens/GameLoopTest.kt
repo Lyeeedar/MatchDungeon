@@ -295,7 +295,7 @@ class GameLoopTest(val completionCallback: ()->Unit)
 			val current = System.currentTimeMillis()
 			val diff = current - start
 
-			if (diff > 20000) // 20 seconds
+			if (diff > 200000) // 200 seconds
 			{
 				throw RuntimeException("Widget $name never appeared!")
 			}
