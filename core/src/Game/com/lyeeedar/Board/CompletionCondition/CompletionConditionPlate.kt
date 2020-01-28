@@ -12,7 +12,6 @@ import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.Localisation
 import com.lyeeedar.Util.Statics
 import com.lyeeedar.Util.XmlData
-import com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table
 
 class CompletionConditionPlate : AbstractCompletionCondition()
 {
@@ -41,7 +40,7 @@ class CompletionConditionPlate : AbstractCompletionCondition()
 			Future.call(
 				{
 					val tutorial = Tutorial("PlateComplete")
-					tutorial.addPopup(Localisation.getText("completioncondition.plate.tutorial", "UI"), table)
+					tutorial.addPopup(Localisation.getText("completioncondition.plate.tutorial", "UI"), label)
 					tutorial.show()
 				}, 0.5f)
 		}
