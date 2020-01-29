@@ -27,7 +27,7 @@ class AndroidLauncher : AndroidApplication()
 		Statics.android = true
 		Statics.crashReporter = AndroidCrashReporter()
 		Statics.logger = AndroidLogger()
-		Statics.performanceTracer = AndroidPerformanceTracer()
+		//Statics.performanceTracer = AndroidPerformanceTracer()
 		Statics.analytics = AndroidAnalytics(FirebaseAnalytics.getInstance(this))
 		Statics.game = MainGame()
 
