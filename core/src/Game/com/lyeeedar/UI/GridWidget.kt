@@ -63,6 +63,8 @@ class GridWidget(val grid: Grid) : Widget()
 
 	var hpLossTimer = 0f
 
+	var renderedStatic = false
+
 	init
 	{
 		name = "GridWidget"
@@ -185,6 +187,8 @@ class GridWidget(val grid: Grid) : Widget()
 		val h = (height - 16f) / grid.height.toFloat()
 
 		tileSize = Math.min(w, h)
+
+		renderedStatic = false
 	}
 
 	fun drawHPBar(space: Float, currentHp: Float, lostHP: Int, remainingReduction: Int, maxHp: Int, dr: Int, immune: Boolean, xi: Float, yi: Float, hp_full: Sprite): Float
@@ -250,6 +254,48 @@ class GridWidget(val grid: Grid) : Widget()
 
 		val delta = if (Global.resolveInstantly) 10f else Gdx.app.graphics.deltaTime * GridScreen.instance.timeMultiplier
 
+		if (!renderedStatic)
+		{
+			renderedStatic = true
+
+			renderer.beginStatic()
+
+			for (x in 0 until grid.width)
+			{
+				for (y in 0 until grid.height)
+				{
+					val tile = grid.grid[x, y]
+
+					val xi = x.toFloat()
+					val yi = (grid.height - 1) - y.toFloat()
+
+					val rendererSprite = tile.groundSprite
+					if (rendererSprite != null)
+					{
+						if (!rendererSprite.hasChosenSprites)
+						{
+							rendererSprite.chooseSprites()
+						}
+
+						val sprite = rendererSprite.chosenSprite
+						if (sprite != null)
+						{
+							renderer.queueSprite(sprite, xi, yi)
+						}
+
+						val tilingSprite = rendererSprite.chosenTilingSprite
+						if (tilingSprite != null)
+						{
+							renderer.queueSprite(tilingSprite, xi, yi)
+						}
+					}
+				}
+			}
+
+			renderer.endStatic()
+		}
+
+		renderer.renderStatic = grid.activeAbility == null
 		renderer.begin(delta, xp, yp, Colour(1f, 1f, 1f, 1f))
 
 		if (grid.activeAbility == null)
@@ -280,26 +326,33 @@ class GridWidget(val grid: Grid) : Widget()
 
 				var tileHeight = 0
 
-				val rendererSprite = tile.groundSprite
-				if (rendererSprite != null)
+				if (grid.activeAbility != null)
 				{
-					if (!rendererSprite.hasChosenSprites)
+					val rendererSprite = tile.groundSprite
+					if (rendererSprite != null)
 					{
-						rendererSprite.chooseSprites()
-					}
+						if (!rendererSprite.hasChosenSprites)
+						{
+							rendererSprite.chooseSprites()
+						}
 
-					val sprite = rendererSprite.chosenSprite
-					if (sprite != null)
-					{
-						renderer.queueSprite(sprite, xi, yi, TILE, tileHeight, tileColour)
-					}
+						val sprite = rendererSprite.chosenSprite
+						if (sprite != null)
+						{
+							renderer.queueSprite(sprite, xi, yi, TILE, tileHeight, tileColour)
+						}
 
-					val tilingSprite = rendererSprite.chosenTilingSprite
-					if (tilingSprite != null)
-					{
-						renderer.queueSprite(tilingSprite, xi, yi, TILE, tileHeight, tileColour)
-					}
+						val tilingSprite = rendererSprite.chosenTilingSprite
+						if (tilingSprite != null)
+						{
+							renderer.queueSprite(tilingSprite, xi, yi, TILE, tileHeight, tileColour)
+						}
 
+						tileHeight++
+					}
+				}
+				else
+				{
 					tileHeight++
 				}
 
