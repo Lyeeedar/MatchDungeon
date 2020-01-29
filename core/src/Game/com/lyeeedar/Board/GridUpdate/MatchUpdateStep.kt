@@ -89,25 +89,25 @@ class MatchUpdateStep : AbstractUpdateStep()
 
 	// ----------------------------------------------------------------------
 	val matches = Array<Match>()
+	private fun addMatch(exact: Boolean, length: Int, p1: Point, p2: Point)
+	{
+		fun check(dst: Int): Boolean
+		{
+			if (exact) return dst == length-1
+			else return dst >= length-1
+		}
+
+		val dst = p1.dist(p2)
+		if (check(dst))
+		{
+			// check not already added
+			matches.add(Match(p1, p2))
+		}
+	}
+
 	fun findMatches(grid: Array2D<Tile>, length: Int, exact: Boolean = false) : Array<Match>
 	{
 		matches.clear()
-
-		fun addMatch(p1: Point, p2: Point)
-		{
-			fun check(dst: Int): Boolean
-			{
-				if (exact) return dst == length-1
-				else return dst >= length-1
-			}
-
-			val dst = p1.dist(p2)
-			if (check(dst))
-			{
-				// check not already added
-				matches.add(Match(p1, p2))
-			}
-		}
 
 		// Match rows
 		for (y in 0 until grid.height)
@@ -124,7 +124,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 				{
 					if (key != -1)
 					{
-						addMatch(Point.obtain().set(sx,y), Point.obtain().set(x-1,y))
+						addMatch(exact, length, Point.obtain().set(sx,y), Point.obtain().set(x-1,y))
 					}
 
 					key = -1
@@ -136,7 +136,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 						// if we were matching, close matching
 						if (key != -1)
 						{
-							addMatch(Point.obtain().set(sx,y), Point.obtain().set(x-1,y))
+							addMatch(exact, length, Point.obtain().set(sx,y), Point.obtain().set(x-1,y))
 						}
 
 						sx = x
@@ -147,7 +147,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 
 			if (key != -1)
 			{
-				addMatch(Point.obtain().set(sx,y), Point.obtain().set(grid.width-1,y))
+				addMatch(exact, length, Point.obtain().set(sx,y), Point.obtain().set(grid.width-1,y))
 			}
 		}
 
@@ -166,7 +166,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 				{
 					if (key != -1)
 					{
-						addMatch(Point.obtain().set(x,sy), Point.obtain().set(x,y-1))
+						addMatch(exact, length, Point.obtain().set(x,sy), Point.obtain().set(x,y-1))
 					}
 
 					key = -1
@@ -178,7 +178,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 						// if we were matching, close matching
 						if (key != -1)
 						{
-							addMatch(Point.obtain().set(x,sy), Point.obtain().set(x,y-1))
+							addMatch(exact, length, Point.obtain().set(x,sy), Point.obtain().set(x,y-1))
 						}
 
 						sy = y
@@ -189,7 +189,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 
 			if (key != -1)
 			{
-				addMatch(Point.obtain().set(x,sy), Point.obtain().set(x,grid.height-1))
+				addMatch(exact, length, Point.obtain().set(x,sy), Point.obtain().set(x,grid.height-1))
 			}
 		}
 
