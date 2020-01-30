@@ -30,7 +30,6 @@ allprojects {
         kryoVersion = '4.0.2'
         ktxVersion = '1.9.10-b3'
         squidlibVersion = '3.0.0-b10'
-		ashleyVersion = '1.7.3'
     }
 
     repositories {
@@ -130,7 +129,6 @@ project(":core") {
         api "io.github.libktx:ktx-math:$ktxVersion"
         api "io.github.libktx:ktx-collections:$ktxVersion"
         api "io.github.libktx:ktx-actors:$ktxVersion"
-		api "com.badlogicgames.ashley:ashley:$ashleyVersion"
         api "com.squidpony:squidlib-util:$squidlibVersion"
         api "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
         api "com.brsanthu:migbase64:2.2"
