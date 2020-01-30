@@ -1,0 +1,16 @@
+<Definitions Colour="194,247,147" Icon="Sprites/Oryx/Custom/terrain/treecluster4.png" xmlns:meta="Editor">
+	<Definition Name="Region" meta:RefKey="Struct">
+		<Data Name="Name" NeedsLocalisation="True" LocalisationFile="Regions" meta:RefKey="String" />
+		<Data Name="Map" ElementPerLine="True" IsAsciiGrid="True" meta:RefKey="MultilineString" />
+		<Data Name="Symbols" meta:RefKey="Collection">
+			<Data Name="Symbol" meta:RefKey="Struct">
+				<Data Name="Extends" MaxLength="1" meta:RefKey="String" />
+				<Data Name="Char" MaxLength="1" meta:RefKey="String" />
+				<Data Name="Sprite" Keys="SpriteWrapper" Nullable="False" meta:RefKey="Reference" />
+			</Data>
+		</Data>
+	</Definition>
+	<Definition Name="Regions" meta:RefKey="Collection">
+		<Data Name="Region" BasePath="Regions" StripExtension="True" ResourceType="Region" meta:RefKey="File" />
+	</Definition>
+</Definitions>

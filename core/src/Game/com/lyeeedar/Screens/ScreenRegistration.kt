@@ -14,6 +14,7 @@ enum class ScreenEnum
 	CARD,
 	DECK,
 	QUESTSELECTION,
+	QUESTSELECTION2,
 	PARTICLEEDITOR,
 	TESTCARDLOOK,
 	INVALID
@@ -29,6 +30,7 @@ fun registerDebugScreens(): HashMap<ScreenEnum, AbstractScreen>
 	}
 
 	screens[ScreenEnum.TESTCARDLOOK] = TestCardLookScreen()
+	screens[ScreenEnum.QUESTSELECTION2] = QuestSelection2Screen()
 
 	return screens
 }

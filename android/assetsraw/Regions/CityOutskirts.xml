@@ -1,0 +1,193 @@
+<Region xmlns:meta="Editor">
+	<Name>CityOutskirts.Region.Name:c2840d77-e9ce-45fb-893d-c7ebf74adfcf</Name>
+	<Map>
+		<Line>tttttttt.tt.ttt.ttttttt....cccccccccccccc</Line>
+		<Line>.t.tt.t........tttttt..tt..cccccccccccccc</Line>
+		<Line>..tt.tt.ttt..ttt..tt..ttt..cccccccccccccc</Line>
+		<Line>.ttttt..t...ttttttttttttt..cccccccccccccc</Line>
+		<Line>.t.t.ttt.t.tt.t..tt.tt.tt..cccccccccccccc</Line>
+		<Line>.t..t.tt..ttt....t.tt.ttt..cccccccccccccc</Line>
+		<Line>.t.t.t...tt...tt...t..ttt...ccccccccccccc</Line>
+		<Line>.ttttt.t.tt.tttttttt.tttt...ccccccccccccc</Line>
+		<Line>ttt...ttt..tttttt.ttt.ttt....cccccccccccc</Line>
+		<Line>tt.tt..t.....t........ttt.....ccccccccccc</Line>
+		<Line>tt.t..ttt.tt.........tt.......ccccccccccc</Line>
+		<Line>.ttt.tttt.t...ttttttttt........cccccccccc</Line>
+		<Line>.ttt......t.tttttt...t..........ccccccccc</Line>
+		<Line>.ttttttt.t.tt....t..t............cccccccc</Line>
+		<Line>..tttttttttt.....t.tt.......t.....ccccccc</Line>
+		<Line>.tt..t.tttt........ttt.....tt......cccccc</Line>
+		<Line>ttt.t.tt.t.........ttt..............ccccc</Line>
+		<Line>ttt.t....ttttt.....t.................cccc</Line>
+		<Line>tt..tt.tttttt..................tt.....ccc</Line>
+		<Line>t.ttt.......t.........ttt.t.........t..cc</Line>
+		<Line>tt..........t........................t...</Line>
+		<Line>.........................t..t............</Line>
+		<Line>...t.............tt.........t............</Line>
+		<Line>...t.....t.........ttt......t............</Line>
+		<Line>..........t..............t...t...........</Line>
+		<Line>.................t.......tt..............</Line>
+		<Line>..........................t............tt</Line>
+		<Line>.....................t...................</Line>
+		<Line>..t.................t....................</Line>
+		<Line>...t.tt......tt....t.....................</Line>
+		<Line>...............t...tt....t.tt............</Line>
+		<Line>.......................tt...............t</Line>
+		<Line>....t....................t..............t</Line>
+		<Line>....t....................t...............</Line>
+		<Line>....t..............................t.....</Line>
+		<Line>...........tt....tt.............tt.......</Line>
+		<Line>......tt...t.............................</Line>
+		<Line>..............................t......t...</Line>
+		<Line>..............................t......tt..</Line>
+		<Line>...............................t......t..</Line>
+		<Line>..t.............ww,,,ww..................</Line>
+		<Line>.............wwww,,,,,wwwww..............</Line>
+		<Line>...........ww,,,,,,,,,,,,,www............</Line>
+		<Line>.........ww,,,,,,,,,,,,,,,,,ww...........</Line>
+		<Line>.......ww,,,,,,,,,,,,,,,,,,,,ww..........</Line>
+		<Line>......ww,,,,,,,,,,,,,,,,,,,,,,ww.......t.</Line>
+		<Line>.....ww,,,,,,,,,,,,,,,,,,,,,,,,ww........</Line>
+		<Line>.....w,,,,,,,,,,,,,,,,,,,,,,,,,,w.....tt.</Line>
+		<Line>....w,,,,,,,,,,,,,,,,,,,,,,,,,,,ww....t..</Line>
+		<Line>....w,,,,,,,,,,,,,,,,,,,,,,,,,,,,ww......</Line>
+		<Line>....w,,,,,,,,,,,,,,,,,,,,,,,,,,,,,w......</Line>
+		<Line>...w,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,w......</Line>
+		<Line>...w,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,w......</Line>
+		<Line>...w,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,w.....</Line>
+	</Map>
+	<Symbols>
+		<Symbol>
+			<Char>.</Char>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/ground_grass_1</Name>
+				</Sprite>
+				<SpriteVariants>
+					<Sprite>
+						<Sprite meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_terrain/ground_grass_2</Name>
+						</Sprite>
+						<Chance>0.2</Chance>
+					</Sprite>
+					<Sprite>
+						<Sprite meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_terrain/ground_grass_3</Name>
+						</Sprite>
+						<Chance>0.05</Chance>
+					</Sprite>
+					<Sprite>
+						<Sprite meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_terrain/ground_grass_4</Name>
+						</Sprite>
+						<Chance>0.05</Chance>
+					</Sprite>
+				</SpriteVariants>
+			</Sprite>
+		</Symbol>
+		<Symbol>
+			<Char>,</Char>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<Sprite meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_terrain/floor_extra_8</Name>
+				</Sprite>
+			</Sprite>
+		</Symbol>
+		<Symbol>
+			<Char>t</Char>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<Sprite meta:RefKey="RenderedLayeredSprite">
+					<Layers>
+						<Layer>
+							<Name>Oryx/uf_split/uf_terrain/ground_grass_1</Name>
+						</Layer>
+						<Layer>
+							<Name>Oryx/Custom/terrain/tree1</Name>
+							<DrawActualSize>true</DrawActualSize>
+						</Layer>
+					</Layers>
+				</Sprite>
+				<SpriteVariants>
+					<Sprite>
+						<Sprite meta:RefKey="RenderedLayeredSprite">
+							<Layers>
+								<Layer>
+									<Name>Oryx/uf_split/uf_terrain/ground_grass_1</Name>
+								</Layer>
+								<Layer>
+									<Name>Oryx/Custom/terrain/tree2</Name>
+									<DrawActualSize>true</DrawActualSize>
+								</Layer>
+							</Layers>
+						</Sprite>
+						<Chance>0.1</Chance>
+					</Sprite>
+					<Sprite>
+						<Sprite meta:RefKey="RenderedLayeredSprite">
+							<Layers>
+								<Layer>
+									<Name>Oryx/uf_split/uf_terrain/ground_grass_1</Name>
+								</Layer>
+								<Layer>
+									<Name>Oryx/Custom/terrain/tree3</Name>
+									<DrawActualSize>true</DrawActualSize>
+								</Layer>
+							</Layers>
+						</Sprite>
+						<Chance>0.1</Chance>
+					</Sprite>
+					<Sprite>
+						<Sprite meta:RefKey="RenderedLayeredSprite">
+							<Layers>
+								<Layer>
+									<Name>Oryx/uf_split/uf_terrain/ground_grass_1</Name>
+								</Layer>
+								<Layer>
+									<Name>Oryx/Custom/terrain/tree4</Name>
+									<DrawActualSize>true</DrawActualSize>
+								</Layer>
+							</Layers>
+						</Sprite>
+						<Chance>0.05</Chance>
+					</Sprite>
+				</SpriteVariants>
+			</Sprite>
+		</Symbol>
+		<Symbol>
+			<Char>w</Char>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<TilingSprite meta:RefKey="TilingSprite">
+					<Name>wall</Name>
+					<Mode>Premade</Mode>
+					<Front meta:RefKey="Sprite">
+						<Name>Oryx/Custom/terrain/light_brick_wall</Name>
+					</Front>
+					<Top meta:RefKey="Sprite">
+						<Name>Oryx/Custom/terrain/light_brick_wall_top</Name>
+					</Top>
+					<Overhang meta:RefKey="Sprite">
+						<Name>Oryx/Custom/terrain/light_brick_wall_overhang</Name>
+					</Overhang>
+				</TilingSprite>
+			</Sprite>
+		</Symbol>
+		<Symbol>
+			<Char>c</Char>
+			<Sprite meta:RefKey="SpriteWrapper">
+				<TilingSprite meta:RefKey="TilingSprite">
+					<Name>cave</Name>
+					<Mode>Premade</Mode>
+					<Front meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_cave_14</Name>
+					</Front>
+					<Top meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_cave_7</Name>
+					</Top>
+					<Overhang meta:RefKey="Sprite">
+						<Name>Oryx/uf_split/uf_terrain/wall_cave_1</Name>
+					</Overhang>
+				</TilingSprite>
+			</Sprite>
+		</Symbol>
+	</Symbols>
+</Region>

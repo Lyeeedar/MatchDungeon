@@ -4,6 +4,7 @@
 		<Data Name="Title" NeedsLocalisation="True" LocalisationFile="Quest" meta:RefKey="String" />
 		<Data Name="Description" NeedsLocalisation="True" LocalisationFile="Quest" meta:RefKey="String" />
 		<Data Name="Icon" Keys="Sprite" Nullable="False" meta:RefKey="Reference" />
+		<Data Name="Region" BasePath="Regions" StripExtension="True" ResourceType="Region" meta:RefKey="File" />
 		<Data Name="Theme" BasePath="Themes" StripExtension="True" ResourceType="Theme" meta:RefKey="File" />
 		<Data Name="QuestCards" meta:RefKey="Collection">
 			<Data Name="Card" StripExtension="True" ResourceType="Card" RelativeToThis="True" meta:RefKey="File" />
