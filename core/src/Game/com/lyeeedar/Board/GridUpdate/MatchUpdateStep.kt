@@ -20,6 +20,7 @@ import com.lyeeedar.UI.shake
 import com.lyeeedar.Util.*
 import ktx.actors.then
 import ktx.collections.toGdxArray
+import kotlin.math.absoluteValue
 
 class MatchUpdateStep : AbstractUpdateStep()
 {
@@ -88,15 +89,15 @@ class MatchUpdateStep : AbstractUpdateStep()
 
 	// ----------------------------------------------------------------------
 	val matches = Array<Match>()
-	private fun addMatch(exact: Boolean, length: Int, p1: Point, p2: Point)
+	private inline fun addMatch(exact: Boolean, length: Int, p1X: Int, p1Y: Int, p2X: Int, p2Y: Int)
 	{
-		val dst = p1.dist(p2)
+		val dst = (p1X - p2X).absoluteValue + (p1Y - p2Y).absoluteValue
 		val checked = if (exact) dst == length-1 else dst >= length-1
 
 		if (checked)
 		{
 			// check not already added
-			matches.add(Match(p1, p2))
+			matches.add(Match(Point.obtain().set(p1X, p1Y), Point.obtain().set(p2X, p2Y)))
 		}
 	}
 
@@ -119,7 +120,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 				{
 					if (key != -1)
 					{
-						addMatch(exact, length, Point.obtain().set(sx,y), Point.obtain().set(x-1,y))
+						addMatch(exact, length, sx, y, x-1, y)
 					}
 
 					key = -1
@@ -131,7 +132,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 						// if we were matching, close matching
 						if (key != -1)
 						{
-							addMatch(exact, length, Point.obtain().set(sx,y), Point.obtain().set(x-1,y))
+							addMatch(exact, length, sx, y, x-1, y)
 						}
 
 						sx = x
@@ -142,7 +143,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 
 			if (key != -1)
 			{
-				addMatch(exact, length, Point.obtain().set(sx,y), Point.obtain().set(grid.width-1,y))
+				addMatch(exact, length, sx, y, grid.width-1, y)
 			}
 		}
 
@@ -161,7 +162,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 				{
 					if (key != -1)
 					{
-						addMatch(exact, length, Point.obtain().set(x,sy), Point.obtain().set(x,y-1))
+						addMatch(exact, length, x, sy, x, y-1)
 					}
 
 					key = -1
@@ -173,7 +174,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 						// if we were matching, close matching
 						if (key != -1)
 						{
-							addMatch(exact, length, Point.obtain().set(x,sy), Point.obtain().set(x,y-1))
+							addMatch(exact, length, x, sy, x, y-1)
 						}
 
 						sy = y
@@ -184,7 +185,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 
 			if (key != -1)
 			{
-				addMatch(exact, length, Point.obtain().set(x,sy), Point.obtain().set(x,grid.height-1))
+				addMatch(exact, length, x, sy, x, grid.height-1)
 			}
 		}
 
