@@ -6,7 +6,7 @@ import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.ciel
 
-fun Entity.healable(): HealableComponent? = this.components[ComponentType.Healable] as HealableComponent?
+inline fun Entity.healable(): HealableComponent? = this.components[ComponentType.Healable] as HealableComponent?
 class HealableComponent : AbstractComponent()
 {
 	override val type: ComponentType = ComponentType.Healable

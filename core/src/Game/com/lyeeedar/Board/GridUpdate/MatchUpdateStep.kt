@@ -90,14 +90,10 @@ class MatchUpdateStep : AbstractUpdateStep()
 	val matches = Array<Match>()
 	private fun addMatch(exact: Boolean, length: Int, p1: Point, p2: Point)
 	{
-		fun check(dst: Int): Boolean
-		{
-			if (exact) return dst == length-1
-			else return dst >= length-1
-		}
-
 		val dst = p1.dist(p2)
-		if (check(dst))
+		val checked = if (exact) dst == length-1 else dst >= length-1
+
+		if (checked)
 		{
 			// check not already added
 			matches.add(Match(p1, p2))

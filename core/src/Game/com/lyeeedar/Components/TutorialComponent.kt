@@ -5,7 +5,7 @@ import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.XmlData
 
-fun Entity.tutorial(): TutorialComponent? = this.components[ComponentType.Tutorial] as TutorialComponent?
+inline fun Entity.tutorial(): TutorialComponent? = this.components[ComponentType.Tutorial] as TutorialComponent?
 class TutorialComponent : AbstractComponent()
 {
 	override val type: ComponentType = ComponentType.Tutorial

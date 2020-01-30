@@ -3,7 +3,7 @@ package com.lyeeedar.Components
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Util.XmlData
 
-fun Entity.onTurn(): OnTurnComponent? = this.components[ComponentType.OnTurn] as OnTurnComponent?
+inline fun Entity.onTurn(): OnTurnComponent? = this.components[ComponentType.OnTurn] as OnTurnComponent?
 class OnTurnComponent : AbstractComponent()
 {
 	override val type: ComponentType = ComponentType.OnTurn

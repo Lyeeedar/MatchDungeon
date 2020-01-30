@@ -4,7 +4,7 @@ import com.lyeeedar.Board.Grid
 import com.lyeeedar.Util.Event1Arg
 import com.lyeeedar.Util.XmlData
 
-fun Entity.orbSpawner(): OrbSpawnerComponent? = this.components[ComponentType.OrbSpawner] as OrbSpawnerComponent?
+inline fun Entity.orbSpawner(): OrbSpawnerComponent? = this.components[ComponentType.OrbSpawner] as OrbSpawnerComponent?
 class OrbSpawnerComponent : AbstractComponent()
 {
 	override val type: ComponentType = ComponentType.OrbSpawner

@@ -3,7 +3,7 @@ package com.lyeeedar.Components
 import com.lyeeedar.Board.Special
 import com.lyeeedar.Util.XmlData
 
-fun Entity.special(): SpecialComponent? = this.components[ComponentType.Special] as SpecialComponent?
+inline fun Entity.special(): SpecialComponent? = this.components[ComponentType.Special] as SpecialComponent?
 class SpecialComponent : AbstractComponent()
 {
 	override val type: ComponentType = ComponentType.Special

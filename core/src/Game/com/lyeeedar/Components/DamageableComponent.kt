@@ -7,7 +7,7 @@ import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.ciel
 
-fun Entity.damageable(): DamageableComponent? = this.components[ComponentType.Damageable] as DamageableComponent?
+inline fun Entity.damageable(): DamageableComponent? = this.components[ComponentType.Damageable] as DamageableComponent?
 class DamageableComponent : AbstractComponent()
 {
 	override val type: ComponentType = ComponentType.Damageable

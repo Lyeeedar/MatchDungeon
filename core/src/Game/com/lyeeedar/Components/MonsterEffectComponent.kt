@@ -3,7 +3,7 @@ package com.lyeeedar.Components
 import com.lyeeedar.Board.MonsterEffect
 import com.lyeeedar.Util.XmlData
 
-fun Entity.monsterEffect(): MonsterEffectComponent? = this.components[ComponentType.MonsterEffect] as MonsterEffectComponent?
+inline fun Entity.monsterEffect(): MonsterEffectComponent? = this.components[ComponentType.MonsterEffect] as MonsterEffectComponent?
 class MonsterEffectComponent : AbstractComponent()
 {
 	override val type: ComponentType = ComponentType.MonsterEffect

@@ -2,7 +2,7 @@ package com.lyeeedar.Components
 
 import com.lyeeedar.Util.XmlData
 
-fun Entity.sinkable(): SinkableComponent? = this.components[ComponentType.Sinkable] as SinkableComponent?
+inline fun Entity.sinkable(): SinkableComponent? = this.components[ComponentType.Sinkable] as SinkableComponent?
 class SinkableComponent : AbstractComponent()
 {
 	override val type: ComponentType = ComponentType.Sinkable

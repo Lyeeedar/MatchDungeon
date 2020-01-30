@@ -4,7 +4,7 @@ import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Util.Point
 import com.lyeeedar.Util.XmlData
 
-fun Entity.swappable(): SwappableComponent? = this.components[ComponentType.Swappable] as SwappableComponent?
+inline fun Entity.swappable(): SwappableComponent? = this.components[ComponentType.Swappable] as SwappableComponent?
 class SwappableComponent : AbstractComponent()
 {
 	override val type: ComponentType = ComponentType.Swappable

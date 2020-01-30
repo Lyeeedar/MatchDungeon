@@ -3,7 +3,7 @@ package com.lyeeedar.Components
 import com.lyeeedar.Board.OrbDesc
 import com.lyeeedar.Util.XmlData
 
-fun Entity.matchable(): MatchableComponent? = this.components[ComponentType.Matchable] as MatchableComponent?
+inline fun Entity.matchable(): MatchableComponent? = this.components[ComponentType.Matchable] as MatchableComponent?
 class MatchableComponent : AbstractComponent()
 {
 	override val type: ComponentType = ComponentType.Matchable

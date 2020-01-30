@@ -17,7 +17,7 @@ fun Tile.getContentsOrContainer(check: (entity: Entity)->Boolean): Entity?
 	return null
 }
 
-fun Entity.container(): ContainerComponent? = this.components[ComponentType.Container] as ContainerComponent?
+inline fun Entity.container(): ContainerComponent? = this.components[ComponentType.Container] as ContainerComponent?
 class ContainerComponent : AbstractComponent()
 {
 	override val type: ComponentType = ComponentType.Container

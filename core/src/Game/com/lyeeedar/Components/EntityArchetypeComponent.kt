@@ -16,7 +16,7 @@ enum class EntityArchetype private constructor(val letter: Char)
 	CUSTOM('&')
 }
 
-fun Entity.archetype(): EntityArchetypeComponent? = this.components[ComponentType.EntityArchetype] as EntityArchetypeComponent?
+inline fun Entity.archetype(): EntityArchetypeComponent? = this.components[ComponentType.EntityArchetype] as EntityArchetypeComponent?
 class EntityArchetypeComponent : AbstractComponent()
 {
 	override val type: ComponentType = ComponentType.EntityArchetype
