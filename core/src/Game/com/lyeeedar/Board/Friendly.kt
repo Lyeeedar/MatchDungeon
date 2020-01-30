@@ -1,6 +1,5 @@
 package com.lyeeedar.Board
 
-import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Array
@@ -22,7 +21,7 @@ import ktx.math.minus
 
 fun Entity.isFriendly(): Boolean
 {
-	if (this.hasComponent(HealableComponent::class.java) && this.ai()?.ai is FriendlyAI)
+	if (this.hasComponent(ComponentType.Healable) && this.ai()?.ai is FriendlyAI)
 	{
 		return true
 	}
@@ -40,22 +39,24 @@ class FriendlyDesc
 
 	fun getEntity(isSummon: Boolean, grid: Grid): Entity
 	{
-		val archetype = EntityArchetypeComponent.obtain().set(EntityArchetype.FRIENDLY)
+		val entity = friendlyBuilder.build()
 
-		val position = PositionComponent.obtain()
+		entity.archetype()!!.set(EntityArchetype.FRIENDLY)
+
+		val position = entity.pos()
 		position.size = size
 
-		val renderable = RenderableComponent.obtain().set(sprite.copy())
+		entity.renderable().set(sprite.copy())
 
-		val healable = HealableComponent.obtain()
+		val healable = entity.healable()!!
 		healable.deathEffect = death.copy()
 		healable.maxhp = hp
 		healable.isSummon = isSummon
 
-		val ai = AIComponent.obtain()
+		val ai = entity.ai()!!
 		ai.ai = this.ai.copy(grid)
 
-		val tutorialComponent = TutorialComponent.obtain()
+		val tutorialComponent = entity.tutorial()!!
 		tutorialComponent.displayTutorial = fun (grid, entity, gridWidget): Tutorial? {
 			if (!Statics.settings.get("Friendly", false) )
 			{
@@ -67,19 +68,19 @@ class FriendlyDesc
 			return null
 		}
 
-		val entity = EntityPool.obtain()
-		entity.add(archetype)
-		entity.add(position)
-		entity.add(renderable)
-		entity.add(healable)
-		entity.add(ai)
-		entity.add(tutorialComponent)
-
 		return entity
 	}
 
 	companion object
 	{
+		val friendlyBuilder = EntityArchetypeBuilder()
+				.add(ComponentType.EntityArchetype)
+				.add(ComponentType.Position)
+				.add(ComponentType.Renderable)
+				.add(ComponentType.AI)
+				.add(ComponentType.Healable)
+				.add(ComponentType.Tutorial)
+
 		fun load(xml: XmlData): FriendlyDesc
 		{
 			val desc = FriendlyDesc()

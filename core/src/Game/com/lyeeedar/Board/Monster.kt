@@ -1,6 +1,5 @@
 package com.lyeeedar.Board
 
-import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
@@ -25,7 +24,7 @@ import java.util.*
 
 fun Entity.isMonster(): Boolean
 {
-	if (this.hasComponent(DamageableComponent::class.java) && this.ai()?.ai is MonsterAI)
+	if (this.hasComponent(ComponentType.Damageable) && this.ai()?.ai is MonsterAI)
 	{
 		return true
 	}
@@ -51,14 +50,16 @@ class MonsterDesc
 
 	fun getEntity(difficulty: Int, isSummon: Boolean, grid: Grid): Entity
 	{
-		val archetype = EntityArchetypeComponent.obtain().set(EntityArchetype.MONSTER)
+		val entity = monsterBuilder.build()
 
-		val position = PositionComponent.obtain()
+		entity.archetype()!!.set(EntityArchetype.MONSTER)
+
+		val position = entity.pos()
 		position.size = size
 
-		val renderable = RenderableComponent.obtain().set(sprite.copy())
+		entity.renderable().set(sprite.copy())
 
-		val damageable = DamageableComponent.obtain()
+		val damageable = entity.damageable()!!
 		damageable.deathEffect = death.copy()
 		damageable.maxhp = hp + (hp.toFloat() * (difficulty.toFloat() / 7f)).ciel()
 		damageable.isSummon = isSummon
@@ -70,10 +71,10 @@ class MonsterDesc
 			damageable.damageReduction += (difficulty.toFloat() / 5f).ciel()
 		}
 
-		val ai = AIComponent.obtain()
+		val ai = entity.ai()!!
 		ai.ai = MonsterAI(this, difficulty, grid)
 
-		val tutorialComponent = TutorialComponent.obtain()
+		val tutorialComponent = entity.tutorial()!!
 		tutorialComponent.displayTutorial = fun (grid, entity, gridWidget): Tutorial? {
 			if (damageable.damageReduction > 0  && !Statics.settings.get("DR", false))
 			{
@@ -99,19 +100,19 @@ class MonsterDesc
 			return null
 		}
 
-		val entity = EntityPool.obtain()
-		entity.add(archetype)
-		entity.add(position)
-		entity.add(renderable)
-		entity.add(damageable)
-		entity.add(ai)
-		entity.add(tutorialComponent)
-
 		return entity
 	}
 
 	companion object
 	{
+		val monsterBuilder = EntityArchetypeBuilder()
+				.add(ComponentType.EntityArchetype)
+				.add(ComponentType.Position)
+				.add(ComponentType.Renderable)
+				.add(ComponentType.AI)
+				.add(ComponentType.Damageable)
+				.add(ComponentType.Tutorial)
+
 		fun load(xml: XmlData): MonsterDesc
 		{
 			val desc = MonsterDesc()
