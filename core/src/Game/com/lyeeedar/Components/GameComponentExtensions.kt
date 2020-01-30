@@ -3,8 +3,6 @@ package com.lyeeedar.Components
 import com.lyeeedar.Board.MonsterAI
 import com.lyeeedar.Board.isMonster
 
-fun loadGameComponents(name: String) = null
-
 fun Entity.isBasicOrb(): Boolean
 {
 	if (!this.hasComponent(ComponentType.Matchable)) return false

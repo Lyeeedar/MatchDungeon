@@ -1,6 +1,5 @@
 package com.lyeeedar.Board.GridUpdate
 
-import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
