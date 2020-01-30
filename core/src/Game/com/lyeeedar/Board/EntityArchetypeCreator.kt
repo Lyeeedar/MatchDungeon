@@ -1,6 +1,5 @@
 package com.lyeeedar.Board
 
-import com.badlogic.ashley.core.Entity
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionTurns
 import com.lyeeedar.Components.*
 import com.lyeeedar.Renderables.Renderable
@@ -14,20 +13,25 @@ class EntityArchetypeCreator
 {
 	companion object
 	{
+		val blockBuilder = EntityArchetypeBuilder()
+				.add(ComponentType.EntityArchetype)
+				.add(ComponentType.Position)
+				.add(ComponentType.Renderable)
+				.add(ComponentType.Damageable)
+				.add(ComponentType.Tutorial)
 		fun createBlock(theme: Theme, hp: Int): Entity
 		{
-			val archetype = EntityArchetypeComponent.obtain().set(EntityArchetype.BLOCK)
+			val entity = blockBuilder.build()
 
-			val position = PositionComponent.obtain()
+			entity.archetype()!!.set(EntityArchetype.BLOCK)
+			entity.renderable().set(theme.blockSprites.tryGet(0).copy())
 
-			val renderable = RenderableComponent.obtain().set(theme.blockSprites.tryGet(0).copy())
-
-			val damageableComponent = DamageableComponent.obtain()
+			val damageableComponent = entity.damageable()!!
 			damageableComponent.deathEffect = AssetManager.loadParticleEffect("Hit").getParticleEffect()
 			damageableComponent.alwaysShowHP = false
 			damageableComponent.maxhp = hp
 
-			val tutorialComponent = TutorialComponent.obtain()
+			val tutorialComponent = entity.tutorial()!!
 			tutorialComponent.displayTutorial = fun (grid, entity, gridWidget): Tutorial? {
 				if (!Statics.settings.get("Block", false) )
 				{
@@ -40,54 +44,52 @@ class EntityArchetypeCreator
 				return null
 			}
 
-			val entity = EntityPool.obtain()
-			entity.add(archetype)
-			entity.add(position)
-			entity.add(renderable)
-			entity.add(damageableComponent)
-			entity.add(tutorialComponent)
-
 			return entity
 		}
 
+		val containerBuilder = EntityArchetypeBuilder()
+				.add(ComponentType.EntityArchetype)
+				.add(ComponentType.Position)
+				.add(ComponentType.Renderable)
+				.add(ComponentType.Damageable)
+				.add(ComponentType.Container)
 		fun createContainer(sprite: Renderable, hp: Int, contents: Entity): Entity
 		{
-			val archetype = EntityArchetypeComponent.obtain().set(EntityArchetype.CONTAINER)
+			val entity = containerBuilder.build()
 
-			val position = PositionComponent.obtain()
+			entity.archetype()!!.set(EntityArchetype.CONTAINER)
+			entity.renderable().set(sprite.copy())
 
-			val renderable = RenderableComponent.obtain().set(sprite.copy())
-
-			val damageableComponent = DamageableComponent.obtain()
+			val damageableComponent = entity.damageable()!!
 			damageableComponent.deathEffect = AssetManager.loadParticleEffect("Hit").getParticleEffect()
 			damageableComponent.alwaysShowHP = false
 			damageableComponent.maxhp = hp
 
-			val containerComponent = ContainerComponent.obtain()
+			val containerComponent = entity.container()!!
 			containerComponent.containedEntity = contents
-
-			val entity = EntityPool.obtain()
-			entity.add(archetype)
-			entity.add(position)
-			entity.add(renderable)
-			entity.add(damageableComponent)
-			entity.add(containerComponent)
 
 			return entity
 		}
 
+		val chestBuilder = EntityArchetypeBuilder()
+				.add(ComponentType.EntityArchetype)
+				.add(ComponentType.Position)
+				.add(ComponentType.Renderable)
+				.add(ComponentType.OrbSpawner)
+				.add(ComponentType.Tutorial)
 		fun createChest(spawnOrbs: Boolean, theme: Theme): Entity
 		{
-			val archetype = EntityArchetypeComponent.obtain().set(EntityArchetype.CHEST)
+			val entity = chestBuilder.build()
 
-			val position = PositionComponent.obtain()
+			entity.archetype()!!.set(EntityArchetype.CHEST)
 
 			val fullSprite = theme.chestFull.copy()
 			val emptySprite = theme.chestEmpty.copy()
-			val renderable = RenderableComponent.obtain()
+
+			val renderable = entity.renderable()
 			renderable.renderable = emptySprite
 
-			val spawner = OrbSpawnerComponent.obtain()
+			val spawner = entity.orbSpawner()!!
 			spawner.canSpawnSinkables = true
 			spawner.spawn = fun(grid: Grid, entity: Entity): Entity? {
 				if (spawnOrbs)
@@ -144,7 +146,7 @@ class EntityArchetypeCreator
 				return false
 			}
 
-			val tutorialComponent = TutorialComponent.obtain()
+			val tutorialComponent = entity.tutorial()!!
 			tutorialComponent.displayTutorial = fun (grid, entity, gridWidget): Tutorial? {
 				if (spawner.numToSpawn > 0 && !Statics.settings.get("Chest", false))
 				{
@@ -156,30 +158,24 @@ class EntityArchetypeCreator
 				return null
 			}
 
-
-			val entity = EntityPool.obtain()
-			entity.add(archetype)
-			entity.add(position)
-			entity.add(renderable)
-			entity.add(spawner)
-			entity.add(tutorialComponent)
-
 			return entity
 		}
 
+		val sinkableBuilder = EntityArchetypeBuilder()
+				.add(ComponentType.EntityArchetype)
+				.add(ComponentType.Position)
+				.add(ComponentType.Renderable)
+				.add(ComponentType.Sinkable)
+				.add(ComponentType.Swappable)
+				.add(ComponentType.Tutorial)
 		fun createSinkable(renderable: Renderable): Entity
 		{
-			val archetype = EntityArchetypeComponent.obtain().set(EntityArchetype.SINKABLE)
+			val entity = sinkableBuilder.build()
 
-			val position = PositionComponent.obtain()
+			entity.archetype()!!.set(EntityArchetype.SINKABLE)
+			entity.renderable().set(renderable)
 
-			val renderable = RenderableComponent.obtain().set(renderable)
-
-			val sinkable = SinkableComponent.obtain()
-
-			val swappable = SwappableComponent.obtain()
-
-			val tutorialComponent = TutorialComponent.obtain()
+			val tutorialComponent = entity.tutorial()!!
 			tutorialComponent.displayTutorial = fun (grid, entity, gridWidget): Tutorial? {
 				if (!Statics.settings.get("Sinkable", false) )
 				{
@@ -191,31 +187,27 @@ class EntityArchetypeCreator
 				return null
 			}
 
-			val entity = EntityPool.obtain()
-			entity.add(archetype)
-			entity.add(position)
-			entity.add(renderable)
-			entity.add(sinkable)
-			entity.add(swappable)
-			entity.add(tutorialComponent)
-
 			return entity
 		}
 
+		val orbBuilder = EntityArchetypeBuilder()
+				.add(ComponentType.EntityArchetype)
+				.add(ComponentType.Position)
+				.add(ComponentType.Renderable)
+				.add(ComponentType.Matchable)
+				.add(ComponentType.Swappable)
+				.add(ComponentType.Tutorial)
 		fun createOrb(desc: OrbDesc): Entity
 		{
-			val matchable = MatchableComponent.obtain()
+			val entity = orbBuilder.build()
 
-			val swappable = SwappableComponent.obtain()
+			entity.archetype()!!.set(EntityArchetype.ORB)
+			entity.renderable().set(desc.sprite.copy())
 
-			val renderable = RenderableComponent.obtain()
-			renderable.set(desc.sprite.copy())
+			val matchable = entity.matchable()!!
+			val swappable = entity.swappable()!!
 
-			val position = PositionComponent.obtain()
-
-			val archetype = EntityArchetypeComponent.obtain().set(EntityArchetype.ORB)
-
-			val tutorialComponent = TutorialComponent.obtain()
+			val tutorialComponent = entity.tutorial()!!
 			tutorialComponent.displayTutorial = fun (grid, entity, gridWidget): Tutorial? {
 				if (swappable.sealed && !Statics.settings.get("Seal", false) )
 				{
@@ -226,14 +218,6 @@ class EntityArchetypeCreator
 
 				return null
 			}
-
-			val entity = EntityPool.obtain()
-			entity.add(matchable)
-			entity.add(swappable)
-			entity.add(renderable)
-			entity.add(position)
-			entity.add(archetype)
-			entity.add(tutorialComponent)
 
 			matchable.setDesc(desc, entity)
 

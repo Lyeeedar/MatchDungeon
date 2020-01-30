@@ -1,18 +1,17 @@
 package com.lyeeedar.Components
 
-import com.badlogic.ashley.core.ComponentMapper
-import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.ObjectSet
-import com.badlogic.gdx.utils.Pool
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.ciel
 
-fun Entity.damageable(): DamageableComponent? = DamageableComponent.mapper.get(this)
+fun Entity.damageable(): DamageableComponent? = this.components[ComponentType.Damageable] as DamageableComponent?
 class DamageableComponent : AbstractComponent()
 {
+	override val type: ComponentType = ComponentType.Damageable
+
 	var immune = false
 	var immuneCooldown = 0
 
@@ -74,37 +73,7 @@ class DamageableComponent : AbstractComponent()
 	var alwaysShowHP = true
 	var isSummon = false
 
-	var obtained: Boolean = false
-	companion object
-	{
-		val mapper: ComponentMapper<DamageableComponent> = ComponentMapper.getFor(DamageableComponent::class.java)
-		fun get(entity: Entity): DamageableComponent? = mapper.get(entity)
-
-		private val pool: Pool<DamageableComponent> = object : Pool<DamageableComponent>() {
-			override fun newObject(): DamageableComponent
-			{
-				return DamageableComponent()
-			}
-
-		}
-
-		@JvmStatic fun obtain(): DamageableComponent
-		{
-			val obj = pool.obtain()
-
-			if (obj.obtained) throw RuntimeException()
-			obj.reset()
-
-			obj.obtained = true
-			return obj
-		}
-	}
-	override fun free() { if (obtained) { pool.free(this); obtained = false } }
-
-	override fun parse(xml: XmlData, entity: Entity, parentPath: String)
-	{
-		TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-	}
+	override fun parse(xml: XmlData, entity: Entity, parentPath: String) {}
 
 	override fun reset()
 	{

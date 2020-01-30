@@ -3,6 +3,7 @@ package com.lyeeedar.Components
 enum class ComponentType private constructor(val constructor: ()->AbstractComponent)
 {
 	// Engine
+	ArchetypeBuilder({ ArchetypeBuilderComponent() }),
 	AdditionalRenderable({ AdditionalRenderableComponent() }),
 	Dialogue({ DialogueComponent() }),
 	DirectionalSprite({ DirectionalSpriteComponent() }),

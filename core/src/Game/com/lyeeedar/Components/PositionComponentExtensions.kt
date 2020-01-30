@@ -1,6 +1,5 @@
 package com.lyeeedar.Components
 
-import com.badlogic.ashley.core.Entity
 import com.lyeeedar.Board.Tile
 import com.lyeeedar.Direction
 import com.lyeeedar.Util.Point

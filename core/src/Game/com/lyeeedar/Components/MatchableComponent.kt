@@ -1,14 +1,13 @@
 package com.lyeeedar.Components
 
-import com.badlogic.ashley.core.ComponentMapper
-import com.badlogic.ashley.core.Entity
-import com.badlogic.gdx.utils.Pool
 import com.lyeeedar.Board.OrbDesc
 import com.lyeeedar.Util.XmlData
 
-fun Entity.matchable(): MatchableComponent? = MatchableComponent.mapper.get(this)
+fun Entity.matchable(): MatchableComponent? = this.components[ComponentType.Matchable] as MatchableComponent?
 class MatchableComponent : AbstractComponent()
 {
+	override val type: ComponentType = ComponentType.Matchable
+
 	var desc: OrbDesc = OrbDesc()
 		private set(value)
 		{
@@ -40,37 +39,7 @@ class MatchableComponent : AbstractComponent()
 
 	var skipPowerOrb = false
 
-	var obtained: Boolean = false
-	companion object
-	{
-		val mapper: ComponentMapper<MatchableComponent> = ComponentMapper.getFor(MatchableComponent::class.java)
-		fun get(entity: Entity): MatchableComponent? = mapper.get(entity)
-
-		private val pool: Pool<MatchableComponent> = object : Pool<MatchableComponent>() {
-			override fun newObject(): MatchableComponent
-			{
-				return MatchableComponent()
-			}
-
-		}
-
-		@JvmStatic fun obtain(): MatchableComponent
-		{
-			val obj = MatchableComponent.pool.obtain()
-
-			if (obj.obtained) throw RuntimeException()
-			obj.reset()
-
-			obj.obtained = true
-			return obj
-		}
-	}
-	override fun free() { if (obtained) { MatchableComponent.pool.free(this); obtained = false } }
-
-	override fun parse(xml: XmlData, entity: Entity, parentPath: String)
-	{
-		TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-	}
+	override fun parse(xml: XmlData, entity: Entity, parentPath: String) {}
 
 	override fun reset()
 	{

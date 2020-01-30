@@ -1,17 +1,16 @@
 package com.lyeeedar.Components
 
-import com.badlogic.ashley.core.ComponentMapper
-import com.badlogic.ashley.core.Entity
-import com.badlogic.gdx.utils.Pool
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Util.AssetManager
 import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.ciel
 
-fun Entity.healable(): HealableComponent? = HealableComponent.mapper.get(this)
+fun Entity.healable(): HealableComponent? = this.components[ComponentType.Healable] as HealableComponent?
 class HealableComponent : AbstractComponent()
 {
+	override val type: ComponentType = ComponentType.Healable
+
 	var immune = false
 
 	var hp: Float = 1f
@@ -55,37 +54,7 @@ class HealableComponent : AbstractComponent()
 
 	var deathEffect: ParticleEffect = AssetManager.loadParticleEffect("Death").getParticleEffect()
 
-	var obtained: Boolean = false
-	companion object
-	{
-		val mapper: ComponentMapper<HealableComponent> = ComponentMapper.getFor(HealableComponent::class.java)
-		fun get(entity: Entity): HealableComponent? = mapper.get(entity)
-
-		private val pool: Pool<HealableComponent> = object : Pool<HealableComponent>() {
-			override fun newObject(): HealableComponent
-			{
-				return HealableComponent()
-			}
-
-		}
-
-		@JvmStatic fun obtain(): HealableComponent
-		{
-			val obj = pool.obtain()
-
-			if (obj.obtained) throw RuntimeException()
-			obj.reset()
-
-			obj.obtained = true
-			return obj
-		}
-	}
-	override fun free() { if (obtained) { pool.free(this); obtained = false } }
-
-	override fun parse(xml: XmlData, entity: Entity, parentPath: String)
-	{
-		TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-	}
+	override fun parse(xml: XmlData, entity: Entity, parentPath: String) {}
 
 	override fun reset()
 	{

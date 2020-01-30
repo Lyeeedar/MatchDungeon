@@ -1,15 +1,14 @@
 package com.lyeeedar.Components
 
-import com.badlogic.ashley.core.ComponentMapper
-import com.badlogic.ashley.core.Entity
-import com.badlogic.gdx.utils.Pool
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Util.Event1Arg
 import com.lyeeedar.Util.XmlData
 
-fun Entity.orbSpawner(): OrbSpawnerComponent? = OrbSpawnerComponent.mapper.get(this)
+fun Entity.orbSpawner(): OrbSpawnerComponent? = this.components[ComponentType.OrbSpawner] as OrbSpawnerComponent?
 class OrbSpawnerComponent : AbstractComponent()
 {
+	override val type: ComponentType = ComponentType.OrbSpawner
+
 	var canSpawnSinkables = true
 
 	val numToSpawnChanged = Event1Arg<Int>()
@@ -25,37 +24,7 @@ class OrbSpawnerComponent : AbstractComponent()
 
 	lateinit var spawn: ((grid: Grid, entity: Entity)->Entity?)
 
-	var obtained: Boolean = false
-	companion object
-	{
-		val mapper: ComponentMapper<OrbSpawnerComponent> = ComponentMapper.getFor(OrbSpawnerComponent::class.java)
-		fun get(entity: Entity): OrbSpawnerComponent? = mapper.get(entity)
-
-		private val pool: Pool<OrbSpawnerComponent> = object : Pool<OrbSpawnerComponent>() {
-			override fun newObject(): OrbSpawnerComponent
-			{
-				return OrbSpawnerComponent()
-			}
-
-		}
-
-		@JvmStatic fun obtain(): OrbSpawnerComponent
-		{
-			val obj = OrbSpawnerComponent.pool.obtain()
-
-			if (obj.obtained) throw RuntimeException()
-			obj.reset()
-
-			obj.obtained = true
-			return obj
-		}
-	}
-	override fun free() { if (obtained) { OrbSpawnerComponent.pool.free(this); obtained = false } }
-
-	override fun parse(xml: XmlData, entity: Entity, parentPath: String)
-	{
-		TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-	}
+	override fun parse(xml: XmlData, entity: Entity, parentPath: String) {}
 
 	override fun reset()
 	{

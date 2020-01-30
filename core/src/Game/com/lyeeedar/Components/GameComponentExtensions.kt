@@ -1,6 +1,5 @@
 package com.lyeeedar.Components
 
-import com.badlogic.ashley.core.Entity
 import com.lyeeedar.Board.MonsterAI
 import com.lyeeedar.Board.isMonster
 
@@ -8,9 +7,9 @@ fun loadGameComponents(name: String) = null
 
 fun Entity.isBasicOrb(): Boolean
 {
-	if (!this.hasComponent(MatchableComponent::class.java)) return false
+	if (!this.hasComponent(ComponentType.Matchable)) return false
 
-	if (this.hasComponent(SpecialComponent::class.java)) return false
+	if (this.hasComponent(ComponentType.Special)) return false
 
 	if (this.matchable()!!.desc.isNamed) return false
 
