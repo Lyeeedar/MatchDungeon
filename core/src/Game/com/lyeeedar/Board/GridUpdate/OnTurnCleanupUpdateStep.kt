@@ -1,6 +1,5 @@
 package com.lyeeedar.Board.GridUpdate
 
-import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Board.*

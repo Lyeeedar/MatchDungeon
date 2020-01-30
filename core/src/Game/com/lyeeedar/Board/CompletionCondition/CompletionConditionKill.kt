@@ -1,6 +1,5 @@
 package com.lyeeedar.Board.CompletionCondition
 
-import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
@@ -9,10 +8,7 @@ import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.MonsterAI
 import com.lyeeedar.Board.isMonster
-import com.lyeeedar.Components.ai
-import com.lyeeedar.Components.container
-import com.lyeeedar.Components.damageable
-import com.lyeeedar.Components.renderable
+import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.SpriteWidget

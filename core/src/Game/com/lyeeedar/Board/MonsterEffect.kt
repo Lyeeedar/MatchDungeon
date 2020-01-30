@@ -1,6 +1,5 @@
 package com.lyeeedar.Board
 
-import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Components.*
@@ -36,9 +35,11 @@ fun addMonsterEffect(entity: Entity, monsterEffect: MonsterEffect): Entity
 		throw RuntimeException("Entity does not have matchable!")
 	}
 
-	entity.add(MonsterEffectComponent.obtain().set(monsterEffect))
+	entity.addComponent(ComponentType.MonsterEffect)
+	entity.monsterEffect()!!.set(monsterEffect)
 
-	val tutorialComponent = TutorialComponent.obtain()
+	entity.addComponent(ComponentType.Tutorial)
+	val tutorialComponent = entity.tutorial()!!
 	tutorialComponent.displayTutorial = fun (grid, entity, gridWidget): Tutorial? {
 		if (!Statics.settings.get("Attack", false) )
 		{
@@ -50,7 +51,6 @@ fun addMonsterEffect(entity: Entity, monsterEffect: MonsterEffect): Entity
 
 		return null
 	}
-	entity.add(tutorialComponent)
 
 	return entity
 }

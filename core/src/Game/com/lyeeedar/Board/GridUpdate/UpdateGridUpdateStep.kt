@@ -1,6 +1,5 @@
 package com.lyeeedar.Board.GridUpdate
 
-import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Board.Grid
@@ -167,7 +166,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 
 			if (damageableComponent.hp <= 0 && !entity.isMarkedForDeletion())
 			{
-				entity.add(MarkedForDeletionComponent.obtain("died"))
+				entity.markForDeletion(0f, "died")
 			}
 		}
 
@@ -183,7 +182,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 
 			if (healableComponent.hp <= 0 && !entity.isMarkedForDeletion())
 			{
-				entity.add(MarkedForDeletionComponent.obtain("died"))
+				entity.markForDeletion(0f, "died")
 			}
 		}
 
@@ -264,7 +263,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 				{
 					if (special.special.armed && !contents.isMarkedForDeletion())
 					{
-						contents.add(MarkedForDeletionComponent.obtain("armed"))
+						contents.markForDeletion(0f, "armed")
 					}
 				}
 
@@ -348,7 +347,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 
 				if (monsterEffect.monsterEffect.timer <= 0)
 				{
-					tile.contents!!.add(MarkedForDeletionComponent.obtain("timer expired"))
+					tile.contents!!.markForDeletion(0f, "timer expired")
 				}
 			}
 		}

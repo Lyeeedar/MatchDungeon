@@ -1,6 +1,5 @@
 package com.lyeeedar.Board
 
-import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Board.GridUpdate.Match
 import com.lyeeedar.Components.*
@@ -17,7 +16,7 @@ class Tile(x: Int, y: Int, val grid: Grid) : Point(x, y)
 	var contents: Entity? = null
 		set(value)
 		{
-			if (Statics.debug && value != null && !canHaveOrb && (value.hasComponent(SwappableComponent::class.java) || value.hasComponent(AIComponent::class.java)))
+			if (Statics.debug && value != null && !canHaveOrb && (value.hasComponent(ComponentType.Swappable) || value.hasComponent(ComponentType.AI)))
 			{
 				val wall = wallSprite != null
 				throw RuntimeException("Tried to put something in tile ($x,$y) that should be empty. IsPit: $isPit, IsWall: $wall, Existing: $field, object: ${value.archetype()!!.archetype}")

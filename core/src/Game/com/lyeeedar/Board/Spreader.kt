@@ -173,7 +173,7 @@ class Spreader
 				val target = attackedTile.contents!!
 
 				val attack = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap())
-				target.add(MonsterEffectComponent.obtain().set(attack))
+				addMonsterEffect(target, attack)
 				attack.timer = attackNumPips + (Global.player.getStat(Statistic.HASTE) * attackNumPips).toInt()
 
 				grid.replay.logAction("spreader $nameKey attacking from (${tile.toShortString()}) to (${attackedTile.toShortString()})")

@@ -1,6 +1,5 @@
 package com.lyeeedar.Board
 
-import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.ObjectSet
@@ -25,8 +24,8 @@ fun addSpecial(entity: Entity, special: Special): Entity
 	var holder = entity.special()
 	if (holder == null)
 	{
-		holder = SpecialComponent.obtain()
-		entity.add(holder)
+		entity.addComponent(ComponentType.Special)
+		holder = entity.special()!!
 	}
 	holder.special = special
 
@@ -39,7 +38,7 @@ fun addSpecial(entity: Entity, special: Special): Entity
 	{
 		renderable.colourAnimation = ChromaticAnimation.obtain().set(15f)
 
-		entity.remove(MatchableComponent::class.java)
+		entity.removeComponent(ComponentType.Matchable)
 	}
 	else
 	{
@@ -57,7 +56,8 @@ fun tryMergeSpecial(special: Special, entity: Entity): Special
 	if (otherSpecial != null)
 	{
 		val tempEntity = EntityPool.obtain()
-		tempEntity.add(SpecialComponent.obtain().set(special))
+		tempEntity.addComponent(ComponentType.Special)
+		tempEntity.special()!!.set(special)
 
 		val newSpecial = otherSpecial.special.merge(tempEntity) ?: special.merge(entity) ?: special
 
@@ -697,8 +697,8 @@ class Match5Spread(val special: Special) : GemSpecial()
 								else
 								{
 									val specialHolder = EntityPool.obtain()
-									val specialComponent = SpecialComponent.obtain().set(special)
-									specialHolder.add(specialComponent)
+									specialHolder.addComponent(ComponentType.Special)
+									specialHolder.special()!!.set(special)
 
 									val merged = contents.special()!!.special.merge(specialHolder) ?: special.merge(contents) ?: special
 

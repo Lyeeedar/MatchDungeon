@@ -88,15 +88,16 @@ class Effect(val type: Type)
 				val special = contents?.special() ?: return
 
 				val specialEntity = EntityPool.obtain()
-				val specialHolder = SpecialComponent.obtain().set(DualMatch())
-				specialEntity.add(specialHolder)
+				specialEntity.addComponent(ComponentType.Special)
+				val specialHolder = specialEntity.special()!!
+				specialHolder.set(DualMatch())
 
 				val merged = special.special.merge(specialEntity) ?: specialHolder.special.merge(contents) ?: special.special
 				addSpecial(contents, merged)
 
 				merged.setArmed(true, contents)
 
-				contents.add(MarkedForDeletionComponent.obtain("merged"))
+				contents.markForDeletion(0f, "merged")
 
 				specialEntity.free()
 			}

@@ -1,11 +1,11 @@
 package com.lyeeedar.Board.CompletionCondition
 
-import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.OrbDesc
+import com.lyeeedar.Components.Entity
 import com.lyeeedar.Components.matchable
 import com.lyeeedar.Game.Global
 import com.lyeeedar.UI.SpriteWidget

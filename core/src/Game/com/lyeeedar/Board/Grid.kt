@@ -1,6 +1,5 @@
 package com.lyeeedar.Board
 
-import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
@@ -512,7 +511,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 				oldTile.contents = null
 
 				merged.setArmed(true, newEntity)
-				newEntity.add(MarkedForDeletionComponent.obtain("swap merged"))
+				newEntity.markForDeletion(0f, "swap merged")
 
 				lastSwapped = newTile
 				matchHint = null
@@ -622,7 +621,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 
 		if (damageable.hp <= 0)
 		{
-			damageableEntity.add(MarkedForDeletionComponent.obtain("killed").set(delay))
+			damageableEntity.markForDeletion(delay, "killed")
 
 			logString += " killing entity"
 		}
@@ -706,7 +705,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 
 		val contents = tile.contents
 		val swappable = contents?.swappable() ?: return
-		if (contents.hasComponent(MarkedForDeletionComponent::class.java)) return // already completed, dont do it again
+		if (contents.isMarkedForDeletion()) return // already completed, dont do it again
 
 		if (swappable.sealed)
 		{
@@ -737,7 +736,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 		val matchable = contents.matchable()
 		if (matchable != null)
 		{
-			contents.add(MarkedForDeletionComponent.obtain("popped").set(delay))
+			contents.markForDeletion(delay, "popped")
 
 			matchable.skipPowerOrb = skipPowerOrb
 
@@ -754,7 +753,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 
 		if (contents.monsterEffect() != null)
 		{
-			contents.remove(MonsterEffectComponent::class.java)
+			contents.removeComponent(ComponentType.MonsterEffect)
 		}
 	}
 

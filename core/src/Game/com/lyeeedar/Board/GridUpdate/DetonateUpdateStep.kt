@@ -3,8 +3,7 @@ package com.lyeeedar.Board.GridUpdate
 import com.badlogic.gdx.utils.Array
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Tile
-import com.lyeeedar.Components.MarkedForDeletionComponent
-import com.lyeeedar.Components.special
+import com.lyeeedar.Components.*
 import com.lyeeedar.Util.Statics
 
 class DetonateUpdateStep : AbstractUpdateStep()
@@ -49,8 +48,8 @@ class DetonateUpdateStep : AbstractUpdateStep()
 
 			special.special.apply(tile, grid)
 
-			contents.remove(special.javaClass)
-			contents.add(MarkedForDeletionComponent.obtain("detonated"))
+			contents.removeComponent(ComponentType.Special)
+			contents.markForDeletion(0f, "detonated")
 			complete = false
 		}
 
