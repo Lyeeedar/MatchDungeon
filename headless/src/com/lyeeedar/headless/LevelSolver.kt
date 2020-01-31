@@ -82,11 +82,11 @@ class LevelSolver
 
 		println("Replaying level ${replay.levelPath} variant ${replay.variant}")
 
-		Global.globalflags = deserialize(replay.globalflags) as GameStateFlags
-		Global.questflags = deserialize(replay.questflags) as GameStateFlags
-		Global.cardflags = deserialize(replay.cardflags) as GameStateFlags
-		Global.deck = deserialize(replay.globalDeck) as GlobalDeck
-		Global.player = deserialize(replay.player) as Player
+		Global.globalflags = deserialize(replay.globalflags, GameStateFlags::class.java)
+		Global.questflags = deserialize(replay.questflags, GameStateFlags::class.java)
+		Global.cardflags = deserialize(replay.cardflags, GameStateFlags::class.java)
+		Global.deck = deserialize(replay.globalDeck, GlobalDeck::class.java)
+		Global.player = deserialize(replay.player, Player::class.java)
 
 		val theme = Theme.load(replay.questTheme)
 		val levels = Level.load(replay.levelPath)

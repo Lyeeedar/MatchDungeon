@@ -961,7 +961,7 @@ class Replay()
 			val inputByteWriter = ByteArrayInputStream(compressedBytes)
 			val decompressionStream = GZIPInputStream(inputByteWriter)
 			val rawBytes = decompressionStream.readBytes()
-			val replay = deserialize(rawBytes) as Replay
+			val replay = deserialize(rawBytes, Replay::class.java)
 
 			return replay
 		}
