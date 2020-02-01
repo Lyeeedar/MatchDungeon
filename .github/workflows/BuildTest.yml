@@ -32,7 +32,9 @@ jobs:
 
     - name: Build Android
       working-directory: Game
-      run: ./gradlew :android:assembleDebug
+      run: |
+        ./gradlew :android:build
+        ./gradlew :android:bundleRelease
 
     - name: Build Resources
       working-directory: Game
