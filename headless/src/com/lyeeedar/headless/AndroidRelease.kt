@@ -23,7 +23,7 @@ object AndroidRelease
 		return output
 	}
 
-	@JvmStatic fun uploadToPlaystore(version: String, versionCode: Long)
+	@JvmStatic fun uploadToPlaystore(version: String, versionCode: Long, changes: String)
 	{
 		println("Loading credentials")
 
@@ -61,7 +61,7 @@ object AndroidRelease
 													.setReleaseNotes(Collections.singletonList(
 														LocalizedText()
 															.setLanguage("en-GB")
-															.setText("Automated nightly release")))))).execute()
+															.setText("Automated nightly release\n\nChanges:\n$changes")))))).execute()
 
 		println("Committing edit")
 
@@ -81,7 +81,7 @@ object AndroidRelease
 		val lastTag = "git describe --abbrev=0".runCommand().replace("'", "")
 		val commitsSinceRelease = ("git log $lastTag..HEAD --oneline").runCommand()
 
-		if (!commitsSinceRelease.isNullOrEmpty()) {
+		if (commitsSinceRelease.isNotEmpty()) {
 			println("Work to release, continuing")
 
 			val manifestFile = File("android/AndroidManifest.xml")
@@ -96,7 +96,7 @@ object AndroidRelease
 			val versionCode = matches2.groupValues[1]
 
 			// push to playstore
-			uploadToPlaystore(version, versionCode.toLong())
+			uploadToPlaystore(version, versionCode.toLong(), commitsSinceRelease)
 
 			println("Release complete")
 			println("::set-output name=version::$version")
