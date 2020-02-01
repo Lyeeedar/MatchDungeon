@@ -24,7 +24,7 @@ class CompletionConditionCustomOrb : AbstractCompletionCondition()
 
 	override fun attachHandlers(grid: Grid)
 	{
-		grid.onPop += fun(orb: Entity, delay: Float) : Boolean {
+		grid.onPop += fun(orb: Entity, delay: Float) : HandlerAction {
 
 			if (orb.matchable()?.desc?.name == targetOrbName)
 			{
@@ -32,7 +32,7 @@ class CompletionConditionCustomOrb : AbstractCompletionCondition()
 				rebuildWidget()
 			}
 
-			return false
+			return HandlerAction.KeepAttached
 		}
 
 		if (!Global.resolveInstantly)

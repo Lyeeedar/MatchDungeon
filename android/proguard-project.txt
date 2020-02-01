@@ -19,6 +19,11 @@
 #   public *;
 #}
 
+-dontobfuscate
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*,!code/allocation/variable
+-optimizationpasses 5
+-allowaccessmodification
+
 -verbose
 
 -dontwarn android.support.**

@@ -72,7 +72,7 @@ class Effect(val type: Type)
 			{
 				val desc = FriendlyDesc.load(data["SUMMON"] as XmlData)
 				val friendly = desc.getEntity(data["DEGENSUMMON", "true"].toString().toBoolean(), grid)
-				friendly.pos().setTile(friendly, tile)
+				friendly.pos()!!.setTile(friendly, tile)
 			}
 
 			Type.SPREADER -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>)

@@ -88,7 +88,7 @@ class CompletionConditionMatches(): AbstractCompletionCondition()
 			}
 		}
 
-		grid.onPop += fun(orb: Entity, delay: Float) : Boolean {
+		grid.onPop += fun(orb: Entity, delay: Float) : HandlerAction {
 			val matchable = orb.matchable()!!
 			if (toBeMatched.containsKey(matchable.desc.key))
 			{
@@ -99,7 +99,7 @@ class CompletionConditionMatches(): AbstractCompletionCondition()
 				rebuildWidget()
 			}
 
-			return false
+			return HandlerAction.KeepAttached
 		}
 
 		for (entry in toBeMatched.entries())

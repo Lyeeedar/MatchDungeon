@@ -35,18 +35,27 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 		this.grid = grid
 		grid.onSunk += {
 
-			val sprite = it.renderable().renderable.copy() as Sprite
-			val dst = table.localToStageCoordinates(Vector2(table.width / 2f, table.height / 2f))
-			val src = GridWidget.instance.pointToScreenspace(it.pos().tile!!)
+			val sprite = it.sprite()?.copy()
+			val tile = it.pos()?.tile
+			if (sprite != null && tile != null)
+			{
+				val dst = table.localToStageCoordinates(Vector2(table.width / 2f, table.height / 2f))
+				val src = GridWidget.instance.pointToScreenspace(tile)
 
-			spawnMote(src, dst, sprite, GridWidget.instance.tileSize, {}, 0.6f)
-			it.pos().tile!!.addDelayedAction(
+				val shattered = Tesselator.shatter(sprite.currentTexture)
+				for (piece in shattered)
 				{
-					sinkableMap[sprite.fileName].count = max(0, sinkableMap[sprite.fileName].count-1)
-					rebuildWidget()
-				}, 0.6f)
+					spawnMote(src, dst, Sprite(piece), max(piece.regionWidth.toFloat(), piece.regionHeight.toFloat()), {}, 0.9f + Random.random(1f))
+				}
 
-			false
+				tile.addDelayedAction(
+					{
+						sinkableMap[sprite.fileName].count = max(0, sinkableMap[sprite.fileName].count-1)
+						rebuildWidget()
+					}, 0.6f)
+			}
+
+			HandlerAction.KeepAttached
 		}
 
 		if (!Global.resolveInstantly)

@@ -157,9 +157,9 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 			updateGrid,
 			cleanup)
 
-		onPop += fun (entity: Entity, delay: Float) : Boolean {
+		onPop += fun (entity: Entity, delay: Float) : HandlerAction {
 
-			val matchable = entity.matchable() ?: return false
+			val matchable = entity.matchable() ?: return HandlerAction.KeepAttached
 			if (!matchable.skipPowerOrb)
 			{
 				if (Global.resolveInstantly)
@@ -178,7 +178,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 				}
 				else
 				{
-					val pos = GridWidget.instance.pointToScreenspace(entity.pos().tile!!)
+					val pos = GridWidget.instance.pointToScreenspace(entity.pos()!!.tile!!)
 					val dst = PowerBar.instance.getOrbDest()
 					val sprite = AssetManager.loadSprite("Oryx/uf_split/uf_items/crystal_sky")
 
@@ -201,7 +201,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 				}
 			}
 
-			return false
+			return HandlerAction.KeepAttached
 		}
 	}
 
@@ -503,7 +503,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 
 				if (!Global.resolveInstantly)
 				{
-					val sprite = oldEntity.renderable().renderable.copy()
+					val sprite = oldEntity.sprite()!!.copy()
 					sprite.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile, true)), Interpolation.linear)
 					newTile.effects.add(sprite)
 				}
@@ -525,8 +525,8 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 		oldTile.contents = newEntity
 		newTile.contents = oldEntity
 
-		oldEntity.pos().tile = newTile
-		newEntity.pos().tile = oldTile
+		oldEntity.pos()!!.tile = newTile
+		newEntity.pos()!!.tile = oldTile
 
 		val matches = match.findAllMatches(this)
 		for (match in matches) match.free()
@@ -535,14 +535,14 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 			oldTile.contents = oldEntity
 			newTile.contents = newEntity
 
-			oldEntity.pos().tile = oldTile
-			newEntity.pos().tile = newTile
+			oldEntity.pos()!!.tile = oldTile
+			newEntity.pos()!!.tile = newTile
 
 			if (!Global.resolveInstantly)
 			{
 				var dir = Direction.getDirection(oldTile, newTile)
 				if (dir.y != 0) dir = dir.opposite
-				oldEntity.renderable().renderable.animation = BumpAnimation.obtain().set(animSpeed, dir)
+				oldEntity.renderable()?.renderable?.animation = BumpAnimation.obtain().set(animSpeed, dir)
 			}
 
 			if (Global.resolveInstantly)
@@ -559,8 +559,8 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 
 			if (!Global.resolveInstantly)
 			{
-				oldEntity.renderable().renderable.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile)).invertY(), Interpolation.linear)
-				newEntity.renderable().renderable.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(oldTile.getPosDiff(newTile)).invertY(), Interpolation.linear)
+				oldEntity.renderable()?.renderable?.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(newTile.getPosDiff(oldTile)).invertY(), Interpolation.linear)
+				newEntity.renderable()?.renderable?.animation = MoveAnimation.obtain().set(animSpeed, UnsmoothedPath(oldTile.getPosDiff(newTile)).invertY(), Interpolation.linear)
 			}
 
 			replay.addMove(HistoryMove(historySwapStart, historySwapEnd, gridSnapshot))
@@ -743,7 +743,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 			if (!Global.resolveInstantly)
 			{
 				val sprite = matchable.desc.death.copy()
-				sprite.colour = contents.renderable().renderable.colour
+				sprite.colour = contents.renderable()!!.renderable.colour
 				sprite.renderDelay = delay
 				sprite.isShortened = true
 

@@ -114,13 +114,13 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 			monster.hp += heal
 			monster.hp = min(monster.hp, monster.maxhp.toFloat())
 
-			val monsterTile = entity.pos().tile!!
+			val monsterTile = entity.pos()!!.tile!!
 
 			val diff = monsterTile.getPosDiff(srcTile)
 			diff[0].y *= -1
-			entity.renderable().renderable.animation = BumpAnimation.obtain().set(0.2f, diff)
+			entity.renderable()!!.renderable.animation = BumpAnimation.obtain().set(0.2f, diff)
 
-			val dst = entity.pos().tile!!.euclideanDist(srcTile)
+			val dst = entity.pos()!!.tile!!.euclideanDist(srcTile)
 			val animDuration = 0.4f + dst * 0.025f
 			val attackSprite = actualSprite.copy()
 			attackSprite.drawActualSize = false
@@ -129,8 +129,8 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 			monsterTile.effects.add(attackSprite)
 
 			val sprite = AssetManager.loadSprite("EffectSprites/Heal/Heal", 0.1f, Colour(0f,1f,0f,1f))
-			sprite.size[0] = entity.pos().size
-			sprite.size[1] = entity.pos().size
+			sprite.size[0] = entity.pos()!!.size
+			sprite.size[1] = entity.pos()!!.size
 			sprite.renderDelay = animDuration
 
 			monsterTile.effects.add(sprite)
@@ -164,8 +164,8 @@ class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, A
 
 		val summoned = desc.getEntity(difficulty, data["ISSUMMON", "false"].toString().toBoolean(), grid)
 
-		summoned.pos().tile = tile
-		summoned.pos().addToTile(summoned)
+		summoned.pos()!!.tile = tile
+		summoned.pos()!!.addToTile(summoned)
 
 		val spawnEffect = data["SPAWNEFFECT", null] as? ParticleEffect
 		if (spawnEffect != null)

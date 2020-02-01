@@ -45,7 +45,7 @@ fun addSpecial(entity: Entity, special: Special): Entity
 		renderable.colourAnimation = BlinkAnimation.obtain().set(renderable.colour, 0.1f, 2.5f, false)
 	}
 
-	entity.renderable().renderable = renderable
+	entity.renderable()?.renderable = renderable
 
 	return entity
 }

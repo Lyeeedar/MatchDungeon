@@ -222,7 +222,7 @@ class Level(val loadPath: String)
 
 					if (symbol.block.sprite != null)
 					{
-						contents.renderable().renderable = symbol.block.sprite.copy()
+						contents.renderable()?.renderable = symbol.block.sprite.copy()
 					}
 
 					contents.damageable()!!.alwaysShowHP = symbol.block.alwaysShowHP
@@ -273,7 +273,7 @@ class Level(val loadPath: String)
 				if (symbol.friendlyDesc != null)
 				{
 					val friendly = symbol.friendlyDesc.getEntity(false, grid)
-					friendly.pos().setTile(friendly, tile)
+					friendly.pos()?.setTile(friendly, tile)
 				}
 
 				if (symbol.isChest)
@@ -416,8 +416,8 @@ class Level(val loadPath: String)
 						}
 
 						val monster = monsterDesc.getEntity(difficulty, false, grid)
-						monster.pos().size = size
-						monster.pos().tile = grid.grid[x, y]
+						monster.pos()?.size = size
+						monster.pos()?.tile = grid.grid[x, y]
 
 						for (ix in 0 until size)
 						{
@@ -548,9 +548,9 @@ class Level(val loadPath: String)
 
 				modifyOrbs(tile, char)
 
-				if (tile.contents != null && (tile.contents!!.pos().tile == null || tile.contents!!.pos().tile == tile))
+				if (tile.contents != null && (tile.contents!!.pos()?.tile == null || tile.contents!!.pos()?.tile == tile))
 				{
-					tile.contents!!.pos().setTile(tile.contents!!, tile)
+					tile.contents!!.pos()?.setTile(tile.contents!!, tile)
 				}
 			}
 		}

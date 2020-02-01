@@ -32,7 +32,7 @@ class SinkUpdateStep : AbstractUpdateStep()
 			val sink = contents?.sinkable()
 			if (sink != null)
 			{
-				contents.pos().removeFromTile(contents)
+				contents.pos()?.removeFromTile(contents)
 
 				grid.onSunk(contents)
 

@@ -43,10 +43,10 @@ class FriendlyDesc
 
 		entity.archetype()!!.set(EntityArchetype.FRIENDLY)
 
-		val position = entity.pos()
+		val position = entity.pos()!!
 		position.size = size
 
-		entity.renderable().set(sprite.copy())
+		entity.renderable()!!.set(sprite.copy())
 
 		val healable = entity.healable()!!
 		healable.deathEffect = death.copy()
@@ -196,16 +196,18 @@ abstract class FriendlyPopTileAbility : FriendlyAbility()
 
 	override fun activate(entity: Entity, grid: Grid)
 	{
-		val validTargets = getTargets(entity, grid).filter { entity.pos().position.taxiDist(it) <= range }
+		val pos = entity.pos() ?: return
+
+		val validTargets = getTargets(entity, grid).filter { pos.position.taxiDist(it) <= range }
 
 		val tile = validTargets.randomOrNull(grid.ran) ?: return
-		val srcTile = entity.pos().tile!!
+		val srcTile = pos.tile!!
 
 		var delay = 0f
 
 		val diff = tile.getPosDiff(srcTile)
 		diff[0].y *= -1
-		entity.renderable().renderable.animation = BumpAnimation.obtain().set(0.2f, diff)
+		entity.renderable()?.renderable?.animation = BumpAnimation.obtain().set(0.2f, diff)
 
 		if (flightEffect != null)
 		{
@@ -322,7 +324,7 @@ class FriendlyHealAbility : FriendlyAbility()
 
 	override fun activate(entity: Entity, grid: Grid)
 	{
-		val srcPos = entity.pos().tile!!
+		val srcPos = entity.pos()?.tile ?: return
 
 		for (tile in grid.friendlyTiles)
 		{
@@ -331,7 +333,7 @@ class FriendlyHealAbility : FriendlyAbility()
 
 			val diff = tile.getPosDiff(srcPos)
 			diff[0].y *= -1
-			entity.renderable().renderable.animation = BumpAnimation.obtain().set(0.2f, diff)
+			entity.renderable()?.renderable?.animation = BumpAnimation.obtain().set(0.2f, diff)
 
 			val dst = tile.euclideanDist(srcPos)
 			var animDuration = dst * 0.025f
@@ -393,7 +395,8 @@ class FriendlyMoveAbility : FriendlyAbility()
 
 	override fun activate(entity: Entity, grid: Grid)
 	{
-		val srcPos = entity.pos().tile!!
+		val pos = entity.pos() ?: return
+		val srcPos = pos.tile ?: return
 		var targetTile: Tile? = null
 
 		// move out of sinkable way
@@ -438,14 +441,14 @@ class FriendlyMoveAbility : FriendlyAbility()
 
 		if (nextTile != null && nextTile.canHaveOrb && nextTile.contents?.matchable() != null && nextTile.contents?.special() == null)
 		{
-			entity.pos().removeFromTile(entity)
-			entity.pos().tile = nextTile
-			entity.pos().addToTile(entity)
+			pos.removeFromTile(entity)
+			pos.tile = nextTile
+			pos.addToTile(entity)
 
 			val diff = nextTile.getPosDiff(srcPos)
 			diff[0].y *= -1
 
-			entity.renderable().renderable.animation = MoveAnimation.obtain().set(0.25f, UnsmoothedPath(diff), Interpolation.linear)
+			entity.renderable()?.renderable?.animation = MoveAnimation.obtain().set(0.25f, UnsmoothedPath(diff), Interpolation.linear)
 		}
 	}
 

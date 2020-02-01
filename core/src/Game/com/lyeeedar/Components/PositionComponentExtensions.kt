@@ -136,7 +136,12 @@ fun PositionComponent.addToTile(entity: Entity, delay: Float = 0f)
 				{
 					val sprite = matchable.desc.death.copy()
 					sprite.renderDelay = delay
-					sprite.colour = existing.renderable().renderable.colour
+
+					val renderable = existing.renderable()
+					if (renderable != null)
+					{
+						sprite.colour = renderable.renderable.colour
+					}
 
 					tile.effects.add(sprite)
 				}

@@ -4,10 +4,7 @@ import com.lyeeedar.Board.CompletionCondition.CompletionConditionTurns
 import com.lyeeedar.Components.*
 import com.lyeeedar.Renderables.Renderable
 import com.lyeeedar.UI.Tutorial
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.Localisation
-import com.lyeeedar.Util.Statics
-import com.lyeeedar.Util.tryGet
+import com.lyeeedar.Util.*
 
 class EntityArchetypeCreator
 {
@@ -24,7 +21,7 @@ class EntityArchetypeCreator
 			val entity = blockBuilder.build()
 
 			entity.archetype()!!.set(EntityArchetype.BLOCK)
-			entity.renderable().set(theme.blockSprites.tryGet(0).copy())
+			entity.renderable()!!.set(theme.blockSprites.tryGet(0).copy())
 
 			val damageableComponent = entity.damageable()!!
 			damageableComponent.deathEffect = AssetManager.loadParticleEffect("Hit").getParticleEffect()
@@ -36,7 +33,7 @@ class EntityArchetypeCreator
 				if (!Statics.settings.get("Block", false) )
 				{
 					val tutorial = Tutorial("Block")
-					tutorial.addPopup(Localisation.getText("block.tutorial", "UI"), gridWidget.getRect(entity.pos().tile!!, true))
+					tutorial.addPopup(Localisation.getText("block.tutorial", "UI"), gridWidget.getRect(entity.pos()!!.tile!!, true))
 
 					return tutorial
 				}
@@ -58,7 +55,7 @@ class EntityArchetypeCreator
 			val entity = containerBuilder.build()
 
 			entity.archetype()!!.set(EntityArchetype.CONTAINER)
-			entity.renderable().set(sprite.copy())
+			entity.renderable()!!.set(sprite.copy())
 
 			val damageableComponent = entity.damageable()!!
 			damageableComponent.deathEffect = AssetManager.loadParticleEffect("Hit").getParticleEffect()
@@ -86,7 +83,7 @@ class EntityArchetypeCreator
 			val fullSprite = theme.chestFull.copy()
 			val emptySprite = theme.chestEmpty.copy()
 
-			val renderable = entity.renderable()
+			val renderable = entity.renderable()!!
 			renderable.renderable = emptySprite
 
 			val spawner = entity.orbSpawner()!!
@@ -141,9 +138,9 @@ class EntityArchetypeCreator
 					return createSinkable(theme.coin.copy())
 				}
 			}
-			spawner.numToSpawnChanged += fun (numToSpawn: Int): Boolean {
+			spawner.numToSpawnChanged += fun (numToSpawn: Int): HandlerAction {
 				renderable.renderable = if (numToSpawn > 0) fullSprite else emptySprite
-				return false
+				return HandlerAction.KeepAttached
 			}
 
 			val tutorialComponent = entity.tutorial()!!
@@ -173,14 +170,14 @@ class EntityArchetypeCreator
 			val entity = sinkableBuilder.build()
 
 			entity.archetype()!!.set(EntityArchetype.SINKABLE)
-			entity.renderable().set(renderable)
+			entity.renderable()!!.set(renderable)
 
 			val tutorialComponent = entity.tutorial()!!
 			tutorialComponent.displayTutorial = fun (grid, entity, gridWidget): Tutorial? {
 				if (!Statics.settings.get("Sinkable", false) )
 				{
 					val tutorial = Tutorial("Sinkable")
-					tutorial.addPopup(Localisation.getText("sinkable.tutorial", "UI"), gridWidget.getRect(entity.pos().tile!!, true))
+					tutorial.addPopup(Localisation.getText("sinkable.tutorial", "UI"), gridWidget.getRect(entity.pos()!!.tile!!, true))
 					return tutorial
 				}
 
@@ -202,7 +199,7 @@ class EntityArchetypeCreator
 			val entity = orbBuilder.build()
 
 			entity.archetype()!!.set(EntityArchetype.ORB)
-			entity.renderable().set(desc.sprite.copy())
+			entity.renderable()!!.set(desc.sprite.copy())
 
 			val matchable = entity.matchable()!!
 			val swappable = entity.swappable()!!

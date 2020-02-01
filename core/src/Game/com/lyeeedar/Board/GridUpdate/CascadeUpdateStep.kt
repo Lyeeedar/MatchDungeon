@@ -163,7 +163,7 @@ class CascadeUpdateStep : AbstractUpdateStep()
 			else
 			{
 				entity = found.contents!!
-				entity.pos().removeFromTile(entity)
+				entity.pos()?.removeFromTile(entity)
 
 				val swappable = entity.swappable()!!
 
@@ -173,8 +173,8 @@ class CascadeUpdateStep : AbstractUpdateStep()
 			// if we found an entity, then move it
 			if (entity != null)
 			{
-				entity.pos().tile = emptyTile
-				entity.pos().addToTile(entity)
+				entity.pos()?.tile = emptyTile
+				entity.pos()?.addToTile(entity)
 
 				val swappable = entity.swappable()!!
 
@@ -288,14 +288,14 @@ class CascadeUpdateStep : AbstractUpdateStep()
 						fun pullIn(othertile: Tile)
 						{
 							val orb = othertile.contents!!
-							orb.pos().removeFromTile(orb)
+							orb.pos()?.removeFromTile(orb)
 
 							val swappable = orb.swappable()!!
 
 							if (swappable.movePoints.size == 0) swappable.movePoints.add(othertile)
 
-							orb.pos().tile = tile
-							orb.pos().addToTile(orb)
+							orb.pos()?.tile = tile
+							orb.pos()?.addToTile(orb)
 
 							swappable.cascadeCount = cascadeCount
 							swappable.movePoints.add(tile)
@@ -346,7 +346,7 @@ class CascadeUpdateStep : AbstractUpdateStep()
 			{
 				val orb = grid.grid[x, y].contents ?: continue
 				val swappable = orb.swappable() ?: continue
-				val renderable = orb.renderable()
+				val renderable = orb.renderable() ?: continue
 
 				if (swappable.movePoints.size > 0)
 				{

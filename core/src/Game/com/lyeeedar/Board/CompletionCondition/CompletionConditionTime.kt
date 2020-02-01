@@ -67,7 +67,7 @@ class CompletionConditionTime(): AbstractCompletionCondition()
 						blinkTable.add(actor).grow()
 					}
 
-					false
+					HandlerAction.KeepAttached
 				}
 
 		if (!Global.resolveInstantly)

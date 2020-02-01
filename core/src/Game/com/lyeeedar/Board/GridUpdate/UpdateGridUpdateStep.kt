@@ -116,7 +116,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 
 				val contents = tile.contents ?: continue
 
-				if (tile == contents.pos().tile)
+				if (tile == contents.pos()?.tile)
 				{
 					processEntityRealTime(contents, grid, deltaTime)
 				}
@@ -128,7 +128,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 
 	private fun processEntityRealTime(entity: Entity, grid: Grid, deltaTime: Float)
 	{
-		val renderable = entity.renderableOrNull()
+		val renderable = entity.renderable()
 
 		val monsterEffect = entity.monsterEffect()
 		if (renderable != null && monsterEffect != null)
@@ -251,7 +251,7 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 				{
 					matchableTiles.add(tile)
 				}
-				if (ai != null && tile == contents.pos().tile)
+				if (ai != null && tile == contents.pos()?.tile)
 				{
 					aiTiles.add(tile)
 				}

@@ -296,7 +296,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 
 			if (tile.associatedMatches[0] != null && tile.associatedMatches[1] != null && !matchable!!.desc.isNamed)
 			{
-				val sprite = contents.renderable().renderable
+				val sprite = contents.sprite()!!
 
 				val special = getSpecial(grid, tile.associatedMatches[0]!!.length(), tile.associatedMatches[1]!!.length(), Direction.CENTER) ?: continue
 				val merged = tryMergeSpecial(special, contents)
@@ -305,7 +305,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 
 				val orb = EntityArchetypeCreator.createOrb(contents.matchable()!!.desc)
 				addSpecial(orb, merged)
-				orb.pos().setTile(orb, tile)
+				orb.pos()?.setTile(orb, tile)
 
 				tile.associatedMatches[0]!!.used = true
 				tile.associatedMatches[1]!!.used = true
@@ -333,7 +333,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 				val matchable = contents?.matchable()!!
 				if (!matchable.desc.isNamed)
 				{
-					val sprite = contents.renderable().renderable
+					val sprite = contents.sprite()!!
 
 					val special = getSpecial(grid, match.length(), 0, match.direction()) ?: continue
 					val merged = tryMergeSpecial(special, contents)
@@ -342,7 +342,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 
 					val orb = EntityArchetypeCreator.createOrb(contents.matchable()!!.desc)
 					addSpecial(orb, merged)
-					orb.pos().setTile(orb, tile)
+					orb.pos()?.setTile(orb, tile)
 
 					for (point in match.points())
 					{

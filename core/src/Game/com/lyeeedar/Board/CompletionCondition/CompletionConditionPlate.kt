@@ -8,10 +8,7 @@ import com.lyeeedar.Components.Entity
 import com.lyeeedar.Game.Global
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
-import com.lyeeedar.Util.Future
-import com.lyeeedar.Util.Localisation
-import com.lyeeedar.Util.Statics
-import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.*
 
 class CompletionConditionPlate : AbstractCompletionCondition()
 {
@@ -25,14 +22,14 @@ class CompletionConditionPlate : AbstractCompletionCondition()
 		grid.onTurn += {
 			remaining = grid.grid.count(Tile::hasPlate)
 			label.setText(" x $remaining")
-			false
+			HandlerAction.KeepAttached
 		}
 
-		grid.onPop += fun (orb: Entity, delay: Float ) : Boolean {
+		grid.onPop += fun (orb: Entity, delay: Float ) : HandlerAction {
 			remaining = grid.grid.count(Tile::hasPlate)
 			label.setText(" x $remaining")
 
-			return false
+			return HandlerAction.KeepAttached
 		}
 
 		if (!Global.resolveInstantly)

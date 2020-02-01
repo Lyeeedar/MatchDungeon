@@ -36,14 +36,14 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 	{
 		this.grid = grid
 
-		grid.onDamaged += fun(c) : Boolean {
+		grid.onDamaged += fun(c) : HandlerAction {
 			rebuildWidget()
-			return false
+			return HandlerAction.KeepAttached
 		}
 
-		grid.onTurn += fun() : Boolean {
+		grid.onTurn += fun() : HandlerAction {
 			rebuildWidget()
-			return false
+			return HandlerAction.KeepAttached
 		}
 
 		if (!Global.resolveInstantly)
@@ -129,7 +129,7 @@ class CompletionConditionKill() : AbstractCompletionCondition()
 			}
 			monsterCountMap[desc.name] = count
 
-			monsterSpriteMap[desc.name] = monster.renderable().renderable as Sprite
+			monsterSpriteMap[desc.name] = monster.sprite()!!
 		}
 
 		var row = Table()

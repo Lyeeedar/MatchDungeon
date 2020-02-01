@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Game.Equipment
 import com.lyeeedar.Util.AssetManager
+import com.lyeeedar.Util.HandlerAction
 import com.lyeeedar.Util.Localisation
 import com.lyeeedar.Util.Statics
 
@@ -54,12 +55,12 @@ class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val gr
 		PowerBar.instance.powerChanged += {
 			updateEnabled()
 
-			false
+			HandlerAction.KeepAttached
 		}
 		grid.onTurn += {
 			updateEnabled()
 
-			false
+			HandlerAction.KeepAttached
 		}
 
 		updateEnabled()

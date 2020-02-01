@@ -71,8 +71,8 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 
 		var doRemove = true
 
-		val pos = entity.posOrNull()
-		val renderable = entity.renderableOrNull()
+		val pos = entity.pos()
+		val renderable = entity.renderable()
 		val tile = if (pos != null) pos.tile ?: grid.getTileClamped(pos.position) else grid.grid[0, 0]
 
 		val damageableComponent = entity.damageable()
@@ -110,7 +110,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 						{
 							val nextDesc = rootDesc.stages[currentStage + 1]
 							val monster = nextDesc.getEntity(monsterAI.difficulty, false, grid)
-							monster.pos().setTile(monster, tile)
+							monster.pos()?.setTile(monster, tile)
 
 							logAction += " spawning next monster stage"
 						}
@@ -125,8 +125,8 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 		if (pos != null && containerComponent != null && containerComponent.containedEntity != null && doRemove)
 		{
 			val centity = containerComponent.containedEntity!!
-			centity.pos().tile = tile
-			centity.pos().addToTile(centity)
+			centity.pos()?.tile = tile
+			centity.pos()?.addToTile(centity)
 		}
 
 		val special = entity.special()
@@ -144,6 +144,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 			if (renderable.renderable.animation == null)
 			{
 				monsterEffect.monsterEffect.apply(grid, tile)
+				entity.removeComponent(ComponentType.MonsterEffect)?.free()
 			}
 			else
 			{
@@ -206,7 +207,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 				val damageableComponent = tile.contents!!.damageable()
 				val positionComponent = tile.contents!!.pos()
 
-				if (damageableComponent != null && positionComponent.tile == tile)
+				if (damageableComponent != null && positionComponent?.tile == tile)
 				{
 					damageableComponent.damSources.clear()
 					damageableComponent.remainingReduction = damageableComponent.damageReduction

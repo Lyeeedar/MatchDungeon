@@ -17,7 +17,7 @@ class MatchableComponent : AbstractComponent()
 	fun setDesc(desc: OrbDesc, entity: Entity)
 	{
 		this.desc = desc
-		entity.renderable().renderable.colour = desc.sprite.colour
+		entity.renderable()?.renderable?.colour = desc.sprite.colour
 	}
 
 	var canMatch: Boolean = true

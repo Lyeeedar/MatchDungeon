@@ -54,10 +54,10 @@ class MonsterDesc
 
 		entity.archetype()!!.set(EntityArchetype.MONSTER)
 
-		val position = entity.pos()
+		val position = entity.pos()!!
 		position.size = size
 
-		entity.renderable().set(sprite.copy())
+		entity.renderable()!!.set(sprite.copy())
 
 		val damageable = entity.damageable()!!
 		damageable.deathEffect = death.copy()
@@ -254,7 +254,7 @@ class MonsterAI(val desc: MonsterDesc, val difficulty: Int, grid: Grid) : Abstra
 
 			if (tile?.contents != null)
 			{
-				val startTile = entity.pos().tile!!
+				val startTile = entity.pos()!!.tile!!
 
 				val damage = if (powerfulAttacks > 0) attackDamage + 2 else attackDamage
 
@@ -273,12 +273,12 @@ class MonsterAI(val desc: MonsterDesc, val difficulty: Int, grid: Grid) : Abstra
 				{
 					val diff = tile.getPosDiff(startTile)
 					diff[0].y *= -1
-					entity.renderable().renderable.animation = BumpAnimation.obtain().set(0.2f, diff)
+					entity.renderable()?.renderable?.animation = BumpAnimation.obtain().set(0.2f, diff)
 
 					val dst = tile.euclideanDist(startTile)
 					val animDuration = 0.4f + tile.euclideanDist(startTile) * 0.025f
 					val attackSprite = monsterEffect.actualSprite.copy()
-					attackSprite.colour = tile.contents!!.renderable().renderable.colour
+					attackSprite.colour = tile.contents!!.renderable()!!.renderable.colour
 					attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
 					attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
 					tile.effects.add(attackSprite)
@@ -367,7 +367,7 @@ abstract class AbstractMonsterAbility
 			println("Monster trying to use ability '${this.javaClass.name.split(".Monster")[1].replace("Ability", "")}'")
 		}
 
-		val monsterTile = entity.pos().tile!!
+		val monsterTile = entity.pos()!!.tile!!
 
 		val availableTargets = Array<Tile>()
 
@@ -389,7 +389,7 @@ abstract class AbstractMonsterAbility
 
 		for (target in chosen)
 		{
-			val source = entity.pos().tile!!
+			val source = entity.pos()!!.tile!!
 			for (t in permuter.permute(target, grid, data, chosen, null, source))
 			{
 				if (!finalTargets.contains(t, true))
@@ -411,9 +411,9 @@ abstract class AbstractMonsterAbility
 
 		if (finalTargets.size > 0 && !Global.resolveInstantly)
 		{
-			val diff = finalTargets[0].getPosDiff(entity.pos().tile!!)
+			val diff = finalTargets[0].getPosDiff(entity.pos()!!.tile!!)
 			diff[0].y *= -1
-			entity.renderable().renderable.animation = BumpAnimation.obtain().set(0.2f, diff)
+			entity.renderable()?.renderable?.animation = BumpAnimation.obtain().set(0.2f, diff)
 		}
 
 		grid.replay.logAction("Activating monster ability $this on targets " + finalTargets.joinToString(" ") { "(${it.toShortString()})" })
@@ -479,20 +479,20 @@ class MonsterMoveAbility : AbstractMonsterAbility()
 
 	override fun activate(entity: Entity, grid: Grid, targets: Array<Tile>)
 	{
-		val target = targets.filter{ entity.pos().isValidTile(it, entity) }.asSequence().random(grid.ran)
+		val target = targets.filter{ entity.pos()!!.isValidTile(it, entity) }.asSequence().random(grid.ran)
 
-		entity.renderable().renderable.animation = null
+		entity.renderable()?.renderable?.animation = null
 
 		if (target != null)
 		{
-			val monsterSrc = entity.pos().tile!!
+			val monsterSrc = entity.pos()!!.tile!!
 
 			val dst = monsterSrc.euclideanDist(target)
 			var animDuration = 0.25f + dst * 0.025f
 
-			entity.pos().removeFromTile(entity)
-			entity.pos().tile = target
-			entity.pos().addToTile(entity, animDuration - 0.1f)
+			entity.pos()!!.removeFromTile(entity)
+			entity.pos()!!.tile = target
+			entity.pos()!!.addToTile(entity, animDuration - 0.1f)
 
 			val diff = target.getPosDiff(monsterSrc)
 			diff[0].y *= -1
@@ -520,18 +520,18 @@ class MonsterMoveAbility : AbstractMonsterAbility()
 
 			if (moveType == MoveType.LEAP)
 			{
-				entity.renderable().renderable.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
-				entity.renderable().renderable.animation = ExpandAnimation.obtain().set(animDuration, 1f, 2f, false)
+				entity.renderable()?.renderable?.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
+				entity.renderable()?.renderable?.animation = ExpandAnimation.obtain().set(animDuration, 1f, 2f, false)
 			}
 			else if (moveType == MoveType.TELEPORT)
 			{
 				animDuration = 0.2f
-				entity.renderable().renderable.renderDelay = animDuration
-				entity.renderable().renderable.showBeforeRender = false
+				entity.renderable()?.renderable?.renderDelay = animDuration
+				entity.renderable()?.renderable?.showBeforeRender = false
 			}
 			else
 			{
-				entity.renderable().renderable.animation = MoveAnimation.obtain().set(animDuration, UnsmoothedPath(diff), Interpolation.linear)
+				entity.renderable()?.renderable?.animation = MoveAnimation.obtain().set(animDuration, UnsmoothedPath(diff), Interpolation.linear)
 			}
 
 			val startParticle = data["STARTEFFECT", null]
@@ -540,8 +540,8 @@ class MonsterMoveAbility : AbstractMonsterAbility()
 			if (startParticle is ParticleEffect)
 			{
 				val particle = startParticle.copy()
-				particle.size[0] = entity.pos().size
-				particle.size[1] = entity.pos().size
+				particle.size[0] = entity.pos()!!.size
+				particle.size[1] = entity.pos()!!.size
 
 				monsterSrc.effects.add(particle)
 			}
@@ -549,8 +549,8 @@ class MonsterMoveAbility : AbstractMonsterAbility()
 			if (endParticle is ParticleEffect)
 			{
 				val particle = endParticle.copy()
-				particle.size[0] = entity.pos().size
-				particle.size[1] = entity.pos().size
+				particle.size[0] = entity.pos()!!.size
+				particle.size[1] = entity.pos()!!.size
 
 				particle.renderDelay = animDuration
 
@@ -629,7 +629,7 @@ class MonsterMonsterEffectAbility : AbstractMonsterAbility()
 
 	override fun activate(entity: Entity, grid: Grid, targets: Array<Tile>)
 	{
-		val monsterSrc = entity.pos().tile!!
+		val monsterSrc = entity.pos()!!.tile!!
 
 		for (tile in targets)
 		{
@@ -672,7 +672,7 @@ class MonsterMonsterEffectAbility : AbstractMonsterAbility()
 			{
 				animDuration += 0.4f
 				val attackSprite = monsterEffect.actualSprite.copy()
-				attackSprite.colour = contents.renderable().renderable.colour
+				attackSprite.colour = contents.renderable()!!.renderable.colour
 				attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
 				attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
 				tile.effects.add(attackSprite)
@@ -769,7 +769,7 @@ class MonsterBlockAbility : AbstractMonsterAbility()
 	override fun activate(entity: Entity, grid: Grid, targets: Array<Tile>)
 	{
 		val strength = data.get("STRENGTH", "1").toString().toInt()
-		val monsterSrc = entity.pos().tile!!
+		val monsterSrc = entity.pos()!!.tile!!
 
 		for (tile in targets)
 		{
@@ -780,14 +780,14 @@ class MonsterBlockAbility : AbstractMonsterAbility()
 
 			val dst = tile.euclideanDist(monsterSrc)
 			val animDuration = 0.4f + dst * 0.025f
-			val attackSprite = block.renderable().renderable.copy()
+			val attackSprite = block.renderable()!!.renderable.copy()
 			attackSprite.animation = LeapAnimation.obtain().set(animDuration, diff, 1f + dst * 0.25f)
 			attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
 			tile.effects.add(attackSprite)
 
-			block.renderable().renderable.renderDelay = animDuration
-			block.pos().tile = tile
-			block.pos().addToTile(block, animDuration)
+			block.renderable()!!.renderable.renderDelay = animDuration
+			block.pos()!!.tile = tile
+			block.pos()!!.addToTile(block, animDuration)
 		}
 	}
 
@@ -837,8 +837,8 @@ class MonsterSummonAbility : AbstractMonsterAbility()
 
 			val summoned = desc!!.getEntity(difficulty, data["ISSUMMON", "false"].toString().toBoolean(), grid)
 
-			summoned.pos().tile = tile
-			summoned.pos().addToTile(summoned)
+			summoned.pos()!!.tile = tile
+			summoned.pos()!!.addToTile(summoned)
 
 			val spawnEffect = data["SPAWNEFFECT", null] as? ParticleEffect
 			if (spawnEffect != null)
@@ -882,9 +882,9 @@ class MonsterSelfBuffAbility : AbstractMonsterAbility()
 		if (effect is ParticleEffect)
 		{
 			val e = effect.copy()
-			e.size[0] = entity.pos().size
-			e.size[1] = entity.pos().size
-			entity.pos().tile!!.effects.add(e)
+			e.size[0] = entity.pos()!!.size
+			e.size[1] = entity.pos()!!.size
+			entity.pos()!!.tile!!.effects.add(e)
 		}
 	}
 
@@ -904,7 +904,7 @@ class MonsterSpreaderAbility : AbstractMonsterAbility()
 
 	override fun activate(entity: Entity, grid: Grid, targets: Array<Tile>)
 	{
-		val monsterSrc = entity.pos().tile!!
+		val monsterSrc = entity.pos()!!.tile!!
 
 		for (tile in targets)
 		{

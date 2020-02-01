@@ -8,7 +8,6 @@ import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Global
-import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
@@ -37,9 +36,9 @@ class CompletionConditionBreak : AbstractCompletionCondition()
 			}
 		}
 
-		grid.onDamaged += fun(c) : Boolean {
+		grid.onDamaged += fun(c) : HandlerAction {
 			rebuildWidget()
-			return false
+			return HandlerAction.KeepAttached
 		}
 
 		if (!Global.resolveInstantly)
@@ -74,7 +73,7 @@ class CompletionConditionBreak : AbstractCompletionCondition()
 
 		for (block in blocks)
 		{
-			val sprite = block.renderable().renderable as Sprite
+			val sprite = block.sprite() ?: continue
 
 			if (!blockMap.containsKey(sprite.fileName))
 			{

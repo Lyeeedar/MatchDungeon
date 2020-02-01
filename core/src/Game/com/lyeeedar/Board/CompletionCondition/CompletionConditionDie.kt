@@ -8,11 +8,10 @@ import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.spawnMote
 import com.lyeeedar.Components.healable
 import com.lyeeedar.Components.pos
-import com.lyeeedar.Components.renderable
+import com.lyeeedar.Components.sprite
 import com.lyeeedar.Components.tile
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Animation.ExpandAnimation
-import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.GridWidget
@@ -40,22 +39,23 @@ class CompletionConditionDie : AbstractCompletionCondition()
 		maxHP = grid.level.player.getStat(Statistic.HEALTH).toInt()
 		hp = maxHP
 
-		grid.onAttacked += fun(entity): Boolean {
+		grid.onAttacked += fun(entity): HandlerAction {
 
-			val sprite = entity.renderable().renderable.copy() as Sprite
+			val sprite = entity.sprite() ?: return HandlerAction.KeepAttached
+			val pos = entity.pos() ?: return HandlerAction.KeepAttached
 			val dst = table.localToStageCoordinates(Vector2(Random.random() * table.width, Random.random() * table.height))
 			val moteDst = dst.cpy() - Vector2(GridWidget.instance.tileSize / 2f, GridWidget.instance.tileSize / 2f)
-			val src = GridWidget.instance.pointToScreenspace(entity.pos().tile!!)
+			val src = GridWidget.instance.pointToScreenspace(pos.position)
 
 			// attack all friendlies
 			for (tile in grid.friendlyTiles)
 			{
 				val friendly = tile.contents?.healable() ?: continue
-				val sprite = entity.renderable().renderable.copy() as Sprite
+				val newsprite = sprite.copy()
 				val dst = GridWidget.instance.pointToScreenspace(tile)
 
 				val duration = 0.35f
-				spawnMote(src, dst, sprite, GridWidget.instance.tileSize, {}, animSpeed = duration, leap = true)
+				spawnMote(src, dst, newsprite, GridWidget.instance.tileSize, {}, animSpeed = duration, leap = true)
 
 				tile.addDelayedAction(
 					{ tile ->
@@ -122,7 +122,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 			// animate player attack
 			spawnMote(src, moteDst, sprite, GridWidget.instance.tileSize, {}, animSpeed = 0.35f, leap = true)
 
-			entity.pos().tile!!.addDelayedAction(
+			pos.tile?.addDelayedAction(
 				{
 					if (blocked)
 					{
@@ -172,7 +172,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 					}
 				}, 0.35f)
 
-			return false
+			return HandlerAction.KeepAttached
 		}
 
 		grid.onTurn += {
@@ -183,7 +183,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 
 			updateFractionalHp()
 
-			false
+			HandlerAction.KeepAttached
 		}
 
 		if (!Global.resolveInstantly)
