@@ -34,7 +34,6 @@ jobs:
       working-directory: Game
       run: |
         ./gradlew :android:build
-        ./gradlew :android:bundleRelease
 
     - name: Build Resources
       working-directory: Game
