@@ -34,7 +34,7 @@ class CardContentActionRewards : AbstractCardContentAction()
 
 			for (reward in chosenRewards)
 			{
-				Statics.logger.logDebug("Granting reward $reward")
+				Statics.logger.logDebug("Granting reward ${reward.data}")
 			}
 
 			CardWidget.displayLoot(chosenRewards, CardWidget.Companion.LootAnimation.CHEST) {

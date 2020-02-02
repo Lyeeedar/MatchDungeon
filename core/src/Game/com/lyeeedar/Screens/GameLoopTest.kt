@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup
 import com.lyeeedar.Game.Global
+import com.lyeeedar.ScreenEnum
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.Util.Future
 import com.lyeeedar.Util.Statics
@@ -164,6 +165,7 @@ class GameLoopTest(val completionCallback: ()->Unit)
 
 		while (true)
 		{
+			if (Statics.game.currentScreenEnum != ScreenEnum.GRID) break
 			val gridWidget = getActor("GridWidget") as? GridWidget ?: break
 			val grid = gridWidget.grid
 
@@ -199,7 +201,6 @@ class GameLoopTest(val completionCallback: ()->Unit)
 
 		clickThroughCardContent()
 		delay(delay)
-		takeAllRewards()
 
 		Statics.logger.logDebug("")
 		Statics.logger.logDebug("Complete Card Succeeded")
@@ -210,7 +211,7 @@ class GameLoopTest(val completionCallback: ()->Unit)
 	{
 		while (true)
 		{
-			delay(delay)
+			delay(delay / 10)
 
 			val tutorial = getActor("Tutorial")
 
@@ -231,7 +232,7 @@ class GameLoopTest(val completionCallback: ()->Unit)
 
 		while (true)
 		{
-			delay(delay)
+			delay(delay / 10)
 
 			val actor = getActor("ContentTable")
 
@@ -253,6 +254,11 @@ class GameLoopTest(val completionCallback: ()->Unit)
 					{
 						break
 					}
+				}
+
+				if (getActor("Reward0") != null)
+				{
+					takeAllRewards()
 				}
 
 				actor.click()
