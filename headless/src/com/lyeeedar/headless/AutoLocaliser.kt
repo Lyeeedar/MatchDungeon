@@ -53,8 +53,8 @@ object AutoLocaliser
 
 class Localiser
 {
-	val algorithmVersion = 1
-
+	val algorithmVersion = 2
+	
 	lateinit var translate: Translate
 
 	val languages = Array<String>()

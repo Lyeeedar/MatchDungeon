@@ -36,7 +36,6 @@ jobs:
       with:
         path: Game/android/caches
         key: resourceCacheVersion1
-        restore-keys: resourceCacheVersion1
 
     - name: Make gradlew executable
       working-directory: Game
