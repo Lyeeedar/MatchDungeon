@@ -51,7 +51,7 @@ object AndroidRelease
 		service.Edits().Bundles().upload(packageName, editID, aabFile).execute()
 
 		println("Assigning to track")
-		service.Edits().Tracks().update(packageName, editID, "alpha",
+		service.Edits().Tracks().update(packageName, editID, "beta",
 										Track().setReleases(
 											Collections.singletonList(
 												TrackRelease()
