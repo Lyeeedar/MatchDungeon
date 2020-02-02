@@ -24,21 +24,18 @@ jobs:
         token: ${{ secrets.PRIVATESTUFF_ACCESS_TOKEN }}
         path: PrivateStuff
 
-    - name: Hash project contents
-      run: echo "::set-env name=PROJECT_HASH::${{ hashFiles('Game/*') }}"
-
     - name: Restore gradle cache
       uses: actions/cache@v1
       with:
         path: ~/.gradle/caches
-        key: ${{ runner.os }}-gradle-${{ PROJECT_HASH }}
+        key: ${{ runner.os }}-gradle-${{ hashFiles('Game/*') }}
         restore-keys: ${{ runner.os }}-gradle-
 
     - name: Restore resource cache
       uses: actions/cache@v1
       with:
         path: Game/android/caches
-        key: resourceCache-${{ PROJECT_HASH }}
+        key: resourceCache-${{ hashFiles('Game/*') }}
         restore-keys: resourceCache-
 
     - name: Make gradlew executable
