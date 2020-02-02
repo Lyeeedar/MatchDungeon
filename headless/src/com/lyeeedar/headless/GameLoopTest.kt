@@ -33,7 +33,7 @@ object GameLoopTest
 		println("")
 		println("")
 
-		val androidHome = "D:\\AndroidSDK\\platform-tools"
+		val androidHome = System.getenv("ANDROID_HOME")
 		println("ANDROID_HOME: $androidHome")
 
 		"$androidHome/adb install android/build/outputs/apk/debug/android-debug.apk".runCommand()
