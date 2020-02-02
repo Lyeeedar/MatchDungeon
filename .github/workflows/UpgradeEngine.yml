@@ -43,11 +43,23 @@ jobs:
       working-directory: Game
       run: |
         chmod +x ./gradlew
-        ./gradlew :desktop:build
-        ./gradlew :android:build
         ./gradlew :headless:compileResources
+        ./gradlew :desktop:build
+        ./gradlew :android:assembleDebug
         ./gradlew :headless:testResources
-        ./gradlew :desktop:gameLoopTest
+      if: steps.commit.outputs.status == 'Success'
+
+    - uses: actions/upload-artifact@v1
+      if: failure()
+      with:
+        name: crashedLevelReplay
+        path: Game/android/assets/crashedLevelReplay
+
+    - name: Run Game Loop Test
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 28
+        script: ./Game/gradlew -p Game :headless:gameLoopTest
       if: steps.commit.outputs.status == 'Success'
 
     - name: Push changes

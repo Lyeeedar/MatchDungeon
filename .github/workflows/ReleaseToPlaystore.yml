@@ -47,7 +47,15 @@ jobs:
         ./gradlew :headless:testResources
         ./gradlew :desktop:gameLoopTest
         ./gradlew :android:build
+        ./gradlew :android:assembleDebug
         ./gradlew :android:bundleRelease
+      if: steps.hasChanges.outputs.status != 'false'
+
+    - name: Run Game Loop Test
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 28
+        script: ./Game/gradlew -p Game :headless:gameLoopTest
       if: steps.hasChanges.outputs.status != 'false'
 
     - name: Setup git credentials
