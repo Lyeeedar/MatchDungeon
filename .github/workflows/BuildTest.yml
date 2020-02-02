@@ -46,6 +46,10 @@ jobs:
       working-directory: Game
       run: chmod +x ./gradlew
 
+    - name: Build Resources
+      working-directory: Game
+      run: ./gradlew :headless:compileResources
+
     - name: Build Desktop
       working-directory: Game
       run: ./gradlew :desktop:build
@@ -53,10 +57,6 @@ jobs:
     - name: Build Android
       working-directory: Game
       run: ./gradlew :android:assembleDebug
-
-    - name: Build Resources
-      working-directory: Game
-      run: ./gradlew :headless:compileResources
 
     - name: Run Tests
       working-directory: Game

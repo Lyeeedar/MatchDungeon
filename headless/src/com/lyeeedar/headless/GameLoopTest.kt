@@ -60,7 +60,7 @@ object GameLoopTest
 		var inCrash = false
 		for (line in completeLogs.lines())
 		{
-			if (line.startsWith("--------- beginning of crash"))
+			if (line.startsWith("--------- beginning of crash") || line.contains("FATAL EXCEPTION: GLThread"))
 			{
 				inCrash = true
 			}
