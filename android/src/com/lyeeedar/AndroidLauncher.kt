@@ -1,6 +1,7 @@
 package com.lyeeedar
 
 import android.os.Bundle
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.backends.android.AndroidApplication
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
 import com.crashlytics.android.Crashlytics
@@ -39,7 +40,12 @@ class AndroidLauncher : AndroidApplication()
 		val launchIntent = intent
 		if (launchIntent.action == "com.google.intent.action.TEST_LOOP")
 		{
-			GameLoopTest { finish() }.run()
+			GameLoopTest {
+				Gdx.app.exit()
+				finish()
+				finishAffinity()
+				System.exit(0)
+			}.run()
 		}
 	}
 }
