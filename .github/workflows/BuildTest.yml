@@ -66,4 +66,4 @@ jobs:
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 28
-        script: ./Game/gradlew :headless:gameLoopTest
+        script: ./Game/gradlew -p Game :headless:gameLoopTest
