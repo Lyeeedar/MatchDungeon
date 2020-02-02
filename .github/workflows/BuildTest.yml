@@ -5,7 +5,9 @@ jobs:
   test:
     runs-on: macOS-latest
     steps:
-    - uses: actions/checkout@master
+
+    - name: Checkout master
+      uses: actions/checkout@master
       with:
         path: Game
 
@@ -53,4 +55,6 @@ jobs:
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 28
-        script: adb shell am start -a com.google.intent.action.TEST_LOOP -n com.lyeeedar.MatchDungeon/com.lyeeedar.AndroidLauncher
+        script:
+          adb install Game/android/build/outputs/apk/debug/android-debug.apk
+          adb shell am start -a com.google.intent.action.TEST_LOOP -n com.lyeeedar.MatchDungeon/com.lyeeedar.AndroidLauncher
