@@ -24,18 +24,21 @@ jobs:
         token: ${{ secrets.PRIVATESTUFF_ACCESS_TOKEN }}
         path: PrivateStuff
 
+    - name: Hash project contents
+      run: echo "::set-env name=PROJECT_HASH::${{ hashFiles('Game/*') }}"
+
     - name: Restore gradle cache
       uses: actions/cache@v1
       with:
         path: ~/.gradle/caches
-        key: ${{ runner.os }}-gradle-${{ hashFiles('Game/*') }}
+        key: ${{ runner.os }}-gradle-${{ env.PROJECT_HASH }}
         restore-keys: ${{ runner.os }}-gradle-
 
     - name: Restore resource cache
       uses: actions/cache@v1
       with:
         path: Game/android/caches
-        key: resourceCache-${{ hashFiles('Game/*') }}
+        key: resourceCache-${{ env.PROJECT_HASH }}
         restore-keys: resourceCache-
 
     - name: Make gradlew executable
@@ -58,11 +61,11 @@ jobs:
       working-directory: Game
       run: ./gradlew :headless:testResources
 
-    - name: Run Game Loop Test
-      uses: reactivecircus/android-emulator-runner@v2
-      with:
-        api-level: 28
-        script: |
-          adb install Game/android/build/outputs/apk/debug/android-debug.apk
-          adb shell am start -a com.google.intent.action.TEST_LOOP -n com.lyeeedar.MatchDungeon/com.lyeeedar.AndroidLauncher
-          sleep 2m
+ #   - name: Run Game Loop Test
+ #     uses: reactivecircus/android-emulator-runner@v2
+ #     with:
+ #       api-level: 28
+ #       script: |
+ #         adb install Game/android/build/outputs/apk/debug/android-debug.apk
+ #         adb shell am start -a com.google.intent.action.TEST_LOOP -n com.lyeeedar.MatchDungeon/com.lyeeedar.AndroidLauncher
+ #         // somehow figure out how to sleep until the loop completes
