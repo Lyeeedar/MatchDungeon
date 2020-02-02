@@ -40,7 +40,6 @@ class GameLoopTest(val completionCallback: ()->Unit)
 			testEditDeck()
 			testNewQuest()
 			testGrid()
-			testCompleteCard()
 
 			Statics.logger.logDebug("###################################################################")
 			Statics.logger.logDebug("Test completed successfully")
@@ -187,6 +186,8 @@ class GameLoopTest(val completionCallback: ()->Unit)
 
 			delay(500)
 		}
+
+		waitUntilActorVisible("ContentTable")
 
 		Statics.logger.logDebug("")
 		Statics.logger.logDebug("Grid Succeeded")
