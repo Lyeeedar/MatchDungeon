@@ -35,8 +35,8 @@ jobs:
       uses: actions/cache@v1
       with:
         path: Game/android/caches
-        key: resource-${{ hashFiles('Game/android/assetsRaw') }}
-        restore-keys: resource-
+        key: resourceCacheVersion1
+        restore-keys: resourceCacheVersion1
 
     - name: Make gradlew executable
       working-directory: Game
