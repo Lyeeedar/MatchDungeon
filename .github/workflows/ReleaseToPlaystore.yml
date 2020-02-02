@@ -45,6 +45,7 @@ jobs:
       run: |
         ./gradlew :headless:compileResources
         ./gradlew :headless:testResources
+        ./gradlew :desktop:gameLoopTest
         ./gradlew :android:build
         ./gradlew :android:bundleRelease
       if: steps.hasChanges.outputs.status != 'false'

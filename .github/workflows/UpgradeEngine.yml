@@ -44,9 +44,10 @@ jobs:
       run: |
         chmod +x ./gradlew
         ./gradlew :desktop:build
-        ./gradlew :android:assembleDebug
+        ./gradlew :android:build
         ./gradlew :headless:compileResources
         ./gradlew :headless:testResources
+        ./gradlew :desktop:gameLoopTest
       if: steps.commit.outputs.status == 'Success'
 
     - name: Push changes

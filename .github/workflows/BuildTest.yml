@@ -42,3 +42,7 @@ jobs:
     - name: Run Tests
       working-directory: Game
       run: ./gradlew :headless:testResources
+
+    - name: Run Game Loop Test
+      working-directory: Game
+      run: ./gradlew :desktop:gameLoopTest
