@@ -25,7 +25,7 @@ jobs:
         path: PrivateStuff
 
     - name: Hash project contents
-      run: echo "::set-env name=PROJECT_HASH::${{ hashFiles('Game/*') }}"
+      run: echo "::set-env name=PROJECT_HASH::${{ hashFiles('**/*.kt') }}-${{ hashFiles('**/*.xml') }}-${{ hashFiles('**/*.gradle') }}"
 
     - name: Restore gradle cache
       uses: actions/cache@v1
