@@ -31,6 +31,12 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
         restore-keys: ${{ runner.os }}-gradle-
 
+    - name: Restore resource cache
+      uses: actions/cache@v1
+      with:
+        path: Game/android/caches
+        key: cacheVersion1
+
     - name: Make gradlew executable
       working-directory: Game
       run: chmod +x ./gradlew
