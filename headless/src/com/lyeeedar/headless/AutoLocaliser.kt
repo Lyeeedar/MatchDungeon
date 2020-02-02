@@ -53,6 +53,8 @@ object AutoLocaliser
 
 class Localiser
 {
+	val algorithmVersion = 1
+
 	lateinit var translate: Translate
 
 	val languages = Array<String>()
@@ -373,6 +375,15 @@ class Localiser
 			var unusedLines = ""
 			val missingWords = ObjectSet<String>()
 
+			val fileContentsHash = ("algorithm:$algorithmVersion\n" + file.readText()).hashCode()
+			val cacheFile = File("../caches/loc-en-${file.nameWithoutExtension}")
+			val needsSentenceAnalysis = if (cacheFile.exists()) cacheFile.readText().toInt() != fileContentsHash else true
+
+			if (!needsSentenceAnalysis)
+			{
+				println("File found identical in cache, skipping sentence analysis")
+			}
+
 			val englishFile = getRawXml(file.path)
 			var i = 2
 			for (el in englishFile.children())
@@ -391,7 +402,7 @@ class Localiser
 				}
 				allFoundIds.add(id)
 
-				try
+				if (needsSentenceAnalysis)
 				{
 					val context = "ID: $id\nText: $text\nFile: ${file.path}\nLine: $i"
 					doSentenceAnalysis(text, context)
@@ -420,21 +431,6 @@ class Localiser
 						}
 					}
 				}
-				catch (ex: Exception)
-				{
-					val message = ex.message ?: ""
-					if (message.contains("Unknown word"))
-					{
-						val word = message.split('\n')[2].replace("Word: ", "")
-						missingWords.add(word)
-
-						System.err.println(message)
-					}
-					else
-					{
-						throw ex
-					}
-				}
 
 				if (!allIds.contains(id))
 				{
@@ -457,6 +453,8 @@ class Localiser
 			{
 				throw RuntimeException("Loc file $file contained unreferences lines:\n$unusedLines")
 			}
+
+			cacheFile.writeText(fileContentsHash.toString())
 		}
 
 		for (id in allRequiredIds)

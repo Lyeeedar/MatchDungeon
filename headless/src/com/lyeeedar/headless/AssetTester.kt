@@ -33,7 +33,7 @@ object AssetTester
 			funcs.add(Pair("XmlLoadTest", { XmlLoadTester.test() }))
 			funcs.add(Pair("CardContentValidator", { CardContentValidator() }))
 			funcs.add(Pair("ValidateEnglish", { Localiser().validateEnglish() }))
-			funcs.add(Pair("LevelSolve", { LevelSolver().attemptAllLevels() }))
+			funcs.add(Pair("LevelSolve", { LevelSolver().attemptAllLevels(false) }))
 
 			val timings = com.badlogic.gdx.utils.Array<Pair<String, Long>>()
 			for (func in funcs)

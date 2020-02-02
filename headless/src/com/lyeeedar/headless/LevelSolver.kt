@@ -204,7 +204,7 @@ class LevelSolver
 		}
 	}
 
-	fun attemptAllLevels()
+	fun attemptAllLevels(testResolve: Boolean)
 	{
 		println("")
 		println("")
@@ -285,35 +285,39 @@ class LevelSolver
 
 					throw ex
 				}
-				val levelGrid = levels[i].grid.grid.toString()
 
-				createLevel(resolveLevels[i])
-
-				try
+				if (testResolve)
 				{
-					println("")
-					println("Resolving level '$path' variant '$i'")
-					val victory = resolve(resolveLevels[i].grid, levels[i].grid.replay.moves)
-					println("Level solved. Victory=$victory")
+					val levelGrid = levels[i].grid.grid.toString()
 
-					if (levelGrid != resolveLevels[i].grid.grid.toString())
+					createLevel(resolveLevels[i])
+
+					try
 					{
-						throw RuntimeException("History didnt give the same result!")
-					}
-				}
-				catch (ex: Exception)
-				{
-					println("Resolving level '$path' variant '$i' crashed!")
+						println("")
+						println("Resolving level '$path' variant '$i'")
+						val victory = resolve(resolveLevels[i].grid, levels[i].grid.replay.moves)
+						println("Level solved. Victory=$victory")
 
-					fun dumpReplayToDisk(replay: Replay, path: String)
+						if (levelGrid != resolveLevels[i].grid.grid.toString())
+						{
+							throw RuntimeException("History didnt give the same result!")
+						}
+					}
+					catch (ex: Exception)
 					{
-						File(path).writeText(replay.toString())
+						println("Resolving level '$path' variant '$i' crashed!")
+
+						fun dumpReplayToDisk(replay: Replay, path: String)
+						{
+							File(path).writeText(replay.toString())
+						}
+
+						dumpReplayToDisk(levels[i].grid.replay, "original_solve.txt")
+						dumpReplayToDisk(resolveLevels[i].grid.replay, "resolve.txt")
+
+						throw ex
 					}
-
-					dumpReplayToDisk(levels[i].grid.replay, "original_solve.txt")
-					dumpReplayToDisk(resolveLevels[i].grid.replay, "resolve.txt")
-
-					throw ex
 				}
 			}
 		}

@@ -55,6 +55,6 @@ jobs:
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 28
-        script:
+        script: |
           adb install Game/android/build/outputs/apk/debug/android-debug.apk
           adb shell am start -a com.google.intent.action.TEST_LOOP -n com.lyeeedar.MatchDungeon/com.lyeeedar.AndroidLauncher
