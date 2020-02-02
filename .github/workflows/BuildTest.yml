@@ -22,6 +22,13 @@ jobs:
         token: ${{ secrets.PRIVATESTUFF_ACCESS_TOKEN }}
         path: PrivateStuff
 
+    - name: Restore gradle cache
+      uses: actions/cache@v1
+      with:
+        path: ~/.gradle/caches
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
+        restore-keys: ${{ runner.os }}-gradle-
+
     - name: Make gradlew executable
       working-directory: Game
       run: chmod +x ./gradlew
@@ -32,8 +39,7 @@ jobs:
 
     - name: Build Android
       working-directory: Game
-      run: |
-        ./gradlew :android:build
+      run: ./gradlew :android:assembleDebug
 
     - name: Build Resources
       working-directory: Game
