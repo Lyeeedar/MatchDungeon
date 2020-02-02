@@ -62,6 +62,12 @@ jobs:
       working-directory: Game
       run: ./gradlew :headless:testResources
 
+    - uses: actions/upload-artifact@v1
+      if: failure()
+      with:
+        name: crashedLevelReplay
+        path: Game/android/assets/crashedLevelReplay
+
     - name: Run Game Loop Test
       uses: reactivecircus/android-emulator-runner@v2
       with:
