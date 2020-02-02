@@ -3,7 +3,7 @@ name: CI
 on: [push, pull_request]
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
     steps:
     - uses: actions/checkout@master
       with:
@@ -50,5 +50,7 @@ jobs:
       run: ./gradlew :headless:testResources
 
     - name: Run Game Loop Test
-      working-directory: Game
-      run: ./gradlew :desktop:gameLoopTest
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 28
+        script: adb shell am start -a com.google.intent.action.TEST_LOOP -n com.lyeeedar.MatchDungeon/com.lyeeedar.AndroidLauncher

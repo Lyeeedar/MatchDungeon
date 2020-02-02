@@ -41,9 +41,9 @@ class GameLoopTest(val completionCallback: ()->Unit)
 			testGrid()
 			testCompleteCard()
 
-			println("###################################################################")
-			println("Test completed successfully")
-			println("###################################################################")
+			Statics.logger.logDebug("###################################################################")
+			Statics.logger.logDebug("Test completed successfully")
+			Statics.logger.logDebug("###################################################################")
 
 			delay(2000)
 			completionCallback()
@@ -52,9 +52,9 @@ class GameLoopTest(val completionCallback: ()->Unit)
 
 	private suspend fun testLanguageSelection()
 	{
-		println("---------------------------------------------------------------")
-		println("Testing Language Selection")
-		println("")
+		Statics.logger.logDebug("---------------------------------------------------------------")
+		Statics.logger.logDebug("Testing Language Selection")
+		Statics.logger.logDebug("")
 
 		waitUntilActorVisible("Language_en")
 		getActor("Language_de")!!.click()
@@ -71,16 +71,16 @@ class GameLoopTest(val completionCallback: ()->Unit)
 		waitUntilActorVisible("Tutorial")
 		clickThroughTutorial()
 
-		println("")
-		println("Language Selection Succeeded")
-		println("---------------------------------------------------------------")
+		Statics.logger.logDebug("")
+		Statics.logger.logDebug("Language Selection Succeeded")
+		Statics.logger.logDebug("---------------------------------------------------------------")
 	}
 
 	private suspend fun testCompleteQuest()
 	{
-		println("---------------------------------------------------------------")
-		println("Testing Completing Quest")
-		println("")
+		Statics.logger.logDebug("---------------------------------------------------------------")
+		Statics.logger.logDebug("Testing Completing Quest")
+		Statics.logger.logDebug("")
 
 		waitUntilVisibleAndClick("Card0")
 		waitUntilVisibleAndClick("Choose")
@@ -97,16 +97,16 @@ class GameLoopTest(val completionCallback: ()->Unit)
 		waitUntilActorVisible("Tutorial")
 		clickThroughTutorial()
 
-		println("")
-		println("Completing Quest Succeeded")
-		println("---------------------------------------------------------------")
+		Statics.logger.logDebug("")
+		Statics.logger.logDebug("Completing Quest Succeeded")
+		Statics.logger.logDebug("---------------------------------------------------------------")
 	}
 
 	private suspend fun testEditDeck()
 	{
-		println("---------------------------------------------------------------")
-		println("Testing Edit Deck")
-		println("")
+		Statics.logger.logDebug("---------------------------------------------------------------")
+		Statics.logger.logDebug("Testing Edit Deck")
+		Statics.logger.logDebug("")
 
 		waitUntilVisibleAndClick("EditDeck")
 
@@ -121,16 +121,16 @@ class GameLoopTest(val completionCallback: ()->Unit)
 
 		waitUntilVisibleAndClick("Return")
 
-		println("")
-		println("Edit Deck Succeeded")
-		println("---------------------------------------------------------------")
+		Statics.logger.logDebug("")
+		Statics.logger.logDebug("Edit Deck Succeeded")
+		Statics.logger.logDebug("---------------------------------------------------------------")
 	}
 
 	private suspend fun testNewQuest()
 	{
-		println("---------------------------------------------------------------")
-		println("Testing New Quest")
-		println("")
+		Statics.logger.logDebug("---------------------------------------------------------------")
+		Statics.logger.logDebug("Testing New Quest")
+		Statics.logger.logDebug("")
 
 		waitUntilVisibleAndClick("Levelling Up")
 		delay(delay)
@@ -149,16 +149,16 @@ class GameLoopTest(val completionCallback: ()->Unit)
 		waitUntilActorVisible("Tutorial")
 		clickThroughTutorial()
 
-		println("")
-		println("New Quest Succeeded")
-		println("---------------------------------------------------------------")
+		Statics.logger.logDebug("")
+		Statics.logger.logDebug("New Quest Succeeded")
+		Statics.logger.logDebug("---------------------------------------------------------------")
 	}
 
 	private suspend fun testGrid()
 	{
-		println("---------------------------------------------------------------")
-		println("Testing Grid")
-		println("")
+		Statics.logger.logDebug("---------------------------------------------------------------")
+		Statics.logger.logDebug("Testing Grid")
+		Statics.logger.logDebug("")
 
 		waitUntilActorVisible("GridWidget")
 
@@ -186,24 +186,24 @@ class GameLoopTest(val completionCallback: ()->Unit)
 			delay(500)
 		}
 
-		println("")
-		println("Grid Succeeded")
-		println("---------------------------------------------------------------")
+		Statics.logger.logDebug("")
+		Statics.logger.logDebug("Grid Succeeded")
+		Statics.logger.logDebug("---------------------------------------------------------------")
 	}
 
 	private suspend fun testCompleteCard()
 	{
-		println("---------------------------------------------------------------")
-		println("Testing Complete Card")
-		println("")
+		Statics.logger.logDebug("---------------------------------------------------------------")
+		Statics.logger.logDebug("Testing Complete Card")
+		Statics.logger.logDebug("")
 
 		clickThroughCardContent()
 		delay(delay)
 		takeAllRewards()
 
-		println("")
-		println("Complete Card Succeeded")
-		println("---------------------------------------------------------------")
+		Statics.logger.logDebug("")
+		Statics.logger.logDebug("Complete Card Succeeded")
+		Statics.logger.logDebug("---------------------------------------------------------------")
 	}
 
 	private suspend fun clickThroughTutorial()
