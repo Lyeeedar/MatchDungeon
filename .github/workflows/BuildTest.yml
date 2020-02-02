@@ -61,11 +61,8 @@ jobs:
       working-directory: Game
       run: ./gradlew :headless:testResources
 
- #   - name: Run Game Loop Test
- #     uses: reactivecircus/android-emulator-runner@v2
- #     with:
- #       api-level: 28
- #       script: |
- #         adb install Game/android/build/outputs/apk/debug/android-debug.apk
- #         adb shell am start -a com.google.intent.action.TEST_LOOP -n com.lyeeedar.MatchDungeon/com.lyeeedar.AndroidLauncher
- #         // somehow figure out how to sleep until the loop completes
+    - name: Run Game Loop Test
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 28
+        script: ./gradlew :headless:gameLoopTest

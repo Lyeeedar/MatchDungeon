@@ -11,11 +11,11 @@ object GameLoopTest
 
 	fun readLogs(androidHome: String, pid: String, completeLog: StringBuilder)
 	{
-		val logs = "$androidHome/adb logcat -d".runCommand().split('\n').filter { it.contains(" $pid ") }
+		val logs = "$androidHome/adb logcat -d".runCommand().split('\n')
 		for (log in logs)
 		{
 			completeLog.append(log)
-			println(log)
+			if (log.contains(" $pid ")) println(log)
 		}
 
 		"$androidHome/adb logcat -c".runCommand()
@@ -40,16 +40,47 @@ object GameLoopTest
 		"$androidHome/adb shell am start -a com.google.intent.action.TEST_LOOP -n com.lyeeedar.MatchDungeon/com.lyeeedar.AndroidLauncher -S".runCommand()
 		"$androidHome/adb logcat -c".runCommand()
 
-		Thread.sleep(30000) // 30 seconds
+		var pid = ""
+		while (pid.isBlank())
+		{
+			pid = "$androidHome/adb shell pidof com.lyeeedar.MatchDungeon".runCommand()
+			Thread.sleep(1000) // 1 seconds
+		}
 
 		val completeLogs = StringBuilder()
-		val pid = "$androidHome/adb shell pidof com.lyeeedar.MatchDungeon".runCommand()
 		while ("$androidHome/adb shell pidof com.lyeeedar.MatchDungeon".runCommand().isNotBlank())
 		{
 			readLogs(androidHome, pid, completeLogs)
 			Thread.sleep(5000) // 5 seconds
 		}
 		readLogs(androidHome, pid, completeLogs)
+
+		var crash = ""
+
+		var inCrash = false
+		for (line in completeLogs.lines())
+		{
+			if (line.startsWith("--------- beginning of crash"))
+			{
+				inCrash = true
+			}
+			else if (inCrash)
+			{
+				if (line.contains(" E "))
+				{
+					crash += line.split(" E ")[1] + "\n"
+				}
+				else
+				{
+					break
+				}
+			}
+		}
+
+		if (crash.isNotBlank())
+		{
+			throw RuntimeException(crash)
+		}
 
 		println("")
 		println("#####      Game Loop Test Complete      #######")
