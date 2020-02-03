@@ -54,6 +54,11 @@ jobs:
         name: crashedLevelReplay
         path: Game/android/assets/crashedLevelReplay
 
+    - uses: actions/upload-artifact@v1
+      with:
+        name: LevelDifficulties
+        path: Game/android/assets/LevelDifficulties.xml
+
     - name: Run Game Loop Test
       uses: reactivecircus/android-emulator-runner@v2
       with:
