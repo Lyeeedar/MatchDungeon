@@ -146,6 +146,18 @@ class GridScreen(): AbstractScreen()
 
 				return true
 			})
+
+			debugConsole.register("setstat", "", fun (args, console): Boolean {
+
+				val stat = Statistic.valueOf(args[0].toUpperCase())
+				val value = args[1].toFloat()
+
+				level.player.statistics[stat] = value
+
+				console.write("$stat set to $value")
+
+				return true
+			})
 		}
 	}
 
