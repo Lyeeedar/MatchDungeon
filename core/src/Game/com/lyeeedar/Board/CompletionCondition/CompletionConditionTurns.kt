@@ -53,8 +53,11 @@ class CompletionConditionTurns(): AbstractCompletionCondition()
 
 		grid.onTurn +=
 				{
-					turnCount--
-
+					if (!Global.godMode)
+					{
+						turnCount--
+					}
+					
 					val turnStr =
 						if (turnCount == 1)
 							Localisation.getText("completioncondition.turns.turn", "UI")

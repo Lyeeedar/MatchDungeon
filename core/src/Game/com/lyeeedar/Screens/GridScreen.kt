@@ -158,6 +158,14 @@ class GridScreen(): AbstractScreen()
 
 				return true
 			})
+
+			debugConsole.register("god", "", fun(args, console): Boolean
+			{
+				Global.godMode = !Global.godMode
+				console.write("God Mode: ${Global.godMode}")
+
+				return true
+			})
 		}
 	}
 

@@ -54,7 +54,11 @@ class CompletionConditionTime(): AbstractCompletionCondition()
 
 		grid.onTime +=
 				{
-					time -= it
+					if (!Global.godMode)
+					{
+						time -= it
+					}
+
 					val t = time.toInt()
 					label.setText("$t\n" + Localisation.getText("completioncondition.time.seconds", "UI"))
 

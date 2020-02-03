@@ -28,8 +28,6 @@ class CompletionConditionDie : AbstractCompletionCondition()
 	var hp = 1
 	var fractionalHp = 0f
 
-	var godMode = false
-
 	val blinkTable = Table()
 
 	lateinit var table: Table
@@ -114,7 +112,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 				countered = true
 			}
 
-			if (godMode)
+			if (Global.godMode)
 			{
 				blocked = true
 			}
@@ -195,20 +193,6 @@ class CompletionConditionDie : AbstractCompletionCondition()
 					tutorial.addPopup(Localisation.getText("completioncondition.die.tutorial", "UI"), hpLabel)
 					tutorial.show()
 				}, 0.5f)
-
-			if (!Statics.release)
-			{
-				Future.call({
-								GridScreen.instance.debugConsole.reregister("god", "", fun(args, console): Boolean
-								{
-
-									godMode = !godMode
-									console.write("God Mode: $godMode")
-
-									return true
-								})
-							}, 1f)
-			}
 		}
 	}
 
