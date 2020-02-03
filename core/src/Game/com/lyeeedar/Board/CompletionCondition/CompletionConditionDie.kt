@@ -41,7 +41,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 
 		grid.onAttacked += fun(entity): HandlerAction {
 
-			val sprite = entity.sprite() ?: return HandlerAction.KeepAttached
+			val sprite = entity.sprite()?.copy() ?: return HandlerAction.KeepAttached
 			val pos = entity.pos() ?: return HandlerAction.KeepAttached
 			val dst = table.localToStageCoordinates(Vector2(Random.random() * table.width, Random.random() * table.height))
 			val moteDst = dst.cpy() - Vector2(GridWidget.instance.tileSize / 2f, GridWidget.instance.tileSize / 2f)
@@ -120,7 +120,8 @@ class CompletionConditionDie : AbstractCompletionCondition()
 			}
 
 			// animate player attack
-			spawnMote(src, moteDst, sprite, GridWidget.instance.tileSize, {}, animSpeed = 0.35f, leap = true)
+			val animSpeed = 0.35f
+			spawnMote(src, moteDst, sprite, GridWidget.instance.tileSize, {}, animSpeed = animSpeed, leap = true)
 
 			pos.tile?.addDelayedAction(
 				{
@@ -170,7 +171,7 @@ class CompletionConditionDie : AbstractCompletionCondition()
 								}, 0.35f)
 						}
 					}
-				}, 0.35f)
+				}, animSpeed)
 
 			return HandlerAction.KeepAttached
 		}

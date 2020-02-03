@@ -21,8 +21,6 @@ class Mote(src: Vector2, dst: Vector2, sprite: Sprite, spriteWidth: Float, sprit
 
 		if (leap)
 		{
-
-
 			sprite.animation = LeapAnimation.obtain().setAbsolute(animDuration, src, dst, 1f + len * 0.25f)
 			sprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
 		}
