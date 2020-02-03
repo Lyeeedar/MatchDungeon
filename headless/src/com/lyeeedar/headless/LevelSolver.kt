@@ -273,12 +273,19 @@ class LevelSolver
 				}
 				catch (ex: Exception)
 				{
-					println("Solving level '$path' variant '$i' crashed!")
+					if (ex.message?.contains("Level completed in under 5 moves") == true)
+					{
 
-					val file = Gdx.files.local("crashedLevelReplay")
-					file.writeString(levels[i].grid.replay.compressToString(), false)
+					}
+					else
+					{
+						println("Solving level '$path' variant '$i' crashed!")
 
-					throw ex
+						val file = Gdx.files.local("crashedLevelReplay")
+						file.writeString(levels[i].grid.replay.compressToString(), false)
+
+						throw ex
+					}
 				}
 			}
 		}
