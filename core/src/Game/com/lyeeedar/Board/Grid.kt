@@ -184,7 +184,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 
 					if (dst != null)
 					{
-						Future.call({ spawnMote(pos, dst, sprite.copy(), 32f, {PowerBar.instance.power++}) }, delay)
+						Future.call({ spawnMote(pos, dst, sprite.copy(), 32f, {PowerBar.instance.power++}, adjustDuration = false) }, delay)
 
 						if (!gainedBonusPower)
 						{
@@ -194,7 +194,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 							for (i in 0 until gain)
 							{
 								val dst = PowerBar.instance.getOrbDest() ?: break
-								Future.call({ spawnMote(pos, dst, sprite.copy(), 32f, {PowerBar.instance.power++}) }, delay)
+								Future.call({ spawnMote(pos, dst, sprite.copy(), 32f, {PowerBar.instance.power++}, adjustDuration = false) }, delay)
 							}
 						}
 					}

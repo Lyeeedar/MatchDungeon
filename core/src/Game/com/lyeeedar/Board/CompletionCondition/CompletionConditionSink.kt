@@ -13,11 +13,13 @@ import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.GridWidget
+import com.lyeeedar.UI.ParticleEffectActor
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
 import ktx.collections.set
 import ktx.collections.toGdxArray
+import ktx.math.minus
 
 class CompletionConditionSink() : AbstractCompletionCondition()
 {
@@ -39,20 +41,35 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 			val tile = it.pos()?.tile
 			if (sprite != null && tile != null)
 			{
-				val dst = table.localToStageCoordinates(Vector2(table.width / 2f, table.height / 2f))
-				val src = GridWidget.instance.pointToScreenspace(tile)
+				val data = sinkableMap[sprite.fileName]
 
-				val shattered = Tesselator.shatter(sprite.currentTexture)
-				for (piece in shattered)
+				if (data != null)
 				{
-					spawnMote(src, dst, Sprite(piece), max(piece.regionWidth.toFloat(), piece.regionHeight.toFloat()), {}, 0.9f + Random.random(1f))
-				}
+					val spriteSize = GridWidget.instance.tileSize
+					val dst = data.table.localToStageCoordinates(Vector2(Random.random() * data.table.width, Random.random() * data.table.height))
+					val moteDst = dst.cpy() - Vector2(spriteSize, spriteSize)
+					val src = GridWidget.instance.pointToScreenspace(tile)
 
-				tile.addDelayedAction(
-					{
-						sinkableMap[sprite.fileName].count = max(0, sinkableMap[sprite.fileName].count-1)
-						rebuildWidget()
-					}, 0.6f)
+					val animSpeed = 0.35f
+					spawnMote(src, moteDst, sprite, spriteSize, {}, animSpeed = animSpeed, leap = true, adjustDuration = false)
+
+					tile.addDelayedAction(
+						{
+							if (!Global.resolveInstantly)
+							{
+								val pos = dst
+
+								val sprite = AssetManager.loadParticleEffect("GetShard")
+								val actor = ParticleEffectActor(sprite.getParticleEffect())
+								actor.setSize(48f, 48f)
+								actor.setPosition(pos.x, pos.y)
+								Statics.stage.addActor(actor)
+							}
+
+							data.count = max(0, data.count - 1)
+							rebuildWidget()
+						}, animSpeed)
+				}
 			}
 
 			HandlerAction.KeepAttached
@@ -91,7 +108,7 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 			}
 			else
 			{
-				data = SinkableData(sinkable.sprite()!!, 0)
+				data = SinkableData(sinkable.sprite()!!, 0, Table())
 				sinkableMap[sinkable.sprite()!!.fileName] = data
 			}
 
@@ -136,7 +153,7 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 				}
 			}
 
-			sinkableMap[grid.level.theme.coin.fileName] = SinkableData(grid.level.theme.coin, coins)
+			sinkableMap[grid.level.theme.coin.fileName] = SinkableData(grid.level.theme.coin, coins, Table())
 		}
 		else
 		{
@@ -155,19 +172,24 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 
 		for (pair in sinkableMap)
 		{
+			val sinkableTable = pair.value.table
+			sinkableTable.clear()
+
 			val sprite = pair.value.sprite.copy()
 			val count = pair.value.count
 
-			row.add(SpriteWidget(sprite, 24f, 24f)).padLeft(5f)
+			sinkableTable.add(SpriteWidget(sprite, 24f, 24f)).padLeft(5f)
 
 			if (count == 0)
 			{
-				row.add(SpriteWidget(tick, 24f, 24f))
+				sinkableTable.add(SpriteWidget(tick, 24f, 24f))
 			}
 			else
 			{
-				row.add(Label(" x $count", Statics.skin))
+				sinkableTable.add(Label(" x $count", Statics.skin))
 			}
+
+			row.add(sinkableTable).grow()
 
 			counter++
 			if (counter == 2)
@@ -206,4 +228,4 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 	}
 }
 
-data class SinkableData(val sprite: Sprite, var count: Int)
+data class SinkableData(val sprite: Sprite, var count: Int, var table: Table)

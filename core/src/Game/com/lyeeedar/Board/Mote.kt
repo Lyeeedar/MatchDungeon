@@ -11,15 +11,17 @@ import com.lyeeedar.Renderables.Animation.MoveAnimation
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Renderables.Sprite.SpriteEffectActor
 
-class Mote(src: Vector2, dst: Vector2, sprite: Sprite, spriteSize: Float, completionFun: (() -> Unit)? = null, animSpeed: Float = 1.5f, leap: Boolean = false) : SpriteEffectActor(sprite, spriteSize, spriteSize, Vector2())
+class Mote(src: Vector2, dst: Vector2, sprite: Sprite, spriteWidth: Float, spriteHeight: Float, completionFun: (() -> Unit)? = null, animSpeed: Float = 1.5f, leap: Boolean = false, adjustDuration: Boolean = true)
+	: SpriteEffectActor(sprite, spriteWidth, spriteHeight, Vector2())
 {
 	init
 	{
+		val len = src.dst(dst)
+		val animDuration = if (adjustDuration) animSpeed + len * 0.001f else animSpeed
+
 		if (leap)
 		{
-			val len = src.dst(dst)
 
-			val animDuration = animSpeed + len * 0.001f
 
 			sprite.animation = LeapAnimation.obtain().setAbsolute(animDuration, src, dst, 1f + len * 0.25f)
 			sprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
@@ -33,7 +35,7 @@ class Mote(src: Vector2, dst: Vector2, sprite: Sprite, spriteSize: Float, comple
 			val p3 = dst.cpy()
 
 			val path = Bezier(p0, p1, p2, p3)
-			sprite.animation = MoveAnimation.obtain().set(animSpeed, path, Interpolation.exp5)
+			sprite.animation = MoveAnimation.obtain().set(animDuration, path, Interpolation.exp5)
 		}
 
 		sprite.faceInMoveDirection = true
@@ -41,6 +43,9 @@ class Mote(src: Vector2, dst: Vector2, sprite: Sprite, spriteSize: Float, comple
 		motes.add(this)
 		completionFunc = { completionFun?.invoke(); motes.removeValue(this, true) }
 	}
+
+	constructor(src: Vector2, dst: Vector2, sprite: Sprite, spriteSize: Float, completionFun: (() -> Unit)? = null, animSpeed: Float = 1.5f, leap: Boolean = false, adjustDuration: Boolean = true)
+		: this(src, dst, sprite, spriteSize, spriteSize, completionFun, animSpeed, leap, adjustDuration)
 
 	companion object
 	{
@@ -57,7 +62,7 @@ class Mote(src: Vector2, dst: Vector2, sprite: Sprite, spriteSize: Float, comple
 	}
 }
 
-fun spawnMote(src: Vector2, dst: Vector2, sprite: Sprite, spriteSize: Float, completionFun: (() -> Unit)? = null, animSpeed: Float = 1.5f, leap: Boolean = false)
+fun spawnMote(src: Vector2, dst: Vector2, sprite: Sprite, spriteSize: Float, completionFun: (() -> Unit)? = null, animSpeed: Float = 1.5f, leap: Boolean = false, adjustDuration: Boolean = true)
 {
 	if (Global.resolveInstantly)
 	{
@@ -65,6 +70,18 @@ fun spawnMote(src: Vector2, dst: Vector2, sprite: Sprite, spriteSize: Float, com
 	}
 	else
 	{
-		Mote(src, dst, sprite, spriteSize, completionFun, animSpeed, leap)
+		Mote(src, dst, sprite, spriteSize, completionFun, animSpeed, leap, adjustDuration)
+	}
+}
+
+fun spawnMote(src: Vector2, dst: Vector2, sprite: Sprite, spriteWidth: Float, spriteHeight: Float, completionFun: (() -> Unit)? = null, animSpeed: Float = 1.5f, leap: Boolean = false, adjustDuration: Boolean = true)
+{
+	if (Global.resolveInstantly)
+	{
+		completionFun?.invoke()
+	}
+	else
+	{
+		Mote(src, dst, sprite, spriteWidth, spriteHeight, completionFun, animSpeed, leap, adjustDuration)
 	}
 }

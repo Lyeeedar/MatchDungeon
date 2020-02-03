@@ -116,7 +116,7 @@ class StatisticsReward : AbstractReward()
 
 					spawnMote(src, dst, sprite, 64f, {
 
-					}, 0.75f)
+					}, 0.75f, adjustDuration = false)
 				}
 
 				output.add(card)
@@ -172,7 +172,7 @@ class CardReward : AbstractReward()
 				val dst = dstTable.localToStageCoordinates(Vector2())
 
 				spawnMote(src, dst, sprite, 64f, {
-				}, 0.75f)
+				}, 0.75f, adjustDuration = false)
 			}
 
 			cardWidget.canZoom = false
@@ -228,7 +228,7 @@ class QuestReward : AbstractReward()
 				val dst = dstTable.localToStageCoordinates(Vector2())
 
 				spawnMote(src, dst, sprite, 64f, {
-				}, 0.75f)
+				}, 0.75f, adjustDuration = false)
 			}
 
 			cardWidget.canZoom = false
@@ -286,7 +286,7 @@ class CharacterReward : AbstractReward()
 				val dst = dstTable.localToStageCoordinates(Vector2())
 
 				spawnMote(src, dst, sprite, 64f, {
-				}, 0.75f)
+				}, 0.75f, adjustDuration = false)
 			}
 
 			cardWidget.canZoom = false
@@ -345,7 +345,7 @@ class MoneyReward : AbstractReward()
 
 			spawnMote(src, dst, sprite, 64f, {
 				CardScreen.instance.updateEquipment()
-			}, 0.75f)
+			}, 0.75f, adjustDuration = false)
 		}
 		card.canZoom = false
 
@@ -402,7 +402,7 @@ class BuffReward : AbstractReward()
 			val dst = dstTable.localToStageCoordinates(Vector2())
 
 			spawnMote(src, dst, sprite, 64f, {
-			}, 0.75f)
+			}, 0.75f, adjustDuration = false)
 		}
 		card.canZoom = false
 
@@ -532,7 +532,7 @@ class EquipmentReward : AbstractReward()
 
 			spawnMote(src, dst, sprite, 64f, {
 				CardScreen.instance.updateEquipment()
-			}, 0.75f)
+			}, 0.75f, adjustDuration = false)
 		}
 
 		val sellAmount = equipment.cost / 4
@@ -548,7 +548,7 @@ class EquipmentReward : AbstractReward()
 
 			spawnMote(src, dst, sprite, 64f, {
 				CardScreen.instance.updateEquipment()
-			}, 0.75f)
+			}, 0.75f, adjustDuration = false)
 		}
 
 		output.add(card)
@@ -611,7 +611,7 @@ class ItemReward : AbstractReward()
 				val dst = dstTable.localToStageCoordinates(Vector2())
 
 				spawnMote(src, dst, sprite, 64f, {
-				}, 0.75f)
+				}, 0.75f, adjustDuration = false)
 			}
 
 			cardWidget.canZoom = false
