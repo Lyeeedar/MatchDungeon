@@ -571,6 +571,11 @@ class Level(val loadPath: String)
 				val totalToSpawn = numToSink - existingCount
 				if (totalToSpawn > 0)
 				{
+					if (chests.size == 0)
+					{
+						throw java.lang.RuntimeException("No chests found on level that needs to spawn coins!")
+					}
+
 					for (i in 0 until totalToSpawn)
 					{
 						chests.random(grid.ran).numToSpawn++

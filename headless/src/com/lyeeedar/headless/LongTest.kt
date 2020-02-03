@@ -25,8 +25,9 @@ object LongTest
 			val start = System.currentTimeMillis()
 
 			val funcs = com.badlogic.gdx.utils.Array<Pair<String, ()->Any>>()
-			funcs.add(Pair("LevelSolve", { LevelSolver().attemptAllLevels(true) }))
+			funcs.add(Pair("ReplayTest", { LevelSolver().attemptAllLevels(true) }))
 			funcs.add(Pair("CheckSolvability", { LevelSolver().checkSolvability() }))
+			funcs.add(Pair("DetermineDifficulty", { LevelSolver().determineDifficulty() }))
 
 			val timings = com.badlogic.gdx.utils.Array<Pair<String, Long>>()
 			for (func in funcs)

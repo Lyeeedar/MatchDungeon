@@ -15,12 +15,10 @@ import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.PowerBar
-import com.lyeeedar.Util.Future
-import com.lyeeedar.Util.Random
-import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.filename
+import com.lyeeedar.Util.*
 import org.mockito.Mockito
 import java.io.File
+import kotlin.collections.random
 
 object CrashedLevelReplayer
 {
@@ -294,6 +292,166 @@ class LevelSolver
 		println("All levels solvable")
 
 		Global.godMode = false
+		Global.resolveInstantly = false
+	}
+
+	class LevelDifficulty(val level: String, val variant: Int, val difficultyRating: Float, val successRates: FloatArray)
+	fun determineDifficulty()
+	{
+		println("")
+		println("")
+		println("-------------------------------------------------------------------------")
+		println("")
+		println("#####      Difficulty Checker      #######")
+		println("")
+		println("-------------------------------------------------------------------------")
+		println("")
+		println("")
+
+		val powerPerLevel = FastEnumMap<Statistic, Float>(Statistic::class.java)
+		powerPerLevel[Statistic.MATCHDAMAGE] = 0.3f
+		powerPerLevel[Statistic.ABILITYDAMAGE] = 0.5f
+		powerPerLevel[Statistic.POWERGAIN] = 1f
+		powerPerLevel[Statistic.HEALTH] = 2f
+		powerPerLevel[Statistic.PIERCE] = 0.1f
+		powerPerLevel[Statistic.AEGIS] = 0.2f
+		powerPerLevel[Statistic.HASTE] = 0.02f
+		powerPerLevel[Statistic.REGENERATION] = 0.02f
+
+		val attemptsPerLevel = 10
+		val powerLevelsToTest = 10
+
+		Global.resolveInstantly = true
+		disableOutput = true
+
+		val levelDifficulties = Array<LevelDifficulty>()
+
+		val themes = XmlData.enumeratePaths("", "Theme").toList()
+		val gridScreen = GridScreen()
+
+		val paths = XmlData.enumeratePaths("", "Level").toList()
+		var pathI = 0
+		for (path in paths)
+		{
+			pathI++
+			println("")
+			println("-----------------------------------------------------------------------------")
+			println("    $path    ")
+			println("    $pathI / ${paths.size}")
+			println("")
+
+			val levels = Level.load(path)
+
+			for (i in 0 until levels.size)
+			{
+				val theme = Theme.load(themes.random())
+				val seed = Random.random.nextLong()
+				fun createLevel(level: Level, powerLevel: Int)
+				{
+					val character = Character.load("Peasant")
+					val player = Player(character, PlayerDeck())
+
+					for (stat in Statistic.Values)
+					{
+						val statVal = powerPerLevel[stat] ?: continue
+						player.statistics[stat] = (player.statistics[stat] ?: 0f) + statVal * powerLevel
+					}
+
+					Global.player = player
+					Global.deck = GlobalDeck()
+					Global.deck.chosenCharacter = character
+					Global.deck.characters.add(character)
+
+					level.create(theme, player, {}, {}, seed, i)
+
+					for (cond in level.victoryConditions)
+					{
+						cond.createTable(level.grid)
+					}
+					for (cond in level.defeatConditions)
+					{
+						cond.createTable(level.grid)
+					}
+				}
+
+				val successRate = FloatArray(powerLevelsToTest)
+				for (powerLevel in 0 until powerLevelsToTest)
+				{
+					val attemptSuccess = BooleanArray(attemptsPerLevel)
+					for (attempt in 0 until attemptsPerLevel)
+					{
+						val levels = Level.load(path)
+
+						createLevel(levels[i], powerLevel)
+
+						var success = false
+						try
+						{
+							success = solve(levels[i].grid)
+						}
+						catch (ex: Exception)
+						{
+							if (ex.message?.contains("Level completed in under 5 moves") == true)
+							{
+								success = true
+							}
+							else
+							{
+								val file = Gdx.files.local("crashedLevelReplay")
+								file.writeString(levels[i].grid.replay.compressToString(), false)
+
+								throw ex
+							}
+						}
+
+						attemptSuccess[attempt] = success
+					}
+
+					var successTotal = 0f
+					for (attempt in 0 until attemptsPerLevel)
+					{
+						if (attemptSuccess[attempt])
+						{
+							successTotal += 1f
+						}
+					}
+					successTotal /= attemptsPerLevel.toFloat()
+
+					successRate[powerLevel] = successTotal
+					println("Solving level '$path' variant '$i' with power level '$powerLevel'. SuccessRate: '${successRate[powerLevel]}'")
+				}
+
+				var difficultyRating = 0f
+				for (i in 0 until powerLevelsToTest)
+				{
+					difficultyRating += successRate[i]
+				}
+				difficultyRating = powerLevelsToTest - difficultyRating
+
+				levelDifficulties.add(LevelDifficulty(path, i, difficultyRating, successRate))
+
+				println("Completed: $path, Difficulty: $difficultyRating")
+			}
+		}
+
+		var output = "<LevelDifficulties>\n"
+		for (level in levelDifficulties.sortedBy { it.difficultyRating })
+		{
+			output += "\t<Level name=\"${level.level}\" variant=\"${level.variant}\" rating=\"${level.difficultyRating}\">\n"
+
+			for (i in 0 until powerLevelsToTest)
+			{
+				output += "\t\t<Difficulty$i>${level.successRates[i]}</Difficulty$i>\n"
+			}
+
+			output += "\t</Level>\n"
+		}
+		output += "</LevelDifficulties>"
+		File("LevelDifficulties.xml").writeText(output)
+
+		println("")
+		println("All levels tested")
+
 		Global.resolveInstantly = false
 	}
 
