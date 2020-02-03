@@ -57,7 +57,7 @@ class CompletionConditionTurns(): AbstractCompletionCondition()
 					{
 						turnCount--
 					}
-					
+
 					val turnStr =
 						if (turnCount == 1)
 							Localisation.getText("completioncondition.turns.turn", "UI")

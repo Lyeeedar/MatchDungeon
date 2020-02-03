@@ -17,6 +17,13 @@ task testResources(dependsOn: classes, type: JavaExec) {
     workingDir =  new File("../android/assets")
 }
 
+task longTest(dependsOn: classes, type: JavaExec) {
+    main = "com.lyeeedar.headless.LongTest"
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+    workingDir =  new File("../android/assets")
+}
+
 task replayCrashedLevel(dependsOn: classes, type: JavaExec) {
     main = "com.lyeeedar.headless.CrashedLevelReplayer"
     classpath = sourceSets.main.runtimeClasspath

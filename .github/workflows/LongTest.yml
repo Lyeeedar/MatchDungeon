@@ -1,0 +1,61 @@
+name: LongTest
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+jobs:
+  test:
+    runs-on: macOS-latest
+    steps:
+
+    - name: Checkout master
+      uses: actions/checkout@master
+      with:
+        path: Game
+
+    - name: Checkout submodules
+      working-directory: Game
+      run: |
+        git submodule sync --recursive
+        git submodule update --init --force --recursive --rebase -j 8
+
+    - name: Checkout private
+      uses: actions/checkout@master
+      with:
+        repository: Lyeeedar/PrivateStuff
+        token: ${{ secrets.PRIVATESTUFF_ACCESS_TOKEN }}
+        path: PrivateStuff
+
+    - name: Make gradlew executable
+      working-directory: Game
+      run: chmod +x ./gradlew
+
+    - name: Build Resources
+      working-directory: Game
+      run: ./gradlew :headless:compileResources
+
+    - name: Build Desktop
+      working-directory: Game
+      run: ./gradlew :desktop:build
+
+    - name: Build Android
+      working-directory: Game
+      run: ./gradlew :android:assembleDebug
+
+    - name: Run Tests
+      working-directory: Game
+      run: |
+        ./gradlew :headless:testResources
+        ./gradlew :headless:longTest
+
+    - uses: actions/upload-artifact@v1
+      if: failure()
+      with:
+        name: crashedLevelReplay
+        path: Game/android/assets/crashedLevelReplay
+
+    - name: Run Game Loop Test
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 28
+        script: ./Game/gradlew -p Game :headless:gameLoopTest

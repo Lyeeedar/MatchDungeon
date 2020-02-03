@@ -12,6 +12,7 @@ import com.lyeeedar.Components.markedForDeletion
 import com.lyeeedar.Components.renderable
 import com.lyeeedar.Game.*
 import com.lyeeedar.Screens.GridScreen
+import com.lyeeedar.Statistic
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.PowerBar
 import com.lyeeedar.Util.Future
@@ -202,6 +203,91 @@ class LevelSolver
 
 			totalI++
 		}
+	}
+
+	fun checkSolvability()
+	{
+		println("")
+		println("")
+		println("-------------------------------------------------------------------------")
+		println("")
+		println("#####      Solveability Check      #######")
+		println("")
+		println("-------------------------------------------------------------------------")
+		println("")
+		println("")
+
+		Global.resolveInstantly = true
+		Global.godMode = true
+
+		val themes = XmlData.enumeratePaths("", "Theme").toList()
+		val gridScreen = GridScreen()
+
+		val paths = XmlData.enumeratePaths("", "Level").toList()
+		var pathI = 0
+		for (path in paths)
+		{
+			pathI++
+			println("")
+			println("-----------------------------------------------------------------------------")
+			println("    $pathI / ${paths.size}")
+			println("")
+
+			val levels = Level.load(path)
+
+			for (i in 0 until levels.size)
+			{
+				val theme = Theme.load(themes.random())
+				val seed = Random.random.nextLong()
+				fun createLevel(level: Level)
+				{
+					val character = Character.load("Peasant")
+					val player = Player(character, PlayerDeck())
+					player.statistics[Statistic.MATCHDAMAGE] = 4f
+					player.statistics[Statistic.PIERCE] = 1f
+					Global.player = player
+					Global.deck = GlobalDeck()
+					Global.deck.chosenCharacter = character
+					Global.deck.characters.add(character)
+
+					level.create(theme, player, {}, {}, seed, i)
+
+					for (cond in level.victoryConditions)
+					{
+						cond.createTable(level.grid)
+					}
+					for (cond in level.defeatConditions)
+					{
+						cond.createTable(level.grid)
+					}
+				}
+
+				createLevel(levels[i])
+
+				try
+				{
+					println("")
+					println("Solving level '$path' variant '$i'")
+					solve(levels[i].grid)
+					println("Level solved.")
+				}
+				catch (ex: Exception)
+				{
+					println("Solving level '$path' variant '$i' crashed!")
+
+					val file = Gdx.files.local("crashedLevelReplay")
+					file.writeString(levels[i].grid.replay.compressToString(), false)
+
+					throw ex
+				}
+			}
+		}
+
+		println("")
+		println("All levels solvable")
+
+		Global.godMode = false
+		Global.resolveInstantly = false
 	}
 
 	fun attemptAllLevels(testResolve: Boolean)
