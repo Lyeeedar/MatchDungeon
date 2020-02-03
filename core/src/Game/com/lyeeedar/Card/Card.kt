@@ -267,6 +267,7 @@ class CardNode
 
 			stack.addTapToolTip(Localisation.getText("card.willadvance", "UI"))
 			table.add(stack).expandX().center().pad(5f).padBottom(32f)
+			table.row()
 		}
 
 		table.add(Table()).grow()
