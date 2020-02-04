@@ -53,7 +53,7 @@ class CompletionConditionTurns(): AbstractCompletionCondition()
 
 		grid.onTurn +=
 				{
-					if (!Global.godMode)
+					if (!Global.godMode || grid.level.victoryConditions.contains(this))
 					{
 						turnCount--
 					}

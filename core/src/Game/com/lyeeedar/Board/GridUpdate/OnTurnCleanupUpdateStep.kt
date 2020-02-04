@@ -300,6 +300,11 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 			{
 				movePriorities.add(MovePriority(grid.sinkPathTiles, true))
 			}
+			val sinkableTiles = grid.grid.filter { it.contents?.sinkable() != null }.toList().toGdxArray()
+			if (sinkableTiles.size > 0)
+			{
+				movePriorities.add(MovePriority(sinkableTiles, true))
+			}
 		}
 
 		// if under half health, prioritise clearing attacks

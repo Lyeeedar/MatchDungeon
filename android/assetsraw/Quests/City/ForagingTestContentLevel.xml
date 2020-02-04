@@ -4,15 +4,15 @@
 			<Line>......#....</Line>
 			<Line>.........#.</Line>
 			<Line>#..........</Line>
-			<Line>..F..f.F..#</Line>
-			<Line>.........f.</Line>
+			<Line>..F..f.F...</Line>
+			<Line>.........f#</Line>
 			<Line>...........</Line>
-			<Line>#.f.F.f.f.#</Line>
+			<Line>..f.F.f.f..</Line>
 			<Line>...........</Line>
 			<Line>...........</Line>
 			<Line>#....f.....</Line>
 			<Line>.......f..#</Line>
-			<Line>..#........</Line>
+			<Line>....#......</Line>
 		</Rows>
 	</Grid>
 	<Symbols>
