@@ -5,10 +5,11 @@
 		<Data Name="Usages" Type="Int" Min="-1" Default="-1" meta:RefKey="Number" />
 	</Definition>
 	<Definition Name="TargettedMonsterAbility" Extends="MonsterAbility" meta:RefKey="StructDef">
-		<Data Name="Target" EnumValues="Neighbour,Random" meta:RefKey="Enum" />
 		<Data Name="Count" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
 		<Data Name="TargetRestriction" EnumValues="Orb,Special,Block,Empty,Sealed,Monster,Attack,Tile,NamedTile,Spreader" meta:RefKey="Enum" />
 		<Data Name="Permuter" EnumValues="Single,AllOfType,NofType,Column,Row,Cross,Block,Diamond,Cone,Random" meta:RefKey="Enum" />
+		<Data Name="Range" Name1="Min" Name2="Max" Min="0" Default="0,99" Type="Int" meta:RefKey="Vector" />
+		<Data Name="Coverage" Min="0" Max="1" Default="1" meta:RefKey="Number" />
 	</Definition>
 	<Definition Name="MonsterEffectAbility" Extends="TargettedMonsterAbility" meta:RefKey="StructDef">
 		<Data Name="NumPips" Type="Int" Min="1" Default="7" meta:RefKey="Number" />
