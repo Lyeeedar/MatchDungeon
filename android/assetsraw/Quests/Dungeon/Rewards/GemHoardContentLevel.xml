@@ -68,16 +68,13 @@
 				<HP>7</HP>
 				<DamageReduction>1</DamageReduction>
 				<Abilities>
-					<Ability>
+					<Move>
 						<Cooldown>4,8</Cooldown>
-						<Effect>Move</Effect>
-					</Ability>
-					<Ability>
+					</Move>
+					<Block>
 						<Cooldown>2,7</Cooldown>
 						<Count>2</Count>
-						<Effect>Block</Effect>
-						<Data />
-					</Ability>
+					</Block>
 				</Abilities>
 			</MonsterDesc>
 			<SpecialOrb>None</SpecialOrb>

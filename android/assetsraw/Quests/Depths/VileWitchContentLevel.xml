@@ -38,45 +38,38 @@
 				<HP>60</HP>
 				<DamageReduction>2</DamageReduction>
 				<Abilities>
-					<Ability>
+					<Move>
 						<Cooldown>2,6</Cooldown>
-						<Effect>Move</Effect>
-					</Ability>
-					<Ability>
+					</Move>
+					<Move>
 						<Cooldown>1,9</Cooldown>
 						<Target>Random</Target>
-						<Effect>Move</Effect>
-						<Data>
-							<MoveType>Leap</MoveType>
-							<EndEffect meta:RefKey="ParticleEffect">
-								<Name>Shout</Name>
-							</EndEffect>
-						</Data>
-					</Ability>
-					<Ability>
+						<MoveType>Leap</MoveType>
+						<EndEffect meta:RefKey="ParticleEffect">
+							<Name>Shout</Name>
+						</EndEffect>
+					</Move>
+					<Spreader>
 						<Cooldown>4,8</Cooldown>
 						<Permuter>Cone</Permuter>
-						<Effect>Spreader</Effect>
-						<Data>
-							<Range>2</Range>
-							<Coverage>0.8</Coverage>
-							<Spreader meta:RefKey="SpreaderDef">
-								<Name>Lava</Name>
-								<Sprite meta:RefKey="SpriteWrapper">
-									<Sprite meta:RefKey="Sprite">
-										<Name>Oryx/uf_split/uf_terrain/water_lava</Name>
-									</Sprite>
+						<Range>2</Range>
+						<Coverage>0.8</Coverage>
+						<Spreader meta:RefKey="SpreaderDef">
+							<Name>Lava</Name>
+							<Sprite meta:RefKey="SpriteWrapper">
+								<Sprite meta:RefKey="Sprite">
+									<Name>Oryx/uf_split/uf_terrain/water_lava</Name>
 								</Sprite>
-								<Effect>Attack</Effect>
-								<Spreads>false</Spreads>
-								<FadeOut>15</FadeOut>
-								<RenderAbove>false</RenderAbove>
-								<AttackEffect meta:RefKey="ParticleEffect">
-									<Name>Fireburst</Name>
-								</AttackEffect>
-							</Spreader>
-						</Data>
-					</Ability>
+							</Sprite>
+							<Effect>Attack</Effect>
+							<Spreads>false</Spreads>
+							<FadeOut>15</FadeOut>
+							<RenderAbove>false</RenderAbove>
+							<AttackEffect meta:RefKey="ParticleEffect">
+								<Name>Fireburst</Name>
+							</AttackEffect>
+						</Spreader>
+					</Spreader>
 				</Abilities>
 			</MonsterDesc>
 			<SpecialOrb>None</SpecialOrb>
@@ -121,20 +114,16 @@
 		<HP>20</HP>
 		<DamageReduction>1</DamageReduction>
 		<Abilities>
-			<Ability>
+			<Move>
 				<Cooldown>2,5</Cooldown>
-				<Effect>Move</Effect>
-			</Ability>
-			<Ability>
+			</Move>
+			<Seal>
 				<Cooldown>2,6</Cooldown>
 				<Count>2</Count>
-				<Effect>Seal</Effect>
-			</Ability>
-			<Ability>
+			</Seal>
+			<SealedAttack>
 				<Cooldown>1,9</Cooldown>
-				<Effect>SealedAttack</Effect>
-				<Data />
-			</Ability>
+			</SealedAttack>
 		</Abilities>
 	</CustomMonster>
 	<VictoryConditions>

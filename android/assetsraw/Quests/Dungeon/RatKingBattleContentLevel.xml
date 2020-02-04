@@ -38,18 +38,15 @@
 				<HP>60</HP>
 				<DamageReduction>2</DamageReduction>
 				<Abilities>
-					<Ability>
+					<Summon>
 						<Cooldown>2,6</Cooldown>
 						<Target>Random</Target>
 						<TargetRestriction>NamedTile</TargetRestriction>
-						<Effect>Summon</Effect>
-						<Data>
-							<TileName>Grate</TileName>
-							<Faction>Rats</Faction>
-							<Name>Small Rat</Name>
-							<IsSummon>false</IsSummon>
-						</Data>
-					</Ability>
+						<TileName>Grate</TileName>
+						<Faction>Rats</Faction>
+						<Name>Small Rat</Name>
+						<IsSummon>false</IsSummon>
+					</Summon>
 				</Abilities>
 			</MonsterDesc>
 			<SpecialOrb>None</SpecialOrb>

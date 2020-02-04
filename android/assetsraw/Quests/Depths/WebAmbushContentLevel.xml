@@ -29,20 +29,16 @@
 		<HP>20</HP>
 		<DamageReduction>1</DamageReduction>
 		<Abilities>
-			<Ability>
+			<Move>
 				<Cooldown>2,5</Cooldown>
-				<Effect>Move</Effect>
-			</Ability>
-			<Ability>
+			</Move>
+			<Seal>
 				<Cooldown>2,6</Cooldown>
 				<Count>2</Count>
-				<Effect>Seal</Effect>
-			</Ability>
-			<Ability>
+			</Seal>
+			<SealedAttack>
 				<Cooldown>1,9</Cooldown>
-				<Effect>SealedAttack</Effect>
-				<Data />
-			</Ability>
+			</SealedAttack>
 		</Abilities>
 	</CustomMonster>
 	<BlockStength>5</BlockStength>

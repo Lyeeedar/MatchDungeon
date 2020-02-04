@@ -81,28 +81,24 @@
 				<HP>45</HP>
 				<DamageReduction>2</DamageReduction>
 				<Abilities>
-					<Ability>
+					<Move>
 						<Cooldown>2,6</Cooldown>
-						<Effect>Move</Effect>
-					</Ability>
-					<Ability>
+					</Move>
+					<Debuff>
 						<Cooldown>2,6</Cooldown>
 						<Permuter>Cone</Permuter>
-						<Effect>Debuff</Effect>
-						<Data>
-							<Debuff meta:RefKey="Buff">
-								<Name>SewerOutflowContentLevel.Level.Symbols.[2] Symbol.Symbol.MonsterDesc (MonsterDesc).Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:ce0ffd64-b62c-4c7b-8457-1d9cd8beb35b</Name>
-								<Icon meta:RefKey="Sprite">
-									<Name>GUI/Debuff</Name>
-								</Icon>
-								<Statistics meta:RefKey="Statistics">
-									<Haste>-0.1</Haste>
-								</Statistics>
-								<Duration>4</Duration>
-							</Debuff>
-							<Range>2</Range>
-						</Data>
-					</Ability>
+						<Debuff meta:RefKey="Buff">
+							<Name>SewerOutflowContentLevel.Level.Symbols.[2] Symbol.Symbol.MonsterDesc (MonsterDesc).Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:ce0ffd64-b62c-4c7b-8457-1d9cd8beb35b</Name>
+							<Icon meta:RefKey="Sprite">
+								<Name>GUI/Debuff</Name>
+							</Icon>
+							<Statistics meta:RefKey="Statistics">
+								<Haste>-0.1</Haste>
+							</Statistics>
+							<Duration>4</Duration>
+						</Debuff>
+						<Range>2</Range>
+					</Debuff>
 				</Abilities>
 			</MonsterDesc>
 			<SpecialOrb>None</SpecialOrb>

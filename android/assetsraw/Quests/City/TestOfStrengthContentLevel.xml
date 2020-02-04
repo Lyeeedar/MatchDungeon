@@ -36,20 +36,16 @@
 				<HP>25</HP>
 				<DamageReduction>1</DamageReduction>
 				<Abilities>
-					<Ability>
+					<Move>
 						<Cooldown>1,5</Cooldown>
-						<Effect>Move</Effect>
-					</Ability>
-					<Ability>
+					</Move>
+					<SelfBuff>
 						<Cooldown>3,9</Cooldown>
-						<Effect>SelfBuff</Effect>
-						<Data>
-							<Duration>2</Duration>
-							<ParticleEffect meta:RefKey="ParticleEffect">
-								<Name>Block</Name>
-							</ParticleEffect>
-						</Data>
-					</Ability>
+						<Duration>2</Duration>
+						<ParticleEffect meta:RefKey="ParticleEffect">
+							<Name>Block</Name>
+						</ParticleEffect>
+					</SelfBuff>
 				</Abilities>
 			</MonsterDesc>
 			<SpecialOrb>None</SpecialOrb>

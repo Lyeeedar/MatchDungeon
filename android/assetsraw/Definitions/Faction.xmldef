@@ -1,4 +1,22 @@
 <Definitions Colour="250,136,136" Icon="Sprites/Oryx/uf_split/uf_heroes/rat_giant_1.png" xmlns:meta="Editor">
+	<!--Root Ability Definitions-->
+	<Definition Name="MonsterAbility" meta:RefKey="StructDef">
+		<Data Name="Cooldown" Name1="Min" Name2="Max" Min="1" Type="Int" SkipIfDefault="False" meta:RefKey="Vector" />
+		<Data Name="Usages" Type="Int" Min="-1" Default="-1" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="TargettedMonsterAbility" Extends="MonsterAbility" meta:RefKey="StructDef">
+		<Data Name="Target" EnumValues="Neighbour,Random" meta:RefKey="Enum" />
+		<Data Name="Count" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
+		<Data Name="TargetRestriction" EnumValues="Orb,Special,Block,Empty,Sealed,Monster,Attack,Tile,NamedTile,Spreader" meta:RefKey="Enum" />
+		<Data Name="Permuter" EnumValues="Single,AllOfType,NofType,Column,Row,Cross,Block,Diamond,Cone,Random" meta:RefKey="Enum" />
+	</Definition>
+	<Definition Name="MonsterEffectAbility" Extends="TargettedMonsterAbility" meta:RefKey="StructDef">
+		<Data Name="NumPips" Type="Int" Min="1" Default="7" meta:RefKey="Number" />
+		<Data Name="FlightEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
+		<Data Name="HitEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
+		<Data Name="ShowAttackLeap" Default="True" meta:RefKey="Boolean" />
+	</Definition>
+	<!--Faction-->
 	<Definition Name="Faction" meta:RefKey="Struct">
 		<Data Name="Monsters" MinCount="1" meta:RefKey="Collection">
 			<Data Name="Monster" Keys="MonsterDesc" Nullable="False" meta:RefKey="Reference" />
@@ -7,6 +25,7 @@
 			<Data Name="Monster" Keys="MonsterDesc" Nullable="False" meta:RefKey="Reference" />
 		</Data>
 	</Definition>
+	<!--Monster-->
 	<Definition Name="MonsterDesc" IsGlobal="True" meta:RefKey="StructDef">
 		<Data Name="Name" meta:RefKey="String" />
 		<Data Name="Sprite" Keys="Sprite" meta:RefKey="Reference" />
@@ -17,54 +36,69 @@
 		<Data Name="Size" Type="Int" Min="1" Default="1" SkipIfDefault="False" meta:RefKey="Number" />
 		<Data Name="HP" Type="Int" Min="1" Default="10" SkipIfDefault="False" meta:RefKey="Number" />
 		<Data Name="DamageReduction" Type="Int" Min="0" SkipIfDefault="False" meta:RefKey="Number" />
+		<!--Abilities-->
 		<Data Name="Abilities" meta:RefKey="Collection">
-			<Data Name="Ability" meta:RefKey="Struct">
-				<Data Name="Cooldown" Name1="Min" Name2="Max" Min="1" Type="Int" SkipIfDefault="False" meta:RefKey="Vector" />
-				<Data Name="Usages" Type="Int" Min="-1" Default="-1" meta:RefKey="Number" />
-				<Data Name="Target" EnumValues="Neighbour,Random" VisibleIf="Effect != SelfBuff" meta:RefKey="Enum" />
-				<Data Name="Count" Type="Int" Min="1" Default="1" VisibleIf="Effect != SelfBuff" meta:RefKey="Number" />
-				<Data Name="TargetRestriction" EnumValues="Orb,Special,Block,Empty,Sealed,Monster,Attack,Tile,NamedTile,Spreader" VisibleIf="Effect != SelfBuff" meta:RefKey="Enum" />
-				<Data Name="Permuter" EnumValues="Single,AllOfType,NofType,Column,Row,Cross,Block,Diamond,Cone,Random" VisibleIf="Effect != SelfBuff" meta:RefKey="Enum" />
-				<Data Name="Effect" EnumValues="Attack,Seal,CustomOrb,Block,Move,Dash,Heal,SealedAttack,Summon,DelayedSummon,Spreader,Debuff,SelfBuff" meta:RefKey="Enum" />
-				<Data Name="Data" meta:RefKey="Struct">
-					<!--Attack-->
-					<Data Name="NumPips" Type="Int" Min="1" Default="7" VisibleIf="Parent.Effect==Attack || Parent.Effect==SealedAttack || Parent.Effect == Heal || Parent.Effect == DelayedSummon || Parent.Effect==Dash || Parent.Effect==Debuff" meta:RefKey="Number" />
-					<Data Name="Damage" Type="Int" Min="1" Default="1" VisibleIf="Parent.Effect == Attack || Parent.Effect == SealedAttack" meta:RefKey="Number" />
-					<Data Name="Strength" Type="Int" Min="1" Default="1" VisibleIf="Parent.Effect==Seal || Parent.Effect==Shield || Parent.Effect == SealedAttack || Parent.Effect == Block" meta:RefKey="Number" />
-					<Data Name="Amount" Type="Int" Min="1" Default="10" VisibleIf="Parent.Effect==Heal" meta:RefKey="Number" />
-					<Data Name="Debuff" Keys="Buff" VisibleIf="Parent.Effect == Debuff" meta:RefKey="Reference" />
-					<Data Name="FlightEffect" Keys="ParticleEffect" VisibleIf="Parent.Effect==Attack || Parent.Effect==SealedAttack || Parent.Effect == Heal || Parent.Effect == DelayedSummon || Parent.Effect==Dash" meta:RefKey="Reference" />
-					<Data Name="HitEffect" Keys="ParticleEffect" VisibleIf="Parent.Effect==Attack || Parent.Effect==SealedAttack || Parent.Effect == Heal || Parent.Effect == DelayedSummon || Parent.Effect==Dash" meta:RefKey="Reference" />
-					<Data Name="ShowAttackLeap" Default="True" VisibleIf="Parent.Effect==Attack || Parent.Effect==SealedAttack || Parent.Effect == Heal || Parent.Effect == DelayedSummon || Parent.Effect==Dash" meta:RefKey="Boolean" />
-					<!--Permuter-->
-					<Data Name="AOE" Type="Int" Min="1" Default="1" VisibleIf="Parent.Permuter==Block || Parent.Permuter==Diamond" meta:RefKey="Number" />
-					<Data Name="Count" Type="Int" Min="1" Default="1" VisibleIf="Parent.Permuter==Random || Parent.Permuter==NOfType" meta:RefKey="Number" />
-					<Data Name="Type" VisibleIf="Parent.Permuter==NofType || Parent.Permuter==AllOfType" meta:RefKey="String" />
-					<Data Name="Range" Type="Int" Min="1" Default="9999999" VisibleIf="Parent.Target==Neighbour || Parent.Permuter == Cone" meta:RefKey="Number" />
-					<Data Name="MinRange" Type="Int" Min="0" meta:RefKey="Number" />
-					<Data Name="TileName" VisibleIf="Parent.TargetRestriction==NamedTile" meta:RefKey="String" />
-					<Data Name="Coverage" Min="0" Max="1" Default="1" VisibleIf="Parent.Permuter != Single &amp;&amp; Parent.Permuter != Random" meta:RefKey="Number" />
-					<!--Spreader-->
-					<Data Name="SpreaderName" VisibleIf="Parent.TargetRestriction == Spreader" meta:RefKey="String" />
-					<Data Name="Spreader" Keys="SpreaderDef" VisibleIf="Parent.Effect == Spreader" meta:RefKey="Reference" />
-					<!--Summon-->
-					<Data Name="MonsterDesc" Keys="MonsterDesc" VisibleIf="Parent.Effect == Summon || Parent.Effect == DelayedSummon" meta:RefKey="Reference" />
-					<Data Name="Faction" BasePath="Factions" StripExtension="True" ResourceType="Faction" VisibleIf="Parent.Effect==Summon || Parent.Effect == DelayedSummon" meta:RefKey="File" />
-					<Data Name="Name" VisibleIf="Parent.Effect==Summon || Parent.Effect == DelayedSummon || Parent.Effect==CustomOrb" meta:RefKey="String" />
-					<Data Name="Difficulty" Type="Int" Min="0" VisibleIf="Parent.Effect==Summon || Parent.Effect == DelayedSummon" meta:RefKey="Number" />
-					<Data Name="IsSummon" SkipIfDefault="False" VisibleIf="Parent.Effect == Summon || Parent.Effect == DelayedSummon" meta:RefKey="Boolean" />
-					<Data Name="SpawnEffect" Keys="ParticleEffect" VisibleIf="Parent.Effect == Summon || Parent.Effect == DelayedSummon" meta:RefKey="Reference" />
-					<!--Move-->
-					<Data Name="MoveType" EnumValues="Basic,Leap,Teleport" VisibleIf="Parent.Effect==Move || Parent.Effect==Dash" meta:RefKey="Enum" />
-					<Data Name="StartEffect" Keys="ParticleEffect" VisibleIf="Parent.Effect==Move || Parent.Effect==Dash" meta:RefKey="Reference" />
-					<Data Name="EndEffect" Keys="ParticleEffect" VisibleIf="Parent.Effect==Move || Parent.Effect==Dash" meta:RefKey="Reference" />
-					<!--Other-->
-					<Data Name="BuffType" EnumValues="Immunity,FastAttacks,PowerfulAttacks" VisibleIf="Parent.Effect==SelfBuff" meta:RefKey="Enum" />
-					<Data Name="Duration" Type="Int" Min="1" Default="1" VisibleIf="Parent.Effect==SelfBuff" meta:RefKey="Number" />
-					<Data Name="ParticleEffect" Keys="ParticleEffect" VisibleIf="Parent.Effect==SelfBuff" meta:RefKey="Reference" />
-				</Data>
+			<!--Move-->
+			<Data Name="Move" Extends="TargettedMonsterAbility" meta:RefKey="Struct">
+				<Data Name="MoveType" EnumValues="Basic,Leap,Teleport" meta:RefKey="Enum" />
+				<Data Name="StartEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
+				<Data Name="EndEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
+			</Data>
+			<Data Name="Dash" Extends="TargettedMonsterAbility" meta:RefKey="Struct">
+				<Data Name="MoveType" EnumValues="Basic,Leap,Teleport" meta:RefKey="Enum" />
+				<Data Name="NumPips" Type="Int" Min="1" Default="7" meta:RefKey="Number" />
+				<Data Name="HitEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
+				<Data Name="StartEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
+				<Data Name="EndEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
+			</Data>
+			<!--MonsterEffect-->
+			<Data Name="Attack" Extends="MonsterEffectAbility" meta:RefKey="Struct">
+				<Data Name="Damage" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
+			</Data>
+			<Data Name="SealedAttack" Extends="MonsterEffectAbility" meta:RefKey="Struct">
+				<Data Name="Damage" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
+				<Data Name="Strength" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
+			</Data>
+			<Data Name="Heal" Extends="MonsterEffectAbility" meta:RefKey="Struct">
+				<Data Name="Amount" Type="Int" Min="1" Default="10" meta:RefKey="Number" />
+			</Data>
+			<Data Name="Debuff" Extends="MonsterEffectAbility" meta:RefKey="Struct">
+				<Data Name="Debuff" Keys="Buff" meta:RefKey="Reference" />
+			</Data>
+			<Data Name="DelayedSummon" Extends="MonsterEffectAbility" meta:RefKey="Struct">
+				<Data Name="MonsterDesc" Keys="MonsterDesc" meta:RefKey="Reference" />
+				<Data Name="Faction" BasePath="Factions" StripExtension="True" ResourceType="Faction" meta:RefKey="File" />
+				<Data Name="Name" meta:RefKey="String" />
+				<Data Name="Difficulty" Type="Int" Min="0" meta:RefKey="Number" />
+				<Data Name="IsSummon" SkipIfDefault="False" meta:RefKey="Boolean" />
+				<Data Name="SpawnEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
+			</Data>
+			<!--Instant-->
+			<Data Name="Summon" Extends="TargettedMonsterAbility" meta:RefKey="Struct">
+				<Data Name="MonsterDesc" Keys="MonsterDesc" meta:RefKey="Reference" />
+				<Data Name="Faction" BasePath="Factions" StripExtension="True" ResourceType="Faction" meta:RefKey="File" />
+				<Data Name="Name" meta:RefKey="String" />
+				<Data Name="Difficulty" Type="Int" Min="0" meta:RefKey="Number" />
+				<Data Name="IsSummon" SkipIfDefault="False" meta:RefKey="Boolean" />
+				<Data Name="SpawnEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
+			</Data>
+			<Data Name="Seal" Extends="TargettedMonsterAbility" meta:RefKey="Struct">
+				<Data Name="Strength" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
+			</Data>
+			<Data Name="Block" Extends="TargettedMonsterAbility" meta:RefKey="Struct">
+				<Data Name="Strength" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
+			</Data>
+			<Data Name="Spreader" Extends="TargettedMonsterAbility" meta:RefKey="Struct">
+				<Data Name="Spreader" Keys="SpreaderDef" meta:RefKey="Reference" />
+				<Data Name="SpreaderName" meta:RefKey="String" />
+			</Data>
+			<Data Name="SelfBuff" Extends="MonsterAbility" meta:RefKey="Struct">
+				<Data Name="BuffType" EnumValues="Immunity,FastAttacks,PowerfulAttacks" meta:RefKey="Enum" />
+				<Data Name="Duration" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
+				<Data Name="ParticleEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
 			</Data>
 		</Data>
+		<!--Stages-->
 		<Data Name="Stages" meta:RefKey="Collection">
 			<Data Name="MonsterDesc" Keys="MonsterDesc" Nullable="False" meta:RefKey="Reference" />
 		</Data>

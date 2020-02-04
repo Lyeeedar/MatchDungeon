@@ -15,22 +15,16 @@
 			<HP>12</HP>
 			<DamageReduction>0</DamageReduction>
 			<Abilities>
-				<Ability>
+				<Move>
 					<Cooldown>1,5</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
-				<Ability>
+				</Move>
+				<Seal>
 					<Cooldown>2,6</Cooldown>
-					<Effect>Seal</Effect>
-					<Data />
-				</Ability>
-				<Ability>
+				</Seal>
+				<SealedAttack>
 					<Cooldown>4,10</Cooldown>
-					<Effect>SealedAttack</Effect>
-					<Data>
-						<NumPips>10</NumPips>
-					</Data>
-				</Ability>
+					<NumPips>10</NumPips>
+				</SealedAttack>
 			</Abilities>
 		</Monster>
 		<Monster meta:RefKey="MonsterDesc">
@@ -48,23 +42,17 @@
 			<HP>15</HP>
 			<DamageReduction>0</DamageReduction>
 			<Abilities>
-				<Ability>
+				<Move>
 					<Cooldown>1,5</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
-				<Ability>
+				</Move>
+				<Seal>
 					<Cooldown>2,6</Cooldown>
 					<Count>2</Count>
-					<Effect>Seal</Effect>
-					<Data />
-				</Ability>
-				<Ability>
+				</Seal>
+				<SealedAttack>
 					<Cooldown>4,10</Cooldown>
-					<Effect>SealedAttack</Effect>
-					<Data>
-						<NumPips>10</NumPips>
-					</Data>
-				</Ability>
+					<NumPips>10</NumPips>
+				</SealedAttack>
 			</Abilities>
 		</Monster>
 	</Monsters>
