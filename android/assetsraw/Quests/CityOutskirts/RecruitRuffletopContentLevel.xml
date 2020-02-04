@@ -88,16 +88,16 @@
 			<SpecialOrb>None</SpecialOrb>
 		</Symbol>
 	</Symbols>
-	<AllowedVictories>
+	<VictoryConditions>
 		<Condition meta:RefKey="CustomOrb">
 			<Count>30</Count>
 			<OrbName>Seduce</OrbName>
 			<Chance>0.3</Chance>
 		</Condition>
-	</AllowedVictories>
-	<AllowedDefeats>
+	</VictoryConditions>
+	<DefeatConditions>
 		<Condition meta:RefKey="Turns">
 			<Turns>40</Turns>
 		</Condition>
-	</AllowedDefeats>
+	</DefeatConditions>
 </Level>

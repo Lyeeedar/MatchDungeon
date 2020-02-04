@@ -31,7 +31,7 @@
 		</Symbol>
 	</Symbols>
 	<OrbCount>5</OrbCount>
-	<AllowedVictories>
+	<VictoryConditions>
 		<Condition meta:RefKey="Sink">
 			<Count>6</Count>
 		</Condition>
@@ -40,10 +40,10 @@
 			<Orbs>20</Orbs>
 			<Orbs>10</Orbs>
 		</Condition>
-	</AllowedVictories>
-	<AllowedDefeats>
+	</VictoryConditions>
+	<DefeatConditions>
 		<Condition meta:RefKey="Turns">
 			<Turns>40</Turns>
 		</Condition>
-	</AllowedDefeats>
+	</DefeatConditions>
 </Level>

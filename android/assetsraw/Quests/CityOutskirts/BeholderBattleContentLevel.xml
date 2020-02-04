@@ -231,13 +231,13 @@
 		</Symbol>
 	</Symbols>
 	<Theme>Cave</Theme>
-	<AllowedVictories>
+	<VictoryConditions>
 		<Condition meta:RefKey="Kill">
 			<All>false</All>
 			<Named>Beholder</Named>
 		</Condition>
-	</AllowedVictories>
-	<AllowedDefeats>
+	</VictoryConditions>
+	<DefeatConditions>
 		<Condition meta:RefKey="Die" />
-	</AllowedDefeats>
+	</DefeatConditions>
 </Level>

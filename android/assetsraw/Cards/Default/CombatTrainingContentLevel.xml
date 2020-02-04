@@ -82,12 +82,12 @@
 			<SpecialOrb>None</SpecialOrb>
 		</Symbol>
 	</Symbols>
-	<AllowedVictories>
+	<VictoryConditions>
 		<Condition meta:RefKey="Kill" />
-	</AllowedVictories>
-	<AllowedDefeats>
+	</VictoryConditions>
+	<DefeatConditions>
 		<Condition meta:RefKey="Turns">
 			<Turns>40</Turns>
 		</Condition>
-	</AllowedDefeats>
+	</DefeatConditions>
 </Level>

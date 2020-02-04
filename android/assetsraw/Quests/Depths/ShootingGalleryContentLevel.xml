@@ -41,17 +41,17 @@
 			<SpecialOrb>None</SpecialOrb>
 		</Symbol>
 	</Symbols>
-	<AllowedVictories>
+	<VictoryConditions>
 		<Condition meta:RefKey="Matches">
 			<Orbs>30</Orbs>
 			<Orbs>30</Orbs>
 			<Orbs>30</Orbs>
 		</Condition>
-	</AllowedVictories>
-	<AllowedDefeats>
+	</VictoryConditions>
+	<DefeatConditions>
 		<Condition meta:RefKey="Die" />
 		<Condition meta:RefKey="Turns">
 			<Turns>40</Turns>
 		</Condition>
-	</AllowedDefeats>
+	</DefeatConditions>
 </Level>

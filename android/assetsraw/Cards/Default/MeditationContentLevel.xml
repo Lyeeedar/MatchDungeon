@@ -12,16 +12,16 @@
 			<Line>.........</Line>
 		</Rows>
 	</Grid>
-	<AllowedVictories>
+	<VictoryConditions>
 		<Condition meta:RefKey="CustomOrb">
 			<Count>20</Count>
 			<OrbName>Brain</OrbName>
 			<Chance>0.3</Chance>
 		</Condition>
-	</AllowedVictories>
-	<AllowedDefeats>
+	</VictoryConditions>
+	<DefeatConditions>
 		<Condition meta:RefKey="Turns">
 			<Turns>40</Turns>
 		</Condition>
-	</AllowedDefeats>
+	</DefeatConditions>
 </Level>

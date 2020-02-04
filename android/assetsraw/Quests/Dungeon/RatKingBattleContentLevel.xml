@@ -71,13 +71,13 @@
 		</Symbol>
 	</Symbols>
 	<Faction>Rats</Faction>
-	<AllowedVictories>
+	<VictoryConditions>
 		<Condition meta:RefKey="Kill">
 			<All>false</All>
 			<Named>Rat King</Named>
 		</Condition>
-	</AllowedVictories>
-	<AllowedDefeats>
+	</VictoryConditions>
+	<DefeatConditions>
 		<Condition meta:RefKey="Die" />
-	</AllowedDefeats>
+	</DefeatConditions>
 </Level>

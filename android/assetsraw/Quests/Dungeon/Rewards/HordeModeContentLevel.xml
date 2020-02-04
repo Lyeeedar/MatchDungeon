@@ -34,12 +34,12 @@
 			</TurnEffects>
 		</Symbol>
 	</Symbols>
-	<AllowedVictories>
+	<VictoryConditions>
 		<Condition meta:RefKey="Turns">
 			<Turns>20</Turns>
 		</Condition>
-	</AllowedVictories>
-	<AllowedDefeats>
+	</VictoryConditions>
+	<DefeatConditions>
 		<Condition meta:RefKey="Die" />
-	</AllowedDefeats>
+	</DefeatConditions>
 </Level>

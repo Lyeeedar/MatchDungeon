@@ -77,15 +77,15 @@
 		</Rows>
 	</Grid>
 	<OrbCount>5</OrbCount>
-	<AllowedVictories>
+	<VictoryConditions>
 		<Condition meta:RefKey="Sink">
 			<Count>2</Count>
 		</Condition>
-	</AllowedVictories>
-	<AllowedDefeats>
+	</VictoryConditions>
+	<DefeatConditions>
 		<Condition meta:RefKey="Turns">
 			<Turns>30</Turns>
 		</Condition>
 		<Condition meta:RefKey="Die" />
-	</AllowedDefeats>
+	</DefeatConditions>
 </Level>

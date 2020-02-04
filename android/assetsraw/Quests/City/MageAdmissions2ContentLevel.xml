@@ -48,13 +48,13 @@
 		</Symbol>
 	</Symbols>
 	<OrbCount>5</OrbCount>
-	<AllowedVictories>
+	<VictoryConditions>
 		<Condition meta:RefKey="Kill" />
-	</AllowedVictories>
-	<AllowedDefeats>
+	</VictoryConditions>
+	<DefeatConditions>
 		<Condition meta:RefKey="Die" />
 		<Condition meta:RefKey="Turns">
 			<Turns>60</Turns>
 		</Condition>
-	</AllowedDefeats>
+	</DefeatConditions>
 </Level>

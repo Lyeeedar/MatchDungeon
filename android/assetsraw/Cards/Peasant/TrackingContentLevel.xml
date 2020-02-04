@@ -39,16 +39,16 @@
 		</Symbol>
 	</Symbols>
 	<Theme>Farm</Theme>
-	<AllowedVictories>
+	<VictoryConditions>
 		<Condition meta:RefKey="CustomOrb">
 			<Count>25</Count>
 			<OrbName>Boot</OrbName>
 			<Chance>0.3</Chance>
 		</Condition>
-	</AllowedVictories>
-	<AllowedDefeats>
+	</VictoryConditions>
+	<DefeatConditions>
 		<Condition meta:RefKey="Turns">
 			<Turns>40</Turns>
 		</Condition>
-	</AllowedDefeats>
+	</DefeatConditions>
 </Level>

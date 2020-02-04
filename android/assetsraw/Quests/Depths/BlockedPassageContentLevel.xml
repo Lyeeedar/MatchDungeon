@@ -31,12 +31,12 @@
 			<SpecialOrb>None</SpecialOrb>
 		</Symbol>
 	</Symbols>
-	<AllowedVictories>
+	<VictoryConditions>
 		<Condition meta:RefKey="Break" />
-	</AllowedVictories>
-	<AllowedDefeats>
+	</VictoryConditions>
+	<DefeatConditions>
 		<Condition meta:RefKey="Turns">
 			<Turns>40</Turns>
 		</Condition>
-	</AllowedDefeats>
+	</DefeatConditions>
 </Level>

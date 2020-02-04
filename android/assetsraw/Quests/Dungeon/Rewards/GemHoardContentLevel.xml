@@ -85,15 +85,15 @@
 	</Symbols>
 	<Theme>Dungeon</Theme>
 	<OrbCount>5</OrbCount>
-	<AllowedVictories>
+	<VictoryConditions>
 		<Condition meta:RefKey="Sink">
 			<Count>3</Count>
 		</Condition>
-	</AllowedVictories>
-	<AllowedDefeats>
+	</VictoryConditions>
+	<DefeatConditions>
 		<Condition meta:RefKey="Die" />
 		<Condition meta:RefKey="Turns">
 			<Turns>35</Turns>
 		</Condition>
-	</AllowedDefeats>
+	</DefeatConditions>
 </Level>

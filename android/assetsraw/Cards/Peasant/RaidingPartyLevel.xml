@@ -64,10 +64,10 @@
 	</Symbols>
 	<Faction>Goblin</Faction>
 	<Theme>Farm</Theme>
-	<AllowedVictories>
+	<VictoryConditions>
 		<Condition meta:RefKey="Kill" />
-	</AllowedVictories>
-	<AllowedDefeats>
+	</VictoryConditions>
+	<DefeatConditions>
 		<Condition meta:RefKey="Die" />
-	</AllowedDefeats>
+	</DefeatConditions>
 </Level>

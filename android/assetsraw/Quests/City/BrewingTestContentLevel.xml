@@ -50,7 +50,7 @@
 			<Spawn>Attack,1</Spawn>
 		</SpawnWeights>
 	</SpawnWeightsOverride>
-	<AllowedVictories>
+	<VictoryConditions>
 		<Condition meta:RefKey="CustomOrb">
 			<Count>10</Count>
 			<OrbName>PotionRed</OrbName>
@@ -66,11 +66,11 @@
 			<OrbName>PotionBlue</OrbName>
 			<Chance>0.2</Chance>
 		</Condition>
-	</AllowedVictories>
-	<AllowedDefeats>
+	</VictoryConditions>
+	<DefeatConditions>
 		<Condition meta:RefKey="Turns">
 			<Turns>40</Turns>
 		</Condition>
 		<Condition meta:RefKey="Die" />
-	</AllowedDefeats>
+	</DefeatConditions>
 </Level>

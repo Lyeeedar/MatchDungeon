@@ -137,13 +137,13 @@
 			</Ability>
 		</Abilities>
 	</CustomMonster>
-	<AllowedVictories>
+	<VictoryConditions>
 		<Condition meta:RefKey="Kill">
 			<All>false</All>
 			<Named>Queen</Named>
 		</Condition>
-	</AllowedVictories>
-	<AllowedDefeats>
+	</VictoryConditions>
+	<DefeatConditions>
 		<Condition meta:RefKey="Die" />
-	</AllowedDefeats>
+	</DefeatConditions>
 </Level>

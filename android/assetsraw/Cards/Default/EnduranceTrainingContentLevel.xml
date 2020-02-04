@@ -61,17 +61,17 @@
 			<Line>..........</Line>
 		</Rows>
 	</Grid>
-	<AllowedVictories>
+	<VictoryConditions>
 		<Condition meta:RefKey="Matches">
 			<Orbs>20</Orbs>
 			<Orbs>20</Orbs>
 			<Orbs>20</Orbs>
 			<Orbs>20</Orbs>
 		</Condition>
-	</AllowedVictories>
-	<AllowedDefeats>
+	</VictoryConditions>
+	<DefeatConditions>
 		<Condition meta:RefKey="Time">
 			<Seconds>60</Seconds>
 		</Condition>
-	</AllowedDefeats>
+	</DefeatConditions>
 </Level>

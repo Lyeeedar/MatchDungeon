@@ -761,13 +761,13 @@ class Level(val loadPath: String)
 				val height = rows.childCount
 				level.charGrid = Array2D<Char>(width, height) { x, y -> rows.getChild(y).text[if (flip) width - x - 1 else x] }
 
-				val defeatsEl = xml.getChildByName("AllowedDefeats")!!
+				val defeatsEl = xml.getChildByName("DefeatConditions")!!
 				for (defeatEl in defeatsEl.children)
 				{
 					level.defeatConditions.add(AbstractCompletionCondition.load(defeatEl))
 				}
 
-				val victoriesEl = xml.getChildByName("AllowedVictories")!!
+				val victoriesEl = xml.getChildByName("VictoryConditions")!!
 				for (victoryEl in victoriesEl.children)
 				{
 					level.victoryConditions.add(AbstractCompletionCondition.load(victoryEl))

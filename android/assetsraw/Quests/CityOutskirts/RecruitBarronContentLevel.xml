@@ -55,10 +55,10 @@
 		</Symbol>
 	</Symbols>
 	<Theme>Forest</Theme>
-	<AllowedVictories>
+	<VictoryConditions>
 		<Condition meta:RefKey="Kill" />
-	</AllowedVictories>
-	<AllowedDefeats>
+	</VictoryConditions>
+	<DefeatConditions>
 		<Condition meta:RefKey="Die" />
-	</AllowedDefeats>
+	</DefeatConditions>
 </Level>

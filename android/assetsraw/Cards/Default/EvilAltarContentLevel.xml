@@ -30,17 +30,17 @@
 			<Type>Wall</Type>
 		</Symbol>
 	</Symbols>
-	<AllowedVictories>
+	<VictoryConditions>
 		<Condition meta:RefKey="Matches">
 			<Orbs>20</Orbs>
 			<Orbs>20</Orbs>
 			<Orbs>20</Orbs>
 			<Orbs>20</Orbs>
 		</Condition>
-	</AllowedVictories>
-	<AllowedDefeats>
+	</VictoryConditions>
+	<DefeatConditions>
 		<Condition meta:RefKey="Turns">
 			<Turns>40</Turns>
 		</Condition>
-	</AllowedDefeats>
+	</DefeatConditions>
 </Level>
