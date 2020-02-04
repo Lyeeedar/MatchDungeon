@@ -342,7 +342,7 @@ class LevelSolver
 
 			val levels = Level.load(path)
 
-			for (i in 0 until levels.size)
+			for (variant in 0 until levels.size)
 			{
 				val theme = Theme.load(themes.random())
 				val seed = Random.random.nextLong()
@@ -362,7 +362,7 @@ class LevelSolver
 					Global.deck.chosenCharacter = character
 					Global.deck.characters.add(character)
 
-					level.create(theme, player, {}, {}, seed, i)
+					level.create(theme, player, {}, {}, seed, variant)
 
 					for (cond in level.victoryConditions)
 					{
@@ -382,12 +382,12 @@ class LevelSolver
 					{
 						val levels = Level.load(path)
 
-						createLevel(levels[i], powerLevel)
+						createLevel(levels[variant], powerLevel)
 
 						var success = false
 						try
 						{
-							success = solve(levels[i].grid)
+							success = solve(levels[variant].grid)
 						}
 						catch (ex: Exception)
 						{
@@ -398,7 +398,7 @@ class LevelSolver
 							else
 							{
 								val file = Gdx.files.local("crashedLevelReplay")
-								file.writeString(levels[i].grid.replay.compressToString(), false)
+								file.writeString(levels[variant].grid.replay.compressToString(), false)
 
 								throw ex
 							}
@@ -418,7 +418,7 @@ class LevelSolver
 					successTotal /= attemptsPerLevel.toFloat()
 
 					successRate[powerLevel] = successTotal
-					println("Solving level '$path' variant '$i' with power level '$powerLevel'. SuccessRate: '${successRate[powerLevel]}'")
+					println("Solving level '$path' variant '$variant' with power level '$powerLevel'. SuccessRate: '${successRate[powerLevel]}'")
 				}
 
 				var difficultyRating = 0f
@@ -428,7 +428,7 @@ class LevelSolver
 				}
 				difficultyRating = powerLevelsToTest - difficultyRating
 
-				levelDifficulties.add(LevelDifficulty(path, i, difficultyRating, successRate))
+				levelDifficulties.add(LevelDifficulty(path, variant, difficultyRating, successRate))
 
 				println("Completed: $path, Difficulty: $difficultyRating")
 			}

@@ -8,7 +8,7 @@
 			<Line>....£===£=..</Line>
 			<Line>..==.=£===..</Line>
 			<Line>.£.=======..</Line>
-			<Line>.=.£.====.£.</Line>
+			<Line>.=...====.£.</Line>
 			<Line>.==.======..</Line>
 			<Line>.=..=..====.</Line>
 			<Line>.====.......</Line>
@@ -22,8 +22,8 @@
 			<Line>..£==.=£=.£.</Line>
 			<Line>==..===.===.</Line>
 			<Line>========..=.</Line>
-			<Line>=.===..=.£=.</Line>
-			<Line>=====.£====.</Line>
+			<Line>=.===..=..=.</Line>
+			<Line>=====..====.</Line>
 			<Line>.......====.</Line>
 			<Line>............</Line>
 			<Line>............</Line>
@@ -32,12 +32,12 @@
 			<Line>............</Line>
 			<Line>............</Line>
 			<Line>.........£..</Line>
-			<Line>......£.....</Line>
-			<Line>...=====£...</Line>
+			<Line>......£.£...</Line>
+			<Line>...=====....</Line>
 			<Line>..£=.===.=..</Line>
 			<Line>==.=£..===..</Line>
 			<Line>====..===...</Line>
-			<Line>.£..=.===...</Line>
+			<Line>....=.===...</Line>
 			<Line>..===...=...</Line>
 			<Line>.==.==.==...</Line>
 			<Line>.....===....</Line>
@@ -48,10 +48,10 @@
 			<Line>...£........</Line>
 			<Line>.£....===...</Line>
 			<Line>....=====...</Line>
-			<Line>..£.===.....</Line>
+			<Line>....===.....</Line>
 			<Line>=...==...£..</Line>
 			<Line>=====..£....</Line>
-			<Line>.=====....£.</Line>
+			<Line>.=====......</Line>
 			<Line>.=.======...</Line>
 			<Line>.==========.</Line>
 			<Line>............</Line>
@@ -65,8 +65,8 @@
 			<Line>===..==.....</Line>
 			<Line>.=====......</Line>
 			<Line>====........</Line>
-			<Line>====.£......</Line>
-			<Line>=£.==.=.....</Line>
+			<Line>=£==........</Line>
+			<Line>=..==.=.....</Line>
 			<Line>=.=====.....</Line>
 			<Line>===..==.....</Line>
 		</Rows>
@@ -90,11 +90,11 @@
 			<Line>~....~~~~...</Line>
 			<Line>~£....~~....</Line>
 			<Line>....~~~~.£..</Line>
-			<Line>...~~.~~....</Line>
+			<Line>...~~.~~..£.</Line>
 			<Line>.~~~........</Line>
 			<Line>~~..£.......</Line>
 			<Line>~...........</Line>
-			<Line>..........£.</Line>
+			<Line>............</Line>
 			<Line>............</Line>
 			<Line>............</Line>
 		</Rows>
@@ -144,7 +144,7 @@
 	<OrbCount>5</OrbCount>
 	<AllowedVictories>
 		<Condition meta:RefKey="Sink">
-			<Count>8</Count>
+			<Count>7</Count>
 		</Condition>
 	</AllowedVictories>
 	<AllowedDefeats>

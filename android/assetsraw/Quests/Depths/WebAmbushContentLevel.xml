@@ -4,11 +4,11 @@
 			<Line>...........</Line>
 			<Line>.....!.....</Line>
 			<Line>...........</Line>
-			<Line>##..##..###</Line>
+			<Line>#=..==..==#</Line>
 			<Line>.......!...</Line>
 			<Line>...........</Line>
 			<Line>..!........</Line>
-			<Line>###..##..##</Line>
+			<Line>#==..==..=#</Line>
 			<Line>...........</Line>
 			<Line>.....!.....</Line>
 			<Line>...........</Line>
@@ -45,6 +45,7 @@
 			</Ability>
 		</Abilities>
 	</CustomMonster>
+	<BlockStength>5</BlockStength>
 	<AllowedVictories>
 		<Condition meta:RefKey="Kill" />
 	</AllowedVictories>
