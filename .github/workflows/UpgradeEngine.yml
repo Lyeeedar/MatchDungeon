@@ -7,6 +7,7 @@ jobs:
   test:
     runs-on: macOS-latest
     steps:
+      
     - uses: actions/checkout@master
       with:
         path: Game
@@ -49,7 +50,8 @@ jobs:
         ./gradlew :headless:testResources
       if: steps.commit.outputs.status == 'Success'
 
-    - uses: actions/upload-artifact@v1
+    - name: Upload crashed level replay
+      uses: actions/upload-artifact@v1
       if: failure()
       with:
         name: crashedLevelReplay

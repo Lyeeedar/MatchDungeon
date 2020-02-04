@@ -48,13 +48,15 @@ jobs:
         ./gradlew :headless:testResources
         ./gradlew :headless:longTest
 
-    - uses: actions/upload-artifact@v1
+    - name: Upload crashed level replay
+      uses: actions/upload-artifact@v1
       if: failure()
       with:
         name: crashedLevelReplay
         path: Game/android/assets/crashedLevelReplay
 
-    - uses: actions/upload-artifact@v1
+    - name: Upload Level Difficulties
+      uses: actions/upload-artifact@v1
       with:
         name: LevelDifficulties
         path: Game/android/assets/LevelDifficulties.xml
