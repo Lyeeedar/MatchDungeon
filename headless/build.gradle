@@ -2,59 +2,53 @@ apply plugin: "java"
 apply plugin: "kotlin"
 sourceCompatibility = 1.6
 sourceSets.main.java.srcDirs = ["src/"]
-
 task compileResources(dependsOn: classes, type: JavaExec) {
     main = "com.lyeeedar.headless.CompilerRunner"
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
-    workingDir =  new File("../android/assets")
+    workingDir = new File("../android/assets")
 }
-
 task testResources(dependsOn: classes, type: JavaExec) {
     main = "com.lyeeedar.headless.AssetTester"
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
-    workingDir =  new File("../android/assets")
+    workingDir = new File("../android/assets")
 }
-
 task longTest(dependsOn: classes, type: JavaExec) {
     main = "com.lyeeedar.headless.LongTest"
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
-    workingDir =  new File("../android/assets")
+    workingDir = new File("../android/assets")
 }
-
 task replayCrashedLevel(dependsOn: classes, type: JavaExec) {
     main = "com.lyeeedar.headless.CrashedLevelReplayer"
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
-    workingDir =  new File("../android/assets")
+    workingDir = new File("../android/assets")
 }
-
 task bruteForceTestLevels(dependsOn: classes, type: JavaExec) {
     main = "com.lyeeedar.headless.BruteForceLevelTester"
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
-    workingDir =  new File("../android/assets")
+    workingDir = new File("../android/assets")
 }
-
 task releaseAndroidToPlaystore(dependsOn: classes, type: JavaExec) {
     main = "com.lyeeedar.headless.AndroidRelease"
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
-    workingDir =  new File("../")
+    workingDir = new File("../")
 }
-
 task gameLoopTest(dependsOn: classes, type: JavaExec) {
     main = "com.lyeeedar.headless.GameLoopTest"
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
-    workingDir =  new File("../")
+    workingDir = new File("../")
 }
-
 task autoLocalise(dependsOn: classes, type: JavaExec) {
     main = "com.lyeeedar.headless.AutoLocaliser"
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
-    workingDir =  new File("../android/assets")
+    workingDir = new File("../android/assets")
+}
+dependencies {
 }

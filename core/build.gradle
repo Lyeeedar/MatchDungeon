@@ -1,8 +1,16 @@
 apply plugin: "java"
 apply plugin: "kotlin"
+
 sourceCompatibility = 1.6
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 sourceSets.main.java.srcDirs = ["src/Game/", "src/Engine/", "src/exp4j/src/main/java"]
 eclipse.project {
     name = appName + "-core"
+}
+
+build.finalizedBy(weave)
+
+weave {
+    classesDirs = sourceSets.main.output.classesDirs
+    dependsOn build
 }
