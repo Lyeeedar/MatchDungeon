@@ -105,16 +105,16 @@ class MetaScanner(private val info: ClassMetadata) : ClassVisitor(ASM4), Opcodes
 			  access: Int,
 			  name: String?,
 			  signature: String?,
-			  superName: String,
+			  superName: String?,
 			  interfaces: Array<String?>?)
 	{
 		info.superClass = superName
 		super.visit(version, access, name, signature, superName, interfaces)
 	}
 
-	override fun visitAnnotation(desc: String?, visible: Boolean): AnnotationVisitor
+	override fun visitAnnotation(desc: String?, visible: Boolean): AnnotationVisitor?
 	{
-		var av: AnnotationVisitor = super.visitAnnotation(desc, visible)
+		var av: AnnotationVisitor? = super.visitAnnotation(desc, visible)
 //		if (POOLED_ANNOTATION.equals(desc))
 //		{
 //			info.annotation = WeaverType.POOLED
@@ -137,14 +137,15 @@ class MetaScanner(private val info: ClassMetadata) : ClassVisitor(ASM4), Opcodes
 	}
 
 	override fun visitField(access: Int,
-				   name: String?,
+				   name: String,
 				   desc: String,
-				   signature: String,
+				   signature: String?,
 				   value: Any?): FieldVisitor?
 	{
 		val field = info.field(name!!)
 		field[access, desc, signature] = value
-		var fv: FieldVisitor = super.visitField(access, name, desc, signature, value)
+
+		var fv: FieldVisitor? = super.visitField(access, name, desc, signature, value)
 //		if ("Lcom/artemis/Entity;" == desc)
 //		{
 //			field.entityLinkMutator = UniEntityLink.Mutator::class.java
@@ -169,9 +170,9 @@ class MetaScanner(private val info: ClassMetadata) : ClassVisitor(ASM4), Opcodes
 					name: String,
 					desc: String,
 					signature: String?,
-					exceptions: Array<String>?): MethodVisitor
+					exceptions: Array<String>?): MethodVisitor?
 	{
-		val mv: MethodVisitor = super.visitMethod(access, name, desc, signature, exceptions)
+		val mv: MethodVisitor? = super.visitMethod(access, name, desc, signature, exceptions)
 
 		info.addMethod(MethodDescriptor(access, name, desc, signature, exceptions))
 

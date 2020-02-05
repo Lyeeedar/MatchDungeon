@@ -20,7 +20,7 @@ class Weaver(val classesDirs: Set<File>)
 	{
 		println("processing file ${file.absolutePath}")
 
-		val cr = ClassReader(file.absolutePath)
+		val cr = ClassReader(file.inputStream())
 		val meta = ClassMetadata()
 		meta.type = Type.getObjectType(cr.className)
 		cr.accept(MetaScanner(meta), 0)

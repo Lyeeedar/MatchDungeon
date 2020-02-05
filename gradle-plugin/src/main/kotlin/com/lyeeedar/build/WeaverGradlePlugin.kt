@@ -7,6 +7,7 @@ import org.gradle.api.file.FileCollection
 import org.gradle.api.tasks.OutputDirectories
 import org.gradle.api.tasks.TaskAction
 
+//gradlew :core:build  --stacktrace -Dorg.gradle.daemon=false   -Dorg.gradle.debug=true
 class WeaverGradlePlugin : Plugin<Project>
 {
 	override fun apply(target: Project)
@@ -29,7 +30,6 @@ open class WeavingTask : DefaultTask()
 		val weaver = Weaver(classesDirs!!.files)
 		weaver.execute()
 
-		println("")
 		println("Weave completed")
 		println("################################################")
 	}
