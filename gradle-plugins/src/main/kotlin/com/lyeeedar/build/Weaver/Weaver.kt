@@ -24,6 +24,8 @@ class Weaver(val classesDirs: Set<File>)
 		val meta = ClassMetadata()
 		meta.type = Type.getObjectType(cr.className)
 		cr.accept(MetaScanner(meta), 0)
+
+		XmlDataClassTransmuter(file.absolutePath, cr, meta).process()
 	}
 
 	fun find(roots: Set<File>): List<File>

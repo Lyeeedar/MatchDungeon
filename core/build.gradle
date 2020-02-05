@@ -8,9 +8,7 @@ eclipse.project {
     name = appName + "-core"
 }
 
-build.finalizedBy(weave)
-
-weave {
-    classesDirs = sourceSets.main.output.classesDirs
-    dependsOn build
+rewriteSources {
+    srcDirs = sourceSets.main.java.srcDirs
 }
+compileKotlin.dependsOn rewriteSources
