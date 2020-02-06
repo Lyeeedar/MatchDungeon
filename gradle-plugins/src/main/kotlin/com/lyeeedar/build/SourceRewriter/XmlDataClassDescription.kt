@@ -7,6 +7,11 @@ class XmlDataClassDescription(val classDefinition: ClassDefinition, val classReg
     var classIndentation = 0
     val variables = ArrayList<VariableDescription>()
 
+    init
+    {
+        classDefinition.classDef = this
+    }
+
     fun resolveImports(imports: HashSet<String>)
     {
         for (variable in variables)
@@ -65,7 +70,7 @@ class XmlDataClassDescription(val classDefinition: ClassDefinition, val classReg
 
         for (variable in variables)
         {
-            variable.writeLoad(builder, classIndentation+2, classRegister)
+            variable.writeLoad(builder, classIndentation+2, classDefinition, classRegister)
         }
 
         builder.appendln(classIndentation+1, "}")
@@ -101,5 +106,10 @@ class XmlDataClassDescription(val classDefinition: ClassDefinition, val classReg
         }
 
         builder.appendln(classIndentation, "}")
+    }
+
+    fun createDefFile(builder: IndentedStringBuilder, needsGlobalScope: Boolean)
+    {
+
     }
 }

@@ -10,5 +10,6 @@ eclipse.project {
 
 rewriteSources {
     srcDirs = sourceSets.main.java.srcDirs
+    defsDir = new File("../android/assetsraw/Definitions/Generated")
 }
 compileKotlin.dependsOn rewriteSources

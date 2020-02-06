@@ -30,7 +30,7 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
         }
     }
 
-    fun writeLoad(builder: IndentedStringBuilder, indentation: Int, classRegister: ClassRegister)
+    fun writeLoad(builder: IndentedStringBuilder, indentation: Int, classDefinition: ClassDefinition, classRegister: ClassRegister)
     {
         var dataName = name.capitalize()
         for (annotation in annotations)
@@ -137,6 +137,8 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
         else
         {
             val classDef = classRegister.classMap[type] ?: throw RuntimeException("Unknown type '$type'!")
+
+            classDefinition.referencedClasses.add(classDef)
 
             val el = name+"El"
             if (variableType == VariableType.LATEINIT || (variableType == VariableType.VAR && !nullable))
