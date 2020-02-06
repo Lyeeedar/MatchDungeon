@@ -6,6 +6,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.OutputDirectories
+import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import java.io.File
 
@@ -54,6 +55,9 @@ open class SourceRewriterTask : DefaultTask()
 		{
 			rewriter.write()
 		}
+
+		println("Writing def files")
+		classRegister.writeXmlDefFiles()
 
 		println("")
 		println("Source Rewrite completed")

@@ -180,6 +180,8 @@ class SourceRewriter(val file: File, val classRegister: ClassRegister)
 
 	fun write()
 	{
+		if (!fileContents.any { it is DataClassFilePart }) return
+
 		val imports = fileContents[1] as ImportsFilePart
 		for (part in fileContents)
 		{

@@ -124,7 +124,7 @@ class XmlDataClassDescription(val classDefinition: ClassDefinition, val classReg
 
         for (variable in variables)
         {
-            variable.createDefEntry(builder)
+            variable.createDefEntry(builder, classRegister)
         }
 
         builder.appendln(1, "</Definition>")

@@ -11,6 +11,14 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 {
     fun resolveImports(imports: HashSet<String>, classDefinition: ClassDefinition, classRegister: ClassRegister)
     {
+		var type = type
+		var nullable = false
+		if (type.endsWith('?'))
+		{
+			type = type.substring(0, type.length-1)
+			nullable = true
+		}
+
         if (type == "ParticleEffect" || type == "ParticleEffectDescription" || type == "Sprite")
         {
             imports.add("import com.lyeeedar.Util.AssetManager")
@@ -21,7 +29,7 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
         }
         else
         {
-            val classDef = classRegister.classMap[type] ?: throw RuntimeException("Unknown type '$type'!")
+            val classDef = classRegister.classMap[type] ?: throw RuntimeException("resolveImports: Unknown type '$type'!")
 
             if (classDef.packageStr != classDefinition.packageStr)
             {
@@ -136,7 +144,7 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
         }
         else
         {
-            val classDef = classRegister.classMap[type] ?: throw RuntimeException("Unknown type '$type'!")
+            val classDef = classRegister.classMap[type] ?: throw RuntimeException("writeLoad: Unknown type '$type'!")
 
             classDefinition.referencedClasses.add(classDef)
 
@@ -189,6 +197,19 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
             builder.appendln(2, """<Const Name="classID">$defaultValue</Const>""")
             return
         }
+
+		var dataName = name.capitalize()
+		for (annotation in annotations)
+		{
+			if (annotation.name == "XmlDataValue")
+			{
+				val customDataName = annotation.paramMap["dataName"]
+				if (customDataName != null && customDataName != "")
+				{
+					dataName = customDataName
+				}
+			}
+		}
 
         var type = type
         var isNullable = false
@@ -254,13 +275,13 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
         {
             builder.appendln(2, """<Data Name="$name" Keys="Sprite" $nullable $skipIfDefault meta:RefKey="Reference" />""")
         }
-        else if (type == "Particle" || type == "ParticleEffectDescription")
+        else if (type == "ParticleEffect" || type == "ParticleEffectDescription")
         {
             builder.appendln(2, """<Data Name="$name" Keys="ParticleEffect" $nullable $skipIfDefault meta:RefKey="Reference" />""")
         }
         else
         {
-            val classDef = classRegister.classMap[type] ?: throw RuntimeException("Unknown type '$type'!")
+            val classDef = classRegister.classMap[type] ?: throw RuntimeException("createDefEntry: Unknown type '$type'!")
 
             if (classDef.isAbstract)
             {

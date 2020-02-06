@@ -23,7 +23,11 @@ class AnnotationDescription(val annotationString: String)
 
         for (parameter in split)
         {
-            if (!split.contains("=")) throw RuntimeException("Non-named annotation parameters are not currently supported!")
+            if (!split.contains("="))
+			{
+				System.err.println("Non-named annotation parameters are not currently supported!")
+				continue
+			}
 
             val split = parameter.split("=")
             val paramName = split[0].trim()
