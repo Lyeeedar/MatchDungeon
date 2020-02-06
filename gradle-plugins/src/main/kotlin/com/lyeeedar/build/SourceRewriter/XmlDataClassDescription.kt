@@ -113,7 +113,7 @@ class XmlDataClassDescription(val classDefinition: ClassDefinition, val classReg
         val dataFileAnnotation = annotations.firstOrNull { it.name == "XmlDataFile" }
         if (dataFileAnnotation != null)
         {
-            val name = dataFileAnnotation.paramMap["name"] ?: name
+            val name = dataFileAnnotation.paramMap["name"]?.replace("\"", "") ?: name
             builder.appendln(1, "<Definition Name=\"$name\" meta:RefKey=\"Struct\"")
         }
         else

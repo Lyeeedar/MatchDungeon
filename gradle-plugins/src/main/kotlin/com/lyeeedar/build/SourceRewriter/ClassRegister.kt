@@ -137,7 +137,7 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 		val rootClasses = xmlDataClasses.filter { it.classDef!!.annotations.any { it.name == "XmlDataFile" } }.toList()
 
 		val refCountMap = HashMap<ClassDefinition, Int>()
-		for (dataClass in xmlDataClasses)
+		for (dataClass in rootClasses)
 		{
 			fun writeRef(classDef: ClassDefinition)
 			{
@@ -153,17 +153,9 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 				}
 			}
 
-			for (referencedClass in dataClass.referencedClasses)
+			for (referencedClass in dataClass.getAllReferencedClasses())
 			{
 				writeRef(referencedClass)
-
-				if (referencedClass.isAbstract)
-				{
-					for (childClass in referencedClass.inheritingClasses)
-					{
-						writeRef(childClass)
-					}
-				}
 			}
 		}
 
@@ -180,7 +172,7 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 		for (root in rootClasses)
 		{
 			val otherClasses = HashSet<ClassDefinition>()
-			for (referencedClass in root.referencedClasses)
+			for (referencedClass in root.getAllReferencedClasses())
 			{
 				if (rootClasses.contains(referencedClass)) continue
 
@@ -188,25 +180,11 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 				if (refCount == 0)
 				{
 					otherClasses.add(referencedClass)
-
-					if (referencedClass.isAbstract)
-					{
-						for (childClass in referencedClass.inheritingClasses)
-						{
-							if (rootClasses.contains(childClass)) continue
-
-							val refCount = refCountMap[referencedClass] ?: 0
-							if (refCount == 0)
-							{
-								otherClasses.add(referencedClass)
-							}
-						}
-					}
 				}
 			}
 
 			val dataClassAnnotation = root.classDef!!.annotations.first { it.name == "XmlDataFile" }
-			val name = dataClassAnnotation.paramMap["name"] ?: root.classDef!!.name
+			val name = dataClassAnnotation.paramMap["name"]?.replace("\"", "") ?: root.classDef!!.name
 			val colour =  dataClassAnnotation.paramMap["colour"]
 			val icon = dataClassAnnotation.paramMap["icon"]
 
@@ -295,6 +273,24 @@ class ClassDefinition(val name: String)
 		{
 			superClass?.updateParents(this)
 		}
+	}
+
+	fun getAllReferencedClasses(): HashSet<ClassDefinition>
+	{
+		val output = HashSet<ClassDefinition>()
+
+		output.addAll(referencedClasses)
+		output.addAll(inheritingClasses)
+		for (classDef in referencedClasses)
+		{
+			output.addAll(classDef.getAllReferencedClasses())
+		}
+		for (classDef in inheritingClasses)
+		{
+			output.addAll(classDef.getAllReferencedClasses())
+		}
+
+		return output
 	}
 }
 

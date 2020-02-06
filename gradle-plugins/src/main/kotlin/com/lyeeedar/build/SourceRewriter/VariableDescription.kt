@@ -48,7 +48,7 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
                 val customDataName = annotation.paramMap["dataName"]
                 if (customDataName != null && customDataName != "")
                 {
-                    dataName = customDataName
+                    dataName = customDataName.replace("\"", "")
                 }
             }
         }
@@ -194,11 +194,12 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
     {
         if (variableType == VariableType.VAL && name == "classID")
         {
+			val defaultValue = defaultValue.replace("\"", "")
             builder.appendln(2, """<Const Name="classID">$defaultValue</Const>""")
             return
         }
 
-		var dataName = name.capitalize()
+		var name = name.capitalize()
 		for (annotation in annotations)
 		{
 			if (annotation.name == "XmlDataValue")
@@ -206,7 +207,7 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 				val customDataName = annotation.paramMap["dataName"]
 				if (customDataName != null && customDataName != "")
 				{
-					dataName = customDataName
+					name = customDataName.replace("\"", "")
 				}
 			}
 		}

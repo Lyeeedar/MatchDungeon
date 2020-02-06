@@ -18,7 +18,7 @@ class TestObjectData : XmlDataClass()
 
 	override fun load(xmlData: XmlData)
 	{
-		name = xmlData.get("Name", "")!!
+		name = xmlData.get("Title", "")!!
 		description = xmlData.get("Description", "")!!
 		count = xmlData.getInt("Count", 0)
 		effect = AssetManager.loadParticleEffect(xmlData.getChildByName("Effect")!!).getParticleEffect()

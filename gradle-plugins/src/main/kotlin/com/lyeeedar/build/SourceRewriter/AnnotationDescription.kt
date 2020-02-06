@@ -8,8 +8,8 @@ class AnnotationDescription(val annotationString: String)
         {
             if (!isParsed)
             {
+				isParsed = true
                 parse()
-                isParsed = true
             }
 
             return field
@@ -23,9 +23,9 @@ class AnnotationDescription(val annotationString: String)
 
         for (parameter in split)
         {
-            if (!split.contains("="))
+            if (!parameter.contains("="))
 			{
-				System.err.println("Non-named annotation parameters are not currently supported!")
+				System.err.println("Non-named annotation parameters are not currently supported! ($annotationString) ($parameter)")
 				continue
 			}
 

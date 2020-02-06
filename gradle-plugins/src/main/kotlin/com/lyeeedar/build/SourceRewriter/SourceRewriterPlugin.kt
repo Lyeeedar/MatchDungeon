@@ -5,6 +5,7 @@ import com.lyeeedar.build.SourceRewriter.SourceRewriter
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectories
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
@@ -20,6 +21,9 @@ class SourceRewriterPlugin : Plugin<Project>
 
 open class SourceRewriterTask : DefaultTask()
 {
+	@InputFiles
+	var inputDirs: LinkedHashSet<File>? = null
+
 	@OutputDirectories
 	var srcDirs: LinkedHashSet<File>? = null
 
