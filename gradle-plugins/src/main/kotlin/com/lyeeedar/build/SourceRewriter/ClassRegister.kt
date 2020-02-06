@@ -182,6 +182,8 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 			val otherClasses = HashSet<ClassDefinition>()
 			for (referencedClass in root.referencedClasses)
 			{
+				if (rootClasses.contains(referencedClass)) continue
+
 				val refCount = refCountMap[referencedClass] ?: 0
 				if (refCount == 0)
 				{
@@ -191,6 +193,8 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 					{
 						for (childClass in referencedClass.inheritingClasses)
 						{
+							if (rootClasses.contains(childClass)) continue
+
 							val refCount = refCountMap[referencedClass] ?: 0
 							if (refCount == 0)
 							{
@@ -236,16 +240,23 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 			val builder = IndentedStringBuilder()
 			builder.appendln(0, "<Definitions xmlns:meta=\"Editor\">")
 
-			for (classDef in sharedClasses) {
+			for (classDef in sharedClasses)
+			{
+				if (rootClasses.contains(classDef)) continue
+
 				sharedClassesToWrite.add(classDef)
-				if (classDef.isAbstract) {
-					for (childDef in classDef.inheritingClasses) {
+				if (classDef.isAbstract)
+				{
+					for (childDef in classDef.inheritingClasses)
+					{
+						if (rootClasses.contains(childDef)) continue
 						sharedClassesToWrite.add(childDef)
 					}
 				}
 			}
 
-			for (classDef in sharedClassesToWrite) {
+			for (classDef in sharedClassesToWrite)
+			{
 				if (writtenSpecificFiles.contains(classDef)) throw RuntimeException("Class written twice!")
 				classDef.classDef!!.createDefFile(builder, true)
 			}

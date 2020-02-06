@@ -181,4 +181,105 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
             }
         }
     }
+
+    fun createDefEntry(builder: IndentedStringBuilder, classRegister: ClassRegister)
+    {
+        if (variableType == VariableType.VAL && name == "classID")
+        {
+            builder.appendln(2, """<Const Name="classID">$defaultValue</Const>""")
+            return
+        }
+
+        var type = type
+        var isNullable = false
+        if (type.endsWith('?'))
+        {
+            type = type.substring(0, type.length-1)
+            isNullable = true
+        }
+
+        var nullable = ""
+        var skipIfDefault = ""
+
+        if (variableType == VariableType.LATEINIT)
+        {
+            nullable = """Nullable="False""""
+            skipIfDefault = """SkipIfDefault="False""""
+        }
+        else if (variableType == VariableType.VAL)
+        {
+            nullable = """Nullable="False""""
+            skipIfDefault = """SkipIfDefault="False""""
+        }
+        else
+        {
+            if (isNullable)
+            {
+                nullable = """Nullable="True""""
+                skipIfDefault = """SkipIfDefault="True""""
+            }
+            else
+            {
+                nullable = """Nullable="False""""
+                skipIfDefault = """SkipIfDefault="False""""
+            }
+        }
+
+        if (type == "String")
+        {
+            val canSkip = if (variableType != VariableType.LATEINIT) "True" else "False"
+            builder.appendln(2, """<Data Name="$name" SkipIfDefault="$canSkip" Default=$defaultValue meta:RefKey="String" />""")
+        }
+        else if (type == "Int")
+        {
+            val numericAnnotation = annotations.firstOrNull { it.name == "NumericRange" }
+            val min = numericAnnotation?.paramMap?.get("min")
+            val max = numericAnnotation?.paramMap?.get("min")
+            val minStr = if (min != null) """Min="$min"""" else ""
+            val maxStr = if (max != null) """Max="$max"""" else ""
+
+            builder.appendln(2, """<Data Name="$name" $minStr $maxStr Type="Int" Default="$defaultValue" SkipIfDefault="True" meta:RefKey="Number" />""")
+        }
+        else if (type == "Float")
+        {
+            val numericAnnotation = annotations.firstOrNull { it.name == "NumericRange" }
+            val min = numericAnnotation?.paramMap?.get("min")
+            val max = numericAnnotation?.paramMap?.get("min")
+            val minStr = if (min != null) """Min="$min"""" else ""
+            val maxStr = if (max != null) """Max="$max"""" else ""
+
+            builder.appendln(2, """<Data Name="$name" $minStr $maxStr Default="$defaultValue" SkipIfDefault="True" meta:RefKey="Number" />""")
+        }
+        else if (type == "Sprite")
+        {
+            builder.appendln(2, """<Data Name="$name" Keys="Sprite" $nullable $skipIfDefault meta:RefKey="Reference" />""")
+        }
+        else if (type == "Particle" || type == "ParticleEffectDescription")
+        {
+            builder.appendln(2, """<Data Name="$name" Keys="ParticleEffect" $nullable $skipIfDefault meta:RefKey="Reference" />""")
+        }
+        else
+        {
+            val classDef = classRegister.classMap[type] ?: throw RuntimeException("Unknown type '$type'!")
+
+            if (classDef.isAbstract)
+            {
+                val keys = ArrayList<String>()
+                for (childDef in classDef.inheritingClasses)
+                {
+                    if (!childDef.isAbstract)
+                    {
+                        keys.add(childDef.name)
+                    }
+                }
+
+                val keysStr = keys.joinToString(",")
+                builder.appendln(2, """<Data Name="$name" Keys="$keysStr" $nullable $skipIfDefault meta:RefKey="Reference" />""")
+            }
+            else
+            {
+                builder.appendln(2, """<Data Name="$name" Keys="$type" $nullable $skipIfDefault meta:RefKey="Reference" />""")
+            }
+        }
+    }
 }
