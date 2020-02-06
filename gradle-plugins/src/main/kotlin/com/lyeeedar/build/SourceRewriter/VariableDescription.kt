@@ -250,13 +250,14 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
         if (type == "String")
         {
             val canSkip = if (variableType != VariableType.LATEINIT) "True" else "False"
+			val defaultValue = if (this.defaultValue.isBlank()) "\"\"" else this.defaultValue
             builder.appendln(2, """<Data Name="$name" SkipIfDefault="$canSkip" Default=$defaultValue meta:RefKey="String" />""")
         }
         else if (type == "Int")
         {
             val numericAnnotation = annotations.firstOrNull { it.name == "NumericRange" }
-            val min = numericAnnotation?.paramMap?.get("min")
-            val max = numericAnnotation?.paramMap?.get("min")
+            val min = numericAnnotation?.paramMap?.get("min")?.replace("f", "")
+            val max = numericAnnotation?.paramMap?.get("max")?.replace("f", "")
             val minStr = if (min != null) """Min="$min"""" else ""
             val maxStr = if (max != null) """Max="$max"""" else ""
 
@@ -265,10 +266,11 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
         else if (type == "Float")
         {
             val numericAnnotation = annotations.firstOrNull { it.name == "NumericRange" }
-            val min = numericAnnotation?.paramMap?.get("min")
-            val max = numericAnnotation?.paramMap?.get("min")
+            val min = numericAnnotation?.paramMap?.get("min")?.replace("f", "")
+            val max = numericAnnotation?.paramMap?.get("max")?.replace("f", "")
             val minStr = if (min != null) """Min="$min"""" else ""
             val maxStr = if (max != null) """Max="$max"""" else ""
+			val defaultValue = this.defaultValue.replace("f", "")
 
             builder.appendln(2, """<Data Name="$name" $minStr $maxStr Default="$defaultValue" SkipIfDefault="True" meta:RefKey="Number" />""")
         }
@@ -286,17 +288,7 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 
             if (classDef.isAbstract)
             {
-                val keys = ArrayList<String>()
-                for (childDef in classDef.inheritingClasses)
-                {
-                    if (!childDef.isAbstract)
-                    {
-                        keys.add(childDef.name)
-                    }
-                }
-
-                val keysStr = keys.joinToString(",")
-                builder.appendln(2, """<Data Name="$name" Keys="$keysStr" $nullable $skipIfDefault meta:RefKey="Reference" />""")
+                builder.appendln(2, """<Data Name="$name" DefKey="${classDef.name}Defs" $nullable $skipIfDefault meta:RefKey="Reference" />""")
             }
             else
             {

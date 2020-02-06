@@ -55,9 +55,11 @@ abstract class AbstractNode : XmlDataClass()
 {
 	abstract val classID: String
 
+	lateinit var description: String
 
 	override fun load(xmlData: XmlData)
 	{
+		description = xmlData.get("Description")
 	}
 
 	companion object

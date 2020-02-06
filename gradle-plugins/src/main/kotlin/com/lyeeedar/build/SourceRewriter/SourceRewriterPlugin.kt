@@ -7,7 +7,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectories
-import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import java.io.File
 
@@ -27,9 +26,6 @@ open class SourceRewriterTask : DefaultTask()
 	@OutputDirectories
 	var srcDirs: LinkedHashSet<File>? = null
 
-	@OutputDirectory
-	var defsDir: File? = null
-
 	@TaskAction
 	fun rewriteSources()
 	{
@@ -40,7 +36,9 @@ open class SourceRewriterTask : DefaultTask()
 		println("Parsing source files")
 		val srcFiles = find(srcDirs!!)
 
-		val classRegister = ClassRegister(srcFiles, defsDir!!)
+		val defsDir = File(srcDirs!!.first().absolutePath + "/../../../android/assetsraw/Definitions/Generated").canonicalFile
+
+		val classRegister = ClassRegister(srcFiles, defsDir)
 		classRegister.registerClasses()
 
 		val dataClassFiles = ArrayList<SourceRewriter>()

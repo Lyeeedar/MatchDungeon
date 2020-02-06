@@ -159,10 +159,16 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 			}
 		}
 
+		if (!defFolder.exists()) defFolder.mkdirs()
 		val defFolder = defFolder.absolutePath
 
 		// clean folder
-		for (file in this.defFolder.listFiles())
+		val sharedFolder = File("$defFolder/Shared")
+		for (file in sharedFolder.listFiles()?.filterNotNull() ?: ArrayList())
+		{
+			file.delete()
+		}
+		for (file in this.defFolder.listFiles()?.filterNotNull() ?: ArrayList())
 		{
 			file.delete()
 		}
@@ -202,6 +208,19 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 				if (writtenSpecificFiles.contains(classDef)) throw RuntimeException("Class written twice!")
 				classDef.classDef!!.createDefFile(builder, false)
 				writtenSpecificFiles.add(classDef)
+
+				if (classDef.isAbstract)
+				{
+					val defNames = ArrayList<String>()
+					for (childDef in classDef.inheritingClasses)
+					{
+						if (!childDef.isAbstract)
+						{
+							defNames.add(childDef.name)
+						}
+					}
+					builder.appendln(1, """<Definition Name="${classDef.name}Defs" Keys="${defNames.joinToString(",")}" meta:RefKey="ReferenceDef" />""")
+				}
 			}
 
 			builder.appendln(0, "</Definitions>")
@@ -214,9 +233,9 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 		val sharedClasses = refCountMap.filter { it.value > 0 }.map { it.key }.toList()
 
 		if (sharedClasses.isNotEmpty()) {
+			File("$defFolder/Shared").mkdirs()
+
 			val sharedClassesToWrite = HashSet<ClassDefinition>()
-			val builder = IndentedStringBuilder()
-			builder.appendln(0, "<Definitions xmlns:meta=\"Editor\">")
 
 			for (classDef in sharedClasses)
 			{
@@ -233,15 +252,48 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 				}
 			}
 
+			for (abstractClass in sharedClassesToWrite.filter { it.isAbstract && it.superClass!!.superClass == null }.toList())
+			{
+				val builder = IndentedStringBuilder()
+				builder.appendln(0, "<Definitions xmlns:meta=\"Editor\">")
+
+				val defNames = ArrayList<String>()
+
+				abstractClass.classDef!!.createDefFile(builder, true)
+				sharedClassesToWrite.remove(abstractClass)
+				for (classDef in abstractClass.inheritingClasses)
+				{
+					if (writtenSpecificFiles.contains(classDef)) throw RuntimeException("Class written twice!")
+					classDef.classDef!!.createDefFile(builder, true)
+					sharedClassesToWrite.remove(classDef)
+
+					if (!classDef.isAbstract)
+					{
+						defNames.add(classDef.name)
+					}
+				}
+				builder.appendln(1, """<Definition Name="${abstractClass.name}Defs" Keys="${defNames.joinToString(",")}" IsGlobal="True" meta:RefKey="ReferenceDef" />""")
+
+				builder.appendln(0, "</Definitions>")
+				File("$defFolder/Shared/${abstractClass.name}.xmldef").writeText(builder.toString())
+				println("Created def file ${abstractClass.name}")
+			}
+
 			for (classDef in sharedClassesToWrite)
 			{
 				if (writtenSpecificFiles.contains(classDef)) throw RuntimeException("Class written twice!")
+
+				val builder = IndentedStringBuilder()
+				builder.appendln(0, "<Definitions xmlns:meta=\"Editor\">")
+
 				classDef.classDef!!.createDefFile(builder, true)
+
+				builder.appendln(0, "</Definitions>")
+				File("$defFolder/Shared/${classDef.name}.xmldef").writeText(builder.toString())
+				println("Created def file ${classDef.name}")
 			}
 
-			builder.appendln(0, "</Definitions>")
-			File("$defFolder/Shared.xmldef").writeText(builder.toString())
-			println("Created def file Shared")
+
 		}
 	}
 }

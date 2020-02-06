@@ -110,20 +110,23 @@ class XmlDataClassDescription(val classDefinition: ClassDefinition, val classReg
 
     fun createDefFile(builder: IndentedStringBuilder, needsGlobalScope: Boolean)
     {
+		val extends = if (classDefinition.superClass?.superClass != null) "Extends=\"${classDefinition.superClass!!.name}\"" else ""
+
         val dataFileAnnotation = annotations.firstOrNull { it.name == "XmlDataFile" }
         if (dataFileAnnotation != null)
         {
             val name = dataFileAnnotation.paramMap["name"]?.replace("\"", "") ?: name
-            builder.appendln(1, "<Definition Name=\"$name\" meta:RefKey=\"Struct\"")
+            builder.appendln(1, """<Definition Name="$name" $extends meta:RefKey="Struct">""")
         }
         else
         {
             val global = if (needsGlobalScope) "IsGlobal=\"True\"" else ""
-            builder.appendln(1, "<Definition Name=\"$name\" $global meta:RefKey=\"StructDef\"")
+            builder.appendln(1, """<Definition Name="$name" $global $extends meta:RefKey="StructDef">""")
         }
 
         for (variable in variables)
         {
+			if (variable.raw.startsWith("abstract")) continue
             variable.createDefEntry(builder, classRegister)
         }
 
