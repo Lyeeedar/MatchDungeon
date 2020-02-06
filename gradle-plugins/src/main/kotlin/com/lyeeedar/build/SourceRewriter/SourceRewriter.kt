@@ -4,7 +4,7 @@ import java.io.File
 
 class SourceRewriter(val file: File, val classRegister: ClassRegister)
 {
-	val variableRegex = "(override )?(?<VariableType>var|val|lateinit var) (?<Name>[a-zA-Z0-9]*)(: (?<Type>[a-zA-Z0-9<>?]*))?( = (?<DefaultValue>.*))?".toRegex()
+	val variableRegex = "(override |abstract )?(?<VariableType>var|val|lateinit var) (?<Name>[a-zA-Z0-9]*)(: (?<Type>[a-zA-Z0-9<>?]*))?( = (?<DefaultValue>.*))?".toRegex()
 
 	lateinit var originalContents: String
 	val dataClasses = ArrayList<XmlDataClassDescription>()
@@ -28,6 +28,7 @@ class SourceRewriter(val file: File, val classRegister: ClassRegister)
 		var currentMiscPart: MiscFilePart? = null
 		var currentClassPart: DataClassFilePart? = null
 		var funcDepth: Int? = null
+		var annotations: ArrayList<String>? = null
 		for (line in lines)
 		{
 			val trimmed = line.trim()
@@ -51,10 +52,11 @@ class SourceRewriter(val file: File, val classRegister: ClassRegister)
 					{
 						currentMiscPart = null
 
-						currentClassPart = DataClassFilePart(classDefinition, classRegister)
+						currentClassPart = DataClassFilePart(classDefinition, classRegister, annotations ?: ArrayList())
 						currentClassPart.desc.name = name
 						currentClassPart.desc.superClass = trimmed.split(':')[1].trim()
 						currentClassPart.desc.classIndentation = line.length - line.trimStart().length
+						annotations = null
 
 						dataClasses.add(currentClassPart.desc)
 
@@ -71,10 +73,11 @@ class SourceRewriter(val file: File, val classRegister: ClassRegister)
 					{
 						currentMiscPart = null
 
-						currentClassPart = DataClassFilePart(classDefinition, classRegister)
+						currentClassPart = DataClassFilePart(classDefinition, classRegister, annotations ?: ArrayList())
 						currentClassPart.desc.name = name
 						currentClassPart.desc.superClass = trimmed.split(':')[1].trim()
 						currentClassPart.desc.classIndentation = line.length - line.trimStart().length
+						annotations = null
 
 						dataClasses.add(currentClassPart.desc)
 
@@ -83,6 +86,16 @@ class SourceRewriter(val file: File, val classRegister: ClassRegister)
 						continue
 					}
 				}
+				else if (trimmed.startsWith("@"))
+				{
+					if (annotations == null)
+					{
+						annotations = ArrayList()
+					}
+					annotations.add(trimmed)
+
+					continue
+				}
 
 				if (currentMiscPart == null)
 				{
@@ -90,6 +103,8 @@ class SourceRewriter(val file: File, val classRegister: ClassRegister)
 					fileContents.add(currentMiscPart)
 				}
 				currentMiscPart.code.appendln(line.trimEnd())
+
+				annotations = null
 			}
 			else
 			{
@@ -109,6 +124,15 @@ class SourceRewriter(val file: File, val classRegister: ClassRegister)
 						funcDepth = depth
 					}
 				}
+				else if (trimmed.startsWith("@"))
+				{
+					if (annotations == null)
+					{
+						annotations = ArrayList()
+					}
+
+					annotations.add(trimmed)
+				}
 				else
 				{
 					val matches = variableRegex.matchEntire(trimmed)
@@ -126,19 +150,26 @@ class SourceRewriter(val file: File, val classRegister: ClassRegister)
 						val type = namedGroups["Type"]?.value ?: "String"
 						val default = namedGroups["DefaultValue"]?.value ?: ""
 
-						val variableDesc = VariableDescription(variableType, name, type, default, trimmed)
+						val variableDesc = VariableDescription(variableType, name, type, default, trimmed, annotations ?: ArrayList())
 						currentClassPart.desc.variables.add(variableDesc)
 
 						if (variableDesc.variableType == VariableType.VAL && variableDesc.name == "classID")
 						{
 							currentClassPart.desc.classDefinition.classID = variableDesc.defaultValue
 						}
+
+						annotations = null
 					}
 					else if (trimmed == "}" && line.trimEnd().length == currentClassPart.desc.classIndentation + 1)
 					{
 						println("Found data class ${currentClassPart.desc.name}")
 
 						currentClassPart = null
+						annotations = null
+					}
+					else
+					{
+						annotations = null
 					}
 				}
 			}
@@ -214,9 +245,9 @@ class MiscFilePart : IFilePart
 	}
 }
 
-class DataClassFilePart(classDefinition: ClassDefinition, classRegister: ClassRegister) : IFilePart
+class DataClassFilePart(classDefinition: ClassDefinition, classRegister: ClassRegister, annotations: ArrayList<String>) : IFilePart
 {
-	val desc: XmlDataClassDescription = XmlDataClassDescription(classDefinition, classRegister)
+	val desc: XmlDataClassDescription = XmlDataClassDescription(classDefinition, classRegister, annotations)
 
 	override fun write(builder: IndentedStringBuilder)
 	{
@@ -224,7 +255,7 @@ class DataClassFilePart(classDefinition: ClassDefinition, classRegister: ClassRe
 	}
 }
 
-class XmlDataClassDescription(val classDefinition: ClassDefinition, val classRegister: ClassRegister)
+class XmlDataClassDescription(val classDefinition: ClassDefinition, val classRegister: ClassRegister, val annotations: ArrayList<String>)
 {
 	lateinit var name: String
 	lateinit var superClass: String
@@ -241,12 +272,22 @@ class XmlDataClassDescription(val classDefinition: ClassDefinition, val classReg
 
 	fun write(builder: IndentedStringBuilder)
 	{
+		for (annotation in annotations)
+		{
+			builder.appendln(classIndentation, annotation)
+		}
+
 		val classType = if (classDefinition.isAbstract) "abstract class" else "class"
 		builder.appendln(classIndentation, "$classType $name : $superClass")
 		builder.appendln(classIndentation, "{")
 
 		for (variable in variables)
 		{
+			for (annotation in variable.annotations)
+			{
+				builder.appendln(classIndentation+1, annotation)
+			}
+
 			builder.appendln(classIndentation+1, variable.raw.trimEnd())
 			if (variable.name == "classID")
 			{
@@ -311,7 +352,7 @@ enum class VariableType
 	LATEINIT
 }
 
-class VariableDescription(val variableType: VariableType, val name: String, val type: String, val defaultValue: String, val raw: String)
+class VariableDescription(val variableType: VariableType, val name: String, val type: String, val defaultValue: String, val raw: String, val annotations: ArrayList<String>)
 {
 	fun resolveImports(imports: HashSet<String>)
 	{
