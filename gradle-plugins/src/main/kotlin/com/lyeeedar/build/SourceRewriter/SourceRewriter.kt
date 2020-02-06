@@ -2,116 +2,305 @@ package com.lyeeedar.build.SourceRewriter
 
 import java.io.File
 
-class SourceRewriter(val file: File)
+class SourceRewriter(val file: File, val classRegister: ClassRegister)
 {
-	val variableRegex = "(var|val|lateinit var) ([a-zA-Z0-9]*): ([a-zA-Z0-9<>?]*) = (.*)".toRegex()
+	val variableRegex = "(override )?(?<VariableType>var|val|lateinit var) (?<Name>[a-zA-Z0-9]*)(: (?<Type>[a-zA-Z0-9<>?]*))?( = (?<DefaultValue>.*))?".toRegex()
 
-	fun rewrite()
+	lateinit var originalContents: String
+	val dataClasses = ArrayList<XmlDataClassDescription>()
+
+	val fileContents = ArrayList<IFilePart>()
+
+	fun parse(): Boolean
 	{
-		val source = file.readText()
-		if (!source.contains("XmlDataClass")) return
+		originalContents = file.readText()
 
-		println("Rewriting ${file.absolutePath}")
+		println("Parsing ${file.absolutePath}")
 
-		val lines = source.split('\n')
+		val lines = originalContents.split('\n')
 
-		val output = StringBuilder()
-		var packageStr = ""
-		val imports = HashSet<String>()
-		var currentClass: XmlDataClassDescription? = null
+		val packagePart = PackageFilePart()
+		val importsPart = ImportsFilePart()
+
+		fileContents.add(packagePart)
+		fileContents.add(importsPart)
+
+		var currentMiscPart: MiscFilePart? = null
+		var currentClassPart: DataClassFilePart? = null
+		var funcDepth: Int? = null
 		for (line in lines)
 		{
 			val trimmed = line.trim()
-			if (currentClass == null)
+			if (currentClassPart == null)
 			{
-				if (trimmed.startsWith("class") && trimmed.endsWith(" : XmlDataClass"))
+				if (line.startsWith("package "))
 				{
-					currentClass = XmlDataClassDescription()
-					currentClass.name = trimmed.replace("class", "").replace(": XmlDataClass", "").trim()
-					currentClass.classIndentation = line.length - line.trimStart().length
-				}
-				else if (line.startsWith("package "))
-				{
-					packageStr = line.trim()
+					packagePart.packageStr = line.trim()
+					continue
 				}
 				else if (line.startsWith("import "))
 				{
-					imports.add(line.trim())
+					importsPart.imports.add(line.trim())
+					continue
 				}
-				else if (imports.size != 0)
+				else if (trimmed.startsWith("class "))
 				{
-					output.appendln(line.trimEnd())
+					val name = trimmed.split(':')[0].replace("class ", "").trim()
+					val classDefinition = classRegister.classMap[name]
+					if (classDefinition?.isXmlDataClass == true)
+					{
+						currentMiscPart = null
+
+						currentClassPart = DataClassFilePart(classDefinition, classRegister)
+						currentClassPart.desc.name = name
+						currentClassPart.desc.superClass = trimmed.split(':')[1].trim()
+						currentClassPart.desc.classIndentation = line.length - line.trimStart().length
+
+						dataClasses.add(currentClassPart.desc)
+
+						fileContents.add(currentClassPart)
+
+						continue
+					}
 				}
+				else if (trimmed.startsWith("abstract class "))
+				{
+					val name = trimmed.split(':')[0].replace("abstract class ", "").trim()
+					val classDefinition = classRegister.classMap[name]
+					if (classDefinition?.isXmlDataClass == true)
+					{
+						currentMiscPart = null
+
+						currentClassPart = DataClassFilePart(classDefinition, classRegister)
+						currentClassPart.desc.name = name
+						currentClassPart.desc.superClass = trimmed.split(':')[1].trim()
+						currentClassPart.desc.classIndentation = line.length - line.trimStart().length
+
+						dataClasses.add(currentClassPart.desc)
+
+						fileContents.add(currentClassPart)
+
+						continue
+					}
+				}
+
+				if (currentMiscPart == null)
+				{
+					currentMiscPart = MiscFilePart()
+					fileContents.add(currentMiscPart)
+				}
+				currentMiscPart.code.appendln(line.trimEnd())
 			}
 			else
 			{
-				val matches = variableRegex.matchEntire(trimmed)
-				if (matches != null)
+				if (funcDepth != null)
 				{
-					val variableType = VariableType.valueOf(matches.groupValues[1].toUpperCase())
-					val name = matches.groupValues[2]
-					val type = matches.groupValues[3]
-					val default = matches.groupValues[4]
-
-					val variableDesc = VariableDescription(variableType, name, type, default, trimmed)
-					currentClass.variables.add(variableDesc)
+					if (trimmed == "}" && line.trimEnd().length == funcDepth+1)
+					{
+						funcDepth = null
+					}
 				}
-				else if (trimmed == "}" && line.trimEnd().length == currentClass.classIndentation+1)
+				else if (trimmed == "{")
 				{
-					println("Found data class ${currentClass.name}")
+					val depth = line.trimEnd().length-1
 
-					currentClass.write(output, imports)
-					currentClass = null
+					if (depth > currentClassPart.desc.classIndentation)
+					{
+						funcDepth = depth
+					}
+				}
+				else
+				{
+					val matches = variableRegex.matchEntire(trimmed)
+					if (matches != null)
+					{
+						val namedGroups = matches.groups as MatchNamedGroupCollection
+						val variableType = when (namedGroups["VariableType"]!!.value)
+						{
+							"val" -> VariableType.VAL
+							"var" -> VariableType.VAR
+							"lateinit var" -> VariableType.LATEINIT
+							else -> throw RuntimeException("Unknown variable type ${namedGroups["VariableType"]!!.value}")
+						}
+						val name = namedGroups["Name"]!!.value
+						val type = namedGroups["Type"]?.value ?: "String"
+						val default = namedGroups["DefaultValue"]?.value ?: ""
+
+						val variableDesc = VariableDescription(variableType, name, type, default, trimmed)
+						currentClassPart.desc.variables.add(variableDesc)
+
+						if (variableDesc.variableType == VariableType.VAL && variableDesc.name == "classID")
+						{
+							currentClassPart.desc.classDefinition.classID = variableDesc.defaultValue
+						}
+					}
+					else if (trimmed == "}" && line.trimEnd().length == currentClassPart.desc.classIndentation + 1)
+					{
+						println("Found data class ${currentClassPart.desc.name}")
+
+						currentClassPart = null
+					}
 				}
 			}
 		}
 
-		val newSource = "$packageStr\n\n${imports.sorted().joinToString("\n")}\n\n${output.trim()}"
-		if (newSource != source)
-		{
-			file.writeText(newSource)
+		return true
+	}
 
-			println("Rewrite complete")
+	fun write()
+	{
+		val imports = fileContents[1] as ImportsFilePart
+		for (part in fileContents)
+		{
+			if (part is DataClassFilePart)
+			{
+				part.desc.resolveImports(imports.imports)
+			}
+		}
+
+		val output = IndentedStringBuilder()
+		for (part in fileContents)
+		{
+			part.write(output)
+		}
+
+		val newContents = output.toString()
+		if (newContents != originalContents)
+		{
+			file.writeText(newContents)
+
+			println("Writing ${file.absolutePath} complete")
 		}
 		else
 		{
-			println("Rewrite identical")
+			println("Skipping writing ${file.absolutePath}. Identical")
 		}
 	}
 }
 
-class XmlDataClassDescription()
+interface IFilePart
+{
+	fun write(builder: IndentedStringBuilder)
+}
+
+class PackageFilePart : IFilePart
+{
+	var packageStr: String = ""
+
+	override fun write(builder: IndentedStringBuilder)
+	{
+		builder.appendln(packageStr)
+		builder.appendln("")
+	}
+}
+
+class ImportsFilePart : IFilePart
+{
+	val imports: HashSet<String> = HashSet()
+
+	override fun write(builder: IndentedStringBuilder)
+	{
+		builder.appendln(imports.sorted().joinToString("\n"))
+	}
+}
+
+class MiscFilePart : IFilePart
+{
+	val code: StringBuilder = StringBuilder()
+
+	override fun write(builder: IndentedStringBuilder)
+	{
+		builder.appendln(code.toString().trimEnd())
+	}
+}
+
+class DataClassFilePart(classDefinition: ClassDefinition, classRegister: ClassRegister) : IFilePart
+{
+	val desc: XmlDataClassDescription = XmlDataClassDescription(classDefinition, classRegister)
+
+	override fun write(builder: IndentedStringBuilder)
+	{
+		desc.write(builder)
+	}
+}
+
+class XmlDataClassDescription(val classDefinition: ClassDefinition, val classRegister: ClassRegister)
 {
 	lateinit var name: String
+	lateinit var superClass: String
 	var classIndentation = 0
 	val variables = ArrayList<VariableDescription>()
 
-	fun write(builder: StringBuilder, imports: HashSet<String>)
+	fun resolveImports(imports: HashSet<String>)
 	{
-		val classIndentation = "\t".repeat(classIndentation)
-		val contentIndentation = "\t".repeat(this.classIndentation+1)
+		for (variable in variables)
+		{
+			variable.resolveImports(imports)
+		}
+	}
 
-		builder.appendln("${classIndentation}class $name : XmlDataClass")
-		builder.appendln("$classIndentation{")
+	fun write(builder: IndentedStringBuilder)
+	{
+		val classType = if (classDefinition.isAbstract) "abstract class" else "class"
+		builder.appendln(classIndentation, "$classType $name : $superClass")
+		builder.appendln(classIndentation, "{")
 
 		for (variable in variables)
 		{
-			builder.appendln("$contentIndentation${variable.raw}")
+			builder.appendln(classIndentation+1, variable.raw.trimEnd())
+			if (variable.name == "classID")
+			{
+				builder.appendln("")
+			}
 		}
 
 		builder.appendln("")
-		builder.appendln("${contentIndentation}override fun load(xmlData: XmlData)")
-		builder.appendln("$contentIndentation{")
+		builder.appendln(classIndentation+1, "override fun load(xmlData: XmlData)")
+		builder.appendln(classIndentation+1, "{")
 
-		val loadIndentation = "\t".repeat(this.classIndentation+2)
-		for (variable in variables)
+		if (classDefinition.superClass != null && classDefinition.superClass!!.name != "XmlDataClass")
 		{
-			variable.writeLoad(builder, imports, loadIndentation)
+			builder.appendln(classIndentation+2, "super.load(xmlData)")
 		}
 
-		builder.appendln("$contentIndentation}")
+		for (variable in variables)
+		{
+			variable.writeLoad(builder, classIndentation+2, classRegister)
+		}
 
-		builder.appendln("$classIndentation}")
+		builder.appendln(classIndentation+1, "}")
+
+		if (classDefinition.isAbstract)
+		{
+			builder.appendln("")
+
+			// write switch loader
+			builder.appendln(classIndentation+1, "companion object")
+			builder.appendln(classIndentation+1, "{")
+
+			builder.appendln(classIndentation+2, "fun loadPolymorphicClass(classID: String): $name")
+			builder.appendln(classIndentation+2, "{")
+
+			builder.appendln(classIndentation+3, "return when (classID)")
+			builder.appendln(classIndentation+3, "{")
+
+			for (childClass in classDefinition.inheritingClasses)
+			{
+				if (!childClass.isAbstract)
+				{
+					builder.appendln(classIndentation+4, "${childClass.classID} -> ${childClass.name}()")
+				}
+			}
+
+			builder.appendln(classIndentation+4, "else -> throw RuntimeException(\"Unknown classID '\$classID' for $name!\")")
+			builder.appendln(classIndentation+3, "}")
+
+			builder.appendln(classIndentation+2, "}")
+
+			builder.appendln(classIndentation+1, "}")
+		}
+
+		builder.appendln(classIndentation, "}")
 	}
 }
 
@@ -124,7 +313,23 @@ enum class VariableType
 
 class VariableDescription(val variableType: VariableType, val name: String, val type: String, val defaultValue: String, val raw: String)
 {
-	fun writeLoad(builder: StringBuilder, imports: HashSet<String>, indentation: String)
+	fun resolveImports(imports: HashSet<String>)
+	{
+		if (type == "ParticleEffect" || type == "ParticleEffectDescription" || type == "Sprite")
+		{
+			imports.add("import com.lyeeedar.Util.AssetManager")
+		}
+		else if (type == "String" || type == "Int" || type == "Float")
+		{
+
+		}
+		else
+		{
+
+		}
+	}
+
+	fun writeLoad(builder: IndentedStringBuilder, indentation: Int, classRegister: ClassRegister)
 	{
 		val niceName = name.capitalize()
 		var type = type
@@ -137,57 +342,128 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 
 		if (type == "String")
 		{
-			var loadLine = "$name = xmlData.get(\"$niceName\", $defaultValue)"
-			if (!nullable)
+			if (variableType == VariableType.LATEINIT)
 			{
-				loadLine += "!!"
+				builder.appendln(indentation, "$name = xmlData.get(\"$niceName\")")
 			}
-			builder.appendln("$indentation$loadLine")
+			else if (variableType == VariableType.VAR)
+			{
+				var loadLine = "$name = xmlData.get(\"$niceName\", $defaultValue)"
+				if (!nullable)
+				{
+					loadLine += "!!"
+				}
+				builder.appendln(indentation, loadLine)
+			}
 		}
 		else if (type == "Int")
 		{
-			builder.appendln("${indentation}$name = xmlData.getInt(\"$niceName\", $defaultValue)")
+			if (variableType == VariableType.VAR)
+			{
+				builder.appendln(indentation, "$name = xmlData.getInt(\"$niceName\", $defaultValue)")
+			}
 		}
 		else if (type == "Float")
 		{
-			builder.appendln("${indentation}$name = xmlData.getFloat(\"$niceName\", $defaultValue)")
+			if (variableType == VariableType.VAR)
+			{
+				builder.appendln(indentation, "$name = xmlData.getFloat(\"$niceName\", $defaultValue)")
+			}
 		}
 		else if (type == "ParticleEffect")
 		{
-			imports.add("import com.lyeeedar.Util.AssetManager")
-
-			var loadLine = "$name = AssetManager.tryLoadParticleEffect(xmlData.getChildByName(\"$niceName\"))"
-			if (!nullable)
+			if (variableType == VariableType.LATEINIT)
 			{
-				loadLine += "!!"
+				val loadLine = "$name = AssetManager.loadParticleEffect(xmlData.getChildByName(\"$niceName\")!!)"
+				builder.appendln(indentation, "${loadLine}.getParticleEffect()")
 			}
-			builder.appendln("$indentation${loadLine}.getParticleEffect()")
+			else if (variableType == VariableType.VAR)
+			{
+				var loadLine = "$name = AssetManager.tryLoadParticleEffect(xmlData.getChildByName(\"$niceName\"))"
+				if (!nullable)
+				{
+					loadLine += "!!"
+				}
+				builder.appendln(indentation, "${loadLine}.getParticleEffect()")
+			}
 		}
 		else if (type == "ParticleEffectDescription")
 		{
-			imports.add("import com.lyeeedar.Util.AssetManager")
-
-			var loadLine = "$name = AssetManager.tryLoadParticleEffect(xmlData.getChildByName(\"$niceName\"))"
-			if (!nullable)
+			if (variableType == VariableType.LATEINIT)
 			{
-				loadLine += "!!"
+				val loadLine = "$name = AssetManager.loadParticleEffect(xmlData.getChildByName(\"$niceName\")!!)"
+				builder.appendln(indentation, loadLine)
 			}
-			builder.appendln("$indentation${loadLine}")
+			else if (variableType == VariableType.VAR)
+			{
+				var loadLine = "$name = AssetManager.tryLoadParticleEffect(xmlData.getChildByName(\"$niceName\"))"
+				if (!nullable)
+				{
+					loadLine += "!!"
+				}
+				builder.appendln(indentation, loadLine)
+			}
 		}
 		else if (type == "Sprite")
 		{
-			imports.add("import com.lyeeedar.Util.AssetManager")
-
-			var loadLine = "$name = AssetManager.tryLoadSprite(xmlData.getChildByName(\"$niceName\"))"
-			if (!nullable)
+			if (variableType == VariableType.LATEINIT)
 			{
-				loadLine += "!!"
+				val loadLine = "$name = AssetManager.loadSprite(xmlData.getChildByName(\"$niceName\")!!)"
+				builder.appendln(indentation, loadLine)
 			}
-			builder.appendln("$indentation${loadLine}")
+			else if (variableType == VariableType.VAR)
+			{
+				var loadLine = "$name = AssetManager.tryLoadSprite(xmlData.getChildByName(\"$niceName\"))"
+				if (!nullable)
+				{
+					loadLine += "!!"
+				}
+				builder.appendln(indentation, loadLine)
+			}
 		}
 		else
 		{
-			throw RuntimeException("Unknown variable type: $type")
+			val classDef = classRegister.classMap[type] ?: throw RuntimeException("Unknown type '$type'!")
+
+			val el = name+"El"
+			if (variableType == VariableType.LATEINIT || (variableType == VariableType.VAR && !nullable))
+			{
+				builder.appendln(indentation, "val $el = xmlData.getChildByName(\"$niceName\")!!")
+
+				if (classDef.isAbstract)
+				{
+					builder.appendln(indentation, "$name = $type.loadPolymorphicClass(${el}.get(\"classID\"))")
+				}
+				else
+				{
+					builder.appendln(indentation, "$name = $type()")
+				}
+
+				builder.appendln(indentation, "$name.load($el)")
+			}
+			else if (variableType == VariableType.VAR)
+			{
+				builder.appendln(indentation, "val $el = xmlData.getChildByName(\"$niceName\")")
+				builder.appendln(indentation, "if ($el != null)")
+				builder.appendln(indentation, "{")
+
+				if (classDef.isAbstract)
+				{
+					builder.appendln(indentation+1, "$name = $type.loadPolymorphicClass(${el}.get(\"classID\"))")
+				}
+				else
+				{
+					builder.appendln(indentation+1, "$name = $type()")
+				}
+
+				builder.appendln(indentation+1, "$name!!.load($el)")
+				builder.appendln(indentation, "}")
+			}
+			else
+			{
+				builder.appendln(indentation, "val $el = xmlData.getChildByName(\"$niceName\")!!")
+				builder.appendln(indentation, "$name.load($el)")
+			}
 		}
 	}
 }

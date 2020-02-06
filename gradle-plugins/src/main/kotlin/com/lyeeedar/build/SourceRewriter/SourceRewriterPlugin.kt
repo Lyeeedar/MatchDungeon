@@ -1,5 +1,6 @@
 package com.lyeeedar.build
 
+import com.lyeeedar.build.SourceRewriter.ClassRegister
 import com.lyeeedar.build.SourceRewriter.SourceRewriter
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
@@ -28,9 +29,27 @@ open class SourceRewriterTask : DefaultTask()
 		println("Source Rewrite starting")
 		println("")
 
-		for (file in find(srcDirs!!))
+		println("Parsing source files")
+		val srcFiles = find(srcDirs!!)
+
+		val classRegister = ClassRegister(srcFiles)
+		classRegister.registerClasses()
+
+		val dataClassFiles = ArrayList<SourceRewriter>()
+		for (file in srcFiles)
 		{
-			SourceRewriter(file).rewrite()
+			val rewriter = SourceRewriter(file, classRegister)
+			val hasDataClass = rewriter.parse()
+			if (hasDataClass)
+			{
+				dataClassFiles.add(rewriter)
+			}
+		}
+
+		println("Writing changes")
+		for (rewriter in dataClassFiles)
+		{
+			rewriter.write()
 		}
 
 		println("")
