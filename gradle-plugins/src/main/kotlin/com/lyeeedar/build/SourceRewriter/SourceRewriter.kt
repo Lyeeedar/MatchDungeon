@@ -266,7 +266,21 @@ class XmlDataClassDescription(val classDefinition: ClassDefinition, val classReg
 	{
 		for (variable in variables)
 		{
-			variable.resolveImports(imports)
+			variable.resolveImports(imports, classDefinition, classRegister)
+		}
+
+		if (classDefinition.isAbstract)
+		{
+			for (childClass in classDefinition.inheritingClasses)
+			{
+				if (!childClass.isAbstract)
+				{
+					if (childClass.packageStr != classDefinition.packageStr)
+					{
+						imports.add(childClass.packageStr.replace("package ", "").trim() + ".${childClass.name}")
+					}
+				}
+			}
 		}
 	}
 
@@ -354,7 +368,7 @@ enum class VariableType
 
 class VariableDescription(val variableType: VariableType, val name: String, val type: String, val defaultValue: String, val raw: String, val annotations: ArrayList<String>)
 {
-	fun resolveImports(imports: HashSet<String>)
+	fun resolveImports(imports: HashSet<String>, classDefinition: ClassDefinition, classRegister: ClassRegister)
 	{
 		if (type == "ParticleEffect" || type == "ParticleEffectDescription" || type == "Sprite")
 		{
@@ -362,11 +376,16 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 		}
 		else if (type == "String" || type == "Int" || type == "Float")
 		{
-
+			// primitives dont need imports
 		}
 		else
 		{
+			val classDef = classRegister.classMap[type] ?: throw RuntimeException("Unknown type '$type'!")
 
+			if (classDef.packageStr != classDefinition.packageStr)
+			{
+				imports.add(classDef.packageStr.replace("package ", "").trim() + ".${classDef.name}")
+			}
 		}
 	}
 
