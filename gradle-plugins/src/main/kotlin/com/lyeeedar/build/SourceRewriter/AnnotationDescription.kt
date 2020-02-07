@@ -19,21 +19,25 @@ class AnnotationDescription(val annotationString: String)
     fun parse()
     {
         val parameters = annotationString.replace("@$name(", "").replace(")", "")
-        val split = parameters.split(",")
 
-        for (parameter in split)
-        {
-            if (!parameter.contains("="))
+		if (!parameters.isBlank())
+		{
+			val split = parameters.split(",")
+
+			for (parameter in split)
 			{
-				System.err.println("Non-named annotation parameters are not currently supported! ($annotationString) ($parameter)")
-				continue
+				if (!parameter.contains("="))
+				{
+					System.err.println("Non-named annotation parameters are not currently supported! ($annotationString) ($parameter)")
+					continue
+				}
+
+				val split = parameter.split("=")
+				val paramName = split[0].trim()
+				val paramValue = split[1].trim().replace("\"", "")
+
+				paramMap.put(paramName, paramValue)
 			}
-
-            val split = parameter.split("=")
-            val paramName = split[0].trim()
-            val paramValue = split[1].trim()
-
-            paramMap.put(paramName, paramValue)
-        }
+		}
     }
 }

@@ -36,9 +36,9 @@ class MiscFilePart : IFilePart
     }
 }
 
-class DataClassFilePart(classDefinition: ClassDefinition, classRegister: ClassRegister, annotations: ArrayList<AnnotationDescription>) : IFilePart
+class DataClassFilePart(name: String, superClass: String, classIndentation: Int, classDefinition: ClassDefinition, classRegister: ClassRegister, annotations: ArrayList<AnnotationDescription>) : IFilePart
 {
-    val desc: XmlDataClassDescription = XmlDataClassDescription(classDefinition, classRegister, annotations)
+    val desc: XmlDataClassDescription = XmlDataClassDescription(name, superClass, classIndentation, classDefinition, classRegister, annotations)
 
     override fun write(builder: IndentedStringBuilder)
     {

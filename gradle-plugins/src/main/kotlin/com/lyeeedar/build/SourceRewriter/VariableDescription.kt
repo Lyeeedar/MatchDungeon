@@ -9,6 +9,21 @@ enum class VariableType
 
 class VariableDescription(val variableType: VariableType, val name: String, val type: String, val defaultValue: String, val raw: String, val annotations: ArrayList<AnnotationDescription>)
 {
+	val dataName: String
+
+	init
+	{
+		val dataValueAnnotation = annotations.firstOrNull { it.name == "DataValue" }
+		if (dataValueAnnotation != null)
+		{
+			dataName = dataValueAnnotation.paramMap["dataName"]?.replace("\"", "") ?: name.capitalize()
+		}
+		else
+		{
+			dataName = name.capitalize()
+		}
+	}
+
     fun resolveImports(imports: HashSet<String>, classDefinition: ClassDefinition, classRegister: ClassRegister)
     {
 		var type = type
@@ -40,19 +55,6 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 
     fun writeLoad(builder: IndentedStringBuilder, indentation: Int, classDefinition: ClassDefinition, classRegister: ClassRegister)
     {
-        var dataName = name.capitalize()
-        for (annotation in annotations)
-        {
-            if (annotation.name == "XmlDataValue")
-            {
-                val customDataName = annotation.paramMap["dataName"]
-                if (customDataName != null && customDataName != "")
-                {
-                    dataName = customDataName.replace("\"", "")
-                }
-            }
-        }
-
         var type = type
         var nullable = false
         if (type.endsWith('?'))
@@ -199,19 +201,6 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
             return
         }
 
-		var name = name.capitalize()
-		for (annotation in annotations)
-		{
-			if (annotation.name == "XmlDataValue")
-			{
-				val customDataName = annotation.paramMap["dataName"]
-				if (customDataName != null && customDataName != "")
-				{
-					name = customDataName.replace("\"", "")
-				}
-			}
-		}
-
         var type = type
         var isNullable = false
         if (type.endsWith('?'))
@@ -251,19 +240,9 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
         {
             val canSkip = if (variableType != VariableType.LATEINIT) "True" else "False"
 			val defaultValue = if (this.defaultValue.isBlank()) "\"\"" else this.defaultValue
-            builder.appendln(2, """<Data Name="$name" SkipIfDefault="$canSkip" Default=$defaultValue meta:RefKey="String" />""")
+            builder.appendln(2, """<Data Name="$dataName" SkipIfDefault="$canSkip" Default=$defaultValue meta:RefKey="String" />""")
         }
-        else if (type == "Int")
-        {
-            val numericAnnotation = annotations.firstOrNull { it.name == "NumericRange" }
-            val min = numericAnnotation?.paramMap?.get("min")?.replace("f", "")
-            val max = numericAnnotation?.paramMap?.get("max")?.replace("f", "")
-            val minStr = if (min != null) """Min="$min"""" else ""
-            val maxStr = if (max != null) """Max="$max"""" else ""
-
-            builder.appendln(2, """<Data Name="$name" $minStr $maxStr Type="Int" Default="$defaultValue" SkipIfDefault="True" meta:RefKey="Number" />""")
-        }
-        else if (type == "Float")
+        else if (type == "Int" || type == "Float")
         {
             val numericAnnotation = annotations.firstOrNull { it.name == "NumericRange" }
             val min = numericAnnotation?.paramMap?.get("min")?.replace("f", "")
@@ -272,15 +251,15 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
             val maxStr = if (max != null) """Max="$max"""" else ""
 			val defaultValue = this.defaultValue.replace("f", "")
 
-            builder.appendln(2, """<Data Name="$name" $minStr $maxStr Default="$defaultValue" SkipIfDefault="True" meta:RefKey="Number" />""")
+            builder.appendln(2, """<Data Name="$dataName" $minStr $maxStr Type="$type" Default="$defaultValue" SkipIfDefault="True" meta:RefKey="Number" />""")
         }
         else if (type == "Sprite")
         {
-            builder.appendln(2, """<Data Name="$name" Keys="Sprite" $nullable $skipIfDefault meta:RefKey="Reference" />""")
+            builder.appendln(2, """<Data Name="$dataName" Keys="Sprite" $nullable $skipIfDefault meta:RefKey="Reference" />""")
         }
         else if (type == "ParticleEffect" || type == "ParticleEffectDescription")
         {
-            builder.appendln(2, """<Data Name="$name" Keys="ParticleEffect" $nullable $skipIfDefault meta:RefKey="Reference" />""")
+            builder.appendln(2, """<Data Name="$dataName" Keys="ParticleEffect" $nullable $skipIfDefault meta:RefKey="Reference" />""")
         }
         else
         {
@@ -288,11 +267,11 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 
             if (classDef.isAbstract)
             {
-                builder.appendln(2, """<Data Name="$name" DefKey="${classDef.name}Defs" $nullable $skipIfDefault meta:RefKey="Reference" />""")
+                builder.appendln(2, """<Data Name="$dataName" DefKey="${classDef.classDef!!.dataClassName}Defs" $nullable $skipIfDefault meta:RefKey="Reference" />""")
             }
             else
             {
-                builder.appendln(2, """<Data Name="$name" Keys="$type" $nullable $skipIfDefault meta:RefKey="Reference" />""")
+                builder.appendln(2, """<Data Name="$dataName" Keys="${classDef.classDef!!.dataClassName}" $nullable $skipIfDefault meta:RefKey="Reference" />""")
             }
         }
     }

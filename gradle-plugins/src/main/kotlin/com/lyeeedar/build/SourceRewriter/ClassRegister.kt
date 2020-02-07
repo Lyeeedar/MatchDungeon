@@ -134,7 +134,7 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 	{
 		val xmlDataClasses = classMap.values.filter { it.isXmlDataClass }.toList()
 
-		val rootClasses = xmlDataClasses.filter { it.classDef!!.annotations.any { it.name == "XmlDataFile" } }.toList()
+		val rootClasses = xmlDataClasses.filter { it.classDef!!.annotations.any { it.name == "DataFile" } }.toList()
 
 		val refCountMap = HashMap<ClassDefinition, Int>()
 		for (dataClass in rootClasses)
@@ -189,7 +189,7 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 				}
 			}
 
-			val dataClassAnnotation = root.classDef!!.annotations.first { it.name == "XmlDataFile" }
+			val dataClassAnnotation = root.classDef!!.annotations.first { it.name == "DataFile" }
 			val name = dataClassAnnotation.paramMap["name"]?.replace("\"", "") ?: root.classDef!!.name
 			val colour =  dataClassAnnotation.paramMap["colour"]
 			val icon = dataClassAnnotation.paramMap["icon"]
@@ -216,10 +216,10 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 					{
 						if (!childDef.isAbstract)
 						{
-							defNames.add(childDef.name)
+							defNames.add(childDef.classDef!!.dataClassName)
 						}
 					}
-					builder.appendln(1, """<Definition Name="${classDef.name}Defs" Keys="${defNames.joinToString(",")}" meta:RefKey="ReferenceDef" />""")
+					builder.appendln(1, """<Definition Name="${classDef.classDef!!.dataClassName}Defs" Keys="${defNames.joinToString(",")}" meta:RefKey="ReferenceDef" />""")
 				}
 			}
 
@@ -269,14 +269,15 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 
 					if (!classDef.isAbstract)
 					{
-						defNames.add(classDef.name)
+						defNames.add(classDef.classDef!!.dataClassName)
 					}
 				}
-				builder.appendln(1, """<Definition Name="${abstractClass.name}Defs" Keys="${defNames.joinToString(",")}" IsGlobal="True" meta:RefKey="ReferenceDef" />""")
+				val abstractClassName = abstractClass.classDef!!.dataClassName
+				builder.appendln(1, """<Definition Name="${abstractClassName}Defs" Keys="${defNames.joinToString(",")}" IsGlobal="True" meta:RefKey="ReferenceDef" />""")
 
 				builder.appendln(0, "</Definitions>")
-				File("$defFolder/Shared/${abstractClass.name}.xmldef").writeText(builder.toString())
-				println("Created def file ${abstractClass.name}")
+				File("$defFolder/Shared/${abstractClassName}.xmldef").writeText(builder.toString())
+				println("Created def file $abstractClassName")
 			}
 
 			for (classDef in sharedClassesToWrite)
@@ -289,8 +290,8 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 				classDef.classDef!!.createDefFile(builder, true)
 
 				builder.appendln(0, "</Definitions>")
-				File("$defFolder/Shared/${classDef.name}.xmldef").writeText(builder.toString())
-				println("Created def file ${classDef.name}")
+				File("$defFolder/Shared/${classDef.classDef!!.dataClassName}.xmldef").writeText(builder.toString())
+				println("Created def file ${classDef.classDef!!.dataClassName}")
 			}
 
 

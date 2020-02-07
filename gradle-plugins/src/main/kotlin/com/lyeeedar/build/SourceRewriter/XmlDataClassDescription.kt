@@ -1,15 +1,27 @@
 package com.lyeeedar.build.SourceRewriter
 
-class XmlDataClassDescription(val classDefinition: ClassDefinition, val classRegister: ClassRegister, val annotations: ArrayList<AnnotationDescription>)
+class XmlDataClassDescription(val name: String, val superClass: String, val classIndentation: Int, val classDefinition: ClassDefinition, val classRegister: ClassRegister, val annotations: ArrayList<AnnotationDescription>)
 {
-    lateinit var name: String
-    lateinit var superClass: String
-    var classIndentation = 0
     val variables = ArrayList<VariableDescription>()
+
+	val dataClassName: String
+	val dataClassCategory: String
 
     init
     {
         classDefinition.classDef = this
+
+		val dataClassAnnotation = annotations.firstOrNull { it.name == "DataClass" }
+		if (dataClassAnnotation != null)
+		{
+			dataClassName = dataClassAnnotation.paramMap["name"] ?: name.capitalize()
+			dataClassCategory = dataClassAnnotation.paramMap["category"] ?: ""
+		}
+		else
+		{
+			dataClassName = name.capitalize()
+			dataClassCategory = ""
+		}
     }
 
     fun resolveImports(imports: HashSet<String>)
@@ -110,18 +122,17 @@ class XmlDataClassDescription(val classDefinition: ClassDefinition, val classReg
 
     fun createDefFile(builder: IndentedStringBuilder, needsGlobalScope: Boolean)
     {
-		val extends = if (classDefinition.superClass?.superClass != null) "Extends=\"${classDefinition.superClass!!.name}\"" else ""
+		val extends = if (classDefinition.superClass?.superClass != null) "Extends=\"${classDefinition.superClass!!.classDef!!.dataClassName}\"" else ""
 
-        val dataFileAnnotation = annotations.firstOrNull { it.name == "XmlDataFile" }
+        val dataFileAnnotation = annotations.firstOrNull { it.name == "DataFile" }
         if (dataFileAnnotation != null)
         {
-            val name = dataFileAnnotation.paramMap["name"]?.replace("\"", "") ?: name
-            builder.appendln(1, """<Definition Name="$name" $extends meta:RefKey="Struct">""")
+            builder.appendln(1, """<Definition Name="$dataClassName" $extends meta:RefKey="Struct">""")
         }
         else
         {
             val global = if (needsGlobalScope) "IsGlobal=\"True\"" else ""
-            builder.appendln(1, """<Definition Name="$name" $global $extends meta:RefKey="StructDef">""")
+            builder.appendln(1, """<Definition Name="$dataClassName" $global $extends meta:RefKey="StructDef">""")
         }
 
         for (variable in variables)

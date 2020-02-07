@@ -15,8 +15,6 @@ class SourceRewriter(val file: File, val classRegister: ClassRegister)
 	{
 		originalContents = file.readText()
 
-		println("Parsing ${file.absolutePath}")
-
 		val lines = originalContents.split('\n')
 
 		val packagePart = PackageFilePart()
@@ -52,10 +50,13 @@ class SourceRewriter(val file: File, val classRegister: ClassRegister)
 					{
 						currentMiscPart = null
 
-						currentClassPart = DataClassFilePart(classDefinition, classRegister, annotations ?: ArrayList())
-						currentClassPart.desc.name = name
-						currentClassPart.desc.superClass = trimmed.split(':')[1].trim()
-						currentClassPart.desc.classIndentation = line.length - line.trimStart().length
+						currentClassPart = DataClassFilePart(
+							name,
+							trimmed.split(':')[1].trim(),
+							line.length - line.trimStart().length,
+							classDefinition,
+							classRegister,
+							annotations ?: ArrayList())
 						annotations = null
 
 						dataClasses.add(currentClassPart.desc)
@@ -73,10 +74,13 @@ class SourceRewriter(val file: File, val classRegister: ClassRegister)
 					{
 						currentMiscPart = null
 
-						currentClassPart = DataClassFilePart(classDefinition, classRegister, annotations ?: ArrayList())
-						currentClassPart.desc.name = name
-						currentClassPart.desc.superClass = trimmed.split(':')[1].trim()
-						currentClassPart.desc.classIndentation = line.length - line.trimStart().length
+						currentClassPart = DataClassFilePart(
+							name,
+							trimmed.split(':')[1].trim(),
+							line.length - line.trimStart().length,
+							classDefinition,
+							classRegister,
+							annotations ?: ArrayList())
 						annotations = null
 
 						dataClasses.add(currentClassPart.desc)
