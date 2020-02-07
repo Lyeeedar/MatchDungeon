@@ -211,15 +211,31 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 
 				if (classDef.isAbstract)
 				{
-					val defNames = ArrayList<String>()
+					val defNames = HashMap<String, ArrayList<String>>()
 					for (childDef in classDef.inheritingClasses)
 					{
 						if (!childDef.isAbstract)
 						{
-							defNames.add(childDef.classDef!!.dataClassName)
+							var category = defNames[childDef.classDef!!.dataClassCategory]
+							if (category == null)
+							{
+								category = ArrayList()
+								defNames[childDef.classDef!!.dataClassCategory] = category
+							}
+							category.add(childDef.classDef!!.dataClassName)
 						}
 					}
-					builder.appendln(1, """<Definition Name="${classDef.classDef!!.dataClassName}Defs" Keys="${defNames.joinToString(",")}" meta:RefKey="ReferenceDef" />""")
+					val keysStr: String
+					if (defNames.size == 1)
+					{
+						keysStr = defNames.values.first().sorted().joinToString(",")
+					}
+					else
+					{
+						keysStr = defNames.entries.sortedBy { it.key }.joinToString(",") { "${it.key}(${it.value.sorted().joinToString(",")})" }
+					}
+
+					builder.appendln(1, """<Definition Name="${classDef.classDef!!.dataClassName}Defs" Keys="$keysStr" meta:RefKey="ReferenceDef" />""")
 				}
 			}
 
@@ -257,7 +273,7 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 				val builder = IndentedStringBuilder()
 				builder.appendln(0, "<Definitions xmlns:meta=\"Editor\">")
 
-				val defNames = ArrayList<String>()
+				val defNames = HashMap<String, ArrayList<String>>()
 
 				abstractClass.classDef!!.createDefFile(builder, true)
 				sharedClassesToWrite.remove(abstractClass)
@@ -269,11 +285,27 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 
 					if (!classDef.isAbstract)
 					{
-						defNames.add(classDef.classDef!!.dataClassName)
+						var category = defNames[classDef.classDef!!.dataClassCategory]
+						if (category == null)
+						{
+							category = ArrayList()
+							defNames[classDef.classDef!!.dataClassCategory] = category
+						}
+						category.add(classDef.classDef!!.dataClassName)
 					}
 				}
+				val keysStr: String
+				if (defNames.size == 1)
+				{
+					keysStr = defNames.values.first().sorted().joinToString(",")
+				}
+				else
+				{
+					keysStr = defNames.entries.sortedBy { it.key }.joinToString(",") { "${it.key}(${it.value.sorted().joinToString(",")})" }
+				}
+
 				val abstractClassName = abstractClass.classDef!!.dataClassName
-				builder.appendln(1, """<Definition Name="${abstractClassName}Defs" Keys="${defNames.joinToString(",")}" IsGlobal="True" meta:RefKey="ReferenceDef" />""")
+				builder.appendln(1, """<Definition Name="${abstractClassName}Defs" Keys="$keysStr" IsGlobal="True" meta:RefKey="ReferenceDef" />""")
 
 				builder.appendln(0, "</Definitions>")
 				File("$defFolder/Shared/${abstractClassName}.xmldef").writeText(builder.toString())

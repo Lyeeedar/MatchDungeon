@@ -10,6 +10,7 @@ enum class VariableType
 class VariableDescription(val variableType: VariableType, val name: String, val type: String, val defaultValue: String, val raw: String, val annotations: ArrayList<AnnotationDescription>)
 {
 	val dataName: String
+	var visibleIfStr: String = ""
 
 	init
 	{
@@ -17,6 +18,12 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 		if (dataValueAnnotation != null)
 		{
 			dataName = dataValueAnnotation.paramMap["dataName"]?.replace("\"", "") ?: name.capitalize()
+
+			val visibleIfRaw = dataValueAnnotation.paramMap["visibleIf"]
+			if (visibleIfRaw != null)
+			{
+				visibleIfStr = """VisibleIf="$visibleIfRaw""""
+			}
 		}
 		else
 		{
@@ -240,7 +247,7 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
         {
             val canSkip = if (variableType != VariableType.LATEINIT) "True" else "False"
 			val defaultValue = if (this.defaultValue.isBlank()) "\"\"" else this.defaultValue
-            builder.appendln(2, """<Data Name="$dataName" SkipIfDefault="$canSkip" Default=$defaultValue meta:RefKey="String" />""")
+            builder.appendlnFix(2, """<Data Name="$dataName" SkipIfDefault="$canSkip" Default=$defaultValue $visibleIfStr meta:RefKey="String" />""")
         }
         else if (type == "Int" || type == "Float")
         {
@@ -251,15 +258,15 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
             val maxStr = if (max != null) """Max="$max"""" else ""
 			val defaultValue = this.defaultValue.replace("f", "")
 
-            builder.appendln(2, """<Data Name="$dataName" $minStr $maxStr Type="$type" Default="$defaultValue" SkipIfDefault="True" meta:RefKey="Number" />""")
+            builder.appendlnFix(2, """<Data Name="$dataName" $minStr $maxStr Type="$type" Default="$defaultValue" SkipIfDefault="True" $visibleIfStr meta:RefKey="Number" />""")
         }
         else if (type == "Sprite")
         {
-            builder.appendln(2, """<Data Name="$dataName" Keys="Sprite" $nullable $skipIfDefault meta:RefKey="Reference" />""")
+            builder.appendlnFix(2, """<Data Name="$dataName" Keys="Sprite" $nullable $skipIfDefault $visibleIfStr meta:RefKey="Reference" />""")
         }
         else if (type == "ParticleEffect" || type == "ParticleEffectDescription")
         {
-            builder.appendln(2, """<Data Name="$dataName" Keys="ParticleEffect" $nullable $skipIfDefault meta:RefKey="Reference" />""")
+            builder.appendlnFix(2, """<Data Name="$dataName" Keys="ParticleEffect" $nullable $skipIfDefault $visibleIfStr meta:RefKey="Reference" />""")
         }
         else
         {
@@ -267,11 +274,11 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 
             if (classDef.isAbstract)
             {
-                builder.appendln(2, """<Data Name="$dataName" DefKey="${classDef.classDef!!.dataClassName}Defs" $nullable $skipIfDefault meta:RefKey="Reference" />""")
+                builder.appendlnFix(2, """<Data Name="$dataName" DefKey="${classDef.classDef!!.dataClassName}Defs" $nullable $skipIfDefault $visibleIfStr meta:RefKey="Reference" />""")
             }
             else
             {
-                builder.appendln(2, """<Data Name="$dataName" Keys="${classDef.classDef!!.dataClassName}" $nullable $skipIfDefault meta:RefKey="Reference" />""")
+                builder.appendlnFix(2, """<Data Name="$dataName" Keys="${classDef.classDef!!.dataClassName}" $nullable $skipIfDefault $visibleIfStr meta:RefKey="Reference" />""")
             }
         }
     }
