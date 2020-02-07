@@ -188,7 +188,7 @@ class SourceRewriter(val file: File, val classRegister: ClassRegister)
 					}
 				}
 
-				if (trimmed.contains(" fun ") || trimmed.contains("companion object "))
+				if (trimmed.contains(" fun ") || trimmed.contains("companion "))
 				{
 
 				}
@@ -221,7 +221,7 @@ class SourceRewriter(val file: File, val classRegister: ClassRegister)
 			part.write(output)
 		}
 
-		val newContents = output.toString()
+		val newContents = output.toString().trim()
 		if (newContents != originalContents)
 		{
 			file.writeText(newContents)

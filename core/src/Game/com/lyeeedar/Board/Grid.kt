@@ -669,7 +669,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 		if (tile.spreader != null && damSource !is Spreader)
 		{
 			val spreader = tile.spreader!!
-			poppedSpreaders.add(spreader.nameKey)
+			poppedSpreaders.add(spreader.data.nameKey)
 			tile.spreader = null
 
 			if (!Global.resolveInstantly)

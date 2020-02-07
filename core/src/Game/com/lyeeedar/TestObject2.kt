@@ -24,12 +24,3 @@ class TestObject2 : XmlDataClass()
 		container.load(containerEl)
 	}
 }
-
-
-
-
-
-
-
-
-

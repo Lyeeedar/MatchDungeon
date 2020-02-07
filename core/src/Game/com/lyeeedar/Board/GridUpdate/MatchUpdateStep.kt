@@ -380,7 +380,7 @@ class MatchUpdateStep : AbstractUpdateStep()
 		{
 			val spreader = tile.spreader!!
 			tile.spreader = null
-			grid.poppedSpreaders.add(spreader.nameKey)
+			grid.poppedSpreaders.add(spreader.data.nameKey)
 
 			if (!Global.resolveInstantly)
 			{

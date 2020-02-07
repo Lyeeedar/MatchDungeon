@@ -78,7 +78,7 @@ class Effect(val type: Type)
 			Type.SPREADER -> fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>)
 			{
 				val spreader = (data["SPREADER"] as Spreader).copy()
-				spreader.damage += Global.player.getStat(Statistic.ABILITYDAMAGE) / 3f
+				//spreader.damage += Global.player.getStat(Statistic.ABILITYDAMAGE) / 3f
 				tile.spreader = spreader
 			}
 

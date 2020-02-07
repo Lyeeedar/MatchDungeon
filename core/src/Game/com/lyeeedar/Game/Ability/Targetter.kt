@@ -50,7 +50,7 @@ class Targetter(val type: Type)
 
 			Type.TILE -> fun(tile: Tile, data: ObjectMap<String, Any>) = tile.canHaveOrb
 
-			Type.SPREADER ->  fun(tile: Tile, data: ObjectMap<String, Any>) = tile.spreader?.nameKey == data["SPREADERNAME"]
+			Type.SPREADER ->  fun(tile: Tile, data: ObjectMap<String, Any>) = tile.spreader?.data?.nameKey == data["SPREADERNAME"]
 
 			Type.NAMEDTILE -> fun(tile: Tile, data: ObjectMap<String, Any>) = tile.nameKey == data["TILENAME"]
 

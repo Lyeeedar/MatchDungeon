@@ -580,7 +580,7 @@ class GridWidget(val grid: Grid) : Widget()
 
 				if (spreader != null)
 				{
-					val level = if (spreader.renderAbove) renderer else renderer
+					val level = if (spreader.data.renderAbove) renderer else renderer
 
 					val spriteWrapper = spreader.spriteWrapper
 					if (spriteWrapper != null)

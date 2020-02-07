@@ -3,7 +3,7 @@ package com.lyeeedar.Board.GridUpdate
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.Vector2
 import com.lyeeedar.Board.Grid
-import com.lyeeedar.Board.Spreader
+import com.lyeeedar.Board.SpreaderEffect
 import com.lyeeedar.Board.Tile
 import com.lyeeedar.Components.*
 import com.lyeeedar.Game.Global
@@ -92,7 +92,7 @@ class CascadeUpdateStep : AbstractUpdateStep()
 			{
 				break
 			}
-			else if (stile.spreader?.effect == Spreader.SpreaderEffect.SEAL)
+			else if (stile.spreader?.data?.effect == SpreaderEffect.SEAL)
 			{
 				break
 			}
@@ -272,7 +272,7 @@ class CascadeUpdateStep : AbstractUpdateStep()
 						if (contents.sinkable() != null && !connectsToBottom) return false
 
 						// if tile has a spreader with a seal effect, not valid
-						if (tile.spreader != null && tile.spreader!!.effect == Spreader.SpreaderEffect.SEAL) return false
+						if (tile.spreader != null && tile.spreader!!.data.effect == SpreaderEffect.SEAL) return false
 
 						// if the tile to the left is empty, and can take an orb, then not valid
 						if (tileBelow != null && tileBelow.canHaveOrb && tileBelow.contents == null) return false

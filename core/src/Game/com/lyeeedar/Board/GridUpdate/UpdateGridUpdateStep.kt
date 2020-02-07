@@ -308,9 +308,9 @@ class UpdateGridUpdateStep : AbstractUpdateStep()
 			val spreader = tile.spreader
 			if (spreader != null)
 			{
-				if (!processedSpreaders.contains(spreader.nameKey) && spreader.spreads)
+				if (!processedSpreaders.contains(spreader.data.nameKey) && spreader.data.spreads)
 				{
-					processedSpreaders.add(spreader.nameKey)
+					processedSpreaders.add(spreader.data.nameKey)
 
 					spreader.spread(grid, tile)
 				}
