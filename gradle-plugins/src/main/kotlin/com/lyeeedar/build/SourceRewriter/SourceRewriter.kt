@@ -106,7 +106,11 @@ class SourceRewriter(val file: File, val classRegister: ClassRegister)
 					currentMiscPart = MiscFilePart()
 					fileContents.add(currentMiscPart)
 				}
-				currentMiscPart.code.appendln(line.trimEnd())
+
+				if (importsPart.imports.size > 0)
+				{
+					currentMiscPart.code.add(line.trimEnd())
+				}
 
 				annotations = null
 			}
@@ -118,6 +122,8 @@ class SourceRewriter(val file: File, val classRegister: ClassRegister)
 					{
 						funcDepth = null
 					}
+
+					continue
 				}
 				else if (trimmed == "{")
 				{
@@ -127,8 +133,11 @@ class SourceRewriter(val file: File, val classRegister: ClassRegister)
 					{
 						funcDepth = depth
 					}
+
+					continue
 				}
-				else if (trimmed.startsWith("@"))
+
+				if (trimmed.startsWith("@"))
 				{
 					if (annotations == null)
 					{
@@ -170,11 +179,22 @@ class SourceRewriter(val file: File, val classRegister: ClassRegister)
 
 						currentClassPart = null
 						annotations = null
+
+						continue
 					}
 					else
 					{
 						annotations = null
 					}
+				}
+
+				if (trimmed.contains(" fun ") || trimmed.contains("companion object "))
+				{
+
+				}
+				else
+				{
+					currentClassPart.desc.classContents.add(trimmed)
 				}
 			}
 		}

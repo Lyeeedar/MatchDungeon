@@ -2,7 +2,6 @@ package com.lyeeedar.Board
 
 import com.badlogic.gdx.utils.ObjectMap
 import com.badlogic.gdx.utils.ObjectSet
-import com.lyeeedar.Components.MonsterEffectComponent
 import com.lyeeedar.Components.damageable
 import com.lyeeedar.Components.isBasicOrb
 import com.lyeeedar.Direction
@@ -12,58 +11,81 @@ import com.lyeeedar.Renderables.Animation.LeapAnimation
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Sprite.SpriteWrapper
 import com.lyeeedar.Statistic
-import com.lyeeedar.Util.AssetManager
-import com.lyeeedar.Util.XmlData
-import com.lyeeedar.Util.random
+import com.lyeeedar.Util.*
 import java.util.*
+
+enum class SpreaderEffect
+{
+	POP,
+	SEAL,
+	DAMAGE,
+	ATTACK
+}
+
+@DataClass(name = "Spreader")
+class SpreaderData : XmlDataClass()
+{
+	lateinit var nameKey: String
+	var spriteWrapper: SpriteWrapper? = null
+	var particleEffect: ParticleEffect? = null
+	lateinit var effect: SpreaderEffect
+
+	@DataValue(visibleIf = "Effect == POP || Effect == Damage")
+	var damage: Float = 0f
+
+	@DataValue(visibleIf = "Effect == Attack")
+	@NumericRange(min = 3f)
+	var attackCooldownMin: Int = 3
+
+	@DataValue(visibleIf = "Effect == Attack")
+	@NumericRange(min = 3f)
+	var attackCooldownMax: Int = 10
+
+	@DataValue(visibleIf = "Effect == Attack")
+	@NumericRange(min = 3f)
+	var attackNumPips: Int = 7
+
+	@DataValue(visibleIf = "Effect == Attack")
+	var attackEffect: ParticleEffect? = null
+	var spreads: Boolean = true
+	var renderAbove: Boolean = true
+
+	@NumericRange(min = -1f)
+	var fadeOut: Int = -1
+
+	override fun load(xmlData: XmlData)
+	{
+		nameKey = xmlData.get("NameKey")
+		spriteWrapper = AssetManager.tryLoadSpriteWrapper(xmlData.getChildByName("SpriteWrapper"))
+		particleEffect = AssetManager.tryLoadParticleEffect(xmlData.getChildByName("ParticleEffect"))?.getParticleEffect()
+		effect = SpreaderEffect.valueOf(xmlData.get("Effect").toUpperCase(Locale.ENGLISH))
+		damage = xmlData.getFloat("Damage", 0f)
+		attackCooldownMin = xmlData.getInt("AttackCooldownMin", 3)
+		attackCooldownMax = xmlData.getInt("AttackCooldownMax", 10)
+		attackNumPips = xmlData.getInt("AttackNumPips", 7)
+		attackEffect = AssetManager.tryLoadParticleEffect(xmlData.getChildByName("AttackEffect"))?.getParticleEffect()
+		spreads = xmlData.getBoolean("Spreads", true)
+		renderAbove = xmlData.getBoolean("RenderAbove", true)
+		fadeOut = xmlData.getInt("FadeOut", -1)
+	}
+}
 
 class Spreader
 {
-	enum class SpreaderEffect
-	{
-		POP,
-		SEAL,
-		DAMAGE,
-		ATTACK
-	}
-
-	lateinit var nameKey: String
-
+	lateinit var data: SpreaderData
+	var fadeOut = -1
+	var attackCooldown = 0
 	var spriteWrapper: SpriteWrapper? = null
 	var particleEffect: ParticleEffect? = null
-
-	lateinit var effect: SpreaderEffect
-
-	var damage: Float = 0f
-
-	var attackCooldownMin = 0
-	var attackCooldownMax = 0
-	var attackCooldown = 0
-	var attackNumPips = 0
-
-	var attackEffect: ParticleEffect? = null
-
-	var spreads = true
-	var renderAbove = true
-	var fadeOut = -1
 
 	fun copy(): Spreader
 	{
 		val out = Spreader()
-		out.nameKey = nameKey
-		out.spriteWrapper = spriteWrapper?.copy()
-		out.particleEffect = particleEffect?.copy()
-
-		out.spreads = spreads
-		out.renderAbove = renderAbove
-		out.fadeOut = fadeOut
-		out.damage = damage
-		out.effect = effect
-
-		out.attackCooldownMin = attackCooldownMin
-		out.attackCooldownMax = attackCooldownMax
-		out.attackEffect = attackEffect
-		out.attackNumPips = attackNumPips
+		out.data = data
+		out.spriteWrapper = data.spriteWrapper?.copy()
+		out.particleEffect = data.particleEffect?.copy()
+		out.fadeOut = data.fadeOut
+		out.attackCooldown = data.attackCooldownMax
 
 		return out
 	}
@@ -71,7 +93,7 @@ class Spreader
 	fun spread(grid: Grid, tile: Tile)
 	{
 		// do spreading
-		if (!grid.poppedSpreaders.contains(nameKey))
+		if (!grid.poppedSpreaders.contains(data.nameKey))
 		{
 			// spread
 
@@ -79,7 +101,7 @@ class Spreader
 			val border = ObjectSet<Tile>()
 			for (t in grid.grid)
 			{
-				if (t.spreader != null && t.spreader!!.nameKey == nameKey)
+				if (t.spreader != null && t.spreader!!.data.nameKey == data.nameKey)
 				{
 					for (dir in Direction.CardinalValues)
 					{
@@ -120,7 +142,7 @@ class Spreader
 
 				chosenTile.spreader = newspreader
 
-				grid.replay.logAction("spreader $nameKey spreading to (${chosenTile.toShortString()})")
+				grid.replay.logAction("spreader ${data.nameKey} spreading to (${chosenTile.toShortString()})")
 			}
 		}
 	}
@@ -137,23 +159,23 @@ class Spreader
 		}
 
 		// do on turn effects
-		if (effect == SpreaderEffect.POP)
+		if (data.effect == SpreaderEffect.POP)
 		{
-			grid.pop(tile, 0f, this, damage, 0f, true)
+			grid.pop(tile, 0f, this, data.damage, 0f, true)
 		}
-		else if (effect == SpreaderEffect.DAMAGE)
+		else if (data.effect == SpreaderEffect.DAMAGE)
 		{
 			val damageable = tile.contents?.damageable()
 			if (damageable != null)
 			{
-				grid.damage(tile, tile.contents!!, 0f, nameKey, damage)
+				grid.damage(tile, tile.contents!!, 0f, data.nameKey, data.damage)
 			}
 		}
-		else if (effect == SpreaderEffect.ATTACK)
+		else if (data.effect == SpreaderEffect.ATTACK)
 		{
 			if (attackCooldown <= 0)
 			{
-				attackCooldown = attackCooldownMin + grid.ran.nextInt(attackCooldownMax - attackCooldownMin)
+				attackCooldown = data.attackCooldownMin + grid.ran.nextInt(data.attackCooldownMax - data.attackCooldownMin)
 				attackCooldown += (attackCooldown * Global.player.getStat(Statistic.HASTE, true)).toInt()
 			}
 
@@ -174,9 +196,9 @@ class Spreader
 
 				val attack = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap())
 				addMonsterEffect(target, attack)
-				attack.timer = attackNumPips + (Global.player.getStat(Statistic.HASTE) * attackNumPips).toInt()
+				attack.timer = data.attackNumPips + (Global.player.getStat(Statistic.HASTE) * data.attackNumPips).toInt()
 
-				grid.replay.logAction("spreader $nameKey attacking from (${tile.toShortString()}) to (${attackedTile.toShortString()})")
+				grid.replay.logAction("spreader ${data.nameKey} attacking from (${tile.toShortString()}) to (${attackedTile.toShortString()})")
 
 				if (!Global.resolveInstantly)
 				{
@@ -190,9 +212,9 @@ class Spreader
 					attackSprite.animation = ExpandAnimation.obtain().set(animDuration, 0.5f, 1.5f, false)
 					attackedTile.effects.add(attackSprite)
 
-					if (attackEffect != null)
+					if (data.attackEffect != null)
 					{
-						val effect = attackEffect!!.copy()
+						val effect = data.attackEffect!!.copy()
 						tile.effects.add(effect)
 					}
 
@@ -207,40 +229,23 @@ class Spreader
 		fun load(xmlData: XmlData): Spreader
 		{
 			val spreader = Spreader()
+			spreader.data = SpreaderData()
+			spreader.data.load(xmlData)
 
-			spreader.nameKey = xmlData.get("Name")
-
-			val spriteEl = xmlData.getChildByName("Sprite")
-			if (spriteEl != null)
-			{
-				spreader.spriteWrapper = SpriteWrapper.load(spriteEl)
-			}
-
-			val particleEl = xmlData.getChildByName("ParticleEffect")
-			if (particleEl != null)
-			{
-				spreader.particleEffect = AssetManager.loadParticleEffect(particleEl).getParticleEffect()
-			}
-
-			spreader.effect = SpreaderEffect.valueOf(xmlData.get("Effect", "seal")!!.toUpperCase(Locale.ENGLISH))
-
-			spreader.damage = xmlData.getFloat("Damage", 0f)
-
-			spreader.spreads = xmlData.getBoolean("Spreads", true)
-			spreader.renderAbove = xmlData.getBoolean("RenderAbove", true)
-			spreader.fadeOut = xmlData.getInt("FadeOut", -1)
-
-			spreader.attackCooldownMin = xmlData.getInt("AttackCooldownMin", 3)
-			spreader.attackCooldownMax = xmlData.getInt("AttackCooldownMax", 10)
-			spreader.attackNumPips = xmlData.getInt("AttackNumPips", 7)
-
-			val attackEffectEl = xmlData.getChildByName("AttackEffect")
-			if (attackEffectEl != null)
-			{
-				spreader.attackEffect = AssetManager.loadParticleEffect(attackEffectEl).getParticleEffect()
-			}
+			spreader.spriteWrapper = spreader.data.spriteWrapper?.copy()
+			spreader.particleEffect = spreader.data.particleEffect?.copy()
+			spreader.fadeOut = spreader.data.fadeOut
+			spreader.attackCooldown = spreader.data.attackCooldownMax
 
 			return spreader
 		}
 	}
 }
+
+
+
+
+
+
+
+

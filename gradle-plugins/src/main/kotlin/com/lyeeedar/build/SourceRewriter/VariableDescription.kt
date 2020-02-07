@@ -41,14 +41,18 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 			nullable = true
 		}
 
-        if (type == "ParticleEffect" || type == "ParticleEffectDescription" || type == "Sprite")
+        if (type == "ParticleEffect" || type == "ParticleEffectDescription" || type == "Sprite" || type == "SpriteWrapper")
         {
             imports.add("import com.lyeeedar.Util.AssetManager")
         }
-        else if (type == "String" || type == "Int" || type == "Float")
+        else if (type == "String" || type == "Int" || type == "Float" || type == "Boolean")
         {
             // primitives dont need imports
         }
+		else if (classRegister.enumMap.containsKey(type))
+		{
+			imports.add("import java.util.*")
+		}
         else
         {
             val classDef = classRegister.classMap[type] ?: throw RuntimeException("resolveImports: Unknown type '$type'!")
@@ -100,6 +104,13 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
                 builder.appendln(indentation, "$name = xmlData.getFloat(\"$dataName\", $defaultValue)")
             }
         }
+		else if (type == "Boolean")
+		{
+			if (variableType == VariableType.VAR)
+			{
+				builder.appendln(indentation, "$name = xmlData.getBoolean(\"$dataName\", $defaultValue)")
+			}
+		}
         else if (type == "ParticleEffect")
         {
             if (variableType == VariableType.LATEINIT)
@@ -114,6 +125,10 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
                 {
                     loadLine += "!!"
                 }
+				else
+				{
+					loadLine += "?"
+				}
                 builder.appendln(indentation, "${loadLine}.getParticleEffect()")
             }
         }
@@ -151,6 +166,36 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
                 builder.appendln(indentation, loadLine)
             }
         }
+		else if (type == "SpriteWrapper")
+		{
+			if (variableType == VariableType.LATEINIT)
+			{
+				val loadLine = "$name = AssetManager.loadSpriteWrapper(xmlData.getChildByName(\"$dataName\")!!)"
+				builder.appendln(indentation, loadLine)
+			}
+			else if (variableType == VariableType.VAR)
+			{
+				var loadLine = "$name = AssetManager.tryLoadSpriteWrapper(xmlData.getChildByName(\"$dataName\"))"
+				if (!nullable)
+				{
+					loadLine += "!!"
+				}
+				builder.appendln(indentation, loadLine)
+			}
+		}
+		else if (classRegister.enumMap.containsKey(type))
+		{
+			val enumDef = classRegister.enumMap[type]!!
+
+			if (variableType == VariableType.LATEINIT)
+			{
+				builder.appendln(indentation, "$name = ${enumDef.name}.valueOf(xmlData.get(\"$dataName\").toUpperCase(Locale.ENGLISH))")
+			}
+			else if (variableType == VariableType.VAR)
+			{
+				builder.appendln(indentation, "${enumDef.name}.valueOf(xmlData.get(\"$dataName\", ${defaultValue}.toString()).toUpperCase(Locale.ENGLISH)))")
+			}
+		}
         else
         {
             val classDef = classRegister.classMap[type] ?: throw RuntimeException("writeLoad: Unknown type '$type'!")
@@ -260,14 +305,26 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 
             builder.appendlnFix(2, """<Data Name="$dataName" $minStr $maxStr Type="$type" Default="$defaultValue" SkipIfDefault="True" $visibleIfStr meta:RefKey="Number" />""")
         }
+		else if (type == "Boolean")
+		{
+			builder.appendlnFix(2, """<Data Name="$dataName" SkipIfDefault="True" Default="$defaultValue" $visibleIfStr meta:RefKey="Boolean" />""")
+		}
         else if (type == "Sprite")
         {
             builder.appendlnFix(2, """<Data Name="$dataName" Keys="Sprite" $nullable $skipIfDefault $visibleIfStr meta:RefKey="Reference" />""")
         }
+		else if (type == "SpriteWrapper")
+		{
+			builder.appendlnFix(2, """<Data Name="$dataName" Keys="SpriteWrapper" $nullable $skipIfDefault $visibleIfStr meta:RefKey="Reference" />""")
+		}
         else if (type == "ParticleEffect" || type == "ParticleEffectDescription")
         {
             builder.appendlnFix(2, """<Data Name="$dataName" Keys="ParticleEffect" $nullable $skipIfDefault $visibleIfStr meta:RefKey="Reference" />""")
         }
+		else if (classRegister.enumMap.containsKey(type))
+		{
+			val enumDef = classRegister.enumMap[type]!!
+		}
         else
         {
             val classDef = classRegister.classMap[type] ?: throw RuntimeException("createDefEntry: Unknown type '$type'!")

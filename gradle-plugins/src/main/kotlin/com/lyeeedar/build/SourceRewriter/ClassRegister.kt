@@ -6,6 +6,7 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 {
 	val classMap = HashMap<String, ClassDefinition>()
 	val interfaceMap = HashMap<String, InterfaceDefinition>()
+	val enumMap = HashMap<String, EnumDefinition>()
 
 	fun registerClasses()
 	{
@@ -67,8 +68,10 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 		val lines = file.readLines()
 
 		var packageStr: String = ""
-		for (line in lines)
+		for (i in 0 until lines.size)
 		{
+			val line = lines[i]
+
 			val trimmed = line.trim()
 
 			if (trimmed.startsWith("package "))
@@ -121,6 +124,29 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 				interfaceDef.packageStr = packageStr
 
 				interfaceMap.put(name, interfaceDef)
+			}
+			else if (trimmed.startsWith("enum class "))
+			{
+				val name = trimmed.replace("enum class ", "").trim().split(" ")[0]
+
+				val enumDef = EnumDefinition(name)
+
+				var ii = i+2
+				while (true)
+				{
+					val line = lines[ii]
+
+					val enumValue = line.split(',', '(', ';')[0].trim()
+					enumDef.values.add(enumValue)
+
+					if (!line.trim().endsWith(','))
+					{
+						break
+					}
+					ii++
+				}
+
+				enumMap.put(name, enumDef)
 			}
 		}
 	}
@@ -382,4 +408,9 @@ class ClassDefinition(val name: String)
 class InterfaceDefinition(val name: String)
 {
 	var packageStr: String = ""
+}
+
+class EnumDefinition(val name: String)
+{
+	val values = ArrayList<String>()
 }

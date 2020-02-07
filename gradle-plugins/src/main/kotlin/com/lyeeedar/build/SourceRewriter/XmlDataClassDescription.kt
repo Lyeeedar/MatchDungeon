@@ -4,6 +4,8 @@ class XmlDataClassDescription(val name: String, val superClass: String, val clas
 {
     val variables = ArrayList<VariableDescription>()
 
+	val classContents = ArrayList<String>()
+
 	val dataClassName: String
 	val dataClassCategory: String
 
@@ -57,19 +59,17 @@ class XmlDataClassDescription(val name: String, val superClass: String, val clas
         builder.appendln(classIndentation, "$classType $name : $superClass")
         builder.appendln(classIndentation, "{")
 
-        for (variable in variables)
-        {
-            for (annotation in variable.annotations)
-            {
-                builder.appendln(classIndentation+1, annotation.annotationString)
-            }
+		// remove blank lines from end of content
+		for (i in classContents.size-1 downTo 0)
+		{
+			if (classContents[i].isBlank()) classContents.removeAt(i)
+			else break
+		}
 
-            builder.appendln(classIndentation+1, variable.raw.trimEnd())
-            if (variable.name == "classID")
-            {
-                builder.appendln("")
-            }
-        }
+		for (line in classContents)
+		{
+			builder.appendln(classIndentation+1, line)
+		}
 
         builder.appendln("")
         builder.appendln(classIndentation+1, "override fun load(xmlData: XmlData)")

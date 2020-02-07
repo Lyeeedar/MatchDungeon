@@ -22,17 +22,23 @@ class ImportsFilePart : IFilePart
 
     override fun write(builder: IndentedStringBuilder)
     {
-        builder.appendln(imports.sorted().joinToString("\n"))
+		for (import in imports.sorted())
+		{
+			builder.appendln(import.trimEnd())
+		}
     }
 }
 
 class MiscFilePart : IFilePart
 {
-    val code: StringBuilder = StringBuilder()
+    val code = ArrayList<String>()
 
     override fun write(builder: IndentedStringBuilder)
     {
-        builder.appendln(code.toString().trimEnd())
+		for (line in code)
+		{
+			builder.appendln(line.trimEnd())
+		}
     }
 }
 

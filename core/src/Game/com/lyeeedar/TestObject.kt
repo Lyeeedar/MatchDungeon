@@ -5,6 +5,13 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Util.*
 import com.lyeeedar.Util.AssetManager
 
+
+
+
+
+
+
+
 @DataFile()
 @DataClass(name = "TestObject")
 class TestObjectData : XmlDataClass()
@@ -56,8 +63,35 @@ class DataContainer : XmlDataClass()
 abstract class AbstractNode : XmlDataClass()
 {
 	abstract val classID: String
-
+	
 	lateinit var description: String
+	
+	
+	companion object
+	
+	
+	companion object
+	
+	
+	companion object
+	
+	
+	companion object
+	
+	
+	companion object
+	
+	
+	companion object
+	
+	
+	companion object
+	
+	
+	companion object
+	
+	
+	companion object
 
 	override fun load(xmlData: XmlData)
 	{
@@ -82,7 +116,7 @@ abstract class AbstractNode : XmlDataClass()
 class StringNode : AbstractNode()
 {
 	override val classID = "String"
-
+	
 	lateinit var text: String
 
 	override fun load(xmlData: XmlData)
@@ -96,7 +130,7 @@ class StringNode : AbstractNode()
 class IntNode : AbstractNode()
 {
 	override val classID = "Int"
-
+	
 	var value: Int = 5
 
 	override fun load(xmlData: XmlData)
@@ -105,4 +139,12 @@ class IntNode : AbstractNode()
 		value = xmlData.getInt("Value", 5)
 	}
 }
+
+
+
+
+
+
+
+
 
