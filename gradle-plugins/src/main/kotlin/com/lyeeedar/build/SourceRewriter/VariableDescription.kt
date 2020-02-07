@@ -324,6 +324,15 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 		else if (classRegister.enumMap.containsKey(type))
 		{
 			val enumDef = classRegister.enumMap[type]!!
+            val enumVals = enumDef.values.sorted().joinToString(",")
+
+            var defaultStr = ""
+            if (defaultValue.isNotBlank())
+            {
+                defaultStr = "Default=\"${defaultValue.split('.').last()}\""
+            }
+
+            builder.appendlnFix(2, """<Data Name="$dataName" Keys="$enumVals" $defaultStr $skipIfDefault $visibleIfStr meta:RefKey="Enum" />""")
 		}
         else
         {
