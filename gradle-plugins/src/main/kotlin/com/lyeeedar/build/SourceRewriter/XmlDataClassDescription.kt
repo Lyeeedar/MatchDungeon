@@ -8,6 +8,7 @@ class XmlDataClassDescription(val name: String, val superClass: String, val clas
 
 	val dataClassName: String
 	val dataClassCategory: String
+	val forceGlobal: Boolean
 
     init
     {
@@ -18,11 +19,13 @@ class XmlDataClassDescription(val name: String, val superClass: String, val clas
 		{
 			dataClassName = dataClassAnnotation.paramMap["name"] ?: name.capitalize()
 			dataClassCategory = dataClassAnnotation.paramMap["category"] ?: ""
+			forceGlobal = dataClassAnnotation.paramMap["global"] == "true"
 		}
 		else
 		{
 			dataClassName = name.capitalize()
 			dataClassCategory = ""
+			forceGlobal = false
 		}
     }
 

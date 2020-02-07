@@ -23,9 +23,10 @@ enum class SpreaderEffect
 	ATTACK
 }
 
-@DataClass(name = "Spreader")
+@DataClass(name = "SpreaderDef", global = true)
 class SpreaderData : XmlDataClass()
 {
+	@DataValue(dataName = "Name")
 	lateinit var nameKey: String
 	var spriteWrapper: SpriteWrapper? = null
 	var particleEffect: ParticleEffect? = null
@@ -56,7 +57,7 @@ class SpreaderData : XmlDataClass()
 
 	override fun load(xmlData: XmlData)
 	{
-		nameKey = xmlData.get("NameKey")
+		nameKey = xmlData.get("Name")
 		spriteWrapper = AssetManager.tryLoadSpriteWrapper(xmlData.getChildByName("SpriteWrapper"))
 		particleEffect = AssetManager.tryLoadParticleEffect(xmlData.getChildByName("ParticleEffect"))?.getParticleEffect()
 		effect = SpreaderEffect.valueOf(xmlData.get("Effect").toUpperCase(Locale.ENGLISH))

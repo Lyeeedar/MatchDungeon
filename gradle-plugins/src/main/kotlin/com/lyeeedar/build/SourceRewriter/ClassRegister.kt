@@ -231,6 +231,8 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 
 			for (classDef in otherClasses)
 			{
+				if (classDef.classDef!!.forceGlobal) continue
+
 				if (writtenSpecificFiles.contains(classDef)) throw RuntimeException("Class written twice!")
 				classDef.classDef!!.createDefFile(builder, false)
 				writtenSpecificFiles.add(classDef)
@@ -272,9 +274,11 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 		}
 
 		// write shared files
-		val sharedClasses = refCountMap.filter { it.value > 0 }.map { it.key }.toList()
+		val sharedClasses = refCountMap.filter { it.value > 0 }.map { it.key }.toHashSet()
+		sharedClasses.addAll(xmlDataClasses.filter { it.classDef!!.forceGlobal })
 
-		if (sharedClasses.isNotEmpty()) {
+		if (sharedClasses.isNotEmpty())
+		{
 			File("$defFolder/Shared").mkdirs()
 
 			val sharedClassesToWrite = HashSet<ClassDefinition>()

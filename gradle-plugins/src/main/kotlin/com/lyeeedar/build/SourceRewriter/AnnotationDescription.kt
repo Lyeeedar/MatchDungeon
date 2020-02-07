@@ -34,7 +34,7 @@ class AnnotationDescription(val annotationString: String)
 
 				val split = parameter.split("=")
 				val paramName = split[0].trim()
-				val paramValue = split[1].trim().replace("\"", "")
+				val paramValue = parameter.replace("${split[0]}=", "").trim().replace("\"", "")
 
 				paramMap.put(paramName, paramValue)
 			}
