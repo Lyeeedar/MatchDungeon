@@ -75,13 +75,15 @@
 				</Death>
 				<HP>5</HP>
 				<Abilities>
-					<Move>
+					<FriendlyMoveAbilityData>
+						<classID>Move</classID>
 						<Cooldown>2,4</Cooldown>
-					</Move>
-					<Pop>
+					</FriendlyMoveAbilityData>
+					<FriendlyPopAbilityData>
+						<classID>Pop</classID>
 						<Cooldown>1,3</Cooldown>
 						<Count>1</Count>
-					</Pop>
+					</FriendlyPopAbilityData>
 				</Abilities>
 			</Friendly>
 			<IsMonster>false</IsMonster>

@@ -31,23 +31,26 @@
 				</Death>
 				<DamageReduction>1</DamageReduction>
 				<Abilities>
-					<Attack>
+					<FriendlyAttackAbilityData>
+						<classID>Attack</classID>
 						<Cooldown>2,3</Cooldown>
 						<Range>2</Range>
 						<Count>1</Count>
 						<Damage>1</Damage>
-					</Attack>
-					<Move>
+					</FriendlyAttackAbilityData>
+					<FriendlyMoveAbilityData>
+						<classID>Move</classID>
 						<Cooldown>1,2</Cooldown>
-					</Move>
-					<Block>
+					</FriendlyMoveAbilityData>
+					<FriendlyBlockAbilityData>
+						<classID>Block</classID>
 						<Cooldown>1,3</Cooldown>
 						<Range>2</Range>
 						<Count>1</Count>
 						<HitEffect meta:RefKey="ParticleEffect">
 							<Name>Block</Name>
 						</HitEffect>
-					</Block>
+					</FriendlyBlockAbilityData>
 				</Abilities>
 			</Friendly>
 			<IsMonster>false</IsMonster>

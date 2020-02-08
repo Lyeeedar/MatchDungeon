@@ -136,7 +136,7 @@ class XmlDataClassDescription(val name: String, val superClass: String, val clas
         }
         else
         {
-            val global = if (needsGlobalScope) "IsGlobal=\"True\"" else ""
+            val global = if (needsGlobalScope || forceGlobal) "IsGlobal=\"True\"" else ""
             builder.appendln(1, """<Definition Name="$dataClassName" $global $extends meta:RefKey="StructDef">""")
         }
 

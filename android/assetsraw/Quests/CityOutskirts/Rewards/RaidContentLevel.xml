@@ -107,7 +107,8 @@
 					<Name>Death</Name>
 				</Death>
 				<Abilities>
-					<Attack>
+					<FriendlyAttackAbilityData>
+						<classID>Attack</classID>
 						<Cooldown>1,4</Cooldown>
 						<Range>4</Range>
 						<Count>1</Count>
@@ -116,10 +117,11 @@
 							<Name>Arrow</Name>
 							<KillOnAnimComplete>true</KillOnAnimComplete>
 						</FlightEffect>
-					</Attack>
-					<Move>
+					</FriendlyAttackAbilityData>
+					<FriendlyMoveAbilityData>
+						<classID>Move</classID>
 						<Cooldown>1,5</Cooldown>
-					</Move>
+					</FriendlyMoveAbilityData>
 				</Abilities>
 			</Friendly>
 			<IsMonster>false</IsMonster>

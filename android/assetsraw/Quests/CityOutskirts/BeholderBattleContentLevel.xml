@@ -109,22 +109,25 @@
 				</Death>
 				<DamageReduction>1</DamageReduction>
 				<Abilities>
-					<Attack>
+					<FriendlyAttackAbilityData>
+						<classID>Attack</classID>
 						<Cooldown>2,3</Cooldown>
 						<Count>1</Count>
 						<Damage>1</Damage>
-					</Attack>
-					<Move>
+					</FriendlyAttackAbilityData>
+					<FriendlyMoveAbilityData>
+						<classID>Move</classID>
 						<Cooldown>1,3</Cooldown>
-					</Move>
-					<Block>
+					</FriendlyMoveAbilityData>
+					<FriendlyBlockAbilityData>
+						<classID>Block</classID>
 						<Cooldown>1,6</Cooldown>
 						<Range>2</Range>
 						<Count>1</Count>
 						<HitEffect meta:RefKey="ParticleEffect">
 							<Name>Block</Name>
 						</HitEffect>
-					</Block>
+					</FriendlyBlockAbilityData>
 				</Abilities>
 			</Friendly>
 			<IsMonster>false</IsMonster>
@@ -146,14 +149,16 @@
 					<Name>Death</Name>
 				</Death>
 				<Abilities>
-					<Move>
+					<FriendlyMoveAbilityData>
+						<classID>Move</classID>
 						<Cooldown>1,3</Cooldown>
-					</Move>
-					<Attack>
+					</FriendlyMoveAbilityData>
+					<FriendlyAttackAbilityData>
+						<classID>Attack</classID>
 						<Cooldown>2,4</Cooldown>
 						<Count>1</Count>
 						<Damage>1</Damage>
-					</Attack>
+					</FriendlyAttackAbilityData>
 				</Abilities>
 			</Friendly>
 			<IsMonster>false</IsMonster>
@@ -176,21 +181,24 @@
 				</Death>
 				<HP>5</HP>
 				<Abilities>
-					<Move>
+					<FriendlyMoveAbilityData>
+						<classID>Move</classID>
 						<Cooldown>2,4</Cooldown>
-					</Move>
-					<Block>
+					</FriendlyMoveAbilityData>
+					<FriendlyBlockAbilityData>
+						<classID>Block</classID>
 						<Cooldown>3,9</Cooldown>
 						<Count>1</Count>
 						<HitEffect meta:RefKey="ParticleEffect">
 							<Name>Heal</Name>
 							<Colour>31,240,0,255</Colour>
 						</HitEffect>
-					</Block>
-					<Heal>
+					</FriendlyBlockAbilityData>
+					<FriendlyHealAbilityData>
+						<classID>Heal</classID>
 						<Cooldown>2,6</Cooldown>
 						<Amount>1</Amount>
-					</Heal>
+					</FriendlyHealAbilityData>
 				</Abilities>
 			</Friendly>
 			<IsMonster>false</IsMonster>
@@ -211,7 +219,8 @@
 					<Name>Death</Name>
 				</Death>
 				<Abilities>
-					<Attack>
+					<FriendlyAttackAbilityData>
+						<classID>Attack</classID>
 						<Cooldown>1,4</Cooldown>
 						<Range>4</Range>
 						<Count>1</Count>
@@ -220,10 +229,11 @@
 							<Name>Arrow</Name>
 							<KillOnAnimComplete>true</KillOnAnimComplete>
 						</FlightEffect>
-					</Attack>
-					<Move>
+					</FriendlyAttackAbilityData>
+					<FriendlyMoveAbilityData>
+						<classID>Move</classID>
 						<Cooldown>1,5</Cooldown>
-					</Move>
+					</FriendlyMoveAbilityData>
 				</Abilities>
 			</Friendly>
 			<IsMonster>false</IsMonster>

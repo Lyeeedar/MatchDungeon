@@ -72,7 +72,7 @@ fun FriendlyDesc.getEntity(isSummon: Boolean, grid: Grid): Entity
 	return entity
 }
 
-@DataClass(global = true)
+@DataClass(name = "Friendly", global = true)
 class FriendlyDesc : XmlDataClass()
 {
 	lateinit var sprite: Sprite

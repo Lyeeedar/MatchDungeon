@@ -1,5 +1,5 @@
 <Definitions   xmlns:meta="Editor">
-	<Definition Name="FriendlyDesc"   meta:RefKey="StructDef">
+	<Definition Name="Friendly" IsGlobal="True"  meta:RefKey="StructDef">
 		<Data Name="Sprite" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="Death" Keys="ParticleEffect" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="Size" Min="1" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />

@@ -217,7 +217,7 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 			}
 
 			val dataClassAnnotation = root.classDef!!.annotations.firstOrNull { it.name == "DataFile" } ?: AnnotationDescription("@DataFile()")
-			val name = dataClassAnnotation.paramMap["name"]?.replace("\"", "") ?: root.classDef!!.name
+			val name = root.classDef!!.dataClassName
 			val colour =  dataClassAnnotation.paramMap["colour"]
 			val icon = dataClassAnnotation.paramMap["icon"]
 
