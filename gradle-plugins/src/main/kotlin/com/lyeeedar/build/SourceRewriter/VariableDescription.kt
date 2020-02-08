@@ -350,7 +350,7 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
                 defaultStr = "Default=\"${defaultValue.split('.').last()}\""
             }
 
-            builder.appendlnFix(2, """<Data Name="$dataName" Keys="$enumVals" $defaultStr $skipIfDefault $visibleIfStr meta:RefKey="Enum" />""")
+            builder.appendlnFix(2, """<Data Name="$dataName" EnumValues="$enumVals" $defaultStr $skipIfDefault $visibleIfStr meta:RefKey="Enum" />""")
 		}
 		else if (type.startsWith("Array<"))
 		{

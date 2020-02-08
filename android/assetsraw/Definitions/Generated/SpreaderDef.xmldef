@@ -1,9 +1,9 @@
 <Definitions   xmlns:meta="Editor">
 	<Definition Name="SpreaderDef" IsGlobal="True"  meta:RefKey="StructDef">
 		<Data Name="Name" SkipIfDefault="False" Default="" meta:RefKey="String" />
-		<Data Name="SpriteWrapper" Keys="SpriteWrapper" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+		<Data Name="Sprite" Keys="SpriteWrapper" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
 		<Data Name="ParticleEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
-		<Data Name="Effect" Keys="ATTACK,DAMAGE,POP,SEAL" Default="POP" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Effect" EnumValues="ATTACK,DAMAGE,POP,SEAL" Default="SEAL" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="Damage" Type="Float" Default="0" SkipIfDefault="True" VisibleIf="Effect == POP || Effect == Damage" meta:RefKey="Number" />
 		<Data Name="AttackCooldownMin" Min="3" Type="Int" Default="3" SkipIfDefault="True" VisibleIf="Effect == Attack" meta:RefKey="Number" />
 		<Data Name="AttackCooldownMax" Min="3" Type="Int" Default="10" SkipIfDefault="True" VisibleIf="Effect == Attack" meta:RefKey="Number" />
