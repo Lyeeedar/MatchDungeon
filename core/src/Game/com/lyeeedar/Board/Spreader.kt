@@ -12,7 +12,6 @@ import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.Sprite.SpriteWrapper
 import com.lyeeedar.Statistic
 import com.lyeeedar.Util.*
-import com.lyeeedar.Util.AssetManager
 import java.util.*
 
 enum class SpreaderEffect
@@ -30,28 +29,28 @@ class SpreaderData : XmlDataClass()
 	lateinit var nameKey: String
 	var spriteWrapper: SpriteWrapper? = null
 	var particleEffect: ParticleEffect? = null
-	lateinit var effect: SpreaderEffect
-	
+	var effect: SpreaderEffect = SpreaderEffect.POP
+
 	@DataValue(visibleIf = "Effect == POP || Effect == Damage")
 	var damage: Float = 0f
-	
+
 	@DataValue(visibleIf = "Effect == Attack")
 	@NumericRange(min = 3f)
 	var attackCooldownMin: Int = 3
-	
+
 	@DataValue(visibleIf = "Effect == Attack")
 	@NumericRange(min = 3f)
 	var attackCooldownMax: Int = 10
-	
+
 	@DataValue(visibleIf = "Effect == Attack")
 	@NumericRange(min = 3f)
 	var attackNumPips: Int = 7
-	
+
 	@DataValue(visibleIf = "Effect == Attack")
 	var attackEffect: ParticleEffect? = null
 	var spreads: Boolean = true
 	var renderAbove: Boolean = true
-	
+
 	@NumericRange(min = -1f)
 	var fadeOut: Int = -1
 
@@ -61,7 +60,7 @@ class SpreaderData : XmlDataClass()
 		nameKey = xmlData.get("Name")
 		spriteWrapper = AssetManager.tryLoadSpriteWrapper(xmlData.getChildByName("SpriteWrapper"))
 		particleEffect = AssetManager.tryLoadParticleEffect(xmlData.getChildByName("ParticleEffect"))?.getParticleEffect()
-		effect = SpreaderEffect.valueOf(xmlData.get("Effect").toUpperCase(Locale.ENGLISH))
+		effect = SpreaderEffect.valueOf(xmlData.get("Effect", SpreaderEffect.POP.toString())!!.toUpperCase(Locale.ENGLISH))
 		damage = xmlData.getFloat("Damage", 0f)
 		attackCooldownMin = xmlData.getInt("AttackCooldownMin", 3)
 		attackCooldownMax = xmlData.getInt("AttackCooldownMax", 10)

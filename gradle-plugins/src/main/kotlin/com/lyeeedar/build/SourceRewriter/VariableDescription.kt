@@ -184,7 +184,7 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 			}
 			else if (variableType == VariableType.VAR)
 			{
-				builder.appendln(indentation, "${enumDef.name}.valueOf(xmlData.get(\"$dataName\", ${defaultValue}.toString()).toUpperCase(Locale.ENGLISH)))")
+				builder.appendln(indentation, "$name = ${enumDef.name}.valueOf(xmlData.get(\"$dataName\", ${defaultValue}.toString())!!.toUpperCase(Locale.ENGLISH))")
 			}
 		}
 		else if (type.startsWith("Array<"))
