@@ -70,7 +70,8 @@ class Effect(val type: Type)
 
 			Type.SUMMON ->  fun(tile: Tile, grid: Grid, delay: Float, data: ObjectMap<String, Any>, originalTargets: Array<Tile>, variables: ObjectFloatMap<String>)
 			{
-				val desc = FriendlyDesc.load(data["SUMMON"] as XmlData)
+				val desc = FriendlyDesc()
+				desc.load(data["SUMMON"] as XmlData)
 				val friendly = desc.getEntity(data["DEGENSUMMON", "true"].toString().toBoolean(), grid)
 				friendly.pos()!!.setTile(friendly, tile)
 			}

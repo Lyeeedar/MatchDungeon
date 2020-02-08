@@ -665,7 +665,8 @@ class Level(val loadPath: String)
 					val friendlyDescEl = symbolEl.getChildByName("Friendly")
 					if (friendlyDescEl != null)
 					{
-						friendlyDesc = FriendlyDesc.load(friendlyDescEl)
+						friendlyDesc = FriendlyDesc()
+						friendlyDesc.load(friendlyDescEl)
 					}
 
 					val isMonster = symbolEl.getBoolean("IsMonster", false)

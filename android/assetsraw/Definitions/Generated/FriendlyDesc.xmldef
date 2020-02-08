@@ -1,0 +1,38 @@
+<Definitions   xmlns:meta="Editor">
+	<Definition Name="FriendlyDesc"   meta:RefKey="StructDef">
+		<Data Name="Sprite" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Death" Keys="ParticleEffect" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Size" Min="1" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Hp" Min="1" Type="Int" Default="10" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Abilities" DefKey="AbstractFriendlyAbilityDataDefs" meta:RefKey="Collection" />
+	</Definition>
+	<Definition Name="AbstractFriendlyAbilityData"   meta:RefKey="StructDef">
+		<Data Name="CooldownMin" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="CooldownMax" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Range" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="AbstractFriendlyAbilityDataDefs" Keys="FriendlyAttackAbilityData,FriendlyBlockAbilityData,FriendlyHealAbilityData,FriendlyMoveAbilityData,FriendlyPopAbilityData" meta:RefKey="ReferenceDef" />
+	<Definition Name="FriendlyAttackAbilityData"  Extends="FriendlyPopTileAbilityData" meta:RefKey="StructDef">
+		<Const Name="classID">Attack</Const>
+	</Definition>
+	<Definition Name="FriendlyBlockAbilityData"  Extends="FriendlyPopTileAbilityData" meta:RefKey="StructDef">
+		<Const Name="classID">Block</Const>
+	</Definition>
+	<Definition Name="FriendlyHealAbilityData"  Extends="AbstractFriendlyAbilityData" meta:RefKey="StructDef">
+		<Const Name="classID">Heal</Const>
+		<Data Name="HeartSprite" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Amount" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="FriendlyMoveAbilityData"  Extends="AbstractFriendlyAbilityData" meta:RefKey="StructDef">
+		<Const Name="classID">Move</Const>
+	</Definition>
+	<Definition Name="FriendlyPopAbilityData"  Extends="FriendlyPopTileAbilityData" meta:RefKey="StructDef">
+		<Const Name="classID">Pop</Const>
+	</Definition>
+	<Definition Name="FriendlyPopTileAbilityData"  Extends="AbstractFriendlyAbilityData" meta:RefKey="StructDef">
+		<Data Name="Damage" Min="1" Type="Float" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="FlightEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+		<Data Name="HitEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="FriendlyPopTileAbilityDataDefs" Keys="FriendlyAttackAbilityData,FriendlyBlockAbilityData,FriendlyPopAbilityData" meta:RefKey="ReferenceDef" />
+</Definitions>

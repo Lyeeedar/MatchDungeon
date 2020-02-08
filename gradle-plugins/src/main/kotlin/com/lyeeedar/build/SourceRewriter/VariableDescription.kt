@@ -53,15 +53,6 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 		{
 			imports.add("import java.util.*")
 		}
-        else
-        {
-            val classDef = classRegister.classMap[type] ?: throw RuntimeException("resolveImports: Unknown type '$type'!")
-
-            if (classDef.packageStr != classDefinition.packageStr)
-            {
-                imports.add(classDef.packageStr.replace("package ", "").trim() + ".${classDef.name}")
-            }
-        }
     }
 
     fun writeLoad(builder: IndentedStringBuilder, indentation: Int, classDefinition: ClassDefinition, classRegister: ClassRegister)
@@ -195,6 +186,33 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 			{
 				builder.appendln(indentation, "${enumDef.name}.valueOf(xmlData.get(\"$dataName\", ${defaultValue}.toString()).toUpperCase(Locale.ENGLISH)))")
 			}
+		}
+		else if (type.startsWith("Array<"))
+		{
+			val arrayType = type.replace("Array<", "").dropLast(1)
+
+			val classDef = classRegister.classMap[arrayType] ?: throw RuntimeException("writeLoad: Unknown type '$arrayType' in '$type'!")
+			classDefinition.referencedClasses.add(classDef)
+
+			val elName = name+"El"
+
+			builder.appendln(indentation, "val $elName = xmlData.getChildByName(\"$dataName\")!!")
+			builder.appendln(indentation, "for (el in ${elName}.children)")
+			builder.appendln(indentation, "{")
+
+			if (classDef.isAbstract)
+			{
+				builder.appendln(indentation+1, "val obj = $arrayType.loadPolymorphicClass(el.get(\"classID\"))")
+			}
+			else
+			{
+				builder.appendln(indentation+1, "val obj = $arrayType()")
+			}
+
+			builder.appendln(indentation+1, "obj.load(el)")
+			builder.appendln(indentation+1, "$name.add(obj)")
+
+			builder.appendln(indentation, "}")
 		}
         else
         {
@@ -333,6 +351,21 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
             }
 
             builder.appendlnFix(2, """<Data Name="$dataName" Keys="$enumVals" $defaultStr $skipIfDefault $visibleIfStr meta:RefKey="Enum" />""")
+		}
+		else if (type.startsWith("Array<"))
+		{
+			val arrayType = type.replace("Array<", "").dropLast(1)
+
+			val classDef = classRegister.classMap[arrayType] ?: throw RuntimeException("createDefEntry: Unknown type '$arrayType' for '$type'!")
+
+			if (classDef.isAbstract)
+			{
+				builder.appendlnFix(2, """<Data Name="$dataName" DefKey="${classDef.classDef!!.dataClassName}Defs" $visibleIfStr meta:RefKey="Collection" />""")
+			}
+			else
+			{
+				builder.appendlnFix(2, """<Data Name="$dataName" Keys="${classDef.classDef!!.dataClassName}" $visibleIfStr meta:RefKey="Collection" />""")
+			}
 		}
         else
         {

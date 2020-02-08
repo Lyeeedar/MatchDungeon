@@ -160,7 +160,8 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 	{
 		val xmlDataClasses = classMap.values.filter { it.isXmlDataClass }.toList()
 
-		val rootClasses = xmlDataClasses.filter { it.classDef!!.annotations.any { it.name == "DataFile" } }.toList()
+		val rootClasses = xmlDataClasses.filter { it.classDef!!.annotations.any { it.name == "DataFile" } }.toHashSet()
+		rootClasses.addAll(xmlDataClasses.filter { it.classDef!!.forceGlobal })
 
 		val refCountMap = HashMap<ClassDefinition, Int>()
 		for (dataClass in rootClasses)
@@ -215,7 +216,7 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 				}
 			}
 
-			val dataClassAnnotation = root.classDef!!.annotations.first { it.name == "DataFile" }
+			val dataClassAnnotation = root.classDef!!.annotations.firstOrNull { it.name == "DataFile" } ?: AnnotationDescription("@DataFile()")
 			val name = dataClassAnnotation.paramMap["name"]?.replace("\"", "") ?: root.classDef!!.name
 			val colour =  dataClassAnnotation.paramMap["colour"]
 			val icon = dataClassAnnotation.paramMap["icon"]
@@ -229,7 +230,7 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 			root.classDef!!.createDefFile(builder, false)
 			writtenSpecificFiles.add(root)
 
-			for (classDef in otherClasses)
+			for (classDef in otherClasses.sortedBy { it.name })
 			{
 				if (classDef.classDef!!.forceGlobal) continue
 
@@ -275,7 +276,6 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 
 		// write shared files
 		val sharedClasses = refCountMap.filter { it.value > 0 }.map { it.key }.toHashSet()
-		sharedClasses.addAll(xmlDataClasses.filter { it.classDef!!.forceGlobal })
 
 		if (sharedClasses.isNotEmpty())
 		{
