@@ -91,16 +91,14 @@
 			</Directions>
 		</TilingSprite>
 	</Pit>
-	<Chest>
-		<Full meta:RefKey="Sprite">
-			<Name>Oryx/uf_split/uf_items/chest_silver_open</Name>
-			<DrawActualSize>true</DrawActualSize>
-		</Full>
-		<Empty meta:RefKey="Sprite">
-			<Name>Oryx/uf_split/uf_items/chest_silver_empty</Name>
-			<DrawActualSize>true</DrawActualSize>
-		</Empty>
-	</Chest>
+	<ChestFull meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/chest_silver_open</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</ChestFull>
+	<ChestEmpty meta:RefKey="Sprite">
+		<Name>Oryx/uf_split/uf_items/chest_silver_empty</Name>
+		<DrawActualSize>true</DrawActualSize>
+	</ChestEmpty>
 	<Coin meta:RefKey="Sprite">
 		<Name>Oryx/uf_split/uf_items/coin_gold</Name>
 		<DrawActualSize>true</DrawActualSize>
