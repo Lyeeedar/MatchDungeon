@@ -486,7 +486,7 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 		else if (classRegister.enumMap.containsKey(type))
 		{
 			val enumDef = classRegister.enumMap[type]!!
-            val enumVals = enumDef.values.sorted().joinToString(",")
+            val enumVals = enumDef.values.joinToString(",")
 
             var defaultStr = ""
             if (defaultValue.isNotBlank())
@@ -565,7 +565,7 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 			else if (classRegister.enumMap.containsKey(arrayType))
 			{
 				val enumDef = classRegister.enumMap[arrayType]!!
-				val enumVals = enumDef.values.sorted().joinToString(",")
+				val enumVals = enumDef.values.joinToString(",")
 
 				builder.appendlnFix(2, """<Data Name="$dataName" $minCountStr $maxCountStr $visibleIfStr meta:RefKey="Collection">""")
 				builder.appendlnFix(3, """<Data Name="$childName" EnumValues="$enumVals" meta:RefKey="Enum" />""")
