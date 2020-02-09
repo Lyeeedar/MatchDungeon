@@ -24,7 +24,7 @@
 		<Data Name="BackgroundTile" BasePath="Sprites" StripExtension="True" AllowedFileTypes="png" SkipIfDefault="False" Default="" meta:RefKey="File" />
 	</Definition>
 	<Definition Name="SpawnTypeAndWeight" Nullable="False" meta:RefKey="StructDef">
-		<Data Name="Type" EnumValues="ORB,CHANGER,SHIELD,SUMMON" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Type" EnumValues="ORB,CHANGER,ATTACK,SHIELD,SUMMON,NAMEDORB1,NAMEDORB2,NAMEDORB3,NAMEDORB4,NAMEDORB5" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="Weight" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
 </Definitions>

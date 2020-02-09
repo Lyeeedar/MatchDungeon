@@ -21,7 +21,7 @@ class EntityArchetypeCreator
 			val entity = blockBuilder.build()
 
 			entity.archetype()!!.set(EntityArchetype.BLOCK)
-			entity.renderable()!!.set(theme.blockSprites.tryGet(0).copy())
+			entity.renderable()!!.set(theme.data.blockSprites.tryGet(0).copy())
 
 			val damageableComponent = entity.damageable()!!
 			damageableComponent.deathEffect = AssetManager.loadParticleEffect("Hit").getParticleEffect()
@@ -80,8 +80,8 @@ class EntityArchetypeCreator
 
 			entity.archetype()!!.set(EntityArchetype.CHEST)
 
-			val fullSprite = theme.chestFull.copy()
-			val emptySprite = theme.chestEmpty.copy()
+			val fullSprite = theme.data.chestFull.copy()
+			val emptySprite = theme.data.chestEmpty.copy()
 
 			val renderable = entity.renderable()!!
 			renderable.renderable = emptySprite
@@ -128,14 +128,14 @@ class EntityArchetypeCreator
 					{
 						spawner.spacingCounter = 0
 						spawner.numToSpawn--
-						return createSinkable(theme.coin.copy())
+						return createSinkable(theme.data.coin.copy())
 					}
 				}
 				else
 				{
 					if (spawner.numToSpawn <= 0) return null
 					spawner.numToSpawn--
-					return createSinkable(theme.coin.copy())
+					return createSinkable(theme.data.coin.copy())
 				}
 			}
 			spawner.numToSpawnChanged += fun (numToSpawn: Int): HandlerAction {

@@ -43,7 +43,8 @@ class Level(val loadPath: String)
 
 	var customMonster: MonsterDesc? = null
 
-	val spawnList = Array<String>()
+	val spawnList = Array<SpawnType>()
+	val namedOrbs = Array<OrbDesc>()
 
 	// Active state data
 	var levelTheme: Theme? = null
@@ -66,13 +67,13 @@ class Level(val loadPath: String)
 	{
 		val toSpawn = spawnList.random(grid.ran)
 
-		if (toSpawn == "Changer")
+		if (toSpawn == SpawnType.CHANGER)
 		{
 			val orb = EntityArchetypeCreator.createOrb(OrbDesc.getRandomOrb(this))
 			orb.matchable()!!.setIsChanger(OrbDesc.getRandomOrb(this, orb.matchable()!!.desc))
 			return orb
 		}
-		else if (toSpawn == "Attack")
+		else if (toSpawn == SpawnType.ATTACK)
 		{
 			val orb = EntityArchetypeCreator.createOrb(OrbDesc.getRandomOrb(this))
 			val monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap())
@@ -81,7 +82,7 @@ class Level(val loadPath: String)
 
 			return orb
 		}
-		else if (toSpawn == "Summon")
+		else if (toSpawn == SpawnType.SUMMON)
 		{
 			val data = ObjectMap<String, Any>()
 			data["FACTION"] = factions.random(grid.ran)
@@ -93,13 +94,33 @@ class Level(val loadPath: String)
 
 			return orb
 		}
-		else if (toSpawn == "Orb")
+		else if (toSpawn == SpawnType.ORB)
 		{
 			return EntityArchetypeCreator.createOrb(OrbDesc.getRandomOrb(this))
 		}
+		else if (toSpawn == SpawnType.NAMEDORB1)
+		{
+			return EntityArchetypeCreator.createOrb(namedOrbs[0])
+		}
+		else if (toSpawn == SpawnType.NAMEDORB2)
+		{
+			return EntityArchetypeCreator.createOrb(namedOrbs[1])
+		}
+		else if (toSpawn == SpawnType.NAMEDORB3)
+		{
+			return EntityArchetypeCreator.createOrb(namedOrbs[2])
+		}
+		else if (toSpawn == SpawnType.NAMEDORB4)
+		{
+			return EntityArchetypeCreator.createOrb(namedOrbs[3])
+		}
+		else if (toSpawn == SpawnType.NAMEDORB5)
+		{
+			return EntityArchetypeCreator.createOrb(namedOrbs[4])
+		}
 		else
 		{
-			return EntityArchetypeCreator.createOrb(OrbDesc.getNamedOrb(toSpawn))
+			throw RuntimeException("Unhandled spawn type $toSpawn")
 		}
 	}
 
@@ -109,14 +130,20 @@ class Level(val loadPath: String)
 
 		if (spawnList.size == 0)
 		{
-			spawnList.addAll(questTheme.spawnList)
+			for (spawn in questTheme.data.spawnList)
+			{
+				for (i in 0 until spawn.weight)
+				{
+					spawnList.add(spawn.type)
+				}
+			}
 		}
 
 		if (spawnList.size == 1)
 		{
 			for (i in 0 until 9)
 			{
-				spawnList.add("Orb")
+				spawnList.add(SpawnType.ORB)
 			}
 		}
 
@@ -125,12 +152,23 @@ class Level(val loadPath: String)
 		{
 			if (victory is CompletionConditionCustomOrb)
 			{
+				namedOrbs.add(OrbDesc.getNamedOrb(victory.targetOrbName))
+
 				val chance = victory.orbChance
 				val weight = (spawnWeightTotal.toFloat() * chance).ciel()
 
 				for (i in 0 until weight)
 				{
-					spawnList.add(victory.targetOrbName)
+					val orbType = when (namedOrbs.size)
+					{
+						1 -> SpawnType.NAMEDORB1
+						2 -> SpawnType.NAMEDORB2
+						3 -> SpawnType.NAMEDORB3
+						4 -> SpawnType.NAMEDORB4
+						5 -> SpawnType.NAMEDORB5
+						else -> throw RuntimeException("Too many named orb victory conditions!")
+					}
+					spawnList.add(orbType)
 				}
 			}
 		}
@@ -150,50 +188,50 @@ class Level(val loadPath: String)
 			if (char == '#')
 			{
 				tile.canHaveOrb = false
-				tile.groundSprite = theme.floor.copy()
-				tile.wallSprite = theme.wall.copy()
+				tile.groundSprite = theme.data.floor.copy()
+				tile.wallSprite = theme.data.wall.copy()
 			}
 			else if (char == '~')
 			{
 				tile.canHaveOrb = false
 				tile.isPit = true
-				tile.wallSprite = theme.pit.copy()
+				tile.wallSprite = theme.data.pit.copy()
 			}
 			else if (char == 'p')
 			{
 				tile.canHaveOrb = true
-				tile.groundSprite = theme.floor.copy()
+				tile.groundSprite = theme.data.floor.copy()
 				tile.plateStrength = plateStrength
 			}
 			else if (char == '=')
 			{
 				tile.canHaveOrb = true
-				tile.groundSprite = theme.floor.copy()
+				tile.groundSprite = theme.data.floor.copy()
 				tile.contents = EntityArchetypeCreator.createBlock(theme, blockStrength)
 			}
 			else if (char == '$')
 			{
 				tile.contents = EntityArchetypeCreator.createChest(true, theme)
 				tile.canHaveOrb = false
-				tile.groundSprite = theme.floor.copy()
+				tile.groundSprite = theme.data.floor.copy()
 			}
 			else if (char == '£')
 			{
 				tile.contents = EntityArchetypeCreator.createChest(false, theme)
 				tile.canHaveOrb = false
-				tile.groundSprite = theme.floor.copy()
+				tile.groundSprite = theme.data.floor.copy()
 			}
 			else if (char == '!')
 			{
 				tile.canHaveOrb = true
-				tile.groundSprite = theme.floor.copy()
+				tile.groundSprite = theme.data.floor.copy()
 
 				hasMonster = true
 			}
 			else if (char == '?')
 			{
 				tile.canHaveOrb = true
-				tile.groundSprite = theme.floor.copy()
+				tile.groundSprite = theme.data.floor.copy()
 
 				hasMonster = true
 			}
@@ -279,7 +317,7 @@ class Level(val loadPath: String)
 				if (symbol.isChest)
 				{
 					tile.contents = EntityArchetypeCreator.createChest(true, theme)
-					tile.groundSprite = theme.floor.copy()
+					tile.groundSprite = theme.data.floor.copy()
 
 					tile.canHaveOrb = false
 					tile.isPit = false
@@ -294,7 +332,7 @@ class Level(val loadPath: String)
 			}
 			else
 			{
-				tile.groundSprite = theme.floor.copy()
+				tile.groundSprite = theme.data.floor.copy()
 			}
 		}
 
@@ -324,7 +362,7 @@ class Level(val loadPath: String)
 
 		if (chosenFaction == null)
 		{
-			chosenFaction = Faction.load(theme.factions.random(grid.ran))
+			chosenFaction = Faction.load(theme.data.factions.random(grid.ran))
 		}
 
 		if (hasMonster)
@@ -786,7 +824,7 @@ class Level(val loadPath: String)
 
 						for (i in 0 until split[1].toInt())
 						{
-							level.spawnList.add(split[0])
+							level.spawnList.add(SpawnType.valueOf(split[0].toUpperCase(Locale.ENGLISH)))
 						}
 					}
 				}

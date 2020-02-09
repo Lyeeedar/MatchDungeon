@@ -148,12 +148,12 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 
 					if (chosen != null)
 					{
-						chosen.contents = EntityArchetypeCreator.createSinkable(grid.level.theme.coin.copy())
+						chosen.contents = EntityArchetypeCreator.createSinkable(grid.level.theme.data.coin.copy())
 					}
 				}
 			}
 
-			sinkableMap[grid.level.theme.coin.fileName] = SinkableData(grid.level.theme.coin, coins, Table())
+			sinkableMap[grid.level.theme.data.coin.fileName] = SinkableData(grid.level.theme.data.coin, coins, Table())
 		}
 		else
 		{
@@ -209,7 +209,7 @@ class CompletionConditionSink() : AbstractCompletionCondition()
 		val table = Table()
 
 		// This is the default
-		var sprite = grid.level.theme.coin.copy()
+		var sprite = grid.level.theme.data.coin.copy()
 
 		// check if any sinkables exist in the level already, use their sprite instead if they do
 		for (tile in grid.sinkableTiles)

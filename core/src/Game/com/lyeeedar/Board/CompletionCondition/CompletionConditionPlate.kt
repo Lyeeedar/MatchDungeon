@@ -53,7 +53,7 @@ class CompletionConditionPlate : AbstractCompletionCondition()
 	{
 		val table = Table()
 
-		val sprite = grid.level.theme.plate.copy()
+		val sprite = grid.level.theme.data.plate.copy()
 		label = Label(" x $remaining", Statics.skin)
 
 		table.add(SpriteWidget(sprite, 24f, 24f))
@@ -67,7 +67,7 @@ class CompletionConditionPlate : AbstractCompletionCondition()
 		val table = Table()
 
 		table.add(Label(Localisation.getText("completioncondition.plate.description", "UI") + " $remaining ", Statics.skin))
-		table.add(SpriteWidget(grid.level.theme.plate.copy(), 24f, 24f))
+		table.add(SpriteWidget(grid.level.theme.data.plate.copy(), 24f, 24f))
 
 		return table
 	}

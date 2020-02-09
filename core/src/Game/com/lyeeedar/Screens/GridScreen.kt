@@ -311,7 +311,7 @@ class GridScreen(): AbstractScreen()
 		topTable.add(powerBarStack).height(25f).pad(10f).growX()
 
 		val table = Table()
-		table.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(level.theme.backgroundTile))).tint(Color(0.5f, 0.5f, 0.5f, 1f))
+		table.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(level.theme.data.backgroundTile))).tint(Color(0.5f, 0.5f, 0.5f, 1f))
 
 		table.add(topTable).growX()
 		table.row()

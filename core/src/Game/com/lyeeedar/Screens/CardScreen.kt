@@ -103,7 +103,7 @@ class CardScreen : AbstractScreen()
 		nonStatsTable.add(contentTable).grow()
 
 		mainTable.add(nonStatsTable).grow()
-		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(quest.currentTheme.backgroundTile))).tint(Color(0.5f, 0.5f, 0.5f, 1f))
+		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(quest.currentTheme.data.backgroundTile))).tint(Color(0.5f, 0.5f, 0.5f, 1f))
 
 		textAndButtonsTable.clear()
 		textAndButtonsTable.background = NinePatchDrawable(NinePatch(AssetManager.loadTextureRegion("Sprites/GUI/background.png"), 24, 24, 24, 24))

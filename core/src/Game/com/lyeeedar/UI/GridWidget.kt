@@ -353,7 +353,7 @@ class GridWidget(val grid: Grid) : Widget()
 
 				if (tile.hasPlate)
 				{
-					renderer.queueSprite(grid.level.theme.plate, xi, yi, TILE, tileHeight, tileColour)
+					renderer.queueSprite(grid.level.theme.data.plate, xi, yi, TILE, tileHeight, tileColour)
 
 					if ( !grid.inTurn )
 					{
@@ -478,7 +478,7 @@ class GridWidget(val grid: Grid) : Widget()
 					{
 						if (swappable.sealed)
 						{
-							renderer.queueSprite(grid.level.theme.sealSprites.tryGet(swappable.sealCount), xi, yi, ORB, 2, tileColour)
+							renderer.queueSprite(grid.level.theme.data.sealSprites.tryGet(swappable.sealCount), xi, yi, ORB, 2, tileColour)
 						}
 					}
 

@@ -273,9 +273,9 @@ class QuestSelectionScreen : AbstractScreen()
 			}
 		}
 
-		titleLabel.setText(Localisation.getText(currentTheme.nameID, "Theme"))
+		titleLabel.setText(Localisation.getText(currentTheme.data.nameID, "Theme"))
 
-		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(themeMap[currentTheme].first().theme.backgroundTile))).tint(Color(0.5f, 0.5f, 0.5f, 1.0f))
+		mainTable.background = TiledDrawable(TextureRegionDrawable(AssetManager.loadTextureRegion(themeMap[currentTheme].first().theme.data.backgroundTile))).tint(Color(0.5f, 0.5f, 0.5f, 1.0f))
 
 		scrollTable.clear()
 

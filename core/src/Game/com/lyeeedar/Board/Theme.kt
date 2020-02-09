@@ -97,8 +97,14 @@ enum class SpawnType
 {
 	ORB,
 	CHANGER,
+	ATTACK,
 	SHIELD,
-	SUMMON
+	SUMMON,
+	NAMEDORB1,
+	NAMEDORB2,
+	NAMEDORB3,
+	NAMEDORB4,
+	NAMEDORB5
 }
 class SpawnTypeAndWeight : XmlDataClass()
 {
