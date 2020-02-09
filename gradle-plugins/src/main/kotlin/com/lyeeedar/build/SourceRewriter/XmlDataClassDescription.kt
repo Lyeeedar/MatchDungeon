@@ -132,12 +132,12 @@ class XmlDataClassDescription(val name: String, val superClass: String, val clas
         val dataFileAnnotation = annotations.firstOrNull { it.name == "DataFile" }
         if (dataFileAnnotation != null)
         {
-            builder.appendln(1, """<Definition Name="$dataClassName" $extends meta:RefKey="Struct">""")
+            builder.appendlnFix(1, """<Definition Name="$dataClassName" Nullable="False" $extends meta:RefKey="Struct">""")
         }
         else
         {
             val global = if (needsGlobalScope || forceGlobal) "IsGlobal=\"True\"" else ""
-            builder.appendln(1, """<Definition Name="$dataClassName" $global $extends meta:RefKey="StructDef">""")
+            builder.appendlnFix(1, """<Definition Name="$dataClassName" Nullable="False" $global $extends meta:RefKey="StructDef">""")
         }
 
         for (variable in variables)

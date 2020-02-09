@@ -222,8 +222,8 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 			val icon = dataClassAnnotation.paramMap["icon"]
 
 			val builder = IndentedStringBuilder()
-			val colourLine = if (colour != null) "Colour=$colour" else ""
-			val iconLine = if (icon != null) "Icon=$icon" else ""
+			val colourLine = if (colour != null) "Colour=\"$colour\"" else ""
+			val iconLine = if (icon != null) "Icon=\"$icon\"" else ""
 			builder.appendln(0, "<Definitions $colourLine $iconLine xmlns:meta=\"Editor\">")
 
 			if (writtenSpecificFiles.contains(root)) throw RuntimeException("Class written twice!")

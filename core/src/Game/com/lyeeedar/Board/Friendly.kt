@@ -15,6 +15,7 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
+import com.lyeeedar.Util.AssetManager
 import ktx.collections.filter
 import ktx.collections.toGdxArray
 import ktx.math.minus
@@ -76,13 +77,13 @@ class FriendlyDesc : XmlDataClass()
 {
 	lateinit var sprite: Sprite
 	lateinit var death: ParticleEffect
-
+	
 	@NumericRange(min = 1f)
 	var size: Int = 1
-
+	
 	@NumericRange(min = 1f)
 	var hp: Int = 10
-
+	
 	val abilities: Array<AbstractFriendlyAbilityData> = Array()
 
 	override fun load(xmlData: XmlData)
@@ -144,9 +145,9 @@ abstract class AbstractFriendlyAbilityData : XmlDataClass()
 {
 	@Vector(name1 = "Min", name2 = "Max")
 	var cooldown: Point = Point(1, 1)
-
+	
 	var range: Int = 1
-
+	
 	abstract val classID: String
 
 	override fun load(xmlData: XmlData)
@@ -368,7 +369,7 @@ class FriendlyPopAbility(data: FriendlyPopAbilityData) : FriendlyPopTileAbility<
 class FriendlyHealAbilityData : AbstractFriendlyAbilityData()
 {
 	override val classID: String = "Heal"
-
+	
 	val heartSprite: Sprite = AssetManager.loadSprite("Oryx/Custom/items/heart")
 	var amount: Int = 1
 

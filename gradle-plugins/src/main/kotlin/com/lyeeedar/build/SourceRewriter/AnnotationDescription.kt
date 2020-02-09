@@ -22,10 +22,12 @@ class AnnotationDescription(val annotationString: String)
 
 		if (!parameters.isBlank())
 		{
-			val split = parameters.split(",")
-
-			for (parameter in split)
+			var parameters = parameters
+			while (true)
 			{
+				val nextSplit = nextNonQuotedComma(parameters)
+				val parameter = if (nextSplit != -1) parameters.substring(0, nextSplit) else parameters
+
 				if (!parameter.contains("="))
 				{
 					System.err.println("Non-named annotation parameters are not currently supported! ($annotationString) ($parameter)")
@@ -37,7 +39,34 @@ class AnnotationDescription(val annotationString: String)
 				val paramValue = parameter.replace("${split[0]}=", "").trim().replace("\"", "")
 
 				paramMap.put(paramName, paramValue)
+
+				if (nextSplit == -1)
+				{
+					break
+				}
+				else
+				{
+					parameters = parameters.substring(nextSplit+1)
+				}
 			}
 		}
     }
+
+	fun nextNonQuotedComma(str: String): Int
+	{
+		var inQuotes = false
+		for (i in str.indices)
+		{
+			if (str[i] == '"')
+			{
+				inQuotes = !inQuotes
+			}
+			else if (!inQuotes && str[i] == ',')
+			{
+				return i
+			}
+		}
+
+		return -1
+	}
 }

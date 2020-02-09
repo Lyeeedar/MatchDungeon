@@ -57,6 +57,18 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 		{
 			imports.add("import java.util.*")
 		}
+		else if (type.startsWith("Array<"))
+		{
+			val arrayType = type.replace("Array<", "").dropLast(1)
+			if (arrayType == "ParticleEffect" || arrayType == "ParticleEffectDescription" || arrayType == "Sprite" || arrayType == "SpriteWrapper")
+			{
+				imports.add("import com.lyeeedar.Util.AssetManager")
+			}
+			else if (classRegister.enumMap.containsKey(arrayType))
+			{
+				imports.add("import java.util.*")
+			}
+		}
     }
 
     fun writeLoad(builder: IndentedStringBuilder, indentation: Int, classDefinition: ClassDefinition, classRegister: ClassRegister)
@@ -226,26 +238,84 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 		{
 			val arrayType = type.replace("Array<", "").dropLast(1)
 
-			val classDef = classRegister.classMap[arrayType] ?: throw RuntimeException("writeLoad: Unknown type '$arrayType' in '$type'!")
-			classDefinition.referencedClasses.add(classDef)
-
 			val elName = name+"El"
 
 			builder.appendln(indentation, "val $elName = xmlData.getChildByName(\"$dataName\")!!")
 			builder.appendln(indentation, "for (el in ${elName}.children)")
 			builder.appendln(indentation, "{")
 
-			if (classDef.isAbstract)
+			if (arrayType == "String")
 			{
-				builder.appendln(indentation+1, "val obj = $arrayType.loadPolymorphicClass(el.get(\"classID\"))")
+				builder.appendln(indentation+1, "$name.add(el.text)")
+			}
+			else if (arrayType == "Int")
+			{
+				builder.appendln(indentation+1, "$name.add(el.int())")
+			}
+			else if (arrayType == "Float")
+			{
+				builder.appendln(indentation+1, "$name.add(el.float())")
+			}
+			else if (arrayType == "Boolean")
+			{
+				builder.appendln(indentation+1, "$name.add(el.boolean())")
+			}
+			else if (arrayType == "Sprite" || arrayType == "SpriteWrapper" || arrayType == "ParticleEffectDescription" || arrayType == "ParticleEffect")
+			{
+				val loadName: String
+				if (arrayType == "ParticleEffectDescription" || arrayType == "ParticleEffect")
+				{
+					loadName = "ParticleEffect"
+				}
+				else if (arrayType == "Sprite")
+				{
+					loadName = "Sprite"
+				}
+				else if (arrayType == "SpriteWrapper")
+				{
+					loadName = "SpriteWrapper"
+				}
+				else
+				{
+					throw RuntimeException("Unhandled renderable load type '$arrayType'")
+				}
+
+				val loadExtension: String
+				if (arrayType == "ParticleEffect")
+				{
+					loadExtension = ".getParticleEffect()"
+				}
+				else
+				{
+					loadExtension = ""
+				}
+
+				builder.appendln(indentation+1, "val obj = AssetManager.load$loadName(el)$loadExtension")
+				builder.appendln(indentation+1, "$name.add(obj)")
+			}
+			else if (classRegister.enumMap.containsKey(arrayType))
+			{
+				val enumDef = classRegister.enumMap[arrayType]!!
+				builder.appendln(indentation+1, "val obj = ${enumDef.name}.valueOf(el.text.toUpperCase(Locale.ENGLISH))")
+				builder.appendln(indentation+1, "$name.add(obj)")
 			}
 			else
 			{
-				builder.appendln(indentation+1, "val obj = $arrayType()")
-			}
+				val classDef = classRegister.classMap[arrayType] ?: throw RuntimeException("writeLoad: Unknown type '$arrayType' in '$type'!")
+				classDefinition.referencedClasses.add(classDef)
 
-			builder.appendln(indentation+1, "obj.load(el)")
-			builder.appendln(indentation+1, "$name.add(obj)")
+				if (classDef.isAbstract)
+				{
+					builder.appendln(indentation+1, "val obj = $arrayType.loadPolymorphicClass(el.get(\"classID\"))")
+				}
+				else
+				{
+					builder.appendln(indentation+1, "val obj = $arrayType()")
+				}
+
+				builder.appendln(indentation+1, "obj.load(el)")
+				builder.appendln(indentation+1, "$name.add(obj)")
+			}
 
 			builder.appendln(indentation, "}")
 		}
@@ -343,9 +413,32 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 
         if (type == "String")
         {
-            val canSkip = if (variableType != VariableType.LATEINIT) "True" else "False"
+			val canSkip = if (variableType != VariableType.LATEINIT) "True" else "False"
 			val defaultValue = if (this.defaultValue.isBlank()) "\"\"" else this.defaultValue
-            builder.appendlnFix(2, """<Data Name="$dataName" SkipIfDefault="$canSkip" Default=$defaultValue $visibleIfStr meta:RefKey="String" />""")
+
+			val fileReferenceAnnotation = annotations.firstOrNull { it.name == "FileReference" }
+			if (fileReferenceAnnotation != null)
+			{
+				val basePath = fileReferenceAnnotation.paramMap["basePath"]
+				val stripExtension = fileReferenceAnnotation.paramMap["stripExtension"]
+				val resourceType = fileReferenceAnnotation.paramMap["resourceType"]
+				val allowedFileTypes = fileReferenceAnnotation.paramMap["allowedFileTypes"]
+
+				val basePathStr = if (basePath != null) "BasePath=\"$basePath\"" else ""
+				val stripExtensionStr = if (stripExtension != null) "StripExtension=\"$stripExtension\"" else "StripExtension=\"True\""
+				val resourceTypeStr = if (resourceType != null) "ResourceType=\"$resourceType\"" else ""
+				val allowedFileTypesStr = if (allowedFileTypes != null) "AllowedFileTypes=\"$allowedFileTypes\"" else ""
+
+				builder.appendlnFix(2, """<Data Name="$dataName" $basePathStr $stripExtensionStr $resourceTypeStr $allowedFileTypesStr SkipIfDefault="$canSkip" Default=$defaultValue $visibleIfStr meta:RefKey="File" />""")
+			}
+			else
+			{
+				val localisationAnnotation = annotations.firstOrNull { it.name == "NeedsLocalisation" }
+				val needsLocalisation = if (localisationAnnotation != null) "NeedsLocalisation=\"True\"" else ""
+				val localisationFile = if (localisationAnnotation != null) "LocalisationFile=\"${localisationAnnotation.paramMap["file"]!!}\"" else ""
+
+				builder.appendlnFix(2, """<Data Name="$dataName" $needsLocalisation $localisationFile SkipIfDefault="$canSkip" Default=$defaultValue $visibleIfStr meta:RefKey="String" />""")
+			}
         }
         else if (type == "Int" || type == "Float")
         {
@@ -385,17 +478,10 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 		{
 			builder.appendlnFix(2, """<Data Name="$dataName" SkipIfDefault="True" Default="$defaultValue" $visibleIfStr meta:RefKey="Boolean" />""")
 		}
-        else if (type == "Sprite")
+        else if (type == "Sprite" || type == "SpriteWrapper" || type == "ParticleEffect" || type == "ParticleEffectDescription")
         {
-            builder.appendlnFix(2, """<Data Name="$dataName" Keys="Sprite" $nullable $skipIfDefault $visibleIfStr meta:RefKey="Reference" />""")
-        }
-		else if (type == "SpriteWrapper")
-		{
-			builder.appendlnFix(2, """<Data Name="$dataName" Keys="SpriteWrapper" $nullable $skipIfDefault $visibleIfStr meta:RefKey="Reference" />""")
-		}
-        else if (type == "ParticleEffect" || type == "ParticleEffectDescription")
-        {
-            builder.appendlnFix(2, """<Data Name="$dataName" Keys="ParticleEffect" $nullable $skipIfDefault $visibleIfStr meta:RefKey="Reference" />""")
+			val dataType = if (type == "ParticleEffectDescription") "ParticleEffect" else type
+            builder.appendlnFix(2, """<Data Name="$dataName" Keys="$dataType" $nullable $skipIfDefault $visibleIfStr meta:RefKey="Reference" />""")
         }
 		else if (classRegister.enumMap.containsKey(type))
 		{
@@ -414,15 +500,89 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 		{
 			val arrayType = type.replace("Array<", "").dropLast(1)
 
-			val classDef = classRegister.classMap[arrayType] ?: throw RuntimeException("createDefEntry: Unknown type '$arrayType' for '$type'!")
+			val dataArrayAnnotation = annotations.firstOrNull { it.name == "DataArray" }
+			val minCount = dataArrayAnnotation?.paramMap?.get("minCount")
+			val maxCount = dataArrayAnnotation?.paramMap?.get("maxCount")
+			val minCountStr = if (minCount != null) "MinCount=\"$minCount\"" else ""
+			val maxCountStr = if (maxCount != null) "MaxCount=\"$maxCount\"" else ""
 
-			if (classDef.isAbstract)
+			val childName = if (dataName.endsWith('s')) dataName.dropLast(1) else arrayType
+			if (arrayType == "String")
 			{
-				builder.appendlnFix(2, """<Data Name="$dataName" DefKey="${classDef.classDef!!.dataClassName}Defs" $visibleIfStr meta:RefKey="Collection" />""")
+				val fileReferenceAnnotation = annotations.firstOrNull { it.name == "FileReference" }
+				if (fileReferenceAnnotation != null)
+				{
+					val basePath = fileReferenceAnnotation.paramMap["basePath"]
+					val stripExtension = fileReferenceAnnotation.paramMap["stripExtension"]
+					val resourceType = fileReferenceAnnotation.paramMap["resourceType"]
+					val allowedFileTypes = fileReferenceAnnotation.paramMap["allowedFileTypes"]
+
+					val basePathStr = if (basePath != null) "BasePath=\"$basePath\"" else ""
+					val stripExtensionStr = if (stripExtension != null) "StripExtension=\"$stripExtension\"" else "StripExtension=\"True\""
+					val resourceTypeStr = if (resourceType != null) "ResourceType=\"$resourceType\"" else ""
+					val allowedFileTypesStr = if (allowedFileTypes != null) "AllowedFileTypes=\"$allowedFileTypes\"" else ""
+
+					builder.appendlnFix(2, """<Data Name="$dataName" $minCountStr $maxCountStr $visibleIfStr meta:RefKey="Collection">""")
+					builder.appendlnFix(3, """<Data Name="$childName" $basePathStr $stripExtensionStr $resourceTypeStr $allowedFileTypesStr meta:RefKey="File">""")
+					builder.appendlnFix(2, """</Data>""")
+				}
+				else
+				{
+					val localisationAnnotation = annotations.firstOrNull { it.name == "NeedsLocalisation" }
+					val needsLocalisation = if (localisationAnnotation != null) "NeedsLocalisation=\"True\"" else ""
+					val localisationFile = if (localisationAnnotation != null) "LocalisationFile=\"${localisationAnnotation.paramMap["localisationFile"]!!}\"" else ""
+
+					builder.appendlnFix(2, """<Data Name="$dataName" $minCountStr $maxCountStr $visibleIfStr meta:RefKey="Collection">""")
+					builder.appendlnFix(3, """<Data Name="$childName" $needsLocalisation $localisationFile meta:RefKey="String">""")
+					builder.appendlnFix(2, """</Data>""")
+				}
+			}
+			else if (arrayType == "Int" || arrayType == "Float")
+			{
+				val numericAnnotation = annotations.firstOrNull { it.name == "NumericRange" }
+				val min = numericAnnotation?.paramMap?.get("min")?.replace("f", "")
+				val max = numericAnnotation?.paramMap?.get("max")?.replace("f", "")
+				val minStr = if (min != null) """Min="$min"""" else ""
+				val maxStr = if (max != null) """Max="$max"""" else ""
+
+				builder.appendlnFix(2, """<Data Name="$dataName" $minCountStr $maxCountStr $visibleIfStr meta:RefKey="Collection">""")
+				builder.appendlnFix(3, """<Data Name="$childName" $minStr $maxStr Type="$arrayType" SkipIfDefault="True" meta:RefKey="Number" />""")
+				builder.appendlnFix(2, """</Data>""")
+			}
+			else if (arrayType == "Boolean")
+			{
+				builder.appendlnFix(2, """<Data Name="$dataName" $minCountStr $maxCountStr $visibleIfStr meta:RefKey="Collection">""")
+				builder.appendlnFix(3, """<Data Name="$childName" meta:RefKey="Boolean">""")
+				builder.appendlnFix(2, """</Data>""")
+			}
+			else if (arrayType == "Sprite" || arrayType == "SpriteWrapper" || arrayType == "ParticleEffect" || arrayType == "ParticleEffectDescription")
+			{
+				val dataType = if (arrayType == "ParticleEffectDescription") "ParticleEffect" else arrayType
+				builder.appendlnFix(2, """<Data Name="$dataName" $minCountStr $maxCountStr $visibleIfStr meta:RefKey="Collection">""")
+				builder.appendlnFix(3, """<Data Name="$childName" Keys="$dataType" Nullable="False" meta:RefKey="Reference" />""")
+				builder.appendlnFix(2, """</Data>""")
+			}
+			else if (classRegister.enumMap.containsKey(arrayType))
+			{
+				val enumDef = classRegister.enumMap[arrayType]!!
+				val enumVals = enumDef.values.sorted().joinToString(",")
+
+				builder.appendlnFix(2, """<Data Name="$dataName" $minCountStr $maxCountStr $visibleIfStr meta:RefKey="Collection">""")
+				builder.appendlnFix(3, """<Data Name="$childName" EnumValues="$enumVals" meta:RefKey="Enum" />""")
+				builder.appendlnFix(2, """</Data>""")
 			}
 			else
 			{
-				builder.appendlnFix(2, """<Data Name="$dataName" Keys="${classDef.classDef!!.dataClassName}" $visibleIfStr meta:RefKey="Collection" />""")
+				val classDef = classRegister.classMap[arrayType] ?: throw RuntimeException("createDefEntry: Unknown type '$arrayType' for '$type'!")
+
+				if (classDef.isAbstract)
+				{
+					builder.appendlnFix(2, """<Data Name="$dataName" $minCountStr $maxCountStr DefKey="${classDef.classDef!!.dataClassName}Defs" $visibleIfStr meta:RefKey="Collection" />""")
+				}
+				else
+				{
+					builder.appendlnFix(2, """<Data Name="$dataName" $minCountStr $maxCountStr Keys="${classDef.classDef!!.dataClassName}" $visibleIfStr meta:RefKey="Collection" />""")
+				}
 			}
 		}
         else

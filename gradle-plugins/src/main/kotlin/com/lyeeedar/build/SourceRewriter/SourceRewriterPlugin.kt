@@ -29,41 +29,49 @@ open class SourceRewriterTask : DefaultTask()
 	@TaskAction
 	fun rewriteSources()
 	{
-		println("################################################")
-		println("Source Rewrite starting")
-		println("")
-
-		println("Parsing source files")
-		val srcFiles = find(srcDirs!!)
-
-		val defsDir = File(srcDirs!!.first().absolutePath + "/../../../android/assetsraw/Definitions/Generated").canonicalFile
-
-		val classRegister = ClassRegister(srcFiles, defsDir)
-		classRegister.registerClasses()
-
-		val dataClassFiles = ArrayList<SourceRewriter>()
-		for (file in srcFiles)
+		try
 		{
-			val rewriter = SourceRewriter(file, classRegister)
-			val hasDataClass = rewriter.parse()
-			if (hasDataClass)
+			println("################################################")
+			println("Source Rewrite starting")
+			println("")
+
+			println("Parsing source files")
+			val srcFiles = find(srcDirs!!)
+
+			val defsDir = File(srcDirs!!.first().absolutePath + "/../../../android/assetsraw/Definitions/Generated").canonicalFile
+
+			val classRegister = ClassRegister(srcFiles, defsDir)
+			classRegister.registerClasses()
+
+			val dataClassFiles = ArrayList<SourceRewriter>()
+			for (file in srcFiles)
 			{
-				dataClassFiles.add(rewriter)
+				val rewriter = SourceRewriter(file, classRegister)
+				val hasDataClass = rewriter.parse()
+				if (hasDataClass)
+				{
+					dataClassFiles.add(rewriter)
+				}
 			}
-		}
 
-		println("Writing changes")
-		for (rewriter in dataClassFiles)
+			println("Writing changes")
+			for (rewriter in dataClassFiles)
+			{
+				rewriter.write()
+			}
+
+			println("Writing def files")
+			classRegister.writeXmlDefFiles()
+
+			println("")
+			println("Source Rewrite completed")
+			println("################################################")
+		}
+		catch (ex: Exception)
 		{
-			rewriter.write()
+			ex.printStackTrace()
+			throw ex
 		}
-
-		println("Writing def files")
-		classRegister.writeXmlDefFiles()
-
-		println("")
-		println("Source Rewrite completed")
-		println("################################################")
 	}
 
 	fun find(roots: LinkedHashSet<File>): List<File>
