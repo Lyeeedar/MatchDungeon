@@ -523,7 +523,7 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 					val allowedFileTypesStr = if (allowedFileTypes != null) "AllowedFileTypes=\"$allowedFileTypes\"" else ""
 
 					builder.appendlnFix(2, """<Data Name="$dataName" $minCountStr $maxCountStr $visibleIfStr meta:RefKey="Collection">""")
-					builder.appendlnFix(3, """<Data Name="$childName" $basePathStr $stripExtensionStr $resourceTypeStr $allowedFileTypesStr meta:RefKey="File">""")
+					builder.appendlnFix(3, """<Data Name="$childName" $basePathStr $stripExtensionStr $resourceTypeStr $allowedFileTypesStr meta:RefKey="File"/>""")
 					builder.appendlnFix(2, """</Data>""")
 				}
 				else
@@ -533,7 +533,7 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 					val localisationFile = if (localisationAnnotation != null) "LocalisationFile=\"${localisationAnnotation.paramMap["localisationFile"]!!}\"" else ""
 
 					builder.appendlnFix(2, """<Data Name="$dataName" $minCountStr $maxCountStr $visibleIfStr meta:RefKey="Collection">""")
-					builder.appendlnFix(3, """<Data Name="$childName" $needsLocalisation $localisationFile meta:RefKey="String">""")
+					builder.appendlnFix(3, """<Data Name="$childName" $needsLocalisation $localisationFile meta:RefKey="String"/>""")
 					builder.appendlnFix(2, """</Data>""")
 				}
 			}
