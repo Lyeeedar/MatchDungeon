@@ -402,7 +402,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 				{
 					if (match.value > 0)
 					{
-						keys.add(match.key)
+						keys.add(match.key.key)
 					}
 				}
 			}
@@ -412,7 +412,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 			{
 				if (!custom.isCompleted())
 				{
-					val key = OrbDesc.getNamedOrb(custom.targetOrbName).key
+					val key = OrbDesc.getNamedOrb(custom.data.targetOrbName).key
 					keys.add(key)
 				}
 			}

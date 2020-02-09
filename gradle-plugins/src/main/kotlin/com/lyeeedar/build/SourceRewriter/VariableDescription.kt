@@ -414,7 +414,7 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
         if (type == "String")
         {
 			val canSkip = if (variableType != VariableType.LATEINIT) "True" else "False"
-			val defaultValue = if (this.defaultValue.isBlank()) "\"\"" else this.defaultValue
+			val defaultValue = if (this.defaultValue.isBlank() || this.defaultValue == "null") "\"\"" else this.defaultValue
 
 			val fileReferenceAnnotation = annotations.firstOrNull { it.name == "FileReference" }
 			if (fileReferenceAnnotation != null)

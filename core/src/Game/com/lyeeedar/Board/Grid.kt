@@ -294,9 +294,9 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 							{
 								if (v is CompletionConditionCustomOrb)
 								{
-									if (ran.nextFloat() < v.orbChance)
+									if (ran.nextFloat() < v.data.orbChance)
 									{
-										valid.add(OrbDesc.getNamedOrb(v.targetOrbName))
+										valid.add(OrbDesc.getNamedOrb(v.data.targetOrbName))
 									}
 								}
 							}

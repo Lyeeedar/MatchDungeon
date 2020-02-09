@@ -1,0 +1,46 @@
+<Definitions   xmlns:meta="Editor">
+	<Definition Name="CompletionCondition" Nullable="False" IsGlobal="True" meta:RefKey="StructDef">
+	</Definition>
+	<Definition Name="CompletionConditionBreakData" Nullable="False" Extends="CompletionCondition" meta:RefKey="StructDef">
+		<Const Name="classID">Break</Const>
+	</Definition>
+	<Definition Name="CompletionConditionCustomOrbData" Nullable="False" Extends="CompletionCondition" meta:RefKey="StructDef">
+		<Const Name="classID">CustomOrb</Const>
+		<Data Name="TargetOrbName" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="MatchCount" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="OrbChance" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="CompletionConditionDieData" Nullable="False" Extends="CompletionCondition" meta:RefKey="StructDef">
+		<Const Name="classID">Die</Const>
+	</Definition>
+	<Definition Name="CompletionConditionKillData" Nullable="False" Extends="CompletionCondition" meta:RefKey="StructDef">
+		<Const Name="classID">Kill</Const>
+		<Data Name="All" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+		<Data Name="Named" SkipIfDefault="True" Default="" meta:RefKey="String" />
+	</Definition>
+	<Definition Name="CompletionConditionMatchesData" Nullable="False" Extends="CompletionCondition" meta:RefKey="StructDef">
+		<Const Name="classID">Matches</Const>
+		<Data Name="ToBeMatched" meta:RefKey="Collection">
+			<Data Name="Int" Type="Int" SkipIfDefault="True" meta:RefKey="Number" />
+		</Data>
+	</Definition>
+	<Definition Name="CompletionConditionNoneData" Nullable="False" Extends="CompletionCondition" meta:RefKey="StructDef">
+		<Const Name="classID">None</Const>
+	</Definition>
+	<Definition Name="CompletionConditionPlateData" Nullable="False" Extends="CompletionCondition" meta:RefKey="StructDef">
+		<Const Name="classID">Plate</Const>
+	</Definition>
+	<Definition Name="CompletionConditionSinkData" Nullable="False" Extends="CompletionCondition" meta:RefKey="StructDef">
+		<Const Name="classID">Sink</Const>
+		<Data Name="Count" Type="Int" Default="5" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="CompletionConditionTimeData" Nullable="False" Extends="CompletionCondition" meta:RefKey="StructDef">
+		<Const Name="classID">Time</Const>
+		<Data Name="Seconds" Type="Float" Default="60" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="CompletionConditionTurnsData" Nullable="False" Extends="CompletionCondition" meta:RefKey="StructDef">
+		<Const Name="classID">Turns</Const>
+		<Data Name="Turns" Type="Int" Default="30" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="CompletionConditionDefs" Keys="CompletionConditionBreakData,CompletionConditionCustomOrbData,CompletionConditionDieData,CompletionConditionKillData,CompletionConditionMatchesData,CompletionConditionNoneData,CompletionConditionPlateData,CompletionConditionSinkData,CompletionConditionTimeData,CompletionConditionTurnsData" IsGlobal="True" meta:RefKey="ReferenceDef" />
+</Definitions>

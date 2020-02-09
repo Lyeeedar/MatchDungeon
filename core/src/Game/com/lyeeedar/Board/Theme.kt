@@ -5,8 +5,9 @@ import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Renderables.Sprite.SpriteWrapper
 import com.lyeeedar.Util.*
-import ktx.collections.set
+import com.lyeeedar.Util.AssetManager
 import java.util.*
+import ktx.collections.set
 
 @DataFile(colour = "114,182,240", icon = "Sprites/Oryx/uf_split/uf_terrain/crate.png")
 @DataClass(name = "Theme")
@@ -15,36 +16,36 @@ class ThemeData : XmlDataClass()
 	@NeedsLocalisation(file = "Theme")
 	@DataValue(dataName = "Name")
 	lateinit var nameID: String
-
+	
 	lateinit var floor: SpriteWrapper
 	lateinit var wall: SpriteWrapper
 	lateinit var pit: SpriteWrapper
-
+	
 	lateinit var chestFull: Sprite
 	lateinit var chestEmpty: Sprite
 	lateinit var coin: Sprite
 	lateinit var plate: Sprite
-
+	
 	@DataValue(dataName = "Block")
 	@DataArray(minCount = 1)
 	val blockSprites: Array<Sprite> = Array()
-
+	
 	@DataValue(dataName = "Seal")
 	@DataArray(minCount = 1)
 	val sealSprites: Array<Sprite> = Array()
-
+	
 	@DataValue(dataName = "Shield")
 	@DataArray(minCount = 1)
 	val shieldSprites: Array<Sprite> = Array()
-
+	
 	@DataValue(dataName = "SpawnWeights")
 	@DataArray(minCount = 1)
 	val spawnList: Array<SpawnTypeAndWeight> = Array()
-
+	
 	@DataArray(minCount = 1)
 	@FileReference(basePath = "Factions", resourceType = "Faction")
 	val factions: Array<String> = Array()
-
+	
 	@FileReference(basePath = "Sprites", allowedFileTypes = "png")
 	lateinit var backgroundTile: String
 

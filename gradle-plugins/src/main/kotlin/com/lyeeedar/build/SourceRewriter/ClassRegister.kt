@@ -268,6 +268,36 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 				}
 			}
 
+			if (root.isAbstract)
+			{
+				val defNames = HashMap<String, ArrayList<String>>()
+				for (childDef in root.inheritingClasses)
+				{
+					if (!childDef.isAbstract)
+					{
+						var category = defNames[childDef.classDef!!.dataClassCategory]
+						if (category == null)
+						{
+							category = ArrayList()
+							defNames[childDef.classDef!!.dataClassCategory] = category
+						}
+						category.add(childDef.classDef!!.dataClassName)
+					}
+				}
+
+				val keysStr: String
+				if (defNames.size == 1)
+				{
+					keysStr = defNames.values.first().sorted().joinToString(",")
+				}
+				else
+				{
+					keysStr = defNames.entries.sortedBy { it.key }.joinToString(",") { "${it.key}(${it.value.sorted().joinToString(",")})" }
+				}
+
+				builder.appendln(1, """<Definition Name="${root.classDef!!.dataClassName}Defs" Keys="$keysStr" IsGlobal="True" meta:RefKey="ReferenceDef" />""")
+			}
+
 			builder.appendln(0, "</Definitions>")
 			File("$defFolder/$name.xmldef").writeText(builder.toString())
 

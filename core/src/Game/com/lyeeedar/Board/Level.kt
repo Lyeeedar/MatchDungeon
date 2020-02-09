@@ -18,10 +18,6 @@ import ktx.collections.set
 import ktx.collections.toGdxArray
 import java.util.*
 
-/**
- * Created by Philip on 13-Jul-16.
- */
-
 class Level(val loadPath: String)
 {
 	// Load Data
@@ -29,8 +25,8 @@ class Level(val loadPath: String)
 
 	val symbolMap = IntMap<Symbol>()
 
-	val defeatConditions = Array<AbstractCompletionCondition>()
-	val victoryConditions = Array<AbstractCompletionCondition>()
+	val defeatConditions = Array<AbstractCompletionCondition<*>>()
+	val victoryConditions = Array<AbstractCompletionCondition<*>>()
 
 	var orbs: Int = 6
 
@@ -152,9 +148,9 @@ class Level(val loadPath: String)
 		{
 			if (victory is CompletionConditionCustomOrb)
 			{
-				namedOrbs.add(OrbDesc.getNamedOrb(victory.targetOrbName))
+				namedOrbs.add(OrbDesc.getNamedOrb(victory.data.targetOrbName))
 
-				val chance = victory.orbChance
+				val chance = victory.data.orbChance
 				val weight = (spawnWeightTotal.toFloat() * chance).ciel()
 
 				for (i in 0 until weight)
@@ -597,7 +593,7 @@ class Level(val loadPath: String)
 		{
 			if (victory is CompletionConditionSink)
 			{
-				val numToSink = (victory as? CompletionConditionSink)!!.count
+				val numToSink = (victory as? CompletionConditionSink)!!.actualCount
 
 				val existingCount = grid.grid.filter { it.contents?.sinkable() != null || it.contents?.container()?.containedEntity?.sinkable() != null }.count()
 
