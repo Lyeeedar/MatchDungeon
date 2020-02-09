@@ -137,8 +137,13 @@
 		</Sprite>
 	</Shield>
 	<SpawnWeights>
-		<Spawn>Orb,40</Spawn>
-		<Spawn>Summon,1</Spawn>
+		<SpawnTypeAndWeight>
+			<Type>ORB</Type>
+			<Weight>40</Weight>
+		</SpawnTypeAndWeight>
+		<SpawnTypeAndWeight>
+			<Type>SUMMON</Type>
+		</SpawnTypeAndWeight>
 	</SpawnWeights>
 	<Factions>
 		<Faction>Spider</Faction>

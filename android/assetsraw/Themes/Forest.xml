@@ -101,8 +101,13 @@
 		</Sprite>
 	</Shield>
 	<SpawnWeights>
-		<Spawn>Orb,5</Spawn>
-		<Spawn>Changer,1</Spawn>
+		<SpawnTypeAndWeight>
+			<Type>ORB</Type>
+			<Weight>5</Weight>
+		</SpawnTypeAndWeight>
+		<SpawnTypeAndWeight>
+			<Type>CHANGER</Type>
+		</SpawnTypeAndWeight>
 	</SpawnWeights>
 	<Factions>
 		<Faction>Slime</Faction>

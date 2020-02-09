@@ -71,7 +71,9 @@
 		</Sprite>
 	</Shield>
 	<SpawnWeights>
-		<Spawn>Orb,1</Spawn>
+		<SpawnTypeAndWeight>
+			<Type>ORB</Type>
+		</SpawnTypeAndWeight>
 	</SpawnWeights>
 	<Factions>
 		<Faction>Instructor</Faction>
