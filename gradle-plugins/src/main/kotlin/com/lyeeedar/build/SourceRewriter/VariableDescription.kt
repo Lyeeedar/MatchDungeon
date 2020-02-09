@@ -49,6 +49,10 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
         {
             // primitives dont need imports
         }
+		else if (type == "Point" || type == "Vector2" || type == "Vector3"|| type == "Vector4")
+		{
+
+		}
 		else if (classRegister.enumMap.containsKey(type))
 		{
 			imports.add("import java.util.*")
@@ -102,78 +106,109 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 				builder.appendln(indentation, "$name = xmlData.getBoolean(\"$dataName\", $defaultValue)")
 			}
 		}
-        else if (type == "ParticleEffect")
-        {
-            if (variableType == VariableType.LATEINIT)
-            {
-                val loadLine = "$name = AssetManager.loadParticleEffect(xmlData.getChildByName(\"$dataName\")!!)"
-                builder.appendln(indentation, "${loadLine}.getParticleEffect()")
-            }
-            else if (variableType == VariableType.VAR)
-            {
-                var loadLine = "$name = AssetManager.tryLoadParticleEffect(xmlData.getChildByName(\"$dataName\"))"
-                if (!nullable)
-                {
-                    loadLine += "!!"
-                }
+		else if (type == "Point" || type == "Vector2" || type == "Vector3" || type == "Vector4")
+		{
+			if (variableType == VariableType.VAR || variableType == VariableType.LATEINIT)
+			{
+				if (variableType == VariableType.LATEINIT)
+				{
+					builder.appendln(indentation, """val ${name}Raw = xmlData.get("$dataName").split(',')""")
+				}
 				else
 				{
-					loadLine += "?"
+					var defaultValue = defaultValue.split('(')[1].dropLast(1)
+					if (defaultValue.isBlank())
+					{
+						if (type == "Vector4")
+						{
+							defaultValue = "0,0,0,0"
+						}
+						else if (type == "Vector3")
+						{
+							defaultValue = "0,0,0"
+						}
+						else
+						{
+							defaultValue = "0,0"
+						}
+					}
+					builder.appendln(indentation, """val ${name}Raw = xmlData.get("$dataName", "$defaultValue")!!.split(',')""")
 				}
-                builder.appendln(indentation, "${loadLine}.getParticleEffect()")
-            }
-        }
-        else if (type == "ParticleEffectDescription")
-        {
-            if (variableType == VariableType.LATEINIT)
-            {
-                val loadLine = "$name = AssetManager.loadParticleEffect(xmlData.getChildByName(\"$dataName\")!!)"
-                builder.appendln(indentation, loadLine)
-            }
-            else if (variableType == VariableType.VAR)
-            {
-                var loadLine = "$name = AssetManager.tryLoadParticleEffect(xmlData.getChildByName(\"$dataName\"))"
-                if (!nullable)
-                {
-                    loadLine += "!!"
-                }
-                builder.appendln(indentation, loadLine)
-            }
-        }
-        else if (type == "Sprite")
-        {
-            if (variableType == VariableType.LATEINIT)
-            {
-                val loadLine = "$name = AssetManager.loadSprite(xmlData.getChildByName(\"$dataName\")!!)"
-                builder.appendln(indentation, loadLine)
-            }
-            else if (variableType == VariableType.VAR)
-            {
-                var loadLine = "$name = AssetManager.tryLoadSprite(xmlData.getChildByName(\"$dataName\"))"
-                if (!nullable)
-                {
-                    loadLine += "!!"
-                }
-                builder.appendln(indentation, loadLine)
-            }
-        }
-		else if (type == "SpriteWrapper")
-		{
-			if (variableType == VariableType.LATEINIT)
-			{
-				val loadLine = "$name = AssetManager.loadSpriteWrapper(xmlData.getChildByName(\"$dataName\")!!)"
-				builder.appendln(indentation, loadLine)
-			}
-			else if (variableType == VariableType.VAR)
-			{
-				var loadLine = "$name = AssetManager.tryLoadSpriteWrapper(xmlData.getChildByName(\"$dataName\"))"
-				if (!nullable)
+
+				if (type == "Point")
 				{
-					loadLine += "!!"
+					builder.appendln(indentation, "$name = Point(${name}Raw[0].toInt(), ${name}Raw[1].toInt())")
 				}
-				builder.appendln(indentation, loadLine)
+				else if (type == "Vector2")
+				{
+					builder.appendln(indentation, "$name = Vector2(${name}Raw[0].toFloat(), ${name}Raw[1].toFloat())")
+				}
+				else if (type == "Vector3")
+				{
+					builder.appendln(indentation, "$name = Vector3(${name}Raw[0].toFloat(), ${name}Raw[1].toFloat(), ${name}Raw[2].toFloat())")
+				}
+				else
+				{
+					builder.appendln(indentation, "$name = Vector3(${name}Raw[0].toFloat(), ${name}Raw[1].toFloat(), ${name}Raw[2].toFloat(), ${name}Raw[3].toFloat())")
+				}
 			}
 		}
+        else if (type == "ParticleEffect" || type == "ParticleEffectDescription" || type == "Sprite" || type == "SpriteWrapper")
+        {
+			val loadName: String
+			if (type == "ParticleEffectDescription" || type == "ParticleEffect")
+			{
+				loadName = "ParticleEffect"
+			}
+			else if (type == "Sprite")
+			{
+				loadName = "Sprite"
+			}
+			else if (type == "SpriteWrapper")
+			{
+				loadName = "SpriteWrapper"
+			}
+			else
+			{
+				throw RuntimeException("Unhandled renderable load type '$type'")
+			}
+
+			val loadExtension: String
+			if (type == "ParticleEffect")
+			{
+				if (variableType == VariableType.LATEINIT)
+				{
+					loadExtension = ".getParticleEffect()"
+				}
+				else if (nullable)
+				{
+					loadExtension = "?.getParticleEffect()"
+				}
+				else
+				{
+					loadExtension = ""
+				}
+			}
+			else
+			{
+				loadExtension = ""
+			}
+
+            if (variableType == VariableType.LATEINIT)
+            {
+                val loadLine = "$name = AssetManager.load$loadName(xmlData.getChildByName(\"$dataName\")!!)"
+                builder.appendln(indentation, "$loadLine$loadExtension")
+            }
+            else if (variableType == VariableType.VAR)
+            {
+                var loadLine = "$name = AssetManager.tryLoad$loadName(xmlData.getChildByName(\"$dataName\"))"
+                if (!nullable)
+                {
+                    loadLine += "!!"
+                }
+                builder.appendln(indentation, "$loadLine$loadExtension")
+            }
+        }
 		else if (classRegister.enumMap.containsKey(type))
 		{
 			val enumDef = classRegister.enumMap[type]!!
@@ -323,6 +358,29 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 
             builder.appendlnFix(2, """<Data Name="$dataName" $minStr $maxStr Type="$type" Default="$defaultValue" SkipIfDefault="True" $visibleIfStr meta:RefKey="Number" />""")
         }
+		else if (type == "Point" || type == "Vector2" || type == "Vector3" || type == "Vector4")
+		{
+			val numericAnnotation = annotations.firstOrNull { it.name == "NumericRange" }
+			val min = numericAnnotation?.paramMap?.get("min")?.replace("f", "")
+			val max = numericAnnotation?.paramMap?.get("max")?.replace("f", "")
+			val minStr = if (min != null) """Min="$min"""" else ""
+			val maxStr = if (max != null) """Max="$max"""" else ""
+			val defaultValue = this.defaultValue.split('(')[1].dropLast(1).replace("f", "")
+			val numericType = if (type == "Point") "Type=\"Int\"" else ""
+
+			val vectorAnnotation = annotations.firstOrNull { it.name == "Vector" }
+			val name1 = vectorAnnotation?.paramMap?.get("name1")
+			val name2 = vectorAnnotation?.paramMap?.get("name2")
+			val name3 = vectorAnnotation?.paramMap?.get("name3")
+			val name4 = vectorAnnotation?.paramMap?.get("name4")
+			val name1Str = if (name1 != null) "Name1=\"$name1\"" else ""
+			val name2Str = if (name2 != null) "Name2=\"$name2\"" else ""
+			val name3Str = if (name3 != null) "Name3=\"$name3\"" else ""
+			val name4Str = if (name4 != null) "Name4=\"$name4\"" else ""
+			val numComponents = if (type == "Point") "NumComponents=\"2\"" else "NumComponents=\"${type.last()}\""
+
+			builder.appendlnFix(2, """<Data Name="$dataName" $minStr $maxStr $numericType $name1Str $name2Str $name3Str $name4Str $numComponents SkipIfDefault="True" Default="$defaultValue" $visibleIfStr meta:RefKey="Vector" />""")
+		}
 		else if (type == "Boolean")
 		{
 			builder.appendlnFix(2, """<Data Name="$dataName" SkipIfDefault="True" Default="$defaultValue" $visibleIfStr meta:RefKey="Boolean" />""")

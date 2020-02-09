@@ -7,8 +7,7 @@
 		<Data Name="Abilities" DefKey="AbstractFriendlyAbilityDataDefs" meta:RefKey="Collection" />
 	</Definition>
 	<Definition Name="AbstractFriendlyAbilityData"   meta:RefKey="StructDef">
-		<Data Name="CooldownMin" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
-		<Data Name="CooldownMax" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Cooldown" Type="Int" Name1="Min" Name2="Max" NumComponents="2" SkipIfDefault="True" Default="1, 1" meta:RefKey="Vector" />
 		<Data Name="Range" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
 	<Definition Name="AbstractFriendlyAbilityDataDefs" Keys="FriendlyAttackAbilityData,FriendlyBlockAbilityData,FriendlyHealAbilityData,FriendlyMoveAbilityData,FriendlyPopAbilityData" meta:RefKey="ReferenceDef" />
