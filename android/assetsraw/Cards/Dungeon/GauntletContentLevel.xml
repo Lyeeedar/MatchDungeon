@@ -78,14 +78,18 @@
 	</Grid>
 	<OrbCount>5</OrbCount>
 	<VictoryConditions>
-		<Condition meta:RefKey="Sink">
+		<Sink>
+			<classID>Sink </classID>
 			<Count>2</Count>
-		</Condition>
+		</Sink>
 	</VictoryConditions>
 	<DefeatConditions>
-		<Condition meta:RefKey="Turns">
+		<Turns>
+			<classID>Turns </classID>
 			<Turns>30</Turns>
-		</Condition>
-		<Condition meta:RefKey="Die" />
+		</Turns>
+		<Die>
+			<classID>Die </classID>
+		</Die>
 	</DefeatConditions>
 </Level>

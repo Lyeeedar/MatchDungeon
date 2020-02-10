@@ -36,9 +36,13 @@
 	</Symbols>
 	<Faction>Rats</Faction>
 	<VictoryConditions>
-		<Condition meta:RefKey="Kill" />
+		<Kill>
+			<classID>Kill </classID>
+		</Kill>
 	</VictoryConditions>
 	<DefeatConditions>
-		<Condition meta:RefKey="Die" />
+		<Die>
+			<classID>Die </classID>
+		</Die>
 	</DefeatConditions>
 </Level>

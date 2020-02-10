@@ -13,11 +13,14 @@
 		</Rows>
 	</Grid>
 	<VictoryConditions>
-		<Condition meta:RefKey="Break" />
+		<Break>
+			<classID>Break </classID>
+		</Break>
 	</VictoryConditions>
 	<DefeatConditions>
-		<Condition meta:RefKey="Turns">
+		<Turns>
+			<classID>Turns </classID>
 			<Turns>40</Turns>
-		</Condition>
+		</Turns>
 	</DefeatConditions>
 </Level>

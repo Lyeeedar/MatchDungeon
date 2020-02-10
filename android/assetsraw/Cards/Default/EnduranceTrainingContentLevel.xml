@@ -62,16 +62,18 @@
 		</Rows>
 	</Grid>
 	<VictoryConditions>
-		<Condition meta:RefKey="Matches">
+		<Matches>
+			<classID>Matches </classID>
 			<Orbs>20</Orbs>
 			<Orbs>20</Orbs>
 			<Orbs>20</Orbs>
 			<Orbs>20</Orbs>
-		</Condition>
+		</Matches>
 	</VictoryConditions>
 	<DefeatConditions>
-		<Condition meta:RefKey="Time">
+		<Time>
+			<classID>Time </classID>
 			<Seconds>60</Seconds>
-		</Condition>
+		</Time>
 	</DefeatConditions>
 </Level>

@@ -35,11 +35,14 @@
 		</Symbol>
 	</Symbols>
 	<VictoryConditions>
-		<Condition meta:RefKey="Turns">
+		<Turns>
+			<classID>Turns </classID>
 			<Turns>20</Turns>
-		</Condition>
+		</Turns>
 	</VictoryConditions>
 	<DefeatConditions>
-		<Condition meta:RefKey="Die" />
+		<Die>
+			<classID>Die </classID>
+		</Die>
 	</DefeatConditions>
 </Level>

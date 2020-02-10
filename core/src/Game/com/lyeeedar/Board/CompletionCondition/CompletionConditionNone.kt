@@ -2,12 +2,10 @@ package com.lyeeedar.Board.CompletionCondition
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.lyeeedar.Board.Grid
+import com.lyeeedar.Util.DataClass
 import com.lyeeedar.Util.XmlData
 
-/**
- * Created by Philip on 07-Aug-16.
- */
-
+@DataClass(name = "None")
 class CompletionConditionNoneData : AbstractCompletionConditionData()
 {
 	override val classID: String = "None"

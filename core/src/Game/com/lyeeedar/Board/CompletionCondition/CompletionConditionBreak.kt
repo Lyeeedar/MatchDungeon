@@ -13,6 +13,7 @@ import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
 import ktx.collections.set
 
+@DataClass(name = "Break")
 class CompletionConditionBreakData : AbstractCompletionConditionData()
 {
 	override val classID: String = "Break"

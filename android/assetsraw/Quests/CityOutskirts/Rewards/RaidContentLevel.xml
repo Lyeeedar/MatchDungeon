@@ -130,12 +130,15 @@
 	</Symbols>
 	<Theme>Cave</Theme>
 	<VictoryConditions>
-		<Condition meta:RefKey="Kill">
+		<Kill>
+			<classID>Kill </classID>
 			<All>false</All>
 			<Named>Beholder</Named>
-		</Condition>
+		</Kill>
 	</VictoryConditions>
 	<DefeatConditions>
-		<Condition meta:RefKey="Die" />
+		<Die>
+			<classID>Die </classID>
+		</Die>
 	</DefeatConditions>
 </Level>

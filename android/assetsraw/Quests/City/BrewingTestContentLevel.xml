@@ -51,26 +51,32 @@
 		</SpawnWeights>
 	</SpawnWeightsOverride>
 	<VictoryConditions>
-		<Condition meta:RefKey="CustomOrb">
+		<CustomOrb>
+			<classID>CustomOrb </classID>
 			<Count>10</Count>
 			<OrbName>PotionRed</OrbName>
 			<Chance>0.2</Chance>
-		</Condition>
-		<Condition meta:RefKey="CustomOrb">
+		</CustomOrb>
+		<CustomOrb>
+			<classID>CustomOrb </classID>
 			<Count>10</Count>
 			<OrbName>PotionGreen</OrbName>
 			<Chance>0.2</Chance>
-		</Condition>
-		<Condition meta:RefKey="CustomOrb">
+		</CustomOrb>
+		<CustomOrb>
+			<classID>CustomOrb </classID>
 			<Count>10</Count>
 			<OrbName>PotionBlue</OrbName>
 			<Chance>0.2</Chance>
-		</Condition>
+		</CustomOrb>
 	</VictoryConditions>
 	<DefeatConditions>
-		<Condition meta:RefKey="Turns">
+		<Turns>
+			<classID>Turns </classID>
 			<Turns>40</Turns>
-		</Condition>
-		<Condition meta:RefKey="Die" />
+		</Turns>
+		<Die>
+			<classID>Die </classID>
+		</Die>
 	</DefeatConditions>
 </Level>

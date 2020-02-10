@@ -21,6 +21,7 @@ import ktx.collections.set
 import ktx.collections.toGdxArray
 import ktx.math.minus
 
+@DataClass(name = "Sink")
 class CompletionConditionSinkData : AbstractCompletionConditionData()
 {
 	override val classID: String = "Sink"

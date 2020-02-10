@@ -13,15 +13,17 @@
 		</Rows>
 	</Grid>
 	<VictoryConditions>
-		<Condition meta:RefKey="CustomOrb">
+		<CustomOrb>
+			<classID>CustomOrb </classID>
 			<Count>20</Count>
 			<OrbName>Brain</OrbName>
 			<Chance>0.3</Chance>
-		</Condition>
+		</CustomOrb>
 	</VictoryConditions>
 	<DefeatConditions>
-		<Condition meta:RefKey="Turns">
+		<Turns>
+			<classID>Turns </classID>
 			<Turns>40</Turns>
-		</Condition>
+		</Turns>
 	</DefeatConditions>
 </Level>

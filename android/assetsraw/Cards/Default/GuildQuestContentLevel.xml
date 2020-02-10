@@ -15,20 +15,27 @@
 	</Grid>
 	<OrbCount>5</OrbCount>
 	<VictoryConditions>
-		<Condition meta:RefKey="Sink">
+		<Sink>
+			<classID>Sink </classID>
 			<Count>2</Count>
-		</Condition>
-		<Condition meta:RefKey="Kill" />
-		<Condition meta:RefKey="Matches">
+		</Sink>
+		<Kill>
+			<classID>Kill </classID>
+		</Kill>
+		<Matches>
+			<classID>Matches </classID>
 			<Orbs>20</Orbs>
 			<Orbs>15</Orbs>
 			<Orbs>10</Orbs>
-		</Condition>
+		</Matches>
 	</VictoryConditions>
 	<DefeatConditions>
-		<Condition meta:RefKey="Die" />
-		<Condition meta:RefKey="Turns">
+		<Die>
+			<classID>Die </classID>
+		</Die>
+		<Turns>
+			<classID>Turns </classID>
 			<Turns>40</Turns>
-		</Condition>
+		</Turns>
 	</DefeatConditions>
 </Level>

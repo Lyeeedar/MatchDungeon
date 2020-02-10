@@ -109,12 +109,15 @@
 		</Symbol>
 	</Symbols>
 	<VictoryConditions>
-		<Condition meta:RefKey="Kill">
+		<Kill>
+			<classID>Kill </classID>
 			<All>false</All>
 			<Named>Dragon</Named>
-		</Condition>
+		</Kill>
 	</VictoryConditions>
 	<DefeatConditions>
-		<Condition meta:RefKey="Die" />
+		<Die>
+			<classID>Die </classID>
+		</Die>
 	</DefeatConditions>
 </Level>

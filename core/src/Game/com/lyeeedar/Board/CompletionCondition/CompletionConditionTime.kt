@@ -12,6 +12,7 @@ import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
 
+@DataClass(name = "Time")
 class CompletionConditionTimeData : AbstractCompletionConditionData()
 {
 	override val classID: String = "Time"

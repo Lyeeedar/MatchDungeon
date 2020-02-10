@@ -10,6 +10,7 @@ import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
 
+@DataClass(name = "Plate")
 class CompletionConditionPlateData : AbstractCompletionConditionData()
 {
 	override val classID: String = "Plate"

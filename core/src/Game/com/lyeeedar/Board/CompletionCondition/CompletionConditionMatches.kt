@@ -15,6 +15,7 @@ import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
 import ktx.collections.set
 
+@DataClass(name = "Matches")
 class CompletionConditionMatchesData : AbstractCompletionConditionData()
 {
 	override val classID: String = "Matches"

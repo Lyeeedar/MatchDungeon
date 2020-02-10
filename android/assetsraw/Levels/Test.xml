@@ -14,16 +14,20 @@
 	</Grid>
 	<Faction>Rats</Faction>
 	<VictoryConditions>
-		<Condition meta:RefKey="Kill" />
-		<Condition meta:RefKey="CustomOrb">
+		<Kill>
+			<classID>Kill </classID>
+		</Kill>
+		<CustomOrb>
+			<classID>CustomOrb </classID>
 			<Count>20</Count>
 			<OrbName>Seduce</OrbName>
 			<Chance>0.2</Chance>
-		</Condition>
+		</CustomOrb>
 	</VictoryConditions>
 	<DefeatConditions>
-		<Condition meta:RefKey="Turns">
+		<Turns>
+			<classID>Turns </classID>
 			<Turns>30</Turns>
-		</Condition>
+		</Turns>
 	</DefeatConditions>
 </Level>

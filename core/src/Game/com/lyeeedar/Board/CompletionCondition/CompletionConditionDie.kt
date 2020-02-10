@@ -21,6 +21,7 @@ import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
 import ktx.math.minus
 
+@DataClass(name = "Die")
 class CompletionConditionDieData : AbstractCompletionConditionData()
 {
 	override val classID: String = "Die"

@@ -40,15 +40,17 @@
 	</Symbols>
 	<Theme>Farm</Theme>
 	<VictoryConditions>
-		<Condition meta:RefKey="CustomOrb">
+		<CustomOrb>
+			<classID>CustomOrb </classID>
 			<Count>25</Count>
 			<OrbName>Boot</OrbName>
 			<Chance>0.3</Chance>
-		</Condition>
+		</CustomOrb>
 	</VictoryConditions>
 	<DefeatConditions>
-		<Condition meta:RefKey="Turns">
+		<Turns>
+			<classID>Turns </classID>
 			<Turns>40</Turns>
-		</Condition>
+		</Turns>
 	</DefeatConditions>
 </Level>

@@ -83,11 +83,14 @@
 		</Symbol>
 	</Symbols>
 	<VictoryConditions>
-		<Condition meta:RefKey="Kill" />
+		<Kill>
+			<classID>Kill </classID>
+		</Kill>
 	</VictoryConditions>
 	<DefeatConditions>
-		<Condition meta:RefKey="Turns">
+		<Turns>
+			<classID>Turns </classID>
 			<Turns>40</Turns>
-		</Condition>
+		</Turns>
 	</DefeatConditions>
 </Level>

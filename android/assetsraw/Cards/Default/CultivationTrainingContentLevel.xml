@@ -57,15 +57,17 @@
 		</Rows>
 	</Grid>
 	<VictoryConditions>
-		<Condition meta:RefKey="CustomOrb">
+		<CustomOrb>
+			<classID>CustomOrb </classID>
 			<Count>30</Count>
 			<OrbName>Brain</OrbName>
 			<Chance>0.35</Chance>
-		</Condition>
+		</CustomOrb>
 	</VictoryConditions>
 	<DefeatConditions>
-		<Condition meta:RefKey="Time">
+		<Time>
+			<classID>Time </classID>
 			<Seconds>60</Seconds>
-		</Condition>
+		</Time>
 	</DefeatConditions>
 </Level>

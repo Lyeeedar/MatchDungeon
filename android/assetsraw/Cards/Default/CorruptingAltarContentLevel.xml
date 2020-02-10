@@ -112,9 +112,13 @@
 		</Symbol>
 	</Symbols>
 	<VictoryConditions>
-		<Condition meta:RefKey="Break" />
+		<Break>
+			<classID>Break </classID>
+		</Break>
 	</VictoryConditions>
 	<DefeatConditions>
-		<Condition meta:RefKey="Die" />
+		<Die>
+			<classID>Die </classID>
+		</Die>
 	</DefeatConditions>
 </Level>

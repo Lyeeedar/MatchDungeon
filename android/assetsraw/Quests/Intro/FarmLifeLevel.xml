@@ -14,14 +14,16 @@
 	</Grid>
 	<Theme>Farm</Theme>
 	<VictoryConditions>
-		<Condition meta:RefKey="Matches">
+		<Matches>
+			<classID>Matches </classID>
 			<Orbs>20</Orbs>
 			<Orbs>20</Orbs>
-		</Condition>
+		</Matches>
 	</VictoryConditions>
 	<DefeatConditions>
-		<Condition meta:RefKey="Turns">
+		<Turns>
+			<classID>Turns </classID>
 			<Turns>40</Turns>
-		</Condition>
+		</Turns>
 	</DefeatConditions>
 </Level>

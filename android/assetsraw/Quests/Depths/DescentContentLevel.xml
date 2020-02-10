@@ -33,13 +33,15 @@
 	</Symbols>
 	<OrbCount>5</OrbCount>
 	<VictoryConditions>
-		<Condition meta:RefKey="Sink">
+		<Sink>
+			<classID>Sink </classID>
 			<Count>1</Count>
-		</Condition>
+		</Sink>
 	</VictoryConditions>
 	<DefeatConditions>
-		<Condition meta:RefKey="Turns">
+		<Turns>
+			<classID>Turns </classID>
 			<Turns>40</Turns>
-		</Condition>
+		</Turns>
 	</DefeatConditions>
 </Level>

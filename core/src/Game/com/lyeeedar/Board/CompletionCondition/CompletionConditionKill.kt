@@ -16,6 +16,7 @@ import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
 import ktx.collections.set
 
+@DataClass(name = "Kill")
 class CompletionConditionKillData : AbstractCompletionConditionData()
 {
 	override val classID: String = "Kill"
