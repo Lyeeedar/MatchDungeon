@@ -16,8 +16,10 @@
 	<VictoryConditions>
 		<Matches>
 			<classID>Matches </classID>
-			<Orbs>20</Orbs>
-			<Orbs>20</Orbs>
+			<ToBeMatched>
+				<Orbs>20</Orbs>
+				<Orbs>20</Orbs>
+			</ToBeMatched>
 		</Matches>
 	</VictoryConditions>
 	<DefeatConditions>

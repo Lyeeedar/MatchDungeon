@@ -68,10 +68,12 @@
 		</Sink>
 		<Matches>
 			<classID>Matches </classID>
-			<Orbs>10</Orbs>
-			<Orbs>10</Orbs>
-			<Orbs>10</Orbs>
-			<Orbs>10</Orbs>
+			<ToBeMatched>
+				<Orbs>10</Orbs>
+				<Orbs>10</Orbs>
+				<Orbs>10</Orbs>
+				<Orbs>10</Orbs>
+			</ToBeMatched>
 		</Matches>
 	</VictoryConditions>
 	<DefeatConditions>

@@ -78,8 +78,10 @@
 	<VictoryConditions>
 		<Matches>
 			<classID>Matches </classID>
-			<Orbs>25</Orbs>
-			<Orbs>25</Orbs>
+			<ToBeMatched>
+				<Orbs>25</Orbs>
+				<Orbs>25</Orbs>
+			</ToBeMatched>
 		</Matches>
 	</VictoryConditions>
 	<DefeatConditions>

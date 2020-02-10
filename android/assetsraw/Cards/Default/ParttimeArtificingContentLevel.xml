@@ -38,9 +38,11 @@
 		</Sink>
 		<Matches>
 			<classID>Matches </classID>
-			<Orbs>20</Orbs>
-			<Orbs>20</Orbs>
-			<Orbs>10</Orbs>
+			<ToBeMatched>
+				<Orbs>20</Orbs>
+				<Orbs>20</Orbs>
+				<Orbs>10</Orbs>
+			</ToBeMatched>
 		</Matches>
 	</VictoryConditions>
 	<DefeatConditions>

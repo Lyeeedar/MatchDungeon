@@ -24,9 +24,11 @@
 		</Kill>
 		<Matches>
 			<classID>Matches </classID>
-			<Orbs>20</Orbs>
-			<Orbs>15</Orbs>
-			<Orbs>10</Orbs>
+			<ToBeMatched>
+				<Orbs>20</Orbs>
+				<Orbs>15</Orbs>
+				<Orbs>10</Orbs>
+			</ToBeMatched>
 		</Matches>
 	</VictoryConditions>
 	<DefeatConditions>
