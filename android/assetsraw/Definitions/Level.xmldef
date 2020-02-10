@@ -1,32 +1,4 @@
 <Definitions Colour="125,156,127" Icon="Sprites/Icons/LevelIcon.png" xmlns:meta="Editor">
-	<!--Completion Conditions-->
-	<Definition Name="None" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />
-	<!--Failure-->
-	<Definition Name="Die" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />
-	<Definition Name="Time" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef">
-		<Data Name="Seconds" Min="1" Default="60" SkipIfDefault="False" meta:RefKey="Number" />
-	</Definition>
-	<Definition Name="Turns" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef">
-		<Data Name="Turns" Type="Int" Min="1" Default="40" SkipIfDefault="False" meta:RefKey="Number" />
-	</Definition>
-	<!--Success-->
-	<Definition Name="Plate" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />
-	<Definition Name="Matches" MinCount="1" SkipIfDefault="False" meta:RefKey="CollectionDef">
-		<Data Name="Orbs" Type="Int" Min="1" Default="10" SkipIfDefault="False" meta:RefKey="Number" />
-	</Definition>
-	<Definition Name="Kill" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef">
-		<Data Name="All" Default="True" meta:RefKey="Boolean" />
-		<Data Name="Named" VisibleIf="All == false" meta:RefKey="String" />
-	</Definition>
-	<Definition Name="Break" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef" />
-	<Definition Name="Sink" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef">
-		<Data Name="Count" Type="Int" Min="1" Default="4" SkipIfDefault="False" meta:RefKey="Number" />
-	</Definition>
-	<Definition Name="CustomOrb" Nullable="False" SkipIfDefault="False" meta:RefKey="StructDef">
-		<Data Name="Count" Type="Int" Min="1" Default="20" SkipIfDefault="False" meta:RefKey="Number" />
-		<Data Name="OrbName" meta:RefKey="String" />
-		<Data Name="Chance" Min="0" Max="1" Default="0.2" SkipIfDefault="False" meta:RefKey="Number" />
-	</Definition>
 	<!--Level Content-->
 	<Definition Name="TurnEffects" IsGlobal="True" meta:RefKey="CollectionDef">
 		<Data Name="TurnEffect" meta:RefKey="Struct">
