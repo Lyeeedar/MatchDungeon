@@ -61,20 +61,20 @@ abstract class AbstractCompletionCondition<T: AbstractCompletionConditionData>(v
 		{
 			val instance = when(data.classID)
 			{
-				"NONE" -> CompletionConditionNone(data as CompletionConditionNoneData)
+				"None" -> CompletionConditionNone(data as CompletionConditionNoneData)
 
 			// Defeat
-				"DIE" -> CompletionConditionDie(data as CompletionConditionDieData)
-				"TURNS" -> CompletionConditionTurns(data as CompletionConditionTurnsData)
-				"TIME" -> CompletionConditionTime(data as CompletionConditionTimeData)
+				"Die" -> CompletionConditionDie(data as CompletionConditionDieData)
+				"Turns" -> CompletionConditionTurns(data as CompletionConditionTurnsData)
+				"Time" -> CompletionConditionTime(data as CompletionConditionTimeData)
 
 			// Victory
-				"KILL" -> CompletionConditionKill(data as CompletionConditionKillData)
-				"MATCHES" -> CompletionConditionMatches(data as CompletionConditionMatchesData)
-				"SINK" -> CompletionConditionSink(data as CompletionConditionSinkData)
-				"PLATE" -> CompletionConditionPlate(data as CompletionConditionPlateData)
-				"CUSTOMORB" -> CompletionConditionCustomOrb(data as CompletionConditionCustomOrbData)
-				"BREAK" -> CompletionConditionBreak(data as CompletionConditionBreakData)
+				"Kill" -> CompletionConditionKill(data as CompletionConditionKillData)
+				"Matches" -> CompletionConditionMatches(data as CompletionConditionMatchesData)
+				"Sink" -> CompletionConditionSink(data as CompletionConditionSinkData)
+				"Plate" -> CompletionConditionPlate(data as CompletionConditionPlateData)
+				"CustomOrb" -> CompletionConditionCustomOrb(data as CompletionConditionCustomOrbData)
+				"Break" -> CompletionConditionBreak(data as CompletionConditionBreakData)
 
 			// ARGH everything broke
 				else -> throw RuntimeException("Invalid completion condition type: ${data.classID}")
