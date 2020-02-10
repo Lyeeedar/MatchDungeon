@@ -6,9 +6,9 @@
 	</Definition>
 	<Definition Name="CustomOrb" Nullable="False" Extends="CompletionCondition" meta:RefKey="StructDef">
 		<Const Name="classID">CustomOrb</Const>
-		<Data Name="TargetOrbName" SkipIfDefault="False" Default="" meta:RefKey="String" />
-		<Data Name="MatchCount" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
-		<Data Name="OrbChance" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="OrbName" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Count" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Chance" Type="Float" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
 	</Definition>
 	<Definition Name="Die" Nullable="False" Extends="CompletionCondition" meta:RefKey="StructDef">
 		<Const Name="classID">Die</Const>

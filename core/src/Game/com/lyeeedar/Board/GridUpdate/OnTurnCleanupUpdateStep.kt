@@ -412,7 +412,7 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 			{
 				if (!custom.isCompleted())
 				{
-					val key = OrbDesc.getNamedOrb(custom.data.targetOrbName).key
+					val key = OrbDesc.getNamedOrb(custom.data.orbName).key
 					keys.add(key)
 				}
 			}

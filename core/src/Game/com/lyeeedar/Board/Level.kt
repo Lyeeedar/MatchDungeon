@@ -148,9 +148,9 @@ class Level(val loadPath: String)
 		{
 			if (victory is CompletionConditionCustomOrb)
 			{
-				namedOrbs.add(OrbDesc.getNamedOrb(victory.data.targetOrbName))
+				namedOrbs.add(OrbDesc.getNamedOrb(victory.data.orbName))
 
-				val chance = victory.data.orbChance
+				val chance = victory.data.chance
 				val weight = (spawnWeightTotal.toFloat() * chance).ciel()
 
 				for (i in 0 until weight)
