@@ -55,7 +55,7 @@ fun addMonsterEffect(entity: Entity, monsterEffect: MonsterEffect): Entity
 	return entity
 }
 
-class MonsterEffect(val effect: MonsterEffectType, val data: ObjectMap<String, Any>)
+class MonsterEffect(val effect: MonsterEffectType)
 {
 	val actualSprite: Sprite = when (effect)
 	{

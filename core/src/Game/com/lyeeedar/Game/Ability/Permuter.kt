@@ -1,85 +1,102 @@
 package com.lyeeedar.Game.Ability
 
 import com.badlogic.gdx.utils.Array
-import com.badlogic.gdx.utils.ObjectMap
 import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.Tile
 import com.lyeeedar.Components.matchable
 import com.lyeeedar.Direction
+import com.lyeeedar.Util.DataValue
+import com.lyeeedar.Util.XmlData
+import com.lyeeedar.Util.XmlDataClass
 import com.lyeeedar.Util.random
 
-/**
- * Created by Philip on 21-Jul-16.
- */
-
-class Permuter(val type: Type)
+enum class PermuterType
 {
-	enum class Type
-	{
-		SINGLE,
-		ALLOFTYPE,
-		NOFTYPE,
-		COLUMN,
-		ROW,
-		CROSS,
-		BLOCK,
-		DIAMOND,
-		RANDOM,
-		CONE
+	SINGLE,
+	ALLOFTYPE,
+	NOFTYPE,
+	COLUMN,
+	ROW,
+	CROSS,
+	BLOCK,
+	DIAMOND,
+	RANDOM,
+	CONE
+}
+
+class Permuter : XmlDataClass()
+{
+	lateinit var type: PermuterType
+
+	@DataValue(visibleIf = "Type == NOFTYPE || Type == RANDOM")
+	var count: Int = 1
+
+	@DataValue(visibleIf = "Type == COLUMN || Type == ROW || Type == CROSS || Type == CONE")
+	var range: Int = 99999
+
+	@DataValue(visibleIf = "Type == BLOCK || Type == DIAMOND")
+	var aoe: Int = 1
+
+	override fun load(xmlData: XmlData) {
+
 	}
+}
 
-	lateinit var permute: (tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?) -> Sequence<Tile>
-
-	init
+fun Permuter.permute(tile: Tile, grid: Grid, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile>
+{
+	return when(type)
 	{
-		permute = when(type)
-		{
-			Type.SINGLE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?) = sequenceOf(tile)
+		PermuterType.SINGLE -> sequenceOf(tile)
 
-			Type.ALLOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?) = grid.grid.filter{ val key = data["TYPE"]?.hashCode() ?: tile.contents!!.matchable()!!.desc.key; it.contents?.matchable()?.desc?.key == key }
-
-			Type.NOFTYPE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> { val type = data["TYPE"].hashCode(); val count = data["COUNT"].toString().toInt(); return grid.grid.filter{ it.contents?.matchable()?.desc?.key == type }.random(count, grid.ran) }
-
-			Type.COLUMN -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> {
-				val range = data["RANGE", "9999999"]!!.toString().toInt()
-				return grid.grid.filter{ it.x == tile.x && it.dist(tile) <= range }
+		PermuterType.ALLOFTYPE -> {
+			return grid.grid.filter {
+				val key = tile.contents!!.matchable()!!.desc.key
+				it.contents?.matchable()?.desc?.key == key
 			}
-
-			Type.ROW -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> {
-				val range = data["RANGE", "9999999"]!!.toString().toInt()
-				return grid.grid.filter{ it.y == tile.y && it.dist(tile) <= range }
-			}
-
-			Type.CROSS -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> {
-				val range = data["RANGE", "9999999"]!!.toString().toInt()
-				return grid.grid.filter{ (it.y == tile.y || it.x == tile.x) && it.dist(tile) <= range }
-			}
-
-			Type.BLOCK ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> { val dst = data["AOE", "1"].toString().toInt(); return grid.grid.filter{ it.taxiDist(tile) <= dst } }
-			Type.DIAMOND ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> { val dst = data["AOE", "1"].toString().toInt(); return grid.grid.filter{ it.dist(tile) <= dst } }
-
-			Type.RANDOM ->  fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> {
-				val count = data["COUNT"].toString().toInt()
-
-				if (ability != null && selectedTargets.size > 0 && ability.effect.type == Effect.Type.CONVERT)
-				{
-					val selectedType = selectedTargets[0].contents!!.matchable()!!.desc
-					return grid.grid.filter{ it.contents?.matchable() != null && it.contents!!.matchable()!!.desc != selectedType }.random(count, grid.ran)
-				}
-
-				return grid.grid.filter{ ability?.targetter?.isValid?.invoke(it, data) ?: it.canHaveOrb }.random(count, grid.ran)
-			}
-
-			Type.CONE -> fun(tile: Tile, grid: Grid, data: ObjectMap<String, Any>, selectedTargets: Array<Tile>, ability: Ability?, source: Tile?): Sequence<Tile> {
-				val range = data["RANGE", "3"]!!.toString().toInt()
-
-				val dir = Direction.getCardinalDirection(source!!, tile)
-				val cone = Direction.buildCone(dir, source, range)
-
-				return cone.mapNotNull { if (grid.grid.inBounds(it)) grid.grid.get(it) else null }.asSequence()
-			}
-
-			else -> throw Exception("Invalid permuter type $type")
 		}
+
+		PermuterType.NOFTYPE -> {
+			val key = tile.contents!!.matchable()!!.desc.key
+			return grid.grid.filter{ it.contents?.matchable()?.desc?.key == key }.random(count, grid.ran)
+		}
+
+		PermuterType.COLUMN -> {
+			return grid.grid.filter{ it.x == tile.x && it.dist(tile) <= range }
+		}
+
+		PermuterType.ROW -> {
+			return grid.grid.filter{ it.y == tile.y && it.dist(tile) <= range }
+		}
+
+		PermuterType.CROSS -> {
+			return grid.grid.filter{ (it.y == tile.y || it.x == tile.x) && it.dist(tile) <= range }
+		}
+
+		PermuterType.BLOCK -> {
+			return grid.grid.filter{ it.taxiDist(tile) <= aoe }
+		}
+
+		PermuterType.DIAMOND -> {
+			return grid.grid.filter{ it.dist(tile) <= aoe }
+		}
+
+		PermuterType.RANDOM -> {
+			if (ability != null && selectedTargets.size > 0 && ability.effect.type == Effect.Type.CONVERT)
+			{
+				val selectedType = selectedTargets[0].contents!!.matchable()!!.desc
+				return grid.grid.filter{ it.contents?.matchable() != null && it.contents!!.matchable()!!.desc != selectedType }.random(count, grid.ran)
+			}
+
+			return grid.grid.filter{ ability?.targetter?.isValid(it) ?: it.canHaveOrb }.random(count, grid.ran)
+		}
+
+		PermuterType.CONE -> {
+			val dir = Direction.getCardinalDirection(source!!, tile)
+			val cone = Direction.buildCone(dir, source, range)
+
+			return cone.mapNotNull { if (grid.grid.inBounds(it)) grid.grid.get(it) else null }.asSequence()
+		}
+
+		else -> throw Exception("Invalid permuter type $type")
 	}
 }
