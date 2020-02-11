@@ -69,7 +69,7 @@ class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val gr
 		{
 			override fun clicked(event: InputEvent?, x: Float, y: Float)
 			{
-				if (PowerBar.instance.pips >= ability.cost && ability.hasValidTargets(grid))
+				if (PowerBar.instance.pips >= ability.data.cost && ability.hasValidTargets(grid))
 				{
 					if (grid.activeAbility == ability)
 					{
@@ -90,7 +90,7 @@ class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val gr
 	var colour: Color = Color.DARK_GRAY
 	fun updateEnabled()
 	{
-		if (PowerBar.instance.pips >= ability.cost && ability.hasValidTargets(grid))
+		if (PowerBar.instance.pips >= ability.data.cost && ability.hasValidTargets(grid))
 		{
 			colour = Color.WHITE
 		}
@@ -99,7 +99,7 @@ class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val gr
 			colour = Color.DARK_GRAY
 		}
 
-		if (ability.maxUsages > 0 && !ability.resetUsagesPerLevel)
+		if (ability.data.maxUsages > 0 && !ability.data.resetUsagesPerLevel)
 		{
 			usagesLabel.setText("" + ability.remainingUsages)
 		}
@@ -121,12 +121,12 @@ class AbilityWidget(val equipment: Equipment, val w: Float, val h: Float, val gr
 
 		super.draw(batch, parentAlpha)
 
-		val pipSize = (width - (ability.cost+1) * padding) / ability.cost
+		val pipSize = (width - (ability.data.cost+1) * padding) / ability.data.cost
 		val filledPips = PowerBar.instance.pips
 
 		batch!!.color = Color.WHITE
 
-		for (i in 1..ability.cost)
+		for (i in 1..ability.data.cost)
 		{
 			val sprite = if (i <= filledPips) full else empty
 

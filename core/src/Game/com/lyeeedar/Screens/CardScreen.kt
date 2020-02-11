@@ -219,7 +219,7 @@ class CardScreen : AbstractScreen()
 
 				if (equip.ability != null)
 				{
-					if (equip.ability!!.maxUsages > 0 && !equip.ability!!.resetUsagesPerLevel)
+					if (equip.ability!!.data.maxUsages > 0 && !equip.ability!!.data.resetUsagesPerLevel)
 					{
 						val label = Label(equip.ability!!.remainingUsages.toString(), Statics.skin)
 						stack.add(label)

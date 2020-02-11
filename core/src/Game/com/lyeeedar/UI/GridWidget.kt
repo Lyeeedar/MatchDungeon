@@ -317,7 +317,7 @@ class GridWidget(val grid: Grid) : Widget()
 
 				if (activeAbility != null)
 				{
-					val isValidTarget = activeAbility.targetter.isValid(tile)
+					val isValidTarget = activeAbility.data.targetter.isValid(tile)
 					if (!isValidTarget)
 					{
 						tileColour = Colour.DARK_GRAY

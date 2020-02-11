@@ -226,9 +226,9 @@ class GridScreen(): AbstractScreen()
 					val widget = AbilityWidget(equip, 64f, 64f, level.grid)
 					abilityTable.add(widget).expand()
 
-					if (ability.resetUsagesPerLevel)
+					if (ability.data.resetUsagesPerLevel)
 					{
-						ability.remainingUsages = ability.maxUsages
+						ability.remainingUsages = ability.data.maxUsages
 					}
 				}
 				equip != null ->
@@ -495,7 +495,7 @@ class GridScreen(): AbstractScreen()
 			launchButton!!.isVisible = true
 			launchButton!!.color = if (ability.selectedTargets.size == 0) Color.DARK_GRAY else Color.WHITE
 			launchButton!!.touchable = if (ability.selectedTargets.size == 0) Touchable.disabled else Touchable.enabled
-			launchButton!!.setText(Localisation.getText("gridscreen.activate", "UI") + " (" + ability.selectedTargets.size + "/" + ability.targets + ")")
+			launchButton!!.setText(Localisation.getText("gridscreen.activate", "UI") + " (" + ability.selectedTargets.size + "/" + ability.data.targets + ")")
 		}
 		else if (level.grid.noValidMoves && canShowButtons)
 		{

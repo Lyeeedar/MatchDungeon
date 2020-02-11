@@ -87,13 +87,13 @@ fun Permuter.permute(tile: Tile, grid: Grid, selectedTargets: Array<Tile>, abili
 		}
 
 		PermuterType.RANDOM -> {
-			if (ability != null && selectedTargets.size > 0 && ability.effect.type == Effect.Type.CONVERT)
+			if (ability != null && selectedTargets.size > 0 && ability.data.effect.type == EffectType.CONVERT)
 			{
 				val selectedType = selectedTargets[0].contents!!.matchable()!!.desc
 				return grid.grid.filter{ it.contents?.matchable() != null && it.contents!!.matchable()!!.desc != selectedType }.random(count, grid.ran)
 			}
 
-			return grid.grid.filter{ ability?.targetter?.isValid(it) ?: it.canHaveOrb }.random(count, grid.ran)
+			return grid.grid.filter{ ability?.data?.targetter?.isValid(it) ?: it.canHaveOrb }.random(count, grid.ran)
 		}
 
 		PermuterType.CONE -> {

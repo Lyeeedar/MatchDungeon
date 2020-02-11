@@ -12,6 +12,7 @@ import com.lyeeedar.Board.GridUpdate.*
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.Ability
+import com.lyeeedar.Game.Ability.EffectType
 import com.lyeeedar.Game.Ability.isValid
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Game.GlobalDeck
@@ -137,7 +138,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 			{
 				dragStart = Point.MINUS_ONE
 
-				if (value.targets == 0)
+				if (value.data.targets == 0 || value.data.effect.type == EffectType.BUFF)
 				{
 					value.activate(this)
 					inTurn = true
@@ -348,14 +349,14 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 		if (activeAbility != null)
 		{
 			val newTile = tile(newSelection) ?: return
-			if (!activeAbility!!.targetter.isValid(newTile)) return
+			if (!activeAbility!!.data.targetter.isValid(newTile)) return
 
 			if (newTile.isSelected)
 			{
 				newTile.isSelected = false
 				activeAbility!!.selectedTargets.removeValue(newTile, true)
 			}
-			else if (activeAbility!!.selectedTargets.size < activeAbility!!.targets)
+			else if (activeAbility!!.selectedTargets.size < activeAbility!!.data.targets)
 			{
 				newTile.isSelected = true
 				activeAbility!!.selectedTargets.add(newTile)

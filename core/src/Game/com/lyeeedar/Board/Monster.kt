@@ -15,9 +15,10 @@ import com.lyeeedar.Renderables.Sprite.Sprite
 import com.lyeeedar.Statistic
 import com.lyeeedar.UI.Tutorial
 import com.lyeeedar.Util.*
+import com.lyeeedar.Util.AssetManager
+import java.util.*
 import ktx.collections.addAll
 import ktx.collections.toGdxArray
-import java.util.*
 
 fun Entity.isMonster(): Boolean
 {
@@ -287,7 +288,7 @@ fun validAttack(grid: Grid, tile: Tile): Boolean
 abstract class AbstractMonsterAbilityData : XmlDataClass()
 {
 	abstract val classID: String
-
+	
 	var cooldown: Point = Point(1, 1)
 	var usages: Int = -1
 
@@ -488,16 +489,16 @@ enum class MoveType
 class MonsterMoveAbilityData : TargettedMonsterAbilityData()
 {
 	override val classID: String = "Move"
-
+	
 	var isDash: Boolean = false
 	lateinit var moveType: MoveType
-
+	
 	var startEffect: ParticleEffect? = null
 	var endEffect: ParticleEffect? = null
-
+	
 	@DataValue(visibleIf = "IsDash == True")
 	var hitEffect: ParticleEffect? = null
-
+	
 	@DataValue(visibleIf = "IsDash == True")
 	var numPips: Int = 8
 
@@ -637,14 +638,14 @@ enum class EffectType
 class MonsterMonsterEffectAbilityData : TargettedMonsterAbilityData()
 {
 	override val classID: String = "MonsterEffect"
-
+	
 	lateinit var effect: EffectType
-
+	
 	var numPips: Int = 8
 	var sealStrength: Int = 1
-
+	
 	lateinit var monsterEffectData: MonsterEffectData
-
+	
 	var showAttackLeap: Boolean = true
 	var flightEffect: ParticleEffect? = null
 	var hitEffect: ParticleEffect? = null
@@ -762,7 +763,7 @@ class MonsterMonsterEffectAbility(data: MonsterMonsterEffectAbilityData) : Targe
 class MonsterSealAbilityData : TargettedMonsterAbilityData()
 {
 	override val classID: String = "Seal"
-
+	
 	var sealStrength: Int = 0
 
 	override fun load(xmlData: XmlData)
@@ -790,7 +791,7 @@ class MonsterSealAbility(data: MonsterSealAbilityData) : TargettedMonsterAbility
 class MonsterBlockAbilityData : TargettedMonsterAbilityData()
 {
 	override val classID: String = "Block"
-
+	
 	var blockStrength: Int = 1
 
 	override fun load(xmlData: XmlData)
@@ -832,14 +833,14 @@ class MonsterBlockAbility(data: MonsterBlockAbilityData) : TargettedMonsterAbili
 class MonsterSummonAbilityData : TargettedMonsterAbilityData()
 {
 	override val classID: String = "Summon"
-
+	
 	var monsterDesc: MonsterDesc? = null
-
+	
 	var faction: String? = null
 	var name: String? = null
 	var difficulty: Int = 0
 	var isSummon: Boolean = false
-
+	
 	var spawnEffect: ParticleEffect? = null
 
 	override fun load(xmlData: XmlData)
@@ -914,7 +915,7 @@ enum class SelfBuffType
 class MonsterSelfBuffAbilityData : AbstractMonsterAbilityData()
 {
 	override val classID: String = "SelfBuff"
-
+	
 	lateinit var buffType: SelfBuffType
 	var duration: Int = 1
 	var particleEffect: ParticleEffect? = null
@@ -958,7 +959,7 @@ class MonsterSelfBuffAbility(data: MonsterSelfBuffAbilityData) : AbstractMonster
 class MonsterSpreaderAbilityData : TargettedMonsterAbilityData()
 {
 	override val classID: String = "Spreader"
-
+	
 	lateinit var spreader: SpreaderData
 
 	override fun load(xmlData: XmlData)
