@@ -8,23 +8,28 @@
 	<Statistics meta:RefKey="Statistics">
 		<AbilityDamage>1</AbilityDamage>
 	</Statistics>
-	<Ability>
-		<Name>SkullNecklace.Head.Ability.Name:b7fcb91d-a7aa-4ef7-9e13-108d80c8d8a4</Name>
-		<Description>SkullNecklace.Head.Ability.Description:110e2fb5-f463-4d97-827b-e94f16cb6991</Description>
-		<EffectData>
-			<Cost>5</Cost>
-			<Effect>3,Monster,Single,Pop</Effect>
-			<Data>
-				<Damage>1</Damage>
-			</Data>
-			<FlightEffect meta:RefKey="ParticleEffect">
-				<Name>FireOrb</Name>
-				<Colour>53,29,71,255</Colour>
-			</FlightEffect>
-			<HitEffect meta:RefKey="ParticleEffect">
-				<Name>Fireburst</Name>
-				<Colour>151,82,168,255</Colour>
-			</HitEffect>
-		</EffectData>
+	<Ability meta:RefKey="Ability">
+		<Name>SkullNecklace.Head.Ability (Ability).Name:b7fcb91d-a7aa-4ef7-9e13-108d80c8d8a4</Name>
+		<Description>SkullNecklace.Head.Ability (Ability).Description:110e2fb5-f463-4d97-827b-e94f16cb6991</Description>
+		<HitEffect meta:RefKey="ParticleEffect">
+			<Name>Fireburst</Name>
+			<Colour>53,36,88,255</Colour>
+		</HitEffect>
+		<FlightEffect meta:RefKey="ParticleEffect">
+			<Name>FireOrb</Name>
+			<Colour>53,36,88,255</Colour>
+		</FlightEffect>
+		<Cost>5</Cost>
+		<Targets>3</Targets>
+		<Targetter meta:RefKey="Targetter">
+			<Type>MONSTER</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>SINGLE</Type>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>POP</Type>
+			<Damage>1</Damage>
+		</Effect>
 	</Ability>
 </Head>

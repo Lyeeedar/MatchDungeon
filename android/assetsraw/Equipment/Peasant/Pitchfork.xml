@@ -6,18 +6,22 @@
 		<Name>Oryx/uf_split/uf_items/weapon_trident</Name>
 	</Icon>
 	<Statistics meta:RefKey="Statistics" />
-	<Ability>
-		<Name>Pitchfork.MainHand.Ability.Name:a32a816e-cd99-4941-8ac5-824e41ed4136</Name>
-		<Description>Pitchfork.MainHand.Ability.Description:3cd903d4-509b-4444-bc15-8ccc6d12710e</Description>
-		<EffectData>
-			<Cost>7</Cost>
-			<Effect>1,Monster,Single,Pop</Effect>
-			<Data>
-				<Damage>1</Damage>
-			</Data>
-			<HitEffect meta:RefKey="ParticleEffect">
-				<Name>Thrust</Name>
-			</HitEffect>
-		</EffectData>
+	<Ability meta:RefKey="Ability">
+		<Name>Pitchfork.MainHand.Ability (Ability).Name:a32a816e-cd99-4941-8ac5-824e41ed4136</Name>
+		<Description>Pitchfork.MainHand.Ability (Ability).Description:3cd903d4-509b-4444-bc15-8ccc6d12710e</Description>
+		<HitEffect meta:RefKey="ParticleEffect">
+			<Name>Thrust</Name>
+		</HitEffect>
+		<Cost>7</Cost>
+		<Targetter meta:RefKey="Targetter">
+			<Type>MONSTER</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>SINGLE</Type>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>POP</Type>
+			<Damage>1</Damage>
+		</Effect>
 	</Ability>
 </MainHand>

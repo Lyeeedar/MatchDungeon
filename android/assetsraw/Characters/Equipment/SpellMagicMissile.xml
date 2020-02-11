@@ -7,23 +7,26 @@
 		<DrawActualSize>true</DrawActualSize>
 	</Icon>
 	<Statistics meta:RefKey="Statistics" />
-	<Ability>
-		<Name>SpellMagicMissile.MainHand.Ability.Name:1629d1e6-6426-4617-9ff2-a219523a3005</Name>
-		<Description>SpellMagicMissile.MainHand.Ability.Description:4e7e5019-b896-429b-bff2-bc14a0ed4bdd</Description>
-		<EffectData>
-			<Cost>4</Cost>
-			<Effect>0,Monster,Random,Pop</Effect>
-			<Data>
-				<Count>3</Count>
-				<Damage>0</Damage>
-			</Data>
-			<FlightEffect meta:RefKey="ParticleEffect">
-				<Name>SpecialBeam</Name>
-				<Colour>140,219,255,255</Colour>
-			</FlightEffect>
-			<HitEffect meta:RefKey="ParticleEffect">
-				<Name>SpecialExplosion</Name>
-			</HitEffect>
-		</EffectData>
+	<Ability meta:RefKey="Ability">
+		<Name>SpellMagicMissile.MainHand.Ability (Ability).Name:1629d1e6-6426-4617-9ff2-a219523a3005</Name>
+		<Description>SpellMagicMissile.MainHand.Ability (Ability).Description:4e7e5019-b896-429b-bff2-bc14a0ed4bdd</Description>
+		<HitEffect meta:RefKey="ParticleEffect">
+			<Name>SpecialExplosion</Name>
+		</HitEffect>
+		<FlightEffect meta:RefKey="ParticleEffect">
+			<Name>SpecialBeam</Name>
+		</FlightEffect>
+		<Cost>4</Cost>
+		<Targets>0</Targets>
+		<Targetter meta:RefKey="Targetter">
+			<Type>MONSTER</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>RANDOM</Type>
+			<Count>3</Count>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>POP</Type>
+		</Effect>
 	</Ability>
 </MainHand>

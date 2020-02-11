@@ -11,27 +11,32 @@
 		<PowerGain>2</PowerGain>
 		<BuffDuration>0.2</BuffDuration>
 	</Statistics>
-	<Ability>
-		<Name>PotionBandolier.Body.Ability.Name:3e7c8e24-b063-400f-bffb-6afbad122bf5</Name>
-		<Description>PotionBandolier.Body.Ability.Description:2fd203d3-9725-4f50-ab24-be75319e107f</Description>
-		<EffectData>
-			<Cost>3</Cost>
-			<Effect>1,Orb,Single,Buff</Effect>
-			<Data>
-				<Buff meta:RefKey="Buff">
-					<Name>PotionBandolier.Body.Ability.EffectData.Data.Buff (Buff).Name:10d9bd75-0f7c-45f8-961c-892ad9d81f57</Name>
-					<Icon meta:RefKey="Sprite">
-						<Name>Oryx/uf_split/uf_items/potion_red</Name>
-						<DrawActualSize>true</DrawActualSize>
-					</Icon>
-					<Statistics meta:RefKey="Statistics">
-						<MatchDamage>1</MatchDamage>
-						<AbilityDamage>1</AbilityDamage>
-						<Pierce>1</Pierce>
-					</Statistics>
-					<Duration>4</Duration>
-				</Buff>
-			</Data>
-		</EffectData>
+	<Ability meta:RefKey="Ability">
+		<Name>PotionBandolier.Body.Ability (Ability).Name:3e7c8e24-b063-400f-bffb-6afbad122bf5</Name>
+		<Description>PotionBandolier.Body.Ability (Ability).Description:2fd203d3-9725-4f50-ab24-be75319e107f</Description>
+		<Cost>3</Cost>
+		<Targets>0</Targets>
+		<Targetter meta:RefKey="Targetter">
+			<Type>BASICORB</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>SINGLE</Type>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>BUFF</Type>
+			<Buff meta:RefKey="Buff">
+				<Name>PotionBandolier.Body.Ability (Ability).Effect (Effect).Buff (Buff).Name:10d9bd75-0f7c-45f8-961c-892ad9d81f57</Name>
+				<Icon meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_items/potion_red</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Icon>
+				<Statistics meta:RefKey="Statistics">
+					<MatchDamage>1</MatchDamage>
+					<AbilityDamage>1</AbilityDamage>
+					<Pierce>1</Pierce>
+				</Statistics>
+				<Duration>4</Duration>
+			</Buff>
+		</Effect>
 	</Ability>
 </Body>

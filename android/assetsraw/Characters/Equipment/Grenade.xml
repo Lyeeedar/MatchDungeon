@@ -7,23 +7,27 @@
 		<DrawActualSize>true</DrawActualSize>
 	</Icon>
 	<Statistics meta:RefKey="Statistics" />
-	<Ability>
-		<Name>Grenade.OffHand.Ability.Name:51f03565-b8a1-4022-9007-27097f9f0dff</Name>
-		<Description>Grenade.OffHand.Ability.Description:b95f7c9c-ca64-49f2-98ee-e361bb67347d</Description>
-		<EffectData>
-			<Cost>3</Cost>
-			<Usages>1</Usages>
-			<Effect>1,Tile,Diamond,Pop</Effect>
-			<Data>
-				<AOE>3</AOE>
-				<Damage>10</Damage>
-			</Data>
-			<FlightEffect meta:RefKey="ParticleEffect">
-				<Name>ThrowGrenade</Name>
-			</FlightEffect>
-			<HitEffect meta:RefKey="ParticleEffect">
-				<Name>Explosion</Name>
-			</HitEffect>
-		</EffectData>
+	<Ability meta:RefKey="Ability">
+		<Name>Grenade.OffHand.Ability (Ability).Name:51f03565-b8a1-4022-9007-27097f9f0dff</Name>
+		<Description>Grenade.OffHand.Ability (Ability).Description:b95f7c9c-ca64-49f2-98ee-e361bb67347d</Description>
+		<HitEffect meta:RefKey="ParticleEffect">
+			<Name>Explosion</Name>
+		</HitEffect>
+		<FlightEffect meta:RefKey="ParticleEffect">
+			<Name>ThrowGrenade</Name>
+		</FlightEffect>
+		<Cost>3</Cost>
+		<MaxUsages>1</MaxUsages>
+		<Targetter meta:RefKey="Targetter">
+			<Type>TILE</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>DIAMOND</Type>
+			<Aoe>3</Aoe>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>POP</Type>
+			<Damage>10</Damage>
+		</Effect>
 	</Ability>
 </OffHand>

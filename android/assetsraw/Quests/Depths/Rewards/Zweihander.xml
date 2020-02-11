@@ -10,19 +10,23 @@
 		<MatchDamage>3</MatchDamage>
 		<Haste>-0.1</Haste>
 	</Statistics>
-	<Ability>
-		<Name>Zweihander.MainHand.Ability.Name:a7863b11-7737-413c-9107-f58a9d960b3d</Name>
-		<Description>Zweihander.MainHand.Ability.Description:4262580d-d0aa-4210-86d9-0f7ec78327ce</Description>
-		<EffectData>
-			<Cost>6</Cost>
-			<Effect>1,Orb,Column,Pop</Effect>
-			<Data>
-				<Damage>1</Damage>
-				<Range>1</Range>
-			</Data>
-			<HitEffect meta:RefKey="ParticleEffect">
-				<Name>Stomp</Name>
-			</HitEffect>
-		</EffectData>
+	<Ability meta:RefKey="Ability">
+		<Name>Zweihander.MainHand.Ability (Ability).Name:a7863b11-7737-413c-9107-f58a9d960b3d</Name>
+		<Description>Zweihander.MainHand.Ability (Ability).Description:4262580d-d0aa-4210-86d9-0f7ec78327ce</Description>
+		<HitEffect meta:RefKey="ParticleEffect">
+			<Name>Stomp</Name>
+		</HitEffect>
+		<Cost>6</Cost>
+		<Targetter meta:RefKey="Targetter">
+			<Type>ORB</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>COLUMN</Type>
+			<Range>1</Range>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>POP</Type>
+			<Damage>1</Damage>
+		</Effect>
 	</Ability>
 </MainHand>

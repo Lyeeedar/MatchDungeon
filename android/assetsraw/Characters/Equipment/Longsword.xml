@@ -10,18 +10,22 @@
 		<MatchDamage>1</MatchDamage>
 		<Pierce>1</Pierce>
 	</Statistics>
-	<Ability>
-		<Name>Longsword.MainHand.Ability.Name:1be71a30-2ce3-4013-a8ae-1875ca9bdee1</Name>
-		<Description>Longsword.MainHand.Ability.Description:a03ae051-7476-4530-9173-932bab3ac247</Description>
-		<EffectData>
-			<Cost>5</Cost>
-			<Effect>1,Monster,Single,Pop</Effect>
-			<Data>
-				<Damage>2</Damage>
-			</Data>
-			<HitEffect meta:RefKey="ParticleEffect">
-				<Name>slash</Name>
-			</HitEffect>
-		</EffectData>
+	<Ability meta:RefKey="Ability">
+		<Name>Longsword.MainHand.Ability (Ability).Name:1be71a30-2ce3-4013-a8ae-1875ca9bdee1</Name>
+		<Description>Longsword.MainHand.Ability (Ability).Description:a03ae051-7476-4530-9173-932bab3ac247</Description>
+		<HitEffect meta:RefKey="ParticleEffect">
+			<Name>slash</Name>
+		</HitEffect>
+		<Cost>5</Cost>
+		<Targetter meta:RefKey="Targetter">
+			<Type>MONSTER</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>SINGLE</Type>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>POP</Type>
+			<Damage>2</Damage>
+		</Effect>
 	</Ability>
 </MainHand>

@@ -9,19 +9,22 @@
 	<Statistics meta:RefKey="Statistics">
 		<PowerGain>5</PowerGain>
 	</Statistics>
-	<Ability>
-		<Name>EnergyRing.OffHand.Ability.Name:5b66833c-1a4d-46e1-96f1-a22acbfda08f</Name>
-		<Description>EnergyRing.OffHand.Ability.Description:bc8bfb4c-e28c-4834-80ef-493c6a0a2fd6</Description>
-		<EffectData>
-			<Cost>5</Cost>
-			<Effect>1,Orb,Random,Convert</Effect>
-			<Data>
-				<Count>6</Count>
-				<ConvertTo>Same</ConvertTo>
-			</Data>
-			<HitEffect meta:RefKey="ParticleEffect">
-				<Name>Heal</Name>
-			</HitEffect>
-		</EffectData>
+	<Ability meta:RefKey="Ability">
+		<Name>EnergyRing.OffHand.Ability (Ability).Name:5b66833c-1a4d-46e1-96f1-a22acbfda08f</Name>
+		<Description>EnergyRing.OffHand.Ability (Ability).Description:bc8bfb4c-e28c-4834-80ef-493c6a0a2fd6</Description>
+		<HitEffect meta:RefKey="ParticleEffect">
+			<Name>Heal</Name>
+		</HitEffect>
+		<Cost>5</Cost>
+		<Targetter meta:RefKey="Targetter">
+			<Type>ORB</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>RANDOM</Type>
+			<Count>6</Count>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>CONVERT</Type>
+		</Effect>
 	</Ability>
 </OffHand>

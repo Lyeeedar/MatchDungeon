@@ -8,18 +8,21 @@
 	<Statistics meta:RefKey="Statistics">
 		<PowerGain>2</PowerGain>
 	</Statistics>
-	<Ability>
-		<Name>Hammer.MainHand.Ability.Name:df19caba-fdfc-4940-acfb-4f0fd55df04f</Name>
-		<Description>Hammer.MainHand.Ability.Description:aab9d8e3-d42e-42e6-9c17-858ab1de071f</Description>
-		<EffectData>
-			<Cost>2</Cost>
-			<Effect>1,Block,Single,Pop</Effect>
-			<Data>
-				<Damage>10</Damage>
-			</Data>
-			<HitEffect meta:RefKey="ParticleEffect">
-				<Name>Stomp</Name>
-			</HitEffect>
-		</EffectData>
+	<Ability meta:RefKey="Ability">
+		<Name>Hammer.MainHand.Ability (Ability).Name:df19caba-fdfc-4940-acfb-4f0fd55df04f</Name>
+		<Description>Hammer.MainHand.Ability (Ability).Description:aab9d8e3-d42e-42e6-9c17-858ab1de071f</Description>
+		<HitEffect meta:RefKey="ParticleEffect">
+			<Name>Stomp</Name>
+		</HitEffect>
+		<Targetter meta:RefKey="Targetter">
+			<Type>BLOCK</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>SINGLE</Type>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>POP</Type>
+			<Damage>10</Damage>
+		</Effect>
 	</Ability>
 </MainHand>

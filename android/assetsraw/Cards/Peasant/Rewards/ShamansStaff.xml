@@ -10,7 +10,7 @@
 		<AbilityDamage>1</AbilityDamage>
 		<PowerGain>3</PowerGain>
 	</Statistics>
-	<Ability>
+	<Ability meta:RefKey="Ability">
 		<Name>ShamansStaff.MainHand.Ability.Name:be939452-1309-448d-ac88-b3fd91ebfa90</Name>
 		<Description>ShamansStaff.MainHand.Ability.Description:056dd23b-e250-40c8-be29-0f871eff61a3</Description>
 		<EffectData>

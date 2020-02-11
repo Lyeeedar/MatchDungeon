@@ -9,7 +9,7 @@
 	<Statistics meta:RefKey="Statistics">
 		<MatchDamage>0.5</MatchDamage>
 	</Statistics>
-	<Ability>
+	<Ability meta:RefKey="Ability">
 		<Name>Torch.OffHand.Ability.Name:6a5edebf-dde1-47f3-8b66-10ed5b564553</Name>
 		<Description>Torch.OffHand.Ability.Description:0cd80c21-54cf-4bba-b89a-24a31cb72b01</Description>
 		<EffectData>

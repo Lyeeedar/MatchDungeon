@@ -10,6 +10,7 @@ import com.lyeeedar.Game.BuffData
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Screens.GridScreen
 import com.lyeeedar.Statistic
+import com.lyeeedar.Util.DataValue
 import com.lyeeedar.Util.XmlData
 import com.lyeeedar.Util.XmlDataClass
 import java.util.*
@@ -28,11 +29,22 @@ class Effect : XmlDataClass()
 {
 	lateinit var type: EffectType
 	
+	@DataValue(visibleIf = "Type == POP")
 	var damage: String = "0"
+	
+	@DataValue(visibleIf = "Type == CONVERT")
 	var convertToRandom: Boolean = false
+	
+	@DataValue(visibleIf = "Type == SUMMON")
 	var friendly: FriendlyDesc? = null
+	
+	@DataValue(visibleIf = "Type == SUMMON")
 	var degenSummon: Boolean = true
+	
+	@DataValue(visibleIf = "Type == SPREADER")
 	var spreader: SpreaderData? = null
+	
+	@DataValue(visibleIf = "Type == BUFF")
 	var buff: BuffData? = null
 
 	override fun load(xmlData: XmlData)

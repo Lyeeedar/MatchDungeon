@@ -8,19 +8,21 @@
 	<Statistics meta:RefKey="Statistics">
 		<Health>2</Health>
 	</Statistics>
-	<Ability>
-		<Name>Breastplate.Body.Ability.Name:bd3e3415-b7ba-4730-b99b-51af5e7c9c74</Name>
-		<Description>Breastplate.Body.Ability.Description:6d68a13b-f863-4c1b-94e3-bf9f829d7ab6</Description>
-		<EffectData>
-			<Cost>4</Cost>
-			<Effect>1,Attack,Block,Pop</Effect>
-			<Data>
-				<AOE>1</AOE>
-				<Damage>0</Damage>
-			</Data>
-			<HitEffect meta:RefKey="ParticleEffect">
-				<Name>Stomp</Name>
-			</HitEffect>
-		</EffectData>
+	<Ability meta:RefKey="Ability">
+		<Name>Breastplate.Body.Ability (Ability).Name:bd3e3415-b7ba-4730-b99b-51af5e7c9c74</Name>
+		<Description>Breastplate.Body.Ability (Ability).Description:6d68a13b-f863-4c1b-94e3-bf9f829d7ab6</Description>
+		<HitEffect meta:RefKey="ParticleEffect">
+			<Name>Stomp</Name>
+		</HitEffect>
+		<Cost>4</Cost>
+		<Targetter meta:RefKey="Targetter">
+			<Type>ATTACK</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>BLOCK</Type>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>POP</Type>
+		</Effect>
 	</Ability>
 </Body>

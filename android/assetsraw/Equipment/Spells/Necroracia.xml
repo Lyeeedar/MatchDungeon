@@ -7,19 +7,23 @@
 		<DrawActualSize>true</DrawActualSize>
 	</Icon>
 	<Statistics meta:RefKey="Statistics" />
-	<Ability>
-		<Name>Necroracia.OffHand.Ability.Name:f8f6753f-cd3e-455b-a3b0-9d0efd1ba211</Name>
-		<Description>Necroracia.OffHand.Ability.Description:0d71769f-7071-4b3d-8765-948254d5b5df</Description>
-		<EffectData>
-			<Cost>8</Cost>
-			<Effect>1,Monster,Diamond,Pop</Effect>
-			<Data>
-				<AOE>2</AOE>
-				<Damage>2+MONSTERHP/2</Damage>
-			</Data>
-			<HitEffect meta:RefKey="ParticleEffect">
-				<Name>Necroracia</Name>
-			</HitEffect>
-		</EffectData>
+	<Ability meta:RefKey="Ability">
+		<Name>Necroracia.OffHand.Ability (Ability).Name:f8f6753f-cd3e-455b-a3b0-9d0efd1ba211</Name>
+		<Description>Necroracia.OffHand.Ability (Ability).Description:0d71769f-7071-4b3d-8765-948254d5b5df</Description>
+		<HitEffect meta:RefKey="ParticleEffect">
+			<Name>Necroracia</Name>
+		</HitEffect>
+		<Cost>8</Cost>
+		<Targetter meta:RefKey="Targetter">
+			<Type>MONSTER</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>DIAMOND</Type>
+			<Aoe>2</Aoe>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>POP</Type>
+			<Damage>2+MONSTERHP/2</Damage>
+		</Effect>
 	</Ability>
 </OffHand>

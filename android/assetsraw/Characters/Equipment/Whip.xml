@@ -8,18 +8,22 @@
 	<Statistics meta:RefKey="Statistics">
 		<MatchDamage>0.5</MatchDamage>
 	</Statistics>
-	<Ability>
-		<Name>Whip.MainHand.Ability.Name:07650389-52d5-41a7-a137-b3d3a63db54e</Name>
-		<Description>Whip.MainHand.Ability.Description:ae6bf388-bb12-49fc-a08c-a49b1d4ad180</Description>
-		<EffectData>
-			<Cost>6</Cost>
-			<Effect>1,Monster,Single,Pop</Effect>
-			<Data>
-				<Damage>1</Damage>
-			</Data>
-			<HitEffect meta:RefKey="ParticleEffect">
-				<Name>slash</Name>
-			</HitEffect>
-		</EffectData>
+	<Ability meta:RefKey="Ability">
+		<Name>Whip.MainHand.Ability (Ability).Name:07650389-52d5-41a7-a137-b3d3a63db54e</Name>
+		<Description>Whip.MainHand.Ability (Ability).Description:ae6bf388-bb12-49fc-a08c-a49b1d4ad180</Description>
+		<HitEffect meta:RefKey="ParticleEffect">
+			<Name>slash</Name>
+		</HitEffect>
+		<Cost>6</Cost>
+		<Targetter meta:RefKey="Targetter">
+			<Type>MONSTER</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>SINGLE</Type>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>POP</Type>
+			<Damage>1</Damage>
+		</Effect>
 	</Ability>
 </MainHand>

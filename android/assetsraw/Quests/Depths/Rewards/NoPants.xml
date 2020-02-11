@@ -10,24 +10,27 @@
 		<Haste>0.05</Haste>
 		<Luck>0.05</Luck>
 	</Statistics>
-	<Ability>
-		<Name>NoPants.Body.Ability.Name:0fdf7939-cbd5-413f-8557-18b9297154a1</Name>
-		<Description>NoPants.Body.Ability.Description:126b7e78-a2ae-4171-9c0f-c76a5a5ae417</Description>
-		<EffectData>
-			<Cost>2</Cost>
-			<Effect>1,Orb,Single,Buff</Effect>
-			<Data>
-				<Buff meta:RefKey="Buff">
-					<Name>NoPants.Body.Ability.EffectData.Data.Buff (Buff).Name:f46302cf-e132-461b-a97b-d3ac8753f509</Name>
-					<Icon meta:RefKey="Sprite">
-						<Name>Oryx/uf_split/uf_skills/uf_skills_33</Name>
-					</Icon>
-					<Statistics meta:RefKey="Statistics">
-						<Aegis>100</Aegis>
-					</Statistics>
-					<Duration>1</Duration>
-				</Buff>
-			</Data>
-		</EffectData>
+	<Ability meta:RefKey="Ability">
+		<Name>NoPants.Body.Ability (Ability).Name:0fdf7939-cbd5-413f-8557-18b9297154a1</Name>
+		<Description>NoPants.Body.Ability (Ability).Description:126b7e78-a2ae-4171-9c0f-c76a5a5ae417</Description>
+		<Targets>0</Targets>
+		<Targetter meta:RefKey="Targetter">
+			<Type>BASICORB</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>SINGLE</Type>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>BUFF</Type>
+			<Buff meta:RefKey="Buff">
+				<Name>NoPants.Body.Ability (Ability).Effect (Effect).Buff (Buff).Name:f46302cf-e132-461b-a97b-d3ac8753f509</Name>
+				<Icon meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_skills/uf_skills_33</Name>
+				</Icon>
+				<Statistics meta:RefKey="Statistics">
+					<Aegis>100</Aegis>
+				</Statistics>
+			</Buff>
+		</Effect>
 	</Ability>
 </Body>

@@ -7,26 +7,31 @@
 		<DrawActualSize>true</DrawActualSize>
 	</Icon>
 	<Statistics meta:RefKey="Statistics" />
-	<Ability>
-		<Name>SpellShockShield.OffHand.Ability.Name:6ca7c696-33f9-4c16-8799-65bf59cf5787</Name>
-		<Description>SpellShockShield.OffHand.Ability.Description:05ece79b-5a72-4678-aea1-cb540b890117</Description>
-		<EffectData>
-			<Cost>7</Cost>
-			<Effect>1,Orb,Single,Buff</Effect>
-			<Data>
-				<Buff meta:RefKey="Buff">
-					<Name>SpellShockShield.OffHand.Ability.EffectData.Data.Buff (Buff).Name:b602c3fe-15d4-4775-a03c-880fe1fd8ac4</Name>
-					<Icon meta:RefKey="Sprite">
-						<Name>Oryx/uf_split/uf_items/shield_mystic_buckler</Name>
-						<DrawActualSize>true</DrawActualSize>
-					</Icon>
-					<Statistics meta:RefKey="Statistics">
-						<Counter>100</Counter>
-						<Reflect>1</Reflect>
-					</Statistics>
-					<Duration>6</Duration>
-				</Buff>
-			</Data>
-		</EffectData>
+	<Ability meta:RefKey="Ability">
+		<Name>SpellShockShield.OffHand.Ability (Ability).Name:6ca7c696-33f9-4c16-8799-65bf59cf5787</Name>
+		<Description>SpellShockShield.OffHand.Ability (Ability).Description:05ece79b-5a72-4678-aea1-cb540b890117</Description>
+		<Cost>7</Cost>
+		<Targets>0</Targets>
+		<Targetter meta:RefKey="Targetter">
+			<Type>BASICORB</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>SINGLE</Type>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>BUFF</Type>
+			<Buff meta:RefKey="Buff">
+				<Name>SpellShockShield.OffHand.Ability (Ability).Effect (Effect).Buff (Buff).Name:b602c3fe-15d4-4775-a03c-880fe1fd8ac4</Name>
+				<Icon meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_items/shield_mystic_buckler</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Icon>
+				<Statistics meta:RefKey="Statistics">
+					<Counter>100</Counter>
+					<Reflect>1</Reflect>
+				</Statistics>
+				<Duration>6</Duration>
+			</Buff>
+		</Effect>
 	</Ability>
 </OffHand>

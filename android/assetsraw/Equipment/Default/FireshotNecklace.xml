@@ -6,21 +6,25 @@
 		<Name>Oryx/uf_split/uf_items/necklace_ruby</Name>
 	</Icon>
 	<Statistics meta:RefKey="Statistics" />
-	<Ability>
-		<Name>FireshotNecklace.Head.Ability.Name:147466a9-7ef4-4c89-9500-b074a4042a67</Name>
-		<Description>FireshotNecklace.Head.Ability.Description:ac413c46-f35a-41a7-9dd4-cb36a8521a95</Description>
-		<EffectData>
-			<Cost>4</Cost>
-			<Effect>1,Monster,Single,Pop</Effect>
-			<Data>
-				<Damage>1</Damage>
-			</Data>
-			<FlightEffect meta:RefKey="ParticleEffect">
-				<Name>FireOrb</Name>
-			</FlightEffect>
-			<HitEffect meta:RefKey="ParticleEffect">
-				<Name>Fireburst</Name>
-			</HitEffect>
-		</EffectData>
+	<Ability meta:RefKey="Ability">
+		<Name>FireshotNecklace.Head.Ability (Ability).Name:147466a9-7ef4-4c89-9500-b074a4042a67</Name>
+		<Description>FireshotNecklace.Head.Ability (Ability).Description:ac413c46-f35a-41a7-9dd4-cb36a8521a95</Description>
+		<HitEffect meta:RefKey="ParticleEffect">
+			<Name>Fireburst</Name>
+		</HitEffect>
+		<FlightEffect meta:RefKey="ParticleEffect">
+			<Name>FireOrb</Name>
+		</FlightEffect>
+		<Cost>4</Cost>
+		<Targetter meta:RefKey="Targetter">
+			<Type>MONSTER</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>SINGLE</Type>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>POP</Type>
+			<Damage>1</Damage>
+		</Effect>
 	</Ability>
 </Head>

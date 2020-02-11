@@ -13,6 +13,7 @@ import com.lyeeedar.UI.FrontTableSimple
 import com.lyeeedar.UI.Seperator
 import com.lyeeedar.UI.SpriteWidget
 import com.lyeeedar.Util.*
+import com.lyeeedar.Util.AssetManager
 
 @DataClass(name = "Buff")
 class BuffData : XmlDataClass()

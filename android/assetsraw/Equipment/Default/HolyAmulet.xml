@@ -9,18 +9,21 @@
 		<Health>2</Health>
 		<PowerGain>2</PowerGain>
 	</Statistics>
-	<Ability>
-		<Name>HolyAmulet.Head.Ability.Name:13dc7914-166b-47e1-b9a0-25b6629a25e0</Name>
-		<Description>HolyAmulet.Head.Ability.Description:5caa4306-28a9-4613-a691-1554079b471f</Description>
-		<EffectData>
-			<Cost>5</Cost>
-			<Effect>1,Attack,Single,Pop</Effect>
-			<Data>
-				<Damage>0</Damage>
-			</Data>
-			<HitEffect meta:RefKey="ParticleEffect">
-				<Name>Block</Name>
-			</HitEffect>
-		</EffectData>
+	<Ability meta:RefKey="Ability">
+		<Name>HolyAmulet.Head.Ability (Ability).Name:13dc7914-166b-47e1-b9a0-25b6629a25e0</Name>
+		<Description>HolyAmulet.Head.Ability (Ability).Description:5caa4306-28a9-4613-a691-1554079b471f</Description>
+		<HitEffect meta:RefKey="ParticleEffect">
+			<Name>Block</Name>
+		</HitEffect>
+		<Cost>5</Cost>
+		<Targetter meta:RefKey="Targetter">
+			<Type>ATTACK</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>SINGLE</Type>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>POP</Type>
+		</Effect>
 	</Ability>
 </Head>

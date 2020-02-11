@@ -6,18 +6,21 @@
 		<Name>Oryx/uf_split/uf_items/weapon_hammer_exotic1</Name>
 	</Icon>
 	<Statistics meta:RefKey="Statistics" />
-	<Ability>
-		<Name>Sledgehammer.MainHand.Ability.Name:e0b20bc3-ba6f-4c7c-a9d7-e7b13e4766b9</Name>
-		<Description>Sledgehammer.MainHand.Ability.Description:99829214-9e01-4619-bacb-812ff9c077c3</Description>
-		<EffectData>
-			<Cost>6</Cost>
-			<Effect>1,Orb,Single,Pop</Effect>
-			<Data>
-				<Damage>0</Damage>
-			</Data>
-			<HitEffect meta:RefKey="ParticleEffect">
-				<Name>Stomp</Name>
-			</HitEffect>
-		</EffectData>
+	<Ability meta:RefKey="Ability">
+		<Name>Sledgehammer.MainHand.Ability (Ability).Name:e0b20bc3-ba6f-4c7c-a9d7-e7b13e4766b9</Name>
+		<Description>Sledgehammer.MainHand.Ability (Ability).Description:99829214-9e01-4619-bacb-812ff9c077c3</Description>
+		<HitEffect meta:RefKey="ParticleEffect">
+			<Name>Stomp</Name>
+		</HitEffect>
+		<Cost>6</Cost>
+		<Targetter meta:RefKey="Targetter">
+			<Type>ORB</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>SINGLE</Type>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>POP</Type>
+		</Effect>
 	</Ability>
 </MainHand>

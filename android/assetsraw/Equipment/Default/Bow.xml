@@ -10,23 +10,23 @@
 		<MatchDamage>0.5</MatchDamage>
 		<Pierce>1</Pierce>
 	</Statistics>
-	<Ability>
-		<Name>Bow.MainHand.Ability.Name:9f28629b-232a-47e3-bae4-ab76a190e47f</Name>
-		<Description>Bow.MainHand.Ability.Description:3c70cdf8-4214-419c-beda-4c44bbfbcab1</Description>
-		<EffectData>
-			<Cost>2</Cost>
-			<Usages>15</Usages>
-			<Effect>1,Monster,Single,Pop</Effect>
-			<Data>
-				<Damage>1</Damage>
-			</Data>
-			<FlightEffect meta:RefKey="ParticleEffect">
-				<Name>Arrow</Name>
-				<TimeMultiplier>2</TimeMultiplier>
-			</FlightEffect>
-			<HitEffect meta:RefKey="ParticleEffect">
-				<Name>Hit</Name>
-			</HitEffect>
-		</EffectData>
+	<Ability meta:RefKey="Ability">
+		<Name>Bow.MainHand.Ability (Ability).Name:9f28629b-232a-47e3-bae4-ab76a190e47f</Name>
+		<Description>Bow.MainHand.Ability (Ability).Description:3c70cdf8-4214-419c-beda-4c44bbfbcab1</Description>
+		<FlightEffect meta:RefKey="ParticleEffect">
+			<Name>Arrow</Name>
+			<KillOnAnimComplete>true</KillOnAnimComplete>
+		</FlightEffect>
+		<MaxUsages>15</MaxUsages>
+		<Targetter meta:RefKey="Targetter">
+			<Type>MONSTER</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>SINGLE</Type>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>POP</Type>
+			<Damage>1</Damage>
+		</Effect>
 	</Ability>
 </MainHand>

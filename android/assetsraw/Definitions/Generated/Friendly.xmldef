@@ -6,32 +6,4 @@
 		<Data Name="Hp" Min="1" Type="Int" Default="10" SkipIfDefault="True" meta:RefKey="Number" />
 		<Data Name="Abilities" DefKey="AbstractFriendlyAbilityDataDefs" meta:RefKey="Collection" />
 	</Definition>
-	<Definition Name="AbstractFriendlyAbilityData" Nullable="False" meta:RefKey="StructDef">
-		<Data Name="Cooldown" Type="Int" Name1="Min" Name2="Max" NumComponents="2" SkipIfDefault="True" Default="1, 1" meta:RefKey="Vector" />
-		<Data Name="Range" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
-	</Definition>
-	<Definition Name="AbstractFriendlyAbilityDataDefs" Keys="FriendlyAttackAbilityData,FriendlyBlockAbilityData,FriendlyHealAbilityData,FriendlyMoveAbilityData,FriendlyPopAbilityData" meta:RefKey="ReferenceDef" />
-	<Definition Name="FriendlyAttackAbilityData" Nullable="False" Extends="FriendlyPopTileAbilityData" meta:RefKey="StructDef">
-		<Const Name="classID">Attack</Const>
-	</Definition>
-	<Definition Name="FriendlyBlockAbilityData" Nullable="False" Extends="FriendlyPopTileAbilityData" meta:RefKey="StructDef">
-		<Const Name="classID">Block</Const>
-	</Definition>
-	<Definition Name="FriendlyHealAbilityData" Nullable="False" Extends="AbstractFriendlyAbilityData" meta:RefKey="StructDef">
-		<Const Name="classID">Heal</Const>
-		<Data Name="HeartSprite" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
-		<Data Name="Amount" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
-	</Definition>
-	<Definition Name="FriendlyMoveAbilityData" Nullable="False" Extends="AbstractFriendlyAbilityData" meta:RefKey="StructDef">
-		<Const Name="classID">Move</Const>
-	</Definition>
-	<Definition Name="FriendlyPopAbilityData" Nullable="False" Extends="FriendlyPopTileAbilityData" meta:RefKey="StructDef">
-		<Const Name="classID">Pop</Const>
-	</Definition>
-	<Definition Name="FriendlyPopTileAbilityData" Nullable="False" Extends="AbstractFriendlyAbilityData" meta:RefKey="StructDef">
-		<Data Name="Damage" Min="1" Type="Float" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
-		<Data Name="FlightEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
-		<Data Name="HitEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
-	</Definition>
-	<Definition Name="FriendlyPopTileAbilityDataDefs" Keys="FriendlyAttackAbilityData,FriendlyBlockAbilityData,FriendlyPopAbilityData" meta:RefKey="ReferenceDef" />
 </Definitions>

@@ -6,38 +6,7 @@
 		<Data Name="Cost" Type="Int" Min="1" Default="100" SkipIfDefault="False" meta:RefKey="Number" />
 		<Data Name="Icon" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="Statistics" Keys="Statistics" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
-		<Data Name="Ability" meta:RefKey="Struct">
-			<Data Name="Name" NeedsLocalisation="True" LocalisationFile="Ability" meta:RefKey="String" />
-			<Data Name="Description" NeedsLocalisation="True" LocalisationFile="Ability" meta:RefKey="String" />
-			<Data Name="EffectData" Nullable="False" SkipIfDefault="False" meta:RefKey="Struct">
-				<Data Name="Cost" Type="Int" Min="1" Default="1" meta:RefKey="Number" />
-				<Data Name="Usages" Type="Int" Min="-1" Default="-1" meta:RefKey="Number" />
-				<Data Name="ResetUsagesPerLevel" meta:RefKey="Boolean" />
-				<Data Name="Effect" Nullable="False" Collapse="True" meta:RefKey="Struct">
-					<Data Name="Target Count" Type="Int" Min="0" Default="1" SkipIfDefault="False" VisibleIf="Effect != Buff" meta:RefKey="Number" />
-					<Data Name="Targetter" EnumValues="Orb,Special,Block,Empty,Sealed,Monster,Attack,Tile,Spreader" VisibleIf="Effect != Buff" meta:RefKey="Enum" />
-					<Data Name="Permuter" EnumValues="Single,AllOfType,NofType,Column,Row,Cross,Block,Diamond,Random" VisibleIf="Effect != Buff" meta:RefKey="Enum" />
-					<Data Name="Effect" EnumValues="Pop,Convert,Summon,Spreader,Supercharge,Buff" meta:RefKey="Enum" />
-				</Data>
-				<Data Name="Data" Nullable="False" meta:RefKey="Struct">
-					<Data Name="Coverage" Min="0" Max="1" Default="1" VisibleIf="Parent.Effect.Permuter != Single &amp;&amp; Parent.Effect.Permuter != Random" meta:RefKey="Number" />
-					<Data Name="AOE" Type="Int" Min="1" Default="1" SkipIfDefault="False" VisibleIf="Parent.Effect.Permuter==Block || Parent.Effect.Permuter==Diamond" meta:RefKey="Number" />
-					<Data Name="Count" Type="Int" Min="1" Default="1" SkipIfDefault="False" VisibleIf="Parent.Effect.Permuter==Random || Parent.Effect.Permuter==NOfType" meta:RefKey="Number" />
-					<Data Name="Type" SkipIfDefault="False" VisibleIf="Parent.Effect.Permuter==NofType || Parent.Effect.Permuter==AllOfType" meta:RefKey="String" />
-					<Data Name="Damage" Default="0" SkipIfDefault="False" VisibleIf="Parent.Effect.Effect == Pop" meta:RefKey="String" />
-					<Data Name="Summon" Keys="Friendly" SkipIfDefault="False" VisibleIf="Parent.Effect.Effect == Summon" meta:RefKey="Reference" />
-					<Data Name="DegenSummon" Default="True" SkipIfDefault="False" VisibleIf="Parent.Effect.Effect == Summon" meta:RefKey="Boolean" />
-					<Data Name="SummonName" Default="Thing" SkipIfDefault="False" VisibleIf="Parent.Effect.Effect == Summon" meta:RefKey="String" />
-					<Data Name="SpreaderName" VisibleIf="Parent.Effect.Targetter == Spreader" meta:RefKey="String" />
-					<Data Name="Spreader" Keys="SpreaderDef" VisibleIf="Parent.Effect.Effect == Spreader" meta:RefKey="Reference" />
-					<Data Name="ConvertTo" VisibleIf="Parent.Effect.Effect == Convert" meta:RefKey="String" />
-					<Data Name="Buff" Keys="Buff" VisibleIf="Parent.Effect.Effect == Buff" meta:RefKey="Reference" />
-					<Data Name="Range" Type="Int" Min="1" Default="9999999" VisibleIf="Parent.Effect.Permuter == Row || Parent.Effect.Permuter == Column || Parent.Effect.Permuter == Cross" meta:RefKey="Number" />
-				</Data>
-				<Data Name="FlightEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
-				<Data Name="HitEffect" Keys="ParticleEffect" meta:RefKey="Reference" />
-			</Data>
-		</Data>
+		<Data Name="Ability" Keys="Ability" meta:RefKey="Reference" />
 	</Definition>
 	<!--File References-->
 	<Definition Name="HeadFile" IsGlobal="True" meta:RefKey="StructDef">

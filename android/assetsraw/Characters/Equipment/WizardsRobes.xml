@@ -10,14 +10,20 @@
 		<AbilityDamage>2</AbilityDamage>
 		<PowerGain>5</PowerGain>
 	</Statistics>
-	<Ability>
-		<Name>WizardsRobes.Body.Ability.Name:0be2e2b4-6f40-4411-a653-086b25d3ea83</Name>
-		<Description>WizardsRobes.Body.Ability.Description:1b03862e-5630-4578-9d4d-f9d76a2b2721</Description>
-		<EffectData>
-			<Cost>5</Cost>
-			<Effect>1,Orb,Single,Buff</Effect>
-			<Data>
-				<Buff meta:RefKey="Buff">
+	<Ability meta:RefKey="Ability">
+		<Name>WizardsRobes.Body.Ability (Ability).Name:0be2e2b4-6f40-4411-a653-086b25d3ea83</Name>
+		<Description>WizardsRobes.Body.Ability (Ability).Description:1b03862e-5630-4578-9d4d-f9d76a2b2721</Description>
+		<Cost>5</Cost>
+		<Targets>0</Targets>
+		<Targetter meta:RefKey="Targetter">
+			<Type>BASICORB</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>SINGLE</Type>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>BUFF</Type>
+			<Buff meta:RefKey="Buff">
 					<Name>WizardsRobes.Body.Ability.EffectData.Data.Buff (Buff).Name:8f6012da-70ba-4b77-9a1a-167683c0b67e</Name>
 					<Icon meta:RefKey="Sprite">
 						<Name>Oryx/uf_split/uf_items/book_brown</Name>
@@ -29,7 +35,6 @@
 					</Statistics>
 					<Duration>10</Duration>
 				</Buff>
-			</Data>
-		</EffectData>
+		</Effect>
 	</Ability>
 </Body>

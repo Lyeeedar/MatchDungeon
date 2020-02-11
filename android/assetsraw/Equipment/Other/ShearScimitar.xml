@@ -11,18 +11,23 @@
 		<MatchDamage>2</MatchDamage>
 		<AbilityDamage>2</AbilityDamage>
 	</Statistics>
-	<Ability>
-		<Name>ShearScimitar.MainHand.Ability.Name:341e13ef-43ca-4468-b7d0-502fde1f53f7</Name>
-		<Description>ShearScimitar.MainHand.Ability.Description:02e90070-4df0-4af4-afd7-484f1a0465bf</Description>
-		<EffectData>
-			<Cost>5</Cost>
-			<Effect>1,Monster,Single,Pop</Effect>
-			<Data>
-				<Damage>3</Damage>
-			</Data>
-			<HitEffect meta:RefKey="ParticleEffect">
-				<Name>slash</Name>
-			</HitEffect>
-		</EffectData>
+	<Ability meta:RefKey="Ability">
+		<Name>ShearScimitar.MainHand.Ability (Ability).Name:341e13ef-43ca-4468-b7d0-502fde1f53f7</Name>
+		<Description>ShearScimitar.MainHand.Ability (Ability).Description:02e90070-4df0-4af4-afd7-484f1a0465bf</Description>
+		<HitEffect meta:RefKey="ParticleEffect">
+			<Name>slash</Name>
+			<Colour>255,91,225,255</Colour>
+		</HitEffect>
+		<Cost>5</Cost>
+		<Targetter meta:RefKey="Targetter">
+			<Type>MONSTER</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>SINGLE</Type>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>POP</Type>
+			<Damage>3</Damage>
+		</Effect>
 	</Ability>
 </MainHand>

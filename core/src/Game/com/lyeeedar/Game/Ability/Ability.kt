@@ -23,30 +23,31 @@ import com.lyeeedar.UI.GridWidget
 import com.lyeeedar.UI.PowerBar
 import com.lyeeedar.UI.Seperator
 import com.lyeeedar.Util.*
-import com.lyeeedar.Util.AssetManager
-import java.util.*
 import ktx.collections.set
 import ktx.collections.toGdxArray
+import java.util.*
 
-@DataClass(name = "Ability")
+@DataClass(name = "Ability", global = true)
 class AbilityData : XmlDataClass()
 {
 	@DataValue(dataName = "Name")
 	@NeedsLocalisation(file = "Ability")
 	lateinit var nameID: String
-	
+
 	@DataValue(dataName = "Description")
 	@NeedsLocalisation(file = "Ability")
 	lateinit var descriptionID: String
-	
+
 	var hitEffect: ParticleEffect? = null
 	var flightEffect: ParticleEffect? = null
-	
+
 	var cost: Int = 2
-	
+
 	var maxUsages: Int = -1
+
+	@DataValue(visibleIf = "MaxUsages > 0")
 	var resetUsagesPerLevel: Boolean = false
-	
+
 	var targets: Int = 1
 	var coverage: Float = 1f
 	lateinit var targetter: Targetter

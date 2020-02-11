@@ -6,23 +6,24 @@
 		<Name>Oryx/uf_split/uf_items/weapon_staff_jeweled</Name>
 	</Icon>
 	<Statistics meta:RefKey="Statistics" />
-	<Ability>
-		<Name>FlawedFireballWand.MainHand.Ability.Name:99da1e48-dab7-4d0c-b85c-5a9162b3b175</Name>
-		<Description>FlawedFireballWand.MainHand.Ability.Description:715cce2c-adf3-48b5-a305-d0db8e541c20</Description>
-		<EffectData>
-			<Cost>9</Cost>
-			<Effect>1,Orb,Block,Pop</Effect>
-			<Data>
-				<AOE>1</AOE>
-				<Damage>0</Damage>
-			</Data>
-			<FlightEffect meta:RefKey="ParticleEffect">
-				<Name>FireOrb</Name>
-				<KillOnAnimComplete>true</KillOnAnimComplete>
-			</FlightEffect>
-			<HitEffect meta:RefKey="ParticleEffect">
-				<Name>Fireburst</Name>
-			</HitEffect>
-		</EffectData>
+	<Ability meta:RefKey="Ability">
+		<Name>FlawedFireballWand.MainHand.Ability (Ability).Name:99da1e48-dab7-4d0c-b85c-5a9162b3b175</Name>
+		<Description>FlawedFireballWand.MainHand.Ability (Ability).Description:715cce2c-adf3-48b5-a305-d0db8e541c20</Description>
+		<HitEffect meta:RefKey="ParticleEffect">
+			<Name>Fireburst</Name>
+		</HitEffect>
+		<FlightEffect meta:RefKey="ParticleEffect">
+			<Name>FireOrb</Name>
+		</FlightEffect>
+		<Cost>9</Cost>
+		<Targetter meta:RefKey="Targetter">
+			<Type>ORB</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>BLOCK</Type>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>POP</Type>
+		</Effect>
 	</Ability>
 </MainHand>

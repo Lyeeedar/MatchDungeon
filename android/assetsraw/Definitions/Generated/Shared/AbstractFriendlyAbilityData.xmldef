@@ -1,0 +1,29 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="AbstractFriendlyAbilityData" Nullable="False" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="Cooldown" Type="Int" Name1="Min" Name2="Max" NumComponents="2" SkipIfDefault="True" Default="1, 1" meta:RefKey="Vector" />
+		<Data Name="Range" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="FriendlyHealAbilityData" Nullable="False" IsGlobal="True" Extends="AbstractFriendlyAbilityData" meta:RefKey="StructDef">
+		<Const Name="classID">Heal</Const>
+		<Data Name="HeartSprite" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Amount" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="FriendlyPopAbilityData" Nullable="False" IsGlobal="True" Extends="FriendlyPopTileAbilityData" meta:RefKey="StructDef">
+		<Const Name="classID">Pop</Const>
+	</Definition>
+	<Definition Name="FriendlyAttackAbilityData" Nullable="False" IsGlobal="True" Extends="FriendlyPopTileAbilityData" meta:RefKey="StructDef">
+		<Const Name="classID">Attack</Const>
+	</Definition>
+	<Definition Name="FriendlyPopTileAbilityData" Nullable="False" IsGlobal="True" Extends="AbstractFriendlyAbilityData" meta:RefKey="StructDef">
+		<Data Name="Damage" Min="1" Type="Float" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="FlightEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+		<Data Name="HitEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="FriendlyBlockAbilityData" Nullable="False" IsGlobal="True" Extends="FriendlyPopTileAbilityData" meta:RefKey="StructDef">
+		<Const Name="classID">Block</Const>
+	</Definition>
+	<Definition Name="FriendlyMoveAbilityData" Nullable="False" IsGlobal="True" Extends="AbstractFriendlyAbilityData" meta:RefKey="StructDef">
+		<Const Name="classID">Move</Const>
+	</Definition>
+	<Definition Name="AbstractFriendlyAbilityDataDefs" Keys="FriendlyAttackAbilityData,FriendlyBlockAbilityData,FriendlyHealAbilityData,FriendlyMoveAbilityData,FriendlyPopAbilityData" IsGlobal="True" meta:RefKey="ReferenceDef" />
+</Definitions>
