@@ -119,7 +119,7 @@ class CompletionConditionKill(data: CompletionConditionKillData) : AbstractCompl
 		{
 			val ai = monster.ai()!!.ai as MonsterAI
 
-			val desc = ai.desc.originalDesc ?: ai.desc
+			val desc = ai.originalDesc ?: ai.desc
 
 			if (!monsterCountMap.containsKey(desc.name))
 			{

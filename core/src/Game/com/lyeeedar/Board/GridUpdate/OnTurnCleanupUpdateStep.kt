@@ -98,18 +98,19 @@ class OnTurnCleanupUpdateStep : AbstractUpdateStep()
 					}
 				}
 
-				val monsterAI = entity.ai()?.ai as? MonsterAI
+				val monsterAI = entity.monsterAI()
 				if (monsterAI != null)
 				{
-					val rootDesc = monsterAI.desc.originalDesc ?: monsterAI.desc
+					val rootDesc = monsterAI.originalDesc
 					if (rootDesc.stages.size > 0)
 					{
-						val currentStage = if (monsterAI.desc.originalDesc == null) -1 else rootDesc.stages.indexOf(monsterAI.desc)
+						val currentStage = rootDesc.stages.indexOf(monsterAI.desc)
 
 						if (currentStage < rootDesc.stages.size - 1)
 						{
 							val nextDesc = rootDesc.stages[currentStage + 1]
 							val monster = nextDesc.getEntity(monsterAI.difficulty, false, grid)
+							monster.monsterAI()!!.originalDesc = monsterAI.originalDesc
 							monster.pos()?.setTile(monster, tile)
 
 							logAction += " spawning next monster stage"

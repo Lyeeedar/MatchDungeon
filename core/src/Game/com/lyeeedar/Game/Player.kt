@@ -65,17 +65,17 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 
 		for (buff in buffs)
 		{
-			stat += buff.statistics[statistic] ?: 0f
+			stat += buff.data.statistics[statistic] ?: 0f
 		}
 
 		for (buff in levelbuffs)
 		{
-			stat += buff.statistics[statistic] ?: 0f
+			stat += buff.data.statistics[statistic] ?: 0f
 		}
 
 		for (buff in leveldebuffs)
 		{
-			stat += buff.statistics[statistic] ?: 0f
+			stat += buff.data.statistics[statistic] ?: 0f
 		}
 
 		if (statistic == Statistic.MATCHDAMAGE || statistic == Statistic.ABILITYDAMAGE || statistic == Statistic.POWERGAIN || statistic == Statistic.PIERCE)
@@ -147,10 +147,10 @@ class Player(val baseCharacter: Character, val deck: PlayerDeck)
 					val statSources = Array<Pair<String, Float>>()
 					statSources.add(Pair(Localisation.getText("rewards", "UI"), statistics[stat] ?: 0f))
 					statSources.add(Pair(Localisation.getText("equipment", "UI"), EquipmentSlot.Values.map { equipment[it]?.statistics?.get(stat) ?: 0f }.sum()))
-					statSources.add(Pair(Localisation.getText("buffs", "UI"), buffs.map { it.statistics[stat] ?: 0f }.sum()))
+					statSources.add(Pair(Localisation.getText("buffs", "UI"), buffs.map { it.data.statistics[stat] ?: 0f }.sum()))
 					statSources.add(Pair(Localisation.getText("statistic.chaoticnature", "UI"), choaticNature[stat] ?: 0f))
-					statSources.add(Pair(Localisation.getText("levelbuffs", "UI"), levelbuffs.map { it.statistics[stat] ?: 0f }.sum()))
-					statSources.add(Pair(Localisation.getText("leveldebuffs", "UI"), leveldebuffs.map { it.statistics[stat] ?: 0f }.sum()))
+					statSources.add(Pair(Localisation.getText("levelbuffs", "UI"), levelbuffs.map { it.data.statistics[stat] ?: 0f }.sum()))
+					statSources.add(Pair(Localisation.getText("leveldebuffs", "UI"), leveldebuffs.map { it.data.statistics[stat] ?: 0f }.sum()))
 
 					val base = baseCharacter.baseStatistics[stat] ?: 0f
 					var eqn = Localisation.getText("base", "UI") + "(${base})"

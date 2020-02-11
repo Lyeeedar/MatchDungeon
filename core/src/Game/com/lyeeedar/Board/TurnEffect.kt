@@ -4,5 +4,5 @@ import com.badlogic.gdx.utils.Array
 
 interface IHasTurnEffect
 {
-	val onTurnEffects: Array<AbstractMonsterAbility>
+	val onTurnEffects: Array<AbstractMonsterAbility<*>>
 }

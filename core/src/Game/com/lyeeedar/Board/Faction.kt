@@ -87,7 +87,8 @@ class Faction
 			for (i in 0 until monsterEl.childCount)
 			{
 				val el = monsterEl.getChild(i)
-				val desc = MonsterDesc.load(el)
+				val desc = MonsterDesc()
+				desc.load(el)
 
 				if (!faction.sizeMap.containsKey(desc.size))
 				{
@@ -103,7 +104,8 @@ class Faction
 				for (i in 0 until bossEl.childCount)
 				{
 					val el = bossEl.getChild(i)
-					val desc = MonsterDesc.load(el)
+					val desc = MonsterDesc()
+					desc.load(el)
 
 					if (!faction.bossSizeMap.containsKey(desc.size))
 					{

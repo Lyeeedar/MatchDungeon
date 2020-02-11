@@ -2,13 +2,11 @@ package com.lyeeedar.Board
 
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.IntMap
-import com.badlogic.gdx.utils.ObjectMap
 import com.exp4j.Helpers.evaluate
 import com.lyeeedar.Board.CompletionCondition.AbstractCompletionCondition
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionCustomOrb
 import com.lyeeedar.Board.CompletionCondition.CompletionConditionSink
 import com.lyeeedar.Components.*
-import com.lyeeedar.Game.Buff
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Game.Player
 import com.lyeeedar.Renderables.Sprite.Sprite
@@ -72,7 +70,7 @@ class Level(val loadPath: String)
 		else if (toSpawn == SpawnType.ATTACK)
 		{
 			val orb = EntityArchetypeCreator.createOrb(OrbDesc.getRandomOrb(this))
-			val monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap())
+			val monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, MonsterEffectData())
 			monsterEffect.timer = 7
 			addMonsterEffect(orb, monsterEffect)
 
@@ -80,8 +78,8 @@ class Level(val loadPath: String)
 		}
 		else if (toSpawn == SpawnType.SUMMON)
 		{
-			val data = ObjectMap<String, Any>()
-			data["FACTION"] = factions.random(grid.ran)
+			val data = MonsterEffectData()
+			data.faction = factions.random(grid.ran)
 
 			val orb = EntityArchetypeCreator.createOrb(OrbDesc.getRandomOrb(this))
 			val monsterEffect = MonsterEffect(MonsterEffectType.SUMMON, data)
@@ -530,7 +528,7 @@ class Level(val loadPath: String)
 						tile.contents = EntityArchetypeCreator.createOrb(OrbDesc.getRandomOrb(this))
 					}
 
-					val monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap())
+					val monsterEffect = MonsterEffect(MonsterEffectType.ATTACK, MonsterEffectData())
 					monsterEffect.timer = symbol.attack
 
 					addMonsterEffect(tile.contents!!, monsterEffect)
@@ -718,7 +716,9 @@ class Level(val loadPath: String)
 					var monsterDesc: MonsterDesc? = null
 					if (monsterDescEl != null)
 					{
-						monsterDesc = MonsterDesc.load(monsterDescEl)
+						val desc = MonsterDesc()
+						desc.load(monsterDescEl)
+						monsterDesc = desc
 					}
 
 					val special = symbolEl.get("SpecialOrb")
@@ -838,7 +838,9 @@ class Level(val loadPath: String)
 				val customMonsterDesc = xml.getChildByName("CustomMonster")
 				if (customMonsterDesc != null)
 				{
-					level.customMonster = MonsterDesc.load(customMonsterDesc)
+					val desc = MonsterDesc()
+					desc.load(customMonsterDesc)
+					level.customMonster = desc
 				}
 
 				levels.add(level)
@@ -877,40 +879,3 @@ data class Symbol(
 		val container: ContainerDesc?,
 		val spreader: Spreader?,
 		val type: SymbolType)
-
-fun loadDataBlock(xmlData: XmlData): ObjectMap<String, Any>
-{
-	val data = ObjectMap<String, Any>()
-
-	for (el in xmlData.children)
-	{
-		if (el.name == "Spreader")
-		{
-			val spreader = Spreader.load(el)
-			data[el.name.toUpperCase(Locale.ENGLISH)] = spreader
-		}
-		else if (el.name == "Debuff")
-		{
-			val buff = Buff.load(el)
-			data[el.name.toUpperCase(Locale.ENGLISH)] = buff
-		}
-		else if (el.name == "MonsterDesc")
-		{
-			data[el.name.toUpperCase(Locale.ENGLISH)] = MonsterDesc.load(el)
-		}
-		else if (el.name.contains("Effect"))
-		{
-			data[el.name.toUpperCase(Locale.ENGLISH)] = AssetManager.loadParticleEffect(el)
-		}
-		else if (el.name == "Sprite")
-		{
-			data[el.name.toUpperCase(Locale.ENGLISH)] = AssetManager.loadSprite(el)
-		}
-		else
-		{
-			data[el.name.toUpperCase(Locale.ENGLISH)] = el.text.toUpperCase(Locale.ENGLISH)
-		}
-	}
-
-	return data
-}

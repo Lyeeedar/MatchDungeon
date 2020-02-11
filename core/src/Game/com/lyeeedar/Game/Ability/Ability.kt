@@ -28,17 +28,14 @@ import ktx.collections.set
 import ktx.collections.toGdxArray
 import java.util.*
 
-/**
- * Created by Philip on 20-Jul-16.
- */
-
-class Ability
+@DataClass(name = "Ability")
+class AbilityData : XmlDataClass()
 {
+	@NeedsLocalisation(file = "Ability")
 	lateinit var nameID: String
-	lateinit var descriptionID: String
 
-	val name: String
-		get() = Localisation.getText(nameID, "Ability")
+	@NeedsLocalisation(file = "Ability")
+	lateinit var descriptionID: String
 
 	var hitEffect: ParticleEffect? = null
 	var flightEffect: ParticleEffect? = null
@@ -46,14 +43,25 @@ class Ability
 	var cost: Int = 2
 
 	var maxUsages: Int = -1
-	var remainingUsages: Int = -1
 	var resetUsagesPerLevel = false
 
 	var targets = 1
-	var targetter: Targetter = Targetter(Targetter.Type.ORB)
-	var permuter: Permuter = Permuter(Permuter.Type.SINGLE)
-	var effect: Effect = Effect(Effect.Type.POP)
-	val data = ObjectMap<String, Any>()
+	lateinit var targetter: Targetter
+	lateinit var permuter: Permuter
+	lateinit var effect: Effect
+
+	override fun load(xmlData: XmlData)
+	{
+
+	}
+}
+
+class Ability(val data: AbilityData)
+{
+	val name: String
+		get() = Localisation.getText(data.nameID, "Ability")
+
+	var remainingUsages: Int = -1
 
 	val selectedTargets = Array<Tile>()
 
@@ -67,9 +75,9 @@ class Ability
 		val table = Table()
 		table.defaults().pad(5f)
 
-		var description = Localisation.getText(descriptionID, "Ability")
+		var description = Localisation.getText(data.descriptionID, "Ability")
 
-		if (effect.type == Effect.Type.POP)
+		if (data.effect.type == Effect.Type.POP)
 		{
 			val dam = data["DAMAGE", "0"].toString().evaluate(Global.getVariableMap())
 			val bonusDam: Float
@@ -84,7 +92,7 @@ class Ability
 			}
 			description = description.replace("{Damage}", bonusDam.toString())
 		}
-		else if (effect.type == Effect.Type.BUFF)
+		else if (data.effect.type == Effect.Type.BUFF)
 		{
 			val buff = data["BUFF"] as Buff
 			var turns = buff.remainingDuration.toString()
@@ -107,7 +115,7 @@ class Ability
 		table.add(Seperator(Statics.skin, "horizontalcard")).growX().pad(10f)
 		table.row()
 
-		if (effect.type == Effect.Type.BUFF)
+		if (data.effect.type == Effect.Type.BUFF)
 		{
 			table.add(Seperator(Statics.skin)).growX()
 			table.row()
@@ -120,14 +128,14 @@ class Ability
 			table.row()
 		}
 
-		table.add(Label(Localisation.getText("ability.powercost", "UI") + ": $cost", Statics.skin, "card")).growX()
+		table.add(Label(Localisation.getText("ability.powercost", "UI") + ": ${data.cost}", Statics.skin, "card")).growX()
 		table.row()
 
-		if (maxUsages > 0)
+		if (data.maxUsages > 0)
 		{
-			if (resetUsagesPerLevel)
+			if (data.resetUsagesPerLevel)
 			{
-				table.add(Label(Localisation.getText("ability.usagesperencounter", "UI") + ": $maxUsages", Statics.skin, "card")).growX()
+				table.add(Label(Localisation.getText("ability.usagesperencounter", "UI") + ": ${data.maxUsages}", Statics.skin, "card")).growX()
 				table.row()
 			}
 			else
@@ -142,7 +150,7 @@ class Ability
 
 	fun activate(grid: Grid)
 	{
-		if (maxUsages > 0)
+		if (data.maxUsages > 0)
 		{
 			if (remainingUsages == 0)
 			{
@@ -154,17 +162,17 @@ class Ability
 
 		PowerBar.instance.pips -= cost
 
-		if (effect.type == Effect.Type.BUFF)
+		if (data.effect.type == Effect.Type.BUFF)
 		{
-			effect.apply(Tile(0, 0, grid), grid, 0f, data, Array(), ObjectFloatMap())
+			data.effect.apply(Tile(0, 0, grid), grid, 0f, Array(), ObjectFloatMap())
 			return
 		}
 
 		val finalTargets = Array<Tile>()
 
-		if (permuter.type == Permuter.Type.RANDOM && targets == 0)
+		if (data.permuter.type == PermuterType.RANDOM && data.targets == 0)
 		{
-			for (t in permuter.permute(grid.tile(grid.width/2, grid.height/2)!!, grid, data, selectedTargets, this, null))
+			for (t in data.permuter.permute(grid.tile(grid.width/2, grid.height/2)!!, grid, selectedTargets, this, null))
 			{
 				if (!selectedTargets.contains(t, true))
 				{
@@ -177,13 +185,13 @@ class Ability
 
 		for (target in selectedTargets)
 		{
-			if (permuter.type == Permuter.Type.RANDOM && targets == 0)
+			if (data.permuter.type == PermuterType.RANDOM && data.targets == 0)
 			{
 				finalTargets.add(target)
 			}
 			else
 			{
-				for (t in permuter.permute(target, grid, data, selectedTargets, this, null))
+				for (t in data.permuter.permute(target, grid, selectedTargets, this, null))
 				{
 					if (!finalTargets.contains(t, true))
 					{
@@ -203,9 +211,9 @@ class Ability
 			}
 
 			var delay = 0f
-			if (flightEffect != null && !Global.resolveInstantly)
+			if (data.flightEffect != null && !Global.resolveInstantly)
 			{
-				val fs = flightEffect!!.copy()
+				val fs = data.flightEffect!!.copy()
 				fs.killOnAnimComplete = true
 
 				val p1 = Vector2(Statics.stage.width / 2f, 0f)
@@ -243,18 +251,18 @@ class Ability
 		for (target in finalTargets)
 		{
 			val closest = selectedTargets.minBy { it.dist(target) }!!
-			val dst = if (permuter.type == Permuter.Type.RANDOM) 0 else closest.dist(target)
+			val dst = if (data.permuter.type == PermuterType.RANDOM) 0 else closest.dist(target)
 
 			target.addDelayedAction(
 					{ target ->
 						var delay = 0.0f
-						if (hitEffect != null && !Global.resolveInstantly)
+						if (data.hitEffect != null && !Global.resolveInstantly)
 						{
-							val hs = hitEffect!!.copy()
+							val hs = data.hitEffect!!.copy()
 							hs.renderDelay = delay + 0.1f * dst
 							delay += hs.lifetime * 0.6f
 
-							if (permuter.type == Permuter.Type.BLOCK || permuter.type == Permuter.Type.DIAMOND)
+							if (data.permuter.type == PermuterType.BLOCK || data.permuter.type == PermuterType.DIAMOND)
 							{
 								// single sprite
 								if (originalTargets.contains(target, true))
@@ -271,7 +279,7 @@ class Ability
 							}
 						}
 
-						effect.apply(target, grid, delay, data, originalTargets, variables)
+						data.effect.apply(target, grid, delay, data, originalTargets, variables)
 					}, selectedDelays[closest] - 0.05f)
 
 		}
@@ -281,14 +289,14 @@ class Ability
 
 	fun hasValidTargets(grid: Grid): Boolean
 	{
-		if (maxUsages > 0 && remainingUsages == 0)
+		if (data.maxUsages > 0 && remainingUsages == 0)
 		{
 			return false
 		}
-		else if (effect.type == Effect.Type.BUFF)
+		else if (data.effect.type == Effect.Type.BUFF)
 		{
 			val buff = data["BUFF"] as Buff
-			if (Global.player.levelbuffs.any { it.nameID == buff.nameID && it.remainingDuration > 1 })
+			if (Global.player.levelbuffs.any { it.data.nameID == buff.data.nameID && it.remainingDuration > 1 })
 			{
 				return false
 			}
@@ -307,7 +315,7 @@ class Ability
 
 		for (tile in grid.grid)
 		{
-			if (targetter.isValid(tile, data))
+			if (data.targetter.isValid(tile))
 			{
 				output.add(tile)
 			}
@@ -316,72 +324,14 @@ class Ability
 		return output
 	}
 
-	fun parse(xml: XmlData)
-	{
-		nameID = xml.get("Name")
-		descriptionID = xml.get("Description")
-
-		val dataEl = xml.getChildByName("EffectData")!!
-
-		cost = dataEl.getInt("Cost", 1)
-
-		maxUsages = dataEl.getInt("Usages", -1)
-		remainingUsages = maxUsages
-		resetUsagesPerLevel = dataEl.getBoolean("ResetUsagesPerLevel", false)
-
-		val effectDesc = dataEl.get("Effect")
-		val split = effectDesc.toUpperCase(Locale.ENGLISH).split(",")
-
-		targets = split[0].toInt()
-		targetter = Targetter(Targetter.Type.valueOf(split[1]))
-		permuter = Permuter(Permuter.Type.valueOf(split[2]))
-		effect = Effect(Effect.Type.valueOf(split[3]))
-
-		val dEl = dataEl.getChildByName("Data")
-		if (dEl != null)
-		{
-			for (el in dEl.children)
-			{
-				if (el.name == "Spreader")
-				{
-					val spreader = Spreader.load(el)
-					data[el.name.toUpperCase(Locale.ENGLISH)] = spreader
-
-				}
-				else if (el.name == "Buff")
-				{
-					val buff = Buff.load(el)
-					data[el.name.toUpperCase(Locale.ENGLISH)] = buff
-				}
-				else if (el.name == "Summon")
-				{
-					data[el.name.toUpperCase(Locale.ENGLISH)] = el
-				}
-				else
-				{
-					data[el.name.toUpperCase(Locale.ENGLISH)] = el.text.toUpperCase(Locale.ENGLISH)
-				}
-			}
-		}
-
-		val hitEffectData = dataEl.getChildByName("HitEffect")
-		if (hitEffectData != null) hitEffect = AssetManager.loadParticleEffect(hitEffectData).getParticleEffect()
-		val flightEffectData = dataEl.getChildByName("FlightEffect")
-		if (flightEffectData != null) flightEffect = AssetManager.loadParticleEffect(flightEffectData).getParticleEffect()
-
-		if (effect.type == Effect.Type.BUFF)
-		{
-			targets = 0
-		}
-	}
-
 	companion object
 	{
 		fun load(xml: XmlData): Ability
 		{
-			val ability = Ability()
-			ability.parse(xml)
-			return ability
+			val data = AbilityData()
+			data.load(xml)
+
+			return Ability(data)
 		}
 	}
 }

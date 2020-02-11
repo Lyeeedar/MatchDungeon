@@ -12,6 +12,7 @@ import com.lyeeedar.Board.GridUpdate.*
 import com.lyeeedar.Components.*
 import com.lyeeedar.Direction
 import com.lyeeedar.Game.Ability.Ability
+import com.lyeeedar.Game.Ability.isValid
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Game.GlobalDeck
 import com.lyeeedar.Game.Player
@@ -347,7 +348,7 @@ class Grid(val width: Int, val height: Int, val level: Level, val replay: Replay
 		if (activeAbility != null)
 		{
 			val newTile = tile(newSelection) ?: return
-			if (!activeAbility!!.targetter.isValid(newTile, activeAbility!!.data)) return
+			if (!activeAbility!!.targetter.isValid(newTile)) return
 
 			if (newTile.isSelected)
 			{

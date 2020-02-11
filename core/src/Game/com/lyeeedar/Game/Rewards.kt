@@ -381,7 +381,7 @@ class BuffReward : AbstractReward()
 		buff.remainingDuration += (buff.remainingDuration * Global.player.getStat(Statistic.BUFFDURATION)).toInt()
 		buff.remainingDuration++ // add one cause as soon as the level ends itll be decreased by 1
 
-		val existing = Global.player.buffs.firstOrNull{ it.nameID != buff.nameID }
+		val existing = Global.player.buffs.firstOrNull{ it.data.nameID != buff.data.nameID }
 		if (existing != null)
 		{
 			existing.remainingDuration = buff.remainingDuration
@@ -394,7 +394,7 @@ class BuffReward : AbstractReward()
 		val card = buff.getCard()
 		card.addPick("") {
 
-			val sprite = buff.icon.copy()
+			val sprite = buff.data.icon.copy()
 
 			val src = card.localToStageCoordinates(Vector2(card.width / 2f, card.height / 2f))
 

@@ -1,6 +1,5 @@
 package com.lyeeedar.Board
 
-import com.badlogic.gdx.utils.ObjectMap
 import com.badlogic.gdx.utils.ObjectSet
 import com.lyeeedar.Components.damageable
 import com.lyeeedar.Components.isBasicOrb
@@ -75,24 +74,24 @@ class SpreaderData : XmlDataClass()
 	}
 }
 
-class Spreader
+class Spreader(val data: SpreaderData)
 {
-	lateinit var data: SpreaderData
 	var fadeOut = -1
 	var attackCooldown = 0
 	var spriteWrapper: SpriteWrapper? = null
 	var particleEffect: ParticleEffect? = null
 
+	init
+	{
+		spriteWrapper = data.spriteWrapper?.copy()
+		particleEffect = data.particleEffect?.copy()
+		fadeOut = data.fadeOut
+		attackCooldown = data.attackCooldownMax
+	}
+
 	fun copy(): Spreader
 	{
-		val out = Spreader()
-		out.data = data
-		out.spriteWrapper = data.spriteWrapper?.copy()
-		out.particleEffect = data.particleEffect?.copy()
-		out.fadeOut = data.fadeOut
-		out.attackCooldown = data.attackCooldownMax
-
-		return out
+		return Spreader(data)
 	}
 
 	fun spread(grid: Grid, tile: Tile)
@@ -199,7 +198,7 @@ class Spreader
 
 				val target = attackedTile.contents!!
 
-				val attack = MonsterEffect(MonsterEffectType.ATTACK, ObjectMap())
+				val attack = MonsterEffect(MonsterEffectType.ATTACK, MonsterEffectData())
 				addMonsterEffect(target, attack)
 				attack.timer = data.attackNumPips + (Global.player.getStat(Statistic.HASTE) * data.attackNumPips).toInt()
 
@@ -233,16 +232,10 @@ class Spreader
 	{
 		fun load(xmlData: XmlData): Spreader
 		{
-			val spreader = Spreader()
-			spreader.data = SpreaderData()
-			spreader.data.load(xmlData)
+			val data = SpreaderData()
+			data.load(xmlData)
 
-			spreader.spriteWrapper = spreader.data.spriteWrapper?.copy()
-			spreader.particleEffect = spreader.data.particleEffect?.copy()
-			spreader.fadeOut = spreader.data.fadeOut
-			spreader.attackCooldown = spreader.data.attackCooldownMax
-
-			return spreader
+			return Spreader(data)
 		}
 	}
 }

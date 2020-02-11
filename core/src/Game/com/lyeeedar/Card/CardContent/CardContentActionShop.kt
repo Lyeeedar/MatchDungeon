@@ -699,7 +699,7 @@ class BuffWare : ShopWare()
 			SpriteWidget(AssetManager.loadSprite("GUI/background_stars"), size, size)
 				.tint(Color(1f, 1f, 1f, 1f)))
 
-		val tileFront = SpriteWidget(buff.icon.copy(), size, size)
+		val tileFront = SpriteWidget(buff.data.icon.copy(), size, size)
 		equipmentStack.add(tileFront)
 		equipmentStack.add(SpriteWidget(AssetManager.loadSprite("GUI/PortraitFrameBorder"), size, size))
 

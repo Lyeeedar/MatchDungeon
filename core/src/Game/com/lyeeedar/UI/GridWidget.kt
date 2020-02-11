@@ -14,6 +14,7 @@ import com.lyeeedar.Board.Grid
 import com.lyeeedar.Board.MonsterAI
 import com.lyeeedar.Board.OrbDesc
 import com.lyeeedar.Components.*
+import com.lyeeedar.Game.Ability.isValid
 import com.lyeeedar.Game.Global
 import com.lyeeedar.Renderables.Particle.ParticleEffect
 import com.lyeeedar.Renderables.SortedRenderer
@@ -316,7 +317,7 @@ class GridWidget(val grid: Grid) : Widget()
 
 				if (activeAbility != null)
 				{
-					val isValidTarget = activeAbility.targetter.isValid(tile, activeAbility.data)
+					val isValidTarget = activeAbility.targetter.isValid(tile)
 					if (!isValidTarget)
 					{
 						tileColour = Colour.DARK_GRAY
@@ -449,10 +450,10 @@ class GridWidget(val grid: Grid) : Widget()
 
 						if (monsterAI != null)
 						{
-							val rootDesc = monsterAI.desc.originalDesc ?: monsterAI.desc
+							val rootDesc = monsterAI.originalDesc
 							if (rootDesc.stages.size > 0)
 							{
-								val currentStage = if (monsterAI.desc.originalDesc == null) -1 else rootDesc.stages.indexOf(monsterAI.desc)
+								val currentStage = rootDesc.stages.indexOf(monsterAI.desc)
 								var x = xi
 								val y = maxY
 								val size = 0.15f

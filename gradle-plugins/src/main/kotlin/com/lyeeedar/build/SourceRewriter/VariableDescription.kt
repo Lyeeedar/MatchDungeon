@@ -319,6 +319,10 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 
 			builder.appendln(indentation, "}")
 		}
+		else if (type == "FastEnumMap<Statistic, Float>")
+		{
+			builder.appendln(indentation, "Statistic.parse(xmlData.getChildByName(\"$dataName\")!!, $name)")
+		}
         else
         {
             val classDef = classRegister.classMap[type] ?: throw RuntimeException("writeLoad: Unknown type '$type'!")
@@ -584,6 +588,10 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 					builder.appendlnFix(2, """<Data Name="$dataName" $minCountStr $maxCountStr Keys="${classDef.classDef!!.dataClassName}" $visibleIfStr meta:RefKey="Collection" />""")
 				}
 			}
+		}
+		else if (type == "FastEnumMap<Statistic, Float>")
+		{
+			builder.appendlnFix(2, """<Data Name="$dataName" Keys="Statistics" $nullable $skipIfDefault $visibleIfStr meta:RefKey="Reference" />""")
 		}
         else
         {
