@@ -13,30 +13,40 @@
 			</Death>
 			<AttackNumPips>6</AttackNumPips>
 			<AttackCooldown>2,6</AttackCooldown>
-			<Size>1</Size>
-			<HP>10</HP>
 			<DamageReduction>1</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterMoveAbilityData>
 					<Cooldown>2,5</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
-				<Ability>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Move</classID>
+					<MoveType>BASIC</MoveType>
+				</MonsterMoveAbilityData>
+				<MonsterSpreaderAbilityData>
 					<Cooldown>3,9</Cooldown>
-					<Effect>Spreader</Effect>
-					<Data>
-						<Spreader meta:RefKey="SpreaderDef">
-							<Name>Goop</Name>
-							<Sprite meta:RefKey="SpriteWrapper">
-								<Sprite meta:RefKey="Sprite">
-									<Name>Oryx/Custom/terrain/cloud</Name>
-									<Colour>46,232,183,255</Colour>
-								</Sprite>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Spreader</classID>
+					<Spreader meta:RefKey="SpreaderDef">
+						<Name>Goop</Name>
+						<Sprite meta:RefKey="SpriteWrapper">
+							<Sprite meta:RefKey="Sprite">
+								<Name>Oryx/Custom/terrain/cloud</Name>
+								<Colour>46,232,183,255</Colour>
 							</Sprite>
-							<Spreads>false</Spreads>
-						</Spreader>
-					</Data>
-				</Ability>
+						</Sprite>
+						<Effect>SEAL</Effect>
+						<Spreads>false</Spreads>
+					</Spreader>
+				</MonsterSpreaderAbilityData>
 			</Abilities>
 		</Monster>
 		<Monster meta:RefKey="MonsterDesc">
@@ -53,29 +63,40 @@
 			<AttackNumPips>6</AttackNumPips>
 			<AttackCooldown>2,6</AttackCooldown>
 			<Size>2</Size>
-			<HP>15</HP>
 			<DamageReduction>1</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterMoveAbilityData>
 					<Cooldown>2,5</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
-				<Ability>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Move</classID>
+					<MoveType>BASIC</MoveType>
+				</MonsterMoveAbilityData>
+				<MonsterSpreaderAbilityData>
 					<Cooldown>3,9</Cooldown>
-					<Effect>Spreader</Effect>
-					<Data>
-						<Spreader meta:RefKey="SpreaderDef">
-							<Name>Goop</Name>
-							<Sprite meta:RefKey="SpriteWrapper">
-								<Sprite meta:RefKey="Sprite">
-									<Name>Oryx/Custom/terrain/cloud</Name>
-									<Colour>46,232,183,255</Colour>
-								</Sprite>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Spreader</classID>
+					<Spreader meta:RefKey="SpreaderDef">
+						<Name>Goop</Name>
+						<Sprite meta:RefKey="SpriteWrapper">
+							<Sprite meta:RefKey="Sprite">
+								<Name>Oryx/Custom/terrain/cloud</Name>
+								<Colour>46,232,183,255</Colour>
 							</Sprite>
-							<Spreads>false</Spreads>
-						</Spreader>
-					</Data>
-				</Ability>
+						</Sprite>
+						<Effect>SEAL</Effect>
+						<Spreads>false</Spreads>
+					</Spreader>
+				</MonsterSpreaderAbilityData>
 			</Abilities>
 		</Monster>
 		<Monster meta:RefKey="MonsterDesc">
@@ -91,30 +112,40 @@
 			</Death>
 			<AttackNumPips>6</AttackNumPips>
 			<AttackCooldown>2,6</AttackCooldown>
-			<Size>1</Size>
-			<HP>10</HP>
 			<DamageReduction>1</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterMoveAbilityData>
 					<Cooldown>2,5</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
-				<Ability>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Move</classID>
+					<MoveType>BASIC</MoveType>
+				</MonsterMoveAbilityData>
+				<MonsterSpreaderAbilityData>
 					<Cooldown>3,9</Cooldown>
-					<Effect>Spreader</Effect>
-					<Data>
-						<Spreader meta:RefKey="SpreaderDef">
-							<Name>Goop</Name>
-							<Sprite meta:RefKey="SpriteWrapper">
-								<Sprite meta:RefKey="Sprite">
-									<Name>Oryx/Custom/terrain/cloud</Name>
-									<Colour>232,46,46,255</Colour>
-								</Sprite>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Spreader</classID>
+					<Spreader meta:RefKey="SpreaderDef">
+						<Name>Goop</Name>
+						<Sprite meta:RefKey="SpriteWrapper">
+							<Sprite meta:RefKey="Sprite">
+								<Name>Oryx/Custom/terrain/cloud</Name>
+								<Colour>232,46,46,255</Colour>
 							</Sprite>
-							<Spreads>false</Spreads>
-						</Spreader>
-					</Data>
-				</Ability>
+						</Sprite>
+						<Effect>SEAL</Effect>
+						<Spreads>false</Spreads>
+					</Spreader>
+				</MonsterSpreaderAbilityData>
 			</Abilities>
 		</Monster>
 		<Monster meta:RefKey="MonsterDesc">
@@ -131,29 +162,40 @@
 			<AttackNumPips>6</AttackNumPips>
 			<AttackCooldown>2,6</AttackCooldown>
 			<Size>2</Size>
-			<HP>15</HP>
 			<DamageReduction>1</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterMoveAbilityData>
 					<Cooldown>2,5</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
-				<Ability>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Move</classID>
+					<MoveType>BASIC</MoveType>
+				</MonsterMoveAbilityData>
+				<MonsterSpreaderAbilityData>
 					<Cooldown>3,9</Cooldown>
-					<Effect>Spreader</Effect>
-					<Data>
-						<Spreader meta:RefKey="SpreaderDef">
-							<Name>Goop</Name>
-							<Sprite meta:RefKey="SpriteWrapper">
-								<Sprite meta:RefKey="Sprite">
-									<Name>Oryx/Custom/terrain/cloud</Name>
-									<Colour>232,46,46,255</Colour>
-								</Sprite>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Spreader</classID>
+					<Spreader meta:RefKey="SpreaderDef">
+						<Name>Goop</Name>
+						<Sprite meta:RefKey="SpriteWrapper">
+							<Sprite meta:RefKey="Sprite">
+								<Name>Oryx/Custom/terrain/cloud</Name>
+								<Colour>232,46,46,255</Colour>
 							</Sprite>
-							<Spreads>false</Spreads>
-						</Spreader>
-					</Data>
-				</Ability>
+						</Sprite>
+						<Effect>SEAL</Effect>
+						<Spreads>false</Spreads>
+					</Spreader>
+				</MonsterSpreaderAbilityData>
 			</Abilities>
 		</Monster>
 		<Monster meta:RefKey="MonsterDesc">
@@ -169,30 +211,40 @@
 			</Death>
 			<AttackNumPips>6</AttackNumPips>
 			<AttackCooldown>2,6</AttackCooldown>
-			<Size>1</Size>
-			<HP>10</HP>
 			<DamageReduction>1</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterMoveAbilityData>
 					<Cooldown>2,5</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
-				<Ability>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Move</classID>
+					<MoveType>BASIC</MoveType>
+				</MonsterMoveAbilityData>
+				<MonsterSpreaderAbilityData>
 					<Cooldown>3,9</Cooldown>
-					<Effect>Spreader</Effect>
-					<Data>
-						<Spreader meta:RefKey="SpreaderDef">
-							<Name>Goop</Name>
-							<Sprite meta:RefKey="SpriteWrapper">
-								<Sprite meta:RefKey="Sprite">
-									<Name>Oryx/Custom/terrain/cloud</Name>
-									<Colour>141,46,232,255</Colour>
-								</Sprite>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Spreader</classID>
+					<Spreader meta:RefKey="SpreaderDef">
+						<Name>Goop</Name>
+						<Sprite meta:RefKey="SpriteWrapper">
+							<Sprite meta:RefKey="Sprite">
+								<Name>Oryx/Custom/terrain/cloud</Name>
+								<Colour>141,46,232,255</Colour>
 							</Sprite>
-							<Spreads>false</Spreads>
-						</Spreader>
-					</Data>
-				</Ability>
+						</Sprite>
+						<Effect>SEAL</Effect>
+						<Spreads>false</Spreads>
+					</Spreader>
+				</MonsterSpreaderAbilityData>
 			</Abilities>
 		</Monster>
 		<Monster meta:RefKey="MonsterDesc">
@@ -209,29 +261,40 @@
 			<AttackNumPips>6</AttackNumPips>
 			<AttackCooldown>2,6</AttackCooldown>
 			<Size>2</Size>
-			<HP>15</HP>
 			<DamageReduction>1</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterMoveAbilityData>
 					<Cooldown>2,5</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
-				<Ability>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Move</classID>
+					<MoveType>BASIC</MoveType>
+				</MonsterMoveAbilityData>
+				<MonsterSpreaderAbilityData>
 					<Cooldown>3,9</Cooldown>
-					<Effect>Spreader</Effect>
-					<Data>
-						<Spreader meta:RefKey="SpreaderDef">
-							<Name>Goop</Name>
-							<Sprite meta:RefKey="SpriteWrapper">
-								<Sprite meta:RefKey="Sprite">
-									<Name>Oryx/Custom/terrain/cloud</Name>
-									<Colour>141,46,232,255</Colour>
-								</Sprite>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Spreader</classID>
+					<Spreader meta:RefKey="SpreaderDef">
+						<Name>Goop</Name>
+						<Sprite meta:RefKey="SpriteWrapper">
+							<Sprite meta:RefKey="Sprite">
+								<Name>Oryx/Custom/terrain/cloud</Name>
+								<Colour>141,46,232,255</Colour>
 							</Sprite>
-							<Spreads>false</Spreads>
-						</Spreader>
-					</Data>
-				</Ability>
+						</Sprite>
+						<Effect>SEAL</Effect>
+						<Spreads>false</Spreads>
+					</Spreader>
+				</MonsterSpreaderAbilityData>
 			</Abilities>
 		</Monster>
 	</Monsters>
@@ -249,43 +312,59 @@
 			</Death>
 			<AttackNumPips>6</AttackNumPips>
 			<AttackCooldown>2,6</AttackCooldown>
-			<Size>1</Size>
-			<HP>15</HP>
 			<DamageReduction>1</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterMoveAbilityData>
 					<Cooldown>2,5</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
-				<Ability>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Move</classID>
+					<MoveType>BASIC</MoveType>
+				</MonsterMoveAbilityData>
+				<MonsterMonsterEffectAbilityData>
 					<Cooldown>2,5</Cooldown>
-					<Target>Random</Target>
-					<Effect>DelayedSummon</Effect>
-					<Data>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>MonsterEffect</classID>
+					<Effect>SUMMON</Effect>
+					<MonsterEffectData meta:RefKey="MonsterEffectData">
 						<Faction>Slime</Faction>
-						<IsSummon>false</IsSummon>
-						<SpawnEffect meta:RefKey="ParticleEffect">
-							<Name>Splatter</Name>
-							<Colour>212,178,26,255</Colour>
-						</SpawnEffect>
-					</Data>
-				</Ability>
-				<Ability>
+					<IsSummon>false</IsSummon>
+					<SpawnEffect meta:RefKey="ParticleEffect">
+						<Name>Splatter</Name>
+						<Colour>212,178,26,255</Colour>
+					</SpawnEffect>
+					</MonsterEffectData>
+				</MonsterMonsterEffectAbilityData>
+				<MonsterSpreaderAbilityData>
 					<Cooldown>3,9</Cooldown>
-					<Effect>Spreader</Effect>
-					<Data>
-						<Spreader meta:RefKey="SpreaderDef">
-							<Name>Goop</Name>
-							<Sprite meta:RefKey="SpriteWrapper">
-								<Sprite meta:RefKey="Sprite">
-									<Name>Oryx/Custom/terrain/cloud</Name>
-									<Colour>232,171,46,255</Colour>
-								</Sprite>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Spreader</classID>
+					<Spreader meta:RefKey="SpreaderDef">
+						<Name>Goop</Name>
+						<Sprite meta:RefKey="SpriteWrapper">
+							<Sprite meta:RefKey="Sprite">
+								<Name>Oryx/Custom/terrain/cloud</Name>
+								<Colour>232,171,46,255</Colour>
 							</Sprite>
-							<Spreads>false</Spreads>
-						</Spreader>
-					</Data>
-				</Ability>
+						</Sprite>
+						<Effect>SEAL</Effect>
+						<Spreads>false</Spreads>
+					</Spreader>
+				</MonsterSpreaderAbilityData>
 			</Abilities>
 		</Monster>
 	</Bosses>

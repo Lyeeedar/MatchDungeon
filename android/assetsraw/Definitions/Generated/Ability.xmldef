@@ -13,12 +13,6 @@
 		<Data Name="Permuter" Keys="Permuter" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 		<Data Name="Effect" Keys="Effect" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
 	</Definition>
-	<Definition Name="Buff" Nullable="False" meta:RefKey="StructDef">
-		<Data Name="Name" NeedsLocalisation="True" LocalisationFile="Buff" SkipIfDefault="False" Default="" meta:RefKey="String" />
-		<Data Name="Icon" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
-		<Data Name="Statistics" Keys="Statistics" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
-		<Data Name="Duration" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
-	</Definition>
 	<Definition Name="Effect" Nullable="False" meta:RefKey="StructDef">
 		<Data Name="Type" EnumValues="POP,CONVERT,SUMMON,SPREADER,SUPERCHARGE,BUFF" SkipIfDefault="False" meta:RefKey="Enum" />
 		<Data Name="Damage" SkipIfDefault="True" Default="0" VisibleIf="Type == POP" meta:RefKey="String" />
@@ -27,16 +21,5 @@
 		<Data Name="DegenSummon" SkipIfDefault="True" Default="true" VisibleIf="Type == SUMMON" meta:RefKey="Boolean" />
 		<Data Name="Spreader" Keys="SpreaderDef" Nullable="True" SkipIfDefault="True" VisibleIf="Type == SPREADER" meta:RefKey="Reference" />
 		<Data Name="Buff" Keys="Buff" Nullable="True" SkipIfDefault="True" VisibleIf="Type == BUFF" meta:RefKey="Reference" />
-	</Definition>
-	<Definition Name="Permuter" Nullable="False" meta:RefKey="StructDef">
-		<Data Name="Type" EnumValues="SINGLE,ALLOFTYPE,NOFTYPE,COLUMN,ROW,CROSS,BLOCK,DIAMOND,RANDOM,CONE" SkipIfDefault="False" meta:RefKey="Enum" />
-		<Data Name="Count" Type="Int" Default="1" SkipIfDefault="True" VisibleIf="Type == NOFTYPE || Type == RANDOM" meta:RefKey="Number" />
-		<Data Name="Range" Type="Int" Default="99999" SkipIfDefault="True" VisibleIf="Type == COLUMN || Type == ROW || Type == CROSS || Type == CONE" meta:RefKey="Number" />
-		<Data Name="Aoe" Type="Int" Default="1" SkipIfDefault="True" VisibleIf="Type == BLOCK || Type == DIAMOND" meta:RefKey="Number" />
-	</Definition>
-	<Definition Name="Targetter" Nullable="False" meta:RefKey="StructDef">
-		<Data Name="Type" EnumValues="BASICORB,ORB,SPECIAL,BLOCK,EMPTY,SEALED,MONSTER,ATTACK,TILE,SPREADER,NAMEDTILE" SkipIfDefault="False" meta:RefKey="Enum" />
-		<Data Name="SpreaderName" SkipIfDefault="True" Default="" VisibleIf="Type == SPREADER" meta:RefKey="String" />
-		<Data Name="TileName" SkipIfDefault="True" Default="" VisibleIf="Type == NAMEDTILE" meta:RefKey="String" />
 	</Definition>
 </Definitions>

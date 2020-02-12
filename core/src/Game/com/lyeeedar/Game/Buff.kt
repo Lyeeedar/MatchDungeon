@@ -23,7 +23,9 @@ class BuffData : XmlDataClass()
 	lateinit var nameID: String
 	lateinit var icon: Sprite
 	val statistics: FastEnumMap<Statistic, Float> = FastEnumMap<Statistic, Float>(Statistic::class.java)
-	var duration: Int = 1
+	
+	@NumericRange(min = 1f)
+	var duration: Int = 4
 
 	override fun load(xmlData: XmlData)
 	{
@@ -31,7 +33,7 @@ class BuffData : XmlDataClass()
 		nameID = xmlData.get("Name")
 		icon = AssetManager.loadSprite(xmlData.getChildByName("Icon")!!)
 		Statistic.parse(xmlData.getChildByName("Statistics")!!, statistics)
-		duration = xmlData.getInt("Duration", 1)
+		duration = xmlData.getInt("Duration", 4)
 	}
 }
 

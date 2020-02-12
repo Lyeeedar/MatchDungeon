@@ -15,10 +15,9 @@
 			<HP>5</HP>
 			<DamageReduction>0</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterMoveAbilityData>
 					<Cooldown>3,7</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
+				</MonsterMoveAbilityData>
 			</Abilities>
 		</Monster>
 		<Monster meta:RefKey="MonsterDesc">
@@ -35,10 +34,9 @@
 			<HP>5</HP>
 			<DamageReduction>0</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterMoveAbilityData>
 					<Cooldown>3,7</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
+				</MonsterMoveAbilityData>
 			</Abilities>
 		</Monster>
 		<Monster meta:RefKey="MonsterDesc">
@@ -56,16 +54,13 @@
 			<HP>8</HP>
 			<DamageReduction>0</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterMoveAbilityData>
 					<Cooldown>3,7</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
-				<Ability>
+				</MonsterMoveAbilityData>
+				<MonsterAbilityData>
 					<Cooldown>4,8</Cooldown>
-					<Data>
-						<Damage>2</Damage>
-					</Data>
-				</Ability>
+					<Damage>2</Damage>
+				</MonsterAbilityData>
 			</Abilities>
 		</Monster>
 	</Monsters>
@@ -85,16 +80,13 @@
 			<HP>10</HP>
 			<DamageReduction>0</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterAbilityData>
 					<Cooldown>2,5</Cooldown>
-					<Data>
-						<Damage>3</Damage>
-					</Data>
-				</Ability>
-				<Ability>
+					<Damage>3</Damage>
+				</MonsterAbilityData>
+				<MonsterMoveAbilityData>
 					<Cooldown>2,5</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
+				</MonsterMoveAbilityData>
 			</Abilities>
 		</Monster>
 		<Monster meta:RefKey="MonsterDesc">
@@ -113,16 +105,13 @@
 			<HP>10</HP>
 			<DamageReduction>0</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterAbilityData>
 					<Cooldown>2,5</Cooldown>
-					<Data>
-						<Damage>3</Damage>
-					</Data>
-				</Ability>
-				<Ability>
+					<Damage>3</Damage>
+				</MonsterAbilityData>
+				<MonsterMoveAbilityData>
 					<Cooldown>2,5</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
+				</MonsterMoveAbilityData>
 			</Abilities>
 		</Monster>
 	</Bosses>

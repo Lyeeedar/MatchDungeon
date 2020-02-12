@@ -1,0 +1,8 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="Permuter" Nullable="False" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="Type" EnumValues="SINGLE,ALLOFTYPE,NOFTYPE,COLUMN,ROW,CROSS,BLOCK,DIAMOND,RANDOM,CONE" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Count" Type="Int" Default="1" SkipIfDefault="True" VisibleIf="Type == NOFTYPE || Type == RANDOM" meta:RefKey="Number" />
+		<Data Name="Range" Type="Int" Default="99999" SkipIfDefault="True" VisibleIf="Type == COLUMN || Type == ROW || Type == CROSS || Type == CONE" meta:RefKey="Number" />
+		<Data Name="Aoe" Type="Int" Default="1" SkipIfDefault="True" VisibleIf="Type == BLOCK || Type == DIAMOND" meta:RefKey="Number" />
+	</Definition>
+</Definitions>

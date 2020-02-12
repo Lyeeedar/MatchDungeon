@@ -1,0 +1,7 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="Targetter" Nullable="False" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="Type" EnumValues="BASICORB,ORB,SPECIAL,BLOCK,EMPTY,SEALED,MONSTER,ATTACK,TILE,SPREADER,NAMEDTILE" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="SpreaderName" SkipIfDefault="True" Default="" VisibleIf="Type == SPREADER" meta:RefKey="String" />
+		<Data Name="TileName" SkipIfDefault="True" Default="" VisibleIf="Type == NAMEDTILE" meta:RefKey="String" />
+	</Definition>
+</Definitions>

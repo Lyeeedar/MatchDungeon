@@ -1,0 +1,85 @@
+<Definitions   xmlns:meta="Editor">
+	<Definition Name="MonsterDesc" Nullable="False" IsGlobal="True" meta:RefKey="StructDef">
+		<Data Name="Name" SkipIfDefault="False" Default="" meta:RefKey="String" />
+		<Data Name="Sprite" Keys="Sprite" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Death" Keys="ParticleEffect" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="AttackNumPips" Type="Int" Default="5" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="AttackCooldown" Type="Int" NumComponents="2" SkipIfDefault="True" Default="6, 6" meta:RefKey="Vector" />
+		<Data Name="AttackDamage" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Size" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Hp" Type="Int" Default="10" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="DamageReduction" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Abilities" DefKey="AbstractMonsterAbilityDataDefs" meta:RefKey="Collection" />
+		<Data Name="Stages" Keys="MonsterDesc" meta:RefKey="Collection" />
+	</Definition>
+	<Definition Name="AbstractMonsterAbilityData" Nullable="False" meta:RefKey="StructDef">
+		<Data Name="Cooldown" Type="Int" NumComponents="2" SkipIfDefault="True" Default="1, 1" meta:RefKey="Vector" />
+		<Data Name="Usages" Type="Int" Default="-1" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="AbstractMonsterAbilityDataDefs" Keys="MonsterBlockAbilityData,MonsterMonsterEffectAbilityData,MonsterMoveAbilityData,MonsterSealAbilityData,MonsterSelfBuffAbilityData,MonsterSpreaderAbilityData,MonsterSummonAbilityData" meta:RefKey="ReferenceDef" />
+	<Definition Name="MonsterBlockAbilityData" Nullable="False" Extends="TargettedMonsterAbilityData" meta:RefKey="StructDef">
+		<Const Name="classID">Block</Const>
+		<Data Name="BlockStrength" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="MonsterEffectData" Nullable="False" meta:RefKey="StructDef">
+		<Data Name="Damage" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Amount" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="MonsterDesc" Keys="MonsterDesc" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+		<Data Name="Faction" SkipIfDefault="True" Default="" meta:RefKey="String" />
+		<Data Name="Name" SkipIfDefault="True" Default="" meta:RefKey="String" />
+		<Data Name="Difficulty" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="IsSummon" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+		<Data Name="SpawnEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+		<Data Name="Debuff" Keys="Buff" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="MonsterMonsterEffectAbilityData" Nullable="False" Extends="TargettedMonsterAbilityData" meta:RefKey="StructDef">
+		<Const Name="classID">MonsterEffect</Const>
+		<Data Name="Effect" EnumValues="POP,CONVERT,SUMMON,SPREADER,SUPERCHARGE,BUFF" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="NumPips" Type="Int" Default="8" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="SealStrength" Type="Int" Default="1" SkipIfDefault="True" VisibleIf="Effect == SEALEDATTACK" meta:RefKey="Number" />
+		<Data Name="MonsterEffectData" Keys="MonsterEffectData" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="ShowAttackLeap" SkipIfDefault="True" Default="true" meta:RefKey="Boolean" />
+		<Data Name="FlightEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+		<Data Name="HitEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="MonsterMoveAbilityData" Nullable="False" Extends="TargettedMonsterAbilityData" meta:RefKey="StructDef">
+		<Const Name="classID">Move</Const>
+		<Data Name="IsDash" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+		<Data Name="MoveType" EnumValues="BASIC,LEAP,TELEPORT" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="StartEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+		<Data Name="EndEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+		<Data Name="HitEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" VisibleIf="IsDash == True" meta:RefKey="Reference" />
+		<Data Name="NumPips" Type="Int" Default="8" SkipIfDefault="True" VisibleIf="IsDash == True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="MonsterSealAbilityData" Nullable="False" Extends="TargettedMonsterAbilityData" meta:RefKey="StructDef">
+		<Const Name="classID">Seal</Const>
+		<Data Name="SealStrength" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="MonsterSelfBuffAbilityData" Nullable="False" Extends="AbstractMonsterAbilityData" meta:RefKey="StructDef">
+		<Const Name="classID">SelfBuff</Const>
+		<Data Name="BuffType" EnumValues="IMMUNITY,FASTATTACKS,POWERFULATTACKS" SkipIfDefault="False" meta:RefKey="Enum" />
+		<Data Name="Duration" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="ParticleEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="MonsterSpreaderAbilityData" Nullable="False" Extends="TargettedMonsterAbilityData" meta:RefKey="StructDef">
+		<Const Name="classID">Spreader</Const>
+		<Data Name="Spreader" Keys="SpreaderDef" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="MonsterSummonAbilityData" Nullable="False" Extends="TargettedMonsterAbilityData" meta:RefKey="StructDef">
+		<Const Name="classID">Summon</Const>
+		<Data Name="MonsterDesc" Keys="MonsterDesc" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+		<Data Name="Faction" SkipIfDefault="True" Default="" meta:RefKey="String" />
+		<Data Name="Name" SkipIfDefault="True" Default="" meta:RefKey="String" />
+		<Data Name="Difficulty" Type="Int" Default="0" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="IsSummon" SkipIfDefault="True" Default="false" meta:RefKey="Boolean" />
+		<Data Name="SpawnEffect" Keys="ParticleEffect" Nullable="True" SkipIfDefault="True" meta:RefKey="Reference" />
+	</Definition>
+	<Definition Name="TargettedMonsterAbilityData" Nullable="False" Extends="AbstractMonsterAbilityData" meta:RefKey="StructDef">
+		<Data Name="Range" Type="Int" NumComponents="2" SkipIfDefault="True" Default="0, 9999" meta:RefKey="Vector" />
+		<Data Name="TargetRestriction" Keys="Targetter" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="TargetCount" Type="Int" Default="1" SkipIfDefault="True" meta:RefKey="Number" />
+		<Data Name="Permuter" Keys="Permuter" Nullable="False" SkipIfDefault="False" meta:RefKey="Reference" />
+		<Data Name="Coverage" Type="Float" Default="1" SkipIfDefault="True" VisibleIf="Permutter.Type != SINGLE" meta:RefKey="Number" />
+	</Definition>
+	<Definition Name="TargettedMonsterAbilityDataDefs" Keys="MonsterBlockAbilityData,MonsterMonsterEffectAbilityData,MonsterMoveAbilityData,MonsterSealAbilityData,MonsterSpreaderAbilityData,MonsterSummonAbilityData" meta:RefKey="ReferenceDef" />
+</Definitions>

@@ -15,10 +15,9 @@
 			<HP>5</HP>
 			<DamageReduction>0</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterMoveAbilityData>
 					<Cooldown>2,5</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
+				</MonsterMoveAbilityData>
 			</Abilities>
 		</Monster>
 		<Monster meta:RefKey="MonsterDesc">
@@ -36,10 +35,9 @@
 			<HP>7</HP>
 			<DamageReduction>0</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterMoveAbilityData>
 					<Cooldown>2,5</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
+				</MonsterMoveAbilityData>
 			</Abilities>
 		</Monster>
 		<Monster meta:RefKey="MonsterDesc">
@@ -57,16 +55,12 @@
 			<HP>11</HP>
 			<DamageReduction>0</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterMoveAbilityData>
 					<Cooldown>3,6</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
-				<Ability>
+				</MonsterMoveAbilityData>
+				<MonsterAbilityData>
 					<Cooldown>2,6</Cooldown>
-					<Target>Random</Target>
-					<Count>3</Count>
-					<Data />
-				</Ability>
+				</MonsterAbilityData>
 			</Abilities>
 		</Monster>
 	</Monsters>
@@ -86,25 +80,17 @@
 			<HP>20</HP>
 			<DamageReduction>0</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterMoveAbilityData>
 					<Cooldown>3,6</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
-				<Ability>
+				</MonsterMoveAbilityData>
+				<MonsterHealAbilityData>
 					<Cooldown>2,9</Cooldown>
-					<Target>Random</Target>
-					<Effect>Heal</Effect>
-					<Data>
-						<Amount>4</Amount>
-					</Data>
-				</Ability>
-				<Ability>
+					<Amount>4</Amount>
+				</MonsterHealAbilityData>
+				<MonsterAbilityData>
 					<Cooldown>3,6</Cooldown>
-					<Target>Random</Target>
-					<Data>
-						<Damage>3</Damage>
-					</Data>
-				</Ability>
+					<Damage>3</Damage>
+				</MonsterAbilityData>
 			</Abilities>
 		</Monster>
 	</Bosses>

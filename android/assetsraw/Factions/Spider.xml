@@ -15,22 +15,16 @@
 			<HP>12</HP>
 			<DamageReduction>0</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterMoveAbilityData>
 					<Cooldown>1,5</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
-				<Ability>
+				</MonsterMoveAbilityData>
+				<MonsterSealAbilityData>
 					<Cooldown>2,6</Cooldown>
-					<Effect>Seal</Effect>
-					<Data />
-				</Ability>
-				<Ability>
+				</MonsterSealAbilityData>
+				<MonsterSealedAttackAbilityData>
 					<Cooldown>4,10</Cooldown>
-					<Effect>SealedAttack</Effect>
-					<Data>
-						<NumPips>10</NumPips>
-					</Data>
-				</Ability>
+					<NumPips>10</NumPips>
+				</MonsterSealedAttackAbilityData>
 			</Abilities>
 		</Monster>
 		<Monster meta:RefKey="MonsterDesc">
@@ -48,23 +42,16 @@
 			<HP>15</HP>
 			<DamageReduction>0</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterMoveAbilityData>
 					<Cooldown>1,5</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
-				<Ability>
+				</MonsterMoveAbilityData>
+				<MonsterSealAbilityData>
 					<Cooldown>2,6</Cooldown>
-					<Count>2</Count>
-					<Effect>Seal</Effect>
-					<Data />
-				</Ability>
-				<Ability>
+				</MonsterSealAbilityData>
+				<MonsterSealedAttackAbilityData>
 					<Cooldown>4,10</Cooldown>
-					<Effect>SealedAttack</Effect>
-					<Data>
-						<NumPips>10</NumPips>
-					</Data>
-				</Ability>
+					<NumPips>10</NumPips>
+				</MonsterSealedAttackAbilityData>
 			</Abilities>
 		</Monster>
 	</Monsters>
@@ -84,26 +71,19 @@
 			<HP>15</HP>
 			<DamageReduction>0</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterMoveAbilityData>
 					<Cooldown>2,5</Cooldown>
-					<Effect>Move</Effect>
-				</Ability>
-				<Ability>
+				</MonsterMoveAbilityData>
+				<MonsterSealedAttackAbilityData>
 					<Cooldown>2,7</Cooldown>
-					<Effect>SealedAttack</Effect>
-					<Data>
-						<NumPips>9</NumPips>
-						<Damage>2</Damage>
-					</Data>
-				</Ability>
-				<Ability>
+					<NumPips>9</NumPips>
+					<Damage>2</Damage>
+				</MonsterSealedAttackAbilityData>
+				<MonsterAbilityData>
 					<Cooldown>2,8</Cooldown>
-					<Target>Random</Target>
-					<Data>
-						<NumPips>10</NumPips>
-						<Damage>3</Damage>
-					</Data>
-				</Ability>
+					<NumPips>10</NumPips>
+					<Damage>3</Damage>
+				</MonsterAbilityData>
 			</Abilities>
 		</Monster>
 	</Bosses>

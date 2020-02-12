@@ -180,7 +180,7 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 				}
 			}
 
-			for (referencedClass in dataClass.getAllReferencedClasses())
+			for (referencedClass in dataClass.getAllReferencedClasses(HashSet()))
 			{
 				writeRef(referencedClass)
 			}
@@ -205,7 +205,7 @@ class ClassRegister(val files: List<File>, val defFolder: File)
 		for (root in rootClasses)
 		{
 			val otherClasses = HashSet<ClassDefinition>()
-			for (referencedClass in root.getAllReferencedClasses())
+			for (referencedClass in root.getAllReferencedClasses(HashSet()))
 			{
 				if (rootClasses.contains(referencedClass)) continue
 
@@ -420,7 +420,7 @@ class ClassDefinition(val name: String)
 		}
 	}
 
-	fun getAllReferencedClasses(): HashSet<ClassDefinition>
+	fun getAllReferencedClasses(processedClasses: HashSet<ClassDefinition>): HashSet<ClassDefinition>
 	{
 		val output = HashSet<ClassDefinition>()
 
@@ -428,11 +428,15 @@ class ClassDefinition(val name: String)
 		output.addAll(inheritingClasses)
 		for (classDef in referencedClasses)
 		{
-			output.addAll(classDef.getAllReferencedClasses())
+			if (!processedClasses.contains(classDef))
+			{
+				processedClasses.add(classDef)
+				output.addAll(classDef.getAllReferencedClasses(processedClasses))
+			}
 		}
 		for (classDef in inheritingClasses)
 		{
-			output.addAll(classDef.getAllReferencedClasses())
+			output.addAll(classDef.getAllReferencedClasses(processedClasses))
 		}
 
 		return output

@@ -15,32 +15,26 @@
 			<HP>15</HP>
 			<DamageReduction>1</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterMoveAbilityData>
 					<Cooldown>2,5</Cooldown>
-					<Target>Random</Target>
-					<Effect>Move</Effect>
-				</Ability>
-				<Ability>
+				</MonsterMoveAbilityData>
+				<MonsterDebuffAbilityData>
 					<Cooldown>3,8</Cooldown>
-					<Target>Random</Target>
-					<Effect>Debuff</Effect>
-					<Data>
-						<Debuff meta:RefKey="Buff">
-							<Name>Bugs.Faction.Monsters.[0] MonsterDesc.MonsterDesc.Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:f1334d98-b89c-4a1a-a07b-e41f23aec86a</Name>
-							<Icon meta:RefKey="Sprite">
-								<Name>Oryx/uf_split/uf_items/heart_green_half</Name>
-								<DrawActualSize>true</DrawActualSize>
-								<Colour>153,113,113,255</Colour>
-							</Icon>
-							<Statistics meta:RefKey="Statistics">
-								<MatchDamage>-1</MatchDamage>
-								<AbilityDamage>-2</AbilityDamage>
-								<PowerGain>-3</PowerGain>
-							</Statistics>
-							<Duration>5</Duration>
-						</Debuff>
-					</Data>
-				</Ability>
+					<Debuff meta:RefKey="Buff">
+						<Name>Bugs.Faction.Monsters.[0] MonsterDesc.MonsterDesc.Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:f1334d98-b89c-4a1a-a07b-e41f23aec86a</Name>
+						<Icon meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_items/heart_green_half</Name>
+							<DrawActualSize>true</DrawActualSize>
+							<Colour>153,113,113,255</Colour>
+						</Icon>
+						<Statistics meta:RefKey="Statistics">
+							<MatchDamage>-1</MatchDamage>
+							<AbilityDamage>-2</AbilityDamage>
+							<PowerGain>-3</PowerGain>
+						</Statistics>
+						<Duration>5</Duration>
+					</Debuff>
+				</MonsterDebuffAbilityData>
 			</Abilities>
 		</Monster>
 		<Monster meta:RefKey="MonsterDesc">
@@ -59,33 +53,26 @@
 			<HP>20</HP>
 			<DamageReduction>1</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterMoveAbilityData>
 					<Cooldown>2,5</Cooldown>
-					<Target>Random</Target>
-					<Effect>Move</Effect>
-				</Ability>
-				<Ability>
+				</MonsterMoveAbilityData>
+				<MonsterDebuffAbilityData>
 					<Cooldown>3,8</Cooldown>
-					<Target>Random</Target>
-					<Count>2</Count>
-					<Effect>Debuff</Effect>
-					<Data>
-						<Debuff meta:RefKey="Buff">
-							<Name>Bugs.Faction.Monsters.[1] MonsterDesc.MonsterDesc.Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:7e918906-e783-4e72-9d26-b16b8bb00cac</Name>
-							<Icon meta:RefKey="Sprite">
-								<Name>Oryx/uf_split/uf_items/heart_green_half</Name>
-								<DrawActualSize>true</DrawActualSize>
-								<Colour>153,113,113,255</Colour>
-							</Icon>
-							<Statistics meta:RefKey="Statistics">
-								<MatchDamage>-1</MatchDamage>
-								<AbilityDamage>-2</AbilityDamage>
-								<PowerGain>-3</PowerGain>
-							</Statistics>
-							<Duration>5</Duration>
-						</Debuff>
-					</Data>
-				</Ability>
+					<Debuff meta:RefKey="Buff">
+						<Name>Bugs.Faction.Monsters.[1] MonsterDesc.MonsterDesc.Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:7e918906-e783-4e72-9d26-b16b8bb00cac</Name>
+						<Icon meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_items/heart_green_half</Name>
+							<DrawActualSize>true</DrawActualSize>
+							<Colour>153,113,113,255</Colour>
+						</Icon>
+						<Statistics meta:RefKey="Statistics">
+							<MatchDamage>-1</MatchDamage>
+							<AbilityDamage>-2</AbilityDamage>
+							<PowerGain>-3</PowerGain>
+						</Statistics>
+						<Duration>5</Duration>
+					</Debuff>
+				</MonsterDebuffAbilityData>
 			</Abilities>
 		</Monster>
 	</Monsters>
@@ -105,29 +92,23 @@
 			<HP>20</HP>
 			<DamageReduction>1</DamageReduction>
 			<Abilities>
-				<Ability>
+				<MonsterMoveAbilityData>
 					<Cooldown>1,4</Cooldown>
-					<Target>Random</Target>
-					<Effect>Move</Effect>
-				</Ability>
-				<Ability>
+				</MonsterMoveAbilityData>
+				<MonsterDebuffAbilityData>
 					<Cooldown>1,6</Cooldown>
-					<Target>Random</Target>
-					<Effect>Debuff</Effect>
-					<Data>
-						<Debuff meta:RefKey="Buff">
-							<Name>Bugs.Faction.Bosses.[0] MonsterDesc.MonsterDesc.Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:cbeec1b6-7c21-4311-b4bf-fdbc991e3fb1</Name>
-							<Icon meta:RefKey="Sprite">
-								<Name>Oryx/uf_split/uf_items/heart_green_full</Name>
-								<DrawActualSize>true</DrawActualSize>
-							</Icon>
-							<Statistics meta:RefKey="Statistics">
-								<Regeneration>-0.34</Regeneration>
-							</Statistics>
-							<Duration>6</Duration>
-						</Debuff>
-					</Data>
-				</Ability>
+					<Debuff meta:RefKey="Buff">
+						<Name>Bugs.Faction.Bosses.[0] MonsterDesc.MonsterDesc.Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:cbeec1b6-7c21-4311-b4bf-fdbc991e3fb1</Name>
+						<Icon meta:RefKey="Sprite">
+							<Name>Oryx/uf_split/uf_items/heart_green_full</Name>
+							<DrawActualSize>true</DrawActualSize>
+						</Icon>
+						<Statistics meta:RefKey="Statistics">
+							<Regeneration>-0.34</Regeneration>
+						</Statistics>
+						<Duration>6</Duration>
+					</Debuff>
+				</MonsterDebuffAbilityData>
 			</Abilities>
 		</Monster>
 	</Bosses>
