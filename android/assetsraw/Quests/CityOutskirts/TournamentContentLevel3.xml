@@ -66,43 +66,35 @@
 				<HP>20</HP>
 				<DamageReduction>1</DamageReduction>
 				<Abilities>
-					<Ability>
+					<MonsterMoveAbilityData>
+						<classID>Move</classID>
 						<Cooldown>2,5</Cooldown>
-						<Effect>Move</Effect>
-					</Ability>
-					<Ability>
+					</MonsterMoveAbilityData>
+					<MonsterMonsterEffectAbilityData>
+						<classID>MonsterEffect</classID>
+						<Effect>ATTACK</Effect>
 						<Cooldown>2,6</Cooldown>
-						<Target>Random</Target>
-						<Data>
-							<Damage>3</Damage>
-						</Data>
-					</Ability>
-					<Ability>
+						<Damage>3</Damage>
+					</MonsterMonsterEffectAbilityData>
+					<MonsterHealAbilityData>
+						<classID>Heal</classID>
 						<Cooldown>1,5</Cooldown>
-						<Target>Random</Target>
-						<Effect>Heal</Effect>
-						<Data>
-							<Amount>3</Amount>
-						</Data>
-					</Ability>
-					<Ability>
+						<Amount>3</Amount>
+					</MonsterHealAbilityData>
+					<MonsterSpreaderAbilityData>
+						<classID>Spreader</classID>
 						<Cooldown>4,12</Cooldown>
-						<Target>Random</Target>
-						<TargetRestriction>Special</TargetRestriction>
-						<Effect>Spreader</Effect>
-						<Data>
-							<Spreader meta:RefKey="SpreaderDef">
-								<Name>Goop</Name>
-								<Sprite meta:RefKey="SpriteWrapper">
-									<Sprite meta:RefKey="Sprite">
-										<Name>Oryx/Custom/terrain/cloud</Name>
-										<Colour>147,224,81,226</Colour>
-									</Sprite>
+						<Spreader meta:RefKey="SpreaderDef">
+							<Name>Goop</Name>
+							<Sprite meta:RefKey="SpriteWrapper">
+								<Sprite meta:RefKey="Sprite">
+									<Name>Oryx/Custom/terrain/cloud</Name>
+									<Colour>147,224,81,226</Colour>
 								</Sprite>
-								<Spreads>false</Spreads>
-							</Spreader>
-						</Data>
-					</Ability>
+							</Sprite>
+							<Spreads>false</Spreads>
+						</Spreader>
+					</MonsterSpreaderAbilityData>
 				</Abilities>
 			</MonsterDesc>
 			<SpecialOrb>None</SpecialOrb>

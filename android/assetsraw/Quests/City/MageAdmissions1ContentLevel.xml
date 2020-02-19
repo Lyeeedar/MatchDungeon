@@ -35,12 +35,12 @@
 				<HP>3</HP>
 				<DamageReduction>0</DamageReduction>
 				<Abilities>
-					<Ability>
+					<MonsterMonsterEffectAbilityData>
+						<classID>MonsterEffect</classID>
+						<Effect>ATTACK</Effect>
 						<Cooldown>3,6</Cooldown>
-						<Target>Random</Target>
 						<Count>2</Count>
-						<Data />
-					</Ability>
+					</MonsterMonsterEffectAbilityData>
 				</Abilities>
 			</MonsterDesc>
 			<SpecialOrb>None</SpecialOrb>

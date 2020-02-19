@@ -56,38 +56,35 @@
 				<HP>65</HP>
 				<DamageReduction>2</DamageReduction>
 				<Abilities>
-					<Ability>
+					<MonsterMoveAbilityData>
+						<classID>Move</classID>
 						<Cooldown>2,5</Cooldown>
-						<Effect>Move</Effect>
-					</Ability>
-					<Ability>
+					</MonsterMoveAbilityData>
+					<MonsterDebuffAbilityData>
+						<classID>Debuff</classID>
 						<Cooldown>2,6</Cooldown>
-						<Effect>Debuff</Effect>
-						<Data>
-							<Debuff meta:RefKey="Buff">
-								<Name>BeholderBattleContentLevel.Level.Symbols.[1] Symbol.Symbol.MonsterDesc (MonsterDesc).Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:acd17dda-4089-4d1b-b4b6-4e51a396d7cd</Name>
-								<Icon meta:RefKey="Sprite">
-									<Name>Oryx/Custom/heroes/prisoner_idle_1</Name>
-									<DrawActualSize>true</DrawActualSize>
-									<Colour>138,116,59,255</Colour>
-								</Icon>
-								<Statistics meta:RefKey="Statistics">
-									<Regeneration>-0.1</Regeneration>
-									<PowerGain>-2</PowerGain>
-									<Haste>-0.2</Haste>
-								</Statistics>
-								<Duration>4</Duration>
-							</Debuff>
-						</Data>
-					</Ability>
-					<Ability>
+						<Debuff meta:RefKey="Buff">
+							<Name>BeholderBattleContentLevel.Level.Symbols.[1] Symbol.Symbol.MonsterDesc (MonsterDesc).Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:acd17dda-4089-4d1b-b4b6-4e51a396d7cd</Name>
+							<Icon meta:RefKey="Sprite">
+								<Name>Oryx/Custom/heroes/prisoner_idle_1</Name>
+								<DrawActualSize>true</DrawActualSize>
+								<Colour>138,116,59,255</Colour>
+							</Icon>
+							<Statistics meta:RefKey="Statistics">
+								<Regeneration>-0.1</Regeneration>
+								<PowerGain>-2</PowerGain>
+								<Haste>-0.2</Haste>
+							</Statistics>
+							<Duration>4</Duration>
+						</Debuff>
+					</MonsterDebuffAbilityData>
+					<MonsterMonsterEffectAbilityData>
+						<classID>MonsterEffect</classID>
+						<Effect>ATTACK</Effect>
 						<Cooldown>1,5</Cooldown>
-						<Target>Random</Target>
 						<Count>2</Count>
-						<Data>
-							<Damage>2</Damage>
-						</Data>
-					</Ability>
+						<Damage>2</Damage>
+					</MonsterMonsterEffectAbilityData>
 				</Abilities>
 			</MonsterDesc>
 			<SpecialOrb>None</SpecialOrb>

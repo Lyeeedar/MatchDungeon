@@ -66,14 +66,15 @@
 				<HP>12</HP>
 				<DamageReduction>0</DamageReduction>
 				<Abilities>
-					<Ability>
+					<MonsterMoveAbilityData>
+						<classID>Move</classID>
 						<Cooldown>2,5</Cooldown>
-						<Effect>Move</Effect>
-					</Ability>
-					<Ability>
+					</MonsterMoveAbilityData>
+					<MonsterMonsterEffectAbilityData>
+						<classID>MonsterEffect</classID>
+						<Effect>ATTACK</Effect>
 						<Cooldown>3,8</Cooldown>
-						<Data />
-					</Ability>
+					</MonsterMonsterEffectAbilityData>
 				</Abilities>
 			</MonsterDesc>
 			<SpecialOrb>None</SpecialOrb>

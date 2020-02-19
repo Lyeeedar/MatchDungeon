@@ -36,34 +36,31 @@
 				<HP>20</HP>
 				<DamageReduction>0</DamageReduction>
 				<Abilities>
-					<Ability>
+					<MonsterMoveAbilityData>
+						<classID>Move</classID>
 						<Cooldown>1,5</Cooldown>
-						<Effect>Move</Effect>
-					</Ability>
-					<Ability>
+					</MonsterMoveAbilityData>
+					<MonsterMonsterEffectAbilityData>
+						<classID>MonsterEffect</classID>
+						<Effect>ATTACK</Effect>
 						<Cooldown>4,9</Cooldown>
-						<Target>Random</Target>
-						<Permuter>Diamond</Permuter>
-						<Data>
-							<HitEffect meta:RefKey="ParticleEffect">
-								<Name>Necroracia</Name>
-							</HitEffect>
-							<ShowAttackLeap>false</ShowAttackLeap>
-						</Data>
-					</Ability>
-					<Ability>
+						<HitEffect meta:RefKey="ParticleEffect">
+							<Name>Necroracia</Name>
+						</HitEffect>
+						<ShowAttackLeap>false</ShowAttackLeap>
+					</MonsterMonsterEffectAbilityData>
+					<MonsterMonsterEffectAbilityData>
+						<classID>MonsterEffect</classID>
+						<Effect>ATTACK</Effect>
 						<Cooldown>2,6</Cooldown>
-						<Target>Random</Target>
 						<Count>3</Count>
-						<Data>
-							<Damage>2</Damage>
-							<FlightEffect meta:RefKey="ParticleEffect">
-								<Name>SpecialBeam</Name>
-								<Colour>204,180,180,255</Colour>
-							</FlightEffect>
-							<ShowAttackLeap>false</ShowAttackLeap>
-						</Data>
-					</Ability>
+						<Damage>2</Damage>
+						<FlightEffect meta:RefKey="ParticleEffect">
+							<Name>SpecialBeam</Name>
+							<Colour>204,180,180,255</Colour>
+						</FlightEffect>
+						<ShowAttackLeap>false</ShowAttackLeap>
+					</MonsterMonsterEffectAbilityData>
 				</Abilities>
 			</MonsterDesc>
 			<SpecialOrb>None</SpecialOrb>

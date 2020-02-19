@@ -66,18 +66,17 @@
 				<HP>20</HP>
 				<DamageReduction>0</DamageReduction>
 				<Abilities>
-					<Ability>
+					<MonsterMoveAbilityData>
+						<classID>Move</classID>
 						<Cooldown>1,3</Cooldown>
-						<Effect>Move</Effect>
-					</Ability>
-					<Ability>
+					</MonsterMoveAbilityData>
+					<MonsterMonsterEffectAbilityData>
+						<classID>MonsterEffect</classID>
+						<Effect>ATTACK</Effect>
 						<Cooldown>1,6</Cooldown>
-						<Target>Random</Target>
 						<Count>4</Count>
-						<Data>
-							<NumPips>5</NumPips>
-						</Data>
-					</Ability>
+						<NumPips>5</NumPips>
+					</MonsterMonsterEffectAbilityData>
 				</Abilities>
 			</MonsterDesc>
 			<SpecialOrb>None</SpecialOrb>

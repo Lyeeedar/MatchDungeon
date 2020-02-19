@@ -36,53 +36,48 @@
 				<HP>25</HP>
 				<DamageReduction>1</DamageReduction>
 				<Abilities>
-					<Ability>
+					<MonsterMoveAbilityData>
+						<classID>Move</classID>
 						<Cooldown>3,8</Cooldown>
-						<Effect>Move</Effect>
-						<Data>
-							<Range>3</Range>
-						</Data>
-					</Ability>
-					<Ability>
+						<Range>3</Range>
+					</MonsterMoveAbilityData>
+					<MonsterMoveAbilityData>
+						<classID>Move</classID>
 						<Cooldown>2,6</Cooldown>
-						<Effect>Move</Effect>
-					</Ability>
-					<Ability>
+					</MonsterMoveAbilityData>
+					<MonsterMonsterEffectAbilityData>
+						<classID>MonsterEffect</classID>
+						<Effect>ATTACK</Effect>
 						<Cooldown>2,5</Cooldown>
 						<Count>2</Count>
-						<Data>
-							<Damage>3</Damage>
-						</Data>
-					</Ability>
-					<Ability>
+						<Damage>3</Damage>
+					</MonsterMonsterEffectAbilityData>
+					<MonsterSummonAbilityData>
+						<classID>Summon</classID>
 						<Cooldown>1,6</Cooldown>
-						<Usages>4</Usages>
-						<Effect>Summon</Effect>
-						<Data>
-							<MonsterDesc meta:RefKey="MonsterDesc">
-								<Name>Hellhound</Name>
-								<Sprite meta:RefKey="Sprite">
-									<Name>Oryx/uf_split/uf_heroes/wolf_black</Name>
-									<DrawActualSize>true</DrawActualSize>
-								</Sprite>
-								<Death meta:RefKey="ParticleEffect">
-									<Name>Death</Name>
-								</Death>
-								<AttackNumPips>5</AttackNumPips>
-								<AttackCooldown>2,6</AttackCooldown>
-								<Size>1</Size>
-								<HP>16</HP>
-								<DamageReduction>0</DamageReduction>
-								<Abilities>
-									<Ability>
-										<Cooldown>1,2</Cooldown>
-										<Effect>Move</Effect>
-									</Ability>
-								</Abilities>
-							</MonsterDesc>
-							<IsSummon>true</IsSummon>
-						</Data>
-					</Ability>
+						<MonsterDesc meta:RefKey="MonsterDesc">
+							<Name>Hellhound</Name>
+							<Sprite meta:RefKey="Sprite">
+								<Name>Oryx/uf_split/uf_heroes/wolf_black</Name>
+								<DrawActualSize>true</DrawActualSize>
+							</Sprite>
+							<Death meta:RefKey="ParticleEffect">
+								<Name>Death</Name>
+							</Death>
+							<AttackNumPips>5</AttackNumPips>
+							<AttackCooldown>2,6</AttackCooldown>
+							<Size>1</Size>
+							<HP>16</HP>
+							<DamageReduction>0</DamageReduction>
+							<Abilities>
+								<MonsterMoveAbilityData>
+									<classID>Move</classID>
+									<Cooldown>1,2</Cooldown>
+								</MonsterMoveAbilityData>
+							</Abilities>
+						</MonsterDesc>
+						<IsSummon>true</IsSummon>
+					</MonsterSummonAbilityData>
 				</Abilities>
 			</MonsterDesc>
 			<SpecialOrb>None</SpecialOrb>

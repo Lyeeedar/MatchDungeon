@@ -53,38 +53,34 @@
 				<HP>50</HP>
 				<DamageReduction>2</DamageReduction>
 				<Abilities>
-					<Ability>
+					<MonsterSpreaderAbilityData>
+						<classID>Spreader</classID>
 						<Cooldown>1,7</Cooldown>
-						<Target>Random</Target>
 						<Count>3</Count>
-						<Effect>Spreader</Effect>
-						<Data>
-							<Spreader meta:RefKey="SpreaderDef">
-								<Name>Lava</Name>
-								<Sprite meta:RefKey="SpriteWrapper">
-									<Sprite meta:RefKey="Sprite">
-										<Name>Oryx/uf_split/uf_terrain/water_lava</Name>
-									</Sprite>
+						<Spreader meta:RefKey="SpreaderDef">
+							<Name>Lava</Name>
+							<Sprite meta:RefKey="SpriteWrapper">
+								<Sprite meta:RefKey="Sprite">
+									<Name>Oryx/uf_split/uf_terrain/water_lava</Name>
 								</Sprite>
-								<Effect>Attack</Effect>
-								<RenderAbove>false</RenderAbove>
-								<AttackEffect meta:RefKey="ParticleEffect">
-									<Name>Fireburst</Name>
-								</AttackEffect>
-							</Spreader>
-						</Data>
-					</Ability>
-					<Ability>
-						<Cooldown>4,8</Cooldown>
-						<Target>Random</Target>
-						<Count>3</Count>
-						<Data>
-							<Damage>3</Damage>
-							<HitEffect meta:RefKey="ParticleEffect">
+							</Sprite>
+							<Effect>Attack</Effect>
+							<RenderAbove>false</RenderAbove>
+							<AttackEffect meta:RefKey="ParticleEffect">
 								<Name>Fireburst</Name>
-							</HitEffect>
-						</Data>
-					</Ability>
+							</AttackEffect>
+						</Spreader>
+					</MonsterSpreaderAbilityData>
+					<MonsterMonsterEffectAbilityData>
+						<classID>MonsterEffect</classID>
+						<Effect>ATTACK</Effect>
+						<Cooldown>4,8</Cooldown>
+						<Count>3</Count>
+						<Damage>3</Damage>
+						<HitEffect meta:RefKey="ParticleEffect">
+							<Name>Fireburst</Name>
+						</HitEffect>
+					</MonsterMonsterEffectAbilityData>
 				</Abilities>
 			</MonsterDesc>
 			<SpecialOrb>None</SpecialOrb>
