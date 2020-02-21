@@ -33,21 +33,21 @@
 	<OrbCount>5</OrbCount>
 	<VictoryConditions>
 		<Sink>
-			<classID>Sink </classID>
+			<classID>Sink</classID>
 			<Count>6</Count>
 		</Sink>
 		<Matches>
-			<classID>Matches </classID>
+			<classID>Matches</classID>
 			<ToBeMatched>
-				<Orbs>20</Orbs>
-				<Orbs>20</Orbs>
-				<Orbs>10</Orbs>
+				<Int>20</Int>
+				<Int>20</Int>
+				<Int>10</Int>
 			</ToBeMatched>
 		</Matches>
 	</VictoryConditions>
 	<DefeatConditions>
 		<Turns>
-			<classID>Turns </classID>
+			<classID>Turns</classID>
 			<Turns>40</Turns>
 		</Turns>
 	</DefeatConditions>

@@ -4,7 +4,12 @@
 		<Emitter>
 			<Name>Clouds</Name>
 			<Shape>Cone</Shape>
+			<Angle>90</Angle>
 			<Width>90</Width>
+			<Height>1</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>0.4,0.7</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
@@ -59,6 +64,9 @@
 			<Name>Shockwave</Name>
 			<Width>0</Width>
 			<Height>0</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<Direction>Up</Direction>
 			<ParticleSpeed>0,0</ParticleSpeed>
 			<ParticleRotation>0,0</ParticleRotation>

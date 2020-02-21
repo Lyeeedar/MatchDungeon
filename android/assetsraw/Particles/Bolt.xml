@@ -1,4 +1,5 @@
 <Effect xmlns:meta="Editor">
+	<Loop>false</Loop>
 	<Emitters>
 		<Emitter>
 			<Name>Bolt</Name>
@@ -6,6 +7,9 @@
 			<Space>Local</Space>
 			<Width>0</Width>
 			<Height>0</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<Direction>Up</Direction>
 			<ParticleSpeed>0,0</ParticleSpeed>
 			<ParticleRotation>0,0</ParticleRotation>
@@ -52,6 +56,9 @@
 			<Type>Accumulated</Type>
 			<Width>0.01</Width>
 			<Height>0.01</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<Direction>Random</Direction>
 			<ParticleSpeed>0.05,0.2</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>

@@ -62,18 +62,29 @@
 				</Death>
 				<AttackNumPips>7</AttackNumPips>
 				<AttackCooldown>3,6</AttackCooldown>
-				<Size>1</Size>
-				<HP>12</HP>
-				<DamageReduction>0</DamageReduction>
 				<Abilities>
 					<MonsterMoveAbilityData>
-						<classID>Move</classID>
 						<Cooldown>2,5</Cooldown>
+						<TargetRestriction meta:RefKey="Targetter">
+							<Type>BASICORB</Type>
+						</TargetRestriction>
+						<Permuter meta:RefKey="Permuter">
+							<Type>SINGLE</Type>
+						</Permuter>
+						<classID>Move</classID>
+						<MoveType>BASIC</MoveType>
 					</MonsterMoveAbilityData>
 					<MonsterMonsterEffectAbilityData>
+						<Cooldown>3,8</Cooldown>
+						<TargetRestriction meta:RefKey="Targetter">
+							<Type>BASICORB</Type>
+						</TargetRestriction>
+						<Permuter meta:RefKey="Permuter">
+							<Type>SINGLE</Type>
+						</Permuter>
 						<classID>MonsterEffect</classID>
 						<Effect>ATTACK</Effect>
-						<Cooldown>3,8</Cooldown>
+						<MonsterEffectData meta:RefKey="MonsterEffectData" />
 					</MonsterMonsterEffectAbilityData>
 				</Abilities>
 			</MonsterDesc>
@@ -82,12 +93,12 @@
 	</Symbols>
 	<VictoryConditions>
 		<Kill>
-			<classID>Kill </classID>
+			<classID>Kill</classID>
 		</Kill>
 	</VictoryConditions>
 	<DefeatConditions>
 		<Die>
-			<classID>Die </classID>
+			<classID>Die</classID>
 		</Die>
 	</DefeatConditions>
 </Level>

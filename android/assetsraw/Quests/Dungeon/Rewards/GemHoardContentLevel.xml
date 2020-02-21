@@ -64,18 +64,28 @@
 				</Death>
 				<AttackNumPips>8</AttackNumPips>
 				<AttackCooldown>2,6</AttackCooldown>
-				<Size>1</Size>
-				<HP>7</HP>
 				<DamageReduction>1</DamageReduction>
 				<Abilities>
 					<MonsterMoveAbilityData>
-						<classID>Move</classID>
 						<Cooldown>4,8</Cooldown>
+						<TargetRestriction meta:RefKey="Targetter">
+							<Type>BASICORB</Type>
+						</TargetRestriction>
+						<Permuter meta:RefKey="Permuter">
+							<Type>SINGLE</Type>
+						</Permuter>
+						<classID>Move</classID>
+						<MoveType>BASIC</MoveType>
 					</MonsterMoveAbilityData>
 					<MonsterBlockAbilityData>
-						<classID>Block</classID>
 						<Cooldown>2,7</Cooldown>
-						<Count>2</Count>
+						<TargetRestriction meta:RefKey="Targetter">
+							<Type>BASICORB</Type>
+						</TargetRestriction>
+						<Permuter meta:RefKey="Permuter">
+							<Type>SINGLE</Type>
+						</Permuter>
+						<classID>Block</classID>
 					</MonsterBlockAbilityData>
 				</Abilities>
 			</MonsterDesc>
@@ -86,16 +96,16 @@
 	<OrbCount>5</OrbCount>
 	<VictoryConditions>
 		<Sink>
-			<classID>Sink </classID>
+			<classID>Sink</classID>
 			<Count>3</Count>
 		</Sink>
 	</VictoryConditions>
 	<DefeatConditions>
 		<Die>
-			<classID>Die </classID>
+			<classID>Die</classID>
 		</Die>
 		<Turns>
-			<classID>Turns </classID>
+			<classID>Turns</classID>
 			<Turns>35</Turns>
 		</Turns>
 	</DefeatConditions>

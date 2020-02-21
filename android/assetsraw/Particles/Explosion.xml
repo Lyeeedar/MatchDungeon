@@ -7,6 +7,9 @@
 			<Shape>Circle</Shape>
 			<Width>0.1</Width>
 			<Height>0.1</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<Direction>Random</Direction>
 			<ParticleSpeed>0.3,0.6</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
@@ -73,6 +76,9 @@
 			<IsCollisionEmitter>true</IsCollisionEmitter>
 			<Width>0</Width>
 			<Height>0</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>0,0</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
@@ -121,6 +127,9 @@
 			<Shape>Circle</Shape>
 			<Width>0</Width>
 			<Height>0</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<Direction>Random</Direction>
 			<ParticleSpeed>3,5</ParticleSpeed>
 			<ParticleRotation>0,1</ParticleRotation>

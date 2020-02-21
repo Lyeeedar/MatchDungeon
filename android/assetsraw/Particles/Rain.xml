@@ -1,11 +1,15 @@
 <Effect xmlns:meta="Editor">
 	<Warmup>5</Warmup>
+	<Loop>false</Loop>
 	<Emitters>
 		<Emitter>
 			<Name>rain</Name>
 			<Type>Accumulated</Type>
 			<Width>1.5</Width>
 			<Height>0</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<Rotation>20</Rotation>
 			<Offset>
 				<Keyframe>0|0,1.5</Keyframe>
@@ -19,19 +23,19 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.3,0.6</Lifetime>
-					<BlendMode>Additive</BlendMode>
 					<VelocityAligned>true</VelocityAligned>
 					<AllowResize>false</AllowResize>
-					<TextureKeyframes>
-						<Stream>
-							<Keyframe>0|Particle/line</Keyframe>
-						</Stream>
-					</TextureKeyframes>
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|0.05|0.05</Keyframe>
 						</Stream>
 					</SizeKeyframes>
+					<BlendMode>Additive</BlendMode>
+					<TextureKeyframes>
+						<Stream>
+							<Keyframe>0|Particle/line</Keyframe>
+						</Stream>
+					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|24,255,249,255</Keyframe>
@@ -45,6 +49,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>

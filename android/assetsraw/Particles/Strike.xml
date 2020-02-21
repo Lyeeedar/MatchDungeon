@@ -4,6 +4,9 @@
 		<Emitter>
 			<Width>0</Width>
 			<Height>0</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>0,0</ParticleSpeed>
 			<ParticleRotation>0,0</ParticleRotation>
 			<RateKeyframes>

@@ -1,6 +1,12 @@
 <Effect xmlns:meta="Editor">
+	<Loop>false</Loop>
 	<Emitters>
 		<Emitter>
+			<Width>1</Width>
+			<Height>1</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>0.2,0.6</ParticleSpeed>
 			<ParticleRotation>-30,30</ParticleRotation>
 			<RateKeyframes>
@@ -9,18 +15,18 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.3,0.6</Lifetime>
-					<BlendMode>Additive</BlendMode>
 					<VelocityAligned>true</VelocityAligned>
-					<TextureKeyframes>
-						<Stream>
-							<Keyframe>0|Particle/heart</Keyframe>
-						</Stream>
-					</TextureKeyframes>
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|0.1|0.25</Keyframe>
 						</Stream>
 					</SizeKeyframes>
+					<BlendMode>Additive</BlendMode>
+					<TextureKeyframes>
+						<Stream>
+							<Keyframe>0|Particle/heart</Keyframe>
+						</Stream>
+					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|255,255,255,255</Keyframe>
@@ -33,6 +39,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>

@@ -6,6 +6,9 @@
 			<Shape>Circle</Shape>
 			<Width>0.1</Width>
 			<Height>0.1</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>0.7,1.4</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>

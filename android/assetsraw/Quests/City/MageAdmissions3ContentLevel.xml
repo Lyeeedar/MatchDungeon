@@ -30,36 +30,51 @@
 				<Death meta:RefKey="ParticleEffect">
 					<Name>Death</Name>
 				</Death>
-				<AttackNumPips>5</AttackNumPips>
 				<AttackCooldown>3,6</AttackCooldown>
-				<Size>1</Size>
-				<HP>20</HP>
-				<DamageReduction>0</DamageReduction>
 				<Abilities>
 					<MonsterMoveAbilityData>
-						<classID>Move</classID>
 						<Cooldown>1,5</Cooldown>
+						<TargetRestriction meta:RefKey="Targetter">
+							<Type>BASICORB</Type>
+						</TargetRestriction>
+						<Permuter meta:RefKey="Permuter">
+							<Type>SINGLE</Type>
+						</Permuter>
+						<classID>Move</classID>
+						<MoveType>BASIC</MoveType>
 					</MonsterMoveAbilityData>
 					<MonsterMonsterEffectAbilityData>
+						<Cooldown>4,9</Cooldown>
+						<TargetRestriction meta:RefKey="Targetter">
+							<Type>BASICORB</Type>
+						</TargetRestriction>
+						<Permuter meta:RefKey="Permuter">
+							<Type>SINGLE</Type>
+						</Permuter>
 						<classID>MonsterEffect</classID>
 						<Effect>ATTACK</Effect>
-						<Cooldown>4,9</Cooldown>
+						<MonsterEffectData meta:RefKey="MonsterEffectData" />
+						<ShowAttackLeap>false</ShowAttackLeap>
 						<HitEffect meta:RefKey="ParticleEffect">
 							<Name>Necroracia</Name>
 						</HitEffect>
-						<ShowAttackLeap>false</ShowAttackLeap>
 					</MonsterMonsterEffectAbilityData>
 					<MonsterMonsterEffectAbilityData>
+						<Cooldown>2,6</Cooldown>
+						<TargetRestriction meta:RefKey="Targetter">
+							<Type>BASICORB</Type>
+						</TargetRestriction>
+						<Permuter meta:RefKey="Permuter">
+							<Type>SINGLE</Type>
+						</Permuter>
 						<classID>MonsterEffect</classID>
 						<Effect>ATTACK</Effect>
-						<Cooldown>2,6</Cooldown>
-						<Count>3</Count>
-						<Damage>2</Damage>
+						<MonsterEffectData meta:RefKey="MonsterEffectData" />
+						<ShowAttackLeap>false</ShowAttackLeap>
 						<FlightEffect meta:RefKey="ParticleEffect">
 							<Name>SpecialBeam</Name>
 							<Colour>204,180,180,255</Colour>
 						</FlightEffect>
-						<ShowAttackLeap>false</ShowAttackLeap>
 					</MonsterMonsterEffectAbilityData>
 				</Abilities>
 			</MonsterDesc>
@@ -68,12 +83,12 @@
 	</Symbols>
 	<VictoryConditions>
 		<Kill>
-			<classID>Kill </classID>
+			<classID>Kill</classID>
 		</Kill>
 	</VictoryConditions>
 	<DefeatConditions>
 		<Die>
-			<classID>Die </classID>
+			<classID>Die</classID>
 		</Die>
 	</DefeatConditions>
 </Level>

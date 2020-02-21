@@ -10,23 +10,27 @@
 		<MatchDamage>0.5</MatchDamage>
 	</Statistics>
 	<Ability meta:RefKey="Ability">
-		<Name>Torch.OffHand.Ability.Name:6a5edebf-dde1-47f3-8b66-10ed5b564553</Name>
-		<Description>Torch.OffHand.Ability.Description:0cd80c21-54cf-4bba-b89a-24a31cb72b01</Description>
-		<EffectData>
-			<Cost>3</Cost>
-			<Effect>1,Tile,Single,Spreader</Effect>
-			<Data>
-				<Spreader meta:RefKey="SpreaderDef">
+		<Name>Torch.OffHand.Ability (Ability).Name:6a5edebf-dde1-47f3-8b66-10ed5b564553</Name>
+		<Description>Torch.OffHand.Ability (Ability).Description:0cd80c21-54cf-4bba-b89a-24a31cb72b01</Description>
+		<FlightEffect meta:RefKey="ParticleEffect">
+			<Name>TorchThrow</Name>
+		</FlightEffect>
+		<Cost>3</Cost>
+		<Targetter meta:RefKey="Targetter">
+			<Type>TILE</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>SINGLE</Type>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>SPREADER</Type>
+			<Spreader meta:RefKey="SpreaderDef">
+				<Name>Fire</Name>
+				<ParticleEffect meta:RefKey="ParticleEffect">
 					<Name>Fire</Name>
-					<ParticleEffect meta:RefKey="ParticleEffect">
-						<Name>Fire</Name>
-					</ParticleEffect>
-					<Effect>Pop</Effect>
-				</Spreader>
-			</Data>
-			<FlightEffect meta:RefKey="ParticleEffect">
-				<Name>TorchThrow</Name>
-			</FlightEffect>
-		</EffectData>
+				</ParticleEffect>
+				<Effect>POP</Effect>
+			</Spreader>
+		</Effect>
 	</Ability>
 </OffHand>

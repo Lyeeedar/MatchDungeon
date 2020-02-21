@@ -53,37 +53,59 @@
 				<AttackCooldown>1,4</AttackCooldown>
 				<AttackDamage>2</AttackDamage>
 				<Size>2</Size>
-				<HP>65</HP>
 				<DamageReduction>2</DamageReduction>
 				<Abilities>
 					<MonsterMoveAbilityData>
-						<classID>Move</classID>
 						<Cooldown>2,5</Cooldown>
+						<TargetRestriction meta:RefKey="Targetter">
+							<Type>BASICORB</Type>
+						</TargetRestriction>
+						<Permuter meta:RefKey="Permuter">
+							<Type>SINGLE</Type>
+						</Permuter>
+						<classID>Move</classID>
+						<MoveType>BASIC</MoveType>
 					</MonsterMoveAbilityData>
-					<MonsterDebuffAbilityData>
-						<classID>Debuff</classID>
-						<Cooldown>2,6</Cooldown>
-						<Debuff meta:RefKey="Buff">
-							<Name>BeholderBattleContentLevel.Level.Symbols.[1] Symbol.Symbol.MonsterDesc (MonsterDesc).Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:acd17dda-4089-4d1b-b4b6-4e51a396d7cd</Name>
-							<Icon meta:RefKey="Sprite">
-								<Name>Oryx/Custom/heroes/prisoner_idle_1</Name>
-								<DrawActualSize>true</DrawActualSize>
-								<Colour>138,116,59,255</Colour>
-							</Icon>
-							<Statistics meta:RefKey="Statistics">
-								<Regeneration>-0.1</Regeneration>
-								<PowerGain>-2</PowerGain>
-								<Haste>-0.2</Haste>
-							</Statistics>
-							<Duration>4</Duration>
-						</Debuff>
-					</MonsterDebuffAbilityData>
 					<MonsterMonsterEffectAbilityData>
+						<Cooldown>2,6</Cooldown>
+						<TargetRestriction meta:RefKey="Targetter">
+							<Type>BASICORB</Type>
+						</TargetRestriction>
+						<Permuter meta:RefKey="Permuter">
+							<Type>SINGLE</Type>
+						</Permuter>
+						<classID>MonsterEffect</classID>
+						<Effect>DEBUFF</Effect>
+						<MonsterEffectData meta:RefKey="MonsterEffectData">
+							<Debuff meta:RefKey="Buff">
+								<Name>BeholderBattleContentLevel.Level.Symbols.[1] Symbol.Symbol.MonsterDesc (MonsterDesc).Abilities.[1] MonsterMonsterEffectAbilityData.MonsterMonsterEffectAbilityData.MonsterEffectData (MonsterEffectData).Debuff (Buff).Name:acd17dda-4089-4d1b-b4b6-4e51a396d7cd</Name>
+								<Icon meta:RefKey="Sprite">
+									<Name>Oryx/Custom/heroes/prisoner_idle_1</Name>
+									<DrawActualSize>true</DrawActualSize>
+									<Colour>138,116,59,255</Colour>
+								</Icon>
+								<Statistics meta:RefKey="Statistics">
+									<Regeneration>-0.1</Regeneration>
+									<PowerGain>-2</PowerGain>
+									<Haste>-0.2</Haste>
+								</Statistics>
+							</Debuff>
+						</MonsterEffectData>
+					</MonsterMonsterEffectAbilityData>
+					<MonsterMonsterEffectAbilityData>
+						<Cooldown>1,5</Cooldown>
+						<TargetRestriction meta:RefKey="Targetter">
+							<Type>BASICORB</Type>
+						</TargetRestriction>
+						<TargetCount>2</TargetCount>
+						<Permuter meta:RefKey="Permuter">
+							<Type>SINGLE</Type>
+						</Permuter>
 						<classID>MonsterEffect</classID>
 						<Effect>ATTACK</Effect>
-						<Cooldown>1,5</Cooldown>
-						<Count>2</Count>
-						<Damage>2</Damage>
+						<MonsterEffectData meta:RefKey="MonsterEffectData">
+							<Damage>2</Damage>
+						</MonsterEffectData>
 					</MonsterMonsterEffectAbilityData>
 				</Abilities>
 			</MonsterDesc>
@@ -104,26 +126,22 @@
 				<Death meta:RefKey="ParticleEffect">
 					<Name>Death</Name>
 				</Death>
-				<DamageReduction>1</DamageReduction>
 				<Abilities>
 					<FriendlyAttackAbilityData>
-						<classID>Attack</classID>
 						<Cooldown>2,3</Cooldown>
-						<Count>1</Count>
-						<Damage>1</Damage>
+						<classID>Attack</classID>
 					</FriendlyAttackAbilityData>
 					<FriendlyMoveAbilityData>
-						<classID>Move</classID>
 						<Cooldown>1,3</Cooldown>
+						<classID>Move</classID>
 					</FriendlyMoveAbilityData>
 					<FriendlyBlockAbilityData>
-						<classID>Block</classID>
 						<Cooldown>1,6</Cooldown>
 						<Range>2</Range>
-						<Count>1</Count>
 						<HitEffect meta:RefKey="ParticleEffect">
 							<Name>Block</Name>
 						</HitEffect>
+						<classID>Block</classID>
 					</FriendlyBlockAbilityData>
 				</Abilities>
 			</Friendly>
@@ -147,14 +165,12 @@
 				</Death>
 				<Abilities>
 					<FriendlyMoveAbilityData>
-						<classID>Move</classID>
 						<Cooldown>1,3</Cooldown>
+						<classID>Move</classID>
 					</FriendlyMoveAbilityData>
 					<FriendlyAttackAbilityData>
-						<classID>Attack</classID>
 						<Cooldown>2,4</Cooldown>
-						<Count>1</Count>
-						<Damage>1</Damage>
+						<classID>Attack</classID>
 					</FriendlyAttackAbilityData>
 				</Abilities>
 			</Friendly>
@@ -176,25 +192,25 @@
 				<Death meta:RefKey="ParticleEffect">
 					<Name>Death</Name>
 				</Death>
-				<HP>5</HP>
 				<Abilities>
 					<FriendlyMoveAbilityData>
-						<classID>Move</classID>
 						<Cooldown>2,4</Cooldown>
+						<classID>Move</classID>
 					</FriendlyMoveAbilityData>
 					<FriendlyBlockAbilityData>
-						<classID>Block</classID>
 						<Cooldown>3,9</Cooldown>
-						<Count>1</Count>
 						<HitEffect meta:RefKey="ParticleEffect">
 							<Name>Heal</Name>
 							<Colour>31,240,0,255</Colour>
 						</HitEffect>
+						<classID>Block</classID>
 					</FriendlyBlockAbilityData>
 					<FriendlyHealAbilityData>
-						<classID>Heal</classID>
 						<Cooldown>2,6</Cooldown>
-						<Amount>1</Amount>
+						<classID>Heal</classID>
+						<HeartSprite meta:RefKey="Sprite">
+							<Name>white</Name>
+						</HeartSprite>
 					</FriendlyHealAbilityData>
 				</Abilities>
 			</Friendly>
@@ -217,19 +233,17 @@
 				</Death>
 				<Abilities>
 					<FriendlyAttackAbilityData>
-						<classID>Attack</classID>
 						<Cooldown>1,4</Cooldown>
 						<Range>4</Range>
-						<Count>1</Count>
-						<Damage>1</Damage>
 						<FlightEffect meta:RefKey="ParticleEffect">
 							<Name>Arrow</Name>
 							<KillOnAnimComplete>true</KillOnAnimComplete>
 						</FlightEffect>
+						<classID>Attack</classID>
 					</FriendlyAttackAbilityData>
 					<FriendlyMoveAbilityData>
-						<classID>Move</classID>
 						<Cooldown>1,5</Cooldown>
+						<classID>Move</classID>
 					</FriendlyMoveAbilityData>
 				</Abilities>
 			</Friendly>
@@ -240,14 +254,14 @@
 	<Theme>Cave</Theme>
 	<VictoryConditions>
 		<Kill>
-			<classID>Kill </classID>
+			<classID>Kill</classID>
 			<All>false</All>
 			<Named>Beholder</Named>
 		</Kill>
 	</VictoryConditions>
 	<DefeatConditions>
 		<Die>
-			<classID>Die </classID>
+			<classID>Die</classID>
 		</Die>
 	</DefeatConditions>
 </Level>

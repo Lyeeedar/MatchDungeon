@@ -29,7 +29,7 @@
 				</Choices>
 			</Choice>
 		</Node>
-		<Node meta:X="621.831298828125" meta:Y="-399.33828735351563" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="163595b9-9532-48c2-b6fd-8aa4a648e40e">
+		<Node meta:X="621.831298828125" meta:Y="-399.33828735351562" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="163595b9-9532-48c2-b6fd-8aa4a648e40e">
 			<Line>
 				<MultilineString>GrindingLevelsContent.Node.[0] Line.Line.MultilineString:2c549313-e0c8-4510-887d-57b666d7f6f2</MultilineString>
 			</Line>
@@ -87,7 +87,7 @@
 				</Statistics>
 			</Rewards>
 		</Node>
-		<Node meta:X="1133.517822265625" meta:Y="-324.65469360351563" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="1a506b06-040c-47b8-90cd-98ec00873c8c">
+		<Node meta:X="1133.517822265625" meta:Y="-324.65469360351562" meta:Comment="3da8dc5f-08ec-40c1-a7ad-52e9ff91876a" GUID="1a506b06-040c-47b8-90cd-98ec00873c8c">
 			<Rewards meta:RefKey="Rewards">
 				<Statistics>
 					<Statistics meta:RefKey="Statistics">

@@ -77,16 +77,16 @@
 	<Theme>City</Theme>
 	<VictoryConditions>
 		<Matches>
-			<classID>Matches </classID>
+			<classID>Matches</classID>
 			<ToBeMatched>
-				<Orbs>25</Orbs>
-				<Orbs>25</Orbs>
+				<Int>25</Int>
+				<Int>25</Int>
 			</ToBeMatched>
 		</Matches>
 	</VictoryConditions>
 	<DefeatConditions>
 		<Turns>
-			<classID>Turns </classID>
+			<classID>Turns</classID>
 			<Turns>40</Turns>
 		</Turns>
 	</DefeatConditions>

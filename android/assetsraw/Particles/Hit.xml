@@ -3,6 +3,11 @@
 	<Emitters>
 		<Emitter>
 			<Name>Flash</Name>
+			<Width>1</Width>
+			<Height>1</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>0,0</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
@@ -12,8 +17,13 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.1,0.1</Lifetime>
-					<BlendMode>Additive</BlendMode>
 					<AllowResize>false</AllowResize>
+					<SizeKeyframes>
+						<Stream>
+							<Keyframe>0|0.8|0.8</Keyframe>
+						</Stream>
+					</SizeKeyframes>
+					<BlendMode>Additive</BlendMode>
 					<BlendKeyframes>true</BlendKeyframes>
 					<TextureKeyframes>
 						<Stream>
@@ -23,11 +33,6 @@
 							<Keyframe>0.9|EffectSprites/Hit/Hit_4</Keyframe>
 						</Stream>
 					</TextureKeyframes>
-					<SizeKeyframes>
-						<Stream>
-							<Keyframe>0|0.8|0.8</Keyframe>
-						</Stream>
-					</SizeKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|255,255,255,255</Keyframe>
@@ -40,6 +45,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>

@@ -30,17 +30,19 @@
 				<Death meta:RefKey="ParticleEffect">
 					<Name>Death</Name>
 				</Death>
-				<AttackNumPips>5</AttackNumPips>
 				<AttackCooldown>3,6</AttackCooldown>
-				<Size>1</Size>
-				<HP>3</HP>
-				<DamageReduction>0</DamageReduction>
 				<Abilities>
 					<MonsterMonsterEffectAbilityData>
+						<Cooldown>3,6</Cooldown>
+						<TargetRestriction meta:RefKey="Targetter">
+							<Type>BASICORB</Type>
+						</TargetRestriction>
+						<Permuter meta:RefKey="Permuter">
+							<Type>SINGLE</Type>
+						</Permuter>
 						<classID>MonsterEffect</classID>
 						<Effect>ATTACK</Effect>
-						<Cooldown>3,6</Cooldown>
-						<Count>2</Count>
+						<MonsterEffectData meta:RefKey="MonsterEffectData" />
 					</MonsterMonsterEffectAbilityData>
 				</Abilities>
 			</MonsterDesc>
@@ -50,15 +52,15 @@
 	<OrbCount>5</OrbCount>
 	<VictoryConditions>
 		<Kill>
-			<classID>Kill </classID>
+			<classID>Kill</classID>
 		</Kill>
 	</VictoryConditions>
 	<DefeatConditions>
 		<Die>
-			<classID>Die </classID>
+			<classID>Die</classID>
 		</Die>
 		<Turns>
-			<classID>Turns </classID>
+			<classID>Turns</classID>
 			<Turns>60</Turns>
 		</Turns>
 	</DefeatConditions>

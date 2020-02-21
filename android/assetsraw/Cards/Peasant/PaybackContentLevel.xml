@@ -79,16 +79,16 @@
 	<Theme>Farm</Theme>
 	<VictoryConditions>
 		<Break>
-			<classID>Break </classID>
+			<classID>Break</classID>
 		</Break>
 	</VictoryConditions>
 	<DefeatConditions>
 		<Turns>
-			<classID>Turns </classID>
+			<classID>Turns</classID>
 			<Turns>40</Turns>
 		</Turns>
 		<Die>
-			<classID>Die </classID>
+			<classID>Die</classID>
 		</Die>
 	</DefeatConditions>
 </Level>

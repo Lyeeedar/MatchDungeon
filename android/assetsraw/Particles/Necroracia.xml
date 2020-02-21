@@ -6,6 +6,9 @@
 			<Shape>Circle</Shape>
 			<Width>0.01</Width>
 			<Height>0.01</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>0,1</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
@@ -15,20 +18,20 @@
 			<Particles>
 				<Particle>
 					<Lifetime>1,1.5</Lifetime>
-					<BlendMode>Multiplicative</BlendMode>
 					<Brownian>2</Brownian>
 					<VelocityAligned>true</VelocityAligned>
-					<TextureKeyframes>
-						<Stream>
-							<Keyframe>0|Oryx/uf_split/uf_items/skull_large_open</Keyframe>
-						</Stream>
-					</TextureKeyframes>
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|0|0</Keyframe>
 							<Keyframe>0.04622507|1|1</Keyframe>
 						</Stream>
 					</SizeKeyframes>
+					<BlendMode>Multiplicative</BlendMode>
+					<TextureKeyframes>
+						<Stream>
+							<Keyframe>0|Oryx/uf_split/uf_items/skull_large_open</Keyframe>
+						</Stream>
+					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|43,43,43,255</Keyframe>
@@ -41,6 +44,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>
@@ -49,6 +57,9 @@
 			<IsBlockingEmitter>false</IsBlockingEmitter>
 			<Width>0</Width>
 			<Height>0</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>0,0</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
@@ -58,18 +69,18 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.2,0.3</Lifetime>
-					<BlendMode>Multiplicative</BlendMode>
-					<TextureKeyframes>
-						<Stream>
-							<Keyframe>0|Particle/star</Keyframe>
-						</Stream>
-					</TextureKeyframes>
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|0|0</Keyframe>
 							<Keyframe>0.2|1.4|1.8</Keyframe>
 						</Stream>
 					</SizeKeyframes>
+					<BlendMode>Multiplicative</BlendMode>
+					<TextureKeyframes>
+						<Stream>
+							<Keyframe>0|Particle/star</Keyframe>
+						</Stream>
+					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|38,38,38,255</Keyframe>
@@ -82,6 +93,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>
@@ -90,6 +106,9 @@
 			<Shape>Circle</Shape>
 			<Width>0.5</Width>
 			<Height>0.5</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>0,0</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
@@ -99,6 +118,12 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.5,1</Lifetime>
+					<SizeKeyframes>
+						<Stream>
+							<Keyframe>0|0|0</Keyframe>
+							<Keyframe>0.2979167|0.3|0.6</Keyframe>
+						</Stream>
+					</SizeKeyframes>
 					<BlendMode>Multiplicative</BlendMode>
 					<TextureKeyframes>
 						<Stream>
@@ -108,12 +133,6 @@
 							<Keyframe>0|Particle/plasma_2</Keyframe>
 						</Stream>
 					</TextureKeyframes>
-					<SizeKeyframes>
-						<Stream>
-							<Keyframe>0|0|0</Keyframe>
-							<Keyframe>0.2979167|0.3|0.6</Keyframe>
-						</Stream>
-					</SizeKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|0,0,0,255</Keyframe>
@@ -126,6 +145,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>

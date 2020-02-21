@@ -41,15 +41,15 @@
 	<Theme>Farm</Theme>
 	<VictoryConditions>
 		<CustomOrb>
-			<classID>CustomOrb </classID>
-			<Count>25</Count>
+			<classID>CustomOrb</classID>
 			<OrbName>Boot</OrbName>
+			<Count>25</Count>
 			<Chance>0.3</Chance>
 		</CustomOrb>
 	</VictoryConditions>
 	<DefeatConditions>
 		<Turns>
-			<classID>Turns </classID>
+			<classID>Turns</classID>
 			<Turns>40</Turns>
 		</Turns>
 	</DefeatConditions>

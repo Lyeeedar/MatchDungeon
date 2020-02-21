@@ -11,25 +11,27 @@
 		<PowerGain>3</PowerGain>
 	</Statistics>
 	<Ability meta:RefKey="Ability">
-		<Name>ShamansStaff.MainHand.Ability.Name:be939452-1309-448d-ac88-b3fd91ebfa90</Name>
-		<Description>ShamansStaff.MainHand.Ability.Description:056dd23b-e250-40c8-be29-0f871eff61a3</Description>
-		<EffectData>
-			<Cost>6</Cost>
-			<Effect>1,Tile,Block,Spreader</Effect>
-			<Data>
-				<Coverage>0.5</Coverage>
-				<AOE>1</AOE>
-				<Spreader meta:RefKey="SpreaderDef">
-					<Name>Poison Cloud</Name>
-					<Sprite meta:RefKey="SpriteWrapper">
-						<Sprite meta:RefKey="Sprite">
-							<Name>Oryx/Custom/terrain/cloud</Name>
-							<Colour>16,143,5,255</Colour>
-						</Sprite>
+		<Name>ShamansStaff.MainHand.Ability (Ability).Name:be939452-1309-448d-ac88-b3fd91ebfa90</Name>
+		<Description>ShamansStaff.MainHand.Ability (Ability).Description:056dd23b-e250-40c8-be29-0f871eff61a3</Description>
+		<Cost>3</Cost>
+		<Targetter meta:RefKey="Targetter">
+			<Type>TILE</Type>
+		</Targetter>
+		<Permuter meta:RefKey="Permuter">
+			<Type>BLOCK</Type>
+		</Permuter>
+		<Effect meta:RefKey="Effect">
+			<Type>SPREADER</Type>
+			<Spreader meta:RefKey="SpreaderDef">
+				<Name>Poison Cloud</Name>
+				<Sprite meta:RefKey="SpriteWrapper">
+					<Sprite meta:RefKey="Sprite">
+						<Name>Oryx/Custom/terrain/cloud</Name>
+						<Colour>16,143,5,255</Colour>
 					</Sprite>
-					<Effect>Damage</Effect>
-				</Spreader>
-			</Data>
-		</EffectData>
+				</Sprite>
+				<Effect>DAMAGE</Effect>
+			</Spreader>
+		</Effect>
 	</Ability>
 </MainHand>

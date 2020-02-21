@@ -31,20 +31,22 @@
 				<Death meta:RefKey="ParticleEffect">
 					<Name>Death</Name>
 				</Death>
-				<AttackNumPips>5</AttackNumPips>
 				<AttackCooldown>2,5</AttackCooldown>
 				<AttackDamage>3</AttackDamage>
 				<Size>3</Size>
-				<HP>60</HP>
 				<DamageReduction>2</DamageReduction>
 				<Abilities>
 					<MonsterSummonAbilityData>
-						<classID>Summon</classID>
 						<Cooldown>2,6</Cooldown>
-						<TileName>Grate</TileName>
+						<TargetRestriction meta:RefKey="Targetter">
+							<Type>BASICORB</Type>
+						</TargetRestriction>
+						<Permuter meta:RefKey="Permuter">
+							<Type>SINGLE</Type>
+						</Permuter>
+						<classID>Summon</classID>
 						<Faction>Rats</Faction>
 						<Name>Small Rat</Name>
-						<IsSummon>false</IsSummon>
 					</MonsterSummonAbilityData>
 				</Abilities>
 			</MonsterDesc>
@@ -69,14 +71,14 @@
 	<Faction>Rats</Faction>
 	<VictoryConditions>
 		<Kill>
-			<classID>Kill </classID>
+			<classID>Kill</classID>
 			<All>false</All>
 			<Named>Rat King</Named>
 		</Kill>
 	</VictoryConditions>
 	<DefeatConditions>
 		<Die>
-			<classID>Die </classID>
+			<classID>Die</classID>
 		</Die>
 	</DefeatConditions>
 </Level>

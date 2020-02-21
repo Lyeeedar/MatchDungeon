@@ -5,6 +5,9 @@
 			<Name>Shield</Name>
 			<Width>0</Width>
 			<Height>0</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>0,0</ParticleSpeed>
 			<ParticleRotation>0,0</ParticleRotation>
 			<RateKeyframes>
@@ -14,12 +17,6 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.5,0.5</Lifetime>
-					<BlendMode>Additive</BlendMode>
-					<TextureKeyframes>
-						<Stream>
-							<Keyframe>0|EffectSprites/Aegis/Aegis_3</Keyframe>
-						</Stream>
-					</TextureKeyframes>
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|0|0</Keyframe>
@@ -27,6 +24,12 @@
 							<Keyframe>1|1.1|1.1</Keyframe>
 						</Stream>
 					</SizeKeyframes>
+					<BlendMode>Additive</BlendMode>
+					<TextureKeyframes>
+						<Stream>
+							<Keyframe>0|EffectSprites/Aegis/Aegis_3</Keyframe>
+						</Stream>
+					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|171,171,171,255</Keyframe>
@@ -40,6 +43,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>
@@ -48,6 +56,9 @@
 			<Shape>Circle</Shape>
 			<Width>0.1</Width>
 			<Height>0.1</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<Area>Border</Area>
 			<ParticleSpeed>0,2</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
@@ -58,19 +69,19 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.5,0.5</Lifetime>
-					<BlendMode>Additive</BlendMode>
 					<VelocityAligned>true</VelocityAligned>
 					<AllowResize>false</AllowResize>
-					<TextureKeyframes>
-						<Stream>
-							<Keyframe>0|Particle/spark</Keyframe>
-						</Stream>
-					</TextureKeyframes>
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|0.1|0.1</Keyframe>
 						</Stream>
 					</SizeKeyframes>
+					<BlendMode>Additive</BlendMode>
+					<TextureKeyframes>
+						<Stream>
+							<Keyframe>0|Particle/spark</Keyframe>
+						</Stream>
+					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|192,194,179,255</Keyframe>
@@ -84,6 +95,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>

@@ -7,6 +7,9 @@
 			<Shape>Circle</Shape>
 			<Width>0.1</Width>
 			<Height>0.1</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>0,1</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
@@ -16,6 +19,16 @@
 			<Particles>
 				<Particle>
 					<Lifetime>1,1</Lifetime>
+					<SizeKeyframes>
+						<Stream>
+							<Keyframe>0|1|1</Keyframe>
+						</Stream>
+					</SizeKeyframes>
+					<RotationSpeedKeyframes>
+						<Stream>
+							<Keyframe>0|-20|20</Keyframe>
+						</Stream>
+					</RotationSpeedKeyframes>
 					<BlendMode>Multiplicative</BlendMode>
 					<TextureKeyframes>
 						<Stream>
@@ -28,16 +41,6 @@
 							<Keyframe>0|Particle/plasma_3</Keyframe>
 						</Stream>
 					</TextureKeyframes>
-					<SizeKeyframes>
-						<Stream>
-							<Keyframe>0|1|1</Keyframe>
-						</Stream>
-					</SizeKeyframes>
-					<RotationSpeedKeyframes>
-						<Stream>
-							<Keyframe>0|-20|20</Keyframe>
-						</Stream>
-					</RotationSpeedKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|62,10,71,255</Keyframe>
@@ -51,6 +54,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>
@@ -58,6 +66,9 @@
 			<Name>Skull</Name>
 			<Width>0</Width>
 			<Height>0</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<Direction>Up</Direction>
 			<ParticleSpeed>0,0</ParticleSpeed>
 			<ParticleRotation>0,0</ParticleRotation>
@@ -68,18 +79,18 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.6,0.6</Lifetime>
-					<BlendMode>Multiplicative</BlendMode>
-					<TextureKeyframes>
-						<Stream>
-							<Keyframe>0|Oryx/uf_split/uf_items/skull_large_open</Keyframe>
-						</Stream>
-					</TextureKeyframes>
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|0|0</Keyframe>
 							<Keyframe>0.9846648|1|1</Keyframe>
 						</Stream>
 					</SizeKeyframes>
+					<BlendMode>Multiplicative</BlendMode>
+					<TextureKeyframes>
+						<Stream>
+							<Keyframe>0|Oryx/uf_split/uf_items/skull_large_open</Keyframe>
+						</Stream>
+					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|43,20,61,255</Keyframe>
@@ -93,6 +104,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>

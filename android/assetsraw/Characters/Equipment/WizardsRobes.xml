@@ -24,17 +24,17 @@
 		<Effect meta:RefKey="Effect">
 			<Type>BUFF</Type>
 			<Buff meta:RefKey="Buff">
-					<Name>WizardsRobes.Body.Ability.EffectData.Data.Buff (Buff).Name:8f6012da-70ba-4b77-9a1a-167683c0b67e</Name>
-					<Icon meta:RefKey="Sprite">
-						<Name>Oryx/uf_split/uf_items/book_brown</Name>
-						<DrawActualSize>true</DrawActualSize>
-					</Icon>
-					<Statistics meta:RefKey="Statistics">
-						<AbilityDamage>4</AbilityDamage>
-						<PowerGain>10</PowerGain>
-					</Statistics>
-					<Duration>10</Duration>
-				</Buff>
+				<Name>WizardsRobes.Body.Ability (Ability).Effect (Effect).Buff (Buff).Name:8f6012da-70ba-4b77-9a1a-167683c0b67e</Name>
+				<Icon meta:RefKey="Sprite">
+					<Name>Oryx/uf_split/uf_items/book_brown</Name>
+					<DrawActualSize>true</DrawActualSize>
+				</Icon>
+				<Statistics meta:RefKey="Statistics">
+					<AbilityDamage>4</AbilityDamage>
+					<PowerGain>10</PowerGain>
+				</Statistics>
+				<Duration>10</Duration>
+			</Buff>
 		</Effect>
 	</Ability>
 </Body>

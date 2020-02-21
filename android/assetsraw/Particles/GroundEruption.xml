@@ -5,6 +5,9 @@
 			<Name>Shockwave</Name>
 			<Width>0</Width>
 			<Height>0</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>0,0</ParticleSpeed>
 			<ParticleRotation>0,0</ParticleRotation>
 			<RateKeyframes>
@@ -14,18 +17,18 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.2,0.2</Lifetime>
-					<BlendMode>Multiplicative</BlendMode>
-					<TextureKeyframes>
-						<Stream>
-							<Keyframe>0|Particle/shockwave</Keyframe>
-						</Stream>
-					</TextureKeyframes>
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|0|0</Keyframe>
 							<Keyframe>1|1.5|1.5</Keyframe>
 						</Stream>
 					</SizeKeyframes>
+					<BlendMode>Multiplicative</BlendMode>
+					<TextureKeyframes>
+						<Stream>
+							<Keyframe>0|Particle/shockwave</Keyframe>
+						</Stream>
+					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|112,79,43,255</Keyframe>
@@ -38,11 +41,21 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>
 		<Emitter>
 			<Name>ForceLines</Name>
+			<Width>1</Width>
+			<Height>1</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<Direction>Up</Direction>
 			<ParticleSpeed>1,1</ParticleSpeed>
 			<ParticleRotation>0,0</ParticleRotation>
@@ -53,17 +66,17 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.4,0.5</Lifetime>
+					<SizeKeyframes>
+						<Stream>
+							<Keyframe>0|0.6|0.6</Keyframe>
+						</Stream>
+					</SizeKeyframes>
 					<BlendMode>Multiplicative</BlendMode>
 					<TextureKeyframes>
 						<Stream>
 							<Keyframe>0|Particle/blurrylines</Keyframe>
 						</Stream>
 					</TextureKeyframes>
-					<SizeKeyframes>
-						<Stream>
-							<Keyframe>0|0.6|0.6</Keyframe>
-						</Stream>
-					</SizeKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|184,110,53,255</Keyframe>
@@ -77,16 +90,26 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>
 		<Emitter>
 			<Name>Debris</Name>
+			<Gravity>-5</Gravity>
 			<Shape>Cone</Shape>
+			<Angle>90</Angle>
 			<Width>45</Width>
+			<Height>1</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>1.5,2</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
-			<Gravity>-5</Gravity>
 			<RateKeyframes>
 				<Keyframe>0|10</Keyframe>
 			</RateKeyframes>
@@ -94,8 +117,18 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.5,1</Lifetime>
-					<BlendMode>Multiplicative</BlendMode>
 					<Brownian>2</Brownian>
+					<SizeKeyframes>
+						<Stream>
+							<Keyframe>0|0.2|0.4</Keyframe>
+						</Stream>
+					</SizeKeyframes>
+					<RotationSpeedKeyframes>
+						<Stream>
+							<Keyframe>0|-30|30</Keyframe>
+						</Stream>
+					</RotationSpeedKeyframes>
+					<BlendMode>Multiplicative</BlendMode>
 					<TextureKeyframes>
 						<Stream>
 							<Keyframe>0|Particle/debris1</Keyframe>
@@ -110,16 +143,6 @@
 							<Keyframe>0|Particle/debris4</Keyframe>
 						</Stream>
 					</TextureKeyframes>
-					<SizeKeyframes>
-						<Stream>
-							<Keyframe>0|0.2|0.4</Keyframe>
-						</Stream>
-					</SizeKeyframes>
-					<RotationSpeedKeyframes>
-						<Stream>
-							<Keyframe>0|-30|30</Keyframe>
-						</Stream>
-					</RotationSpeedKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|201,118,66,255</Keyframe>
@@ -132,6 +155,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>

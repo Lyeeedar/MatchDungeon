@@ -1,7 +1,7 @@
-<Localisation Language="it" xmlns:meta="Editor">
+<Localisation xmlns:meta="Editor">
 	<Text ID="AdventurerHat.Head.Description:ffa81d95-3e47-4095-b757-deb2c9fddadf" TranslateType="Auto" TranslatedHash="-1932953667">Il cappello di un avventuriero. Sembra dare buona fortuna di trovare il tesoro.</Text>
 	<Text ID="AdventurerHat.Head.Name:badbee6d-394e-4d9a-b4b5-5990e63f8faf" TranslateType="Auto" TranslatedHash="1263819855">Cappello Explorers</Text>
-	<Text ID="ApprenticeFocus.OffHand.Description:19213540-9019-406a-a891-263561e42114" TranslateType="Auto" TranslatedHash="1784692357">L&#39;attenzione distribuito ai maghi apprendisti. Ti aiuta a incanalare il potere più veloce.</Text>
+	<Text ID="ApprenticeFocus.OffHand.Description:19213540-9019-406a-a891-263561e42114" TranslateType="Auto" TranslatedHash="1784692357">L'attenzione distribuito ai maghi apprendisti. Ti aiuta a incanalare il potere più veloce.</Text>
 	<Text ID="ApprenticeFocus.OffHand.Name:c4a4d753-cf12-4144-bb33-98c76fb760c8" TranslateType="Auto" TranslatedHash="1739585385">Apprendista di messa a fuoco</Text>
 	<Text ID="ApprenticeRobes.Body.Description:51634e7b-b21c-4640-ba79-3291cf4d4eda" TranslateType="Auto" TranslatedHash="-134085782">Le vesti di un mago apprendista. Stregata per migliorare la velocità di lancio di incantesimi.</Text>
 	<Text ID="ApprenticeRobes.Body.Name:c09029e5-04a5-4890-ba3a-fa1449d472d7" TranslateType="Auto" TranslatedHash="1750666180">Apprendista Robes</Text>
@@ -11,18 +11,18 @@
 	<Text ID="BootsOfSpeed.Body.Name:38dd697a-3353-4194-a48b-e5d98b65a082" TranslateType="Auto" TranslatedHash="317744701">Stivali di Speed</Text>
 	<Text ID="Bow.MainHand.Description:f8d82cf2-5c7e-4e4a-bddd-19d23dd9ed39" TranslateType="Auto" TranslatedHash="-1329895725">Un arco e freccia. Grande per la ripresa le cose.</Text>
 	<Text ID="Bow.MainHand.Name:20b62d4b-b525-476f-826a-d3e26ba21775" TranslateType="Auto" TranslatedHash="66986">Arco</Text>
-	<Text ID="Breastplate.Body.Description:b1f655a9-64e1-4d0a-b065-19f51e3bda18" TranslateType="Auto" TranslatedHash="-1357688992">Un singolo pettorale, che offre alta protezione da una sola direzione. Richiede abilità per l&#39;uso.</Text>
+	<Text ID="Breastplate.Body.Description:b1f655a9-64e1-4d0a-b065-19f51e3bda18" TranslateType="Auto" TranslatedHash="-1357688992">Un singolo pettorale, che offre alta protezione da una sola direzione. Richiede abilità per l'uso.</Text>
 	<Text ID="Breastplate.Body.Name:e15704b4-e53d-4033-abcb-f442e936b734" TranslateType="Auto" TranslatedHash="-1766333751">pettorale</Text>
 	<Text ID="ChampionsMedal.Head.Description:7dacc15d-fb41-48f9-b9fc-e3a6306d1c0d" TranslateType="Auto" TranslatedHash="130570831">La medaglia ha assegnato ai vincitori del Torneo avventurieri. Incantato con la magia potente. I commercianti daranno i prezzi migliori per le persone che indossano questo.</Text>
 	<Text ID="ChampionsMedal.Head.Name:add40e0f-f1d7-4d65-a125-e9c8983d5321" TranslateType="Auto" TranslatedHash="769576001">Medaglia Champions</Text>
 	<Text ID="ClothGambeson.Body.Description:a059da6d-1ddf-406d-9b75-20137ec7ebe2" TranslateType="Auto" TranslatedHash="-2099956412">Una giacca imbottita spessa, fornendo protezione minima.</Text>
 	<Text ID="ClothGambeson.Body.Name:7f6e5987-c849-4aa9-856a-e66b015f0ba5" TranslateType="Auto" TranslatedHash="575035807">panno Jambeson</Text>
-	<Text ID="CrownOfHector.Head.Description:ebe13852-80ad-4d89-afb1-7456fa8693c1" TranslateType="Auto" TranslatedHash="-1366094041">Una corona d&#39;oro, intarsiato con pietre preziose. Contiene potenti incantesimi che dà la grande forza chi l&#39;indossa.</Text>
+	<Text ID="CrownOfHector.Head.Description:ebe13852-80ad-4d89-afb1-7456fa8693c1" TranslateType="Auto" TranslatedHash="-1366094041">Una corona d'oro, intarsiato con pietre preziose. Contiene potenti incantesimi che dà la grande forza chi l'indossa.</Text>
 	<Text ID="CrownOfHector.Head.Name:78399ca1-a256-4ccd-bd09-28f78a67ba7f" TranslateType="Auto" TranslatedHash="1707973329">Corona di Hector</Text>
 	<Text ID="DistressFlare.OffHand.Description:31d5a12e-7505-4f26-9961-f0fe6f58e4a5" TranslateType="Auto" TranslatedHash="38087719">Un bagliore alchemico che può essere sparato in aria per segnalare che avete bisogno di assistenza. Un altro avventuriero sicuramente verrà in vostro aiuto.</Text>
 	<Text ID="DistressFlare.OffHand.Name:14ddf26f-0701-4a11-9204-22a6e16e7107" TranslateType="Auto" TranslatedHash="-1358592153">Razzo di soccorso</Text>
 	<Text ID="EnergyRing.OffHand.Description:f67faa5f-ff07-4f93-aecb-b9abf82bb04b" TranslateType="Auto" TranslatedHash="1605670171">Un piccolo anello, coperto di sigilli. Indossando ti fa sentire corsa energia innaturale attraverso di voi.</Text>
-	<Text ID="EnergyRing.OffHand.Name:4c1d9db5-45ee-4414-94b9-babe93f806a4" TranslateType="Auto" TranslatedHash="-209807160">anello per l&#39;energia</Text>
+	<Text ID="EnergyRing.OffHand.Name:4c1d9db5-45ee-4414-94b9-babe93f806a4" TranslateType="Auto" TranslatedHash="-209807160">anello per l'energia</Text>
 	<Text ID="FireshotNecklace.Head.Description:584cc69d-10f4-49db-a7de-480b04d46231" TranslateType="Auto" TranslatedHash="-951169907">Una collana incantato con la FireShot potere.</Text>
 	<Text ID="FireshotNecklace.Head.Name:826b28fd-c792-466d-8a66-8ee93b0c49aa" TranslateType="Auto" TranslatedHash="-168196762">FireShot collana</Text>
 	<Text ID="FlawedFireballWand.MainHand.Description:292fe5db-1f7d-4ee7-9ba2-4310f9bd1ed5" TranslateType="Auto" TranslatedHash="138545106">Una bacchetta di palla di fuoco con un difetto in esso. Ci vuole più energia molto più del solito per attivare.</Text>
@@ -37,7 +37,7 @@
 	<Text ID="HolyAmulet.Head.Name:a7dbf169-4a4b-4e01-80f1-af3928903a8c" TranslateType="Auto" TranslatedHash="-2074044290">Santa Amulet</Text>
 	<Text ID="IronBuckler.OffHand.Description:5ed975d2-239e-4a5d-a8f3-67559753b760" TranslateType="Auto" TranslatedHash="-1430096639">Uno scudo semplice, eccellente per bloccare gli attacchi.</Text>
 	<Text ID="IronBuckler.OffHand.Name:e3a1924c-065e-4fb1-9e52-0c906f61d94b" TranslateType="Auto" TranslatedHash="-1920155418">Ferro Buckler</Text>
-	<Text ID="IronGauntlets.OffHand.Description:d7fc5cfc-9690-40fa-a038-421d9db3386d" TranslateType="Auto" TranslatedHash="-91890493">guanti di ferro, fornendo con solo un po &#39;più di protezione.</Text>
+	<Text ID="IronGauntlets.OffHand.Description:d7fc5cfc-9690-40fa-a038-421d9db3386d" TranslateType="Auto" TranslatedHash="-91890493">guanti di ferro, fornendo con solo un po 'più di protezione.</Text>
 	<Text ID="IronGauntlets.OffHand.Name:48f17a1a-d928-4d35-a38b-a9c0fcfa61ba" TranslateType="Auto" TranslatedHash="-488553023">Ferro Guanti</Text>
 	<Text ID="IronHelm.Head.Description:04832e1c-7ad2-4410-b75f-9937917d63ad" TranslateType="Auto" TranslatedHash="707899184">Un casco ferro. Abbastanza duro per proteggere la testa.</Text>
 	<Text ID="IronHelm.Head.Name:6e45f888-0ea1-4947-a6dc-ab277e7906f7" TranslateType="Auto" TranslatedHash="926391190">Ferro Helm</Text>
@@ -45,13 +45,13 @@
 	<Text ID="Knife.MainHand.Name:745f1b9b-99bb-4e33-8f8c-775624130c7b" TranslateType="Auto" TranslatedHash="72645253">Coltello</Text>
 	<Text ID="LeatherArmour.Body.Description:6e601e6d-a9a6-4d8c-b27b-635e952f2c43" TranslateType="Auto" TranslatedHash="-1076251624">armature di cuoio indurito, la protezione ma ancora offrendo flessibile.</Text>
 	<Text ID="LeatherArmour.Body.Name:a3a6a184-8182-462b-ad96-e4ebda4158c2" TranslateType="Auto" TranslatedHash="-1698567289">Armatura in pelle</Text>
-	<Text ID="Longsword.MainHand.Description:9d4db2a9-cac8-402f-a360-f90fa62b8d3b" TranslateType="Auto" TranslatedHash="-1466147232">Una lama lunga, ben affilate attraverso un&#39;attenta manutenzione e incantesimi potenti.</Text>
+	<Text ID="Longsword.MainHand.Description:9d4db2a9-cac8-402f-a360-f90fa62b8d3b" TranslateType="Auto" TranslatedHash="-1466147232">Una lama lunga, ben affilate attraverso un'attenta manutenzione e incantesimi potenti.</Text>
 	<Text ID="Longsword.MainHand.Name:e556a8b7-2f44-4683-9425-3a7c03b789c3" TranslateType="Auto" TranslatedHash="-2144314143">longsword</Text>
 	<Text ID="MidasGlove.OffHand.Description:7d7148ad-3eb4-479c-b440-ae77844138bb" TranslateType="Auto" TranslatedHash="41695850">Un guanto impregnata di un incantesimo che trasforma gli elementi normali in oro.</Text>
 	<Text ID="MidasGlove.OffHand.Name:6048660b-8f90-4dab-b633-57d53698ef49" TranslateType="Auto" TranslatedHash="1075414259">Midas Glove</Text>
-	<Text ID="Necroracia.OffHand.Description:cfa0ee3e-ad48-4ced-94cd-68a3695a4889" TranslateType="Auto" TranslatedHash="-786564623">Un oscuro e potente incantesimo. Offerte più danni a seconda di come molte creature sono all&#39;interno della sua area d&#39;effetto.</Text>
+	<Text ID="Necroracia.OffHand.Description:cfa0ee3e-ad48-4ced-94cd-68a3695a4889" TranslateType="Auto" TranslatedHash="-786564623">Un oscuro e potente incantesimo. Offerte più danni a seconda di come molte creature sono all'interno della sua area d'effetto.</Text>
 	<Text ID="Necroracia.OffHand.Name:f96e222a-c2ac-461e-a965-e88cf09feeec" TranslateType="Auto" TranslatedHash="1809382691">Necroracia</Text>
-	<Text ID="NoPants.Body.Description:02c3d78e-c187-4828-97db-909f6ef034db" TranslateType="Auto" TranslatedHash="-1271780458">La vostra mancanza di vestiti aiuta la mobilità al punto che si può semplicemente rotolare lontano da qualsiasi attacco. Non è l&#39;aspetto più lusinghiero però.</Text>
+	<Text ID="NoPants.Body.Description:02c3d78e-c187-4828-97db-909f6ef034db" TranslateType="Auto" TranslatedHash="-1271780458">La vostra mancanza di vestiti aiuta la mobilità al punto che si può semplicemente rotolare lontano da qualsiasi attacco. Non è l'aspetto più lusinghiero però.</Text>
 	<Text ID="NoPants.Body.Name:27e06576-9de2-46e8-827b-f02335928c88" TranslateType="Auto" TranslatedHash="-778072899">Niente pantaloni</Text>
 	<Text ID="Pitchfork.MainHand.Description:edfd341c-78c8-452a-a9d4-1480a17c9ddd" TranslateType="Auto" TranslatedHash="-63163064">Una forca, normalmente utilizzato per spostare il fieno. Serve come arma utile per qualsiasi contadino arrabbiato.</Text>
 	<Text ID="Pitchfork.MainHand.Name:41ad7134-392b-4211-8fbe-ae6b61233877" TranslateType="Auto" TranslatedHash="-1746251806">Forcone</Text>
@@ -69,7 +69,7 @@
 	<Text ID="ShamansStaff.MainHand.Name:0c49ccba-3fb7-46eb-879b-f866cbc35d91" TranslateType="Auto" TranslatedHash="-1307440187">sciamani personale</Text>
 	<Text ID="ShearScimitar.MainHand.Description:825c41a0-8579-455f-a6c6-275122d0134b" TranslateType="Auto" TranslatedHash="-691419515">Una scimitarra, vagamente incandescente con riflessi viola. Il suo bordo è innaturale tagliente.</Text>
 	<Text ID="ShearScimitar.MainHand.Name:da6bf1f3-cb19-4d8e-a4c9-04d150252c45" TranslateType="Auto" TranslatedHash="-1047787345">shear Scimitar</Text>
-	<Text ID="SkullNecklace.Head.Description:6e45b7d0-480b-4f05-9cdc-0cc22a8e9771" TranslateType="Auto" TranslatedHash="739785429">Una collana di teschi finemente intagliato. Balefire illumina dall&#39;interno delle loro orbite vuote.</Text>
+	<Text ID="SkullNecklace.Head.Description:6e45b7d0-480b-4f05-9cdc-0cc22a8e9771" TranslateType="Auto" TranslatedHash="739785429">Una collana di teschi finemente intagliato. Balefire illumina dall'interno delle loro orbite vuote.</Text>
 	<Text ID="SkullNecklace.Head.Name:433fa531-f9dd-42e6-895e-fd21e80ddcd3" TranslateType="Auto" TranslatedHash="207151897">della collana del cranio</Text>
 	<Text ID="Sledgehammer.MainHand.Description:5abe52e7-cbfe-4a37-85c1-5060c4d2766d" TranslateType="Auto" TranslatedHash="-167425946">Una mazza pesante. Lento e pesante, ma vi permette di distruggere quasi tutto.</Text>
 	<Text ID="Sledgehammer.MainHand.Name:5fea89a7-7abd-445a-bfbf-f89dbd090d0a" TranslateType="Auto" TranslatedHash="-63336964">Mazza</Text>
@@ -83,13 +83,13 @@
 	<Text ID="SpikedArmour.Body.Name:50da9d76-5581-4f6b-af5a-71988d34268e" TranslateType="Auto" TranslatedHash="64257202">Spiked Armatura</Text>
 	<Text ID="SpikedHelmet.Head.Description:a993de1f-7c5f-4b90-93e6-7adedadf5da1" TranslateType="Auto" TranslatedHash="-1285109510">Un casco spillo. Con questo si può consegnare un colpo di testa vizioso.</Text>
 	<Text ID="SpikedHelmet.Head.Name:45d8db24-c173-4c52-93ff-bbcd8a0ee052" TranslateType="Auto" TranslatedHash="252623279">Casco Spiked</Text>
-	<Text ID="SpikedShield.MainHand.Description:6d844de7-a737-4bbf-81a4-1c1937230020" TranslateType="Auto" TranslatedHash="1077835839">Sai cosa c&#39;è di meglio di uno scudo? Due scudi! La miglior difesa è una grande difesa dopo tutto.</Text>
+	<Text ID="SpikedShield.MainHand.Description:6d844de7-a737-4bbf-81a4-1c1937230020" TranslateType="Auto" TranslatedHash="1077835839">Sai cosa c'è di meglio di uno scudo? Due scudi! La miglior difesa è una grande difesa dopo tutto.</Text>
 	<Text ID="SpikedShield.MainHand.Name:a898b62c-12b5-40ed-8104-2a87728860b7" TranslateType="Auto" TranslatedHash="570217643">Spiked Shield</Text>
 	<Text ID="Torch.OffHand.Description:e653ee91-a5da-4299-b352-0c2fc66536ca" TranslateType="Auto" TranslatedHash="1934583680">Una torcia accesa, ideale per illuminare luoghi e dando fuoco alle cose.</Text>
 	<Text ID="Torch.OffHand.Name:cd454d91-fc3c-4062-bf3f-1f78c6f7118d" TranslateType="Auto" TranslatedHash="80995292">Torcia</Text>
 	<Text ID="Warpaint.Body.Description:388b7c4a-813e-4768-be30-c75113e7e828" TranslateType="Auto" TranslatedHash="1444548223">Questa vernice si spinge in una frenesia di combattimento, prestando grande potere ai vostri attacchi. Tuttavia, non fornisce alcuna copertura a tutti. Sarete completamente esposto.</Text>
 	<Text ID="Warpaint.Body.Name:ac93b931-7164-4e77-8e40-a3e218fdfb7f" TranslateType="Auto" TranslatedHash="564339350">Colori di guerra</Text>
-	<Text ID="Whip.MainHand.Description:f3f0e387-35c5-4ae5-ab64-a9107cf62a7e" TranslateType="Auto" TranslatedHash="-965446281">La frusta. Nelle mani di un professionista esperto che può essere un&#39;arma dolorosa.</Text>
+	<Text ID="Whip.MainHand.Description:f3f0e387-35c5-4ae5-ab64-a9107cf62a7e" TranslateType="Auto" TranslatedHash="-965446281">La frusta. Nelle mani di un professionista esperto che può essere un'arma dolorosa.</Text>
 	<Text ID="Whip.MainHand.Name:e0359222-8205-4f6c-afdf-04753b3687fb" TranslateType="Auto" TranslatedHash="2695128">Frusta</Text>
 	<Text ID="WizardsRobes.Body.Description:32159260-fab8-4fc5-bbed-b80609f4307c" TranslateType="Auto" TranslatedHash="1963325931">Le vesti di un mago. Stregata per migliorare la velocità e la potenza di lancio di incantesimi.</Text>
 	<Text ID="WizardsRobes.Body.Name:ddf4cf25-2cf4-4364-82a2-16485ef75e83" TranslateType="Auto" TranslatedHash="1415788347">Wizards Robes</Text>

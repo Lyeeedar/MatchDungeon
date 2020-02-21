@@ -60,6 +60,8 @@
 			<Name>Lightbeams</Name>
 			<Type>Accumulated</Type>
 			<Shape>Circle</Shape>
+			<Width>1</Width>
+			<Height>1</Height>
 			<SizeMultiplier>
 				<Keyframe>0|1</Keyframe>
 			</SizeMultiplier>

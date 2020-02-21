@@ -1,4 +1,4 @@
-<Localisation Language="ru" xmlns:meta="Editor">
+<Localisation xmlns:meta="Editor">
 	<Text ID="Cave.Theme.Name:992f3960-b7cc-4a83-9935-bf3532d28ca9" TranslateType="Auto" TranslatedHash="2092973">пещера</Text>
 	<Text ID="City.Theme.Name:3af60929-c316-419a-9e36-d016820fd66d" TranslateType="Auto" TranslatedHash="2100619">город</Text>
 	<Text ID="CityOutskirts.Theme.Name:93c3f959-8e24-4236-8331-fbd1a294fd6d" TranslateType="Auto" TranslatedHash="1413231641">Город Окраина</Text>

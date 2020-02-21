@@ -4,6 +4,7 @@
 		<Emitter>
 			<Name>Blade</Name>
 			<Shape>Cone</Shape>
+			<Angle>90</Angle>
 			<Width>60</Width>
 			<Height>2</Height>
 			<SizeMultiplier>
@@ -57,6 +58,7 @@
 			<IsBlockingEmitter>false</IsBlockingEmitter>
 			<Gravity>-9</Gravity>
 			<Shape>Cone</Shape>
+			<Angle>90</Angle>
 			<Width>90</Width>
 			<Height>0.1</Height>
 			<SizeMultiplier>

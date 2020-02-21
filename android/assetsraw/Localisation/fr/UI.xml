@@ -1,4 +1,4 @@
-<Localisation Language="fr" xmlns:meta="Editor">
+<Localisation xmlns:meta="Editor">
 	<Text ID="new" TranslateType="Auto" TranslatedHash="78208">Nouveau</Text>
 	<Text ID="complete" TranslateType="Auto" TranslatedHash="-534801063">Achevée</Text>
 	<Text ID="gold" TranslateType="Auto" TranslatedHash="2225280">Or</Text>
@@ -27,24 +27,24 @@
 	<Text ID="confirm" TranslateType="Auto" TranslatedHash="-1679196512">Confirmer</Text>
 	<Text ID="questselection.embark" TranslateType="Auto" TranslatedHash="2079091584">Embarquer</Text>
 	<Text ID="questselection.editdeck" TranslateType="Auto" TranslatedHash="78334207">Deck Modifier</Text>
-	<Text ID="questselection.tutorial.1" TranslateType="Auto" TranslatedHash="1811985389">Voici l&#39;écran de sélection de quête.</Text>
+	<Text ID="questselection.tutorial.1" TranslateType="Auto" TranslatedHash="1811985389">Voici l'écran de sélection de quête.</Text>
 	<Text ID="questselection.tutorial.2" TranslateType="Auto" TranslatedHash="1728073929">Vous pouvez choisir une quête de ceux que vous avez débloqué ici. Il suffit de taper la carte que vous voulez, puis appuyez sur « Embarquez ».</Text>
 	<Text ID="questselection.tutorial.3" TranslateType="Auto" TranslatedHash="-487851138">Vous pouvez modifier votre jeu de cartes ici. Cela vous permettra de personnaliser votre expérience de quête.</Text>
 	<Text ID="questscreen.abandonquest" TranslateType="Auto" TranslatedHash="-821113033">abandonner Quête</Text>
-	<Text ID="questscreen.abandonquest.popuptext" TranslateType="Auto" TranslatedHash="1885656698">Etes-vous sûr de vouloir abandonner la quête et revenir à l&#39;écran de sélection de quête? Vous perdrez les progrès réalisés, mais conserver les récompenses que vous avez gagnés.</Text>
+	<Text ID="questscreen.abandonquest.popuptext" TranslateType="Auto" TranslatedHash="1885656698">Etes-vous sûr de vouloir abandonner la quête et revenir à l'écran de sélection de quête? Vous perdrez les progrès réalisés, mais conserver les récompenses que vous avez gagnés.</Text>
 	<Text ID="questscreen.abandonquest.continue" TranslateType="Auto" TranslatedHash="-916530135">continuer Quête</Text>
 	<Text ID="questscreen.abandonquest.abandon" TranslateType="Auto" TranslatedHash="-821113033">abandonner Quête</Text>
 	<Text ID="questscreen.choose" TranslateType="Auto" TranslatedHash="2017616439">Choisir</Text>
 	<Text ID="questscreen.questfailed" TranslateType="Auto" TranslatedHash="-1556233861">quête Échec</Text>
 	<Text ID="questscreen.questcompleted" TranslateType="Auto" TranslatedHash="1542117453">quête terminée</Text>
-	<Text ID="questscreen.tutorial.1" TranslateType="Auto" TranslatedHash="-337009343">Voici l&#39;écran de recherche.</Text>
+	<Text ID="questscreen.tutorial.1" TranslateType="Auto" TranslatedHash="-337009343">Voici l'écran de recherche.</Text>
 	<Text ID="questscreen.tutorial.2" TranslateType="Auto" TranslatedHash="-809625458">Vous pouvez choisir ce que vous voulez rencontrer à côté. Appuyez sur une carte pour voir plus de détails à ce sujet, et de le sélectionner.</Text>
-	<Text ID="questscreen.tutorial.3" TranslateType="Auto" TranslatedHash="1703591319">Appuyez ici pour voir vos informations actuelles de caractères, y compris les statistiques et de l&#39;équipement.</Text>
-	<Text ID="questscreen.tutorial.4" TranslateType="Auto" TranslatedHash="-607053051">Ici vous pouvez voir votre or en cours. Vous pouvez l&#39;utiliser pour acheter du matériel dans les magasins, ou lors de rencontres.</Text>
+	<Text ID="questscreen.tutorial.3" TranslateType="Auto" TranslatedHash="1703591319">Appuyez ici pour voir vos informations actuelles de caractères, y compris les statistiques et de l'équipement.</Text>
+	<Text ID="questscreen.tutorial.4" TranslateType="Auto" TranslatedHash="-607053051">Ici vous pouvez voir votre or en cours. Vous pouvez l'utiliser pour acheter du matériel dans les magasins, ou lors de rencontres.</Text>
 	<Text ID="deckscreen.toomanyencounters" TranslateType="Auto" TranslatedHash="-517794333">Plate-forme contient trop de rencontres.</Text>
 	<Text ID="deckscreen.toofewencounters" TranslateType="Auto" TranslatedHash="-1780972857">Plate-forme ne contient pas assez de rencontres.</Text>
 	<Text ID="deckscreen.toomuchequipment" TranslateType="Auto" TranslatedHash="-2055246851">Plate-forme contient trop de matériel.</Text>
-	<Text ID="deckscreen.toofewequipment" TranslateType="Auto" TranslatedHash="886068487">Plate-forme ne contient pas suffisamment d&#39;équipement.</Text>
+	<Text ID="deckscreen.toofewequipment" TranslateType="Auto" TranslatedHash="886068487">Plate-forme ne contient pas suffisamment d'équipement.</Text>
 	<Text ID="deckscreen.return" TranslateType="Auto" TranslatedHash="-1850529456">Revenir</Text>
 	<Text ID="deckscreen.remove" TranslateType="Auto" TranslatedHash="-1850743644">Retirer</Text>
 	<Text ID="deckscreen.add" TranslateType="Auto" TranslatedHash="65665">Ajouter</Text>
@@ -63,9 +63,9 @@
 	<Text ID="gridscreen.tutorial.2" TranslateType="Auto" TranslatedHash="1858446564">Ce sont vos conditions de victoire.</Text>
 	<Text ID="gridscreen.tutorial.3" TranslateType="Auto" TranslatedHash="-1075529636">Ce sont vos conditions de défaillance.</Text>
 	<Text ID="gridscreen.tutorial.4" TranslateType="Auto" TranslatedHash="-323994935">Ce sont vos capacités, fournies par votre équipement.</Text>
-	<Text ID="gridscreen.tutorial.5" TranslateType="Auto" TranslatedHash="1846146489">Voici la barre de puissance. Vous utilisez la puissance recueillie ici pour utiliser les capacités, ou quand il est complet, vous pouvez décharger tout pour mélanger le conseil d&#39;administration.</Text>
+	<Text ID="gridscreen.tutorial.5" TranslateType="Auto" TranslatedHash="1846146489">Voici la barre de puissance. Vous utilisez la puissance recueillie ici pour utiliser les capacités, ou quand il est complet, vous pouvez décharger tout pour mélanger le conseil d'administration.</Text>
 	<Text ID="gridscreen.tutorial.6" TranslateType="Auto" TranslatedHash="2071848755">Cette zone contient les orbes vous correspondent. Faire des lignes de trois orbes ou plus de la même couleur pour les faire correspondre.</Text>
-	<Text ID="gridscreen.tutorial.7" TranslateType="Auto" TranslatedHash="1514171391">Faire des lignes de plus de trois pour frayer un orbe spécial, qui, lorsqu&#39;il est assorti a un effet spécial.</Text>
+	<Text ID="gridscreen.tutorial.7" TranslateType="Auto" TranslatedHash="1514171391">Faire des lignes de plus de trois pour frayer un orbe spécial, qui, lorsqu'il est assorti a un effet spécial.</Text>
 	<Text ID="gridscreen.berserk" TranslateType="Auto" TranslatedHash="1446053114">Fou furieux</Text>
 	<Text ID="gridscreen.activate" TranslateType="Auto" TranslatedHash="-1591330541">Activer</Text>
 	<Text ID="shop.leave" TranslateType="Auto" TranslatedHash="1904371455">Boutique congé</Text>
@@ -76,15 +76,15 @@
 	<Text ID="completioncondition.customorb.description" TranslateType="Auto" TranslatedHash="74115493">Rencontre</Text>
 	<Text ID="completioncondition.die.tutorial" TranslateType="Auto" TranslatedHash="992474406">Ceci est votre santé restante. Les attaques vont le réduire, et quand il atteint 0 vous échouerez le niveau.</Text>
 	<Text ID="completioncondition.die.description" TranslateType="Auto" TranslatedHash="-1433378665">Ne laissez pas atteindre votre santé 0.</Text>
-	<Text ID="completioncondition.kill.tutorial" TranslateType="Auto" TranslatedHash="220080640">Ceci est le nombre d&#39;ennemis dont vous avez besoin de tuer pour gagner.</Text>
+	<Text ID="completioncondition.kill.tutorial" TranslateType="Auto" TranslatedHash="220080640">Ceci est le nombre d'ennemis dont vous avez besoin de tuer pour gagner.</Text>
 	<Text ID="completioncondition.kill.description" TranslateType="Auto" TranslatedHash="1102195732">Battez tous les ennemis.</Text>
-	<Text ID="completioncondition.match.tutorial" TranslateType="Auto" TranslatedHash="2108284281">Ceci est le nombre d&#39;orbes de chaque couleur que vous devez correspondre à gagner.</Text>
+	<Text ID="completioncondition.match.tutorial" TranslateType="Auto" TranslatedHash="2108284281">Ceci est le nombre d'orbes de chaque couleur que vous devez correspondre à gagner.</Text>
 	<Text ID="completioncondition.match.description" TranslateType="Auto" TranslatedHash="74115493">Rencontre</Text>
 	<Text ID="completioncondition.plate.tutorial" TranslateType="Auto" TranslatedHash="-402683419">Ceci est le nombre de plaques dont vous avez besoin pour arriver à briser pour gagner.</Text>
 	<Text ID="completioncondition.plate.description" TranslateType="Auto" TranslatedHash="64448735">Pause</Text>
-	<Text ID="completioncondition.sink.tutorial" TranslateType="Auto" TranslatedHash="-937495945">Ceci est le nombre d&#39;éléments dont vous avez besoin pour aller au fond du plateau pour gagner. Si vous ne pouvez pas les voir sur la carte alors ils seront dans des coffres, à l&#39;intérieur des blocs, ou ennemis.</Text>
+	<Text ID="completioncondition.sink.tutorial" TranslateType="Auto" TranslatedHash="-937495945">Ceci est le nombre d'éléments dont vous avez besoin pour aller au fond du plateau pour gagner. Si vous ne pouvez pas les voir sur la carte alors ils seront dans des coffres, à l'intérieur des blocs, ou ennemis.</Text>
 	<Text ID="completioncondition.sink.description" TranslateType="Auto" TranslatedHash="1503192309">Déplacer {Count} au fond.</Text>
-	<Text ID="completioncondition.time.tutorial" TranslateType="Auto" TranslatedHash="-264742714">Ceci est votre temps restant. Quand il atteint 0, vous échouerez le niveau. Cela ne diminue lorsque le conseil d&#39;administration n&#39;est pas mise à jour, agir si vite!</Text>
+	<Text ID="completioncondition.time.tutorial" TranslateType="Auto" TranslatedHash="-264742714">Ceci est votre temps restant. Quand il atteint 0, vous échouerez le niveau. Cela ne diminue lorsque le conseil d'administration n'est pas mise à jour, agir si vite!</Text>
 	<Text ID="completioncondition.time.description" TranslateType="Auto" TranslatedHash="-1565835433">Terminez le niveau dans {Time} secondes.</Text>
 	<Text ID="completioncondition.time.seconds" TranslateType="Auto" TranslatedHash="-660217249">secondes</Text>
 	<Text ID="completioncondition.turns.tutorial" TranslateType="Auto" TranslatedHash="1859800163">Ceci est votre nombre de tour restant. Quand il atteint 0, vous échouerez le niveau.</Text>
@@ -99,21 +99,21 @@
 	<Text ID="matchmessage.6" TranslateType="Auto" TranslatedHash="191459333">Mythique</Text>
 	<Text ID="matchmessage.7" TranslateType="Auto" TranslatedHash="2047371727">Divin</Text>
 	<Text ID="matchmessage.8" TranslateType="Auto" TranslatedHash="1861761523">Divin</Text>
-	<Text ID="block.tutorial" TranslateType="Auto" TranslatedHash="951808056">Ceci est un bloc. Faites correspondre les tuiles qui l&#39;entourent pour le briser.</Text>
-	<Text ID="chest.tutorial" TranslateType="Auto" TranslatedHash="919882126">Ceci est un coffre. Faites correspondre les tuiles sous ce à des pièces spawn. Quand il n&#39;y a plus de pièces à Spawn, il apparaît vide.</Text>
+	<Text ID="block.tutorial" TranslateType="Auto" TranslatedHash="951808056">Ceci est un bloc. Faites correspondre les tuiles qui l'entourent pour le briser.</Text>
+	<Text ID="chest.tutorial" TranslateType="Auto" TranslatedHash="919882126">Ceci est un coffre. Faites correspondre les tuiles sous ce à des pièces spawn. Quand il n'y a plus de pièces à Spawn, il apparaît vide.</Text>
 	<Text ID="sinkable.tutorial" TranslateType="Auto" TranslatedHash="-856766742">Ceci est un élément insubmersible. Si vous vous déplacez au bas de la carte, vous plongerez avec succès.</Text>
-	<Text ID="seal.tutorial" TranslateType="Auto" TranslatedHash="894558379">Cette orbe a été scellé. Il ne se déplace pas jusqu&#39;à ce que le sceau est brisé. Pour briser le sceau utiliser l&#39;orbe dans un match.</Text>
+	<Text ID="seal.tutorial" TranslateType="Auto" TranslatedHash="894558379">Cette orbe a été scellé. Il ne se déplace pas jusqu'à ce que le sceau est brisé. Pour briser le sceau utiliser l'orbe dans un match.</Text>
 	<Text ID="friendly.tutorial" TranslateType="Auto" TranslatedHash="-1796118667">Ceci est un allié amical. Faites correspondre les tuiles environnantes pour reconstituer sa santé.</Text>
-	<Text ID="monster.tutorial" TranslateType="Auto" TranslatedHash="-1151180820">Ceci est un ennemi. La barre rouge au-dessous est sa santé reste. Faites correspondre les tuiles qui l&#39;entourent à l&#39;endommager.</Text>
+	<Text ID="monster.tutorial" TranslateType="Auto" TranslatedHash="-1151180820">Ceci est un ennemi. La barre rouge au-dessous est sa santé reste. Faites correspondre les tuiles qui l'entourent à l'endommager.</Text>
 	<Text ID="monster.dr.tutorial" TranslateType="Auto" TranslatedHash="843616929">Cet ennemi a résistance aux dégâts, représenté par les pépins gris sur sa barre de santé. A la fin de chaque tour, il reconstituera les pépins, se concentrer sur les grands donc coups!</Text>
 	<Text ID="monster.stages.tutorial" TranslateType="Auto" TranslatedHash="1340209179">Cet ennemi a plusieurs étapes, indiquées par les orbes au-dessus de sa barre de santé. Lorsque la barre de santé est vide, il va muter en une nouvelle créature, alors attention!</Text>
-	<Text ID="monstereffect.tutorial.1" TranslateType="Auto" TranslatedHash="-1817481407">Ceci est une attaque. Les pépins entourant le crâne indiquent les tours restants jusqu&#39;à ce qu&#39;il active.</Text>
-	<Text ID="monstereffect.tutorial.2" TranslateType="Auto" TranslatedHash="-1052459269">Faites correspondre comme un orbe normal de le retirer du conseil d&#39;administration. Si vous ne parvenez pas à le supprimer, vous perdrez 1 santé.</Text>
+	<Text ID="monstereffect.tutorial.1" TranslateType="Auto" TranslatedHash="-1817481407">Ceci est une attaque. Les pépins entourant le crâne indiquent les tours restants jusqu'à ce qu'il active.</Text>
+	<Text ID="monstereffect.tutorial.2" TranslateType="Auto" TranslatedHash="-1052459269">Faites correspondre comme un orbe normal de le retirer du conseil d'administration. Si vous ne parvenez pas à le supprimer, vous perdrez 1 santé.</Text>
 	<Text ID="ability.tutorial.1" TranslateType="Auto" TranslatedHash="-726409319">Ceci est une capacité utilisable, accordée par votre équipement actuel.</Text>
-	<Text ID="ability.tutorial.2" TranslateType="Auto" TranslatedHash="1980738996">Ces pépins montrent à quel point la puissance dont vous avez besoin pour l&#39;activer.</Text>
-	<Text ID="ability.tutorial.3" TranslateType="Auto" TranslatedHash="902052048">Lorsque vous avez assez de puissance, vous pouvez appuyer sur cette capacité de commencer à sélectionner des cibles pour elle. Note, vous ne serez pas en mesure de choisir s&#39;il n&#39;y a pas des cibles valides.</Text>
+	<Text ID="ability.tutorial.2" TranslateType="Auto" TranslatedHash="1980738996">Ces pépins montrent à quel point la puissance dont vous avez besoin pour l'activer.</Text>
+	<Text ID="ability.tutorial.3" TranslateType="Auto" TranslatedHash="902052048">Lorsque vous avez assez de puissance, vous pouvez appuyer sur cette capacité de commencer à sélectionner des cibles pour elle. Note, vous ne serez pas en mesure de choisir s'il n'y a pas des cibles valides.</Text>
 	<Text ID="plate.tutorial" TranslateType="Auto" TranslatedHash="-378210030">Ceci est une plaque. Faites correspondre au-dessus de cela pour le casser.</Text>
-	<Text ID="spreader.tutorial" TranslateType="Auto" TranslatedHash="-1730505209">Ce champ est la propagation. Faites correspondre les tuiles qui l&#39;entourent pour le retirer et arrêter la diffusion de ce tour.</Text>
+	<Text ID="spreader.tutorial" TranslateType="Auto" TranslatedHash="-1730505209">Ce champ est la propagation. Faites correspondre les tuiles qui l'entourent pour le retirer et arrêter la diffusion de ce tour.</Text>
 	<Text ID="card.containsshop" TranslateType="Auto" TranslatedHash="1437245543">Cette rencontre contient un magasin.</Text>
 	<Text ID="card.unknownreward" TranslateType="Auto" TranslatedHash="-1611710601">Avoir une chance inconnue de gagner des récompenses inconnues.</Text>
 	<Text ID="card.rewardchance" TranslateType="Auto" TranslatedHash="2019625802">Avoir un {Chance} chance de gagner {Reward} récompenses.</Text>
@@ -121,7 +121,7 @@
 	<Text ID="cardsource.deck" TranslateType="Auto" TranslatedHash="-742094546">Cette rencontre est venue de la plate-forme de rencontre.</Text>
 	<Text ID="cardsource.character" TranslateType="Auto" TranslatedHash="746358198">Cette rencontre est venue du caractère actuel.</Text>
 	<Text ID="cardsource.quest" TranslateType="Auto" TranslatedHash="1028345757">Cette rencontre est venue de la quête actuelle.</Text>
-	<Text ID="cardsource.location" TranslateType="Auto" TranslatedHash="1588074602">Cette rencontre est venue de l&#39;emplacement de la quête actuelle.</Text>
+	<Text ID="cardsource.location" TranslateType="Auto" TranslatedHash="1588074602">Cette rencontre est venue de l'emplacement de la quête actuelle.</Text>
 	<Text ID="cardchance.greatpositive" TranslateType="Auto" TranslatedHash="1071925039">Heureusement bienheureusement</Text>
 	<Text ID="cardchance.positive" TranslateType="Auto" TranslatedHash="73771720">Chanceux</Text>
 	<Text ID="cardchance.negative" TranslateType="Auto" TranslatedHash="1380932559">Malchanceux</Text>
@@ -132,7 +132,7 @@
 	<Text ID="statistic.abilitydamage" TranslateType="Auto" TranslatedHash="817607525">Les dégâts de la</Text>
 	<Text ID="statistic.pierce" TranslateType="Auto" TranslatedHash="-1904543896">transpercer</Text>
 	<Text ID="statistic.powergain" TranslateType="Auto" TranslatedHash="-1920082438">Gain de puissance</Text>
-	<Text ID="statistic.bonusgold" TranslateType="Auto" TranslatedHash="-625484799">Bonus d&#39;or</Text>
+	<Text ID="statistic.bonusgold" TranslateType="Auto" TranslatedHash="-625484799">Bonus d'or</Text>
 	<Text ID="statistic.haste" TranslateType="Auto" TranslatedHash="69497451">Hâte</Text>
 	<Text ID="statistic.regeneration" TranslateType="Auto" TranslatedHash="1197090731">Régénération</Text>
 	<Text ID="statistic.berserk" TranslateType="Auto" TranslatedHash="1446053114">Fou furieux</Text>
@@ -146,31 +146,31 @@
 	<Text ID="statistic.buffduration" TranslateType="Auto" TranslatedHash="-1073275199">Durée Buff</Text>
 	<Text ID="statistic.luck" TranslateType="Auto" TranslatedHash="2379729">La chance</Text>
 	<Text ID="statistic.vampiricstrikes" TranslateType="Auto" TranslatedHash="1164249202">grèves vampiriques</Text>
-	<Text ID="statistic.health.description" TranslateType="Auto" TranslatedHash="1299227753">Le nombre d&#39;attaques que vous pouvez prendre avant la mort.</Text>
-	<Text ID="statistic.matchdamage.description" TranslateType="Auto" TranslatedHash="-937411760">Le bonus de dégâts que vous faites la première fois que vous correspondent à côté d&#39;un objet à chaque tour endommageable.</Text>
+	<Text ID="statistic.health.description" TranslateType="Auto" TranslatedHash="1299227753">Le nombre d'attaques que vous pouvez prendre avant la mort.</Text>
+	<Text ID="statistic.matchdamage.description" TranslateType="Auto" TranslatedHash="-937411760">Le bonus de dégâts que vous faites la première fois que vous correspondent à côté d'un objet à chaque tour endommageable.</Text>
 	<Text ID="statistic.abilitydamage.description" TranslateType="Auto" TranslatedHash="-594150834">Le bonus de dégâts que vous faites avec promotions et capacités.</Text>
 	<Text ID="statistic.pierce.description" TranslateType="Auto" TranslatedHash="1780413089">La quantité de résistance aux dégâts que vous retirez chaque fois que vous touchez quelque chose avec résistance aux dégâts.</Text>
 	<Text ID="statistic.powergain.description" TranslateType="Auto" TranslatedHash="-1214613458">La puissance de bonus vous gagnez la première fois que vous gagnez la puissance à chaque tour.</Text>
-	<Text ID="statistic.bonusgold.description" TranslateType="Auto" TranslatedHash="-502527789">Le bonus multiplicateur que vous gagnez à chaque fois que vous gagnez l&#39;or.</Text>
+	<Text ID="statistic.bonusgold.description" TranslateType="Auto" TranslatedHash="-502527789">Le bonus multiplicateur que vous gagnez à chaque fois que vous gagnez l'or.</Text>
 	<Text ID="statistic.haste.description" TranslateType="Auto" TranslatedHash="504448476">Combien vous déplacez plus vite. Il augmente le nombre de tour, délai entre les attaques des monstres et des capacités, et la durée de buff.</Text>
 	<Text ID="statistic.regeneration.description" TranslateType="Auto" TranslatedHash="-1788362379">Le montant de la santé que vous régénèrent chaque tour.</Text>
 	<Text ID="statistic.berserk.description" TranslateType="Auto" TranslatedHash="-502193063">Lorsque la santé inférieure à la moitié de cette quantité est le {MatchDamage}, {AbilityDamage} et {PowerGain} est augmentée.</Text>
-	<Text ID="statistic.pricereduction.description" TranslateType="Auto" TranslatedHash="1807591934">La réduction en pourcentage du prix des articles d&#39;un magasin.</Text>
-	<Text ID="statistic.aegis.description" TranslateType="Auto" TranslatedHash="-1340618061">La possibilité de bloquer les dégâts d&#39;une attaque comme il frappe.</Text>
-	<Text ID="statistic.counter.description" TranslateType="Auto" TranslatedHash="430655623">En cas de dégâts d&#39;une attaque, la chance de riposter à un ennemi au hasard.</Text>
+	<Text ID="statistic.pricereduction.description" TranslateType="Auto" TranslatedHash="1807591934">La réduction en pourcentage du prix des articles d'un magasin.</Text>
+	<Text ID="statistic.aegis.description" TranslateType="Auto" TranslatedHash="-1340618061">La possibilité de bloquer les dégâts d'une attaque comme il frappe.</Text>
+	<Text ID="statistic.counter.description" TranslateType="Auto" TranslatedHash="430655623">En cas de dégâts d'une attaque, la chance de riposter à un ennemi au hasard.</Text>
 	<Text ID="statistic.reflect.description" TranslateType="Auto" TranslatedHash="1786020960">La possibilité de bloquer les dommages causés par une attaque, puis riposté à un ennemi au hasard.</Text>
-	<Text ID="statistic.chaoticnature.description" TranslateType="Auto" TranslatedHash="-391481612">Le pourcentage d&#39;augmentation ou diminution d&#39;appliquer de façon aléatoire à chaque statistique. Les modifications à chaque fois que vous terminez une rencontre.</Text>
-	<Text ID="statistic.weaknessaura.description" TranslateType="Auto" TranslatedHash="1258719768">La valeur à soustraire de la vie de l&#39;ennemi comme ils se reproduisent.</Text>
+	<Text ID="statistic.chaoticnature.description" TranslateType="Auto" TranslatedHash="-391481612">Le pourcentage d'augmentation ou diminution d'appliquer de façon aléatoire à chaque statistique. Les modifications à chaque fois que vous terminez une rencontre.</Text>
+	<Text ID="statistic.weaknessaura.description" TranslateType="Auto" TranslatedHash="1258719768">La valeur à soustraire de la vie de l'ennemi comme ils se reproduisent.</Text>
 	<Text ID="statistic.necroticaura.description" TranslateType="Auto" TranslatedHash="-1424424200">Le montant de la santé que vous gagnez à chaque fois que vous tuez un ennemi.</Text>
 	<Text ID="statistic.buffduration.description" TranslateType="Auto" TranslatedHash="-806180849">Le multiplicateur pour augmenter la durée buff par.</Text>
 	<Text ID="statistic.luck.description" TranslateType="Auto" TranslatedHash="551934223">Affecte votre chance de gagner des récompenses.</Text>
 	<Text ID="statistic.vampiricstrikes.description" TranslateType="Auto" TranslatedHash="147460025">Vous regagnez une partie des dégâts que vous infligez que la santé.</Text>
 	<Text ID="quest.bronzerewardavailable" TranslateType="Auto" TranslatedHash="1954364909">Peut gagner une récompense de niveau bronze.</Text>
 	<Text ID="quest.bronzerewardacquired" TranslateType="Auto" TranslatedHash="649613005">récompense Bronze déjà acquis.</Text>
-	<Text ID="quest.silverrewardavailable" TranslateType="Auto" TranslatedHash="-502954464">Peut gagner une récompense de niveau d&#39;argent.</Text>
+	<Text ID="quest.silverrewardavailable" TranslateType="Auto" TranslatedHash="-502954464">Peut gagner une récompense de niveau d'argent.</Text>
 	<Text ID="quest.silverrewardacquired" TranslateType="Auto" TranslatedHash="-216598342">récompense Argent déjà acquis.</Text>
-	<Text ID="quest.goldrewardavailable" TranslateType="Auto" TranslatedHash="-463531469">Peut gagner une récompense de niveau d&#39;or.</Text>
-	<Text ID="quest.goldrewardacquired" TranslateType="Auto" TranslatedHash="-841132345">récompense d&#39;or déjà acquis.</Text>
+	<Text ID="quest.goldrewardavailable" TranslateType="Auto" TranslatedHash="-463531469">Peut gagner une récompense de niveau d'or.</Text>
+	<Text ID="quest.goldrewardacquired" TranslateType="Auto" TranslatedHash="-841132345">récompense d'or déjà acquis.</Text>
 	<Text ID="chance.verylow" TranslateType="Auto" TranslatedHash="-1981689494">très lent</Text>
 	<Text ID="chance.low" TranslateType="Auto" TranslatedHash="107348">faible</Text>
 	<Text ID="chance.medium" TranslateType="Auto" TranslatedHash="-1078030475">moyen</Text>

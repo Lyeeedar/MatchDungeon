@@ -1,4 +1,4 @@
-<Localisation Language="ru" xmlns:meta="Editor">
+<Localisation xmlns:meta="Editor">
 	<Text ID="BackalleyGamblingContent.Node.[1] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:ddb1e956-cb9d-4c65-a8d5-f7f6748006ba" TranslateType="Auto" TranslatedHash="2144723756">Невезение</Text>
 	<Text ID="BackalleyGamblingContent.Node.[1] Rewards.Rewards.[1] Buff.Buff.Buff (Buff).Name:3605db3b-5b17-4045-97c2-c38b44011dc4" TranslateType="Auto" TranslatedHash="-973288140">Удачи</Text>
 	<Text ID="BeholderBattleContentLevel.Level.Symbols.[1] Symbol.Symbol.MonsterDesc (MonsterDesc).Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:acd17dda-4089-4d1b-b4b6-4e51a396d7cd" TranslateType="Auto" TranslatedHash="988023497">окаменевать</Text>

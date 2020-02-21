@@ -46,17 +46,20 @@
 				<Death meta:RefKey="ParticleEffect">
 					<Name>Fireburst</Name>
 				</Death>
-				<AttackNumPips>5</AttackNumPips>
 				<AttackCooldown>2,7</AttackCooldown>
 				<AttackDamage>3</AttackDamage>
 				<Size>4</Size>
-				<HP>50</HP>
 				<DamageReduction>2</DamageReduction>
 				<Abilities>
 					<MonsterSpreaderAbilityData>
-						<classID>Spreader</classID>
 						<Cooldown>1,7</Cooldown>
-						<Count>3</Count>
+						<TargetRestriction meta:RefKey="Targetter">
+							<Type>BASICORB</Type>
+						</TargetRestriction>
+						<Permuter meta:RefKey="Permuter">
+							<Type>SINGLE</Type>
+						</Permuter>
+						<classID>Spreader</classID>
 						<Spreader meta:RefKey="SpreaderDef">
 							<Name>Lava</Name>
 							<Sprite meta:RefKey="SpriteWrapper">
@@ -65,18 +68,23 @@
 								</Sprite>
 							</Sprite>
 							<Effect>Attack</Effect>
-							<RenderAbove>false</RenderAbove>
 							<AttackEffect meta:RefKey="ParticleEffect">
 								<Name>Fireburst</Name>
 							</AttackEffect>
+							<RenderAbove>false</RenderAbove>
 						</Spreader>
 					</MonsterSpreaderAbilityData>
 					<MonsterMonsterEffectAbilityData>
+						<Cooldown>4,8</Cooldown>
+						<TargetRestriction meta:RefKey="Targetter">
+							<Type>BASICORB</Type>
+						</TargetRestriction>
+						<Permuter meta:RefKey="Permuter">
+							<Type>SINGLE</Type>
+						</Permuter>
 						<classID>MonsterEffect</classID>
 						<Effect>ATTACK</Effect>
-						<Cooldown>4,8</Cooldown>
-						<Count>3</Count>
-						<Damage>3</Damage>
+						<MonsterEffectData meta:RefKey="MonsterEffectData" />
 						<HitEffect meta:RefKey="ParticleEffect">
 							<Name>Fireburst</Name>
 						</HitEffect>
@@ -103,14 +111,14 @@
 	</Symbols>
 	<VictoryConditions>
 		<Kill>
-			<classID>Kill </classID>
+			<classID>Kill</classID>
 			<All>false</All>
 			<Named>Elemental</Named>
 		</Kill>
 	</VictoryConditions>
 	<DefeatConditions>
 		<Die>
-			<classID>Die </classID>
+			<classID>Die</classID>
 		</Die>
 	</DefeatConditions>
 </Level>

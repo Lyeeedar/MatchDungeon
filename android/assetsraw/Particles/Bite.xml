@@ -5,6 +5,9 @@
 			<Name>Jaws</Name>
 			<Width>0</Width>
 			<Height>0</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>0,0</ParticleSpeed>
 			<ParticleRotation>0,0</ParticleRotation>
 			<RateKeyframes>
@@ -14,6 +17,11 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.4,0.4</Lifetime>
+					<SizeKeyframes>
+						<Stream>
+							<Keyframe>0|1|1</Keyframe>
+						</Stream>
+					</SizeKeyframes>
 					<BlendMode>Additive</BlendMode>
 					<TextureKeyframes>
 						<Stream>
@@ -25,11 +33,6 @@
 							<Keyframe>0.9019231|EffectSprites/Jaws/Jaws_6</Keyframe>
 						</Stream>
 					</TextureKeyframes>
-					<SizeKeyframes>
-						<Stream>
-							<Keyframe>0|1|1</Keyframe>
-						</Stream>
-					</SizeKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|255,255,255,255</Keyframe>
@@ -42,6 +45,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>

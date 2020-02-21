@@ -15,19 +15,18 @@
 	<Faction>Rats</Faction>
 	<VictoryConditions>
 		<Kill>
-			<classID>Kill </classID>
+			<classID>Kill</classID>
 		</Kill>
 		<CustomOrb>
-			<classID>CustomOrb </classID>
-			<Count>20</Count>
+			<classID>CustomOrb</classID>
 			<OrbName>Seduce</OrbName>
+			<Count>20</Count>
 			<Chance>0.2</Chance>
 		</CustomOrb>
 	</VictoryConditions>
 	<DefeatConditions>
 		<Turns>
-			<classID>Turns </classID>
-			<Turns>30</Turns>
+			<classID>Turns</classID>
 		</Turns>
 	</DefeatConditions>
 </Level>

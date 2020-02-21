@@ -58,16 +58,15 @@
 	</Grid>
 	<VictoryConditions>
 		<CustomOrb>
-			<classID>CustomOrb </classID>
-			<Count>30</Count>
+			<classID>CustomOrb</classID>
 			<OrbName>Brain</OrbName>
+			<Count>30</Count>
 			<Chance>0.35</Chance>
 		</CustomOrb>
 	</VictoryConditions>
 	<DefeatConditions>
 		<Time>
-			<classID>Time </classID>
-			<Seconds>60</Seconds>
+			<classID>Time</classID>
 		</Time>
 	</DefeatConditions>
 </Level>

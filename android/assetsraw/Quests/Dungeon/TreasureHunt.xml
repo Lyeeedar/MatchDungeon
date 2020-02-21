@@ -64,7 +64,7 @@
 			<Value>Complete+1</Value>
 			<Next meta:RefKey="QuestNode">404dbb20-26da-4238-b339-d57406c15ac1</Next>
 		</Define>
-		<QuestNode meta:X="330.69302368164063" meta:Y="395.05218505859375" meta:Comment="8c565d5a-5ed2-4d54-9b6b-6a37fb1d1b0b" GUID="404dbb20-26da-4238-b339-d57406c15ac1">
+		<QuestNode meta:X="330.69302368164062" meta:Y="395.05218505859375" meta:Comment="8c565d5a-5ed2-4d54-9b6b-6a37fb1d1b0b" GUID="404dbb20-26da-4238-b339-d57406c15ac1">
 			<Type>Deck</Type>
 			<AllowDeckCards>true</AllowDeckCards>
 			<AllowQuestCards>true</AllowQuestCards>

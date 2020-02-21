@@ -29,27 +29,23 @@
 				<Death meta:RefKey="ParticleEffect">
 					<Name>Death</Name>
 				</Death>
-				<DamageReduction>1</DamageReduction>
 				<Abilities>
 					<FriendlyAttackAbilityData>
-						<classID>Attack</classID>
 						<Cooldown>2,3</Cooldown>
 						<Range>2</Range>
-						<Count>1</Count>
-						<Damage>1</Damage>
+						<classID>Attack</classID>
 					</FriendlyAttackAbilityData>
 					<FriendlyMoveAbilityData>
-						<classID>Move</classID>
 						<Cooldown>1,2</Cooldown>
+						<classID>Move</classID>
 					</FriendlyMoveAbilityData>
 					<FriendlyBlockAbilityData>
-						<classID>Block</classID>
 						<Cooldown>1,3</Cooldown>
 						<Range>2</Range>
-						<Count>1</Count>
 						<HitEffect meta:RefKey="ParticleEffect">
 							<Name>Block</Name>
 						</HitEffect>
+						<classID>Block</classID>
 					</FriendlyBlockAbilityData>
 				</Abilities>
 			</Friendly>
@@ -60,12 +56,12 @@
 	<Theme>Forest</Theme>
 	<VictoryConditions>
 		<Kill>
-			<classID>Kill </classID>
+			<classID>Kill</classID>
 		</Kill>
 	</VictoryConditions>
 	<DefeatConditions>
 		<Die>
-			<classID>Die </classID>
+			<classID>Die</classID>
 		</Die>
 	</DefeatConditions>
 </Level>

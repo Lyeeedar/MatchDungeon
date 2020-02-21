@@ -1,4 +1,4 @@
-<Localisation Language="ru" xmlns:meta="Editor">
+<Localisation xmlns:meta="Editor">
 	<Text ID="AdventurerHat.Head.Description:ffa81d95-3e47-4095-b757-deb2c9fddadf" TranslateType="Auto" TranslatedHash="-1932953667">Шляпа авантюриста. Кажется, чтобы дать удачи в поиске сокровищ.</Text>
 	<Text ID="AdventurerHat.Head.Name:badbee6d-394e-4d9a-b4b5-5990e63f8faf" TranslateType="Auto" TranslatedHash="1263819855">Проводники Hat</Text>
 	<Text ID="ApprenticeFocus.OffHand.Description:19213540-9019-406a-a891-263561e42114" TranslateType="Auto" TranslatedHash="1784692357">В центре внимания розданы начинающими магами. Это поможет вам направить энергию быстрее.</Text>

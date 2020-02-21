@@ -6,6 +6,9 @@
 			<Space>Local</Space>
 			<Width>0</Width>
 			<Height>0</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<Offset>
 				<Keyframe>0|0,0.5</Keyframe>
 			</Offset>

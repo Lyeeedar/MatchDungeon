@@ -5,6 +5,9 @@
 			<Name>Wolf</Name>
 			<Width>0</Width>
 			<Height>0</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<Offset>
 				<Keyframe>0|-0.5,0</Keyframe>
 			</Offset>
@@ -18,12 +21,6 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.5,0.5</Lifetime>
-					<BlendMode>Multiplicative</BlendMode>
-					<TextureKeyframes>
-						<Stream>
-							<Keyframe>0|Oryx/uf_split/uf_heroes/wolf_black_1</Keyframe>
-						</Stream>
-					</TextureKeyframes>
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|0.8|0.8</Keyframe>
@@ -31,6 +28,12 @@
 							<Keyframe>1|0.8|0.8</Keyframe>
 						</Stream>
 					</SizeKeyframes>
+					<BlendMode>Multiplicative</BlendMode>
+					<TextureKeyframes>
+						<Stream>
+							<Keyframe>0|Oryx/uf_split/uf_heroes/wolf_black_1</Keyframe>
+						</Stream>
+					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|89,89,89,255</Keyframe>
@@ -44,6 +47,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>
@@ -52,6 +60,9 @@
 			<Type>Accumulated</Type>
 			<Width>0</Width>
 			<Height>0</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<Offset>
 				<Keyframe>0|-0.5,0</Keyframe>
 				<Keyframe>0.4948783|0.5,0</Keyframe>
@@ -66,6 +77,11 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.1,0.3</Lifetime>
+					<SizeKeyframes>
+						<Stream>
+							<Keyframe>0|0.1|0.2</Keyframe>
+						</Stream>
+					</SizeKeyframes>
 					<BlendMode>Multiplicative</BlendMode>
 					<TextureKeyframes>
 						<Stream>
@@ -78,11 +94,6 @@
 							<Keyframe>0|Particle/plasma_3</Keyframe>
 						</Stream>
 					</TextureKeyframes>
-					<SizeKeyframes>
-						<Stream>
-							<Keyframe>0|0.1|0.2</Keyframe>
-						</Stream>
-					</SizeKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|16,12,18,255</Keyframe>
@@ -96,6 +107,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>

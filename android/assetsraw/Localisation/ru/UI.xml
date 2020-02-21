@@ -1,4 +1,4 @@
-<Localisation Language="ru" xmlns:meta="Editor">
+<Localisation xmlns:meta="Editor">
 	<Text ID="new" TranslateType="Auto" TranslatedHash="78208">новый</Text>
 	<Text ID="complete" TranslateType="Auto" TranslatedHash="-534801063">полный</Text>
 	<Text ID="gold" TranslateType="Auto" TranslatedHash="2225280">Золото</Text>

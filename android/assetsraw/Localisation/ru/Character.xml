@@ -1,4 +1,4 @@
-<Localisation Language="ru" xmlns:meta="Editor">
+<Localisation xmlns:meta="Editor">
 	<Text ID="Adventurer.Character.Description:0e681606-9eef-44bb-b295-067f66e90870" TranslateType="Auto" TranslatedHash="1469535156">Они зарабатывают себе на жизнь, рискуя свою жизнь в древних гробницах или забытых руинах. Сокровище их цель.</Text>
 	<Text ID="Adventurer.Character.Name:1e94d256-5384-45ce-b970-4cb68523f464" TranslateType="Auto" TranslatedHash="1951385474">авантюрист</Text>
 	<Text ID="Alchemist.Character.Description:3031baea-7d06-4e02-9988-d17cadc883fa" TranslateType="Auto" TranslatedHash="1864120403">Алхимик одержит смешивания химических веществ и посмотреть, что происходит. Обычно со взрывчатыми результатами.</Text>

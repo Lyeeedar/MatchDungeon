@@ -39,7 +39,7 @@
 			<Success meta:RefKey="QuestNode">e2237341-1813-4456-b185-f5743b4938b9</Success>
 			<Failure meta:RefKey="QuestNode">e2237341-1813-4456-b185-f5743b4938b9</Failure>
 		</QuestNode>
-		<QuestNode meta:X="146.33285522460938" meta:Y="399.84158325195313" meta:Comment="747ad511-c564-4c69-b485-865dc062a2bb" GUID="e2237341-1813-4456-b185-f5743b4938b9">
+		<QuestNode meta:X="146.33285522460938" meta:Y="399.84158325195312" meta:Comment="747ad511-c564-4c69-b485-865dc062a2bb" GUID="e2237341-1813-4456-b185-f5743b4938b9">
 			<Type>Fixed</Type>
 			<FixedEvent>GateGuardian</FixedEvent>
 			<Success meta:RefKey="SetTheme">c13720bb-4038-421e-be85-2980aee2d387</Success>
@@ -57,7 +57,7 @@
 		<CompleteQuest meta:X="1020.0430908203125" meta:Y="598.6683349609375" meta:Comment="2f947a90-54cc-47f8-9353-6359d9fd6fbf" GUID="76681422-900b-4e91-8b38-118e09366d83">
 			<State>Failure</State>
 		</CompleteQuest>
-		<SetTheme meta:X="592.61676025390625" meta:Y="408.72427368164063" meta:Comment="2f947a90-54cc-47f8-9353-6359d9fd6fbf" GUID="c13720bb-4038-421e-be85-2980aee2d387">
+		<SetTheme meta:X="592.61676025390625" meta:Y="408.72427368164062" meta:Comment="2f947a90-54cc-47f8-9353-6359d9fd6fbf" GUID="c13720bb-4038-421e-be85-2980aee2d387">
 			<Theme>Depths</Theme>
 			<Next meta:RefKey="QuestNode">306b8776-743e-4f6d-9a8b-535d16331108</Next>
 		</SetTheme>

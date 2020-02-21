@@ -78,6 +78,7 @@
 				<Size>1</Size>
 				<HP>6</HP>
 				<DamageReduction>0</DamageReduction>
+				<Abilities />
 			</MonsterDesc>
 			<SpecialOrb>None</SpecialOrb>
 		</Symbol>

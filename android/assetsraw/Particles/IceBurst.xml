@@ -4,6 +4,9 @@
 		<Emitter>
 			<Width>0</Width>
 			<Height>0</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>0,0</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
@@ -13,6 +16,11 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.3,0.3</Lifetime>
+					<SizeKeyframes>
+						<Stream>
+							<Keyframe>0|1|1</Keyframe>
+						</Stream>
+					</SizeKeyframes>
 					<BlendMode>Additive</BlendMode>
 					<BlendKeyframes>true</BlendKeyframes>
 					<TextureKeyframes>
@@ -26,11 +34,6 @@
 							<Keyframe>0.9|EffectSprites/IceBurst/IceBurst_6</Keyframe>
 						</Stream>
 					</TextureKeyframes>
-					<SizeKeyframes>
-						<Stream>
-							<Keyframe>0|1|1</Keyframe>
-						</Stream>
-					</SizeKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|255,255,255,255</Keyframe>
@@ -43,6 +46,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>

@@ -5,6 +5,9 @@
 			<Name>Heal</Name>
 			<Width>0</Width>
 			<Height>0</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<Direction>Up</Direction>
 			<ParticleSpeed>0,0</ParticleSpeed>
 			<ParticleRotation>0,0</ParticleRotation>
@@ -15,6 +18,11 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.5,0.5</Lifetime>
+					<SizeKeyframes>
+						<Stream>
+							<Keyframe>0|1|1</Keyframe>
+						</Stream>
+					</SizeKeyframes>
 					<BlendMode>Additive</BlendMode>
 					<TextureKeyframes>
 						<Stream>
@@ -26,11 +34,6 @@
 							<Keyframe>1|EffectSprites/Heal/Heal_5</Keyframe>
 						</Stream>
 					</TextureKeyframes>
-					<SizeKeyframes>
-						<Stream>
-							<Keyframe>0|1|1</Keyframe>
-						</Stream>
-					</SizeKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|255,255,255,255</Keyframe>
@@ -44,6 +47,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>

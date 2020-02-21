@@ -63,19 +63,18 @@
 	</Grid>
 	<VictoryConditions>
 		<Matches>
-			<classID>Matches </classID>
+			<classID>Matches</classID>
 			<ToBeMatched>
-				<Orbs>20</Orbs>
-				<Orbs>20</Orbs>
-				<Orbs>20</Orbs>
-				<Orbs>20</Orbs>
+				<Int>20</Int>
+				<Int>20</Int>
+				<Int>20</Int>
+				<Int>20</Int>
 			</ToBeMatched>
 		</Matches>
 	</VictoryConditions>
 	<DefeatConditions>
 		<Time>
-			<classID>Time </classID>
-			<Seconds>60</Seconds>
+			<classID>Time</classID>
 		</Time>
 	</DefeatConditions>
 </Level>

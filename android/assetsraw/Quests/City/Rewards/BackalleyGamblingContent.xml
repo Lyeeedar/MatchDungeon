@@ -233,7 +233,6 @@
 						<Statistics meta:RefKey="Statistics">
 							<Luck>-0.2</Luck>
 						</Statistics>
-						<Duration>4</Duration>
 					</Buff>
 				</Buff>
 			</Rewards>
@@ -259,7 +258,6 @@
 						<Statistics meta:RefKey="Statistics">
 							<Luck>0.2</Luck>
 						</Statistics>
-						<Duration>4</Duration>
 					</Buff>
 				</Buff>
 			</Rewards>

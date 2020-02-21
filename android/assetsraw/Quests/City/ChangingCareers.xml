@@ -264,7 +264,7 @@
 		<CompleteQuest meta:X="3356.64111328125" meta:Y="-57.65887451171875" meta:Comment="a07e5911-882c-472b-894f-8a44fe885130" GUID="fa079a20-d82f-450d-8134-cb8e9ef781c9">
 			<State>Failure</State>
 		</CompleteQuest>
-		<CompleteQuest meta:X="4106.57177734375" meta:Y="-61.020034790039063" meta:Comment="a07e5911-882c-472b-894f-8a44fe885130" GUID="d8de7ed3-312d-4c1c-b98a-c33d28f67f1c">
+		<CompleteQuest meta:X="4106.57177734375" meta:Y="-61.020034790039062" meta:Comment="a07e5911-882c-472b-894f-8a44fe885130" GUID="d8de7ed3-312d-4c1c-b98a-c33d28f67f1c">
 			<State>Failure</State>
 		</CompleteQuest>
 		<Define meta:X="4094.380126953125" meta:Y="-228.01441955566406" meta:Comment="a07e5911-882c-472b-894f-8a44fe885130" GUID="41f213d2-5bc5-4028-9c5e-ddf024828a7f">
@@ -347,7 +347,7 @@
 		<CompleteQuest meta:X="3302.06396484375" meta:Y="315.6689453125" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="5b7cba6f-341f-414e-af0b-fe929916b387">
 			<State>Failure</State>
 		</CompleteQuest>
-		<CompleteQuest meta:X="4015.6572265625" meta:Y="323.92642211914063" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="bf20c190-2fba-48fb-b038-4c1b96d0568d">
+		<CompleteQuest meta:X="4015.6572265625" meta:Y="323.92642211914062" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="bf20c190-2fba-48fb-b038-4c1b96d0568d">
 			<State>Failure</State>
 		</CompleteQuest>
 		<Define meta:X="4031.41552734375" meta:Y="152.46432495117188" meta:Comment="9e0344c5-5f90-479e-aa5b-faf7f95ff6de" GUID="15ffb8a5-2183-4c69-b74b-0bacba0db688">

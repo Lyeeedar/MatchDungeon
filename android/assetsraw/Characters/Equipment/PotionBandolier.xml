@@ -35,7 +35,6 @@
 					<AbilityDamage>1</AbilityDamage>
 					<Pierce>1</Pierce>
 				</Statistics>
-				<Duration>4</Duration>
 			</Buff>
 		</Effect>
 	</Ability>

@@ -1,4 +1,4 @@
-<Localisation Language="fr" xmlns:meta="Editor">
+<Localisation xmlns:meta="Editor">
 	<Text ID="Bow.MainHand.Ability.Description:3c70cdf8-4214-419c-beda-4c44bbfbcab1" TranslateType="Auto" TranslatedHash="1641933417">Tirez une flèche à un ennemi, lui infligeant des dégâts {Damage}.</Text>
 	<Text ID="Bow.MainHand.Ability.Name:9f28629b-232a-47e3-bae4-ab76a190e47f" TranslateType="Auto" TranslatedHash="79860735">Tirer</Text>
 	<Text ID="Breastplate.Body.Ability.Description:6d68a13b-f863-4c1b-94e3-bf9f829d7ab6" TranslateType="Auto" TranslatedHash="1266998393">Smash votre corps dans une attaque, éclater et tout dans un rayon de 1 tuile autour, sur le {Damage} dégâts.</Text>
@@ -21,7 +21,7 @@
 	<Text ID="Knife.MainHand.Ability.Name:a4d791c5-72ee-4173-a9f8-e14f7347fec6" TranslateType="Auto" TranslatedHash="2587234">Poignarder</Text>
 	<Text ID="Longsword.MainHand.Ability.Description:a03ae051-7476-4530-9173-932bab3ac247" TranslateType="Auto" TranslatedHash="1874835166">Hacher un ennemi en deux, infligeant des dégâts {Damage}.</Text>
 	<Text ID="Longsword.MainHand.Ability.Name:1be71a30-2ce3-4013-a8ae-1875ca9bdee1" TranslateType="Auto" TranslatedHash="2099494">Hacher</Text>
-	<Text ID="Necroracia.OffHand.Ability.Description:0d71769f-7071-4b3d-8765-948254d5b5df" TranslateType="Auto" TranslatedHash="462682541">Un sombre et puissant sortilège, frappant 1 monstre et tous les autres avec un rayon de 2 tuiles pour les dommages de base {Damage}. Inflige plus de dégâts selon le nombre de créatures sont dans sa zone d&#39;effet.</Text>
+	<Text ID="Necroracia.OffHand.Ability.Description:0d71769f-7071-4b3d-8765-948254d5b5df" TranslateType="Auto" TranslatedHash="462682541">Un sombre et puissant sortilège, frappant 1 monstre et tous les autres avec un rayon de 2 tuiles pour les dommages de base {Damage}. Inflige plus de dégâts selon le nombre de créatures sont dans sa zone d'effet.</Text>
 	<Text ID="Necroracia.OffHand.Ability.Name:f8f6753f-cd3e-455b-a3b0-9d0efd1ba211" TranslateType="Auto" TranslatedHash="1809382691">Necroracia</Text>
 	<Text ID="NoPants.Body.Ability.Description:126b7e78-a2ae-4171-9c0f-c76a5a5ae417" TranslateType="Auto" TranslatedHash="-1839963387">Etaler de la voie de toute attaque, vous rendant insensible aux dégâts pour les virages {Turns}.</Text>
 	<Text ID="NoPants.Body.Ability.Name:0fdf7939-cbd5-413f-8557-18b9297154a1" TranslateType="Auto" TranslatedHash="-1207376026">Roulade</Text>
@@ -29,7 +29,7 @@
 	<Text ID="Pitchfork.MainHand.Ability.Name:a32a816e-cd99-4941-8ac5-824e41ed4136" TranslateType="Auto" TranslatedHash="2587234">Poignarder</Text>
 	<Text ID="PotionBandolier.Body.Ability.Description:2fd203d3-9725-4f50-ab24-be75319e107f" TranslateType="Auto" TranslatedHash="1225867038">Buvez une potion pour obtenir une augmentation des dommages pour les virages {Turns}.</Text>
 	<Text ID="PotionBandolier.Body.Ability.Name:3e7c8e24-b063-400f-bffb-6afbad122bf5" TranslateType="Auto" TranslatedHash="-683016613">buvez Potion</Text>
-	<Text ID="ShamansStaff.MainHand.Ability.Description:056dd23b-e250-40c8-be29-0f871eff61a3" TranslateType="Auto" TranslatedHash="-1284321027">Invoque un nuage de poison à l&#39;emplacement cible. Cela n&#39;endommage chaque tour, mais est dispersée si vous correspondez à côté.</Text>
+	<Text ID="ShamansStaff.MainHand.Ability.Description:056dd23b-e250-40c8-be29-0f871eff61a3" TranslateType="Auto" TranslatedHash="-1284321027">Invoque un nuage de poison à l'emplacement cible. Cela n'endommage chaque tour, mais est dispersée si vous correspondez à côté.</Text>
 	<Text ID="ShamansStaff.MainHand.Ability.Name:be939452-1309-448d-ac88-b3fd91ebfa90" TranslateType="Auto" TranslatedHash="2143415260">Summon Poison Nuage</Text>
 	<Text ID="ShearScimitar.MainHand.Ability.Description:02e90070-4df0-4af4-afd7-484f1a0465bf" TranslateType="Auto" TranslatedHash="-1045359376">Slash la cible avec votre lame, couper à rubans, traiter {Damage} dégâts.</Text>
 	<Text ID="ShearScimitar.MainHand.Ability.Name:341e13ef-43ca-4468-b7d0-502fde1f53f7" TranslateType="Auto" TranslatedHash="-160914829">mille coupes</Text>
@@ -37,7 +37,7 @@
 	<Text ID="SkullNecklace.Head.Ability.Name:b7fcb91d-a7aa-4ef7-9e13-108d80c8d8a4" TranslateType="Auto" TranslatedHash="-1856723890">Malefeu</Text>
 	<Text ID="Sledgehammer.MainHand.Ability.Description:99829214-9e01-4619-bacb-812ff9c077c3" TranslateType="Auto" TranslatedHash="460598652">Écraser une quelconque globe en morceaux.</Text>
 	<Text ID="Sledgehammer.MainHand.Ability.Name:e0b20bc3-ba6f-4c7c-a9d7-e7b13e4766b9" TranslateType="Auto" TranslatedHash="79996348">Fracasser</Text>
-	<Text ID="SpellMagicMissile.MainHand.Ability.Description:4e7e5019-b896-429b-bff2-bc14a0ed4bdd" TranslateType="Auto" TranslatedHash="-974630217">Ce sort déclenche 3 boulons d&#39;énergie que la maison dans sur les ennemis au hasard, sur le {Damage} dégâts.</Text>
+	<Text ID="SpellMagicMissile.MainHand.Ability.Description:4e7e5019-b896-429b-bff2-bc14a0ed4bdd" TranslateType="Auto" TranslatedHash="-974630217">Ce sort déclenche 3 boulons d'énergie que la maison dans sur les ennemis au hasard, sur le {Damage} dégâts.</Text>
 	<Text ID="SpellMagicMissile.MainHand.Ability.Name:1629d1e6-6426-4617-9ff2-a219523a3005" TranslateType="Auto" TranslatedHash="-1217425037">Missile magique</Text>
 	<Text ID="SpellReflect.OffHand.Ability.Description:093611b2-d0fa-4cd0-910a-8613fc5d6d23" TranslateType="Auto" TranslatedHash="324385765">Refléter les attaques de {Turns} tours.</Text>
 	<Text ID="SpellReflect.OffHand.Ability.Name:6df417a3-50f3-4781-90da-febeb38d7df2" TranslateType="Auto" TranslatedHash="627165259">Réflexion</Text>
@@ -49,6 +49,6 @@
 	<Text ID="Whip.MainHand.Ability.Name:07650389-52d5-41a7-a137-b3d3a63db54e" TranslateType="Auto" TranslatedHash="2695128">Fouet</Text>
 	<Text ID="WizardsRobes.Body.Ability.Description:1b03862e-5630-4578-9d4d-f9d76a2b2721" TranslateType="Auto" TranslatedHash="339612081">Pour {Turns} tours, le gain de bonus aux dégâts de vos sorts.</Text>
 	<Text ID="WizardsRobes.Body.Ability.Name:0be2e2b4-6f40-4411-a653-086b25d3ea83" TranslateType="Auto" TranslatedHash="-211202904">Surcharge</Text>
-	<Text ID="Zweihander.MainHand.Ability.Description:4262580d-d0aa-4210-86d9-0f7ec78327ce" TranslateType="Auto" TranslatedHash="-214500100">Smash une tuile et l&#39;un au-dessus et au-dessous en morceaux, infligeant des dégâts {Damage}.</Text>
+	<Text ID="Zweihander.MainHand.Ability.Description:4262580d-d0aa-4210-86d9-0f7ec78327ce" TranslateType="Auto" TranslatedHash="-214500100">Smash une tuile et l'un au-dessus et au-dessous en morceaux, infligeant des dégâts {Damage}.</Text>
 	<Text ID="Zweihander.MainHand.Ability.Name:a7863b11-7737-413c-9107-f58a9d960b3d" TranslateType="Auto" TranslatedHash="79996348">Fracasser</Text>
 </Localisation>

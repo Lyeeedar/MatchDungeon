@@ -1,7 +1,5 @@
 <Localisation Language="en" xmlns:meta="Editor">
 	<Text ID="Bow.MainHand.Ability (Ability).Description:3c70cdf8-4214-419c-beda-4c44bbfbcab1">Shoot an arrow at an enemy, dealing {Damage} damage.</Text>
-	<Text ID="Bow.MainHand.Ability (Ability).Description:b2ed30f6-86f7-436d-be82-db86fb8ca63e"></Text>
-	<Text ID="Bow.MainHand.Ability (Ability).Name:8058fe37-73c8-4ad4-aa1c-5b2fc0b1e7ba"></Text>
 	<Text ID="Bow.MainHand.Ability (Ability).Name:9f28629b-232a-47e3-bae4-ab76a190e47f">Shoot</Text>
 	<Text ID="Bow.MainHand.Ability.Description:3c70cdf8-4214-419c-beda-4c44bbfbcab1">Shoot an arrow at an enemy, dealing {Damage} damage.</Text>
 	<Text ID="Bow.MainHand.Ability.Name:9f28629b-232a-47e3-bae4-ab76a190e47f">Shoot</Text>
@@ -61,6 +59,8 @@
 	<Text ID="PotionBandolier.Body.Ability (Ability).Name:3e7c8e24-b063-400f-bffb-6afbad122bf5">Drink Potion</Text>
 	<Text ID="PotionBandolier.Body.Ability.Description:2fd203d3-9725-4f50-ab24-be75319e107f">Drink a potion to gain increased damage for {Turns} turns.</Text>
 	<Text ID="PotionBandolier.Body.Ability.Name:3e7c8e24-b063-400f-bffb-6afbad122bf5">Drink Potion</Text>
+	<Text ID="ShamansStaff.MainHand.Ability (Ability).Description:056dd23b-e250-40c8-be29-0f871eff61a3">Summon a poison cloud at the target location. This does damage every turn, but is dispersed if you match next to it.</Text>
+	<Text ID="ShamansStaff.MainHand.Ability (Ability).Name:be939452-1309-448d-ac88-b3fd91ebfa90">Summon Poison Cloud</Text>
 	<Text ID="ShamansStaff.MainHand.Ability.Description:056dd23b-e250-40c8-be29-0f871eff61a3">Summon a poison cloud at the target location. This does damage every turn, but is dispersed if you match next to it.</Text>
 	<Text ID="ShamansStaff.MainHand.Ability.Name:be939452-1309-448d-ac88-b3fd91ebfa90">Summon Poison Cloud</Text>
 	<Text ID="ShearScimitar.MainHand.Ability (Ability).Description:02e90070-4df0-4af4-afd7-484f1a0465bf">Slash the target with your blade, slicing it to ribbons, dealing {Damage} damage.</Text>
@@ -87,6 +87,8 @@
 	<Text ID="SpellShockShield.OffHand.Ability (Ability).Name:6ca7c696-33f9-4c16-8799-65bf59cf5787">Shock Shield</Text>
 	<Text ID="SpellShockShield.OffHand.Ability.Description:05ece79b-5a72-4678-aea1-cb540b890117">Block some attacks, and shock the attackers, for {Turns} turns.</Text>
 	<Text ID="SpellShockShield.OffHand.Ability.Name:6ca7c696-33f9-4c16-8799-65bf59cf5787">Shock Shield</Text>
+	<Text ID="Torch.OffHand.Ability (Ability).Description:0cd80c21-54cf-4bba-b89a-24a31cb72b01">Set an object on fire.</Text>
+	<Text ID="Torch.OffHand.Ability (Ability).Name:6a5edebf-dde1-47f3-8b66-10ed5b564553">Light Fire</Text>
 	<Text ID="Torch.OffHand.Ability.Description:0cd80c21-54cf-4bba-b89a-24a31cb72b01">Set an object on fire.</Text>
 	<Text ID="Torch.OffHand.Ability.Name:6a5edebf-dde1-47f3-8b66-10ed5b564553">Light Fire</Text>
 	<Text ID="Whip.MainHand.Ability (Ability).Description:ae6bf388-bb12-49fc-a08c-a49b1d4ad180">Whip an enemy, dealing {Damage} damage.</Text>

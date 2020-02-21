@@ -113,12 +113,12 @@
 	</Symbols>
 	<VictoryConditions>
 		<Break>
-			<classID>Break </classID>
+			<classID>Break</classID>
 		</Break>
 	</VictoryConditions>
 	<DefeatConditions>
 		<Die>
-			<classID>Die </classID>
+			<classID>Die</classID>
 		</Die>
 	</DefeatConditions>
 </Level>

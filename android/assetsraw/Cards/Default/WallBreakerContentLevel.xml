@@ -36,13 +36,12 @@
 	<OrbCount>5</OrbCount>
 	<VictoryConditions>
 		<Sink>
-			<classID>Sink </classID>
-			<Count>5</Count>
+			<classID>Sink</classID>
 		</Sink>
 	</VictoryConditions>
 	<DefeatConditions>
 		<Turns>
-			<classID>Turns </classID>
+			<classID>Turns</classID>
 			<Turns>40</Turns>
 		</Turns>
 	</DefeatConditions>

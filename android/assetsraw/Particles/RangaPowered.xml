@@ -5,6 +5,11 @@
 			<Name>Static</Name>
 			<Type>Accumulated</Type>
 			<Shape>Circle</Shape>
+			<Width>1</Width>
+			<Height>1</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<Direction>Random</Direction>
 			<ParticleSpeed>0,0.1</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>

@@ -9,14 +9,18 @@
 			<Death meta:RefKey="ParticleEffect">
 				<Name>Death</Name>
 			</Death>
-			<AttackNumPips>5</AttackNumPips>
 			<AttackCooldown>2,5</AttackCooldown>
-			<Size>1</Size>
-			<HP>5</HP>
-			<DamageReduction>0</DamageReduction>
 			<Abilities>
 				<MonsterMoveAbilityData>
 					<Cooldown>2,5</Cooldown>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Move</classID>
+					<MoveType>BASIC</MoveType>
 				</MonsterMoveAbilityData>
 			</Abilities>
 		</Monster>
@@ -31,12 +35,17 @@
 			</Death>
 			<AttackNumPips>7</AttackNumPips>
 			<AttackCooldown>3,6</AttackCooldown>
-			<Size>1</Size>
-			<HP>7</HP>
-			<DamageReduction>0</DamageReduction>
 			<Abilities>
 				<MonsterMoveAbilityData>
 					<Cooldown>2,5</Cooldown>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Move</classID>
+					<MoveType>BASIC</MoveType>
 				</MonsterMoveAbilityData>
 			</Abilities>
 		</Monster>
@@ -52,15 +61,30 @@
 			<AttackNumPips>4</AttackNumPips>
 			<AttackCooldown>4,7</AttackCooldown>
 			<Size>2</Size>
-			<HP>11</HP>
-			<DamageReduction>0</DamageReduction>
 			<Abilities>
 				<MonsterMoveAbilityData>
 					<Cooldown>3,6</Cooldown>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Move</classID>
+					<MoveType>BASIC</MoveType>
 				</MonsterMoveAbilityData>
-				<MonsterAbilityData>
+				<MonsterMonsterEffectAbilityData>
 					<Cooldown>2,6</Cooldown>
-				</MonsterAbilityData>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>MonsterEffect</classID>
+					<Effect>ATTACK</Effect>
+					<MonsterEffectData meta:RefKey="MonsterEffectData" />
+				</MonsterMonsterEffectAbilityData>
 			</Abilities>
 		</Monster>
 	</Monsters>
@@ -74,23 +98,47 @@
 			<Death meta:RefKey="ParticleEffect">
 				<Name>Death</Name>
 			</Death>
-			<AttackNumPips>5</AttackNumPips>
 			<AttackCooldown>4,6</AttackCooldown>
-			<Size>1</Size>
-			<HP>20</HP>
-			<DamageReduction>0</DamageReduction>
 			<Abilities>
 				<MonsterMoveAbilityData>
 					<Cooldown>3,6</Cooldown>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Move</classID>
+					<MoveType>BASIC</MoveType>
 				</MonsterMoveAbilityData>
-				<MonsterHealAbilityData>
+				<MonsterMonsterEffectAbilityData>
 					<Cooldown>2,9</Cooldown>
-					<Amount>4</Amount>
-				</MonsterHealAbilityData>
-				<MonsterAbilityData>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>MonsterEffect</classID>
+					<Effect>HEAL</Effect>
+					<MonsterEffectData meta:RefKey="MonsterEffectData">
+						<Amount>4</Amount>
+					</MonsterEffectData>
+				</MonsterMonsterEffectAbilityData>
+				<MonsterMonsterEffectAbilityData>
 					<Cooldown>3,6</Cooldown>
-					<Damage>3</Damage>
-				</MonsterAbilityData>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>MonsterEffect</classID>
+					<Effect>ATTACK</Effect>
+					<MonsterEffectData meta:RefKey="MonsterEffectData">
+						<Damage>3</Damage>
+					</MonsterEffectData>
+				</MonsterMonsterEffectAbilityData>
 			</Abilities>
 		</Monster>
 	</Bosses>

@@ -337,11 +337,10 @@
 					<Effect>SUMMON</Effect>
 					<MonsterEffectData meta:RefKey="MonsterEffectData">
 						<Faction>Slime</Faction>
-					<IsSummon>false</IsSummon>
-					<SpawnEffect meta:RefKey="ParticleEffect">
-						<Name>Splatter</Name>
-						<Colour>212,178,26,255</Colour>
-					</SpawnEffect>
+						<SpawnEffect meta:RefKey="ParticleEffect">
+							<Name>Splatter</Name>
+							<Colour>212,178,26,255</Colour>
+						</SpawnEffect>
 					</MonsterEffectData>
 				</MonsterMonsterEffectAbilityData>
 				<MonsterSpreaderAbilityData>

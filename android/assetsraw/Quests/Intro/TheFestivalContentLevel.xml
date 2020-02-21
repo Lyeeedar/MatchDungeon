@@ -31,9 +31,6 @@
 				</Death>
 				<AttackNumPips>10</AttackNumPips>
 				<AttackCooldown>4,7</AttackCooldown>
-				<Size>1</Size>
-				<HP>5</HP>
-				<DamageReduction>0</DamageReduction>
 			</MonsterDesc>
 			<SpecialOrb>None</SpecialOrb>
 		</Symbol>
@@ -41,12 +38,12 @@
 	<Theme>City</Theme>
 	<VictoryConditions>
 		<Kill>
-			<classID>Kill </classID>
+			<classID>Kill</classID>
 		</Kill>
 	</VictoryConditions>
 	<DefeatConditions>
 		<Die>
-			<classID>Die </classID>
+			<classID>Die</classID>
 		</Die>
 	</DefeatConditions>
 </Level>

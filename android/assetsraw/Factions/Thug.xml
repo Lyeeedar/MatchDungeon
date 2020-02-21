@@ -11,12 +11,17 @@
 			</Death>
 			<AttackNumPips>6</AttackNumPips>
 			<AttackCooldown>3,6</AttackCooldown>
-			<Size>1</Size>
-			<HP>8</HP>
-			<DamageReduction>0</DamageReduction>
 			<Abilities>
 				<MonsterMoveAbilityData>
 					<Cooldown>4,8</Cooldown>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Move</classID>
+					<MoveType>BASIC</MoveType>
 				</MonsterMoveAbilityData>
 			</Abilities>
 		</Monster>
@@ -31,12 +36,17 @@
 			</Death>
 			<AttackNumPips>8</AttackNumPips>
 			<AttackCooldown>3,5</AttackCooldown>
-			<Size>1</Size>
-			<HP>8</HP>
-			<DamageReduction>0</DamageReduction>
 			<Abilities>
 				<MonsterMoveAbilityData>
 					<Cooldown>4,8</Cooldown>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Move</classID>
+					<MoveType>BASIC</MoveType>
 				</MonsterMoveAbilityData>
 			</Abilities>
 		</Monster>
@@ -52,18 +62,26 @@
 			<AttackNumPips>8</AttackNumPips>
 			<AttackCooldown>3,6</AttackCooldown>
 			<Size>2</Size>
-			<HP>12</HP>
-			<DamageReduction>0</DamageReduction>
 			<Abilities>
-				<MonsterAbilityData>
+				<MonsterMonsterEffectAbilityData>
 					<Cooldown>3,6</Cooldown>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>MonsterEffect</classID>
+					<Effect>ATTACK</Effect>
 					<NumPips>6</NumPips>
-				</MonsterAbilityData>
+					<MonsterEffectData meta:RefKey="MonsterEffectData" />
+				</MonsterMonsterEffectAbilityData>
 			</Abilities>
 		</Monster>
 	</Monsters>
 	<Bosses>
 		<Monster meta:RefKey="MonsterDesc">
+			<Name></Name>
 			<Sprite meta:RefKey="Sprite">
 				<Name>Oryx/uf_split/uf_heroes/barbarian_f</Name>
 				<DrawActualSize>true</DrawActualSize>
@@ -73,16 +91,30 @@
 			</Death>
 			<AttackNumPips>4</AttackNumPips>
 			<AttackCooldown>2,6</AttackCooldown>
-			<Size>1</Size>
-			<HP>15</HP>
-			<DamageReduction>0</DamageReduction>
 			<Abilities>
 				<MonsterMoveAbilityData>
 					<Cooldown>2,6</Cooldown>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>Move</classID>
+					<MoveType>BASIC</MoveType>
 				</MonsterMoveAbilityData>
-				<MonsterAbilityData>
+				<MonsterMonsterEffectAbilityData>
 					<Cooldown>1,5</Cooldown>
-				</MonsterAbilityData>
+					<TargetRestriction meta:RefKey="Targetter">
+						<Type>BASICORB</Type>
+					</TargetRestriction>
+					<Permuter meta:RefKey="Permuter">
+						<Type>SINGLE</Type>
+					</Permuter>
+					<classID>MonsterEffect</classID>
+					<Effect>ATTACK</Effect>
+					<MonsterEffectData meta:RefKey="MonsterEffectData" />
+				</MonsterMonsterEffectAbilityData>
 			</Abilities>
 		</Monster>
 	</Bosses>

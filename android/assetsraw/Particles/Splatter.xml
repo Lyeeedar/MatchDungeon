@@ -5,8 +5,12 @@
 			<Name>Splatter</Name>
 			<Gravity>-4</Gravity>
 			<Shape>Cone</Shape>
+			<Angle>90</Angle>
 			<Width>45</Width>
 			<Height>0.1</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>1.5,2</ParticleSpeed>
 			<ParticleRotation>0,1</ParticleRotation>
 			<RateKeyframes>

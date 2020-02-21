@@ -1,4 +1,4 @@
-<Localisation Language="fr" xmlns:meta="Editor">
+<Localisation xmlns:meta="Editor">
 	<Text ID="BackalleyGamblingContent.Node.[1] Rewards.Rewards.[0] Buff.Buff.Buff (Buff).Name:ddb1e956-cb9d-4c65-a8d5-f7f6748006ba" TranslateType="Auto" TranslatedHash="2144723756">Malchance</Text>
 	<Text ID="BackalleyGamblingContent.Node.[1] Rewards.Rewards.[1] Buff.Buff.Buff (Buff).Name:3605db3b-5b17-4045-97c2-c38b44011dc4" TranslateType="Auto" TranslatedHash="-973288140">Bonne chance</Text>
 	<Text ID="BeholderBattleContentLevel.Level.Symbols.[1] Symbol.Symbol.MonsterDesc (MonsterDesc).Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:acd17dda-4089-4d1b-b4b6-4e51a396d7cd" TranslateType="Auto" TranslatedHash="988023497">Pétrifier</Text>
@@ -17,7 +17,7 @@
 	<Text ID="PotionDealerContent.Node.[2] Shop.Shop.Items.[0] Buff.Buff.Buff (Buff).Name:e09edab3-4d73-483f-a1f2-73511ce244ee" TranslateType="Auto" TranslatedHash="1612011542">Potion de Heartiness</Text>
 	<Text ID="PotionDealerContent.Node.[2] Shop.Shop.Items.[1] Buff.Buff.Buff (Buff).Name:95529ac3-62bc-44f8-915d-f6f496386cd2" TranslateType="Auto" TranslatedHash="-1248127587">Potion de force</Text>
 	<Text ID="PotionDealerContent.Node.[2] Shop.Shop.Items.[2] Buff.Buff.Buff (Buff).Name:4b1ceee5-5fa1-42ec-82f5-01985028ff45" TranslateType="Auto" TranslatedHash="-810715111">Potion de fer peau</Text>
-	<Text ID="PotionDealerContent.Node.[2] Shop.Shop.Items.[3] Buff.Buff.Buff (Buff).Name:fb6b16ed-9a3d-474f-868b-03539252982a" TranslateType="Auto" TranslatedHash="1066835684">Potion de l&#39;énergie</Text>
+	<Text ID="PotionDealerContent.Node.[2] Shop.Shop.Items.[3] Buff.Buff.Buff (Buff).Name:fb6b16ed-9a3d-474f-868b-03539252982a" TranslateType="Auto" TranslatedHash="1066835684">Potion de l'énergie</Text>
 	<Text ID="PotionDealerContent.Node.[2] Shop.Shop.Items.[4] Buff.Buff.Buff (Buff).Name:a47cd4d8-e355-4009-bc51-5ad220717953" TranslateType="Auto" TranslatedHash="-879298894">Potion de Fury</Text>
 	<Text ID="RaidContentLevel.Level.Symbols.[1] Symbol.Symbol.MonsterDesc (MonsterDesc).Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:aaf92c38-f4dc-47fc-bce4-98054123cb4d" TranslateType="Auto" TranslatedHash="988023497">Pétrifier</Text>
 	<Text ID="SewerOutflowContentLevel.Level.Symbols.[2] Symbol.Symbol.MonsterDesc (MonsterDesc).Abilities.[1] Ability.Ability.Data.Debuff (Buff).Name:ce0ffd64-b62c-4c7b-8457-1d9cd8beb35b" TranslateType="Auto" TranslatedHash="2580001">Lent</Text>

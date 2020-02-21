@@ -1,4 +1,5 @@
 <Effect xmlns:meta="Editor">
+	<Loop>false</Loop>
 	<Emitters>
 		<Emitter>
 			<Name>Glow</Name>
@@ -7,6 +8,9 @@
 			<Space>Local</Space>
 			<Width>0</Width>
 			<Height>0</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>0,1</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
@@ -15,12 +19,6 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0,1</Lifetime>
-					<BlendMode>Additive</BlendMode>
-					<TextureKeyframes>
-						<Stream>
-							<Keyframe>0|Particle/glow</Keyframe>
-						</Stream>
-					</TextureKeyframes>
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|2|2</Keyframe>
@@ -31,6 +29,12 @@
 							<Keyframe>0|0|0</Keyframe>
 						</Stream>
 					</RotationSpeedKeyframes>
+					<BlendMode>Additive</BlendMode>
+					<TextureKeyframes>
+						<Stream>
+							<Keyframe>0|Particle/glow</Keyframe>
+						</Stream>
+					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|255,234,101,255</Keyframe>
@@ -41,16 +45,24 @@
 							<Keyframe>0|0.3</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>
 		<Emitter>
 			<Name>Orb</Name>
 			<KillParticlesOnStop>true</KillParticlesOnStop>
-			<Type>Accumulated</Type>
 			<Space>Local</Space>
+			<Type>Accumulated</Type>
 			<Width>0.1</Width>
 			<Height>0.1</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<ParticleSpeed>0,0.1</ParticleSpeed>
 			<ParticleRotation>0,360</ParticleRotation>
 			<RateKeyframes>
@@ -59,6 +71,17 @@
 			<Particles>
 				<Particle>
 					<Lifetime>1,2</Lifetime>
+					<SizeKeyframes>
+						<Stream>
+							<Keyframe>0|0.6|0.6</Keyframe>
+							<Keyframe>1|0.5|0.3</Keyframe>
+						</Stream>
+					</SizeKeyframes>
+					<RotationSpeedKeyframes>
+						<Stream>
+							<Keyframe>0|0|0</Keyframe>
+						</Stream>
+					</RotationSpeedKeyframes>
 					<BlendMode>Additive</BlendMode>
 					<TextureKeyframes>
 						<Stream>
@@ -71,17 +94,6 @@
 							<Keyframe>0|Particle/plasma_3</Keyframe>
 						</Stream>
 					</TextureKeyframes>
-					<SizeKeyframes>
-						<Stream>
-							<Keyframe>0|0.6|0.6</Keyframe>
-							<Keyframe>1|0.5|0.3</Keyframe>
-						</Stream>
-					</SizeKeyframes>
-					<RotationSpeedKeyframes>
-						<Stream>
-							<Keyframe>0|0|0</Keyframe>
-						</Stream>
-					</RotationSpeedKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|255,0,0,255</Keyframe>
@@ -101,6 +113,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>
@@ -109,8 +126,12 @@
 			<IsBlockingEmitter>false</IsBlockingEmitter>
 			<Type>Accumulated</Type>
 			<Shape>Cone</Shape>
+			<Angle>90</Angle>
 			<Width>180</Width>
 			<Height>0.2</Height>
+			<SizeMultiplier>
+				<Keyframe>0|1</Keyframe>
+			</SizeMultiplier>
 			<Rotation>180</Rotation>
 			<Area>Border</Area>
 			<ParticleSpeed>2,2</ParticleSpeed>
@@ -121,13 +142,7 @@
 			<Particles>
 				<Particle>
 					<Lifetime>0.3,0.6</Lifetime>
-					<BlendMode>Additive</BlendMode>
 					<VelocityAligned>true</VelocityAligned>
-					<TextureKeyframes>
-						<Stream>
-							<Keyframe>0|Particle/spark</Keyframe>
-						</Stream>
-					</TextureKeyframes>
 					<SizeKeyframes>
 						<Stream>
 							<Keyframe>0|0.2|0.2</Keyframe>
@@ -138,6 +153,12 @@
 							<Keyframe>0|0|0</Keyframe>
 						</Stream>
 					</RotationSpeedKeyframes>
+					<BlendMode>Additive</BlendMode>
+					<TextureKeyframes>
+						<Stream>
+							<Keyframe>0|Particle/spark</Keyframe>
+						</Stream>
+					</TextureKeyframes>
 					<ColourKeyframes>
 						<Stream>
 							<Keyframe>0|255,255,255,255</Keyframe>
@@ -150,6 +171,11 @@
 							<Keyframe>1|0</Keyframe>
 						</Stream>
 					</AlphaKeyframes>
+					<AlphaRefKeyframes>
+						<Stream>
+							<Keyframe>0|0</Keyframe>
+						</Stream>
+					</AlphaRefKeyframes>
 				</Particle>
 			</Particles>
 		</Emitter>

@@ -1,4 +1,4 @@
-<Localisation Language="it" xmlns:meta="Editor">
+<Localisation xmlns:meta="Editor">
 	<Text ID="Bow.MainHand.Ability.Description:3c70cdf8-4214-419c-beda-4c44bbfbcab1" TranslateType="Auto" TranslatedHash="1641933417">Spara una freccia contro un nemico, che si occupa {Damage} danni.</Text>
 	<Text ID="Bow.MainHand.Ability.Name:9f28629b-232a-47e3-bae4-ab76a190e47f" TranslateType="Auto" TranslatedHash="79860735">Sparare</Text>
 	<Text ID="Breastplate.Body.Ability.Description:6d68a13b-f863-4c1b-94e3-bf9f829d7ab6" TranslateType="Auto" TranslatedHash="1266998393">Smash il vostro corpo in un attacco, popping e tutto in un raggio di 1 tessera intorno ad esso, si occupano {Damage} danni.</Text>
@@ -21,7 +21,7 @@
 	<Text ID="Knife.MainHand.Ability.Name:a4d791c5-72ee-4173-a9f8-e14f7347fec6" TranslateType="Auto" TranslatedHash="2587234">pugnalata</Text>
 	<Text ID="Longsword.MainHand.Ability.Description:a03ae051-7476-4530-9173-932bab3ac247" TranslateType="Auto" TranslatedHash="1874835166">Tritate un nemico in due, che si occupa {Damage} danni.</Text>
 	<Text ID="Longsword.MainHand.Ability.Name:1be71a30-2ce3-4013-a8ae-1875ca9bdee1" TranslateType="Auto" TranslatedHash="2099494">Chop</Text>
-	<Text ID="Necroracia.OffHand.Ability.Description:0d71769f-7071-4b3d-8765-948254d5b5df" TranslateType="Auto" TranslatedHash="462682541">Un oscuro e potente incantesimo, che colpisce 1 mostro e tutti gli altri con un raggio di 2 tegola per la base {Damage} danni. Offerte più danni a seconda di come molte creature sono all&#39;interno della sua area d&#39;effetto.</Text>
+	<Text ID="Necroracia.OffHand.Ability.Description:0d71769f-7071-4b3d-8765-948254d5b5df" TranslateType="Auto" TranslatedHash="462682541">Un oscuro e potente incantesimo, che colpisce 1 mostro e tutti gli altri con un raggio di 2 tegola per la base {Damage} danni. Offerte più danni a seconda di come molte creature sono all'interno della sua area d'effetto.</Text>
 	<Text ID="Necroracia.OffHand.Ability.Name:f8f6753f-cd3e-455b-a3b0-9d0efd1ba211" TranslateType="Auto" TranslatedHash="1809382691">Necroracia</Text>
 	<Text ID="NoPants.Body.Ability.Description:126b7e78-a2ae-4171-9c0f-c76a5a5ae417" TranslateType="Auto" TranslatedHash="-1839963387">Stendete del modo di qualsiasi attacco, rendendo immune ai danni per {Turns} giri.</Text>
 	<Text ID="NoPants.Body.Ability.Name:0fdf7939-cbd5-413f-8557-18b9297154a1" TranslateType="Auto" TranslatedHash="-1207376026">Dodge Rotolo</Text>
@@ -49,6 +49,6 @@
 	<Text ID="Whip.MainHand.Ability.Name:07650389-52d5-41a7-a137-b3d3a63db54e" TranslateType="Auto" TranslatedHash="2695128">Frusta</Text>
 	<Text ID="WizardsRobes.Body.Ability.Description:1b03862e-5630-4578-9d4d-f9d76a2b2721" TranslateType="Auto" TranslatedHash="339612081">Per {Turns} a turno, aumento di danno bonus per i tuoi incantesimi.</Text>
 	<Text ID="WizardsRobes.Body.Ability.Name:0be2e2b4-6f40-4411-a653-086b25d3ea83" TranslateType="Auto" TranslatedHash="-211202904">Sovraccaricare</Text>
-	<Text ID="Zweihander.MainHand.Ability.Description:4262580d-d0aa-4210-86d9-0f7ec78327ce" TranslateType="Auto" TranslatedHash="-214500100">Smash una tessera e l&#39;uno sopra e sotto di esso in pezzi, che si occupa {Damage} danni.</Text>
+	<Text ID="Zweihander.MainHand.Ability.Description:4262580d-d0aa-4210-86d9-0f7ec78327ce" TranslateType="Auto" TranslatedHash="-214500100">Smash una tessera e l'uno sopra e sotto di esso in pezzi, che si occupa {Damage} danni.</Text>
 	<Text ID="Zweihander.MainHand.Ability.Name:a7863b11-7737-413c-9107-f58a9d960b3d" TranslateType="Auto" TranslatedHash="79996348">Distruggere</Text>
 </Localisation>
