@@ -60,35 +60,50 @@ class ThemeData : XmlDataClass()
 		chestEmpty = AssetManager.loadSprite(xmlData.getChildByName("ChestEmpty")!!)
 		coin = AssetManager.loadSprite(xmlData.getChildByName("Coin")!!)
 		plate = AssetManager.loadSprite(xmlData.getChildByName("Plate")!!)
-		val blockSpritesEl = xmlData.getChildByName("Block")!!
-		for (el in blockSpritesEl.children)
+		val blockSpritesEl = xmlData.getChildByName("Block")
+		if (blockSpritesEl != null)
 		{
-			val obj = AssetManager.loadSprite(el)
-			blockSprites.add(obj)
+			for (el in blockSpritesEl.children)
+			{
+				val obj = AssetManager.loadSprite(el)
+				blockSprites.add(obj)
+			}
 		}
-		val sealSpritesEl = xmlData.getChildByName("Seal")!!
-		for (el in sealSpritesEl.children)
+		val sealSpritesEl = xmlData.getChildByName("Seal")
+		if (sealSpritesEl != null)
 		{
-			val obj = AssetManager.loadSprite(el)
-			sealSprites.add(obj)
+			for (el in sealSpritesEl.children)
+			{
+				val obj = AssetManager.loadSprite(el)
+				sealSprites.add(obj)
+			}
 		}
-		val shieldSpritesEl = xmlData.getChildByName("Shield")!!
-		for (el in shieldSpritesEl.children)
+		val shieldSpritesEl = xmlData.getChildByName("Shield")
+		if (shieldSpritesEl != null)
 		{
-			val obj = AssetManager.loadSprite(el)
-			shieldSprites.add(obj)
+			for (el in shieldSpritesEl.children)
+			{
+				val obj = AssetManager.loadSprite(el)
+				shieldSprites.add(obj)
+			}
 		}
-		val spawnListEl = xmlData.getChildByName("SpawnWeights")!!
-		for (el in spawnListEl.children)
+		val spawnListEl = xmlData.getChildByName("SpawnWeights")
+		if (spawnListEl != null)
 		{
-			val obj = SpawnTypeAndWeight()
-			obj.load(el)
-			spawnList.add(obj)
+			for (el in spawnListEl.children)
+			{
+				val obj = SpawnTypeAndWeight()
+				obj.load(el)
+				spawnList.add(obj)
+			}
 		}
-		val factionsEl = xmlData.getChildByName("Factions")!!
-		for (el in factionsEl.children)
+		val factionsEl = xmlData.getChildByName("Factions")
+		if (factionsEl != null)
 		{
-			factions.add(el.text)
+			for (el in factionsEl.children)
+			{
+				factions.add(el.text)
+			}
 		}
 		backgroundTile = xmlData.get("BackgroundTile")
 	}

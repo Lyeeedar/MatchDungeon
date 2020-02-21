@@ -149,19 +149,19 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 
 				if (type == "Point")
 				{
-					builder.appendln(indentation, "$name = Point(${name}Raw[0].toInt(), ${name}Raw[1].toInt())")
+					builder.appendln(indentation, "$name = Point(${name}Raw[0].trim().toInt(), ${name}Raw[1].trim().toInt())")
 				}
 				else if (type == "Vector2")
 				{
-					builder.appendln(indentation, "$name = Vector2(${name}Raw[0].toFloat(), ${name}Raw[1].toFloat())")
+					builder.appendln(indentation, "$name = Vector2(${name}Raw[0].trim().toFloat(), ${name}Raw[1].trim().toFloat())")
 				}
 				else if (type == "Vector3")
 				{
-					builder.appendln(indentation, "$name = Vector3(${name}Raw[0].toFloat(), ${name}Raw[1].toFloat(), ${name}Raw[2].toFloat())")
+					builder.appendln(indentation, "$name = Vector3(${name}Raw[0].trim().toFloat(), ${name}Raw[1].trim().toFloat(), ${name}Raw[2].trim().toFloat())")
 				}
 				else
 				{
-					builder.appendln(indentation, "$name = Vector3(${name}Raw[0].toFloat(), ${name}Raw[1].toFloat(), ${name}Raw[2].toFloat(), ${name}Raw[3].toFloat())")
+					builder.appendln(indentation, "$name = Vector3(${name}Raw[0].trim().toFloat(), ${name}Raw[1].trim().toFloat(), ${name}Raw[2].trim().toFloat(), ${name}Raw[3].trim().toFloat())")
 				}
 			}
 		}
@@ -240,25 +240,27 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 
 			val elName = name+"El"
 
-			builder.appendln(indentation, "val $elName = xmlData.getChildByName(\"$dataName\")!!")
-			builder.appendln(indentation, "for (el in ${elName}.children)")
+			builder.appendln(indentation, "val $elName = xmlData.getChildByName(\"$dataName\")")
+			builder.appendln(indentation, "if ($elName != null)")
 			builder.appendln(indentation, "{")
+			builder.appendln(indentation+1, "for (el in ${elName}.children)")
+			builder.appendln(indentation+1, "{")
 
 			if (arrayType == "String")
 			{
-				builder.appendln(indentation+1, "$name.add(el.text)")
+				builder.appendln(indentation+2, "$name.add(el.text)")
 			}
 			else if (arrayType == "Int")
 			{
-				builder.appendln(indentation+1, "$name.add(el.int())")
+				builder.appendln(indentation+2, "$name.add(el.int())")
 			}
 			else if (arrayType == "Float")
 			{
-				builder.appendln(indentation+1, "$name.add(el.float())")
+				builder.appendln(indentation+2, "$name.add(el.float())")
 			}
 			else if (arrayType == "Boolean")
 			{
-				builder.appendln(indentation+1, "$name.add(el.boolean())")
+				builder.appendln(indentation+2, "$name.add(el.boolean())")
 			}
 			else if (arrayType == "Sprite" || arrayType == "SpriteWrapper" || arrayType == "ParticleEffectDescription" || arrayType == "ParticleEffect")
 			{
@@ -290,14 +292,14 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 					loadExtension = ""
 				}
 
-				builder.appendln(indentation+1, "val obj = AssetManager.load$loadName(el)$loadExtension")
-				builder.appendln(indentation+1, "$name.add(obj)")
+				builder.appendln(indentation+2, "val obj = AssetManager.load$loadName(el)$loadExtension")
+				builder.appendln(indentation+2, "$name.add(obj)")
 			}
 			else if (classRegister.enumMap.containsKey(arrayType))
 			{
 				val enumDef = classRegister.enumMap[arrayType]!!
-				builder.appendln(indentation+1, "val obj = ${enumDef.name}.valueOf(el.text.toUpperCase(Locale.ENGLISH))")
-				builder.appendln(indentation+1, "$name.add(obj)")
+				builder.appendln(indentation+2, "val obj = ${enumDef.name}.valueOf(el.text.toUpperCase(Locale.ENGLISH))")
+				builder.appendln(indentation+2, "$name.add(obj)")
 			}
 			else
 			{
@@ -306,17 +308,18 @@ class VariableDescription(val variableType: VariableType, val name: String, val 
 
 				if (classDef.isAbstract)
 				{
-					builder.appendln(indentation+1, "val obj = $arrayType.loadPolymorphicClass(el.get(\"classID\"))")
+					builder.appendln(indentation+2, "val obj = $arrayType.loadPolymorphicClass(el.get(\"classID\"))")
 				}
 				else
 				{
-					builder.appendln(indentation+1, "val obj = $arrayType()")
+					builder.appendln(indentation+2, "val obj = $arrayType()")
 				}
 
-				builder.appendln(indentation+1, "obj.load(el)")
-				builder.appendln(indentation+1, "$name.add(obj)")
+				builder.appendln(indentation+2, "obj.load(el)")
+				builder.appendln(indentation+2, "$name.add(obj)")
 			}
 
+			builder.appendln(indentation+1, "}")
 			builder.appendln(indentation, "}")
 		}
 		else if (type == "FastEnumMap<Statistic, Float>")
